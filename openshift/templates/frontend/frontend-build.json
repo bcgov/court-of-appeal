@@ -48,13 +48,7 @@
                         "from": {
                             "kind": "ImageStreamTag",
                             "name": "${BUILDER_IMAGE}:latest"
-                        },
-                        "env": [
-                            {
-                                "name": "NPM_MIRROR",
-                                "value": "${NPM_MIRROR}"
-                            }
-                        ]
+                        }
                     }
                 },
                 "output": {
@@ -102,7 +96,7 @@
                             "paths": [
                                 {
                                     "destinationDir": "tmp",
-                                    "sourcePath": "/opt/app-root/src/dist/."
+                                    "sourcePath": "/opt/app-root/src/build/."
                                 }
                             ]
                         }
