@@ -20,7 +20,7 @@ def APP_URLS = [
 def ARTIFACT_BUILD = APP_NAME+'-artifacts-build'
 def RUNTIME_BUILD = APP_NAME+'-nginx-runtime-build'
 def IMAGESTREAM_NAME = APP_NAME
-def SLACK_DEV_CHANNEL="#e_filing"
+def SLACK_DEV_CHANNEL="#e_filing_build"
 def SLACK_MAIN_CHANNEL="#general"
 
 def hasRepoChanged = false;
