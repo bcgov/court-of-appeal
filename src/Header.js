@@ -12,13 +12,25 @@ class Header extends Component {
                                 <a href="http://gov.bc.ca"><img src="/images/gov3_bc_logo.png" alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
                             </div>
                         </div>
-                        <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                             <div className="bcgov-title">
-                                <h1>E-Filing</h1>
+                                <h2>Court of Appeal E-Filing Suite</h2>  
+                                <label className="tag-line">E-filing first choice citizens fill forms</label>
                             </div>
                         </div>
-                        <div className="col-xs-6 col-sm-6 col-md-7 col-lg-7">
-                                <a id="logout" className="pull-right" href="/logout" style={{color:'white',whiteSpace:'nowrap',marginTop:'30px'}}>Log out</a>
+                        <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
+                            <div className="pull-right">
+                                <div className="align-right header-top-line">
+                                    <span >Welcome Julie</span>
+                                </div>
+                                <div className="align-right header-bottom-line">
+                                    <div className="icons">
+                                        <i class="fa fa-home" aria-hidden="true"></i>
+                                        <i class="fa fa-bell" aria-hidden="true"></i>
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>                  
                     </div>
                 </div>
