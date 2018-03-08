@@ -5,7 +5,7 @@ import './Form.7.css';
 class Form7 extends Component {
   render() {
     return (
-      <div id="topicTemplate" class="template container gov-container">
+      <div id="topicTemplate" class="template container gov-container form">
       <div className="row">
 
         <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">

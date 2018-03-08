@@ -26,7 +26,7 @@ class Form2 extends Component {
 
   render() {
     return (
-      <div id="topicTemplate" className="template container gov-container">
+      <div id="topicTemplate" className="template container gov-container form">
         
       
         <div className="row">
