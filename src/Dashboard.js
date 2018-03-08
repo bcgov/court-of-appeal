@@ -8,10 +8,7 @@ class Dashboard extends Component {
             <div className="row">
 
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">
-                    <a id="main-content-anchor"></a>
-
-                    <label id="news"></label>
-
+                
                     <div id="body">
                         <h2>COURT OF APPEAL FORMS</h2>
                         <h3>

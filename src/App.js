@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Dashboard from './Dashboard.js';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Form7 from './Form.7.js';
+import Form2 from './Form.2.js';
 
 class App extends Component {
   render() {
     return (
-      <div className="full-height">
-        <Header />  
-        <Dashboard />
-        <Footer />      
-      </div>
+      <Router>
+        <div className="full-height">
+          <Header />  
+          <Route exact path="/" component={Dashboard} /> 
+          <Route path="/forms/form.7.html" component={Form7} />        
+          <Route path="/forms/form.2.html" component={Form2} />        
+          <Footer />      
+        </div>
+      </Router>
     );
   }
 }

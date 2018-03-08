@@ -4,7 +4,7 @@ class Footer extends Component {
   render() {
     return (
         <div id="footer" role="contentinfo">
-            <img className="back-to-top" src="images/back-to-top.png" alt="Back to top" title="Back to top" style={{display: 'inline'}} />
+            <img className="back-to-top" src="/images/back-to-top.png" alt="Back to top" title="Back to top" style={{display: 'inline'}} />
             <div id="footerWrapper">
                 <div id="footerAdminSection">
                     <div id="footerAdminLinksContainer" className="container">
