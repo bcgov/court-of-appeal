@@ -3,6 +3,27 @@ import './Form.css';
 import './Form.2.css';
 
 class Form2 extends Component {
+
+  componentDidMount () {
+    const script = document.createElement("script");
+
+    const scriptText = document.createTextNode(`
+      var confirmBtn = document.getElementById('confirm');
+      var modal = document.getElementById('validationModal');
+      var closeBtn = document.getElementById('close-modal');
+
+      confirmBtn.onclick = function() {
+          modal.style.display = "block";
+      };
+      closeBtn.onclick = function() {
+          modal.style.display = "none";
+      };
+    `);
+
+    script.appendChild(scriptText);
+    document.getElementById('validationModal').appendChild(script);
+  }
+
   render() {
     return (
       <div id="topicTemplate" className="template container gov-container">
