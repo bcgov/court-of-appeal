@@ -6,7 +6,7 @@ class SelectForm extends Component {
     render() {
         return (
             <div id="select-form">
-                <h2>START E-FILING</h2>
+                <h2>Start E-Filing</h2>
 
                 <div id="steps" className="small-steps">
                     <ol>

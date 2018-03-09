@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SelectForm from './forms/select.form.js';
 import Top5 from './forms/top.5.js';
+import ActiveForms from './forms/active.forms.js';
 
 class Dashboard extends Component {
   render() {
@@ -9,6 +10,7 @@ class Dashboard extends Component {
             <div className="row">
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">   
                     <div className="col-sm-8">
+                        <ActiveForms />
                         <SelectForm />
                     </div>
                     <div className="col-sm-4">

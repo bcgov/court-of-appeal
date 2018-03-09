@@ -1,0 +1,19 @@
+#active-forms {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#active-forms table {
+    width: 100%;
+}
+
+#active-forms table tr.header {
+    border-bottom: 1px solid black;
+}
+
+#active-forms table td {
+    width: 25%;
+}
