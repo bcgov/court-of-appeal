@@ -1,0 +1,42 @@
+#select-form {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px;
+}
+#steps.small-steps {
+	background-color: white;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	padding-left:0px;
+	font-size: 2rem;
+	font-weight: bold;
+}
+#steps ol li.small-steps
+{
+	display:inline-block;
+	list-style-type: none;
+	width: 20%;
+	white-space: nowrap;
+}
+.step-circle .small-steps {
+	display:inline-block;
+	border: 1px black solid;
+	border-radius: 50%;
+	vertical-align: middle;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	line-height: 15px;
+}
+.small-steps {
+    font-size: 1rem;
+}
+#forms-table td {
+    vertical-align: top;
+    padding: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+#forms-table > tr > td.left-bordered {
+    border-left: 1px solid black;
+}

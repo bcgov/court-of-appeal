@@ -1,6 +1,7 @@
-.template {
+.form {
 	background-color: #f1f1f1;
 }
+
 #steps {
 	background-color: white;
 	padding-top: 15px;
@@ -12,6 +13,7 @@
 #steps ol {
 	padding: 0px;
 	width: 100%;
+	white-space: nowrap;
 }
 #steps ol li
 {
