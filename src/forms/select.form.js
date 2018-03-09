@@ -7,7 +7,6 @@ class SelectForm extends Component {
         return (
             <div id="select-form">
                 <h2>START E-FILING</h2>
-                Are you starting an Appel?
 
                 <div id="steps" className="small-steps">
                     <ol>
@@ -22,7 +21,7 @@ class SelectForm extends Component {
                 <table id="forms-table">
                     <tr>
                         <td>Are you starting an Appeal?</td>
-                        <td className="left-bordered">Are you responding to Appeal?</td>
+                        <td className="left-bordered">Are you responding to an Appeal?</td>
                     </tr>
                     <tr>
                         <td>COA FORMS FOR APPELANTS</td>
