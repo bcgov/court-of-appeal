@@ -13,6 +13,7 @@
 #steps ol {
 	padding: 0px;
 	width: 100%;
+	white-space: nowrap;
 }
 #steps ol li
 {
