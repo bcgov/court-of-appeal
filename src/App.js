@@ -21,7 +21,8 @@ class App extends Component {
     );
   }
   componentDidMount() {
-    console.log(process.env.API_URL);
+    console.log('NODE_ENV: ' + process.env.NODE_ENV);
+    console.log('REACT_APP_API_URL: ' + process.env.REACT_APP_API_URL);
   }
 }
 
