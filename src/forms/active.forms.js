@@ -12,7 +12,17 @@ class ActiveForms extends Component {
                         <tr className="header">
                             <td>Form</td>
                             <td>File #</td>
-                            <td>Status</td>
+                            <td>Status: 
+                                <select>
+                                    <option>*** ALL</option>
+                                    <option>Draft</option>
+                                    <option>Submitted / Pending</option>
+                                    <option>Accept</option>
+                                    <option>Reject</option>
+                                    <option>Upcoming deadline</option>
+                                    <option>About expire</option>
+                                </select>
+                            </td>
                             <td>Deadline to file/server</td>
                         </tr>
                     </thead>

@@ -12,4 +12,5 @@
 
 #active-forms table td {
     width: 25%;
+    white-space: nowrap;
 }
