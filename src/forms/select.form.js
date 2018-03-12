@@ -5,8 +5,8 @@ class SelectForm extends Component {
 
     render() {
         return (
-            <div id="select-form">
-                <h2>START E-FILING</h2>
+            <div className="dashboard-section">
+                <h2>Start E-Filing</h2>
 
                 <div id="steps" className="small-steps">
                     <ol>
@@ -19,6 +19,7 @@ class SelectForm extends Component {
                 </div>
                 
                 <table id="forms-table">
+                <tbody>
                     <tr>
                         <td>Are you starting an Appeal?</td>
                         <td className="left-bordered">Are you responding to an Appeal?</td>
@@ -30,42 +31,43 @@ class SelectForm extends Component {
                     <tr>
                         <td>
                             <div>
-                                <table><tr>
+                                <table><tbody><tr>
                                     <td>
-                                        Right to Appeal <span style={{ color:'gray' }}>(Start appeal without court's permission)</span>
+                                        Right to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
                                         <ul>
-                                            <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form 7)</a></li>
-                                            <li>Affidavit of Service <i className="far fa-file"></i><i className="far fa-file-pdf"></i></li>
+                                            <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
+                                            <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
                                         </ul>
                                     </td>
                                     <td>
-                                        Leave to Appeal <span style={{ color:'gray' }}>(with court's permission)</span>
+                                        Leave to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
                                         <ul>
-                                            <li>Notice of Application for Leave to Appeal (Form 1)</li>
+                                            <li>Notice of Application for Leave to Appeal (Form-1)</li>
                                         </ul>
                                     </td>
-                                </tr></table>
+                                </tr></tbody></table>
                             </div>
                         </td>
                         <td className="left-bordered">
                             <div>
-                                <table><tr>
+                                <table><tbody><tr>
                                     <td>
-                                        Right to Appeal <span style={{ color:'gray' }}>(Start appeal without court's permission)</span>
+                                        Right to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
                                         <ul>
-                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
+                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
                                         </ul>
                                     </td>
                                     <td>
-                                        Leave to Appeal <span style={{ color:'gray' }}>(with court's permission)</span>
+                                        Leave to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
                                         <ul>
-                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
+                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
                                         </ul>
                                     </td>
-                                </tr></table>
+                                </tr></tbody></table>
                             </div>
                         </td>
                     </tr>
+                </tbody>
                 </table>                
             </div>
         )

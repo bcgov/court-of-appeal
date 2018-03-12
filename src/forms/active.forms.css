@@ -1,0 +1,16 @@
+#active-forms {
+    width: 100%;
+}
+
+#active-forms table {
+    width: 100%;
+}
+
+#active-forms table tr.header {
+    border-bottom: 1px solid black;
+}
+
+#active-forms table td {
+    width: 25%;
+    white-space: nowrap;
+}

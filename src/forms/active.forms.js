@@ -1,0 +1,51 @@
+import React, { Component } from 'react';
+import './active.forms.css';
+
+class ActiveForms extends Component {
+
+    render() {
+        return (
+            <div id="active-forms" className="dashboard-section">
+                <h3>Active E-Filing Applications</h3>
+                <table>
+                    <thead>
+                        <tr className="header">
+                            <td>Form</td>
+                            <td>File #</td>
+                            <td>Status: 
+                                <select>
+                                    <option>*** ALL</option>
+                                    <option>Draft</option>
+                                    <option>Submitted / Pending</option>
+                                    <option>Accept</option>
+                                    <option>Reject</option>
+                                    <option>Upcoming deadline</option>
+                                    <option>About expire</option>
+                                </select>
+                            </td>
+                            <td>Deadline to file/server</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Form 7</td>
+                            <td>2098709</td>
+                            <td>Accepted</td>
+                            <td>2018-01-31</td>
+                        </tr>
+                        <tr>
+                            <td>Form 2</td>
+                            <td>3456769</td>
+                            <td>Draft</td>
+                            <td>2018-04-30</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="align-right">
+                    <button className="btn btn-primary">All Forms</button>
+                </div>
+            </div>
+        )
+    }
+}
+export default ActiveForms;

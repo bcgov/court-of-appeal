@@ -25,13 +25,24 @@ class Header extends Component {
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">
-                                        <i class="fa fa-home" aria-hidden="true"></i>
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                        <i className="fa fa-home" aria-hidden="true"></i>
+                                        <i className="fa fa-bell" aria-hidden="true"></i>
+                                        <i className="fa fa-cog" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>                  
+                    </div>
+                </div>
+                <div className="navigationRibbon">
+                    <div className="level2Navigation">
+                        <div className="container">
+                            <a href="">HOME</a>
+                            <a href="">ALL FORMS</a>
+                            <a href="">NOTIFICATIONS</a>
+                            <a href="">ACCOUNT INFO</a>
+                            <a href="">LOG OFF</a>
+                        </div>
                     </div>
                 </div>
             </div>
