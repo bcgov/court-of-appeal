@@ -25,9 +25,9 @@ class Header extends Component {
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">
-                                        <i class="fa fa-home" aria-hidden="true"></i>
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                        <i className="fa fa-home" aria-hidden="true"></i>
+                                        <i className="fa fa-bell" aria-hidden="true"></i>
+                                        <i className="fa fa-cog" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>

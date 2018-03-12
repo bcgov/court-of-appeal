@@ -1,9 +1,5 @@
 #active-forms {
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 3px;
     width: 100%;
-    margin-bottom: 10px;
 }
 
 #active-forms table {

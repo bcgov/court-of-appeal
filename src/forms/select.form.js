@@ -5,7 +5,7 @@ class SelectForm extends Component {
 
     render() {
         return (
-            <div id="select-form">
+            <div className="dashboard-section">
                 <h2>Start E-Filing</h2>
 
                 <div id="steps" className="small-steps">
@@ -19,6 +19,7 @@ class SelectForm extends Component {
                 </div>
                 
                 <table id="forms-table">
+                <tbody>
                     <tr>
                         <td>Are you starting an Appeal?</td>
                         <td className="left-bordered">Are you responding to an Appeal?</td>
@@ -30,7 +31,7 @@ class SelectForm extends Component {
                     <tr>
                         <td>
                             <div>
-                                <table><tr>
+                                <table><tbody><tr>
                                     <td>
                                         Right to Appeal <span style={{ color:'gray' }}>(Start appeal without court's permission)</span>
                                         <ul>
@@ -44,12 +45,12 @@ class SelectForm extends Component {
                                             <li>Notice of Application for Leave to Appeal (Form 1)</li>
                                         </ul>
                                     </td>
-                                </tr></table>
+                                </tr></tbody></table>
                             </div>
                         </td>
                         <td className="left-bordered">
                             <div>
-                                <table><tr>
+                                <table><tbody><tr>
                                     <td>
                                         Right to Appeal <span style={{ color:'gray' }}>(Start appeal without court's permission)</span>
                                         <ul>
@@ -62,10 +63,11 @@ class SelectForm extends Component {
                                             <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
                                         </ul>
                                     </td>
-                                </tr></table>
+                                </tr></tbody></table>
                             </div>
                         </td>
                     </tr>
+                </tbody>
                 </table>                
             </div>
         )
