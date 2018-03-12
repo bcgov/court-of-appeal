@@ -20,6 +20,9 @@ class App extends Component {
       </Router>
     );
   }
+  componentDidMount() {
+    console.log(process.env.API_URL);
+  }
 }
 
 export default App;
