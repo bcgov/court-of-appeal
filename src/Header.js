@@ -38,10 +38,8 @@ class Header extends Component {
                     <div className="level2Navigation">
                         <div className="container">
                             <a href="">HOME</a>
-                            <a href="">ALL FORMS</a>
+                            <a href="/my-applications.html">MY APPLICATIONS</a>
                             <a href="">NOTIFICATIONS</a>
-                            <a href="">ACCOUNT INFO</a>
-                            <a href="">LOG OFF</a>
                         </div>
                     </div>
                 </div>

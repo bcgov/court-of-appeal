@@ -3,6 +3,17 @@ import './select.form.css';
 
 class SelectForm extends Component {
 
+    toggle(id, document) {
+        var element = document.getElementById(id);
+        if (element) {
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
+        }
+    }
+
     render() {
         return (
             <div className="dashboard-section">
@@ -31,21 +42,30 @@ class SelectForm extends Component {
                     <tr>
                         <td>
                             <div>
-                                <table><tbody><tr>
-                                    <td>
-                                        Right to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
-                                        <ul>
-                                            <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
-                                            <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        Leave to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
-                                        <ul>
-                                            <li>Notice of Application for Leave to Appeal (Form-1)</li>
-                                        </ul>
-                                    </td>
-                                </tr></tbody></table>
+                                <ul>
+                                    <li onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)} className="toggler">Right to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i></li>
+                                    <ul id="appelants-right-to-appeal-forms">
+                                        <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
+                                        <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
+                                    </ul>
+                                    <li onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)} className="toggler">Leave to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i></li>
+                                    <ul id="respondents-right-to-appeal-forms">
+                                        <li>Notice of Application for Leave to Appeal (Form-1)</li>
+                                        <li>Notice of Motion for Leave to Appeal (Form-3)</li>
+                                        <li>Motion Book (Form-4)</li>
+                                        <li>Notice of Application to Vary an Order of a Justice (Form-15)</li>
+                                        <li>Motion Book (Form-16)</li>
+                                        <li>Appeal Record (Form-9)</li>
+                                        <li>Factum (Form-10)</li>
+                                        <li>Transcript Extract Book (Form-13)</li>
+                                        <li>Appeal Book (Form-12)</li>
+                                        <li>Reply (Form-11)</li>
+                                        <li>Certificate of REadiness (Form-14)</li>
+                                        <li>Notice of Hearing (Form-34)</li>
+                                    </ul>
+                                </ul>
+                                        
+                                     
                             </div>
                         </td>
                         <td className="left-bordered">
@@ -55,12 +75,19 @@ class SelectForm extends Component {
                                         Right to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
                                         <ul>
                                             <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
+                                            <li>Notice of Cross Appeal (Form-8)</li>
+                                            <li>Factum (Form-10)</li>
+                                            <li>Transcript Extract Book (Form-13)</li>
+                                            <li>Appeal Book (Form-12)</li>
+                                            <li>Court Order</li>
                                         </ul>
                                     </td>
                                     <td>
                                         Leave to Appeal <i className="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
                                         <ul>
                                             <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
+                                            <li>Reply Book (Form-5)</li>
+                                            <li>Reply Book (Form-17)</li>
                                         </ul>
                                     </td>
                                 </tr></tbody></table>

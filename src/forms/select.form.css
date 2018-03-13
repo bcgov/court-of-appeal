@@ -33,5 +33,12 @@
     padding-right: 3px;
 }
 #forms-table > tbody > tr > td.left-bordered {
-    border-left: 1px solid black;
+	border-left: 1px solid black;
+	width: 50%;
+}
+.toggler {
+	cursor: pointer;
+}
+#appelants-right-to-appeal-forms, #respondents-right-to-appeal-forms {
+	display: none;
 }
