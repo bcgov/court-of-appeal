@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import SelectForm from './forms/select.form.js';
-import Top5 from './forms/top.5.js';
-import ActiveForms from './forms/active.forms.js';
 import NotificationCenter from './notification.center.js';
 
 class Notifications extends Component {
