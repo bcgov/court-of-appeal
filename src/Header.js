@@ -27,6 +27,7 @@ class Header extends Component {
                                     <div className="icons">
                                         <i className="fa fa-home" aria-hidden="true"></i>
                                         <i className="fa fa-bell" aria-hidden="true"></i>
+                                        <a href="/notifications.html"><span class="notify">3</span></a>
                                         <i className="fa fa-cog" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -37,9 +38,9 @@ class Header extends Component {
                 <div className="navigationRibbon">
                     <div className="level2Navigation">
                         <div className="container">
-                            <a href="">HOME</a>
+                            <a href="/">HOME</a>
                             <a href="/my-applications.html">MY APPLICATIONS</a>
-                            <a href="">NOTIFICATIONS</a>
+                            <a href="/notifications.html">NOTIFICATIONS</a>
                         </div>
                     </div>
                 </div>
