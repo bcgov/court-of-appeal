@@ -5,7 +5,7 @@ class NotificationCenter extends Component {
 
     render() {
         return (
-            <div className="dashboard-section">
+            <div className="form-section">
                 <h3>Notification Center</h3>
                 <ol>
                     <li>Forms about to expire</li>

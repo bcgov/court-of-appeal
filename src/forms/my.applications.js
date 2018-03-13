@@ -4,11 +4,12 @@ import './select.form.css';
 class MyApplications extends Component {
   render() {
     return (
-        <div id="topicTemplate" className="template container gov-container">
+        <div id="topicTemplate" className="template container gov-container form">
             <div className="row">
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">   
                     <div className="col-sm-12">
-                        <div id="active-forms" className="dashboard-section">
+
+                        <div id="active-forms" className="form-section">
                             <h3>My Applications</h3>
                             <div>
                                 File #:<input type="text"/>

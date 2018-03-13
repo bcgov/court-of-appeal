@@ -5,7 +5,7 @@ class Top5 extends Component {
 
     render() {
         return (
-            <div className="dashboard-section">
+            <div className="form-section">
                 <h3>Top 5 Most Used Forms</h3>
                 <ol>
                     <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form 7)</a></li>
