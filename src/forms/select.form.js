@@ -3,10 +3,21 @@ import './select.form.css';
 
 class SelectForm extends Component {
 
+    toggle(id, document) {
+        var element = document.getElementById(id);
+        if (element) {
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
+        }
+    }
+
     render() {
         return (
-            <div className="dashboard-section">
-                <h2>Start E-Filing</h2>
+            <div className="form-section">
+                <h3>Start E-Filing</h3>
 
                 <div id="steps" className="small-steps">
                     <ol>
@@ -17,58 +28,76 @@ class SelectForm extends Component {
                         <li className="small-steps"><span className="step-circle future small-steps">5</span><span className="step-title future small-steps">Notfications</span></li>
                     </ol>
                 </div>
-                
-                <table id="forms-table">
-                <tbody>
-                    <tr>
-                        <td>Are you starting an Appeal?</td>
-                        <td className="left-bordered">Are you responding to an Appeal?</td>
-                    </tr>
-                    <tr>
-                        <td>COA FORMS FOR APPELANTS</td>
-                        <td className="left-bordered">CAO FORMS FOR RESPONDANTS</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <table><tbody><tr>
-                                    <td>
-                                        Right to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
-                                        <ul>
-                                            <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
-                                            <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        Leave to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
-                                        <ul>
-                                            <li>Notice of Application for Leave to Appeal (Form-1)</li>
-                                        </ul>
-                                    </td>
-                                </tr></tbody></table>
-                            </div>
-                        </td>
-                        <td className="left-bordered">
-                            <div>
-                                <table><tbody><tr>
-                                    <td>
-                                        Right to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
-                                        <ul>
-                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        Leave to Appeal <i class="fa fa-question-circle" aria-hidden="true" title="with court's permission"></i>
-                                        <ul>
-                                            <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
-                                        </ul>
-                                    </td>
-                                </tr></tbody></table>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>                
+
+                <div id="forms-list">
+                    <ul>
+                        <li>Starting an appeal?</li>
+                        <ul>
+                            <li>
+                                <a onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Right to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                </a>
+                            </li>
+                                <ul id="appelants-right-to-appeal-forms">
+                                    <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
+                                    <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
+                                </ul>
+                            <li>
+                                <a onClick={(e) => this.toggle('appelants-leave-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Leave to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
+                                </a>
+                            </li>
+                                <ul id="appelants-leave-to-appeal-forms">
+                                    <li>Notice of Application for Leave to Appeal (Form-1)</li>
+                                    <li>Notice of Motion for Leave to Appeal (Form-3)</li>
+                                    <li>Motion Book (Form-4)</li>
+                                    <li>Notice of Application to Vary an Order of a Justice (Form-15)</li>
+                                    <li>Motion Book (Form-16)</li>
+                                    <li>Appeal Record (Form-9)</li>
+                                    <li>Factum (Form-10)</li>
+                                    <li>Transcript Extract Book (Form-13)</li>
+                                    <li>Appeal Book (Form-12)</li>
+                                    <li>Reply (Form-11)</li>
+                                    <li>Certificate of REadiness (Form-14)</li>
+                                    <li>Notice of Hearing (Form-34)</li>
+                                </ul>
+                        </ul>
+                        <li>Responding to an appeal?</li>
+                        <ul>
+                            <li>
+                                <a onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Right to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                </a>
+                            </li>
+                            <ul id="respondents-right-to-appeal-forms">
+                                <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
+                                <li>Notice of Cross Appeal (Form-8)</li>
+                                <li>Factum (Form-10)</li>
+                                <li>Transcript Extract Book (Form-13)</li>
+                                <li>Appeal Book (Form-12)</li>
+                                <li>Court Order</li>
+                            </ul>
+                            <li>
+                                <a onClick={(e) => this.toggle('respondents-leave-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Leave to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
+                                </a>
+                            </li>
+                            <ul id="respondents-leave-to-appeal-forms">
+                                <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
+                                <li>Reply Book (Form-5)</li>
+                                <li>Reply Book (Form-17)</li>
+                            </ul>
+                        </ul>
+                    </ul>   
+                </div>                           
             </div>
         )
     }

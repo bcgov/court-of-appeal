@@ -5,44 +5,38 @@ class ActiveForms extends Component {
 
     render() {
         return (
-            <div id="active-forms" className="dashboard-section">
-                <h3>Active E-Filing Applications</h3>
+            <div id="active-forms" className="form-section">
+                <h3>My Top-5 pending Applications</h3>
                 <table>
                     <thead>
                         <tr className="header">
-                            <td>Form</td>
                             <td>File #</td>
-                            <td>Status: 
-                                <select>
-                                    <option>*** ALL</option>
-                                    <option>Draft</option>
-                                    <option>Submitted / Pending</option>
-                                    <option>Accept</option>
-                                    <option>Reject</option>
-                                    <option>Upcoming deadline</option>
-                                    <option>About expire</option>
-                                </select>
+                            <td>Parties</td>
+                            <td>Status                                
                             </td>
-                            <td>Deadline to file/server</td>
+                            <td>Deadline to file / serve</td>
+                            <td>Last Modified</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Form 7</td>
-                            <td>2098709</td>
-                            <td>Accepted</td>
-                            <td>2018-01-31</td>
+                            <td>3456769 (Form-2)</td>
+                            <td>Moreno / Julia</td>
+                            <td>Draft</td>
+                            <td style={{ backgroundColor:'rgb(252, 186, 25)' }}>2018-03-20</td>
+                            <td>2018-03-12</td>
                         </tr>
                         <tr>
-                            <td>Form 2</td>
-                            <td>3456769</td>
-                            <td>Draft</td>
-                            <td>2018-04-30</td>
+                            <td>2098709 (Form-7)</td>
+                            <td>Moreno / Julia</td>
+                            <td>Accepted</td>
+                            <td style={{ backgroundColor:'lightgreen' }}>2018-03-05</td>
+                            <td>2018-03-01</td>
                         </tr>
                     </tbody>
                 </table>
                 <div className="align-right">
-                    <button className="btn btn-primary">All Forms</button>
+                    <a href="/my-applications.html">more...</a>
                 </div>
             </div>
         )
