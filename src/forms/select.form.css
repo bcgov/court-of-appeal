@@ -45,3 +45,15 @@
 #respondents-leave-to-appeal-forms {
 	display: none;
 }
+#forms-list > ul {
+	padding-left: 0px;
+}
+#forms-list > ul > ul {
+	padding-left: 25px;
+}
+#forms-list li {
+	list-style: none;
+}
+#forms-list > ul > ul > ul > li {
+	list-style: disc;
+}

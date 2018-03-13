@@ -10,14 +10,14 @@ class Dashboard extends Component {
     return (
         <div id="topicTemplate" className="template container gov-container form">
             <div className="row">
-                <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">   
+                <div role="main" className="col-sm-12">   
                     <div className="col-sm-12">
                         <ActiveForms />
                     </div>
                 </div>
             </div>
             <div className="row">
-                <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">   
+                <div role="main" className="col-sm-12">   
                     <div className="col-sm-8">
                         <SelectForm />
                     </div>
