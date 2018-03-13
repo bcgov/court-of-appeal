@@ -39,6 +39,9 @@
 .toggler {
 	cursor: pointer;
 }
-#appelants-right-to-appeal-forms, #respondents-right-to-appeal-forms {
+#appelants-right-to-appeal-forms, 
+#appelants-leave-to-appeal-forms,
+#respondents-right-to-appeal-forms,
+#respondents-leave-to-appeal-forms {
 	display: none;
 }
