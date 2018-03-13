@@ -34,20 +34,22 @@ class SelectForm extends Component {
                         <li>Starting an appeal?</li>
                         <ul>
                             <li>
-                                <i className="fas fa-plus" aria-hidden="true"></i>&nbsp;
-                                <span onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)}  className="toggler">Right to Appeal</span> 
-                                &nbsp;
-                                <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                <a onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Right to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                </a>
                             </li>
                                 <ul id="appelants-right-to-appeal-forms">
                                     <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
                                     <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
                                 </ul>
                             <li>
-                                <i className="fas fa-plus" aria-hidden="true"></i>&nbsp;
-                                <span onClick={(e) => this.toggle('appelants-leave-to-appeal-forms', document)}  className="toggler">Leave to Appeal</span> 
-                                &nbsp;
-                                <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
+                                <a onClick={(e) => this.toggle('appelants-leave-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Leave to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
+                                </a>
                             </li>
                                 <ul id="appelants-leave-to-appeal-forms">
                                     <li>Notice of Application for Leave to Appeal (Form-1)</li>
@@ -67,9 +69,11 @@ class SelectForm extends Component {
                         <li>Responding to an appeal?</li>
                         <ul>
                             <li>
-                                <span onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)}  className="toggler">Right to Appeal</span> 
-                                &nbsp;
-                                <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                <a onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Right to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                </a>
                             </li>
                             <ul id="respondents-right-to-appeal-forms">
                                 <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
@@ -80,9 +84,11 @@ class SelectForm extends Component {
                                 <li>Court Order</li>
                             </ul>
                             <li>
-                                <span onClick={(e) => this.toggle('respondents-leave-to-appeal-forms', document)}  className="toggler">Leave to Appeal</span> 
-                                &nbsp;
-                                <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
+                                <a onClick={(e) => this.toggle('respondents-leave-to-appeal-forms', document)} className="toggler">
+                                    <i className="fas fa-plus" aria-hidden="true"></i>
+                                    &nbsp;Leave to Appeal&nbsp;
+                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
+                                </a>
                             </li>
                             <ul id="respondents-leave-to-appeal-forms">
                                 <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>

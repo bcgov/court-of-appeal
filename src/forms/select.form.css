@@ -39,6 +39,12 @@
 .toggler {
 	cursor: pointer;
 }
+a.toggler {
+	color: rgb(73, 73, 73);
+}
+a.toggler:hover {
+	text-decoration: none;
+}
 #appelants-right-to-appeal-forms, 
 #appelants-leave-to-appeal-forms,
 #respondents-right-to-appeal-forms,
