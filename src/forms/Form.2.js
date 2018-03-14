@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import './Form.css';
 import './Form.2.css';
+import Find from './find.js';
 
 class Form2 extends Component {
+
+    constructor(props) {
+        super(props);
+        this.found = this.found.bind(this);
+    }
+
+    found(parties) {
+        console.log(parties);
+    }
 
   componentDidMount () {
     const script = document.createElement("script");
@@ -70,31 +80,12 @@ class Form2 extends Component {
                   </p>
                 </div>
 
-                <div className="form-section">
-                        <h2 style={{ fontWeight:'bold' }}>Appeal Case Information</h2>
-                        Enter the Court of Appeal number you want to respond to:
-
-                        <table>
-                            <tr>
-                                <td>LEVEL OF COURT</td>
-                                <td>COURT OF APPEAL FILE NO.</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><input disabled value="Court of Appeal" /></td>
-                                <td><input name="file-no" autofocus value="20160430" /></td>
-                                <td>
-                                    <button className="btn btn-primary btn-green">Find</button>
-                                </td>
-                            </tr>
-                        </table>
-
-                </div>
+                <Find callback={this.found} />                
 
                 <div className="form-section">
                     <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
 
-                    <table>
+                    <table><tbody>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
                             <td>Jason Dent by way of their litigation guardian, Maria Terresa Dent</td>
@@ -105,13 +96,13 @@ class Form2 extends Component {
                             <td>Bob Jones</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
                         </tr>
-                    </table>
+                    </tbody></table>
                 </div>
                 
                 <div className="form-section">
                     <h2 style={{ fontWeight:'bold' }}>Enter an Appearance (on Behalf of)</h2>
 
-                    <table>
+                    <table><tbody>
                       <tr>
                         <td><span style={{ color:'red' }}>*</span> Respondent's name:</td>
                         <td>
@@ -124,7 +115,7 @@ class Form2 extends Component {
                       <tr>
                         <td><span style={{ color:'red' }}>*</span> Respondent's mail address for service:</td>
                         <td>
-                          <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" value="123 Harbour street, Victoria, BC"/>
+                          <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" defaultValue="123 Harbour street, Victoria, BC"/>
                         </td>
                         <td style={{ color:'gray' }}>Where would you like to receive documents related to this case?</td>
                       </tr>
@@ -143,7 +134,7 @@ class Form2 extends Component {
                         </td>
                         <td style={{ color:'gray' }}>Who is filing this Notice of Appearance?</td>
                       </tr>
-                    </table>
+                    </tbody></table>
 
 
                 </div>
@@ -162,7 +153,7 @@ class Form2 extends Component {
                                 <span>100%</span>
                             </div>
                         </div>                        
-                        <table id="validations">
+                        <table id="validations"><tbody>
                             <tr>
                                 <td className="validation">All required fields filled in</td>
                                 <td><i className="far fa-check-circle"></i></td>
@@ -171,7 +162,7 @@ class Form2 extends Component {
                                 <td className="validation">Address for Service is in BC</td>
                                 <td><i className="far fa-check-circle"></i></td>
                             </tr>
-                        </table>
+                        </tbody></table>
                         <hr/>
                         <div>
                             <span className="success">Your form has been successfully verified. Please proceed to review.</span>
