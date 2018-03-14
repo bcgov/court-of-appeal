@@ -6,7 +6,7 @@ class ActiveForms extends Component {
     render() {
         return (
             <div id="active-forms" className="form-section">
-                <h3>My Top-5 pending Applications</h3>
+                <h3>My Top 5 pending Applications</h3>
                 <table>
                     <thead>
                         <tr className="header">

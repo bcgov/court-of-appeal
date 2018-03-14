@@ -31,7 +31,7 @@ class SelectForm extends Component {
 
                 <div id="forms-list">
                     <ul>
-                        <li>Starting an appeal?</li>
+                        <li className="starting-or-responding">Starting an appeal?</li>
                         <ul>
                             <li>
                                 <a onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)} className="toggler">
@@ -66,7 +66,7 @@ class SelectForm extends Component {
                                     <li>Notice of Hearing (Form-34)</li>
                                 </ul>
                         </ul>
-                        <li>Responding to an appeal?</li>
+                        <li className="vertical-gap starting-or-responding">Responding to an appeal?</li>
                         <ul>
                             <li>
                                 <a onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)} className="toggler">

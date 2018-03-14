@@ -63,3 +63,13 @@ a.toggler:hover {
 #forms-list > ul > ul > ul > li {
 	list-style: disc;
 }
+#forms-list .fa-info-circle {
+	color: #38598a;
+}
+#forms-list > ul > li.vertical-gap {
+	padding-top: 10px;
+}
+#forms-list .starting-or-responding {
+	font-weight: 600;
+	font-size: 1.1em;
+}
