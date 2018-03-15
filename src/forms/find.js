@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import './find.css';
-import defaultService from '../service/default.service.js';
+import DefaultService from '../service/default.service.js';
 
 class Find extends Component {
 
     constructor(props) {
         super(props);   
-        this.service = props.service ? props.service : defaultService; 
+        this.service = props.service ? props.service : new DefaultService(); 
         this.callback = props.callback;   
 
         this.search = this.search.bind(this);
     }
 
     search() {
-        this.service.searchForm7(this.textInput.value, (data) => {
+        this.service.searchForm7(this.textInput.value, (data) => {            
             this.callback(data);
         });
     }

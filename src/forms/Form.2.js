@@ -7,32 +7,14 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        
         this.found = this.found.bind(this);
     }
 
-    found(parties) {
-        console.log(parties);
+    found(data) {
+        this.appelantName.innerHTML = data.parties.appelant.name;
+        this.respondentName.innerHTML = data.parties.respondent.name;
     }
-
-  componentDidMount () {
-    const script = document.createElement("script");
-
-    const scriptText = document.createTextNode(`
-      var confirmBtn = document.getElementById('confirm');
-      var modal = document.getElementById('validationModal');
-      var closeBtn = document.getElementById('close-modal');
-
-      confirmBtn.onclick = function() {
-          modal.style.display = "block";
-      };
-      closeBtn.onclick = function() {
-          modal.style.display = "none";
-      };
-    `);
-
-    script.appendChild(scriptText);
-    document.getElementById('validationModal').appendChild(script);
-  }
 
   render() {
     return (
@@ -88,12 +70,12 @@ class Form2 extends Component {
                     <table><tbody>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                            <td>Jason Dent by way of their litigation guardian, Maria Terresa Dent</td>
+                            <td id="appelant-name" ref={(element) => { this.appelantName = element; }}>Jason Dent by way of their litigation guardian, Maria Terresa Dent</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
                         </tr>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>AND:</td>
-                            <td>Bob Jones</td>
+                            <td id="respondent-name" ref={(element) => { this.respondentName = element; }}>Bob Jones</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
                         </tr>
                     </tbody></table>
@@ -141,7 +123,7 @@ class Form2 extends Component {
 
                 <button id="confirm" className="btn btn-primary btn-green pull-right">Confirm</button>
 
-                <div id="validationModal" className="modal">
+                <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                     <div className="modal-title">
                         <span id="close-modal">&times;</span>
                         Form Validation

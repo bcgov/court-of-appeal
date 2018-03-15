@@ -12,7 +12,7 @@ describe('Find', function() {
     var document;
     var sut;
     var serviceWasCalledCorrectly;
-    var callback = function(data) {};
+    var callback = function(data) { };
 
     beforeEach(function() {
         document = jsdom.jsdom('<div id="root"></div>');
@@ -22,10 +22,7 @@ describe('Find', function() {
                         callback({ any:'value' });
                     } }} 
                     callback={function(data) { callback(data); }} />;
-        ReactDOM.render(
-            sut,
-            document.getElementById('root')
-        );
+        ReactDOM.render(sut, document.getElementById('root'));
     });
     it('renders without crashing', function() {        
         expect(document.getElementById('find-button').innerHTML).to.equal('Find');
@@ -40,7 +37,18 @@ describe('Find', function() {
         callback = function(data) {
             expect(data).to.deep.equal({ any:'value' });
             done();
-        }
+        };
+        click('#find-button', document);
+    });
+    it('can work with default service', function(done) {
+        document = jsdom.jsdom('<div id="root"></div>');
+        process.env.REACT_APP_API_URL = undefined;  
+        var Service = require('../service/default.service');
+        sut = <Find callback={function(data) { 
+            expect(data).to.deep.equal(Service.fakeData);
+            done(); 
+        }} />;
+        ReactDOM.render(sut, document.getElementById('root'));        
         click('#find-button', document);
     });
 });
