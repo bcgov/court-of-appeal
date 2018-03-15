@@ -29,6 +29,7 @@ class Header extends Component {
                                             <i className="fa fa-bell" aria-hidden="true"></i>
                                             <span className="notify">3</span>
                                         </a>
+                                        <i className="fas fa-info-circle" aria-hidden="true"></i>
                                         <i className="fa fa-cog" aria-hidden="true"></i>
                                     </div>
                                 </div>
