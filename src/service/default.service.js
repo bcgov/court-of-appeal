@@ -17,7 +17,6 @@ var Service = function() {
 
 Service.prototype.serveLocalData = function() {
     this.apiUrl = undefined;
-    process.env.REACT_APP_API_URL = undefined;
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
