@@ -29,75 +29,21 @@ class SelectForm extends Component {
                     </ol>
                 </div>
 
-                <div id="forms-list">
-                    <ul>
-                        <li className="starting-or-responding">Starting an appeal?</li>
-                        <ul>
-                            <li>
-                                <a onClick={(e) => this.toggle('appelants-right-to-appeal-forms', document)} className="toggler">
-                                    <i className="fas fa-plus" aria-hidden="true"></i>
-                                    &nbsp;Right to Appeal&nbsp;
-                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
-                                </a>
-                            </li>
-                                <ul id="appelants-right-to-appeal-forms">
-                                    <li><a id="form7" href="/forms/form.7.html" target="_self">Notice of Appeal (Form-7)</a></li>
-                                    <li>Affidavit of Service <i className="far fa-file"></i> <i className="far fa-file-pdf"></i></li>
-                                </ul>
-                            <li>
-                                <a onClick={(e) => this.toggle('appelants-leave-to-appeal-forms', document)} className="toggler">
-                                    <i className="fas fa-plus" aria-hidden="true"></i>
-                                    &nbsp;Leave to Appeal&nbsp;
-                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
-                                </a>
-                            </li>
-                                <ul id="appelants-leave-to-appeal-forms">
-                                    <li>Notice of Application for Leave to Appeal (Form-1)</li>
-                                    <li>Notice of Motion for Leave to Appeal (Form-3)</li>
-                                    <li>Motion Book (Form-4)</li>
-                                    <li>Notice of Application to Vary an Order of a Justice (Form-15)</li>
-                                    <li>Motion Book (Form-16)</li>
-                                    <li>Appeal Record (Form-9)</li>
-                                    <li>Factum (Form-10)</li>
-                                    <li>Transcript Extract Book (Form-13)</li>
-                                    <li>Appeal Book (Form-12)</li>
-                                    <li>Reply (Form-11)</li>
-                                    <li>Certificate of REadiness (Form-14)</li>
-                                    <li>Notice of Hearing (Form-34)</li>
-                                </ul>
-                        </ul>
-                        <li className="vertical-gap starting-or-responding">Responding to an appeal?</li>
-                        <ul>
-                            <li>
-                                <a onClick={(e) => this.toggle('respondents-right-to-appeal-forms', document)} className="toggler">
-                                    <i className="fas fa-plus" aria-hidden="true"></i>
-                                    &nbsp;Right to Appeal&nbsp;
-                                    <i className="fa fa-info-circle" aria-hidden="true" title="Start appeal without court's permission"></i>
-                                </a>
-                            </li>
-                            <ul id="respondents-right-to-appeal-forms">
-                                <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
-                                <li>Notice of Cross Appeal (Form-8)</li>
-                                <li>Factum (Form-10)</li>
-                                <li>Transcript Extract Book (Form-13)</li>
-                                <li>Appeal Book (Form-12)</li>
-                                <li>Court Order</li>
-                            </ul>
-                            <li>
-                                <a onClick={(e) => this.toggle('respondents-leave-to-appeal-forms', document)} className="toggler">
-                                    <i className="fas fa-plus" aria-hidden="true"></i>
-                                    &nbsp;Leave to Appeal&nbsp;
-                                    <i className="fa fa-info-circle" aria-hidden="true" title="with court's permission"></i>
-                                </a>
-                            </li>
-                            <ul id="respondents-leave-to-appeal-forms">
-                                <li><a id="form2" href="/forms/form.2.html" target="_self">Notice of Appearance (Form-2)</a>&nbsp;</li>
-                                <li>Reply Book (Form-5)</li>
-                                <li>Reply Book (Form-17)</li>
-                            </ul>
-                        </ul>
-                    </ul>   
-                </div>                           
+                <div>
+                    <table style={{ width:'100%' }}>
+                        <tbody>
+                            <tr>
+                                <td style={{ width:'50%', textAlign:'center'}}>
+                                    <a href="/" className="btn btn-primary" style={{ backgroundColor:'green'}}>Start an Appeal</a>
+                                </td>
+                                <td style={{ width:'50%', textAlign:'center'}}>
+                                    <a href="/" className="btn btn-primary" style={{ backgroundColor:'yellow', color:'black'}}>Respond to Appeal</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                        
             </div>
         )
     }

@@ -14,8 +14,7 @@ class Header extends Component {
                         </div>
                         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                             <div className="bcgov-title">
-                                <h2>Court of Appeal E-Filing Suite</h2>  
-                                <label className="tag-line">E-filing first choice citizens fill forms</label>
+                                <h2>Court of Appeal</h2>  
                             </div>
                         </div>
                         <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
@@ -25,9 +24,12 @@ class Header extends Component {
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">
-                                        <i className="fa fa-home" aria-hidden="true"></i>
-                                        <i className="fa fa-bell" aria-hidden="true"></i>
-                                        <a href="/notifications.html"><span className="notify">3</span></a>
+                                        <i className="fa fa-home" aria-hidden="true"></i>                                        
+                                        <a href="/notifications.html">
+                                            <i className="fa fa-bell" aria-hidden="true"></i>
+                                            <span className="notify">3</span>
+                                        </a>
+                                        <i className="fas fa-info-circle" aria-hidden="true"></i>
                                         <i className="fa fa-cog" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -38,9 +40,11 @@ class Header extends Component {
                 <div className="navigationRibbon">
                     <div className="level2Navigation">
                         <div className="container">
-                            <a href="/">HOME</a>
-                            <a href="/my-applications.html">MY APPLICATIONS</a>
-                            <a href="/notifications.html">NOTIFICATIONS</a>
+                            <div id="header-menu-row">
+                                <a href="/">HOME</a>
+                                <a href="/my-applications.html">MY CASES</a>
+                                <a href="/">ALL FORMS</a>
+                            </div>
                         </div>
                     </div>
                 </div>

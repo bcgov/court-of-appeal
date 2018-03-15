@@ -1,4 +1,4 @@
-var fakeData = fakeData = { 
+var fakeData = { 
     parties: {
         appelant: {
             name: 'Bruce Wayne',
