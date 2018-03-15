@@ -1,4 +1,15 @@
-var fakeData = require('./fake.data');
+var fakeData = fakeData = { 
+    parties: {
+        appelant: {
+            name: 'Bruce Wayne',
+            address: 'The Wayne Castle'
+        },
+        respondent: {
+            name: 'Clark Kent',
+            address: 'This guy does not need any'
+        }
+    }
+};
 
 var Service = function() {
     this.apiUrl = process.env.REACT_APP_API_URL;    
