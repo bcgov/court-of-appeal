@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SelectForm from './forms/select.form.js';
 import Top5 from './forms/top.5.js';
 import ActiveForms from './forms/active.forms.js';
+import NeedHelp from './need.help.js';
 import './dashboard.css';
 
 class Dashboard extends Component {
@@ -22,6 +23,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="col-sm-4">
                         <Top5 />
+                        <NeedHelp />
                     </div>
                 </div>
             </div>
