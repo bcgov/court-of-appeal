@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './select.form.css';
+import './active.forms.css';
 
 class MyApplications extends Component {
   render() {
@@ -28,26 +28,33 @@ class MyApplications extends Component {
                             <table>
                                 <thead>
                                     <tr className="header">
+                                        <td></td>
                                         <td>File #</td>
+                                        <td>Form</td>
                                         <td>Parties</td>
-                                        <td>Status</td>
-                                        <td>Deadline to file / serve <i className="fa fa-sort" aria-hidden="true"></i></td>
-                                        <td>Last Modified <i className="fa fa-sort" aria-hidden="true"></i></td>
+                                        <td>Status                                
+                                        </td>
+                                        <td>Deadline to File</td>
+                                        <td>Recently Modified</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>3456769 (Form-2)</td>
+                                        <td className="near-deadline"><i class="fas fa-exclamation"></i></td>
+                                        <td>3456769</td>
+                                        <td>Notice of Appearance (Form-2)</td>
                                         <td>Moreno / Julia</td>
                                         <td>Draft</td>
-                                        <td>2018-03-20</td>
+                                        <td style={{ color:'rgb(255, 0, 0)' }}>2018-03-20</td>
                                         <td>2018-03-12</td>
                                     </tr>
                                     <tr>
-                                        <td>2098709 (Form-7)</td>
+                                        <td></td>
+                                        <td>2098709</td>
+                                        <td>Notice of Appearance (Form-2)</td>
                                         <td>Moreno / Julia</td>
-                                        <td>Accepted</td>
-                                        <td>2018-03-05</td>
+                                        <td>Draft</td>
+                                        <td>2018-04-05</td>
                                         <td>2018-03-01</td>
                                     </tr>
                                 </tbody>
