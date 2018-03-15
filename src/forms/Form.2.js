@@ -7,13 +7,30 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            appelant: {
+                name: ''
+            },
+            respondent: {
+                name: ''
+            }
+        };
         
         this.found = this.found.bind(this);
     }
 
-    found(data) {
-        this.appelantName.innerHTML = data.parties.appelant.name;
-        this.respondentName.innerHTML = data.parties.respondent.name;
+    found(data) {        
+        if (data) {
+            this.setState({
+                appelant: { name:data.parties.appelant.name },
+                respondent: {name:data.parties.respondent.name }
+            });
+        } else {
+            this.setState({
+                appelant: { name:'' },
+                respondent: {name:'' }
+            });
+        }
     }
 
   render() {
@@ -70,12 +87,12 @@ class Form2 extends Component {
                     <table><tbody>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                            <td id="appelant-name" ref={(element) => { this.appelantName = element; }}>Jason Dent by way of their litigation guardian, Maria Terresa Dent</td>
+                            <td id="appelant-name">{ this.state.appelant.name }</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
                         </tr>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>AND:</td>
-                            <td id="respondent-name" ref={(element) => { this.respondentName = element; }}>Bob Jones</td>
+                            <td id="respondent-name" >{ this.state.respondent.name }</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
                         </tr>
                     </tbody></table>

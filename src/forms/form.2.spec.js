@@ -34,4 +34,19 @@ describe('Search Form 7 in form 2', function() {
         expect(document.getElementById('respondent-name').innerHTML).
             to.equal(Service.fakeData.parties.respondent.name);
     });
+
+    it('resists no data', function(done) {
+        process.env.REACT_APP_API_URL = 'http://not-a-running-server';
+        var Service = require('../service/default.service');
+        document = jsdom.jsdom('<div id="root"></div>');
+        sut = <Form2 />;
+        ReactDOM.render(sut, document.getElementById('root'));
+        click('#find-button', document);    
+           
+        setTimeout(function() {
+            expect(document.getElementById('appelant-name').innerHTML).to.equal('');
+            expect(document.getElementById('respondent-name').innerHTML).to.equal('');
+            done();
+        }, 100);
+    });
 });
