@@ -27,7 +27,7 @@ class ActiveForms extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="near-deadline"><i class="fas fa-exclamation"></i></td>
+                            <td className="near-deadline"><i className="fas fa-exclamation"></i></td>
                             <td>3456769</td>
                             <td>Notice of Appearance (Form-2)</td>
                             <td>Moreno / Julia</td>
