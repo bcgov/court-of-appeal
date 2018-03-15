@@ -11,6 +11,7 @@ describe('Default service', function() {
             response.setHeader('Content-Type', 'application/json');
             var parsed = url.parse(request.url, true);
             if (parsed.pathname == '/form-7') {
+                response.setHeader('Access-Control-Allow-Origin', '*');
                 response.write(JSON.stringify({ value:42 }));
                 response.end();
             } else {

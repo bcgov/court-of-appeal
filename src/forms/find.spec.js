@@ -42,10 +42,9 @@ describe('Find', function() {
     });
     it('can work with default service', function(done) {
         document = jsdom.jsdom('<div id="root"></div>');
-        process.env.REACT_APP_API_URL = undefined;  
-        var Service = require('../service/default.service');
+        process.env.REACT_APP_API_URL = undefined;          
         sut = <Find callback={function(data) { 
-            expect(data).to.deep.equal(Service.fakeData);
+            expect(data).to.deep.equal(require('../service/default.service').fakeData);
             done(); 
         }} />;
         ReactDOM.render(sut, document.getElementById('root'));        

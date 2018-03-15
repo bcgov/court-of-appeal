@@ -1,26 +1,40 @@
-var request = require('request');
-var fakeData = require('./fake.data');
+var fakeData = fakeData = { 
+    parties: {
+        appelant: {
+            name: 'Bruce Wayne',
+            address: 'The Wayne Castle'
+        },
+        respondent: {
+            name: 'Clark Kent',
+            address: 'This guy does not need any'
+        }
+    }
+};
 
 var Service = function() {
-    this.apiUrl = process.env.REACT_APP_API_URL;
+    this.apiUrl = process.env.REACT_APP_API_URL;    
 };
 
 Service.prototype.serveLocalData = function() {
     this.apiUrl = undefined;
-    process.env.REACT_APP_API_URL = undefined;
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
     if (this.apiUrl === undefined || this.apiUrl === 'undefined') {
         callback(fakeData);
     } else {
-        request(this.apiUrl + '/form-7', function(err, response, body) {
-            if (err) {                
-                callback(undefined);
-            } else {
-                callback(JSON.parse(body));
+        var xhr = new window.XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                if (this.status === 200) {                    
+                    callback(JSON.parse(this.responseText));
+                } else {
+                    callback(undefined);
+                }
             }
-        });
+        };
+        xhr.open('GET', this.apiUrl + '/form-7', true);
+        xhr.send();
     }
 };
 
