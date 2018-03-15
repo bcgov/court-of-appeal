@@ -113,6 +113,16 @@ body {
     float: right;
 }
 
+#header-main-row {
+    padding-left: 30px;
+    padding-right: 15px;
+    margin: auto;
+}
+#header-menu-row {
+    padding-left: 15px;
+    margin: auto;
+}
+
 .header-main-right {
     margin-top: 16px;
 }

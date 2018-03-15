@@ -39,9 +39,11 @@ class Header extends Component {
                 <div className="navigationRibbon">
                     <div className="level2Navigation">
                         <div className="container">
-                            <a href="/">HOME</a>
-                            <a href="/my-applications.html">MY CASES</a>
-                            <a href="/">ALL FORMS</a>
+                            <div id="header-menu-row">
+                                <a href="/">HOME</a>
+                                <a href="/my-applications.html">MY CASES</a>
+                                <a href="/">ALL FORMS</a>
+                            </div>
                         </div>
                     </div>
                 </div>
