@@ -12,7 +12,7 @@ var fakeData = {
 };
 
 var Service = function() {
-    this.apiUrl = process.env.REACT_APP_API_URL;    
+    this.apiUrl = process.env.REACT_APP_API_URL;       
 };
 
 Service.prototype.serveLocalData = function() {
@@ -23,18 +23,14 @@ Service.prototype.searchForm7 = function(file, callback) {
     if (this.apiUrl === undefined || this.apiUrl === 'undefined') {
         callback(fakeData);
     } else {
-        var xhr = new window.XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (this.readyState === 4) {
-                if (this.status === 200) {                    
-                    callback(JSON.parse(this.responseText));
-                } else {
-                    callback(undefined);
-                }
-            }
-        };
-        xhr.open('GET', this.apiUrl + '/form-7', true);
-        xhr.send();
+        var socket = require('socket.io-client')(this.apiUrl);
+        socket.on('connect_error', function(error) {
+            callback(undefined);
+        });
+        socket.emit('form-7-search', { file:file });
+        socket.on('form-7-data', function(data) {
+            callback(data);
+        });   
     }
 };
 
