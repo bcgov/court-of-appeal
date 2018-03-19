@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var Service = require('./default.service');
 var url = require('url');
 
-describe('Default service', function() {
+describe.only('Default service', function() {
 
     var api = 'http://localhost:5001';
     var serverSocket;
@@ -10,8 +10,8 @@ describe('Default service', function() {
     beforeEach(function() {
         serverSocket = require('socket.io').listen(5001);
         serverSocket.on('connection', function(socket) {
-            socket.on('form-7-search', function(data) {
-                socket.emit('form-7-data', { message:'data for file ' + data.file });
+            socket.on('form-7-search', function(data, callback) {
+                callback({ message:'data for file ' + data.file });
             });
         });        
     });
@@ -28,8 +28,7 @@ describe('Default service', function() {
 
     it('leverage socket.io-client', function(done) {        
         var socket = require('socket.io-client')(api);
-        socket.emit('form-7-search', { file:42 });
-        socket.on('form-7-data', function(data) {
+        socket.emit('form-7-search', { file:42 }, function(data) {
             expect(data).to.deep.equal({ message:'data for file 42' });
             done();
         });

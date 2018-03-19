@@ -27,10 +27,9 @@ Service.prototype.searchForm7 = function(file, callback) {
         socket.on('connect_error', function(error) {
             callback(undefined);
         });
-        socket.emit('form-7-search', { file:file });
-        socket.on('form-7-data', function(data) {
+        socket.emit('form-7-search', { file:file }, function(data) {
             callback(data);
-        });   
+        });
     }
 };
 
