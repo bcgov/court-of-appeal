@@ -9,27 +9,38 @@ class Form2 extends Component {
         super(props);
         this.state = {
             appelant: {
-                name: ''
+                name: '',
+                address: ''
             },
             respondent: {
-                name: ''
-            }
+                name: '',
+                address: ''
+            },
+            displayData: 'none'
         };
         
         this.found = this.found.bind(this);
     }
 
+    componentDidMount() {
+        this.address.value = this.state.respondent.address;
+    }
+
     found(data) {        
         if (data) {
             this.setState({
-                appelant: { name:data.parties.appelant.name },
-                respondent: {name:data.parties.respondent.name }
+                appelant: { name:data.parties.appelant.name, address:data.parties.appelant.address },
+                respondent: {name:data.parties.respondent.name, address:data.parties.respondent.address },
+                displayData: 'block'
             });
+            this.address.value = data.parties.respondent.address;
         } else {
             this.setState({
                 appelant: { name:'' },
-                respondent: {name:'' }
+                respondent: {name:'' },
+                displayData: 'none'
             });
+            this.address.value = '';
         }
     }
 
@@ -81,7 +92,7 @@ class Form2 extends Component {
 
                 <Find callback={this.found} />                
 
-                <div className="form-section">
+                <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
 
                     <table><tbody>
@@ -98,7 +109,7 @@ class Form2 extends Component {
                     </tbody></table>
                 </div>
                 
-                <div className="form-section">
+                <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Enter an Appearance (on Behalf of)</h2>
 
                     <table><tbody>
@@ -114,7 +125,7 @@ class Form2 extends Component {
                       <tr>
                         <td><span style={{ color:'red' }}>*</span> Respondent's mail address for service:</td>
                         <td>
-                          <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" defaultValue="123 Harbour street, Victoria, BC"/>
+                          <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" ref={(input) => { this.address = input; }} />
                         </td>
                         <td style={{ color:'gray' }}>Where would you like to receive documents related to this case?</td>
                       </tr>
@@ -138,7 +149,7 @@ class Form2 extends Component {
 
                 </div>
 
-                <button id="confirm" className="btn btn-primary btn-green pull-right">Confirm</button>
+                <button id="confirm" className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
 
                 <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                     <div className="modal-title">
