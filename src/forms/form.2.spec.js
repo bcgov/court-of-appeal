@@ -14,8 +14,7 @@ describe('Search Form 7 in form 2', function() {
     var sut;
 
     beforeEach(function() {
-        var service = new Service();
-        service.serveLocalData();
+        process.env.REACT_APP_API_URL = null;
         document = jsdom.jsdom('<div id="root"></div>');
         sut = <Form2 />;
         ReactDOM.render(sut, document.getElementById('root'));
@@ -37,7 +36,6 @@ describe('Search Form 7 in form 2', function() {
 
     it('resists no data', function(done) {
         process.env.REACT_APP_API_URL = 'http://not-a-running-server';
-        var Service = require('../service/default.service');
         document = jsdom.jsdom('<div id="root"></div>');
         sut = <Form2 />;
         ReactDOM.render(sut, document.getElementById('root'));

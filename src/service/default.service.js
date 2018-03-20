@@ -20,7 +20,7 @@ Service.prototype.serveLocalData = function() {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    if (this.apiUrl === undefined || this.apiUrl === 'undefined') {
+    if (!this.apiUrl || this.apiUrl === 'undefined' || this.apiUrl === 'null') {
         callback(fakeData);
     } else {
         var socket = require('socket.io-client')(this.apiUrl);
