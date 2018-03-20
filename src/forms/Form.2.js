@@ -114,20 +114,28 @@ class Form2 extends Component {
 
                     <table><tbody>
                       <tr>
-                        <td><span style={{ color:'red' }}>*</span> Respondent's name:</td>
+                        <td>
+                            <span style={{ color:'red' }}>*</span> 
+                            Respondent's name &nbsp;
+                            <i class="fa fa-question-circle" aria-hidden="true" title="Who is responding to the Notice of Appeal?"></i>
+                            :
+                        </td>
                         <td>
                           <select>
                               <option>Bob Jones</option>
                           </select>
                         </td>
-                        <td style={{ color:'gray' }}>Who is responding to the Notice of Appeal?</td>
                       </tr>
                       <tr>
-                        <td><span style={{ color:'red' }}>*</span> Respondent's mail address for service:</td>
+                        <td>
+                            <span style={{ color:'red' }}>*</span> 
+                            Respondent's mail address for service &nbsp;
+                            <i class="fa fa-question-circle" aria-hidden="true" title="Where would you like to receive documents related to this case?"></i>
+                            :
+                        </td>
                         <td>
                           <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" ref={(input) => { this.address = input; }} />
                         </td>
-                        <td style={{ color:'gray' }}>Where would you like to receive documents related to this case?</td>
                       </tr>
                       <tr>
                         <td><span style={{ color:'red' }}>*</span> Respondent's e-mail:</td>
@@ -138,11 +146,15 @@ class Form2 extends Component {
                         <td><input name="respondent-phone"/></td>
                       </tr>
                       <tr>
-                        <td><span style={{ color:'red' }}>*</span> Respondent name (or Solicitor name):</td>
+                        <td>
+                            <span style={{ color:'red' }}>*</span> 
+                            Respondent name (or Solicitor name) &nbsp;
+                            <i class="fa fa-question-circle" aria-hidden="true" title="Who is filing this Notice of Appearance?"></i>
+                            :
+                        </td>
                         <td>
                             <input name="respondent-solicitor"/>
                         </td>
-                        <td style={{ color:'gray' }}>Who is filing this Notice of Appearance?</td>
                       </tr>
                     </tbody></table>
 
