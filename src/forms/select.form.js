@@ -37,7 +37,7 @@ class SelectForm extends Component {
                                     <a href="/" className="btn btn-primary round-borders" style={{ width:'250px', backgroundColor:'green'}}>Start an Appeal</a>
                                 </td>
                                 <td style={{ width:'50%', textAlign:'center'}}>
-                                    <a href="/" className="btn btn-primary round-borders" style={{ width:'250px', backgroundColor:'#fcbc199f', color:'black'}}>Respond to Appeal</a>
+                                    <a href="/" className="btn btn-primary round-borders" style={{ width:'250px', backgroundColor:'#fdb813', color:'black'}}>Respond to Appeal</a>
                                 </td>
                             </tr>
                         </tbody>
