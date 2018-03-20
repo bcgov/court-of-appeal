@@ -43,7 +43,7 @@ class MyApplications extends Component {
                                         <td className="near-deadline"><i className="fas fa-exclamation-circle"></i></td>
                                         <td>3456769</td>
                                         <td>Notice of Appearance (Form-2)</td>
-                                        <td>Moreno / Julia</td>
+                                        <td>Moreno / McLane</td>
                                         <td>Draft</td>
                                         <td style={{ color:'rgb(255, 0, 0)' }}>2018-03-20</td>
                                         <td>2018-03-12</td>
@@ -52,7 +52,7 @@ class MyApplications extends Component {
                                         <td></td>
                                         <td>2098709</td>
                                         <td>Notice of Appearance (Form-2)</td>
-                                        <td>Moreno / Julia</td>
+                                        <td>Moreno / McLane</td>
                                         <td>Draft</td>
                                         <td>2018-04-05</td>
                                         <td>2018-03-01</td>
@@ -61,7 +61,7 @@ class MyApplications extends Component {
                                         <td></td>
                                         <td>2098710</td>
                                         <td>Notice of Appearance (Form-2)</td>
-                                        <td>Moreno / Julia</td>
+                                        <td>Moreno / McLane</td>
                                         <td>Draft</td>
                                         <td>2018-04-06</td>
                                         <td>2018-03-01</td>
@@ -70,7 +70,7 @@ class MyApplications extends Component {
                                         <td></td>
                                         <td>2098711</td>
                                         <td>Notice of Appearance (Form-2)</td>
-                                        <td>Moreno / Julia</td>
+                                        <td>Moreno / McLane</td>
                                         <td>Draft</td>
                                         <td>2018-04-07</td>
                                         <td>2018-03-01</td>
