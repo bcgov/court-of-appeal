@@ -40,7 +40,7 @@ class MyApplications extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="near-deadline"><i class="fas fa-exclamation"></i></td>
+                                        <td className="near-deadline"><i className="fas fa-exclamation-circle"></i></td>
                                         <td>3456769</td>
                                         <td>Notice of Appearance (Form-2)</td>
                                         <td>Moreno / Julia</td>
@@ -55,6 +55,24 @@ class MyApplications extends Component {
                                         <td>Moreno / Julia</td>
                                         <td>Draft</td>
                                         <td>2018-04-05</td>
+                                        <td>2018-03-01</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>2098710</td>
+                                        <td>Notice of Appearance (Form-2)</td>
+                                        <td>Moreno / Julia</td>
+                                        <td>Draft</td>
+                                        <td>2018-04-06</td>
+                                        <td>2018-03-01</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>2098711</td>
+                                        <td>Notice of Appearance (Form-2)</td>
+                                        <td>Moreno / Julia</td>
+                                        <td>Draft</td>
+                                        <td>2018-04-07</td>
                                         <td>2018-03-01</td>
                                     </tr>
                                 </tbody>

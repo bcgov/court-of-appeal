@@ -2,61 +2,53 @@ var expect = require('chai').expect;
 var Service = require('./default.service');
 var url = require('url');
 
-describe('Default service', function() {
+describe.only('Default service', function() {
 
     var api = 'http://localhost:5001';
-    var http;
-    beforeEach(function(done) {
-        http = require('http').createServer(function(request, response) {
-            response.setHeader('Content-Type', 'application/json');
-            var parsed = url.parse(request.url, true);
-            if (parsed.pathname == '/form-7') {
-                response.setHeader('Access-Control-Allow-Origin', '*');
-                response.write(JSON.stringify({ value:42 }));
-                response.end();
-            } else {
-                response.statusCode = 404;
-                response.end();
-            }
-        }).listen(5001, done);
+    var serverSocket;
+
+    beforeEach(function() {
+        serverSocket = require('socket.io').listen(5001);
+        serverSocket.on('connection', function(socket) {
+            socket.on('form-7-search', function(data, callback) {
+                callback({ message:'data for file ' + data.file });
+            });
+        });        
     });
-    afterEach(function(done) {
-        http.close(done);
+    afterEach(function() {
+        serverSocket.close();
     });
 
     it('uses environment variable', function() {
         process.env.REACT_APP_API_URL = api;
         var service = new Service();
 
-        expect(service.apiUrl).to.equal('http://localhost:5001');
+        expect(service.apiUrl).to.equal(api);
     });
 
-    it('delegates to external service', function(done) {        
-        process.env.REACT_APP_API_URL = api;
-        var service = new Service();
-        service.searchForm7('any', function(data) {
-            expect(data).to.deep.equal({ value:42 });
+    it('leverage socket.io-client', function(done) {        
+        var socket = require('socket.io-client')(api);
+        socket.emit('form-7-search', { file:42 }, function(data) {
+            expect(data).to.deep.equal({ message:'data for file 42' });
             done();
         });
     });
 
-    it('resists external service down', function(done) {
-        http.close(function() {
-            process.env.REACT_APP_API_URL = api;
-            var service = new Service();
-            service.searchForm7('any', function(data) {
-                expect(data).to.deep.equal(undefined);
-                done();
-            });
-        });        
+    it('requests form-7 data', function(done) {
+        process.env.REACT_APP_API_URL = api;
+        var service = new Service();
+        service.searchForm7('any', function(data) {
+            expect(data).to.deep.equal({ message:'data for file any' });
+            done();
+        });
     });
 
-    it('defaults to local data', function(done) {        
-        process.env.REACT_APP_API_URL = undefined;
+    it('resists server down', function(done) {
+        serverSocket.close();
+        process.env.REACT_APP_API_URL = api;
         var service = new Service();
-        expect(service.apiUrl).to.equal('undefined');
         service.searchForm7('any', function(data) {
-            expect(data).to.deep.equal(Service.fakeData);
+            expect(data).to.deep.equal(undefined);
             done();
         });
     });

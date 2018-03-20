@@ -556,3 +556,7 @@ fieldset[disabled] a.btn {
     padding:5px;
     border-radius:3px;
 }
+
+.round-borders {
+    border-radius: 5px;
+}

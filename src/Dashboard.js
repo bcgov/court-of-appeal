@@ -23,6 +23,12 @@ class Dashboard extends Component {
                     </div>
                     <div className="col-sm-4">
                         <Top5 />
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div role="main" className="col-sm-12">   
+                    <div className="col-sm-12">
                         <NeedHelp />
                     </div>
                 </div>

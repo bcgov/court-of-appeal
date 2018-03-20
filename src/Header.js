@@ -20,7 +20,7 @@ class Header extends Component {
                         <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                             <div className="pull-right">
                                 <div className="align-right header-top-line">
-                                    <span >Welcome Julie</span>
+                                    <span >Welcome, Julie</span>
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">
