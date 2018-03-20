@@ -117,7 +117,7 @@ class Form2 extends Component {
                         <td>
                             <span style={{ color:'red' }}>*</span> 
                             Respondent's name &nbsp;
-                            <i class="fa fa-question-circle" aria-hidden="true" title="Who is responding to the Notice of Appeal?"></i>
+                            <i className="fa fa-question-circle" aria-hidden="true" title="Who is responding to the Notice of Appeal?"></i>
                             :
                         </td>
                         <td>
@@ -130,7 +130,7 @@ class Form2 extends Component {
                         <td>
                             <span style={{ color:'red' }}>*</span> 
                             Respondent's mail address for service &nbsp;
-                            <i class="fa fa-question-circle" aria-hidden="true" title="Where would you like to receive documents related to this case?"></i>
+                            <i className="fa fa-question-circle" aria-hidden="true" title="Where would you like to receive documents related to this case?"></i>
                             :
                         </td>
                         <td>
@@ -149,7 +149,7 @@ class Form2 extends Component {
                         <td>
                             <span style={{ color:'red' }}>*</span> 
                             Respondent name (or Solicitor name) &nbsp;
-                            <i class="fa fa-question-circle" aria-hidden="true" title="Who is filing this Notice of Appearance?"></i>
+                            <i className="fa fa-question-circle" aria-hidden="true" title="Who is filing this Notice of Appearance?"></i>
                             :
                         </td>
                         <td>
