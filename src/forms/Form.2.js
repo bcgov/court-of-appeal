@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './Form.css';
 import './Form.2.css';
 import Find from './find.js';
+import DefaultService from '../service/default.service.js';
 
 class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        this.service = props.service ? props.service : new DefaultService(); 
         this.state = {
             appelant: {
                 name: '',
@@ -20,6 +22,7 @@ class Form2 extends Component {
         };
         
         this.found = this.found.bind(this);
+        this.save = this.save.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +45,14 @@ class Form2 extends Component {
             });
             this.address.value = '';
         }
+    }
+
+    save() {        
+        this.service.saveForm2({ 
+                formSevenNumber:42, 
+                appelant:'Bruce', 
+                respondent:'Clark' 
+            }, (data) => { console.log(data); });
     }
 
   render() {
@@ -161,7 +172,7 @@ class Form2 extends Component {
 
                 </div>
 
-                <button id="confirm" className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
+                <button id="save" onClick={this.save} className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
 
                 <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                     <div className="modal-title">

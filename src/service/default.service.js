@@ -33,5 +33,15 @@ Service.prototype.searchForm7 = function(file, callback) {
     }
 };
 
+Service.prototype.saveForm2 = function(form, callback) {    
+    var socket = require('socket.io-client')(this.apiUrl);
+    socket.on('connect_error', function(error) {
+        callback(undefined);
+    });
+    socket.emit('form-2-save', { data:form }, function(data) {
+        callback(data);
+    });
+};
+
 module.exports = Service;
 module.exports.fakeData = fakeData;
