@@ -18,7 +18,7 @@ class ActiveForms extends Component {
                 cases:data.cases.map(function(item) { 
                     return {
                         id:item.id,
-                        parties: item.appelant + ' / ' + item.respondent,
+                        parties: item.data.appelant + ' / ' + item.data.respondent,
                         status: item.status
                     };
                 }) 

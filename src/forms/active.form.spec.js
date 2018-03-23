@@ -22,7 +22,7 @@ describe('Active forms section', function() {
                 received = params;
                 callback({
                     cases: [
-                        { id:1501, status:'draft', appelant:'Bruce', respondent:'Clark' }
+                        { id:1501, status:'draft', data:{appelant:'Bruce', respondent:'Clark'} }
                     ]
                 });
             });
