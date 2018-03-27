@@ -20,7 +20,8 @@ class ActiveForms extends Component {
                         return {
                             id:item.id,
                             parties: item.data.appelant + ' / ' + item.data.respondent,
-                            status: item.status
+                            status: item.status,
+                            modified: item.modified ? item.modified.substring(0, item.modified.indexOf('.')) : ''
                         };
                     }) 
                 });
@@ -57,8 +58,8 @@ class ActiveForms extends Component {
                                     <td>{item.id}</td>
                                     <td>{item.parties}</td>
                                     <td>{item.status}</td>
-                                    <td>2018-04-05</td>
-                                    <td>2018-03-01</td>
+                                    <td></td>
+                                    <td>{item.modified}</td>
                                 </tr>
                             )
                         }
