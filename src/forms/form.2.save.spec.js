@@ -45,4 +45,27 @@ describe('Form 2 save', function() {
             done();
         }, 300);        
     });
+
+    it('display confirmation message', function(done) {
+        enter('777', '#file-no', document);
+        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
+        click('#save', document); 
+
+        setTimeout(()=> {
+            expect(sut.state.displaySaveSuccess).to.equal(true);
+            done();
+        }, 300); 
+    });
+
+    it('display error message when server times out', function(done) {
+        io.close();
+        enter('777', '#file-no', document);
+        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
+        click('#save', document); 
+
+        setTimeout(()=> {
+            expect(sut.state.displaySaveError).to.equal(true);
+            done();
+        }, 300); 
+    });
 });

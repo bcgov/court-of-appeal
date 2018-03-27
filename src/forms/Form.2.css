@@ -14,10 +14,10 @@
 }
 
 .modal {
-    display: nopne;
+    display: none;
     position: fixed; 
     z-index: 1; 
-    padding-top: 100px; 
+    padding-top: 110px; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -34,6 +34,12 @@
     padding: 20px;
     width: 40%;
 	font-size: 2rem;
+}
+.red {
+    background-color: red;
+}
+.green {
+    background-color: green;
 }
 
 .modal-content {

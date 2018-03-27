@@ -42,7 +42,6 @@ Service.prototype.searchForm7 = function(file, callback) {
 Service.prototype.saveForm2 = function(form, callback) {    
     var socket = this.connect();
     socket.on('connect_error', function(error) {
-        console.log('connect error');
         callback(undefined);
         socket.close();
     });
