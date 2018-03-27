@@ -20,13 +20,13 @@ describe('Form 2 save', function() {
         io.on('connection', (socket) => { 
             socket.on('form-2-save', (params, callback) => {
                 received = params;
+                callback('ok');                
             });
         });
 
         process.env.REACT_APP_API_URL = 'http://localhost:5001';
         document = jsdom.jsdom('<div id="root"></div>');
-        sut = <Form2 />;
-        ReactDOM.render(sut, document.getElementById('root'));        
+        sut = ReactDOM.render(<Form2 />, document.getElementById('root'));       
     });
 
     afterEach(function() {
@@ -34,11 +34,15 @@ describe('Form 2 save', function() {
     });
     
     it('sends data to server', function(done) {
+        enter('777', '#file-no', document);
+        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
         click('#save', document);    
            
         setTimeout(()=> {
-            expect(received).to.deep.equal({data:{ formSevenNumber:42, appelant:'Bruce', respondent:'Clark' }});
+            expect(received.data.formSevenNumber).to.equal('777'); 
+            expect(received.data.appelant).to.equal('bob'); 
+            expect(received.data.respondent).to.equal('toto'); 
             done();
-        }, 100);        
+        }, 300);        
     });
 });

@@ -47,12 +47,15 @@ class Form2 extends Component {
         }
     }
 
-    save() {        
+    save() {     
         this.service.saveForm2({ 
-                formSevenNumber:42, 
-                appelant:'Bruce', 
-                respondent:'Clark' 
-            }, (data) => { console.log(data); });
+                formSevenNumber: this.findComponent.textInput.value, 
+                appelant: this.state.appelant.name, 
+                respondent: this.state.respondent.name 
+            }, (data) => { 
+            
+            
+        });
     }
 
   render() {
@@ -101,7 +104,7 @@ class Form2 extends Component {
                   </p>
                 </div>
 
-                <Find callback={this.found} />                
+                <Find callback={this.found} ref={(element) => { this.findComponent = element; }} />                
 
                 <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
