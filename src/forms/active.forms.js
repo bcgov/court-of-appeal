@@ -14,15 +14,17 @@ class ActiveForms extends Component {
 
     componentDidMount() {
         this.service.getMyCases({}, (data) => { 
-            this.setState({ 
-                cases:data.cases.map(function(item) { 
-                    return {
-                        id:item.id,
-                        parties: item.data.appelant + ' / ' + item.data.respondent,
-                        status: item.status
-                    };
-                }) 
-            });
+            if (data && data.cases) {
+                this.setState({ 
+                    cases:data.cases.slice(0, 5).map(function(item) { 
+                        return {
+                            id:item.id,
+                            parties: item.data.appelant + ' / ' + item.data.respondent,
+                            status: item.status
+                        };
+                    }) 
+                });
+            }
         });
     }
 
