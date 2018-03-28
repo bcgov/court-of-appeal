@@ -1,7 +1,33 @@
 import React, { Component } from 'react';
 import './active.forms.css';
+import DefaultService from '../service/default.service.js';
 
 class ActiveForms extends Component {
+
+    constructor(props) {
+        super(props);
+        this.service = props.service ? props.service : new DefaultService(); 
+        this.state = {
+            cases: []
+        };
+    }
+
+    componentDidMount() {
+        this.service.getMyCases({}, (data) => { 
+            if (data && data.cases) {
+                this.setState({ 
+                    cases:data.cases.slice(0, 5).map(function(item) { 
+                        return {
+                            id:item.id,
+                            parties: item.data.appelant + ' / ' + item.data.respondent,
+                            status: item.status,
+                            modified: item.modified
+                        };
+                    }) 
+                });
+            }
+        });
+    }
 
     render() {
         return (
@@ -12,7 +38,7 @@ class ActiveForms extends Component {
                         <a href="/my-applications.html" className="btn btn-primary round-borders">View All Cases</a>
                     </div>
                 </div>
-                <table>
+                <table id="my-cases">
                     <thead>
                         <tr className="header">
                             <td></td>
@@ -25,6 +51,18 @@ class ActiveForms extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {
+                            this.state.cases.map((item) =>
+                                <tr key={item.id}>
+                                    <td></td>
+                                    <td>{item.id}</td>
+                                    <td>{item.parties}</td>
+                                    <td>{item.status}</td>
+                                    <td></td>
+                                    <td>{item.modified}</td>
+                                </tr>
+                            )
+                        }
                         <tr>
                             <td className="near-deadline"><i className="fas fa-exclamation-circle"></i></td>
                             <td>3456769</td>

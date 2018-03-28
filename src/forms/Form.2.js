@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './Form.css';
 import './Form.2.css';
 import Find from './find.js';
+import DefaultService from '../service/default.service.js';
 
 class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        this.service = props.service ? props.service : new DefaultService(); 
         this.state = {
             appelant: {
                 name: '',
@@ -16,10 +18,15 @@ class Form2 extends Component {
                 name: '',
                 address: ''
             },
-            displayData: 'none'
+            displayData: 'none',
+            displaySaveSuccess: false,
+            displaySaveError: false
         };
         
         this.found = this.found.bind(this);
+        this.save = this.save.bind(this);
+        this.closeErrorModal = this.closeErrorModal.bind(this);
+        this.closeSuccessModal = this.closeSuccessModal.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +49,36 @@ class Form2 extends Component {
             });
             this.address.value = '';
         }
+    }
+
+    save() {     
+        this.service.saveForm2({ 
+                formSevenNumber: this.findComponent.textInput.value, 
+                appelant: this.state.appelant.name, 
+                respondent: this.state.respondent.name 
+            }, (data) => { 
+            if (data !== undefined) {
+                this.setState({
+                    displaySaveSuccess: true
+                });
+            } else {
+                this.setState({
+                    displaySaveError: true
+                });
+            }
+        });
+    }
+
+    closeErrorModal() {
+        this.setState({
+            displaySaveError: false
+        });
+    }
+
+    closeSuccessModal() {
+        this.setState({
+            displaySaveSuccess: false
+        });
     }
 
   render() {
@@ -90,7 +127,7 @@ class Form2 extends Component {
                   </p>
                 </div>
 
-                <Find callback={this.found} />                
+                <Find callback={this.found} ref={(element) => { this.findComponent = element; }} />                
 
                 <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
@@ -161,7 +198,7 @@ class Form2 extends Component {
 
                 </div>
 
-                <button id="confirm" className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
+                <button id="save" onClick={this.save} className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
 
                 <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                     <div className="modal-title">
@@ -189,6 +226,31 @@ class Form2 extends Component {
                         <div>
                             <span className="success">Your form has been successfully verified. Please proceed to review.</span>
                             <button className="btn btn-primary">Preview Form ></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="saveErrorModal" className="modal" 
+                    style={{ display:(this.state.displaySaveError?'block':'none') }} >
+                    <div className="modal-title red">
+                        <span id="close-modal" onClick={this.closeErrorModal}>&times;</span>
+                        Save failed
+                    </div>
+                    <div className="modal-content">
+                        <div>
+                            Something unexpected happened.
+                        </div>
+                    </div>
+                </div>
+                <div id="saveSucessModal" className="modal" 
+                    style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
+                    <div className="modal-title green">
+                        <span id="close-modal" onClick={this.closeSuccessModal}>&times;</span>
+                        Saved!
+                    </div>
+                    <div className="modal-content">
+                        <div>
+                            Form saved, you can return to dashboard
                         </div>
                     </div>
                 </div>

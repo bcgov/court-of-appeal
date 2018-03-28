@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var Service = require('./default.service');
 var url = require('url');
 
-describe.only('Default service', function() {
+describe('Default service', function() {
 
     var api = 'http://localhost:5001';
     var serverSocket;
