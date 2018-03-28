@@ -21,7 +21,7 @@ class ActiveForms extends Component {
                             id:item.id,
                             parties: item.data.appelant + ' / ' + item.data.respondent,
                             status: item.status,
-                            modified: item.modified ? item.modified.substring(0, item.modified.indexOf('.')) : ''
+                            modified: item.modified
                         };
                     }) 
                 });

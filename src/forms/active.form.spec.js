@@ -22,7 +22,7 @@ describe('Active forms section', function() {
                 received = params;
                 callback({
                     cases: [
-                        { id:1501, status:'draft', modified:'2018-03-27 16:15:54.901364-07', data:{appelant:'Bruce', respondent:'Clark'} }
+                        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appelant:'Bruce', respondent:'Clark'} }
                     ]
                 });
             });
@@ -51,7 +51,7 @@ describe('Active forms section', function() {
             expect(row.innerHTML).to.contain(1501);
             expect(row.innerHTML).to.contain('Bruce / Clark');
             expect(row.innerHTML).to.contain('draft');
-            expect(row.innerHTML).to.contain('<td>2018-03-27 16:15:54</td>');
+            expect(row.innerHTML).to.contain('<td>2018-03-27T16:15:54Z</td>');
             done();
         }, 100); 
     });
