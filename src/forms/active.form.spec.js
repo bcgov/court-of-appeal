@@ -1,20 +1,20 @@
-var expect = require('chai').expect;
-var sinon = require('sinon');
+let expect = require('chai').expect;
+let sinon = require('sinon');
 require('chai').use(require('sinon-chai'));
-var jsdom = require("jsdom");
-var { click, enter } = require('../../tests/utils');
+let jsdom = require("jsdom");
+let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ActiveForms from './active.forms.js';
-var Service = require('../service/default.service');
+let Service = require('../service/default.service');
 
 describe('Active forms section', function() {
 
-    var document;
-    var sut;    
-    var io;
-    var received = undefined;
-    var cases = [
+    let document;
+    let sut;    
+    let io;
+    let received = undefined;
+    let cases = [
         { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appelant:'Bruce', respondent:'Clark'} }
     ];
 
@@ -34,8 +34,8 @@ describe('Active forms section', function() {
         sut = ReactDOM.render(<ActiveForms />, document.getElementById('root'));        
     });
 
-    afterEach(function() {
-        io.close();
+    afterEach(function(done) {
+        io.close(done);
     });
     
     it('gets my cases without parameters', function(done) {
@@ -56,7 +56,7 @@ describe('Active forms section', function() {
 
     it('injects the data in the list', function(done) {        
         setTimeout(()=> {
-            var item = document.querySelector("#my-cases .case-item:first-child");
+            let item = document.querySelector("#my-cases .case-item:first-child");
             
             expect(item.innerHTML).to.contain(1501);
             expect(item.innerHTML).to.contain('Bruce / Clark'); 

@@ -1,11 +1,11 @@
-var expect = require('chai').expect;
-var Service = require('./default.service');
-var url = require('url');
+let expect = require('chai').expect;
+let Service = require('./default.service');
+let url = require('url');
 
 describe('Default service', function() {
 
-    var api = 'http://localhost:5001';
-    var serverSocket;
+    let api = 'http://localhost:5001';
+    let serverSocket;
 
     beforeEach(function() {
         serverSocket = require('socket.io').listen(5001);
@@ -15,19 +15,19 @@ describe('Default service', function() {
             });
         });        
     });
-    afterEach(function() {
-        serverSocket.close();
+    afterEach(function(done) {
+        serverSocket.close(done);
     });
 
     it('uses environment variable', function() {
         process.env.REACT_APP_API_URL = api;
-        var service = new Service();
+        let service = new Service();
 
         expect(service.apiUrl).to.equal(api);
     });
 
     it('leverage socket.io-client', function(done) {        
-        var socket = require('socket.io-client')(api);
+        let socket = require('socket.io-client')(api);
         socket.emit('form-7-search', { file:42 }, function(data) {
             expect(data).to.deep.equal({ message:'data for file 42' });
             done();
@@ -36,7 +36,7 @@ describe('Default service', function() {
 
     it('requests form-7 data', function(done) {
         process.env.REACT_APP_API_URL = api;
-        var service = new Service();
+        let service = new Service();
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal({ message:'data for file any' });
             done();
@@ -46,7 +46,7 @@ describe('Default service', function() {
     it('resists server down', function(done) {
         serverSocket.close();
         process.env.REACT_APP_API_URL = api;
-        var service = new Service();
+        let service = new Service();
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal(undefined);
             done();
@@ -55,7 +55,7 @@ describe('Default service', function() {
 
     it('can be set to serve local data', function(done) {
         process.env.REACT_APP_API_URL = api;
-        var service = new Service();
+        let service = new Service();
         service.serveLocalData();
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal(Service.fakeData);

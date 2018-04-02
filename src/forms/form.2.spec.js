@@ -1,17 +1,17 @@
-var expect = require('chai').expect;
-var sinon = require('sinon');
+let expect = require('chai').expect;
+let sinon = require('sinon');
 require('chai').use(require('sinon-chai'));
-var jsdom = require("jsdom");
-var { click, enter } = require('../../tests/utils');
+let jsdom = require("jsdom");
+let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form2 from './Form.2.js';
-var Service = require('../service/default.service');
+let Service = require('../service/default.service');
 
 describe('Search Form 7 in form 2', function() {
 
-    var document;
-    var sut;
+    let document;
+    let sut;
 
     beforeEach(function() {
         process.env.REACT_APP_API_URL = null;
