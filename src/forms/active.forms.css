@@ -20,3 +20,6 @@
 #active-forms table tbody tr:nth-child(even) td {
     background-color: rgb(240, 240, 240);
 }
+#my-cases-empty-label {
+    font-style: italic
+}

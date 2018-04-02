@@ -8,13 +8,14 @@ class ActiveForms extends Component {
         super(props);
         this.service = props.service ? props.service : new DefaultService(); 
         this.state = {
-            cases: []
+            cases: [],
+            displayMyCasesEmptyLabel:true
         };
     }
 
     componentDidMount() {
         this.service.getMyCases({}, (data) => { 
-            if (data && data.cases) {
+            if (data && data.cases && data.cases.length > 0) {
                 this.setState({ 
                     cases:data.cases.slice(0, 5).map(function(item) { 
                         return {
@@ -23,8 +24,14 @@ class ActiveForms extends Component {
                             status: item.status,
                             modified: item.modified
                         };
-                    }) 
+                    }),
+                    displayMyCasesEmptyLabel: false 
                 });
+            } else {
+                this.setState({
+                    cases:[],
+                    displayMyCasesEmptyLabel: true
+                })
             }
         });
     }
@@ -53,7 +60,7 @@ class ActiveForms extends Component {
                     <tbody>
                         {
                             this.state.cases.map((item) =>
-                                <tr key={item.id}>
+                                <tr className="case-item" key={item.id}>
                                     <td></td>
                                     <td>{item.id}</td>
                                     <td>{item.parties}</td>
@@ -62,41 +69,12 @@ class ActiveForms extends Component {
                                     <td>{item.modified}</td>
                                 </tr>
                             )
-                        }
-                        <tr>
-                            <td className="near-deadline"><i className="fas fa-exclamation-circle"></i></td>
-                            <td>3456769</td>
-                            <td>Moreno / McLane</td>
-                            <td>draft</td>
-                            <td style={{ color:'rgb(255, 0, 0)' }}>2018-03-20</td>
-                            <td>2018-03-12</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>2098709</td>
-                            <td>Moreno / McLane</td>
-                            <td>rejected</td>
-                            <td>2018-04-05</td>
-                            <td>2018-03-01</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>2098710</td>
-                            <td>Moreno / McLane</td>
-                            <td>submitted</td>
-                            <td>2018-04-06</td>
-                            <td>2018-03-01</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>2098711</td>
-                            <td>Moreno / McLane</td>
-                            <td>withdrawn</td>
-                            <td>2018-04-07</td>
-                            <td>2018-03-01</td>
-                        </tr>
+                        }                        
                     </tbody>
                 </table>
+                <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
+                        You don't have any open cases
+                </div>
             </div>
         )
     }
