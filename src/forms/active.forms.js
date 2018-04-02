@@ -73,7 +73,7 @@ class ActiveForms extends Component {
                     </tbody>
                 </table>
                 <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
-                        You don't have any open cases
+                        No open cases found
                 </div>
             </div>
         )
