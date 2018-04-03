@@ -104,6 +104,7 @@ echo "IpFilterRules = ${IpFilterRules}"
 echo "AdditionalRealIpFromRules = ${AdditionalRealIpFromRules}"
 echo "HTTP_BASIC = ${HTTP_BASIC}"
 echo "API_URL = ${API_URL}"
+echo "API_CONFIG_SECTION = ${API_CONFIG_SECTION}"
 sed "s~%RealIpFrom%~${RealIpFrom:-172.51.0.0/16}~g; s~%IpFilterRules%~${IpFilterRules}~g; s~%AdditionalRealIpFromRules%~${AdditionalRealIpFromRules}~g; s~%HTTP_BASIC%~${HTTP_BASIC}~g; s~%API_CONFIG_SECTION%~${API_CONFIG_SECTION}~g" /tmp/nginx.conf.template > /etc/nginx/nginx.conf
 if [ -n "$HTTP_BASIC_USERNAME" ] && [ -n "$HTTP_BASIC_PASSWORD" ]; then
     echo "---> Generating .htpasswd file"
