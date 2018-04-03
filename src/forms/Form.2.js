@@ -202,7 +202,6 @@ class Form2 extends Component {
                           </td>
                       </tr>
                       <FormRow
-                        mandatory={false}
                         show={this.state.useServiceEmail}
                         labelText="Respondent's email:"
                         name="respondent-email"
@@ -211,13 +210,11 @@ class Form2 extends Component {
                       />
                       <FormRow
                         mandatory={true}
-                        show={true}
                         labelText="Respondent's phone:"
                         input={(input) => { this.phone = input; }}
                       />
                       <FormRow
                         mandatory={true}
-                        show={true}
                         labelText="Respondent name (or Solicitor name):"
                         input={(input) => { this.filer = input; }}
                         iconText="Who is filing this Notice of Appearance?"
