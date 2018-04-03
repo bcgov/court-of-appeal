@@ -11,6 +11,11 @@ getApiProxyConfigSection (){
 # ================================================================================
 read -r -d '' _CONFIG_SECTION << EOF
 # proxy requests to the API
+
+        location /socket.io/socket.io.js {
+            proxy_pass ${1};
+        }
+
         location /socket.io/ {
             proxy_set_header Upgrade "WebSocket";
             proxy_set_header Connection "Upgrade";
