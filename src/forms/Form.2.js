@@ -3,12 +3,14 @@ import './Form.css';
 import './Form.2.css';
 import Find from './find.js';
 import DefaultService from '../service/default.service.js';
+import FormRow from '../components/form.row.js'
 
 class Form2 extends Component {
 
+   //TODO: populate this with any existing data from the server.  So, we may also need a default set of props.
     constructor(props) {
         super(props);
-        this.service = props.service ? props.service : new DefaultService(); 
+        this.service = props.service ? props.service : new DefaultService();
         this.state = {
             appelant: {
                 name: '',
@@ -20,20 +22,23 @@ class Form2 extends Component {
             },
             displayData: 'none',
             displaySaveSuccess: false,
-            displaySaveError: false
+            displaySaveError: false,
+            useServiceEmail: false
         };
-        
+
         this.found = this.found.bind(this);
         this.save = this.save.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
+        this.hideShowEmail = this.hideShowEmail.bind(this);
+        this.Label = this.Label.bind(this);
     }
 
     componentDidMount() {
         this.address.value = this.state.respondent.address;
     }
 
-    found(data) {        
+    found(data) {
         if (data) {
             this.setState({
                 appelant: { name:data.parties.appelant.name, address:data.parties.appelant.address },
@@ -51,12 +56,12 @@ class Form2 extends Component {
         }
     }
 
-    save() {     
-        this.service.saveForm2({ 
-                formSevenNumber: this.findComponent.textInput.value, 
-                appelant: this.state.appelant.name, 
-                respondent: this.state.respondent.name 
-            }, (data) => { 
+    save() {
+        this.service.saveForm2({
+                formSevenNumber: this.findComponent.textInput.value,
+                appelant: this.state.appelant.name,
+                respondent: this.state.respondent.name
+            }, (data) => {
             if (data !== undefined) {
                 this.setState({
                     displaySaveSuccess: true
@@ -81,10 +86,24 @@ class Form2 extends Component {
         });
     }
 
+    hideShowEmail() {
+        this.setState({useServiceEmail:!this.state.useServiceEmail});
+    }
+
+  Label(props){
+       let content="";
+       if (props.show) {
+          content = (
+            <div className={ props.className }>{ props.text }</div>
+          );
+       }
+       return content;
+     }
+
   render() {
     return (
       <div id="topicTemplate" className="template container gov-container form">
-        
+
         <div id="breadcrumbContainer">
             <ol className="breadcrumb">
 
@@ -127,7 +146,7 @@ class Form2 extends Component {
                   </p>
                 </div>
 
-                <Find callback={this.found} ref={(element) => { this.findComponent = element; }} />                
+                <Find callback={this.found} ref={(element) => { this.findComponent = element; }} />
 
                 <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
@@ -145,15 +164,15 @@ class Form2 extends Component {
                         </tr>
                     </tbody></table>
                 </div>
-                
+
                 <div className="form-section" style={{ display:this.state.displayData }}>
                     <h2 style={{ fontWeight:'bold' }}>Enter an Appearance (on Behalf of)</h2>
 
                     <table><tbody>
                       <tr>
                         <td>
-                            <span style={{ color:'red' }}>*</span> 
-                            Respondent's name &nbsp;
+                            <span style={{ color:'red' }}>*</span>
+                            Respondent&apos;s name &nbsp;
                             <i className="fa fa-question-circle" aria-hidden="true" title="Who is responding to the Notice of Appeal?"></i>
                             :
                         </td>
@@ -165,8 +184,8 @@ class Form2 extends Component {
                       </tr>
                       <tr>
                         <td>
-                            <span style={{ color:'red' }}>*</span> 
-                            Respondent's mail address for service &nbsp;
+                            <span style={{ color:'red' }}>*</span>
+                            Respondent&apos;s mailing address for service &nbsp;
                             <i className="fa fa-question-circle" aria-hidden="true" title="Where would you like to receive documents related to this case?"></i>
                             :
                         </td>
@@ -175,27 +194,35 @@ class Form2 extends Component {
                         </td>
                       </tr>
                       <tr>
-                        <td><span style={{ color:'red' }}>*</span> Respondent's e-mail:</td>
-                        <td><input name="respondent-email"/></td>
-                      </tr>
-                      <tr>
-                        <td><span style={{ color:'red' }}>*</span> Respondent's phone:</td>
-                        <td><input name="respondent-phone"/></td>
-                      </tr>
-                      <tr>
                         <td>
-                            <span style={{ color:'red' }}>*</span> 
-                            Respondent name (or Solicitor name) &nbsp;
-                            <i className="fa fa-question-circle" aria-hidden="true" title="Who is filing this Notice of Appearance?"></i>
-                            :
+                          Do you wish to use email for service? &nbsp;
                         </td>
                         <td>
-                            <input name="respondent-solicitor"/>
-                        </td>
+                          <input id="receive-email-checkbox" type="checkbox" onClick={ this.hideShowEmail } />
+                          </td>
                       </tr>
+                      <FormRow
+                        mandatory={false}
+                        show={this.state.useServiceEmail}
+                        labelText="Respondent's email:"
+                        name="respondent-email"
+                        input={(input) => { this.email = input; }}
+                        id="respondent-email"
+                      />
+                      <FormRow
+                        mandatory={true}
+                        show={true}
+                        labelText="Respondent's phone:"
+                        input={(input) => { this.phone = input; }}
+                      />
+                      <FormRow
+                        mandatory={true}
+                        show={true}
+                        labelText="Respondent name (or Solicitor name):"
+                        input={(input) => { this.filer = input; }}
+                        iconText="Who is filing this Notice of Appearance?"
+                      />
                     </tbody></table>
-
-
                 </div>
 
                 <button id="save" onClick={this.save} className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
@@ -211,7 +238,7 @@ class Form2 extends Component {
                                 aria-valuemin="0" aria-valuemax="100" style={{ width: '100%' }}>
                                 <span>100%</span>
                             </div>
-                        </div>                        
+                        </div>
                         <table id="validations"><tbody>
                             <tr>
                                 <td className="validation">All required fields filled in</td>
@@ -230,7 +257,7 @@ class Form2 extends Component {
                     </div>
                 </div>
 
-                <div id="saveErrorModal" className="modal" 
+                <div id="saveErrorModal" className="modal"
                     style={{ display:(this.state.displaySaveError?'block':'none') }} >
                     <div className="modal-title red">
                         <span id="close-modal" onClick={this.closeErrorModal}>&times;</span>
@@ -242,7 +269,7 @@ class Form2 extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="saveSucessModal" className="modal" 
+                <div id="saveSucessModal" className="modal"
                     style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
                     <div className="modal-title green">
                         <span id="close-modal" onClick={this.closeSuccessModal}>&times;</span>
