@@ -17,6 +17,7 @@ describe('Search Form 7 in form 2', function() {
         process.env.REACT_APP_API_URL = null;
         document = jsdom.jsdom('<div id="root"></div>');
         sut = ReactDOM.render(<Form2 />, document.getElementById('root'));
+        sut.findComponent.service.setServeLocalData(true);
     });
 
     it('sets appellant', function() {
@@ -33,17 +34,13 @@ describe('Search Form 7 in form 2', function() {
             to.equal(Service.fakeData.parties.respondent.name);
     });
 
-    it('resists no data', function(done) {
-        process.env.REACT_APP_API_URL = 'http://not-a-running-server';
-        document = jsdom.jsdom('<div id="root"></div>');
-        sut = ReactDOM.render(<Form2 />, document.getElementById('root'));
-        click('#find-button', document);
-
-        setTimeout(function() {
-            expect(document.getElementById('appellant-name').innerHTML).to.equal('');
-            expect(document.getElementById('respondent-name').innerHTML).to.equal('');
-            done();
-        }, 100);
+    it('resists no data', function() {
+        sut.findComponent.service.setServeLocalData(false);
+        sut.findComponent.service.apiUrl = 'http://not-a-running-server';
+        click('#find-button', document);    
+           
+        expect(sut.state.appelant.name).to.equal('');
+        expect(sut.state.respondent.name).to.equal('');
     });
 
     it('disables correspondence-email field if checkbox is not selected', function() {

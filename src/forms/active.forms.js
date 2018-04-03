@@ -8,12 +8,18 @@ class ActiveForms extends Component {
         super(props);
         this.service = props.service ? props.service : new DefaultService(); 
         this.state = {
+            fetch: props.fetch !== 'false',
             cases: [],
             displayMyCasesEmptyLabel:true
         };
+        this.fetchCases = this.fetchCases.bind(this);
     }
 
     componentDidMount() {
+        if (this.state.fetch) { this.fetchCases(); }
+    }
+
+    fetchCases() {
         this.service.getMyCases({}, (data) => { 
             if (data && data.cases && data.cases.length > 0) {
                 this.setState({ 

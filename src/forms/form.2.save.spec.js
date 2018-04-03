@@ -20,13 +20,13 @@ describe('Form 2 save', function() {
         io.on('connection', (socket) => { 
             socket.on('form-2-save', (params, callback) => {
                 received = params;
-                callback('ok');                
+                callback('ok');                              
             });
         });
 
-        process.env.REACT_APP_API_URL = 'http://localhost:5001';
         document = jsdom.jsdom('<div id="root"></div>');
         sut = ReactDOM.render(<Form2 />, document.getElementById('root'));       
+        sut.service.apiUrl = 'http://localhost:5001';
     });
 
     afterEach(function(done) {
