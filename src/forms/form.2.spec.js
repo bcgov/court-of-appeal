@@ -39,7 +39,7 @@ describe('Search Form 7 in form 2', function() {
         sut.findComponent.service.apiUrl = 'http://not-a-running-server';
         click('#find-button', document);    
            
-        expect(sut.state.appelant.name).to.equal('');
+        expect(sut.state.appellant.name).to.equal('');
         expect(sut.state.respondent.name).to.equal('');
     });
 
