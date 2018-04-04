@@ -42,12 +42,12 @@ describe('Find', function() {
     });
     it('can work with default service', function(done) {
         document = jsdom.jsdom('<div id="root"></div>');
-        process.env.REACT_APP_API_URL = undefined;          
-        sut = <Find callback={function(data) { 
+        let component = <Find callback={function(data) { 
             expect(data).to.deep.equal(require('../service/default.service').fakeData);
             done(); 
         }} />;
-        ReactDOM.render(sut, document.getElementById('root'));        
+        sut = ReactDOM.render(component, document.getElementById('root'));        
+        sut.service.setServeLocalData(true);
         click('#find-button', document);
     });
 });

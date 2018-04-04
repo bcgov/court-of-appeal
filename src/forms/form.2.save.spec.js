@@ -41,7 +41,7 @@ describe('Form 2 save', function() {
         setTimeout(()=> {
             expect(received.data.formSevenNumber).to.equal('777'); 
             expect(received.data.appellant).to.equal('bob');
-            expect(received.data.respondent).to.equal('toto'); 
+            expect(received.data.respondent.name).to.equal('toto'); 
             done();
         }, 300);        
     });

@@ -19,11 +19,10 @@ describe('Default service', function() {
         serverSocket.close(done);
     });
 
-    it('uses environment variable', function() {
-        process.env.REACT_APP_API_URL = api;
+    it('targets default host', function() {
         let service = new Service();
 
-        expect(service.apiUrl).to.equal(api);
+        expect(service.apiUrl).to.equal(undefined);
     });
 
     it('leverage socket.io-client', function(done) {        
@@ -35,8 +34,8 @@ describe('Default service', function() {
     });
 
     it('requests form-7 data', function(done) {
-        process.env.REACT_APP_API_URL = api;
         let service = new Service();
+        service.apiUrl = api;
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal({ message:'data for file any' });
             done();
@@ -45,7 +44,6 @@ describe('Default service', function() {
 
     it('resists server down', function(done) {
         serverSocket.close();
-        process.env.REACT_APP_API_URL = api;
         let service = new Service();
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal(undefined);
@@ -54,9 +52,8 @@ describe('Default service', function() {
     });
 
     it('can be set to serve local data', function(done) {
-        process.env.REACT_APP_API_URL = api;
         let service = new Service();
-        service.serveLocalData();
+        service.setServeLocalData(true);
         service.searchForm7('any', function(data) {
             expect(data).to.deep.equal(Service.fakeData);
             done();
