@@ -21,14 +21,14 @@ http {
         server_name  localhost;
 
         location /socket.io/socket.io.js {
-            proxy_pass http://local-api-local-api.192.168.99.100.nip.io/;
+            proxy_pass http://local-api-local-api.192.168.99.100.nip.io;
         }
 
         location /socket.io {
             proxy_http_version  1.1;
             proxy_set_header    Upgrade $http_upgrade;
             proxy_set_header    Connection "Upgrade";
-            proxy_pass http://local-api-local-api.192.168.99.100.nip.io/socket.io;
+            proxy_pass http://local-api-local-api.192.168.99.100.nip.io;
         }
 
         # serve our angular app here
