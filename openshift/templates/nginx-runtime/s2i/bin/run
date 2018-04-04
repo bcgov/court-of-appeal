@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cp /tmp/nginx.conf.template /etc/nginx/nginx.conf
+#sed -e "s/\$API_URL/${API_URL}/" ../../nginx.conf.template 
+
+sed -e "s/\$API_URL/${API_URL}/" /tmp/nginx.conf.template > /etc/nginx/nginx.conf
 cat /etc/nginx/nginx.conf
 
 echo "---> Starting nginx ..."
