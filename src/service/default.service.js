@@ -11,20 +11,21 @@ let fakeData = {
     }
 };
 
-let Service = function() {
-    this.apiUrl = process.env.REACT_APP_API_URL;       
-};
-
-Service.prototype.serveLocalData = function() {
+var Service = function() {  
     this.apiUrl = undefined;
+    this.serveLocalData = false;  
 };
 
-Service.prototype.connect = function() {
+Service.prototype.setServeLocalData = function(flag) {    
+    this.serveLocalData = flag;
+};
+
+Service.prototype.connect = function() {    
     return require('socket.io-client')(this.apiUrl);
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    if (!this.apiUrl || this.apiUrl === 'undefined' || this.apiUrl === 'null') {
+    if (this.serveLocalData) {
         callback(fakeData);
     } else {
         let socket = this.connect();
@@ -57,7 +58,7 @@ Service.prototype.getMyCases = function(form, callback) {
         callback(undefined);
         socket.close();
     });
-    socket.emit('my-cases', { data:{} }, function(data) {
+    socket.emit('my-cases', { data:{} }, function(data) {        
         callback(data);
         socket.close();
     });

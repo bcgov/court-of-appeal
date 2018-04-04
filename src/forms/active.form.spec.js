@@ -29,9 +29,11 @@ describe('Active forms section', function() {
             });
         });
 
-        process.env.REACT_APP_API_URL = 'http://localhost:5001';
         document = jsdom.jsdom('<div id="root"></div>');
-        sut = ReactDOM.render(<ActiveForms />, document.getElementById('root'));        
+        let component = <ActiveForms fetch="false" />;
+        sut = ReactDOM.render(component, document.getElementById('root'));        
+        sut.service.apiUrl = 'http://localhost:5001';
+        sut.fetchCases();
     });
 
     afterEach(function(done) {
