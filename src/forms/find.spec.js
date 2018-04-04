@@ -1,18 +1,18 @@
-var expect = require('chai').expect;
-var sinon = require('sinon');
+let expect = require('chai').expect;
+let sinon = require('sinon');
 require('chai').use(require('sinon-chai'));
-var jsdom = require("jsdom");
-var { click, enter } = require('../../tests/utils');
+let jsdom = require("jsdom");
+let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Find from './find.js';
 
 describe('Find', function() {
 
-    var document;
-    var sut;
-    var serviceWasCalledCorrectly;
-    var callback = function(data) { };
+    let document;
+    let sut;
+    let serviceWasCalledCorrectly;
+    let callback = function(data) { };
 
     beforeEach(function() {
         document = jsdom.jsdom('<div id="root"></div>');

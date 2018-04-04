@@ -1,4 +1,4 @@
-var fakeData = { 
+let fakeData = { 
     parties: {
         appelant: {
             name: 'Bruce Wayne',
@@ -11,7 +11,7 @@ var fakeData = {
     }
 };
 
-var Service = function() {
+let Service = function() {
     this.apiUrl = process.env.REACT_APP_API_URL;       
 };
 
@@ -27,7 +27,7 @@ Service.prototype.searchForm7 = function(file, callback) {
     if (!this.apiUrl || this.apiUrl === 'undefined' || this.apiUrl === 'null') {
         callback(fakeData);
     } else {
-        var socket = this.connect();
+        let socket = this.connect();
         socket.on('connect_error', function(error) {
             callback(undefined);
             socket.close();
@@ -40,7 +40,7 @@ Service.prototype.searchForm7 = function(file, callback) {
 };
 
 Service.prototype.saveForm2 = function(form, callback) {    
-    var socket = this.connect();
+    let socket = this.connect();
     socket.on('connect_error', function(error) {
         callback(undefined);
         socket.close();
@@ -52,7 +52,7 @@ Service.prototype.saveForm2 = function(form, callback) {
 };
 
 Service.prototype.getMyCases = function(form, callback) {    
-    var socket = this.connect();
+    let socket = this.connect();
     socket.on('connect_error', function(error) {
         callback(undefined);
         socket.close();

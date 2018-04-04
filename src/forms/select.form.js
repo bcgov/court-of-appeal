@@ -4,7 +4,7 @@ import './select.form.css';
 class SelectForm extends Component {
 
     toggle(id, document) {
-        var element = document.getElementById(id);
+        let element = document.getElementById(id);
         if (element) {
             if (element.style.display === 'block') {
                 element.style.display = 'none';
