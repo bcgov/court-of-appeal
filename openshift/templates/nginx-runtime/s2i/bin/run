@@ -18,7 +18,7 @@ read -r -d '' _CONFIG_SECTION << EOF
 
         location /socket.io/ {
             proxy_http_version  1.1;
-            proxy_set_header    Upgrade $http_upgrade;
+            proxy_set_header    Upgrade \$http_upgrade;
             proxy_set_header    Connection "Upgrade";
             proxy_pass ${1};
         }
@@ -95,7 +95,7 @@ if [ ! -z "${API_URL}" ]; then
 	# replaced with a blank string.
 	# ================================================================================
 	API_CONFIG_SECTION=$(getApiProxyConfigSection ${API_URL})
-	API_CONFIG_SECTION="$(echo "${API_CONFIG_SECTION}" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/\$/\\$/g')"
+	API_CONFIG_SECTION="$(echo "${API_CONFIG_SECTION}" | sed ':a;N;$!ba;s/\n/\\n/g')"
 fi
 echo "---> Replacing Configuration ..."
 echo "Setting:"
