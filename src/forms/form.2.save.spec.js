@@ -35,12 +35,12 @@ describe('Form 2 save', function() {
     
     it('sends data to server', function(done) {
         enter('777', '#file-no', document);
-        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
+        sut.setState({ appellant:{ name:'bob'}, respondent:{ name:'toto' } });
         click('#save', document);    
            
         setTimeout(()=> {
             expect(received.data.formSevenNumber).to.equal('777'); 
-            expect(received.data.appelant).to.equal('bob'); 
+            expect(received.data.appellant).to.equal('bob');
             expect(received.data.respondent).to.equal('toto'); 
             done();
         }, 300);        
@@ -48,7 +48,7 @@ describe('Form 2 save', function() {
 
     it('display confirmation message', function(done) {
         enter('777', '#file-no', document);
-        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
+        sut.setState({ appellant:{ name:'bob'}, respondent:{ name:'toto' } });
         click('#save', document); 
 
         setTimeout(()=> {
@@ -60,7 +60,7 @@ describe('Form 2 save', function() {
     it('display error message when server times out', function(done) {
         io.close();
         enter('777', '#file-no', document);
-        sut.setState({ appelant:{ name:'bob'}, respondent:{ name:'toto' } });
+        sut.setState({ appellant:{ name:'bob'}, respondent:{ name:'toto' } });
         click('#save', document); 
 
         setTimeout(()=> {
