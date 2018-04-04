@@ -12,13 +12,16 @@ class Form2 extends Component {
         super(props);
         this.service = props.service ? props.service : new DefaultService();
         this.state = {
-            appelant: {
+            appellant: {
                 name: '',
                 address: ''
             },
             respondent: {
                 name: '',
-                address: ''
+                address: '',
+                useServiceEmail: false,
+                email: '',
+                serviceFiler: ''
             },
             displayData: 'none',
             displaySaveSuccess: false,
@@ -41,14 +44,14 @@ class Form2 extends Component {
     found(data) {
         if (data) {
             this.setState({
-                appelant: { name:data.parties.appelant.name, address:data.parties.appelant.address },
+                appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
                 respondent: {name:data.parties.respondent.name, address:data.parties.respondent.address },
                 displayData: 'block'
             });
             this.address.value = data.parties.respondent.address;
         } else {
             this.setState({
-                appelant: { name:'' },
+                appellant: { name:'' },
                 respondent: {name:'' },
                 displayData: 'none'
             });
@@ -59,8 +62,14 @@ class Form2 extends Component {
     save() {
         this.service.saveForm2({
                 formSevenNumber: this.findComponent.textInput.value,
-                appelant: this.state.appelant.name,
-                respondent: this.state.respondent.name
+                appellant: this.state.appellant.name,
+                respondent: {
+                    name: this.state.respondent.name,
+                    address: this.state.respondent.address,
+                    useServiceEmail: this.state.useServiceEmail,
+                    email: this.state.respondent.email,
+                    serviceFiler: this.state.respondent.serviceFiler
+                }
             }, (data) => {
             if (data !== undefined) {
                 this.setState({
@@ -154,7 +163,7 @@ class Form2 extends Component {
                     <table><tbody>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                            <td id="appelant-name">{ this.state.appelant.name }</td>
+                            <td id="appellant-name">{ this.state.appellant.name }</td>
                             <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
                         </tr>
                         <tr>
@@ -193,30 +202,32 @@ class Form2 extends Component {
                           <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" ref={(input) => { this.address = input; }} />
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          Do you wish to use email for service? &nbsp;
-                        </td>
-                        <td>
-                          <input id="receive-email-checkbox" type="checkbox" onClick={ this.hideShowEmail } />
-                          </td>
-                      </tr>
+                      <FormRow
+                          mandatory={true}
+                          labelText="Respondent's mailing address for service:"
+                          iconText="Where would you like to receive documents related to this case?"
+                      />
+                      <FormRow
+                        labelText="Do you wish to use email for service?"
+                        id="receive-email-checkbox"
+                        field={<input id="receive-email-checkbox" type="checkbox" onClick={ this.hideShowEmail } />}
+                      />
                       <FormRow
                         show={this.state.useServiceEmail}
                         labelText="Respondent's email:"
                         name="respondent-email"
-                        input={(input) => { this.email = input; }}
+                        inputRef={(input) => { this.email = input; }}
                         id="respondent-email"
                       />
                       <FormRow
                         mandatory={true}
                         labelText="Respondent's phone:"
-                        input={(input) => { this.phone = input; }}
+                        inputRef={(input) => { this.phone = input; }}
                       />
                       <FormRow
                         mandatory={true}
                         labelText="Respondent name (or Solicitor name):"
-                        input={(input) => { this.filer = input; }}
+                        inputRef={(input) => { this.formfiler = input; }}
                         iconText="Who is filing this Notice of Appearance?"
                       />
                     </tbody></table>

@@ -19,11 +19,11 @@ describe('Search Form 7 in form 2', function() {
         sut = ReactDOM.render(<Form2 />, document.getElementById('root'));
     });
 
-    it('sets appelant', function() {
+    it('sets appellant', function() {
         click('#find-button', document);
 
-        expect(document.getElementById('appelant-name').innerHTML).
-            to.equal(Service.fakeData.parties.appelant.name);
+        expect(document.getElementById('appellant-name').innerHTML).
+            to.equal(Service.fakeData.parties.appellant.name);
     });
 
     it('sets respondent', function() {
@@ -40,7 +40,7 @@ describe('Search Form 7 in form 2', function() {
         click('#find-button', document);
 
         setTimeout(function() {
-            expect(document.getElementById('appelant-name').innerHTML).to.equal('');
+            expect(document.getElementById('appellant-name').innerHTML).to.equal('');
             expect(document.getElementById('respondent-name').innerHTML).to.equal('');
             done();
         }, 100);

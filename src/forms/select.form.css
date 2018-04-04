@@ -45,8 +45,8 @@ a.toggler {
 a.toggler:hover {
 	text-decoration: none;
 }
-#appelants-right-to-appeal-forms, 
-#appelants-leave-to-appeal-forms,
+#appellants-right-to-appeal-forms,
+#appellants-leave-to-appeal-forms,
 #respondents-right-to-appeal-forms,
 #respondents-leave-to-appeal-forms {
 	display: none;

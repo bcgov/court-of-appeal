@@ -1,6 +1,6 @@
 let fakeData = { 
     parties: {
-        appelant: {
+        appellant: {
             name: 'Bruce Wayne',
             address: 'The Wayne Castle'
         },
