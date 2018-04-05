@@ -21,14 +21,19 @@ Service.prototype.setServeLocalData = function(flag) {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", this.apiUrl + '/forms?file=' + file, true);
-    xhr.onreadystatechange = function() {     
-        if(xhr.readyState == xhr.DONE && xhr.status==200) {
-            callback(xhr.responseText);
-        }
+    if (this.serveLocalData == true) {
+        callback(fakeData);
     }
-    xhr.send(); 
+    else {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", this.apiUrl + '/forms?file=' + file, true);
+        xhr.onreadystatechange = function() {     
+            if(xhr.readyState == xhr.DONE && xhr.status==200) {
+                callback(xhr.responseText);
+            }
+        }
+        xhr.send(); 
+    }
 };
 
 Service.prototype.saveForm2 = function(form, callback) {    

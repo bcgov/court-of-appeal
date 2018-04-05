@@ -20,7 +20,8 @@ class ActiveForms extends Component {
     }
 
     fetchCases() {
-        this.service.getMyCases({}, (data) => { 
+        this.service.getMyCases({}, (input) => { 
+            let data = JSON.parse(input);
             if (data && data.cases && data.cases.length > 0) {
                 this.setState({ 
                     cases:data.cases.slice(0, 5).map(function(item) { 
