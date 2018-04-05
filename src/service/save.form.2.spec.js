@@ -15,7 +15,7 @@ describe('Save form 2', function() {
         service.apiUrl = api;
         server = require('http').createServer((request, response)=> {            
             response.setHeader('Access-Control-Allow-Origin', '*');
-            if (request.url == '/forms' && request.method == 'POST') {                
+            if (request.url == '/api/forms' && request.method == 'POST') {                
                 let body = '';
                 request.on('data', (data)=> {
                     body += data;

@@ -15,7 +15,7 @@ describe('Search form 7', function() {
         service.apiUrl = api;
         server = require('http').createServer((request, response)=> {            
             response.setHeader('Access-Control-Allow-Origin', '*');
-            if (request.url == '/forms?file=42' && request.method == 'GET') {                
+            if (request.url == '/api/forms?file=42' && request.method == 'GET') {                
                 response.statusCode = 200;
                 response.write('ok');
                 response.end(); 
