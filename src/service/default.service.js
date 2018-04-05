@@ -41,15 +41,16 @@ Service.prototype.searchForm7 = function(file, callback) {
 };
 
 Service.prototype.saveForm2 = function(form, callback) {    
-    let socket = this.connect();
-    socket.on('connect_error', function(error) {
-        callback(undefined);
-        socket.close();
-    });
-    socket.emit('form-2-save', { data:form }, function(data) {
-        callback(data);
-        socket.close();
-    });
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", this.apiUrl + '/forms', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {     
+        if(xhr.readyState == xhr.DONE && xhr.status==201) {
+            callback(xhr.responseText);
+        }
+    }
+    let params = 'data=' + JSON.stringify(form);
+    xhr.send(params); 
 };
 
 Service.prototype.getMyCases = function(form, callback) {    
