@@ -15,7 +15,7 @@ describe('Active forms section', function() {
     let io;
     let received = undefined;
     let cases = [
-        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellant:'Bruce', respondent:'Clark'} }
+        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellant:'Bruce', respondent:{name:'Clark'}} }
     ];
 
     beforeEach(function() {
