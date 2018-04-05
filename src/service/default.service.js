@@ -25,19 +25,14 @@ Service.prototype.connect = function() {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    if (this.serveLocalData) {
-        callback(fakeData);
-    } else {
-        let socket = this.connect();
-        socket.on('connect_error', function(error) {
-            callback(undefined);
-            socket.close();
-        });
-        socket.emit('form-7-search', { file:file }, function(data) {
-            callback(data);
-            socket.close();
-        });
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", this.apiUrl + '/forms?file=' + file, true);
+    xhr.onreadystatechange = function() {     
+        if(xhr.readyState == xhr.DONE && xhr.status==200) {
+            callback(xhr.responseText);
+        }
     }
+    xhr.send(); 
 };
 
 Service.prototype.saveForm2 = function(form, callback) {    
