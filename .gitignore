@@ -62,3 +62,6 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
+# Webstorm or other IDE generated files #
+#########################################
+.idea
