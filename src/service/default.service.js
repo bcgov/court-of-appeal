@@ -20,10 +20,6 @@ Service.prototype.setServeLocalData = function(flag) {
     this.serveLocalData = flag;
 };
 
-Service.prototype.connect = function() {    
-    return require('socket.io-client')(this.apiUrl);
-};
-
 Service.prototype.searchForm7 = function(file, callback) {
     let xhr = new XMLHttpRequest();
     xhr.open("GET", this.apiUrl + '/forms?file=' + file, true);
@@ -49,15 +45,14 @@ Service.prototype.saveForm2 = function(form, callback) {
 };
 
 Service.prototype.getMyCases = function(form, callback) {    
-    let socket = this.connect();
-    socket.on('connect_error', function(error) {
-        callback(undefined);
-        socket.close();
-    });
-    socket.emit('my-cases', { data:{} }, function(data) {        
-        callback(data);
-        socket.close();
-    });
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", this.apiUrl + '/cases', true);
+    xhr.onreadystatechange = function() {     
+        if(xhr.readyState == xhr.DONE && xhr.status==200) {
+            callback(xhr.responseText);
+        }
+    }
+    xhr.send(); 
 };
 
 module.exports = Service;
