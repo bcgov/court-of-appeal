@@ -21,7 +21,6 @@ http {
         server_name  localhost;
 
         location /api {
-            rewrite ^/api/(.*)$ /$1 break;
             proxy_pass          %API_URL%;
         }
 
