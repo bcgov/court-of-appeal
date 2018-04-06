@@ -10,24 +10,30 @@ let Service = require('../service/default.service');
 
 describe('Active forms section', function() {
 
+    let api = 'http://localhost:5001';
+    let server;
+    let port = 5001;
+
     let document;
-    let sut;    
-    let io;
+    let sut;        
     let received = undefined;
     let cases = [
         { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellant:'Bruce', respondent:{name:'Clark'}} }
     ];
 
-    beforeEach(function() {
-        io = require('socket.io').listen(5001);
-        io.on('connection', (socket) => { 
-            socket.on('my-cases', (params, callback) => {
-                received = params;
-                callback({
-                    cases: cases
-                });
-            });
-        });
+    beforeEach(function(done) {
+        server = require('http').createServer((request, response)=> {     
+            response.setHeader('Access-Control-Allow-Origin', '*');
+            if (request.url == '/api/cases' && request.method == 'GET') {                
+                response.write( JSON.stringify({ cases:cases })); 
+                response.end();
+            }
+            else {
+                response.statusCode = 200;
+                response.write('ko');
+                response.end(); 
+            }
+        }).listen(port, done);
 
         document = jsdom.jsdom('<div id="root"></div>');
         let component = <ActiveForms fetch="false" />;
@@ -36,19 +42,12 @@ describe('Active forms section', function() {
         sut.fetchCases();
     });
 
-    afterEach(function(done) {
-        io.close(done);
-    });
-    
-    it('gets my cases without parameters', function(done) {
-        setTimeout(()=> {
-            expect(received).to.deep.equal({data:{  }});
-            done();
-        }, 100);        
+    afterEach(function() {
+        server.close();
     });
     
     it('transforms the data for the list', function(done) {
-        setTimeout(()=> {
+        setTimeout(()=> {            
             expect(sut.state.cases).to.deep.equal([
                 { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' }
             ]);
