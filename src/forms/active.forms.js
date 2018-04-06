@@ -46,7 +46,7 @@ class ActiveForms extends Component {
         return (
             <div id="active-forms" className="form-section">
                 <div>
-                    <h3 style={{ display:'inline-block' }}>Cases Reminders</h3>
+                    <h3 style={{ display:'inline-block' }}>Case Reminders</h3>
                     <div style={{ display:'inline-block', float:'right', marginTop:'15px' }}>
                         <a href="/my-applications.html" className="btn btn-primary round-borders">View All Cases</a>
                     </div>
