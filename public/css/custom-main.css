@@ -684,6 +684,18 @@ label {
     color: #444;
 }
 
+/* Tweak help panel spacing */
+.info-icon {
+    padding:    0px 14px 4px 4px;
+    vertical-align: top;
+    font-size:  50px;
+    color:      #38598a;
+}
+
+.help-section {
+    vertical-align: top;
+    padding: 10px 24px 4px 4px;
+}
 
 /* LEGAL STATEMENT */
 
