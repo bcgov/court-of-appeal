@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "REACT_APP_API_URL=http://localhost:8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

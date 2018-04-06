@@ -13,6 +13,9 @@ let fakeData = {
 
 var Service = function() {  
     this.apiUrl = undefined;
+    if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
+        this.apiUrl = process.env.REACT_APP_API_URL;
+    }
     this.serveLocalData = false;  
 };
 
@@ -53,7 +56,7 @@ Service.prototype.saveForm2 = function(form, callback) {
     xhr.send(params); 
 };
 
-Service.prototype.getMyCases = function(form, callback) {    
+Service.prototype.getMyCases = function(form, callback) { 
     let xhr = new XMLHttpRequest();
     xhr.open("GET", this.base() + '/api/cases', true);
     xhr.onreadystatechange = function() {
