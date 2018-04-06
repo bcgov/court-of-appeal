@@ -17,7 +17,7 @@ describe('Search form 7', function() {
             response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/forms?file=42' && request.method == 'GET') {                
                 response.statusCode = 200;
-                response.write('ok');
+                response.write(JSON.stringify({any:'field'}));
                 response.end(); 
             }
             else {
@@ -32,8 +32,8 @@ describe('Search form 7', function() {
     });
 
     it('uses a rest service', function(done) {                        
-        service.searchForm7(42, function(data) {
-            expect(data).to.equal('ok');
+        service.searchForm7(42, function(data) {            
+            expect(data).to.deep.equal({any:'field'});
             done();
         });     
     });

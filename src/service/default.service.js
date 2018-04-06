@@ -16,6 +16,10 @@ var Service = function() {
     this.serveLocalData = false;  
 };
 
+Service.prototype.base = function() {
+    return this.apiUrl === undefined ? '' : this.apiUrl;
+};
+
 Service.prototype.setServeLocalData = function(flag) {    
     this.serveLocalData = flag;
 };
@@ -26,10 +30,10 @@ Service.prototype.searchForm7 = function(file, callback) {
     }
     else {
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", this.apiUrl + '/api/forms?file=' + file, true);
-        xhr.onreadystatechange = function() {     
+        xhr.open("GET", this.base() + '/api/forms?file=' + file, true);
+        xhr.onreadystatechange = function() { 
             if(xhr.readyState === xhr.DONE && xhr.status===200) {
-                callback(xhr.responseText);
+                callback(JSON.parse(xhr.responseText));
             }
         }
         xhr.send(); 
@@ -38,7 +42,7 @@ Service.prototype.searchForm7 = function(file, callback) {
 
 Service.prototype.saveForm2 = function(form, callback) {    
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", this.apiUrl + '/api/forms', true);
+    xhr.open("POST", this.base() + '/api/forms', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {     
         if(xhr.readyState === xhr.DONE && xhr.status===201) {
@@ -51,10 +55,10 @@ Service.prototype.saveForm2 = function(form, callback) {
 
 Service.prototype.getMyCases = function(form, callback) {    
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", this.apiUrl + '/api/cases', true);
-    xhr.onreadystatechange = function() {     
+    xhr.open("GET", this.base() + '/api/cases', true);
+    xhr.onreadystatechange = function() {
         if(xhr.readyState === xhr.DONE && xhr.status===200) {
-            callback(xhr.responseText);
+            callback(JSON.parse(xhr.responseText));
         }
     }
     xhr.send(); 

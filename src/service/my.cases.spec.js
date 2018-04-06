@@ -17,7 +17,7 @@ describe('My cases', function() {
             response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.statusCode = 200;
-                response.write('ok');
+                response.write(JSON.stringify({any:'field'}));
                 response.end(); 
             }
             else {
@@ -33,7 +33,7 @@ describe('My cases', function() {
 
     it('uses a rest service', function(done) {                        
         service.getMyCases({}, function(data) {
-            expect(data).to.equal('ok');
+            expect(data).to.deep.equal({any:'field'});
             done();
         });     
     });
