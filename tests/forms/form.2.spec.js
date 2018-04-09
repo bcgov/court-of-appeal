@@ -16,21 +16,21 @@ describe('Search Form 7 in form 2', function() {
         sut.findComponent.service.setServeLocalData(true);
     });
 
-    it('sets appellant', function() {
+    test('sets appellant', function() {
         click('#find-button', document);
 
         expect(document.getElementById('appellant-name').innerHTML).
             toEqual(Service.fakeData.parties.appellant.name);
     });
 
-    it('sets respondent', function() {
+    test('sets respondent', function() {
         click('#find-button', document);
 
         expect(document.getElementById('respondent-name').innerHTML).
             toEqual(Service.fakeData.parties.respondent.name);
     });
 
-    it('resists no data', function() {
+    test('resists no data', function() {
         sut.findComponent.service.setServeLocalData(false);
         sut.findComponent.service.apiUrl = 'http://not-a-running-server';
         click('#find-button', document);    
@@ -39,14 +39,14 @@ describe('Search Form 7 in form 2', function() {
         expect(sut.state.respondent.name).toEqual('');
     });
 
-    it('disables correspondence-email field if checkbox is not selected', function() {
+    test('disables correspondence-email field if checkbox is not selected', function() {
         click('#find-button', document);
 
         expect(document.getElementById('receive-email-checkbox').checked).toEqual(false);
         expect(document.getElementById('respondent-email')).toEqual(null);
     });
 
-    it('enables correspondence-email field if checkbox is selected', function() {
+    test('enables correspondence-email field if checkbox is selected', function() {
         click('#find-button', document);
         click('#receive-email-checkbox', document);
 

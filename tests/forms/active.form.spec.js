@@ -43,7 +43,7 @@ describe('Active forms section', function() {
         server.close();
     });
     
-    it('transforms the data for the list', function(done) {
+    test('transforms the data for the list', function(done) {
         setTimeout(()=> {            
             expect(sut.state.cases).toEqual([
                 { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' }
@@ -52,7 +52,7 @@ describe('Active forms section', function() {
         }, 100);        
     });
 
-    it('injects the data in the list', function(done) {        
+    test('injects the data in the list', function(done) {        
         setTimeout(()=> {
             let item = document.querySelector("#my-cases .case-item:first-child");
             
@@ -64,7 +64,7 @@ describe('Active forms section', function() {
         }, 100); 
     });
 
-    it('hides the empty-list message', function(done) {
+    test('hides the empty-list message', function(done) {
         setTimeout(()=> {
             expect(sut.state.displayMyCasesEmptyLabel).toEqual(false);
             expect(document.getElementById('my-cases-empty-label').style.display).toEqual('none');
@@ -72,7 +72,7 @@ describe('Active forms section', function() {
         }, 100);  
     });
 
-    it('shows the empty-list message when cases list is empty', function(done) {
+    test('shows the empty-list message when cases list is empty', function(done) {
         cases = [];
 
         setTimeout(()=> {
