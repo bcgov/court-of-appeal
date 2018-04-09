@@ -1,12 +1,9 @@
-let expect = require('chai').expect;
-let sinon = require('sinon');
-require('chai').use(require('sinon-chai'));
 let jsdom = require("jsdom");
 let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ActiveForms from './active.forms.js';
-let Service = require('../service/default.service');
+import ActiveForms from '../../src/forms/active.forms';
+let Service = require('../../src/service/default.service');
 
 describe('Active forms section', function() {
 
@@ -48,7 +45,7 @@ describe('Active forms section', function() {
     
     it('transforms the data for the list', function(done) {
         setTimeout(()=> {            
-            expect(sut.state.cases).to.deep.equal([
+            expect(sut.state.cases).toEqual([
                 { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' }
             ]);
             done();
@@ -59,18 +56,18 @@ describe('Active forms section', function() {
         setTimeout(()=> {
             let item = document.querySelector("#my-cases .case-item:first-child");
             
-            expect(item.innerHTML).to.contain(1501);
-            expect(item.innerHTML).to.contain('Bruce / Clark'); 
-            expect(item.innerHTML).to.contain('draft');
-            expect(item.innerHTML).to.contain('2018-03-27T16:15:54Z');
+            expect(item.innerHTML).toContain(1501);
+            expect(item.innerHTML).toContain('Bruce / Clark'); 
+            expect(item.innerHTML).toContain('draft');
+            expect(item.innerHTML).toContain('2018-03-27T16:15:54Z');
             done();
         }, 100); 
     });
 
     it('hides the empty-list message', function(done) {
         setTimeout(()=> {
-            expect(sut.state.displayMyCasesEmptyLabel).to.equal(false);
-            expect(document.getElementById('my-cases-empty-label').style.display).to.equal('none');
+            expect(sut.state.displayMyCasesEmptyLabel).toEqual(false);
+            expect(document.getElementById('my-cases-empty-label').style.display).toEqual('none');
             done();
         }, 100);  
     });
@@ -79,8 +76,8 @@ describe('Active forms section', function() {
         cases = [];
 
         setTimeout(()=> {
-            expect(sut.state.displayMyCasesEmptyLabel).to.equal(true);
-            expect(document.getElementById('my-cases-empty-label').style.display).to.equal('block');
+            expect(sut.state.displayMyCasesEmptyLabel).toEqual(true);
+            expect(document.getElementById('my-cases-empty-label').style.display).toEqual('block');
             done();
         }, 100);  
     });

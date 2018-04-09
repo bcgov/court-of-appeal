@@ -3,21 +3,39 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "chai": "^4.1.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "sinon": "^4.4.5",
-    "sinon-chai": "^3.0.0",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^22.4.3",
+    "jest-css-modules-transform": "^1.0.5",
+    "react-test-renderer": "^16.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform",
+      "^.+\\.js?$": "babel-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   }
 }

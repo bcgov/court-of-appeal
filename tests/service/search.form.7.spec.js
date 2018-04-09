@@ -1,5 +1,4 @@
-let expect = require('chai').expect;
-let Service = require('./default.service');
+let Service = require('../../src/service/default.service');
 let url = require('url');
 var qs = require('querystring');
 
@@ -31,9 +30,9 @@ describe('Search form 7', function() {
         server.close();
     });
 
-    it('uses a rest service', function(done) {                        
+    test('uses a rest service', function(done) {                        
         service.searchForm7(42, function(data) {            
-            expect(data).to.deep.equal({any:'field'});
+            expect(data).toEqual({any:'field'});
             done();
         });     
     });

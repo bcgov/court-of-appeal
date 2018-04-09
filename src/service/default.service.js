@@ -28,43 +28,30 @@ Service.prototype.setServeLocalData = function(flag) {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    if (this.serveLocalData === true) {
+    if (this.serveLocalData) {
         callback(fakeData);
     }
-    else {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", this.base() + '/api/forms?file=' + file, true);
-        xhr.onreadystatechange = function() { 
-            if(xhr.readyState === xhr.DONE && xhr.status===200) {
-                callback(JSON.parse(xhr.responseText));
-            }
-        }
-        xhr.send(); 
+    else {        
+        let get = require('request');
+        get(this.base() + '/api/forms?file=' + file, (err, response, body)=>{            
+            if (body) { callback(JSON.parse(body)); }
+            else { callback(undefined); }
+        }); 
     }
 };
 
 Service.prototype.saveForm2 = function(form, callback) {    
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", this.base() + '/api/forms', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {     
-        if(xhr.readyState === xhr.DONE && xhr.status===201) {
-            callback(xhr.responseText);
-        }
-    }
-    let params = 'data=' + JSON.stringify(form);
-    xhr.send(params); 
+    let request = require('request');
+    request.post(this.base() + '/api/forms', {form: { data:JSON.stringify(form) }}, function(err, response, body) {
+        callback(body);
+    });
 };
 
 Service.prototype.getMyCases = function(form, callback) { 
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", this.base() + '/api/cases', true);
-    xhr.onreadystatechange = function() {
-        if(xhr.readyState === xhr.DONE && xhr.status===200) {
-            callback(JSON.parse(xhr.responseText));
-        }
-    }
-    xhr.send(); 
+    let get = require('request');
+    get(this.base() + '/api/cases', (err, response, body)=>{
+        callback(JSON.parse(body));
+    }); 
 };
 
 module.exports = Service;

@@ -1,5 +1,4 @@
-let expect = require('chai').expect;
-let Service = require('./default.service');
+let Service = require('../../src/service/default.service');
 let url = require('url');
 var qs = require('querystring');
 
@@ -23,7 +22,8 @@ describe('Save form 2', function() {
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/json');
                     response.statusCode = 201;
-                    response.write(body);
+                    var data = qs.parse(body).data;
+                    response.write(data);
                     response.end();
                 }); 
             }
@@ -33,9 +33,9 @@ describe('Save form 2', function() {
         server.close();
     });
 
-    it('sends data via post inside a data field', function(done) {                        
+    test('sends data via post inside a data field', function(done) {                        
         service.saveForm2({ any:'field' }, function(data) {
-            expect(data).to.equal('data={"any":"field"}');
+            expect(data).toEqual('{"any":"field"}');
             done();
         });     
     });
