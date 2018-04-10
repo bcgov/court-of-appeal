@@ -2,7 +2,7 @@ let jsdom = require("jsdom");
 let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ActiveForms from '../../src/forms/active.forms';
+import ActiveFormList from '../../src/components/ActiveFormList';
 let Service = require('../../src/service/default.service');
 
 describe('Active forms section', function() {
@@ -33,7 +33,7 @@ describe('Active forms section', function() {
         }).listen(port, done);
 
         document = jsdom.jsdom('<div id="root"></div>');
-        let component = <ActiveForms fetch="false" />;
+        let component = <ActiveFormList fetch="false" />;
         sut = ReactDOM.render(component, document.getElementById('root'));        
         sut.service.apiUrl = 'http://localhost:5001';
         sut.fetchCases();
@@ -81,4 +81,6 @@ describe('Active forms section', function() {
             done();
         }, 100);  
     });
+
+
 });
