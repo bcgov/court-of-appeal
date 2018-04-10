@@ -1,5 +1,4 @@
 let jsdom = require("jsdom");
-let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ActiveFormList from '../../src/components/ActiveFormList';

@@ -55,7 +55,6 @@ class ActiveFormList extends Component {
                 <CaseList
                     cases={this.state.cases}
                     save={this.props.save}
-                    service={this.service}
                 />
                 <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
                         No open cases found
