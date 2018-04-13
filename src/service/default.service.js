@@ -83,7 +83,12 @@ Service.prototype.buildOptions = function(url) {
 Service.prototype.getPersonInfo = function(callback) {
     let get = require('request');
     get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
-        callback(JSON.parse(body));
+        if (response && response.statusCode == 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            callback(body);
+        }
     }); 
 };
 module.exports = Service;
