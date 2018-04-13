@@ -61,9 +61,9 @@ Service.prototype.getMyCases = function(form, callback) {
     }); 
 };
 
-Service.prototype.saveUser = function(user, callback) {
+Service.prototype.savePerson = function(user, callback) {
     let request = require('request');
-    var options = this.buildOptions('/api/users');
+    var options = this.buildOptions('/api/persons');
     options.form = { data:user };
     request.post(options, function(err, response, body) {
         callback(body);

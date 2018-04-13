@@ -13,7 +13,7 @@ const FakeSiteMinder = () => (
 
 const fakeAuth = {
   isAuthenticated () {
-      return document.cookie.indexOf('user=') !== -1 && document.cookie.substring(5).length > 0;
+      return document.cookie.indexOf('login=') !== -1 && document.cookie.substring(5).length > 0;
   }
 };
 
@@ -25,15 +25,15 @@ const AuthButton = withRouter(
         <div>
             <p>Please log in</p>
             <label>username</label>
-            <input name="username" id="user" />
+            <input name="login" id="login" />
             <button id="go"
                 onClick={() => {
-                    let user = document.getElementById('user').value;
-                    if (user.length > 0) {
-                        let value = "user=" + document.getElementById('user').value;
+                    let login = document.getElementById('login').value;
+                    if (login.length > 0) {
+                        let value = "login=" + document.getElementById('login').value;
                         document.cookie=value;
                         let service = new Service(window);
-                        service.saveUser(user, function() {
+                        service.savePerson(login, function() {
                             history.push("/");
                         });                        
                     }
