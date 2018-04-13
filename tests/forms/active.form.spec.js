@@ -31,9 +31,9 @@ describe('Active forms section', function() {
             }
         }).listen(port, done);
 
-        document = jsdom.jsdom('<div id="root"></div>');
+        document = jsdom.jsdom('<div id="react_app"></div>');
         let component = <ActiveFormList fetch="false" />;
-        sut = ReactDOM.render(component, document.getElementById('root'));        
+        sut = ReactDOM.render(component, document.getElementById('react_app'));
         sut.service.apiUrl = 'http://localhost:5001';
         sut.fetchCases();
     });

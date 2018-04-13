@@ -11,8 +11,8 @@ describe('Search Form 7 in form 2', function() {
     let sut;
 
     beforeEach(function() {
-        document = jsdom.jsdom('<div id="root"></div>');
-        sut = ReactDOM.render(<Form2 />, document.getElementById('root'));
+        document = jsdom.jsdom('<div id="react_app"></div>');
+        sut = ReactDOM.render(<Form2 />, document.getElementById('react_app'));
         sut.findComponent.service.setServeLocalData(true);
     });
 

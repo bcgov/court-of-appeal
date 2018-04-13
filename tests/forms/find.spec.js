@@ -12,14 +12,14 @@ describe('Find', function() {
     let received;
 
     beforeEach(function() {
-        document = jsdom.jsdom('<div id="root"></div>');
+        document = jsdom.jsdom('<div id="react_app"></div>');
         serviceWasCalledCorrectly = false;
         sut = <Find service={{ searchForm7:function(file, callback){
                         serviceWasCalledCorrectly = (file == '42');
                         callback({ any:'value' });
                     } }} 
                     callback={function(data) { received = data; }} />;
-        ReactDOM.render(sut, document.getElementById('root'));
+        ReactDOM.render(sut, document.getElementById('react_app'));
     });
 
     test('renders without crashing', ()=> {        
