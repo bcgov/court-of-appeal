@@ -7,7 +7,7 @@ class ActiveFormList extends Component {
 
     constructor(props) {
         super(props);
-        this.service = props.service ? props.service : new DefaultService(); 
+        this.service = props.service; 
         this.state = {
             fetch: props.fetch !== 'false',
             cases: [],
@@ -17,6 +17,8 @@ class ActiveFormList extends Component {
     }
 
     componentDidMount() {
+        let window = this.element.ownerDocument.defaultView;
+        if (this.service == null) { this.service = new DefaultService(window); }
         if (this.state.fetch) { this.fetchCases(); }
     }
 
@@ -45,7 +47,7 @@ class ActiveFormList extends Component {
 
     render() {
         return (
-            <div id="active-forms" className="form-section">
+            <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
                 <div>
                     <h3 style={{ display:'inline-block' }}>Case Reminders</h3>
                     <div style={{ display:'inline-block', float:'right', marginTop:'15px' }}>

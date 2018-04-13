@@ -10,7 +10,7 @@ class Form2 extends Component {
    //TODO: populate this with any existing data from the server.  So, we may also need a default set of props.
     constructor(props) {
         super(props);
-        this.service = props.service ? props.service : new DefaultService();
+        this.service = props.service;
         this.state = {
             appellant: {
                 name: '',
@@ -37,6 +37,8 @@ class Form2 extends Component {
     }
 
     componentDidMount() {
+        let window = this.element.ownerDocument.defaultView;
+        if (this.service == null) { this.service = new DefaultService(window); }        
         this.address.value = this.state.respondent.address;
     }
 
@@ -100,7 +102,7 @@ class Form2 extends Component {
 
     render() {
         return (
-          <div id="topicTemplate" className="template container gov-container form">
+          <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
             <div id="breadcrumbContainer">
                 <ol className="breadcrumb">
