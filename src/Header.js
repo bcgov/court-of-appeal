@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
+import DefaultService from './service/default.service.js';
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);   
+        this.service = props.service; 
+        this.state = {
+            login: '<?>'
+        }
+
+        this.fetch = this.fetch.bind(this);
+    }
+
+    componentDidMount() {
+        let window = this.element.ownerDocument.defaultView;
+        if (this.service == null) { this.service = new DefaultService(window); }        
+
+        this.fetch();
+    }
+
+    fetch() {
+        this.service.getPersonInfo((person)=> {
+            this.setState({
+                login: person.login? person.login: '<?>'
+            });
+        });
+    }
+
   render() {
     return (
-        <div id="header" role="banner">
+        <div id="header" role="banner" ref={ (element)=> {this.element = element }}>
             <div id="header-main" className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
                     <div id="header-main-row" className="row">
@@ -20,7 +47,7 @@ class Header extends Component {
                         <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                             <div className="pull-right">
                                 <div className="align-right header-top-line">
-                                    <span >Welcome, Julie</span>
+                                    <span >Welcome, { this.state.login }</span>
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">

@@ -16,7 +16,9 @@ var Service = function(window) {
     this.user = undefined;
     if (typeof window !== 'undefined') {
         this.apiUrl = window.location.origin;        
-        if (window.document && window.document.cookie) { this.user = window.document.cookie.substring('user='.length); }
+        if (window.document && window.document.cookie) { 
+            this.user = window.document.cookie.substring('login='.length); 
+        }
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
@@ -77,6 +79,12 @@ Service.prototype.buildOptions = function(url) {
             'X-USER': this.user
         }
     };
+};
+Service.prototype.getPersonInfo = function(callback) {
+    let get = require('request');
+    get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
+        callback(JSON.parse(body));
+    }); 
 };
 module.exports = Service;
 module.exports.fakeData = fakeData;

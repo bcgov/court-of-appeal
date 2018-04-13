@@ -51,7 +51,7 @@ describe('Gateway to API', function() {
         });
 
         test('takes the user from the cookie', ()=> {
-            service = new Service({ location: { origin:'here' }, document: { cookie:'user=bob' } });
+            service = new Service({ location: { origin:'here' }, document: { cookie:'login=bob' } });
 
             expect(service.user).toEqual('bob'); 
         });
