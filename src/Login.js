@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import App from './App';
-
+import Service from '../src/service/default.service';
 
 const FakeSiteMinder = () => (
   <Router>
@@ -13,7 +13,7 @@ const FakeSiteMinder = () => (
 
 const fakeAuth = {
   isAuthenticated () {
-      return document.cookie.indexOf('user=') != -1 && document.cookie.substring(5).length > 0;
+      return document.cookie.indexOf('user=') !== -1 && document.cookie.substring(5).length > 0;
   }
 };
 
@@ -28,9 +28,15 @@ const AuthButton = withRouter(
             <input name="username" id="user" />
             <button id="go"
                 onClick={() => {
-                    let value = "user=" + document.getElementById('user').value;
-                    document.cookie=value;
-                    history.push("/");
+                    let user = document.getElementById('user').value;
+                    if (user.length > 0) {
+                        let value = "user=" + document.getElementById('user').value;
+                        document.cookie=value;
+                        let service = new Service(window);
+                        service.saveUser(user, function() {
+                            history.push("/");
+                        });                        
+                    }
                 }}
             >
                 Go

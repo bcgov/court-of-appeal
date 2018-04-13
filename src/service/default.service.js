@@ -61,6 +61,15 @@ Service.prototype.getMyCases = function(form, callback) {
     }); 
 };
 
+Service.prototype.saveUser = function(user, callback) {
+    let request = require('request');
+    var options = this.buildOptions('/api/users');
+    options.form = { data:user };
+    request.post(options, function(err, response, body) {
+        callback(body);
+    });
+};
+
 Service.prototype.buildOptions = function(url) {
     return {
         url: this.base() + url,
