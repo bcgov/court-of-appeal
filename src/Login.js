@@ -41,7 +41,7 @@ class Authenticate extends Component {
                 <div ref={ (element)=> {this.element = element }}>
                     <p>Unknown user... Please log in</p>
                     <label>login</label>
-                    <input name="login" id="login" />
+                    <input name="login" id="login" autoFocus/>
                     <button id="go"
                         onClick={() => {
                             let login = document.getElementById('login').value;

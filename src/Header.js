@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DefaultService from './service/default.service.js';
+import './header.css';
 
 class Header extends Component {
 
@@ -11,6 +12,7 @@ class Header extends Component {
         }
 
         this.fetch = this.fetch.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +28,13 @@ class Header extends Component {
                 login: person.login? person.login: '<?>'
             });
         });
+    }
+
+    logout() {
+        let document = this.element.ownerDocument;
+        let window = document.defaultView;
+        document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        window.location = '/';
     }
 
   render() {
@@ -48,6 +57,8 @@ class Header extends Component {
                             <div className="pull-right">
                                 <div className="align-right header-top-line">
                                     <span >Welcome, { this.state.login }</span>
+                                    <span> | </span>
+                                    <span id="logout" onClick={ this.logout }>Logout</span>
                                 </div>
                                 <div className="align-right header-bottom-line">
                                     <div className="icons">
