@@ -8,11 +8,14 @@ describe('My cases', function() {
     let server;
     let port = 5001;
     let service;
+    let received;
 
     beforeEach(function(done) {
+        received = undefined;
         service = new Service();
         service.apiUrl = api;
-        server = require('http').createServer((request, response)=> {            
+        server = require('http').createServer((request, response)=> {          
+            received = request.headers;  
             response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.statusCode = 200;
@@ -35,5 +38,19 @@ describe('My cases', function() {
             expect(data).toEqual({any:'field'});
             done();
         });     
+    });
+    test('sends user info when initialized', (done)=>{
+        service.user = 'any';
+        service.getMyCases({}, (data)=> {
+            expect(received['x-user']).toEqual('any');
+            done();
+        }); 
+    });
+    test('does not send user info when undefined', (done)=>{
+        service.user = undefined;
+        service.getMyCases({}, (data)=> {
+            expect(received['x-user']).toEqual(undefined);
+            done();
+        }); 
     });
 });

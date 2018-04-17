@@ -11,10 +11,14 @@ let fakeData = {
     }
 };
 
-var Service = function() {  
+var Service = function(window) {  
     this.apiUrl = undefined;
+    this.user = undefined;
     if (typeof window !== 'undefined') {
-        this.apiUrl = window.location.origin;
+        this.apiUrl = window.location.origin;        
+        if (window.document && window.document.cookie) { 
+            this.user = window.document.cookie.substring('login='.length); 
+        }
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
@@ -36,7 +40,7 @@ Service.prototype.searchForm7 = function(file, callback) {
     }
     else {        
         let get = require('request');
-        get(this.base() + '/api/forms?file=' + file, (err, response, body)=>{            
+        get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
             if (body) { callback(JSON.parse(body)); }
             else { callback(undefined); }
         }); 
@@ -45,17 +49,47 @@ Service.prototype.searchForm7 = function(file, callback) {
 
 Service.prototype.saveForm2 = function(form, callback) {    
     let request = require('request');
-    request.post(this.base() + '/api/forms', {form: { data:JSON.stringify(form) }}, function(err, response, body) {
+    var options = this.buildOptions('/api/forms');
+    options.form = { data:JSON.stringify(form) };
+    request.post(options, function(err, response, body) {
         callback(body);
     });
 };
 
 Service.prototype.getMyCases = function(form, callback) { 
     let get = require('request');
-    get(this.base() + '/api/cases', (err, response, body)=>{
+    get(this.buildOptions('/api/cases'), (err, response, body)=>{
         callback(JSON.parse(body));
     }); 
 };
 
+Service.prototype.savePerson = function(user, callback) {
+    let request = require('request');
+    var options = this.buildOptions('/api/persons');
+    options.form = { data:user };
+    request.post(options, function(err, response, body) {
+        callback(body);
+    });
+};
+
+Service.prototype.buildOptions = function(url) {
+    return {
+        url: this.base() + url,
+        headers: {
+            'X-USER': this.user
+        }
+    };
+};
+Service.prototype.getPersonInfo = function(callback) {
+    let get = require('request');
+    get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            callback(body);
+        }
+    }); 
+};
 module.exports = Service;
 module.exports.fakeData = fakeData;

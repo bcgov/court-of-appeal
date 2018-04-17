@@ -6,10 +6,15 @@ class Find extends Component {
 
     constructor(props) {
         super(props);   
-        this.service = props.service ? props.service : new DefaultService(); 
+        this.service = props.service; 
         this.callback = props.callback;   
 
         this.search = this.search.bind(this);
+    }
+
+    componentDidMount() {
+        let window = this.element.ownerDocument.defaultView;
+        if (this.service == null) { this.service = new DefaultService(window); }        
     }
 
     search() {
@@ -20,7 +25,7 @@ class Find extends Component {
 
     render() {
         return (
-            <div className="form-section">
+            <div className="form-section" ref={ (element)=> {this.element = element }}>
                 <h2 style={{ fontWeight:'bold' }}>Appeal Case Information</h2>
                 Enter the Court of Appeal number you want to respond to:
 
