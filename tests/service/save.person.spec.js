@@ -13,7 +13,6 @@ describe('Save person', function() {
         service = new Service();
         service.apiUrl = api;
         server = require('http').createServer((request, response)=> {            
-            response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/persons' && request.method == 'POST') {                
                 let body = '';
                 request.on('data', (data)=> {

@@ -16,7 +16,6 @@ describe('My cases', function() {
         service.apiUrl = api;
         server = require('http').createServer((request, response)=> {          
             received = request.headers;  
-            response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.statusCode = 200;
                 response.write(JSON.stringify({any:'field'}));

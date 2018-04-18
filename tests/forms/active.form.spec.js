@@ -19,7 +19,6 @@ describe('Active forms section', function() {
 
     beforeEach(function(done) {
         server = require('http').createServer((request, response)=> {     
-            response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.write( JSON.stringify({ cases:cases })); 
                 response.end();

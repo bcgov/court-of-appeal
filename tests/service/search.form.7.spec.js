@@ -13,7 +13,6 @@ describe('Search form 7', function() {
         service = new Service();
         service.apiUrl = api;
         server = require('http').createServer((request, response)=> {            
-            response.setHeader('Access-Control-Allow-Origin', '*');
             if (request.url == '/api/forms?file=42' && request.method == 'GET') {                
                 response.statusCode = 200;
                 response.write(JSON.stringify({any:'field'}));
