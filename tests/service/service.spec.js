@@ -50,10 +50,22 @@ describe('Gateway to API', function() {
             expect(service.user).toEqual(undefined); 
         });
 
-        test('takes the user from the cookie', ()=> {
+        test('is taken from the cookie', ()=> {
             service = new Service({ location: { origin:'here' }, document: { cookie:'login=bob' } });
 
             expect(service.user).toEqual('bob'); 
+        });
+
+        test('can be extracted when at the end', ()=> {
+            service = new Service({ location: { origin:'here' }, document: { cookie:'before=it; login=max' } });
+
+            expect(service.user).toEqual('max'); 
+        });
+
+        test('can be extracted when in the middle', ()=> {
+            service = new Service({ location: { origin:'here' }, document: { cookie:'before=it; login=max; after=it;' } });
+
+            expect(service.user).toEqual('max'); 
         });
     });
 });

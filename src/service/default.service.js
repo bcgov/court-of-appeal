@@ -17,7 +17,11 @@ var Service = function(window) {
     if (typeof window !== 'undefined') {
         this.apiUrl = window.location.origin;        
         if (window.document && window.document.cookie) { 
-            this.user = window.document.cookie.substring('login='.length); 
+            let index = window.document.cookie.indexOf('login=');
+            this.user = window.document.cookie.substring(index + 'login='.length);
+            if (this.user.indexOf(';') > 0) {
+                this.user = this.user.substring(0, this.user.indexOf(';'));
+            }
         }
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
