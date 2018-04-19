@@ -38,7 +38,7 @@ body {
 #header {
     color:#fff;
 }
-#header .bcgov-title h1 { 
+#header .bcgov-title h1 {
     color: #fff;
     font-size: 35px;
     margin-bottom: 0;
@@ -252,7 +252,7 @@ button.gov-button-custom {
         margin-right: 0;
         margin-bottom: 0;
     }
-    
+
 }
 
 
@@ -686,15 +686,21 @@ label {
 
 /* Tweak help panel spacing */
 .info-icon {
-    padding:    0px 14px 4px 4px;
+    padding:    5px 14px 0px 4px;
     vertical-align: top;
-    font-size:  50px;
+    font-size:  30px;
     color:      #38598a;
 }
 
 .help-section {
     vertical-align: top;
-    padding: 10px 24px 4px 4px;
+    padding: 5px 24px 0px 4px;
+}
+
+.help-details {
+    vertical-align: top;
+    padding: 13px 24px 13px 24px;
+    font-size: 18px
 }
 
 /* LEGAL STATEMENT */
