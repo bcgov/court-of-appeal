@@ -10,7 +10,7 @@ class MyApplications extends Component {
                     <div className="col-sm-12">
 
                         <div id="active-forms" className="form-section">
-                            <h3>My Cases</h3>
+                            <h3>My Documents</h3>
                             <div>
                                 File #:<input type="text"/>
                                 Status:

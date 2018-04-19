@@ -80,8 +80,8 @@ class Header extends Component {
                         <div className="container">
                             <div id="header-menu-row">
                                 <a href="/">HOME</a>
-                                <a href="/my-applications.html">MY CASES</a>
-                                <a href="/">ALL FORMS</a>
+                                <a href="/my-applications.html">MY DOCUMENTS</a>
+                                <a href="/">ALL DOCUMENTS</a>
                             </div>
                         </div>
                     </div>
