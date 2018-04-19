@@ -33,7 +33,7 @@ class Header extends Component {
     logout() {
         let document = this.element.ownerDocument;
         let window = document.defaultView;
-        document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         window.location = '/';
     }
 
