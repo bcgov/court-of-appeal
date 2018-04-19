@@ -7,7 +7,6 @@ import FormRow from '../components/FormRow.js'
 
 class Form2 extends Component {
 
-   //TODO: populate this with any existing data from the server.  So, we may also need a default set of props.
     constructor(props) {
         super(props);
         this.service = props.service;

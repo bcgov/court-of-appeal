@@ -16,17 +16,11 @@ class NeedHelp extends Component {
                             <td className="help-section" style={{ fontSize:'30px' }}>
                                 Need help?
                             </td>
-                            <td className="help-section" >
-                                <ol style={{ padding:'0px', listStyleType:'none' }}>
-                                    <li>Phone: 1-800-663-6102</li>
-                                    <li>E-mail: Courts.cso@gov.bc.ca</li>
-                                </ol>
+                            <td className="help-details" >
+                                    Phone: 1-800-663-6102
                             </td>
-                            <td className="help-section" >
-                                <ol style={{ padding:'0px', listStyleType:'none' }}>
-                                    <li><strong>Victoria Registry</strong></li>
-                                    <li>2nd Flr, 850 Burdett Ave., Victoria, BC V8W 9J2</li>
-                                </ol>
+                            <td className="help-details">
+                                    E-mail: Courts.cso@gov.bc.ca
                             </td>
                         </tr>
                     </tbody>
