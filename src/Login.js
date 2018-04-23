@@ -20,7 +20,10 @@ class Authenticate extends Component {
         }
     }
 
-    componentDidMount() {        
+    componentDidMount() {
+        console.log("App did mount, document is not null? ", document);
+        debugger;
+
         if (document.cookie.indexOf('login=') !== -1 && document.cookie.substring('login='.length).length > 0) {
             let window = this.element.ownerDocument.defaultView;
             let service = new Service(window);

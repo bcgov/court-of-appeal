@@ -6,13 +6,20 @@ import NeedHelp from './need.help.js';
 import './dashboard.css';
 
 class Dashboard extends Component {
+
+    componentDidMount() {
+        console.log("Did mount Dashboard");
+        // let window = this.element.ownerDocument.defaultView;
+        // console.log("window?");
+    }
+
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form">
                 <div className="row">
                     <div role="main" className="col-sm-12">
                         <div className="col-sm-12">
-                            <ActiveFormList/>
+                            <ActiveFormList window={window}/>
                         </div>
                     </div>
                 </div>
