@@ -10,7 +10,6 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
-        console.log("constructor being called without a service");
         this.state = {
             id: '',
             appellant: {
@@ -39,7 +38,6 @@ class Form2 extends Component {
     }
 
     componentDidMount() {
-        console.log("Did mount Form 2");
         let window = this.element.ownerDocument.defaultView;
         if (this.service == null) { this.service = new DefaultService(window); }
     }
@@ -227,12 +225,14 @@ class Form2 extends Component {
                                   iconText="Where would you like to receive documents related to this case?"
                                   onChange={this.fieldChanged}
                                   name="respondent.address"
+                                  value={this.state.respondent.address}
                               />
                               <FormRow
                                   labelText="Do you wish to use email for service?"
                                   id="receive-email-checkbox"
                                   field={<input id="receive-email-checkbox" type="checkbox"
                                                 onClick={this.hideShowEmail}/>}
+                                  value={this.state.respondent.useServiceEmail}
                               />
                               <FormRow
                                   show={this.state.respondent.useServiceEmail}
@@ -240,12 +240,14 @@ class Form2 extends Component {
                                   id="respondent-email"
                                   name="respondent.email"
                                   onChange={this.fieldChanged}
+                                  value={this.state.respondent.email}
                               />
                               <FormRow
                                   mandatory={true}
                                   labelText="Respondent's phone "
                                   onChange={this.fieldChanged}
                                   name="respondent.phone"
+                                  value={this.state.respondent.phone}
                               />
                               <FormRow
                                   mandatory={true}
@@ -253,6 +255,7 @@ class Form2 extends Component {
                                   iconText="Who is filing this Notice of Appearance?"
                                   name="respondent.serviceFiler"
                                   onChange={this.fieldChanged}
+                                  value={this.state.respondent.serviceFiler}
                               />
 
                         </tbody></table>
