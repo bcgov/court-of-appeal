@@ -72,8 +72,7 @@ class ActiveFormList extends Component {
                     </div>
                 </div>
                 <CaseList
-                    cases={this.state.cases}
-                    window={this.props.window}
+                    cases={this.state.cases}                   
                     service={this.service}
                     updateCases={this.updateCases}
                 />

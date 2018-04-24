@@ -13,7 +13,7 @@ class Dashboard extends Component {
                 <div className="row">
                     <div role="main" className="col-sm-12">
                         <div className="col-sm-12">
-                            <ActiveFormList window={window}/>
+                            <ActiveFormList />
                         </div>
                     </div>
                 </div>

@@ -62,7 +62,6 @@ class Form2 extends Component {
                 respondent: {name:'' },
                 displayData: 'none'
             });
-            this.address.value = '';
         }
     }
 
