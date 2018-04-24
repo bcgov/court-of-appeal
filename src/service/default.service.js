@@ -51,7 +51,7 @@ Service.prototype.searchForm7 = function(file, callback) {
     }
 };
 
-Service.prototype.saveForm2 = function(form, callback) {    
+Service.prototype.createForm2 = function(form, callback) {
     let request = require('request');
     var options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
@@ -59,6 +59,16 @@ Service.prototype.saveForm2 = function(form, callback) {
         callback(body);
     });
 };
+
+Service.prototype.updateForm2 = function(form, id, callback) {
+    let request = require('request');
+    var options = this.buildOptions(`/api/forms/${id}`);
+    options.form = { data:JSON.stringify(form) };
+    request.put(options, function(err, response, body) {
+        callback(body);
+    });
+};
+
 
 Service.prototype.getMyCases = function(form, callback) { 
     let get = require('request');

@@ -1,19 +1,73 @@
 import React from 'react';
-import FormRow from './FormRow.js';
+import update from 'immutability-helper';
+import DefaultService from "../service/default.service";
+import Form2DataSection from "./Form2DataSection"
 
 class CaseList extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            editMode: false
+            editMode: false,
+            selectedDocumentId: '',
+            selectedDocument: {
+                formSevenNumber: '',
+                appellant: {
+                    name: '',
+                    address: ''
+                },
+                respondent: {
+                    name: '',
+                    address: '',
+                    email: '',
+                    phone: '',
+                    serviceFiler: '',
+                    useServiceEmail: false
+                }
+            }
         };
+        this.service = this.props.service;
+        this.updateForm2 = this.updateForm2.bind(this);
+        this.hideShowEmail = this.hideShowEmail.bind(this);
+        this.fieldChanged = this.fieldChanged.bind(this);
+    }
+
+    componentDidMount() {
+        let window = this.element.ownerDocument.defaultView;
+        if (this.service === null || this.service === undefined) {
+            this.service = new DefaultService(window);
+        }
+    }
+
+    fieldChanged(e) {
+        let keys = e.target.name.split(".");
+        switch (keys[1]) {
+            case 'name' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {name: {$set: e.target.value}}}}));
+                break;
+            case 'address' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {address: {$set: e.target.value}}}}));
+                break;
+            case 'useServiceEmail' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}}));
+                break;
+            case 'email' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {email: {$set: e.target.value}}}}));
+                break;
+            case 'phone' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {phone: {$set: e.target.value}}}}));
+                break;
+            case 'serviceFiler' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {serviceFiler: {$set: e.target.value}}}}));
+                break;
+            default :
+                return;
+        }
     }
 
     render() {
         return (
-            <div>
+            <div ref={ (element)=> {this.element = element } }>
                 <table id="my-cases">
                     <thead>
                     <tr className="header">
@@ -21,6 +75,7 @@ class CaseList extends React.Component {
                         <td>File #</td>
                         <td>Parties</td>
                         <td>Status</td>
+                        <td>Deadline to File</td>
                         <td>Recently Modified</td>
                     </tr>
                     </thead>
@@ -29,12 +84,13 @@ class CaseList extends React.Component {
                         this.props.cases.map((item) =>
                             <tr className="case-item" key={item.id}>
                                 <td>
-                                    <button className="btn" onClick={this.openEditModal.bind(this)}><i
-                                        className="fas fa-pencil-alt"/></button>
+                                    <button className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
+                                        <i className="fas fa-pencil-alt"/></button>
                                 </td>
                                 <td>{item.id}</td>
                                 <td>{item.parties}</td>
                                 <td>{item.status}</td>
+                                <td></td>
                                 <td>{item.modified}</td>
                             </tr>
                         )
@@ -48,91 +104,53 @@ class CaseList extends React.Component {
                         Edit Form 2
                     </div>
                     <div className="modal-content">
-                        <div className="form-section" style={{display: this.state.displayData}}>
-                            <h2 style={{fontWeight: 'bold'}}>Enter an Appearance (on Behalf of)</h2>
-
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <span style={{color: 'red'}}>*</span>
-                                        Respondent&apos;s name &nbsp;
-                                        <i className="fa fa-question-circle" aria-hidden="true"
-                                           title="Who is responding to the Notice of Appeal?"></i>
-                                        :
-                                    </td>
-                                    <td>
-                                        <select>
-                                            <option>Bob Jones</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <FormRow
-                                    mandatory={true}
-                                    labelText="Respondent's mailing address for service:"
-                                    iconText="Where would you like to receive documents related to this case?"
-                                />
-                                <FormRow
-                                    labelText="Do you wish to use email for service?"
-                                    id="receive-email-checkbox"
-                                    field={<input id="receive-email-checkbox" type="checkbox"
-                                                  onClick={this.hideShowEmail}/>}
-                                />
-                                <FormRow
-                                    show={this.state.useServiceEmail}
-                                    labelText="Respondent's email:"
-                                    name="respondent-email"
-                                    inputRef={(input) => {
-                                        this.email = input;
-                                    }}
-                                    id="respondent-email"
-                                />
-                                <FormRow
-                                    mandatory={true}
-                                    labelText="Respondent's phone:"
-                                    inputRef={(input) => {
-                                        this.phone = input;
-                                    }}
-                                />
-                                <FormRow
-                                    mandatory={true}
-                                    labelText="Respondent name (or Solicitor name):"
-                                    inputRef={(input) => {
-                                        this.formfiler = input;
-                                    }}
-                                    iconText="Who is filing this Notice of Appearance?"
-                                />
-                                </tbody>
-                            </table>
-
-                            <button id="cancelModal" onClick={this.closeEditModal.bind(this)} className="btn btn-primary btn-red"
-                                    style={{display: this.state.displayData}}>Cancel
-                            </button>
-
-                            <button id="saveModal" onClick={this.save.bind(this)}
-                                    className="btn btn-primary btn-green pull-right"
-                                    style={{display: this.state.displayData}}>Save Draft
-                            </button>
-
-                        </div>
+                        <Form2DataSection
+                            closeEditModal={this.closeEditModal.bind(this)}
+                            show={this.state.editMode}
+                            fieldChanged={this.fieldChanged}
+                            className="case-list-modal"
+                            renderer="CaseList"
+                            data={this.state.selectedDocument}
+                            hideShowEmail={this.hideShowEmail}
+                            updateForm2={this.updateForm2}
+                        />
                     </div>
                 </div>
             </div>
         );
     }
 
-    openEditModal() {
-        this.setState({editMode: true});
+    updateForm2() {
+        this.service.updateForm2(
+            this.state.selectedDocument, this.state.selectedDocumentId,
+            (data) => {
+                if (data !== undefined) {
+                    this.setState({
+                        displaySaveSuccess: true
+                    });
+                    this.props.updateCases(this.state.selectedDocument, this.state.selectedDocumentId);
+                } else {
+                    this.setState({
+                        displaySaveError: true
+                    });
+                }
+            });
+        this.closeEditModal();
+    }
+
+    hideShowEmail(e) {
+        let state = update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}});
+        this.setState(state);
+    }
+
+    openEditModal(data, id) {
+        this.setState({selectedDocument: data, editMode: true, selectedDocumentId: id});
     }
 
     closeEditModal() {
         this.setState({editMode: false});
 
     }
-
-    save() {
-        console.log("TODO: save the form in the shared state!!!!");
-        this.closeEditModal();
-    }
 }
+
 export default CaseList;

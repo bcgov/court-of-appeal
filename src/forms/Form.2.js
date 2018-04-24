@@ -3,14 +3,15 @@ import './Form.css';
 import './Form.2.css';
 import Find from './find.js';
 import DefaultService from '../service/default.service.js';
-import FormRow from '../components/FormRow.js'
+import FormRow from '../components/FormRow.js';
+import update from 'immutability-helper';
 
 class Form2 extends Component {
 
     constructor(props) {
         super(props);
-        this.service = props.service;
         this.state = {
+            id: '',
             appellant: {
                 name: '',
                 address: ''
@@ -29,43 +30,53 @@ class Form2 extends Component {
         };
 
         this.found = this.found.bind(this);
-        this.save = this.save.bind(this);
+        this.create = this.create.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
         this.hideShowEmail = this.hideShowEmail.bind(this);
+        this.fieldChanged = this.fieldChanged.bind(this);
     }
 
     componentDidMount() {
         let window = this.element.ownerDocument.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }        
-        this.address.value = this.state.respondent.address;
+        if (this.service == null) { this.service = new DefaultService(window); }
     }
 
     found(data) {
         if (data) {
             this.setState({
                 appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
-                respondent: {name:data.parties.respondent.name, address:data.parties.respondent.address },
+                respondent: {
+                    name: data.parties.respondent.name || '',
+                    address: data.parties.respondent.address || '',
+                    phone: data.parties.respondent.phone || '',
+                    useServiceEmail: data.parties.respondent.useServiceEmail || '',
+                    email: data.parties.respondent.email || '',
+                    serviceFiler: data.parties.respondent.serviceFiler || '',
+                },
                 displayData: 'block'
             });
-            this.address.value = data.parties.respondent.address;
         } else {
             this.setState({
                 appellant: { name:'' },
                 respondent: {name:'' },
                 displayData: 'none'
             });
-            this.address.value = '';
         }
     }
 
-    save() {
-        this.service.saveForm2({
+    create() {
+        this.service.createForm2({
                 formSevenNumber: this.findComponent.textInput.value,
-                appellant: this.state.appellant.name,
+                id: this.state.id,
+                appellant: {
+                    name: this.state.appellant.name,
+                    address: this.state.appellant.address
+                },
                 respondent: {
                     name: this.state.respondent.name,
                     address: this.state.respondent.address,
+                    phone: this.state.respondent.phone,
                     useServiceEmail: this.state.useServiceEmail,
                     email: this.state.respondent.email,
                     serviceFiler: this.state.respondent.serviceFiler
@@ -95,8 +106,35 @@ class Form2 extends Component {
         });
     }
 
-    hideShowEmail() {
-        this.setState({useServiceEmail:!this.state.useServiceEmail});
+    hideShowEmail(e) {
+        let state = update(this.state,{ respondent: { useServiceEmail: { $set: e.target.checked } } });
+        this.setState(state);
+    }
+
+    fieldChanged(e) {
+        let keys = e.target.name.split(".");
+        switch (keys[1]) {
+            case 'name' :
+                this.setState(update(this.state, { respondent: { name: { $set: e.target.value } }}));
+                break;
+            case 'address' :
+                this.setState(update(this.state,{ respondent: { address: { $set: e.target.value } }}));
+                break;
+            case 'useServiceEmail' :
+                this.setState(update(this.state, { respondent: { useServiceEmail: { $set: e.target.checked } }}));
+                break;
+            case 'email' :
+                this.setState(update(this.state, { respondent: { email: { $set: e.target.value } }}));
+                break;
+            case 'phone' :
+                this.setState(update(this.state, { respondent: { phone: { $set: e.target.value } }}));
+                break;
+            case 'serviceFiler' :
+                this.setState(update(this.state, { respondent: { serviceFiler: { $set: e.target.value } }}));
+                break;
+            default :
+                return;
+        }
     }
 
     render() {
@@ -168,62 +206,61 @@ class Form2 extends Component {
                         <h2 style={{ fontWeight:'bold' }}>Enter an Appearance (on Behalf of)</h2>
 
                         <table><tbody>
-                          <tr>
-                            <td>
-                                <span style={{ color:'red' }}>*</span>
-                                Respondent&apos;s name &nbsp;
-                                <i className="fa fa-question-circle" aria-hidden="true" title="Who is responding to the Notice of Appeal?"></i>
-                                :
-                            </td>
-                            <td>
-                              <select>
-                                  <option>Bob Jones</option>
-                              </select>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                                <span style={{ color:'red' }}>*</span>
-                                Respondent&apos;s mailing address for service &nbsp;
-                                <i className="fa fa-question-circle" aria-hidden="true" title="Where would you like to receive documents related to this case?"></i>
-                                :
-                            </td>
-                            <td>
-                              <input size="40" style={{ backgroundColor:'lightyellow' }} name="respondent-address" ref={(input) => { this.address = input; }} />
-                            </td>
-                          </tr>
-                          <FormRow
-                              mandatory={true}
-                              labelText="Respondent's mailing address for service:"
-                              iconText="Where would you like to receive documents related to this case?"
-                          />
-                          <FormRow
-                            labelText="Do you wish to use email for service?"
-                            id="receive-email-checkbox"
-                            field={<input id="receive-email-checkbox" type="checkbox" onClick={ this.hideShowEmail } />}
-                          />
-                          <FormRow
-                            show={this.state.useServiceEmail}
-                            labelText="Respondent's email:"
-                            name="respondent-email"
-                            inputRef={(input) => { this.email = input; }}
-                            id="respondent-email"
-                          />
-                          <FormRow
-                            mandatory={true}
-                            labelText="Respondent's phone:"
-                            inputRef={(input) => { this.phone = input; }}
-                          />
-                          <FormRow
-                            mandatory={true}
-                            labelText="Respondent name (or Solicitor name):"
-                            inputRef={(input) => { this.formfiler = input; }}
-                            iconText="Who is filing this Notice of Appearance?"
-                          />
+                              <FormRow
+                                  mandatory={true}
+                                  labelText="Respondent's name "
+                                  iconText="Who is responding to the Notice of Appeal?"
+                                  onChange={this.fieldChanged}
+                                  name="respondent.name"
+                                  field={
+                                      <select>
+                                        <option>Bob Jones</option>
+                                        </select>
+                                  }
+                              />
+                              <FormRow
+                                  mandatory={true}
+                                  labelText="Respondent's mailing address for service "
+                                  iconText="Where would you like to receive documents related to this case?"
+                                  onChange={this.fieldChanged}
+                                  name="respondent.address"
+                                  value={this.state.respondent.address}
+                              />
+                              <FormRow
+                                  labelText="Do you wish to use email for service?"
+                                  id="receive-email-checkbox"
+                                  field={<input id="receive-email-checkbox" type="checkbox"
+                                                onClick={this.hideShowEmail}/>}
+                                  value={this.state.respondent.useServiceEmail}
+                              />
+                              <FormRow
+                                  show={this.state.respondent.useServiceEmail}
+                                  labelText="Respondent's email "
+                                  id="respondent-email"
+                                  name="respondent.email"
+                                  onChange={this.fieldChanged}
+                                  value={this.state.respondent.email}
+                              />
+                              <FormRow
+                                  mandatory={true}
+                                  labelText="Respondent's phone "
+                                  onChange={this.fieldChanged}
+                                  name="respondent.phone"
+                                  value={this.state.respondent.phone}
+                              />
+                              <FormRow
+                                  mandatory={true}
+                                  labelText="Respondent name (or Solicitor name) "
+                                  iconText="Who is filing this Notice of Appearance?"
+                                  name="respondent.serviceFiler"
+                                  onChange={this.fieldChanged}
+                                  value={this.state.respondent.serviceFiler}
+                              />
+
                         </tbody></table>
                     </div>
 
-                    <button id="save" onClick={this.save} className="btn btn-primary btn-green pull-right"  style={{ display:this.state.displayData }}>Confirm</button>
+                    <button id="save" onClick={this.create} className="btn btn-primary btn-green pull-right" style={{ display:this.state.displayData }}>Confirm</button>
 
                     <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                         <div className="modal-title">

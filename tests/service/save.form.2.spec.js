@@ -2,7 +2,7 @@ let Service = require('../../src/service/default.service');
 let url = require('url');
 var qs = require('querystring');
 
-describe('Save form 2', function() {
+describe('Create form 2', function() {
 
     let api = 'http://localhost:5001';
     let server;
@@ -33,7 +33,7 @@ describe('Save form 2', function() {
     });
 
     test('sends data via post inside a data field', function(done) {                        
-        service.saveForm2({ any:'field' }, function(data) {
+        service.createForm2({ any:'field' }, function(data) {
             expect(data).toEqual('{"any":"field"}');
             done();
         });     

@@ -14,7 +14,7 @@ describe('Active forms section', function() {
     let sut;        
     let received = undefined;
     let cases = [
-        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellant:'Bruce', respondent:{name:'Clark'}} }
+        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellant:{name:'Bruce'}, respondent:{name:'Clark'}} }
     ];
 
     beforeEach(function(done) {
@@ -44,7 +44,10 @@ describe('Active forms section', function() {
     test('transforms the data for the list', function(done) {
         setTimeout(()=> {            
             expect(sut.state.cases).toEqual([
-                { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' }
+                { 
+                    id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' ,
+                    data:{appellant:{name:'Bruce'}, respondent:{name:'Clark'}}
+                }
             ]);
             done();
         }, 100);        

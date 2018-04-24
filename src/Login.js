@@ -20,11 +20,17 @@ class Authenticate extends Component {
         }
     }
 
-    componentDidMount() {        
+    componentDidMount() {
+
         if (document.cookie.indexOf('login=') !== -1 && document.cookie.substring('login='.length).length > 0) {
             let window = this.element.ownerDocument.defaultView;
             let service = new Service(window);
-            let login = document.cookie.substring('login='.length);
+            
+            let index = document.cookie.indexOf('login=');
+            let login = document.cookie.substring(index + 'login='.length);
+            if (login.indexOf(';') > 0) {
+                login = login.substring(0, login.indexOf(';'));
+            }
             service.getPersonInfo((data)=> {
                 if (data && data.login === login) {
                     this.setState({

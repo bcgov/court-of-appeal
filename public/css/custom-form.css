@@ -560,3 +560,9 @@ fieldset[disabled] a.btn {
 .round-borders {
     border-radius: 5px;
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #e1e1e1;
+    opacity: 1; /* Firefox */
+    font-style: italic;
+}

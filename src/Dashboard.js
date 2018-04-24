@@ -6,13 +6,14 @@ import NeedHelp from './need.help.js';
 import './dashboard.css';
 
 class Dashboard extends Component {
+
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form">
                 <div className="row">
                     <div role="main" className="col-sm-12">
                         <div className="col-sm-12">
-                            <ActiveFormList/>
+                            <ActiveFormList />
                         </div>
                     </div>
                 </div>
