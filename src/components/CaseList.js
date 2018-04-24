@@ -34,17 +34,13 @@ class CaseList extends React.Component {
 
     componentDidMount() {
         let window = this.element.ownerDocument.defaultView;
-        console.log("Did mount CaseList window is null: ", this.props.window);
-
         if (this.service === null || this.service === undefined) {
             this.service = new DefaultService(window);
         }
-
     }
 
     fieldChanged(e) {
         let keys = e.target.name.split(".");
-        debugger;
         switch (keys[1]) {
             case 'name' :
                 this.setState(update(this.state, {selectedDocument: {respondent: {name: {$set: e.target.value}}}}));
@@ -125,7 +121,6 @@ class CaseList extends React.Component {
     }
 
     updateForm2() {
-        debugger;
         this.service.updateForm2(
             this.state.selectedDocument, this.state.selectedDocumentId,
             (data) => {
@@ -133,6 +128,7 @@ class CaseList extends React.Component {
                     this.setState({
                         displaySaveSuccess: true
                     });
+                    this.props.updateCases(this.state.selectedDocument, this.state.selectedDocumentId);
                 } else {
                     this.setState({
                         displaySaveError: true
@@ -143,13 +139,11 @@ class CaseList extends React.Component {
     }
 
     hideShowEmail(e) {
-        debugger;
         let state = update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}});
         this.setState(state);
     }
 
     openEditModal(data, id) {
-        debugger;
         this.setState({selectedDocument: data, editMode: true, selectedDocumentId: id});
     }
 

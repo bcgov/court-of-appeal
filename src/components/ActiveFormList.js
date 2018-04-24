@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../forms/active.forms.css';
 import DefaultService from '../service/default.service.js';
 import CaseList from '../components/CaseList.js';
+import _ from 'lodash';
+import update from 'immutability-helper';
 
 class ActiveFormList extends Component {
 
@@ -14,6 +16,7 @@ class ActiveFormList extends Component {
             displayMyCasesEmptyLabel:true
         };
         this.fetchCases = this.fetchCases.bind(this);
+        this.updateCases = this.updateCases.bind(this);
     }
 
     componentDidMount() {
@@ -29,7 +32,7 @@ class ActiveFormList extends Component {
                     cases:data.cases.slice(0, 5).map(function(item) { 
                         return {
                             id:item.id,
-                            parties: item.data.appellant + ' / ' + item.data.respondent.name,
+                            parties: item.data.appellant.name + ' / ' + item.data.respondent.name,
                             status: item.status,
                             modified: item.modified,
                             data: item.data
@@ -46,6 +49,19 @@ class ActiveFormList extends Component {
         });
     }
 
+    /**
+     * Update the cases in the state so we don't need to call the api to get the updated cases after a successful update.
+     */
+    updateCases(data, id) {
+        let cases = this.state.cases;
+        _.forEach(cases, (doc) => {
+            if (doc.id === id) {
+                doc.data = data;
+            }
+        });
+        this.setState(update(this.state, {cases: {$set: cases}}));
+    }
+
     render() {
         return (
             <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
@@ -59,6 +75,7 @@ class ActiveFormList extends Component {
                     cases={this.state.cases}
                     window={this.props.window}
                     service={this.service}
+                    updateCases={this.updateCases}
                 />
                 <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
                         No open cases found

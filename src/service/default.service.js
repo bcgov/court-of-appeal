@@ -61,8 +61,6 @@ Service.prototype.createForm2 = function(form, callback) {
 };
 
 Service.prototype.updateForm2 = function(form, id, callback) {
-    console.log("Call to update", id, form);
-    debugger;
     let request = require('request');
     var options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };

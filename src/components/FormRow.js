@@ -4,11 +4,16 @@ class FormRow extends Component {
 
     render() {
         let content = null;
+
         if (this.props.show) {
             let field = this.props.field || (
-                <input id={this.props.id} name={this.props.name} ref={this.props.inputRef}/>);
-            let icon = this.props.iconText ?
-                <i className="fa fa-question-circle" aria-hidden="true" title={this.props.iconText}></i> : null;
+                <input
+                    id={this.props.id}
+                    name={this.props.name}
+                    onChange={this.props.onChange}
+                    value={this.props.value || ''} r
+                    ef={this.props.inputRef}/>);
+            let icon = this.props.iconText ? <i className="fa fa-question-circle" aria-hidden="true" title={this.props.iconText}></i> : null;
             let redstar = this.props.mandatory ? <span style={{color: 'red'}}>*</span> : null;
 
             content = (
@@ -25,6 +30,7 @@ class FormRow extends Component {
                 </tr>
             );
         }
+
         return content;
     }
 };

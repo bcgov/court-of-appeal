@@ -4,19 +4,8 @@ import FormRow from "./FormRow";
 
 class Form2DataSection extends React.Component {
 
-    constructor(props) {
-
-        super(props);
-
-        this.service = this.props.service || new DefaultService(undefined);
-    }
-    componentDidMount() {
-        console.log("Mounted the Form2DataSection");
-    }
-
     render() {
         if (this.props.show) {
-            console.log("Data section props vs state ", this.props, this.state);
             return (
                 <div>
                     <div className="form-section" style={{display: this.props.displayData}}>
@@ -73,11 +62,16 @@ class Form2DataSection extends React.Component {
                             />
                             </tbody>
                         </table>
+
+                        <button id="cancel" onClick={this.props.closeEditModal} className="btn btn-warning"
+                                style={{display: this.props.displayData}}>Cancel
+                        </button>
+                        <button id="save" onClick={this.props.updateForm2} className="btn btn-primary pull-right"
+                                style={{display: this.props.displayData}}>Confirm
+                        </button>
+
                     </div>
 
-                    <button id="save" onClick={this.props.updateForm2} className="btn btn-primary btn-green pull-right"
-                            style={{display: this.props.displayData}}>Confirm
-                    </button>
                 </div>
             );
         } else {

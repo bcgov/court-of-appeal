@@ -7,12 +7,6 @@ import './dashboard.css';
 
 class Dashboard extends Component {
 
-    componentDidMount() {
-        console.log("Did mount Dashboard");
-        // let window = this.element.ownerDocument.defaultView;
-        // console.log("window?");
-    }
-
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form">

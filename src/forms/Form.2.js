@@ -58,7 +58,6 @@ class Form2 extends Component {
                 },
                 displayData: 'block'
             });
-            // this.address.value = data.parties.respondent.address;
         } else {
             this.setState({
                 appellant: { name:'' },
@@ -70,7 +69,6 @@ class Form2 extends Component {
     }
 
     create() {
-        console.log("Error for create??");
         this.service.createForm2({
                 formSevenNumber: this.findComponent.textInput.value,
                 id: this.state.id,
@@ -81,6 +79,7 @@ class Form2 extends Component {
                 respondent: {
                     name: this.state.respondent.name,
                     address: this.state.respondent.address,
+                    phone: this.state.respondent.phone,
                     useServiceEmail: this.state.useServiceEmail,
                     email: this.state.respondent.email,
                     serviceFiler: this.state.respondent.serviceFiler
@@ -117,25 +116,24 @@ class Form2 extends Component {
 
     fieldChanged(e) {
         let keys = e.target.name.split(".");
-        debugger;
         switch (keys[1]) {
             case 'name' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { name: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { respondent: { name: { $set: e.target.value } }}));
                 break;
             case 'address' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { address: { $set: e.target.value } } }}));
+                this.setState(update(this.state,{ respondent: { address: { $set: e.target.value } }}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { useServiceEmail: { $set: e.target.checked } } }}));
+                this.setState(update(this.state, { respondent: { useServiceEmail: { $set: e.target.checked } }}));
                 break;
             case 'email' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { email: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { respondent: { email: { $set: e.target.value } }}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { phone: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { respondent: { phone: { $set: e.target.value } }}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, { selectedDocument: { respondent: { serviceFiler: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { respondent: { serviceFiler: { $set: e.target.value } }}));
                 break;
             default :
                 return;
