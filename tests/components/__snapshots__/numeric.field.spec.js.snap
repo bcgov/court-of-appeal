@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should only allow numeric entries 1`] = `
+<input
+  autoFocus={false}
+  id="number-field"
+  name={undefined}
+  onChange={[Function]}
+  placeholder={undefined}
+  value=""
+/>
+`;

@@ -4,7 +4,7 @@ class NumericField extends Component {
 
     constructor(props) {
         super(props);
-        this.fieldChanged = this.props.fieldChanged ? this.props.fieldChanged.bind(this) : this.fieldChanged.bind(this);
+        this.fieldChanged = this.fieldChanged.bind(this);
     }
 
     render() {
@@ -21,10 +21,13 @@ class NumericField extends Component {
        />;
     }
 
+    /**
+     * Remove all non-numeric characters
+     * @param e - the change event
+     */
     fieldChanged(e) {
         e.target.value = e.target.value.replace(/\D/g,'');
         this.props.fieldChanged(e);
     }
-
 }
 export default NumericField;
