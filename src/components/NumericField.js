@@ -18,6 +18,7 @@ class NumericField extends Component {
            value={this.props.value || ''}
            onChange={this.fieldChanged}
            placeholder={this.props.placeholder}
+           onKeyPress={this.props.handleKeyPress}
        />;
     }
 
