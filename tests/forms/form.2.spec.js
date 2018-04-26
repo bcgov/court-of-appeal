@@ -35,8 +35,8 @@ describe('Search Form 7 in form 2', function() {
         sut.findComponent.service.apiUrl = 'http://not-a-running-server';
         click('#find-button', document);    
            
-        expect(sut.state.appellant.name).toEqual('');
-        expect(sut.state.respondent.name).toEqual('');
+        expect(sut.state.document.appellant.name).toEqual('');
+        expect(sut.state.document.respondent.name).toEqual('');
     });
 
     test('disables correspondence-email field if checkbox is not selected', function() {

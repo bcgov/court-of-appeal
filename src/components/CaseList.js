@@ -105,14 +105,14 @@ class CaseList extends React.Component {
                     </div>
                     <div className="modal-content">
                         <Form2DataSection
-                            closeEditModal={this.closeEditModal.bind(this)}
+                            closeForm={this.closeEditModal.bind(this)}
                             show={this.state.editMode}
                             fieldChanged={this.fieldChanged}
                             className="case-list-modal"
                             renderer="CaseList"
                             data={this.state.selectedDocument}
                             hideShowEmail={this.hideShowEmail}
-                            updateForm2={this.updateForm2}
+                            saveForm={this.updateForm2}
                         />
                     </div>
                 </div>

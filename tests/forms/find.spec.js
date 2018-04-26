@@ -2,7 +2,7 @@ let jsdom = require("jsdom");
 let { click, enter } = require('../../tests/utils');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Find from '../../src/forms/find';
+import Find from '../../src/forms/Find';
 
 describe('Find', function() {
 
@@ -14,7 +14,9 @@ describe('Find', function() {
     beforeEach(function() {
         document = jsdom.jsdom('<div id="react_app"></div>');
         serviceWasCalledCorrectly = false;
-        sut = <Find service={{ searchForm7:function(file, callback){
+        sut = <Find
+                    formSevenNumber="42"
+                    service={{ searchForm7:function(file, callback){
                         serviceWasCalledCorrectly = (file == '42');
                         callback({ any:'value' });
                     } }} 

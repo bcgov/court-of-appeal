@@ -1,7 +1,5 @@
 import React from 'react';
-import DefaultService from "../service/default.service";
 import FormRow from "./FormRow";
-
 class Form2DataSection extends React.Component {
 
     render() {
@@ -22,6 +20,7 @@ class Form2DataSection extends React.Component {
                                 field={<select>
                                     <option>Bob Jones</option>
                                 </select>}
+                                type="dropdown"
                             />
                             <FormRow
                                 mandatory={true}
@@ -30,6 +29,8 @@ class Form2DataSection extends React.Component {
                                 onChange={this.props.fieldChanged}
                                 name="respondent.address"
                                 value={this.props.data ? this.props.data.respondent.address : ''}
+                                type="text"
+                                placeholder={"Enter valid address for document service"}
                             />
                             <FormRow
                                 labelText="Do you wish to use email for service?"
@@ -44,6 +45,8 @@ class Form2DataSection extends React.Component {
                                 name="respondent.email"
                                 onChange={this.props.fieldChanged}
                                 value={this.props.data ? this.props.data.respondent.email : ''}
+                                type="email"
+                                placeholder="Enter a valid email address for notifcations"
                             />
                             <FormRow
                                 mandatory={true}
@@ -51,6 +54,8 @@ class Form2DataSection extends React.Component {
                                 onChange={this.props.fieldChanged}
                                 name="respondent.phone"
                                 value={this.props.data ? this.props.data.respondent.phone : ''}
+                                type="phone"
+                                placeholder="(###)###-####"
                             />
                             <FormRow
                                 mandatory={true}
@@ -59,14 +64,16 @@ class Form2DataSection extends React.Component {
                                 name="respondent.serviceFiler"
                                 onChange={this.props.fieldChanged}
                                 value={this.props.data ? this.props.data.respondent.serviceFiler : ''}
+                                type="text"
+                                placeholder="Name of the representative or person filing"
                             />
                             </tbody>
                         </table>
 
-                        <button id="cancel" onClick={this.props.closeEditModal} className="btn btn-warning"
+                        <button id="cancel" onClick={this.props.closeForm} className="btn btn-warning"
                                 style={{display: this.props.displayData}}>Cancel
                         </button>
-                        <button id="save" onClick={this.props.updateForm2} className="btn btn-primary pull-right"
+                        <button id="save" onClick={this.props.saveForm} className="btn btn-primary pull-right"
                                 style={{display: this.props.displayData}}>Confirm
                         </button>
 

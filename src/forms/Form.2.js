@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import './Form.css';
 import './Form.2.css';
-import Find from './find.js';
+import Find from './Find.js';
 import DefaultService from '../service/default.service.js';
-import FormRow from '../components/FormRow.js';
 import update from 'immutability-helper';
+import Form2DataSection from "../components/Form2DataSection";
 
 class Form2 extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
-            appellant: {
-                name: '',
-                address: ''
-            },
-            respondent: {
-                name: '',
-                address: '',
-                useServiceEmail: false,
-                email: '',
-                serviceFiler: ''
+            formSevenNumber: 'CA',
+            document: {
+                appellant: {
+                    name: '',
+                    address: ''
+                },
+                respondent: {
+                    name: '',
+                    address: '',
+                    useServiceEmail: false,
+                    email: '',
+                    serviceFiler: ''
+                }
             },
             displayData: 'none',
+            showForm2: false,
             displaySaveSuccess: false,
             displaySaveError: false,
             useServiceEmail: false
@@ -35,6 +38,7 @@ class Form2 extends Component {
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
         this.hideShowEmail = this.hideShowEmail.bind(this);
         this.fieldChanged = this.fieldChanged.bind(this);
+        this.closeForm = this.closeForm.bind(this);
     }
 
     componentDidMount() {
@@ -45,41 +49,59 @@ class Form2 extends Component {
     found(data) {
         if (data) {
             this.setState({
-                appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
-                respondent: {
-                    name: data.parties.respondent.name || '',
-                    address: data.parties.respondent.address || '',
-                    phone: data.parties.respondent.phone || '',
-                    useServiceEmail: data.parties.respondent.useServiceEmail || '',
-                    email: data.parties.respondent.email || '',
-                    serviceFiler: data.parties.respondent.serviceFiler || '',
+                document: {
+                    appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
+                    respondent: {
+                        name: data.parties.respondent.name || '',
+                        address: data.parties.respondent.address || '',
+                        phone: data.parties.respondent.phone || '',
+                        useServiceEmail: data.parties.respondent.useServiceEmail || '',
+                        email: data.parties.respondent.email || '',
+                        serviceFiler: data.parties.respondent.serviceFiler || '',
+                    },
                 },
-                displayData: 'block'
-            });
-        } else {
-            this.setState({
-                appellant: { name:'' },
-                respondent: {name:'' },
-                displayData: 'none'
+
+                displayData: 'block',
+                showForm2: true
             });
         }
     }
 
-    create() {
-        this.service.createForm2({
-                formSevenNumber: this.findComponent.textInput.value,
-                id: this.state.id,
+    closeForm() {
+        this.setState({
+            formSevenNumber: 'CA',
+            document: {
                 appellant: {
-                    name: this.state.appellant.name,
-                    address: this.state.appellant.address
+                    name: '',
+                    address: ''
                 },
                 respondent: {
-                    name: this.state.respondent.name,
-                    address: this.state.respondent.address,
-                    phone: this.state.respondent.phone,
-                    useServiceEmail: this.state.useServiceEmail,
-                    email: this.state.respondent.email,
-                    serviceFiler: this.state.respondent.serviceFiler
+                    name: '',
+                    address: '',
+                    useServiceEmail: false,
+                    email: '',
+                    serviceFiler: ''
+                }
+            },
+            displayData: 'none',
+            showForm2: false
+        })
+    }
+
+    create() {
+        this.service.createForm2({
+                formSevenNumber: this.state.formSevenNumber,
+                appellant: {
+                    name: this.state.document.appellant.name,
+                    address: this.state.document.appellant.address
+                },
+                respondent: {
+                    name: this.state.document.respondent.name,
+                    address: this.state.document.respondent.address,
+                    phone: this.state.document.respondent.phone,
+                    useServiceEmail: this.state.document.useServiceEmail,
+                    email: this.state.document.respondent.email,
+                    serviceFiler: this.state.document.respondent.serviceFiler
                 }
             }, (data) => {
             if (data !== undefined) {
@@ -107,30 +129,33 @@ class Form2 extends Component {
     }
 
     hideShowEmail(e) {
-        let state = update(this.state,{ respondent: { useServiceEmail: { $set: e.target.checked } } });
+        let state = update(this.state, { document: { respondent: { useServiceEmail: { $set: e.target.checked } } } });
         this.setState(state);
     }
 
     fieldChanged(e) {
         let keys = e.target.name.split(".");
         switch (keys[1]) {
+            case 'form-seven' :
+                this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
+                break;
             case 'name' :
-                this.setState(update(this.state, { respondent: { name: { $set: e.target.value } }}));
+                this.setState(update(this.state, { document: { respondent: { name: { $set: e.target.value } } }}));
                 break;
             case 'address' :
-                this.setState(update(this.state,{ respondent: { address: { $set: e.target.value } }}));
+                this.setState(update(this.state, { document: { respondent: { address: { $set: e.target.value } } }}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { respondent: { useServiceEmail: { $set: e.target.checked } }}));
+                this.setState(update(this.state, { document: { respondent: { useServiceEmail: { $set: e.target.checked } } }}));
                 break;
             case 'email' :
-                this.setState(update(this.state, { respondent: { email: { $set: e.target.value } }}));
+                this.setState(update(this.state, { document: { respondent: { email: { $set: e.target.value } } }}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, { respondent: { phone: { $set: e.target.value } }}));
+                this.setState(update(this.state, { document: { respondent: { phone: { $set: e.target.value } } }}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, { respondent: { serviceFiler: { $set: e.target.value } }}));
+                this.setState(update(this.state, { document: { respondent: { serviceFiler: { $set: e.target.value } } }}));
                 break;
             default :
                 return;
@@ -183,7 +208,12 @@ class Form2 extends Component {
                       </p>
                     </div>
 
-                    <Find callback={this.found} ref={(element) => { this.findComponent = element; }} />
+                    <Find
+                        formSevenNumber={this.state.formSevenNumber}
+                        callback={this.found}
+                        ref={(element) => { this.findComponent = element; }}
+                        fieldChanged={this.fieldChanged}
+                    />
 
                     <div className="form-section" style={{ display:this.state.displayData }}>
                         <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
@@ -191,77 +221,25 @@ class Form2 extends Component {
                         <table><tbody>
                             <tr>
                                 <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                                <td id="appellant-name">{ this.state.appellant.name }</td>
+                                <td id="appellant-name">{ this.state.document.appellant.name }</td>
                                 <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
                             </tr>
                             <tr>
                                 <td style={{ fontWeight:'bold' }}>AND:</td>
-                                <td id="respondent-name" >{ this.state.respondent.name }</td>
+                                <td id="respondent-name" >{ this.state.document.respondent.name }</td>
                                 <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
                             </tr>
                         </tbody></table>
                     </div>
 
-                    <div className="form-section" style={{ display:this.state.displayData }}>
-                        <h2 style={{ fontWeight:'bold' }}>Enter an Appearance (on Behalf of)</h2>
-
-                        <table><tbody>
-                              <FormRow
-                                  mandatory={true}
-                                  labelText="Respondent's name "
-                                  iconText="Who is responding to the Notice of Appeal?"
-                                  onChange={this.fieldChanged}
-                                  name="respondent.name"
-                                  field={
-                                      <select>
-                                        <option>Bob Jones</option>
-                                        </select>
-                                  }
-                              />
-                              <FormRow
-                                  mandatory={true}
-                                  labelText="Respondent's mailing address for service "
-                                  iconText="Where would you like to receive documents related to this case?"
-                                  onChange={this.fieldChanged}
-                                  name="respondent.address"
-                                  value={this.state.respondent.address}
-                              />
-                              <FormRow
-                                  labelText="Do you wish to use email for service?"
-                                  id="receive-email-checkbox"
-                                  field={<input id="receive-email-checkbox" type="checkbox"
-                                                onClick={this.hideShowEmail}/>}
-                                  value={this.state.respondent.useServiceEmail}
-                              />
-                              <FormRow
-                                  show={this.state.respondent.useServiceEmail}
-                                  labelText="Respondent's email "
-                                  id="respondent-email"
-                                  name="respondent.email"
-                                  onChange={this.fieldChanged}
-                                  value={this.state.respondent.email}
-                              />
-                              <FormRow
-                                  mandatory={true}
-                                  labelText="Respondent's phone "
-                                  onChange={this.fieldChanged}
-                                  name="respondent.phone"
-                                  value={this.state.respondent.phone}
-                              />
-                              <FormRow
-                                  mandatory={true}
-                                  labelText="Respondent name (or Solicitor name) "
-                                  iconText="Who is filing this Notice of Appearance?"
-                                  name="respondent.serviceFiler"
-                                  onChange={this.fieldChanged}
-                                  value={this.state.respondent.serviceFiler}
-                              />
-
-                        </tbody></table>
-                    </div>
-
-                    <button id="save" onClick={this.create} className="btn btn-primary btn-green pull-right" style={{ display:this.state.displayData }}>Confirm</button>
-
+                    <Form2DataSection
+                        show={this.state.showForm2}
+                        fieldChanged={this.fieldChanged}
+                        data={this.state.document}
+                        hideShowEmail={this.hideShowEmail}
+                        saveForm={this.create}
+                        closeForm={this.closeForm}
+                    />
                     <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                         <div className="modal-title">
                             <span id="close-modal">&times;</span>
