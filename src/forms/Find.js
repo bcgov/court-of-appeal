@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './find.css';
 import DefaultService from '../service/default.service.js';
+import NumericField from '../components/NumericField';
 
 class Find extends Component {
 
     constructor(props) {
         super(props);   
         this.service = props.service; 
-        this.callback = props.callback;   
+        this.callback = props.callback;
 
         this.search = this.search.bind(this);
+        this.caseFieldChanged = this.caseFieldChanged.bind(this);
     }
 
     componentDidMount() {
@@ -18,7 +20,7 @@ class Find extends Component {
     }
 
     search() {
-        this.service.searchForm7(this.textInput.value, (data) => {            
+        this.service.searchForm7(this.props.formSevenNumber, (data) => {
             this.callback(data);
         });
     }
@@ -38,7 +40,15 @@ class Find extends Component {
                         </tr>
                         <tr>
                             <td><input disabled value="Court of Appeal" /></td>
-                            <td><input id="file-no" name="file-no" autoFocus ref={(input) => { this.textInput = input; }} /></td>
+                            <td>
+                                <NumericField
+                                    id="file-no"
+                                    name="number.form-seven"
+                                    autofocus={true}
+                                    value={this.props.formSevenNumber}
+                                    fieldChanged={this.caseFieldChanged}
+                                />
+                            </td>
                             <td>
                                 <button id="find-button" onClick={this.search} className="btn btn-primary btn-green">Find</button>
                             </td>
@@ -47,6 +57,12 @@ class Find extends Component {
                 </table>
             </div>
         );
+    }
+
+    caseFieldChanged(e) {
+        // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d+$
+        e.target.value = 'CA'.concat(e.target.value.replace(/\D/g,''));
+        this.props.fieldChanged(e);
     }
 }
 
