@@ -6,6 +6,7 @@ exports[`should only allow numeric entries 1`] = `
   id="number-field"
   name={undefined}
   onChange={[Function]}
+  onKeyPress={undefined}
   placeholder={undefined}
   value=""
 />

@@ -20,6 +20,29 @@ class Authenticate extends Component {
         }
     }
 
+    handleButtonClick() {
+        let login = document.getElementById('login').value;
+        if (login.length > 0) {
+            let value = "login=" + document.getElementById('login').value;
+            document.cookie=value;
+            let service = new Service(window);
+            service.savePerson(login, (data)=> {
+                if (data !== undefined) {
+                    this.setState({
+                                      authenticated: true
+                                  })
+                }
+            });
+        }
+    }
+
+    handleKeyPress(target) {
+        console.log("handling keypress", target.charCode);
+        if(target.charCode === 13){
+            this.handleButtonClick();
+        }
+    }
+
     componentDidMount() {
 
         if (document.cookie.indexOf('login=') !== -1 && document.cookie.substring('login='.length).length > 0) {
@@ -47,23 +70,15 @@ class Authenticate extends Component {
                 <div ref={ (element)=> {this.element = element }}>
                     <p>Unknown user... Please log in</p>
                     <label>login</label>
-                    <input name="login" id="login" autoFocus/>
-                    <button id="go"
-                        onClick={() => {
-                            let login = document.getElementById('login').value;
-                            if (login.length > 0) {
-                                let value = "login=" + document.getElementById('login').value;
-                                document.cookie=value;
-                                let service = new Service(window);
-                                service.savePerson(login, (data)=> {
-                                    if (data !== undefined) {
-                                        this.setState({
-                                            authenticated: true
-                                        })    
-                                    }
-                                });                        
-                            }
-                        }}
+                    <input
+                        name="login"
+                        id="login"
+                        onKeyPress={ this.handleKeyPress.bind(this) }
+                        autoFocus
+                    />
+                    <button
+                        id="go"
+                        onClick={ this.handleButtonClick.bind(this) }
                     >
                         Go
                     </button>

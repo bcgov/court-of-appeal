@@ -26,8 +26,8 @@ test('should only allow numeric, dash, and parentheses entries', ()=> {
     tree.props.onChange(e);
     expect(value).toMatch('(250)8674309');
 
-    e = { target: { value: "bah(867)--5309)pooh!" } };
+    e = { target: { value: "+bah1(867)-5309)pooh!" } };
     tree.props.onChange(e);
-    expect(value).toMatch('(867)--5309)');
+    expect(value).toMatch('+1(867)-5309)');
 
 });

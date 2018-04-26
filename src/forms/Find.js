@@ -25,6 +25,12 @@ class Find extends Component {
         });
     }
 
+    handleKeyPress(target) {
+        if(target.charCode === 13){
+            this.search();
+        }
+    }
+
     render() {
         return (
             <div className="form-section" ref={ (element)=> {this.element = element }}>
@@ -47,6 +53,7 @@ class Find extends Component {
                                     autofocus={true}
                                     value={this.props.formSevenNumber}
                                     fieldChanged={this.caseFieldChanged}
+                                    handleKeyPress={this.handleKeyPress.bind(this)}
                                 />
                             </td>
                             <td>
