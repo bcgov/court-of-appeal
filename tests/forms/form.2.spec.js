@@ -1,57 +1,24 @@
-let jsdom = require("jsdom");
-let { click, enter } = require('../../tests/utils');
+import renderer from "react-test-renderer";
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Form2 from '../../src/forms/Form.2';
-let Service = require('../../src/service/default.service');
 
-describe('Search Form 7 in form 2', function() {
+test('Snapshots of form2', ()=> {
 
-    let document;
-    let sut;
+    const form2 = renderer.create(
+        <Form2 id="form-2"
+              service={{ createForm2: ()=> {} }}
+        />,
+    );
+    let tree = form2.toJSON();
+    expect(tree).toMatchSnapshot();
 
-    beforeEach(function() {
-        document = jsdom.jsdom('<div id="react_app"></div>');
-        sut = ReactDOM.render(<Form2 />, document.getElementById('react_app'));
-        sut.findComponent.service.setServeLocalData(true);
-    });
+    let instance = form2.getInstance();
+    expect(instance.state.showForm2).toBe(false);
 
-    test('sets appellant', function() {
-        click('#find-button', document);
+    instance.state.showForm2 = true;
 
-        expect(document.getElementById('appellant-name').innerHTML).
-            toEqual(Service.fakeData.parties.appellant.name);
-    });
-
-    test('sets respondent', function() {
-        click('#find-button', document);
-
-        expect(document.getElementById('respondent-name').innerHTML).
-            toEqual(Service.fakeData.parties.respondent.name);
-    });
-
-    test('resists no data', function() {
-        sut.findComponent.service.setServeLocalData(false);
-        sut.findComponent.service.apiUrl = 'http://not-a-running-server';
-        click('#find-button', document);    
-           
-        expect(sut.state.document.appellant.name).toEqual('');
-        expect(sut.state.document.respondent.name).toEqual('');
-    });
-
-    test('disables correspondence-email field if checkbox is not selected', function() {
-        click('#find-button', document);
-
-        expect(document.getElementById('receive-email-checkbox').checked).toEqual(false);
-        expect(document.getElementById('respondent-email')).toEqual(null);
-    });
-
-    test('enables correspondence-email field if checkbox is selected', function() {
-        click('#find-button', document);
-        click('#receive-email-checkbox', document);
-
-        expect(document.getElementById('receive-email-checkbox').checked).toEqual(true);
-        expect(document.getElementById('respondent-email').innerHTML).toEqual('');
-    });
+    let e = { target: { name: "number.form-seven", value: "CA12345" }};
+    instance.fieldChanged(e);
+    expect(instance.state.formSevenNumber).toMatch('CA12345');
 
 });

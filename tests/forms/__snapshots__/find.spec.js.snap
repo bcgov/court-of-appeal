@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should enable button for only valid entries 1`] = `
+<div
+  className="form-section"
+>
+  <h2
+    style={
+      Object {
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Appeal Case Information
+  </h2>
+  Enter the Court of Appeal number you want to respond to:
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          LEVEL OF COURT
+        </td>
+        <td>
+          COURT OF APPEAL FILE NO.
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          <input
+            disabled={true}
+            value="Court of Appeal"
+          />
+        </td>
+        <td>
+          <input
+            autoFocus={true}
+            id="file-no"
+            name="number.form-seven"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            placeholder={undefined}
+            value=""
+          />
+        </td>
+        <td>
+          <button
+            className="btn btn-primary btn-green"
+            disabled={true}
+            id="find-button"
+            onClick={[Function]}
+          >
+            Find
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
