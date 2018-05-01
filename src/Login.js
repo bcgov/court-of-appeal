@@ -37,7 +37,6 @@ class Authenticate extends Component {
     }
 
     handleKeyPress(target) {
-        console.log("handling keypress", target.charCode);
         if(target.charCode === 13){
             this.handleButtonClick();
         }
