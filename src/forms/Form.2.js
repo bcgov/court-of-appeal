@@ -10,6 +10,7 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        this.service = props.service;
         this.state = {
             formSevenNumber: 'CA',
             document: {
@@ -42,8 +43,10 @@ class Form2 extends Component {
     }
 
     componentDidMount() {
-        let window = this.element.ownerDocument.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
     }
 
     found(data) {
@@ -211,8 +214,8 @@ class Form2 extends Component {
                     <Find
                         formSevenNumber={this.state.formSevenNumber}
                         callback={this.found}
-                        ref={(element) => { this.findComponent = element; }}
                         fieldChanged={this.fieldChanged}
+                        service={this.service}
                     />
 
                     <div className="form-section" style={{ display:this.state.displayData }}>

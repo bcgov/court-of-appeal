@@ -1,42 +1,42 @@
-let jsdom = require("jsdom");
-let { click, enter } = require('../../tests/utils');
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Find from '../../src/forms/Find';
+import renderer from 'react-test-renderer';
 
-describe('Find', function() {
+test('should enable button for only valid entries', ()=> {
 
-    let document;
-    let sut;
-    let serviceWasCalledCorrectly;
-    let received;
+    let value = '';
+    let fieldChanged = (e) => { value = e.target.value; };
 
-    beforeEach(function() {
-        document = jsdom.jsdom('<div id="react_app"></div>');
-        serviceWasCalledCorrectly = false;
-        sut = <Find
-                    formSevenNumber="42"
-                    service={{ searchForm7:function(file, callback){
-                        serviceWasCalledCorrectly = (file == '42');
-                        callback({ any:'value' });
-                    } }} 
-                    callback={function(data) { received = data; }} />;
-        ReactDOM.render(sut, document.getElementById('react_app'));
-    });
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: ()=> {} }}
+              fieldChanged={fieldChanged.bind(this)}/>,
+    );
+    let tree = finder.toJSON();
+    expect(tree).toMatchSnapshot();
 
-    test('renders without crashing', ()=> {        
-        expect(document.getElementById('find-button').innerHTML).toEqual('Find');
-    });
-    test('triggers fetch on click', ()=> {
-        enter('42', '#file-no', document);
-        click('#find-button', document);
-        
-        expect(serviceWasCalledCorrectly).toEqual(true);
-    });
-    test('calls back when found', ()=> {
-        click('#find-button', document);
+    let instance = finder.getInstance();
+    expect(instance.state.searchDisabled).toBe(true);
 
-        expect(received).toEqual({ any:'value' });
-    });
+    let e = { target: { value: "CA12345"}};
+    instance.caseFieldChanged(e);
+    expect(value).toMatch('CA12345');
+    expect(instance.state.searchDisabled).toBe(false);
+
+    e = { target: { value: "CAT IN HAT2" } };
+    instance.caseFieldChanged(e)
+    expect(value).toMatch('CA2');
+    expect(instance.state.searchDisabled).toBe(true);
+
+    e = { target: { value: '1234' } };
+    instance.caseFieldChanged(e);
+    expect(value).toMatch('CA1234');
+    expect(instance.state.searchDisabled).toBe(true);
+
+    e = { target: { value: "*bah1#?234?wtf?  5" } };
+    instance.caseFieldChanged(e);
+    expect(value).toMatch('CA12345');
+    expect(instance.state.searchDisabled).toBe(false);
 
 });

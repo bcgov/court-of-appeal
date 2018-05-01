@@ -9,14 +9,19 @@ class Find extends Component {
         super(props);   
         this.service = props.service; 
         this.callback = props.callback;
+        this.state = {
+            searchDisabled: true
+        };
 
         this.search = this.search.bind(this);
         this.caseFieldChanged = this.caseFieldChanged.bind(this);
     }
 
     componentDidMount() {
-        let window = this.element.ownerDocument.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }        
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
     }
 
     search() {
@@ -57,7 +62,7 @@ class Find extends Component {
                                 />
                             </td>
                             <td>
-                                <button id="find-button" onClick={this.search} className="btn btn-primary btn-green">Find</button>
+                                <button id="find-button" disabled={this.state.searchDisabled} onClick={this.search} className="btn btn-primary btn-green">Find</button>
                             </td>
                         </tr>
                     </tbody>
@@ -67,8 +72,13 @@ class Find extends Component {
     }
 
     caseFieldChanged(e) {
-        // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d+$
+        // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d{5}\d*sea$
         e.target.value = 'CA'.concat(e.target.value.replace(/\D/g,''));
+        if (e.target.value.match(/^CA\d{5}\d*$/) !== null) {
+            this.setState({ searchDisabled: false });
+        } else {
+            this.setState({ searchDisabled: true });
+        }
         this.props.fieldChanged(e);
     }
 }
