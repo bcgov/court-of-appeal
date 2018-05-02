@@ -14,7 +14,7 @@ class Find extends Component {
         };
 
         this.search = this.search.bind(this);
-        this.caseFieldChanged = this.caseFieldChanged.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
     }
 
     componentDidMount() {
@@ -57,7 +57,7 @@ class Find extends Component {
                                     name="number.form-seven"
                                     autofocus={true}
                                     value={this.props.formSevenNumber}
-                                    fieldChanged={this.caseFieldChanged}
+                                    handleFieldChange={this.handleFieldChange}
                                     handleKeyPress={this.handleKeyPress.bind(this)}
                                 />
                             </td>
@@ -71,7 +71,7 @@ class Find extends Component {
         );
     }
 
-    caseFieldChanged(e) {
+    handleFieldChange(e) {
         // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d{5}\d*sea$
         e.target.value = 'CA'.concat(e.target.value.replace(/\D/g,''));
         if (e.target.value.match(/^CA\d{5}\d*$/) !== null) {
@@ -79,7 +79,7 @@ class Find extends Component {
         } else {
             this.setState({ searchDisabled: true });
         }
-        this.props.fieldChanged(e);
+        this.props.handleFieldChange(e);
     }
 }
 

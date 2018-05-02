@@ -4,10 +4,11 @@ exports[`should only allow numeric, dash, and parentheses entries 1`] = `
 <input
   autoFocus={false}
   id="number-field"
-  maxLength="15"
+  maxLength={15}
   name={undefined}
   onChange={[Function]}
   placeholder={undefined}
+  size={30}
   value=""
 />
 `;

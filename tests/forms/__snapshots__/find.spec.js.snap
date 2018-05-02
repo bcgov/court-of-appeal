@@ -46,7 +46,7 @@ exports[`should enable button for only valid entries 1`] = `
         <td>
           <button
             className="btn btn-primary btn-green"
-            disabled={true}
+            disabled={false}
             id="find-button"
             onClick={[Function]}
           >
