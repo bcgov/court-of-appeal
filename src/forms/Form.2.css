@@ -32,7 +32,7 @@
 	color: white;
     margin: auto;
     padding: 20px;
-    width: 40%;
+    width: 80%;
 	font-size: 2rem;
 }
 .red {
@@ -47,7 +47,7 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
+    width: 80%;
 }
 
 #close-modal {
@@ -75,3 +75,4 @@
 #validationModal .success {
 	font-size: 1rem;
 }
+

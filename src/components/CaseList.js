@@ -18,18 +18,24 @@ class CaseList extends React.Component {
                 },
                 respondent: {
                     name: '',
-                    address: '',
+                    address: {
+                        addressLine1: '',
+                        addressLine2: '',
+                        city: '',
+                        province: 'BC',
+                        country: 'Canada',
+                        postalCode: ''
+                    },
                     email: '',
                     phone: '',
-                    serviceFiler: '',
-                    useServiceEmail: false
+                    notify: false,
+
                 }
             }
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
-        this.hideShowEmail = this.hideShowEmail.bind(this);
-        this.fieldChanged = this.fieldChanged.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
     }
 
     componentDidMount() {
@@ -39,17 +45,29 @@ class CaseList extends React.Component {
         }
     }
 
-    fieldChanged(e) {
+    handleFieldChange(e) {
         let keys = e.target.name.split(".");
         switch (keys[1]) {
             case 'name' :
                 this.setState(update(this.state, {selectedDocument: {respondent: {name: {$set: e.target.value}}}}));
                 break;
-            case 'address' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {address: {$set: e.target.value}}}}));
+            case 'addressLine1' :
+                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                break;
+            case 'addressLine2' :
+                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                break;
+            case 'city' :
+                this.setState(update(this.state, {selectedDocument: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                break;
+            case 'postalCode' :
+                this.setState(update(this.state, {selectedDocument: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
                 break;
             case 'useServiceEmail' :
                 this.setState(update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}}));
+                break;
+            case 'sendNotifications' :
+                this.setState(update(this.state, {selectedDocument: {respondent: {sendNotifications: {$set: e.target.checked}}}}));
                 break;
             case 'email' :
                 this.setState(update(this.state, {selectedDocument: {respondent: {email: {$set: e.target.value}}}}));
@@ -107,11 +125,10 @@ class CaseList extends React.Component {
                         <Form2DataSection
                             closeForm={this.closeEditModal.bind(this)}
                             show={this.state.editMode}
-                            fieldChanged={this.fieldChanged}
+                            handleFieldChange={this.handleFieldChange}
                             className="case-list-modal"
                             renderer="CaseList"
                             data={this.state.selectedDocument}
-                            hideShowEmail={this.hideShowEmail}
                             saveForm={this.updateForm2}
                         />
                     </div>
@@ -136,11 +153,6 @@ class CaseList extends React.Component {
                 }
             });
         this.closeEditModal();
-    }
-
-    hideShowEmail(e) {
-        let state = update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}});
-        this.setState(state);
     }
 
     openEditModal(data, id) {

@@ -5,11 +5,11 @@ import renderer from 'react-test-renderer';
 test('should only allow numeric, dash, and parentheses entries', ()=> {
 
     let value = '';
-    let fieldChanged = (e) => { value = e.target.value; };
+    let handleFieldChange = (e) => { value = e.target.value; };
 
     const phoneField = renderer.create(
         <PhoneField id="number-field" value={value}
-                      onChange={fieldChanged.bind(this)}/>,
+                      handleFieldChange={handleFieldChange.bind(this)}/>,
     );
     let tree = phoneField.toJSON();
     expect(tree).toMatchSnapshot();

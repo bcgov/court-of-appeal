@@ -4,7 +4,7 @@ class PhoneField extends Component {
 
     constructor(props) {
         super(props);
-        this.fieldChanged= this.fieldChanged.bind(this);
+        this.handleFieldChange= this.handleFieldChange.bind(this);
     }
 
     render() {
@@ -15,9 +15,10 @@ class PhoneField extends Component {
             autoFocus={autofocus}
             ref={this.props.ref}
             value={this.props.value || ''}
-            onChange={this.fieldChanged}
-            maxLength="15"
-            placeholder={this.props.placeholder}
+            onChange={this.handleFieldChange}
+            maxLength={15}
+            size={30}
+            placeholder={this.props.placeHolder}
         />;
     }
 
@@ -25,9 +26,9 @@ class PhoneField extends Component {
      * Eliminate all but valid Canadian phone characters are used eg +1(250)385-9999
      * @param e
      */
-    fieldChanged(e) {
+    handleFieldChange(e) {
         e.target.value = e.target.value.replace(/[^+\d-)(]/g,'');
-        this.props.onChange(e);
+        this.props.handleFieldChange(e);
     }
 
 }

@@ -58,6 +58,8 @@
 	margin-bottom: 15px;
 	border: 1px solid white;
 	border-radius: 5px;
+	font-family: Myriad-Pro, sans-serif;
+	font-size: medium;
 }
 .form-section h3 {
 	font-weight: 600;
@@ -72,4 +74,25 @@
 }
 #access-list th {
 	background-color: lightblue;
+}
+.form-field {
+	max-width: 100%;
+	padding: 2px;
+}
+.address-row {
+	padding: 0 0 10px 5px;
+	font-size: 1em;
+}
+.address-label {
+	text-align: right;
+	padding: 5px;
+}
+.address-hint {
+	color: slategrey;
+	padding: 0 0 5px 1px;
+	font-size: smaller;
+}
+.invalid-field {
+	background-color: palevioletred;
+	border-color: darkred;
 }

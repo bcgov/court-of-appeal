@@ -5,11 +5,11 @@ import renderer from 'react-test-renderer';
 test('should only allow numeric entries', ()=> {
 
     let value = '';
-    let fieldChanged = (e) => { value = e.target.value; };
+    let handleFieldChange = (e) => { value = e.target.value; };
 
     const numericField = renderer.create(
         <NumericField id="number-field" value={value}
-        fieldChanged={fieldChanged.bind(this)}/>,
+        handleFieldChange={handleFieldChange.bind(this)}/>,
     );
     let tree = numericField.toJSON();
     expect(tree).toMatchSnapshot();

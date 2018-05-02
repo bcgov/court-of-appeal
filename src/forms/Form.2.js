@@ -20,8 +20,16 @@ class Form2 extends Component {
                 },
                 respondent: {
                     name: '',
-                    address: '',
+                    address: {
+                        addressLine1: '',
+                        addressLine2: '',
+                        city: '',
+                        province: 'BC',
+                        country: 'Canada',
+                        postalCode: ''
+                    },
                     useServiceEmail: false,
+                    sendNotifications: false,
                     email: '',
                     serviceFiler: ''
                 }
@@ -29,16 +37,14 @@ class Form2 extends Component {
             displayData: 'none',
             showForm2: false,
             displaySaveSuccess: false,
-            displaySaveError: false,
-            useServiceEmail: false
+            displaySaveError: false
         };
 
         this.found = this.found.bind(this);
         this.create = this.create.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
-        this.hideShowEmail = this.hideShowEmail.bind(this);
-        this.fieldChanged = this.fieldChanged.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
         this.closeForm = this.closeForm.bind(this);
     }
 
@@ -56,9 +62,17 @@ class Form2 extends Component {
                     appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
                     respondent: {
                         name: data.parties.respondent.name || '',
-                        address: data.parties.respondent.address || '',
+                        address: {
+                            addressLine1: '',
+                            addressLine2: '',
+                            city:  '',
+                            province: 'BC',
+                            country: 'Canada',
+                            postalCode: ''
+                        },
                         phone: data.parties.respondent.phone || '',
                         useServiceEmail: data.parties.respondent.useServiceEmail || '',
+                        sendNotifications: data.parties.respondent.sendNotifications || '',
                         email: data.parties.respondent.email || '',
                         serviceFiler: data.parties.respondent.serviceFiler || '',
                     },
@@ -80,8 +94,16 @@ class Form2 extends Component {
                 },
                 respondent: {
                     name: '',
-                    address: '',
+                    address: {
+                        addressLine1: '',
+                        addressLine2: '',
+                        city: '',
+                        province: 'BC',
+                        country: 'Canada',
+                        postalCode: ''
+                    },
                     useServiceEmail: false,
+                    sendNotifications: false,
                     email: '',
                     serviceFiler: ''
                 }
@@ -100,9 +122,17 @@ class Form2 extends Component {
                 },
                 respondent: {
                     name: this.state.document.respondent.name,
-                    address: this.state.document.respondent.address,
+                    address: {
+                        addressLine1: this.state.document.respondent.address.addressLine1,
+                        addressLine2: this.state.document.respondent.address.addressLine2,
+                        city: this.state.document.respondent.address.city,
+                        province: 'BC',
+                        country: 'Canada',
+                        postalCode: this.state.document.respondent.address.postalCode
+                    },
                     phone: this.state.document.respondent.phone,
-                    useServiceEmail: this.state.document.useServiceEmail,
+                    useServiceEmail: this.state.document.respondent.useServiceEmail,
+                    sendNotifications: this.state.document.respondent.sendNotifications,
                     email: this.state.document.respondent.email,
                     serviceFiler: this.state.document.respondent.serviceFiler
                 }
@@ -131,12 +161,7 @@ class Form2 extends Component {
         });
     }
 
-    hideShowEmail(e) {
-        let state = update(this.state, { document: { respondent: { useServiceEmail: { $set: e.target.checked } } } });
-        this.setState(state);
-    }
-
-    fieldChanged(e) {
+    handleFieldChange(e) {
         let keys = e.target.name.split(".");
         switch (keys[1]) {
             case 'form-seven' :
@@ -145,11 +170,23 @@ class Form2 extends Component {
             case 'name' :
                 this.setState(update(this.state, { document: { respondent: { name: { $set: e.target.value } } }}));
                 break;
-            case 'address' :
-                this.setState(update(this.state, { document: { respondent: { address: { $set: e.target.value } } }}));
+            case 'addressLine1' :
+                this.setState(update(this.state, { document: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                break;
+            case 'addressLine2' :
+                this.setState(update(this.state, { document: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                break;
+            case 'city' :
+                this.setState(update(this.state, { document: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                break;
+            case 'postalCode' :
+                this.setState(update(this.state, { document: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
                 break;
             case 'useServiceEmail' :
                 this.setState(update(this.state, { document: { respondent: { useServiceEmail: { $set: e.target.checked } } }}));
+                break;
+            case 'sendNotifications' :
+                this.setState(update(this.state, { document: { respondent: { sendNotifications: { $set: e.target.checked } } }}));
                 break;
             case 'email' :
                 this.setState(update(this.state, { document: { respondent: { email: { $set: e.target.value } } }}));
@@ -171,7 +208,6 @@ class Form2 extends Component {
 
             <div id="breadcrumbContainer">
                 <ol className="breadcrumb">
-
                     <li>
                         <a id="home" href="/">Home</a>
                     </li>
@@ -181,9 +217,7 @@ class Form2 extends Component {
                 </ol>
             </div>
             <div className="row">
-
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">
-
                     <div id="steps">
                         <ol>
                             <li><span className="step-circle in-progress">1</span><span className="step-title in-progress">Form 2</span></li>
@@ -214,7 +248,7 @@ class Form2 extends Component {
                     <Find
                         formSevenNumber={this.state.formSevenNumber}
                         callback={this.found}
-                        fieldChanged={this.fieldChanged}
+                        handleFieldChange={this.handleFieldChange}
                         service={this.service}
                     />
 
@@ -237,12 +271,12 @@ class Form2 extends Component {
 
                     <Form2DataSection
                         show={this.state.showForm2}
-                        fieldChanged={this.fieldChanged}
+                        handleFieldChange={this.handleFieldChange}
                         data={this.state.document}
-                        hideShowEmail={this.hideShowEmail}
                         saveForm={this.create}
                         closeForm={this.closeForm}
                     />
+
                     <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                         <div className="modal-title">
                             <span id="close-modal">&times;</span>

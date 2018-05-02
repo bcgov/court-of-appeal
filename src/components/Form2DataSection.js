@@ -1,5 +1,8 @@
 import React from 'react';
-import FormRow from "./FormRow";
+import TextField from "./TextField";
+import PostalCodeField from "./PostalCodeField";
+import PhoneField from "./PhoneField";
+
 class Form2DataSection extends React.Component {
 
     render() {
@@ -9,66 +12,144 @@ class Form2DataSection extends React.Component {
                     <div className="form-section" style={{display: this.props.displayData}}>
                         <h2 style={{fontWeight: 'bold'}}>Enter an Appearance (on Behalf
                             of {this.props.data.respondent.name})</h2>
-                        <table>
-                            <tbody>
-                            <FormRow
-                                mandatory={true}
-                                labelText="Respondent's name "
-                                iconText="Who is responding to the Notice of Appeal?"
-                                onChange={this.props.fieldChanged}
-                                name="respondent.name"
-                                field={<select>
+                        <div className="row address-row">
+                            <div className="col-lg-2">
+                                <div>
+                                    Respondent's name:
+                                </div>
+                            </div>
+                            <div className="col-lg-10">
+                                <select>
                                     <option>Bob Jones</option>
-                                </select>}
-                                type="dropdown"
-                            />
-                            <FormRow
-                                mandatory={true}
-                                labelText="Respondent's mailing address for service "
-                                iconText="Where would you like to receive documents related to this case?"
-                                onChange={this.props.fieldChanged}
-                                name="respondent.address"
-                                value={this.props.data ? this.props.data.respondent.address : ''}
-                                type="text"
-                                placeholder={"Enter valid address for document service"}
-                            />
-                            <FormRow
-                                labelText="Do you wish to use email for service?"
-                                id="receive-email-checkbox"
-                                field={<input id="receive-email-checkbox" type="checkbox"
-                                              onClick={this.props.hideShowEmail}/>}
-                            />
-                            <FormRow
-                                show={this.props.data ? this.props.data.respondent.useServiceEmail : false}
-                                labelText="Respondent's email "
-                                id="respondent-email"
-                                name="respondent.email"
-                                onChange={this.props.fieldChanged}
-                                value={this.props.data ? this.props.data.respondent.email : ''}
-                                type="email"
-                                placeholder="Enter a valid email address for notifcations"
-                            />
-                            <FormRow
-                                mandatory={true}
-                                labelText="Respondent's phone "
-                                onChange={this.props.fieldChanged}
-                                name="respondent.phone"
-                                value={this.props.data ? this.props.data.respondent.phone : ''}
-                                type="phone"
-                                placeholder="(###)###-####"
-                            />
-                            <FormRow
-                                mandatory={true}
-                                labelText="Respondent name (or Solicitor name) "
-                                iconText="Who is filing this Notice of Appearance?"
-                                name="respondent.serviceFiler"
-                                onChange={this.props.fieldChanged}
-                                value={this.props.data ? this.props.data.respondent.serviceFiler : ''}
-                                type="text"
-                                placeholder="Name of the representative or person filing"
-                            />
-                            </tbody>
-                        </table>
+                                    <option>Celine Dion</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-12">
+                            Respondent's mailing address for service: &nbsp;
+                                <i className="fa fa-question-circle" aria-hidden="true" title="What is the address where you would like to receive documents?"></i>
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">Address Line 1: </div>
+                            <div className="col-lg-10">
+                                <div>
+                                    <TextField
+                                        value={this.props.data ? this.props.data.respondent.address.addressLine1 : ''}
+                                        handleFieldChange={this.props.handleFieldChange}
+                                        name="respondent.addressLine1"
+                                    />
+                                    <div className="row address-hint">
+                                        Street address, P.O. box, company name, c/o
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">Address Line 2:</div>
+                            <div className="col-lg-10">
+                                <div>
+                                <TextField
+                                    value={this.props.data ? this.props.data.respondent.address.addressLine2 : ''}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.addressLine2"
+                                />
+                                    <div className="row address-hint">
+                                        Apartment, suite, unit, building, floor, etc.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">City: </div>
+                            <div className="col-lg-10">
+                                <div >
+                                <TextField
+                                    value={this.props.data ? this.props.data.respondent.address.city : ''}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.city"
+                                />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">Province: </div>
+                            <div className="col-lg-10">
+                                <TextField
+                                    value='BC'
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.province"
+                                    disabled={true}
+                                />
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">Country:</div>
+                            <div className="col-lg-10 ">
+                                <TextField
+                                    value='Canada'
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.country"
+                                    disabled={true}
+                                />
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 address-label">Postal code:</div>
+                            <div className="col-lg-10 ">
+                                <PostalCodeField
+                                    value={this.props.data ? this.props.data.respondent.address.postalCode : ''}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.postalCode"
+                                />
+                            </div>
+                        </div>
+                        <hr/>
+                        <div className="row address-row">
+                            <div className="col-lg-2 ">Phone:</div>
+                            <div className="col-lg-10 ">
+                                <PhoneField
+                                    value={this.props.data ? this.props.data.respondent.phone : ''}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.phone"
+                                />
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-2 ">Email address:</div>
+                            <div className="col-lg-10 ">
+                                <TextField
+                                    value={this.props.data ? this.props.data.respondent.email : ''}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    name="respondent.email"
+                                    maxLength={254}
+                                />
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-6 ">Would you like any documents to be sent / served to you by email?</div>
+                            <div className="col-lg-6 " style={{textAlign: 'left'}}>
+                               <input
+                                   type="checkbox"
+                                   onChange={this.props.handleFieldChange}
+                                   name="respondent.useServiceEmail"
+                                   checked={this.props.data.respondent.useServiceEmail}
+                               />
+                            </div>
+                        </div>
+                        <div className="row address-row">
+                            <div className="col-lg-6 ">Would you like email notifications when a document status changes?</div>
+                            <div className="col-lg-6 " style={{textAlign: 'left'}}>
+                                <input
+                                    type="checkbox"
+                                    onChange={this.props.handleFieldChange}
+                                    name="respondent.sendNotifications"
+                                    checked={this.props.data.respondent.sendNotifications}
+                                />
+                            </div>
+                        </div>
 
                         <button id="cancel" onClick={this.props.closeForm} className="btn btn-warning"
                                 style={{display: this.props.displayData}}>Cancel
