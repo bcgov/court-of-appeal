@@ -40,13 +40,14 @@ exports[`should enable button for only valid entries 1`] = `
             onChange={[Function]}
             onKeyPress={[Function]}
             placeholder={undefined}
+            readOnly={undefined}
             value=""
           />
         </td>
         <td>
           <button
             className="btn btn-primary btn-green"
-            disabled={false}
+            disabled={true}
             id="find-button"
             onClick={[Function]}
           >

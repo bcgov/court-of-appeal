@@ -8,17 +8,16 @@ class NumericField extends Component {
     }
 
     render() {
-        let autofocus = this.props.autofocus ? true : false;
-
        return <input
            id={this.props.id}
            name={this.props.name}
-           autoFocus={autofocus}
+           autoFocus={this.props.autofocus}
            ref={this.props.ref}
            value={this.props.value || ''}
            onChange={this.handleFieldChange}
            placeholder={this.props.placeholder}
            onKeyPress={this.props.handleKeyPress}
+           readOnly={this.props.readOnly}
        />;
     }
 

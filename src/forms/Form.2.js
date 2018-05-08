@@ -5,6 +5,7 @@ import Find from './Find.js';
 import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
+import FormButtonBar from "../components/FormButtonBar";
 
 class Form2 extends Component {
 
@@ -34,10 +35,15 @@ class Form2 extends Component {
                     serviceFiler: ''
                 }
             },
+
             displayData: 'none',
+            displayPreview: 'none',
             showForm2: false,
+            previewMode: false,
             displaySaveSuccess: false,
-            displaySaveError: false
+            displaySaveError: false,
+            dataLoss: false,
+            displayWarning: 'none'
         };
 
         this.found = this.found.bind(this);
@@ -46,6 +52,9 @@ class Form2 extends Component {
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.closeForm = this.closeForm.bind(this);
+        this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
+        this.closePreview = this.closePreview.bind(this);
+        this.acceptDataLoss = this.acceptDataLoss.bind(this);
     }
 
     componentDidMount() {
@@ -71,8 +80,8 @@ class Form2 extends Component {
                             postalCode: ''
                         },
                         phone: data.parties.respondent.phone || '',
-                        useServiceEmail: data.parties.respondent.useServiceEmail || '',
-                        sendNotifications: data.parties.respondent.sendNotifications || '',
+                        useServiceEmail: data.parties.respondent.useServiceEmail || false,
+                        sendNotifications: data.parties.respondent.sendNotifications || false,
                         email: data.parties.respondent.email || '',
                         serviceFiler: data.parties.respondent.serviceFiler || '',
                     },
@@ -159,6 +168,41 @@ class Form2 extends Component {
         this.setState({
             displaySaveSuccess: false
         });
+        this.closePreview();
+    }
+
+    preview() {
+        this.setState({
+            previewMode: true,
+            displayPreview: 'block'
+        })
+    }
+
+    closePreview() {
+        this.setState({
+            previewMode: false,
+            displayPreview: 'none'
+        })
+    }
+
+    componentWillReceiveProps() {
+        debugger;
+    }
+
+    openDataLossWarning() {
+        this.setState({ dataLoss : true, displayWarning: 'block'});
+    }
+
+    closeDataLossWarning() {
+        this.setState({
+            dataLoss:false,
+            displayWarning: 'none'
+        })
+    }
+
+    acceptDataLoss() {
+        this.closeDataLossWarning();
+        this.closeForm();
     }
 
     handleFieldChange(e) {
@@ -198,8 +242,9 @@ class Form2 extends Component {
                 this.setState(update(this.state, { document: { respondent: { serviceFiler: { $set: e.target.value } } }}));
                 break;
             default :
-                return;
+                break;
         }
+
     }
 
     render() {
@@ -218,14 +263,6 @@ class Form2 extends Component {
             </div>
             <div className="row">
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">
-                    <div id="steps">
-                        <ol>
-                            <li><span className="step-circle in-progress">1</span><span className="step-title in-progress">Form 2</span></li>
-                            <li><span className="step-circle future">2</span><span className="step-title future">Preview</span></li>
-                            <li><span className="step-circle future">3</span><span className="step-title future">Payment</span></li>
-                        </ol>
-                    </div>
-
                     <div className="form-title">
                         <h1>NOTICE OF APPEARANCE</h1>
                         Form 2 (RULES 5 (A), 13 (A) AND 17 (A))
@@ -251,31 +288,44 @@ class Form2 extends Component {
                         handleFieldChange={this.handleFieldChange}
                         service={this.service}
                     />
-
-                    <div className="form-section" style={{ display:this.state.displayData }}>
-                        <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case 20160430</h2>
-
-                        <table><tbody>
-                            <tr>
-                                <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                                <td id="appellant-name">{ this.state.document.appellant.name }</td>
-                                <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
-                            </tr>
-                            <tr>
-                                <td style={{ fontWeight:'bold' }}>AND:</td>
-                                <td id="respondent-name" >{ this.state.document.respondent.name }</td>
-                                <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
-                            </tr>
-                        </tbody></table>
+                    <div className="form-section" style={{display: this.state.displayData}}>
+                        <Form2DataSection
+                            show={this.state.showForm2}
+                            handleFieldChange={this.handleFieldChange}
+                            data={this.state.document}
+                            saveForm={this.create}
+                            closeForm={this.closeForm}
+                        />
+                        <FormButtonBar
+                            back={this.openDataLossWarning.bind(this)}
+                            save={this.create}
+                            preview={this.preview.bind(this)}/>
                     </div>
 
-                    <Form2DataSection
-                        show={this.state.showForm2}
-                        handleFieldChange={this.handleFieldChange}
-                        data={this.state.document}
-                        saveForm={this.create}
-                        closeForm={this.closeForm}
-                    />
+                    <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
+                        <div className="modal-title green">
+                            <span id="close-modal" onClick={this.closeForm}>&times;</span>
+                            Edit Form 2
+                        </div>
+                        <div className="modal-content">
+                            <div className="form-section">
+                                <Form2DataSection
+                                    closeForm={this.closeForm}
+                                    show={this.state.showForm2}
+                                    readOnly={this.state.previewMode}
+                                    className="case-list-modal"
+                                    renderer="CaseList"
+                                    data={this.state.document}
+                                    handleFieldChange={this.handleFieldChange}
+                                />
+                                <FormButtonBar
+                                    back={this.closePreview.bind(this)}
+                                    save={this.create}
+                                    submit={this.create}
+                                />
+                            </div>
+                        </div>
+                    </div>
 
                     <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
                         <div className="modal-title">
@@ -327,8 +377,27 @@ class Form2 extends Component {
                         </div>
                         <div className="modal-content">
                             <div>
-                                Form saved, you can return to dashboard
+                                Saved as draft!
                             </div>
+                        </div>
+                    </div>
+
+                    <div id="dataLossWarning" className="modal"
+                         style={{ display:(this.state.displayWarning) }} >
+                        <div className="modal-title warning">
+                            <span id="close-modal" onClick={this.closeDataLossWarning}>&times;</span>
+                            Warning!
+                        </div>
+                        <div className="modal-content">
+                            <div>
+                                All changes will be lost!
+                            </div>
+                            <FormButtonBar
+                                continue={this.acceptDataLoss.bind(this)}
+                                continueMessage="Continue anyway.  I don't care about the data."
+                                back={this.closeDataLossWarning.bind(this)}
+                                backMessage="Go back so I can save the form as draft."
+                            />
                         </div>
                     </div>
                 </div>

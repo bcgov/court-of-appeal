@@ -1,7 +1,8 @@
 import React from 'react';
 import update from 'immutability-helper';
 import DefaultService from "../service/default.service";
-import Form2DataSection from "./Form2DataSection"
+import Form2DataSection from "./Form2DataSection";
+import FormButtonBar from "./FormButtonBar";
 
 class CaseList extends React.Component {
 
@@ -9,6 +10,7 @@ class CaseList extends React.Component {
         super(props);
         this.state = {
             editMode: false,
+            previewMode: false,
             selectedDocumentId: '',
             selectedDocument: {
                 formSevenNumber: '',
@@ -29,13 +31,18 @@ class CaseList extends React.Component {
                     email: '',
                     phone: '',
                     notify: false,
-
                 }
-            }
+            },
+            dataLoss: false,
+            displayWarning: 'none'
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.openDataLossWarning = this.openDataLossWarning.bind(this);
+        this.acceptDataLoss = this.acceptDataLoss.bind(this);
+        this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
     }
 
     componentDidMount() {
@@ -103,7 +110,7 @@ class CaseList extends React.Component {
                             <tr className="case-item" key={item.id}>
                                 <td>
                                     <button className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
-                                        <i className="fas fa-pencil-alt"/></button>
+                                        <i className="fa fa-pencil"/></button>
                                 </td>
                                 <td>{item.id}</td>
                                 <td>{item.parties}</td>
@@ -122,14 +129,61 @@ class CaseList extends React.Component {
                         Edit Form 2
                     </div>
                     <div className="modal-content">
-                        <Form2DataSection
-                            closeForm={this.closeEditModal.bind(this)}
-                            show={this.state.editMode}
-                            handleFieldChange={this.handleFieldChange}
-                            className="case-list-modal"
-                            renderer="CaseList"
-                            data={this.state.selectedDocument}
-                            saveForm={this.updateForm2}
+                        <div className="form-section" style={{display: this.props.displayData}}>
+                            <Form2DataSection
+                                show={this.state.editMode}
+                                handleFieldChange={this.handleFieldChange}
+                                className="case-list-modal"
+                                renderer="CaseList"
+                                data={this.state.selectedDocument}
+                            />
+                            <FormButtonBar
+                            back={this.cancel.bind(this)}
+                            save={this.updateForm2.bind(this)}
+                            viewInFullPage={this.updateForm2.bind(this)}
+                            preview={this.preview.bind(this)}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="viewFormModal" className="modal"
+                     style={{display: (this.state.previewMode ? 'block' : 'none')}}>
+                    <div className="modal-title green">
+                        <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
+                        Edit Form 2
+                    </div>
+                    <div className="modal-content">
+                        <div className="form-section" style={{display: this.props.displayData}}>
+                            <Form2DataSection
+                                closeForm={this.cancel.bind(this)}
+                                show={this.state.previewMode}
+                                readOnly={this.state.previewMode}
+                                className="case-list-modal"
+                                renderer="CaseList"
+                                data={this.state.selectedDocument}
+                            />
+                            <FormButtonBar
+                                back={this.backToEdit.bind(this)}
+                                save={this.updateForm2.bind(this)}
+                                submit={this.updateForm2.bind(this)}/>
+                        </div>
+                    </div>
+                </div>
+                <div id="dataLossWarning" className="modal"
+                     style={{ display:(this.state.displayWarning) }} >
+                    <div className="modal-title warning">
+                        <span id="close-modal" onClick={this.closeDataLossWarning}>&times;</span>
+                        Warning!
+                    </div>
+                    <div className="modal-content">
+                        <div>
+                            All changes will be lost!
+                        </div>
+                        <FormButtonBar
+                            continue={this.acceptDataLoss.bind(this)}
+                            continueMessage="Continue anyway.  I don't care about the data."
+                            back={this.closeDataLossWarning}
+                            backMessage="Go back so I can save the form as draft."
                         />
                     </div>
                 </div>
@@ -138,6 +192,8 @@ class CaseList extends React.Component {
     }
 
     updateForm2() {
+        let doc = this.state.selectedDocument;
+        let id = this.state.selectedDocumentId;
         this.service.updateForm2(
             this.state.selectedDocument, this.state.selectedDocumentId,
             (data) => {
@@ -145,7 +201,7 @@ class CaseList extends React.Component {
                     this.setState({
                         displaySaveSuccess: true
                     });
-                    this.props.updateCases(this.state.selectedDocument, this.state.selectedDocumentId);
+                    this.props.updateCases(doc, id);
                 } else {
                     this.setState({
                         displaySaveError: true
@@ -160,8 +216,38 @@ class CaseList extends React.Component {
     }
 
     closeEditModal() {
-        this.setState({editMode: false});
+        this.setState({selectedDocument: null, editMode: false, previewMode: false, selectedDocumentId: -1});
+    }
 
+    /**
+     * cancel or back button.
+     */
+    cancel() {
+        this.openDataLossWarning();
+    }
+
+    backToEdit() {
+        this.setState({editMode: true, previewMode: false});
+    }
+
+    preview() {
+        this.setState({editMode: false, previewMode: true});
+    }
+
+    openDataLossWarning() {
+        this.setState({ dataLoss : true, displayWarning: 'block'});
+    }
+
+    closeDataLossWarning() {
+        this.setState({
+            dataLoss: false,
+            displayWarning: 'none'
+        })
+    }
+
+    acceptDataLoss() {
+        this.closeDataLossWarning();
+        this.closeEditModal();
     }
 }
 

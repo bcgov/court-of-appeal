@@ -9,12 +9,10 @@ class Find extends Component {
         super(props);   
         this.service = props.service; 
         this.callback = props.callback;
-        this.state = {
-            searchDisabled: true
-        };
 
         this.search = this.search.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.isInvalidCaseNumber = this.isInvalidCaseNumber.bind(this);
     }
 
     componentDidMount() {
@@ -62,7 +60,7 @@ class Find extends Component {
                                 />
                             </td>
                             <td>
-                                <button id="find-button" disabled={this.state.searchDisabled} onClick={this.search} className="btn btn-primary btn-green">Find</button>
+                                <button id="find-button" disabled={this.isInvalidCaseNumber()} onClick={this.search} className="btn btn-primary btn-green">Find</button>
                             </td>
                         </tr>
                     </tbody>
@@ -74,12 +72,11 @@ class Find extends Component {
     handleFieldChange(e) {
         // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d{5}\d*sea$
         e.target.value = 'CA'.concat(e.target.value.replace(/\D/g,''));
-        if (e.target.value.match(/^CA\d{5}\d*$/) !== null) {
-            this.setState({ searchDisabled: false });
-        } else {
-            this.setState({ searchDisabled: true });
-        }
         this.props.handleFieldChange(e);
+    }
+
+    isInvalidCaseNumber() {
+        return this.props.formSevenNumber.match(/^CA\d{5}\d*$/) === null;
     }
 }
 
