@@ -25,15 +25,16 @@ class TextField extends Component {
             size={this.state.size}
             className="form-field"
             maxLength={300}
+            readOnly={this.props.readOnly}
         />);
     }
 
     handleFieldChange(e) {
-        if (!this.props.disabled) {
+        if (!this.props.readOnly) {
             let size = this.props.value.length > 30 ? this.props.value.length  : 30;
             this.setState({size: size});
+            this.props.handleFieldChange(e);
         }
-        this.props.handleFieldChange(e);
     }
 }
 export default TextField;

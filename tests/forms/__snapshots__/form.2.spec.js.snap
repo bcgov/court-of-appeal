@@ -37,48 +37,6 @@ exports[`Snapshots of form2 1`] = `
       role="main"
     >
       <div
-        id="steps"
-      >
-        <ol>
-          <li>
-            <span
-              className="step-circle in-progress"
-            >
-              1
-            </span>
-            <span
-              className="step-title in-progress"
-            >
-              Form 2
-            </span>
-          </li>
-          <li>
-            <span
-              className="step-circle future"
-            >
-              2
-            </span>
-            <span
-              className="step-title future"
-            >
-              Preview
-            </span>
-          </li>
-          <li>
-            <span
-              className="step-circle future"
-            >
-              3
-            </span>
-            <span
-              className="step-title future"
-            >
-              Payment
-            </span>
-          </li>
-        </ol>
-      </div>
-      <div
         className="form-title"
       >
         <h1>
@@ -154,13 +112,14 @@ exports[`Snapshots of form2 1`] = `
                   onChange={[Function]}
                   onKeyPress={[Function]}
                   placeholder={undefined}
+                  readOnly={undefined}
                   value="CA"
                 />
               </td>
               <td>
                 <button
                   className="btn btn-primary btn-green"
-                  disabled={false}
+                  disabled={true}
                   id="find-button"
                   onClick={[Function]}
                 >
@@ -244,6 +203,96 @@ exports[`Snapshots of form2 1`] = `
             </tr>
           </tbody>
         </table>
+      </div>
+      <div
+        className="form-section"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <div
+          className="button-bar"
+        >
+          <button
+            className="btn btn-warning"
+            id="cancel"
+            onClick={[Function]}
+          >
+            &lt; 
+            Back
+          </button>
+          <button
+            className="btn btn-success"
+            id="cancel"
+            onClick={[Function]}
+          >
+            Save as Draft
+          </button>
+          <button
+            className="btn btn-success"
+            id="preview"
+            onClick={[Function]}
+          >
+            Preview &gt;
+          </button>
+        </div>
+      </div>
+      <div
+        className="modal"
+        id="viewFormModal"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <div
+          className="modal-title green"
+        >
+          <span
+            id="close-modal"
+            onClick={[Function]}
+          >
+            ×
+          </span>
+          Edit Form 2
+        </div>
+        <div
+          className="modal-content"
+        >
+          <div
+            className="form-section"
+          >
+            <div
+              className="button-bar"
+            >
+              <button
+                className="btn btn-warning"
+                id="cancel"
+                onClick={[Function]}
+              >
+                &lt; 
+                Back
+              </button>
+              <button
+                className="btn btn-success"
+                id="cancel"
+                onClick={[Function]}
+              >
+                Save as Draft
+              </button>
+              <button
+                className="btn btn-success"
+                id="submit"
+                onClick={[Function]}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div
         className="modal"
@@ -379,7 +428,54 @@ exports[`Snapshots of form2 1`] = `
           className="modal-content"
         >
           <div>
-            Form saved, you can return to dashboard
+            Saved as draft!
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal"
+        id="dataLossWarning"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <div
+          className="modal-title warning"
+        >
+          <span
+            id="close-modal"
+            onClick={[Function]}
+          >
+            ×
+          </span>
+          Warning!
+        </div>
+        <div
+          className="modal-content"
+        >
+          <div>
+            All changes will be lost!
+          </div>
+          <div
+            className="button-bar"
+          >
+            <button
+              className="btn btn-warning"
+              id="cancel"
+              onClick={[Function]}
+            >
+              &lt; 
+              Go back so I can save the form as draft.
+            </button>
+            <button
+              className="btn btn-success"
+              id="submit"
+              onClick={[Function]}
+            >
+              Continue anyway.  I don't care about the data.
+            </button>
           </div>
         </div>
       </div>

@@ -19,6 +19,7 @@ class PhoneField extends Component {
             maxLength={15}
             size={30}
             placeholder={this.props.placeHolder}
+            readOnly={this.props.readOnly}
         />;
     }
 

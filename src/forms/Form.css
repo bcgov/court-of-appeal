@@ -96,3 +96,7 @@
 	background-color: palevioletred;
 	border-color: darkred;
 }
+.button-bar {
+	display: flex;
+	justify-content: space-between;
+}

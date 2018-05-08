@@ -8,6 +8,7 @@ exports[`should only allow numeric, dash, and parentheses entries 1`] = `
   name={undefined}
   onChange={[Function]}
   placeholder={undefined}
+  readOnly={undefined}
   size={30}
   value=""
 />

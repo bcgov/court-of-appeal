@@ -15,15 +15,9 @@ class PostalCodeField extends Component {
     }
 
     render() {
-        let autofocus = this.props.autofocus ? true : false;
         return (<input
-            id={this.props.id}
-            name={this.props.name}
-            autoFocus={autofocus}
-            ref={this.props.ref}
             value={this.props.value || ''}
             onChange={this.handleFieldChange}
-            onKeyPress={this.handleKeyPress}
             maxLength={7}
             size={30}
             title={this.state.title}
@@ -31,15 +25,18 @@ class PostalCodeField extends Component {
             onBlur={this.validate}
             onFocus={this.clearClass}
             placeholder="Valid Canadian postal code"
+            readOnly={this.props.readOnly}
+            name={this.props.name}
         />);
     }
 
     handleFieldChange(e) {
-        let value = e.target.value;
-        value = value.toUpperCase().replace(/[^\dA-Z ]/g,"");
-        value = value.replace(/[ ]+/g," ");
-        e.target.value =  value;
-        this.props.handleFieldChange(e);
+        if (!this.props.readOnly) {
+            let value = e.target.value;
+            value = value.toUpperCase().replace(/[^\dA-Z ]/g,"").replace(/[ ]+/g," ");
+            e.target.value =  value;
+            this.props.handleFieldChange(e);
+        }
     }
 
     /**
