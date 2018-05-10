@@ -24,8 +24,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
-    "eject": "react-scripts eject"
+    "test": "jest -u",
+    "eject": "react-scripts eject",
+    "test:coverage": "jest -u --coverage"
   },
   "jest": {
     "testEnvironment": "node",
