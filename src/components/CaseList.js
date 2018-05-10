@@ -14,24 +14,13 @@ class CaseList extends React.Component {
             selectedDocumentId: '',
             selectedDocument: {
                 formSevenNumber: '',
-                appellant: {
-                    name: '',
-                    address: ''
-                },
-                respondent: {
-                    name: '',
-                    address: {
-                        addressLine1: '',
-                        addressLine2: '',
-                        city: '',
-                        province: 'British Columbia',
-                        country: 'Canada',
-                        postalCode: ''
-                    },
-                    email: '',
-                    phone: '',
-                    notify: false,
-                }
+                appellants: [],
+                respondents: [],
+                phone: '',
+                useServiceEmail: false,
+                sendNotifications: false,
+                email: '',
+                serviceFiler: ''
             },
             dataLoss: false,
             displayWarning: 'none',
@@ -74,19 +63,19 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}}));
+                this.setState(update(this.state, {selectedDocument: { useServiceEmail: {$set: e.target.checked}}}));
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {sendNotifications: {$set: e.target.checked}}}}));
+                this.setState(update(this.state, {selectedDocument: { sendNotifications: {$set: e.target.checked}}}));
                 break;
             case 'email' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {email: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {email: {$set: e.target.value}}}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {phone: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {phone: {$set: e.target.value}}}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {serviceFiler: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: e.target.value}}}));
                 break;
             default :
                 return;
