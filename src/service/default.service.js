@@ -26,29 +26,19 @@ var Service = function(window) {
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
-    }
-    this.serveLocalData = false;  
+    } 
 };
 
 Service.prototype.base = function() {
     return this.apiUrl === undefined ? '' : this.apiUrl;
 };
 
-Service.prototype.setServeLocalData = function(flag) {    
-    this.serveLocalData = flag;
-};
-
 Service.prototype.searchForm7 = function(file, callback) {
-    if (this.serveLocalData) {
-        callback(fakeData);
-    }
-    else {        
-        let get = require('request');
-        get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
-            if (response.statusCode == 404) { callback(undefined); }
-            else { callback(JSON.parse(body)); }
-        }); 
-    }
+    let get = require('request');
+    get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
+        if (response.statusCode == 404) { callback(undefined); }
+        else { callback(JSON.parse(body)); }
+    }); 
 };
 
 Service.prototype.createForm2 = function(form, callback) {
