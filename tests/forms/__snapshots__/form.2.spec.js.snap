@@ -95,7 +95,9 @@ exports[`Snapshots of form2 1`] = `
               <td>
                 COURT OF APPEAL FILE NO.
               </td>
-              <td />
+              <td>
+                 
+              </td>
             </tr>
             <tr>
               <td>
@@ -125,80 +127,6 @@ exports[`Snapshots of form2 1`] = `
                 >
                   Find
                 </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div
-        className="form-section"
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-      >
-        <h2
-          style={
-            Object {
-              "fontWeight": "bold",
-            }
-          }
-        >
-          Style of Proceeding (Parties) in Case 20160430
-        </h2>
-        <table>
-          <tbody>
-            <tr>
-              <td
-                style={
-                  Object {
-                    "fontWeight": "bold",
-                  }
-                }
-              >
-                BETWEEN:
-              </td>
-              <td
-                id="appellant-name"
-              >
-                
-              </td>
-              <td
-                style={
-                  Object {
-                    "fontWeight": "bold",
-                    "paddingLeft": "70px",
-                  }
-                }
-              >
-                Appellant
-              </td>
-            </tr>
-            <tr>
-              <td
-                style={
-                  Object {
-                    "fontWeight": "bold",
-                  }
-                }
-              >
-                AND:
-              </td>
-              <td
-                id="respondent-name"
-              >
-                
-              </td>
-              <td
-                style={
-                  Object {
-                    "fontWeight": "bold",
-                    "paddingLeft": "70px",
-                  }
-                }
-              >
-                Respondent
               </td>
             </tr>
           </tbody>
@@ -274,7 +202,7 @@ exports[`Snapshots of form2 1`] = `
                 onClick={[Function]}
               >
                 &lt; 
-                Back
+                Back to editing
               </button>
               <button
                 className="btn btn-success"

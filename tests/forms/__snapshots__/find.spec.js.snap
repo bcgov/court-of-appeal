@@ -23,7 +23,9 @@ exports[`should enable button for only valid entries 1`] = `
         <td>
           COURT OF APPEAL FILE NO.
         </td>
-        <td />
+        <td>
+           
+        </td>
       </tr>
       <tr>
         <td>
