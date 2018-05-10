@@ -29,7 +29,7 @@ class Find extends Component {
     }
 
     handleKeyPress(target) {
-        if(target.charCode === 13){
+        if(target.charCode === 13 && !this.isInvalidCaseNumber()){
             this.search();
         }
     }
@@ -45,7 +45,7 @@ class Find extends Component {
                         <tr>
                             <td>LEVEL OF COURT</td>
                             <td>COURT OF APPEAL FILE NO.</td>
-                            <td></td>
+                            <td> </td>
                         </tr>
                         <tr>
                             <td><input disabled value="Court of Appeal" /></td>

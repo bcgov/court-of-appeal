@@ -138,10 +138,11 @@ class CaseList extends React.Component {
                                 data={this.state.selectedDocument}
                             />
                             <FormButtonBar
-                            back={this.cancel.bind(this)}
-                            save={this.updateForm2.bind(this)}
-                            viewInFullPage={this.updateForm2.bind(this)}
-                            preview={this.preview.bind(this)}/>
+                                back={this.cancel.bind(this)}
+                                save={this.updateForm2.bind(this)}
+                                viewInFullPage={this.updateForm2.bind(this)}
+                                preview={this.preview.bind(this)}
+                            />
                         </div>
                     </div>
                 </div>

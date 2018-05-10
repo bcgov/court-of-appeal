@@ -55,6 +55,8 @@ class Form2 extends Component {
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
         this.closePreview = this.closePreview.bind(this);
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
+        this.formHasData = this.formHasData.bind(this);
+        this.preview = this.preview.bind(this);
     }
 
     componentDidMount() {
@@ -94,32 +96,7 @@ class Form2 extends Component {
     }
 
     closeForm() {
-        this.setState({
-            formSevenNumber: 'CA',
-            document: {
-                appellant: {
-                    name: '',
-                    address: ''
-                },
-                respondent: {
-                    name: '',
-                    address: {
-                        addressLine1: '',
-                        addressLine2: '',
-                        city: '',
-                        province: 'BC',
-                        country: 'Canada',
-                        postalCode: ''
-                    },
-                    useServiceEmail: false,
-                    sendNotifications: false,
-                    email: '',
-                    serviceFiler: ''
-                }
-            },
-            displayData: 'none',
-            showForm2: false
-        })
+        this.props.history.push('/');
     }
 
     create() {
@@ -185,12 +162,12 @@ class Form2 extends Component {
         })
     }
 
-    componentWillReceiveProps() {
-        debugger;
-    }
-
     openDataLossWarning() {
-        this.setState({ dataLoss : true, displayWarning: 'block'});
+        if (!this.formHasData()) {
+            this.props.history.push('/');
+        } else {
+            this.setState({ dataLoss : true, displayWarning: 'block'});
+        }
     }
 
     closeDataLossWarning() {
@@ -247,6 +224,19 @@ class Form2 extends Component {
 
     }
 
+    formHasData() {
+            let respondent = this.state.document.respondent;
+            let hasData = respondent ?
+                (respondent.address.addressLine1 !== '') ||
+                (respondent.address.addressLine2 !== '') ||
+                (respondent.address.city !== '') ||
+                (respondent.address.postalCode !== '') ||
+                (respondent.phone !== '') ||
+                (respondent.email !== '')
+                : false;
+            return ( hasData );
+    }
+
     render() {
         return (
           <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
@@ -299,7 +289,9 @@ class Form2 extends Component {
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
                             save={this.create}
-                            preview={this.preview.bind(this)}/>
+                            preview={this.preview}
+                            formHasData={this.formHasData.bind(this)}
+                        />
                     </div>
 
                     <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
@@ -322,6 +314,7 @@ class Form2 extends Component {
                                     back={this.closePreview.bind(this)}
                                     save={this.create}
                                     submit={this.create}
+                                    backMessage="Back to editing"
                                 />
                             </div>
                         </div>
