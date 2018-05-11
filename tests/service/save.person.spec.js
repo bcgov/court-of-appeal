@@ -1,7 +1,7 @@
 let Service = require('../../src/service/default.service');
 let url = require('url');
-var qs = require('querystring');
-var LocalServer = require('../support/local.server');
+let qs = require('querystring');
+let LocalServer = require('../support/local.server');
 
 describe('Save person', function() {
 
@@ -19,7 +19,7 @@ describe('Save person', function() {
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/json');
                     response.statusCode = 201;
-                    var data = qs.parse(body).data;
+                    let data = qs.parse(body).data;
                     response.write(data);
                     response.end();
                 }); 

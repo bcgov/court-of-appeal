@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ActiveFormList from '../../src/components/ActiveFormList';
 let Service = require('../../src/service/default.service');
-var LocalServer = require('../support/local.server');
+let LocalServer = require('../support/local.server');
 
 describe('Active forms section', function() {
 

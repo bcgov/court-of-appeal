@@ -1,12 +1,12 @@
-var http = require('http');
+let http = require('http');
 
-var LocalServer = function(handler) {
+let LocalServer = function(handler) {
     this.handler = handler;
 };
 LocalServer.prototype.start = function(done) {
-    var self = this;
+    let self = this;
     self.port = 5001;
-    var tryAgain = true;
+    let tryAgain = true;
     self.server = http.createServer(self.handler);
     self.server.on('error', (e)=>{
         self.port++;

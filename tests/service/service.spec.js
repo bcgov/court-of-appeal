@@ -1,6 +1,6 @@
 let Service = require('../../src/service/default.service');
 let url = require('url');
-var qs = require('querystring');
+let qs = require('querystring');
 
 describe('Gateway to API', function() {
 

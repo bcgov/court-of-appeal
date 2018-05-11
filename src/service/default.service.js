@@ -11,7 +11,7 @@ let fakeData = {
     }
 };
 
-var Service = function(window) {  
+let Service = function(window) {  
     this.apiUrl = undefined;
     this.user = undefined;
     if (typeof window !== 'undefined') {
@@ -43,7 +43,7 @@ Service.prototype.searchForm7 = function(file, callback) {
 
 Service.prototype.createForm2 = function(form, callback) {
     let request = require('request');
-    var options = this.buildOptions('/api/forms');
+    let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
     request.post(options, function(err, response, body) {
         callback(body);
@@ -52,7 +52,7 @@ Service.prototype.createForm2 = function(form, callback) {
 
 Service.prototype.updateForm2 = function(form, id, callback) {
     let request = require('request');
-    var options = this.buildOptions(`/api/forms/${id}`);
+    let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     request.put(options, function(err, response, body) {
         callback(body);
@@ -69,9 +69,9 @@ Service.prototype.getMyCases = function(form, callback) {
 
 Service.prototype.savePerson = function(user, callback) {
     let request = require('request');
-    var options = this.buildOptions('/api/persons');
+    let options = this.buildOptions('/api/persons');
     options.form = { data:user };
-    request.post(options, function(err, response, body) {        
+    request.post(options, function(err, response, body) {
         callback(body);
     });
 };

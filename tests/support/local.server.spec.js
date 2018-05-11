@@ -1,10 +1,10 @@
-var LocalServer = require('../support/local.server');
-var get = require('request');
-var http = require('http');
+let LocalServer = require('../support/local.server');
+let get = require('request');
+let http = require('http');
 
 describe('Local Server', ()=> {
 
-    var server;
+    let server;
     afterEach((done)=>{
         if (server) {server.stop(done);}
     });
