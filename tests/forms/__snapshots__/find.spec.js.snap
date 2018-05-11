@@ -56,6 +56,9 @@ exports[`should enable button for only valid entries 1`] = `
             Find
           </button>
         </td>
+        <td>
+          Error message will display here when we hook it up.
+        </td>
       </tr>
     </tbody>
   </table>

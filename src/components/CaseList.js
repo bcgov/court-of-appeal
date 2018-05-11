@@ -20,7 +20,8 @@ class CaseList extends React.Component {
                 useServiceEmail: false,
                 sendNotifications: false,
                 email: '',
-                serviceFiler: ''
+                serviceFiler: '',
+                selectedRespondentIndex: 0
             },
             dataLoss: false,
             displayWarning: 'none',
@@ -45,28 +46,38 @@ class CaseList extends React.Component {
     }
 
     handleFieldChange(e) {
-        let keys = e.target.name.split(".");
+        const keys = e.target.name.split(".");
+        const respondents = this.state.selectedDocument.respondents.slice();
         switch (keys[1]) {
+            case 'form-seven' :
+                this.setState(update(this.state, {formSevenNumber: {$set: e.target.value}}));
+                break;
             case 'name' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {name: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: e.target.value}}}));
                 break;
             case 'addressLine1' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'addressLine2' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['city'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'postalCode' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, {selectedDocument: { useServiceEmail: {$set: e.target.checked}}}));
+                this.setState(update(this.state, {selectedDocument: {useServiceEmail: {$set: e.target.checked}}}));
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, {selectedDocument: { sendNotifications: {$set: e.target.checked}}}));
+                this.setState(update(this.state, {selectedDocument: {sendNotifications: {$set: e.target.checked}}}));
                 break;
             case 'email' :
                 this.setState(update(this.state, {selectedDocument: {email: {$set: e.target.value}}}));
@@ -78,7 +89,7 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: e.target.value}}}));
                 break;
             default :
-                return;
+                break;
         }
         this.setState({formHasUnsavedChanges: true});
     }

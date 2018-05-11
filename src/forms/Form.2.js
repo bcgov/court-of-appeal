@@ -15,8 +15,31 @@ class Form2 extends Component {
         this.state = {
             formSevenNumber: 'CA',
             document: {
-                appellants: [],
-                respondents: [],
+                appellants: [
+                    {
+                        name: '',
+                        address: {
+                            addressLine1: '',
+                            addressLine2: '',
+                            city: '',
+                            province: '',
+                            postalCode: ''
+                        }
+                    }
+                ],
+                respondents: [
+                    {
+                        name: '',
+                        address: {
+                            addressLine1: '',
+                            addressLine2: '',
+                            city: '',
+                            province: '',
+                            postalCode: ''
+                        }
+                    }
+                ],
+                selectedRespondentIndex: 0,
                 phone: '',
                 useServiceEmail: false,
                 sendNotifications: false,
@@ -88,14 +111,15 @@ class Form2 extends Component {
                 }
                 return respondenttMap;
             } );
-            this.setState({
-                document: {
-                    appellants: appellants,
-                    respondents: respondents
-                },
-                displayData: 'block',
-                showForm2: true
-            });
+            if (appellants && respondents) {
+                this.setState(update(this.state, { document: { appellants: {$set: appellants} } }));
+                this.setState(update(this.state, { document: { respondents: {$set: respondents} } }));
+                this.setState({displayData: 'block',
+                    showForm2: true
+                });
+            } else {
+                //display error
+            }
         }
     }
 
@@ -104,21 +128,22 @@ class Form2 extends Component {
     }
 
     create() {
+        let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
+        respondent['phone'] = this.state.document.phone;
+        respondent['email'] = this.state.document.email;
+        respondent['useServiceEmail'] = this.state.document.useServiceEmail;
+        respondent['sendNotifications'] =  this.state.document.sendNotifications;
+        respondent['serviceFiler'] = this.state.document.serviceFiler;
+        // TODO-SP ^^ get update as to how this data should be structured
         this.service.createForm2({
                 formSevenNumber: this.state.formSevenNumber,
-                appellant: {
-                    name: this.state.document.appellant.name,
-                    address: this.state.document.appellant.address
-                },
-                respondent: {
-                    name: this.state.document.respondent.name,
-                    address: this.state.document.respondent.address,
-                    phone: this.state.document.phone,
-                    useServiceEmail: this.state.document.useServiceEmail,
-                    sendNotifications: this.state.document.sendNotifications,
-                    email: this.state.document.email,
-                    serviceFiler: this.state.document.serviceFiler
-                }
+                appellants: this.state.document.appellants,
+                respondents: this.state.document.respondents,
+                phone: this.state.document.phone,
+                email: this.state.document.email,
+                useServiceEmail: this.state.document.useServiceEmail,
+                sendNotifications: this.state.document.sendNotifications,
+                serviceFiler: this.state.document.serviceFiler
             }, (data) => {
             if (data !== undefined) {
                 this.setState({
@@ -181,25 +206,32 @@ class Form2 extends Component {
     }
 
     handleFieldChange(e) {
-        let keys = e.target.name.split(".");
+        const keys = e.target.name.split(".");
+        const respondents = this.state.document.respondents.slice();
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
                 break;
             case 'name' :
-                this.setState(update(this.state, { document: { respondent: { name: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { document: { selectedRespondentIndex: { $set: e.target.value } } }));
                 break;
             case 'addressLine1' :
-                this.setState(update(this.state, { document: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'addressLine2' :
-                this.setState(update(this.state, { document: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'city' :
-                this.setState(update(this.state, { document: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.document.selectedRespondentIndex]['address']['city'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'postalCode' :
-                this.setState(update(this.state, { document: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
+                respondents[this.state.document.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'useServiceEmail' :
                 this.setState(update(this.state, { document:  { useServiceEmail: { $set: e.target.checked } }}));
@@ -223,7 +255,7 @@ class Form2 extends Component {
     }
 
     formHasData() {
-            let respondent = this.state.document.respondent;
+            let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
             let hasData = respondent ?
                 (respondent.address.addressLine1 !== '') ||
                 (respondent.address.addressLine2 !== '') ||
@@ -233,12 +265,6 @@ class Form2 extends Component {
                 (respondent.email !== '')
                 : false;
             return ( hasData );
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        console.log(nextProps);
-        console.log(prevState);
-        return null;
     }
 
     render() {

@@ -62,6 +62,9 @@ class Find extends Component {
                             <td>
                                 <button id="find-button" disabled={this.isInvalidCaseNumber()} onClick={this.search} className="btn btn-primary btn-green">Find</button>
                             </td>
+                            <td>
+                                Error message will display here when we hook it up.
+                            </td>
                         </tr>
                     </tbody>
                 </table>
