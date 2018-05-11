@@ -32,7 +32,7 @@ class ActiveFormList extends Component {
                     cases:data.cases.slice(0, 5).map(function(item) { 
                         return {
                             id:item.id,
-                            parties: item.data.appellant.name + ' / ' + item.data.respondent.name,
+                            parties: item.data.appellants[0].name + ' / ' + item.data.respondents[0].name,
                             status: item.status,
                             modified: item.modified,
                             data: item.data

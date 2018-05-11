@@ -14,35 +14,28 @@ class CaseList extends React.Component {
             selectedDocumentId: '',
             selectedDocument: {
                 formSevenNumber: '',
-                appellant: {
-                    name: '',
-                    address: ''
-                },
-                respondent: {
-                    name: '',
-                    address: {
-                        addressLine1: '',
-                        addressLine2: '',
-                        city: '',
-                        province: 'BC',
-                        country: 'Canada',
-                        postalCode: ''
-                    },
-                    email: '',
-                    phone: '',
-                    notify: false,
-                }
+                appellants: [],
+                respondents: [],
+                phone: '',
+                useServiceEmail: false,
+                sendNotifications: false,
+                email: '',
+                serviceFiler: '',
+                selectedRespondentIndex: 0
             },
             dataLoss: false,
-            displayWarning: 'none'
+            displayWarning: 'none',
+            formHasUnsavedChanges: false,
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.openDataLossWarning = this.openDataLossWarning.bind(this);
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
         this.closeEditModal = this.closeEditModal.bind(this);
+        this.cancel = this.cancel.bind(this);
+        this.backToEdit = this.backToEdit.bind(this);
+        this.preview = this.preview.bind(this);
     }
 
     componentDidMount() {
@@ -53,41 +46,52 @@ class CaseList extends React.Component {
     }
 
     handleFieldChange(e) {
-        let keys = e.target.name.split(".");
+        const keys = e.target.name.split(".");
+        const respondents = this.state.selectedDocument.respondents.slice();
         switch (keys[1]) {
+            case 'form-seven' :
+                this.setState(update(this.state, {formSevenNumber: {$set: e.target.value}}));
+                break;
             case 'name' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {name: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: e.target.value}}}));
                 break;
             case 'addressLine1' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'addressLine2' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['city'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'postalCode' :
-                this.setState(update(this.state, {selectedDocument: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
+                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {useServiceEmail: {$set: e.target.checked}}}}));
+                this.setState(update(this.state, {selectedDocument: {useServiceEmail: {$set: e.target.checked}}}));
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {sendNotifications: {$set: e.target.checked}}}}));
+                this.setState(update(this.state, {selectedDocument: {sendNotifications: {$set: e.target.checked}}}));
                 break;
             case 'email' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {email: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {email: {$set: e.target.value}}}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {phone: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {phone: {$set: e.target.value}}}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, {selectedDocument: {respondent: {serviceFiler: {$set: e.target.value}}}}));
+                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: e.target.value}}}));
                 break;
             default :
-                return;
+                break;
         }
+        this.setState({formHasUnsavedChanges: true});
     }
 
     render() {
@@ -138,10 +142,9 @@ class CaseList extends React.Component {
                                 data={this.state.selectedDocument}
                             />
                             <FormButtonBar
-                                back={this.cancel.bind(this)}
-                                save={this.updateForm2.bind(this)}
-                                viewInFullPage={this.updateForm2.bind(this)}
-                                preview={this.preview.bind(this)}
+                                back={this.cancel}
+                                save={this.updateForm2}
+                                preview={this.preview}
                             />
                         </div>
                     </div>
@@ -156,7 +159,7 @@ class CaseList extends React.Component {
                     <div className="modal-content">
                         <div className="form-section" style={{display: this.props.displayData}}>
                             <Form2DataSection
-                                closeForm={this.cancel.bind(this)}
+                                closeForm={this.backToEdit}
                                 show={this.state.previewMode}
                                 readOnly={this.state.previewMode}
                                 className="case-list-modal"
@@ -164,9 +167,9 @@ class CaseList extends React.Component {
                                 data={this.state.selectedDocument}
                             />
                             <FormButtonBar
-                                back={this.backToEdit.bind(this)}
-                                save={this.updateForm2.bind(this)}
-                                submit={this.updateForm2.bind(this)}/>
+                                back={this.backToEdit}
+                                save={this.updateForm2}
+                                submit={this.updateForm2}/>
                         </div>
                     </div>
                 </div>
@@ -181,7 +184,7 @@ class CaseList extends React.Component {
                             All changes will be lost!
                         </div>
                         <FormButtonBar
-                            continue={this.acceptDataLoss.bind(this)}
+                            continue={this.acceptDataLoss}
                             continueMessage="Continue anyway.  I don't care about the data."
                             back={this.closeDataLossWarning}
                             backMessage="Go back so I can save the form as draft."
@@ -200,12 +203,14 @@ class CaseList extends React.Component {
             (data) => {
                 if (data !== undefined) {
                     this.setState({
-                        displaySaveSuccess: true
+                        displaySaveSuccess: true,
+                        formHasUnsavedChanges: false
                     });
                     this.props.updateCases(doc, id);
                 } else {
                     this.setState({
-                        displaySaveError: true
+                        displaySaveError: true,
+                        formHasUnsavedChanges: false
                     });
                 }
             });
@@ -213,18 +218,22 @@ class CaseList extends React.Component {
     }
 
     openEditModal(data, id) {
-        this.setState({selectedDocument: data, editMode: true, selectedDocumentId: id});
+        this.setState({selectedDocument: data, editMode: true, selectedDocumentId: id, selected: data});
     }
 
     closeEditModal() {
-        this.setState({selectedDocument: null, editMode: false, previewMode: false, selectedDocumentId: -1});
+        this.setState({formHasUnsavedChanges: false, selectedDocument: null, editMode: false, previewMode: false, selectedDocumentId: -1});
     }
 
     /**
      * cancel or back button.
      */
     cancel() {
-        this.openDataLossWarning();
+        if(this.state.formHasUnsavedChanges) {
+            this.setState({ dataLoss : true, displayWarning: 'block'});
+        } else {
+            this.closeEditModal();
+        }
     }
 
     backToEdit() {
@@ -233,10 +242,6 @@ class CaseList extends React.Component {
 
     preview() {
         this.setState({editMode: false, previewMode: true});
-    }
-
-    openDataLossWarning() {
-        this.setState({ dataLoss : true, displayWarning: 'block'});
     }
 
     closeDataLossWarning() {

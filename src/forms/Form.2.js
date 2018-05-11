@@ -15,25 +15,36 @@ class Form2 extends Component {
         this.state = {
             formSevenNumber: 'CA',
             document: {
-                appellant: {
-                    name: '',
-                    address: ''
-                },
-                respondent: {
-                    name: '',
-                    address: {
-                        addressLine1: '',
-                        addressLine2: '',
-                        city: '',
-                        province: 'BC',
-                        country: 'Canada',
-                        postalCode: ''
-                    },
-                    useServiceEmail: false,
-                    sendNotifications: false,
-                    email: '',
-                    serviceFiler: ''
-                }
+                appellants: [
+                    {
+                        name: '',
+                        address: {
+                            addressLine1: '',
+                            addressLine2: '',
+                            city: '',
+                            province: '',
+                            postalCode: ''
+                        }
+                    }
+                ],
+                respondents: [
+                    {
+                        name: '',
+                        address: {
+                            addressLine1: '',
+                            addressLine2: '',
+                            city: '',
+                            province: '',
+                            postalCode: ''
+                        }
+                    }
+                ],
+                selectedRespondentIndex: 0,
+                phone: '',
+                useServiceEmail: false,
+                sendNotifications: false,
+                email: '',
+                serviceFiler: ''
             },
 
             displayData: 'none',
@@ -43,7 +54,8 @@ class Form2 extends Component {
             displaySaveSuccess: false,
             displaySaveError: false,
             dataLoss: false,
-            displayWarning: 'none'
+            displayWarning: 'none',
+            formHasUnsavedChanges: false
         };
 
         this.found = this.found.bind(this);
@@ -68,30 +80,46 @@ class Form2 extends Component {
 
     found(data) {
         if (data) {
-            this.setState({
-                document: {
-                    appellant: { name:data.parties.appellant.name, address:data.parties.appellant.address },
-                    respondent: {
-                        name: data.parties.respondent.name || '',
-                        address: {
-                            addressLine1: '',
-                            addressLine2: '',
-                            city:  '',
-                            province: 'BC',
-                            country: 'Canada',
-                            postalCode: ''
-                        },
-                        phone: data.parties.respondent.phone || '',
-                        useServiceEmail: data.parties.respondent.useServiceEmail || false,
-                        sendNotifications: data.parties.respondent.sendNotifications || false,
-                        email: data.parties.respondent.email || '',
-                        serviceFiler: data.parties.respondent.serviceFiler || '',
-                    },
-                },
-
-                displayData: 'block',
-                showForm2: true
+            const appellants = data.parties.appellants.map((appellant) => {
+                let appellantMap = {};
+                if (appellant.name) {
+                    appellantMap['name'] = appellant.name;
+                } else if (appellant.organization) {
+                    appellantMap['name'] = appellant.organization;
+                }
+                if (appellant.solicitor) {
+                    if (appellant.solicitor.name && !appellantMap.name) {
+                        appellantMap['name'] = appellant.solicitor.name;
+                    }
+                    appellantMap['address'] = appellant.solicitor.address;
+                }
+                return appellantMap;
             });
+
+            const respondents = data.parties.respondents.map( (respondent) => {
+                let respondenttMap = {};
+                if (respondent.name) {
+                    respondenttMap['name'] = respondent.name;
+                } else if (respondent.organization) {
+                    respondenttMap['name'] = respondent.organization;
+                }
+                if (respondent.solicitor) {
+                    if (respondent.solicitor.name && !respondenttMap.name) {
+                        respondenttMap['name'] = respondent.solicitor.name;
+                    }
+                    respondenttMap['address'] = respondent.solicitor.address;
+                }
+                return respondenttMap;
+            } );
+            if (appellants && respondents) {
+                this.setState(update(this.state, { document: { appellants: {$set: appellants} } }));
+                this.setState(update(this.state, { document: { respondents: {$set: respondents} } }));
+                this.setState({displayData: 'block',
+                    showForm2: true
+                });
+            } else {
+                //display error
+            }
         }
     }
 
@@ -100,31 +128,26 @@ class Form2 extends Component {
     }
 
     create() {
+        let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
+        respondent['phone'] = this.state.document.phone;
+        respondent['email'] = this.state.document.email;
+        respondent['useServiceEmail'] = this.state.document.useServiceEmail;
+        respondent['sendNotifications'] =  this.state.document.sendNotifications;
+        respondent['serviceFiler'] = this.state.document.serviceFiler;
+        // TODO-SP ^^ get update as to how this data should be structured
         this.service.createForm2({
                 formSevenNumber: this.state.formSevenNumber,
-                appellant: {
-                    name: this.state.document.appellant.name,
-                    address: this.state.document.appellant.address
-                },
-                respondent: {
-                    name: this.state.document.respondent.name,
-                    address: {
-                        addressLine1: this.state.document.respondent.address.addressLine1,
-                        addressLine2: this.state.document.respondent.address.addressLine2,
-                        city: this.state.document.respondent.address.city,
-                        province: 'BC',
-                        country: 'Canada',
-                        postalCode: this.state.document.respondent.address.postalCode
-                    },
-                    phone: this.state.document.respondent.phone,
-                    useServiceEmail: this.state.document.respondent.useServiceEmail,
-                    sendNotifications: this.state.document.respondent.sendNotifications,
-                    email: this.state.document.respondent.email,
-                    serviceFiler: this.state.document.respondent.serviceFiler
-                }
+                appellants: this.state.document.appellants,
+                respondents: this.state.document.respondents,
+                phone: this.state.document.phone,
+                email: this.state.document.email,
+                useServiceEmail: this.state.document.useServiceEmail,
+                sendNotifications: this.state.document.sendNotifications,
+                serviceFiler: this.state.document.serviceFiler
             }, (data) => {
             if (data !== undefined) {
                 this.setState({
+                    formHasUnsavedChanges: false,
                     displaySaveSuccess: true
                 });
             } else {
@@ -163,7 +186,7 @@ class Form2 extends Component {
     }
 
     openDataLossWarning() {
-        if (!this.formHasData()) {
+        if (!this.formHasData() || !this.state.formHasUnsavedChanges) {
             this.props.history.push('/');
         } else {
             this.setState({ dataLoss : true, displayWarning: 'block'});
@@ -183,49 +206,56 @@ class Form2 extends Component {
     }
 
     handleFieldChange(e) {
-        let keys = e.target.name.split(".");
+        const keys = e.target.name.split(".");
+        const respondents = this.state.document.respondents.slice();
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
                 break;
             case 'name' :
-                this.setState(update(this.state, { document: { respondent: { name: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { document: { selectedRespondentIndex: { $set: e.target.value } } }));
                 break;
             case 'addressLine1' :
-                this.setState(update(this.state, { document: { respondent: { address: { addressLine1: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'addressLine2' :
-                this.setState(update(this.state, { document: { respondent: { address: { addressLine2: { $set: e.target.value } } } }}));
+                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'city' :
-                this.setState(update(this.state, { document: { respondent: { address: { city: { $set: e.target.value } } } }}));
+                debugger;
+                respondents[this.state.document.selectedRespondentIndex]['address']['city'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'postalCode' :
-                this.setState(update(this.state, { document: { respondent: { address: { postalCode: { $set: e.target.value } } } }}));
+                respondents[this.state.document.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
+                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { document: { respondent: { useServiceEmail: { $set: e.target.checked } } }}));
+                this.setState(update(this.state, { document:  { useServiceEmail: { $set: e.target.checked } }}));
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, { document: { respondent: { sendNotifications: { $set: e.target.checked } } }}));
+                this.setState(update(this.state, { document:  { sendNotifications: { $set: e.target.checked } }}));
                 break;
             case 'email' :
-                this.setState(update(this.state, { document: { respondent: { email: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { document:  { email: { $set: e.target.value } } }));
                 break;
             case 'phone' :
-                this.setState(update(this.state, { document: { respondent: { phone: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { document:  { phone: { $set: e.target.value } } }));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, { document: { respondent: { serviceFiler: { $set: e.target.value } } }}));
+                this.setState(update(this.state, { document: { serviceFiler: { $set: e.target.value } } }));
                 break;
             default :
                 break;
         }
-
+        this.setState({formHasUnsavedChanges: true});
     }
 
     formHasData() {
-            let respondent = this.state.document.respondent;
+            let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
             let hasData = respondent ?
                 (respondent.address.addressLine1 !== '') ||
                 (respondent.address.addressLine2 !== '') ||
@@ -338,7 +368,7 @@ class Form2 extends Component {
                                     <td><i className="far fa-check-circle"></i></td>
                                 </tr>
                                 <tr>
-                                    <td className="validation">Address for Service is in BC</td>
+                                    <td className="validation">Address for Service is in British Columbia</td>
                                     <td><i className="far fa-check-circle"></i></td>
                                 </tr>
                             </tbody></table>
