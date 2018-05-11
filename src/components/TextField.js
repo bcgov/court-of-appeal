@@ -30,9 +30,9 @@ class TextField extends Component {
     }
 
     handleFieldChange(e) {
+        let size = this.props.value.length > 30 ? this.props.value.length  : 30;
+        this.setState({size: size});
         if (!this.props.readOnly) {
-            let size = this.props.value.length > 30 ? this.props.value.length  : 30;
-            this.setState({size: size});
             this.props.handleFieldChange(e);
         }
     }

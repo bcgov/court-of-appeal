@@ -191,9 +191,11 @@ class Form2DataSection extends React.Component {
                         <div className="row address-row">
                             <div className="col-lg-4 col-md-4 col-sm-4 ">Electronically submitted by:</div>
                             <div className="col-lg-8 col-md-8 col-sm-8 ">
-                                <input
+                                <TextField
+                                    className={"form-field"}
                                     value={selectedRespondent.name || this.props.data.serviceFiler}
-                                    disabled={true}
+                                    readOnly={true}
+
                                 />
                             </div>
                         </div>

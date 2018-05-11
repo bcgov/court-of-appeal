@@ -56,7 +56,8 @@ class Form2 extends Component {
             displaySaveError: false,
             dataLoss: false,
             displayWarning: 'none',
-            formHasUnsavedChanges: false
+            formHasUnsavedChanges: false,
+            notFoundError: ''
         };
 
         this.found = this.found.bind(this);
@@ -80,7 +81,9 @@ class Form2 extends Component {
     }
 
     found(data) {
+
         if (data) {
+            this.setState({notFoundError: ''});
             const appellants = data.parties.appellants.map((appellant) => {
                 let appellantMap = {};
                 if (appellant.name) {
@@ -119,8 +122,10 @@ class Form2 extends Component {
                     showForm2: true
                 });
             } else {
-                //display error
+                this.setState({notFoundError: 'Something went wrong with the document requested'});
             }
+        } else {
+            this.setState({notFoundError: 'No such Court of Appeal document found'});
         }
     }
 
@@ -212,6 +217,7 @@ class Form2 extends Component {
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
+                this.setState({ notFoundError: '' });
                 break;
             case 'name' :
                 this.setState(update(this.state, { document: { selectedRespondentIndex: { $set: e.target.value } } }));
@@ -308,6 +314,7 @@ class Form2 extends Component {
                         callback={this.found}
                         handleFieldChange={this.handleFieldChange}
                         service={this.service}
+                        notFoundError={this.state.notFoundError}
                     />
                     <div className="form-section" style={{display: this.state.displayData}}>
                         <Form2DataSection

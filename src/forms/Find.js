@@ -82,7 +82,9 @@ class Find extends Component {
                                 { this.buttonOrSpinner() }
                             </td>
                             <td>
-                                Error message will display here when we hook it up.
+                                <div className="error-message">
+                                {this.props.notFoundError}
+                                </div>
                             </td>
                         </tr>
                     </tbody>
