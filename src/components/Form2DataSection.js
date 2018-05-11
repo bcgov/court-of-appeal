@@ -12,18 +12,32 @@ class Form2DataSection extends React.Component {
                 <div>
 
                     <div className="form-section" >
-                        <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case 20160430</h2></div>
+                        <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2></div>
 
                         <table><tbody>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                            <td id="appellant-name">{ this.props.data.appellants[0].name}</td>
-                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant</td>
+                            <td id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
+                                if (index === this.props.data.appellants.length - 1) {
+                                    return appellant.name;
+                                } else {
+                                    return appellant.name + ', ';
+                                }
+                            } ) }
+                            </td>
+                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</td>
                         </tr>
                         <tr>
                             <td style={{ fontWeight:'bold' }}>AND:</td>
-                            <td id="respondent-name" >{ selectedRespondent.name}</td>
-                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent</td>
+                            <td id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
+                                if (index === this.props.data.respondents.length - 1) {
+                                    return respondent.name;
+                                } else {
+                                    return respondent.name + ', ';
+                                }
+                            } ) }
+                            </td>
+                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</td>
                         </tr>
                         </tbody></table>
                     </div>
@@ -34,7 +48,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                         <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                            <select onChange={this.props.handleFieldChange} name={"respondent.name"}>
+                            <select className="form-field" onChange={this.props.handleFieldChange} name={"respondent.name"}>
                                 {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
                             </select>
                         </div>
