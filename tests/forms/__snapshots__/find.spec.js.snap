@@ -56,6 +56,9 @@ exports[`[enter] can trigger the search 1`] = `
             Find
           </button>
         </td>
+        <td>
+          Error message will display here when we hook it up.
+        </td>
       </tr>
     </tbody>
   </table>
@@ -118,6 +121,9 @@ exports[`only [enter] can trigger the search 1`] = `
             Find
           </button>
         </td>
+        <td>
+          Error message will display here when we hook it up.
+        </td>
       </tr>
     </tbody>
   </table>
@@ -179,6 +185,9 @@ exports[`sends fetched data to caller 1`] = `
           >
             Find
           </button>
+        </td>
+        <td>
+          Error message will display here when we hook it up.
         </td>
       </tr>
     </tbody>
