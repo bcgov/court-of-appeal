@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-test('should enable button for only valid entries', ()=> {
+test('valid entries', ()=> {
 
     let value = '';
     let handleFieldChange = (e) => { value = e.target.value; };
@@ -41,7 +41,7 @@ test('should enable button for only valid entries', ()=> {
 
 });
 
-let Service = require('../../src/service/default.service');
+let DefaultService = require('../../src/service/default.service');
 test('default service', ()=>{
     let value = '';
     let handleFieldChange = (e) => { value = e.target.value; };
@@ -52,7 +52,7 @@ test('default service', ()=>{
     );    
     let instance = finder.instance();
     
-    expect(instance.service instanceof Service).toEqual(true);  
+    expect(instance.service instanceof DefaultService).toEqual(true);  
 });
 test('sends fetched data to caller', ()=>{
     let value = '';
