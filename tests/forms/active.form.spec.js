@@ -3,12 +3,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ActiveFormList from '../../src/components/ActiveFormList';
 let Service = require('../../src/service/default.service');
+var LocalServer = require('../support/local.server');
 
 describe('Active forms section', function() {
 
-    let api = 'http://localhost:5001';
-    let server;
-    let port = 5001;
+    let apiServer;
 
     let document;
     let sut;        
@@ -18,7 +17,7 @@ describe('Active forms section', function() {
     ];
 
     beforeEach(function(done) {
-        server = require('http').createServer((request, response)=> {     
+        apiServer = new LocalServer((request, response)=> {  
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.write( JSON.stringify({ cases:cases })); 
                 response.end();
@@ -28,7 +27,8 @@ describe('Active forms section', function() {
                 response.write('ko');
                 response.end(); 
             }
-        }).listen(port, done);
+        });
+        apiServer.start(done); 
 
         document = jsdom.jsdom('<div id="react_app"></div>');
         let component = <ActiveFormList fetch="false" />;
@@ -37,8 +37,8 @@ describe('Active forms section', function() {
         sut.fetchCases();
     });
 
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        apiServer.stop(done);
     });
     
     test('transforms the data for the list', function(done) {
