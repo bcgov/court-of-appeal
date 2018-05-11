@@ -1,6 +1,28 @@
+var jsdom = require('jsdom').jsdom;
+
+var exposedProperties = ['window', 'navigator', 'document'];
+
+global.document = jsdom('');
+global.window = document.defaultView;
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    exposedProperties.push(property);
+    global[property] = document.defaultView[property];
+  }
+});
+
+global.navigator = {
+  userAgent: 'node.js'
+};
+document.defaultView.location = {origin : 'this.origin'};
+
 import React from 'react';
 import Find from '../../src/forms/Find';
 import renderer from 'react-test-renderer';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('should enable button for only valid entries', ()=> {
 
@@ -34,4 +56,83 @@ test('should enable button for only valid entries', ()=> {
     instance.handleFieldChange(e);
     expect(value).toMatch('CA12345');
 
+});
+
+let Service = require('../../src/service/default.service');
+test('default service', ()=>{
+    let value = '';
+    let handleFieldChange = (e) => { value = e.target.value; };
+
+    const finder = mount(
+        <Find id="number-field"
+              formSevenNumber={value}
+              handleFieldChange={handleFieldChange.bind(this)}/>
+    );
+    
+    let instance = finder.instance();
+    
+    expect(instance.service instanceof Service).toEqual(true);  
+});
+test('sends fetched data to caller', ()=>{
+    let value = '';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );
+    let tree = finder.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    let instance = finder.getInstance();
+    instance.search();
+
+    expect(sent).toEqual(42);
+});
+test('[enter] can trigger the search', ()=>{
+    let value = 'CA12345';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );
+    let tree = finder.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    let instance = finder.getInstance();
+    instance.handleKeyPress({charCode:13});
+
+    expect(sent).toEqual(42);
+});
+test('only [enter] can trigger the search', ()=>{
+    let value = 'CA12345';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );
+    let tree = finder.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    let instance = finder.getInstance();
+    instance.handleKeyPress({charCode:65});
+
+    expect(sent).toEqual({});
 });
