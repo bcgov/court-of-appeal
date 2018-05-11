@@ -1,21 +1,4 @@
-let jsdom = require('jsdom').jsdom;
-
-let exposedProperties = ['window', 'navigator', 'document'];
-
-global.document = jsdom('');
-global.window = document.defaultView;
-Object.keys(document.defaultView).forEach((property) => {
-  if (typeof global[property] === 'undefined') {
-    exposedProperties.push(property);
-    global[property] = document.defaultView[property];
-  }
-});
-
-global.navigator = {
-  userAgent: 'node.js'
-};
-document.defaultView.location = {origin : 'this.origin'};
-
+require('../support/fake.dom');
 import React from 'react';
 import Find from '../../src/forms/Find';
 import renderer from 'react-test-renderer';
@@ -62,13 +45,11 @@ let Service = require('../../src/service/default.service');
 test('default service', ()=>{
     let value = '';
     let handleFieldChange = (e) => { value = e.target.value; };
-
     const finder = mount(
         <Find id="number-field"
               formSevenNumber={value}
               handleFieldChange={handleFieldChange.bind(this)}/>
-    );
-    
+    );    
     let instance = finder.instance();
     
     expect(instance.service instanceof Service).toEqual(true);  
@@ -78,17 +59,13 @@ test('sends fetched data to caller', ()=>{
     let handleFieldChange = (e) => { value = e.target.value; };
     let sent = {};
     let callback = (data) => { sent=data; }
-
     const finder = renderer.create(
         <Find id="number-field"
               formSevenNumber={value}
               service={{ searchForm7: (file, callback)=> {callback(42); } }}
               callback={callback.bind(this)}
               handleFieldChange={handleFieldChange.bind(this)}/>,
-    );
-    let tree = finder.toJSON();
-    expect(tree).toMatchSnapshot();
-
+    );    
     let instance = finder.getInstance();
     instance.search();
 
@@ -99,17 +76,13 @@ test('[enter] can trigger the search', ()=>{
     let handleFieldChange = (e) => { value = e.target.value; };
     let sent = {};
     let callback = (data) => { sent=data; }
-
     const finder = renderer.create(
         <Find id="number-field"
               formSevenNumber={value}
               service={{ searchForm7: (file, callback)=> {callback(42); } }}
               callback={callback.bind(this)}
               handleFieldChange={handleFieldChange.bind(this)}/>,
-    );
-    let tree = finder.toJSON();
-    expect(tree).toMatchSnapshot();
-
+    );    
     let instance = finder.getInstance();
     instance.handleKeyPress({charCode:13});
 
@@ -120,7 +93,6 @@ test('only [enter] can trigger the search', ()=>{
     let handleFieldChange = (e) => { value = e.target.value; };
     let sent = {};
     let callback = (data) => { sent=data; }
-
     const finder = renderer.create(
         <Find id="number-field"
               formSevenNumber={value}
@@ -128,9 +100,6 @@ test('only [enter] can trigger the search', ()=>{
               callback={callback.bind(this)}
               handleFieldChange={handleFieldChange.bind(this)}/>,
     );
-    let tree = finder.toJSON();
-    expect(tree).toMatchSnapshot();
-
     let instance = finder.getInstance();
     instance.handleKeyPress({charCode:65});
 
