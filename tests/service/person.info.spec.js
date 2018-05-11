@@ -1,13 +1,12 @@
 let Service = require('../../src/service/default.service');
 let url = require('url');
-var qs = require('querystring');
+let qs = require('querystring');
+let LocalServer = require('../support/local.server');
 
 describe('Person info', function() {
 
-    let api = 'http://localhost:5001';
-    let server;
-    let port = 5001;
     let service;
+    let apiServer;
     let received;
     let answer = {
         code:200,
@@ -17,8 +16,7 @@ describe('Person info', function() {
     beforeEach(function(done) {
         received = undefined;
         service = new Service();
-        service.apiUrl = api;
-        server = require('http').createServer((request, response)=> {          
+        apiServer = new LocalServer((request, response)=> {  
             if (request.url == '/api/persons/max' && request.method == 'GET') {                
                 response.statusCode = answer.code;
                 response.write(answer.body);
@@ -29,10 +27,14 @@ describe('Person info', function() {
                 response.write('ko');
                 response.end(); 
             }
-        }).listen(port, done);            
+        });
+        apiServer.start(()=>{
+            service.apiUrl = 'http://localhost:' + apiServer.port;
+            done();
+        }); 
     });
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        apiServer.stop(done);
     });
 
     test('uses a rest service', (done)=> {   
@@ -56,11 +58,12 @@ describe('Person info', function() {
     });
 
     test('resists server is down', (done)=> {
-        server.close();
-        service.user = 'max';                     
-        service.getPersonInfo((data)=> {
-            expect(data).toEqual(undefined);
-            done();
+        apiServer.stop(function() {
+            service.user = 'max';                     
+            service.getPersonInfo((data)=> {
+                expect(data).toEqual(undefined);
+                done();
+            });    
         });
     });
 });

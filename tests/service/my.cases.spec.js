@@ -1,20 +1,18 @@
 let Service = require('../../src/service/default.service');
 let url = require('url');
-var qs = require('querystring');
+let qs = require('querystring');
+let LocalServer = require('../support/local.server');
 
 describe('My cases', function() {
 
-    let api = 'http://localhost:5001';
-    let server;
-    let port = 5001;
     let service;
+    let apiServer;
     let received;
 
     beforeEach(function(done) {
         received = undefined;
         service = new Service();
-        service.apiUrl = api;
-        server = require('http').createServer((request, response)=> {          
+        apiServer = new LocalServer((request, response)=> {  
             received = request.headers;  
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.statusCode = 200;
@@ -26,10 +24,14 @@ describe('My cases', function() {
                 response.write('ko');
                 response.end(); 
             }
-        }).listen(port, done);            
-    });
-    afterEach(function() {
-        server.close();
+        });
+        apiServer.start(()=>{
+            service.apiUrl = 'http://localhost:' + apiServer.port;
+            done();
+        });        
+    });    
+    afterEach(function(done) {
+        apiServer.stop(done);
     });
 
     test('uses a rest service', (done)=> {                        

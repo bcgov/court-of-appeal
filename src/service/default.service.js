@@ -11,7 +11,7 @@ let fakeData = {
     }
 };
 
-var Service = function(window) {  
+let Service = function(window) {  
     this.apiUrl = undefined;
     this.user = undefined;
     if (typeof window !== 'undefined') {
@@ -26,34 +26,24 @@ var Service = function(window) {
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
-    }
-    this.serveLocalData = false;  
+    } 
 };
 
 Service.prototype.base = function() {
     return this.apiUrl === undefined ? '' : this.apiUrl;
 };
 
-Service.prototype.setServeLocalData = function(flag) {    
-    this.serveLocalData = flag;
-};
-
 Service.prototype.searchForm7 = function(file, callback) {
-    if (this.serveLocalData) {
-        callback(fakeData);
-    }
-    else {        
-        let get = require('request');
-        get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
-            if (response.statusCode == 404) { callback(undefined); }
-            else { callback(JSON.parse(body)); }
-        }); 
-    }
+    let get = require('request');
+    get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
+        if (response.statusCode == 404) { callback(undefined); }
+        else { callback(JSON.parse(body)); }
+    }); 
 };
 
 Service.prototype.createForm2 = function(form, callback) {
     let request = require('request');
-    var options = this.buildOptions('/api/forms');
+    let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
     request.post(options, function(err, response, body) {
         callback(body);
@@ -62,7 +52,7 @@ Service.prototype.createForm2 = function(form, callback) {
 
 Service.prototype.updateForm2 = function(form, id, callback) {
     let request = require('request');
-    var options = this.buildOptions(`/api/forms/${id}`);
+    let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     request.put(options, function(err, response, body) {
         callback(body);
@@ -79,7 +69,7 @@ Service.prototype.getMyCases = function(form, callback) {
 
 Service.prototype.savePerson = function(user, callback) {
     let request = require('request');
-    var options = this.buildOptions('/api/persons');
+    let options = this.buildOptions('/api/persons');
     options.form = { data:user };
     request.post(options, function(err, response, body) {
         callback(body);

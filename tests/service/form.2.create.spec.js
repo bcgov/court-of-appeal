@@ -3,7 +3,7 @@ let url = require('url');
 let qs = require('querystring');
 let LocalServer = require('../support/local.server');
 
-describe('Save person', function() {
+describe('Create form 2', function() {
 
     let service;
     let apiServer;
@@ -11,7 +11,7 @@ describe('Save person', function() {
     beforeEach(function(done) {
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            if (request.url == '/api/persons' && request.method == 'POST') {                
+            if (request.url == '/api/forms' && request.method == 'POST') {                
                 let body = '';
                 request.on('data', (data)=> {
                     body += data;
@@ -35,18 +35,9 @@ describe('Save person', function() {
     });
 
     test('sends data via post inside a data field', function(done) {                        
-        service.savePerson('bob', function(data) {
-            expect(data).toEqual('bob');
+        service.createForm2({ any:'field' }, function(data) {
+            expect(data).toEqual('{"any":"field"}');
             done();
         });     
-    });
-
-    test('resists server is down', function(done) {   
-        apiServer.stop(function() {
-            service.savePerson('bob', function(data) {
-                expect(data).toEqual(undefined);
-                done();
-            });     
-        });                     
     });
 });

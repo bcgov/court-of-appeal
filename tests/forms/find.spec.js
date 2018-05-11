@@ -1,8 +1,13 @@
+require('../support/fake.dom');
 import React from 'react';
 import Find from '../../src/forms/Find';
 import renderer from 'react-test-renderer';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-test('should enable button for only valid entries', ()=> {
+configure({ adapter: new Adapter() });
+
+test('valid entries', ()=> {
 
     let value = '';
     let handleFieldChange = (e) => { value = e.target.value; };
@@ -34,4 +39,69 @@ test('should enable button for only valid entries', ()=> {
     instance.handleFieldChange(e);
     expect(value).toMatch('CA12345');
 
+});
+
+let DefaultService = require('../../src/service/default.service');
+test('default service', ()=>{
+    let value = '';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    const finder = mount(
+        <Find id="number-field"
+              formSevenNumber={value}
+              handleFieldChange={handleFieldChange.bind(this)}/>
+    );    
+    let instance = finder.instance();
+    
+    expect(instance.service instanceof DefaultService).toEqual(true);  
+});
+test('sends fetched data to caller', ()=>{
+    let value = '';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );    
+    let instance = finder.getInstance();
+    instance.search();
+
+    expect(sent).toEqual(42);
+});
+test('[enter] can trigger the search', ()=>{
+    let value = 'CA12345';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );    
+    let instance = finder.getInstance();
+    instance.handleKeyPress({charCode:13});
+
+    expect(sent).toEqual(42);
+});
+test('only [enter] can trigger the search', ()=>{
+    let value = 'CA12345';
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let sent = {};
+    let callback = (data) => { sent=data; }
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: (file, callback)=> {callback(42); } }}
+              callback={callback.bind(this)}
+              handleFieldChange={handleFieldChange.bind(this)}/>,
+    );
+    let instance = finder.getInstance();
+    instance.handleKeyPress({charCode:65});
+
+    expect(sent).toEqual({});
 });
