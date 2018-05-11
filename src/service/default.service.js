@@ -71,7 +71,7 @@ Service.prototype.savePerson = function(user, callback) {
     let request = require('request');
     var options = this.buildOptions('/api/persons');
     options.form = { data:user };
-    request.post(options, function(err, response, body) {
+    request.post(options, function(err, response, body) {        
         callback(body);
     });
 };

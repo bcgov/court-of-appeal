@@ -27,8 +27,9 @@ describe('Search form 7', function() {
             }
         }).listen(port, done);            
     });
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        if (server.listening) { server.close(done); }
+        else { done(); }
     });
 
     test('uses a rest service', function(done) {                        

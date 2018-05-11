@@ -31,8 +31,9 @@ describe('Person info', function() {
             }
         }).listen(port, done);            
     });
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        if (server.listening) { server.close(done); }
+        else { done(); }
     });
 
     test('uses a rest service', (done)=> {   
@@ -56,11 +57,12 @@ describe('Person info', function() {
     });
 
     test('resists server is down', (done)=> {
-        server.close();
-        service.user = 'max';                     
-        service.getPersonInfo((data)=> {
-            expect(data).toEqual(undefined);
-            done();
+        server.close(function() {
+            service.user = 'max';                     
+            service.getPersonInfo((data)=> {
+                expect(data).toEqual(undefined);
+                done();
+            });    
         });
     });
 });

@@ -28,8 +28,9 @@ describe('Create form 2', function() {
             }
         }).listen(port, done);            
     });
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        if (server.listening) { server.close(done); }
+        else { done(); }
     });
 
     test('sends data via post inside a data field', function(done) {                        

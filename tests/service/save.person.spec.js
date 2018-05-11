@@ -28,8 +28,9 @@ describe('Save person', function() {
             }
         }).listen(port, done);            
     });
-    afterEach(function() {
-        server.close();
+    afterEach(function(done) {
+        if (server.listening) { server.close(done); }
+        else { done(); }
     });
 
     test('sends data via post inside a data field', function(done) {                        
@@ -40,10 +41,11 @@ describe('Save person', function() {
     });
 
     test('resists server is down', function(done) {   
-        server.close();                     
-        service.savePerson('bob', function(data) {
-            expect(data).toEqual(undefined);
-            done();
-        });     
+        server.close(function() {
+            service.savePerson('bob', function(data) {
+                expect(data).toEqual(undefined);
+                done();
+            });     
+        });                     
     });
 });
