@@ -6,6 +6,7 @@ import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
+import Form2Preview from "../components/Form2Preview";
 
 class Form2 extends Component {
 
@@ -327,16 +328,14 @@ class Form2 extends Component {
                     <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
                         <div className="modal-title green">
                             <span id="close-modal" onClick={this.closeForm}>&times;</span>
-                            Edit Form 2
+                            Preview Form 2
                         </div>
                         <div className="modal-content">
                             <div className="form-section">
-                                <Form2DataSection
+                                <Form2Preview
                                     closeForm={this.closeForm}
                                     show={this.state.showForm2}
-                                    readOnly={this.state.previewMode}
                                     className="case-list-modal"
-                                    renderer="CaseList"
                                     data={this.state.document}
                                     handleFieldChange={this.handleFieldChange}
                                 />

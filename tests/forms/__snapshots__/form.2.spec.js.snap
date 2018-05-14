@@ -188,7 +188,7 @@ exports[`Snapshots of form2 1`] = `
           >
             ×
           </span>
-          Edit Form 2
+          Preview Form 2
         </div>
         <div
           className="modal-content"
