@@ -23,7 +23,7 @@ class FormButtonBar extends React.Component {
             backMessage = "Back";
         }
         if (this.props.back) {
-            button =  <button id="cancel" onClick={this.props.back} className="btn btn-warning">&lt; {backMessage}
+            button =  <button id="back" onClick={this.props.back} className="btn btn-warning">&lt; {backMessage}
             </button>;
         };
         return button;
@@ -41,7 +41,7 @@ class FormButtonBar extends React.Component {
     saveButton() {
         let button = null;
         if (this.props.save) {
-            button =  <button id="cancel" onClick={this.props.save} className="btn btn-success">Save as Draft
+            button =  <button id="draft" onClick={this.props.save} className="btn btn-success">Save as Draft
             </button>;
         };
         return button;
@@ -59,7 +59,12 @@ class FormButtonBar extends React.Component {
     previewButton() {
         let button = null;
         if (this.props.preview) {
-            button =  <button id="preview" onClick={this.props.preview} className="btn btn-success">Preview &gt;
+            button =  <button
+                id="preview"
+                onClick={this.props.preview}
+                className="btn btn-success"
+                disabled={this.props.disablePreview}
+            >Preview &gt;
             </button>;
         };
         return button;
@@ -68,7 +73,12 @@ class FormButtonBar extends React.Component {
     submitButton() {
         let button = null;
         if (this.props.submit) {
-            button =  <button id="submit" onClick={this.props.submit} className="btn btn-success">Submit
+            button =  <button
+                id="submit"
+                onClick={this.props.submit}
+                className="btn btn-success"
+                disabled={this.props.disableSubmit}
+            >Submit
             </button>;
         };
         return button;

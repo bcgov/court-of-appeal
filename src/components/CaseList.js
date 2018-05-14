@@ -56,7 +56,6 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: e.target.value}}}));
                 break;
             case 'addressLine1' :
-                debugger;
                 respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
@@ -65,7 +64,6 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                debugger;
                 respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['city'] = e.target.value;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;

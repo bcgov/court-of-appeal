@@ -136,6 +136,7 @@ class Form2DataSection extends React.Component {
                                     handleFieldChange={this.props.handleFieldChange}
                                     name="respondent.postalCode"
                                     readOnly={this.props.readOnly}
+                                    validate={this.props.validate}
                                 />
                             </div>
                         </div>
@@ -148,6 +149,7 @@ class Form2DataSection extends React.Component {
                                     handleFieldChange={this.props.handleFieldChange}
                                     name="respondent.phone"
                                     readOnly={this.props.readOnly}
+                                    validate={this.props.validate}
                                 />
                             </div>
                         </div>
