@@ -30,6 +30,12 @@ class PostalCodeField extends Component {
         />);
     }
 
+    componentDidMount() {
+        if (this.props.value) {
+            this.validate();
+        }
+    }
+
     handleFieldChange(e) {
         if (!this.props.readOnly) {
             let value = e.target.value;

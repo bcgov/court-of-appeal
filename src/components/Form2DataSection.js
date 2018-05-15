@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from "./TextField";
 import PostalCodeField from "./PostalCodeField";
 import PhoneField from "./PhoneField";
+import EmailField from "./EmailField";
 
 class Form2DataSection extends React.Component {
 
@@ -156,12 +157,13 @@ class Form2DataSection extends React.Component {
                         <div className="row address-row">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 ">Email address:</div>
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                <TextField
+                                <EmailField
                                     value={this.props.data ? this.props.data.email : ''}
                                     handleFieldChange={this.props.handleFieldChange}
                                     name="respondent.email"
                                     maxLength={254}
                                     readOnly={this.props.readOnly}
+                                    validate={this.props.validate}
                                 />
                             </div>
                         </div>

@@ -50,7 +50,7 @@ class CaseList extends React.Component {
 
     handleFieldChange(e) {
         const keys = e.target.name.split(".");
-        const respondents = this.state.selectedDocument.respondents.slice();
+        const respondents = this.state.selectedDocument.respondents;
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, {formSevenNumber: {$set: e.target.value}}));

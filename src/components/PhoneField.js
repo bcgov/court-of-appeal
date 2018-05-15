@@ -11,7 +11,7 @@ class PhoneField extends Component {
             className: "form-field",
             isValid: false,
             title: ''
-        }
+        };
     }
 
     render() {
@@ -33,6 +33,12 @@ class PhoneField extends Component {
         />;
     }
 
+    componentDidMount() {
+        if (this.props.value) {
+            this.validate();
+        }
+    }
+
     /**
      * Eliminate all but valid Canadian phone characters are used eg +1(250)385-9999
      * @param e
@@ -43,6 +49,7 @@ class PhoneField extends Component {
     }
 
     validate() {
+        debugger;
         if (!this.props.value || this.isValidPhoneNumber())
         {
             this.setState({className: "form-field", title: ""}, this.props.validate(true));
