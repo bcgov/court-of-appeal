@@ -129,7 +129,11 @@ exports[`Snapshots of form2 1`] = `
                 </button>
               </td>
               <td>
-                Error message will display here when we hook it up.
+                <div
+                  className="error-message"
+                >
+                  
+                </div>
               </td>
             </tr>
           </tbody>
@@ -148,7 +152,7 @@ exports[`Snapshots of form2 1`] = `
         >
           <button
             className="btn btn-warning"
-            id="cancel"
+            id="back"
             onClick={[Function]}
           >
             &lt; 
@@ -156,13 +160,14 @@ exports[`Snapshots of form2 1`] = `
           </button>
           <button
             className="btn btn-success"
-            id="cancel"
+            id="draft"
             onClick={[Function]}
           >
             Save as Draft
           </button>
           <button
             className="btn btn-success"
+            disabled={true}
             id="preview"
             onClick={[Function]}
           >
@@ -201,7 +206,7 @@ exports[`Snapshots of form2 1`] = `
             >
               <button
                 className="btn btn-warning"
-                id="cancel"
+                id="back"
                 onClick={[Function]}
               >
                 &lt; 
@@ -209,13 +214,14 @@ exports[`Snapshots of form2 1`] = `
               </button>
               <button
                 className="btn btn-success"
-                id="cancel"
+                id="draft"
                 onClick={[Function]}
               >
                 Save as Draft
               </button>
               <button
                 className="btn btn-success"
+                disabled={true}
                 id="submit"
                 onClick={[Function]}
               >
@@ -394,7 +400,7 @@ exports[`Snapshots of form2 1`] = `
           >
             <button
               className="btn btn-warning"
-              id="cancel"
+              id="back"
               onClick={[Function]}
             >
               &lt; 

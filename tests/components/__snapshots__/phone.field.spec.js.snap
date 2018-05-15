@@ -3,13 +3,16 @@
 exports[`should only allow numeric, dash, and parentheses entries 1`] = `
 <input
   autoFocus={false}
+  className="form-field"
   id="number-field"
-  maxLength={15}
+  maxLength={17}
   name={undefined}
+  onBlur={[Function]}
   onChange={[Function]}
   placeholder={undefined}
   readOnly={undefined}
   size={30}
+  title=""
   value=""
 />
 `;
