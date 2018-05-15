@@ -57,7 +57,9 @@ exports[`valid entries 1`] = `
           </button>
         </td>
         <td>
-          Error message will display here when we hook it up.
+          <div
+            className="error-message"
+          />
         </td>
       </tr>
     </tbody>
