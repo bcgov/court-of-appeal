@@ -30,6 +30,12 @@ class PostalCodeField extends Component {
         />);
     }
 
+    componentDidMount() {
+        if (this.props.value) {
+            this.validate();
+        }
+    }
+
     handleFieldChange(e) {
         if (!this.props.readOnly) {
             let value = e.target.value;
@@ -45,9 +51,9 @@ class PostalCodeField extends Component {
      */
     validate() {
         if (this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null || !this.props.value) {
-            this.setState({className: "form-field", title: ""});
+            this.setState({className: "form-field", title: ""}, this.props.validate(true));
         } else {
-            this.setState({className: "form-field invalid-field", title: "ERROR: Invalid Postal Code"});
+            this.setState({className: "form-field invalid-field", title: "ERROR: Invalid Postal Code"}, this.props.validate(false));
         }
     }
 

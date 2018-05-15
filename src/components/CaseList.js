@@ -26,6 +26,8 @@ class CaseList extends React.Component {
             dataLoss: false,
             displayWarning: 'none',
             formHasUnsavedChanges: false,
+            previewShouldBeDisabled: true,
+            submitShouldBeDisabled: true
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
@@ -36,6 +38,7 @@ class CaseList extends React.Component {
         this.cancel = this.cancel.bind(this);
         this.backToEdit = this.backToEdit.bind(this);
         this.preview = this.preview.bind(this);
+        this.validate = this.validate.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +50,7 @@ class CaseList extends React.Component {
 
     handleFieldChange(e) {
         const keys = e.target.name.split(".");
-        const respondents = this.state.selectedDocument.respondents.slice();
+        const respondents = this.state.selectedDocument.respondents;
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, {formSevenNumber: {$set: e.target.value}}));
@@ -56,7 +59,6 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: e.target.value}}}));
                 break;
             case 'addressLine1' :
-                debugger;
                 respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
@@ -65,7 +67,6 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                debugger;
                 respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['city'] = e.target.value;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
@@ -140,11 +141,13 @@ class CaseList extends React.Component {
                                 className="case-list-modal"
                                 renderer="CaseList"
                                 data={this.state.selectedDocument}
+                                validate={this.validate}
                             />
                             <FormButtonBar
                                 back={this.cancel}
                                 save={this.updateForm2}
                                 preview={this.preview}
+                                disablePreview={this.state.previewShouldBeDisabled}
                             />
                         </div>
                     </div>
@@ -165,11 +168,14 @@ class CaseList extends React.Component {
                                 className="case-list-modal"
                                 renderer="CaseList"
                                 data={this.state.selectedDocument}
+                                validate={this.validate}
                             />
                             <FormButtonBar
                                 back={this.backToEdit}
                                 save={this.updateForm2}
-                                submit={this.updateForm2}/>
+                                submit={this.updateForm2}
+                                disableSubmit={this.state.submitShouldBeDisabled}
+                            />
                         </div>
                     </div>
                 </div>
@@ -254,6 +260,23 @@ class CaseList extends React.Component {
     acceptDataLoss() {
         this.closeDataLossWarning();
         this.closeEditModal();
+    }
+
+    validate(isValid) {
+        if (isValid !== null && isValid !== undefined) {
+            let selectedRespondent = this.state.selectedDocument.respondents[this.state.selectedRespondentIndex || 0];
+            let valid = isValid &&
+                selectedRespondent.address &&
+                selectedRespondent.address.addressLine1 &&
+                selectedRespondent.address.addressLine1.length > 3 &&
+                (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1 || selectedRespondent.address.addressLine2.length > 3) &&
+                selectedRespondent.address.city &&
+                selectedRespondent.address.city.length > 4 &&
+                selectedRespondent.address.postalCode && selectedRespondent.address.postalCode.length > 0 &&
+                (!this.state.phone || this.state.phone.length < 1 || this.state.phone.length > 9);
+
+            this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
+        }
     }
 }
 

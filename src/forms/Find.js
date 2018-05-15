@@ -9,10 +9,14 @@ class Find extends Component {
         super(props);   
         this.service = props.service; 
         this.callback = props.callback;
+        this.state = {
+            searching: false
+        }
 
         this.search = this.search.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.isInvalidCaseNumber = this.isInvalidCaseNumber.bind(this);
+        this.buttonOrSpinner = this.buttonOrSpinner.bind(this);
     }
 
     componentDidMount() {
@@ -23,9 +27,24 @@ class Find extends Component {
     }
 
     search() {
+        this.setState({ searching:true });
         this.service.searchForm7(this.props.formSevenNumber, (data) => {
+            this.setState({ searching:false });
             this.callback(data);
         });
+    }
+
+    buttonOrSpinner() {
+        if (this.state.searching) {
+            return (
+                <button id="find-button" disabled="true" className="btn btn-primary btn-green" style={{ width:'52px'}}>
+                    <i className="fa fa-spinner fa-spin"></i>
+                </button>
+            )
+        }
+        else {
+            return <button id="find-button" disabled={this.isInvalidCaseNumber()} onClick={this.search} className="btn btn-primary btn-green">Find</button>
+        }
     }
 
     handleKeyPress(target) {
@@ -60,10 +79,12 @@ class Find extends Component {
                                 />
                             </td>
                             <td>
-                                <button id="find-button" disabled={this.isInvalidCaseNumber()} onClick={this.search} className="btn btn-primary btn-green">Find</button>
+                                { this.buttonOrSpinner() }
                             </td>
                             <td>
-                                Error message will display here when we hook it up.
+                                <div className="error-message">
+                                {this.props.notFoundError}
+                                </div>
                             </td>
                         </tr>
                     </tbody>

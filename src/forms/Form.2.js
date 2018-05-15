@@ -6,6 +6,7 @@ import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
+import Form2Preview from "../components/Form2Preview";
 
 class Form2 extends Component {
 
@@ -55,7 +56,10 @@ class Form2 extends Component {
             displaySaveError: false,
             dataLoss: false,
             displayWarning: 'none',
-            formHasUnsavedChanges: false
+            formHasUnsavedChanges: false,
+            notFoundError: '',
+            previewShouldBeDisabled: true,
+            submitShouldBeDisabled: true
         };
 
         this.found = this.found.bind(this);
@@ -69,6 +73,7 @@ class Form2 extends Component {
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.formHasData = this.formHasData.bind(this);
         this.preview = this.preview.bind(this);
+        this.validate = this.validate.bind(this);
     }
 
     componentDidMount() {
@@ -79,7 +84,9 @@ class Form2 extends Component {
     }
 
     found(data) {
+
         if (data) {
+            this.setState({notFoundError: ''});
             const appellants = data.parties.appellants.map((appellant) => {
                 let appellantMap = {};
                 if (appellant.name) {
@@ -114,12 +121,15 @@ class Form2 extends Component {
             if (appellants && respondents) {
                 this.setState(update(this.state, { document: { appellants: {$set: appellants} } }));
                 this.setState(update(this.state, { document: { respondents: {$set: respondents} } }));
-                this.setState({displayData: 'block',
+                this.setState({
+                    displayData: 'block',
                     showForm2: true
                 });
             } else {
-                //display error
+                this.setState({notFoundError: 'Something went wrong with the document requested'});
             }
+        } else {
+            this.setState({notFoundError: 'No such Court of Appeal document found'});
         }
     }
 
@@ -134,7 +144,7 @@ class Form2 extends Component {
         respondent['useServiceEmail'] = this.state.document.useServiceEmail;
         respondent['sendNotifications'] =  this.state.document.sendNotifications;
         respondent['serviceFiler'] = this.state.document.serviceFiler;
-        // TODO-SP ^^ get update as to how this data should be structured
+
         this.service.createForm2({
                 formSevenNumber: this.state.formSevenNumber,
                 appellants: this.state.document.appellants,
@@ -211,12 +221,12 @@ class Form2 extends Component {
         switch (keys[1]) {
             case 'form-seven' :
                 this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
+                this.setState({ notFoundError: '' });
                 break;
             case 'name' :
                 this.setState(update(this.state, { document: { selectedRespondentIndex: { $set: e.target.value } } }));
                 break;
             case 'addressLine1' :
-                debugger;
                 respondents[this.state.document.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
                 this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
@@ -225,7 +235,6 @@ class Form2 extends Component {
                 this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'city' :
-                debugger;
                 respondents[this.state.document.selectedRespondentIndex]['address']['city'] = e.target.value;
                 this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
@@ -307,6 +316,7 @@ class Form2 extends Component {
                         callback={this.found}
                         handleFieldChange={this.handleFieldChange}
                         service={this.service}
+                        notFoundError={this.state.notFoundError}
                     />
                     <div className="form-section" style={{display: this.state.displayData}}>
                         <Form2DataSection
@@ -315,36 +325,38 @@ class Form2 extends Component {
                             data={this.state.document}
                             saveForm={this.create}
                             closeForm={this.closeForm}
+                            validate={this.validate}
                         />
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
                             save={this.create}
                             preview={this.preview}
                             formHasData={this.formHasData.bind(this)}
+                            disablePreview={this.state.previewShouldBeDisabled}
                         />
                     </div>
 
                     <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
                         <div className="modal-title green">
                             <span id="close-modal" onClick={this.closeForm}>&times;</span>
-                            Edit Form 2
+                            Preview Form 2
                         </div>
                         <div className="modal-content">
                             <div className="form-section">
-                                <Form2DataSection
+                                <Form2Preview
                                     closeForm={this.closeForm}
                                     show={this.state.showForm2}
-                                    readOnly={this.state.previewMode}
                                     className="case-list-modal"
-                                    renderer="CaseList"
                                     data={this.state.document}
                                     handleFieldChange={this.handleFieldChange}
+                                    validate={this.validate}
                                 />
                                 <FormButtonBar
                                     back={this.closePreview.bind(this)}
                                     save={this.create}
                                     submit={this.create}
                                     backMessage="Back to editing"
+                                    disableSubmit={this.state.submitShouldBeDisabled}
                                 />
                             </div>
                         </div>
@@ -427,6 +439,23 @@ class Form2 extends Component {
             </div>
         </div>
         );
+      }
+
+      validate(isValid) {
+        if (isValid !== null && isValid !== undefined) {
+            let selectedRespondent = this.state.document.respondents[this.state.selectedRespondentIndex || 0];
+            let valid = isValid &&
+                        selectedRespondent.address &&
+                        selectedRespondent.address.addressLine1 &&
+                        selectedRespondent.address.addressLine1.length > 3 &&
+                        (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1 || selectedRespondent.address.addressLine2.length > 3) &&
+                        selectedRespondent.address.city &&
+                        selectedRespondent.address.city.length > 4 &&
+                        selectedRespondent.address.postalCode && selectedRespondent.address.postalCode.length > 0 &&
+                        (!this.state.phone || this.state.phone.length < 1 || this.state.phone.length > 9);
+
+            this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
+        }
       }
 }
 
