@@ -21,8 +21,8 @@ class SelectForm extends Component {
 
                 <div id="steps" className="small-steps">
                     <ol>
-                        <li className="small-steps"><span className="step-circle future small-steps">2</span><span className="step-title future small-steps">Complete form</span></li>
-                        <li className="small-steps"><span className="step-circle future small-steps">3</span><span className="step-title future small-steps">Preview</span></li>
+                        <li className="small-steps"><span className="step-circle future small-steps">1</span><span className="step-title future small-steps">Complete form</span></li>
+                        <li className="small-steps"><span className="step-circle future small-steps">2</span><span className="step-title future small-steps">Preview</span></li>
                         <li className="small-steps"><span className="step-circle future small-steps">3</span><span className="step-title future small-steps">Submit</span></li>
                         <li className="small-steps"><span className="step-circle future small-steps">4</span><span className="step-title future small-steps">Pay</span></li>
                     </ol>
