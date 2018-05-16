@@ -10,90 +10,90 @@ class Form2DataSection extends React.Component {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
             return (
-                <div>
-
                     <div className="form-section" >
-                        <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2></div>
+                        <div className="row">
+                            <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2></div>
+                            <div className="row  proceeding-style">
+                                <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">BETWEEN:</div>
 
-                        <table><tbody>
-                        <tr>
-                            <td style={{ fontWeight:'bold' }}>BETWEEN:</td>
-                            <td id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
-                                if (index === this.props.data.appellants.length - 1) {
-                                    return appellant.name;
-                                } else {
-                                    return appellant.name + ', ';
-                                }
-                            } ) }
-                            </td>
-                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</td>
-                        </tr>
-                        <tr>
-                            <td style={{ fontWeight:'bold' }}>AND:</td>
-                            <td id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
-                                if (index === this.props.data.respondents.length - 1) {
-                                    return respondent.name;
-                                } else {
-                                    return respondent.name + ', ';
-                                }
-                            } ) }
-                            </td>
-                            <td style={{ fontWeight:'bold', paddingLeft:'70px' }}>Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</td>
-                        </tr>
-                        </tbody></table>
+                               <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
+                                    if (index === this.props.data.appellants.length - 1) {
+                                        return appellant.name;
+                                    } else {
+                                        return appellant.name + ', ';
+                                    }
+                                } ) }
+                                </div>
+                                <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</div>
+                            </div>
+                            <div className="row  proceeding-style">
+                                <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
+
+                                    <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
+                                        if (index === this.props.data.respondents.length - 1) {
+                                            return respondent.name;
+                                        } else {
+                                            return respondent.name + ', ';
+                                        }
+                                    } ) }
+                                 </div>
+                                <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="row address-row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
+                                    <div>
+                                        Respondent's name:
+                                    </div>
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                    <select className="form-select" onChange={this.props.handleFieldChange} name={"respondent.name"} disabled={this.props.readOnly}>
+                                        {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div className="row address-row">
+                        <div className="col-lg-12">
+                        Respondent's mailing address for service: &nbsp;
+                            <i className="fa fa-question-circle" aria-hidden="true" title="What is the address where you would like to receive documents?"></i>
+                        </div>
                     </div>
                     <div className="row address-row">
-                        <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-                            <div>
-                                Respondent's name:
-                            </div>
-                        </div>
+                        <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1: </div>
                         <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                            <select className="form-field" onChange={this.props.handleFieldChange} name={"respondent.name"}>
-                                {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
-                            </select>
-                        </div>
-                    </div>
-
-                        <div className="row address-row">
-                            <div className="col-lg-12">
-                            Respondent's mailing address for service: &nbsp;
-                                <i className="fa fa-question-circle" aria-hidden="true" title="What is the address where you would like to receive documents?"></i>
-                            </div>
-                        </div>
-                        <div className="row address-row">
-                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1: </div>
-                            <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                <div>
-                                    <TextField
-                                        value={this.props.data ? selectedRespondent.address.addressLine1 : ''}
-                                        handleFieldChange={this.props.handleFieldChange}
-                                        name="respondent.addressLine1"
-                                        readOnly={this.props.readOnly}
-                                    />
-                                    <div className="row address-hint">
-                                        Street address, P.O. box, company name, c/o
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row address-row">
-                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 2:</div>
-                            <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                <div>
+                            <div>
                                 <TextField
-                                    value={this.props.data ? selectedRespondent.address.addressLine2 : ''}
+                                    value={this.props.data ? selectedRespondent.address.addressLine1 : ''}
                                     handleFieldChange={this.props.handleFieldChange}
-                                    name="respondent.addressLine2"
+                                    name="respondent.addressLine1"
                                     readOnly={this.props.readOnly}
                                 />
-                                    <div className="row address-hint">
-                                        Apartment, suite, unit, building, floor, etc.
-                                    </div>
+                                <div className="row address-hint">
+                                    Street address, P.O. box, company name, c/o
                                 </div>
-
                             </div>
                         </div>
+                    </div>
+                    <div className="row address-row">
+                        <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 2:</div>
+                        <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                            <div>
+                            <TextField
+                                value={this.props.data ? selectedRespondent.address.addressLine2 : ''}
+                                handleFieldChange={this.props.handleFieldChange}
+                                name="respondent.addressLine2"
+                                readOnly={this.props.readOnly}
+                            />
+                                <div className="row address-hint">
+                                    Apartment, suite, unit, building, floor, etc.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                         <div className="row address-row">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">City: </div>
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">

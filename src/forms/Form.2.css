@@ -75,4 +75,13 @@
 #validationModal .success {
 	font-size: 1rem;
 }
-
+.proceeding-style{
+    padding-bottom: 18px;
+}
+.proceeding-style-col {
+    font-weight: bolder;
+    padding-right:15px;
+}
+.respondent-name-label {
+    padding-top: 5px;
+}
