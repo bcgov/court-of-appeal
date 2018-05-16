@@ -49,7 +49,6 @@ class PhoneField extends Component {
     }
 
     validate() {
-        debugger;
         if (!this.props.value || this.isValidPhoneNumber())
         {
             this.setState({className: "form-field", title: ""}, this.props.validate(true));

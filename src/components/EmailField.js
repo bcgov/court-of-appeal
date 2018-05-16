@@ -48,7 +48,6 @@ class EmailField extends Component {
     }
 
     validate() {
-        debugger;
         if (!this.props.value || this.isValidEmailAddress())
         {
             this.setState({className: "form-field", title: ""}, this.props.validate(true));

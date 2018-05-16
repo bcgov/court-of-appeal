@@ -79,6 +79,11 @@
 	max-width: 100%;
 	padding: 2px;
 }
+.form-select {
+	max-width: 100%;
+	height: 35px;
+	border: slategrey;
+}
 .address-row {
 	padding: 0 0 10px 5px;
 	font-size: 1em;
@@ -93,7 +98,7 @@
 	font-size: smaller;
 }
 .invalid-field {
-	background-color: palevioletred;
+	background-color: lightpink;
 	border-color: darkred;
 }
 .button-bar {
