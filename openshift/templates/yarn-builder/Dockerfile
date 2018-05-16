@@ -1,7 +1,8 @@
 # Get community edition of nodejs v6.x
 FROM centos/nodejs-6-centos7
 
-RUN node -v
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
+RUN node -v
 
 ENV PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
