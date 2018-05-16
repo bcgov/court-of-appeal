@@ -3,6 +3,8 @@ FROM centos/nodejs-6-centos7
 
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
+ENV PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
 RUN node -v
 
-ENV PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
