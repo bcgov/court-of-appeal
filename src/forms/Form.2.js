@@ -349,6 +349,7 @@ class Form2 extends Component {
                                     show={this.state.showForm2}
                                     className="case-list-modal"
                                     data={this.state.document}
+                                    formSevenNumber= {this.state.formSevenNumber}
                                     handleFieldChange={this.handleFieldChange}
                                     validate={this.validate}                                    
                                 />
