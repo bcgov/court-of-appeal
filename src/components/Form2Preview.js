@@ -82,35 +82,37 @@ class Form2Preview extends React.Component {
                                 <br/>CANADA
                             </div>
                         </div>                                                
-                        <hr/>
 
-                        <div className="row address-row">
-                            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">Phone:</div>
-                            <div className="col-lg-9 col-md-9 col-sm-6 col-xs-6 ">
-                                {this.props.data ? this.props.data.phone : ''}
+                        <div className="not-printable">
+                            <hr/>
+                            <div className="row address-row">
+                                <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">Phone:</div>
+                                <div className="col-lg-9 col-md-9 col-sm-6 col-xs-6 ">
+                                    {this.props.data ? this.props.data.phone : ''}
+                                </div>
                             </div>
-                        </div>
-                        <div className="row address-row">
-                            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">Email address:</div>
-                            <div className="col-lg-9 col-md-9 col-sm-6 col-xs-6 ">
-                                {this.props.data ? this.props.data.email : ''}
+                            <div className="row address-row">
+                                <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">Email address:</div>
+                                <div className="col-lg-9 col-md-9 col-sm-6 col-xs-6 ">
+                                    {this.props.data ? this.props.data.email : ''}
+                                </div>
                             </div>
-                        </div>
-                        <div className="row address-row">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like any documents to be sent / served to you by email?</div>
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                               { this.checked(this.props.data.useServiceEmail) }
-                               { this.unchecked(this.props.data.useServiceEmail) }
+                            <div className="row address-row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like any documents to be sent / served to you by email?</div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
+                                { this.checked(this.props.data.useServiceEmail) }
+                                { this.unchecked(this.props.data.useServiceEmail) }
+                                </div>
                             </div>
-                        </div>
-                        <div className="row address-row">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when a document status changes?</div>
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                { this.checked(this.props.data.sendNotifications) }
-                                { this.unchecked(this.props.data.sendNotifications) }
+                            <div className="row address-row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when a document status changes?</div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
+                                    { this.checked(this.props.data.sendNotifications) }
+                                    { this.unchecked(this.props.data.sendNotifications) }
+                                </div>
                             </div>
+                            <hr/>
                         </div>
-                        <hr/>
 
                         <div className="row address-row">
                             <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">Electronically submitted by:</div>

@@ -55,7 +55,7 @@ class Find extends Component {
 
     render() {
         return (
-            <div className="form-section" ref={ (element)=> {this.element = element }}>
+            <div className="form-section not-printable" ref={ (element)=> {this.element = element }}>
                 <h2 style={{ fontWeight:'bold' }}>Appeal Case Information</h2>
                 Enter the Court of Appeal number you want to respond to:
 
