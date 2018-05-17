@@ -214,13 +214,6 @@ exports[`Snapshots of form2 1`] = `
               </button>
               <button
                 className="btn btn-success"
-                id="draft"
-                onClick={[Function]}
-              >
-                Save as Draft
-              </button>
-              <button
-                className="btn btn-success"
                 id="print"
                 onClick={[Function]}
               >

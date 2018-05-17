@@ -355,7 +355,6 @@ class Form2 extends Component {
                                 />
                                 <FormButtonBar
                                     back={this.closePreview.bind(this)}
-                                    save={this.create}
                                     printable="yes"
                                     backMessage="Back to editing"
                                     disableSubmit={this.state.submitShouldBeDisabled}
