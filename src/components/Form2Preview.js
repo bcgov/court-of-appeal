@@ -1,4 +1,5 @@
 import React from 'react';
+import './Form2Preview.css';
 
 class Form2Preview extends React.Component {
 
@@ -26,7 +27,7 @@ class Form2Preview extends React.Component {
             return (
                 
 
-                <div className="form-section" >
+                <div id="form2-preview" className="form-section">
                     <div className="row form-heading">
                         <h2 className="text-center">FORM 2 (RULES 5 (A), 13 (A) AND 17 (A))</h2>
                     </div>
@@ -40,7 +41,7 @@ class Form2Preview extends React.Component {
                     <table width="100%"><tbody>
                     <tr>
                         <td style={{ fontWeight:'bold', verticalAlign:'top' }}>BETWEEN:</td>
-                        <td id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
+                        <td id="appellant-name" className="preview-data">{this.props.data.appellants.map( (appellant, index) => {
                             if (index === this.props.data.appellants.length - 1) {
                                 return appellant.name;
                             } else {
@@ -52,7 +53,7 @@ class Form2Preview extends React.Component {
                     </tr>
                     <tr>
                         <td style={{ fontWeight:'bold', verticalAlign:'top' }}>AND:</td>
-                        <td id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
+                        <td id="respondent-name" className="preview-data">{this.props.data.respondents.map( (respondent, index) => {
                             if (index === this.props.data.respondents.length - 1) {
                                 return respondent.name;
                             } else {
