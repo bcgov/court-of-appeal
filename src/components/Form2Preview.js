@@ -24,15 +24,13 @@ class Form2Preview extends React.Component {
     render() {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
-            return (
-                
-
+            return (                
                 <div id="form2-preview" className="form-section">
                     <div className="row form-heading">
                         <h2 className="text-center">FORM 2 (RULES 5 (A), 13 (A) AND 17 (A))</h2>
                     </div>
                     <div className="row text-right">
-                        <span>Court of Appeal File No. ...</span>
+                        <span>Court of Appeal File No. ......</span>
                         <span>{this.props.formSevenNumber}</span>
                     </div>
                     <div className="row text-center">
@@ -98,7 +96,7 @@ class Form2Preview extends React.Component {
                     </tbody></table>                    
 
                     <p className="text-right">
-                        {selectedRespondent.name || this.props.data.serviceFiler}
+                        ............................................................................................................
                         <br/>
                         <i>Respondent/Solicitor for the Respondent</i>
                     </p>
