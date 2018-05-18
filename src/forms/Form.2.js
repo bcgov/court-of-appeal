@@ -8,6 +8,7 @@ import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
+import {INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG} from "../helpers/constants";
 
 class Form2 extends Component {
 
@@ -63,7 +64,8 @@ class Form2 extends Component {
             submitShouldBeDisabled: true,
             phoneIsValid: true,
             emailIsValid: true,
-            postalCodeIsValid: true
+            postalCodeIsValid: true,
+            previewButtonErrorMsg: ''
         };
 
         this.found = this.found.bind(this);
@@ -86,7 +88,7 @@ class Form2 extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-        this.validateForm(true);
+        this.validateForm();
     }
 
     found(data) {
@@ -249,10 +251,12 @@ class Form2 extends Component {
                 this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { document:  { useServiceEmail: { $set: e.target.checked } }}));
+                this.setState(update(this.state, { document:  { useServiceEmail: { $set: e.target.checked } }}),
+                    (prevState, props) => { this.validateForm()} );
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, { document:  { sendNotifications: { $set: e.target.checked } }}));
+                this.setState(update(this.state, { document:  { sendNotifications: { $set: e.target.checked } }}),
+                    (prevState, props) => { this.validateForm()} );
                 break;
             case 'email' :
                 this.setState(update(this.state, { document:  { email: { $set: e.target.value } } }));
@@ -339,6 +343,7 @@ class Form2 extends Component {
                             preview={this.preview}
                             formHasData={this.formHasData.bind(this)}
                             disablePreview={this.state.previewShouldBeDisabled}
+                            formErrorMessage={this.state.previewButtonErrorMsg}
                         />
                     </div>
 
@@ -447,44 +452,54 @@ class Form2 extends Component {
         );
       }
 
-      validateForm(isValid) {
+      validateForm() {
             let selectedRespondent = this.state.document.respondents[this.state.selectedRespondentIndex || 0];
-            let valid = isValid &&
-                        selectedRespondent.address &&
-                        selectedRespondent.address.addressLine1 &&
-                        selectedRespondent.address.addressLine1.length > 3 &&
-                        (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1 || selectedRespondent.address.addressLine2.length > 3) &&
-                        selectedRespondent.address.city &&
-                        selectedRespondent.address.city.length > 4 &&
+
+            let validStreetAddress = selectedRespondent.address &&
+                                    selectedRespondent.address.addressLine1 &&
+                                    selectedRespondent.address.addressLine1.length > 5 &&
+                                    (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1
+                                        || selectedRespondent.address.addressLine2.length > 3) &&
+                                    selectedRespondent.address.city &&
+                                    selectedRespondent.address.city.length > 4;
+            let valid = validStreetAddress &&
                         (!this.state.document.phone || this.state.phoneIsValid) &&
-                ((!(this.state.document.useServiceEmail || this.state.document.sendNotifications) && !this.state.document.email)
-                || (this.state.document.useServiceEmail || this.state.document.sendNotifications) && this.state.emailIsValid) &&
-                        (!selectedRespondent.address.postalCode || this.state.postalCodeIsValid);
+                        (!selectedRespondent.address.postalCode || this.state.postalCodeIsValid) &&
+                        // either 1. no email checkbox is checked or 2. at least one is checked, and there's a valid email:
+                        ((!this.state.document.useServiceEmail && !this.state.document.sendNotifications) ||
+                        ((this.state.document.useServiceEmail || this.state.document.sendNotifications)
+                            && (this.state.document.email && this.state.emailIsValid)));
+            if (!validStreetAddress) {
+                this.setState({previewButtonErrorMsg: INVALID_ADDRESS_MSG});
+            } else if (!valid) {
+                this.setState({previewButtonErrorMsg: GENERAL_ERROR_MSG});
+            } else {
+                this.setState({previewButtonErrorMsg: ""});
+            }
 
             this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
-
       }
 
     validateField(isValid, fieldName) {
-        debugger;
         switch (fieldName) {
             case 'phone':
                 this.setState({phoneIsValid: isValid}, () => {
-                    this.validateForm(isValid);
+                    this.validateForm();
                 });
 
                 break;
             case 'email':
                 this.setState({emailIsValid: isValid},() => {
-                    this.validateForm(isValid);
+                    this.validateForm();
                 });
                 break;
             case 'postalCode' :
                 this.setState({postalCodeIsValid: isValid}, () => {
-                    this.validateForm(isValid);
+                    this.validateForm();
                 });
                 break;
             default:
+                this.validateForm();
                 break;
         }
     }

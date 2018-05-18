@@ -36,7 +36,7 @@ Service.prototype.base = function() {
 Service.prototype.searchForm7 = function(file, callback) {
     let get = require('request');
     get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
-        if (response.statusCode == 404) { callback(undefined); }
+        if (response.statusCode === 404) { callback(undefined); }
         else { callback(JSON.parse(body)); }
     }); 
 };

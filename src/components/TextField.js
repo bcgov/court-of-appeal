@@ -26,7 +26,7 @@ class TextField extends Component {
             className="form-field"
             maxLength={300}
             readOnly={this.props.readOnly}
-            onInvalid={this.props.onInvalid}
+            onBlur={this.props.validate}
         />);
     }
 
