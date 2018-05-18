@@ -65,6 +65,7 @@ class FormButtonBar extends React.Component {
                 onClick={this.props.preview}
                 className="btn btn-success"
                 disabled={this.props.disablePreview}
+                title={this.props.formErrorMessage}
             >Preview &gt;
             </button>;
         };

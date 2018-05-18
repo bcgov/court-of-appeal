@@ -70,6 +70,7 @@ class Form2DataSection extends React.Component {
                                     handleFieldChange={this.props.handleFieldChange}
                                     name="respondent.addressLine1"
                                     readOnly={this.props.readOnly}
+                                    validate={this.props.validate}
                                 />
                                 <div className="row address-hint">
                                     Street address, P.O. box, company name, c/o
@@ -103,6 +104,7 @@ class Form2DataSection extends React.Component {
                                     handleFieldChange={this.props.handleFieldChange}
                                     name="respondent.city"
                                     readOnly={this.props.readOnly}
+                                    validate={this.props.validate}
                                 />
                                 </div>
                             </div>
