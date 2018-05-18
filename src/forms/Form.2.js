@@ -60,7 +60,10 @@ class Form2 extends Component {
             formHasUnsavedChanges: false,
             notFoundError: '',
             previewShouldBeDisabled: true,
-            submitShouldBeDisabled: true
+            submitShouldBeDisabled: true,
+            phoneIsValid: true,
+            emailIsValid: true,
+            postalCodeIsValid: true
         };
 
         this.found = this.found.bind(this);
@@ -74,7 +77,8 @@ class Form2 extends Component {
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.formHasData = this.formHasData.bind(this);
         this.preview = this.preview.bind(this);
-        this.validate = this.validate.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.validateField = this.validateField.bind(this);
     }
 
     componentDidMount() {
@@ -82,6 +86,7 @@ class Form2 extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+        this.validateForm(true);
     }
 
     found(data) {
@@ -326,7 +331,7 @@ class Form2 extends Component {
                             data={this.state.document}
                             saveForm={this.create}
                             closeForm={this.closeForm}
-                            validate={this.validate}
+                            validate={this.validateField}
                         />
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
@@ -351,7 +356,7 @@ class Form2 extends Component {
                                     data={this.state.document}
                                     formSevenNumber= {this.state.formSevenNumber}
                                     handleFieldChange={this.handleFieldChange}
-                                    validate={this.validate}                                    
+                                    validate={this.validateField}
                                 />
                                 <FormButtonBar
                                     back={this.closePreview.bind(this)}
@@ -442,8 +447,7 @@ class Form2 extends Component {
         );
       }
 
-      validate(isValid) {
-        if (isValid !== null && isValid !== undefined) {
+      validateForm(isValid) {
             let selectedRespondent = this.state.document.respondents[this.state.selectedRespondentIndex || 0];
             let valid = isValid &&
                         selectedRespondent.address &&
@@ -452,12 +456,38 @@ class Form2 extends Component {
                         (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1 || selectedRespondent.address.addressLine2.length > 3) &&
                         selectedRespondent.address.city &&
                         selectedRespondent.address.city.length > 4 &&
-                        selectedRespondent.address.postalCode && selectedRespondent.address.postalCode.length > 0 &&
-                        (!this.state.phone || this.state.phone.length < 1 || this.state.phone.length > 9);
+                        (!this.state.document.phone || this.state.phoneIsValid) &&
+                ((!(this.state.document.useServiceEmail || this.state.document.sendNotifications) && !this.state.document.email)
+                || (this.state.document.useServiceEmail || this.state.document.sendNotifications) && this.state.emailIsValid) &&
+                        (!selectedRespondent.address.postalCode || this.state.postalCodeIsValid);
 
             this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
-        }
+
       }
+
+    validateField(isValid, fieldName) {
+        debugger;
+        switch (fieldName) {
+            case 'phone':
+                this.setState({phoneIsValid: isValid}, () => {
+                    this.validateForm(isValid);
+                });
+
+                break;
+            case 'email':
+                this.setState({emailIsValid: isValid},() => {
+                    this.validateForm(isValid);
+                });
+                break;
+            case 'postalCode' :
+                this.setState({postalCodeIsValid: isValid}, () => {
+                    this.validateForm(isValid);
+                });
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 export default Form2;

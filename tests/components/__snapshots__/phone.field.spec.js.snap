@@ -1,18 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should only allow numeric, dash, and parentheses entries 1`] = `
-<input
-  autoFocus={false}
-  className="form-field"
-  id="number-field"
-  maxLength={17}
-  name={undefined}
-  onBlur={[Function]}
-  onChange={[Function]}
-  placeholder={undefined}
-  readOnly={undefined}
-  size={30}
-  title=""
-  value=""
-/>
+<div>
+  <input
+    autoFocus={false}
+    className="form-field"
+    id="number-field"
+    maxLength={17}
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder={undefined}
+    readOnly={undefined}
+    size={30}
+    title=""
+    value=""
+  />
+  <div
+    className="error-message"
+  >
+     
+    
+  </div>
+</div>
 `;

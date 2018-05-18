@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {INVALID_POSTAL_CODE_MSG} from '../helpers/constants';
 
 class PostalCodeField extends Component {
 
@@ -7,7 +8,8 @@ class PostalCodeField extends Component {
 
         this.state = {
             className: 'form-field',
-            title: ''
+            title: '',
+            errorMessage: ''
         };
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.validate = this.validate.bind(this);
@@ -15,19 +17,24 @@ class PostalCodeField extends Component {
     }
 
     render() {
-        return (<input
-            value={this.props.value || ''}
-            onChange={this.handleFieldChange}
-            maxLength={7}
-            size={30}
-            title={this.state.title}
-            className={this.state.className}
-            onBlur={this.validate}
-            onFocus={this.clearClass}
-            placeholder="Valid Canadian postal code"
-            readOnly={this.props.readOnly}
-            name={this.props.name}
-        />);
+        return (
+            <div>
+                <input
+                value={this.props.value || ''}
+                onChange={this.handleFieldChange}
+                maxLength={7}
+                size={30}
+                title={this.state.title}
+                className={this.state.className}
+                onBlur={this.validate}
+                onFocus={this.clearClass}
+                placeholder="Valid Canadian postal code"
+                readOnly={this.props.readOnly}
+                name={this.props.name}
+                 />
+                <div className="error-message">{this.state.errorMessage}</div>
+            </div>
+        );
     }
 
     componentDidMount() {
@@ -51,14 +58,18 @@ class PostalCodeField extends Component {
      */
     validate() {
         if (this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null || !this.props.value) {
-            this.setState({className: "form-field", title: ""}, this.props.validate(true));
+            this.setState({className: "form-field", title: ""}, this.props.validate(true, 'postalCode'));
         } else {
-            this.setState({className: "form-field invalid-field", title: "ERROR: Invalid Postal Code"}, this.props.validate(false));
+            this.setState({
+                className: "form-field invalid-field",
+                title: INVALID_POSTAL_CODE_MSG,
+                errorMessage: INVALID_POSTAL_CODE_MSG
+            }, this.props.validate(false, 'postalCode'));
         }
     }
 
     clearClass() {
-        this.setState({className: "form-field", title: ""});
+        this.setState({className: "form-field", title: "", errorMessage: ""});
     }
 
 
