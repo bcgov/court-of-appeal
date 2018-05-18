@@ -4,7 +4,7 @@ class FormButtonBar extends React.Component {
 
     render() {
         return (
-            <div className="button-bar">
+            <div className="button-bar not-printable">
                 {this.backButton()}
                 {this.cancelButton()}
                 {this.saveButton()}
@@ -12,6 +12,7 @@ class FormButtonBar extends React.Component {
                 {this.previewButton()}
                 {this.submitButton()}
                 {this.continueButton()}
+                {this.printButton()}
             </div>
         );
     }
@@ -94,6 +95,22 @@ class FormButtonBar extends React.Component {
             button = <button id="submit" onClick={this.props.continue} className="btn btn-success">{continueMessage}
             </button>;
         }
+        return button;
+    }
+
+    print() {
+        window.print();
+    }
+    printButton() {
+        let button = null;
+        if (this.props.printable == "yes") {
+            button =  <button
+                id="print"
+                onClick={this.print}
+                className="btn btn-success"
+            >Print
+            </button>;
+        };
         return button;
     }
 

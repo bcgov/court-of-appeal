@@ -37,7 +37,7 @@ exports[`Snapshots of form2 1`] = `
       role="main"
     >
       <div
-        className="form-title"
+        className="form-title not-printable"
       >
         <h1>
           NOTICE OF APPEARANCE
@@ -45,7 +45,7 @@ exports[`Snapshots of form2 1`] = `
         Form 2 (RULES 5 (A), 13 (A) AND 17 (A))
       </div>
       <div
-        className="form-section"
+        className="form-section not-printable"
       >
         <h2
           style={
@@ -74,7 +74,7 @@ exports[`Snapshots of form2 1`] = `
         </p>
       </div>
       <div
-        className="form-section"
+        className="form-section not-printable"
       >
         <h2
           style={
@@ -148,7 +148,7 @@ exports[`Snapshots of form2 1`] = `
         }
       >
         <div
-          className="button-bar"
+          className="button-bar not-printable"
         >
           <button
             className="btn btn-warning"
@@ -185,7 +185,7 @@ exports[`Snapshots of form2 1`] = `
         }
       >
         <div
-          className="modal-title green"
+          className="modal-title green not-printable"
         >
           <span
             id="close-modal"
@@ -202,7 +202,7 @@ exports[`Snapshots of form2 1`] = `
             className="form-section"
           >
             <div
-              className="button-bar"
+              className="button-bar not-printable"
             >
               <button
                 className="btn btn-warning"
@@ -214,25 +214,17 @@ exports[`Snapshots of form2 1`] = `
               </button>
               <button
                 className="btn btn-success"
-                id="draft"
+                id="print"
                 onClick={[Function]}
               >
-                Save as Draft
-              </button>
-              <button
-                className="btn btn-success"
-                disabled={true}
-                id="submit"
-                onClick={[Function]}
-              >
-                Submit
+                Print
               </button>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="modal"
+        className="modal not-printable"
         id="validationModal"
       >
         <div
@@ -314,7 +306,7 @@ exports[`Snapshots of form2 1`] = `
         </div>
       </div>
       <div
-        className="modal"
+        className="modal not-printable"
         id="saveErrorModal"
         style={
           Object {
@@ -342,7 +334,7 @@ exports[`Snapshots of form2 1`] = `
         </div>
       </div>
       <div
-        className="modal"
+        className="modal not-printable"
         id="saveSucessModal"
         style={
           Object {
@@ -370,7 +362,7 @@ exports[`Snapshots of form2 1`] = `
         </div>
       </div>
       <div
-        className="modal"
+        className="modal not-printable"
         id="dataLossWarning"
         style={
           Object {
@@ -396,7 +388,7 @@ exports[`Snapshots of form2 1`] = `
             All changes will be lost!
           </div>
           <div
-            className="button-bar"
+            className="button-bar not-printable"
           >
             <button
               className="btn btn-warning"

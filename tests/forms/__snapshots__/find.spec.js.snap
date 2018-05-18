@@ -2,7 +2,7 @@
 
 exports[`valid entries 1`] = `
 <div
-  className="form-section"
+  className="form-section not-printable"
 >
   <h2
     style={

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Form.css';
 import './Form.2.css';
+import './Form.2.print.css';
 import Find from './Find.js';
 import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';
@@ -292,12 +293,12 @@ class Form2 extends Component {
             </div>
             <div className="row">
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">
-                    <div className="form-title">
+                    <div className="form-title not-printable">
                         <h1>NOTICE OF APPEARANCE</h1>
                         Form 2 (RULES 5 (A), 13 (A) AND 17 (A))
                     </div>
 
-                    <div className="form-section">
+                    <div className="form-section not-printable">
                       <h2 style={{ fontWeight:'bold' }}>When Do You Use the Notice of Appearance (Form 2)?</h2>
                       <p>
                         If you have been served a Notice of Appeal (Form 7), and you want to respond,
@@ -337,8 +338,8 @@ class Form2 extends Component {
                     </div>
 
                     <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
-                        <div className="modal-title green">
-                            <span id="close-modal" onClick={this.closeForm}>&times;</span>
+                        <div className="modal-title green not-printable">
+                            <span id="close-modal" onClick={this.closePreview}>&times;</span>
                             Preview Form 2
                         </div>
                         <div className="modal-content">
@@ -348,13 +349,13 @@ class Form2 extends Component {
                                     show={this.state.showForm2}
                                     className="case-list-modal"
                                     data={this.state.document}
+                                    formSevenNumber= {this.state.formSevenNumber}
                                     handleFieldChange={this.handleFieldChange}
-                                    validate={this.validate}
+                                    validate={this.validate}                                    
                                 />
                                 <FormButtonBar
                                     back={this.closePreview.bind(this)}
-                                    save={this.create}
-                                    submit={this.create}
+                                    printable="yes"
                                     backMessage="Back to editing"
                                     disableSubmit={this.state.submitShouldBeDisabled}
                                 />
@@ -362,7 +363,7 @@ class Form2 extends Component {
                         </div>
                     </div>
 
-                    <div id="validationModal" className="modal" ref={(element) => { this.validationModal = element; }}>
+                    <div id="validationModal" className="modal not-printable" ref={(element) => { this.validationModal = element; }}>
                         <div className="modal-title">
                             <span id="close-modal">&times;</span>
                             Form Validation
@@ -392,7 +393,7 @@ class Form2 extends Component {
                         </div>
                     </div>
 
-                    <div id="saveErrorModal" className="modal"
+                    <div id="saveErrorModal" className="modal not-printable"
                         style={{ display:(this.state.displaySaveError?'block':'none') }} >
                         <div className="modal-title red">
                             <span id="close-modal" onClick={this.closeErrorModal}>&times;</span>
@@ -404,7 +405,7 @@ class Form2 extends Component {
                             </div>
                         </div>
                     </div>
-                    <div id="saveSucessModal" className="modal"
+                    <div id="saveSucessModal" className="modal not-printable"
                         style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
                         <div className="modal-title green">
                             <span id="close-modal" onClick={this.closeSuccessModal}>&times;</span>
@@ -417,7 +418,7 @@ class Form2 extends Component {
                         </div>
                     </div>
 
-                    <div id="dataLossWarning" className="modal"
+                    <div id="dataLossWarning" className="modal not-printable"
                          style={{ display:(this.state.displayWarning) }} >
                         <div className="modal-title warning">
                             <span id="close-modal" onClick={this.closeDataLossWarning}>&times;</span>

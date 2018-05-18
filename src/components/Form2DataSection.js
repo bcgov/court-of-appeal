@@ -10,7 +10,7 @@ class Form2DataSection extends React.Component {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
             return (
-                    <div className="form-section" >
+                    <div className="form-section not-printable" >
                         <div className="row">
                             <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2></div>
                             <div className="row  proceeding-style">
@@ -192,17 +192,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                     <hr/>
-                        <div className="row address-row">
-                            <div className="col-lg-4 col-md-4 col-sm-4 ">Electronically submitted by:</div>
-                            <div className="col-lg-8 col-md-8 col-sm-8 ">
-                                <TextField
-                                    className={"form-field"}
-                                    value={selectedRespondent.name || this.props.data.serviceFiler}
-                                    readOnly={true}
-
-                                />
-                            </div>
-                        </div>
+                        
                    </div>
 
             );
