@@ -1,11 +1,6 @@
-require('../support/fake.dom');
 import React from 'react';
 import PostalCodeField from '../../src/components/PostalCodeField';
 import renderer from 'react-test-renderer';
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
 
 test('should only allow valid Canadian postal code characters', ()=> {
 

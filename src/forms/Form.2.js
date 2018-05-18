@@ -457,7 +457,8 @@ class Form2 extends Component {
                         selectedRespondent.address.city &&
                         selectedRespondent.address.city.length > 4 &&
                         (!this.state.document.phone || this.state.phoneIsValid) &&
-                        (!this.state.document.email || this.state.emailIsValid) &&
+                ((!(this.state.document.useServiceEmail || this.state.document.sendNotifications) && !this.state.document.email)
+                || (this.state.document.useServiceEmail || this.state.document.sendNotifications) && this.state.emailIsValid) &&
                         (!selectedRespondent.address.postalCode || this.state.postalCodeIsValid);
 
             this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
