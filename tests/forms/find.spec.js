@@ -28,7 +28,7 @@ test('valid entries', ()=> {
     expect(value).toMatch('CA12345');
 
     e = { target: { value: "CAT IN HAT2" } };
-    instance.handleFieldChange(e)
+    instance.handleFieldChange(e);
     expect(value).toMatch('CA2');
 
     e = { target: { value: '1234' } };

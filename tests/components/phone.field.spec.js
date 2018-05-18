@@ -1,6 +1,11 @@
+require('../support/fake.dom');
 import React from 'react';
 import PhoneField from '../../src/components/PhoneField';
 import renderer from 'react-test-renderer';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('should only allow numeric, dash, and parentheses entries', ()=> {
 
@@ -15,19 +20,21 @@ test('should only allow numeric, dash, and parentheses entries', ()=> {
     expect(tree).toMatchSnapshot();
 
     let e = { target: { value: "42"}};
-    tree.props.onChange(e);
+    let p = phoneField.getInstance();
+
+    p.handleFieldChange(e);
     expect(value).toMatch('42');
 
     e = { target: { value: "bah" } };
-    tree.props.onChange(e);
+    p.handleFieldChange(e);
     expect(value).toMatch('');
 
     e = { target: { value: "(250)8674309" } };
-    tree.props.onChange(e);
+    p.handleFieldChange(e);
     expect(value).toMatch('(250)8674309');
 
     e = { target: { value: "+bah1(867)-5309)pooh!" } };
-    tree.props.onChange(e);
+    p.handleFieldChange(e);
     expect(value).toMatch('+1(867)-5309)');
 
 });
