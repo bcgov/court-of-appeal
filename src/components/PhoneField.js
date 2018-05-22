@@ -34,7 +34,7 @@ class PhoneField extends Component {
                         readOnly={this.props.readOnly}
                         onBlur={this.validate}
                         className={this.state.className}
-                        title={this.state.title}
+                        data-tip={this.state.errorMessage}
                         onFocus={this.clearClass}
                     />
                     <div className="error-message"> {this.state.errorMessage}</div>
