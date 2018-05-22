@@ -1,0 +1,561 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders empty list of documents  1`] = `
+<div
+  className="form-section"
+  id="active-forms"
+>
+  <div>
+    <h3
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      Document Reminders
+    </h3>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+          "float": "right",
+          "marginTop": "15px",
+        }
+      }
+    >
+      <a
+        className="btn btn-primary round-borders"
+        href="/my-applications.html"
+      >
+        View All Documents
+      </a>
+    </div>
+  </div>
+  <div>
+    <table
+      id="my-cases"
+    >
+      <thead>
+        <tr
+          className="header"
+        >
+          <td>
+            Edit
+          </td>
+          <td>
+            File #
+          </td>
+          <td>
+            Parties
+          </td>
+          <td>
+            Status
+          </td>
+          <td>
+            Deadline to File
+          </td>
+          <td>
+            Recently Modified
+          </td>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+    <div
+      className="modal"
+      id="editFormModal"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title green"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Edit Form 2
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div
+          className="form-section"
+          style={
+            Object {
+              "display": undefined,
+            }
+          }
+        >
+          <div
+            className="button-bar not-printable"
+          >
+            <div>
+              <button
+                className="btn btn-warning"
+                id="back"
+                onClick={[Function]}
+              >
+                &lt; 
+                Back
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-success"
+                id="draft"
+                onClick={[Function]}
+              >
+                Save as Draft
+              </button>
+            </div>
+            <div
+              data-tip={undefined}
+            >
+              <button
+                className="btn btn-success"
+                disabled={true}
+                id="preview"
+                onClick={[Function]}
+              >
+                Preview &gt;
+              </button>
+            </div>
+            <div
+              className="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+              id={undefined}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal"
+      id="viewFormModal"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title green"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Edit Form 2
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div
+          className="form-section"
+          style={
+            Object {
+              "display": undefined,
+            }
+          }
+        >
+          <div
+            className="button-bar not-printable"
+          >
+            <div>
+              <button
+                className="btn btn-warning"
+                id="back"
+                onClick={[Function]}
+              >
+                &lt; 
+                Back
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-success"
+                id="draft"
+                onClick={[Function]}
+              >
+                Save as Draft
+              </button>
+            </div>
+            <div
+              data-tip={undefined}
+            >
+              <button
+                className="btn btn-success"
+                disabled={true}
+                id="submit"
+                onClick={[Function]}
+              >
+                Submit
+              </button>
+            </div>
+            <div
+              className="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+              id={undefined}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal"
+      id="dataLossWarning"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title warning"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Warning!
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div>
+          All changes will be lost!
+        </div>
+        <div
+          className="button-bar not-printable"
+        >
+          <div>
+            <button
+              className="btn btn-warning"
+              id="back"
+              onClick={[Function]}
+            >
+              &lt; 
+              Go back so I can save the form as draft.
+            </button>
+          </div>
+          <div>
+            <button
+              className="btn btn-success"
+              id="submit"
+              onClick={[Function]}
+            >
+              Continue anyway.  I don't care about the data.
+            </button>
+          </div>
+          <div
+            className="__react_component_tooltip place-top type-dark "
+            data-id="tooltip"
+            id={undefined}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="my-cases-empty-label"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    No open cases found
+  </div>
+</div>
+`;
+
+exports[`renders full list of documents  1`] = `
+<div
+  className="form-section"
+  id="active-forms"
+>
+  <div>
+    <h3
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      Document Reminders
+    </h3>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+          "float": "right",
+          "marginTop": "15px",
+        }
+      }
+    >
+      <a
+        className="btn btn-primary round-borders"
+        href="/my-applications.html"
+      >
+        View All Documents
+      </a>
+    </div>
+  </div>
+  <div>
+    <table
+      id="my-cases"
+    >
+      <thead>
+        <tr
+          className="header"
+        >
+          <td>
+            Edit
+          </td>
+          <td>
+            File #
+          </td>
+          <td>
+            Parties
+          </td>
+          <td>
+            Status
+          </td>
+          <td>
+            Deadline to File
+          </td>
+          <td>
+            Recently Modified
+          </td>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+    <div
+      className="modal"
+      id="editFormModal"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title green"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Edit Form 2
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div
+          className="form-section"
+          style={
+            Object {
+              "display": undefined,
+            }
+          }
+        >
+          <div
+            className="button-bar not-printable"
+          >
+            <div>
+              <button
+                className="btn btn-warning"
+                id="back"
+                onClick={[Function]}
+              >
+                &lt; 
+                Back
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-success"
+                id="draft"
+                onClick={[Function]}
+              >
+                Save as Draft
+              </button>
+            </div>
+            <div
+              data-tip={undefined}
+            >
+              <button
+                className="btn btn-success"
+                disabled={true}
+                id="preview"
+                onClick={[Function]}
+              >
+                Preview &gt;
+              </button>
+            </div>
+            <div
+              className="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+              id={undefined}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal"
+      id="viewFormModal"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title green"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Edit Form 2
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div
+          className="form-section"
+          style={
+            Object {
+              "display": undefined,
+            }
+          }
+        >
+          <div
+            className="button-bar not-printable"
+          >
+            <div>
+              <button
+                className="btn btn-warning"
+                id="back"
+                onClick={[Function]}
+              >
+                &lt; 
+                Back
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-success"
+                id="draft"
+                onClick={[Function]}
+              >
+                Save as Draft
+              </button>
+            </div>
+            <div
+              data-tip={undefined}
+            >
+              <button
+                className="btn btn-success"
+                disabled={true}
+                id="submit"
+                onClick={[Function]}
+              >
+                Submit
+              </button>
+            </div>
+            <div
+              className="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+              id={undefined}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal"
+      id="dataLossWarning"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div
+        className="modal-title warning"
+      >
+        <span
+          id="close-modal"
+          onClick={[Function]}
+        >
+          ×
+        </span>
+        Warning!
+      </div>
+      <div
+        className="modal-content"
+      >
+        <div>
+          All changes will be lost!
+        </div>
+        <div
+          className="button-bar not-printable"
+        >
+          <div>
+            <button
+              className="btn btn-warning"
+              id="back"
+              onClick={[Function]}
+            >
+              &lt; 
+              Go back so I can save the form as draft.
+            </button>
+          </div>
+          <div>
+            <button
+              className="btn btn-success"
+              id="submit"
+              onClick={[Function]}
+            >
+              Continue anyway.  I don't care about the data.
+            </button>
+          </div>
+          <div
+            className="__react_component_tooltip place-top type-dark "
+            data-id="tooltip"
+            id={undefined}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="my-cases-empty-label"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    No open cases found
+  </div>
+</div>
+`;

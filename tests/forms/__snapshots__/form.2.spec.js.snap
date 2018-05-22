@@ -150,30 +150,42 @@ exports[`Snapshots of form2 1`] = `
         <div
           className="button-bar not-printable"
         >
-          <button
-            className="btn btn-warning"
-            id="back"
-            onClick={[Function]}
+          <div>
+            <button
+              className="btn btn-warning"
+              id="back"
+              onClick={[Function]}
+            >
+              &lt; 
+              Back
+            </button>
+          </div>
+          <div>
+            <button
+              className="btn btn-success"
+              id="draft"
+              onClick={[Function]}
+            >
+              Save as Draft
+            </button>
+          </div>
+          <div
+            data-tip="Please make sure the address entered is a valid street address for serving documents in person"
           >
-            &lt; 
-            Back
-          </button>
-          <button
-            className="btn btn-success"
-            id="draft"
-            onClick={[Function]}
-          >
-            Save as Draft
-          </button>
-          <button
-            className="btn btn-success"
-            disabled={true}
-            id="preview"
-            onClick={[Function]}
-            title="Please make sure the address entered is a valid street address for serving documents in person"
-          >
-            Preview &gt;
-          </button>
+            <button
+              className="btn btn-success"
+              disabled={true}
+              id="preview"
+              onClick={[Function]}
+            >
+              Preview &gt;
+            </button>
+          </div>
+          <div
+            className="__react_component_tooltip place-top type-dark "
+            data-id="tooltip"
+            id={undefined}
+          />
         </div>
       </div>
       <div
@@ -205,21 +217,30 @@ exports[`Snapshots of form2 1`] = `
             <div
               className="button-bar not-printable"
             >
-              <button
-                className="btn btn-warning"
-                id="back"
-                onClick={[Function]}
-              >
-                &lt; 
-                Back to editing
-              </button>
-              <button
-                className="btn btn-success"
-                id="print"
-                onClick={[Function]}
-              >
-                Print
-              </button>
+              <div>
+                <button
+                  className="btn btn-warning"
+                  id="back"
+                  onClick={[Function]}
+                >
+                  &lt; 
+                  Back to editing
+                </button>
+              </div>
+              <div>
+                <button
+                  className="btn btn-success"
+                  id="print"
+                  onClick={[Function]}
+                >
+                  Print
+                </button>
+              </div>
+              <div
+                className="__react_component_tooltip place-top type-dark "
+                data-id="tooltip"
+                id={undefined}
+              />
             </div>
           </div>
         </div>
@@ -391,21 +412,30 @@ exports[`Snapshots of form2 1`] = `
           <div
             className="button-bar not-printable"
           >
-            <button
-              className="btn btn-warning"
-              id="back"
-              onClick={[Function]}
-            >
-              &lt; 
-              Go back so I can save the form as draft.
-            </button>
-            <button
-              className="btn btn-success"
-              id="submit"
-              onClick={[Function]}
-            >
-              Continue anyway.  I don't care about the data.
-            </button>
+            <div>
+              <button
+                className="btn btn-warning"
+                id="back"
+                onClick={[Function]}
+              >
+                &lt; 
+                Go back so I can save the form as draft.
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-success"
+                id="submit"
+                onClick={[Function]}
+              >
+                Continue anyway.  I don't care about the data.
+              </button>
+            </div>
+            <div
+              className="__react_component_tooltip place-top type-dark "
+              data-id="tooltip"
+              id={undefined}
+            />
           </div>
         </div>
       </div>

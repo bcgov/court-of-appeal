@@ -20,13 +20,16 @@ class ActiveFormList extends Component {
     }
 
     componentDidMount() {
-        let window = this.element.ownerDocument.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }
+
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
         if (this.state.fetch) { this.fetchCases(); }
     }
 
     fetchCases() {
-        this.service.getMyCases({}, (data) => {             
+        this.service.getMyCases({}, (data) => {
             if (data && data.cases && data.cases.length > 0) {
                 this.setState({ 
                     cases:data.cases.slice(0, 5).map(function(item) { 
