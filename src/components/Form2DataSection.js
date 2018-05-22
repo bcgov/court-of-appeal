@@ -50,7 +50,13 @@ class Form2DataSection extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                    <select className="form-select" onChange={this.props.handleFieldChange} name={"respondent.name"} disabled={this.props.readOnly}>
+                                    <select
+                                        className="form-select"
+                                        onChange={this.props.handleFieldChange}
+                                        name={"respondent.name"}
+                                        disabled={this.props.readOnly}
+                                        value={this.props.data.selectedRespondentIndex}
+                                    >
                                         {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
                                     </select>
                                 </div>
