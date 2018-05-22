@@ -1,17 +1,18 @@
-let jsdom = require("jsdom");
+require('../support/fake.dom');
 import React from 'react';
-import ReactDOM from 'react-dom';
+import renderer from "react-test-renderer";
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import ActiveFormList from '../../src/components/ActiveFormList';
-let Service = require('../../src/service/default.service');
 let LocalServer = require('../support/local.server');
+
+configure({ adapter: new Adapter() });
 
 describe('Active forms section', function() {
 
     let apiServer;
 
-    let document;
-    let sut;        
-    let received = undefined;
+    let activeFormList;
     let cases = [
         { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} }
     ];
@@ -28,13 +29,12 @@ describe('Active forms section', function() {
                 response.end(); 
             }
         });
-        apiServer.start(done); 
-
-        document = jsdom.jsdom('<div id="react_app"></div>');
-        let component = <ActiveFormList fetch="false" />;
-        sut = ReactDOM.render(component, document.getElementById('react_app'));
-        sut.service.apiUrl = 'http://localhost:5001';
-        sut.fetchCases();
+        apiServer.start(done);
+         activeFormList = mount(
+            <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases: [
+                        { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} }
+                    ]});} }}/>,
+        ).instance();
     });
 
     afterEach(function(done) {
@@ -42,8 +42,9 @@ describe('Active forms section', function() {
     });
     
     test('transforms the data for the list', function(done) {
-        setTimeout(()=> {            
-            expect(sut.state.cases).toEqual([
+        activeFormList.fetchCases();
+        setTimeout(()=> {
+            expect(activeFormList.state.cases).toEqual([
                 { 
                     id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' ,
                     data:{appellants:[{name:'Bruce'}], respondents:[{name:'Clark'}]}
@@ -53,35 +54,32 @@ describe('Active forms section', function() {
         }, 100);        
     });
 
-    test('injects the data in the list', function(done) {        
-        setTimeout(()=> {
-            let item = document.querySelector("#my-cases .case-item:first-child");
-            
-            expect(item.innerHTML).toContain(1501);
-            expect(item.innerHTML).toContain('Bruce / Clark'); 
-            expect(item.innerHTML).toContain('draft');
-            expect(item.innerHTML).toContain('2018-03-27T16:15:54Z');
-            done();
-        }, 100); 
-    });
+});
 
-    test('hides the empty-list message', function(done) {
-        setTimeout(()=> {
-            expect(sut.state.displayMyCasesEmptyLabel).toEqual(false);
-            expect(document.getElementById('my-cases-empty-label').style.display).toEqual('none');
-            done();
-        }, 100);  
-    });
-
-    test('shows the empty-list message when cases list is empty', function(done) {
-        cases = [];
-
-        setTimeout(()=> {
-            expect(sut.state.displayMyCasesEmptyLabel).toEqual(true);
-            expect(document.getElementById('my-cases-empty-label').style.display).toEqual('block');
-            done();
-        }, 100);  
-    });
+test ('renders full list of documents ', ()=> {
+    let list = renderer.create(
+        <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases: [
+                    { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} }
+                ]});} }}/>,
+    );
+    let tree = list.toJSON();
+    expect(tree).toMatchSnapshot();
+    let instance = list.getInstance();
+    instance.fetchCases();
+    expect(instance.state.displayMyCasesEmptyLabel).toEqual(false);
 
 
+});
+
+test( 'renders empty list of documents ', ()=> {
+
+    let emptylist = renderer.create(
+        <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( { cases: [] }); } }}/>
+    );
+    let tree = emptylist.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    let instance = emptylist.getInstance();
+    instance.fetchCases();
+    expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
 });

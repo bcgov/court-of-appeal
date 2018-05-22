@@ -14,7 +14,6 @@ exports[`should only allow numeric, dash, and parentheses entries 1`] = `
     placeholder={undefined}
     readOnly={undefined}
     size={30}
-    title=""
     value=""
   />
   <div

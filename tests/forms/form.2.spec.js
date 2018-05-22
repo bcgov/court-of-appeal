@@ -1,6 +1,10 @@
-import renderer from "react-test-renderer";
+require('../support/fake.dom');
 import React from 'react';
 import Form2 from '../../src/forms/Form.2';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });import renderer from "react-test-renderer";
 
 test('Snapshots of form2', ()=> {
 

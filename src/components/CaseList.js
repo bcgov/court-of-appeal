@@ -42,8 +42,9 @@ class CaseList extends React.Component {
     }
 
     componentDidMount() {
-        let window = this.element.ownerDocument.defaultView;
+
         if (this.service === null || this.service === undefined) {
+            let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
     }

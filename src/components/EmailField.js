@@ -50,7 +50,7 @@ class EmailField extends Component {
     }
 
     handleFieldChange(e) {
-        let size = this.props.value.length > 30 ? this.props.value.length  : 30;
+        let size = !this.props.value || this.props.value.length < 30 ? 30 : this.props.value.length;
         this.setState({size: size});
         if (!this.props.readOnly) {
             this.props.handleFieldChange(e);
