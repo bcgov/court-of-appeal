@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from "react-tooltip";
 import TextField from "./TextField";
 import PostalCodeField from "./PostalCodeField";
 import PhoneField from "./PhoneField";
@@ -43,8 +44,9 @@ class Form2DataSection extends React.Component {
                         <div className="row">
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
-                                    <div>
-                                        Respondent's name:
+                                    <div style={{whiteSpace: 'nowrap'}}>
+                                        Respondent's name: &nbsp;
+                                        <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
                                     </div>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
@@ -58,7 +60,7 @@ class Form2DataSection extends React.Component {
                     <div className="row address-row">
                         <div className="col-lg-12">
                         Respondent's mailing address for service: &nbsp;
-                            <i className="fa fa-question-circle" aria-hidden="true" title="What is the address where you would like to receive documents?"></i>
+                            <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
                         </div>
                     </div>
                     <div className="row address-row">
@@ -194,7 +196,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                     <hr/>
-                        
+                        <ReactTooltip/>
                    </div>
 
             );
