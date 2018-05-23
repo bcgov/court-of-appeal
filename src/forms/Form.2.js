@@ -360,7 +360,6 @@ class Form2 extends Component {
                                     className="case-list-modal"
                                     data={this.state.document}
                                     formSevenNumber= {this.state.formSevenNumber}
-                                    handleFieldChange={this.handleFieldChange}
                                     validate={this.validateField}
                                 />
                                 <FormButtonBar
@@ -369,36 +368,6 @@ class Form2 extends Component {
                                     backMessage="Back to editing"
                                     disableSubmit={this.state.submitShouldBeDisabled}
                                 />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="validationModal" className="modal not-printable" ref={(element) => { this.validationModal = element; }}>
-                        <div className="modal-title">
-                            <span id="close-modal">&times;</span>
-                            Form Validation
-                        </div>
-                        <div className="modal-content">
-                            <div className="progress">
-                                <div className="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100"
-                                    aria-valuemin="0" aria-valuemax="100" style={{ width: '100%' }}>
-                                    <span>100%</span>
-                                </div>
-                            </div>
-                            <table id="validations"><tbody>
-                                <tr>
-                                    <td className="validation">All required fields filled in</td>
-                                    <td><i className="far fa-check-circle"></i></td>
-                                </tr>
-                                <tr>
-                                    <td className="validation">Address for Service is in British Columbia</td>
-                                    <td><i className="far fa-check-circle"></i></td>
-                                </tr>
-                            </tbody></table>
-                            <hr/>
-                            <div>
-                                <span className="success">Your form has been successfully verified. Please proceed to review.</span>
-                                <button className="btn btn-primary">Preview Form ></button>
                             </div>
                         </div>
                     </div>

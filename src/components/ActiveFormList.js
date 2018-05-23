@@ -67,8 +67,8 @@ class ActiveFormList extends Component {
 
     render() {
         return (
-            <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
-                <div>
+            <div id="active-forms not-printable" className="form-section" ref={ (element)=> {this.element = element }}>
+                <div className="not-printable">
                     <h3 style={{ display:'inline-block' }}>Document Reminders</h3>
                     <div style={{ display:'inline-block', float:'right', marginTop:'15px' }}>
                         <a href="/my-applications.html" className="btn btn-primary round-borders">View All Documents</a>
