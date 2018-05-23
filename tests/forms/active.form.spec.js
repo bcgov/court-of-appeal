@@ -54,6 +54,24 @@ describe('Active forms section', function() {
         }, 100);        
     });
 
+    test('limits the list to first 5', (done)=>{
+        activeFormList = mount(
+            <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases: [
+                { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} },
+                { id:1502, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} },
+                { id:1503, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} },
+                { id:1504, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} },
+                { id:1505, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} },
+                { id:1506, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} }
+            ]});} }}/>,
+        ).instance();
+        activeFormList.fetchCases();
+        setTimeout(()=> {
+            expect(activeFormList.state.cases.length).toEqual(5);
+            done();
+        }, 100);   
+    });
+
 });
 
 test ('renders full list of documents ', ()=> {
@@ -83,3 +101,4 @@ test( 'renders empty list of documents ', ()=> {
     instance.fetchCases();
     expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
 });
+
