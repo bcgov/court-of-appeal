@@ -29,13 +29,14 @@ class ActiveFormList extends Component {
     }
 
     fetchCases() {
+        let self = this;
         this.service.getMyCases({}, (data) => {
             if (data && data.cases && data.cases.length > 0) {
                 this.setState({ 
                     cases:data.cases.slice(0, 5).map(function(item) { 
                         return {
                             id:item.id,
-                            parties: item.data.appellants[0].name + ' / ' + item.data.respondents[0].name,
+                            parties: self.parties(item.data),
                             status: item.status,
                             modified: item.modified,
                             data: item.data
@@ -50,6 +51,23 @@ class ActiveFormList extends Component {
                 })
             }
         });
+    }
+    parties(data) {
+        let appellantName = '?';
+        let respondentName = '?';
+        if (data.appellant) {
+            appellantName = data.appellant;
+        }
+        if (data.appellants && data.appellants[0]) {
+            appellantName = data.appellants[0].name;
+        }
+        if (data.respondent) {
+            respondentName = data.respondent.name;
+        }
+        if (data.respondents && data.respondents[0]) {
+            respondentName = data.respondents[0].name;
+        }
+        return appellantName + ' / ' + respondentName
     }
 
     /**
