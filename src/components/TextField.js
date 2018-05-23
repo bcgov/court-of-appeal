@@ -12,12 +12,16 @@ class TextField extends Component {
     }
 
     render() {
-        let autofocus = this.props.autofocus ? true : false;
+        let fieldProps = {
+            autoFocus: !!this.props.autofocus || false
+        };
+        if (this.props.readOnly) {
+            fieldProps['tabIndex'] = -1;
+        }
 
         return (<input
             id={this.props.id}
             name={this.props.name}
-            autoFocus={autofocus}
             ref={this.props.ref}
             value={this.props.value || ''}
             onChange={this.handleFieldChange}
@@ -27,6 +31,8 @@ class TextField extends Component {
             maxLength={300}
             readOnly={this.props.readOnly}
             onBlur={this.props.validate}
+            onFocus={this.handleFocus}
+            {...fieldProps}
         />);
     }
 
