@@ -106,8 +106,7 @@ class CaseList extends React.Component {
                         <td>File #</td>
                         <td>Parties</td>
                         <td>Status</td>
-                        <td>Deadline to File</td>
-                        <td>Recently Modified</td>
+                        <td className="text-right">Recently Modified</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -121,8 +120,7 @@ class CaseList extends React.Component {
                                 <td>{item.id}</td>
                                 <td>{item.parties}</td>
                                 <td>{item.status}</td>
-                                <td></td>
-                                <td>{item.modified}</td>
+                                <td className="text-right">{item.modified}</td>
                             </tr>
                         )
                     }

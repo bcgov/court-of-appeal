@@ -4,6 +4,7 @@ import DefaultService from '../service/default.service.js';
 import CaseList from '../components/CaseList.js';
 import _ from 'lodash';
 import update from 'immutability-helper';
+import renderCases from './cases.renderer';
 
 class ActiveFormList extends Component {
 
@@ -30,25 +31,11 @@ class ActiveFormList extends Component {
 
     fetchCases() {
         this.service.getMyCases({}, (data) => {
-            if (data && data.cases && data.cases.length > 0) {
-                this.setState({ 
-                    cases:data.cases.slice(0, 5).map(function(item) { 
-                        return {
-                            id:item.id,
-                            parties: item.data.appellants[0].name + ' / ' + item.data.respondents[0].name,
-                            status: item.status,
-                            modified: item.modified,
-                            data: item.data
-                        };
-                    }),
-                    displayMyCasesEmptyLabel: false 
-                });
-            } else {
-                this.setState({
-                    cases:[],
-                    displayMyCasesEmptyLabel: true
-                })
-            }
+            let cases = renderCases(data.cases.slice(0, 5));
+            this.setState({
+                cases:cases,
+                displayMyCasesEmptyLabel: (cases.length === 0)
+            });
         });
     }
 

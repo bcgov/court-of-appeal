@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders empty list of documents  1`] = `
+exports[`Active forms section display empty mention when no cases are found 1`] = `
 <div
   className="form-section"
   id="active-forms"
@@ -52,10 +52,9 @@ exports[`renders empty list of documents  1`] = `
           <td>
             Status
           </td>
-          <td>
-            Deadline to File
-          </td>
-          <td>
+          <td
+            className="text-right"
+          >
             Recently Modified
           </td>
         </tr>
@@ -280,7 +279,7 @@ exports[`renders empty list of documents  1`] = `
 </div>
 `;
 
-exports[`renders full list of documents  1`] = `
+exports[`Active forms section hides the empty mention when cases are found 1`] = `
 <div
   className="form-section"
   id="active-forms"
@@ -332,10 +331,9 @@ exports[`renders full list of documents  1`] = `
           <td>
             Status
           </td>
-          <td>
-            Deadline to File
-          </td>
-          <td>
+          <td
+            className="text-right"
+          >
             Recently Modified
           </td>
         </tr>
