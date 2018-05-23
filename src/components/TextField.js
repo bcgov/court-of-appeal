@@ -5,9 +5,17 @@ class TextField extends Component {
     constructor(props) {
         super(props);
 
+        let className = "form-field";
+        if (this.props.readOnly) {
+            className = "read-only";
+        } else if (this.props.value) {
+            className = "form-field preloaded";
+        }
+
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.state = {
-            size: props.value  && props.value.length > 30 ? props.value.length : 30
+            size: props.value  && props.value.length > 30 ? props.value.length : 30,
+            className: className
         };
     }
 
@@ -27,11 +35,10 @@ class TextField extends Component {
             onChange={this.handleFieldChange}
             placeholder={this.props.placeholder}
             size={this.state.size}
-            className="form-field"
+            className={this.state.className}
             maxLength={300}
             readOnly={this.props.readOnly}
             onBlur={this.props.validate}
-            onFocus={this.handleFocus}
             {...fieldProps}
         />);
     }
