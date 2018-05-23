@@ -5,6 +5,7 @@ import CaseList from '../components/CaseList.js';
 import _ from 'lodash';
 import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
+import './my.applications.css';
 
 class MyApplications extends Component {
   
@@ -56,7 +57,17 @@ class MyApplications extends Component {
                 <div className="row">
                     <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">   
                         <div className="col-sm-12">
-                            <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
+                            <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>                                
+                                <div className="row">
+                                    <div className="col-xs-6 no-padding">
+                                        <h3>My Documents</h3>
+                                    </div>
+                                    <div className="col-xs-6 no-padding text-right">
+                                        <a href="form.2.html">
+                                            <span className="oi oi-plus action-icon"></span>
+                                        </a>
+                                    </div>
+                                </div>
                                 <CaseList
                                     cases={this.state.cases}                   
                                     service={this.service}
