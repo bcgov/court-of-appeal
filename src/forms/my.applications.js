@@ -4,6 +4,7 @@ import DefaultService from '../service/default.service.js';
 import CaseList from '../components/CaseList.js';
 import _ from 'lodash';
 import update from 'immutability-helper';
+import renderCases from '../components/cases.renderer';
 
 class MyApplications extends Component {
   
@@ -30,45 +31,13 @@ class MyApplications extends Component {
     }
 
     fetchCases() {
-        let self = this;
         this.service.getMyCases({}, (data) => {
-            if (data && data.cases && data.cases.length > 0) {
-                this.setState({ 
-                    cases:data.cases.map(function(item) { 
-                        return {
-                            id:item.id,
-                            parties: self.parties(item.data),
-                            status: item.status,
-                            modified: item.modified,
-                            data: item.data
-                        };
-                    }),
-                    displayMyCasesEmptyLabel: false 
-                });
-            } else {
-                this.setState({
-                    cases:[],
-                    displayMyCasesEmptyLabel: true
-                })
-            }
+            let cases = renderCases(data.cases);
+            this.setState({
+                cases:cases,
+                displayMyCasesEmptyLabel: (cases.length === 0)
+            });
         });
-    }
-    parties(data) {
-        let appellantName = '?';
-        let respondentName = '?';
-        if (data.appellant) {
-            appellantName = data.appellant;
-        }
-        if (data.appellants && data.appellants[0]) {
-            appellantName = data.appellants[0].name;
-        }
-        if (data.respondent) {
-            respondentName = data.respondent.name;
-        }
-        if (data.respondents && data.respondents[0]) {
-            respondentName = data.respondents[0].name;
-        }
-        return appellantName + ' / ' + respondentName
     }
 
     updateCases(data, id) {
