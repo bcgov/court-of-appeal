@@ -52,10 +52,9 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
           <td>
             Status
           </td>
-          <td>
-            Deadline to File
-          </td>
-          <td>
+          <td
+            className="text-right"
+          >
             Recently Modified
           </td>
         </tr>
@@ -332,10 +331,9 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
           <td>
             Status
           </td>
-          <td>
-            Deadline to File
-          </td>
-          <td>
+          <td
+            className="text-right"
+          >
             Recently Modified
           </td>
         </tr>
