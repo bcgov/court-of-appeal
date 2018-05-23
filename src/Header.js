@@ -58,18 +58,7 @@ class Header extends Component {
                                 <div className="align-right header-top-line">
                                     <span >Welcome, { this.state.login }</span>
                                     <span> | </span>
-                                    <span id="logout" onClick={ this.logout }>Logout</span>
-                                </div>
-                                <div className="align-right header-bottom-line">
-                                    <div className="icons">
-                                        <i className="fa fa-home" aria-hidden="true"></i>                                        
-                                        <a href="/notifications.html">
-                                            <i className="fa fa-bell" aria-hidden="true"></i>
-                                            <span className="notify">3</span>
-                                        </a>
-                                        <i className="fa fa-info-circle" aria-hidden="true"></i>
-                                        <i className="fa fa-cog" aria-hidden="true"></i>
-                                    </div>
+                                    <span id="logout" onClick={ this.logout }>Log Out</span>
                                 </div>
                             </div>
                         </div>                  
@@ -78,10 +67,23 @@ class Header extends Component {
                 <div className="navigationRibbon">
                     <div className="level2Navigation">
                         <div className="container">
-                            <div id="header-menu-row">
-                                <a href="/">HOME</a>
-                                <a href="/my-applications.html">MY DOCUMENTS</a>
-                                <a href="/">ALL DOCUMENTS</a>
+                            <div id="row">
+                                <div className="col-xs-6 text-left">
+                                    <a href="/">HOME</a>
+                                    <a href="/my-applications.html">MY DOCUMENTS</a>
+                                    <a href="/">ALL DOCUMENTS</a>
+                                </div>
+                                <div className="col-xs-6 text-right icons">
+                                    <a href="/">
+                                        <span className="oi oi-cog" title="profile" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="/">
+                                        <span className="oi oi-info" title="help" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="/">
+                                        <span className="oi oi-bell" title="notifications" aria-hidden="true"></span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

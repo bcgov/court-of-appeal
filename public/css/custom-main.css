@@ -63,7 +63,7 @@ body {
     text-align: right;
 }
 .header-top-line {
-    margin-top: 10px;
+    margin-top: 25px;
 }
 .header-bottom-line {
     margin-top: 0px;
@@ -76,12 +76,17 @@ body {
 
 #header .icons  {
     display: inline;
-    font-size: 25px;
+    font-size: 20px;
     position: relative;
 }
 
-#header .icons a  {
-    color:white;
+#header .icons > a  {    
+    display: inline-block;
+    height: 40px;
+    padding: 10px 15px 10px 5px;
+}
+#header .icons > a:after  {    
+    content: none;
 }
 
 #header .icons span.notify {
