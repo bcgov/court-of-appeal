@@ -47,6 +47,9 @@ class PostalCodeField extends Component {
         if (!this.props.readOnly) {
             let value = e.target.value;
             value = value.toUpperCase().replace(/[^\dA-Z ]/g,"").replace(/[ ]+/g," ");
+            if(value.length === 3 && value.length > this.props.value.length) {
+                value = value + (" ");
+            }
             e.target.value =  value;
             this.props.handleFieldChange(e);
         }
