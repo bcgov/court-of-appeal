@@ -78,6 +78,12 @@
 .form-field {
 	max-width: 100%;
 	padding: 2px;
+	border: thin solid;
+}
+.read-only-field {
+	border: none;
+	max-width: 100%;
+	padding: 2px;
 }
 .form-select {
 	max-width: 100%;
@@ -108,4 +114,20 @@
 .error-message {
 	color: red;
 	text-align: left;
+}
+
+@keyframes preloaded {
+	from {
+		background-color: #a7cc61;
+	}
+	to {
+		background-color: #F6FAE4;
+	}
+}
+
+/* The element to apply the animation to */
+.preloaded {
+	background-color: #F6FAE4;
+	animation-name: preloaded;
+	animation-duration: 6s;
 }

@@ -7,7 +7,7 @@ class PostalCodeField extends Component {
         super(props);
 
         this.state = {
-            className: 'form-field',
+            className: "form-field",
             title: '',
             errorMessage: ''
         };
@@ -39,7 +39,10 @@ class PostalCodeField extends Component {
 
     componentDidMount() {
         if (this.props.value) {
-            this.validate();
+            let isValid = this.validate();
+            if (isValid && this.props.value) {
+                this.setState({className: "form-field preloaded"});
+            }
         }
     }
 
@@ -62,19 +65,19 @@ class PostalCodeField extends Component {
     validate() {
         if (this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null || !this.props.value) {
             this.setState({className: "form-field", title: ""}, this.props.validate(true, 'postalCode'));
+            return true;
         } else {
             this.setState({
                 className: "form-field invalid-field",
                 title: INVALID_POSTAL_CODE_MSG,
                 errorMessage: INVALID_POSTAL_CODE_MSG
             }, this.props.validate(false, 'postalCode'));
+            return false;
         }
     }
 
     clearClass() {
         this.setState({className: "form-field", title: "", errorMessage: ""});
     }
-
-
 }
 export default PostalCodeField;

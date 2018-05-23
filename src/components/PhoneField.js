@@ -10,7 +10,7 @@ class PhoneField extends Component {
         this.isValidPhoneNumber = this.isValidPhoneNumber.bind(this);
         this.clearClass = this.clearClass.bind(this);
         this.state = {
-            className: "form-field",
+            className: this.props.value ? "form-field preloaded" : "form field",
             isValid: false,
             title: '',
             errorMessage: ''
@@ -45,7 +45,10 @@ class PhoneField extends Component {
 
     componentDidMount() {
         if (this.props.value) {
-            this.validate();
+            let isValid = this.validate();
+            if (isValid && this.props.value) {
+                this.setState({className: "form-field preloaded"});
+            }
         }
     }
 
@@ -62,8 +65,10 @@ class PhoneField extends Component {
         if (!this.props.value || this.isValidPhoneNumber())
         {
             this.setState({className: "form-field ", title: "", errorMessage: ""}, this.props.validate(true, 'phone'));
+            return true;
         } else {
             this.setState({className: "form-field invalid-field", title: INVALID_PHONE_MSG, errorMessage: INVALID_PHONE_MSG}, this.props.validate(false, 'phone'));
+            return false;
         }
     }
 
