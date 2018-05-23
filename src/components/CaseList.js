@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
+import Form2Preview from "./Form2Preview";
 
 class CaseList extends React.Component {
 
@@ -99,7 +100,7 @@ class CaseList extends React.Component {
     render() {
         return (
             <div ref={ (element)=> {this.element = element } }>
-                <table id="my-cases">
+                <table id="my-cases" className="not-printable" >
                     <thead>
                     <tr className="header">
                         <td>Edit</td>
@@ -126,13 +127,13 @@ class CaseList extends React.Component {
                     }
                     </tbody>
                 </table>
-                <div id="editFormModal" className="modal"
+                <div id="editFormModal not-printable" className="modal"
                      style={{display: (this.state.editMode ? 'block' : 'none')}}>
                     <div className="modal-title green">
                         <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
                         Edit Form 2
                     </div>
-                    <div className="modal-content">
+                    <div className="modal-content not-printable">
                         <div className="form-section" style={{display: this.props.displayData}}>
                             <Form2DataSection
                                 show={this.state.editMode}
@@ -154,31 +155,30 @@ class CaseList extends React.Component {
 
                 <div id="viewFormModal" className="modal"
                      style={{display: (this.state.previewMode ? 'block' : 'none')}}>
-                    <div className="modal-title green">
+                    <div className="modal-title green not-printable">
                         <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
                         Edit Form 2
                     </div>
                     <div className="modal-content">
                         <div className="form-section" style={{display: this.props.displayData}}>
-                            <Form2DataSection
+                            <Form2Preview
                                 closeForm={this.backToEdit}
                                 show={this.state.previewMode}
-                                readOnly={this.state.previewMode}
                                 className="case-list-modal"
-                                renderer="CaseList"
                                 data={this.state.selectedDocument}
+                                formSevenNumber= {this.state.selectedDocument ? this.state.selectedDocument.formSevenNumber : ''}
                                 validate={this.validate}
                             />
                             <FormButtonBar
                                 back={this.backToEdit}
-                                save={this.updateForm2}
-                                submit={this.updateForm2}
+                                printable="yes"
+                                backMessage="Back to editing"
                                 disableSubmit={this.state.submitShouldBeDisabled}
                             />
                         </div>
                     </div>
                 </div>
-                <div id="dataLossWarning" className="modal"
+                <div id="dataLossWarning" className="modal not-printable"
                      style={{ display:(this.state.displayWarning) }} >
                     <div className="modal-title warning">
                         <span id="close-modal" onClick={this.closeDataLossWarning}>&times;</span>
