@@ -73,9 +73,9 @@ class PhoneField extends Component {
     }
 
     isValidPhoneNumber() {
-        return this.props.value.match(/^(\+1)?[ ]?\(\d{3}\)[ ]?\d{3}[- ]?\d{4}$/) != null ||
-        this.props.value.match(/^(\+1)?[- ]?\d{3}[- ]?\d{3}[- ]?\d{4}$/) != null ||
-        this.props.value.match(/^(\+1)?\d{3}-\d{3}-\d{4}$/) != null;
+        return this.props.value.match(/^(\+)?(1)?[ ]?\(\d{3}\)[ ]?\d{3}[- ]?\d{4}$/) != null ||
+        this.props.value.match(/^(\+)?(1)?[- ]?\d{3}[- ]?\d{3}[- ]?\d{4}$/) != null ||
+        this.props.value.match(/^(\+)?(1)?\d{3}-\d{3}-\d{4}$/) != null;
     }
 
     clearClass() {
