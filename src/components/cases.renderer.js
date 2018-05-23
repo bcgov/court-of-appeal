@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 let parties = function(data) {
     let appellantName = '?';
     let respondentName = '?';
@@ -22,10 +24,10 @@ let render = function(cases) {
             id:item.id,
             parties: parties(item.data),
             status: item.status,
-            modified: item.modified,
+            modified: moment(item.modified).format('YYYY-MM-DD HH:mm Z'),
             data: item.data
         };
     });
 };
 
-module.exports = render;
+export default render;

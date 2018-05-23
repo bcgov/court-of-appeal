@@ -21,7 +21,7 @@ describe('Active forms section', function() {
         setTimeout(()=> {
             expect(activeFormList.state.cases).toEqual([
                 { 
-                    id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', parties:'Bruce / Clark' ,
+                    id:1501, status:'draft', modified:'2018-03-27 09:15 -07:00', parties:'Bruce / Clark' ,
                     data:{appellants:[{name:'Bruce'}], respondents:[{name:'Clark'}]}
                 }
             ]);
