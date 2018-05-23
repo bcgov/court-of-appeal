@@ -98,8 +98,8 @@
 	font-size: smaller;
 }
 .invalid-field {
-	background-color: lightpink;
-	border-color: darkred;
+	border-color: red;
+	border-style: solid;
 }
 .button-bar {
 	display: flex;
