@@ -5,6 +5,7 @@ import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ActiveFormList from '../../src/components/ActiveFormList';
 let LocalServer = require('../support/local.server');
+import moment from 'moment';
 
 configure({ adapter: new Adapter() });
 
@@ -19,9 +20,11 @@ describe('Active forms section', function() {
         activeFormList.fetchCases();
 
         setTimeout(()=> {
-            expect(activeFormList.state.cases).toEqual([
+            let cases = activeFormList.state.cases;
+            cases[0].modified = moment(cases[0].modified).utc().format('YYYY-MM-DD HH:mm')
+            expect(cases).toEqual([
                 { 
-                    id:1501, status:'draft', modified:'2018-03-27 09:15', parties:'Bruce / Clark' ,
+                    id:1501, status:'draft', modified:'2018-03-27 16:15', parties:'Bruce / Clark' ,
                     data:{appellants:[{name:'Bruce'}], respondents:[{name:'Clark'}]}
                 }
             ]);
