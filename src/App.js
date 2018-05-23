@@ -15,8 +15,8 @@ class App extends Component {
         <div className="full-height">
           <Header />  
           <Route exact path="/" component={Dashboard} /> 
-          <Route path="/forms/form.7.html" component={Form7} />        
-          <Route path="/forms/form.2.html" component={Form2} />        
+          <Route path="/form.7.html" component={Form7} />        
+          <Route path="/form.2.html" component={Form2} />        
           <Route path="/my-applications.html" component={MyApplications} />        
           <Route path="/notifications.html" component={Notifications} />        
           <Footer />      

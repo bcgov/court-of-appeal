@@ -39,7 +39,7 @@ class SelectForm extends Component {
                                     </a>
                                 </td>
                                 <td style={{ width:'50%', textAlign:'center'}}>
-                                    <a href="forms/form.2.html" className="btn btn-primary round-borders respond-to-appeal">
+                                    <a href="form.2.html" className="btn btn-primary round-borders respond-to-appeal">
                                         Respond to Appeal &nbsp;
                                         <i className="fa fa-play"/>
                                     </a>
