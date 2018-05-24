@@ -16,7 +16,7 @@ class SelectForm extends Component {
 
     render() {
         return (
-            <div className="form-section">
+            <div className="form-section not-printable">
                 <h3>Start E-Filing</h3>
 
                 <div id="steps" className="small-steps">

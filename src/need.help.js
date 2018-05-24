@@ -5,7 +5,7 @@ class NeedHelp extends Component {
 
     render() {
         return (
-            <div className="form-section">
+            <div className="form-section not-printable">
                 
                 <table>
                     <tbody>
