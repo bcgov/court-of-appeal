@@ -22,7 +22,7 @@ test('Snapshots of form2', ()=> {
     instance.state.showForm2 = true;
 
     let e = { target: { name: "number.form-seven", value: "CA12345" }};
-    instance.handleFieldChange(e);
+    instance.handleSearchFieldChange(e);
     expect(instance.state.formSevenNumber).toMatch('CA12345');
 
 });

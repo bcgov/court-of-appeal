@@ -34,7 +34,10 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
       </a>
     </div>
   </div>
-  <div>
+  <div
+    id="case-list"
+    onClick={[Function]}
+  >
     <table
       className="not-printable"
       id="my-cases"
@@ -118,7 +121,7 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
               </button>
             </div>
             <div
-              data-tip={undefined}
+              data-tip=""
             >
               <button
                 className="btn btn-success"
@@ -304,7 +307,10 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
       </a>
     </div>
   </div>
-  <div>
+  <div
+    id="case-list"
+    onClick={[Function]}
+  >
     <table
       className="not-printable"
       id="my-cases"
@@ -388,7 +394,7 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
               </button>
             </div>
             <div
-              data-tip={undefined}
+              data-tip=""
             >
               <button
                 className="btn btn-success"
