@@ -118,16 +118,16 @@
 
 @keyframes preloaded {
 	from {
-		background-color: #a7cc61;
+		background-color: #fbfe70;
 	}
 	to {
-		background-color: #F6FAE4;
+		background-color: #fbfec4;
 	}
 }
 
 /* The element to apply the animation to */
 .preloaded {
-	background-color: #F6FAE4;
+	background-color: #fbfec4;
 	animation-name: preloaded;
 	animation-duration: 6s;
 }
