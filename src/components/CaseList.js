@@ -38,6 +38,7 @@ class CaseList extends React.Component {
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
+        this.updateAndClose = this.updateAndClose.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
@@ -147,7 +148,7 @@ class CaseList extends React.Component {
                 <div id="editFormModal not-printable" className="modal"
                      style={{display: (this.state.editMode ? 'block' : 'none')}}>
                     <div className="modal-title green">
-                        <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
+                        <span id="close-modal" onClick={this.cancel}>&times;</span>
                         Edit Form 2
                     </div>
                     <div className="modal-content not-printable">
@@ -162,7 +163,7 @@ class CaseList extends React.Component {
                             />
                             <FormButtonBar
                                 back={this.cancel}
-                                save={this.updateForm2}
+                                save={this.updateAndClose}
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
                                 formErrorMessage={this.state.previewButtonErrorMsg}
@@ -217,6 +218,11 @@ class CaseList extends React.Component {
         );
     }
 
+    updateAndClose(){
+        this.updateForm2();
+        this.closeEditModal();
+    }
+
     updateForm2() {
         let doc = this.state.selectedDocument;
         let id = this.state.selectedDocumentId;
@@ -236,7 +242,6 @@ class CaseList extends React.Component {
                     });
                 }
             });
-        this.closeEditModal();
     }
 
     openEditModal(data, id) {
@@ -264,6 +269,7 @@ class CaseList extends React.Component {
 
     preview() {
         this.setState({editMode: false, previewMode: true});
+        this.updateForm2();
     }
 
     closeDataLossWarning() {
