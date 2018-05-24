@@ -157,7 +157,7 @@ class CaseList extends React.Component {
                      style={{display: (this.state.previewMode ? 'block' : 'none')}}>
                     <div className="modal-title green not-printable">
                         <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
-                        Edit Form 2
+                        Preview Form 2
                     </div>
                     <div className="modal-content">
                         <div className="form-section" style={{display: this.props.displayData}}>
