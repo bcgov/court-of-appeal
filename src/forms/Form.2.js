@@ -9,6 +9,7 @@ import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
 import {INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG} from "../helpers/constants";
+import validateForm2 from "../utils/AddressUtils";
 
 class Form2 extends Component {
 
@@ -95,37 +96,8 @@ class Form2 extends Component {
 
         if (data) {
             this.setState({notFoundError: ''});
-            const appellants = data.parties.appellants.map((appellant) => {
-                let appellantMap = {};
-                if (appellant.name) {
-                    appellantMap['name'] = appellant.name;
-                } else if (appellant.organization) {
-                    appellantMap['name'] = appellant.organization;
-                }
-                if (appellant.solicitor) {
-                    if (appellant.solicitor.name && !appellantMap.name) {
-                        appellantMap['name'] = appellant.solicitor.name;
-                    }
-                    appellantMap['address'] = appellant.solicitor.address;
-                }
-                return appellantMap;
-            });
-
-            const respondents = data.parties.respondents.map( (respondent) => {
-                let respondenttMap = {};
-                if (respondent.name) {
-                    respondenttMap['name'] = respondent.name;
-                } else if (respondent.organization) {
-                    respondenttMap['name'] = respondent.organization;
-                }
-                if (respondent.solicitor) {
-                    if (respondent.solicitor.name && !respondenttMap.name) {
-                        respondenttMap['name'] = respondent.solicitor.name;
-                    }
-                    respondenttMap['address'] = respondent.solicitor.address;
-                }
-                return respondenttMap;
-            } );
+            const appellants = this.mapIncomingData(data.parties.appellants);
+            const respondents = this.mapIncomingData(data.parties.respondents);
             if (appellants && respondents) {
                 this.setState(update(this.state, { document: { appellants: {$set: appellants} } }));
                 this.setState(update(this.state, { document: { respondents: {$set: respondents} } }));
@@ -141,18 +113,35 @@ class Form2 extends Component {
         }
     }
 
+    mapIncomingData(parties) {
+        return parties.map((entity) => {
+            let entityMap = {};
+            if (entity.name) {
+                entityMap['name'] = entity.name;
+            } else if (entity.organization) {
+                entityMap['name'] = entity.organization;
+            } else if (entity.solicitor) {
+                entityMap['name'] = entity.solicitor.name;
+            }
+
+            if (entity.solicitor && entity.solicitor.address) {
+                entityMap['address'] = entity.solicitor.address;
+            } else if (entity.organization && entity.organization.address) {
+                entityMap['address'] = entity.organization.address;
+            } else if (entity.address) {
+                entityMap['address'] = entity.address;
+            } else {
+                entityMap['address'] = {}
+            }
+            return entityMap;
+        });
+    }
+
     closeForm() {
         this.props.history.push('/');
     }
 
     create() {
-        let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
-        respondent['phone'] = this.state.document.phone;
-        respondent['email'] = this.state.document.email;
-        respondent['useServiceEmail'] = this.state.document.useServiceEmail;
-        respondent['sendNotifications'] =  this.state.document.sendNotifications;
-        respondent['serviceFiler'] = this.state.document.serviceFiler;
-
         this.service.createForm2({
                 formSevenNumber: this.state.formSevenNumber,
                 appellants: this.state.document.appellants,
@@ -161,7 +150,8 @@ class Form2 extends Component {
                 email: this.state.document.email,
                 useServiceEmail: this.state.document.useServiceEmail,
                 sendNotifications: this.state.document.sendNotifications,
-                serviceFiler: this.state.document.serviceFiler
+                serviceFiler: this.state.document.serviceFiler,
+                selectedRespondentIndex: this.state.document.selectedRespondentIndex
             }, (data) => {
             if (data !== undefined) {
                 this.setState({
@@ -223,49 +213,76 @@ class Form2 extends Component {
         this.closeForm();
     }
 
+    handleSearchFieldChange(e) {
+        this.setState(update(this.state, { formSevenNumber: { $set: e.target.value.trim() } }));
+        this.setState({ notFoundError: '' });
+    }
+
     handleFieldChange(e) {
+
         const keys = e.target.name.split(".");
+        const value = e.target.value;
+
         const respondents = this.state.document.respondents.slice();
+        let address = respondents[this.state.document.selectedRespondentIndex].address || {};
         switch (keys[1]) {
-            case 'form-seven' :
-                this.setState(update(this.state, { formSevenNumber: { $set: e.target.value } }));
-                this.setState({ notFoundError: '' });
-                break;
             case 'name' :
-                this.setState(update(this.state, { document: { selectedRespondentIndex: { $set: e.target.value } } }));
+                this.setState(update(this.state, {document: {selectedRespondentIndex: {$set: value}}}),
+                    (prevState, props) => {
+                        this.validateForm()
+                    }
+                );
                 break;
             case 'addressLine1' :
-                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
-                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
+                address['addressLine1'] = value;
+                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
+                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}),
+                    (prevState, props) => {
+                        this.validateForm()
+                    }
+                );
                 break;
             case 'addressLine2' :
-                respondents[this.state.document.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
-                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
+                address['addressLine2'] = value;
+                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
+                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                respondents[this.state.document.selectedRespondentIndex]['address']['city'] = e.target.value;
-                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
+                address['city'] = value;
+                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
+                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}),
+                    (prevState, props) => {
+                        this.validateForm();
+                    }
+                );
                 break;
             case 'postalCode' :
-                respondents[this.state.document.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
-                this.setState(update(this.state, { document: { respondents: { $set: respondents } } }));
+                address['postalCode'] = value;
+                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
+                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { document:  { useServiceEmail: { $set: e.target.checked } }}),
-                    (prevState, props) => { this.validateForm()} );
+                this.setState(update(this.state, {document: {useServiceEmail: {$set: e.target.checked}}}),
+                    (prevState, props) => {
+                        this.validateForm()
+                    }
+                );
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, { document:  { sendNotifications: { $set: e.target.checked } }}),
-                    (prevState, props) => { this.validateForm()} );
+                this.setState(update(this.state, {document: {sendNotifications: {$set: e.target.checked}}}),
+                    (prevState, props) => {
+                        this.validateForm()
+                    }
+                );
                 break;
             case 'email' :
-                this.setState(update(this.state, { document:  { email: { $set: e.target.value } } }));
+                this.setState(update(this.state, {document: {email: {$set: value}}}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, { document:  { phone: { $set: e.target.value } } }));
+                this.setState(update(this.state, {document: {phone: {$set: value}}}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, { document: { serviceFiler: { $set: e.target.value } } }));
+                this.setState(update(this.state, {document: {serviceFiler: {$set: value}}}));
                 break;
             default :
                 break;
@@ -324,7 +341,7 @@ class Form2 extends Component {
                     <Find
                         formSevenNumber={this.state.formSevenNumber}
                         callback={this.found}
-                        handleFieldChange={this.handleFieldChange}
+                        handleFieldChange={this.handleSearchFieldChange.bind(this)}
                         service={this.service}
                         notFoundError={this.state.notFoundError}
                     />
@@ -341,7 +358,6 @@ class Form2 extends Component {
                             back={this.openDataLossWarning.bind(this)}
                             save={this.create}
                             preview={this.preview}
-                            formHasData={this.formHasData.bind(this)}
                             disablePreview={this.state.previewShouldBeDisabled}
                             formErrorMessage={this.state.previewButtonErrorMsg}
                         />
@@ -422,22 +438,12 @@ class Form2 extends Component {
       }
 
       validateForm() {
-            let selectedRespondent = this.state.document.respondents[this.state.selectedRespondentIndex || 0];
-
-            let validStreetAddress = selectedRespondent.address &&
-                                    selectedRespondent.address.addressLine1 &&
-                                    selectedRespondent.address.addressLine1.length > 5 &&
-                                    (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1
-                                        || selectedRespondent.address.addressLine2.length > 3) &&
-                                    selectedRespondent.address.city &&
-                                    selectedRespondent.address.city.length > 4;
-            let valid = validStreetAddress &&
-                        (!this.state.document.phone || this.state.phoneIsValid) &&
-                        (!selectedRespondent.address.postalCode || this.state.postalCodeIsValid) &&
-                        // either 1. no email checkbox is checked or 2. at least one is checked, and there's a valid email:
-                        ((!this.state.document.useServiceEmail && !this.state.document.sendNotifications) ||
-                        ((this.state.document.useServiceEmail || this.state.document.sendNotifications)
-                            && (this.state.document.email && this.state.emailIsValid)));
+            let fields = {
+                  phoneIsValid: this.state.phoneIsValid,
+                  postalCodeIsValid: this.state.postalCodeIsValid,
+                  emailIsValid: this.state.emailIsValid
+            };
+            let [valid, validStreetAddress] = validateForm2(this.state.document, fields);
             if (!validStreetAddress) {
                 this.setState({previewButtonErrorMsg: INVALID_ADDRESS_MSG});
             } else if (!valid) {

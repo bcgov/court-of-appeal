@@ -4,6 +4,8 @@ import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
 import Form2Preview from "./Form2Preview";
+import {GENERAL_ERROR_MSG, INVALID_ADDRESS_MSG} from "../helpers/constants";
+import validateForm2 from "../utils/AddressUtils";
 
 class CaseList extends React.Component {
 
@@ -28,7 +30,11 @@ class CaseList extends React.Component {
             displayWarning: 'none',
             formHasUnsavedChanges: false,
             previewShouldBeDisabled: true,
-            submitShouldBeDisabled: true
+            submitShouldBeDisabled: true,
+            phoneIsValid: true,
+            emailIsValid: true,
+            postalCodeIsValid: true,
+            previewButtonErrorMsg: ''
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
@@ -39,7 +45,8 @@ class CaseList extends React.Component {
         this.cancel = this.cancel.bind(this);
         this.backToEdit = this.backToEdit.bind(this);
         this.preview = this.preview.bind(this);
-        this.validate = this.validate.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.validateField = this.validateField.bind(this);
     }
 
     componentDidMount() {
@@ -51,45 +58,55 @@ class CaseList extends React.Component {
     }
 
     handleFieldChange(e) {
+        let value = e.target.value;
         const keys = e.target.name.split(".");
-        const respondents = this.state.selectedDocument.respondents;
+        const respondents = this.state.selectedDocument.respondents.slice();
+        let address = respondents[this.state.selectedDocument.selectedRespondentIndex].address || {};
         switch (keys[1]) {
-            case 'form-seven' :
-                this.setState(update(this.state, {formSevenNumber: {$set: e.target.value}}));
-                break;
             case 'name' :
-                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: e.target.value}}}));
+                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: value}}}),
+                    (prevState, props) => { this.validateForm()});
                 break;
             case 'addressLine1' :
-                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine1'] = e.target.value;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
+                address['addressLine1'] = value;
+                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}),
+                    (prevState, props) => { this.validateForm()}
+                    );
                 break;
             case 'addressLine2' :
-                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['addressLine2'] = e.target.value;
+                address['addressLine2'] = value;
+                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'city' :
-                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['city'] = e.target.value;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
+                address['city'] = value;
+                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
+                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}),
+                    (prevState, props) => { this.validateForm()}
+                    );
                 break;
             case 'postalCode' :
-                respondents[this.state.selectedDocument.selectedRespondentIndex]['address']['postalCode'] = e.target.value;
+                address['postalCode'] = value;
+                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, {selectedDocument: {useServiceEmail: {$set: e.target.checked}}}));
+                this.setState(update(this.state, { selectedDocument:  { useServiceEmail: { $set: e.target.checked } }}),
+                    (prevState, props) => { this.validateForm()} );
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, {selectedDocument: {sendNotifications: {$set: e.target.checked}}}));
+                this.setState(update(this.state, { selectedDocument:  { sendNotifications: { $set: e.target.checked } }}),
+                    (prevState, props) => { this.validateForm()} );
                 break;
             case 'email' :
-                this.setState(update(this.state, {selectedDocument: {email: {$set: e.target.value}}}));
+                this.setState(update(this.state, {selectedDocument: {email: {$set: value}}}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, {selectedDocument: {phone: {$set: e.target.value}}}));
+                this.setState(update(this.state, {selectedDocument: {phone: {$set: value}}}));
                 break;
             case 'serviceFiler' :
-                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: e.target.value}}}));
+                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: value}}}));
                 break;
             default :
                 break;
@@ -99,7 +116,7 @@ class CaseList extends React.Component {
 
     render() {
         return (
-            <div ref={ (element)=> {this.element = element } }>
+            <div id="case-list" ref={ (element)=> {this.element = element} } onClick={this.handleClick.bind(this)}>
                 <table id="my-cases" className="not-printable" >
                     <thead>
                     <tr className="header">
@@ -141,13 +158,14 @@ class CaseList extends React.Component {
                                 className="case-list-modal"
                                 renderer="CaseList"
                                 data={this.state.selectedDocument}
-                                validate={this.validate}
+                                validate={this.validateField}
                             />
                             <FormButtonBar
                                 back={this.cancel}
                                 save={this.updateForm2}
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
+                                formErrorMessage={this.state.previewButtonErrorMsg}
                             />
                         </div>
                     </div>
@@ -167,7 +185,6 @@ class CaseList extends React.Component {
                                 className="case-list-modal"
                                 data={this.state.selectedDocument}
                                 formSevenNumber= {this.state.selectedDocument ? this.state.selectedDocument.formSevenNumber : ''}
-                                validate={this.validate}
                             />
                             <FormButtonBar
                                 back={this.backToEdit}
@@ -261,20 +278,54 @@ class CaseList extends React.Component {
         this.closeEditModal();
     }
 
-    validate(isValid) {
-        if (isValid !== null && isValid !== undefined) {
-            let selectedRespondent = this.state.selectedDocument.respondents[this.state.selectedRespondentIndex || 0];
-            let valid = isValid &&
-                selectedRespondent.address &&
-                selectedRespondent.address.addressLine1 &&
-                selectedRespondent.address.addressLine1.length > 3 &&
-                (!selectedRespondent.address.addressLine2 || selectedRespondent.address.addressLine2.length < 1 || selectedRespondent.address.addressLine2.length > 3) &&
-                selectedRespondent.address.city &&
-                selectedRespondent.address.city.length > 4 &&
-                selectedRespondent.address.postalCode && selectedRespondent.address.postalCode.length > 0 &&
-                (!this.state.phone || this.state.phone.length < 1 || this.state.phone.length > 9);
 
-            this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
+    validateForm() {
+        let fields = {
+            phoneIsValid: this.state.phoneIsValid,
+            postalCodeIsValid: this.state.postalCodeIsValid,
+            emailIsValid: this.state.emailIsValid
+        };
+        let [valid, validStreetAddress] = validateForm2(this.state.selectedDocument, fields);
+        if (!validStreetAddress) {
+            this.setState({previewButtonErrorMsg: INVALID_ADDRESS_MSG});
+        } else if (!valid) {
+            this.setState({previewButtonErrorMsg: GENERAL_ERROR_MSG});
+        } else {
+            this.setState({previewButtonErrorMsg: ""});
+        }
+        this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
+    }
+
+    validateField(isValid, fieldName) {
+        switch (fieldName) {
+            case 'phone':
+                this.setState({phoneIsValid: isValid}, () => {
+                    this.validateForm();
+                });
+
+                break;
+            case 'email':
+                this.setState({emailIsValid: isValid},() => {
+                    this.validateForm();
+                });
+                break;
+            case 'postalCode' :
+                this.setState({postalCodeIsValid: isValid}, () => {
+                    this.validateForm();
+                });
+                break;
+            default:
+                this.validateForm();
+                break;
+        }
+    }
+
+    handleClick(e) {
+        if (!e.target.id) {
+            return;
+        }
+        if (this.state.editMode && e.target.id.includes('editFormModal')) {
+            this.cancel();
         }
     }
 }

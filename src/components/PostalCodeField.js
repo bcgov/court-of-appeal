@@ -63,7 +63,7 @@ class PostalCodeField extends Component {
      * an error title message so they can see what's up when they hover.
      */
     validate() {
-        if (this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null || !this.props.value) {
+        if (!this.props.value || this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null) {
             this.setState({className: "form-field", title: ""}, this.props.validate(true, 'postalCode'));
             return true;
         } else {
