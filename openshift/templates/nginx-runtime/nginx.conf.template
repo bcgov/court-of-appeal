@@ -24,7 +24,7 @@ http {
             proxy_pass          %API_URL%;
         }
 
-        # serve our angular app here
+        # serve our app here
         location / {
             root   /tmp/app/dist;
             index  index.html index.htm;
@@ -32,7 +32,9 @@ http {
             gzip            on;
             gzip_min_length 1000;
             gzip_types      *;
-            
+
+            sendfile off;
+            expires -1;
         }
 
         # redirect server error pages to the static page /50x.html
