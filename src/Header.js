@@ -80,9 +80,6 @@ class Header extends Component {
                                     <a href="/">
                                         <span className="oi oi-info" title="help" aria-hidden="true"></span>
                                     </a>
-                                    <a href="/">
-                                        <span className="oi oi-bell" title="notifications" aria-hidden="true"></span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
