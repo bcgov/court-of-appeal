@@ -9,14 +9,17 @@ configure({ adapter: new Adapter() });
 
 test('valid entries', ()=> {
 
-    let value = '';
+    let value = '', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true };
 
     const finder = renderer.create(
         <Find id="number-field"
               formSevenNumber={value}
               service={{ searchForm7: ()=> {} }}
-              handleFieldChange={handleFieldChange.bind(this)}/>,
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />,
     );
     let tree = finder.toJSON();
     expect(tree).toMatchSnapshot();
@@ -43,20 +46,24 @@ test('valid entries', ()=> {
 
 let DefaultService = require('../../src/service/default.service');
 test('default service', ()=>{
-    let value = '';
+    let value = '', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true };
     const finder = mount(
         <Find id="number-field"
               formSevenNumber={value}
-              handleFieldChange={handleFieldChange.bind(this)}/>
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />
     );    
     let instance = finder.instance();
     
     expect(instance.service instanceof DefaultService).toEqual(true);  
 });
 test('sends fetched data to caller', ()=>{
-    let value = '';
+    let value = '', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true }
     let sent = {};
     let callback = (data) => { sent=data; }
     const finder = renderer.create(
@@ -64,7 +71,9 @@ test('sends fetched data to caller', ()=>{
               formSevenNumber={value}
               service={{ searchForm7: (file, callback)=> {callback(42); } }}
               callback={callback.bind(this)}
-              handleFieldChange={handleFieldChange.bind(this)}/>,
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />,
     );    
     let instance = finder.getInstance();
     instance.search();
@@ -72,8 +81,9 @@ test('sends fetched data to caller', ()=>{
     expect(sent).toEqual(42);
 });
 test('[enter] can trigger the search', ()=>{
-    let value = 'CA12345';
+    let value = 'CA12345', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true };
     let sent = {};
     let callback = (data) => { sent=data; }
     const finder = renderer.create(
@@ -81,7 +91,9 @@ test('[enter] can trigger the search', ()=>{
               formSevenNumber={value}
               service={{ searchForm7: (file, callback)=> {callback(42); } }}
               callback={callback.bind(this)}
-              handleFieldChange={handleFieldChange.bind(this)}/>,
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />,
     );    
     let instance = finder.getInstance();
     instance.handleKeyPress({charCode:13});
@@ -89,16 +101,19 @@ test('[enter] can trigger the search', ()=>{
     expect(sent).toEqual(42);
 });
 test('only [enter] can trigger the search', ()=>{
-    let value = 'CA12345';
+    let value = 'CA12345', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true }
     let sent = {};
-    let callback = (data) => { sent=data; }
+    let callback = (data) => { sent=data; };
     const finder = renderer.create(
         <Find id="number-field"
               formSevenNumber={value}
               service={{ searchForm7: (file, callback)=> {callback(42); } }}
               callback={callback.bind(this)}
-              handleFieldChange={handleFieldChange.bind(this)}/>,
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />,
     );
     let instance = finder.getInstance();
     instance.handleKeyPress({charCode:65});

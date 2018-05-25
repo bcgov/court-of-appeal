@@ -11,8 +11,7 @@ class Find extends Component {
         this.callback = props.callback;
         this.state = {
             searching: false
-        }
-
+        };
         this.search = this.search.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.isInvalidCaseNumber = this.isInvalidCaseNumber.bind(this);
@@ -27,6 +26,7 @@ class Find extends Component {
     }
 
     search() {
+        this.props.startSearching();
         this.setState({ searching:true });
         this.service.searchForm7(this.props.formSevenNumber, (data) => {
             this.setState({ searching:false });

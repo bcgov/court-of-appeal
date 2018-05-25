@@ -117,7 +117,7 @@ class CaseList extends React.Component {
 
     render() {
         return (
-            <div id="case-list" ref={ (element)=> {this.element = element} } onClick={this.handleClick.bind(this)}>
+            <div id="case-list" ref={ (element)=> {this.element = element} } onClick={this.handleClickOffForm.bind(this)}>
                 <table id="my-cases" className="not-printable" >
                     <thead>
                     <tr className="header">
@@ -326,7 +326,8 @@ class CaseList extends React.Component {
         }
     }
 
-    handleClick(e) {
+    // Make sure that the user is prompted when they click off the form.
+    handleClickOffForm(e) {
         if (!e.target.id) {
             return;
         }

@@ -16,7 +16,25 @@ class Form2 extends Component {
     constructor(props) {
         super(props);
         this.service = props.service;
-        this.state = {
+        this.state = this.initialState();
+
+        this.found = this.found.bind(this);
+        this.create = this.create.bind(this);
+        this.closeErrorModal = this.closeErrorModal.bind(this);
+        this.closeSuccessModal = this.closeSuccessModal.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.closeForm = this.closeForm.bind(this);
+        this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
+        this.closePreview = this.closePreview.bind(this);
+        this.acceptDataLoss = this.acceptDataLoss.bind(this);
+        this.formHasData = this.formHasData.bind(this);
+        this.preview = this.preview.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.validateField = this.validateField.bind(this);
+    }
+
+    initialState() {
+        return {
             formSevenNumber: 'CA',
             document: {
                 appellants: [
@@ -68,20 +86,6 @@ class Form2 extends Component {
             postalCodeIsValid: true,
             previewButtonErrorMsg: ''
         };
-
-        this.found = this.found.bind(this);
-        this.create = this.create.bind(this);
-        this.closeErrorModal = this.closeErrorModal.bind(this);
-        this.closeSuccessModal = this.closeSuccessModal.bind(this);
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.closeForm = this.closeForm.bind(this);
-        this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
-        this.closePreview = this.closePreview.bind(this);
-        this.acceptDataLoss = this.acceptDataLoss.bind(this);
-        this.formHasData = this.formHasData.bind(this);
-        this.preview = this.preview.bind(this);
-        this.validateForm = this.validateForm.bind(this);
-        this.validateField = this.validateField.bind(this);
     }
 
     componentDidMount() {
@@ -344,6 +348,7 @@ class Form2 extends Component {
                         handleFieldChange={this.handleSearchFieldChange.bind(this)}
                         service={this.service}
                         notFoundError={this.state.notFoundError}
+                        startSearching={this.startSearch.bind(this)}
                     />
                     <div className="form-section" style={{display: this.state.displayData}}>
                         <Form2DataSection
@@ -477,6 +482,10 @@ class Form2 extends Component {
                 this.validateForm();
                 break;
         }
+    }
+
+    startSearch() {
+        this.setState(this.initialState());
     }
 }
 
