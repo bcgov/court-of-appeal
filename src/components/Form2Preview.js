@@ -30,7 +30,7 @@ class Form2Preview extends React.Component {
                         <h2 className="text-center">FORM 2 (RULES 5 (A), 13 (A) AND 17 (A))</h2>
                     </div>
                     <div className="row text-right">
-                        <span>Court of Appeal File No. ......</span>
+                        <span>Court of Appeal File No. </span>
                         <span>{this.props.formSevenNumber}</span>
                     </div>
                     <div className="row text-center">
@@ -66,18 +66,21 @@ class Form2Preview extends React.Component {
                         <strong>NOTICE OF APPEARANCE</strong>
                     </p>
                     <p>
-                        Enter an appearance on behalf of
+
                     </p>
                     <table width="100%"><tbody>
                     <tr>
                         <td>
+                        <strong>Enter an appearance on behalf of:</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             { selectedRespondent.name }
                         </td>
-                        <td style={{ whiteSpace:'no-wrap', textAlign:'left', verticalAlign:'top' }}>
-                            <i>[Respondent's name]</i>
-                        </td>                        
-                    </tr>                        
-                    <tr>                            
+                    </tr>
+                    <tr><td><strong>Address for service:</strong></td></tr>
+                    <tr>
                         <td>
                             {selectedRespondent.address ? selectedRespondent.address.addressLine1 : ''}
                             &nbsp;
@@ -87,10 +90,8 @@ class Form2Preview extends React.Component {
                             {selectedRespondent.address ? selectedRespondent.address.city : ''}
                             , {selectedRespondent.address ? selectedRespondent.address.province : ''}
                             , {selectedRespondent.address ? selectedRespondent.address.postalCode : ''}
-                            <br/>CANADA
-                        </td>
-                        <td style={{ whiteSpace:'no-wrap', textAlign:'left', verticalAlign:'top' }}>
-                            <i>[Respondent's Address for service]</i>
+                            <br/>
+                            Canada
                         </td>
                     </tr>    
                     </tbody></table>                    
