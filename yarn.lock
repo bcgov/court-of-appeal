@@ -6458,6 +6458,13 @@ react-test-renderer@^16.3.1:
     prop-types "^15.6.0"
     react-is "^16.3.1"
 
+react-to-print@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-1.0.17.tgz#f06ed4f6bdf97eeb221eb45b0aae5a39aecef4dd"
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
+
 react-tooltip@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.6.0.tgz#61fd8502540d91fb3397e3fc90b487c0842c4189"

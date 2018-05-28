@@ -56,6 +56,8 @@ class CaseList extends React.Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+
+        this.buttonBar.componentToPrint = this.componentToPrint;
     }
 
     handleFieldChange(e) {
@@ -186,12 +188,16 @@ class CaseList extends React.Component {
                                 className="case-list-modal"
                                 data={this.state.selectedDocument}
                                 formSevenNumber= {this.state.selectedDocument ? this.state.selectedDocument.formSevenNumber : ''}
+
+                                ref={el => (this.componentToPrint = el)}
                             />
                             <FormButtonBar
                                 back={this.backToEdit}
                                 printable="yes"
                                 backMessage="Back to editing"
                                 disableSubmit={this.state.submitShouldBeDisabled}
+
+                                ref={el => (this.buttonBar = el)}
                             />
                         </div>
                     </div>

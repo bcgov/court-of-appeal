@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import ReactToPrint from "react-to-print";
 
 class FormButtonBar extends React.Component {
 
@@ -128,20 +129,21 @@ class FormButtonBar extends React.Component {
         return button;
     }
 
-    print() {
-        window.print();
-    }
     printButton() {
         let button = null;
         if (this.props.printable === "yes") {
             button =  (
-                <div>
-                    <button
-                        id="print"
-                        onClick={this.print}
-                        className="btn btn-success"
-                    >Print
-                    </button>
+                <div>                    
+                    <ReactToPrint
+                        trigger={() => 
+                            <button
+                                id="print"
+                                className="btn btn-success"
+                            >Print
+                            </button>
+                        }
+                        content={() => this.componentToPrint}
+                    />
                 </div>
             );
         };
