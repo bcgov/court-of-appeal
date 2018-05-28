@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SelectForm from './forms/select.form.js';
+import SelectForm from './forms/SelectForm.js';
 import Top5 from './forms/top.5.js';
 import ActiveFormList from './components/ActiveFormList.js';
 import NeedHelp from './need.help.js';

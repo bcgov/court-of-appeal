@@ -103,17 +103,20 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
           >
             <div>
               <button
-                className="btn btn-warning"
+                className="btn btn-primary round-borders"
                 id="back"
                 onClick={[Function]}
               >
-                &lt; 
+                <i
+                  className="glyphicon glyphicon-triangle-left"
+                />
+                 
                 Back
               </button>
             </div>
             <div>
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders"
                 id="draft"
                 onClick={[Function]}
               >
@@ -124,12 +127,15 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
               data-tip=""
             >
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders action-button"
                 disabled={true}
                 id="preview"
                 onClick={[Function]}
               >
-                Preview &gt;
+                Preview 
+                <i
+                  className="glyphicon glyphicon-triangle-right"
+                />
               </button>
             </div>
             <div
@@ -177,21 +183,27 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
           >
             <div>
               <button
-                className="btn btn-warning"
+                className="btn btn-primary round-borders"
                 id="back"
                 onClick={[Function]}
               >
-                &lt; 
+                <i
+                  className="glyphicon glyphicon-triangle-left"
+                />
+                 
                 Back to editing
               </button>
             </div>
             <div>
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders action-button"
                 id="print"
                 onClick={[Function]}
               >
-                Print
+                Print 
+                <i
+                  className="glyphicon glyphicon-triangle-right"
+                />
               </button>
             </div>
             <div
@@ -234,20 +246,27 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
         >
           <div>
             <button
-              className="btn btn-warning"
+              className="btn btn-primary round-borders"
               id="back"
               onClick={[Function]}
             >
-              &lt; 
+              <i
+                className="glyphicon glyphicon-triangle-left"
+              />
+               
               Go back so I can save the form as draft.
             </button>
           </div>
           <div>
             <button
-              className="btn btn-success"
+              className="btn btn-primary round-borders"
               id="submit"
               onClick={[Function]}
             >
+              <i
+                className="glyphicon glyphicon-triangle-left"
+              />
+                
               Continue anyway.  I don't care about the data.
             </button>
           </div>
@@ -376,17 +395,20 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
           >
             <div>
               <button
-                className="btn btn-warning"
+                className="btn btn-primary round-borders"
                 id="back"
                 onClick={[Function]}
               >
-                &lt; 
+                <i
+                  className="glyphicon glyphicon-triangle-left"
+                />
+                 
                 Back
               </button>
             </div>
             <div>
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders"
                 id="draft"
                 onClick={[Function]}
               >
@@ -397,12 +419,15 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
               data-tip=""
             >
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders action-button"
                 disabled={true}
                 id="preview"
                 onClick={[Function]}
               >
-                Preview &gt;
+                Preview 
+                <i
+                  className="glyphicon glyphicon-triangle-right"
+                />
               </button>
             </div>
             <div
@@ -450,21 +475,27 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
           >
             <div>
               <button
-                className="btn btn-warning"
+                className="btn btn-primary round-borders"
                 id="back"
                 onClick={[Function]}
               >
-                &lt; 
+                <i
+                  className="glyphicon glyphicon-triangle-left"
+                />
+                 
                 Back to editing
               </button>
             </div>
             <div>
               <button
-                className="btn btn-success"
+                className="btn btn-primary round-borders action-button"
                 id="print"
                 onClick={[Function]}
               >
-                Print
+                Print 
+                <i
+                  className="glyphicon glyphicon-triangle-right"
+                />
               </button>
             </div>
             <div
@@ -507,20 +538,27 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
         >
           <div>
             <button
-              className="btn btn-warning"
+              className="btn btn-primary round-borders"
               id="back"
               onClick={[Function]}
             >
-              &lt; 
+              <i
+                className="glyphicon glyphicon-triangle-left"
+              />
+               
               Go back so I can save the form as draft.
             </button>
           </div>
           <div>
             <button
-              className="btn btn-success"
+              className="btn btn-primary round-borders"
               id="submit"
               onClick={[Function]}
             >
+              <i
+                className="glyphicon glyphicon-triangle-left"
+              />
+                
               Continue anyway.  I don't care about the data.
             </button>
           </div>
