@@ -33,9 +33,9 @@ class Form2 extends Component {
         this.validateField = this.validateField.bind(this);
     }
 
-    initialState() {
+    initialState(formSevenNumber) {
         return {
-            formSevenNumber: 'CA',
+            formSevenNumber: formSevenNumber || 'CA',
             document: {
                 appellants: [
                     {
@@ -350,7 +350,7 @@ class Form2 extends Component {
                         handleFieldChange={this.handleSearchFieldChange.bind(this)}
                         service={this.service}
                         notFoundError={this.state.notFoundError}
-                        startSearching={this.startSearch.bind(this)}
+                        startSearching={this.startNewSearch.bind(this)}
                     />
                     <div className="form-section" style={{display: this.state.displayData}}>
                         <Form2DataSection
@@ -490,8 +490,8 @@ class Form2 extends Component {
         }
     }
 
-    startSearch() {
-        this.setState(this.initialState());
+    startNewSearch() {
+        this.setState(this.initialState(this.state.formSevenNumber));
     }
 }
 
