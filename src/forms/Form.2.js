@@ -369,7 +369,7 @@ class Form2 extends Component {
                     </div>
 
                     <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
-                        <div className="modal-title green not-printable">
+                        <div className="modal-title  not-printable">
                             <span id="close-modal" onClick={this.closePreview}>&times;</span>
                             Preview Form 2
                         </div>
@@ -407,7 +407,7 @@ class Form2 extends Component {
                     </div>
                     <div id="saveSucessModal" className="modal not-printable"
                         style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
-                        <div className="modal-title green">
+                        <div className="modal-title ">
                             <span id="close-modal" onClick={this.closeSuccessModal}>&times;</span>
                             Saved!
                         </div>

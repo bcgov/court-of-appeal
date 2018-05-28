@@ -28,7 +28,7 @@
 }
 
 .modal-title {
-	background-color: #38598a;
+    background-color: var(--header-background);
 	color: white;
     margin: auto;
     padding: 20px;

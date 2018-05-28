@@ -198,7 +198,7 @@ exports[`Snapshots of form2 1`] = `
         }
       >
         <div
-          className="modal-title green not-printable"
+          className="modal-title  not-printable"
         >
           <span
             id="close-modal"
@@ -283,7 +283,7 @@ exports[`Snapshots of form2 1`] = `
         }
       >
         <div
-          className="modal-title green"
+          className="modal-title "
         >
           <span
             id="close-modal"

@@ -77,7 +77,7 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
       }
     >
       <div
-        className="modal-title green"
+        className=" modal-title "
       >
         <span
           id="close-modal"
@@ -151,7 +151,7 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
       }
     >
       <div
-        className="modal-title green not-printable"
+        className="modal-title  not-printable"
       >
         <span
           id="close-modal"
@@ -350,7 +350,7 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
       }
     >
       <div
-        className="modal-title green"
+        className=" modal-title "
       >
         <span
           id="close-modal"
@@ -424,7 +424,7 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
       }
     >
       <div
-        className="modal-title green not-printable"
+        className="modal-title  not-printable"
       >
         <span
           id="close-modal"

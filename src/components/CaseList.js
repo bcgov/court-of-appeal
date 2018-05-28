@@ -147,7 +147,7 @@ class CaseList extends React.Component {
                 </table>
                 <div id="editFormModal not-printable" className="modal"
                      style={{display: (this.state.editMode ? 'block' : 'none')}}>
-                    <div className="modal-title green">
+                    <div className=" modal-title ">
                         <span id="close-modal" onClick={this.cancel}>&times;</span>
                         Edit Form 2
                     </div>
@@ -174,7 +174,7 @@ class CaseList extends React.Component {
 
                 <div id="viewFormModal" className="modal"
                      style={{display: (this.state.previewMode ? 'block' : 'none')}}>
-                    <div className="modal-title green not-printable">
+                    <div className="modal-title  not-printable">
                         <span id="close-modal" onClick={this.closeEditModal.bind(this)}>&times;</span>
                         Preview Form 2
                     </div>
