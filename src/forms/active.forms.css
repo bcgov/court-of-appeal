@@ -10,9 +10,6 @@
     border-bottom: 1px solid black;
 }
 
-#active-forms table td {    
-    white-space: nowrap;
-}
 #active-forms table td.near-deadline {
     width: 5px;
     color: red;    
