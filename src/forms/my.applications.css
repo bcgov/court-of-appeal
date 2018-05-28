@@ -3,8 +3,10 @@
 }
 
 .action-icon {
+    cursor: pointer;
     color: rgb(0, 51, 102);
     border: 1px solid rgb(0, 51, 102);
     border-radius: 5px;
     padding: 5px;
+    margin-left: 5px; 
 }
