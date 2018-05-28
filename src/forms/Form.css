@@ -1,3 +1,7 @@
+:root {
+	--header-background: #003366;
+}
+
 .form {
 	background-color: #f1f1f1;
 }
