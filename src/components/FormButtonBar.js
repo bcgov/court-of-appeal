@@ -3,6 +3,12 @@ import ReactTooltip from 'react-tooltip';
 
 class FormButtonBar extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.className = "btn btn-primary round-borders";
+        this.actionClassName = this.className + " action-button";
+    }
+
     render() {
         return (
             <div className="button-bar not-printable">
@@ -28,7 +34,7 @@ class FormButtonBar extends React.Component {
         if (this.props.back) {
             button =  (
                 <div >
-                    <button id="back" onClick={this.props.back} className="btn btn-warning">&lt; {backMessage}
+                    <button id="back" onClick={this.props.back} className={this.className}><i className="glyphicon glyphicon-triangle-left" /> {backMessage}
                     </button>
                 </div>
             );
@@ -41,7 +47,7 @@ class FormButtonBar extends React.Component {
         if (this.props.cancel) {
             button =  (
                 <div>
-                    <button id="cancel" onClick={this.props.cancel} className="btn btn-warning">Cancel
+                    <button id="cancel" onClick={this.props.cancel} className={this.className}>Cancel
                     </button>
                 </div>
             );
@@ -54,7 +60,7 @@ class FormButtonBar extends React.Component {
         if (this.props.save) {
             button =  (
                 <div>
-                    <button id="draft" onClick={this.props.save} className="btn btn-success">Save as Draft
+                    <button id="draft" onClick={this.props.save} className={this.className}>Save as Draft
                     </button>
                 </div>
             );
@@ -67,7 +73,7 @@ class FormButtonBar extends React.Component {
         if (this.props.fullpage) {
             button =  (
                 <div>
-                    <button id="save-as-draft" onClick={this.props.fullpage} className="btn btn-success">View in full page
+                    <button id="save-as-draft" onClick={this.props.fullpage} className={this.className}>View in full page
                     </button>
                 </div>
             );
@@ -83,9 +89,9 @@ class FormButtonBar extends React.Component {
                     <button
                         id="preview"
                         onClick={this.props.preview}
-                        className="btn btn-success"
+                        className={this.actionClassName}
                         disabled={this.props.disablePreview}
-                    >Preview &gt;
+                    >Preview <i className="glyphicon glyphicon-triangle-right"/>
                     </button>
                 </div>
             );
@@ -101,9 +107,9 @@ class FormButtonBar extends React.Component {
                     <button
                         id="submit"
                         onClick={this.props.submit}
-                        className="btn btn-success"
+                        className={this.actionClassName}
                         disabled={this.props.disableSubmit}
-                    >Submit
+                    >Submit <i className="glyphicon glyphicon-triangle-right"/>
                     </button>
                 </div>
             );
@@ -120,7 +126,8 @@ class FormButtonBar extends React.Component {
             }
             button = (
                 <div>
-                    <button id="submit" onClick={this.props.continue} className="btn btn-success">{continueMessage}
+                    <button id="submit" onClick={this.props.continue} className={this.className}>
+                        <i className="glyphicon glyphicon-triangle-left" />  {continueMessage}
                     </button>
                 </div>
             );
@@ -139,8 +146,8 @@ class FormButtonBar extends React.Component {
                     <button
                         id="print"
                         onClick={this.print}
-                        className="btn btn-success"
-                    >Print
+                        className={this.actionClassName}
+                    >Print <i className="glyphicon glyphicon-triangle-right"/>
                     </button>
                 </div>
             );

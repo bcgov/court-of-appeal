@@ -82,15 +82,13 @@ a:hover.start-an-appeal {
     background-color: rgb(81, 180, 81);
     color: white;
 }
-
-.respond-to-appeal {
-    width:250px;
-    background-color: #fdb813;
-    color: black;
+.action-button {
+	background-color: green;
+	color: white;
 }
-a:hover.respond-to-appeal {
-    background-color: #fed77a;
-    color: black;
+:hover.action-button {
+	background-color: rgb(81, 180, 81);
+	color: white;
 }
 
 svg.fa-play {
