@@ -94,8 +94,6 @@ class Form2 extends Component {
             this.service = new DefaultService(window);
         }
         this.validateForm();
-
-        this.buttonBar.componentToPrint = this.componentToPrint;
     }
 
     found(data) {
@@ -384,16 +382,12 @@ class Form2 extends Component {
                                     data={this.state.document}
                                     formSevenNumber= {this.state.formSevenNumber}
                                     validate={this.validateField}
-
-                                    ref={el => (this.componentToPrint = el)}
-                                />                                
+                                />
                                 <FormButtonBar
                                     back={this.closePreview.bind(this)}
                                     printable="yes"
                                     backMessage="Back to editing"
                                     disableSubmit={this.state.submitShouldBeDisabled}
-
-                                    ref={el => (this.buttonBar = el)}
                                 />
                             </div>
                         </div>
