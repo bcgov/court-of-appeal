@@ -98,7 +98,7 @@ Service.prototype.getPersonInfo = function(callback) {
 Service.prototype.archiveCases = function(ids, callback) {
     let request = require('request');
     let options = this.buildOptions('/api/cases/archive');
-    options.form = { ids:ids };
+    options.form = { ids:JSON.stringify(ids) };
     request.post(options, function(err, response, body) {
         callback(body);
     });
