@@ -127,7 +127,7 @@ class FormButtonBar extends React.Component {
             button = (
                 <div>
                     <button id="submit" onClick={this.props.continue} className={this.className}>
-                        <i className="glyphicon glyphicon-triangle-left" />  {continueMessage}
+                        <i className="glyphicon glyphicon-triangle-right" />  {continueMessage}
                     </button>
                 </div>
             );
