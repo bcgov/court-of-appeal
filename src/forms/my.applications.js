@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './active.forms.css';
 import DefaultService from '../service/default.service.js';
-import CaseList from '../components/CaseList.js';
+import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
 import _ from 'lodash';
 import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
@@ -20,6 +20,8 @@ class MyApplications extends Component {
         };
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
+        this.archive = this.archive.bind(this);
+        this.toggleSelected = this.toggleSelected.bind(this);
     }
 
     componentDidMount() {
@@ -33,7 +35,8 @@ class MyApplications extends Component {
 
     fetchCases() {
         this.service.getMyCases({}, (data) => {
-            let cases = renderCases(data.cases);
+            let cases = renderCases(data.cases);    
+            cases.forEach((item)=>{item.checked=false;});
             this.setState({
                 cases:cases,
                 displayMyCasesEmptyLabel: (cases.length === 0)
@@ -51,6 +54,31 @@ class MyApplications extends Component {
         this.setState(update(this.state, {cases: {$set: cases}}));
     }
 
+    toggleSelected(id) {
+        let cases = this.state.cases;
+        _.forEach(cases, (doc) => {
+            if (doc.id === id) {
+                doc.checked = !doc.checked;
+            }
+        });
+        this.setState({
+            cases:cases,
+            displayMyCasesEmptyLabel: (cases.length === 0)
+        });
+    }
+    archive() {
+        let reducer = (list, item)=> {
+            if (item.checked) {
+                list.push(item.id);
+            }
+            return list;
+        }        
+        let idsToArchive = this.state.cases.reduce(reducer, []);
+        this.service.archiveCases(idsToArchive, (data) => {
+            this.fetchCases();
+        });
+    }
+
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form">
@@ -63,15 +91,19 @@ class MyApplications extends Component {
                                         <h3>My Documents</h3>
                                     </div>
                                     <div className="col-xs-6 no-padding text-right">
+                                        <a onClick={this.archive}>
+                                            <span className="oi oi-box action-icon"></span>
+                                        </a>
                                         <a href="form.2.html">
                                             <span className="oi oi-plus action-icon"></span>
                                         </a>
                                     </div>
                                 </div>
-                                <CaseList
+                                <MultiSelectionCaseList
                                     cases={this.state.cases}                   
                                     service={this.service}
                                     updateCases={this.updateCases}
+                                    toggleSelected={this.toggleSelected}
                                 />
                                 <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
                                         No open cases found
