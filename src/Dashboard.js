@@ -12,25 +12,23 @@ class Dashboard extends Component {
             <div id="topicTemplate" className="template container gov-container form">
                 <div className="row">
                     <div role="main" className="col-sm-12">
-                        <div className="col-sm-12">
-                            <ActiveFormList />
-                        </div>
+                        <ActiveFormList />
                     </div>
                 </div>
                 <div className="row">
-                    <div role="main" className="col-sm-12">
-                        <div className="col-sm-8">
-                            <SelectForm/>
-                        </div>
-                        <div className="col-sm-4">
-                            <Top5/>
-                        </div>
+                    <div role="main" className="center-main col-lg-8" >
+                        <SelectForm/>
                     </div>
-                </div>
-                <div className="row">
-                    <div role="main" className="col-sm-12">
-                        <div className="col-sm-12">
-                            <NeedHelp/>
+                    <div role="main" className="right-nav-main col-lg-4"  >
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <Top5/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div role="main" className="col-lg-12">
+                                <NeedHelp/>
+                            </div>
                         </div>
                     </div>
                 </div>

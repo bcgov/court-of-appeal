@@ -74,12 +74,14 @@ a.toggler:hover {
 	font-size: 1.1em;
 }
 .start-an-appeal {
-    width: 250px;
+    width: 100%;
     background-color: green;
+	border-color: green;
     color: white;
 }
 a:hover.start-an-appeal {
     background-color: rgb(81, 180, 81);
+	border-color: rgb(81, 180, 81);
     color: white;
 }
 .action-button {

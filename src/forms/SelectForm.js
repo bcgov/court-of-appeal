@@ -18,35 +18,24 @@ class SelectForm extends Component {
         return (
             <div className="form-section not-printable">
                 <h3>Start E-Filing</h3>
-
-                <div id="steps" className="small-steps">
-                    <ol>
-                        <li className="small-steps"><span className="step-circle future small-steps">1</span><span className="step-title future small-steps">Complete form</span></li>
-                        <li className="small-steps"><span className="step-circle future small-steps">2</span><span className="step-title future small-steps">Preview</span></li>
-                        <li className="small-steps"><span className="step-circle future small-steps">3</span><span className="step-title future small-steps">Submit</span></li>
-                        <li className="small-steps"><span className="step-circle future small-steps">4</span><span className="step-title future small-steps">Pay</span></li>
-                    </ol>
-                </div>
-
                 <div>
-                    <table style={{ width:'100%' }}>
-                        <tbody>
-                            <tr>
-                                <td style={{ width:'50%', textAlign:'center'}}>
+                    <div style={{ width:'100%' }}>
+                            <div className="row">
+                                <div className="col col-lg-6 col-med-6 col-sm-6" >
                                     <a href="/" className="btn btn-primary round-borders start-an-appeal">
                                         Start an Appeal &nbsp;
                                         <i className="fa fa-play"/>
                                     </a>
-                                </td>
-                                <td style={{ width:'50%', textAlign:'center'}}>
+                                </div>
+                                <div className="col col-lg-6 col-med-6 col-sm-6" >
                                     <a href="form.2.html" className="btn btn-primary round-borders start-an-appeal">
                                         Respond to Appeal &nbsp;
                                         <i className="fa fa-play"/>
                                     </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+
+                    </div>
                 </div>
                         
             </div>

@@ -8,3 +8,10 @@
 .dashboard-section h3 {
     text-decoration: underline;
 }
+.center-main {
+    padding-right: 0;
+}
+.right-nav-main {
+    padding-right: 0;
+    padding-left: 0;
+}

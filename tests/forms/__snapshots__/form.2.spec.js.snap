@@ -362,7 +362,7 @@ exports[`Snapshots of form2 1`] = `
                 onClick={[Function]}
               >
                 <i
-                  className="glyphicon glyphicon-triangle-left"
+                  className="glyphicon glyphicon-triangle-right"
                 />
                   
                 Continue anyway.  I don't care about the data.
