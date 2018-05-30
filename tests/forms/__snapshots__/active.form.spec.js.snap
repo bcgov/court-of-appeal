@@ -17,22 +17,6 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
     >
       Document Reminders
     </h3>
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-          "float": "right",
-          "marginTop": "15px",
-        }
-      }
-    >
-      <a
-        className="btn btn-primary round-borders"
-        href="/my-applications.html"
-      >
-        View All Documents
-      </a>
-    </div>
   </div>
   <div
     id="case-list"
@@ -264,7 +248,7 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
               onClick={[Function]}
             >
               <i
-                className="glyphicon glyphicon-triangle-left"
+                className="glyphicon glyphicon-triangle-right"
               />
                 
               Continue anyway.  I don't care about the data.
@@ -288,6 +272,14 @@ exports[`Active forms section display empty mention when no cases are found 1`] 
     }
   >
     No open cases found
+  </div>
+  <div>
+    <a
+      className="btn btn-primary round-borders"
+      href="/my-applications.html"
+    >
+      View All Documents
+    </a>
   </div>
 </div>
 `;
@@ -309,22 +301,6 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
     >
       Document Reminders
     </h3>
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-          "float": "right",
-          "marginTop": "15px",
-        }
-      }
-    >
-      <a
-        className="btn btn-primary round-borders"
-        href="/my-applications.html"
-      >
-        View All Documents
-      </a>
-    </div>
   </div>
   <div
     id="case-list"
@@ -556,7 +532,7 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
               onClick={[Function]}
             >
               <i
-                className="glyphicon glyphicon-triangle-left"
+                className="glyphicon glyphicon-triangle-right"
               />
                 
               Continue anyway.  I don't care about the data.
@@ -580,6 +556,14 @@ exports[`Active forms section hides the empty mention when cases are found 1`] =
     }
   >
     No open cases found
+  </div>
+  <div>
+    <a
+      className="btn btn-primary round-borders"
+      href="/my-applications.html"
+    >
+      View All Documents
+    </a>
   </div>
 </div>
 `;
