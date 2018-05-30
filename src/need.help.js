@@ -5,26 +5,14 @@ class NeedHelp extends Component {
 
     render() {
         return (
-            <div className="form-section not-printable">
-                
-                <table>
-                    <tbody>
-                        <tr>
-                            <td className="info-icon">
-                                <i className="fa fa-info-circle" aria-hidden="true"></i>
-                            </td>
-                            <td className="help-section" style={{ fontSize:'30px' }}>
-                                Need help?
-                            </td>
-                            <td className="help-details" >
-                                    Phone: 1-800-663-6102
-                            </td>
-                            <td className="help-details">
-                                    E-mail: Courts.cso@gov.bc.ca
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div className="form-section not-printable" >
+                <h3>Need help?</h3>
+                <p>
+                        Phone: 1-800-663-6102
+                </p>
+                <p>
+                        E-mail: Courts.cso@gov.bc.ca
+                </p>
             </div>
         )
     }
