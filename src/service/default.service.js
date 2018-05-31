@@ -35,10 +35,14 @@ Service.prototype.base = function() {
 
 Service.prototype.searchForm7 = function(file, callback) {
     let get = require('request');
-    get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{            
-        if (response.statusCode === 404) { callback(undefined); }
-        else { callback(JSON.parse(body)); }
-    }); 
+    let msg = require('../helpers/constants');
+    get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
+        if (err) {
+            callback(msg.NETWORK_ERROR_MSG);
+        } else if (response.statusCode === 404) {
+            callback(undefined);
+        } else { callback(JSON.parse(body)); }
+    });
 };
 
 Service.prototype.createForm2 = function(form, callback) {
