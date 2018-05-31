@@ -107,5 +107,14 @@ Service.prototype.archiveCases = function(ids, callback) {
         callback(body);
     });
 };
+Service.prototype.generatePdf = function(html, callback) {
+    let request = require('request');
+    let options = this.buildOptions('/api/pdf');
+    options.form = { html:html };
+    options.encoding = null;
+    request.post(options, function(err, response, body) {
+        callback(body);
+    });
+};
 module.exports = Service;
 module.exports.fakeData = fakeData;

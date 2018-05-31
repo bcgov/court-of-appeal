@@ -51,28 +51,22 @@ describe('Active forms section', function() {
     });
 
     test ('hides the empty mention when cases are found', ()=> {
-        let list = renderer.create(
+        let list = mount(
             <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases: [
                         { id:1501, status:'draft', modified:'2018-03-27T16:15:54Z', data:{appellants: [{name:'Bruce'}], respondents:[{name:'Clark'}]} }
                     ]});} }}/>,
-        );
-        let tree = list.toJSON();
-        expect(tree).toMatchSnapshot();
-        let instance = list.getInstance();
-        instance.fetchCases();
+        ).instance();
+        list.fetchCases();
         
-        expect(instance.state.displayMyCasesEmptyLabel).toEqual(false);
+        expect(list.state.displayMyCasesEmptyLabel).toEqual(false);
     });
     
     test('display empty mention when no cases are found', ()=> {
-        let emptylist = renderer.create(
+        let emptylist = mount(
             <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( { cases: [] }); } }}/>
-        );
-        let tree = emptylist.toJSON();
-        expect(tree).toMatchSnapshot();
-        let instance = emptylist.getInstance();
-        instance.fetchCases();
+        ).instance();
+        emptylist.fetchCases();
     
-        expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
+        expect(emptylist.state.displayMyCasesEmptyLabel).toEqual(true);
     });
 });
