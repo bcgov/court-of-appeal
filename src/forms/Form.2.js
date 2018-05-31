@@ -8,7 +8,7 @@ import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
-import {INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG} from "../helpers/constants";
+import { INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG, NETWORK_ERROR_MSG} from "../helpers/constants";
 import validateForm2 from "../utils/AddressUtils";
 
 class Form2 extends Component {
@@ -99,18 +99,22 @@ class Form2 extends Component {
     found(data) {
 
         if (data) {
-            this.setState({notFoundError: ''});
-            const appellants = this.mapIncomingData(data.parties.appellants);
-            const respondents = this.mapIncomingData(data.parties.respondents);
-            if (appellants && respondents) {
-                this.setState(update(this.state, { document: { appellants: {$set: appellants} } }));
-                this.setState(update(this.state, { document: { respondents: {$set: respondents} } }));
-                this.setState({
-                    displayData: 'block',
-                    showForm2: true
-                });
+            if (data === NETWORK_ERROR_MSG ) {
+                this.setState({notFoundError: NETWORK_ERROR_MSG});
             } else {
-                this.setState({notFoundError: 'Something went wrong with the document requested'});
+                this.setState({notFoundError: ''});
+                const appellants = this.mapIncomingData(data.parties.appellants);
+                const respondents = this.mapIncomingData(data.parties.respondents);
+                if (appellants && respondents) {
+                    this.setState(update(this.state, {document: {appellants: {$set: appellants}}}));
+                    this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
+                    this.setState({
+                        displayData: 'block',
+                        showForm2: true
+                    });
+                } else {
+                    this.setState({notFoundError: 'Something went wrong with the document requested'});
+                }
             }
         } else {
             this.setState({notFoundError: 'No such Court of Appeal document found'});
