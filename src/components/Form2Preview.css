@@ -1,6 +1,13 @@
+#form2-preview {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: Myriad-Pro, sans-serif;
+    font-size: medium;
+}
+
 #form2-preview td {
     padding: 5px;
-}
-#form2-preview td.preview-data {
-    padding-left: 4px;
 }

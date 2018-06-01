@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import DefaultService from '../service/default.service.js';
+import FileSaver from 'file-saver';
 
 class FormButtonBar extends React.Component {
 
@@ -7,11 +9,20 @@ class FormButtonBar extends React.Component {
         super(props);
         this.className = "btn btn-primary round-borders";
         this.actionClassName = this.className + " action-button";
+
+        this.print = this.print.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
     }
 
     render() {
         return (
-            <div className="button-bar not-printable">
+            <div className="button-bar not-printable" ref={ (element)=> {this.element = element }}>
                 {this.backButton()}
                 {this.cancelButton()}
                 {this.saveButton()}
@@ -136,7 +147,25 @@ class FormButtonBar extends React.Component {
     }
 
     print() {
-        window.print();
+        var styles = `
+            <style>
+                #form2-preview {
+                    font-family: Myriad-Pro, sans-serif;
+                    font-size: 12pt;
+                    padding: 5px;
+                }
+                
+                #form2-preview td {
+                    padding: 5px;
+                }
+            </style>
+        `
+        var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';
+        console.log(html);
+        this.service.generatePdf(html, (data)=>{
+            var blob = new Blob([data], {type: 'application/pdf'});
+            FileSaver.saveAs(blob, 'form.pdf');
+        });
     }
     printButton() {
         let button = null;

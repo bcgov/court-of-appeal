@@ -25,21 +25,18 @@ class Form2Preview extends React.Component {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
             return (                
-                <div id="form2-preview" className="form-section">
-                    <div className="row form-heading">
-                        <h2 className="text-center">FORM 2 (RULES 5 (A), 13 (A) AND 17 (A))</h2>
-                    </div>
-                    <div className="row text-right">
+                <div id="form2-preview">
+                    <h2 style={{ textAlign:'center' }}>FORM 2 (RULES 5 (A), 13 (A) AND 17 (A))</h2>
+                    <div style={{ textAlign:'right' }}>
                         <span>Court of Appeal File No. </span>
                         <span>{this.props.formSevenNumber}</span>
                     </div>
-                    <div className="row text-center">
-                        <strong>COURT OF APPEAL</strong>
-                    </div>
+                    
+                    <h3 style={{ textAlign:'center' }}>COURT OF APPEAL</h3>
                     <table width="100%"><tbody>
                     <tr>
                         <td style={{ fontWeight:'bold', verticalAlign:'top' }}>BETWEEN:</td>
-                        <td id="appellant-name" className="preview-data">{this.props.data.appellants.map( (appellant, index) => {
+                        <td id="appellant-name" style={{ paddingLeft:'4px' }}>{this.props.data.appellants.map( (appellant, index) => {
                             if (index === this.props.data.appellants.length - 1) {
                                 return appellant.name;
                             } else {
@@ -47,11 +44,11 @@ class Form2Preview extends React.Component {
                             }
                         } ) }
                         </td>
-                        <td className="text-right" style={{ fontWeight:'bold', paddingLeft:'70px', verticalAlign:'top' }}>Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</td>
+                        <td style={{ textAlign:'right', fontWeight:'bold', paddingLeft:'70px', verticalAlign:'top' }}>Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</td>
                     </tr>
                     <tr>
                         <td style={{ fontWeight:'bold', verticalAlign:'top' }}>AND:</td>
-                        <td id="respondent-name" className="preview-data">{this.props.data.respondents.map( (respondent, index) => {
+                        <td id="respondent-name" style={{ paddingLeft:'4px' }}>{this.props.data.respondents.map( (respondent, index) => {
                             if (index === this.props.data.respondents.length - 1) {
                                 return respondent.name;
                             } else {
@@ -59,15 +56,11 @@ class Form2Preview extends React.Component {
                             }
                         } ) }
                         </td>
-                        <td className="text-right" style={{ fontWeight:'bold', paddingLeft:'70px', verticalAlign:'top' }}>Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</td>
+                        <td style={{ textAlign:'right', fontWeight:'bold', paddingLeft:'70px', verticalAlign:'top' }}>Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</td>
                     </tr>
                     </tbody></table>
-                    <p className="text-center">
-                        <strong>NOTICE OF APPEARANCE</strong>
-                    </p>
-                    <p>
-
-                    </p>
+                    
+                    <h3 style={{ textAlign:'center' }}>NOTICE OF APPEARANCE</h3>                    
                     <table width="100%"><tbody>
                     <tr>
                         <td>
@@ -96,13 +89,10 @@ class Form2Preview extends React.Component {
                     </tr>    
                     </tbody></table>                    
 
-                    <p className="text-right">
+                    <p style={{ textAlign:'right' }}>
                         ............................................................................................................
                         <br/>
                         <i>Respondent/Solicitor for the Respondent</i>
-                    </p>
-                    <p className="text-right">
-                        
                     </p>
 
                 </div>                                                                                                    
