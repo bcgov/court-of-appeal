@@ -149,19 +149,29 @@ class FormButtonBar extends React.Component {
     print() {
         var styles = `
             <style>
+                body {
+                    padding: 15px;
+                }
+                body, table {
+                    font-size: 8pt;
+                }
                 #form2-preview {
                     font-family: Myriad-Pro, sans-serif;
-                    font-size: 12pt;
+                    font-size: 8pt;
                     padding: 5px;
-                }
-                
+                }                
                 #form2-preview td {
                     padding: 5px;
                 }
+                h2 {
+                    font-size: 10pt;
+                }
+                h3 {
+                    font-size: 8pt;
+                }
             </style>
         `
-        var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';
-        console.log(html);
+        var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
         this.service.generatePdf(html, (data)=>{
             var blob = new Blob([data], {type: 'application/pdf'});
             FileSaver.saveAs(blob, 'form.pdf');
