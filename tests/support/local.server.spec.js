@@ -20,5 +20,24 @@ describe('Local Server', ()=> {
                 done();
             })    
         });
-    });    
+    }); 
+    test('always uses a fresh port', (done)=>{
+        server = new LocalServer((request, response)=>{
+            response.write('Hello');
+            response.end();
+        });
+        server.start(()=>{
+            let firstPort = server.port;
+            server.stop(()=>{
+                server = new LocalServer((request, response)=>{
+                    response.write('Hello');
+                    response.end();
+                });
+                server.start(()=>{
+                    expect(server.port).not.toEqual(firstPort);
+                    done();
+                });
+            });
+        });
+    }); 
 });
