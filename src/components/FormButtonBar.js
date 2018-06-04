@@ -7,10 +7,14 @@ class FormButtonBar extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            downloading: false
+        }
         this.className = "btn btn-primary round-borders";
         this.actionClassName = this.className + " action-button";
 
         this.print = this.print.bind(this);
+        this.buttonOrSpinner = this.buttonOrSpinner.bind(this);
     }
 
     componentDidMount() {
@@ -147,6 +151,7 @@ class FormButtonBar extends React.Component {
     }
 
     print() {
+        this.setState({ downloading:true });
         var styles = `
             <style>
                 body {
@@ -174,20 +179,28 @@ class FormButtonBar extends React.Component {
         var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
         this.service.generatePdf(html, (data)=>{
             var blob = new Blob([data], {type: 'application/pdf'});
+            this.setState({ downloading:false });
             FileSaver.saveAs(blob, 'form.pdf');
         });
+    }
+    buttonOrSpinner() {
+        if (this.state.downloading) {
+            return (
+                <button id="download-button" disabled="true" className="btn btn-primary btn-green" style={{ width:'106px'}}>
+                    <i className="fa fa-spinner fa-spin"></i>
+                </button>
+            )
+        }
+        else {
+            return <button id="download-button" onClick={this.print} className={this.actionClassName}>Download <i className="glyphicon glyphicon-triangle-right"/></button>
+        }
     }
     printButton() {
         let button = null;
         if (this.props.printable === "yes") {
             button =  (
                 <div>
-                    <button
-                        id="print"
-                        onClick={this.print}
-                        className={this.actionClassName}
-                    >Print <i className="glyphicon glyphicon-triangle-right"/>
-                    </button>
+                    { this.buttonOrSpinner() }
                 </div>
             );
         };
