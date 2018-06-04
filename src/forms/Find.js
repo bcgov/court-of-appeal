@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './find.css';
 import DefaultService from '../service/default.service.js';
 import NumericField from '../components/NumericField';
+import SpinnerButton from '../components/SpinnerButton';
 
 class Find extends Component {
 
@@ -9,13 +10,9 @@ class Find extends Component {
         super(props);   
         this.service = props.service; 
         this.callback = props.callback;
-        this.state = {
-            searching: false
-        };
         this.search = this.search.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.isInvalidCaseNumber = this.isInvalidCaseNumber.bind(this);
-        this.buttonOrSpinner = this.buttonOrSpinner.bind(this);
     }
 
     componentDidMount() {
@@ -27,24 +24,11 @@ class Find extends Component {
 
     search() {
         this.props.startSearching();
-        this.setState({ searching:true });
+        this.printButton.startSpinner();
         this.service.searchForm7(this.props.formSevenNumber, (data) => {
-            this.setState({ searching:false });
+            this.printButton.stopSpinner();
             this.callback(data);
         });
-    }
-
-    buttonOrSpinner() {
-        if (this.state.searching) {
-            return (
-                <button id="find-button" disabled="true" className="btn btn-primary btn-green" style={{ width:'52px'}}>
-                    <i className="fa fa-spinner fa-spin"></i>
-                </button>
-            )
-        }
-        else {
-            return <button id="find-button" disabled={this.isInvalidCaseNumber()} onClick={this.search} className="btn btn-primary btn-green">Find</button>
-        }
     }
 
     handleKeyPress(target) {
@@ -79,7 +63,9 @@ class Find extends Component {
                                 />
                             </td>
                             <td>
-                                { this.buttonOrSpinner() }
+                            <SpinnerButton id="find-button" width="52" onClick={this.search} ref={ (element)=> {this.printButton = element }}
+                                content='Find'>                        
+                            </SpinnerButton>
                             </td>
                             <td>
                                 <div className="error-message">

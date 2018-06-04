@@ -2,6 +2,7 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import DefaultService from '../service/default.service.js';
 import FileSaver from 'file-saver';
+import SpinnerButton from './SpinnerButton';
 
 class FormButtonBar extends React.Component {
 
@@ -14,7 +15,6 @@ class FormButtonBar extends React.Component {
         this.actionClassName = this.className + " action-button";
 
         this.print = this.print.bind(this);
-        this.buttonOrSpinner = this.buttonOrSpinner.bind(this);
     }
 
     componentDidMount() {
@@ -151,7 +151,7 @@ class FormButtonBar extends React.Component {
     }
 
     print() {
-        this.setState({ downloading:true });
+        this.downloadButton.startSpinner();
         var styles = `
             <style>
                 body {
@@ -178,29 +178,19 @@ class FormButtonBar extends React.Component {
         `
         var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
         this.service.generatePdf(html, (data)=>{
+            this.downloadButton.stopSpinner();
             var blob = new Blob([data], {type: 'application/pdf'});
-            this.setState({ downloading:false });
             FileSaver.saveAs(blob, 'form.pdf');
         });
-    }
-    buttonOrSpinner() {
-        if (this.state.downloading) {
-            return (
-                <button id="download-button" disabled="true" className="btn btn-primary btn-green" style={{ width:'106px'}}>
-                    <i className="fa fa-spinner fa-spin"></i>
-                </button>
-            )
-        }
-        else {
-            return <button id="download-button" onClick={this.print} className={this.actionClassName}>Download <i className="glyphicon glyphicon-triangle-right"/></button>
-        }
     }
     printButton() {
         let button = null;
         if (this.props.printable === "yes") {
             button =  (
                 <div>
-                    { this.buttonOrSpinner() }
+                    <SpinnerButton id="download-button" width="106" onClick={this.print} ref={ (element)=> {this.downloadButton = element }}
+                        content='Download'>                        
+                    </SpinnerButton>
                 </div>
             );
         };
