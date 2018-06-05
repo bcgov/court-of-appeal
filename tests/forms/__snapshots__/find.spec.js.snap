@@ -47,14 +47,20 @@ exports[`valid entries 1`] = `
           />
         </td>
         <td>
-          <button
-            className="btn btn-primary btn-green"
-            disabled={true}
-            id="find-button"
-            onClick={[Function]}
-          >
-            Find
-          </button>
+          <div>
+            <button
+              className="btn btn-primary round-borders action-button"
+              id="find-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "width": "52px",
+                }
+              }
+            >
+              Find
+            </button>
+          </div>
         </td>
         <td>
           <div

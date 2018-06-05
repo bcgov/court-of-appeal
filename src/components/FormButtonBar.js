@@ -2,11 +2,15 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import DefaultService from '../service/default.service.js';
 import FileSaver from 'file-saver';
+import SpinnerButton from './SpinnerButton';
 
 class FormButtonBar extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            downloading: false
+        }
         this.className = "btn btn-primary round-borders";
         this.actionClassName = this.className + " action-button";
 
@@ -147,6 +151,7 @@ class FormButtonBar extends React.Component {
     }
 
     print() {
+        this.downloadButton.startSpinner();
         var styles = `
             <style>
                 body {
@@ -173,6 +178,7 @@ class FormButtonBar extends React.Component {
         `
         var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
         this.service.generatePdf(html, (data)=>{
+            this.downloadButton.stopSpinner();
             var blob = new Blob([data], {type: 'application/pdf'});
             FileSaver.saveAs(blob, 'form.pdf');
         });
@@ -182,12 +188,9 @@ class FormButtonBar extends React.Component {
         if (this.props.printable === "yes") {
             button =  (
                 <div>
-                    <button
-                        id="print"
-                        onClick={this.print}
-                        className={this.actionClassName}
-                    >Print <i className="glyphicon glyphicon-triangle-right"/>
-                    </button>
+                    <SpinnerButton id="download-button" width="106" onClick={this.print} ref={ (element)=> {this.downloadButton = element }}
+                        content='Download'>                        
+                    </SpinnerButton>
                 </div>
             );
         };
