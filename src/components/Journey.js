@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
 import JourneyMap from './JourneyMap';
 
@@ -11,6 +12,7 @@ class Journey extends Component {
             appellant: false,
             displayJourneyMap: false,
             mapSrc : null,
+            mapProps: null,
             title: '',
             subTitle: '',
             appealButtonClass: 'btn btn-primary round-borders btn-journey',
@@ -62,35 +64,40 @@ class Journey extends Component {
     leaveToAppealGranted() {
         this.startAppeal();
         this.setState({
-            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png"
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
+            mapProps: [{alt: "e-file an appeal"}]
         })
     }
 
     leaveToAppealRefused() {
         this.startAppeal();
         this.setState({
-            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png"
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
+            mapProps: [{alt: "e-file an appeal"}]
         })
     }
 
     respondToAppeal() {
         this.setState({
             displayJourneyMap: true,
-            subTitle: "Start e-filing your response to the appeal below."
+            subTitle: "Start e-filing your response to the appeal below.",
         });
     }
 
     respondToNoticeOfAppealJourney() {
        this.respondToAppeal();
        this.setState({
-           mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png"
+           mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
+           mapProps: [{coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"}]
+
        })
     }
 
     respondToNoticeOfLeaveToAppealJourney() {
         this.respondToAppeal();
         this.setState({
-            mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png"
+            mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
+            mapProps: [{coords: "85,15,200,210", href: "/form.2.html", alt: "e-file a notice of appearance"}]
         });
     }
 
@@ -99,6 +106,7 @@ class Journey extends Component {
         if (this.state.displayJourneyMap) {
             return <JourneyMap
                 mapSrc={this.state.mapSrc}
+                mapProps={this.state.mapProps}
                 title={this.state.title}
                 subTitle={this.state.subTitle}
             />;
@@ -109,8 +117,17 @@ class Journey extends Component {
                 <div >
                     <div className="row">
                         <div className="col col-lg-12 col-med-6 col-sm-12" >
-                            <h4>Have you been given leave to Appeal?</h4>
+                            <h4>Do you have a right to appeal your case? &nbsp;
+                                <i
+                                    className="fa fa-question-circle"
+                                    aria-hidden="true"
+                                    data-tip="If you don't know whether you have the right to appeal, clap your hands!
+                                    Or just check with the registry regarding your case.
+                                   Obviously, this is just placeholder text.
+                                    "/>
+                            </h4>
                         </div>
+                        <ReactTooltip />
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6" >

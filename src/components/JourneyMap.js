@@ -3,18 +3,34 @@ import './journeymap.css';
 
 class JourneyMap extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.getAreas = this.getAreas.bind(this);
+    }
+
     render() {
+        let map = null;
+        let targetAreas = this.getAreas();
+
         return (
-                <div className="form-section">
+                <div className="form-section ">
                     <h2>Your Appeal Process</h2>
                     <p>{this.props.subTitle}</p>
                     <img  className="journey-map-image" src={this.props.mapSrc} useMap="#journeymap" alt="Appeal Journey Map" />
                     <map name="journeymap">
-                        <area shape="rect" coords="75,20,180,200" href="/form.2.html" alt="e-file a notice of appearance"/>
+                        {targetAreas}
                     </map>
                 </div>
             );
     }
+
+    getAreas() {
+        return this.props.mapProps.map((prop, key) => {
+            return <area key={key} shape="rect" {...prop}/>
+        });
+    }
+
+
 }
 
 export default JourneyMap;
