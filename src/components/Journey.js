@@ -13,13 +13,17 @@ class Journey extends Component {
             mapSrc : null,
             title: '',
             subTitle: '',
-            appealButtonClass: 'btn-journey',
-
+            appealButtonClass: 'btn btn-primary round-borders btn-journey',
+            respondButtonClass: 'btn btn-primary round-borders btn-journey',
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
         this.journeyForAppellant = this.journeyForAppellant.bind(this);
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
+        this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
+        this.startAppeal = this.startAppeal.bind(this);
+        this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
+        this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
     }
 
     render() {
@@ -30,23 +34,64 @@ class Journey extends Component {
         );
     }
 
-    journeyForRespondent () {
-        this.setState({respondent: true, appellant: false});
+    journeyForRespondent() {
+        this.setState({
+            respondent: true,
+            appellant: false,
+            appealButtonClass: 'btn btn-primary round-borders btn-journey btn-not-selected',
+            respondButtonClass: 'btn btn-primary round-borders btn-journey'
+        });
     }
 
-    journeyForAppellant () {
-        this.setState({appellant: true, respondent: false});
+    journeyForAppellant() {
+        this.setState({
+            appellant: true,
+            respondent: false,
+            respondButtonClass: 'btn btn-primary round-borders btn-journey btn-not-selected',
+            appealButtonClass: 'btn btn-primary round-borders btn-journey'
+        });
     }
 
-    respondToNoticeOfAppealJourney () {
-        console.log(this.state.title);
+    startAppeal() {
         this.setState({
             displayJourneyMap: true,
-            mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
-            title: "Your Process to Respond to an Appeal",
+            subTitle: "Start e-filing your appeal below."
+        })
+    }
+
+    leaveToAppealGranted() {
+        this.startAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png"
+        })
+    }
+
+    leaveToAppealRefused() {
+        this.startAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png"
+        })
+    }
+
+    respondToAppeal() {
+        this.setState({
+            displayJourneyMap: true,
             subTitle: "Start e-filing your response to the appeal below."
         });
+    }
 
+    respondToNoticeOfAppealJourney() {
+       this.respondToAppeal();
+       this.setState({
+           mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png"
+       })
+    }
+
+    respondToNoticeOfLeaveToAppealJourney() {
+        this.respondToAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png"
+        });
     }
 
     journeyMapOrSelectionButtons() {
@@ -59,7 +104,7 @@ class Journey extends Component {
             />;
         }
         if (this.state.appellant) {
-            // TODO- change this to appellant specific content
+
             appellantContent = (
                 <div >
                     <div className="row">
@@ -69,13 +114,13 @@ class Journey extends Component {
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button onClick={this.respondToNoticeOfAppealJourney} className="btn btn-primary round-borders btn-journey" >
+                            <button onClick={this.leaveToAppealGranted} className="btn btn-primary round-borders btn-journey" >
                                 Yes &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button onClick={this.respondToNoticeOfAppealJourney} className="btn btn-primary round-borders btn-journey">
+                            <button onClick={this.leaveToAppealRefused} className="btn btn-primary round-borders btn-journey">
                                 No &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
@@ -99,7 +144,7 @@ class Journey extends Component {
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button onClick={this.respondToNoticeOfAppealJourney} className="btn btn-primary round-borders btn-journey">
+                            <button onClick={this.respondToNoticeOfLeaveToAppealJourney} className="btn btn-primary round-borders btn-journey">
                                 Notice of Application for Leave to Appeal &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
@@ -118,7 +163,9 @@ class Journey extends Component {
                         <div style={{ width:'100%' }}>
                             <div className="row">
                                 <div className="col col-lg-6 col-med-6 col-sm-6" >
-                                    <button onClick={this.journeyForAppellant} className="btn btn-primary round-borders btn-journey">
+                                    <button
+                                        onClick={this.journeyForAppellant}
+                                        className={this.state.appealButtonClass}>
                                         Start an Appeal &nbsp;
                                         <i className="fa fa-play"/>
                                     </button>
@@ -126,7 +173,7 @@ class Journey extends Component {
                                 <div className="col col-lg-6 col-med-6 col-sm-6" >
                                     <button
                                         onClick={this.journeyForRespondent}
-                                        className="btn btn-primary round-borders btn-journey">
+                                        className={this.state.respondButtonClass}>
                                         Respond to Appeal &nbsp;
                                         <i className="fa fa-play"/>
                                     </button>
