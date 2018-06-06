@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SelectForm from './forms/SelectForm.js';
+import Journey from './components/Journey.js';
 import Top5 from './forms/top.5.js';
 import ActiveFormList from './components/ActiveFormList.js';
 import NeedHelp from './need.help.js';
@@ -17,7 +17,7 @@ class Dashboard extends Component {
                 </div>
                 <div className="row">
                     <div role="main" className="center-main col-lg-8" >
-                        <SelectForm/>
+                        <Journey/>
                     </div>
                     <div role="main" className="right-nav-main col-lg-4"  >
                         <div className="row">

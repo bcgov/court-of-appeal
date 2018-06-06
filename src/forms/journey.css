@@ -73,13 +73,13 @@ a.toggler:hover {
 	font-weight: 600;
 	font-size: 1.1em;
 }
-.start-an-appeal {
+.btn-journey {
     width: 100%;
     background-color: green;
 	border-color: green;
     color: white;
 }
-a:hover.start-an-appeal {
+button:hover.btn-journey {
     background-color: rgb(81, 180, 81);
 	border-color: rgb(81, 180, 81);
     color: white;
