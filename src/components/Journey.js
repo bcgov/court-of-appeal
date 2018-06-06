@@ -20,6 +20,10 @@ class Journey extends Component {
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
         this.journeyForAppellant = this.journeyForAppellant.bind(this);
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
+        this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
+        this.startAppeal = this.startAppeal.bind(this);
+        this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
+        this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
     }
 
     render() {
@@ -30,7 +34,7 @@ class Journey extends Component {
         );
     }
 
-    journeyForRespondent () {
+    journeyForRespondent() {
         this.setState({
             respondent: true,
             appellant: false,
@@ -39,7 +43,7 @@ class Journey extends Component {
         });
     }
 
-    journeyForAppellant () {
+    journeyForAppellant() {
         this.setState({
             appellant: true,
             respondent: false,
@@ -48,12 +52,45 @@ class Journey extends Component {
         });
     }
 
-    respondToNoticeOfAppealJourney () {
+    startAppeal() {
         this.setState({
             displayJourneyMap: true,
-            mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
-            title: "Your Process to Respond to an Appeal",
-            subTitle: "Start e-filing your Notice of Appearance below."
+            subTitle: "Start e-filing your appeal below."
+        })
+    }
+
+    leaveToAppealGranted() {
+        this.startAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png"
+        })
+    }
+
+    leaveToAppealRefused() {
+        this.startAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png"
+        })
+    }
+
+    respondToAppeal() {
+        this.setState({
+            displayJourneyMap: true,
+            subTitle: "Start e-filing your response to the appeal below."
+        });
+    }
+
+    respondToNoticeOfAppealJourney() {
+       this.respondToAppeal();
+       this.setState({
+           mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png"
+       })
+    }
+
+    respondToNoticeOfLeaveToAppealJourney() {
+        this.respondToAppeal();
+        this.setState({
+            mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png"
         });
     }
 
@@ -77,13 +114,13 @@ class Journey extends Component {
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button className="btn btn-primary round-borders btn-journey" >
+                            <button onClick={this.leaveToAppealGranted} className="btn btn-primary round-borders btn-journey" >
                                 Yes &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button className="btn btn-primary round-borders btn-journey">
+                            <button onClick={this.leaveToAppealRefused} className="btn btn-primary round-borders btn-journey">
                                 No &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
@@ -107,7 +144,7 @@ class Journey extends Component {
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
-                            <button onClick={this.respondToNoticeOfAppealJourney} className="btn btn-primary round-borders btn-journey">
+                            <button onClick={this.respondToNoticeOfLeaveToAppealJourney} className="btn btn-primary round-borders btn-journey">
                                 Notice of Application for Leave to Appeal &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
