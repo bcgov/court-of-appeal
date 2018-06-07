@@ -134,7 +134,14 @@ Service.prototype.generatePdf = function(html, callback) {
     options.form = { html:html };
     options.encoding = null;
     request.post(options, function(err, response, body) {
-        callback(body);
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            let error = { message:'service unavailable' };
+            error.code = 503;
+            callback({ error:error });
+        }
     });
 };
 module.exports = Service;
