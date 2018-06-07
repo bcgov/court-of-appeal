@@ -66,7 +66,14 @@ Service.prototype.updateForm2 = function(form, id, callback) {
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     request.put(options, function(err, response, body) {
-        callback(body);
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            let error = body ? JSON.parse(body) : { message:'service unavailable' };
+            error.code = 503;
+            callback({ error:error });
+        }
     });
 };
 

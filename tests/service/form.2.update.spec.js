@@ -18,7 +18,7 @@ describe('Create form 2', function() {
                 });
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/json');
-                    response.statusCode = 201;
+                    response.statusCode = 200;
                     let data = qs.parse(body).data;
                     response.write(data);
                     response.end();
@@ -39,5 +39,29 @@ describe('Create form 2', function() {
             expect(data).toEqual('{"any":"field"}');
             done();
         });     
+    });
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.write(JSON.stringify({message:'not working sorry'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.updateForm2({ any:'field' }, 42, function(data) {
+                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    done();
+                });     
+            });    
+        });
+    });
+    test('resists server down', (done)=>{
+        apiServer.stop(()=>{
+            service.updateForm2({ any:'field' }, 42, function(data) {
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                done();
+            });     
+        });
     });
 });

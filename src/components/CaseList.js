@@ -38,7 +38,6 @@ class CaseList extends React.Component {
         };
         this.service = this.props.service;
         this.updateForm2 = this.updateForm2.bind(this);
-        this.updateAndClose = this.updateAndClose.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
@@ -163,7 +162,7 @@ class CaseList extends React.Component {
                             />
                             <FormButtonBar
                                 back={this.cancel}
-                                save={this.updateAndClose}
+                                save={this.updateForm2}
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
                                 formErrorMessage={this.state.previewButtonErrorMsg}
@@ -218,28 +217,23 @@ class CaseList extends React.Component {
         );
     }
 
-    updateAndClose(){
-        this.updateForm2();
-        this.closeEditModal();
-    }
-
     updateForm2() {
         let doc = this.state.selectedDocument;
         let id = this.state.selectedDocumentId;
         this.service.updateForm2(
             this.state.selectedDocument, this.state.selectedDocumentId,
-            (data) => {
-                if (data !== undefined) {
+            (data) => {                
+                if (data.error) {                    
+                    this.setState({
+                        displaySaveError: true,
+                        formHasUnsavedChanges: false
+                    });                    
+                } else {
                     this.setState({
                         displaySaveSuccess: true,
                         formHasUnsavedChanges: false
                     });
-                    this.props.updateCases(doc, id);
-                } else {
-                    this.setState({
-                        displaySaveError: true,
-                        formHasUnsavedChanges: false
-                    });
+                    this.props.updateCases(doc, id);                    
                 }
             });
     }
