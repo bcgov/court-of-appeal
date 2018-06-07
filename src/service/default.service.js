@@ -36,13 +36,15 @@ Service.prototype.base = function() {
 Service.prototype.searchForm7 = function(file, callback) {
     let get = require('request');    
     get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
-        if (err) {
-            callback({error: {code:503, message:'service unavailable'} });
-        } else if (response.statusCode === 404) {
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else if (response && response.statusCode === 404) {
             callback(undefined);
-        } else if (response.statusCode === 503) {
-            callback({error: {code:503, message:'service unavailable'} });
-        } else { callback(JSON.parse(body)); }
+        }
+        else {
+            callback({ error:{ code:503, message:'service unavailable' } });
+        }
     });
 };
 
