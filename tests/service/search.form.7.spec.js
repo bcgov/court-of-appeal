@@ -48,4 +48,29 @@ describe('Search form 7', function() {
             done();
         });     
     });
+
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.searchForm7(42, function(data) {
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                    done();
+                });     
+            });    
+        })
+    });
+
+    test('resists server is down', (done)=>{
+        apiServer.stop(()=>{
+            service.searchForm7(42, function(data) {
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                done();
+            });    
+        })
+    });
 });

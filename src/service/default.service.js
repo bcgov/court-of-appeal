@@ -34,13 +34,14 @@ Service.prototype.base = function() {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    let get = require('request');
-    let msg = require('../helpers/constants');
+    let get = require('request');    
     get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
         if (err) {
-            callback(msg.NETWORK_ERROR_MSG);
+            callback({error: {code:503, message:'service unavailable'} });
         } else if (response.statusCode === 404) {
             callback(undefined);
+        } else if (response.statusCode === 503) {
+            callback({error: {code:503, message:'service unavailable'} });
         } else { callback(JSON.parse(body)); }
     });
 };

@@ -99,7 +99,7 @@ class Form2 extends Component {
     found(data) {
 
         if (data) {
-            if (data === NETWORK_ERROR_MSG ) {
+            if (data.error) {
                 this.setState({notFoundError: NETWORK_ERROR_MSG});
             } else {
                 this.setState({notFoundError: ''});
