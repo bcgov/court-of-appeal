@@ -125,7 +125,14 @@ Service.prototype.archiveCases = function(ids, callback) {
     let options = this.buildOptions('/api/cases/archive');
     options.form = { ids:JSON.stringify(ids) };
     request.post(options, function(err, response, body) {
-        callback(body);
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            let error = body ? JSON.parse(body) : { message:'service unavailable' };
+            error.code = 503;
+            callback({ error:error });
+        }
     });
 };
 Service.prototype.generatePdf = function(html, callback) {
