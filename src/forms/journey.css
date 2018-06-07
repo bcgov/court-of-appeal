@@ -109,3 +109,6 @@ svg.fa-play {
 	 visibility: visible !important;
 	 opacity: 1 !important;
 }
+.right-to-appeal-tooltip a {
+	color: lightblue;
+}
