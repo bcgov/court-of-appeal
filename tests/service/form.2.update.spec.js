@@ -50,7 +50,7 @@ describe('Create form 2', function() {
             apiServer.start(()=>{
                 service.apiUrl = 'http://localhost:' + apiServer.port;
                 service.updateForm2({ any:'field' }, 42, function(data) {
-                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
                     done();
                 });     
             });    

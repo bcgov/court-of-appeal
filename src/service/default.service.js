@@ -54,9 +54,7 @@ Service.prototype.createForm2 = function(form, callback) {
             callback(body);
         }
         else {
-            let error = body ? JSON.parse(body) : { message:'service unavailable' };
-            error.code = 503;
-            callback({ error:error });
+            callback({ error:{ code:503, message:'service unavailable' } });
         }
     });
 };
@@ -70,9 +68,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
             callback(body);
         }
         else {
-            let error = body ? JSON.parse(body) : { message:'service unavailable' };
-            error.code = 503;
-            callback({ error:error });
+            callback({ error:{ code:503, message:'service unavailable' } });
         }
     });
 };
@@ -85,9 +81,7 @@ Service.prototype.getMyCases = function(form, callback) {
             callback(JSON.parse(body));
         }
         else {
-            let error = body ? JSON.parse(body) : { message:'service unavailable' };
-            error.code = 503;
-            callback({ cases:[], error:error });
+            callback({ cases:[], error:{ code:503, message:'service unavailable' } });
         }
     }); 
 };
@@ -129,9 +123,7 @@ Service.prototype.archiveCases = function(ids, callback) {
             callback(body);
         }
         else {
-            let error = body ? JSON.parse(body) : { message:'service unavailable' };
-            error.code = 503;
-            callback({ error:error });
+            callback({ error:{ code:503, message:'service unavailable' } });
         }
     });
 };
@@ -145,9 +137,7 @@ Service.prototype.generatePdf = function(html, callback) {
             callback(body);
         }
         else {
-            let error = { message:'service unavailable' };
-            error.code = 503;
-            callback({ error:error });
+            callback({ error:{ code:503, message:'service unavailable' } });
         }
     });
 };

@@ -65,7 +65,7 @@ describe('My cases', function() {
                 service.apiUrl = 'http://localhost:' + apiServer.port;
                 service.getMyCases({}, (data)=> {
                     expect(data.cases).toEqual([]);
-                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
                     done();
                 });     
             });    

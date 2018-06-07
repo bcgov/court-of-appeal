@@ -69,7 +69,7 @@ describe('My cases', function() {
             apiServer.start(()=>{
                 service.apiUrl = 'http://localhost:' + apiServer.port;
                 service.archiveCases([1, 2, 3], (data)=> {
-                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
                     done();
                 });     
             });    
