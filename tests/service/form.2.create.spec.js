@@ -40,4 +40,28 @@ describe('Create form 2', function() {
             done();
         });     
     });
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.write(JSON.stringify({message:'not working sorry'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.createForm2({ any:'field' }, function(data) {
+                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    done();
+                });     
+            });    
+        });
+    });
+    test('resists server down', (done)=>{
+        apiServer.stop(()=>{
+            service.createForm2({ any:'field' }, function(data) {
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                done();
+            });     
+        });
+    });
 });
