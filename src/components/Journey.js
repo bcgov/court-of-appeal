@@ -57,8 +57,7 @@ class Journey extends Component {
     startAppeal() {
         this.setState({
             displayJourneyMap: true,
-            subTitle: "Start e-filing your appeal below."
-        })
+            subTitle: <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance. <a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>
     }
 
     leaveToAppealGranted() {
