@@ -122,8 +122,8 @@ class Journey extends Component {
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
                                     data-tip="<p>If you don't know whether you have the right to appeal,</p>
-                                    <p>this message will eventually lead <a href='http://bfy.tw/IUO8'>
-                                    to detailed information.</a></p>
+                                    <p>Please see our online guidebook for more <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
+                                    detailed information.</a></p>
                                     "
                                 />
                             </h4>
