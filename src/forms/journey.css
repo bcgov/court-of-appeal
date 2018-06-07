@@ -101,3 +101,11 @@ button:hover.btn-journey {
 svg.fa-play {
     margin-left:10px;
 }
+.right-to-appeal-tooltip {
+	font-size: 15px !important;
+	pointer-events: auto !important;
+}
+.right-to-appeal-tooltip:hover {
+	 visibility: visible !important;
+	 opacity: 1 !important;
+}
