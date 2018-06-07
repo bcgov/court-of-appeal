@@ -121,13 +121,19 @@ class Journey extends Component {
                                 <i
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
-                                    data-tip="If you don't know whether you have the right to appeal, clap your hands!
-                                    Or just check with the registry regarding your case.
-                                   Obviously, this is just placeholder text.
-                                    "/>
+                                    data-tip="<p>If you don't know whether you have the right to appeal,</p>
+                                    <p>this message will eventually lead <a href='http://bfy.tw/IUO8'>
+                                    to detailed information.</a></p>
+                                    "
+                                />
                             </h4>
                         </div>
-                        <ReactTooltip />
+                        <ReactTooltip
+                            multiline={true}
+                            html={true}
+                            effect="solid"
+                            delayHide={1000}
+                            className="right-to-appeal-tooltip"/>
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6" >
