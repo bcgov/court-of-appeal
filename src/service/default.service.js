@@ -67,7 +67,14 @@ Service.prototype.updateForm2 = function(form, id, callback) {
 Service.prototype.getMyCases = function(form, callback) { 
     let get = require('request');
     get(this.buildOptions('/api/cases'), (err, response, body)=>{
-        callback(JSON.parse(body));
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            let error = body ? JSON.parse(body) : { message:'service unavailable' };
+            error.code = 503;
+            callback({ cases:[], error:error });
+        }
     }); 
 };
 

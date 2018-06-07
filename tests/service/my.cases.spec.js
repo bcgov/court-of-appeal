@@ -54,4 +54,30 @@ describe('My cases', function() {
             done();
         }); 
     });
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.write(JSON.stringify({message:'not working sorry'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.getMyCases({}, (data)=> {
+                    expect(data.cases).toEqual([]);
+                    expect(data.error).toEqual({ code:503, message:'not working sorry' });
+                    done();
+                });     
+            });    
+        })
+    });
+    test('resists server is down', (done)=>{
+        apiServer.stop(()=>{
+            service.getMyCases({}, (data)=> {
+                expect(data.cases).toEqual([]);
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                done();
+            });    
+        })
+    });
 });
