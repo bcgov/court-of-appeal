@@ -1,16 +1,3 @@
-let fakeData = { 
-    parties: {
-        appellant: {
-            name: 'Bruce Wayne',
-            address: 'The Wayne Castle'
-        },
-        respondent: {
-            name: 'Clark Kent',
-            address: 'This guy does not need any'
-        }
-    }
-};
-
 let Service = function(window) {  
     this.apiUrl = undefined;
     this.user = undefined;
@@ -167,4 +154,3 @@ Service.prototype.generatePdf = function(html, callback) {
     });
 };
 module.exports = Service;
-module.exports.fakeData = fakeData;
