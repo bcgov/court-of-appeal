@@ -88,7 +88,7 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 1,
+                subtitleIndex: 0,
                 mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
                 mapProps: [{alt: "e-file an appeal"}]
             };
@@ -101,7 +101,7 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 1,
+                subtitleIndex: 0,
                 mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
                 mapProps: [{alt: "e-file an appeal"}]
             };
@@ -114,7 +114,7 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 2,
+                subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
                 mapProps: [{coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"}]
             }
@@ -127,7 +127,7 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 2,
+                subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 mapProps: [{coords: "85,15,200,210", href: "/form.2.html", alt: "e-file a notice of appearance"}]
             }
