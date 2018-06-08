@@ -1,3 +1,5 @@
+let request = require('request');
+
 let Service = function(window) {  
     this.apiUrl = undefined;
     this.user = undefined;
@@ -27,9 +29,8 @@ Service.prototype.notifyThatAnErrorOccured = function(callback, options) {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    let get = require('request'); 
     let self = this;   
-    get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
+    request.get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
@@ -43,7 +44,6 @@ Service.prototype.searchForm7 = function(file, callback) {
 };
 
 Service.prototype.createForm2 = function(form, callback) {
-    let request = require('request');
     let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
     let self = this;
@@ -58,7 +58,6 @@ Service.prototype.createForm2 = function(form, callback) {
 };
 
 Service.prototype.updateForm2 = function(form, id, callback) {
-    let request = require('request');
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     let self = this;
@@ -74,9 +73,8 @@ Service.prototype.updateForm2 = function(form, id, callback) {
 
 
 Service.prototype.getMyCases = function(form, callback) { 
-    let get = require('request');
     let self = this;
-    get(this.buildOptions('/api/cases'), (err, response, body)=>{
+    request.get(this.buildOptions('/api/cases'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
@@ -87,7 +85,6 @@ Service.prototype.getMyCases = function(form, callback) {
 };
 
 Service.prototype.savePerson = function(user, callback) {
-    let request = require('request');
     let options = this.buildOptions('/api/persons');
     options.form = { data:user };
     let self = this;
@@ -110,9 +107,8 @@ Service.prototype.buildOptions = function(url) {
     };
 };
 Service.prototype.getPersonInfo = function(callback) {
-    let get = require('request');
     let self = this;
-    get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
+    request.get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
@@ -125,7 +121,6 @@ Service.prototype.getPersonInfo = function(callback) {
     }); 
 };
 Service.prototype.archiveCases = function(ids, callback) {
-    let request = require('request');
     let options = this.buildOptions('/api/cases/archive');
     options.form = { ids:JSON.stringify(ids) };
     let self = this;
@@ -139,7 +134,6 @@ Service.prototype.archiveCases = function(ids, callback) {
     });
 };
 Service.prototype.generatePdf = function(html, callback) {
-    let request = require('request');
     let options = this.buildOptions('/api/pdf');
     let self = this;
     options.form = { html:html };
