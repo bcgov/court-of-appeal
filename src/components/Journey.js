@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
 import JourneyMap from './JourneyMap';
 import { withRouter } from 'react-router-dom';
+import InfoModal from "./InfoModal";
 
 class Journey extends Component {
 
@@ -18,7 +19,6 @@ class Journey extends Component {
             subtitleIndex: '',
             appealButtonClass: 'btn btn-primary round-borders btn-journey',
             respondButtonClass: 'btn btn-primary round-borders btn-journey',
-            pageState: '/'
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
@@ -90,7 +90,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
-                mapProps: [{alt: "e-file an appeal"}]
+                mapProps: [{coords: "100,270,230,450", function: 'true', alt: "info about the factum"}]
             };
         }, () => {
             this.props.history.push("/", this.state);
@@ -116,7 +116,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
-                mapProps: [{coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"}]
+                mapProps: [
+                    {coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"},
+                    {coords: "465,15,580,210", function: 'true', alt: "info about the factum"}
+                    ]
             }
         }, () => {
             this.props.history.push("/", this.state);
@@ -137,88 +140,20 @@ class Journey extends Component {
     }
 
     journeyMapOrSelectionButtons() {
-        let appellantContent = null, respondentContent = null;
-        let mainContent = null;
+        let content = null;
         if (this.state.displayJourneyMap ) {
-            mainContent = <JourneyMap
-                mapSrc={this.state.mapSrc}
-                mapProps={this.state.mapProps}
-                title={this.state.title}
-                subTitle={this.subtitles[this.state.subtitleIndex]}
-            />;
-        }
-        else {
-            if (this.state.appellant) {
-                appellantContent = (
-                    <div>
-                        <div className="row">
-                            <div className="col col-lg-12 col-med-6 col-sm-12">
-                                <h4>Do you have a right to appeal your case? &nbsp;
-                                    <i
-                                        className="fa fa-question-circle"
-                                        aria-hidden="true"
-                                        data-tip="<p>If you don't know whether you have the right to appeal,</p>
-                                <p>Please see our online guidebook for more <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
-                                detailed information.</a></p>
-                                "
-                                    />
-                                </h4>
-                            </div>
-                            <ReactTooltip
-                                multiline={true}
-                                html={true}
-                                effect="solid"
-                                delayHide={1000}
-                                className="right-to-appeal-tooltip"/>
-                        </div>
-                        <div className="row">
-                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                <button onClick={this.leaveToAppealGranted}
-                                        className="btn btn-primary round-borders btn-journey">
-                                    Yes &nbsp;
-                                    <i className="fa fa-play"/>
-                                </button>
-                            </div>
-                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                <button onClick={this.leaveToAppealRefused}
-                                        className="btn btn-primary round-borders btn-journey">
-                                    No &nbsp;
-                                    <i className="fa fa-play"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-            if (this.state.respondent) {
-                respondentContent = (
-                    <div>
-                        <div className="row">
-                            <div className="col col-lg-12 col-med-6 col-sm-12">
-                                <h4>Were you served with a Notice of Appeal form, or a Notice of Application for Leave
-                                    to Appeal?</h4>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                <button onClick={this.respondToNoticeOfAppealJourney}
-                                        className="btn btn-primary round-borders btn-journey">
-                                    Notice of Appeal &nbsp;
-                                    <i className="fa fa-play"/>
-                                </button>
-                            </div>
-                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                <button onClick={this.respondToNoticeOfLeaveToAppealJourney}
-                                        className="btn btn-primary round-borders btn-journey">
-                                    Notice of Application for Leave to Appeal &nbsp;
-                                    <i className="fa fa-play"/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-            mainContent =
+            content = (
+                <div>
+                    <JourneyMap
+                        mapSrc={this.state.mapSrc}
+                        mapProps={this.state.mapProps}
+                        title={this.state.title}
+                        subTitle={this.subtitles[this.state.subtitleIndex]}
+                    />
+                </div>
+            );
+        } else {
+            content =
                 <div>
                     <div className="form-section not-printable">
                         <h3>Start E-Filing</h3>
@@ -242,14 +177,95 @@ class Journey extends Component {
                                         </button>
                                     </div>
                                 </div>
-                                {appellantContent}
-                                {respondentContent}
+                                {this.renderAppellant()}
+                                {this.renderRespondent()}
                             </div>
                         </div>
                     </div>
                 </div>;
         }
-        return mainContent;
+        return content;
     }
+
+    renderAppellant() {
+        let content = null;
+        if (this.state.appellant) {
+            content = (
+                <div>
+                    <div className="row">
+                        <div className="col col-lg-12 col-med-6 col-sm-12">
+                            <h4>Do you have a right to appeal your case? &nbsp;
+                                <i
+                                    className="fa fa-question-circle"
+                                    aria-hidden="true"
+                                    data-tip="<p>If you don't know whether you have the right to appeal,</p>
+                                <p>Please see our online guidebook for more <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
+                                detailed information.</a></p>
+                                "
+                                />
+                            </h4>
+                        </div>
+                        <ReactTooltip
+                            multiline={true}
+                            html={true}
+                            effect="solid"
+                            delayHide={1000}
+                            className="right-to-appeal-tooltip"/>
+                    </div>
+                    <div className="row">
+                        <div className="col col-lg-6 col-med-6 col-sm-6">
+                            <button onClick={this.leaveToAppealGranted}
+                                    className="btn btn-primary round-borders btn-journey">
+                                Yes &nbsp;
+                                <i className="fa fa-play"/>
+                            </button>
+                        </div>
+                        <div className="col col-lg-6 col-med-6 col-sm-6">
+                            <button onClick={this.leaveToAppealRefused}
+                                    className="btn btn-primary round-borders btn-journey">
+                                No &nbsp;
+                                <i className="fa fa-play"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        return  content;
+    }
+
+    renderRespondent() {
+        let content = null;
+        if (this.state.respondent) {
+            content = (
+                <div>
+                    <div className="row">
+                        <div className="col col-lg-12 col-med-6 col-sm-12">
+                            <h4>Were you served with a Notice of Appeal form, or a Notice of Application for Leave
+                                to Appeal?</h4>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col col-lg-6 col-med-6 col-sm-6">
+                            <button onClick={this.respondToNoticeOfAppealJourney}
+                                    className="btn btn-primary round-borders btn-journey">
+                                Notice of Appeal &nbsp;
+                                <i className="fa fa-play"/>
+                            </button>
+                        </div>
+                        <div className="col col-lg-6 col-med-6 col-sm-6">
+                            <button onClick={this.respondToNoticeOfLeaveToAppealJourney}
+                                    className="btn btn-primary round-borders btn-journey">
+                                Notice of Application for Leave to Appeal &nbsp;
+                                <i className="fa fa-play"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        return content;
+    }
+
 }
 export default withRouter(Journey);

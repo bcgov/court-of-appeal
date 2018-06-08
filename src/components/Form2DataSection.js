@@ -213,5 +213,3 @@ class Form2DataSection extends React.Component {
 }
 
 export default Form2DataSection;
-// note to self:
-// back button for modal should close the modal and then open a new modal to confirm
