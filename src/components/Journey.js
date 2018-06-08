@@ -3,7 +3,6 @@ import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
 import JourneyMap from './JourneyMap';
 import { withRouter } from 'react-router-dom';
-import InfoModal from "./InfoModal";
 
 class Journey extends Component {
 
