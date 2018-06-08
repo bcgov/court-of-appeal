@@ -90,7 +90,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
-                mapProps: [{alt: "e-file an appeal"}]
+                mapProps: [{coords: "100,270,230,450", href: "/form.2.html", alt: "info about the factum"}]
             };
         }, () => {
             this.props.history.push("/", this.state);
@@ -116,7 +116,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
-                mapProps: [{coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"}]
+                mapProps: [
+                    {coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"},
+                    {coords: "465,15,580,210", href: "/form.2.html", alt: "info about the factum"}
+                    ]
             }
         }, () => {
             this.props.history.push("/", this.state);
