@@ -64,6 +64,8 @@ class MultiSelectionCaseList extends CaseList {
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
                                 formErrorMessage={this.state.previewButtonErrorMsg}
+
+                                ref={ (element)=> {this.formButtonBar = element }}
                             />
                         </div>
                     </div>
