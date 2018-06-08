@@ -45,6 +45,7 @@ class Journey extends Component {
 
     componentDidMount() {
         window.onpopstate = this.handlePopState;
+        this.props.history.push("/", this.state);
     }
 
     componentWillUnmount() {
@@ -52,8 +53,8 @@ class Journey extends Component {
     }
 
     handlePopState(event) {
+        this.setState(this.props.history.location.state);
         event.preventDefault();
-        this.setState(this.props.location.state);
     };
 
     journeyForRespondent() {
@@ -81,7 +82,6 @@ class Journey extends Component {
         }, ()=> {
             this.props.history.push("/", this.state);
         });
-
     }
 
     leaveToAppealGranted() {
