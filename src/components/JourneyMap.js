@@ -1,11 +1,17 @@
 import React from 'react';
 import './journeymap.css';
+import InfoModal from './InfoModal';
 
 class JourneyMap extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            showInfoModal: false
+        }
         this.getAreas = this.getAreas.bind(this);
+        this.closeInfoModal = this.closeInfoModal.bind(this);
+        this.openInfoModal = this.openInfoModal.bind(this);
     }
 
     render() {
@@ -20,6 +26,12 @@ class JourneyMap extends React.Component {
                     <map name="journeymap" >
                         {targetAreas}
                     </map>
+                    <InfoModal
+                        title="Information"
+                        body="This is passed in from the journey"
+                        show={this.state.showInfoModal}
+                        close={this.closeInfoModal}
+                    />
                 </div>
             );
         } else {
@@ -30,10 +42,22 @@ class JourneyMap extends React.Component {
 
     getAreas() {
         return this.props.mapProps.map((prop, key) => {
-            return <area alt={prop.alt} key={key} shape="rect" {...prop}/>
+            if (prop.function) {
+                console.log(prop.function);
+                return <area alt={prop.alt} onClick={this.openInfoModal.bind(this)} key={key} shape="rect" {...prop}/>;
+            } else {
+                return <area alt={prop.alt} key={key} shape="rect" {...prop}/>
+            }
         });
     }
 
+    closeInfoModal() {
+        this.setState({showInfoModal:false});
+    }
+
+    openInfoModal() {
+        this.setState({showInfoModal:true});
+    }
 
 }
 
