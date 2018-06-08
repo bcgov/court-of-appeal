@@ -94,7 +94,12 @@ Service.prototype.savePerson = function(user, callback) {
     let options = this.buildOptions('/api/persons');
     options.form = { data:user };
     request.post(options, function(err, response, body) {
-        callback(body);
+        if (response && response.statusCode === 201) {
+            callback(body);
+        }
+        else {
+            callback({ error:{ code:503, message:'service unavailable' } });
+        }
     });
 };
 
@@ -112,8 +117,11 @@ Service.prototype.getPersonInfo = function(callback) {
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
+        else if (response && response.statusCode === 404) {
+            callback({ error:{ code:404, message:'not found' } });
+        }
         else {
-            callback(body);
+            callback({ error:{ code:503, message:'service unavailable' } });
         }
     }); 
 };

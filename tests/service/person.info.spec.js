@@ -52,7 +52,7 @@ describe('Person info', function() {
         };
         service.user = 'max';                     
         service.getPersonInfo((data)=> {
-            expect(data).toEqual('not found');
+            expect(data.error).toEqual({ code:404, message:'not found' });
             done();
         });
     });
@@ -61,9 +61,26 @@ describe('Person info', function() {
         apiServer.stop(function() {
             service.user = 'max';                     
             service.getPersonInfo((data)=> {
-                expect(data).toEqual(undefined);
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
                 done();
             });    
         });
+    });
+
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.user = 'max';                     
+                service.getPersonInfo((data)=> {
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                    done();
+                });     
+            });    
+        })
     });
 });
