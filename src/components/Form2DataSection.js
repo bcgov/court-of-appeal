@@ -11,56 +11,56 @@ class Form2DataSection extends React.Component {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
             return (
-                    <div className="form-section not-printable" >
-                        <div className="row">
-                            <div className="row form-heading"><h2>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2></div>
-                            <div className="row  proceeding-style">
-                                <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">BETWEEN:</div>
+                <div>    
+                    <div className="row">
+                        <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2>
+                        <div className="row  proceeding-style">
+                            <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">BETWEEN:</div>
 
-                               <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
-                                    if (index === this.props.data.appellants.length - 1) {
-                                        return appellant.name;
+                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
+                                if (index === this.props.data.appellants.length - 1) {
+                                    return appellant.name;
+                                } else {
+                                    return appellant.name + ', ';
+                                }
+                            } ) }
+                            </div>
+                            <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</div>
+                        </div>
+                        <div className="row  proceeding-style">
+                            <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
+
+                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
+                                    if (index === this.props.data.respondents.length - 1) {
+                                        return respondent.name;
                                     } else {
-                                        return appellant.name + ', ';
+                                        return respondent.name + ', ';
                                     }
                                 } ) }
                                 </div>
-                                <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</div>
+                            <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="row address-row">
+                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
+                                <div style={{whiteSpace: 'nowrap'}}>
+                                    Respondent's name: &nbsp;
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
+                                </div>
                             </div>
-                            <div className="row  proceeding-style">
-                                <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
-
-                                    <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
-                                        if (index === this.props.data.respondents.length - 1) {
-                                            return respondent.name;
-                                        } else {
-                                            return respondent.name + ', ';
-                                        }
-                                    } ) }
-                                 </div>
-                                <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
+                            <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                <select
+                                    className="form-select"
+                                    onChange={this.props.handleFieldChange}
+                                    name={"respondent.name"}
+                                    disabled={this.props.readOnly}
+                                    value={this.props.data.selectedRespondentIndex}
+                                >
+                                    {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
+                                </select>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
-                                    <div style={{whiteSpace: 'nowrap'}}>
-                                        Respondent's name: &nbsp;
-                                        <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
-                                    </div>
-                                </div>
-                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                    <select
-                                        className="form-select"
-                                        onChange={this.props.handleFieldChange}
-                                        name={"respondent.name"}
-                                        disabled={this.props.readOnly}
-                                        value={this.props.data.selectedRespondentIndex}
-                                    >
-                                        {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
-                                    </select>
-                                </div>
-                            </div>
                     </div>
 
                     <div className="row address-row">
@@ -153,7 +153,7 @@ class Form2DataSection extends React.Component {
                         </div>
                         <hr/>
                         <div className="row address-row">
-                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 ">Phone:</div>
+                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone:</div>
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                 <PhoneField
                                     value={this.props.data ? this.props.data.phone : ''}
@@ -165,7 +165,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                         <div className="row address-row">
-                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 ">Email address:</div>
+                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Email address:</div>
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                 <EmailField
                                     value={this.props.data ? this.props.data.email : ''}
@@ -178,7 +178,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                         <div className="row address-row">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically??</div>
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically?</div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
                                <input
                                    type="checkbox"
@@ -202,10 +202,9 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                     <hr/>
-                        <ReactTooltip/>
-                   </div>
-
-            );
+                    <ReactTooltip/>
+                </div>  
+            )
         } else {
             return null;
         }

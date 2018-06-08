@@ -97,8 +97,9 @@
 	border: slategrey;
 }
 .address-row {
-	padding: 0 0 10px 5px;
+	padding: 0px 0px 2px 0px;
 	font-size: 1em;
+	vertical-align: middle;
 }
 .address-label {
 	text-align: right;
