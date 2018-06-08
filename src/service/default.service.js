@@ -1,6 +1,7 @@
 let request = require('request');
 
 let Service = function(window) {  
+    this.window = window;
     this.apiUrl = undefined;
     this.user = undefined;
     if (typeof window !== 'undefined') {
@@ -26,6 +27,12 @@ Service.prototype.notifyThatAnErrorOccured = function(callback, options) {
     let data = { error:{ code:503, message:'service unavailable' } };
     Object.assign(data, options);
     callback(data);
+    if (this.window && this.window.document) {
+        let errorModal = this.window.document.getElementById('serviceErrorModal');
+        if (errorModal) {
+            errorModal.style.display = 'block';
+        }
+    }
 };
 
 Service.prototype.searchForm7 = function(file, callback) {

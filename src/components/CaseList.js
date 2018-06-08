@@ -225,7 +225,6 @@ class CaseList extends React.Component {
             (data) => {                
                 if (data.error) {                    
                     this.setState({
-                        displaySaveError: true,
                         formHasUnsavedChanges: false
                     });                    
                 } else {

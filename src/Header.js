@@ -13,11 +13,13 @@ class Header extends Component {
 
         this.fetch = this.fetch.bind(this);
         this.logout = this.logout.bind(this);
+        this.closeErrorModal = this.closeErrorModal.bind(this);
     }
 
     componentDidMount() {
-        let window = this.element.ownerDocument.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }        
+        this.document = this.element.ownerDocument;
+        let window = this.document.defaultView;
+        if (this.service == null) { this.service = new DefaultService(window); }                
 
         this.fetch();
     }
@@ -37,6 +39,10 @@ class Header extends Component {
         let window = document.defaultView;
         document.cookie = 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         window.location = '/';
+    }
+
+    closeErrorModal() {
+        this.document.getElementById('serviceErrorModal').style.display = 'none';
     }
 
   render() {
@@ -85,6 +91,18 @@ class Header extends Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="serviceErrorModal" ref={ (element)=> {this.errorModal = element }}>
+                <div className="service-error-modal-title">
+                    <span id="service-error-close-modal" onClick={this.closeErrorModal}>&times;</span>
+                    Service unavailable
+                </div>
+                <div className="service-error-modal-content">
+                    <div>
+                        Something unexpected happened.
                     </div>
                 </div>
             </div>
