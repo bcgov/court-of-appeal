@@ -179,8 +179,11 @@ class FormButtonBar extends React.Component {
         var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
         this.service.generatePdf(html, (data)=>{
             this.downloadButton.stopSpinner();
-            var blob = new Blob([data], {type: 'application/pdf'});
-            FileSaver.saveAs(blob, 'form.pdf');
+            console.log(data);
+            if (!data.error) {                
+                var blob = new Blob([data], {type: 'application/pdf'});
+                FileSaver.saveAs(blob, 'form.pdf');
+            }
         });
     }
     printButton() {

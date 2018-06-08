@@ -99,7 +99,7 @@ class Form2 extends Component {
     found(data) {
 
         if (data) {
-            if (data === NETWORK_ERROR_MSG ) {
+            if (data.error) {
                 this.setState({notFoundError: NETWORK_ERROR_MSG});
             } else {
                 this.setState({notFoundError: ''});
@@ -161,15 +161,15 @@ class Form2 extends Component {
                 serviceFiler: this.state.document.serviceFiler,
                 selectedRespondentIndex: this.state.document.selectedRespondentIndex
             }, (data) => {
-            if (data !== undefined) {
-                this.setState({
-                    formHasUnsavedChanges: false,
-                    displaySaveSuccess: true
-                });
-            } else {
+            if (data.error) {
                 this.setState({
                     displaySaveError: true
                 });
+            } else {
+                this.setState({
+                    formHasUnsavedChanges: false,
+                    displaySaveSuccess: true
+                });                
             }
         });
     }

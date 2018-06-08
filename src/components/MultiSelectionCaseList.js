@@ -60,7 +60,7 @@ class MultiSelectionCaseList extends CaseList {
                             />
                             <FormButtonBar
                                 back={this.cancel}
-                                save={this.updateAndClose}
+                                save={this.updateForm2}
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
                                 formErrorMessage={this.state.previewButtonErrorMsg}

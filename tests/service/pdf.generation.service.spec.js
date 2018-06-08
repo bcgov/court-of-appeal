@@ -18,7 +18,7 @@ describe('Pdf generation service', function() {
                 });
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/pdf');
-                    response.statusCode = 201;
+                    response.statusCode = 200;
                     let html = qs.parse(body).html;
                     response.write(html);
                     response.end();
@@ -39,5 +39,29 @@ describe('Pdf generation service', function() {
             expect(data.toString()).toEqual('any-html');
             done();
         });     
+    });
+    test('resists 500', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(500, {'content-type':'application/pdf'})
+                response.write(JSON.stringify({message:'crashed'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.generatePdf('any-html', function(data) {
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                    done();
+                });     
+            });    
+        });
+    });
+    test('resists server down', (done)=>{
+        apiServer.stop(()=>{
+            service.generatePdf('any-html', function(data) {
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                done();
+            });     
+        });
     });
 });

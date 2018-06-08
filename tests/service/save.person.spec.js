@@ -44,9 +44,26 @@ describe('Save person', function() {
     test('resists server is down', function(done) {   
         apiServer.stop(function() {
             service.savePerson('bob', function(data) {
-                expect(data).toEqual(undefined);
+                expect(data.error).toEqual({ code:503, message:'service unavailable' });
                 done();
             });     
         });                     
+    });
+
+    test('resists 503', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(503, {'content-type':'application/json'})
+                response.write(JSON.stringify({message:'not working sorry'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.savePerson('bob', function(data) {
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                    done();
+                });     
+            });    
+        });
     });
 });

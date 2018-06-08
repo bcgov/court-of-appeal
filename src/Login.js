@@ -16,7 +16,8 @@ class Authenticate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: false
+            authenticated: false,
+            error: ''
         }
     }
 
@@ -27,10 +28,15 @@ class Authenticate extends Component {
             document.cookie=value;
             let service = new Service(window);
             service.savePerson(login, (data)=> {
-                if (data !== undefined) {
+                if (!data.error) {
                     this.setState({
-                                      authenticated: true
-                                  })
+                        authenticated: true
+                    })
+                }
+                if (data.error && data.error.code === 503) {
+                    this.setState({
+                        error:'service unavailable'
+                    });
                 }
             });
         }
@@ -56,8 +62,19 @@ class Authenticate extends Component {
             service.getPersonInfo((data)=> {
                 if (data && data.login === login) {
                     this.setState({
-                        authenticated: true
+                        authenticated: true,
+                        error:''
                     })
+                }
+                if (data.error) {
+                    this.setState({
+                        authenticated: false
+                    });
+                    if (data.error.code === 503) {
+                        this.setState({
+                            error:'service unavailable'
+                        });
+                    }
                 }
             })
         }
@@ -82,6 +99,9 @@ class Authenticate extends Component {
                         Go
                     </button>
                     <p><i>Any login will work</i></p>
+                    <p style={{ color:'red', display:this.state.error.length>0?'block':'none' }}>
+                        Service unavailable
+                    </p>
                 </div>
             )
         }

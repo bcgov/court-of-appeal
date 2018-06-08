@@ -24,9 +24,11 @@ class Header extends Component {
 
     fetch() {
         this.service.getPersonInfo((person)=> {
-            this.setState({
-                login: person.login? person.login: '<?>'
-            });
+            if (!person.error) {
+                this.setState({
+                    login: person.login? person.login: '<?>'
+                });
+            }
         });
     }
 
