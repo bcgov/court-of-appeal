@@ -33,8 +33,15 @@ Service.prototype.base = function() {
     return this.apiUrl === undefined ? '' : this.apiUrl;
 };
 
+Service.prototype.notifyThatAnErrorOccured = function(callback, options) {
+    let data = { error:{ code:503, message:'service unavailable' } };
+    Object.assign(data, options);
+    callback(data);
+};
+
 Service.prototype.searchForm7 = function(file, callback) {
-    let get = require('request');    
+    let get = require('request'); 
+    let self = this;   
     get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
@@ -43,7 +50,7 @@ Service.prototype.searchForm7 = function(file, callback) {
             callback(undefined);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
@@ -52,12 +59,13 @@ Service.prototype.createForm2 = function(form, callback) {
     let request = require('request');
     let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
+    let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(body);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
@@ -66,12 +74,13 @@ Service.prototype.updateForm2 = function(form, id, callback) {
     let request = require('request');
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
+    let self = this;
     request.put(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
@@ -79,12 +88,13 @@ Service.prototype.updateForm2 = function(form, id, callback) {
 
 Service.prototype.getMyCases = function(form, callback) { 
     let get = require('request');
+    let self = this;
     get(this.buildOptions('/api/cases'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
         else {
-            callback({ cases:[], error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback, { cases:[] });
         }
     }); 
 };
@@ -93,12 +103,13 @@ Service.prototype.savePerson = function(user, callback) {
     let request = require('request');
     let options = this.buildOptions('/api/persons');
     options.form = { data:user };
+    let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(body);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
@@ -113,6 +124,7 @@ Service.prototype.buildOptions = function(url) {
 };
 Service.prototype.getPersonInfo = function(callback) {
     let get = require('request');
+    let self = this;
     get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
@@ -121,7 +133,7 @@ Service.prototype.getPersonInfo = function(callback) {
             callback({ error:{ code:404, message:'not found' } });
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     }); 
 };
@@ -129,18 +141,20 @@ Service.prototype.archiveCases = function(ids, callback) {
     let request = require('request');
     let options = this.buildOptions('/api/cases/archive');
     options.form = { ids:JSON.stringify(ids) };
+    let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
 Service.prototype.generatePdf = function(html, callback) {
     let request = require('request');
     let options = this.buildOptions('/api/pdf');
+    let self = this;
     options.form = { html:html };
     options.encoding = null;
     request.post(options, function(err, response, body) {
@@ -148,7 +162,7 @@ Service.prototype.generatePdf = function(html, callback) {
             callback(body);
         }
         else {
-            callback({ error:{ code:503, message:'service unavailable' } });
+            self.notifyThatAnErrorOccured(callback);
         }
     });
 };
