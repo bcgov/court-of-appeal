@@ -18,6 +18,7 @@ class SpinnerButton extends React.Component {
     buttonOrSpinner() {
         if (this.state.downloading) {
             return (
+                <div>
                 <button id={this.props.id} 
                         disabled="true" 
                         className="btn btn-primary btn-green" 
@@ -25,10 +26,12 @@ class SpinnerButton extends React.Component {
                 >
                     <i className="fa fa-spinner fa-spin"></i>
                 </button>
+                </div>
             )
         }
         else {
             return (
+                <div>
                 <button id={this.props.id} 
                         onClick={this.props.onClick} 
                         className="btn btn-primary round-borders action-button"
@@ -36,15 +39,12 @@ class SpinnerButton extends React.Component {
                 >
                         { this.props.content }
                 </button>
+                </div>
             )
         }
     }
     render() {
-        return (
-            <div>
-                { this.buttonOrSpinner() }
-            </div>
-        );
+        return this.buttonOrSpinner();
     }
 }
 
