@@ -8,7 +8,7 @@ import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
-import { INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG, NETWORK_ERROR_MSG} from "../helpers/constants";
+import { INVALID_ADDRESS_MSG, GENERAL_ERROR_MSG } from "../helpers/constants";
 import validateForm2 from "../utils/AddressUtils";
 
 class Form2 extends Component {
