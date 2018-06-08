@@ -20,7 +20,6 @@ class Form2 extends Component {
 
         this.found = this.found.bind(this);
         this.create = this.create.bind(this);
-        this.closeSuccessModal = this.closeSuccessModal.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.closeForm = this.closeForm.bind(this);
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
@@ -72,7 +71,6 @@ class Form2 extends Component {
             displayPreview: 'none',
             showForm2: false,
             previewMode: false,
-            displaySaveSuccess: false,
             dataLoss: false,
             displayWarning: 'none',
             formHasUnsavedChanges: false,
@@ -146,6 +144,7 @@ class Form2 extends Component {
     }
 
     create() {
+        this.formButtonBar.startSaveSpinner();
         this.service.createForm2({
                 formSevenNumber: this.state.formSevenNumber,
                 appellants: this.state.document.appellants,
@@ -157,20 +156,13 @@ class Form2 extends Component {
                 serviceFiler: this.state.document.serviceFiler,
                 selectedRespondentIndex: this.state.document.selectedRespondentIndex
             }, (data) => {
-            if (!data.error) {
-                this.setState({
-                    formHasUnsavedChanges: false,
-                    displaySaveSuccess: true
-                });                
-            }
+                this.formButtonBar.stopSaveSpinner();
+                if (!data.error) {
+                    this.setState({
+                        formHasUnsavedChanges: false
+                    });                
+                }
         });
-    }
-
-    closeSuccessModal() {
-        this.setState({
-            displaySaveSuccess: false
-        });
-        this.closePreview();
     }
 
     preview() {
@@ -355,6 +347,8 @@ class Form2 extends Component {
                             preview={this.preview}
                             disablePreview={this.state.previewShouldBeDisabled}
                             formErrorMessage={this.state.previewButtonErrorMsg}
+
+                            ref={ (element)=> {this.formButtonBar = element }}
                         />
                     </div>
 
@@ -381,19 +375,7 @@ class Form2 extends Component {
                                 />
                             </div>
                         </div>
-                    </div>                    
-                    <div id="saveSucessModal" className="modal not-printable"
-                        style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
-                        <div className="modal-title ">
-                            <span id="close-modal" onClick={this.closeSuccessModal}>&times;</span>
-                            Saved!
-                        </div>
-                        <div className="modal-content">
-                            <div>
-                                Saved as draft!
-                            </div>
-                        </div>
-                    </div>
+                    </div>    
 
                     <div id="dataLossWarning" className="modal not-printable"
                          style={{ display:(this.state.displayWarning) }} >
