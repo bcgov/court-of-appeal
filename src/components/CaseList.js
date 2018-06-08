@@ -166,6 +166,8 @@ class CaseList extends React.Component {
                                 preview={this.preview}
                                 disablePreview={this.state.previewShouldBeDisabled}
                                 formErrorMessage={this.state.previewButtonErrorMsg}
+
+                                ref={ (element)=> {this.formButtonBar = element }}
                             />
                         </div>
                     </div>
@@ -220,16 +222,17 @@ class CaseList extends React.Component {
     updateForm2() {
         let doc = this.state.selectedDocument;
         let id = this.state.selectedDocumentId;
+        this.formButtonBar.startSaveSpinner();
         this.service.updateForm2(
             this.state.selectedDocument, this.state.selectedDocumentId,
-            (data) => {                
+            (data) => {     
+                this.formButtonBar.stopSaveSpinner();           
                 if (data.error) {                    
                     this.setState({
                         formHasUnsavedChanges: false
                     });                    
                 } else {
                     this.setState({
-                        displaySaveSuccess: true,
                         formHasUnsavedChanges: false
                     });
                     this.props.updateCases(doc, id);                    

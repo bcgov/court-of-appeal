@@ -6,6 +6,7 @@ import _ from 'lodash';
 import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
+import SpinnerActionIcon from '../components/SpinnerActionIcon';
 
 class MyApplications extends Component {
   
@@ -74,7 +75,9 @@ class MyApplications extends Component {
             return list;
         }        
         let idsToArchive = this.state.cases.reduce(reducer, []);
+        this.archiveButton.startSpinner();
         this.service.archiveCases(idsToArchive, (data) => {
+            this.archiveButton.stopSpinner();
             this.fetchCases();
         });
     }
@@ -91,11 +94,11 @@ class MyApplications extends Component {
                                         <h3>My Documents</h3>
                                     </div>
                                     <div className="col-xs-6 no-padding text-right">
-                                        <a onClick={this.archive}>
-                                            <span className="oi oi-box action-icon"></span>
-                                        </a>
+                                        <SpinnerActionIcon id="archive-button" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
+                                            content='oi oi-box'>                        
+                                        </SpinnerActionIcon>
                                         <a href="form.2.html">
-                                            <span className="oi oi-plus action-icon"></span>
+                                            <span className="action-icon"><span className="oi oi-plus"></span></span>
                                         </a>
                                     </div>
                                 </div>

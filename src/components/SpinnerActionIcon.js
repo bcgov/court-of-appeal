@@ -1,0 +1,24 @@
+import React from 'react';
+import SpinnerButton from './SpinnerButton';
+
+class SpinnerActionIcon extends SpinnerButton {
+
+    buttonOrSpinner() {
+        if (this.state.downloading) {
+            return (
+                <a id={this.props.id}>
+                    <span className="action-icon"><i className="fa fa-spinner fa-spin"></i></span>
+                </a>
+            )
+        }
+        else {
+            return (
+                <a id={this.props.id} onClick={this.props.onClick}>
+                    <span className="action-icon"><span className={ this.props.content }></span></span>                       
+                </a>
+            )
+        }
+    }
+}
+
+export default SpinnerActionIcon

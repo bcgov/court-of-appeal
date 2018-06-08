@@ -15,6 +15,8 @@ class FormButtonBar extends React.Component {
         this.actionClassName = this.className + " action-button";
 
         this.print = this.print.bind(this);
+        this.startSaveSpinner = this.startSaveSpinner.bind(this);
+        this.stopSaveSpinner = this.stopSaveSpinner.bind(this);
     }
 
     componentDidMount() {
@@ -70,13 +72,20 @@ class FormButtonBar extends React.Component {
         return button;
     }
 
+    startSaveSpinner() {
+        this.draftButton.startSpinner();
+    }
+    stopSaveSpinner(){
+        this.draftButton.stopSpinner();
+    }
     saveButton() {
         let button = null;
         if (this.props.save) {
             button =  (
                 <div>
-                    <button id="draft" onClick={this.props.save} className={this.className}>Save as Draft
-                    </button>
+                    <SpinnerButton id="draft" width="106" onClick={this.props.save} ref={ (element)=> {this.draftButton = element }}
+                        content='Save as Draft'>                        
+                    </SpinnerButton>
                 </div>
             );
         };
