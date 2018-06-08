@@ -20,7 +20,6 @@ class Form2 extends Component {
 
         this.found = this.found.bind(this);
         this.create = this.create.bind(this);
-        this.closeErrorModal = this.closeErrorModal.bind(this);
         this.closeSuccessModal = this.closeSuccessModal.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.closeForm = this.closeForm.bind(this);
@@ -74,7 +73,6 @@ class Form2 extends Component {
             showForm2: false,
             previewMode: false,
             displaySaveSuccess: false,
-            displaySaveError: false,
             dataLoss: false,
             displayWarning: 'none',
             formHasUnsavedChanges: false,
@@ -99,9 +97,7 @@ class Form2 extends Component {
     found(data) {
 
         if (data) {
-            if (data.error) {
-                this.setState({notFoundError: NETWORK_ERROR_MSG});
-            } else {
+            if (!data.error) {
                 this.setState({notFoundError: ''});
                 const appellants = this.mapIncomingData(data.parties.appellants);
                 const respondents = this.mapIncomingData(data.parties.respondents);
@@ -161,22 +157,12 @@ class Form2 extends Component {
                 serviceFiler: this.state.document.serviceFiler,
                 selectedRespondentIndex: this.state.document.selectedRespondentIndex
             }, (data) => {
-            if (data.error) {
-                this.setState({
-                    displaySaveError: true
-                });
-            } else {
+            if (!data.error) {
                 this.setState({
                     formHasUnsavedChanges: false,
                     displaySaveSuccess: true
                 });                
             }
-        });
-    }
-
-    closeErrorModal() {
-        this.setState({
-            displaySaveError: false
         });
     }
 
@@ -395,20 +381,7 @@ class Form2 extends Component {
                                 />
                             </div>
                         </div>
-                    </div>
-
-                    <div id="saveErrorModal" className="modal not-printable"
-                        style={{ display:(this.state.displaySaveError?'block':'none') }} >
-                        <div className="modal-title red">
-                            <span id="close-modal" onClick={this.closeErrorModal}>&times;</span>
-                            Save failed
-                        </div>
-                        <div className="modal-content">
-                            <div>
-                                Something unexpected happened.
-                            </div>
-                        </div>
-                    </div>
+                    </div>                    
                     <div id="saveSucessModal" className="modal not-printable"
                         style={{ display:(this.state.displaySaveSuccess?'block':'none') }} >
                         <div className="modal-title ">
