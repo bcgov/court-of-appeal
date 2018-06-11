@@ -29,7 +29,7 @@ class Journey extends Component {
         this.handlePopState = this.handlePopState.bind(this);
         this.subtitles = [
             <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance.
-                <a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
+                &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
             "Start e-filing your response to the appeal below."
         ]
     }
