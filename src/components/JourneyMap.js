@@ -8,7 +8,7 @@ class JourneyMap extends React.Component {
         super(props);
         this.state = {
             showInfoModal: false
-        }
+        };
         this.getAreas = this.getAreas.bind(this);
         this.closeInfoModal = this.closeInfoModal.bind(this);
         this.openInfoModal = this.openInfoModal.bind(this);

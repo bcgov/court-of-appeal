@@ -112,3 +112,37 @@ svg.fa-play {
 .right-to-appeal-tooltip a {
 	color: lightblue;
 }
+
+.info-modal-icon-container {
+	position: relative;
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	border-width: 20px;
+	background-color: #49a25a;
+}
+.info-modal-icon {
+	height: 60px;
+	width: 60px;
+	position: absolute;
+	padding: 12px;
+}
+.info-modal-clock {
+	padding: 6px;
+}
+.deadline {
+	color: red;
+	font-size: xx-large;
+}
+.vertical-line {
+	width: 80px;
+	border-left: 7px solid #f2f2f2;
+	height: 100%;
+	margin-left: 28px;
+}
+.divider {
+	border-right: 1px solid grey;
+}
+.right-info-cols {
+	text-align: center;
+}
