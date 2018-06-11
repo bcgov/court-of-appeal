@@ -125,6 +125,9 @@ svg.fa-play {
 	height: 60px;
 	width: 60px;
 	position: absolute;
+	padding: 12px;
+}
+.info-modal-clock {
 	padding: 6px;
 }
 .deadline {
@@ -136,4 +139,10 @@ svg.fa-play {
 	border-left: 7px solid #f2f2f2;
 	height: 100%;
 	margin-left: 28px;
+}
+.divider {
+	border-right: 1px solid grey;
+}
+.right-info-cols {
+	text-align: center;
 }
