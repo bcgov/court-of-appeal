@@ -42,7 +42,7 @@ class Form2DataSection extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="row address-row">
+                        <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
                                     Respondent's name: &nbsp;
@@ -62,11 +62,12 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                     </div>
-
-                    <div className="row address-row">
-                        <div className="col-lg-12">
-                        Respondent's mailing address for service: &nbsp;
-                            <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                    <div className="row">
+                        <div className="row address-row-header">
+                            <div className="col-lg-12">
+                            Respondent's mailing address for service: &nbsp;
+                                <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                            </div>
                         </div>
                     </div>
                     <div className="row address-row">
