@@ -101,6 +101,9 @@
 	font-size: 1em;
 	vertical-align: middle;
 }
+.address-row-header {
+	padding-bottom:12px;
+}
 .address-label {
 	text-align: right;
 	padding: 5px;
