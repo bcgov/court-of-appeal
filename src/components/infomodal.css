@@ -1,4 +1,85 @@
-info-modal h2{
+.info-modal h2{
     font-size: 2em;
     font-color: blue;
+}
+
+.info-modal-title {
+    background-color: var(--header-background);
+    color: white;
+    margin: auto;
+    padding: 20px;
+    width: 55%;
+    font-size: 2em;
+    min-width: 800px;
+}
+
+.info-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 55%;
+    min-width: 800px;
+}
+.icon-container-box {
+    padding-top:5px;
+}
+.info-modal-icon-container {
+    position: relative;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border-width: 20px;
+    background-color: #49a25a;
+}
+.info-modal-icon {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    padding: 12px;
+}
+.info-modal-clock {
+    padding: 6px;
+    margin-right: 5px;
+}
+.info-modal-divider {
+    border-top: 2px solid lightgrey;
+    padding-top: 15px;
+}
+.deadline {
+    color: red;
+    font-size: 3.5rem;
+}
+.info-modal-section {
+    padding: 0 0 15px 30px;
+}
+.info-modal-section-heading {
+    padding-bottom: 20px;
+}
+.vertical-line {
+    width: 80px;
+    border-left: 7px solid #f2f2f2;
+    height: 100%;
+    margin-left: 27px;
+    max-height: 100%;
+    min-height:100%;
+}
+.vertical-divider {
+    border-right: 1px solid grey;
+}
+.right-info-cols {
+    text-align: center;
+}
+.content-hidden {
+    display: none;
+}
+.content-showing {
+    display: block;
+}
+.factum-drawer {
+    font-size: xx-large;
+    font-weight: bolder;
+    color: grey;
+    text-align: left;
+    cursor: pointer;
 }
