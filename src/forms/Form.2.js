@@ -145,7 +145,7 @@ class Form2 extends Component {
         this.props.history.push('/');
     }
 
-    create() {
+    create(event, callback) {
         this.formButtonBar.startSaveSpinner();
         var form = {
             formSevenNumber: this.state.formSevenNumber,
@@ -165,7 +165,8 @@ class Form2 extends Component {
                     this.setState({
                         formHasUnsavedChanges: false,
                         id: id
-                    });                
+                    });   
+                    if (callback) { callback(); }             
                 }                
             });
         }
@@ -174,16 +175,19 @@ class Form2 extends Component {
                 this.formButtonBar.stopSaveSpinner();           
                 this.setState({
                     formHasUnsavedChanges: false
-                });                
+                });                  
+                if (callback) { callback(); }            
             });
         }
     }
 
     preview() {
-        this.service.previewForm(this.state.id, (html)=>{
-            if (!html.error) {
-                this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
-            }
+        this.create(null, ()=>{
+            this.service.previewForm(this.state.id, (html)=>{
+                if (!html.error) {
+                    this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
+                }
+            });    
         });
     }
 
