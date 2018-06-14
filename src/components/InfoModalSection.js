@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import '../components/infomodal.css';
+import InfoModalIcon from './InfoModalIcon';
 
 class InfoModalSection extends Component {
 
     render() {
 
+        let deadline = null;
+        if (this.props.deadline) {
+            deadline = <div className="deadline">{this.props.deadline}</div>;
+        }
+
         return (
             <div>
                 <div className="row">
-                    <div className="col col-lg-1 col-md-1 col-sm-1 icon-container-box">
-                        <div shape="circle" className="info-modal-icon-container">
-                            <img src={this.props.iconSrc} className={"info-modal-icon " + this.props.iconClass}/>
-                        </div>
-                    </div>
+                    <InfoModalIcon
+                        iconSrc={this.props.iconSrc}
+                        iconClass={this.props.iconClass}
+                        />
                     <div className="col col-lg-11 col-md-11 col sm-11">
                         <div className="row">
                             <div className="col col-lg-12 col-md-12 col-sm-12">
-                                <div className="deadline">30 days</div>
+                                {deadline}
                                 <div className="info-modal-section-heading">{this.props.sectionHeading}</div>
                             </div>
                         </div>

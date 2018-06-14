@@ -33,7 +33,7 @@ class ExpandableSection extends Component {
                     </div>
                     <div className="row ">
                         <div className="col col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 vertical-divider">
-                            <a href=" https://www.courtofappealbc.ca/respondent-guidebook">Visit: SRL Guidebook</a>
+                            <a href={this.props.helpURL}>{this.props.helpURLName}</a>
                         </div>
                         <div className="col col-lg-4 col-md-4 col-sm-4 vertical-divider info-help-right-cols">
                             <a href="mailto:courts.cso@gov.bc.ca">Email: Courts.cso@gov.bc.ca</a>
@@ -47,7 +47,6 @@ class ExpandableSection extends Component {
             )
         }
 
-        debugger;
         return (
             <div>
                 <div className="row">

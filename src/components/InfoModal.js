@@ -36,6 +36,7 @@ class InfoModal extends Component {
                    sectionHeading="Filing and service deadline after filing the Appeal Record"
                    iconSrc="icons/icon-clock.svg"
                    iconClass="info-modal-clock"
+                   deadline="30 days"
                />
                 <ExpandableSection
                     iconSrc="icons/icon-share.svg"
@@ -45,8 +46,10 @@ class InfoModal extends Component {
                     content={expandedContent}
                     verticalLine={true}
                     VLProps={{height:'156px', marginTop: '-45px', marginBottom: '-18px'}}
-                    helpSection={false}
                     deadLine="7 days"
+                    helpSection={false}
+                    helpURL={null}
+                    helpURLName={null}
                     />
                 <ExpandableSection
                     iconSrc="icons/icon-info.svg"
@@ -57,7 +60,10 @@ class InfoModal extends Component {
                     "                                to it."}
                     content={null}
                     verticalLine={false}
+                    deadLine={null}
                     helpSection={true}
+                    helpURL="https://www.courtofappealbc.ca/respondent-guidebook"
+                    helpURLName="Visit: SRL Guidebook"
                     />
             </div>
         </div>);
