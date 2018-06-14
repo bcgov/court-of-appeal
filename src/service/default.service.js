@@ -56,7 +56,7 @@ Service.prototype.createForm2 = function(form, callback) {
     let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
-            callback(body);
+            callback(JSON.parse(body).id);
         }
         else {
             self.notifyThatAnErrorOccured(callback);

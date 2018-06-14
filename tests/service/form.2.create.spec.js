@@ -7,6 +7,7 @@ describe('Create form 2', function() {
 
     let service;
     let apiServer;
+    let sentData;
 
     beforeEach(function(done) {
         service = new Service();
@@ -19,8 +20,8 @@ describe('Create form 2', function() {
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/json');
                     response.statusCode = 201;
-                    let data = qs.parse(body).data;
-                    response.write(data);
+                    sentData = qs.parse(body).data;
+                    response.write(JSON.stringify({id:42}));
                     response.end();
                 }); 
             }
@@ -35,8 +36,14 @@ describe('Create form 2', function() {
     });
 
     test('sends data via post inside a data field', function(done) {                        
-        service.createForm2({ any:'field' }, function(data) {
-            expect(data).toEqual('{"any":"field"}');
+        service.createForm2({ any:'field' }, function() {
+            expect(sentData).toEqual('{"any":"field"}');
+            done();
+        });     
+    });
+    test('parses the received id', function(done) {                        
+        service.createForm2({ any:'field' }, function(id) {
+            expect(id).toEqual(42);
             done();
         });     
     });
