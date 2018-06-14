@@ -1,8 +1,3 @@
-.info-modal h2{
-    font-size: 2em;
-    font-color: blue;
-}
-
 .info-modal-title {
     background-color: var(--header-background);
     color: white;
@@ -67,7 +62,7 @@
 .vertical-divider {
     border-right: 1px solid grey;
 }
-.right-info-cols {
+.info-help-right-cols {
     text-align: center;
 }
 .content-hidden {
@@ -76,7 +71,7 @@
 .content-showing {
     display: block;
 }
-.factum-drawer {
+.toggle-expansion-button {
     font-size: xx-large;
     font-weight: bolder;
     color: grey;
