@@ -23,6 +23,7 @@ class MyApplications extends Component {
         this.updateCases = this.updateCases.bind(this);
         this.archive = this.archive.bind(this);
         this.toggleSelected = this.toggleSelected.bind(this);
+        this.download = this.download.bind(this);
     }
 
     componentDidMount() {
@@ -81,6 +82,9 @@ class MyApplications extends Component {
             this.fetchCases();
         });
     }
+    download() {
+
+    }
 
     render() {
         return (
@@ -94,6 +98,9 @@ class MyApplications extends Component {
                                         <h3>My Documents</h3>
                                     </div>
                                     <div className="col-xs-6 no-padding text-right">
+                                        <SpinnerActionIcon id="download-button" onClick={this.download} ref={ (element)=> {this.downloadButton = element }}
+                                            content='oi oi-data-transfer-download'>                        
+                                        </SpinnerActionIcon>
                                         <SpinnerActionIcon id="archive-button" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
                                             content='oi oi-box'>                        
                                         </SpinnerActionIcon>

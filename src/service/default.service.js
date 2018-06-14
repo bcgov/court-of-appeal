@@ -154,4 +154,15 @@ Service.prototype.generatePdf = function(html, callback) {
         }
     });
 };
+Service.prototype.previewForm = function(id, callback) {
+    let self = this;
+    request.get(this.buildOptions('/api/forms/'+id+'/preview'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            self.notifyThatAnErrorOccured(callback);
+        }
+    }); 
+};
 module.exports = Service;

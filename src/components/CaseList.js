@@ -14,6 +14,7 @@ class CaseList extends React.Component {
         this.state = {
             editMode: false,
             previewMode: false,
+            previewContent: '',
             selectedDocumentId: '',
             selectedDocument: {
                 formSevenNumber: '',
@@ -184,6 +185,7 @@ class CaseList extends React.Component {
                             <Form2Preview
                                 closeForm={this.backToEdit}
                                 show={this.state.previewMode}
+                                content={this.state.previewContent}
                                 className="case-list-modal"
                                 data={this.state.selectedDocument}
                                 formSevenNumber= {this.state.selectedDocument ? this.state.selectedDocument.formSevenNumber : ''}
@@ -219,7 +221,7 @@ class CaseList extends React.Component {
         );
     }
 
-    updateForm2() {
+    updateForm2(callback) {
         let doc = this.state.selectedDocument;
         let id = this.state.selectedDocumentId;
         this.formButtonBar.startSaveSpinner();
@@ -237,6 +239,7 @@ class CaseList extends React.Component {
                     });
                     this.props.updateCases(doc, id);                    
                 }
+                callback(id, data);
             });
     }
 
@@ -263,9 +266,16 @@ class CaseList extends React.Component {
         this.setState({editMode: true, previewMode: false});
     }
 
-    preview() {
-        this.setState({editMode: false, previewMode: true});
-        this.updateForm2();
+    preview() {        
+        this.updateForm2((id, data)=>{
+            if(!data.error) { 
+                this.service.previewForm(id, (html)=>{
+                    if (!html.error) {
+                        this.setState({editMode: false, previewMode: true, previewContent:html });
+                    }
+                });
+            }
+        });
     }
 
     closeDataLossWarning() {
