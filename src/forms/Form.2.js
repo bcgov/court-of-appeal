@@ -80,7 +80,9 @@ class Form2 extends Component {
             phoneIsValid: true,
             emailIsValid: true,
             postalCodeIsValid: true,
-            previewButtonErrorMsg: ''
+            previewButtonErrorMsg: '',
+            id: null,
+            previewContent: ''
         };
     }
 
@@ -143,33 +145,50 @@ class Form2 extends Component {
         this.props.history.push('/');
     }
 
-    create() {
+    create(event, callback) {
         this.formButtonBar.startSaveSpinner();
-        this.service.createForm2({
-                formSevenNumber: this.state.formSevenNumber,
-                appellants: this.state.document.appellants,
-                respondents: this.state.document.respondents,
-                phone: this.state.document.phone,
-                email: this.state.document.email,
-                useServiceEmail: this.state.document.useServiceEmail,
-                sendNotifications: this.state.document.sendNotifications,
-                serviceFiler: this.state.document.serviceFiler,
-                selectedRespondentIndex: this.state.document.selectedRespondentIndex
-            }, (data) => {
+        var form = {
+            formSevenNumber: this.state.formSevenNumber,
+            appellants: this.state.document.appellants,
+            respondents: this.state.document.respondents,
+            phone: this.state.document.phone,
+            email: this.state.document.email,
+            useServiceEmail: this.state.document.useServiceEmail,
+            sendNotifications: this.state.document.sendNotifications,
+            serviceFiler: this.state.document.serviceFiler,
+            selectedRespondentIndex: this.state.document.selectedRespondentIndex
+        };
+        if (!this.state.id) {
+            this.service.createForm2(form, (id) => {
                 this.formButtonBar.stopSaveSpinner();
-                if (!data.error) {
+                if (!id.error) {
                     this.setState({
-                        formHasUnsavedChanges: false
-                    });                
-                }
-        });
+                        formHasUnsavedChanges: false,
+                        id: id
+                    });   
+                    if (callback) { callback(); }             
+                }                
+            });
+        }
+        else {
+            this.service.updateForm2(form, this.state.id, (data) => {     
+                this.formButtonBar.stopSaveSpinner();           
+                this.setState({
+                    formHasUnsavedChanges: false
+                });                  
+                if (callback) { callback(); }            
+            });
+        }
     }
 
     preview() {
-        this.setState({
-            previewMode: true,
-            displayPreview: 'block'
-        })
+        this.create(null, ()=>{
+            this.service.previewForm(this.state.id, (html)=>{
+                if (!html.error) {
+                    this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
+                }
+            });    
+        });
     }
 
     closePreview() {
@@ -362,6 +381,7 @@ class Form2 extends Component {
                                 <Form2Preview
                                     closeForm={this.closeForm}
                                     show={this.state.showForm2}
+                                    content={this.state.previewContent}
                                     className="case-list-modal"
                                     data={this.state.document}
                                     formSevenNumber= {this.state.formSevenNumber}

@@ -56,7 +56,7 @@ Service.prototype.createForm2 = function(form, callback) {
     let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
-            callback(body);
+            callback(JSON.parse(body).id);
         }
         else {
             self.notifyThatAnErrorOccured(callback);
@@ -153,5 +153,16 @@ Service.prototype.generatePdf = function(html, callback) {
             self.notifyThatAnErrorOccured(callback);
         }
     });
+};
+Service.prototype.previewForm = function(id, callback) {
+    let self = this;
+    request.get(this.buildOptions('/api/forms/'+id+'/preview'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            self.notifyThatAnErrorOccured(callback);
+        }
+    }); 
 };
 module.exports = Service;

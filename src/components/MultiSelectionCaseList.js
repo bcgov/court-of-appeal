@@ -82,6 +82,7 @@ class MultiSelectionCaseList extends CaseList {
                             <Form2Preview
                                 closeForm={this.backToEdit}
                                 show={this.state.previewMode}
+                                content={this.state.previewContent}
                                 className="case-list-modal"
                                 data={this.state.selectedDocument}
                                 formSevenNumber= {this.state.selectedDocument ? this.state.selectedDocument.formSevenNumber : ''}

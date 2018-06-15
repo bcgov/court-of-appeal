@@ -3,49 +3,56 @@ let url = require('url');
 let qs = require('querystring');
 let LocalServer = require('../support/local.server');
 
-describe('Create form 2', function() {
+describe('Form preview', function() {
 
     let service;
     let apiServer;
-    let sentData;
+    let received;
 
     beforeEach(function(done) {
+        received = undefined;
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            if (request.url == '/api/forms' && request.method == 'POST') {                
-                let body = '';
-                request.on('data', (data)=> {
-                    body += data;
-                });
-                request.on('end', ()=> {
-                    response.setHeader('Content-Type', 'application/json');
-                    response.statusCode = 201;
-                    sentData = qs.parse(body).data;
-                    response.write(JSON.stringify({id:42}));
-                    response.end();
-                }); 
+            received = request.headers;  
+            if (request.url == '/api/forms/42/preview' && request.method == 'GET') {                
+                response.statusCode = 200;
+                response.write('<html><body>any</body></html>');
+                response.end(); 
+            }
+            else {
+                response.statusCode = 200;
+                response.write('ko');
+                response.end(); 
             }
         });
         apiServer.start(()=>{
             service.apiUrl = 'http://localhost:' + apiServer.port;
             done();
         });        
-    });
+    });    
     afterEach(function(done) {
         apiServer.stop(done);
     });
 
-    test('sends data via post inside a data field', function(done) {                        
-        service.createForm2({ any:'field' }, function() {
-            expect(sentData).toEqual('{"any":"field"}');
+    test('uses a rest service', (done)=> {                        
+        service.previewForm(42, (data)=> {
+            expect(data).toEqual('<html><body>any</body></html>');
             done();
         });     
     });
-    test('parses the received id', function(done) {                        
-        service.createForm2({ any:'field' }, function(id) {
-            expect(id).toEqual(42);
+    test('sends user info when initialized', (done)=>{
+        service.user = 'any';
+        service.previewForm(42, (data)=> {
+            expect(received['x-user']).toEqual('any');
             done();
-        });     
+        }); 
+    });
+    test('does not send user info when undefined', (done)=>{
+        service.user = undefined;
+        service.previewForm(42, (data)=> {
+            expect(received['x-user']).toEqual(undefined);
+            done();
+        }); 
     });
     test('resists 503', (done)=>{
         apiServer.stop(()=>{
@@ -56,19 +63,19 @@ describe('Create form 2', function() {
             });
             apiServer.start(()=>{
                 service.apiUrl = 'http://localhost:' + apiServer.port;
-                service.createForm2({ any:'field' }, function(data) {
+                service.previewForm(42, (data)=> {
                     expect(data.error).toEqual({ code:503, message:'service unavailable' });
                     done();
                 });     
             });    
-        });
+        })
     });
-    test('resists server down', (done)=>{
+    test('resists server is down', (done)=>{
         apiServer.stop(()=>{
-            service.createForm2({ any:'field' }, function(data) {
+            service.previewForm(42, (data)=> {
                 expect(data.error).toEqual({ code:503, message:'service unavailable' });
                 done();
-            });     
-        });
+            });    
+        })
     });
 });
