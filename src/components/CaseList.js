@@ -221,7 +221,7 @@ class CaseList extends React.Component {
         );
     }
 
-    updateForm2(callback) {
+    updateForm2(event, callback) {
         let doc = this.state.selectedDocument;
         let id = this.state.selectedDocumentId;
         this.formButtonBar.startSaveSpinner();
@@ -239,7 +239,7 @@ class CaseList extends React.Component {
                     });
                     this.props.updateCases(doc, id);                    
                 }
-                callback(id, data);
+                if (callback) { callback(id, data); }
             });
     }
 
@@ -267,7 +267,7 @@ class CaseList extends React.Component {
     }
 
     preview() {        
-        this.updateForm2((id, data)=>{
+        this.updateForm2(null, (id, data)=>{
             if(!data.error) { 
                 this.service.previewForm(id, (html)=>{
                     if (!html.error) {
