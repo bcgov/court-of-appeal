@@ -165,4 +165,17 @@ Service.prototype.previewForm = function(id, callback) {
         }
     }); 
 };
+Service.prototype.download = function(ids, callback) {
+    let options = this.buildOptions('/api/zip?id=' + ids.join('&id='));
+    options.encoding = null;
+    let self = this;
+    request.get(options, function(err, response, body) {
+        if (response && response.statusCode === 200) {
+            callback(body);
+        }
+        else {
+            self.notifyThatAnErrorOccured(callback);
+        }
+    });
+};
 module.exports = Service;

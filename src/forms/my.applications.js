@@ -7,6 +7,7 @@ import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
+import FileSaver from 'file-saver';
 
 class MyApplications extends Component {
   
@@ -83,7 +84,21 @@ class MyApplications extends Component {
         });
     }
     download() {
-
+        let reducer = (list, item)=> {
+            if (item.checked) {
+                list.push(item.id);
+            }
+            return list;
+        }        
+        let ids = this.state.cases.reduce(reducer, []);
+        this.downloadButton.startSpinner();
+        this.service.download(ids, (data) => {
+            this.downloadButton.stopSpinner();    
+            if (!data.error) {  
+                var blob = new Blob([data], {type: "application/zip"});
+                FileSaver.saveAs(blob, 'forms.zip');
+            }        
+        });
     }
 
     render() {
