@@ -7,6 +7,7 @@ import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
+import FileSaver from 'file-saver';
 
 class MyApplications extends Component {
   
@@ -24,12 +25,17 @@ class MyApplications extends Component {
         this.archive = this.archive.bind(this);
         this.toggleSelected = this.toggleSelected.bind(this);
         this.download = this.download.bind(this);
+        this.onlySelected = this.onlySelected.bind(this);
+        this.closeErrorModal = this.closeErrorModal.bind(this);
+        this.maxFileDownload = 5;
+        if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
+            this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
+        } 
     }
 
     componentDidMount() {
-
-        if (this.service == null) {
-            let window = this.element.ownerDocument.defaultView;
+        this.window = this.element.ownerDocument.defaultView;
+        if (this.service == null) {            
             this.service = new DefaultService(window);
         }
         if (this.state.fetch) { this.fetchCases(); }
@@ -68,22 +74,38 @@ class MyApplications extends Component {
             displayMyCasesEmptyLabel: (cases.length === 0)
         });
     }
+    onlySelected(list, item) {
+        if (item.checked) {
+            list.push(item.id);
+        }
+        return list;
+    }
     archive() {
-        let reducer = (list, item)=> {
-            if (item.checked) {
-                list.push(item.id);
-            }
-            return list;
-        }        
-        let idsToArchive = this.state.cases.reduce(reducer, []);
+        let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         this.archiveButton.startSpinner();
         this.service.archiveCases(idsToArchive, (data) => {
             this.archiveButton.stopSpinner();
             this.fetchCases();
         });
     }
+    closeErrorModal() {
+        this.window.document.getElementById('downloadErrorModal').style.display = 'none';
+    }
     download() {
-
+        let ids = this.state.cases.reduce(this.onlySelected, []);
+        if (ids.length > this.maxFileDownload) {
+            this.window.document.getElementById('downloadErrorModal').style.display = 'block';
+        }
+        else {
+            this.downloadButton.startSpinner();
+            this.service.download(ids, (data) => {
+                this.downloadButton.stopSpinner();    
+                if (!data.error) {  
+                    var blob = new Blob([data], {type: "application/zip"});
+                    FileSaver.saveAs(blob, 'forms.zip');
+                }        
+            });    
+        }
     }
 
     render() {
@@ -119,6 +141,17 @@ class MyApplications extends Component {
                                         No open cases found
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="downloadErrorModal" ref={ (element)=> {this.errorModal = element }}>
+                    <div className="download-error-modal-title">
+                        <span id="download-error-close-modal" onClick={this.closeErrorModal}>&times;</span>
+                        Download unavailable
+                    </div>
+                    <div className="download-error-modal-content">
+                        <div>
+                            You cannot download more than {this.maxFileDownload} files at once.
                         </div>
                     </div>
                 </div>
