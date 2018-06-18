@@ -121,7 +121,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Province: </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <TextField
-                                        value='British Columbia'
+                                        value='BC'
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.province"
                                         readOnly={true}
