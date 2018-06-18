@@ -25,6 +25,7 @@ class MyApplications extends Component {
         this.archive = this.archive.bind(this);
         this.toggleSelected = this.toggleSelected.bind(this);
         this.download = this.download.bind(this);
+        this.onlySelected = this.onlySelected.bind(this);
     }
 
     componentDidMount() {
@@ -69,14 +70,14 @@ class MyApplications extends Component {
             displayMyCasesEmptyLabel: (cases.length === 0)
         });
     }
+    onlySelected(list, item) {
+        if (item.checked) {
+            list.push(item.id);
+        }
+        return list;
+    }
     archive() {
-        let reducer = (list, item)=> {
-            if (item.checked) {
-                list.push(item.id);
-            }
-            return list;
-        }        
-        let idsToArchive = this.state.cases.reduce(reducer, []);
+        let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         this.archiveButton.startSpinner();
         this.service.archiveCases(idsToArchive, (data) => {
             this.archiveButton.stopSpinner();
@@ -84,13 +85,7 @@ class MyApplications extends Component {
         });
     }
     download() {
-        let reducer = (list, item)=> {
-            if (item.checked) {
-                list.push(item.id);
-            }
-            return list;
-        }        
-        let ids = this.state.cases.reduce(reducer, []);
+        let ids = this.state.cases.reduce(this.onlySelected, []);
         this.downloadButton.startSpinner();
         this.service.download(ids, (data) => {
             this.downloadButton.stopSpinner();    
