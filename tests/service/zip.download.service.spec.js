@@ -46,7 +46,7 @@ describe('ZIP download service', function() {
     test('resists 500', (done)=>{
         apiServer.stop(()=>{
             apiServer = new LocalServer((request, response)=> {
-                response.writeHeader(500, {'content-type':'application/zip'})
+                response.writeHeader(500, {'content-type':'application/json'})
                 response.write(JSON.stringify({message:'crashed'}));
                 response.end();
             });
@@ -62,8 +62,24 @@ describe('ZIP download service', function() {
     test('resists 503', (done)=>{
         apiServer.stop(()=>{
             apiServer = new LocalServer((request, response)=> {
-                response.writeHeader(503, {'content-type':'application/zip'})
+                response.writeHeader(503, {'content-type':'application/json'})
                 response.write(JSON.stringify({message:'service unavailable'}));
+                response.end();
+            });
+            apiServer.start(()=>{
+                service.apiUrl = 'http://localhost:' + apiServer.port;
+                service.download([1, 2], function(data) {
+                    expect(data.error).toEqual({ code:503, message:'service unavailable' });
+                    done();
+                });     
+            });    
+        });
+    });
+    test('resists 404', (done)=>{
+        apiServer.stop(()=>{
+            apiServer = new LocalServer((request, response)=> {
+                response.writeHeader(404, {'content-type':'application/json'})
+                response.write(JSON.stringify({message:'not found'}));
                 response.end();
             });
             apiServer.start(()=>{
