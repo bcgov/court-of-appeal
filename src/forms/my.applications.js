@@ -27,6 +27,8 @@ class MyApplications extends Component {
         this.download = this.download.bind(this);
         this.onlySelected = this.onlySelected.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
+        this.closeConfirmArchiveModal = this.closeConfirmArchiveModal.bind(this);
+        this.yesArchive = this.yesArchive.bind(this);
         this.maxFileDownload = 5;
         if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
             this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
@@ -82,11 +84,23 @@ class MyApplications extends Component {
     }
     archive() {
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
-        this.archiveButton.startSpinner();
-        this.service.archiveCases(idsToArchive, (data) => {
-            this.archiveButton.stopSpinner();
-            this.fetchCases();
-        });
+        if (idsToArchive.length > 0) {
+            this.window.document.getElementById('are-you-sure-modal').style.display = 'block';
+        }
+    }
+    closeConfirmArchiveModal() {
+        this.window.document.getElementById('are-you-sure-modal').style.display = 'none';
+    }
+    yesArchive() {
+        this.closeConfirmArchiveModal();
+        let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
+        if (idsToArchive.length > 0) {
+            this.archiveButton.startSpinner();
+            this.service.archiveCases(idsToArchive, (data) => {
+                this.archiveButton.stopSpinner();
+                this.fetchCases();
+            });
+        }
     }
     closeErrorModal() {
         this.window.document.getElementById('downloadErrorModal').style.display = 'none';
@@ -120,13 +134,13 @@ class MyApplications extends Component {
                                         <h3>My Documents</h3>
                                     </div>
                                     <div className="col-xs-6 no-padding text-right">
-                                        <SpinnerActionIcon id="download-button" onClick={this.download} ref={ (element)=> {this.downloadButton = element }}
+                                        <SpinnerActionIcon id="download-button" tooltip="download" onClick={this.download} ref={ (element)=> {this.downloadButton = element }}
                                             content='oi oi-data-transfer-download'>                        
                                         </SpinnerActionIcon>
-                                        <SpinnerActionIcon id="archive-button" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
+                                        <SpinnerActionIcon id="archive-button" tooltip="archive" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
                                             content='oi oi-box'>                        
                                         </SpinnerActionIcon>
-                                        <a href="form.2.html">
+                                        <a href="form.2.html" title="create new">
                                             <span className="action-icon"><span className="oi oi-plus"></span></span>
                                         </a>
                                     </div>
@@ -152,6 +166,21 @@ class MyApplications extends Component {
                     <div className="download-error-modal-content">
                         <div>
                             You cannot download more than {this.maxFileDownload} files at once.
+                        </div>
+                    </div>
+                </div>
+                <div id="are-you-sure-modal" ref={ (element)=> {this.confirmArchiveModal = element }}>
+                    <div className="are-you-sure-modal-title">
+                        <span id="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</span>
+                        Please confirm
+                    </div>
+                    <div className="are-you-sure-modal-content">
+                        <div>
+                            You are about to archive those forms
+                        </div>      
+                        <div className="row text-center">                  
+                            <button id="yes-archive" className="btn btn-primary round-borders yes-archive" onClick={this.yesArchive}>archive</button>
+                            <button id="cancel-archive" className="btn btn-primary round-borders cancel-archive" onClick={this.closeConfirmArchiveModal}>cancel</button>
                         </div>
                     </div>
                 </div>
