@@ -1,38 +1,32 @@
 import React from 'react';
-import '../components/infomodal.css';
-import InfoModal from "./InfoModal";
+import './infopopup.css';
+import InfoPopup from "./InfoPopup";
 
-class FactumInfoModal extends InfoModal {
+class FactumPopup extends InfoPopup {
 
     constructor(props) {
         super(props);
+        let contentMap = [
+            {
+                line: "Complete either the .DOCs or .PDFs below:",
+                rows: [
+                    { description: "Factum (Form 10)", times: "4 x", link1: "Doc", link2: "PDF" },
+                    { description: " Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "Doc", link2: "PDF" },
+                    { description: "Appeal Book (Form 12)", times: "4 x", link1: "Doc", link2: "PDF" },
+                ]
+            },
+            "File the indicated number of copies to the registry.",
+            "Serve one copy of each document to respondent."
+        ];
 
-        this.detailedContent =
-            <div className="row ">
-                <div className="col col-lg-12 col-md-12 col-sm-12 info-modal-ol" >
-                    1.&nbsp;&nbsp;If you would like to reply, please complete either the
-                    .DOC or .PDF document below:
-
-                    <div className="row bullet-list-row" >
-                        <div className="col col-lg-1 col-md-1 bullet-div">
-                            <div className="bullet" />
-                        </div>
-                        <div className="col col-lg-8 col-md-8" >
-                            Reply (Form 11)
-                        </div>
-                        <div className="col col-lg-1 col-md-1">4 x</div>
-                        <div className="col col-lg-1 col-md-1">Doc</div>
-                        <div className="col col-lg-1 col-md-1">PDF</div>
-                    </div>
-
-                    <div  >
-                        2.&nbsp;&nbsp;File the indicated number of copies to the registry.
-                    </div>
-                    <div  >
-                        3.&nbsp;&nbsp;Serve one copy of each document to respondent.
-                    </div>
-                </div>
-            </div>;
+        let contentMap2 = [
+            {
+                line: "If you would like to reply, please complete either the .DOC or .PDF document below:",
+                rows: [{description: "Reply (Form 11)", times: "4x", link1: "Doc", link2: "PDF"}]
+            },
+            "File the indicated number of copies to the registry.",
+            "Serve one copy of each document to respondent."
+        ];
 
         this.state = {
             sections: [{
@@ -42,7 +36,8 @@ class FactumInfoModal extends InfoModal {
                 iconClass: "info-modal-clock",
                 deadline: "30 days",
                 lineHeight: '225px',
-                last: false
+                last: false,
+                contentMap: contentMap
             }, {
                 expandable: true,
                 sectionHeading: "Were you served with a respondent's Factum?",
@@ -55,7 +50,8 @@ class FactumInfoModal extends InfoModal {
                 helpSection: false,
                 helpURL: null,
                 helpURLName: null,
-                last: false
+                last: false,
+                contentMap: contentMap2
             }, {
                 expandable: true,
                 sectionHeading: "Were you served with a respondent's Transcript Extract Book?",
@@ -70,7 +66,8 @@ class FactumInfoModal extends InfoModal {
                 helpSection: true,
                 helpURL: "https://www.courtofappealbc.ca/respondent-guidebook",
                 helpURLName: "Visit: SRL Guidebook",
-                last: true
+                last: true,
+                contentMap: null
             }]
         }
     }
@@ -80,15 +77,14 @@ class FactumInfoModal extends InfoModal {
 
         if (this.props.show) {
             content =
-                <InfoModal
+                <InfoPopup
                     title="The Factum and Appeal Book"
                     sections={this.state.sections}
                     close={this.props.close}
-                    detailedContent={this.detailedContent}
                 />
         }
         return content;
     }
 
 }
-export default FactumInfoModal;
+export default FactumPopup;

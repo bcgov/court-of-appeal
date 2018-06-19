@@ -1,6 +1,6 @@
 import React from 'react';
 import './journeymap.css';
-import FactumInfoModal from './FactumInfoModal';
+import FactumPopup from './FactumPopup';
 
 class JourneyMap extends React.Component {
 
@@ -26,7 +26,7 @@ class JourneyMap extends React.Component {
                     <map name="journeymap" >
                         {targetAreas}
                     </map>
-                    <FactumInfoModal
+                    <FactumPopup
                         show={this.state.showInfoModal}
                         close={this.closeInfoModal}
                     />
