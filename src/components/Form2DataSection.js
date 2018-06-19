@@ -45,7 +45,7 @@ class Form2DataSection extends React.Component {
                         <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
-                                    Respondent's name: &nbsp;
+                                    Respondent's name &nbsp;
                                     <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
                                 </div>
                             </div>
@@ -65,12 +65,12 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
-                                Mailing address for service: &nbsp;
+                                Mailing address for service &nbsp;
                                 <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
                             </div>
 
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1: </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1  </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                         <TextField
@@ -87,7 +87,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 2:</div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 2 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                     <TextField
@@ -104,7 +104,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">City: </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">City </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
                                     <TextField
@@ -118,7 +118,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Province: </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Province </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <TextField
                                         value='BC'
@@ -129,7 +129,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Country:</div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Country </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <TextField
                                         value='Canada'
@@ -140,7 +140,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Postal code:</div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Postal code </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PostalCodeField
                                         value={this.props.data ? selectedRespondent.address.postalCode : ''}
@@ -156,11 +156,11 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
-                                Contact information: &nbsp;
+                                Contact information &nbsp;
                                 <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the phone/email to contact you?"></i>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone:</div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PhoneField
                                         value={this.props.data ? this.props.data.phone : ''}
@@ -172,7 +172,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Email address:</div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Email address </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <EmailField
                                         value={this.props.data ? this.props.data.email : ''}
