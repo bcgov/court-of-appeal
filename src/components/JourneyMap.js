@@ -1,6 +1,6 @@
 import React from 'react';
 import './journeymap.css';
-import InfoModal from './InfoModal';
+import FactumInfoModal from './FactumInfoModal';
 
 class JourneyMap extends React.Component {
 
@@ -26,9 +26,7 @@ class JourneyMap extends React.Component {
                     <map name="journeymap" >
                         {targetAreas}
                     </map>
-                    <InfoModal
-                        title="Information"
-                        body="This is passed in from the journey"
+                    <FactumInfoModal
                         show={this.state.showInfoModal}
                         close={this.closeInfoModal}
                     />
@@ -43,8 +41,7 @@ class JourneyMap extends React.Component {
     getAreas() {
         return this.props.mapProps.map((prop, key) => {
             if (prop.function) {
-                console.log(prop.function);
-                return <area alt={prop.alt} onClick={this.openInfoModal.bind(this)} key={key} shape="rect" {...prop}/>;
+                return <area alt={prop.alt}  onClick={this.openInfoModal.bind(this)} key={key} shape="rect" {...prop} />;
             } else {
                 return <area alt={prop.alt} key={key} shape="rect" {...prop}/>
             }

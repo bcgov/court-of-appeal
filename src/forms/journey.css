@@ -112,3 +112,7 @@ svg.fa-play {
 .right-to-appeal-tooltip a {
 	color: lightblue;
 }
+area {
+	display: block;
+	cursor: pointer;
+}
