@@ -10,9 +10,9 @@ class FactumPopup extends InfoPopup {
             {
                 line: "Complete either the .DOCs or .PDFs below:",
                 rows: [
-                    { description: "Factum (Form 10)", times: "4 x", link1: "Doc", link2: "PDF" },
-                    { description: " Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "Doc", link2: "PDF" },
-                    { description: "Appeal Book (Form 12)", times: "4 x", link1: "Doc", link2: "PDF" },
+                    { description: "Factum (Form 10)", times: "4 x", link1: "DOC", link2: "PDF" },
+                    { description: " Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "DOC", link2: "PDF" },
+                    { description: "Appeal Book (Form 12)", times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
             "File the indicated number of copies to the registry.",
@@ -22,7 +22,7 @@ class FactumPopup extends InfoPopup {
         let contentMap2 = [
             {
                 line: "If you would like to reply, please complete either the .DOC or .PDF document below:",
-                rows: [{description: "Reply (Form 11)", times: "4x", link1: "Doc", link2: "PDF"}]
+                rows: [{description: "Reply (Form 11)", times: "4x", link1: "DOC", link2: "PDF"}]
             },
             "File the indicated number of copies to the registry.",
             "Serve one copy of each document to respondent."

@@ -111,6 +111,14 @@
     text-align: left;
     cursor: pointer;
 }
-info-model-content ul {
-
+.doc-badge {
+    width: 40px;
+    height: 20px;
+    border-radius: 7px;
+    border: 1px solid var(--header-background);
+    color: var(--header-background);
+    padding-left: 6px;
+    padding-top: 1px;
+    font-size: small;
+    font-weight: bold;
 }
