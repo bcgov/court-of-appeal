@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import './infomodal.css';
+import './infopopup.css';
 
-class InfoModalIcon extends Component {
+class InfoPopupIcon extends Component {
 
     render() {
         return (
@@ -12,4 +12,4 @@ class InfoModalIcon extends Component {
             </div>
         );
     }
-} export default InfoModalIcon;
+} export default InfoPopupIcon;

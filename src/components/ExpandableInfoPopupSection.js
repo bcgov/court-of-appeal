@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../components/infomodal.css';
-import InfoModalIcon from "./InfoModalIcon";
+import './infopopup.css';
+import InfoPopupIcon from "./InfoPopupIcon";
 
-class ExpandableSection extends Component {
+class ExpandableInfoPopupSection extends Component {
 
     constructor(props) {
         super(props);
@@ -25,6 +25,8 @@ class ExpandableSection extends Component {
                 </div>
             );
         }
+
+        let listContent= this.props.getListContent(this.props.contentMap);
 
         if (this.props.helpSection) {
             helpSection = (
@@ -67,7 +69,7 @@ class ExpandableSection extends Component {
         return (
             <div className="info-modal-section ">
                 <div className="row">
-                    <InfoModalIcon
+                    <InfoPopupIcon
                         iconSrc={this.props.iconSrc}
                         iconClass={this.props.iconClass}
                     />
@@ -96,7 +98,7 @@ class ExpandableSection extends Component {
                 <div className={this.state.detailsClass}>
                     {verticalLine}
                     <div className={sectionClassName}>
-                        {this.props.content}
+                        {listContent}
                         {helpSection}
                     </div>
 
@@ -139,4 +141,4 @@ class ExpandableSection extends Component {
         };
     }
 }
-export default ExpandableSection;
+export default ExpandableInfoPopupSection;
