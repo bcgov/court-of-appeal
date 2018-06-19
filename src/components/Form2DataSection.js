@@ -65,7 +65,7 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
-                                Respondent's mailing address for service: &nbsp;
+                                Mailing address for service: &nbsp;
                                 <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
                             </div>
 
@@ -121,7 +121,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Province: </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <TextField
-                                        value='British Columbia'
+                                        value='BC'
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.province"
                                         readOnly={true}
@@ -151,7 +151,14 @@ class Form2DataSection extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="row proceeding-style">
+                            <div className="col-lg-12 address-row-header">
+                                Contact information: &nbsp;
+                                <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the phone/email to contact you?"></i>
+                            </div>
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone:</div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
