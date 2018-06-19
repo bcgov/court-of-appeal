@@ -7,23 +7,7 @@ class InfoModal extends Component {
 
     render() {
 
-        let expandedContent = (
-            <ol style={{fontWeight:"bolder"}}>
-                <li>
-                    IF you would like to reply, please complete either the
-                    .DOC or .PDF document below:
-                    <ul>
-                        <li> Reply (Form 11)</li>
-                    </ul>
-                </li>
-                <li>
-                    File the indicated number of copies to the registry.
-                </li>
-                <li>
-                    Serve one copy of each document to respondent.
-                </li>
-            </ol>
-        );
+        let sections = this.getSections();
 
        return (
            <div id="info-modal" className="modal" style={{display: 'block'}} >
@@ -32,41 +16,49 @@ class InfoModal extends Component {
                 {this.props.title}
             </div>
             <div className="info-modal-content">
-               <InfoModalSection
-                   sectionHeading="Filing and service deadline after filing the Appeal Record"
-                   iconSrc="icons/icon-clock.svg"
-                   iconClass="info-modal-clock"
-                   deadline="30 days"
-               />
-                <ExpandableSection
-                    iconSrc="icons/icon-share.svg"
-                    iconClass="info-modal-icon"
-                    initialHeading="Were you served with a respondent's Factum?"
-                    expandedHeading="Filing and service deadline after receiving the Factum"
-                    content={expandedContent}
-                    verticalLine={true}
-                    VLProps={{height:'156px', marginTop: '-45px', marginBottom: '-18px'}}
-                    deadLine="7 days"
-                    helpSection={false}
-                    helpURL={null}
-                    helpURLName={null}
-                    />
-                <ExpandableSection
-                    iconSrc="icons/icon-info.svg"
-                    iconClass="info-modal-icon"
-                    initialHeading="Were you served with a respondent's Transcript Extract Book?"
-                    expandedHeading={" You may also be served a copy of the respondent’s Transcript Extract Book.\n" +
-                    "                                This document is for your awareness only and you do not have to respond\n" +
-                    "                                to it."}
-                    content={null}
-                    verticalLine={false}
-                    deadLine={null}
-                    helpSection={true}
-                    helpURL="https://www.courtofappealbc.ca/respondent-guidebook"
-                    helpURLName="Visit: SRL Guidebook"
-                    />
+                {sections}
             </div>
         </div>);
+    }
+
+    getSections() {
+
+        const sections = this.props.sections.map((sectionProps, key) =>{
+            if (!sectionProps.expandable) {
+                return (
+                    <InfoModalSection
+                        key={key}
+                        sectionHeading={sectionProps.sectionHeading}
+                        iconSrc={sectionProps.iconSrc}
+                        iconClass={sectionProps.iconClass}
+                        deadline={sectionProps.deadline}
+                        lineHeight={sectionProps.lineHeight}
+                        last={sectionProps.last}
+                    />
+                )
+            } else {
+                return (
+                    <ExpandableSection
+                        key={key}
+                        sectionHeading={sectionProps.sectionHeading}
+                        iconSrc={sectionProps.iconSrc}
+                        iconClass={sectionProps.iconClass}
+                        expandedHeading={sectionProps.expandedHeading}
+                        lineHeight={sectionProps.lineHeight}
+                        deadline={sectionProps.deadline}
+                        helpSection={sectionProps.helpSection}
+                        helpURL={sectionProps.helpURL}
+                        helpURLName={sectionProps.helpURLName}
+                        content={sectionProps.content ? this.props.detailedContent : null}
+                        last={sectionProps.last}
+                    />
+
+                )
+            }
+        });
+
+
+       return ( sections );
     }
 
 }

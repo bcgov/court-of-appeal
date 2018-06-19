@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../components/infomodal.css';
+import InfoModalIcon from "./InfoModalIcon";
 
 class ExpandableSection extends Component {
 
@@ -15,24 +16,28 @@ class ExpandableSection extends Component {
     }
 
     render() {
+
         let verticalLine = null, helpSection = null;
-        if (this.props.verticalLine) {
+        if (this.props.lineHeight) {
             verticalLine = (
                 <div className="col col-lg-1 col-md-1 col-sm-1">
-                    <div className="vertical-line" style={this.props.VLProps}/>
+                    <div className="vertical-line" style={{height: this.props.lineHeight}}/>
                 </div>
             );
         }
+
         if (this.props.helpSection) {
             helpSection = (
                 <div>
                     <div className="row ">
-                        <div  style={{fontWeight:"bolder",marginBottom:'20px', }} className="col col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 ">
+                        <div style={{fontWeight: "bolder", marginBottom: '20px', paddingTop: '20px'}}
+                             className="col col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 ">
                             Need help completing a document?
                         </div>
                     </div>
                     <div className="row ">
-                        <div className="col col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 vertical-divider">
+                        <div
+                            className="col col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 vertical-divider">
                             <a href={this.props.helpURL}>{this.props.helpURLName}</a>
                         </div>
                         <div className="col col-lg-4 col-md-4 col-sm-4 vertical-divider info-help-right-cols">
@@ -46,19 +51,30 @@ class ExpandableSection extends Component {
 
             )
         }
+        let sectionClassName = "col col-lg-11 col-md-11 col-sm-11 info-modal-details ";
+        let collapsedSectionClassName = "row ";
+
+        if (!this.props.last) {
+            sectionClassName += "info-modal-divider"
+            collapsedSectionClassName += "info-modal-divider";
+        }
+
+        let deadline = null;
+        if (this.props.deadline) {
+            deadline = <div className="deadline">{this.props.deadline}</div>;
+        }
 
         return (
-            <div>
+            <div className="info-modal-section ">
                 <div className="row">
-                    <div className="col col-lg-1 col-md-1 col-sm-1">
-                        <div shape="circle" className="info-modal-icon-container">
-                            <img src={this.props.iconSrc} className={this.props.iconClass}/>
-                        </div>
-                    </div>
+                    <InfoModalIcon
+                        iconSrc={this.props.iconSrc}
+                        iconClass={this.props.iconClass}
+                    />
                     <div className={this.state.promptClass}>
-                        <div className="row info-modal-divider">
-                            <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading" style={{marginBottom:'20px'}}>
-                                {this.props.initialHeading}
+                        <div className={collapsedSectionClassName}>
+                            <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading ">
+                                {this.props.sectionHeading}
                             </div>
                             <div className="col col-lg-3 col-md-3 toggle-expansion-button" onClick={this.toggleSection}>
                                 <i className="fa fa-plus" />
@@ -66,9 +82,9 @@ class ExpandableSection extends Component {
                         </div>
                     </div>
                     <div className={this.state.replacementHeadingClass}>
-                        <div className="row info-modal-divider">
+                        <div className="row ">
                             <div className=" col col-lg-9 col-md-9 col-sm-9" >
-                                <div className="deadline">{this.props.deadLine}</div>
+                                {deadline}
                                 <div className="info-modal-section-heading">{this.props.expandedHeading}</div>
                             </div>
                             <div className="col col-lg-3 col-md-3 col-sm-3 toggle-expansion-button" onClick={this.toggleSection}>
@@ -79,7 +95,7 @@ class ExpandableSection extends Component {
                 </div>
                 <div className={this.state.detailsClass}>
                     {verticalLine}
-                    <div className="col col-lg-11 col-md-11 col-sm-11 info-modal-section">
+                    <div className={sectionClassName}>
                         {this.props.content}
                         {helpSection}
                     </div>

@@ -3,7 +3,7 @@
     color: white;
     margin: auto;
     padding: 20px;
-    width: 55%;
+    width: 65%;
     font-size: 2em;
     min-width: 800px;
 }
@@ -11,13 +11,40 @@
 .info-modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    padding: 22px 20px 40px 20px;
     border: 1px solid #888;
-    width: 55%;
+    width: 65%;
     min-width: 800px;
 }
+
+.info-modal-section {
+    padding-bottom: 15px;
+    margin-top: -5px;
+}
+.info-modal-details {
+    padding-left: 28px;
+}
+
+.bullet {
+    width: 2px;
+    border-radius: 50%;
+    background-color: #4f4f4f;
+    border-width: thick;
+    padding: 3px;
+    margin-top: 8px;
+}
+.bullet-div {
+    width: 5px;
+    margin-left: 20px;
+    margin-right: -10px;
+}
+.bullet-list-row {
+    margin: 5px;
+    paddingLeft: 20px;
+    font-weight: normal;
+}
 .icon-container-box {
-    padding-top:5px;
+    padding-top:1px;
 }
 .info-modal-icon-container {
     position: relative;
@@ -38,30 +65,36 @@
     margin-right: 5px;
 }
 .info-modal-divider {
-    border-top: 2px solid lightgrey;
-    padding-top: 15px;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 15px;
 }
+
+.info-modal-ol {
+    font-weight: bolder;
+    padding: 10px 10px 10px 0;
+}
+
 .deadline {
     color: red;
     font-size: 3.5rem;
-}
-.info-modal-section {
-    padding: 0 0 15px 30px;
+    margin-bottom: -15px;
+    padding-top: 7px;
 }
 .info-modal-section-heading {
     padding-bottom: 20px;
+    padding-top: 15px;
 }
 .vertical-line {
-    width: 80px;
-    border-left: 7px solid #f2f2f2;
-    height: 100%;
+    width: 7px;
     margin-left: 27px;
-    max-height: 100%;
-    min-height:100%;
+    margin-top: -35px;
+    background: #f2f2f2;
+    height: 100%;
 }
 .vertical-divider {
     border-right: 1px solid grey;
 }
+
 .info-help-right-cols {
     text-align: center;
 }
@@ -77,4 +110,7 @@
     color: grey;
     text-align: left;
     cursor: pointer;
+}
+info-model-content ul {
+
 }
