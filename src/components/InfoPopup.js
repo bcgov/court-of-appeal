@@ -115,7 +115,6 @@ class InfoPopup extends Component {
                 );
             }
         });
-        debugger;
 
         return (
             <div className="row ">
