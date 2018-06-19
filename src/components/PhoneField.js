@@ -10,7 +10,7 @@ class PhoneField extends Component {
         this.isValidPhoneNumber = this.isValidPhoneNumber.bind(this);
         this.clearClass = this.clearClass.bind(this);
         this.state = {
-            className: this.props.value ? "form-field preloaded" : "form field",
+            className: this.props.value ? "form-field preloaded" : "form-field",
             isValid: false,
             title: '',
             errorMessage: ''
