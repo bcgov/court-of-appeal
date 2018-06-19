@@ -7,7 +7,7 @@ class TextField extends Component {
 
         let className = "form-field";
         if (this.props.readOnly) {
-            className = "read-only";
+            className = "read-only-field";
         } else if (this.props.value) {
             className = "form-field preloaded";
         }
