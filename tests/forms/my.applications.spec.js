@@ -103,18 +103,23 @@ describe('MyApplications component', ()=> {
 
     describe('toggleSelected', ()=>{
         let instance;
+        let wrapper;
         beforeEach(()=>{
             cases = [
                 { id:11, data:{} },
                 { id:22, data:{} }
             ];
-            instance = createInstance();
+            wrapper = mount(<MyApplications service={{
+                getMyCases: (params, callback)=> { callback({ cases:cases }); }
+            }}/>);
+            instance = wrapper.instance();
         });
         test('keeps track of selected flag in state', ()=>{
-            instance.toggleSelected(22);    
-            expect(instance.state.cases[1].checked).toEqual(true);
-            instance.toggleSelected(22);    
-            expect(instance.state.cases[1].checked).toEqual(false);
+            wrapper.find('#select-11').prop('onChange')();
+            expect(instance.state.cases[0].checked).toEqual(true);
+            wrapper.find('#select-11').prop('onChange')();
+            expect(instance.state.cases[0].checked).toEqual(false);
+            
         });
         test('resists unknown case', ()=>{
             instance.toggleSelected(33);    

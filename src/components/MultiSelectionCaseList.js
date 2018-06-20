@@ -28,7 +28,7 @@ class MultiSelectionCaseList extends CaseList {
                     {
                         this.props.cases.map((item) =>
                             <tr className="case-item" key={item.id}>
-                                <td><input type="checkbox" value={item.id} checked={item.checked} onChange={this.toggleSelection.bind(this, item)} /></td>
+                                <td><input id={'select-'+item.id} type="checkbox" value={item.id} checked={item.checked} onChange={this.toggleSelection.bind(this, item)} /></td>
                                 <td>
                                     <button className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
                                         <i className="fa fa-pencil"/></button>
