@@ -1,6 +1,6 @@
 import React from 'react';
-import './infopopup.css';
-import InfoPopup from "./InfoPopup";
+import '../infopopup.css';
+import InfoPopup from "../InfoPopup";
 
 class FactumPopup extends InfoPopup {
 

@@ -62,7 +62,7 @@ class InfoPopup extends Component {
         });
        return ( sections );
     }
-
+//** turn this into a separate component
     getListContent(listItems) {
         if (!listItems) {
             return null;

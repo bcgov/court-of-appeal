@@ -1,6 +1,6 @@
 import React from 'react';
 import './journeymap.css';
-import FactumPopup from './FactumPopup';
+import FactumPopup from './infopopups/FactumPopup';
 
 class JourneyMap extends React.Component {
 
