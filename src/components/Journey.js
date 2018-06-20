@@ -89,7 +89,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
-                mapProps: [{coords: "100,270,230,450", function: 'true', alt: "info about the factum"}]
+                mapProps: [{coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
             };
         }, () => {
             this.props.history.push("/", this.state);
@@ -117,7 +117,7 @@ class Journey extends Component {
                 mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
                 mapProps: [
                     {coords: "75,20,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"},
-                    {coords: "465,15,580,210", function: 'true', alt: "info about the factum"}
+                    {coords: "465,15,580,210", function: 'factum', alt: "info about the factum"}
                     ]
             }
         }, () => {
@@ -131,7 +131,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
-                mapProps: [{coords: "85,15,200,210", href: "/form.2.html", alt: "e-file a notice of appearance"}]
+                mapProps: [
+                    {coords: "85,15,200,210", href: "/form.2.html", alt: "e-file a notice of appearance"},
+                    {coords: "285,15,385,190", function: 'replybook', alt: "about the Reply Book"},
+                ]
             }
         }, () => {
             this.props.history.push("/", this.state);

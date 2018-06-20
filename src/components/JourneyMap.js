@@ -1,13 +1,14 @@
 import React from 'react';
 import './journeymap.css';
-import FactumPopup from './FactumPopup';
+import InfoPopup from './InfoPopup';
 
 class JourneyMap extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showInfoModal: false
+            showInfoModal: false,
+            popupType: ''
         };
         this.getAreas = this.getAreas.bind(this);
         this.closeInfoModal = this.closeInfoModal.bind(this);
@@ -26,9 +27,10 @@ class JourneyMap extends React.Component {
                     <map name="journeymap" >
                         {targetAreas}
                     </map>
-                    <FactumPopup
+                    <InfoPopup
                         show={this.state.showInfoModal}
                         close={this.closeInfoModal}
+                        type={this.state.popupType}
                     />
                 </div>
             );
@@ -41,7 +43,7 @@ class JourneyMap extends React.Component {
     getAreas() {
         return this.props.mapProps.map((prop, key) => {
             if (prop.function) {
-                return <area alt={prop.alt}  onClick={this.openInfoModal.bind(this)} key={key} shape="rect" {...prop} />;
+                return <area alt={prop.alt}  onClick={this.openInfoModal.bind(this, prop.function)} key={key} shape="rect" {...prop} />;
             } else {
                 return <area alt={prop.alt} key={key} shape="rect" {...prop}/>
             }
@@ -52,8 +54,9 @@ class JourneyMap extends React.Component {
         this.setState({showInfoModal:false});
     }
 
-    openInfoModal() {
-        this.setState({showInfoModal:true});
+    openInfoModal(popupType) {
+        console.log("popup type", popupType);
+        this.setState({showInfoModal:true, popupType: popupType});
     }
 
 }
