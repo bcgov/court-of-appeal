@@ -7,7 +7,6 @@ import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
-import FileSaver from 'file-saver';
 
 class MyApplications extends Component {
   
@@ -34,6 +33,7 @@ class MyApplications extends Component {
         if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
             this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
         } 
+        this.save = require('./save-file');        
     }
 
     componentDidMount() {
@@ -111,12 +111,11 @@ class MyApplications extends Component {
             this.window.document.getElementById('downloadErrorModal').style.display = 'block';
         }
         else {
-            this.downloadButton.startSpinner();
-            this.service.download(ids, (data) => {
+            this.downloadButton.startSpinner();            
+            this.service.download(ids, (data) => {                
                 this.downloadButton.stopSpinner();    
-                if (!data.error) {  
-                    var blob = new Blob([data], {type: "application/zip"});
-                    FileSaver.saveAs(blob, 'forms.zip');
+                if (!data.error) { 
+                    this.save(data);
                 }        
             });    
         }

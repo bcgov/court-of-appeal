@@ -150,4 +150,40 @@ describe('MyApplications document', ()=> {
             expect(received).toEqual([15, 25]);
         });
     });
+
+    describe('download', ()=>{
+        let idsSent;
+        let document;
+        let instance;
+        let savedData;
+        beforeEach(()=>{
+            cases = [
+                { id: 5, data:{} },
+                { id:15, data:{} },
+                { id:25, data:{} }
+            ]; 
+            document = mount(<MyApplications service={{
+                getMyCases: (params, callback)=> { callback({ cases:cases }); },
+                download: (ids, callback)=> { idsSent=ids, callback({value:42}); }
+            }}/>);
+            instance = document.instance();
+            instance.save = function(data) {
+                savedData = data;
+            }
+        });
+        test('sends the selected ids', ()=>{            
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#download-button').at(0).prop('onClick')();
+
+            expect(idsSent).toEqual([15, 25]);
+        });
+        test('saves the received data', ()=>{            
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#download-button').at(0).prop('onClick')();
+
+            expect(savedData).toEqual({value:42});
+        });
+    });
 });
