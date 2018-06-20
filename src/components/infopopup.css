@@ -17,6 +17,11 @@
     min-width: 800px;
 }
 
+.info-modal-section-heading {
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+
 .info-modal-section {
     padding-bottom: 15px;
     margin-top: -5px;
@@ -33,19 +38,23 @@
     padding: 3px;
     margin-top: 8px;
 }
+
 .bullet-div {
     width: 5px;
     margin-left: 20px;
     margin-right: -10px;
 }
+
 .bullet-list-row {
     margin: 5px;
     paddingLeft: 20px;
     font-weight: normal;
 }
+
 .icon-container-box {
     padding-top:1px;
 }
+
 .info-modal-icon-container {
     position: relative;
     height: 60px;
@@ -54,16 +63,19 @@
     border-width: 20px;
     background-color: #49a25a;
 }
+
 .info-modal-icon {
     height: 60px;
     width: 60px;
     position: absolute;
     padding: 12px;
 }
+
 .info-modal-clock {
     padding: 6px;
     margin-right: 5px;
 }
+
 .info-modal-divider {
     border-bottom: 1px solid lightgrey;
     padding-bottom: 15px;
@@ -80,10 +92,7 @@
     margin-bottom: -15px;
     padding-top: 7px;
 }
-.info-modal-section-heading {
-    padding-bottom: 20px;
-    padding-top: 15px;
-}
+
 .vertical-line {
     width: 7px;
     margin-left: 27px;
@@ -91,6 +100,7 @@
     background: #f2f2f2;
     height: 100%;
 }
+
 .vertical-divider {
     border-right: 1px solid grey;
 }
@@ -98,12 +108,15 @@
 .info-help-right-cols {
     text-align: center;
 }
+
 .content-hidden {
     display: none;
 }
+
 .content-showing {
     display: block;
 }
+
 .toggle-expansion-button {
     font-size: xx-large;
     font-weight: bolder;
@@ -111,6 +124,7 @@
     text-align: left;
     cursor: pointer;
 }
+
 .doc-badge {
     width: 40px;
     height: 20px;

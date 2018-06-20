@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Component }from 'react';
 import '../infopopup.css';
-import InfoPopup from "../InfoPopup";
 
-class FactumPopup extends InfoPopup {
+class FactumPopup extends Component {
 
     constructor(props) {
         super(props);
@@ -28,62 +27,62 @@ class FactumPopup extends InfoPopup {
             "Serve one copy of each document to respondent."
         ];
 
-        this.state = {
-            sections: [{
-                expandable: false,
-                sectionHeading: "Filing and service deadline after filing the Appeal Record",
-                iconSrc: "icons/icon-clock.svg",
-                iconClass: "info-modal-clock",
-                deadline: "30 days",
-                lineHeight: '225px',
-                last: false,
-                contentMap: contentMap
-            }, {
-                expandable: true,
-                sectionHeading: "Were you served with a respondent's Factum?",
-                expandedHeading: "Filing and service deadline after receiving the Factum",
-                iconSrc :"icons/icon-share.svg",
-                iconClass: "info-modal-icon",
-                deadline:"7 days",
-                content: true,
-                lineHeight: '172px',
-                helpSection: false,
-                helpURL: null,
-                helpURLName: null,
-                last: false,
-                contentMap: contentMap2
-            }, {
-                expandable: true,
-                sectionHeading: "Were you served with a respondent's Transcript Extract Book?",
-                expandedHeading: " You may also be served a copy of the respondent’s Transcript Extract Book.  " +
-                " This document is for your awareness only and you do not have to respond to it.",
-                iconSrc: "icons/icon-info.svg",
-                iconClass: "info-modal-icon",
-                deadline: null,
-                content: null,
-                lineHeight: null,
-                VLProps: null,
-                helpSection: true,
-                helpURL: "https://www.courtofappealbc.ca/respondent-guidebook",
-                helpURLName: "Visit: SRL Guidebook",
-                last: true,
-                contentMap: null
-            }]
-        }
+        this.sections = [{
+            expandable: false,
+            sectionHeading: "Filing and service deadline after filing the Appeal Record",
+            iconSrc: "icons/icon-clock.svg",
+            iconClass: "info-modal-clock",
+            deadline: "30 days",
+            lineHeight: '225px',
+            last: false,
+            contentMap: contentMap
+        }, {
+            expandable: true,
+            sectionHeading: "Were you served with a respondent's Factum?",
+            expandedHeading: "Filing and service deadline after receiving the Factum",
+            iconSrc :"icons/icon-share.svg",
+            iconClass: "info-modal-icon",
+            deadline:"7 days",
+            content: true,
+            lineHeight: '172px',
+            helpSection: false,
+            helpURL: null,
+            helpURLName: null,
+            last: false,
+            contentMap: contentMap2
+        }, {
+            expandable: true,
+            sectionHeading: "Were you served with a respondent's Transcript Extract Book?",
+            expandedHeading: " You may also be served a copy of the respondent’s Transcript Extract Book.  " +
+            " This document is for your awareness only and you do not have to respond to it.",
+            iconSrc: "icons/icon-info.svg",
+            iconClass: "info-modal-icon",
+            deadline: null,
+            content: null,
+            lineHeight: null,
+            VLProps: null,
+            helpSection: true,
+            helpURL: "https://www.courtofappealbc.ca/respondent-guidebook",
+            helpURLName: "Visit: SRL Guidebook",
+            last: true,
+            contentMap: null
+        }]
     }
 
     render() {
-        let content = null;
 
-        if (this.props.show) {
-            content =
-                <InfoPopup
-                    title="The Factum and Appeal Book"
-                    sections={this.state.sections}
-                    close={this.props.close}
-                />
-        }
-        return content;
+        let sections = this.props.getSections(this.sections);
+        return (
+            <div id="info-modal" className="modal" style={{display: 'block'}} >
+                <div className="info-modal-title ">
+                    <span id="close-modal" onClick={this.props.close}>&times;</span>
+                    The Factum and Appeal Book
+                </div>
+                <div className="info-modal-content">
+                    {sections}
+                </div>
+            </div>
+        );
     }
 
 }
