@@ -65,3 +65,7 @@ Thumbs.db
 # Webstorm or other IDE generated files #
 #########################################
 .idea
+
+# Sonar generated files #
+#########################################
+.scannerwork
