@@ -7,64 +7,59 @@ configure({ adapter: new Adapter() });
 let DefaultService = require('../../src/service/default.service');
 
 describe('MyApplications component', ()=> {
-    
+        
     test('default service', ()=>{
         let instance = mount(<MyApplications/>).instance();
         
         expect(instance.service instanceof DefaultService).toEqual(true);  
-    });
-
-    describe('fetch cases', ()=>{
-        let cases;
-        let service = {
+    });    
+    let cases;
+    let createInstance = ()=>{
+        let instance = mount(<MyApplications service={{
             getMyCases: (params, callback)=> { callback({ cases:cases }); }
-        };        
+        }}/>).instance();
+        return instance;
+    };
 
-        test('happens automatically', (done)=> {
+    describe('fetch cases', ()=>{               
+        test('happens automatically', ()=> {
             let called = false;
             let service = {
                 getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
             };
             mount(<MyApplications service={service}/>).instance();
-            setTimeout(()=> {
-                expect(called).toEqual(true);
-                done();
-            }, 100);        
+
+            expect(called).toEqual(true);
         });
-        test('unless specified otherwise', (done)=> {
+        test('unless specified otherwise', ()=> {
             let called = false;
-            mount(<MyApplications fetch="false"/>).instance();
-            setTimeout(()=> {
-                expect(called).toEqual(false);
-                done();
-            }, 100);        
+            let service = {
+                getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
+            };
+            mount(<MyApplications fetch="false" service={service}/>).instance();
+            
+            expect(called).toEqual(false);  
         });
-        test('unchecks all cases by default', (done)=>{
-            cases = [{ checked:true, id:42, data:{} }];            
-            let instance = mount(<MyApplications service={service}/>).instance();
-            setTimeout(()=> {
-                expect(instance.state.cases[0].checked).toEqual(false);
-                done();
-            }, 100); 
+        test('unchecks all cases by default', ()=>{
+            cases = [{ checked:true, id:42, data:{} }];  
+            let instance = createInstance();
+            
+            expect(instance.state.cases[0].checked).toEqual(false);                    
         });
-        test('sets displayMyCasesEmptyLabel indicator when case collection is empty', (done)=>{
+        test('sets displayMyCasesEmptyLabel indicator when case collection is empty', ()=>{
             cases = [];
-            let instance = mount(<MyApplications service={service}/>).instance();
-            setTimeout(()=> {
-                expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
-                done();
-            }, 100);
+            let instance = createInstance();
+            
+            expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
         });
-        test('unsets displayMyCasesEmptyLabel indicator when case collection is not empty', (done)=>{
+        test('unsets displayMyCasesEmptyLabel indicator when case collection is not empty', ()=>{
             cases = [
-                { checked:true, id:1, data:{value:'old'} },
-                { checked:true, id:2, data:{value:'old'} }
+                { id:1, data:{value:'old'} },
+                { id:2, data:{value:'old'} }
             ];
-            let instance = mount(<MyApplications service={service}/>).instance();
-            setTimeout(()=> {
-                expect(instance.state.displayMyCasesEmptyLabel).toEqual(false);
-                done();
-            }, 100);
+            let instance = createInstance();
+            
+            expect(instance.state.displayMyCasesEmptyLabel).toEqual(false);
         });
     });
               
@@ -85,28 +80,46 @@ describe('MyApplications component', ()=> {
     describe('capture one case change in the collection of cases in state', ()=>{
         let instance;
         beforeEach(()=>{
-            let cases = [
-                { checked:true, id:1, data:{value:'old'} },
-                { checked:true, id:2, data:{value:'old'} }
+            cases = [
+                { id:15, data:{value:'old'} },
+                { id:42, data:{value:'old'} }
             ];
-            let service = {
-                getMyCases: (params, callback)=> { callback({ cases:cases }); }
-            };
-            instance = mount(<MyApplications service={service}/>).instance();
+            instance = createInstance();
         });
-        test('replaces old value with new value', (done)=>{            
-            instance.updateCases({value:'updated'}, 1);    
-            setTimeout(()=> {
-                expect(instance.state.cases[0].data).toEqual({value:'updated'});
-                done();
-            }, 100); 
+        test('replaces old value with new value', ()=>{            
+            instance.updateCases({value:'updated'}, 15);    
+            expect(instance.state.cases[0].data).toEqual({value:'updated'});
         });
-        test('do not modify the other cases', (done)=>{
-            instance.updateCases({value:'updated'}, 1);
-            setTimeout(()=> {
-                expect(instance.state.cases[1].data).toEqual({value:'old'});
-                done();
-            }, 100); 
+        test('do not modify the other cases', ()=>{
+            instance.updateCases({value:'updated'}, 15);
+            expect(instance.state.cases[1].data).toEqual({value:'old'});
+        });
+        test('resists unknown case', ()=>{
+            instance.updateCases({value:'updated'}, 666);
+            expect(instance.state.cases[0].data).toEqual({value:'old'});
+            expect(instance.state.cases[1].data).toEqual({value:'old'});            
+        });
+    });
+
+    describe('toggleSelected', ()=>{
+        let instance;
+        beforeEach(()=>{
+            cases = [
+                { id:11, data:{} },
+                { id:22, data:{} }
+            ];
+            instance = createInstance();
+        });
+        test('keeps track of selected flag in state', ()=>{
+            instance.toggleSelected(22);    
+            expect(instance.state.cases[1].checked).toEqual(true);
+            instance.toggleSelected(22);    
+            expect(instance.state.cases[1].checked).toEqual(false);
+        });
+        test('resists unknown case', ()=>{
+            instance.toggleSelected(33);    
+            expect(instance.state.cases[0].checked).toEqual(false);
+            expect(instance.state.cases[1].checked).toEqual(false);
         });
     });
 });

@@ -20,6 +20,7 @@ class MyApplications extends Component {
             cases: [],
             displayMyCasesEmptyLabel:true
         };
+        this.findCase = this.findCase.bind(this);
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.archive = this.archive.bind(this);
@@ -54,26 +55,25 @@ class MyApplications extends Component {
         });
     }
 
-    updateCases(data, id) {        
+    findCase(id, then) {
         let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.data = data;
-            }
-        });
-        this.setState({ cases:cases });
+        let found = cases.find((item) => item.id === id );
+        if (found) { 
+            then(found);
+        } 
+    }
+
+    updateCases(data, id) {
+        this.findCase(id, (found)=>{
+            found.data = data; 
+            this.setState({ cases:this.state.cases });
+        });       
     }
 
     toggleSelected(id) {
-        let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.checked = !doc.checked;
-            }
-        });
-        this.setState({
-            cases:cases,
-            displayMyCasesEmptyLabel: (cases.length === 0)
+        this.findCase(id, (found)=>{
+            found.checked = !found.checked; 
+            this.setState({ cases:this.state.cases });
         });
     }
     onlySelected(list, item) {
