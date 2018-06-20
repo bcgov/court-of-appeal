@@ -90,10 +90,10 @@ class InfoPopup extends Component {
                                 { row.times }
                             </div>
                             <div  className="col col-lg-1 col-md-1">
-                                { row.link1 }
+                                <div className="doc-badge"> { row.link1 } </div>
                             </div>
                             <div className="col col-lg-1 col-md-1">
-                                { row.link2 }
+                                <div className="doc-badge"> { row.link2 } </div>
                             </div>
                         </div>
                     )
@@ -115,7 +115,6 @@ class InfoPopup extends Component {
                 );
             }
         });
-        debugger;
 
         return (
             <div className="row ">
