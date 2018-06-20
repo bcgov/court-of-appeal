@@ -54,14 +54,14 @@ class MyApplications extends Component {
         });
     }
 
-    updateCases(data, id) {
+    updateCases(data, id) {        
         let cases = this.state.cases;
         _.forEach(cases, (doc) => {
             if (doc.id === id) {
                 doc.data = data;
             }
         });
-        this.setState(update(this.state, {cases: {$set: cases}}));
+        this.setState({ cases:cases });
     }
 
     toggleSelected(id) {
