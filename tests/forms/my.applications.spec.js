@@ -6,7 +6,7 @@ import MyApplications from '../../src/forms/my.applications';
 configure({ adapter: new Adapter() });
 let DefaultService = require('../../src/service/default.service');
 
-describe('MyApplications component', ()=> {
+describe('MyApplications document', ()=> {
         
     test('default service', ()=>{
         let instance = mount(<MyApplications/>).instance();
@@ -103,21 +103,21 @@ describe('MyApplications component', ()=> {
 
     describe('toggleSelected', ()=>{
         let instance;
-        let wrapper;
+        let document;
         beforeEach(()=>{
             cases = [
                 { id:11, data:{} },
                 { id:22, data:{} }
             ];
-            wrapper = mount(<MyApplications service={{
+            document = mount(<MyApplications service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); }
             }}/>);
-            instance = wrapper.instance();
+            instance = document.instance();
         });
         test('keeps track of selected flag in state', ()=>{
-            wrapper.find('#select-11').prop('onChange')();
+            document.find('#select-11').prop('onChange')();
             expect(instance.state.cases[0].checked).toEqual(true);
-            wrapper.find('#select-11').prop('onChange')();
+            document.find('#select-11').prop('onChange')();
             expect(instance.state.cases[0].checked).toEqual(false);
             
         });
@@ -125,6 +125,29 @@ describe('MyApplications component', ()=> {
             instance.toggleSelected(33);    
             expect(instance.state.cases[0].checked).toEqual(false);
             expect(instance.state.cases[1].checked).toEqual(false);
+        });
+    });
+
+    describe('archive', ()=>{
+        let received;
+        let document;
+        beforeEach(()=>{
+            cases = [
+                { id: 5, data:{} },
+                { id:15, data:{} },
+                { id:25, data:{} }
+            ];
+            document = mount(<MyApplications service={{
+                getMyCases: (params, callback)=> { callback({ cases:cases }); },
+                archiveCases: (ids, callback)=> { received=ids, callback(); }
+            }}/>);
+        });
+        test('sends the selected ids', ()=>{            
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#archive-button').at(0).prop('onClick')();
+
+            expect(received).toEqual([15, 25]);
         });
     });
 });
