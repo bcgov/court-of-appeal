@@ -8,6 +8,7 @@
 
 #active-forms table tr.header {
     border-bottom: 1px solid black;
+    white-space: nowrap;
 }
 
 #active-forms table td.near-deadline {
