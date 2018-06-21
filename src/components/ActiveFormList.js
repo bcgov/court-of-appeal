@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import '../forms/active.forms.css';
 import DefaultService from '../service/default.service.js';
 import CaseList from '../components/CaseList.js';
-import _ from 'lodash';
-import update from 'immutability-helper';
 import renderCases from './cases.renderer';
+import findCaseById from '../helpers/find.case.by.id';
 
 class ActiveFormList extends Component {
 
@@ -37,19 +36,13 @@ class ActiveFormList extends Component {
                 displayMyCasesEmptyLabel: (cases.length === 0)
             });
         });
-    }
+    }    
 
-    /**
-     * Update the cases in the state so we don't need to call the api to get the updated cases after a successful update.
-     */
     updateCases(data, id) {
-        let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.data = data;
-            }
-        });
-        this.setState(update(this.state, {cases: {$set: cases}}));
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
+            found.data = data; 
+            this.setState({ cases:this.state.cases });
+        });       
     }
 
     render() {

@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import './active.forms.css';
 import DefaultService from '../service/default.service.js';
 import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
-import _ from 'lodash';
-import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
-import FileSaver from 'file-saver';
+import findCaseById from '../helpers/find.case.by.id';
 
 class MyApplications extends Component {
   
@@ -18,8 +16,10 @@ class MyApplications extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             cases: [],
-            displayMyCasesEmptyLabel:true
-        };
+            displayMyCasesEmptyLabel:true,
+            displayErrorDialog:false,
+            displayAreYouSureDialog:false
+        };        
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.archive = this.archive.bind(this);
@@ -33,6 +33,7 @@ class MyApplications extends Component {
         if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
             this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
         } 
+        this.save = require('./save-file');        
     }
 
     componentDidMount() {
@@ -55,68 +56,60 @@ class MyApplications extends Component {
     }
 
     updateCases(data, id) {
-        let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.data = data;
-            }
-        });
-        this.setState(update(this.state, {cases: {$set: cases}}));
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
+            found.data = data; 
+            this.setState({ cases:this.state.cases });
+        });       
     }
 
     toggleSelected(id) {
-        let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.checked = !doc.checked;
-            }
-        });
-        this.setState({
-            cases:cases,
-            displayMyCasesEmptyLabel: (cases.length === 0)
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
+            found.checked = !found.checked; 
+            this.setState({ cases:this.state.cases });
         });
     }
+    
     onlySelected(list, item) {
         if (item.checked) {
             list.push(item.id);
         }
         return list;
     }
+
     archive() {
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         if (idsToArchive.length > 0) {
-            this.window.document.getElementById('are-you-sure-modal').style.display = 'block';
+            this.setState({ displayAreYouSureDialog:true });
         }
     }
     closeConfirmArchiveModal() {
-        this.window.document.getElementById('are-you-sure-modal').style.display = 'none';
+        this.setState({ displayAreYouSureDialog:false });
     }
     yesArchive() {
         this.closeConfirmArchiveModal();
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
-        if (idsToArchive.length > 0) {
-            this.archiveButton.startSpinner();
-            this.service.archiveCases(idsToArchive, (data) => {
-                this.archiveButton.stopSpinner();
-                this.fetchCases();
-            });
-        }
+        this.archiveButton.startSpinner();
+        this.service.archiveCases(idsToArchive, (data) => {
+            this.archiveButton.stopSpinner();
+            this.fetchCases();
+        });
     }
+
     closeErrorModal() {
-        this.window.document.getElementById('downloadErrorModal').style.display = 'none';
+        this.setState({ displayErrorDialog:false });
     }
+
     download() {
         let ids = this.state.cases.reduce(this.onlySelected, []);
         if (ids.length > this.maxFileDownload) {
-            this.window.document.getElementById('downloadErrorModal').style.display = 'block';
+            this.setState({ displayErrorDialog:true });
         }
         else {
-            this.downloadButton.startSpinner();
-            this.service.download(ids, (data) => {
+            this.downloadButton.startSpinner();            
+            this.service.download(ids, (data) => {                
                 this.downloadButton.stopSpinner();    
-                if (!data.error) {  
-                    var blob = new Blob([data], {type: "application/zip"});
-                    FileSaver.saveAs(blob, 'forms.zip');
+                if (!data.error) { 
+                    this.save(data);
                 }        
             });    
         }
@@ -158,7 +151,7 @@ class MyApplications extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="downloadErrorModal" ref={ (element)=> {this.errorModal = element }}>
+                <div id="downloadErrorModal" style={{ display:this.state.displayErrorDialog?'block':'none' }}>
                     <div className="download-error-modal-title">
                         <span id="download-error-close-modal" onClick={this.closeErrorModal}>&times;</span>
                         Download unavailable
@@ -169,7 +162,7 @@ class MyApplications extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="are-you-sure-modal" ref={ (element)=> {this.confirmArchiveModal = element }}>
+                <div id="are-you-sure-modal" style={{ display:this.state.displayAreYouSureDialog?'block':'none'}}>
                     <div className="are-you-sure-modal-header">                        
                         <div className="are-you-sure-modal-title" >Please Confirm</div>
                         <div className="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</div>
