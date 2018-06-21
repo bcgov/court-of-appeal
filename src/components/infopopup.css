@@ -115,12 +115,10 @@
     height: 100%;
 }
 
-.vertical-divider {
-    border-right: 1px solid grey;
-}
-
-.info-help-right-cols {
-    text-align: center;
+.help-contacts {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
 }
 
 .content-hidden {
