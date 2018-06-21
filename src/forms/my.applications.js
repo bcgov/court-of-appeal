@@ -5,6 +5,7 @@ import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
+import findCaseById from '../helpers/find.case.by.id';
 
 class MyApplications extends Component {
   
@@ -18,8 +19,7 @@ class MyApplications extends Component {
             displayMyCasesEmptyLabel:true,
             displayErrorDialog:false,
             displayAreYourSureDialog:false
-        };
-        this.findCase = this.findCase.bind(this);
+        };        
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.archive = this.archive.bind(this);
@@ -55,23 +55,15 @@ class MyApplications extends Component {
         });
     }
 
-    findCase(id, then) {
-        let cases = this.state.cases;
-        let found = cases.find((item) => item.id === id );
-        if (found) { 
-            then(found);
-        } 
-    }
-
     updateCases(data, id) {
-        this.findCase(id, (found)=>{
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
             found.data = data; 
             this.setState({ cases:this.state.cases });
         });       
     }
 
     toggleSelected(id) {
-        this.findCase(id, (found)=>{
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
             found.checked = !found.checked; 
             this.setState({ cases:this.state.cases });
         });
