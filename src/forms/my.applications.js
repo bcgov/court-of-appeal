@@ -18,7 +18,7 @@ class MyApplications extends Component {
             cases: [],
             displayMyCasesEmptyLabel:true,
             displayErrorDialog:false,
-            displayAreYourSureDialog:false
+            displayAreYouSureDialog:false
         };        
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
@@ -79,11 +79,11 @@ class MyApplications extends Component {
     archive() {
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         if (idsToArchive.length > 0) {
-            this.setState({ displayAreYourSureDialog:true });
+            this.setState({ displayAreYouSureDialog:true });
         }
     }
     closeConfirmArchiveModal() {
-        this.setState({ displayAreYourSureDialog:false });
+        this.setState({ displayAreYouSureDialog:false });
     }
     yesArchive() {
         this.closeConfirmArchiveModal();
@@ -162,7 +162,7 @@ class MyApplications extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="are-you-sure-modal" style={{ display:this.state.displayAreYourSureDialog?'block':'none'}}>
+                <div id="are-you-sure-modal" style={{ display:this.state.displayAreYouSureDialog?'block':'none'}}>
                     <div className="are-you-sure-modal-header">                        
                         <div className="are-you-sure-modal-title" >Please Confirm</div>
                         <div className="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</div>

@@ -145,18 +145,28 @@ describe('MyApplications document', ()=> {
             received = undefined;
             instance = document.instance();
         });
+        test('asks for confirmation', ()=>{            
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#archive-button').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.find('#are-you-sure-modal').prop('style').display).toEqual('block');
+        });
         test('sends the selected ids', ()=>{            
             document.find('#select-15').prop('onChange')();
             document.find('#select-25').prop('onChange')();   
             document.find('#archive-button').at(0).prop('onClick')();
             document.find('#yes-archive').at(0).prop('onClick')();
+            document.update();
 
+            expect(document.find('#are-you-sure-modal').prop('style').display).toEqual('none');
             expect(received).toEqual([15, 25]);
         });
         test('does nothing when no form is selected', ()=>{
             document.find('#archive-button').at(0).prop('onClick')();
             
-            expect(document.find('#are-you-sure-modal').at(0).prop('style').display).toEqual('none');            
+            expect(document.find('#are-you-sure-modal').prop('style').display).toEqual('none');
             expect(received).toEqual(undefined);
         });
     });
