@@ -18,11 +18,11 @@ class ReplyBookPopup extends Component {
 
         this.sections = [{
             expandable: false,
-            sectionHeading: "Were you served with a Notice of Motion for Leave to Appeal and a Motion Book? " +
-            " File a Reply Book at least 5 days before the hearing.",
-            iconSrc: "icons/icon-clock.svg",
+            sectionHeading: "Were you served with a Notice of Motion for Leave to Appeal and a Motion Book? ",
+            iconSrc: "icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadline: " 5 days ",
+            deadline: " at least 5 days ",
+            deadlinePhrase: { first: "File a Reply Book ", last: " before the hearing." },
             lineHeight: null,
             last: true,
             contentMap: contentMap,

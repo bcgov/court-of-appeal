@@ -1,7 +1,7 @@
 import React, { Component }from 'react';
 import '../infopopup.css';
 
-class FactumPopup extends Component {
+class AppellantFactumPopup extends Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ class FactumPopup extends Component {
                 line: "Complete either the .DOCs or .PDFs below:",
                 rows: [
                     { description: "Factum (Form 10)", times: "4 x", link1: "DOC", link2: "PDF" },
-                    { description: " Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "DOC", link2: "PDF" },
+                    { description: "*Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "DOC", link2: "PDF" },
                     { description: "Appeal Book (Form 12)", times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
@@ -20,7 +20,7 @@ class FactumPopup extends Component {
 
         let contentMap2 = [
             {
-                line: "If you would like to reply, please complete either the .DOC or .PDF document below:",
+                line: "IF you would like to reply, please complete either the .DOC or .PDF document below:",
                 rows: [{description: "Reply (Form 11)", times: "4x", link1: "DOC", link2: "PDF"}]
             },
             "File the indicated number of copies to the registry.",
@@ -28,23 +28,28 @@ class FactumPopup extends Component {
         ];
 
         this.sections = [{
-            expandable: false,
-            sectionHeading: "Filing and service deadline after filing the Appeal Record",
-            iconSrc: "icons/icon-clock.svg",
-            iconClass: "info-modal-clock",
-            deadline: "30 days",
-            lineHeight: '225px',
+            expandable: true,
+            sectionHeading: "Have you filed an Appeal Record ?",
+            iconSrc: "icons/icon-share.svg",
+            iconClass: "info-modal-icon",
+            deadlinePhrase: {first: "File a Factum and Appeal Book ", last: " of filing an Appeal Record."},
+            helpSection: false,
+            helpURL: null,
+            helpURLName: null,
+            deadline: " within 30 days ",
+            lineHeight: '243px',
             last: false,
+            expanded: true,
             contentMap: contentMap
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Factum?",
-            expandedHeading: "Filing and service deadline after receiving the Factum",
             iconSrc :"icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadline:"7 days",
+            deadline:" within 7 days ",
+            deadlinePhrase: {first: "File and serve a Reply ", last: " of receiving a Respondent's Factum."},
             content: true,
-            lineHeight: '172px',
+            lineHeight: '187px',
             helpSection: false,
             helpURL: null,
             helpURLName: null,
@@ -58,7 +63,8 @@ class FactumPopup extends Component {
             iconSrc: "icons/icon-info.svg",
             iconClass: "info-modal-icon",
             deadline: null,
-            content: null,
+            content: " You may also be served a copy of the respondent’s Transcript Extract Book.  " +
+            " This document is for your awareness only and you do not have to respond to it.",
             lineHeight: null,
             VLProps: null,
             helpSection: true,
@@ -86,4 +92,4 @@ class FactumPopup extends Component {
     }
 
 }
-export default FactumPopup;
+export default AppellantFactumPopup;
