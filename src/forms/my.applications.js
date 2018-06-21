@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './active.forms.css';
 import DefaultService from '../service/default.service.js';
 import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
-import _ from 'lodash';
-import update from 'immutability-helper';
 import renderCases from '../components/cases.renderer';
 import './my.applications.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';

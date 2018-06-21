@@ -55,7 +55,7 @@ class FormButtonBar extends React.Component {
                     </button>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -68,7 +68,7 @@ class FormButtonBar extends React.Component {
                     </button>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -88,7 +88,7 @@ class FormButtonBar extends React.Component {
                     </SpinnerButton>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -101,7 +101,7 @@ class FormButtonBar extends React.Component {
                     </button>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -119,7 +119,7 @@ class FormButtonBar extends React.Component {
                     </button>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -137,7 +137,7 @@ class FormButtonBar extends React.Component {
                     </button>
                 </div>
             );
-        };
+        }
         return button;
     }
 
@@ -205,7 +205,7 @@ class FormButtonBar extends React.Component {
                     </SpinnerButton>
                 </div>
             );
-        };
+        }
         return button;
     }
 
