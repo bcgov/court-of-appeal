@@ -131,6 +131,7 @@ describe('MyApplications document', ()=> {
     describe('archive', ()=>{
         let received;
         let document;
+        let instance;
         beforeEach(()=>{
             cases = [
                 { id: 5, data:{} },
@@ -141,13 +142,22 @@ describe('MyApplications document', ()=> {
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
                 archiveCases: (ids, callback)=> { received=ids, callback(); }
             }}/>);
+            received = undefined;
+            instance = document.instance();
         });
         test('sends the selected ids', ()=>{            
             document.find('#select-15').prop('onChange')();
             document.find('#select-25').prop('onChange')();   
             document.find('#archive-button').at(0).prop('onClick')();
+            document.find('#yes-archive').at(0).prop('onClick')();
 
             expect(received).toEqual([15, 25]);
+        });
+        test('does nothing when no form is selected', ()=>{
+            document.find('#archive-button').at(0).prop('onClick')();
+            
+            expect(document.find('#are-you-sure-modal').at(0).prop('style').display).toEqual('none');            
+            expect(received).toEqual(undefined);
         });
     });
 

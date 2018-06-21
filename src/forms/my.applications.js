@@ -16,7 +16,8 @@ class MyApplications extends Component {
             fetch: props.fetch !== 'false',
             cases: [],
             displayMyCasesEmptyLabel:true,
-            displayErrorDialog:false
+            displayErrorDialog:false,
+            displayAreYourSureDialog:false
         };
         this.findCase = this.findCase.bind(this);
         this.fetchCases = this.fetchCases.bind(this);
@@ -86,22 +87,20 @@ class MyApplications extends Component {
     archive() {
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         if (idsToArchive.length > 0) {
-            this.window.document.getElementById('are-you-sure-modal').style.display = 'block';
+            this.setState({ displayAreYourSureDialog:true });
         }
     }
     closeConfirmArchiveModal() {
-        this.window.document.getElementById('are-you-sure-modal').style.display = 'none';
+        this.setState({ displayAreYourSureDialog:false });
     }
     yesArchive() {
         this.closeConfirmArchiveModal();
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
-        if (idsToArchive.length > 0) {
-            this.archiveButton.startSpinner();
-            this.service.archiveCases(idsToArchive, (data) => {
-                this.archiveButton.stopSpinner();
-                this.fetchCases();
-            });
-        }
+        this.archiveButton.startSpinner();
+        this.service.archiveCases(idsToArchive, (data) => {
+            this.archiveButton.stopSpinner();
+            this.fetchCases();
+        });
     }
 
     closeErrorModal() {
@@ -171,7 +170,7 @@ class MyApplications extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="are-you-sure-modal" ref={ (element)=> {this.confirmArchiveModal = element }}>
+                <div id="are-you-sure-modal" style={{ display:this.state.displayAreYourSureDialog?'block':'none'}}>
                     <div className="are-you-sure-modal-header">                        
                         <div className="are-you-sure-modal-title" >Please Confirm</div>
                         <div className="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</div>
