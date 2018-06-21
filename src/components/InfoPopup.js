@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
 import ExpandableInfoPopupSection from './ExpandableInfoPopupSection';
-import FactumPopup from "./infopopups/FactumPopup";
+import AppellantFactumPopup from "./infopopups/AppellantFactumPopup";
 import ReplyBookPopup from "./infopopups/ReplyBookPopup";
 
 class InfoPopup extends Component {
@@ -11,7 +11,7 @@ class InfoPopup extends Component {
         if (this.props.show) {
             switch (this.props.type) {
                 case 'factum' :
-                    return <FactumPopup
+                    return <AppellantFactumPopup
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                     />;
@@ -34,36 +34,17 @@ class InfoPopup extends Component {
             if (!sectionProps.expandable) {
                 return (
                     <InfoPopupSection
-                        key={key}
-                        sectionHeading={sectionProps.sectionHeading}
-                        iconSrc={sectionProps.iconSrc}
-                        iconClass={sectionProps.iconClass}
-                        deadline={sectionProps.deadline}
-                        lineHeight={sectionProps.lineHeight}
-                        last={sectionProps.last}
-                        helpSection={sectionProps.helpSection}
-                        helpURL={sectionProps.helpURL}
-                        helpURLName={sectionProps.helpURLName}
-                        contentMap={sectionProps.contentMap}
-                        getListContent={this.getListContent.bind(this)}
+                        key={ key }
+                        { ...sectionProps }
+                        getListContent={ this.getListContent.bind(this) }
                     />
                 )
             } else {
                 return (
                     <ExpandableInfoPopupSection
-                        key={key}
-                        sectionHeading={sectionProps.sectionHeading}
-                        iconSrc={sectionProps.iconSrc}
-                        iconClass={sectionProps.iconClass}
-                        expandedHeading={sectionProps.expandedHeading}
-                        lineHeight={sectionProps.lineHeight}
-                        deadline={sectionProps.deadline}
-                        helpSection={sectionProps.helpSection}
-                        helpURL={sectionProps.helpURL}
-                        helpURLName={sectionProps.helpURLName}
-                        last={sectionProps.last}
-                        contentMap={sectionProps.contentMap}
-                        getListContent={this.getListContent.bind(this)}
+                        key={ key }
+                        { ...sectionProps }
+                        getListContent={ this.getListContent.bind(this) }
                     />
 
                 )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './infopopup.css';
 import InfoPopupIcon from './InfoPopupIcon';
+import Deadline from './infopopups/Deadline';
 
 class InfoPopupSection extends Component {
 
@@ -8,7 +9,10 @@ class InfoPopupSection extends Component {
 
         let deadline = null;
         if (this.props.deadline) {
-            deadline = <div className="deadline">{this.props.deadline}</div>;
+            deadline = <Deadline
+                deadlinePhrase={this.props.deadlinePhrase}
+                deadline={this.props.deadline}
+            />
         }
 
         let verticalLine = null;
@@ -62,10 +66,10 @@ class InfoPopupSection extends Component {
                     <div className="col col-lg-11 col-md-11 col sm-11 top-deadline">
                         <div className="row">
                             <div className="col col-lg-12 col-md-12 col-sm-12">
-                                {deadline}
                                 <div className="info-modal-section-heading">
                                     {this.props.sectionHeading}
                                 </div>
+                                {deadline}
                             </div>
                         </div>
                     </div>

@@ -55,7 +55,6 @@ class JourneyMap extends React.Component {
     }
 
     openInfoModal(popupType) {
-        console.log("popup type", popupType);
         this.setState({showInfoModal:true, popupType: popupType});
     }
 

@@ -3,7 +3,7 @@
     color: white;
     margin: auto;
     padding: 20px;
-    width: 65%;
+    width: 60%;
     font-size: 2em;
     min-width: 800px;
 }
@@ -13,13 +13,15 @@
     margin: auto;
     padding: 22px 20px 40px 20px;
     border: 1px solid #888;
-    width: 65%;
+    width: 60%;
     min-width: 800px;
+    font-size: 16px;
 }
 
 .info-modal-section-heading {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     padding-top: 15px;
+    font-weight: bolder;
 }
 
 .info-modal-section {
@@ -46,7 +48,7 @@
 }
 
 .bullet-list-row {
-    margin: 5px;
+    margin: 5px 0 5px 5px;
     paddingLeft: 20px;
     font-weight: normal;
 }
@@ -83,14 +85,26 @@
 
 .info-modal-ol {
     font-weight: bolder;
-    padding: 10px 10px 10px 0;
+    padding: 25px 10px 10px 0;
 }
 
 .deadline {
+    display: flex;
+    flex-flow: wrap;
+    align-content: space-evenly;
+    background-color: #ffe9b0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.deadline-quantity {
     color: red;
-    font-size: 3.5rem;
-    margin-bottom: -15px;
-    padding-top: 7px;
+    padding: 0 5px;
+}
+
+.deadline-alert {
+    font-size: 2.2rem;
+    margin-right: 15px;
 }
 
 .vertical-line {
@@ -121,7 +135,7 @@
     font-size: xx-large;
     font-weight: bolder;
     color: grey;
-    text-align: left;
+    text-align: right;
     cursor: pointer;
 }
 

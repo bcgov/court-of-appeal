@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './infopopup.css';
 import InfoPopupIcon from "./InfoPopupIcon";
+import Deadline from './infopopups/Deadline';
 
 class ExpandableInfoPopupSection extends Component {
 
     constructor(props) {
         super(props);
-        this.state= this.initialState();
+        this.state= this.initialState(props.expanded);
         this.initialState= this.initialState.bind(this);
         this.toggleSection = this.toggleSection.bind(this);
     }
@@ -63,7 +64,10 @@ class ExpandableInfoPopupSection extends Component {
 
         let deadline = null;
         if (this.props.deadline) {
-            deadline = <div className="deadline">{this.props.deadline}</div>;
+            deadline = <Deadline
+                        deadlinePhrase={this.props.deadlinePhrase}
+                        deadline={this.props.deadline}
+                />
         }
 
         return (
@@ -86,11 +90,17 @@ class ExpandableInfoPopupSection extends Component {
                     <div className={this.state.replacementHeadingClass}>
                         <div className="row ">
                             <div className=" col col-lg-9 col-md-9 col-sm-9" >
-                                {deadline}
-                                <div className="info-modal-section-heading">{this.props.expandedHeading}</div>
+                                <div className="info-modal-section-heading">
+                                    {this.props.sectionHeading}
+                                 </div>
                             </div>
                             <div className="col col-lg-3 col-md-3 col-sm-3 toggle-expansion-button" onClick={this.toggleSection}>
                                 <i className="fa fa-minus" />
+                            </div>
+                        </div>
+                        <div className="row ">
+                            <div className=" col col-lg-12 col-md-12 col-sm-12" >
+                                {deadline}
                             </div>
                         </div>
                     </div>
@@ -132,13 +142,22 @@ class ExpandableInfoPopupSection extends Component {
 
     }
 
-    initialState() {
-        return {
-            promptClass: "col col-lg-11 col-md-11 content-showing",
-            replacementHeadingClass: "col col-lg-11 col-md-11 content-hidden",
-            detailsClass: "row content-hidden",
-            expanded: false
-        };
+    initialState(expandIt) {
+        if (expandIt) {
+            return {
+                promptClass: "col col-lg-11 col-md-11 content-hidden",
+                replacementHeadingClass: "col col-lg-11 col-md-11 content-showing",
+                detailsClass: "row content-showing",
+                expanded: true
+            };
+        } else {
+            return {
+                promptClass: "col col-lg-11 col-md-11 content-showing",
+                replacementHeadingClass: "col col-lg-11 col-md-11 content-hidden",
+                detailsClass: "row content-hidden",
+                expanded: false
+            };
+        }
     }
 }
 export default ExpandableInfoPopupSection;
