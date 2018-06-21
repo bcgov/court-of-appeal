@@ -170,17 +170,17 @@ class MyApplications extends Component {
                     </div>
                 </div>
                 <div id="are-you-sure-modal" ref={ (element)=> {this.confirmArchiveModal = element }}>
-                    <div className="are-you-sure-modal-title">
-                        <span id="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</span>
-                        Please confirm
+                    <div className="are-you-sure-modal-header">                        
+                        <div className="are-you-sure-modal-title" >Please Confirm</div>
+                        <div className="are-you-sure-close-modal" onClick={this.closeConfirmArchiveModal}>&times;</div>
                     </div>
                     <div className="are-you-sure-modal-content">
                         <div>
-                            You are about to archive those forms
+                            Would you like to archive these forms?
                         </div>      
-                        <div className="row text-center">                  
-                            <button id="yes-archive" className="btn btn-primary round-borders yes-archive" onClick={this.yesArchive}>archive</button>
-                            <button id="cancel-archive" className="btn btn-primary round-borders cancel-archive" onClick={this.closeConfirmArchiveModal}>cancel</button>
+                        <div className="row text-center">                                                                          
+                            <button id="cancel-archive" className="btn btn-primary round-borders cancel-archive" onClick={this.closeConfirmArchiveModal}>Cancel</button>
+                            <button id="yes-archive" className="btn btn-primary round-borders yes-archive" onClick={this.yesArchive}>Archive</button>
                         </div>
                     </div>
                 </div>
