@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Help from "./Help";
 
 class ReplyBookPopup extends Component {
 
@@ -25,10 +26,7 @@ class ReplyBookPopup extends Component {
             deadlinePhrase: { first: "File a Reply Book ", last: " before the hearing." },
             lineHeight: null,
             last: true,
-            contentMap: contentMap,
-            helpSection: true,
-            helpURL: "https://www.courtofappealbc.ca/respondent-guidebook",
-            helpURLName: "Visit: SRL Guidebook",
+            contentMap: contentMap
         }]
     }
 
@@ -41,6 +39,10 @@ class ReplyBookPopup extends Component {
                 </div>
                 <div className="info-modal-content">
                     {this.props.getSections(this.sections)}
+                    <Help
+                        URL="https://www.courtofappealbc.ca/respondent-guidebook"
+                        URLName="Visit: SRL Guidebook"
+                    />
                 </div>
             </div>
         );

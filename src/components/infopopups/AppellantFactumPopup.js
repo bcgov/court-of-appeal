@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import '../infopopup.css';
+import Help from './Help';
 
 class AppellantFactumPopup extends Component {
 
@@ -33,9 +34,6 @@ class AppellantFactumPopup extends Component {
             iconSrc: "icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "File a Factum and Appeal Book ", last: " of filing an Appeal Record."},
-            helpSection: false,
-            helpURL: null,
-            helpURLName: null,
             deadline: " within 30 days ",
             lineHeight: '243px',
             last: false,
@@ -50,9 +48,6 @@ class AppellantFactumPopup extends Component {
             deadlinePhrase: {first: "File and serve a Reply ", last: " of receiving a Respondent's Factum."},
             content: true,
             lineHeight: '187px',
-            helpSection: false,
-            helpURL: null,
-            helpURLName: null,
             last: false,
             contentMap: contentMap2
         }, {
@@ -67,9 +62,6 @@ class AppellantFactumPopup extends Component {
             " This document is for your awareness only and you do not have to respond to it.",
             lineHeight: null,
             VLProps: null,
-            helpSection: true,
-            helpURL: "https://www.courtofappealbc.ca/respondent-guidebook",
-            helpURLName: "Visit: SRL Guidebook",
             last: true,
             contentMap: null
         }]
@@ -86,7 +78,12 @@ class AppellantFactumPopup extends Component {
                 </div>
                 <div className="info-modal-content">
                     {sections}
+                    <Help
+                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
+                        URLName="Visit: SRL Guidebook"
+                    />
                 </div>
+
             </div>
         );
     }
