@@ -17,6 +17,7 @@ class ActiveFormList extends Component {
             displayMyCasesEmptyLabel:true
         };
         this.fetchCases = this.fetchCases.bind(this);
+        this.findCase = this.findCase.bind(this);
         this.updateCases = this.updateCases.bind(this);
     }
 
@@ -39,17 +40,19 @@ class ActiveFormList extends Component {
         });
     }
 
-    /**
-     * Update the cases in the state so we don't need to call the api to get the updated cases after a successful update.
-     */
-    updateCases(data, id) {
+    findCase(id, then) {
         let cases = this.state.cases;
-        _.forEach(cases, (doc) => {
-            if (doc.id === id) {
-                doc.data = data;
-            }
-        });
-        this.setState(update(this.state, {cases: {$set: cases}}));
+        let found = cases.find((item) => item.id === id );
+        if (found) { 
+            then(found);
+        } 
+    }
+
+    updateCases(data, id) {
+        this.findCase(id, (found)=>{
+            found.data = data; 
+            this.setState({ cases:this.state.cases });
+        });       
     }
 
     render() {

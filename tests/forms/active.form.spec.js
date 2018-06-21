@@ -1,16 +1,19 @@
 require('../support/fake.dom');
 import React from 'react';
-import renderer from "react-test-renderer";
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ActiveFormList from '../../src/components/ActiveFormList';
-let LocalServer = require('../support/local.server');
 import moment from 'moment';
-
 configure({ adapter: new Adapter() });
+let DefaultService = require('../../src/service/default.service');
 
 describe('Active forms section', function() {
     
+    test('default service', ()=>{
+        let instance = mount(<ActiveFormList/>).instance();
+        
+        expect(instance.service instanceof DefaultService).toEqual(true);  
+    });
     test('transforms the data for the list', function(done) {
         let activeFormList = mount(
             <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases:[
@@ -68,5 +71,36 @@ describe('Active forms section', function() {
         emptylist.fetchCases();
     
         expect(emptylist.state.displayMyCasesEmptyLabel).toEqual(true);
+    });
+
+    let cases;
+    let createInstance = ()=>{
+        let instance = mount(<ActiveFormList service={{
+            getMyCases: (params, callback)=> { callback({ cases:cases }); }
+        }}/>).instance();
+        return instance;
+    };
+    describe('capture one case change in the collection of cases in state', ()=>{
+        let instance;
+        beforeEach(()=>{
+            cases = [
+                { id:15, data:{value:'old'} },
+                { id:42, data:{value:'old'} }
+            ];
+            instance = createInstance();
+        });
+        test('replaces old value with new value', ()=>{            
+            instance.updateCases({value:'updated'}, 15);    
+            expect(instance.state.cases[0].data).toEqual({value:'updated'});
+        });
+        test('do not modify the other cases', ()=>{
+            instance.updateCases({value:'updated'}, 15);
+            expect(instance.state.cases[1].data).toEqual({value:'old'});
+        });
+        test('resists unknown case', ()=>{
+            instance.updateCases({value:'updated'}, 666);
+            expect(instance.state.cases[0].data).toEqual({value:'old'});
+            expect(instance.state.cases[1].data).toEqual({value:'old'});            
+        });
     });
 });
