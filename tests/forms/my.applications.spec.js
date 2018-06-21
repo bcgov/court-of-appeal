@@ -156,6 +156,7 @@ describe('MyApplications document', ()=> {
         let document;
         let instance;
         let savedData;
+        let answer = {value:42};
         beforeEach(()=>{
             cases = [
                 { id: 5, data:{} },
@@ -164,12 +165,14 @@ describe('MyApplications document', ()=> {
             ]; 
             document = mount(<MyApplications service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
-                download: (ids, callback)=> { idsSent=ids, callback({value:42}); }
+                download: (ids, callback)=> { idsSent=ids, callback(answer); }
             }}/>);
             instance = document.instance();
             instance.save = function(data) {
                 savedData = data;
             }
+            idsSent = undefined;
+            savedData = undefined;
         });
         test('sends the selected ids', ()=>{            
             document.find('#select-15').prop('onChange')();
@@ -184,6 +187,25 @@ describe('MyApplications document', ()=> {
             document.find('#download-button').at(0).prop('onClick')();
 
             expect(savedData).toEqual({value:42});
+        });
+        test('unless error is received', ()=>{
+            answer = { error:'any' };
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#download-button').at(0).prop('onClick')();
+
+            expect(savedData).toEqual(undefined);
+        });
+        test('do not even download if too much files selected', ()=>{
+            instance.maxFileDownload = 1;
+            document.find('#select-15').prop('onChange')();
+            document.find('#select-25').prop('onChange')();   
+            document.find('#download-button').at(0).prop('onClick')();
+
+            expect(idsSent).toEqual(undefined);
+            expect(instance.state.displayErrorDialog).toEqual(true);
+            document.find('#download-error-close-modal').at(0).prop('onClick')();
+            expect(instance.state.displayErrorDialog).toEqual(false);
         });
     });
 });

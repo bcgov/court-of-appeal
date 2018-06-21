@@ -17,7 +17,8 @@ class MyApplications extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             cases: [],
-            displayMyCasesEmptyLabel:true
+            displayMyCasesEmptyLabel:true,
+            displayErrorDialog:false
         };
         this.findCase = this.findCase.bind(this);
         this.fetchCases = this.fetchCases.bind(this);
@@ -76,12 +77,14 @@ class MyApplications extends Component {
             this.setState({ cases:this.state.cases });
         });
     }
+    
     onlySelected(list, item) {
         if (item.checked) {
             list.push(item.id);
         }
         return list;
     }
+
     archive() {
         let idsToArchive = this.state.cases.reduce(this.onlySelected, []);
         if (idsToArchive.length > 0) {
@@ -102,13 +105,15 @@ class MyApplications extends Component {
             });
         }
     }
+
     closeErrorModal() {
-        this.window.document.getElementById('downloadErrorModal').style.display = 'none';
+        this.setState({ displayErrorDialog:false });
     }
+
     download() {
         let ids = this.state.cases.reduce(this.onlySelected, []);
         if (ids.length > this.maxFileDownload) {
-            this.window.document.getElementById('downloadErrorModal').style.display = 'block';
+            this.setState({ displayErrorDialog:true });
         }
         else {
             this.downloadButton.startSpinner();            
@@ -157,7 +162,7 @@ class MyApplications extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="downloadErrorModal" ref={ (element)=> {this.errorModal = element }}>
+                <div id="downloadErrorModal" style={{ display:this.state.displayErrorDialog?'block':'none' }}>
                     <div className="download-error-modal-title">
                         <span id="download-error-close-modal" onClick={this.closeErrorModal}>&times;</span>
                         Download unavailable

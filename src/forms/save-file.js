@@ -1,4 +1,4 @@
-import FileSaver from 'file-saver';
+let FileSaver = require('file-saver');
 
 let save = function(data) {
     var blob = new Blob([data], {type: "application/zip"});
