@@ -107,7 +107,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">City </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
-                                    <TextField
+                                    <TextField id="city"
                                         value={this.props.data ? selectedRespondent.address.city : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.city"
@@ -131,7 +131,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Country </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                    <TextField
+                                    <TextField id="country"
                                         value='Canada'
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.country"

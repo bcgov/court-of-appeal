@@ -119,7 +119,7 @@ class CaseList extends React.Component {
     columns(item) {
         return ([
             <td key={item.id+'edit'}>
-                <button className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
+                <button id={'edit-'+item.id} className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
                     <i className="fa fa-pencil"/></button>
             </td>,
             <td key={item.id+'id'}>{item.id}</td>,
@@ -165,7 +165,7 @@ class CaseList extends React.Component {
     modals() {
         return (
         <div>
-            <div id="editFormModal not-printable" className="modal"
+            <div id="editFormModal" className="modal"
                     style={{display: (this.state.editMode ? 'block' : 'none')}}>
                 <div className=" modal-title ">
                     <span id="close-modal" onClick={this.cancel}>&times;</span>
