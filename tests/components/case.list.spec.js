@@ -35,27 +35,36 @@ describe('CaseList', ()=> {
                     data:{
                         respondents: [{
                             address: {
-                                city: 'this-city'
+                                city: 'old-value'
                             }
                         }],
                         appellants: [],
+                        selectedRespondentIndex: 0
                     } 
                 },
                 { id:25, data:{} }
             ];
             document = createDocument();            
         });
-        test('is available', ()=>{
+        test('can be seen', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             expect(document.find('#editFormModal').prop('style').display).toEqual('block');
 
             expect(document.find('#country').at(0).prop('value')).toEqual('Canada');
-            expect(document.find('#city').at(0).prop('value')).toEqual('this-city');
+            expect(document.find('#city').at(0).prop('value')).toEqual('old-value');
 
             document.find('#editFormModal button#back').prop('onClick')();
             document.update();
             expect(document.find('#editFormModal').prop('style').display).toEqual('none');
+        });
+        test('can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('#city').at(0);
+            field.simulate('change', { target: { name:'respondent.city', value:'new-value' } });
+
+            expect(cases[1].data.respondents[0].address.city).toEqual('new-value');
         });
     });
 });
