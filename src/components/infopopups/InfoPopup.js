@@ -4,6 +4,7 @@ import InfoPopupSection from './InfoPopupSection';
 import AppellantFactumPopup from "./AppellantFactumPopup";
 import ReplyBookPopup from "./ReplyBookPopup";
 import HearingPopup from "./HearingPopup";
+import CourtOrderPopup from "./CourtOrderPopup";
 
 class InfoPopup extends Component {
 
@@ -25,6 +26,11 @@ class InfoPopup extends Component {
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                         />;
+                case 'courtorder' :
+                    return <CourtOrderPopup
+                        close={this.props.close}
+                        getSections={this.getSections.bind(this)}
+                    />;
                 default :
                     return null;
             }
