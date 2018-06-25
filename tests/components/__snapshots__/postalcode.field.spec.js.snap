@@ -4,6 +4,7 @@ exports[`should only allow valid Canadian postal code characters 1`] = `
 <div>
   <input
     className="form-field"
+    id="number-field"
     maxLength={7}
     name={undefined}
     onBlur={[Function]}

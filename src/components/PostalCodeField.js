@@ -20,6 +20,7 @@ class PostalCodeField extends Component {
         return (
             <div>
                 <input
+                id={this.props.id}
                 value={this.props.value || ''}
                 onChange={this.handleFieldChange}
                 maxLength={7}
