@@ -9,9 +9,9 @@ class Help extends Component {
             <div className={"row"}>
                 <div className="col col-lg-12 col-md-12 col-sm-12">
                     <div className="row ">
-                        <div style={{fontWeight: "bolder", marginBottom: '20px', paddingTop: '20px'}}
-                             className="col col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 ">
-                            Need help completing a document?
+                        <div style={{fontWeight: "bolder", marginBottom: '10px', paddingTop: '20px'}}
+                             className="col col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 help-title">
+                            Need help?
                         </div>
                     </div>
                     <div className="row">

@@ -46,7 +46,6 @@ class AppellantFactumPopup extends Component {
             iconClass: "info-modal-icon",
             deadline:" within 7 days ",
             deadlinePhrase: {first: "File and serve a Reply ", last: " of receiving a Respondent's Factum."},
-            content: true,
             lineHeight: '221px',
             last: false,
             contentMap: contentMap2
@@ -60,7 +59,7 @@ class AppellantFactumPopup extends Component {
             VLProps: null,
             last: true,
             content: [" You may also be served a copy of the respondent’s Transcript Extract Book.  " +
-            " This document is for your awareness only and you do not have to respond to it.",]
+            " This document is for your awareness only and you do not have to respond to it."]
         }]
     }
 
