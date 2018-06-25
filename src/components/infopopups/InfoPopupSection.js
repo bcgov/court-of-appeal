@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './infopopup.css';
 import InfoPopupIcon from "./InfoPopupIcon";
-import Deadline from './infopopups/Deadline';
+import Deadline from './Deadline';
 
 class InfoPopupSection extends Component {
 

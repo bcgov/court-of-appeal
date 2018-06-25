@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import '../infopopup.css';
+import './infopopup.css';
 import Help from './Help';
 
 class AppellantFactumPopup extends Component {

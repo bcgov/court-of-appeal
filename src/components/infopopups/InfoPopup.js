@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
-import AppellantFactumPopup from "./infopopups/AppellantFactumPopup";
-import ReplyBookPopup from "./infopopups/ReplyBookPopup";
+import AppellantFactumPopup from "./AppellantFactumPopup";
+import ReplyBookPopup from "./ReplyBookPopup";
 
 class InfoPopup extends Component {
 
