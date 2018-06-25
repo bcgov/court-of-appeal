@@ -150,3 +150,7 @@
     font-size: small;
     font-weight: bold;
 }
+
+.help-title {
+    color: red;
+}

@@ -3,6 +3,7 @@ import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
 import AppellantFactumPopup from "./AppellantFactumPopup";
 import ReplyBookPopup from "./ReplyBookPopup";
+import HearingPopup from "./HearingPopup";
 
 class InfoPopup extends Component {
 
@@ -19,6 +20,11 @@ class InfoPopup extends Component {
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                     />;
+                case 'hearing' :
+                    return <HearingPopup
+                        close={this.props.close}
+                        getSections={this.getSections.bind(this)}
+                        />;
                 default :
                     return null;
             }
@@ -43,10 +49,25 @@ class InfoPopup extends Component {
         return (sections);
     }
 
-    getParagraphContent (content) {
-        if (!content) {
+    getParagraphContent (contentOrMap) {
+
+        if (!contentOrMap) {
             return null;
         }
+
+        let content = contentOrMap.map((value, index) => {
+            let paragraph = value;
+            if (value.URL) {
+               paragraph = <a href={value.URL}>{value.URLName}</a>;
+            }
+
+            return (
+                <p key={index}>
+                    {paragraph}
+                </p>
+            ) ;
+
+        });
 
         return (
            <div className="row">
@@ -56,6 +77,7 @@ class InfoPopup extends Component {
            </div>
         );
     }
+    
     //** turn this into a separate component
     getListContent (listItems) {
         if (!listItems) {

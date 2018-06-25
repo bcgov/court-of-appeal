@@ -131,8 +131,9 @@ class Journey extends Component {
                 subtitleIndex: 1,
                 mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 mapProps: [
-                    {coords: "85,15,200,210", href: "/form.2.html", alt: "e-file a notice of appearance"},
-                    {coords: "285,15,385,190", function: 'replybook', alt: "about the Reply Book"},
+                    {coords: "85,10,200,190", href: "/form.2.html", alt: "e-file a notice of appearance"},
+                    {coords: "285,10,385,190", function: 'replybook', alt: "about the Reply Book"},
+                    {coords: "460,5,570,160", function: 'hearing', alt: "info about the hearing"}
                 ]
             }
         }, () => {
