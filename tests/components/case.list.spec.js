@@ -35,7 +35,10 @@ describe('CaseList', ()=> {
                     data:{
                         respondents: [{
                             address: {
-                                city: 'old-value'
+                                addressLine1: 'old-addressLine1',
+                                addressLine2: 'new-addressLine2',
+                                city: 'old-city',
+                                postalCode: 'old-postalCode'
                             }
                         }],
                         appellants: [],
@@ -52,19 +55,43 @@ describe('CaseList', ()=> {
             expect(document.find('#editFormModal').prop('style').display).toEqual('block');
 
             expect(document.find('#country').at(0).prop('value')).toEqual('Canada');
-            expect(document.find('#city').at(0).prop('value')).toEqual('old-value');
+            expect(document.find('#city').at(0).prop('value')).toEqual('old-city');
 
             document.find('#editFormModal button#back').prop('onClick')();
             document.update();
             expect(document.find('#editFormModal').prop('style').display).toEqual('none');
         });
-        test('can be changed', ()=>{
+        test('city can be changed', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
-            let field = document.find('#city').at(0);
-            field.simulate('change', { target: { name:'respondent.city', value:'new-value' } });
+            let field = document.find('input#city').at(0);
+            field.simulate('change', { target: { name:'respondent.city', value:'new-city' } });
 
-            expect(cases[1].data.respondents[0].address.city).toEqual('new-value');
+            expect(cases[1].data.respondents[0].address.city).toEqual('new-city');
+        });
+        test('addressLine1 can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#addressLine1').at(0);
+            field.simulate('change', { target: { name:'respondent.addressLine1', value:'new-addressLine1' } });
+
+            expect(cases[1].data.respondents[0].address.addressLine1).toEqual('new-addressLine1');
+        });
+        test('addressLine2 can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#addressLine2').at(0);
+            field.simulate('change', { target: { name:'respondent.addressLine2', value:'new-addressLine2' } });
+
+            expect(cases[1].data.respondents[0].address.addressLine2).toEqual('new-addressLine2');
+        });
+        test('postalCode can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#postalCode').at(0);
+            field.simulate('change', { target: { name:'respondent.postalCode', value:'new-postalCode' } });
+
+            expect(cases[1].data.respondents[0].address.postalCode).toEqual('NEWPOSTALCODE');
         });
     });
 });

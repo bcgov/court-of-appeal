@@ -73,7 +73,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1  </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
-                                        <TextField
+                                        <TextField id="addressLine1"
                                             value={this.props.data ? selectedRespondent.address.addressLine1 : ''}
                                             handleFieldChange={this.props.handleFieldChange}
                                             name="respondent.addressLine1"
@@ -90,7 +90,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 2 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
-                                    <TextField
+                                    <TextField id="addressLine2"
                                         value={this.props.data ? selectedRespondent.address.addressLine2 : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.addressLine2"
@@ -142,7 +142,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Postal code </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                    <PostalCodeField
+                                    <PostalCodeField id="postalCode"
                                         value={this.props.data ? selectedRespondent.address.postalCode : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.postalCode"
