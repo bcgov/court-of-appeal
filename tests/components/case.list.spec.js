@@ -93,5 +93,13 @@ describe('CaseList', ()=> {
 
             expect(cases[1].data.respondents[0].address.postalCode).toEqual('NEWPOSTALCODE');
         });
+        test('invalid postal code flag is captured by blur event', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#postalCode').at(0);
+            field.simulate('blur', { target: { name:'respondent.postalCode', value:'new-postalCode' } });
+
+            expect(document.instance().state.postalCodeIsValid).toEqual(false);
+        });
     });
 });
