@@ -1,6 +1,6 @@
 import React from 'react';
 import './journeymap.css';
-import InfoPopup from './InfoPopup';
+import InfoPopup from './infopopups/InfoPopup';
 
 class JourneyMap extends React.Component {
 
