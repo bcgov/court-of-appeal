@@ -19,6 +19,7 @@ class ReplyBookPopup extends Component {
 
         this.sections = [{
             expandable: false,
+            expanded: true,
             sectionHeading: "Were you served with a Notice of Motion for Leave to Appeal and a Motion Book? ",
             iconSrc: "icons/icon-share.svg",
             iconClass: "info-modal-icon",

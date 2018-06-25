@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
-import ExpandableInfoPopupSection from './ExpandableInfoPopupSection';
 import AppellantFactumPopup from "./infopopups/AppellantFactumPopup";
 import ReplyBookPopup from "./infopopups/ReplyBookPopup";
 
@@ -31,26 +30,31 @@ class InfoPopup extends Component {
      getSections (sectionList) {
 
         const sections = sectionList.map((sectionProps, key) => {
-            if (!sectionProps.expandable) {
-                return (
-                    <InfoPopupSection
-                        key={ key }
-                        { ...sectionProps }
-                        getListContent={ this.getListContent.bind(this) }
-                    />
-                )
-            } else {
-                return (
-                    <ExpandableInfoPopupSection
-                        key={ key }
-                        { ...sectionProps }
-                        getListContent={ this.getListContent.bind(this) }
-                    />
+            return (
+                <InfoPopupSection
+                    key={ key }
+                    { ...sectionProps }
+                    getListContent={ this.getListContent.bind(this) }
+                    getContent={ this.getParagraphContent.bind(this) }
+                />
+            )
 
-                )
-            }
         });
         return (sections);
+    }
+
+    getParagraphContent (content) {
+        if (!content) {
+            return null;
+        }
+
+        return (
+           <div className="row">
+               <div className="col col-sm-11 col-md-11 col-lg-11" style={{padding:0}}>
+                { content }
+               </div>
+           </div>
+        );
     }
     //** turn this into a separate component
     getListContent (listItems) {
