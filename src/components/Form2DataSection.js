@@ -8,7 +8,7 @@ import EmailField from "./EmailField";
 class Form2DataSection extends React.Component {
 
     constructor(props){
-        super(props);
+        super(props);        
         this.state ={
             useServiceEmail: props.data.useServiceEmail,
             sendNotifications: props.data.sendNotifications,
@@ -16,6 +16,14 @@ class Form2DataSection extends React.Component {
         };
         this.toggleSendNotifications = this.toggleSendNotifications.bind(this);
         this.toggleUseServiceEmail = this.toggleUseServiceEmail.bind(this);
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps == null || nextProps.data == null) { return; }        
+        this.setState({
+            useServiceEmail: nextProps.data.useServiceEmail,
+            sendNotifications: nextProps.data.sendNotifications,
+            showEmailAsMandatory: nextProps.data.useServiceEmail || nextProps.data.sendNotifications
+        });
     }
 
     toggleSendNotifications(e) {

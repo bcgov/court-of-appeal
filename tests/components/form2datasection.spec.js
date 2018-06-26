@@ -109,6 +109,22 @@ describe('Form2DataSection', ()=> {
         expect(asterisk.prop('style').display).toEqual('inline-block');
     });
 
+    test('can show email as mandatory late after creation (useServiceEmail)', ()=>{
+        document.instance().componentWillReceiveProps({ data: { useServiceEmail:true } });
+        document.update();
+        let asterisk = document.find('#emailasterisks').at(0);
+
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
+    test('can show email as mandatory late after creation (sendNotifications)', ()=>{
+        document.instance().componentWillReceiveProps({ data: { sendNotifications:true } });
+        document.update();
+        let asterisk = document.find('#emailasterisks').at(0);
+
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
     test('concatenate appellants names', ()=>{
         let field = document.find('#appellant-name').at(0);
 
