@@ -43,6 +43,7 @@ describe('CaseList', ()=> {
                         }],
                         appellants: [],
                         phone: '111-111-1111',
+                        email: 'me@here.net',
                         selectedRespondentIndex: 0
                     } 
                 },
@@ -117,6 +118,22 @@ describe('CaseList', ()=> {
             field.simulate('blur', { target: { name:'document.phone', value:'invalid value' } });
             
             expect(document.instance().state.phoneIsValid).toEqual(false);
+        });
+        test('email can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#email').at(0);
+            field.simulate('change', { target: { name:'document.email', value:'you@here.net' } });
+            
+            expect(cases[1].data.email).toEqual('you@here.net');
+        });
+        test('invalid email flag is captured by blur event', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#email').at(0);
+            field.simulate('blur', { target: { name:'document.email', value:'invalid value' } });
+            
+            expect(document.instance().state.emailIsValid).toEqual(false);
         });
     });
 });
