@@ -117,6 +117,7 @@ class Journey extends Component {
                 mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
                 mapProps: [
                     {coords: "75,10,180,200", href: "/form.2.html", alt: "e-file a notice of appearance"},
+                    {coords: "250,10,370,200", function: "crossappeal", alt: "e-file a notice of appearance"},
                     {coords: "450,10,565,200", function: "respondentfactum", alt: "e-file a notice of appearance"},
                     {coords: "260,270,370,400", function: 'hearing', alt: "info about the hearing"},
                     {coords: "395,270,520,420", function: 'courtorder', alt: "info about the court order process"}
