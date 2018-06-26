@@ -3,7 +3,6 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CaseList from '../../src/components/CaseList';
-import { truncate } from 'fs';
 configure({ adapter: new Adapter() });
 
 describe('CaseList', ()=> {
