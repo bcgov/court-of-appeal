@@ -194,13 +194,13 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
-                                Contact information &nbsp;
-                                <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the phone/email to contact you?"></i>
+                                Contact information                                
                             </div>
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    Phone 
+                                    Phone&nbsp;
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PhoneField id="phone"
@@ -215,7 +215,8 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span id="emailasterisks" className="mandatory-field" style={{display:this.state.showEmailAsMandatory?'inline-block':'none'}}>*</span>
-                                    Email address 
+                                    Email address&nbsp;
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to aggree to this using the checkboxes below)"></i>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <EmailField id="email"
@@ -233,20 +234,8 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row address-row-header">
                             <div className="row address-row">
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically?</div>
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
-                                    type="checkbox"
-                                    onChange={this.toggleUseServiceEmail}
-                                    name="respondent.useServiceEmail"
-                                    checked={this.props.data.useServiceEmail}
-                                    disabled={this.props.readOnly}
-                                />
-                                </div>
-                            </div>
-                            <div className="row address-row">
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when your document status changes?</div>
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
+                                <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I would like to receive email notifications when the status of my document changes</div>
+                                <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
                                     <input id="sendNotifications" ref={(element)=> { this.sendNotificationsCheckbox = element; }}
                                         type="checkbox"
                                         onChange={this.toggleSendNotifications}
@@ -256,6 +245,18 @@ class Form2DataSection extends React.Component {
                                     />
                                 </div>
                             </div>
+                            <div className="row address-row">
+                                <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I accept to be served documents electronically by another party</div>
+                                <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
+                                <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
+                                    type="checkbox"
+                                    onChange={this.toggleUseServiceEmail}
+                                    name="respondent.useServiceEmail"
+                                    checked={this.props.data.useServiceEmail}
+                                    disabled={this.props.readOnly}
+                                />
+                                </div>
+                            </div>                            
                             <hr/>
                             <ReactTooltip/>
                         </div>
