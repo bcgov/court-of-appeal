@@ -60,22 +60,19 @@ class EmailField extends Component {
         }
     }
 
-    validate(e) {
-        if (e) {
-            let value = e.target.value;
-            if (!value || this.isValidEmailAddress(value))
-            {
-                this.setState({className: "form-field", title: ""}, this.props.validate(true, 'email'));
-                return true;
-            } else {
-                this.setState({className: "form-field invalid-field", title: INVALID_EMAIL_MSG, errorMessage: INVALID_EMAIL_MSG}, this.props.validate(false, 'email'));
-                return false;
-            }
-        }  
+    validate() {
+        if (!this.props.value || this.isValidEmailAddress())
+        {
+            this.setState({className: "form-field", title: ""}, this.props.validate(true, 'email'));
+            return true;
+        } else {
+            this.setState({className: "form-field invalid-field", title: INVALID_EMAIL_MSG, errorMessage: INVALID_EMAIL_MSG}, this.props.validate(false, 'email'));
+            return false;
+        }
     }
 
-    isValidEmailAddress(value) {
-        return value.match(this.regex) != null;
+    isValidEmailAddress() {
+        return this.props.value.match(this.regex) != null;
     }
 
     clearClass() {

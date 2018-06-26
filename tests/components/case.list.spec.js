@@ -95,11 +95,12 @@ describe('CaseList', ()=> {
 
             expect(cases[1].data.respondents[0].address.postalCode).toEqual('NEWPOSTALCODE');
         });
-        test('invalid postal code flag is captured by blur event', ()=>{
+        test('invalid postal code flag is captured by blur event after change', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('input#postalCode').at(0);
-            field.simulate('blur', { target: { name:'respondent.postalCode', value:'2B2' } });
+            field.simulate('change', { target: { name:'respondent.postalCode', value:'2B2' } });
+            field.simulate('blur');
 
             expect(document.instance().state.postalCodeIsValid).toEqual(false);
         });
@@ -111,11 +112,12 @@ describe('CaseList', ()=> {
             
             expect(cases[1].data.phone).toEqual('222-222-2222');
         });
-        test('invalid phone flag is captured by blur event', ()=>{
+        test('invalid phone flag is captured by blur event after change', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('input#phone').at(0);
-            field.simulate('blur', { target: { name:'document.phone', value:'invalid value' } });
+            field.simulate('change', { target: { name:'document.phone', value:'invalid value' } });
+            field.simulate('blur');
             
             expect(document.instance().state.phoneIsValid).toEqual(false);
         });
@@ -127,11 +129,12 @@ describe('CaseList', ()=> {
             
             expect(cases[1].data.email).toEqual('you@here.net');
         });
-        test('invalid email flag is captured by blur event', ()=>{
+        test('invalid email flag is captured by blur event after change', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('input#email').at(0);
-            field.simulate('blur', { target: { name:'document.email', value:'invalid value' } });
+            field.simulate('change', { target: { name:'document.email', value:'invalid value' } });
+            field.simulate('blur');
             
             expect(document.instance().state.emailIsValid).toEqual(false);
         });
