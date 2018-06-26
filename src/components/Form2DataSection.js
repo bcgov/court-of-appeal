@@ -201,7 +201,7 @@ class Form2DataSection extends React.Component {
                             </div>
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
-                                    <span className="mandatory-field" style={{display:this.state.showEmailAsMandatory?'inline-block':'none'}}>*</span>
+                                    <span id="emailasterisks" className="mandatory-field" style={{display:this.state.showEmailAsMandatory?'inline-block':'none'}}>*</span>
                                     Email address 
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
