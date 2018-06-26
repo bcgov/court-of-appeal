@@ -34,14 +34,29 @@ describe('CaseList', ()=> {
                 { 
                     id:15, 
                     data:{
-                        respondents: [{
-                            address: {
-                                addressLine1: 'old-addressLine1',
-                                addressLine2: 'new-addressLine2',
-                                city: 'old-city',
-                                postalCode: 'V1V 1A1'
-                            }
-                        }],
+                        respondents: [
+                            {
+                                name: 'first',
+                                address: {
+                                    addressLine1: 'old-addressLine1',
+                                    addressLine2: 'new-addressLine2',
+                                    city: 'old-city',
+                                    postalCode: 'V1V 1A1'
+                                }
+                            },
+                            {
+                                name: 'second',
+                                address: {
+                                    addressLine1: 'old-addressLine1',
+                                    addressLine2: 'new-addressLine2',
+                                    city: 'old-city',
+                                    postalCode: 'V1V 1A1'
+                                }
+                            },
+                            {
+                                name: 'third-without-address'
+                            },
+                        ],
                         appellants: [],
                         phone: '111-111-1111',
                         email: 'me@here.net',
@@ -156,6 +171,25 @@ describe('CaseList', ()=> {
             field.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
             
             expect(cases[1].data.sendNotifications).toEqual(true);
+        });
+        test('chosen respondent can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('select#chosenRespondent').at(0);
+            field.simulate('change', { target: { name:'respondent.name', value:1 } });
+            
+            expect(cases[1].data.selectedRespondentIndex).toEqual(1);
+        });
+        test('resists unknown address', ()=>{
+            let indexOfRespondentWithoutAddress = 2;
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('select#chosenRespondent').at(0);
+            field.simulate('change', { target: { name:'respondent.name', value:indexOfRespondentWithoutAddress } });
+            field = document.find('input#addressLine1').at(0);
+            field.simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });
+
+            expect(cases[1].data.respondents[indexOfRespondentWithoutAddress].address.addressLine1).toEqual('this-address');
         });
     });
 });

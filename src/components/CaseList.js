@@ -65,7 +65,9 @@ class CaseList extends React.Component {
         let address = respondents[this.state.selectedDocument.selectedRespondentIndex].address || {};
         switch (keys[1]) {
             case 'name' :
-                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: value}}}),
+                let updatedWithSelectedRespondentIndex = this.state.selectedDocument;
+                updatedWithSelectedRespondentIndex.selectedRespondentIndex = value;
+                this.setState({ selectedDocument:updatedWithSelectedRespondentIndex }, 
                     (prevState, props) => { this.validateForm()});
                 break;
             case 'addressLine1' :
