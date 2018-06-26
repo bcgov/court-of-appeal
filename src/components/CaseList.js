@@ -102,10 +102,14 @@ class CaseList extends React.Component {
                     (prevState, props) => { this.validateForm()} );
                 break;
             case 'email' :
-                this.setState(update(this.state, {selectedDocument: {email: {$set: value}}}));
+                let updatedWithEmail = this.state.selectedDocument;
+                updatedWithEmail.email = value;                
+                this.setState({ selectedDocument:updatedWithEmail });
                 break;
             case 'phone' :
-                this.setState(update(this.state, {selectedDocument: {phone: {$set: value}}}));
+                let updatedWithPhone = this.state.selectedDocument;
+                updatedWithPhone.phone = value;                
+                this.setState({ selectedDocument:updatedWithPhone });
                 break;
             case 'serviceFiler' :
                 this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: value}}}));

@@ -38,10 +38,12 @@ describe('CaseList', ()=> {
                                 addressLine1: 'old-addressLine1',
                                 addressLine2: 'new-addressLine2',
                                 city: 'old-city',
-                                postalCode: 'old-postalCode'
+                                postalCode: 'V1V 1A1'
                             }
                         }],
                         appellants: [],
+                        phone: '111-111-1111',
+                        email: 'me@here.net',
                         selectedRespondentIndex: 0
                     } 
                 },
@@ -93,13 +95,48 @@ describe('CaseList', ()=> {
 
             expect(cases[1].data.respondents[0].address.postalCode).toEqual('NEWPOSTALCODE');
         });
-        test('invalid postal code flag is captured by blur event', ()=>{
+        test('invalid postal code flag is captured by blur event after change', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('input#postalCode').at(0);
-            field.simulate('blur', { target: { name:'respondent.postalCode', value:'new-postalCode' } });
+            field.simulate('change', { target: { name:'respondent.postalCode', value:'2B2' } });
+            field.simulate('blur');
 
             expect(document.instance().state.postalCodeIsValid).toEqual(false);
+        });
+        test('phone can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#phone').at(0);
+            field.simulate('change', { target: { name:'document.phone', value:'222-222-2222' } });
+            
+            expect(cases[1].data.phone).toEqual('222-222-2222');
+        });
+        test('invalid phone flag is captured by blur event after change', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#phone').at(0);
+            field.simulate('change', { target: { name:'document.phone', value:'invalid value' } });
+            field.simulate('blur');
+            
+            expect(document.instance().state.phoneIsValid).toEqual(false);
+        });
+        test('email can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#email').at(0);
+            field.simulate('change', { target: { name:'document.email', value:'you@here.net' } });
+            
+            expect(cases[1].data.email).toEqual('you@here.net');
+        });
+        test('invalid email flag is captured by blur event after change', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#email').at(0);
+            field.simulate('change', { target: { name:'document.email', value:'invalid value' } });
+            field.simulate('blur');
+            
+            expect(document.instance().state.emailIsValid).toEqual(false);
         });
     });
 });
