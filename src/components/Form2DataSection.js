@@ -191,7 +191,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                <input
+                                <input id="useServiceEmail"
                                     type="checkbox"
                                     onChange={this.props.handleFieldChange}
                                     name="respondent.useServiceEmail"
@@ -203,7 +203,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when your document status changes?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                    <input
+                                    <input id="sendNotifications"
                                         type="checkbox"
                                         onChange={this.props.handleFieldChange}
                                         name="respondent.sendNotifications"

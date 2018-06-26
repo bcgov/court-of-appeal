@@ -3,6 +3,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CaseList from '../../src/components/CaseList';
+import { truncate } from 'fs';
 configure({ adapter: new Adapter() });
 
 describe('CaseList', ()=> {
@@ -44,6 +45,8 @@ describe('CaseList', ()=> {
                         appellants: [],
                         phone: '111-111-1111',
                         email: 'me@here.net',
+                        useServiceEmail: false,
+                        sendNotifications: false,
                         selectedRespondentIndex: 0
                     } 
                 },
@@ -137,6 +140,22 @@ describe('CaseList', ()=> {
             field.simulate('blur');
             
             expect(document.instance().state.emailIsValid).toEqual(false);
+        });
+        test('userServiceEmail can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#useServiceEmail').at(0);
+            field.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+            
+            expect(cases[1].data.useServiceEmail).toEqual(true);
+        });
+        test('sendNotifications can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#sendNotifications').at(0);
+            field.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
+            
+            expect(cases[1].data.sendNotifications).toEqual(true);
         });
     });
 });

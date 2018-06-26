@@ -94,11 +94,15 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { selectedDocument:  { useServiceEmail: { $set: e.target.checked } }}),
+                let updatedWithUseServiceEmail = this.state.selectedDocument;
+                updatedWithUseServiceEmail.useServiceEmail = e.target.checked;                                
+                this.setState({ selectedDocument:updatedWithUseServiceEmail },
                     (prevState, props) => { this.validateForm()} );
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, { selectedDocument:  { sendNotifications: { $set: e.target.checked } }}),
+                let updatedWithSendNotifications = this.state.selectedDocument;
+                updatedWithSendNotifications.sendNotifications = e.target.checked;                                
+                this.setState({ selectedDocument:updatedWithSendNotifications },
                     (prevState, props) => { this.validateForm()} );
                 break;
             case 'email' :
