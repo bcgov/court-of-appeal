@@ -30,26 +30,18 @@ class Form2DataSection extends React.Component {
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">BETWEEN:</div>
 
-                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{this.props.data.appellants.map( (appellant, index) => {
-                                if (index === this.props.data.appellants.length - 1) {
-                                    return appellant.name;
-                                } else {
-                                    return appellant.name + ', ';
+                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{
+                                this.props.data.appellants.map( (item) => item.name ).join(', ') 
                                 }
-                            } ) }
                             </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</div>
                         </div>
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
 
-                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{this.props.data.respondents.map( (respondent, index) => {
-                                    if (index === this.props.data.respondents.length - 1) {
-                                        return respondent.name;
-                                    } else {
-                                        return respondent.name + ', ';
-                                    }
-                                } ) }
+                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{
+                                    this.props.data.respondents.map( (item) => item.name ).join(', ') 
+                                }
                                 </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
                         </div>
