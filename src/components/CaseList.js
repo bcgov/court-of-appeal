@@ -24,7 +24,6 @@ class CaseList extends React.Component {
                 useServiceEmail: false,
                 sendNotifications: false,
                 email: '',
-                serviceFiler: '',
                 selectedRespondentIndex: 0
             },
             dataLoss: false,
@@ -114,11 +113,6 @@ class CaseList extends React.Component {
                 let updatedWithPhone = this.state.selectedDocument;
                 updatedWithPhone.phone = value;                
                 this.setState({ selectedDocument:updatedWithPhone });
-                break;
-            case 'serviceFiler' :
-                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: value}}}));
-                break;
-            default :
                 break;
         }
         this.setState({formHasUnsavedChanges: true});
