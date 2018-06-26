@@ -38,10 +38,11 @@ describe('CaseList', ()=> {
                                 addressLine1: 'old-addressLine1',
                                 addressLine2: 'new-addressLine2',
                                 city: 'old-city',
-                                postalCode: 'old-postalCode'
+                                postalCode: 'V1V 1A1'
                             }
                         }],
                         appellants: [],
+                        phone: '111-111-1111',
                         selectedRespondentIndex: 0
                     } 
                 },
@@ -97,9 +98,25 @@ describe('CaseList', ()=> {
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('input#postalCode').at(0);
-            field.simulate('blur', { target: { name:'respondent.postalCode', value:'new-postalCode' } });
+            field.simulate('blur', { target: { name:'respondent.postalCode', value:'2B2' } });
 
             expect(document.instance().state.postalCodeIsValid).toEqual(false);
+        });
+        test('phone can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#phone').at(0);
+            field.simulate('change', { target: { name:'document.phone', value:'222-222-2222' } });
+            
+            expect(cases[1].data.phone).toEqual('222-222-2222');
+        });
+        test('invalid phone flag is captured by blur event', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#phone').at(0);
+            field.simulate('blur', { target: { name:'document.phone', value:'invalid value' } });
+            
+            expect(document.instance().state.phoneIsValid).toEqual(false);
         });
     });
 });

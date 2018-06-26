@@ -61,21 +61,24 @@ class PhoneField extends Component {
         this.props.handleFieldChange(e);
     }
 
-    validate() {
-        if (!this.props.value || this.isValidPhoneNumber())
-        {
-            this.setState({className: "form-field ", title: "", errorMessage: ""}, this.props.validate(true, 'phone'));
-            return true;
-        } else {
-            this.setState({className: "form-field invalid-field", title: INVALID_PHONE_MSG, errorMessage: INVALID_PHONE_MSG}, this.props.validate(false, 'phone'));
-            return false;
-        }
+    validate(e) {
+        if (e) {
+            let value = e.target.value;
+            if (!value || this.isValidPhoneNumber(value))
+            {
+                this.setState({className: "form-field ", title: "", errorMessage: ""}, this.props.validate(true, 'phone'));
+                return true;
+            } else {
+                this.setState({className: "form-field invalid-field", title: INVALID_PHONE_MSG, errorMessage: INVALID_PHONE_MSG}, this.props.validate(false, 'phone'));
+                return false;
+            }
+        }        
     }
 
-    isValidPhoneNumber() {
-        return this.props.value.match(/^(\+)?(1)?[ ]?\(\d{3}\)[ ]?\d{3}[- ]?\d{4}$/) != null ||
-        this.props.value.match(/^(\+)?(1)?[- ]?\d{3}[- ]?\d{3}[- ]?\d{4}$/) != null ||
-        this.props.value.match(/^(\+)?(1)?\d{3}-\d{3}-\d{4}$/) != null;
+    isValidPhoneNumber(value) {
+        return value.match(/^(\+)?(1)?[ ]?\(\d{3}\)[ ]?\d{3}[- ]?\d{4}$/) != null ||
+            value.match(/^(\+)?(1)?[- ]?\d{3}[- ]?\d{3}[- ]?\d{4}$/) != null ||
+            value.match(/^(\+)?(1)?\d{3}-\d{3}-\d{4}$/) != null;
     }
 
     clearClass() {

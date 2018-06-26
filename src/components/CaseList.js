@@ -105,7 +105,9 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {email: {$set: value}}}));
                 break;
             case 'phone' :
-                this.setState(update(this.state, {selectedDocument: {phone: {$set: value}}}));
+                let updated = this.state.selectedDocument;
+                updated.phone = value;                
+                this.setState({ selectedDocument:updated });
                 break;
             case 'serviceFiler' :
                 this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: value}}}));

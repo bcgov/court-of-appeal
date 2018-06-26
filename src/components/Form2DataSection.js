@@ -162,7 +162,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                    <PhoneField
+                                    <PhoneField id="phone"
                                         value={this.props.data ? this.props.data.phone : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.phone"

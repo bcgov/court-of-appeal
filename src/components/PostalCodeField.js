@@ -63,18 +63,21 @@ class PostalCodeField extends Component {
      * If, when the field loses focus, it's not empty or a proper postal code, give the field an error color, and give
      * an error title message so they can see what's up when they hover.
      */
-    validate() {
-        if (!this.props.value || this.props.value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null) {
-            this.setState({className: "form-field", title: ""}, this.props.validate(true, 'postalCode'));
-            return true;
-        } else {
-            this.setState({
-                className: "form-field invalid-field",
-                title: INVALID_POSTAL_CODE_MSG,
-                errorMessage: INVALID_POSTAL_CODE_MSG
-            }, this.props.validate(false, 'postalCode'));
-            return false;
-        }
+    validate(e) {        
+        if (e) {
+            let value = e.target.value;
+            if (!value || value.match(/^[a-zA-Z]\d[a-zA-Z] \d[A-Z]\d$/) != null) {
+                this.setState({className: "form-field", title: ""}, this.props.validate(true, 'postalCode'));
+                return true;
+            } else {
+                this.setState({
+                    className: "form-field invalid-field",
+                    title: INVALID_POSTAL_CODE_MSG,
+                    errorMessage: INVALID_POSTAL_CODE_MSG
+                }, this.props.validate(false, 'postalCode'));
+                return false;
+            }
+        }        
     }
 
     clearClass() {
