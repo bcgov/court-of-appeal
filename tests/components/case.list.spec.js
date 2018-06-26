@@ -69,6 +69,17 @@ describe('CaseList', ()=> {
             ];
             document = createDocument();            
         });
+        test('starts with formHasUnsavedChanges flag set to false', ()=>{
+            expect(document.instance().state.formHasUnsavedChanges).toEqual(false);
+        });
+        test('keeps track of the need to save modifications', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#city').at(0);
+            field.simulate('change', { target: { name:'respondent.city', value:'new-city' } });
+            
+            expect(document.instance().state.formHasUnsavedChanges).toEqual(true);
+        });
         test('can be seen', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
