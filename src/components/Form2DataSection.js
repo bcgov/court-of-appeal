@@ -50,7 +50,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                <select
+                                <select id="chosenRespondent"
                                     className="form-select"
                                     onChange={this.props.handleFieldChange}
                                     name={"respondent.name"}
@@ -74,7 +74,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                         <TextField id="addressLine1"
-                                            value={this.props.data ? selectedRespondent.address.addressLine1 : ''}
+                                            value={this.props.data && selectedRespondent.address ? selectedRespondent.address.addressLine1 : ''}
                                             handleFieldChange={this.props.handleFieldChange}
                                             name="respondent.addressLine1"
                                             readOnly={this.props.readOnly}
@@ -91,7 +91,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                     <TextField id="addressLine2"
-                                        value={this.props.data ? selectedRespondent.address.addressLine2 : ''}
+                                        value={this.props.data && selectedRespondent.address ? selectedRespondent.address.addressLine2 : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.addressLine2"
                                         readOnly={this.props.readOnly}
@@ -108,7 +108,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
                                     <TextField id="city"
-                                        value={this.props.data ? selectedRespondent.address.city : ''}
+                                        value={this.props.data && selectedRespondent.address ? selectedRespondent.address.city : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.city"
                                         readOnly={this.props.readOnly}
@@ -143,7 +143,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Postal code </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PostalCodeField id="postalCode"
-                                        value={this.props.data ? selectedRespondent.address.postalCode : ''}
+                                        value={this.props.data && selectedRespondent.address ? selectedRespondent.address.postalCode : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.postalCode"
                                         readOnly={this.props.readOnly}
@@ -191,7 +191,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                <input
+                                <input id="useServiceEmail"
                                     type="checkbox"
                                     onChange={this.props.handleFieldChange}
                                     name="respondent.useServiceEmail"
@@ -203,7 +203,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when your document status changes?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                    <input
+                                    <input id="sendNotifications"
                                         type="checkbox"
                                         onChange={this.props.handleFieldChange}
                                         name="respondent.sendNotifications"

@@ -3,6 +3,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CaseList from '../../src/components/CaseList';
+import { truncate } from 'fs';
 configure({ adapter: new Adapter() });
 
 describe('CaseList', ()=> {
@@ -33,23 +34,51 @@ describe('CaseList', ()=> {
                 { 
                     id:15, 
                     data:{
-                        respondents: [{
-                            address: {
-                                addressLine1: 'old-addressLine1',
-                                addressLine2: 'new-addressLine2',
-                                city: 'old-city',
-                                postalCode: 'V1V 1A1'
-                            }
-                        }],
+                        respondents: [
+                            {
+                                name: 'first',
+                                address: {
+                                    addressLine1: 'old-addressLine1',
+                                    addressLine2: 'new-addressLine2',
+                                    city: 'old-city',
+                                    postalCode: 'V1V 1A1'
+                                }
+                            },
+                            {
+                                name: 'second',
+                                address: {
+                                    addressLine1: 'old-addressLine1',
+                                    addressLine2: 'new-addressLine2',
+                                    city: 'old-city',
+                                    postalCode: 'V1V 1A1'
+                                }
+                            },
+                            {
+                                name: 'third-without-address'
+                            },
+                        ],
                         appellants: [],
                         phone: '111-111-1111',
                         email: 'me@here.net',
+                        useServiceEmail: false,
+                        sendNotifications: false,
                         selectedRespondentIndex: 0
                     } 
                 },
                 { id:25, data:{} }
             ];
             document = createDocument();            
+        });
+        test('starts with formHasUnsavedChanges flag set to false', ()=>{
+            expect(document.instance().state.formHasUnsavedChanges).toEqual(false);
+        });
+        test('keeps track of the need to save modifications', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#city').at(0);
+            field.simulate('change', { target: { name:'respondent.city', value:'new-city' } });
+            
+            expect(document.instance().state.formHasUnsavedChanges).toEqual(true);
         });
         test('can be seen', ()=>{
             document.find('#edit-15').prop('onClick')();
@@ -137,6 +166,41 @@ describe('CaseList', ()=> {
             field.simulate('blur');
             
             expect(document.instance().state.emailIsValid).toEqual(false);
+        });
+        test('userServiceEmail can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#useServiceEmail').at(0);
+            field.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+            
+            expect(cases[1].data.useServiceEmail).toEqual(true);
+        });
+        test('sendNotifications can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#sendNotifications').at(0);
+            field.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
+            
+            expect(cases[1].data.sendNotifications).toEqual(true);
+        });
+        test('chosen respondent can be changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('select#chosenRespondent').at(0);
+            field.simulate('change', { target: { name:'respondent.name', value:1 } });
+            
+            expect(cases[1].data.selectedRespondentIndex).toEqual(1);
+        });
+        test('resists unknown address', ()=>{
+            let indexOfRespondentWithoutAddress = 2;
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('select#chosenRespondent').at(0);
+            field.simulate('change', { target: { name:'respondent.name', value:indexOfRespondentWithoutAddress } });
+            field = document.find('input#addressLine1').at(0);
+            field.simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });
+
+            expect(cases[1].data.respondents[indexOfRespondentWithoutAddress].address.addressLine1).toEqual('this-address');
         });
     });
 });

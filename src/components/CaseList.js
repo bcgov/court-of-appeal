@@ -24,7 +24,6 @@ class CaseList extends React.Component {
                 useServiceEmail: false,
                 sendNotifications: false,
                 email: '',
-                serviceFiler: '',
                 selectedRespondentIndex: 0
             },
             dataLoss: false,
@@ -66,7 +65,9 @@ class CaseList extends React.Component {
         let address = respondents[this.state.selectedDocument.selectedRespondentIndex].address || {};
         switch (keys[1]) {
             case 'name' :
-                this.setState(update(this.state, {selectedDocument: {selectedRespondentIndex: {$set: value}}}),
+                let updatedWithSelectedRespondentIndex = this.state.selectedDocument;
+                updatedWithSelectedRespondentIndex.selectedRespondentIndex = value;
+                this.setState({ selectedDocument:updatedWithSelectedRespondentIndex }, 
                     (prevState, props) => { this.validateForm()});
                 break;
             case 'addressLine1' :
@@ -94,11 +95,15 @@ class CaseList extends React.Component {
                 this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
                 break;
             case 'useServiceEmail' :
-                this.setState(update(this.state, { selectedDocument:  { useServiceEmail: { $set: e.target.checked } }}),
+                let updatedWithUseServiceEmail = this.state.selectedDocument;
+                updatedWithUseServiceEmail.useServiceEmail = e.target.checked;                                
+                this.setState({ selectedDocument:updatedWithUseServiceEmail },
                     (prevState, props) => { this.validateForm()} );
                 break;
             case 'sendNotifications' :
-                this.setState(update(this.state, { selectedDocument:  { sendNotifications: { $set: e.target.checked } }}),
+                let updatedWithSendNotifications = this.state.selectedDocument;
+                updatedWithSendNotifications.sendNotifications = e.target.checked;                                
+                this.setState({ selectedDocument:updatedWithSendNotifications },
                     (prevState, props) => { this.validateForm()} );
                 break;
             case 'email' :
@@ -110,11 +115,6 @@ class CaseList extends React.Component {
                 let updatedWithPhone = this.state.selectedDocument;
                 updatedWithPhone.phone = value;                
                 this.setState({ selectedDocument:updatedWithPhone });
-                break;
-            case 'serviceFiler' :
-                this.setState(update(this.state, {selectedDocument: {serviceFiler: {$set: value}}}));
-                break;
-            default :
                 break;
         }
         this.setState({formHasUnsavedChanges: true});
