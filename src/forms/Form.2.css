@@ -85,3 +85,8 @@
 .respondent-name-label {
     padding-top: 5px;
 }
+
+.mandatory-field {
+    color: red;
+    padding-right: 5px;
+}

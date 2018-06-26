@@ -7,6 +7,19 @@ import EmailField from "./EmailField";
 
 class Form2DataSection extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state ={
+            showEmailAsMandatory: false
+        };
+        this.toggleShowEMailAsMandatory = this.toggleShowEMailAsMandatory.bind(this);
+    }
+
+    toggleShowEMailAsMandatory(e) {        
+        this.setState({ showEmailAsMandatory:e.target.checked });
+        this.props.handleFieldChange(e);
+    }
+
     render() {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
@@ -70,7 +83,10 @@ class Form2DataSection extends React.Component {
                             </div>
 
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Address Line 1  </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Address Line 1  
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                         <TextField id="addressLine1"
@@ -104,7 +120,10 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">City </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    City 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
                                     <TextField id="city"
@@ -118,7 +137,10 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Province </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Province 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <TextField
                                         value='BC'
@@ -129,7 +151,10 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Country </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Country 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <TextField id="country"
                                         value='Canada'
@@ -140,7 +165,10 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Postal code </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Postal code 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PostalCodeField id="postalCode"
                                         value={this.props.data && selectedRespondent.address ? selectedRespondent.address.postalCode : ''}
@@ -172,7 +200,10 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Email address </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field" style={{display:this.state.showEmailAsMandatory?'inline-block':'none'}}>*</span>
+                                    Email address 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <EmailField id="email"
                                         value={this.props.data ? this.props.data.email : ''}
@@ -193,7 +224,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
                                 <input id="useServiceEmail"
                                     type="checkbox"
-                                    onChange={this.props.handleFieldChange}
+                                    onChange={this.toggleShowEMailAsMandatory}
                                     name="respondent.useServiceEmail"
                                     checked={this.props.data.useServiceEmail}
                                     disabled={this.props.readOnly}
@@ -205,7 +236,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
                                     <input id="sendNotifications"
                                         type="checkbox"
-                                        onChange={this.props.handleFieldChange}
+                                        onChange={this.toggleShowEMailAsMandatory}
                                         name="respondent.sendNotifications"
                                         checked={this.props.data.sendNotifications}
                                         disabled={this.props.readOnly}
