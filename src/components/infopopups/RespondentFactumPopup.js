@@ -79,7 +79,7 @@ class RespondentFactumPopup extends Component {
                     The Factum and Transcript Extract Book
                 </div>
                 <div className="info-modal-content">
-                    <div><h4>Waere you served with any of the following documents?</h4></div>
+                    <div className="info-modal-primary-heading ">Were you served with any of the following documents?</div>
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"
