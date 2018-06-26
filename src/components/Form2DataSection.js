@@ -180,7 +180,10 @@ class Form2DataSection extends React.Component {
                                 <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the phone/email to contact you?"></i>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">Phone </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Phone 
+                                </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PhoneField id="phone"
                                         value={this.props.data ? this.props.data.phone : ''}
