@@ -10,13 +10,31 @@ class Form2DataSection extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            showEmailAsMandatory: false
+            useServiceEmail: props.data.useServiceEmail,
+            sendNotifications: props.data.sendNotifications,
+            showEmailAsMandatory: props.data.useServiceEmail || props.data.sendNotifications
         };
-        this.toggleShowEMailAsMandatory = this.toggleShowEMailAsMandatory.bind(this);
+        this.toggleSendNotifications = this.toggleSendNotifications.bind(this);
+        this.toggleUseServiceEmail = this.toggleUseServiceEmail.bind(this);
     }
 
-    toggleShowEMailAsMandatory(e) {        
-        this.setState({ showEmailAsMandatory:e.target.checked });
+    toggleSendNotifications(e) {
+        let sendNotifications = e.target.checked;
+        let showEmailAsMandatory = this.state.useServiceEmail || sendNotifications;
+        this.setState({
+            sendNotifications: sendNotifications,
+            showEmailAsMandatory: showEmailAsMandatory
+        });
+        this.props.handleFieldChange(e);
+    }
+
+    toggleUseServiceEmail(e) {
+        let useServiceEmail = e.target.checked;
+        let showEmailAsMandatory = useServiceEmail || this.state.sendNotifications;
+        this.setState({
+            useServiceEmail: useServiceEmail,
+            showEmailAsMandatory: showEmailAsMandatory
+        });
         this.props.handleFieldChange(e);
     }
 
@@ -217,9 +235,9 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like to receive documents electronically?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                <input id="useServiceEmail"
+                                <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
                                     type="checkbox"
-                                    onChange={this.toggleShowEMailAsMandatory}
+                                    onChange={this.toggleUseServiceEmail}
                                     name="respondent.useServiceEmail"
                                     checked={this.props.data.useServiceEmail}
                                     disabled={this.props.readOnly}
@@ -229,9 +247,9 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Would you like email notifications when your document status changes?</div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style={{textAlign: 'left'}}>
-                                    <input id="sendNotifications"
+                                    <input id="sendNotifications" ref={(element)=> { this.sendNotificationsCheckbox = element; }}
                                         type="checkbox"
-                                        onChange={this.toggleShowEMailAsMandatory}
+                                        onChange={this.toggleSendNotifications}
                                         name="respondent.sendNotifications"
                                         checked={this.props.data.sendNotifications}
                                         disabled={this.props.readOnly}

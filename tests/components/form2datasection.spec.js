@@ -38,6 +38,8 @@ describe('Form2DataSection', ()=> {
     };
     let document;
     beforeEach(()=>{
+        data.useServiceEmail = false;
+        data.sendNotifications = false;
         document = createDocument();
     });
 
@@ -51,6 +53,24 @@ describe('Form2DataSection', ()=> {
         expect(asterisk.prop('style').display).toEqual('none');
     });
 
+    test('unless useServiceEmail is provided as true', ()=>{
+        data.useServiceEmail = true;
+        document = createDocument();
+
+        expect(document.instance().state.showEmailAsMandatory).toEqual(true);
+        let asterisk = document.find('#emailasterisks').at(0);
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
+    test('unless sendNotifications is provided as true', ()=>{
+        data.sendNotifications = true;
+        document = createDocument();
+
+        expect(document.instance().state.showEmailAsMandatory).toEqual(true);
+        let asterisk = document.find('#emailasterisks').at(0);
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
     test('show email as mandatory when notifications are chosen', ()=>{
         let field = document.find('input#sendNotifications').at(0);
         field.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
@@ -62,6 +82,28 @@ describe('Form2DataSection', ()=> {
     test('show email as mandatory when service email is chosen', ()=>{
         let field = document.find('input#useServiceEmail').at(0);
         field.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+        let asterisk = document.find('#emailasterisks').at(0);
+
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
+    test('keeps showing email as mandatory when send notifications is still chosen', ()=>{
+        let first = document.find('input#useServiceEmail').at(0);
+        let second = document.find('input#sendNotifications').at(0);
+        first.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+        second.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
+        first.simulate('change', { target: { name:'document.useServiceEmail', checked:false } });
+        let asterisk = document.find('#emailasterisks').at(0);
+
+        expect(asterisk.prop('style').display).toEqual('inline-block');
+    });
+
+    test('keeps showing email as mandatory when service email is still chosen', ()=>{
+        let first = document.find('input#useServiceEmail').at(0);
+        let second = document.find('input#sendNotifications').at(0);
+        first.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+        second.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
+        second.simulate('change', { target: { name:'document.sendNotifications', checked:false } });
         let asterisk = document.find('#emailasterisks').at(0);
 
         expect(asterisk.prop('style').display).toEqual('inline-block');
