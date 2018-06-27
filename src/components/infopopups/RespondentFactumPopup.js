@@ -26,7 +26,7 @@ class RespondentFactumPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "You have  ", last: " to file and serve your documents."},
             deadline: " 30 days ",
-            lineHeight: '252px',
+            lineHeight: '275px',
             last: false,
             contentMap: contentMap
         }, {

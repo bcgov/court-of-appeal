@@ -4,7 +4,6 @@ class Help extends Component {
 
     render() {
 
-        console.log(this.props);
         return (
             <div className={"row"}>
                 <div className="col col-lg-12 col-md-12 col-sm-12">

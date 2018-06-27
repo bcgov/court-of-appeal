@@ -51,12 +51,21 @@
 .bullet-div {
     width: 5px;
     margin-left: 20px;
-    margin-right: -10px;
 }
 
 .bullet-list-row {
-    margin: 5px 0 5px 5px;
+    margin: 8px;
     font-weight: normal;
+}
+
+.bullet-row-content{
+    display: flex;
+}
+.bullet-row-description {
+    width:75%;
+}
+.bullet-row-badges-container {
+    width: 25%;
 }
 
 .icon-container-box {
@@ -146,16 +155,18 @@
     cursor: pointer;
 }
 
-.doc-badge {
-    width: 40px;
-    height: 20px;
+.row-badge {
     border-radius: 7px;
     border: 1px solid var(--header-background);
     color: var(--header-background);
-    padding-left: 6px;
-    padding-top: 1px;
-    font-size: small;
     font-weight: bold;
+    padding: 2px 3px 0 3px;
+    text-align: center;
+}
+
+.evenly-spaced {
+    display: flex;
+    justify-content: space-between;
 }
 
 .help-title {

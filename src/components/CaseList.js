@@ -116,6 +116,8 @@ class CaseList extends React.Component {
                 updatedWithPhone.phone = value;                
                 this.setState({ selectedDocument:updatedWithPhone });
                 break;
+            default :
+                break;
         }
         this.setState({formHasUnsavedChanges: true});
     }
