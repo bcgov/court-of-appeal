@@ -10,7 +10,9 @@ class ReplyBookPopup extends Component {
             {
                 line: "Complete either the .DOCs or .PDFs below:",
                 rows: [
-                    { description: "Reply Book", times: "1 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink: {
+                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
+                        URLName: "Reply Book" }, times: "1 x", link1: "DOC", link2: "PDF" },
                 ]
             },
             "File the indicated number of copies to the registry.",
@@ -24,7 +26,7 @@ class ReplyBookPopup extends Component {
             iconSrc: "icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadline: " at least 5 days ",
-            deadlinePhrase: { first: "File a Reply Book ", last: " before the hearing." },
+            deadlinePhrase: { first: "File and then serve a Reply Book ", last: " before the hearing." },
             lineHeight: null,
             last: true,
             contentMap: contentMap

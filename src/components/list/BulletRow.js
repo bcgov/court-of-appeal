@@ -4,16 +4,23 @@ import '../infopopups/infopopup.css';
 class BulletRow extends Component {
 
     render() {
-        let rowcontent = null;
+
+        let rowcontent = null, description = null;
         if (this.props.row.descriptionLink) {
+            description =  <a href={this.props.row.descriptionLink.URL} target="_blank">{this.props.row.descriptionLink.URLName}</a>;
+        } else {
+            description = this.props.row.description;
+        }
+
+        if (this.props.row.onlineForm) {
             // build a row that has a link to information about the file, and a link to a form after.
             rowcontent = (
                 <div className="evenly-spaced">
                     <div>
-                        <a href={this.props.row.descriptionLink.URL}>{this.props.row.descriptionLink.URLName}</a>
+                        {description}
                     </div>
                     <div >
-                        <a className={"row-badge"} style={{padding:'5px'}} href={this.props.row.documentLink.URL}>{this.props.row.documentLink.URLName}</a>
+                        <a className={"row-badge"} style={{padding:'5px'}} href={this.props.row.documentLink.URL} target="_blank">{this.props.row.documentLink.URLName}</a>
                     </div>
                 </div>
             )
@@ -21,7 +28,7 @@ class BulletRow extends Component {
             rowcontent = (
                 <div className="bullet-row-content">
                     <div className="bullet-row-description">
-                        {this.props.row.description}
+                        {description}
                     </div>
 
                     <div className="bullet-row-badges-container">
