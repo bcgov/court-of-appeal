@@ -39,6 +39,7 @@ class CourtOrderPopup extends Component {
         return  (
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
+                    <span id="close-modal" onClick={this.props.close}>&times;</span>
                     Court Order
                 </div>
                 <div className="info-modal-content">

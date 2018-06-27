@@ -10,9 +10,17 @@ class RespondentFactumPopup extends Component {
             {
                 line: "Complete either the .DOCs or .PDFs below:",
                 rows: [
-                    { description: "Factum (Form 10)", times: "1 x", link1: "DOC", link2: "PDF" },
-                    { description: "*Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "DOC", link2: "PDF" },
-                    { description: "Appeal Book (Form 12)", times: "1 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink: {
+                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)",
+                        URLName: "Factum"
+                        }, times: "1 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink: {
+                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
+                        URLName: "* Optional - Transcript and Extract Book" }, times: "1 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink : {
+                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
+                        URLName: "* Optional - Appeal Book"
+                        }, times: "1 x", link1: "DOC", link2: "PDF" },
                 ]
             },
             "File the indicated number of copies to the registry.",
@@ -65,18 +73,17 @@ class RespondentFactumPopup extends Component {
             last: false,
             content: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
             "  However, if you were the one who submitted the Certificate of readiness, please click the link for more information",
-                {URL: "#", URLName: "Schedule the appeal for hearing"}]
+                {URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.12-schedule-the-appeal-for-hearing?ct=t(step-index-link)", URLName: "Schedule the appeal for hearing"}]
         }]
     }
 
     render() {
-
         let sections = this.props.getSections(this.sections);
         return (
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
                     <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    The Factum and Transcript Extract Book
+                    The Factum and Appeal Book
                 </div>
                 <div className="info-modal-content">
                     <div className="info-modal-primary-heading ">Were you served with any of the following documents?</div>

@@ -10,9 +10,17 @@ class AppellantFactumPopup extends Component {
             {
                 line: "Complete either the .DOCs or .PDFs below:",
                 rows: [
-                    { description: "Factum (Form 10)", times: "4 x", link1: "DOC", link2: "PDF" },
-                    { description: "*Optional - Transcript and Extract Book (Form 13)", times: "1 x", link1: "DOC", link2: "PDF" },
-                    { description: "Appeal Book (Form 12)", times: "4 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink: {
+                            URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.7-write-your-factum?ct=t(step-index-link)",
+                            URLName: "Factum"
+                        }, times: "4 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink: {
+                            URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.9-preparing-the-transcript-extract-book?ct=t(step-index-link)",
+                            URLName: "* Optional - Transcript and Extract Book" }, times: "1 x", link1: "DOC", link2: "PDF" },
+                    { descriptionLink : {
+                            URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.6-put-together-your-appeal-book?ct=t(step-index-link)",
+                            URLName: "* Optional - Appeal Book"
+                        }, times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
             "File the indicated number of copies to the registry.",
