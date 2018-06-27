@@ -38,11 +38,9 @@ describe('Form2DataSection', ()=> {
     };
     let document;
     beforeEach(()=>{
+        data.useServiceEmail = false;
+        data.sendNotifications = false;
         document = createDocument();
-    });
-
-    test('starts with showEmailAsMandatory false', ()=>{
-        expect(document.instance().state.showEmailAsMandatory).toEqual(false);
     });
 
     test('starts with hidden asterisk for email', ()=>{
@@ -51,17 +49,17 @@ describe('Form2DataSection', ()=> {
         expect(asterisk.prop('style').display).toEqual('none');
     });
 
-    test('show email as mandatory when notifications are chosen', ()=>{
-        let field = document.find('input#sendNotifications').at(0);
-        field.simulate('change', { target: { name:'document.sendNotifications', checked:true } });
+    test('unless useServiceEmail is provided as true', ()=>{
+        data.useServiceEmail = true;
+        document = createDocument();
         let asterisk = document.find('#emailasterisks').at(0);
 
         expect(asterisk.prop('style').display).toEqual('inline-block');
     });
 
-    test('show email as mandatory when service email is chosen', ()=>{
-        let field = document.find('input#useServiceEmail').at(0);
-        field.simulate('change', { target: { name:'document.useServiceEmail', checked:true } });
+    test('unless sendNotifications is provided as true', ()=>{
+        data.sendNotifications = true;
+        document = createDocument();
         let asterisk = document.find('#emailasterisks').at(0);
 
         expect(asterisk.prop('style').display).toEqual('inline-block');
