@@ -7,6 +7,8 @@ import HearingPopup from "./HearingPopup";
 import CourtOrderPopup from "./CourtOrderPopup";
 import RespondentFactumPopup from "./RespondentFactumPopup";
 import CrossAppealPopup from "./CrossAppealPopup";
+import AppearancePopup from "./AppearancePopup";
+import BulletedList from "../list/BulletedList";
 
 class InfoPopup extends Component {
 
@@ -40,6 +42,11 @@ class InfoPopup extends Component {
                     />;
                 case 'crossappeal' :
                     return <CrossAppealPopup
+                        close={this.props.close}
+                        getSections={this.getSections.bind(this)}
+                    />;
+                case 'appearance' :
+                    return <AppearancePopup
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                     />;
@@ -95,51 +102,32 @@ class InfoPopup extends Component {
            </div>
         );
     }
-    
-    //** turn this into a separate component
+
+    /**
+     * getListContent turns a map into a numbered list, potentially containing nested bulleted lists. It assumes that any objects within
+     * the map define a bulleted list.
+     *
+     * @param listItems - map of list rows consisting of either strings (for a numbered row) or objects (defining a bulleted list)
+     * @returns {*}
+     */
     getListContent (listItems) {
         if (!listItems) {
             return null;
         }
 
         let listContent = listItems.map((value, index) => {
-            let key = index + 1;
             let listRow = value;
+            let key = index + 1;
 
             if (listRow instanceof Object) {
-
-                let heading = <div>{key} .&nbsp;&nbsp; {listRow.line}</div>;
-                let rows = listRow.rows;
-
-                let bulletList = rows.map((row, bulletIndex) => {
-                    return (
-                        <div key={bulletIndex + "-" + index} className="row bullet-list-row">
-                            <div className="col col-lg-1 col-md-1 bullet-div">
-                                <div className="bullet"/>
-                            </div>
-                            <div className="col col-lg-8 col-md-8">
-                                {row.description}
-                            </div>
-                            <div className="col col-lg-1 col-md-1">
-                                {row.times}
-                            </div>
-                            <div className="col col-lg-1 col-md-1">
-                                <div className="doc-badge"> {row.link1} </div>
-                            </div>
-                            <div className="col col-lg-1 col-md-1">
-                                <div className="doc-badge"> {row.link2} </div>
-                            </div>
-                        </div>
-                    )
-                });
-
-                return (
-                    <div key={"list" + key}>
-                        {heading}
-                        {bulletList}
-                    </div>
-
-                );
+               return (
+                   <BulletedList
+                       index={key}
+                       key={key}
+                       heading={listRow.line}
+                       rows={listRow.rows}
+                    />
+               );
 
             } else {
                 return (
