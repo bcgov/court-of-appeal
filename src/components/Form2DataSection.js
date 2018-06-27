@@ -7,45 +7,6 @@ import EmailField from "./EmailField";
 
 class Form2DataSection extends React.Component {
 
-    constructor(props){
-        super(props);        
-        this.state ={
-            useServiceEmail: props.data.useServiceEmail,
-            sendNotifications: props.data.sendNotifications,
-            showEmailAsMandatory: props.data.useServiceEmail || props.data.sendNotifications
-        };
-        this.toggleSendNotifications = this.toggleSendNotifications.bind(this);
-        this.toggleUseServiceEmail = this.toggleUseServiceEmail.bind(this);
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps == null || nextProps.data == null) { return; }        
-        this.setState({
-            useServiceEmail: nextProps.data.useServiceEmail,
-            sendNotifications: nextProps.data.sendNotifications,
-            showEmailAsMandatory: nextProps.data.useServiceEmail || nextProps.data.sendNotifications
-        });
-    }
-
-    toggleSendNotifications(e) {
-        let sendNotifications = e.target.checked;
-        let showEmailAsMandatory = this.state.useServiceEmail || sendNotifications;
-        this.setState({
-            sendNotifications: sendNotifications,
-            showEmailAsMandatory: showEmailAsMandatory
-        });
-        this.props.handleFieldChange(e);
-    }
-
-    toggleUseServiceEmail(e) {
-        let useServiceEmail = e.target.checked;
-        let showEmailAsMandatory = useServiceEmail || this.state.sendNotifications;
-        this.setState({
-            useServiceEmail: useServiceEmail,
-            showEmailAsMandatory: showEmailAsMandatory
-        });
-        this.props.handleFieldChange(e);
-    }
-
     render() {
         if (this.props.show && this.props.data) {
             let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
@@ -222,7 +183,7 @@ class Form2DataSection extends React.Component {
                             </div>
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
-                                    <span id="emailasterisks" className="mandatory-field" style={{display:this.state.showEmailAsMandatory?'inline-block':'none'}}>*</span>
+                                    <span id="emailasterisks" className="mandatory-field" style={{display:this.props.data.useServiceEmail || this.props.data.sendNotifications?'inline-block':'none'}}>*</span>
                                     Email address&nbsp;
                                     <i className="fa fa-question-circle" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to aggree to this using the checkboxes below)"></i>
                                 </div>
@@ -246,7 +207,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
                                     <input id="sendNotifications" ref={(element)=> { this.sendNotificationsCheckbox = element; }}
                                         type="checkbox"
-                                        onChange={this.toggleSendNotifications}
+                                        onChange={this.props.handleFieldChange}
                                         name="respondent.sendNotifications"
                                         checked={this.props.data.sendNotifications}
                                         disabled={this.props.readOnly}
@@ -258,7 +219,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
                                 <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
                                     type="checkbox"
-                                    onChange={this.toggleUseServiceEmail}
+                                    onChange={this.props.handleFieldChange}
                                     name="respondent.useServiceEmail"
                                     checked={this.props.data.useServiceEmail}
                                     disabled={this.props.readOnly}
