@@ -10,7 +10,7 @@ class AppearancePopup extends Component {
             {
                 line: "Complete the form below.  Click on the document name for more information.",
                 rows: [
-                    { onlineForm: true, descriptionLink: {URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)", URLName: "Notice of Appearance"}, documentLink: {URL: "/form.2.html", URLName: "Online form" } }
+                    { onlineForm: true, descriptionLink: {URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)", URLName: "Notice of Appearance"}, documentLink: {URL: process.env.PUBLIC_URL + "/form.2.html", URLName: "Online form" } }
                 ]
             },
             "File the indicated number of copies to the registry.",
