@@ -7,5 +7,5 @@ addons:
     token:
       secure: $SONAR_TOKEN
 script: 
-  - jest --coverage --forceExit
+  - npm run test:coverage
   - sonar-scanner

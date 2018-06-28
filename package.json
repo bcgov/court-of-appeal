@@ -35,9 +35,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest -u",
+    "test": "PUBLIC_URL='' jest -u",
     "eject": "react-scripts eject",
-    "test:coverage": "jest -u --coverage"
+    "test:coverage": "PUBLIC_URL='' jest --coverage --forceExit"
   },
   "jest": {
     "testEnvironment": "node",
