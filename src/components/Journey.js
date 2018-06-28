@@ -88,7 +88,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
-                mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
+                mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
                 mapProps: [{coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
             };
         }, () => {
@@ -101,7 +101,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
-                mapSrc: "images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
+                mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
                 mapProps: [{alt: "e-file an appeal"}]
             };
         }, () => {
@@ -114,7 +114,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
-                mapSrc: "images/journeymap/journey-map_respondent-notice-of-appeal.png",
+                mapSrc: "/images/journeymap/journey-map_respondent-notice-of-appeal.png",
                 mapProps: [
                     {coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance"},
                     {coords: "250,10,370,200", function: "crossappeal", alt: "info about the cross appeal"},
@@ -134,7 +134,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
-                mapSrc: "images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
+                mapSrc: "/images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 mapProps: [
                     {coords: "85,10,200,190", function: "appearance", alt: "e-file a notice of appearance"},
                     {coords: "285,10,385,190", function: 'replybook', alt: "about the Reply Book"},

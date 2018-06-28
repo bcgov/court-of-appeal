@@ -21,7 +21,7 @@ class AppearancePopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "Were you served with a Notice of Appeal?",
-            iconSrc: "icons/icon-share.svg",
+            iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "You have ", last: " to file and serve your documents."},
             deadline: " 10 days ",
