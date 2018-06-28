@@ -315,7 +315,7 @@ class Form2 extends Component {
             <div id="breadcrumbContainer">
                 <ol className="breadcrumb">
                     <li>
-                        <a id="home" href="/">Home</a>
+                        <a id="home" href={process.env.PUBLIC_URL}>Home</a>
                     </li>
                     <li>
                         <a href="">Notice of Appearance (Form 2)</a>

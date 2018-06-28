@@ -11,7 +11,7 @@ class Form7 extends Component {
         <ol className="breadcrumb">
 
             <li>
-                <a href="/">Home</a>
+                <a href={process.env.PUBLIC_URL}>Home</a>
             </li>
             <li>
                 <a href="">Form 7</a>

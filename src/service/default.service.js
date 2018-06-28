@@ -20,7 +20,7 @@ let Service = function(window) {
 };
 
 Service.prototype.base = function() {
-    return this.apiUrl === undefined ? '' : this.apiUrl;
+    return (this.apiUrl === undefined ? '' : this.apiUrl) + process.env.PUBLIC_URL;
 };
 
 Service.prototype.notifyThatAnErrorOccured = function(callback, options) {

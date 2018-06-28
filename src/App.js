@@ -14,11 +14,11 @@ class App extends Component {
       <Router>
         <div className="full-height">
           <Header />  
-          <Route exact path="/" component={Dashboard} /> 
-          <Route path="/form.7.html" component={Form7} />        
-          <Route path="/form.2.html" component={Form2} />        
-          <Route path="/my-applications.html" component={MyApplications} />        
-          <Route path="/notifications.html" component={Notifications} />        
+          <Route exact path={process.env.PUBLIC_URL} component={Dashboard} /> 
+          <Route path={process.env.PUBLIC_URL + '/form.7.html'} component={Form7} />        
+          <Route path={process.env.PUBLIC_URL + '/form.2.html'} component={Form2} />        
+          <Route path={process.env.PUBLIC_URL + '/my-applications.html'} component={MyApplications} />        
+          <Route path={process.env.PUBLIC_URL + '/notifications.html'} component={Notifications} />        
           <Footer />      
         </div>
       </Router>

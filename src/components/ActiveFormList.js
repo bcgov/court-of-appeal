@@ -61,7 +61,7 @@ class ActiveFormList extends Component {
                         No open cases found
                 </div>
                 <div>
-                    <a href="/my-applications.html" className="btn btn-primary round-borders">View All Documents</a>
+                    <a href={`${process.env.PUBLIC_URL}/my-applications.html`} className="btn btn-primary round-borders">View All Documents</a>
                 </div>
             </div>
         )

@@ -53,7 +53,7 @@ class Header extends Component {
                     <div id="header-main-row" className="row">
                         <div className="col-xs-3 col-sm-3 col-md-2 col-lg-2 header-main-left">
                             <div id="logo">
-                                <a href="http://gov.bc.ca"><img src="/images/gov3_bc_logo.png" alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
+                                <a href="http://gov.bc.ca"><img src={process.env.PUBLIC_URL + '/images/gov3_bc_logo.png'} alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
                             </div>
                         </div>
                         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
@@ -77,15 +77,15 @@ class Header extends Component {
                         <div className="container">
                             <div id="row">
                                 <div className="col-xs-6 text-left">
-                                    <a href="/">HOME</a>
-                                    <a href="/my-applications.html">MY DOCUMENTS</a>
-                                    <a href="/">ALL DOCUMENTS</a>
+                                    <a href={process.env.PUBLIC_URL}>HOME</a>
+                                    <a href={process.env.PUBLIC_URL + '/my-applications.html'}>MY DOCUMENTS</a>
+                                    <a href={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</a>
                                 </div>
                                 <div className="col-xs-6 text-right icons">
-                                    <a href="/">
+                                    <a href={process.env.PUBLIC_URL}>
                                         <span className="oi oi-cog" title="profile" aria-hidden="true"></span>
                                     </a>
-                                    <a href="/">
+                                    <a href={process.env.PUBLIC_URL}>
                                         <span className="oi oi-info" title="help" aria-hidden="true"></span>
                                     </a>
                                 </div>

@@ -44,7 +44,7 @@ class Journey extends Component {
 
     componentDidMount() {
         window.onpopstate = this.handlePopState;
-        this.props.history.push("/", this.state);
+        this.props.history.push(process.env.PUBLIC_URL, this.state);
     }
 
     componentWillUnmount() {
@@ -65,7 +65,7 @@ class Journey extends Component {
                 respondButtonClass: 'btn btn-primary round-borders btn-journey'
             }
         }, () => {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
 
     }
@@ -79,7 +79,7 @@ class Journey extends Component {
                 appealButtonClass: 'btn btn-primary round-borders btn-journey'
             }
         }, ()=> {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
     }
 
@@ -92,7 +92,7 @@ class Journey extends Component {
                 mapProps: [{coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
             };
         }, () => {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
     }
 
@@ -105,7 +105,7 @@ class Journey extends Component {
                 mapProps: [{alt: "e-file an appeal"}]
             };
         }, () => {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
     }
 
@@ -125,7 +125,7 @@ class Journey extends Component {
                     ]
             }
         }, () => {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
     }
 
@@ -142,7 +142,7 @@ class Journey extends Component {
                 ]
             }
         }, () => {
-            this.props.history.push("/", this.state);
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
         });
     }
 
