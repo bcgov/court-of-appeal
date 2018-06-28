@@ -9,12 +9,18 @@ import MyApplications from './forms/my.applications.js';
 import Notifications from './notifications.js';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+  }
+
   render() {
     return (
       <Router>
         <div className="full-height">
           <Header />  
-          <Route exact path={process.env.PUBLIC_URL} component={Dashboard} /> 
+          <Route exact path={this.homePath} component={Dashboard} /> 
           <Route path={process.env.PUBLIC_URL + '/form.7.html'} component={Form7} />        
           <Route path={process.env.PUBLIC_URL + '/form.2.html'} component={Form2} />        
           <Route path={process.env.PUBLIC_URL + '/my-applications.html'} component={MyApplications} />        

@@ -6,6 +6,7 @@ class Header extends Component {
 
     constructor(props) {
         super(props);   
+        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = props.service; 
         this.state = {
             login: '<?>'
@@ -77,7 +78,7 @@ class Header extends Component {
                         <div className="container">
                             <div id="row">
                                 <div className="col-xs-6 text-left">
-                                    <a href={process.env.PUBLIC_URL}>HOME</a>
+                                    <a href={this.homePath}>HOME</a>
                                     <a href={process.env.PUBLIC_URL + '/my-applications.html'}>MY DOCUMENTS</a>
                                     <a href={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</a>
                                 </div>

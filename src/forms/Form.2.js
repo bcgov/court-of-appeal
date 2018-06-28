@@ -15,6 +15,7 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
+        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = props.service;
         this.state = this.initialState();
 
@@ -315,7 +316,7 @@ class Form2 extends Component {
             <div id="breadcrumbContainer">
                 <ol className="breadcrumb">
                     <li>
-                        <a id="home" href={process.env.PUBLIC_URL}>Home</a>
+                        <a id="home" href={this.homePath}>Home</a>
                     </li>
                     <li>
                         <a href="">Notice of Appearance (Form 2)</a>
