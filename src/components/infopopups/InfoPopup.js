@@ -83,7 +83,7 @@ class InfoPopup extends Component {
         let content = contentOrMap.map((value, index) => {
             let paragraph = value;
             if (value.URL) {
-               paragraph = <a href={value.URL}>{value.URLName}</a>;
+               paragraph = <a href={value.URL} target="_blank">{value.URLName}</a>;
             }
 
             return (
