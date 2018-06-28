@@ -86,7 +86,9 @@ class RespondentFactumPopup extends Component {
                     The Factum and Appeal Book
                 </div>
                 <div className="info-modal-content">
-                    <div className="info-modal-primary-heading ">Were you served with any of the following documents?</div>
+                    <div className="info-modal-primary-heading row">
+                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1"> Were you served with any of the following documents?</div>
+                    </div>
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"
