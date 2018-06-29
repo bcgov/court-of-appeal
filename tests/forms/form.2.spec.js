@@ -71,6 +71,34 @@ describe('Form2', ()=>{
             expect(document.instance().state.document.respondents[3].name).toEqual('fourth');
             expect(document.instance().state.document.respondents[3].address).toEqual('solicitor-address');
         });
+        test('resists empty parties', ()=>{
+            document = mount(<Form2 
+                service={{ searchForm7: (number, callback)=> { 
+                    callback({parties:{ appellants:[], respondents:[] }}); } }}
+            />);
+            document.find('#find-button').at(0).prop('onClick')();
+            document.update();
+        });
+        test('resists missing parties', ()=>{
+            document = mount(<Form2 
+                service={{ searchForm7: (number, callback)=> { 
+                    callback({parties:{  }}); } }}
+            />);
+            document.find('#find-button').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.instance().state.notFoundError).toEqual('Something went wrong with the document requested');
+        });
+        test('resists no data', ()=> {
+            document = mount(<Form2 
+                service={{ searchForm7: (number, callback)=> { 
+                    callback(null); } }}
+            />);
+            document.find('#find-button').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.instance().state.notFoundError).toEqual('No such Court of Appeal document found');
+        });
     });
     
     describe('Creation', ()=>{

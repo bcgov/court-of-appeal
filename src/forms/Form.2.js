@@ -118,6 +118,8 @@ class Form2 extends Component {
     }
 
     mapIncomingData(parties) {
+        if (parties === undefined) { return undefined; }
+
         return parties.map((entity) => {
             let entityMap = {};
             if (entity.name) {
