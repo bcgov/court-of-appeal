@@ -3,6 +3,12 @@ import './Form.css';
 import './Form.7.css';
 
 class Form7 extends Component {
+
+    constructor(props) {
+        super(props);
+        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+      }
+
   render() {
     return (
       <div id="topicTemplate" className="template container gov-container form">
@@ -11,7 +17,7 @@ class Form7 extends Component {
         <ol className="breadcrumb">
 
             <li>
-                <a href="/">Home</a>
+                <a href={this.homePath}>Home</a>
             </li>
             <li>
                 <a href="">Form 7</a>

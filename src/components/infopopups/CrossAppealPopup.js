@@ -20,7 +20,7 @@ class CrossAppealPopup extends Component {
         this.sections = [{
             expandable: true,
             sectionHeading: "The Notice of Appeal or the order granting leave to appeal",
-            iconSrc: "icons/icon-share.svg",
+            iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "You have  ", last: " to file and serve your documents, after receiving the last document."},
             deadline: " 15 days ",

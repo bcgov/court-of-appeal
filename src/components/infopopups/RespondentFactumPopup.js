@@ -30,7 +30,7 @@ class RespondentFactumPopup extends Component {
         this.sections = [{
             expandable: true,
             sectionHeading: "The Factum and Appeal Book",
-            iconSrc: "icons/icon-share.svg",
+            iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "You have  ", last: " to file and serve your documents."},
             deadline: " 30 days ",

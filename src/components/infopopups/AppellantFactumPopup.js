@@ -39,7 +39,7 @@ class AppellantFactumPopup extends Component {
         this.sections = [{
             expandable: true,
             sectionHeading: "Have you filed an Appeal Record ?",
-            iconSrc: "icons/icon-share.svg",
+            iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrase: {first: "File a Factum and Appeal Book ", last: " of filing an Appeal Record."},
             deadline: " within 30 days ",
@@ -50,7 +50,7 @@ class AppellantFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Factum?",
-            iconSrc :"icons/icon-share.svg",
+            iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadline:" within 7 days ",
             deadlinePhrase: {first: "File and serve a Reply ", last: " of receiving a Respondent's Factum."},
@@ -60,7 +60,7 @@ class AppellantFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Transcript Extract Book?",
-            iconSrc: "icons/icon-info.svg",
+            iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             deadline: null,
             lineHeight: null,
