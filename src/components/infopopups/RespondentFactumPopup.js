@@ -31,10 +31,9 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Factum and Appeal Book",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {first: "You have  ", last: " to file and serve your documents."},
+            deadlinePhrase: {startWith: "You have  ", endWith: " to file and serve your documents."},
             deadline: " 30 days ",
             lineHeight: '275px',
-            last: false,
             contentMap: contentMap
         }, {
             expandable: true,
@@ -42,7 +41,6 @@ class RespondentFactumPopup extends Component {
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '60px',
-            last: false,
             content: ["If you are served with the appellant's Transcript Extract Book, you DO NOT have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
@@ -51,7 +49,6 @@ class RespondentFactumPopup extends Component {
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '60px',
-            last: false,
             content: ["If you are served with the appellant's Certificate of Readiness, you DO NOT have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
@@ -60,19 +57,19 @@ class RespondentFactumPopup extends Component {
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '60px',
-            last: false,
             content: ["If you are served with the appellant's Reply to Your Factum, you DO NOT have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",
-            iconSrc :"icons/icon-clock.svg",
-            iconClass: "info-modal-clock",
+            iconSrc :"icons/icon-calendar.svg",
+            iconClass: "info-modal-calendar",
             lineHeight: '121px',
-            last: false,
             content: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
-            "  However, if you were the one who submitted the Certificate of readiness, please click the link for more information",
-                {URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.12-schedule-the-appeal-for-hearing?ct=t(step-index-link)", URLName: "Schedule the appeal for hearing"}]
+            "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information",
+                {
+                    URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.3-schedule-the-appeal-for-hearing?ct=t(step-index-link)",
+                    URLName: "Schedule the appeal for hearing"}]
         }]
     }
 

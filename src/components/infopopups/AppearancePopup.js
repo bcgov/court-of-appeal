@@ -19,12 +19,11 @@ class AppearancePopup extends Component {
         this.sections = [{
             expandable: false,
             expanded: true,
-            sectionHeading: "Were you served with a Notice of Appeal?",
+            sectionHeading: `Were you served with a ${this.props.noticeType}?`,
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {first: "You have ", last: " to file and serve your documents."},
+            deadlinePhrase: {first: "You have ", last: " to file and serve your document."},
             deadline: " 10 days ",
-            lineHeight: '202px',
             last: false,
             contentMap: contentMap
         }]

@@ -26,9 +26,9 @@ describe('Form2DataSection', ()=> {
         useServiceEmail: false,
         sendNotifications: false,
         selectedRespondentIndex: 0
-    } 
+    }
     let createDocument = ()=>{
-        let document = mount(<Form2DataSection 
+        let document = mount(<Form2DataSection
             data={data}
             show={true}
             validate={()=>{}}
@@ -76,5 +76,5 @@ describe('Form2DataSection', ()=> {
 
         expect(field.text()).toEqual('first, second');
     });
-    
+
 });

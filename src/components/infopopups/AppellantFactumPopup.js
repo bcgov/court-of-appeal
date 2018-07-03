@@ -40,10 +40,9 @@ class AppellantFactumPopup extends Component {
             sectionHeading: "Have you filed an Appeal Record ?",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {first: "File a Factum and Appeal Book ", last: " of filing an Appeal Record."},
+            deadlinePhrase: {startWith: "File a Factum and Appeal Book ", endWith: " of filing an Appeal Record."},
             deadline: " within 30 days ",
             lineHeight: '252px',
-            last: false,
             expanded: true,
             contentMap: contentMap
         }, {
@@ -52,9 +51,8 @@ class AppellantFactumPopup extends Component {
             iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadline:" within 7 days ",
-            deadlinePhrase: {first: "File and serve a Reply ", last: " of receiving a Respondent's Factum."},
+            deadlinePhrase: {startWith: "File and serve a Reply ", endWith: " of receiving a Respondent's Factum."},
             lineHeight: '221px',
-            last: false,
             contentMap: contentMap2
         }, {
             expandable: true,
@@ -64,7 +62,6 @@ class AppellantFactumPopup extends Component {
             deadline: null,
             lineHeight: null,
             VLProps: null,
-            last: true,
             content: [" You may also be served a copy of the respondent’s Transcript Extract Book.  " +
             " This document is for your awareness only and you do not have to respond to it."]
         }]

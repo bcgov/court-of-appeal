@@ -26,9 +26,8 @@ class ReplyBookPopup extends Component {
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadline: " at least 5 days ",
-            deadlinePhrase: { first: "File and then serve a Reply Book ", last: " before the hearing." },
+            deadlinePhrase: { startWith: "File and then serve a Reply Book ", endWith: " before the hearing." },
             lineHeight: null,
-            last: true,
             contentMap: contentMap
         }]
     }

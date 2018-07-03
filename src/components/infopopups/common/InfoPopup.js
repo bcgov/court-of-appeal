@@ -3,7 +3,7 @@ import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
 import AppellantFactumPopup from "../AppellantFactumPopup";
 import ReplyBookPopup from "../ReplyBookPopup";
-import HearingPopup from "../HearingPopup";
+import RespondentHearingPopup from "../RespondentHearingPopup";
 import CourtOrderPopup from "../CourtOrderPopup";
 import RespondentFactumPopup from "../RespondentFactumPopup";
 import CrossAppealPopup from "../CrossAppealPopup";
@@ -25,8 +25,8 @@ class InfoPopup extends Component {
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                     />;
-                case 'hearing' :
-                    return <HearingPopup
+                case 'respondenthearing' :
+                    return <RespondentHearingPopup
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                         />;
@@ -45,10 +45,17 @@ class InfoPopup extends Component {
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
                     />;
+                case 'leave-application-appearance' :
+                    return <AppearancePopup
+                        close={this.props.close}
+                        getSections={this.getSections.bind(this)}
+                        noticeType="Notice of Application for Leave to Appeal"
+                    />;
                 case 'appearance' :
                     return <AppearancePopup
                         close={this.props.close}
                         getSections={this.getSections.bind(this)}
+                        noticeType="Notice of Appeal"
                     />;
                 default :
                     return null;

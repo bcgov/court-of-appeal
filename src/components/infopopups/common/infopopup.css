@@ -88,9 +88,8 @@
     padding: 12px;
 }
 
-.info-modal-clock {
-    padding: 6px;
-    margin-right: 5px;
+.info-modal-calendar {
+    margin-left: 3px;
 }
 
 .info-modal-divider {
@@ -101,7 +100,6 @@
 }
 
 .info-modal-ol {
-    font-weight: bolder;
     padding: 25px 0 10px 0;
 }
 
