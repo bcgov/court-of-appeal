@@ -107,10 +107,7 @@ Service.prototype.savePerson = function(user, callback) {
 
 Service.prototype.buildOptions = function(url) {
     return {
-        url: this.base() + url,
-        headers: {
-            'X-USER': this.user
-        }
+        url: this.base() + url
     };
 };
 Service.prototype.getPersonInfo = function(callback) {

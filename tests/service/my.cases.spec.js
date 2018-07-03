@@ -7,13 +7,10 @@ describe('My cases', function() {
 
     let service;
     let apiServer;
-    let received;
 
     beforeEach(function(done) {
-        received = undefined;
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            received = request.headers;  
             if (request.url == '/api/cases' && request.method == 'GET') {                
                 response.statusCode = 200;
                 response.write(JSON.stringify({any:'field'}));
@@ -39,20 +36,6 @@ describe('My cases', function() {
             expect(data).toEqual({any:'field'});
             done();
         });     
-    });
-    test('sends user info when initialized', (done)=>{
-        service.user = 'any';
-        service.getMyCases({}, (data)=> {
-            expect(received['x-user']).toEqual('any');
-            done();
-        }); 
-    });
-    test('does not send user info when undefined', (done)=>{
-        service.user = undefined;
-        service.getMyCases({}, (data)=> {
-            expect(received['x-user']).toEqual(undefined);
-            done();
-        }); 
     });
     test('resists 503', (done)=>{
         apiServer.stop(()=>{

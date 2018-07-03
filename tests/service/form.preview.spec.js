@@ -7,13 +7,10 @@ describe('Form preview', function() {
 
     let service;
     let apiServer;
-    let received;
 
-    beforeEach(function(done) {
-        received = undefined;
+    beforeEach(function(done) {        
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            received = request.headers;  
             if (request.url == '/api/forms/42/preview' && request.method == 'GET') {                
                 response.statusCode = 200;
                 response.write('<html><body>any</body></html>');
@@ -39,20 +36,6 @@ describe('Form preview', function() {
             expect(data).toEqual('<html><body>any</body></html>');
             done();
         });     
-    });
-    test('sends user info when initialized', (done)=>{
-        service.user = 'any';
-        service.previewForm(42, (data)=> {
-            expect(received['x-user']).toEqual('any');
-            done();
-        }); 
-    });
-    test('does not send user info when undefined', (done)=>{
-        service.user = undefined;
-        service.previewForm(42, (data)=> {
-            expect(received['x-user']).toEqual(undefined);
-            done();
-        }); 
     });
     test('resists 503', (done)=>{
         apiServer.stop(()=>{

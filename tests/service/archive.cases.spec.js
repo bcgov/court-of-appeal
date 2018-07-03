@@ -7,13 +7,10 @@ describe('My cases', function() {
 
     let service;
     let apiServer;
-    let received;
 
     beforeEach(function(done) {
-        received = undefined;
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            received = request.headers;  
             if (request.url == '/api/cases/archive' && request.method == 'POST') {                                
                 let body = '';
                 request.on('data', (data)=> {
@@ -44,20 +41,6 @@ describe('My cases', function() {
             expect(data).toEqual('[1,2,3]');
             done();
         });     
-    });
-    test('sends user info when initialized', (done)=>{
-        service.user = 'any';
-        service.archiveCases([1, 2, 3], (data)=> {
-            expect(received['x-user']).toEqual('any');
-            done();
-        }); 
-    });
-    test('does not send user info when undefined', (done)=>{
-        service.user = undefined;
-        service.archiveCases([1, 2, 3], (data)=> {
-            expect(received['x-user']).toEqual(undefined);
-            done();
-        }); 
     });
     test('resists 503', (done)=>{
         apiServer.stop(()=>{
