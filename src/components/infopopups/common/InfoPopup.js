@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
-import AppellantFactumPopup from "./AppellantFactumPopup";
-import ReplyBookPopup from "./ReplyBookPopup";
-import HearingPopup from "./HearingPopup";
-import CourtOrderPopup from "./CourtOrderPopup";
-import RespondentFactumPopup from "./RespondentFactumPopup";
-import CrossAppealPopup from "./CrossAppealPopup";
-import AppearancePopup from "./AppearancePopup";
-import BulletedList from "../list/BulletedList";
+import AppellantFactumPopup from "../AppellantFactumPopup";
+import ReplyBookPopup from "../ReplyBookPopup";
+import HearingPopup from "../HearingPopup";
+import CourtOrderPopup from "../CourtOrderPopup";
+import RespondentFactumPopup from "../RespondentFactumPopup";
+import CrossAppealPopup from "../CrossAppealPopup";
+import AppearancePopup from "../AppearancePopup";
+import BulletedList from "../../list/BulletedList";
 
 class InfoPopup extends Component {
 

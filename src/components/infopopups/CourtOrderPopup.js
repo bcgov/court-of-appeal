@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Help from "./Help";
+import Help from "./common/Help";
 
 class CourtOrderPopup extends Component {
 
