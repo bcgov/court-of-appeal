@@ -1,6 +1,5 @@
 import React, { Component }from 'react';
-import './infopopup.css';
-import Help from './Help';
+import Help from './common/Help';
 
 class AppearancePopup extends Component {
 
