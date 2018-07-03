@@ -15,10 +15,10 @@ describe('Header', ()=>{
     });
     test('displays name of connected user', ()=>{
         let document = mount(<Header service={{
-            getPersonInfo: (callback)=> { callback({ login:'login', name:'this-name' }); }
+            getPersonInfo: (callback)=> { callback({ login:'login', name:'Doe, John' }); }
         }}/>);
         document.update();
 
-        expect(document.find('#header').at(0).html()).toContain('login');
+        expect(document.find('#header').at(0).html()).toContain('John Doe');
     });
 });

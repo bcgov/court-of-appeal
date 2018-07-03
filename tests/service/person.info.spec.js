@@ -10,14 +10,14 @@ describe('Person info', function() {
     let received;
     let answer = {
         code:200,
-        body:JSON.stringify({ login:'max' })
+        body:JSON.stringify({ login:'max', name:'Free Max' })
     };
 
     beforeEach(function(done) {
         received = undefined;
         service = new Service();
         apiServer = new LocalServer((request, response)=> {  
-            if (request.url == '/api/persons/max' && request.method == 'GET') {                
+            if (request.url == '/api/persons/connected' && request.method == 'GET') {                
                 response.statusCode = answer.code;
                 response.write(answer.body);
                 response.end(); 
@@ -40,7 +40,7 @@ describe('Person info', function() {
     test('uses a rest service', (done)=> {   
         service.user = 'max';                     
         service.getPersonInfo((data)=> {
-            expect(data).toEqual({ login:'max' });
+            expect(data).toEqual({ login:'max', name:'Free Max' });
             done();
         });     
     });
