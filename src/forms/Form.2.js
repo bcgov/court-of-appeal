@@ -64,8 +64,7 @@ class Form2 extends Component {
                 phone: '',
                 useServiceEmail: false,
                 sendNotifications: false,
-                email: '',
-                serviceFiler: ''
+                email: ''
             },
 
             displayData: 'none',
@@ -119,6 +118,8 @@ class Form2 extends Component {
     }
 
     mapIncomingData(parties) {
+        if (parties === undefined) { return undefined; }
+
         return parties.map((entity) => {
             let entityMap = {};
             if (entity.name) {
@@ -156,7 +157,6 @@ class Form2 extends Component {
             email: this.state.document.email,
             useServiceEmail: this.state.document.useServiceEmail,
             sendNotifications: this.state.document.sendNotifications,
-            serviceFiler: this.state.document.serviceFiler,
             selectedRespondentIndex: this.state.document.selectedRespondentIndex
         };
         if (!this.state.id) {
@@ -230,7 +230,7 @@ class Form2 extends Component {
         const value = e.target.value;
 
         const respondents = this.state.document.respondents.slice();
-        let address = respondents[this.state.document.selectedRespondentIndex].address || {};
+        let address = respondents[this.state.document.selectedRespondentIndex].address;
         switch (keys[1]) {
             case 'name' :
                 this.setState(update(this.state, {document: {selectedRespondentIndex: {$set: value}}}),
@@ -286,11 +286,6 @@ class Form2 extends Component {
                 break;
             case 'phone' :
                 this.setState(update(this.state, {document: {phone: {$set: value}}}));
-                break;
-            case 'serviceFiler' :
-                this.setState(update(this.state, {document: {serviceFiler: {$set: value}}}));
-                break;
-            default :
                 break;
         }
         this.setState({formHasUnsavedChanges: true});
@@ -352,7 +347,7 @@ class Form2 extends Component {
                         notFoundError={this.state.notFoundError}
                         startSearching={this.startNewSearch.bind(this)}
                     />
-                    <div className="form-section" style={{display: this.state.displayData}}>
+                    <div id="form-data-section" className="form-section" style={{display: this.state.displayData}}>
                         <Form2DataSection
                             show={this.state.showForm2}
                             handleFieldChange={this.handleFieldChange}
