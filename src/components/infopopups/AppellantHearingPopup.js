@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
 
-class CourtOrderPopup extends Component {
+class AppellantHearingPopup extends Component {
 
     constructor(props) {
         super(props);
 
         let content = [
             {
-                URLName: "How will I find out about my judgement?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
+                URLName: "How to prepare for your hearing?",
+                URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(step-index-link)",
             },
             {
-                URLName: "Who is responsible for paying for the hearing?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                URLName: "What will happen at your hearing?",
+                URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(step-index-link)"
             },
             {
-                URLName: "How do I prepare my court order?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(sidebar-link)"
+                URLName: "What to expect after your hearing?",
+                URL: "https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
             }
         ];
 
         this.sections = [{
             expandable: false,
             expanded: true,
-            sectionHeading: "For more information about the court order process, click the topics below: ",
+            sectionHeading: "For more information about the hearing process, click the topics below: ",
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             deadline: null,
@@ -39,7 +39,7 @@ class CourtOrderPopup extends Component {
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
                     <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Court Order
+                    Your Hearing
                 </div>
                 <div className="info-modal-content">
                     {this.props.getSections(this.sections)}
@@ -52,4 +52,4 @@ class CourtOrderPopup extends Component {
         );
     }
 
-} export default CourtOrderPopup;
+} export default AppellantHearingPopup;

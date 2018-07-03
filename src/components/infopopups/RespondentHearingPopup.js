@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
 
-class HearingPopup extends Component {
+class RespondentHearingPopup extends Component {
 
     constructor(props) {
         super(props);
 
         let content = [
             {
-                URLName: "How to prepare for your hearing?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(step-index-link)",
+                URLName: "How do I prepare for my hearing?",
+                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
             },
             {
-                URLName: "What will happen at your hearing?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(step-index-link)"
+                URLName: "What will happen at my hearing?",
+                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
             },
             {
-                URLName: "What to expect after your hearing?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                URLName: "What can I expect after my hearing?",
+                URL: "https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(step-index-link)"
             }
         ];
 
@@ -30,7 +30,6 @@ class HearingPopup extends Component {
             deadline: null,
             deadlinePhrase: null,
             lineHeight: null,
-            last: true,
             content: content
         }]
     }
@@ -53,4 +52,4 @@ class HearingPopup extends Component {
         );
     }
 
-} export default HearingPopup;
+} export default RespondentHearingPopup;

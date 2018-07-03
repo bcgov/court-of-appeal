@@ -118,10 +118,9 @@ class Journey extends Component {
                 mapProps: [
                     {coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance"},
                     {coords: "250,10,370,200", function: "crossappeal", alt: "info about the cross appeal"},
-                    {coords: "450,10,565,200", function: "respondentfactum", alt: "info about the factum and appeal book"},
-                    {coords: "75,270,180,420", function: "respondentfactum", alt: "info about the factum and the appeal book"},
-                    {coords: "260,270,370,400", function: 'hearing', alt: "info about the hearing"},
-                    {coords: "395,270,520,420", function: 'courtorder', alt: "info about the court order process"}
+                    {coords: "450,10,565,200", function: "respondentfactum", alt: "info about the factum and about the appeal book"},
+                    {coords: "150,270,270,400", function: 'respondenthearing', alt: "info about the hearing"},
+                    {coords: "345,270,460,420", function: 'courtorder', alt: "info about the court order process"}
                     ]
             }
         }, () => {
@@ -136,9 +135,9 @@ class Journey extends Component {
                 subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 mapProps: [
-                    {coords: "85,10,200,190", function: "appearance", alt: "e-file a notice of appearance"},
+                    {coords: "85,10,200,190", function: "leave-application-appearance", alt: "e-file a notice of appearance"},
                     {coords: "285,10,385,190", function: 'replybook', alt: "about the Reply Book"},
-                    {coords: "460,5,570,160", function: 'hearing', alt: "info about the hearing"}
+                    {coords: "460,5,570,160", function: 'respondenthearing', alt: "info about the hearing"}
                 ]
             }
         }, () => {
