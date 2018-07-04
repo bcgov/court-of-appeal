@@ -3,7 +3,6 @@ import './infopopup.css';
 import InfoPopupSection from './InfoPopupSection';
 import AppellantFactumPopup from "../AppellantFactumPopup";
 import ReplyBookPopup from "../ReplyBookPopup";
-import RespondentHearingPopup from "../RespondentHearingPopup";
 import CourtOrderPopup from "../CourtOrderPopup";
 import RespondentFactumPopup from "../RespondentFactumPopup";
 import CrossAppealPopup from "../CrossAppealPopup";
@@ -12,6 +11,7 @@ import BulletedList from "../../list/BulletedList";
 import AppealRecordPopup from "../AppealRecordPopup";
 import AppellantInitialPopup from "../AppellantInitialPopup";
 import NoticeOfHearingPopup from "../NoticeOfHearingPopup";
+import HearingPopup from "../HearingPopup";
 import AppellantCourtOrderPopup from "../AppellantCourtOrderPopup";
 
 class InfoPopup extends Component {
@@ -27,10 +27,20 @@ class InfoPopup extends Component {
                 close : this.props.close,
                 getSections: this.getSections
             };
+            let respondentHearingLinks = {
+                link1: "2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
+                link2: "2.6-what-happens-at-the-hearing?ct=t(sidebar-link)",
+                link3: "step-3-after-hearing?ct=t(step-index-link)"
+            };
+            let appellantHearingLinks = {
+                link1: "3.3-how-to-prepare-for-the-hearing?ct=t(step-index-link)",
+                link2: "3.4-what-happens-at-the-hearing?ct=t(sidebar-link)",
+                link3: "3.1-making-chambers-applications?ct=t(step-index-link)"
+            };
             let options = {
                 'factum': <AppellantFactumPopup {...props} />,
                 'replybook': <ReplyBookPopup {...props} />,
-                'respondenthearing': <RespondentHearingPopup {...props} />,
+                'respondenthearing': <HearingPopup {...props} type="respondent" {...respondentHearingLinks} />,
                 'courtorder': <CourtOrderPopup {...props} />,
                 'respondentfactum': <RespondentFactumPopup {...props} />,
                 'crossappeal': <CrossAppealPopup {...props} />,
@@ -39,7 +49,8 @@ class InfoPopup extends Component {
                 'appealrecord': <AppealRecordPopup {...props} />,
                 'appellantinitial': <AppellantInitialPopup {...props} />,
                 'noticeofhearing': <NoticeOfHearingPopup {...props} />,
-                'appellantcourtorder': <AppellantCourtOrderPopup {...props} />
+                'appellantcourtorder': <AppellantCourtOrderPopup {...props} />,
+                'appellanthearing': <HearingPopup {...props} type="appellant" {...appellantHearingLinks} />
             };
             return options[this.props.type];
         } else {

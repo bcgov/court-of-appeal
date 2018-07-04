@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import InfoPopup from '../../../../src/components/infopopups/common/InfoPopup';
 import AppellantFactumPopup from '../../../../src/components/infopopups/AppellantFactumPopup';
 import ReplyBookPopup from '../../../../src/components/infopopups/ReplyBookPopup';
-import RespondentHearingPopup from '../../../../src/components/infopopups/RespondentHearingPopup';
+import HearingPopup from '../../../../src/components/infopopups/HearingPopup';
 import CourtOrderPopup from '../../../../src/components/infopopups/CourtOrderPopup';
 import RespondentFactumPopup from '../../../../src/components/infopopups/RespondentFactumPopup';
 import CrossAppealPopup from '../../../../src/components/infopopups/CrossAppealPopup';
@@ -43,11 +43,33 @@ describe('InfoPopup', ()=> {
             expect(view).toEqual(<ReplyBookPopup close={close} getSections={popup.getSections}/>);
         });
         
-        test('can build RespondentHearingPopup', ()=>{            
+        test('can build HearingPopup for respondent', ()=>{
             let popup = mount(<InfoPopup show="true" type="respondenthearing" close={close}/>).instance();
             let view = popup.render();
 
-            expect(view).toEqual(<RespondentHearingPopup close={close} getSections={popup.getSections}/>);
+            expect(view).toEqual(<HearingPopup
+                close={close}
+                getSections={popup.getSections}
+                link1="2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
+                link2="2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                link3="step-3-after-hearing?ct=t(step-index-link)"
+                type="respondent"
+            />);
+        });
+
+        test('can build HearingPopup for appellant', ()=>{
+            let popup = mount(<InfoPopup show="true" type="appellanthearing" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(
+                <HearingPopup
+                    close={close}
+                    getSections={popup.getSections}
+                    link1="3.3-how-to-prepare-for-the-hearing?ct=t(step-index-link)"
+                    link2="3.4-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                    link3="3.1-making-chambers-applications?ct=t(step-index-link)"
+                    type="appellant"
+                />);
         });
         
         test('can build CourtOrderPopup', ()=>{            

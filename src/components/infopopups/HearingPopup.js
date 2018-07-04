@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
 
-class RespondentHearingPopup extends Component {
+class HearingPopup extends Component {
 
     constructor(props) {
         super(props);
@@ -9,15 +9,15 @@ class RespondentHearingPopup extends Component {
         let content = [
             {
                 URLName: "How do I prepare for my hearing?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
+                URL: `https://www.courtofappealbc.ca/${this.props.type}-guidebook/${this.props.link1}`,
             },
             {
                 URLName: "What will happen at my hearing?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                URL: `https://www.courtofappealbc.ca/${this.props.type}-guidebook/${this.props.link2}`
             },
             {
                 URLName: "What can I expect after my hearing?",
-                URL: "https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(step-index-link)"
+                URL: `https://www.courtofappealbc.ca/${this.props.type}-guidebook/${this.props.link3}`
             }
         ];
 
@@ -44,7 +44,7 @@ class RespondentHearingPopup extends Component {
                 <div className="info-modal-content">
                     {this.props.getSections(this.sections)}
                     <Help
-                        URL="https://www.courtofappealbc.ca/respondent-guidebook"
+                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
@@ -52,4 +52,4 @@ class RespondentHearingPopup extends Component {
         );
     }
 
-} export default RespondentHearingPopup;
+} export default HearingPopup;
