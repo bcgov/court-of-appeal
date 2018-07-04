@@ -27,34 +27,21 @@ class InfoPopup extends Component {
                 close : this.props.close,
                 getSections: this.getSections
             };
-            switch (this.props.type) {
-                case 'factum' :
-                    return <AppellantFactumPopup {...props} />;
-                case 'replybook' :
-                    return <ReplyBookPopup {...props} />;
-                case 'respondenthearing' :
-                    return <RespondentHearingPopup {...props} />;
-                case 'courtorder' :
-                    return <CourtOrderPopup {...props} />;
-                case 'respondentfactum' :
-                    return <RespondentFactumPopup {...props} />;
-                case 'crossappeal' :
-                    return <CrossAppealPopup {...props} />;
-                case 'leave-application-appearance' :
-                    return <AppearancePopup {...props} />;
-                case 'appearance' :
-                    return <AppearancePopup {...props}  noticeType="Notice of Appeal" />;
-                case 'appealrecord' :
-                    return <AppealRecordPopup {...props} />;
-                case 'appellantinitial' :
-                    return <AppellantInitialPopup {...props} />;
-                case 'noticeofhearing' :
-                    return <NoticeOfHearingPopup {...props} />;
-                case 'appellantcourtorder' :
-                    return <AppellantCourtOrderPopup {...props} />;
-                default :
-                    return null;
-            }
+            let options = {
+                'factum': <AppellantFactumPopup {...props} />,
+                'replybook': <ReplyBookPopup {...props} />,
+                'respondenthearing': <RespondentHearingPopup {...props} />,
+                'courtorder': <CourtOrderPopup {...props} />,
+                'respondentfactum': <RespondentFactumPopup {...props} />,
+                'crossappeal': <CrossAppealPopup {...props} />,
+                'leave-application-appearance':  <AppearancePopup {...props} />,
+                'appearance': <AppearancePopup {...props}  noticeType="Notice of Appeal" />,
+                'appealrecord': <AppealRecordPopup {...props} />,
+                'appellantinitial': <AppellantInitialPopup {...props} />,
+                'noticeofhearing': <NoticeOfHearingPopup {...props} />,
+                'appellantcourtorder': <AppellantCourtOrderPopup {...props} />
+            };
+            return options[this.props.type];
         } else {
             return null;
         }
