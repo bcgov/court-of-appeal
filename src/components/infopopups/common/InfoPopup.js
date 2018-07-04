@@ -9,9 +9,9 @@ import RespondentFactumPopup from "../RespondentFactumPopup";
 import CrossAppealPopup from "../CrossAppealPopup";
 import AppearancePopup from "../AppearancePopup";
 import BulletedList from "../../list/BulletedList";
-import App from "../../../App";
 import AppealRecordPopup from "../AppealRecordPopup";
 import AppellantInitialPopup from "../AppellantInitialPopup";
+import NoticeOfHearingPopup from "../NoticeOfHearingPopup";
 
 class InfoPopup extends Component {
 
@@ -42,6 +42,8 @@ class InfoPopup extends Component {
                     return <AppealRecordPopup {...props} />;
                 case 'appellantinitial' :
                     return <AppellantInitialPopup {...props} />;
+                case 'noticeofhearing' :
+                    return <NoticeOfHearingPopup {...props} />;
                 default :
                     return null;
             }
