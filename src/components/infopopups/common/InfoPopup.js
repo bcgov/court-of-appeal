@@ -12,6 +12,7 @@ import BulletedList from "../../list/BulletedList";
 import AppealRecordPopup from "../AppealRecordPopup";
 import AppellantInitialPopup from "../AppellantInitialPopup";
 import NoticeOfHearingPopup from "../NoticeOfHearingPopup";
+import AppellantCourtOrderPopup from "../AppellantCourtOrderPopup";
 
 class InfoPopup extends Component {
 
@@ -44,6 +45,8 @@ class InfoPopup extends Component {
                     return <AppellantInitialPopup {...props} />;
                 case 'noticeofhearing' :
                     return <NoticeOfHearingPopup {...props} />;
+                case 'appellantcourtorder' :
+                    return <AppellantCourtOrderPopup {...props} />;
                 default :
                     return null;
             }
