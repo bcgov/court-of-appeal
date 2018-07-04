@@ -144,7 +144,7 @@ class Form2 extends Component {
     }
 
     closeForm() {
-        this.props.history.push('/');
+        this.props.history.push(process.env.PUBLIC_URL + '/');
     }
 
     create(event, callback) {
@@ -201,7 +201,7 @@ class Form2 extends Component {
 
     openDataLossWarning() {
         if (!this.formHasData() || !this.state.formHasUnsavedChanges) {
-            this.props.history.push('/');
+            this.props.history.push(process.env.PUBLIC_URL + '/');
         } else {
             this.setState({ dataLoss : true, displayWarning: 'block'});
         }
