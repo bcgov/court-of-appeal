@@ -12,3 +12,9 @@
 
 # jag-efiling-frontend
 The frontend application for the E-Filing application
+
+# local dev
+
+```
+node tests/support/fake.site.minder.js
+```
