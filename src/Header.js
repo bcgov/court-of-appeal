@@ -9,7 +9,8 @@ class Header extends Component {
         this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = props.service; 
         this.state = {
-            login: '<?>'
+            login: '<?>',
+            displayname: '<?>'
         }
 
         this.fetch = this.fetch.bind(this);
@@ -28,8 +29,14 @@ class Header extends Component {
     fetch() {
         this.service.getPersonInfo((person)=> {
             if (!person.error) {
+                let display = '<?>';
+                if (person.name) {
+                    let parts = person.name.split(',');
+                    display = parts[1] + ' ' + parts[0];
+                }
                 this.setState({
-                    login: person.login? person.login: '<?>'
+                    login: person.login? person.login: '<?>',
+                    displayname: display
                 });
             }
         });
@@ -39,7 +46,7 @@ class Header extends Component {
         let document = this.element.ownerDocument;
         let window = document.defaultView;
         document.cookie = 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        window.location = '/';
+        window.location = 'https://logon.gov.bc.ca/clp-cgi/logoff.cgi?returl=http%3a%2f%2fdev.justice.gov.bc.ca%2fcourt-of-appeal&retnow=1';
     }
 
     closeErrorModal() {
@@ -65,7 +72,7 @@ class Header extends Component {
                         <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                             <div className="pull-right">
                                 <div className="align-right header-top-line">
-                                    <span >Welcome, { this.state.login }</span>
+                                    <span >Welcome, { this.state.displayname }</span>
                                     <span> | </span>
                                     <span id="logout" onClick={ this.logout }>Log Out</span>
                                 </div>

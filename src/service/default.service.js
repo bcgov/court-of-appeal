@@ -107,15 +107,12 @@ Service.prototype.savePerson = function(user, callback) {
 
 Service.prototype.buildOptions = function(url) {
     return {
-        url: this.base() + url,
-        headers: {
-            'X-USER': this.user
-        }
+        url: this.base() + url
     };
 };
 Service.prototype.getPersonInfo = function(callback) {
     let self = this;
-    request.get(this.buildOptions('/api/persons/' + this.user), (err, response, body)=>{
+    request.get(this.buildOptions('/api/persons/connected'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
