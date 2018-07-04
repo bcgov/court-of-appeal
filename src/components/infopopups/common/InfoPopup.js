@@ -16,11 +16,16 @@ import AppellantCourtOrderPopup from "../AppellantCourtOrderPopup";
 
 class InfoPopup extends Component {
 
+    constructor(props) {
+        super(props);
+        this.getSections = this.getSections.bind(this);
+    }
+
     render () {
         if (this.props.show) {
             let props = {
                 close : this.props.close,
-                getSections: this.getSections.bind(this)
+                getSections: this.getSections
             };
             switch (this.props.type) {
                 case 'factum' :
