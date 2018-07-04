@@ -89,7 +89,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
-                mapProps: [{coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
+                mapProps: [
+                    {coords: "350,0,450,180", function: 'appealrecord', alt: "info about the appeal record and the transcript"},
+                    {coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
