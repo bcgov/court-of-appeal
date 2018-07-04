@@ -9,6 +9,8 @@ import RespondentFactumPopup from "../RespondentFactumPopup";
 import CrossAppealPopup from "../CrossAppealPopup";
 import AppearancePopup from "../AppearancePopup";
 import BulletedList from "../../list/BulletedList";
+import App from "../../../App";
+import AppealRecordPopup from "../AppealRecordPopup";
 
 class InfoPopup extends Component {
 
@@ -57,6 +59,11 @@ class InfoPopup extends Component {
                         getSections={this.getSections.bind(this)}
                         noticeType="Notice of Appeal"
                     />;
+                case 'appealrecord' :
+                    return <AppealRecordPopup
+                        close={this.props.close}
+                        getSections={this.getSections.bind(this)}
+                    />;
                 default :
                     return null;
             }
@@ -94,16 +101,16 @@ class InfoPopup extends Component {
             }
 
             return (
-                <p key={index}>
+                <div key={index}>
                     {paragraph}
-                </p>
+                </div>
             ) ;
 
         });
 
         return (
-           <div className="row">
-               <div className="col col-sm-11 col-md-11 col-lg-11" style={{padding:0}}>
+           <div className="row info-paragraph">
+               <div className="col" >
                 { content }
                </div>
            </div>
