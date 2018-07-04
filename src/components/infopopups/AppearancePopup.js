@@ -9,7 +9,19 @@ class AppearancePopup extends Component {
             {
                 line: "Complete the form below.  Click on the document name for more information.",
                 rows: [
-                    { onlineForm: true, descriptionLink: {URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)", URLName: "Notice of Appearance"}, documentLink: {URL: process.env.PUBLIC_URL + "/form.2.html", URLName: "Online form" } }
+                    {
+                        onlineForm: true,
+                        descriptionLink:
+                            {
+                                URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
+                                URLName: "Notice of Appearance"
+                            },
+                        documentLink:
+                            {
+                                URL: process.env.PUBLIC_URL + "/form.2.html",
+                                URLName: "Online form"
+                            }
+                    }
                 ]
             },
             "File the indicated number of copies to the registry.",
@@ -22,7 +34,7 @@ class AppearancePopup extends Component {
             sectionHeading: `Were you served with a ${this.props.noticeType}?`,
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {first: "You have ", last: " to file and serve your document."},
+            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your document."},
             deadline: " 10 days ",
             last: false,
             contentMap: contentMap
