@@ -11,59 +11,37 @@ import AppearancePopup from "../AppearancePopup";
 import BulletedList from "../../list/BulletedList";
 import App from "../../../App";
 import AppealRecordPopup from "../AppealRecordPopup";
+import AppellantInitialPopup from "../AppellantInitialPopup";
 
 class InfoPopup extends Component {
 
     render () {
         if (this.props.show) {
+            let props = {
+                close : this.props.close,
+                getSections: this.getSections.bind(this)
+            };
             switch (this.props.type) {
                 case 'factum' :
-                    return <AppellantFactumPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <AppellantFactumPopup {...props} />;
                 case 'replybook' :
-                    return <ReplyBookPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <ReplyBookPopup {...props} />;
                 case 'respondenthearing' :
-                    return <RespondentHearingPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                        />;
+                    return <RespondentHearingPopup {...props} />;
                 case 'courtorder' :
-                    return <CourtOrderPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <CourtOrderPopup {...props} />;
                 case 'respondentfactum' :
-                    return <RespondentFactumPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <RespondentFactumPopup {...props} />;
                 case 'crossappeal' :
-                    return <CrossAppealPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <CrossAppealPopup {...props} />;
                 case 'leave-application-appearance' :
-                    return <AppearancePopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                        noticeType="Notice of Application for Leave to Appeal"
-                    />;
+                    return <AppearancePopup {...props} />;
                 case 'appearance' :
-                    return <AppearancePopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                        noticeType="Notice of Appeal"
-                    />;
+                    return <AppearancePopup {...props}  noticeType="Notice of Appeal" />;
                 case 'appealrecord' :
-                    return <AppealRecordPopup
-                        close={this.props.close}
-                        getSections={this.getSections.bind(this)}
-                    />;
+                    return <AppealRecordPopup {...props} />;
+                case 'appellantinitial' :
+                    return <AppellantInitialPopup {...props} />;
                 default :
                     return null;
             }
