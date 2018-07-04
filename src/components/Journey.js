@@ -92,7 +92,8 @@ class Journey extends Component {
                 mapProps: [
                     {coords: "150,0,250,180", function: 'appellantinitial', alt: "how to start your appeal"},
                     {coords: "350,0,450,180", function: 'appealrecord', alt: "info about the appeal record and the transcript"},
-                    {coords: "100,270,230,450", function: 'factum', alt: "info about the factum"}]
+                    {coords: "100,270,230,450", function: 'factum', alt: "info about the factum"},
+                    {coords: "40,520,170,710", function: 'noticeofhearing', alt: "info about the notice of hearing"}]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
