@@ -11,7 +11,7 @@ def TAG_NAMES = [
   'prod'
 ]
 def APP_URLS = [
-  "https://${APP_NAME}-${PROJECT_PREFIX}-${TAG_NAMES[0]}.${PATHFINDER_URL}",
+  "https://dev.justice.gov.bc.ca/court-of-appeal",
   "https://${APP_NAME}-${PROJECT_PREFIX}-${TAG_NAMES[1]}.${PATHFINDER_URL}",
   "https://${APP_NAME}-${PROJECT_PREFIX}-${TAG_NAMES[2]}.${PATHFINDER_URL}"
 ]
