@@ -14,6 +14,8 @@ import AppealRecordPopup from '../../../../src/components/infopopups/AppealRecor
 import AppellantInitialPopup from '../../../../src/components/infopopups/AppellantInitialPopup';
 import NoticeOfHearingPopup from '../../../../src/components/infopopups/NoticeOfHearingPopup';
 import AppellantCourtOrderPopup from '../../../../src/components/infopopups/AppellantCourtOrderPopup';
+import BookAnAppealPopup from '../../../../src/components/infopopups/BookAnAppealPopup';
+
 configure({ adapter: new Adapter() });
 
 describe('InfoPopup', ()=> {    
@@ -133,6 +135,13 @@ describe('InfoPopup', ()=> {
             let view = popup.render();
 
             expect(view).toEqual(<AppellantCourtOrderPopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build BookAnAppealPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="bookappeal" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<BookAnAppealPopup close={close} getSections={popup.getSections}/>);
         });
     });
 });

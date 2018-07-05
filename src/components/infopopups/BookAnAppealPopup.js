@@ -8,7 +8,7 @@ class BookAnAppealPopup extends Component {
 
         let content = [
             {
-                URLName: "List of BC Court of Appeal locations and contacts",
+                URLName: "BC Court of Appeal locations and contacts",
                 URL: "http://www.courts.gov.bc.ca/court_of_appeal/court_locations_and_contacts.aspx",
             }
         ];
