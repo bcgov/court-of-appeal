@@ -1,13 +1,7 @@
-require('./support/fake.dom');
+require('./support/enzyme.setup');
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-configure({ adapter: new Adapter() });
-
-const rrd = require('react-router-dom');
-rrd.BrowserRouter = ({children}) => <div>{children}</div>
-
+import { mount } from 'enzyme';
 import App from '../src/App';
 import Dashboard from '../src/Dashboard.js';
 

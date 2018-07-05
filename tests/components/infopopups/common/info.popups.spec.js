@@ -1,7 +1,6 @@
-require('../../../support/fake.dom');
+require('../../../support/enzyme.setup');
 import React from 'react';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import InfoPopup from '../../../../src/components/infopopups/common/InfoPopup';
 import AppellantFactumPopup from '../../../../src/components/infopopups/AppellantFactumPopup';
 import ReplyBookPopup from '../../../../src/components/infopopups/ReplyBookPopup';
@@ -15,8 +14,6 @@ import AppellantInitialPopup from '../../../../src/components/infopopups/Appella
 import NoticeOfHearingPopup from '../../../../src/components/infopopups/NoticeOfHearingPopup';
 import AppellantCourtOrderPopup from '../../../../src/components/infopopups/AppellantCourtOrderPopup';
 import BookAnAppealPopup from '../../../../src/components/infopopups/BookAnAppealPopup';
-
-configure({ adapter: new Adapter() });
 
 describe('InfoPopup', ()=> {    
 

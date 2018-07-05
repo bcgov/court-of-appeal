@@ -1,10 +1,8 @@
-require('../support/fake.dom');
+require('../support/enzyme.setup');
 import React from 'react';
 import Form2 from '../../src/forms/Form2';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 let DefaultService = require('../../src/service/default.service');
-configure({ adapter: new Adapter() });
 
 describe('Form2', ()=>{
 

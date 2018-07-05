@@ -1,9 +1,7 @@
-require('../support/fake.dom');
+require('../support/enzyme.setup');
 import React from 'react';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import CaseList from '../../src/components/CaseList';
-configure({ adapter: new Adapter() });
 
 describe('CaseList', ()=> {
 
