@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {FILE_ONLINE_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class AppearancePopup extends Component {
 
@@ -7,7 +8,7 @@ class AppearancePopup extends Component {
         super(props);
         let contentMap = [
             {
-                line: "Complete the form below.  Click on the document name for more information.",
+                line: FILE_ONLINE_ONE_MSG,
                 rows: [
                     {
                         onlineForm: true,
@@ -24,8 +25,8 @@ class AppearancePopup extends Component {
                     }
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to respondent."
+            FILE_STEP_TWO_MSG,
+            FILE_STEP_THREE_MSG
         ];
 
         this.sections = [{

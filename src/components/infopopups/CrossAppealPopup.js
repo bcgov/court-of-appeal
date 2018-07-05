@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class CrossAppealPopup extends Component {
 
@@ -7,13 +8,13 @@ class CrossAppealPopup extends Component {
         super(props);
         let contentMap = [
             {
-                line: "Complete either the .DOCs or .PDFs below:",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { description: "Notice of Cross Appeal", times: "1 x", link1: "DOC", link2: "PDF" },
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to appellant."
+            FILE_STEP_TWO_MSG,
+            FILE_STEP_THREE_MSG
         ];
 
         this.sections = [{
@@ -21,18 +22,17 @@ class CrossAppealPopup extends Component {
             sectionHeading: "The Notice of Appeal or the order granting leave to appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have  ", endWith: " to file and serve your documents, after receiving the endWith document."},
+            deadlinePhrase: {startWith: "You have  ", endWith: " to file and serve your documents, after receiving the last document."},
             deadline: " 15 days ",
-            lineHeight: '252px',
+            lineHeight: '205px',
             contentMap: contentMap
         }, {
             expandable: true,
             sectionHeading: "The Appeal Record and Transcript",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '60px',
-            content: ["If you are served with a copy of the Appeal Record and Transcript, you DO NOT have to respond to this document.  This" +
-            " document is for your awareness only."]
+            content: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.  These" +
+            " documents are for your awareness only."]
         }]
     }
 
@@ -53,7 +53,7 @@ class CrossAppealPopup extends Component {
                     </div>
                     {sections}
                     <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
+                        URL="https://www.courtofappealbc.ca/respondent-guidebook"
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>

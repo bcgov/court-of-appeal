@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
+import {
+    FILE_MULTIPLES_STEP_TWO_MSG,
+    FILE_STEP_ONE_MSG,
+    FILE_STEP_THREE_MSG,
+    FILE_STEP_TWO_MSG
+} from "../../helpers/constants";
 
 class ReplyBookPopup extends Component {
 
@@ -8,15 +14,15 @@ class ReplyBookPopup extends Component {
 
         let contentMap = [
             {
-                line: "Complete either the .DOCs or .PDFs below:",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
-                        URLName: "Reply Book" }, times: "1 x", link1: "DOC", link2: "PDF" },
+                        URLName: "Reply Book" }, times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to every other party."
+            FILE_MULTIPLES_STEP_TWO_MSG,
+            FILE_STEP_THREE_MSG
         ];
 
         this.sections = [{

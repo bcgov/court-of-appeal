@@ -1,5 +1,12 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {
+    FILE_MULTIPLES_STEP_THREE_MSG,
+    FILE_MULTIPLES_STEP_TWO_MSG,
+    FILE_STEP_ONE_MSG,
+    FILE_STEP_THREE_MSG,
+    FILE_STEP_TWO_MSG
+} from "../../helpers/constants";
 
 class AppellantFactumPopup extends Component {
 
@@ -7,7 +14,7 @@ class AppellantFactumPopup extends Component {
         super(props);
         let factumDocList = [
             {
-                line: "Complete either the .DOCs or .PDFs below.  Click on the document names for more information.",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.7-write-your-factum?ct=t(step-index-link)",
@@ -26,21 +33,23 @@ class AppellantFactumPopup extends Component {
                         }, times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to respondent."
+            FILE_MULTIPLES_STEP_TWO_MSG,
+            FILE_MULTIPLES_STEP_THREE_MSG
         ];
 
         let respondentFactumDocList = [
             {
-                line: "Complete either the .DOCs or .PDFs below.  Click on the document names for more information.",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
-                            URL: "https://www.courtofappealbc.ca/appellant- guidebook/2.8-replies?ct=t(sidebar-link)",
+                            URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.8-replies?ct=t(sidebar-link)",
                             URLName: "Reply"
                         }, times: "4 x", link1: "DOC", link2: "PDF"
                     }
                 ]
-            }
+            },
+            FILE_MULTIPLES_STEP_TWO_MSG,
+            FILE_MULTIPLES_STEP_THREE_MSG
          ];
 
 
@@ -52,7 +61,7 @@ class AppellantFactumPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents after filing your Appeal Record."},
             deadline: "  30 days ",
-            lineHeight: '356px',
+            lineHeight: '311px',
             expanded: true,
             contentMap: factumDocList
         }, {
@@ -61,8 +70,8 @@ class AppellantFactumPopup extends Component {
             iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadline:" 7 days ",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your document."},
-            lineHeight: '183px',
+            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents."},
+            lineHeight: '206px',
             contentMap: respondentFactumDocList
         }, {
             expandable: true,

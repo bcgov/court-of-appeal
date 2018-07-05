@@ -45,7 +45,7 @@ class InfoPopup extends Component {
                 'courtorder': <CourtOrderPopup {...props} />,
                 'respondentfactum': <RespondentFactumPopup {...props} />,
                 'crossappeal': <CrossAppealPopup {...props} />,
-                'leave-application-appearance':  <AppearancePopup {...props} />,
+                'leave-application-appearance':  <AppearancePopup {...props} noticeType="Notice of Application for Leave to Appeal"/>,
                 'appearance': <AppearancePopup {...props}  noticeType="Notice of Appeal" />,
                 'appealrecord': <AppealRecordPopup {...props} />,
                 'appellantinitial': <AppellantInitialPopup {...props} />,
@@ -89,7 +89,7 @@ class InfoPopup extends Component {
             }
 
             return (
-                <div key={index}>
+                <div className=" info-paragraph" key={index}>
                     {paragraph}
                 </div>
             ) ;
@@ -97,7 +97,7 @@ class InfoPopup extends Component {
         });
 
         return (
-           <div className="row info-paragraph">
+           <div className="row">
                <div className="col" >
                 { content }
                </div>

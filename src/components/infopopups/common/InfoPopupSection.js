@@ -29,7 +29,7 @@ class InfoPopupSection extends Component {
         let toggleButton = null;
         if (this.props.expandable) {
             toggleButton =
-                <div className="col col-lg-3 col-md-3 toggle-expansion-button" onClick={this.toggleSection}>
+                <div className="col col-lg-2 col-md-2 toggle-expansion-button" onClick={this.toggleSection}>
                     <i className={this.state.toggleIconClass} />
                 </div>;
         } else {
@@ -53,7 +53,7 @@ class InfoPopupSection extends Component {
                         iconSrc={this.props.iconSrc}
                         iconClass={this.props.iconClass}
                     />
-                    <div className="col col-lg-11 col-md-11 col-sm-11">
+                    <div className="col">
                         <div className="row">
                             <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading">
                                 {this.props.sectionHeading}
