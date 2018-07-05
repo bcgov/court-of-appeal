@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Journey from './components/Journey.js';
-import Top5 from './forms/top.5.js';
+import Top5 from './forms/Top5.js';
 import ActiveFormList from './components/ActiveFormList.js';
 import NeedHelp from './need.help.js';
 import './dashboard.css';
