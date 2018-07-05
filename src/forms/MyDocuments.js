@@ -3,7 +3,7 @@ import './active.forms.css';
 import DefaultService from '../service/default.service.js';
 import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
 import renderCases from '../components/cases.renderer';
-import './my.applications.css';
+import './MyDocuments.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
 import findCaseById from '../helpers/find.case.by.id';
 

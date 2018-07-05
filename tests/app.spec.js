@@ -6,6 +6,7 @@ import App from '../src/App';
 import Dashboard from '../src/Dashboard.js';
 import Form7 from '../src/forms/Form7.js';
 import Notifications from '../src/notifications.js';
+import MyDocuments from '../src/forms/MyDocuments.js';
 
 describe('App', ()=>{
     
@@ -37,5 +38,15 @@ describe('App', ()=>{
         );    
         
         expect(app.find(Notifications)).toHaveLength(1);
+    });
+    
+    test('can load MyDocuments', ()=>{
+        const app = mount(
+            <MemoryRouter initialEntries={[ '/my-documents.html' ]}>
+                <App />
+            </MemoryRouter>
+        );    
+        
+        expect(app.find(MyDocuments)).toHaveLength(1);
     });
 });
