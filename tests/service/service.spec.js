@@ -47,4 +47,25 @@ describe('Gateway to API', function() {
             expect(service.base()).toEqual('here');
         });
     });
+
+    describe('when an error occurs', ()=>{
+
+        test('#serviceErrorModal becomes visible', ()=>{
+            let jsdom = require('jsdom').jsdom;
+            let document = jsdom(`
+                <html>
+                    <body>
+                        <div id="serviceErrorModal" style="display:none">
+                            Any content
+                        </div>
+                    </body>
+                </html>`);
+            let window = document.defaultView;
+            service = new Service(window);
+            service.notifyThatAnErrorOccured(()=>{}, {});
+            let errorModal = document.querySelector('#serviceErrorModal');
+    
+            expect(errorModal.style.display).toEqual('block');
+        });        
+    });
 });
