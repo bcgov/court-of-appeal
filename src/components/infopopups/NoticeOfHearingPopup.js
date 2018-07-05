@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
+import {FILE_ONLINE_ONE_MSG, FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class NoticeOfHearingPopup extends Component {
 
@@ -8,16 +9,16 @@ class NoticeOfHearingPopup extends Component {
 
         let docList = [
                 {
-                    line: "Complete either the .DOCs or .PDFs below.  Click on the document names for more information.",
+                    line: FILE_STEP_ONE_MSG,
                     rows: [
                         { descriptionLink: {
-                            URL: "https://www.courtofappealbc.ca/appellant- guidebook/2.13-prepare-and-file-a-notice-of- hearing?ct=t(step-index-link)",
+                            URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)",
                             URLName: "Notice of Hearing"
                         }, times: "4 x", link1: "DOC", link2: "PDF" }
                     ]
                 },
-                "File the indicated number of copies to the registry.",
-                "Serve one copy of each document to respondent."
+                FILE_STEP_TWO_MSG,
+                FILE_STEP_THREE_MSG
                 ];
 
         this.sections = [{
@@ -25,8 +26,8 @@ class NoticeOfHearingPopup extends Component {
             expanded: true,
             sectionHeading: "Complete the Notice of Hearing",
             iconSrc: "/icons/icon-calendar.svg",
-            iconClass: "info-modal-calendar",
-            deadline: " 3 months",
+            iconClass: "info-modal-icon",
+            deadline: " 2 months",
             deadlinePhrase: { startWith: "You have ", endWith: " to file and serve your document after submitting the " +
                 "Certificate of Readiness." },
             lineHeight: null,

@@ -6,3 +6,11 @@ export const INVALID_ADDRESS_MSG = "Please make sure the address entered is a va
 export const GENERAL_ERROR_MSG = "Please fix all errors in the form !";
 export const NETWORK_ERROR_MSG = "Network error (Are you connected to the Internet?)";
 
+// Popup messages:
+export const FILE_ONLINE_ONE_MSG = "Complete the online form below.  Click on the document name for more information.";
+export const FILE_STEP_ONE_MSG = "Complete either the .DOCs or .PDFs below.  Click on the document names for more information.";
+export const FILE_STEP_TWO_MSG = "File the document with the registry.";
+export const FILE_MULTIPLES_STEP_TWO_MSG = "File the indicated number of copies with the registry.";
+export const FILE_STEP_THREE_MSG = "Serve one copy to each party.";
+export const FILE_MULTIPLES_STEP_THREE_MSG = "Serve one copy of each completed document to each party.";
+

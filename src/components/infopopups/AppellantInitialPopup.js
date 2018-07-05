@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {FILE_ONLINE_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class AppellantInitialPopup extends Component {
 
@@ -7,7 +8,7 @@ class AppellantInitialPopup extends Component {
         super(props);
         let NoticeOfAppeal = [
             {
-                line: "Complete the online form below.  Click on the document name for more information.",
+                line: FILE_ONLINE_ONE_MSG,
                 rows: [
                     {
                         onlineForm: true,
@@ -24,8 +25,8 @@ class AppellantInitialPopup extends Component {
                     }
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to respondent."
+            FILE_STEP_TWO_MSG,
+            FILE_STEP_THREE_MSG
         ];
 
         let ProofOfService = [
@@ -39,8 +40,8 @@ class AppellantInitialPopup extends Component {
                     }
                  ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to respondent."
+            FILE_STEP_TWO_MSG,
+            FILE_STEP_THREE_MSG
         ];
 
         this.sections = [{
@@ -51,6 +52,7 @@ class AppellantInitialPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your document after the initial court order is declared."},
             deadline: " 30 days ",
+            lineHeight: '201px',
             last: false,
             contentMap: NoticeOfAppeal
         },{

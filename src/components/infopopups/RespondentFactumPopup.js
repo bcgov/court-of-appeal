@@ -1,5 +1,8 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {
+    FILE_STEP_ONE_MSG, FILE_MULTIPLES_STEP_TWO_MSG, FILE_MULTIPLES_STEP_THREE_MSG
+} from "../../helpers/constants";
 
 class RespondentFactumPopup extends Component {
 
@@ -7,23 +10,23 @@ class RespondentFactumPopup extends Component {
         super(props);
         let contentMap = [
             {
-                line: "Complete either the .DOCs or .PDFs below:",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)",
                         URLName: "Factum"
-                        }, times: "1 x", link1: "DOC", link2: "PDF" },
+                        }, times: "4 x", link1: "DOC", link2: "PDF" },
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
-                        URLName: "* Optional - Transcript and Extract Book" }, times: "1 x", link1: "DOC", link2: "PDF" },
+                        URLName: "* Optional - Transcript and Extract Book" }, times: "4 x", link1: "DOC", link2: "PDF" },
                     { descriptionLink : {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
                         URLName: "* Optional - Appeal Book"
-                        }, times: "1 x", link1: "DOC", link2: "PDF" },
+                        }, times: "4 x", link1: "DOC", link2: "PDF" },
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to appellant."
+            FILE_MULTIPLES_STEP_TWO_MSG,
+            FILE_MULTIPLES_STEP_THREE_MSG
         ];
 
         this.sections = [{
@@ -40,33 +43,32 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Transcript Extract Book",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '60px',
-            content: ["If you are served with the appellant's Transcript Extract Book, you DO NOT have to respond to this document.  This" +
+            lineHeight: '73px',
+            content: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
             expandable: true,
-            sectionHeading: "Certificate of Readiness",
+            sectionHeading: "The Certificate of Readiness",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '60px',
-            content: ["If you are served with the appellant's Certificate of Readiness, you DO NOT have to respond to this document.  This" +
+            lineHeight: '73px',
+            content: ["If you are served with the appellant's Certificate of Readiness, you do not have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
             expandable: true,
             sectionHeading: "A Reply to your Factum",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '60px',
-            content: ["If you are served with the appellant's Reply to Your Factum, you DO NOT have to respond to this document.  This" +
+            lineHeight: '73px',
+            content: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document.  This" +
             " document is for your awareness only."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",
             iconSrc :"icons/icon-calendar.svg",
-            iconClass: "info-modal-calendar",
-            lineHeight: '121px',
+            iconClass: "info-modal-icon",
             content: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
-            "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information",
+            "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information.",
                 {
                     URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.3-schedule-the-appeal-for-hearing?ct=t(step-index-link)",
                     URLName: "Schedule the appeal for hearing"}]

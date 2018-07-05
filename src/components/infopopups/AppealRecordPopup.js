@@ -1,5 +1,10 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
+import {
+    FILE_MULTIPLES_STEP_THREE_MSG,
+    FILE_MULTIPLES_STEP_TWO_MSG,
+    FILE_STEP_ONE_MSG
+} from "../../helpers/constants";
 
 class AppealRecordPopup extends Component {
 
@@ -7,7 +12,7 @@ class AppealRecordPopup extends Component {
         super(props);
         let contentMap = [
             {
-                line: "Complete either the .DOCs or .PDFs below.  Click on the document name for more information",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(sidebar-link)",
@@ -20,8 +25,8 @@ class AppealRecordPopup extends Component {
                     }
                 ]
             },
-            "File the indicated number of copies to the registry.",
-            "Serve one copy of each document to respondent."
+            FILE_MULTIPLES_STEP_TWO_MSG,
+            FILE_MULTIPLES_STEP_THREE_MSG
         ];
 
         this.sections = [{
@@ -31,17 +36,14 @@ class AppealRecordPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents after submitting the Notice of Appeal."},
             deadline: " 60 days ",
-            lineHeight: '286px',
+            lineHeight: '241px',
             contentMap: contentMap
         }, {
             expandable: true,
             sectionHeading: "Were you served with a Notice of Appearance or Cross Appeal?",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            deadline:" within 7 days ",
-            deadlinePhrase: {startWith: "File and serve a Reply ", endWith: " of receiving a Respondent's Factum."},
-            lineHeight: '168px',
-            content: ["If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you DO NOT have to respond " +
+            content: ["If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond " +
                     "to these documents.  These documents are for your awareness only."]
         }]
     }
@@ -57,8 +59,6 @@ class AppealRecordPopup extends Component {
                 </div>
                 <div className="info-modal-content">
                     <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
-                            Next Steps: File and serve the following documents:</div>
                     </div>
                     {sections}
                     <Help

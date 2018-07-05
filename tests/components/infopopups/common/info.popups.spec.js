@@ -99,7 +99,7 @@ describe('InfoPopup', ()=> {
             let popup = mount(<InfoPopup show="true" type="leave-application-appearance" close={close}/>).instance();
             let view = popup.render();
 
-            expect(view).toEqual(<AppearancePopup close={close} getSections={popup.getSections}/>);
+            expect(view).toEqual(<AppearancePopup close={close} getSections={popup.getSections} noticeType="Notice of Application for Leave to Appeal" />);
         });
         
         test('can build AppearancePopup with notice', ()=>{            
