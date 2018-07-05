@@ -45,31 +45,33 @@ class Form7 extends Component {
             <div className="form-section">
                 The following users will have access to the package in CSO containing the Notice of Appeal once it has been submitted.
                 <table id="access-list">
-                    <tr>
-                        <th>User</th>
-                        <th className="centered">Read Only</th>
-                        <th className="centered">Update</th>
-                        <th className="centered">Remove</th>
-                        <tr></tr>
-                    </tr>
-                    <tr>
-                        <td>yourself</td>
-                        <td className="centered"></td>
-                        <td className="centered"><i className="fas fa-check"></i></td>
-                        <td className="centered"></td>
-                    </tr>
-                    <tr>
-                        <td>Kathryn Thomson (account admin)</td>
-                        <td className="centered"></td>
-                        <td className="centered"><i className="fas fa-check"></i></td>
-                        <td className="centered"></td>
-                    </tr>
-                    <tr>
-                        <td>Patricia White (account admin)</td>
-                        <td className="centered"></td>
-                        <td className="centered"><i className="fas fa-check"></i></td>
-                        <td className="centered"></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>User</th>
+                            <th className="centered">Read Only</th>
+                            <th className="centered">Update</th>
+                            <th className="centered">Remove</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>yourself</td>
+                            <td className="centered"></td>
+                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"></td>
+                        </tr>
+                        <tr>
+                            <td>Kathryn Thomson (account admin)</td>
+                            <td className="centered"></td>
+                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"></td>
+                        </tr>
+                        <tr>
+                            <td>Patricia White (account admin)</td>
+                            <td className="centered"></td>
+                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"></td>
+                        </tr>
+                    </tbody>
                 </table>
                 <button id="add-user" className="btn btn-primary">Add User</button>
             </div>
