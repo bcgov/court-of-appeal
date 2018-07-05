@@ -4,7 +4,7 @@ import Footer from './Footer.js';
 import Dashboard from './Dashboard.js';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Form7 from './forms/Form.7.js';
-import Form2 from './forms/Form.2.js';
+import Form2 from './forms/Form2.js';
 import MyApplications from './forms/my.applications.js';
 import Notifications from './notifications.js';
 
