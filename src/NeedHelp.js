@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './need.help.css';
+import './NeedHelp.css';
 
 class NeedHelp extends Component {
 

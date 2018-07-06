@@ -1,21 +1,19 @@
-require('../support/fake.dom');
+require('../support/enzyme.setup');
 import React from 'react';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import MyApplications from '../../src/forms/my.applications';
-configure({ adapter: new Adapter() });
+import { mount } from 'enzyme';
+import MyDocuments from '../../src/forms/MyDocuments';
 let DefaultService = require('../../src/service/default.service');
 
-describe('MyApplications document', ()=> {
+describe('MyDocuments', ()=> {
         
     test('default service', ()=>{
-        let instance = mount(<MyApplications/>).instance();
+        let instance = mount(<MyDocuments/>).instance();
         
         expect(instance.service instanceof DefaultService).toEqual(true);  
     });    
     let cases;
     let createInstance = ()=>{
-        let instance = mount(<MyApplications service={{
+        let instance = mount(<MyDocuments service={{
             getMyCases: (params, callback)=> { callback({ cases:cases }); }
         }}/>).instance();
         return instance;
@@ -27,7 +25,7 @@ describe('MyApplications document', ()=> {
             let service = {
                 getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
             };
-            mount(<MyApplications service={service}/>).instance();
+            mount(<MyDocuments service={service}/>).instance();
 
             expect(called).toEqual(true);
         });
@@ -36,7 +34,7 @@ describe('MyApplications document', ()=> {
             let service = {
                 getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
             };
-            mount(<MyApplications fetch="false" service={service}/>).instance();
+            mount(<MyDocuments fetch="false" service={service}/>).instance();
             
             expect(called).toEqual(false);  
         });
@@ -65,13 +63,13 @@ describe('MyApplications document', ()=> {
               
     describe('max file download', ()=>{
         test('default value', ()=>{
-            let instance = mount(<MyApplications/>).instance();
+            let instance = mount(<MyDocuments/>).instance();
             
             expect(instance.maxFileDownload).toEqual(5);  
         });
         test('default value can be overriden', ()=>{
             process.env.REACT_APP_MAX_FILE_DOWNLOAD = 7;
-            let instance = mount(<MyApplications/>).instance();
+            let instance = mount(<MyDocuments/>).instance();
             
             expect(instance.maxFileDownload).toEqual(7);  
         });
@@ -109,7 +107,7 @@ describe('MyApplications document', ()=> {
                 { id:11, data:{} },
                 { id:22, data:{} }
             ];
-            document = mount(<MyApplications service={{
+            document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); }
             }}/>);
             instance = document.instance();
@@ -138,7 +136,7 @@ describe('MyApplications document', ()=> {
                 { id:15, data:{} },
                 { id:25, data:{} }
             ];
-            document = mount(<MyApplications service={{
+            document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
                 archiveCases: (ids, callback)=> { received=ids, callback(); }
             }}/>);
@@ -183,7 +181,7 @@ describe('MyApplications document', ()=> {
                 { id:15, data:{} },
                 { id:25, data:{} }
             ]; 
-            document = mount(<MyApplications service={{
+            document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
                 download: (ids, callback)=> { idsSent=ids, callback(answer); }
             }}/>);

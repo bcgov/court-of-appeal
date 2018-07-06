@@ -1,11 +1,8 @@
-require('../support/fake.dom');
+require('../support/enzyme.setup');
 import React from 'react';
 import Find from '../../src/forms/Find';
 import renderer from 'react-test-renderer';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+import { mount } from 'enzyme';
 
 test('valid entries', ()=> {
 

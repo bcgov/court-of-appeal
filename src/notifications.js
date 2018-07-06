@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NotificationCenter from './notification.center.js';
+import NotificationCenter from './NotificationCenter.js';
 
 class Notifications extends Component {
   render() {

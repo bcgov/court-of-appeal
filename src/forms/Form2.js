@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Form.css';
-import './Form.2.css';
-import './Form.2.print.css';
+import './Form2.css';
+import './Form2.print.css';
 import Find from './Find.js';
 import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';

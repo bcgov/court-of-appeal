@@ -1,9 +1,7 @@
-require('./support/fake.dom');
+require('./support/enzyme.setup');
 import React from 'react';
+import { mount } from 'enzyme';
 import Header from '../src/Header';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-configure({ adapter: new Adapter() });
 let DefaultService = require('../src/service/default.service');
 
 describe('Header', ()=>{

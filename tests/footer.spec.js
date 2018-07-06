@@ -1,11 +1,7 @@
-require('./support/fake.dom');
+require('./support/enzyme.setup');
 import React from 'react';
+import { mount } from 'enzyme';
 import Footer from '../src/Footer';
-import renderer from 'react-test-renderer';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
 
 test('source code displayed', ()=>{
     process.env.REACT_APP_COMMIT = '123456789'

@@ -1,10 +1,8 @@
-require('../support/fake.dom');
+require('../support/enzyme.setup');
 import React from 'react';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import ActiveFormList from '../../src/components/ActiveFormList';
+import { mount } from 'enzyme';
 import moment from 'moment';
-configure({ adapter: new Adapter() });
+import ActiveFormList from '../../src/components/ActiveFormList';
 let DefaultService = require('../../src/service/default.service');
 
 describe('Active forms section', function() {

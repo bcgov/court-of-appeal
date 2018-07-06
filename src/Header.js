@@ -86,7 +86,7 @@ class Header extends Component {
                             <div id="row">
                                 <div className="col-xs-6 text-left">
                                     <a href={this.homePath}>HOME</a>
-                                    <a href={process.env.PUBLIC_URL + '/my-applications.html'}>MY DOCUMENTS</a>
+                                    <a href={process.env.PUBLIC_URL + '/my-documents.html'}>MY DOCUMENTS</a>
                                     <a href={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</a>
                                 </div>
                                 <div className="col-xs-6 text-right icons">

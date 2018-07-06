@@ -2,17 +2,9 @@ let request = require('request');
 
 let Service = function(window) {  
     this.window = window;
-    this.apiUrl = undefined;
-    this.user = undefined;
+    this.apiUrl = undefined;    
     if (typeof window !== 'undefined') {
-        this.apiUrl = window.location.origin;        
-        if (window.document && window.document.cookie) { 
-            let index = window.document.cookie.indexOf('login=');
-            this.user = window.document.cookie.substring(index + 'login='.length);
-            if (this.user.indexOf(';') > 0) {
-                this.user = this.user.substring(0, this.user.indexOf(';'));
-            }
-        }
+        this.apiUrl = window.location.origin;                
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
