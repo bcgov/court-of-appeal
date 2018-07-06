@@ -1,4 +1,6 @@
 
+import {GENERAL_ERROR_MSG, INVALID_ADDRESS_MSG} from "../helpers/constants";
+
 let validateForm2 = (document, fields ) => {
 
         let selectedRespondent = document.respondents[document.selectedRespondentIndex || 0];
@@ -20,4 +22,17 @@ let validateForm2 = (document, fields ) => {
 
 };
 
-export default validateForm2;
+let errorMessage = (valid, validStreetAddress)=>{
+    if (!validStreetAddress) {
+        return INVALID_ADDRESS_MSG;
+    } else if (!valid) {
+        return GENERAL_ERROR_MSG;
+    } else {
+        return '';
+    } 
+}
+
+module.exports = { 
+    validateForm2:validateForm2,
+    errorMessage:errorMessage
+};

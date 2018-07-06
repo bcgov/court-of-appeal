@@ -4,8 +4,7 @@ import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
 import Form2Preview from "./Form2Preview";
-import {GENERAL_ERROR_MSG, INVALID_ADDRESS_MSG} from "../helpers/constants";
-import validateForm2 from "../utils/AddressUtils";
+let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 
 class CaseList extends React.Component {
 
@@ -318,20 +317,12 @@ class CaseList extends React.Component {
 
 
     validateForm() {
-        let fields = {
-            phoneIsValid: this.state.phoneIsValid,
-            postalCodeIsValid: this.state.postalCodeIsValid,
-            emailIsValid: this.state.emailIsValid
-        };
-        let [valid, validStreetAddress] = validateForm2(this.state.selectedDocument, fields);
-        if (!validStreetAddress) {
-            this.setState({previewButtonErrorMsg: INVALID_ADDRESS_MSG});
-        } else if (!valid) {
-            this.setState({previewButtonErrorMsg: GENERAL_ERROR_MSG});
-        } else {
-            this.setState({previewButtonErrorMsg: ""});
-        }
-        this.setState({previewShouldBeDisabled: !valid, submitShouldBeDisabled: !valid});
+        let [valid, validStreetAddress] = validateForm2(this.state.selectedDocument, this.state);
+        this.setState({
+            previewShouldBeDisabled: !valid, 
+            submitShouldBeDisabled: !valid,
+            previewButtonErrorMsg: errorMessage(valid, validStreetAddress)
+        });
     }
 
     validateField(isValid, fieldName) {
