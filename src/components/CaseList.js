@@ -326,27 +326,9 @@ class CaseList extends React.Component {
     }
 
     validateField(isValid, fieldName) {
-        switch (fieldName) {
-            case 'phone':
-                this.setState({phoneIsValid: isValid}, () => {
-                    this.validateForm();
-                });
-
-                break;
-            case 'email':
-                this.setState({emailIsValid: isValid},() => {
-                    this.validateForm();
-                });
-                break;
-            case 'postalCode' :
-                this.setState({postalCodeIsValid: isValid}, () => {
-                    this.validateForm();
-                });
-                break;
-            default:
-                this.validateForm();
-                break;
-        }
+        let flag = {};
+        flag[fieldName + 'IsValid'] = isValid;
+        this.setState(flag, ()=> { this.validateForm(); });
     }
 
     // Make sure that the user is prompted when they click off the form.
