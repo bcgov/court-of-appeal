@@ -15,14 +15,41 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)",
                         URLName: "Factum"
-                        }, times: "4 x", link1: "DOC", link2: "PDF" },
+                        }, times: "4 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_respondent_Final.dotx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_respondent_Final.pdf",
+                            URLName: "PDF"
+                        }
+                    },
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
-                        URLName: "* Optional - Transcript and Extract Book" }, times: "4 x", link1: "DOC", link2: "PDF" },
+                        URLName: "* Optional - Transcript and Extract Book" }, times: "4 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf",
+                            URLName: "PDF"
+                        }
+                    },
                     { descriptionLink : {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
                         URLName: "* Optional - Appeal Book"
-                        }, times: "4 x", link1: "DOC", link2: "PDF" },
+                        }, times: "4 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.pdf",
+                            URLName: "PDF"
+                        }
+                    },
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,

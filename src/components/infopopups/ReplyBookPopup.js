@@ -3,8 +3,7 @@ import Help from "./common/Help";
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG,
-    FILE_STEP_THREE_MSG,
-    FILE_STEP_TWO_MSG
+    FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
 
 class ReplyBookPopup extends Component {
@@ -18,7 +17,17 @@ class ReplyBookPopup extends Component {
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
-                        URLName: "Reply Book" }, times: "4 x", link1: "DOC", link2: "PDF" },
+                        URLName: "Reply Book" }, times: "4 x",
+                        docLink:
+                            {
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%205.doc",
+                                URLName: "DOC"
+                            },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%205.pdf",
+                            URLName: "PDF"
+                        }
+                    },
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,
