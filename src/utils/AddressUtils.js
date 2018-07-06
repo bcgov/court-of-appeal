@@ -32,7 +32,4 @@ let errorMessage = (valid, validStreetAddress)=>{
     } 
 }
 
-module.exports = { 
-    validateForm2:validateForm2,
-    errorMessage:errorMessage
-};
+export { validateForm2, errorMessage };
