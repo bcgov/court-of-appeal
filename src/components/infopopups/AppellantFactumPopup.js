@@ -3,7 +3,7 @@ import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_THREE_MSG,
     FILE_MULTIPLES_STEP_TWO_MSG,
-    FILE_STEP_ONE_MSG,
+    FILE_STEP_ONE_MSG
 } from "../../helpers/constants";
 
 class AppellantFactumPopup extends Component {
