@@ -111,7 +111,7 @@ class Journey extends Component {
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
                 mapProps: [
-                    { coords: "340,10,450,200", function: 'appellanthearing', alt: "what you need to know about the hearing" },
+                    { coords: "340,10,450,200", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
                     { coords: "150,10,230,200", function: 'review', alt: "info about the application for review" }
                     ]
             };
