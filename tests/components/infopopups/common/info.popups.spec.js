@@ -14,6 +14,8 @@ import AppellantInitialPopup from '../../../../src/components/infopopups/Appella
 import NoticeOfHearingPopup from '../../../../src/components/infopopups/NoticeOfHearingPopup';
 import AppellantCourtOrderPopup from '../../../../src/components/infopopups/AppellantCourtOrderPopup';
 import BookAnAppealPopup from '../../../../src/components/infopopups/BookAnAppealPopup';
+import ReviewPopup from "../../../../src/components/infopopups/ReviewPopup";
+import ReviewHearingPopup from "../../../../src/components/infopopups/ReviewHearingPopup";
 
 describe('InfoPopup', ()=> {    
 
@@ -139,6 +141,20 @@ describe('InfoPopup', ()=> {
             let view = popup.render();
 
             expect(view).toEqual(<BookAnAppealPopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build ReviewPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="review" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<ReviewPopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build ReviewHearingPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="reviewhearing" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<ReviewHearingPopup close={close} getSections={popup.getSections}/>);
         });
     });
 });

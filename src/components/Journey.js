@@ -32,6 +32,10 @@ class Journey extends Component {
                 &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
             "Start e-filing your response to the appeal below."
         ]
+        this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
+                        <p>Please see our online guidebook for more 
+                        <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
+                        detailed information.</a></p>`;
     }
 
     render() {
@@ -215,10 +219,7 @@ class Journey extends Component {
                                 <i
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
-                                    data-tip="<p>If you don't know whether you have the right to appeal,</p>
-                                <p>Please see our online guidebook for more <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
-                                detailed information.</a></p>
-                                "
+                                    data-tip={this.dataTip}
                                 />
                             </h4>
                         </div>
