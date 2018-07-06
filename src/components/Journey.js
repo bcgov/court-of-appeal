@@ -110,7 +110,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
-                mapProps: [{alt: "e-file an appeal"}]
+                mapProps: [{coords: "340,10,450,200", function: 'appellanthearing', alt: "what you need to know about the hearing"},]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);

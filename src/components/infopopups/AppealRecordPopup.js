@@ -17,11 +17,27 @@ class AppealRecordPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(sidebar-link)",
                             URLName: "Appeal Record"
-                        }, times: "4 x", link1: "DOC", link2: "PDF"
+                        }, times: "4 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%209.docx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%209.pdf",
+                            URLName: "PDF"
+                        }
                     },
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(sidebar-link)",
-                            URLName: "* Optional - Transcript" }, times: "4 x", link1: "DOC", link2: "PDF"
+                            URLName: "* Optional - Transcript" }, times: "4 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf",
+                            URLName: "PDF"
+                        }
                     }
                 ]
             },

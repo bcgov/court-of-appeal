@@ -1,6 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
-import {FILE_ONLINE_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
+import {FILE_ONLINE_ONE_MSG, FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class AppellantInitialPopup extends Component {
 
@@ -19,7 +19,7 @@ class AppellantInitialPopup extends Component {
                             },
                         documentLink:
                             {
-                                URL: "#",
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%207.docx",
                                 URLName: "Online form"
                             }
                     }
@@ -31,12 +31,20 @@ class AppellantInitialPopup extends Component {
 
         let ProofOfService = [
             {
-                line: "Complete the documents below.  Click on the document name for more information.",
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
                             URLName: "Proof of Service"
-                        }, times: "1 x", link1: "DOC", link2: "PDF"
+                        }, times: "1 x",
+                        docLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx",
+                            URLName: "DOC"
+                        },
+                        pdfLink: {
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf",
+                            URLName: "PDF"
+                        }
                     }
                  ]
             },

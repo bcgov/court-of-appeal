@@ -13,7 +13,6 @@ class BulletRow extends Component {
         }
 
         if (this.props.row.onlineForm) {
-            // build a row that has a link to information about the file, and a link to a form after.
             rowcontent = (
                 <div className="evenly-spaced">
                     <div>
@@ -33,7 +32,13 @@ class BulletRow extends Component {
 
                     <div className="bullet-row-badges-container">
                         <div className=" evenly-spaced">
-                            <div>{this.props.row.times}</div><div className="row-badge" >{this.props.row.link1} </div><div className="row-badge" >{this.props.row.link2}</div>
+                            <div>{this.props.row.times}</div>
+                            <div className="row-badge" >
+                                <a href={this.props.row.docLink.URL}>{this.props.row.docLink.URLName}</a>
+                            </div>
+                            <div className="row-badge" >
+                                <a href={this.props.row.pdfLink.URL} target="_blank">{this.props.row.pdfLink.URLName}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
