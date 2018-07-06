@@ -7,7 +7,7 @@ import './MyDocuments.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
 import findCaseById from '../helpers/find.case.by.id';
 
-class MyApplications extends Component {
+class MyDocuments extends Component {
   
   
     constructor(props) {
@@ -185,4 +185,4 @@ class MyApplications extends Component {
     }
 }
 
-export default MyApplications;
+export default MyDocuments;
