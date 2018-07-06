@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import App from '../src/App';
 import Dashboard from '../src/Dashboard.js';
 import Form7 from '../src/forms/Form7.js';
+import Form2 from '../src/forms/Form2.js';
 import Notifications from '../src/notifications.js';
 import MyDocuments from '../src/forms/MyDocuments.js';
 
@@ -28,6 +29,16 @@ describe('App', ()=>{
         );    
         
         expect(app.find(Form7)).toHaveLength(1);
+    });
+    
+    test('can load Form2', ()=>{
+        const app = mount(
+            <MemoryRouter initialEntries={[ '/form.2.html' ]}>
+                <App />
+            </MemoryRouter>
+        );    
+        
+        expect(app.find(Form2)).toHaveLength(1);
     });
     
     test('can load Notifications', ()=>{
