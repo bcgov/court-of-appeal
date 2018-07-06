@@ -1,6 +1,8 @@
 require('../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
+let sinon = require('sinon');
+require('chai').use(require('sinon-chai'));
 import CaseList from '../../src/components/CaseList';
 
 describe('CaseList', ()=> {
@@ -198,6 +200,104 @@ describe('CaseList', ()=> {
             field.simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });
 
             expect(cases[1].data.respondents[indexOfRespondentWithoutAddress].address.addressLine1).toEqual('this-address');
+        });
+        test('any address line is valid', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('input#addressLine1').at(0);
+            field.simulate('change', { target: { name:'respondent.addressLine1', value:'new-addressLine1' } });
+            field.simulate('blur');
+
+            expect(document.instance().state.previewShouldBeDisabled).toEqual(false);
+            expect(document.instance().state.submitShouldBeDisabled).toEqual(false);
+        });
+    });
+
+    describe('save modification', ()=>{
+        let document;
+        let onUpdateCases;
+        let updateAnswer = {};
+
+        beforeEach(()=>{
+            onUpdateCases = sinon.spy();
+            document = mount(<CaseList 
+                cases={cases}
+                service={{
+                    updateForm2: (data, id, callback)=> { callback(updateAnswer); },
+                    previewForm: (id, callback)=> { callback({}); }
+                }}
+                updateCases={ onUpdateCases }
+            />);
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('select#chosenRespondent').at(0);
+            field.simulate('change', { target: { name:'respondent.name', value:2 } });
+            field = document.find('input#addressLine1').at(0).simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });            
+            updateAnswer = {};
+        });
+        test('resets the form-needs-save flag', ()=>{
+            document.find('button#draft').at(0).prop('onClick')();
+            expect(document.instance().state.formHasUnsavedChanges).toEqual(false);  
+        });
+        test('notifies listener', ()=>{
+            document.find('button#draft').at(0).prop('onClick')();
+            let doc = document.instance().state.selectedDocument;
+            require('chai')
+                .expect(onUpdateCases).to.have.been.calledWith(doc, 15);
+        });
+        test('unless error occured', ()=>{   
+            updateAnswer = { error:'something bad happened' };   
+            document.find('button#draft').at(0).prop('onClick')();      
+            require('chai')
+                .expect(onUpdateCases).not.to.have.been.called;
+        });
+    });
+    describe('preview', ()=>{
+        let document;
+        let onUpdateCases;
+        let afterUpdate;
+        let html;
+
+        beforeEach(()=>{
+            onUpdateCases = sinon.spy();
+            document = mount(<CaseList 
+                cases={cases}
+                service={{
+                    updateForm2: (data, id, callback)=> { callback(afterUpdate); },
+                    previewForm: (id, callback)=> { callback(html); }
+                }}
+                updateCases={ onUpdateCases }
+            />);
+            document.find('#edit-15').prop('onClick')();
+            document.update();   
+            afterUpdate = {};
+            html = 'this-preview';         
+        });
+        test('shows the preview modal', ()=>{     
+            document.find('button#preview').at(0).prop('onClick')();
+            document.update();       
+
+            expect(document.find('#viewFormModal').prop('style').display).toEqual('block');
+        });
+        test('displays the fetched content', ()=>{
+            document.find('button#preview').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.find('#viewFormModal').html()).toContain('this-preview');
+        });
+        test('unless preview call failed', ()=>{
+            html = { error:'can happen' };
+            document.find('button#preview').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.find('#viewFormModal').prop('style').display).toEqual('none');
+        }); 
+        test('unless save modification call failed', ()=>{
+            afterUpdate = { error:'you never know...' };
+            document.find('button#preview').at(0).prop('onClick')();
+            document.update();
+
+            expect(document.find('#viewFormModal').prop('style').display).toEqual('none');
         });
     });
 });
