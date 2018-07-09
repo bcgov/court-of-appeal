@@ -2,7 +2,6 @@ require('../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
 import JourneyMap from "../../src/components/JourneyMap";
-import InfoPopup from "../../src/components/infopopups/common/InfoPopup";
 
 describe.only('JourneyMap', ()=> {
 
@@ -35,7 +34,6 @@ describe.only('JourneyMap', ()=> {
 
             expect(journeymap.find('#journey-map-image').prop('src')).toEqual(mapSrc);
 
-            // journeymap.openInfoModal();
             expect(instance.state.showInfoModal).toEqual(false);
 
             instance.openInfoModal();
@@ -55,9 +53,6 @@ describe.only('JourneyMap', ()=> {
             expect(instance.state.showInfoModal).toEqual(false);
 
         });
-
-
-        //[{coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance"}];
 
     });
 });// 57,61,62,64,65
