@@ -9,6 +9,7 @@ import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
+let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
 class Form2 extends Component {
 
@@ -224,70 +225,8 @@ class Form2 extends Component {
     }
 
     handleFieldChange(e) {
-
-        const keys = e.target.name.split(".");
-        const value = e.target.value;
-
-        const respondents = this.state.document.respondents.slice();
-        let address = respondents[this.state.document.selectedRespondentIndex].address;
-        switch (keys[1]) {
-            case 'name' :
-                this.setState(update(this.state, {document: {selectedRespondentIndex: {$set: value}}}),
-                    (prevState, props) => {
-                        this.validateForm()
-                    }
-                );
-                break;
-            case 'addressLine1' :
-                address['addressLine1'] = value;
-                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
-                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}),
-                    (prevState, props) => {
-                        this.validateForm()
-                    }
-                );
-                break;
-            case 'addressLine2' :
-                address['addressLine2'] = value;
-                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
-                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
-                break;
-            case 'city' :
-                address['city'] = value;
-                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
-                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}),
-                    (prevState, props) => {
-                        this.validateForm();
-                    }
-                );
-                break;
-            case 'postalCode' :
-                address['postalCode'] = value;
-                respondents[this.state.document.selectedRespondentIndex]['address'] = address;
-                this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
-                break;
-            case 'useServiceEmail' :
-                this.setState(update(this.state, {document: {useServiceEmail: {$set: e.target.checked}}}),
-                    (prevState, props) => {
-                        this.validateForm()
-                    }
-                );
-                break;
-            case 'sendNotifications' :
-                this.setState(update(this.state, {document: {sendNotifications: {$set: e.target.checked}}}),
-                    (prevState, props) => {
-                        this.validateForm()
-                    }
-                );
-                break;
-            case 'email' :
-                this.setState(update(this.state, {document: {email: {$set: value}}}));
-                break;
-            case 'phone' :
-                this.setState(update(this.state, {document: {phone: {$set: value}}}));
-                break;
-        }
-        this.setState({formHasUnsavedChanges: true});
+        let document = updateDocument(this.state.document, e);
+        this.setState({ document:document, formHasUnsavedChanges: true }, ()=>{ this.validateForm(); });
     }
 
     formHasData() {

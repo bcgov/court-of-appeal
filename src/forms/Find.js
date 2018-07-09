@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './find.css';
 import DefaultService from '../service/default.service.js';
 import NumericField from '../components/NumericField';
 import SpinnerButton from '../components/SpinnerButton';

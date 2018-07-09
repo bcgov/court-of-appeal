@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Top5.css';
 
 class Top5 extends Component {
 

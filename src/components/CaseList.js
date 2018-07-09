@@ -1,10 +1,10 @@
 import React from 'react';
-import update from 'immutability-helper';
 import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
 import Form2Preview from "./Form2Preview";
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
+let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
 class CaseList extends React.Component {
 
@@ -58,67 +58,8 @@ class CaseList extends React.Component {
     }
 
     handleFieldChange(e) {
-        let value = e.target.value;
-        const keys = e.target.name.split(".");
-        const respondents = this.state.selectedDocument.respondents.slice();
-        let address = respondents[this.state.selectedDocument.selectedRespondentIndex].address || {};
-        switch (keys[1]) {
-            case 'name' :
-                let updatedWithSelectedRespondentIndex = this.state.selectedDocument;
-                updatedWithSelectedRespondentIndex.selectedRespondentIndex = value;
-                this.setState({ selectedDocument:updatedWithSelectedRespondentIndex }, 
-                    (prevState, props) => { this.validateForm()});
-                break;
-            case 'addressLine1' :
-                address['addressLine1'] = value;
-                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}),
-                    (prevState, props) => { this.validateForm()}
-                    );
-                break;
-            case 'addressLine2' :
-                address['addressLine2'] = value;
-                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
-                break;
-            case 'city' :
-                address['city'] = value;
-                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}),
-                    (prevState, props) => { this.validateForm()}
-                    );
-                break;
-            case 'postalCode' :
-                address['postalCode'] = value;
-                respondents[this.state.selectedDocument.selectedRespondentIndex].address = address;
-                this.setState(update(this.state, {selectedDocument: {respondents: {$set: respondents}}}));
-                break;
-            case 'useServiceEmail' :
-                let updatedWithUseServiceEmail = this.state.selectedDocument;
-                updatedWithUseServiceEmail.useServiceEmail = e.target.checked;                                
-                this.setState({ selectedDocument:updatedWithUseServiceEmail },
-                    (prevState, props) => { this.validateForm()} );
-                break;
-            case 'sendNotifications' :
-                let updatedWithSendNotifications = this.state.selectedDocument;
-                updatedWithSendNotifications.sendNotifications = e.target.checked;                                
-                this.setState({ selectedDocument:updatedWithSendNotifications },
-                    (prevState, props) => { this.validateForm()} );
-                break;
-            case 'email' :
-                let updatedWithEmail = this.state.selectedDocument;
-                updatedWithEmail.email = value;                
-                this.setState({ selectedDocument:updatedWithEmail });
-                break;
-            case 'phone' :
-                let updatedWithPhone = this.state.selectedDocument;
-                updatedWithPhone.phone = value;                
-                this.setState({ selectedDocument:updatedWithPhone });
-                break;
-            default :
-                break;
-        }
-        this.setState({formHasUnsavedChanges: true});
+        let document = updateDocument(this.state.selectedDocument, e);
+        this.setState({ selectedDocument:document, formHasUnsavedChanges: true }, ()=>{ this.validateForm(); });
     }
 
     columns(item) {
