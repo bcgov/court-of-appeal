@@ -1,5 +1,4 @@
 import React from 'react';
-import update from 'immutability-helper';
 import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
