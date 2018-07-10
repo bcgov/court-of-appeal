@@ -20,10 +20,10 @@ class JourneyMap extends React.Component {
         if(this.props.mapProps) {
             let targetAreas = this.getAreas();
             return (
-                <div className="form-section "  onClick={this.handleClickOffForm.bind(this)}>
+                <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
                     <h2>Your Appeal Process</h2>
                     <p>{this.props.subTitle}</p>
-                    <img className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
+                    <img id="journey-map-image" className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
                     <map name="journeymap" >
                         {targetAreas}
                     </map>
@@ -58,7 +58,7 @@ class JourneyMap extends React.Component {
         this.setState({showInfoModal:true, popupType: popupType});
     }
 
-    handleClickOffForm(e) {
+    handleClickOffModal(e) {
         if (!e.target.id) {
             return;
         }

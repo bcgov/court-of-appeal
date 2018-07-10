@@ -58,7 +58,7 @@ class InfoPopup extends Component {
                 'review': <ReviewPopup {...props} />,
                 'reviewhearing': <ReviewHearingPopup {...props}/>
             };
-            return options[this.props.type];
+            return options[this.props.type] || null;
         } else {
             return null;
         }
