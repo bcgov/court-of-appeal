@@ -12,7 +12,7 @@ class ApplyForLeavePopup extends Component {
 
     constructor(props) {
         super(props);
-        let NoticeOfAppeal = [
+        let NoticeOfApplicationForLeave = [
             {
                 line: FILE_ONLINE_ONE_MSG,
                 rows: [
@@ -69,7 +69,7 @@ class ApplyForLeavePopup extends Component {
             deadline: " within 30 days ",
             lineHeight: '201px',
             last: false,
-            contentMap: NoticeOfAppeal
+            contentMap: NoticeOfApplicationForLeave
         },{
             expandable: true,
             expanded: false,
@@ -93,10 +93,6 @@ class ApplyForLeavePopup extends Component {
                     Initial Documents
                 </div>
                 <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
-                            Do you need to apply for the court's permission to appeal?</div>
-                    </div>
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"

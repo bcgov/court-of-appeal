@@ -17,6 +17,8 @@ import BookAnAppealPopup from "../BookAnAppealPopup";
 import ReviewPopup from "../ReviewPopup";
 import ReviewHearingPopup from "../ReviewHearingPopup";
 import ApplyForLeavePopup from "../ApplyForLeavePopup";
+import LeaveHearingDocumentsPopup from "../LeaveHearingDocumentsPopup";
+import LeaveHearingPopup from "../LeaveHearingPopup"
 
 class InfoPopup extends Component {
 
@@ -58,7 +60,9 @@ class InfoPopup extends Component {
                 'bookappeal': <BookAnAppealPopup {...props} />,
                 'review': <ReviewPopup {...props} />,
                 'reviewhearing': <ReviewHearingPopup {...props}/>,
-                'applyforleave': <ApplyForLeavePopup {...props} />
+                'applyforleave': <ApplyForLeavePopup {...props} />,
+                'leavehearing': <LeaveHearingPopup {...props}/>,
+                'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>
             };
             return options[this.props.type] || null;
         } else {

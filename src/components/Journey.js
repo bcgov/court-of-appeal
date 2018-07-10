@@ -117,7 +117,8 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_apellant-apply-for-leave-to-appeal.png",
                 mapProps: [
                     { coords: "50,0,200,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
-                    { coords: "340,10,450,200", function: 'reviewhearing', alt: "what you need to know about the review hearing" }
+                    { coords: "260,0,360,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
+                    { coords: "460,0,560,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
                 ]
             };
         }, () => {

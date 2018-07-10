@@ -18,6 +18,8 @@ import AppellantCourtOrderPopup from '../../../../src/components/infopopups/Appe
 import BookAnAppealPopup from '../../../../src/components/infopopups/BookAnAppealPopup';
 import ReviewPopup from "../../../../src/components/infopopups/ReviewPopup";
 import ReviewHearingPopup from "../../../../src/components/infopopups/ReviewHearingPopup";
+import LeaveHearingDocumentsPopup from "../../../../src/components/infopopups/LeaveHearingDocumentsPopup";
+import LeaveHearingPopup from "../../../../src/components/infopopups/LeaveHearingPopup";
 
 describe('InfoPopup', ()=> {    
 
@@ -164,6 +166,20 @@ describe('InfoPopup', ()=> {
             let view = popup.render();
 
             expect(view).toEqual(<ApplyForLeavePopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build LeaveHearingDocumentsPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="leavehearingdocs" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<LeaveHearingDocumentsPopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build LeaveHearingPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="leavehearing" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<LeaveHearingPopup close={close} getSections={popup.getSections}/>);
         });
     });
 });
