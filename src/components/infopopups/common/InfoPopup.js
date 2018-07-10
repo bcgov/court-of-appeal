@@ -16,6 +16,7 @@ import AppellantCourtOrderPopup from "../AppellantCourtOrderPopup";
 import BookAnAppealPopup from "../BookAnAppealPopup";
 import ReviewPopup from "../ReviewPopup";
 import ReviewHearingPopup from "../ReviewHearingPopup";
+import ApplyForLeavePopup from "../ApplyForLeavePopup";
 
 class InfoPopup extends Component {
 
@@ -56,7 +57,8 @@ class InfoPopup extends Component {
                 'appellanthearing': <HearingPopup {...props} type="appellant" {...appellantHearingLinks} />,
                 'bookappeal': <BookAnAppealPopup {...props} />,
                 'review': <ReviewPopup {...props} />,
-                'reviewhearing': <ReviewHearingPopup {...props}/>
+                'reviewhearing': <ReviewHearingPopup {...props}/>,
+                'applyforleave': <ApplyForLeavePopup {...props} />
             };
             return options[this.props.type] || null;
         } else {

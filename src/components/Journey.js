@@ -24,6 +24,7 @@ class Journey extends Component {
         this.journeyForAppellant = this.journeyForAppellant.bind(this);
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
         this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
+        this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
         this.handlePopState = this.handlePopState.bind(this);
@@ -102,6 +103,22 @@ class Journey extends Component {
                     { coords: "240,520,350,710", function: 'appellanthearing', alt: "info about the hearing" },
                     { coords: "400,520,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
                     ]
+            };
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
+    leaveToAppealRequired() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                subtitleIndex: 0,
+                mapSrc: "/images/journeymap/journey-map_apellant-apply-for-leave-to-appeal.png",
+                mapProps: [
+                    { coords: "50,0,200,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
+                    { coords: "340,10,450,200", function: 'reviewhearing', alt: "what you need to know about the review hearing" }
+                ]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -239,7 +256,7 @@ class Journey extends Component {
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6">
-                            <button onClick={this.leaveToAppealRefused}
+                            <button onClick={this.leaveToAppealRequired}
                                     className="btn btn-primary round-borders btn-journey">
                                 No &nbsp;
                                 <i className="fa fa-play"/>

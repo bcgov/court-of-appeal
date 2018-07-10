@@ -1,3 +1,5 @@
+import ApplyForLeavePopup from "../../../../src/components/infopopups/ApplyForLeavePopup";
+
 require('../../../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
@@ -155,6 +157,13 @@ describe('InfoPopup', ()=> {
             let view = popup.render();
 
             expect(view).toEqual(<ReviewHearingPopup close={close} getSections={popup.getSections}/>);
+        });
+
+        test('can build ApplyForLeavePopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="applyforleave" close={close}/>).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<ApplyForLeavePopup close={close} getSections={popup.getSections}/>);
         });
     });
 });
