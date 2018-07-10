@@ -28,7 +28,7 @@ describe.only('JourneyMap', ()=> {
                 />);
         });
 
-        test.only('can build JourneyMap with a modal that can open and close', () => {
+        test('can build JourneyMap with a modal that can open and close', () => {
 
             let instance = journeymap.instance();
 
@@ -44,7 +44,6 @@ describe.only('JourneyMap', ()=> {
 
             instance.openInfoModal();
             expect(instance.state.showInfoModal).toEqual(true);
-            // e.target.id.includes('info-modal')
 
             instance.handleClickOffModal({target: {}});
             expect(instance.state.showInfoModal).toEqual(true);
@@ -55,4 +54,4 @@ describe.only('JourneyMap', ()=> {
         });
 
     });
-});// 57,61,62,64,65
+});
