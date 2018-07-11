@@ -97,11 +97,11 @@ class Journey extends Component {
                 mapProps: [
                     { coords: "150,0,250,180", function: 'appellantinitial', alt: "how to start your appeal" },
                     { coords: "350,0,450,180", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
-                    { coords: "100,270,230,450", function: 'factum', alt: "info about the factum" },
-                    { coords: "430,270,550,450", function: 'bookappeal', alt: "info about booking your appeal" },
-                    { coords: "40,520,170,710", function: 'noticeofhearing', alt: "info about the notice of hearing" },
-                    { coords: "240,520,350,710", function: 'appellanthearing', alt: "info about the hearing" },
-                    { coords: "400,520,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
+                    { coords: "60,270,180,450", function: 'factum', alt: "info about the factum" },
+                    { coords: "260,270,370,450", function: 'bookappeal', alt: "info about booking your appeal" },
+                    { coords: "450,270,530,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
+                    { coords: "160,520,280,710", function: 'appellanthearing', alt: "info about the hearing" },
+                    { coords: "320,520,450,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
                     ]
             };
         }, () => {
