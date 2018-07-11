@@ -73,8 +73,12 @@ class ReviewPopup extends Component {
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             lineHeight: "263px",
-            deadline: " 7 days ",
-            deadlinePhrase: { startWith: "You have  ", endWith: " to file and serve the document below after the Leave to Appeal was refused. If necessary, file and serve optional documents at the same time." },
+            deadlinePhrases: [{
+                startWith: "You have  ",
+                deadline: " 7 days ",
+                endWith: ` to file and serve the document below after the Leave to Appeal was refused. 
+                    If necessary, file and serve optional documents at the same time. `
+            }],
             contentMap: noticeOfApplicationMap
         },{
             expandable: true,
@@ -82,8 +86,11 @@ class ReviewPopup extends Component {
             sectionHeading: "Complete a Motion Book",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadline: " 14 days ",
-            deadlinePhrase: { startWith: "You have ", endWith: " to file and serve the document below after filing and serving the Notice of Application to Vary an Order of a Justice." },
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 14 days ",
+                endWith: ` to file and serve the document below after filing and serving the Notice of 
+                 Application to Vary an Order of a Justice.` }],
             lineHeight: null,
             contentMap: motionBookMap
         }]

@@ -36,9 +36,10 @@ class NoticeOfHearingPopup extends Component {
             sectionHeading: "Complete the Notice of Hearing",
             iconSrc: "/icons/icon-calendar.svg",
             iconClass: "info-modal-icon",
-            deadline: " 2 months",
-            deadlinePhrase: { startWith: "You have ", endWith: " to file and serve your document after submitting the " +
-                "Certificate of Readiness." },
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 2 months",
+                endWith: " to file and serve your document after submitting the Certificate of Readiness." }],
             lineHeight: null,
             contentMap: docList
         }]

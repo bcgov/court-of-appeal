@@ -61,8 +61,7 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Factum and Appeal Book",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have  ", endWith: " to file and serve your documents."},
-            deadline: " 30 days ",
+            deadlinePhrases: [{startWith: "You have  ", deadline: " 30 days ", endWith: " to file and serve your documents."}],
             lineHeight: '275px',
             contentMap: contentMap
         }, {

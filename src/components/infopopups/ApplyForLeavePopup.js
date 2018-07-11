@@ -12,7 +12,7 @@ class ApplyForLeavePopup extends Component {
 
     constructor(props) {
         super(props);
-        let NoticeOfAppeal = [
+        let NoticeOfApplicationForLeave = [
             {
                 line: FILE_ONLINE_ONE_MSG,
                 rows: [
@@ -65,19 +65,17 @@ class ApplyForLeavePopup extends Component {
             sectionHeading: "Notice of Application for Leave to Appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "File the document below ", endWith: " of the decision you want to appeal."},
-            deadline: " within 30 days ",
+            deadlinePhrases: [{startWith: "File the document below ", deadline: " within 30 days ", endWith: " of the decision you want to appeal."}],
             lineHeight: '201px',
             last: false,
-            contentMap: NoticeOfAppeal
+            contentMap: NoticeOfApplicationForLeave
         },{
             expandable: true,
             expanded: false,
             sectionHeading: "Proof of Service",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "File Proof of Service ", endWith: " of serving all respondents."},
-            deadline: " within 10 days ",
+            deadlinePhrases: [{startWith: "File Proof of Service ", deadline: " within 10 days ", endWith: " of serving all respondents."}],
             last: false,
             contentMap: ProofOfService
         }]
@@ -93,10 +91,6 @@ class ApplyForLeavePopup extends Component {
                     Initial Documents
                 </div>
                 <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
-                            Do you need to apply for the court's permission to appeal?</div>
-                    </div>
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"

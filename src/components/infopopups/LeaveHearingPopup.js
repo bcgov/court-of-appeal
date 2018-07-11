@@ -1,31 +1,23 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
 
-class AppellantCourtOrderPopup extends Component {
+class LeaveHearingPopup extends Component {
 
     constructor(props) {
         super(props);
 
         let content = [
             {
-                URLName: "How will I find out about my judgement?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgement?ct=t(sidebar-link)",
-            },
-            {
-                URLName: "Who is responsible for preparing the Court Order?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/4.3-court-orders?ct=t(sidebar-link)"
-            },
-            {
-                URLName: "Who is responsible for paying for the hearing?",
-                URL: "https://www.courtofappealbc.ca/appellant-guidebook/4.2-costs?ct=t(sidebar-link)"
-            },
+                URLName: "Leave to Appeal hearing.",
+                URL: `https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)`,
+            }
         ];
 
         this.sections = [{
             expandable: false,
             expanded: true,
-            sectionHeading: "For more information about the court order process, click the topics below: ",
-            iconSrc: "/icons/icon-info.svg",
+            sectionHeading: "For more information about the hearing process to obtain Leave to Appeal, click the link below: ",
+            iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
             content: content
@@ -37,7 +29,7 @@ class AppellantCourtOrderPopup extends Component {
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
                     <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Court Order
+                    The Hearing for Leave to Appeal
                 </div>
                 <div className="info-modal-content">
                     {this.props.getSections(this.sections)}
@@ -50,4 +42,4 @@ class AppellantCourtOrderPopup extends Component {
         );
     }
 
-} export default AppellantCourtOrderPopup;
+} export default LeaveHearingPopup;

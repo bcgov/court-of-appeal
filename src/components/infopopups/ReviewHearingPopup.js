@@ -19,8 +19,6 @@ class ReviewHearingPopup extends Component {
             sectionHeading: "For more information about the Hearing to Vary an Order of Justice, click the topic below: ",
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
-            deadline: null,
-            deadlinePhrase: null,
             lineHeight: null,
             content: content
         }]

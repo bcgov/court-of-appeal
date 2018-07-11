@@ -19,10 +19,9 @@ class InfoPopupSection extends Component {
     render() {
 
         let deadline = null;
-        if (this.props.deadline) {
+        if (this.props.deadlinePhrases) {
             deadline = <Deadline
-                deadlinePhrase={this.props.deadlinePhrase}
-                deadline={this.props.deadline}
+                deadlinePhrases={this.props.deadlinePhrases}
             />
         }
 

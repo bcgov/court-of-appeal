@@ -3,11 +3,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 import JourneyMap from "../../src/components/JourneyMap";
 
-describe.only('JourneyMap', ()=> {
+describe('JourneyMap', ()=> {
 
     describe('JourneyMap builds', ()=>{
 
-        test.only('returns null when there are no props', () => {
+        test('returns null when there are no props', () => {
             let journeymap = mount(<JourneyMap title="map title" subtitle="subtitle"/>);
             let view = journeymap.instance().render();
 

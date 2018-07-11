@@ -50,8 +50,11 @@ class AppealRecordPopup extends Component {
             sectionHeading: "Complete the Appeal Record and Transcript",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents after submitting the Notice of Appeal."},
-            deadline: " 60 days ",
+            deadlinePhrases: [{
+                    startWith: "You have ",
+                    deadline: " 60 days ",
+                    endWith: " to file and serve your documents after submitting the Notice of Appeal."
+                }],
             lineHeight: '241px',
             contentMap: contentMap
         }, {
