@@ -3,18 +3,26 @@ import React, {Component} from 'react';
 class Deadline extends Component {
 
     render() {
+        let deadlineContent = this.props.deadlinePhrases.map((value, key) => {
+            return(
+                <span key={key}>
+                    {value.startWith}
+                    <span className="deadline-quantity"> {value.deadline}</span>
+                    {value.endWith}
+                </span>
+            );
+        });
+
         return (
+
             <div className="deadline ">
                 <i className=" fa fa-exclamation-triangle deadline-alert" />
                 <div className="deadline-statement">
-                    <div>
-                        {this.props.deadlinePhrase.startWith}
-                        <span className="deadline-quantity"> {this.props.deadline}</span>
-                        {this.props.deadlinePhrase.endWith}
-                     </div>
-
+                    {deadlineContent}
                 </div>
+
             </div>
+
         );
 
     }

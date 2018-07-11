@@ -101,8 +101,11 @@ class AppellantFactumPopup extends Component {
             sectionHeading: "Complete the Factum, Appeal Book, and Certificate of Readiness",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents after filing your Appeal Record."},
-            deadline: "  30 days ",
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: "  30 days ",
+                endWith: " to file and serve your documents after filing your Appeal Record."
+            }],
             lineHeight: '311px',
             expanded: true,
             contentMap: factumDocList
@@ -111,8 +114,7 @@ class AppellantFactumPopup extends Component {
             sectionHeading: "Were you served with a respondent's Factum?",
             iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadline:" 7 days ",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your documents."},
+            deadlinePhrases: [{startWith: "You have ", deadline:" 7 days ", endWith: " to file and serve your documents."}],
             lineHeight: '206px',
             contentMap: respondentFactumDocList
         }, {

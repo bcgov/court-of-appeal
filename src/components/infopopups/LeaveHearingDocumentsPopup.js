@@ -21,11 +21,11 @@ class LeaveHearingDocumentsPopup extends Component {
                             URLName: "Notice of Motion"
                         }, times: "4 x",
                         docLink: {
-                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%203.docx",
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%203.doc",
                             URLName: "DOC"
                         },
                         pdfLink: {
-                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%203.pdf",
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form3.pdf",
                             URLName: "PDF"
                         }
 
@@ -35,7 +35,7 @@ class LeaveHearingDocumentsPopup extends Component {
                             URLName: "Motion Book"
                         }, times: "4 x",
                         docLink: {
-                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%204.docx",
+                            URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%204.doc",
                             URLName: "DOC"
                         },
                         pdfLink: {
@@ -55,12 +55,15 @@ class LeaveHearingDocumentsPopup extends Component {
             sectionHeading: "Notice of Motion and Motion Book",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {
+            deadlinePhrases: [{
                 startWith: "You have ",
-                endWith: ` to file the documents below after filing your Notice of Application for Leave to Appeal. Serve a 
-                filed copy on each respondent at least 10 business days before the hearing. `},
-            deadline: " 30 days ",
-            lineHeight: '201px',
+                deadline: " 30 days ",
+                endWith: " to file the documents below after filing your Notice of Application for Leave to Appeal. "
+            },{
+                startWith: " Serve a filed copy on each respondent ",
+                deadline: "at least 10 business days",
+                endWith: "before the hearing. "
+            }],
             last: false,
             contentMap: NoticeOfMotion
         }]

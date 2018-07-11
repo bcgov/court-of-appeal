@@ -58,8 +58,11 @@ class AppellantInitialPopup extends Component {
             sectionHeading: "Notice of Appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your document after the initial court order is declared."},
-            deadline: " 30 days ",
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 30 days ",
+                endWith: " to file and serve your document after the initial court order is declared."
+            }],
             lineHeight: '201px',
             last: false,
             contentMap: NoticeOfAppeal
@@ -69,8 +72,11 @@ class AppellantInitialPopup extends Component {
             sectionHeading: "Proof of Service",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your proof of service after serving all the respondents."},
-            deadline: " 10 days ",
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 10 days ",
+                endWith: " to file and serve your proof of service after serving all the respondents."
+            }],
             last: false,
             contentMap: ProofOfService
         }]

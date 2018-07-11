@@ -35,8 +35,11 @@ class AppearancePopup extends Component {
             sectionHeading: `Were you served with a ${this.props.noticeType}?`,
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrase: {startWith: "You have ", endWith: " to file and serve your document."},
-            deadline: " 10 days ",
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 10 days ",
+                endWith: " to file and serve your document."
+            }],
             last: false,
             contentMap: contentMap
         }]

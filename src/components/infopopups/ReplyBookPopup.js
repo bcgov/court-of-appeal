@@ -40,8 +40,11 @@ class ReplyBookPopup extends Component {
             sectionHeading: "Were you served with a Notice of Motion for Leave to Appeal and a Motion Book? ",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadline: " at least 5 days ",
-            deadlinePhrase: { startWith: "File and then serve a Reply Book ", endWith: " before the hearing." },
+            deadlinePhrases: [{
+                startWith: "File and then serve a Reply Book ",
+                deadline: " at least 5 days ",
+                endWith: " before the hearing."
+            }],
             lineHeight: null,
             contentMap: contentMap
         }]
