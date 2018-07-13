@@ -6,12 +6,15 @@ import SpinnerButton from '../components/SpinnerButton';
 class Find extends Component {
 
     constructor(props) {
-        super(props);   
-        this.service = props.service; 
+        super(props);
+        this.service = props.service;
         this.callback = props.callback;
         this.search = this.search.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.isInvalidCaseNumber = this.isInvalidCaseNumber.bind(this);
+        this.state = {
+            searchDisabled: true
+        };
     }
 
     componentDidMount() {
@@ -31,7 +34,7 @@ class Find extends Component {
     }
 
     handleKeyPress(target) {
-        if(target.charCode === 13 && !this.isInvalidCaseNumber()){
+        if(target.charCode === 13 && !this.isInvalidCaseNumber(this.props.formSevenNumber)){
             this.search();
         }
     }
@@ -62,8 +65,8 @@ class Find extends Component {
                                 />
                             </td>
                             <td>
-                            <SpinnerButton id="find-button" width="52" onClick={this.search} ref={ (element)=> {this.printButton = element }}
-                                content='Find'>                        
+                            <SpinnerButton disabled={this.state.searchDisabled} id="find-button" width="52" onClick={this.search} ref={ (element)=> {this.printButton = element }}
+                                content='Find'>
                             </SpinnerButton>
                             </td>
                             <td>
@@ -81,11 +84,16 @@ class Find extends Component {
     handleFieldChange(e) {
         // If the first two digits are not CA, add a CA.  otherwise only accept ^CA\d{5}\d*sea$
         e.target.value = 'CA'.concat(e.target.value.replace(/\D/g,''));
+        if (this.isInvalidCaseNumber(e.target.value)) {
+            this.setState({ searchDisabled: true });
+        } else {
+            this.setState({ searchDisabled: false });
+        }
         this.props.handleFieldChange(e);
     }
 
-    isInvalidCaseNumber() {
-        return this.props.formSevenNumber.match(/^CA\d{5}\d*$/) === null;
+    isInvalidCaseNumber(caseNumber) {
+        return caseNumber.match(/^CA\d{5}\d*$/) === null;
     }
 }
 
