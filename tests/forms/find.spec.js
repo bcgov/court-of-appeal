@@ -41,6 +41,38 @@ test('valid entries', ()=> {
 
 });
 
+test.only('cannot search with invalid entries', ()=> {
+
+    let value = '', started = false;
+    let handleFieldChange = (e) => { value = e.target.value; };
+    let startSearch = () => { started = true };
+
+    const finder = renderer.create(
+        <Find id="number-field"
+              formSevenNumber={value}
+              service={{ searchForm7: ()=> {} }}
+              handleFieldChange={handleFieldChange.bind(this)}
+              startSearching={startSearch.bind(this)}
+        />,
+    );
+    let tree = finder.toJSON();
+    expect(tree).toMatchSnapshot();
+
+    let instance = finder.getInstance();
+
+    let e = { target: { value: "CA12345"}};
+    instance.handleFieldChange(e);
+    expect(value).toMatch('CA12345');
+    expect(instance.state.searchDisabled).toEqual(false);
+
+    e = { target: { value: "CA1" } };
+    instance.handleFieldChange(e);
+    expect(value).toMatch('CA1');
+    expect(instance.state.searchDisabled).toEqual(true);
+
+});
+
+
 let DefaultService = require('../../src/service/default.service');
 test('default service', ()=>{
     let value = '', started = false;

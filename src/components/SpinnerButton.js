@@ -6,7 +6,7 @@ class SpinnerButton extends React.Component {
         super(props);
         this.state = {
             downloading: false
-        }
+        };
         this.buttonOrSpinner = this.buttonOrSpinner.bind(this);
     }
     startSpinner() {
@@ -19,9 +19,9 @@ class SpinnerButton extends React.Component {
         if (this.state.downloading) {
             return (
                 <div>
-                <button id={this.props.id} 
-                        disabled="true" 
-                        className="btn btn-primary btn-green" 
+                <button id={this.props.id}
+                        disabled="true"
+                        className="btn btn-primary btn-green"
                         style={{ width:this.props.width+'px' }}
                 >
                     <i className="fa fa-spinner fa-spin"></i>
@@ -32,10 +32,11 @@ class SpinnerButton extends React.Component {
         else {
             return (
                 <div>
-                <button id={this.props.id} 
-                        onClick={this.props.onClick} 
+                <button id={this.props.id}
+                        onClick={this.props.onClick}
                         className="btn btn-primary round-borders action-button"
                         style={{ width:this.props.width+'px' }}
+                        disabled={this.props.disabled}
                 >
                         { this.props.content }
                 </button>
