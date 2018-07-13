@@ -34,8 +34,9 @@ class Journey extends Component {
             "Start e-filing your response to the appeal below."
         ]
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
-                        <p>Please see our online guidebook for more 
-                        <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'>
+                        <p>please see our online guidebook for more 
+                        <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
+                        target="_blank">
                         detailed information.</a></p>`;
     }
 
