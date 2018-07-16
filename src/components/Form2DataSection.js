@@ -185,7 +185,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span id="emailasterisks" className="mandatory-field" style={{display:this.props.data.useServiceEmail || this.props.data.sendNotifications?'inline-block':'none'}}>*</span>
                                     Email address&nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to aggree to this using the checkboxes below)"></i>
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <EmailField id="email"
@@ -215,7 +215,11 @@ class Form2DataSection extends React.Component {
                                 </div>
                             </div>
                             <div className="row address-row">
-                                <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I accept to be served documents electronically by another party</div>
+                                <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">
+                                    I agree to be served documents electronically by another party
+                                    &nbsp;<i className="fa fa-question-circle" aria-hidden="true"
+                                       data-tip="Electronic service will replace in-person service if you select this option."></i>
+                                </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
                                 <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
                                     type="checkbox"
