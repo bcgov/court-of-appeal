@@ -39,8 +39,7 @@ class CrossAppealPopup extends Component {
             sectionHeading: "The Appeal Record and Transcript",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            content: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.  These" +
-            " documents are for your awareness only."]
+            content: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents."]
         }]
     }
 

@@ -70,24 +70,21 @@ class RespondentFactumPopup extends Component {
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '73px',
-            content: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document.  This" +
-            " document is for your awareness only."]
+            content: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '73px',
-            content: ["If you are served with the appellant's Certificate of Readiness, you do not have to respond to this document.  This" +
-            " document is for your awareness only."]
+            content: ["If you are served with the appellant's Certificate of Readiness, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "A Reply to your Factum",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '73px',
-            content: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document.  This" +
-            " document is for your awareness only."]
+            content: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",

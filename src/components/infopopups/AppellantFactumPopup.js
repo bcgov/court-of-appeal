@@ -125,8 +125,7 @@ class AppellantFactumPopup extends Component {
             deadline: null,
             lineHeight: null,
             VLProps: null,
-            content: ["If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond.  " +
-                "These documents are for your awareness only."]
+            content: ["If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond."]
         }]
     }
 
