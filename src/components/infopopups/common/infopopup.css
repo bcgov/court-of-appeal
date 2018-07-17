@@ -60,6 +60,7 @@
 
 .bullet-row-content{
     display: flex;
+    padding-left: 15px;
 }
 .bullet-row-description {
     width:75%;
