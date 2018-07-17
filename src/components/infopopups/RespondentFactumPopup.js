@@ -27,7 +27,7 @@ class RespondentFactumPopup extends Component {
                     },
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
-                        URLName: "* Optional - Transcript and Extract Book" }, times: "4 x",
+                        URLName: "* Optional - Transcript Extract Book" }, times: "4 x",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -76,8 +76,30 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '73px',
-            content: ["If you are served with the appellant's Certificate of Readiness, you do not have to respond to this document."]
+            lineHeight: '240px',
+            content: ["If you are not served a Certificate of Readiness within 7 days of receiving the Factum, and would like to continue with the appeal, then you are responsible for filing and serving the Certificate of Readiness."],
+            contentMap: [
+                {
+                    line: FILE_STEP_ONE_MSG,
+                    rows: [
+                        { descriptionLink: {
+                            URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.12-if-the-appellant-does-not-prepare-a-certificate-of-readiness?ct=t(sidebar-link)",
+                            URLName: "The Certificate of Readiness"
+                            }, times: "4 x",
+                            docLink: {
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx",
+                                URLName: "DOC"
+                            },
+                            pdfLink: {
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form14.pdf",
+                                URLName: "PDF"
+                            }
+                        }
+                    ]
+                },
+                FILE_MULTIPLES_STEP_TWO_MSG,
+                FILE_STEP_THREE_MSG
+            ]
         }, {
             expandable: true,
             sectionHeading: "A Reply to your Factum",
