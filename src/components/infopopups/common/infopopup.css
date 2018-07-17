@@ -165,6 +165,7 @@
 .evenly-spaced {
     display: flex;
     justify-content: space-between;
+    padding-left: 15px;
 }
 
 .help-title {
