@@ -31,7 +31,13 @@ class Journey extends Component {
         this.subtitles = [
             <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance.
                 &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
-            "Start e-filing your response to the appeal below."
+            
+            <div>
+                Follow the steps below to respond to the appeal.
+                <br/>
+                Every appeal process is different. 
+                If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or contact the <a href="mailto:courts.cso@gov.bc.ca">registry</a>.
+            </div>
         ]
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
                         <p>please see our online guidebook for more 
