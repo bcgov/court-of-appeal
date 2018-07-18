@@ -47,14 +47,13 @@ class AppearancePopup extends Component {
                 endWith: " to file and serve your response."
             }],
             last: false,
-            contentMap: contentMap
+            contentMap: contentMap,
+            infoModalDivider: false
         },
         {
             expandable: false,
             expanded: true,
-            sectionHeading: `Complete the Affidavit of Service`,
-            iconSrc: "/icons/icon-share.svg",
-            iconClass: "info-modal-icon",
+            iconLine: false,
             deadlinePhrases: [{
                 startWith: "You have ",
                 deadline: " 10 days ",

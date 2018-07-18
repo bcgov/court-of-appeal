@@ -44,23 +44,32 @@ class InfoPopupSection extends Component {
 
         let listContent= this.props.getListContent(this.props.contentMap);
         let content = this.props.getContent(this.props.content);
-
-        return (
-            <div className="info-modal-section ">
-                <div className="row">
-                    <InfoPopupIcon
-                        iconSrc={this.props.iconSrc}
-                        iconClass={this.props.iconClass}
-                    />
-                    <div className="col">
-                        <div className="row">
-                            <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading">
-                                {this.props.sectionHeading}
-                            </div>
-                            {toggleButton}
+        let sectionDivider = (<div className="info-modal-divider"/>)
+        if (this.props.infoModalDivider === false) {
+            sectionDivider = null;
+        }
+        let iconLine = (
+            <div className="row">
+                <InfoPopupIcon
+                    iconSrc={this.props.iconSrc}
+                    iconClass={this.props.iconClass}
+                />
+                <div className="col">
+                    <div className="row">
+                        <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading">
+                            {this.props.sectionHeading}
                         </div>
+                        {toggleButton}
                     </div>
                 </div>
+            </div>
+        )
+        if (this.props.iconLine === false) {
+            iconLine = null;
+        }
+        return (
+            <div className="info-modal-section ">
+                {iconLine}
                 <div className={this.state.collapsibleClass}>
                     <div className="col col-lg-1 col-md-1 col-sm-1">
                         {verticalLine}
@@ -77,7 +86,7 @@ class InfoPopupSection extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="info-modal-divider"/>
+                {sectionDivider}
             </div>
         );
     }
