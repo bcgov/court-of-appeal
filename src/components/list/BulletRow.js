@@ -11,6 +11,9 @@ class BulletRow extends Component {
         } else {
             description = this.props.row.description;
         }
+        
+        
+        description = <div id={'bullet-' + this.props.id}> {description} { this.props.row.descriptionLink!==undefined && this.props.row.descriptionLink.tooltip!==undefined ? <i className="fa fa-question-circle" aria-hidden="true" data-tip={this.props.row.descriptionLink.tooltip}></i> : ``} </div>;
 
         if (this.props.row.onlineForm) {
             rowcontent = (

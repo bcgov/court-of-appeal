@@ -6,7 +6,7 @@ class BulletedList extends Component {
     render() {
         let heading = <div>{this.props.index} .&nbsp;&nbsp; {this.props.heading}</div>;
         let bulletList = this.props.rows.map((row, bulletIndex) => {
-            return <BulletRow row={row} key={bulletIndex + "-" + this.props.index} />;
+            return <BulletRow row={row} key={bulletIndex + "-" + this.props.index} id={bulletIndex + "-" + this.props.index} />;
         });
 
         return (

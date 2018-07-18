@@ -1,4 +1,5 @@
 import React, { Component }from 'react';
+import ReactTooltip from "react-tooltip";
 import Help from './common/Help';
 import {
     FILE_STEP_ONE_MSG, FILE_MULTIPLES_STEP_TWO_MSG, FILE_STEP_THREE_MSG
@@ -26,8 +27,11 @@ class RespondentFactumPopup extends Component {
                         }
                     },
                     { descriptionLink: {
-                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
-                        URLName: "* Optional - Transcript Extract Book" }, times: "4 x",
+                            URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
+                            URLName: "* Optional - Transcript Extract Boook",
+                            tooltip: 'If a witness spoke at your original trial/ hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                        }, 
+                        times: "4 x",                        
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -38,9 +42,11 @@ class RespondentFactumPopup extends Component {
                         }
                     },
                     { descriptionLink : {
-                        URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
-                        URLName: "* Optional - Appeal Book"
-                        }, times: "4 x",
+                            URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
+                            URLName: "* Optional - Appeal Book",
+                            tooltip: 'If you would like to provide information that is not included in the Appellant’s Appeal Book, please complete your own Appeal Book.'
+                        }, 
+                        times: "4 x",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx",
                             URLName: "DOC"
@@ -138,7 +144,7 @@ class RespondentFactumPopup extends Component {
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
-
+                <ReactTooltip/>
             </div>
         );
     }
