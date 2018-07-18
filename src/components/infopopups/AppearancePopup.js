@@ -1,6 +1,12 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
-import {FILE_ONLINE_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
+import {
+    FILE_ONLINE_ONE_MSG, 
+    FILE_STEP_THREE_MSG, 
+    FILE_STEP_TWO_MSG,
+    FILE_STEP_ONE_MSG,
+    FILE_MULTIPLES_STEP_TWO_MSG
+} from "../../helpers/constants";
 
 class AppearancePopup extends Component {
 
@@ -38,10 +44,45 @@ class AppearancePopup extends Component {
             deadlinePhrases: [{
                 startWith: "You have ",
                 deadline: " 10 days ",
-                endWith: " to file and serve your document."
+                endWith: " to file and serve your response."
             }],
             last: false,
             contentMap: contentMap
+        },
+        {
+            expandable: false,
+            expanded: true,
+            sectionHeading: `Complete the Affidavit of Service`,
+            iconSrc: "/icons/icon-share.svg",
+            iconClass: "info-modal-icon",
+            deadlinePhrases: [{
+                startWith: "You have ",
+                deadline: " 10 days ",
+                endWith: " to file and serve your Affidavit of Service, after you served the Notice of Appearance."
+            }],
+            last: false,
+            contentMap: [
+                {
+                    line: FILE_STEP_ONE_MSG,
+                    rows: [
+                        { descriptionLink: {
+                                URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
+                                URLName: "Affidavit of Service"
+                            }, times: "1 x",
+                            docLink: {
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx",
+                                URLName: "DOC"
+                            },
+                            pdfLink: {
+                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf",
+                                URLName: "PDF"
+                            }
+                        }
+                    ]
+                },
+                FILE_MULTIPLES_STEP_TWO_MSG,
+                FILE_STEP_THREE_MSG
+             ]
         }]
     }
 
