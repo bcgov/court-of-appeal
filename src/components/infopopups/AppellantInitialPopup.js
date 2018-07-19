@@ -1,6 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
-import {FILE_ONLINE_ONE_MSG, FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
+import {FILE_ONLINE_ONE_MSG, FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class AppellantInitialPopup extends Component {
 
@@ -31,7 +31,7 @@ class AppellantInitialPopup extends Component {
 
         let ProofOfService = [
             {
-                line: FILE_STEP_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
@@ -75,7 +75,7 @@ class AppellantInitialPopup extends Component {
             deadlinePhrases: [{
                 startWith: "You have ",
                 deadline: " 10 days ",
-                endWith: " to file and serve your proof of service after serving all the respondents."
+                endWith: " to file and serve your Proof of Service, after serving the Notice of Appeal to all of the respondents."
             }],
             last: false,
             contentMap: ProofOfService

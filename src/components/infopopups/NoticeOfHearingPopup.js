@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
-import { FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
+import { FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
 
 class NoticeOfHearingPopup extends Component {
 
@@ -9,7 +9,7 @@ class NoticeOfHearingPopup extends Component {
 
         let docList = [
                 {
-                    line: FILE_STEP_ONE_MSG,
+                    line: FILE_STEP_ONE_MSG_SINGULAR,
                     rows: [
                         { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)",

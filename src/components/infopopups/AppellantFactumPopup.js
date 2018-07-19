@@ -1,9 +1,11 @@
 import React, { Component }from 'react';
+import ReactTooltip from "react-tooltip";
 import Help from './common/Help';
 import {
     FILE_STEP_THREE_MSG,
     FILE_MULTIPLES_STEP_TWO_MSG,
-    FILE_STEP_ONE_MSG
+    FILE_STEP_ONE_MSG,
+    FILE_STEP_ONE_MSG_SINGULAR
 } from "../../helpers/constants";
 
 class AppellantFactumPopup extends Component {
@@ -29,7 +31,10 @@ class AppellantFactumPopup extends Component {
                     },
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.9-preparing-the-transcript-extract-book?ct=t(step-index-link)",
-                            URLName: "* Optional - Transcript Extract Book" }, times: "4 x",
+                            URLName: "Optional - Transcript Extract Book",
+                            tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                        }, 
+                        times: "4 x",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -73,7 +78,7 @@ class AppellantFactumPopup extends Component {
 
         let respondentFactumDocList = [
             {
-                line: FILE_STEP_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.8-replies?ct=t(sidebar-link)",
@@ -98,7 +103,7 @@ class AppellantFactumPopup extends Component {
 
         this.sections = [{
             expandable: true,
-            sectionHeading: "Complete the Factum, Appeal Book, and Certificate of Readiness",
+            sectionHeading: "Complete the Factum, Appeal Book and Certificate of Readiness",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
@@ -136,7 +141,7 @@ class AppellantFactumPopup extends Component {
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
                     <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    The Factum and Appeal Book
+                    The Factum, Appeal Book and Certificate of Readiness
                 </div>
                 <div className="info-modal-content">
                     {sections}
@@ -145,7 +150,7 @@ class AppellantFactumPopup extends Component {
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
-
+                <ReactTooltip/>
             </div>
         );
     }

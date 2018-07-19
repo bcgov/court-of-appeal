@@ -1,4 +1,5 @@
 import React, { Component }from 'react';
+import ReactTooltip from "react-tooltip";
 import Help from './common/Help';
 import {
     FILE_STEP_THREE_MSG,
@@ -29,7 +30,10 @@ class AppealRecordPopup extends Component {
                     },
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(sidebar-link)",
-                            URLName: "* Optional - Transcript" }, times: "4 x",
+                            URLName: "Optional - Transcript",
+                            tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                        }, 
+                        times: "4 x",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -85,7 +89,7 @@ class AppealRecordPopup extends Component {
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
-
+                <ReactTooltip/>
             </div>
         );
     }

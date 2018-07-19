@@ -113,6 +113,7 @@
 .deadline-quantity {
     color: red;
     padding: 0 5px;
+    font-weight: bold;
 }
 
 .deadline-alert {

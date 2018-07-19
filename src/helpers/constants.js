@@ -8,6 +8,7 @@ export const GENERAL_ERROR_MSG = "Please fix all errors in the form !";
 // Popup messages:
 export const FILE_ONLINE_ONE_MSG = "Complete the online form below.  Click on the document name for more information.";
 export const FILE_STEP_ONE_MSG = "Complete either the .DOCs or .PDFs below.  Click on the document names for more information.";
+export const FILE_STEP_ONE_MSG_SINGULAR = "Complete either the .DOC or .PDF below.  Click on the document name for more information.";
 export const FILE_STEP_TWO_MSG = "File the document with the registry.";
 export const FILE_MULTIPLES_STEP_TWO_MSG = "File the indicated number of copies with the registry.";
 export const FILE_STEP_THREE_MSG = "Serve one copy to each party.";
