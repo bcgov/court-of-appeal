@@ -28,7 +28,7 @@ class InfoPopupSection extends Component {
         let toggleButton = null;
         if (this.props.expandable) {
             toggleButton =
-                <div className="col col-lg-2 col-md-2 toggle-expansion-button" onClick={this.toggleSection}>
+                <div className="col col-lg-2 col-md-2 toggle-expansion-button" >
                     <i className={this.state.toggleIconClass} />
                 </div>;
         } else {
@@ -49,7 +49,7 @@ class InfoPopupSection extends Component {
             sectionDivider = null;
         }
         let iconLine = (
-            <div className="row">
+            <div className="row" onClick={this.toggleSection} style={{ cursor:'pointer' }}>
                 <InfoPopupIcon
                     iconSrc={this.props.iconSrc}
                     iconClass={this.props.iconClass}
