@@ -60,20 +60,19 @@ class ApplyForLeavePopup extends Component {
 
         this.sections = [{
             expandable: true,
-            expanded: false,
+            expanded: true,
             sectionHeading: "Notice of Application for Leave to Appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "File the document below ", deadline: " within 30 days ", endWith: " of the decision you want to appeal."}],
-            lineHeight: '201px',
             last: false,
-            contentMap: NoticeOfApplicationForLeave
+            contentMap: NoticeOfApplicationForLeave,
+            infoModalDivider: false
         },{
-            expandable: true,
-            expanded: false,
+            expandable: false,
+            expanded: true,
             sectionHeading: "Proof of Service",
-            iconSrc: "/icons/icon-share.svg",
-            iconClass: "info-modal-icon",
+            iconLine: false,
             deadlinePhrases: [{startWith: "File Proof of Service ", deadline: " within 10 days ", endWith: " of serving all respondents."}],
             last: false,
             contentMap: ProofOfService
