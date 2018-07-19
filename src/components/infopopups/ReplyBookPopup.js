@@ -17,7 +17,7 @@ class ReplyBookPopup extends Component {
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
-                        URLName: "Reply Book" }, times: "4 x",
+                        URLName: "Reply Book" }, times: "4 copies",
                         docLink:
                             {
                                 URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%205.doc",

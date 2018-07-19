@@ -17,7 +17,7 @@ class LeaveHearingDocumentsPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)",
                             URLName: "Notice of Motion"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%203.doc",
                             URLName: "DOC"
@@ -31,7 +31,7 @@ class LeaveHearingDocumentsPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)",
                             URLName: "Motion Book"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%204.doc",
                             URLName: "DOC"

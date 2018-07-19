@@ -14,7 +14,7 @@ class NoticeOfHearingPopup extends Component {
                         { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)",
                             URLName: "Notice of Hearing"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                             docLink: {
                                 URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2034.doc",
                                 URLName: "DOC"

@@ -18,7 +18,7 @@ class AppealRecordPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(sidebar-link)",
                             URLName: "Appeal Record"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%209.docx",
                             URLName: "DOC"
@@ -33,7 +33,7 @@ class AppealRecordPopup extends Component {
                             URLName: "Optional - Transcript",
                             tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
                         }, 
-                        times: "4 x",
+                        times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"

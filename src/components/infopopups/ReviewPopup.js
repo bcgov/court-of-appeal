@@ -17,7 +17,7 @@ class ReviewPopup extends Component {
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)",
-                        URLName: "Notice of Application to Vary" }, times: "4 x",
+                        URLName: "Notice of Application to Vary" }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2015.doc",
                             URLName: "DOC"
@@ -31,7 +31,7 @@ class ReviewPopup extends Component {
                             URLName: "Optional: Affidavit",
                             tooltip: 'if you would like to include additional information to support your case, complete this Affidavit.'
                         }, 
-                        times: "4 x",
+                        times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx",
                             URLName: "DOC"
@@ -53,7 +53,7 @@ class ReviewPopup extends Component {
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)",
-                            URLName: "Motion Book" }, times: "4 x",
+                            URLName: "Motion Book" }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2016.doc",
                             URLName: "DOC"

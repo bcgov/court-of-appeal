@@ -67,7 +67,7 @@ class AppearancePopup extends Component {
                         { descriptionLink: {
                                 URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
                                 URLName: "Affidavit of Service"
-                            }, times: "1 x",
+                            }, times: "1 copy",
                             docLink: {
                                 URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx",
                                 URLName: "DOC"

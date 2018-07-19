@@ -19,7 +19,7 @@ class AppellantFactumPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.7-write-your-factum?ct=t(step-index-link)",
                             URLName: "Factum"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_Final.dotx",
                             URLName: "DOC"
@@ -34,7 +34,7 @@ class AppellantFactumPopup extends Component {
                             URLName: "Optional - Transcript Extract Book",
                             tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
                         }, 
-                        times: "4 x",
+                        times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -47,7 +47,7 @@ class AppellantFactumPopup extends Component {
                     { descriptionLink : {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.6-put-together-your-appeal-book?ct=t(step-index-link)",
                             URLName: "Appeal Book"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx",
                             URLName: "DOC"
@@ -60,7 +60,7 @@ class AppellantFactumPopup extends Component {
                     { descriptionLink : {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.11-prepare-and-file-a-certificate-of-readiness?ct=t(sidebar-link)",
                             URLName: "Certificate of Readiness"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx",
                             URLName: "DOC"
@@ -83,7 +83,7 @@ class AppellantFactumPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.8-replies?ct=t(sidebar-link)",
                             URLName: "Reply"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2011.docx",
                             URLName: "DOC"

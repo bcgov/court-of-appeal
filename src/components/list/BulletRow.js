@@ -35,7 +35,7 @@ class BulletRow extends Component {
 
                     <div className="bullet-row-badges-container">
                         <div className=" evenly-spaced">
-                            <div>{this.props.row.times}</div>
+                            <div className="bullet-row-times-mention">{this.props.row.times}</div>
                             <div className="row-badge" >
                                 <a href={this.props.row.docLink.URL}>{this.props.row.docLink.URLName}</a>
                             </div>

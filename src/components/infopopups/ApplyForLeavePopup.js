@@ -18,7 +18,7 @@ class ApplyForLeavePopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)",
                             URLName: "Notice of Application for Leave to Appeal"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%201.docx",
                             URLName: "DOC"
@@ -42,7 +42,7 @@ class ApplyForLeavePopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
                             URLName: "Proof of Service"
-                        }, times: "1 x",
+                        }, times: "1 copy",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx",
                             URLName: "DOC"

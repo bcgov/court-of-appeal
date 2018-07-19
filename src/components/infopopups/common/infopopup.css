@@ -63,10 +63,14 @@
     padding-left: 15px;
 }
 .bullet-row-description {
-    width:75%;
+    width:70%;
 }
 .bullet-row-badges-container {
-    width: 25%;
+    width: 30%;
+}
+.bullet-row-times-mention {
+    padding-right: 0px;
+    padding-top: 2px;
 }
 
 .icon-container-box {

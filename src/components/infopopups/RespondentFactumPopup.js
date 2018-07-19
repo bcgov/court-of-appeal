@@ -16,7 +16,7 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)",
                         URLName: "Factum"
-                        }, times: "4 x",
+                        }, times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_respondent_Final.dotx",
                             URLName: "DOC"
@@ -31,7 +31,7 @@ class RespondentFactumPopup extends Component {
                             URLName: "Optional - Transcript Extract Boook",
                             tooltip: 'If a witness spoke at your original trial/ hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
                         }, 
-                        times: "4 x",                        
+                        times: "4 copies",                        
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx",
                             URLName: "DOC"
@@ -46,7 +46,7 @@ class RespondentFactumPopup extends Component {
                             URLName: "Optional - Appeal Book",
                             tooltip: 'If you would like to provide information that is not included in the Appellant’s Appeal Book, please complete your own Appeal Book.'
                         }, 
-                        times: "4 x",
+                        times: "4 copies",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx",
                             URLName: "DOC"
@@ -91,7 +91,7 @@ class RespondentFactumPopup extends Component {
                         { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.12-if-the-appellant-does-not-prepare-a-certificate-of-readiness?ct=t(sidebar-link)",
                             URLName: "The Certificate of Readiness"
-                            }, times: "4 x",
+                            }, times: "4 copies",
                             docLink: {
                                 URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx",
                                 URLName: "DOC"
