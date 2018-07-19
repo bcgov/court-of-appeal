@@ -8,7 +8,7 @@ class LeaveHearingPopup extends Component {
 
         let content = [
             {
-                URLName: "Leave to Appeal hearing.",
+                URLName: "What will happen at my hearing?",
                 URL: `https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)`,
             }
         ];

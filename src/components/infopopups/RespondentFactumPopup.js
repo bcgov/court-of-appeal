@@ -73,14 +73,14 @@ class RespondentFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "The Transcript Extract Book",
-            iconSrc :"icons/icon-info.svg",
+            iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '73px',
             content: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "The Certificate of Readiness",
-            iconSrc :"icons/icon-info.svg",
+            iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '240px',
             content: ["If you are not served a Certificate of Readiness within 7 days of receiving the Factum, and would like to continue with the appeal, then you are responsible for filing and serving the Certificate of Readiness."],
@@ -109,14 +109,14 @@ class RespondentFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "A Reply to your Factum",
-            iconSrc :"icons/icon-info.svg",
+            iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '73px',
             content: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",
-            iconSrc :"icons/icon-calendar.svg",
+            iconSrc :"/icons/icon-calendar.svg",
             iconClass: "info-modal-icon",
             content: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
             "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information.",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Help from "./common/Help";
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
-    FILE_STEP_ONE_MSG,
+    FILE_STEP_ONE_MSG_SINGULAR,
     FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
 
@@ -13,7 +13,7 @@ class ReplyBookPopup extends Component {
 
         let contentMap = [
             {
-                line: FILE_STEP_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                         URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",

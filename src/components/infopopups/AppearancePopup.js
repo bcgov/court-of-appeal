@@ -4,7 +4,7 @@ import {
     FILE_ONLINE_ONE_MSG, 
     FILE_STEP_THREE_MSG, 
     FILE_STEP_TWO_MSG,
-    FILE_STEP_ONE_MSG,
+    FILE_STEP_ONE_MSG_SINGULAR,
     FILE_MULTIPLES_STEP_TWO_MSG
 } from "../../helpers/constants";
 
@@ -62,7 +62,7 @@ class AppearancePopup extends Component {
             last: false,
             contentMap: [
                 {
-                    line: FILE_STEP_ONE_MSG,
+                    line: FILE_STEP_ONE_MSG_SINGULAR,
                     rows: [
                         { descriptionLink: {
                                 URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",

@@ -2,8 +2,7 @@ import React, { Component }from 'react';
 import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
-    FILE_ONLINE_ONE_MSG,
-    FILE_STEP_ONE_MSG,
+    FILE_STEP_ONE_MSG_SINGULAR,
     FILE_STEP_THREE_MSG,
     FILE_STEP_TWO_MSG
 } from "../../helpers/constants";
@@ -14,7 +13,7 @@ class ApplyForLeavePopup extends Component {
         super(props);
         let NoticeOfApplicationForLeave = [
             {
-                line: FILE_ONLINE_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)",
@@ -38,7 +37,7 @@ class ApplyForLeavePopup extends Component {
 
         let ProofOfService = [
             {
-                line: FILE_STEP_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",

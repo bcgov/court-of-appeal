@@ -1,6 +1,6 @@
 import React, { Component }from 'react';
 import Help from './common/Help';
-import {FILE_STEP_ONE_MSG, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
+import {FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class CrossAppealPopup extends Component {
 
@@ -8,7 +8,7 @@ class CrossAppealPopup extends Component {
         super(props);
         let contentMap = [
             {
-                line: FILE_STEP_ONE_MSG,
+                line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { description: "Notice of Cross Appeal", times: "1 x",
                         docLink: {
@@ -37,7 +37,7 @@ class CrossAppealPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "The Appeal Record and Transcript",
-            iconSrc :"icons/icon-info.svg",
+            iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             content: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents."]
         }]

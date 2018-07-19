@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
-    FILE_ONLINE_ONE_MSG,
+    FILE_STEP_ONE_MSG,
     FILE_STEP_THREE_MSG,
 } from "../../helpers/constants";
 
@@ -12,7 +12,7 @@ class LeaveHearingDocumentsPopup extends Component {
         super(props);
         let NoticeOfMotion = [
             {
-                line: FILE_ONLINE_ONE_MSG,
+                line: FILE_STEP_ONE_MSG,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)",
@@ -58,7 +58,7 @@ class LeaveHearingDocumentsPopup extends Component {
                 deadline: " 30 days ",
                 endWith: " to file the documents below after filing your Notice of Application for Leave to Appeal. "
             },{
-                startWith: " Serve a filed copy on each respondent ",
+                startWith: " Next, serve each respondent with a copy ",
                 deadline: "at least 10 business days",
                 endWith: "before the hearing. "
             }],
