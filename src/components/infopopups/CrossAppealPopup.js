@@ -28,6 +28,7 @@ class CrossAppealPopup extends Component {
 
         this.sections = [{
             expandable: true,
+            expanded: true,
             sectionHeading: "The Notice of Appeal or the order granting leave to appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",

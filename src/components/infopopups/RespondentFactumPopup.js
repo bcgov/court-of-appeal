@@ -64,6 +64,7 @@ class RespondentFactumPopup extends Component {
 
         this.sections = [{
             expandable: true,
+            expanded: true,
             sectionHeading: "The Factum and Appeal Book",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",

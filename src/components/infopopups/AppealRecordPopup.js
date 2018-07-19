@@ -51,6 +51,7 @@ class AppealRecordPopup extends Component {
 
         this.sections = [{
             expandable: true,
+            expanded: true,
             sectionHeading: "Complete the Appeal Record and Transcript",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
