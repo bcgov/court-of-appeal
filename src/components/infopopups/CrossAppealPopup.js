@@ -31,7 +31,7 @@ class CrossAppealPopup extends Component {
             sectionHeading: "The Notice of Appeal or the order granting leave to appeal",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            deadlinePhrases: [{startWith: "You have  ", deadline: " 15 days ", endWith: " to file and serve your documents, after receiving the last document."}],
+            deadlinePhrases: [{startWith: "You have  ", deadline: " 15 days ", endWith: " to file and serve your documents, after receiving the Notice of Appeal or the order granting leave to appeal."}],
             lineHeight: '205px',
             contentMap: contentMap
         }, {
@@ -50,7 +50,7 @@ class CrossAppealPopup extends Component {
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
                     <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Cross Appeal (If Applicable)
+                    Cross Appeal (Optional)
                 </div>
                 <div className="info-modal-content">
                     <div className="info-modal-primary-heading row">

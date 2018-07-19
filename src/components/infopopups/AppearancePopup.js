@@ -44,7 +44,7 @@ class AppearancePopup extends Component {
             deadlinePhrases: [{
                 startWith: "You have ",
                 deadline: " 10 days ",
-                endWith: " to file and serve your response."
+                endWith: " to file and serve your Notice of Appearance."
             }],
             last: false,
             contentMap: contentMap,
