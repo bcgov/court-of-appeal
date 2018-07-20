@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Help from "./common/Help";
-import { FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
+import { FILE_STEP_ONE_MSG_SINGULAR, SERVE_EACH_RESPONDENT_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
 
 class NoticeOfHearingPopup extends Component {
 
@@ -27,7 +27,7 @@ class NoticeOfHearingPopup extends Component {
                     ]
                 },
                 FILE_STEP_TWO_MSG,
-                FILE_STEP_THREE_MSG
+                SERVE_EACH_RESPONDENT_MSG
                 ];
 
         this.sections = [{

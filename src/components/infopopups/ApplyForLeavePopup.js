@@ -3,7 +3,7 @@ import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG_SINGULAR,
-    FILE_STEP_THREE_MSG,
+    SERVE_EACH_RESPONDENT_MSG,
     FILE_STEP_TWO_MSG
 } from "../../helpers/constants";
 
@@ -32,7 +32,7 @@ class ApplyForLeavePopup extends Component {
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,
-            FILE_STEP_THREE_MSG
+            SERVE_EACH_RESPONDENT_MSG
         ];
 
         let ProofOfService = [
@@ -55,7 +55,7 @@ class ApplyForLeavePopup extends Component {
                  ]
             },
             FILE_STEP_TWO_MSG,
-            FILE_STEP_THREE_MSG
+            SERVE_EACH_RESPONDENT_MSG
         ];
 
         this.sections = [{

@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import ReactTooltip from "react-tooltip";
 import Help from './common/Help';
 import {
-    FILE_STEP_THREE_MSG,
+    SERVE_EACH_RESPONDENT_MSG,
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG,
     FILE_STEP_ONE_MSG_SINGULAR
@@ -73,7 +73,7 @@ class AppellantFactumPopup extends Component {
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,
-            FILE_STEP_THREE_MSG
+            SERVE_EACH_RESPONDENT_MSG
         ];
 
         let respondentFactumDocList = [
@@ -96,7 +96,7 @@ class AppellantFactumPopup extends Component {
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,
-            FILE_STEP_THREE_MSG
+            SERVE_EACH_RESPONDENT_MSG
          ];
 
 

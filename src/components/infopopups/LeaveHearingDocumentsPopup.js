@@ -3,7 +3,7 @@ import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG,
-    FILE_STEP_THREE_MSG,
+    SERVE_EACH_RESPONDENT_MSG,
 } from "../../helpers/constants";
 
 class LeaveHearingDocumentsPopup extends Component {
@@ -44,7 +44,7 @@ class LeaveHearingDocumentsPopup extends Component {
                 ]
             },
             FILE_MULTIPLES_STEP_TWO_MSG,
-            FILE_STEP_THREE_MSG
+            SERVE_EACH_RESPONDENT_MSG
         ];
 
         this.sections = [{
