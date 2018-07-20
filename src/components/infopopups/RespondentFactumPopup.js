@@ -84,7 +84,7 @@ class RespondentFactumPopup extends Component {
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '240px',
-            content: ["If you are not served a Certificate of Readiness within 7 days of receiving the Factum, and would like to continue with the appeal, then you are responsible for filing and serving the Certificate of Readiness."],
+            content: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
             contentMap: [
                 {
                     line: FILE_STEP_ONE_MSG,
