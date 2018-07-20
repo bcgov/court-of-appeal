@@ -1,4 +1,5 @@
 import React, { Component }from 'react';
+import ReactTooltip from "react-tooltip";
 import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
@@ -35,14 +36,16 @@ class ApplyForLeavePopup extends Component {
             SERVE_EACH_RESPONDENT_MSG
         ];
 
-        let ProofOfService = [
+        let AffidavitOfService = [
             {
                 line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
-                            URLName: "Proof of Service"
-                        }, times: "1 copy",
+                            URLName: "Affidavit of Service",
+                            tooltip: 'To prove that you served the Notice of Application for Leave to Appeal, file an affidavit of service.'
+                        }, 
+                        times: "1 copy",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx",
                             URLName: "DOC"
@@ -71,11 +74,11 @@ class ApplyForLeavePopup extends Component {
         },{
             expandable: false,
             expanded: true,
-            sectionHeading: "Proof of Service",
+            sectionHeading: "Affidavit of Service",
             iconLine: false,
-            deadlinePhrases: [{startWith: "File Proof of Service ", deadline: " within 10 days ", endWith: " of serving all respondents."}],
+            deadlinePhrases: [{startWith: "File Affidavit of Service ", deadline: " within 10 days ", endWith: " of serving all respondents."}],
             last: false,
-            contentMap: ProofOfService
+            contentMap: AffidavitOfService
         }]
     }
 
@@ -95,7 +98,7 @@ class ApplyForLeavePopup extends Component {
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
-
+                <ReactTooltip/>
             </div>
         );
     }
