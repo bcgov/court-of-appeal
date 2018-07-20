@@ -69,7 +69,7 @@ class RespondentFactumPopup extends Component {
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 30 days ", endWith: " to file and serve your documents."}],
-            lineHeight: '275px',
+            lineHeight: '300px',
             contentMap: contentMap
         }, {
             expandable: true,
@@ -83,7 +83,7 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '240px',
+            lineHeight: '300px',
             content: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
             contentMap: [
                 {
