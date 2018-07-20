@@ -21,7 +21,7 @@ class JourneyMap extends React.Component {
             let targetAreas = this.getAreas();
             return (
                 <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
-                    <h2>Your Appeal Process</h2>
+                    <h2>The Appeal Process</h2>
                     <p>{this.props.subTitle}</p>
                     <img id="journey-map-image" className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
                     <map name="journeymap" >
