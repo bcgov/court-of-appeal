@@ -142,6 +142,7 @@
     display: flex;
     justify-content: space-between;
     text-align: left;
+    padding-right: 20px;
 }
 
 .content-hidden {
@@ -182,6 +183,6 @@
 
 .info-paragraph {
     padding-bottom: 10px;
-    padding-right: 26px;
+    padding-right: 20px;
     text-align: justify;
 }
