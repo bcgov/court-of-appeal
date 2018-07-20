@@ -10,7 +10,12 @@ class CrossAppealPopup extends Component {
             {
                 line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
-                    { description: "Notice of Cross Appeal", times: "1 copy",
+                    { 
+                        descriptionLink: {
+                            URL: "http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/297_2001a#part4",
+                            URLName: "Notice of Cross Appeal"
+                        },
+                        times: "1 copy",
                         docLink: {
                             URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.docx",
                             URLName: "DOC"
