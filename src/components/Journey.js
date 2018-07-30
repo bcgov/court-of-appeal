@@ -73,8 +73,8 @@ class Journey extends Component {
             return {
                 respondent: true,
                 appellant: false,
-                appealButtonClass: 'btn btn-primary round-borders btn-journey btn-not-selected',
-                respondButtonClass: 'btn btn-primary round-borders btn-journey'
+                appealButtonClass: 'btn round-borders btn-journey btn-not-selected',
+                respondButtonClass: 'btn round-borders selected btn-journey '
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -87,8 +87,8 @@ class Journey extends Component {
             return {
                 appellant: true,
                 respondent: false,
-                respondButtonClass: 'btn btn-primary round-borders btn-journey btn-not-selected',
-                appealButtonClass: 'btn btn-primary round-borders btn-journey'
+                respondButtonClass: 'btn round-borders btn-journey btn-not-selected',
+                appealButtonClass: 'btn round-borders btn-journey selected'
             }
         }, ()=> {
             this.props.history.push(process.env.PUBLIC_URL, this.state);

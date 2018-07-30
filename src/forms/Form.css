@@ -1,7 +1,7 @@
 :root {
 	--header-background: #003366;
 	--sub-header-background: #38598a;
-	--hover-action-button: rgb(81, 180, 81);
+	--actioned-green: rgb(81, 180, 81);
 	--action-button: green;
 }
 
