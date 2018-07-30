@@ -99,7 +99,7 @@
     margin-left: 20px;
 }
 .yes-archive:hover {
-    background-color: var(--hover-action-button);
+    background-color: var(--actioned-green);
     color: white;
     margin-left: 20px;
 }
