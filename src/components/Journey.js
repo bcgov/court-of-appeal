@@ -144,7 +144,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
-                mapSrc: "/images/journeymap/journey-map_respondent-notice-of-appeal.png",
+                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
                 mapProps: [
                     { coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
                     { coords: "250,10,370,200", function: "crossappeal", alt: "info about the cross appeal" },
