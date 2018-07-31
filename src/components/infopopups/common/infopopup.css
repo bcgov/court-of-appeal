@@ -186,3 +186,9 @@
     padding-right: 20px;
     text-align: justify;
 }
+
+.decision-buttons {
+    margin-left: -15px;
+    padding-bottom: 38px;
+    padding-top: 20px;
+}

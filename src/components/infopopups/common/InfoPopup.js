@@ -19,6 +19,7 @@ import ReviewHearingPopup from "../ReviewHearingPopup";
 import ApplyForLeavePopup from "../ApplyForLeavePopup";
 import LeaveHearingDocumentsPopup from "../LeaveHearingDocumentsPopup";
 import LeaveHearingPopup from "../LeaveHearingPopup"
+import DecisionPopup from "../DecisionPopup";
 
 class InfoPopup extends Component {
 
@@ -31,7 +32,8 @@ class InfoPopup extends Component {
         if (this.props.show) {
             let props = {
                 close : this.props.close,
-                getSections: this.getSections
+                getSections: this.getSections,
+                leaveGranted: this.props.leaveGranted
             };
             let respondentHearingLinks = {
                 link1: "2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
@@ -62,7 +64,8 @@ class InfoPopup extends Component {
                 'reviewhearing': <ReviewHearingPopup {...props}/>,
                 'applyforleave': <ApplyForLeavePopup {...props} />,
                 'leavehearing': <LeaveHearingPopup {...props}/>,
-                'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>
+                'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
+                'decision': <DecisionPopup {...props} />
             };
             return options[this.props.type] || null;
         } else {

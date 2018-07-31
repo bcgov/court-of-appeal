@@ -63,7 +63,7 @@ class InfoPopupSection extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
         if (this.props.iconLine === false) {
             iconLine = null;
         }

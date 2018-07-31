@@ -16,8 +16,8 @@ class Journey extends Component {
             mapProps: null,
             title: '',
             subtitleIndex: '',
-            appealButtonClass: 'btn btn-primary round-borders btn-journey',
-            respondButtonClass: 'btn btn-primary round-borders btn-journey',
+            appealButtonClass: 'btn round-borders btn-journey',
+            respondButtonClass: 'btn round-borders btn-journey',
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
@@ -28,17 +28,6 @@ class Journey extends Component {
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
         this.handlePopState = this.handlePopState.bind(this);
-        this.subtitles = [
-            <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance.
-                &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
-            
-            <div>
-                Follow the steps below to respond to the appeal.
-                <br/>
-                Every appeal process is different. 
-                If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
-            </div>
-        ]
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
                         <p>please see our online guidebook for more 
                         <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
@@ -100,7 +89,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
-                mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-granted.png",
+                mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
                 mapProps: [
                     { coords: "150,0,250,180", function: 'appellantinitial', alt: "how to start your appeal" },
                     { coords: "350,0,450,180", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
@@ -121,11 +110,12 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
-                mapSrc: "/images/journeymap/journey-map_apellant-apply-for-leave-to-appeal.png",
+                mapSrc: "/images/journeymap/journey-map_appellant-apply-for-leave-to-appeal.png",
                 mapProps: [
                     { coords: "50,0,200,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
                     { coords: "260,0,360,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
                     { coords: "460,0,560,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
+                    { coords: "600,0,690,200", function: 'decision', alt: "About the leave to appeal hearing" },
                 ]
             };
         }, () => {
@@ -138,7 +128,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
-                mapSrc: "/images/journeymap/journey-map_apellant-leave-to-appeal-refused.png",
+                mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
                 mapProps: [
                     { coords: "340,10,450,200", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
                     { coords: "150,10,230,200", function: 'review', alt: "info about the application for review" }
@@ -154,7 +144,7 @@ class Journey extends Component {
             return {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
-                mapSrc: "/images/journeymap/journey-map_respondent-notice-of-appeal.png",
+                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
                 mapProps: [
                     { coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
                     { coords: "250,10,370,200", function: "crossappeal", alt: "info about the cross appeal" },
@@ -194,7 +184,7 @@ class Journey extends Component {
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
                         title={this.state.title}
-                        subTitle={this.subtitles[1]}
+                        leaveGranted={this.leaveToAppealGranted}
                     />
                 </div>
             );
@@ -258,14 +248,14 @@ class Journey extends Component {
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.leaveToAppealGranted}
-                                    className="btn btn-primary round-borders btn-journey">
+                                    className="btn round-borders btn-journey">
                                 Yes &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.leaveToAppealRequired}
-                                    className="btn btn-primary round-borders btn-journey">
+                                    className="btn round-borders btn-journey">
                                 No &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
@@ -291,14 +281,14 @@ class Journey extends Component {
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.respondToNoticeOfAppealJourney}
-                                    className="btn btn-primary round-borders btn-journey">
+                                    className="btn round-borders btn-journey">
                                 Notice of Appeal &nbsp;
                                 <i className="fa fa-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.respondToNoticeOfLeaveToAppealJourney}
-                                    className="btn btn-primary round-borders btn-journey">
+                                    className="btn round-borders btn-journey">
                                 Notice of Application for Leave to Appeal &nbsp;
                                 <i className="fa fa-play"/>
                             </button>

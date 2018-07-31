@@ -15,7 +15,7 @@ describe('JourneyMap', ()=> {
         });
 
         let journeymap;
-        let mapSrc = "/images/journeymap/journey-map_respondent-notice-of-appeal.png";
+        let mapSrc = "/images/journeymap/journey-map_respondent-leave-to-appeal.png";
         let mapProps = [{coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance"}];
 
         beforeEach(()=> {

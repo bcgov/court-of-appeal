@@ -42,7 +42,7 @@ class HearingPopup extends Component {
                 <div className="info-modal-content">
                     {this.props.getSections(this.sections)}
                     <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
+                        URL={`https://www.courtofappealbc.ca/${this.props.type}-guidebook`}
                         URLName="Visit: SRL Guidebook"
                     />
                 </div>
