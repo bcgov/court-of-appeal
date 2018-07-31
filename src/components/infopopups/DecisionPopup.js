@@ -4,6 +4,11 @@ import InfoPopupIcon from "./common/InfoPopupIcon";
 
 class DecisionPopup extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onGranted = this.onGranted.bind(this);
+    }
+
     render () {
         return  (
            <InfoPopupWrapper
@@ -49,7 +54,7 @@ class DecisionPopup extends Component {
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
                                                <button
                                                    className="btn round-borders btn-journey"
-                                                   onClick={this.onGranted.bind(this)}
+                                                   onClick={this.onGranted}
                                                >
                                                    Granted &nbsp;
                                                    <i className="fa fa-play"/>
