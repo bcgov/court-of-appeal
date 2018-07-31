@@ -32,7 +32,8 @@ class InfoPopup extends Component {
         if (this.props.show) {
             let props = {
                 close : this.props.close,
-                getSections: this.getSections
+                getSections: this.getSections,
+                leaveGranted: this.props.leaveGranted
             };
             let respondentHearingLinks = {
                 link1: "2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",

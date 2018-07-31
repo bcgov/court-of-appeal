@@ -14,7 +14,7 @@ class DecisionPopup extends Component {
                close={this.props.close}
            >
                <div className="info-modal-section ">
-                   <div className="row" onClick={this.toggleSection} style={{ cursor:'pointer' }}>
+                   <div className="row" >
                        <InfoPopupIcon
                            iconSrc="/icons/icon-hearing.svg"
                            iconClass="info-modal-icon"
@@ -36,15 +36,20 @@ class DecisionPopup extends Component {
                                <div className=" col col-lg-12 col-md-12 col-sm-12"/>
                                <div className="ccol col-lg-12 col-md-12 col-sm-12 info-modal-details">
                                    <div style={{width: '100%'}}>
-                                       <div className="row">
+                                       <div className="row decision-buttons">
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                               <button className="btn round-borders btn-journey">
+                                               <button
+                                                   className="btn round-borders btn-journey"
+                                                   onClick={this.props.close}
+                                               >
                                                   Refused &nbsp;
                                                    <i className="fa fa-play"/>
                                                </button>
                                            </div>
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
-                                               <button className="btn round-borders btn-journey"
+                                               <button
+                                                   className="btn round-borders btn-journey"
+                                                   onClick={this.onGranted.bind(this)}
                                                >
                                                    Granted &nbsp;
                                                    <i className="fa fa-play"/>
@@ -61,6 +66,11 @@ class DecisionPopup extends Component {
 
             </InfoPopupWrapper>
         );
+    }
+
+    onGranted() {
+        this.props.close();
+        this.props.leaveGranted();
     }
 
 } export default DecisionPopup;

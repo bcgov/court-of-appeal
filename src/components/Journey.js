@@ -184,6 +184,7 @@ class Journey extends Component {
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
                         title={this.state.title}
+                        leaveGranted={this.leaveToAppealGranted}
                     />
                 </div>
             );
