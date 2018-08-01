@@ -22,12 +22,7 @@ class JourneyMap extends React.Component {
             return (
                 <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
                     <h2>The Appeal Process</h2>
-                    <div>
-                        Follow the steps below to respond to the appeal.
-                        <br/>
-                        Every appeal process is different.
-                        If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
-                    </div>
+                    <div>{this.props.subtitle}</div>
                     <img id="journey-map-image" className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
                     <map name="journeymap" >
                         {targetAreas}
