@@ -41,7 +41,7 @@ test('valid entries', ()=> {
 
 });
 
-test.only('cannot search with invalid entries', ()=> {
+test('cannot search with invalid entries', ()=> {
 
     let value = '', started = false;
     let handleFieldChange = (e) => { value = e.target.value; };
