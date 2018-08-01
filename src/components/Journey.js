@@ -91,13 +91,13 @@ class Journey extends Component {
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
                 mapProps: [
-                    { coords: "150,0,250,180", function: 'appellantinitial', alt: "how to start your appeal" },
-                    { coords: "350,0,450,180", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
-                    { coords: "60,270,180,450", function: 'factum', alt: "info about the factum" },
-                    { coords: "260,270,370,450", function: 'bookappeal', alt: "info about booking your appeal" },
-                    { coords: "450,270,530,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
-                    { coords: "160,520,280,710", function: 'appellanthearing', alt: "info about the hearing" },
-                    { coords: "320,520,450,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
+                    { coords: "200,10,290,190", function: 'appellantinitial', alt: "how to start your appeal" },
+                    { coords: "380,10,480,190", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
+                    { coords: "110,270,230,450", function: 'factum', alt: "info about the factum" },
+                    { coords: "300,270,400,450", function: 'bookappeal', alt: "info about booking your appeal" },
+                    { coords: "475,270,560,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
+                    { coords: "200,540,320,690", function: 'appellanthearing', alt: "info about the hearing" },
+                    { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
                     ]
             };
         }, () => {
@@ -112,10 +112,10 @@ class Journey extends Component {
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-apply-for-leave-to-appeal.png",
                 mapProps: [
-                    { coords: "50,0,200,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
-                    { coords: "260,0,360,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
-                    { coords: "460,0,560,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
-                    { coords: "600,0,690,200", function: 'decision', alt: "About the leave to appeal hearing" },
+                    { coords: "100,10,220,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
+                    { coords: "280,10,390,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
+                    { coords: "440,10,550,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
+                    { coords: "600,10,690,200", function: 'decision', alt: "About the leave to appeal hearing" },
                 ]
             };
         }, () => {
@@ -130,8 +130,9 @@ class Journey extends Component {
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
                 mapProps: [
-                    { coords: "340,10,450,200", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
-                    { coords: "150,10,230,200", function: 'review', alt: "info about the application for review" }
+                    { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
+                    { coords: "365,10,465,190", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
+
                     ]
             };
         }, () => {
@@ -146,11 +147,11 @@ class Journey extends Component {
                 subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
                 mapProps: [
-                    { coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
-                    { coords: "250,10,370,200", function: "crossappeal", alt: "info about the cross appeal" },
-                    { coords: "450,10,565,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
-                    { coords: "150,270,270,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "345,270,460,420", function: 'courtorder', alt: "info about the court order process"  }
+                    { coords: "115,10,210,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
+                    { coords: "290,10,400,200", function: "crossappeal", alt: "info about the cross appeal" },
+                    { coords: "470,10,585,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
+                    { coords: "200,270,320,400", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process"  }
                     ]
             }
         }, () => {
@@ -165,9 +166,9 @@ class Journey extends Component {
                 subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 mapProps: [
-                    { coords: "85,10,200,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
-                    { coords: "285,10,385,190", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "460,5,570,160", function: 'respondenthearing', alt: "info about the hearing" }
+                    { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
+                    { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
+                    { coords: "440,10,550,160", function: 'respondenthearing', alt: "info about the hearing" }
                 ]
             }
         }, () => {
@@ -185,6 +186,7 @@ class Journey extends Component {
                         mapProps={this.state.mapProps}
                         title={this.state.title}
                         leaveGranted={this.leaveToAppealGranted}
+                        leaveRefused={this.leaveToAppealRefused}
                     />
                 </div>
             );

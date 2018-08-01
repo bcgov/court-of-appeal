@@ -62,7 +62,7 @@ class ApplyForLeavePopup extends Component {
         ];
 
         this.sections = [{
-            expandable: true,
+            expandable: false,
             expanded: true,
             sectionHeading: "Notice of Application for Leave to Appeal",
             iconSrc: "/icons/icon-share.svg",
