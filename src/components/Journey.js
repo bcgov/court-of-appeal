@@ -44,7 +44,8 @@ class Journey extends Component {
                 If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
             </div>
         ]
-
+        this.respondentQuestion =  "Served with ... ";
+        this.appellantQuestion = "Do you have the right to appeal?";
     }
 
     render() {
@@ -102,6 +103,8 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
+                userQuestion: this.appellantQuestion,
+                userState: "Yes",
                 mapProps: [
                     { coords: "200,10,290,190", function: 'appellantinitial', alt: "how to start your appeal" },
                     { coords: "380,10,480,190", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
@@ -123,6 +126,8 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-apply-for-leave-to-appeal.png",
+                userQuestion: this.appellantQuestion,
+                userState: "No",
                 mapProps: [
                     { coords: "100,10,220,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
                     { coords: "280,10,390,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
@@ -141,6 +146,8 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
+                userQuestion: this.appellantQuestion,
+                userState: "No",
                 mapProps: [
                     { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
                     { coords: "365,10,465,190", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
@@ -158,6 +165,8 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Appeal",
                 mapProps: [
                     { coords: "115,10,210,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
                     { coords: "290,10,400,200", function: "crossappeal", alt: "info about the cross appeal" },
@@ -177,6 +186,8 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Application for Leave to Appeal",
                 mapProps: [
                     { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
                     { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
@@ -200,6 +211,7 @@ class Journey extends Component {
                         subtitle={this.subtitles[this.state.subtitleIndex]}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
+                        history={this.props.history}
                     />
                 </div>
             );

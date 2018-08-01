@@ -2,3 +2,12 @@
     width: 713px;
     padding: 20px;
 }
+
+.journey-breadcrumb {
+    display: flex;
+    flex-flow: row;
+}
+
+.journey-breadcrumb.crumb {
+    padding: 10px 10px 10px 0;
+}
