@@ -124,6 +124,7 @@ exports[`valid entries 1`] = `
           <div>
             <button
               className="btn btn-primary round-borders action-button"
+              disabled={true}
               id="find-button"
               onClick={[Function]}
               style={

@@ -33,6 +33,18 @@ class Journey extends Component {
                         <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
                         target="_blank">
                         detailed information.</a></p>`;
+        this.subtitles = [
+            <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance.
+                &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
+
+            <div>
+                Follow the steps below to respond to the appeal.
+                <br/>
+                Every appeal process is different.
+                If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+            </div>
+        ]
+
     }
 
     render() {
@@ -185,6 +197,7 @@ class Journey extends Component {
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
                         title={this.state.title}
+                        subtitle={this.subtitles[this.state.subtitleIndex]}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                     />
