@@ -7,6 +7,7 @@ class DecisionPopup extends Component {
     constructor(props) {
         super(props);
         this.onGranted = this.onGranted.bind(this);
+        this.onRefused = this.onRefused.bind(this);
     }
 
     render () {
@@ -46,6 +47,7 @@ class DecisionPopup extends Component {
                                                <button
                                                    className="btn round-borders btn-journey"
                                                    onClick={this.props.close}
+                                                   onClick={this.onRefused}
                                                >
                                                   Refused &nbsp;
                                                    <i className="fa fa-play"/>
@@ -76,6 +78,11 @@ class DecisionPopup extends Component {
     onGranted() {
         this.props.close();
         this.props.leaveGranted();
+    }
+
+    onRefused() {
+        this.props.close();
+        this.props.leaveRefused();
     }
 
 } export default DecisionPopup;

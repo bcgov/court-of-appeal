@@ -56,7 +56,7 @@ class AppellantInitialPopup extends Component {
         ];
 
         this.sections = [{
-            expandable: true,
+            expandable: false,
             expanded: true,
             sectionHeading: "Notice of Appeal",
             iconSrc: "/icons/icon-share.svg",

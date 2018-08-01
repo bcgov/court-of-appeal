@@ -37,6 +37,7 @@ class JourneyMap extends React.Component {
                         close={this.closeInfoModal}
                         type={this.state.popupType}
                         leaveGranted={this.props.leaveGranted}
+                        leaveRefused={this.props.leaveRefused}
                     />
                 </div>
             );
