@@ -13,5 +13,9 @@
 }
 
 .journey-questions {
-    padding: 10px 0 10px 15px;
+     padding: 10px 0 10px 15px;
+ }
+
+.journey-buttons {
+    padding-bottom: 10px;
 }

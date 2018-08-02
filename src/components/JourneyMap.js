@@ -19,12 +19,28 @@ class JourneyMap extends React.Component {
 
         if(this.props.mapProps) {
             let targetAreas = this.getAreas();
+
+            let anchor;
+            if (this.props.respondent){
+               anchor = "https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal";
+            }  else {
+               anchor = "https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal";
+            }
+
             return (
                 <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
                     {this.getBreadCrumbs()}
-
                     <h2>The Appeal Process</h2>
-                    <div>{this.props.subtitle}</div>
+                    <div>
+                        Follow the steps below to complete the appeal. Start by clicking on the first form.
+                        Follow the instructions until your appeal process is complete.
+                        <br/>
+                        <br/>
+                        Every appeal process is unique. If you have any questions, please visit the &nbsp;
+                        <a href={anchor} target="_blank">Online Guidebook</a> or &nbsp;
+                        <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+                    </div>
+
                     <img id="journey-map-image" className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
                     <map name="journeymap" >
                         {targetAreas}
