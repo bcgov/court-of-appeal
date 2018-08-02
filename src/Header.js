@@ -32,7 +32,7 @@ class Header extends Component {
                 let display = '<?>';
                 if (person.name) {
                     let parts = person.name.split(',');
-                    display = parts[1] + ' ' + parts[0];
+                    display = parts.length>1? parts[1] + ' ' + parts[0] : person.name;
                 }
                 this.setState({
                     login: person.login? person.login: '<?>',

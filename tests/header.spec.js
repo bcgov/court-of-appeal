@@ -19,4 +19,12 @@ describe('Header', ()=>{
 
         expect(document.find('#header').at(0).html()).toContain('John Doe');
     });
+    test('displays name of connected user, resisting no first name', ()=>{
+        let document = mount(<Header service={{
+            getPersonInfo: (callback)=> { callback({ login:'login', name:'Minnie Mouse' }); }
+        }}/>);
+        document.update();
+
+        expect(document.find('#header-main-row').at(0).html()).toContain('Welcome, Minnie Mouse');
+    });
 });

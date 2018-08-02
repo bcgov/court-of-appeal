@@ -7,8 +7,8 @@ var server = http.createServer((req, resp)=>{
         console.log(req.url + ' -> ' + target);
 
         var forward = request(target);
-        req.headers['SMGOV_USERGUID'] = 'YourName';
-        req.headers['SMGOV_USERDISPLAYNAME'] = 'Name, Your';
+        req.headers['SMGOV_USERGUID'] = 'BA589724D21347DE81BAAEE02FA5D495';
+        req.headers['SMGOV_USERDISPLAYNAME'] = 'Minnie Mouse';
         req.pipe(forward);
         forward.pipe(resp);
     }
