@@ -72,7 +72,6 @@ class JourneyMap extends React.Component {
     }
 
     getBreadCrumbs() {
-        console.log(this.props);
 
         let history = this.props.history.location.state;
         let initial = history.appellant ? "Appealing" : "Responding";
