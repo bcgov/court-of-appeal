@@ -10,7 +10,7 @@ class FormButtonBar extends React.Component {
         super(props);
         this.state = {
             downloading: false
-        }
+        };
         this.className = "btn btn-primary round-borders";
         this.actionClassName = this.className + " action-button";
 

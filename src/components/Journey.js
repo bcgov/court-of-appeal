@@ -15,7 +15,6 @@ class Journey extends Component {
             mapSrc : null,
             mapProps: null,
             title: '',
-            subtitleIndex: '',
             appealButtonClass: 'btn round-borders btn-journey',
             respondButtonClass: 'btn round-borders btn-journey',
         };
@@ -33,17 +32,6 @@ class Journey extends Component {
                         <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
                         target="_blank">
                         detailed information.</a></p>`;
-        this.subtitles = [
-            <span>The below diagram outlines the processes a typical appeal follows. There can be variations depending on circumstance.
-                &nbsp;<a href="mailto:courts.cso@gov.bc.ca">Contact the Registry for more information</a>.</span>,
-
-            <div>
-                Follow the steps below to respond to the appeal.
-                <br/>
-                Every appeal process is different.
-                If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
-            </div>
-        ]
         this.respondentQuestion =  "Served with ... ";
         this.appellantQuestion = "Do you have the right to appeal?";
     }
@@ -101,7 +89,6 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
@@ -124,7 +111,6 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-apply-for-leave-to-appeal.png",
                 userQuestion: this.appellantQuestion,
                 userState: "No",
@@ -144,7 +130,6 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 0,
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
                 userQuestion: this.appellantQuestion,
                 userState: "No",
@@ -163,7 +148,6 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
@@ -184,7 +168,6 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                subtitleIndex: 1,
                 mapSrc: "/images/journeymap/journey-map_respondent-apply-for-leave-for-appeal.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Application for Leave to Appeal",
@@ -208,7 +191,6 @@ class Journey extends Component {
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
                         title={this.state.title}
-                        subtitle={this.subtitles[this.state.subtitleIndex]}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                         history={this.props.history}
@@ -220,30 +202,35 @@ class Journey extends Component {
                 <div>
                     <div className="form-section not-printable">
                         <h3>Start E-Filing</h3>
-                        <div>
-                            <div style={{width: '100%'}}>
-                                <div className="row">
-                                    <div className="col col-lg-6 col-med-6 col-sm-6">
-                                        <button
-                                            onClick={this.journeyForAppellant}
-                                            className={this.state.appealButtonClass}>
-                                            Start an Appeal &nbsp;
-                                            <i className="fa fa-play"/>
-                                        </button>
-                                    </div>
-                                    <div className="col col-lg-6 col-med-6 col-sm-6">
-                                        <button
-                                            onClick={this.journeyForRespondent}
-                                            className={this.state.respondButtonClass}>
-                                            Respond to Appeal &nbsp;
-                                            <i className="fa fa-play"/>
-                                        </button>
-                                    </div>
-                                </div>
-                                {this.renderAppellant()}
-                                {this.renderRespondent()}
+                        <div className="row">
+                            <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+
+                                To start e-filing, answer the questions below.
+                            </div>
+                            <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+                                Are you starting or responding to an appeal?
                             </div>
                         </div>
+                        <div className="row journey-buttons">
+                            <div className="col col-lg-6 col-med-6 col-sm-6">
+                                <button
+                                    onClick={this.journeyForAppellant}
+                                    className={this.state.appealButtonClass}>
+                                    Starting an Appeal &nbsp;
+                                    <i className="fa fa-play"/>
+                                </button>
+                            </div>
+                            <div className="col col-lg-6 col-med-6 col-sm-6">
+                                <button
+                                    onClick={this.journeyForRespondent}
+                                    className={this.state.respondButtonClass}>
+                                    Responding to an Appeal &nbsp;
+                                    <i className="fa fa-play"/>
+                                </button>
+                            </div>
+                        </div>
+                        {this.renderAppellant()}
+                        {this.renderRespondent()}
                     </div>
                 </div>;
         }
@@ -256,14 +243,13 @@ class Journey extends Component {
             content = (
                 <div>
                     <div className="row">
-                        <div className="col col-lg-12 col-med-6 col-sm-12">
-                            <h4>Do you have a right to appeal your case? &nbsp;
+                        <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+                            Do you have the right to appeal your case? &nbsp;
                                 <i
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
                                     data-tip={this.dataTip}
                                 />
-                            </h4>
                         </div>
                         <ReactTooltip
                             multiline={true}
