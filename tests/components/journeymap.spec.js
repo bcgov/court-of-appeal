@@ -6,9 +6,9 @@ import JourneyMap from "../../src/components/JourneyMap";
 describe('JourneyMap', ()=> {
 
     describe('JourneyMap builds', ()=>{
-
+        let history = { location : {state: {}}};
         test('returns null when there are no props', () => {
-            let journeymap = mount(<JourneyMap title="map title" subtitle="subtitle"/>);
+            let journeymap = mount(<JourneyMap title="map title" subtitle="subtitle" history={history}/>);
             let view = journeymap.instance().render();
 
             expect(view).toEqual(null);
@@ -25,6 +25,7 @@ describe('JourneyMap', ()=> {
                     subTitle={"where's max?"}
                     mapSrc={mapSrc}
                     mapProps={mapProps}
+                    history={history}
                 />);
         });
 

@@ -21,6 +21,8 @@ class JourneyMap extends React.Component {
             let targetAreas = this.getAreas();
             return (
                 <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
+                    {this.getBreadCrumbs()}
+
                     <h2>The Appeal Process</h2>
                     <div>{this.props.subtitle}</div>
                     <img id="journey-map-image" className="journey-map-image" src={process.env.PUBLIC_URL + this.props.mapSrc} useMap="#journeymap" alt="Your Appeal Journey Map" />
@@ -68,6 +70,39 @@ class JourneyMap extends React.Component {
             this.closeInfoModal();
         }
     }
+
+    getBreadCrumbs() {
+        console.log(this.props);
+
+        let history = this.props.history.location.state;
+        let initial = history.appellant ? "Appealing" : "Responding";
+        let secondary = history.userQuestion;
+        let current = history.userState;
+           return <div id="journeyBreadcrumb">
+                <div className="journey-breadcrumb">
+                    <div className="journey-breadcrumb crumb">
+                        <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
+                    </div>
+                    <div className="journey-breadcrumb crumb">/</div>
+                    <div className="journey-breadcrumb crumb">
+                        <a onClick={this.goBack.bind(this)}>{secondary}</a>
+                    </div>
+                    <div className="journey-breadcrumb crumb">/</div>
+                    <div className="journey-breadcrumb crumb">
+                        {current}
+                    </div>
+                </div>
+            </div>;
+    }
+
+    goBackTwo() {
+        this.props.history.go(-2);
+    }
+
+    goBack() {
+        this.props.history.goBack();
+    }
+
 
 }
 
