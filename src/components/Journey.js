@@ -220,30 +220,35 @@ class Journey extends Component {
                 <div>
                     <div className="form-section not-printable">
                         <h3>Start E-Filing</h3>
-                        <div>
-                            <div style={{width: '100%'}}>
-                                <div className="row">
-                                    <div className="col col-lg-6 col-med-6 col-sm-6">
-                                        <button
-                                            onClick={this.journeyForAppellant}
-                                            className={this.state.appealButtonClass}>
-                                            Start an Appeal &nbsp;
-                                            <i className="fa fa-play"/>
-                                        </button>
-                                    </div>
-                                    <div className="col col-lg-6 col-med-6 col-sm-6">
-                                        <button
-                                            onClick={this.journeyForRespondent}
-                                            className={this.state.respondButtonClass}>
-                                            Respond to Appeal &nbsp;
-                                            <i className="fa fa-play"/>
-                                        </button>
-                                    </div>
-                                </div>
-                                {this.renderAppellant()}
-                                {this.renderRespondent()}
+                        <div className="row">
+                            <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+
+                                To start e-filing, answer the questions below.
+                            </div>
+                            <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+                                Are you starting or responding to an appeal?
                             </div>
                         </div>
+                        <div className="row">
+                            <div className="col col-lg-6 col-med-6 col-sm-6">
+                                <button
+                                    onClick={this.journeyForAppellant}
+                                    className={this.state.appealButtonClass}>
+                                    Starting an Appeal &nbsp;
+                                    <i className="fa fa-play"/>
+                                </button>
+                            </div>
+                            <div className="col col-lg-6 col-med-6 col-sm-6">
+                                <button
+                                    onClick={this.journeyForRespondent}
+                                    className={this.state.respondButtonClass}>
+                                    Responding to an Appeal &nbsp;
+                                    <i className="fa fa-play"/>
+                                </button>
+                            </div>
+                        </div>
+                        {this.renderAppellant()}
+                        {this.renderRespondent()}
                     </div>
                 </div>;
         }
@@ -256,14 +261,13 @@ class Journey extends Component {
             content = (
                 <div>
                     <div className="row">
-                        <div className="col col-lg-12 col-med-6 col-sm-12">
-                            <h4>Do you have a right to appeal your case? &nbsp;
+                        <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
+                            Do you have a right to appeal your case? &nbsp;
                                 <i
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
                                     data-tip={this.dataTip}
                                 />
-                            </h4>
                         </div>
                         <ReactTooltip
                             multiline={true}
