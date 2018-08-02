@@ -262,7 +262,7 @@ class Journey extends Component {
                 <div>
                     <div className="row">
                         <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
-                            Do you have a right to appeal your case? &nbsp;
+                            Do you have the right to appeal your case? &nbsp;
                                 <i
                                     className="fa fa-question-circle"
                                     aria-hidden="true"
