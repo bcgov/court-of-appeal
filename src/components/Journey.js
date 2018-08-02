@@ -43,7 +43,7 @@ class Journey extends Component {
                 Every appeal process is different.
                 If you have any questions, please visit the <a href="https://www.courtofappealbc.ca/respondent-guidebook/step-1-how-to-respond-to-an-appeal">Help Guide Website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
             </div>
-        ]
+        ];
         this.respondentQuestion =  "Served with ... ";
         this.appellantQuestion = "Do you have the right to appeal?";
     }
