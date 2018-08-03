@@ -16,13 +16,14 @@ class BulletRow extends Component {
         description = <div id={'bullet-' + this.props.id}> {description} { this.props.row.descriptionLink!==undefined && this.props.row.descriptionLink.tooltip!==undefined ? <i className="fa fa-question-circle" aria-hidden="true" data-tip={this.props.row.descriptionLink.tooltip}></i> : ``} </div>;
 
         if (this.props.row.onlineForm) {
+            let action = this.props.row.documentLink.URL ? {href: this.props.row.documentLink.URL}:  {onClick: this.props.row.documentLink.action};
             rowcontent = (
                 <div className="evenly-spaced">
                     <div>
                         {description}
                     </div>
                     <div >
-                        <a className={"row-badge"} style={{padding:'5px'}} href={this.props.row.documentLink.URL} target="_blank">{this.props.row.documentLink.URLName}</a>
+                        <a className={"row-badge"} {...action} style={{padding:'5px', cursor: 'pointer'}}  target="_blank">{this.props.row.documentLink.URLName}</a>
                     </div>
                 </div>
             )

@@ -20,7 +20,7 @@ class AppellantInitialPopup extends Component {
                             },
                         documentLink:
                             {
-                                URL: "http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%207.docx",
+                                action: props.redirectToForm7,
                                 URLName: "Online form"
                             }
                     }

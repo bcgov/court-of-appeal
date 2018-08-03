@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
 import JourneyMap from './JourneyMap';
 import { withRouter } from 'react-router-dom';
+import DefaultService from "../service/default.service";
 
 class Journey extends Component {
 
@@ -34,6 +35,8 @@ class Journey extends Component {
                         detailed information.</a></p>`;
         this.respondentQuestion =  "Served with ... ";
         this.appellantQuestion = "Do you have the right to appeal?";
+        this.service = props.service;
+        this.redirectToForm7 = this.redirectToForm7.bind(this);
     }
 
     render() {
@@ -47,6 +50,7 @@ class Journey extends Component {
     componentDidMount() {
         window.onpopstate = this.handlePopState;
         this.props.history.push(process.env.PUBLIC_URL, this.state);
+        if (this.service == null) { this.service = new DefaultService(window); }
     }
 
     componentWillUnmount() {
@@ -194,6 +198,7 @@ class Journey extends Component {
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                         history={this.props.history}
+                        redirectToForm7={this.redirectToForm7}
                     />
                 </div>
             );
@@ -311,6 +316,13 @@ class Journey extends Component {
             );
         }
         return content;
+    }
+
+    redirectToForm7(){
+        this.service.getPersonInfo((person)=> {
+            document.cookie = 'csoext-sm-guid='+person.login+'; Domain=gov.bc.ca; Path=/cso';
+            document.defaultView.location = 'https://dev.justice.gov.bc.ca/cso/ext/coa/form7/#/qualify?_k=f90vwa';
+        });
     }
 
 }
