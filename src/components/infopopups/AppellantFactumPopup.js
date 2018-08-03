@@ -147,7 +147,7 @@ class AppellantFactumPopup extends Component {
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: SRL Guidebook"
+                        URLName="Visit: Online Guidebook"
                     />
                 </div>
                 <ReactTooltip/>

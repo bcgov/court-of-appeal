@@ -56,7 +56,7 @@ class NoticeOfHearingPopup extends Component {
                     {this.props.getSections(this.sections)}
                     <Help
                         URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: SRL Guidebook"
+                        URLName="Visit: Online Guidebook"
                     />
                 </div>
             </div>
