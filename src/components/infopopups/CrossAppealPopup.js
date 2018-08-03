@@ -67,7 +67,7 @@ class CrossAppealPopup extends Component {
                     {sections}
                     <Help
                         URL="https://www.courtofappealbc.ca/respondent-guidebook"
-                        URLName="Visit: SRL Guidebook"
+                        URLName="Visit: Online Guidebook"
                     />
                 </div>
 

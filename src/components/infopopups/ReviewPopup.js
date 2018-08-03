@@ -110,7 +110,7 @@ class ReviewPopup extends Component {
                     {this.props.getSections(this.sections)}
                     <Help
                         URL="https://www.courtofappealbc.ca/respondent-guidebook"
-                        URLName="Visit: SRL Guidebook"
+                        URLName="Visit: Online Guidebook"
                     />
                 </div>
             </div>
