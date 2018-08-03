@@ -1,21 +1,21 @@
 let request = require('request');
 
-let Service = function(window) {  
+let Service = function(window) {
     this.window = window;
-    this.apiUrl = undefined;    
+    this.apiUrl = undefined;
     if (typeof window !== 'undefined') {
-        this.apiUrl = window.location.origin;                
+        this.apiUrl = window.location.origin;
     }
     if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
         this.apiUrl = process.env.REACT_APP_API_URL;
-    } 
+    }
 };
 
 Service.prototype.base = function() {
     return (this.apiUrl === undefined ? '' : this.apiUrl) + process.env.PUBLIC_URL;
 };
 
-Service.prototype.notifyThatAnErrorOccured = function(callback, options) {
+Service.prototype.notifyOfError = function(callback, options) {
     let data = { error:{ code:503, message:'service unavailable' } };
     Object.assign(data, options);
     callback(data);
@@ -37,7 +37,7 @@ Service.prototype.searchForm7 = function(file, callback) {
             callback(undefined);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -51,7 +51,7 @@ Service.prototype.createForm2 = function(form, callback) {
             callback(JSON.parse(body).id);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -65,7 +65,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -78,7 +78,7 @@ Service.prototype.getMyCases = function(form, callback) {
             callback(JSON.parse(body));
         }
         else {
-            self.notifyThatAnErrorOccured(callback, { cases:[] });
+            self.notifyOfError(callback, { cases:[] });
         }
     }); 
 };
@@ -92,7 +92,7 @@ Service.prototype.savePerson = function(user, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -112,7 +112,7 @@ Service.prototype.getPersonInfo = function(callback) {
             callback({ error:{ code:404, message:'not found' } });
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     }); 
 };
@@ -125,7 +125,7 @@ Service.prototype.archiveCases = function(ids, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -139,7 +139,7 @@ Service.prototype.generatePdf = function(html, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };
@@ -150,7 +150,7 @@ Service.prototype.previewForm = function(id, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     }); 
 };
@@ -163,7 +163,7 @@ Service.prototype.download = function(ids, callback) {
             callback(body);
         }
         else {
-            self.notifyThatAnErrorOccured(callback);
+            self.notifyOfError(callback);
         }
     });
 };

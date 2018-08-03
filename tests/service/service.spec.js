@@ -62,7 +62,7 @@ describe('Gateway to API', function() {
                 </html>`);
             let window = document.defaultView;
             service = new Service(window);
-            service.notifyThatAnErrorOccured(()=>{}, {});
+            service.notifyOfError(()=>{}, {});
             let errorModal = document.querySelector('#serviceErrorModal');
     
             expect(errorModal.style.display).toEqual('block');

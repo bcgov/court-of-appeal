@@ -51,6 +51,7 @@ class JourneyMap extends React.Component {
                         type={this.state.popupType}
                         leaveGranted={this.props.leaveGranted}
                         leaveRefused={this.props.leaveRefused}
+                        redirectToForm7={this.props.redirectToForm7}
                     />
                 </div>
             );

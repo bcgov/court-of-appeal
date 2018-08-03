@@ -46,7 +46,6 @@ class DecisionPopup extends Component {
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
                                                <button
                                                    className="btn round-borders btn-journey"
-                                                   onClick={this.props.close}
                                                    onClick={this.onRefused}
                                                >
                                                   Refused &nbsp;
