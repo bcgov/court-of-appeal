@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Help from "./common/Help";
 import { FILE_STEP_ONE_MSG_SINGULAR, SERVE_EACH_RESPONDENT_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class NoticeOfHearingPopup extends Component {
 
@@ -47,19 +47,13 @@ class NoticeOfHearingPopup extends Component {
 
     render () {
         return  (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Notice of Hearing
-                </div>
-                <div className="info-modal-content">
-                    {this.props.getSections(this.sections)}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-            </div>
+            <InfoPopupWrapper
+                title="Notice of Hearing"
+                close={this.props.close}
+                helpType="appellant"
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

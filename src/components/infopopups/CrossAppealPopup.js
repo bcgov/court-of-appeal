@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import Help from './common/Help';
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 import {FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class CrossAppealPopup extends Component {
@@ -50,28 +50,17 @@ class CrossAppealPopup extends Component {
     }
 
     render() {
-
-        let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Cross Appeal (Optional)
+            <InfoPopupWrapper
+                title=" Cross Appeal (Optional)"
+                helpType="respondent"
+                close={this.props.close}
+            >
+                <div className="info-modal-primary-heading row">
+                    Were you served with any of the following documents?
                 </div>
-                <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
-                            Were you served with any of the following documents?
-                        </div>
-                    </div>
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/respondent-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-
-            </div>
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

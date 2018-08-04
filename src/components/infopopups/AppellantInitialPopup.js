@@ -1,7 +1,11 @@
 import React, { Component }from 'react';
-import ReactTooltip from "react-tooltip";
-import Help from './common/Help';
-import {FILE_ONLINE_ONE_MSG, FILE_STEP_ONE_MSG_SINGULAR, SERVE_EACH_RESPONDENT_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
+import {
+    FILE_ONLINE_ONE_MSG,
+    FILE_STEP_ONE_MSG_SINGULAR,
+    SERVE_EACH_RESPONDENT_MSG,
+    FILE_STEP_TWO_MSG
+} from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class AppellantInitialPopup extends Component {
 
@@ -86,26 +90,18 @@ class AppellantInitialPopup extends Component {
 
     render() {
 
-        let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Initial Documents
+            <InfoPopupWrapper
+                title="Initial Documents"
+                helpType="appellant"
+                close={this.props.close}
+            >
+                <div className="info-modal-primary-heading row">
+                    <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
+                        Would you like to start your appeal?</div>
                 </div>
-                <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1">
-                            Would you like to start your appeal?</div>
-                    </div>
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-                <ReactTooltip/>
-            </div>
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

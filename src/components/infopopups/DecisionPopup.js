@@ -14,9 +14,7 @@ class DecisionPopup extends Component {
         return  (
            <InfoPopupWrapper
                title={"Decision on Leave to Appeal"}
-               helpURL={"https://www.courtofappealbc.ca/appellant-guidebook"}
-               helpURLName={"Visit: Online Guidebook"}
-               show={true}
+               helpType="appellant"
                close={this.props.close}
            >
                <div className="info-modal-section ">

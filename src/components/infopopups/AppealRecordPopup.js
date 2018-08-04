@@ -1,11 +1,10 @@
 import React, { Component }from 'react';
-import ReactTooltip from "react-tooltip";
-import Help from './common/Help';
 import {
     SERVE_EACH_RESPONDENT_MSG,
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG
 } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class AppealRecordPopup extends Component {
 
@@ -73,25 +72,17 @@ class AppealRecordPopup extends Component {
     }
 
     render() {
-
         let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Appeal Record and Transcript
+            <InfoPopupWrapper
+                title={"Appeal Record and Transcript"}
+                helpType="appellant"
+                close={this.props.close}
+            >
+                <div className="info-modal-primary-heading row">
                 </div>
-                <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                    </div>
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-                <ReactTooltip/>
-            </div>
+                {sections}
+            </InfoPopupWrapper>
         );
     }
 
