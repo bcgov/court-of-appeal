@@ -1,5 +1,4 @@
 import React, { Component }from 'react';
-import Help from './common/Help';
 import {
     FILE_ONLINE_ONE_MSG, 
     FILE_STEP_THREE_MSG, 
@@ -7,6 +6,7 @@ import {
     FILE_STEP_ONE_MSG_SINGULAR,
     FILE_MULTIPLES_STEP_TWO_MSG
 } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class AppearancePopup extends Component {
 
@@ -87,22 +87,14 @@ class AppearancePopup extends Component {
 
     render() {
 
-        let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Notice of Appearance
-                </div>
-                <div className="info-modal-content">
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-
-            </div>
+            <InfoPopupWrapper
+                title="Notice of Appearance"
+                helpType="respondent"
+                close={this.props.close}
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

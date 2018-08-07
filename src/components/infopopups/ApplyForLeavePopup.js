@@ -1,12 +1,11 @@
 import React, { Component }from 'react';
-import ReactTooltip from "react-tooltip";
-import Help from './common/Help';
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG_SINGULAR,
     SERVE_EACH_RESPONDENT_MSG,
     FILE_STEP_TWO_MSG
 } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class ApplyForLeavePopup extends Component {
 
@@ -83,23 +82,14 @@ class ApplyForLeavePopup extends Component {
     }
 
     render() {
-
-        let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Initial Documents
-                </div>
-                <div className="info-modal-content">
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-                <ReactTooltip/>
-            </div>
+            <InfoPopupWrapper
+                title="Initial Documents"
+                helpType="appellant"
+                close={this.props.close}
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

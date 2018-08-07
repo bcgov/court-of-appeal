@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Help from "./common/Help";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class BookAnAppealPopup extends Component {
 
@@ -26,19 +26,13 @@ class BookAnAppealPopup extends Component {
 
     render () {
         return  (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Book Appeal Date
-                </div>
-                <div className="info-modal-content">
-                    {this.props.getSections(this.sections)}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-            </div>
+            <InfoPopupWrapper
+                title="Book Appeal Date"
+                helpType="appellant"
+                close={this.props.close}
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

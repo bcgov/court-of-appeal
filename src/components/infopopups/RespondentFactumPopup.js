@@ -1,9 +1,8 @@
 import React, { Component }from 'react';
-import ReactTooltip from "react-tooltip";
-import Help from './common/Help';
 import {
     FILE_STEP_ONE_MSG, FILE_MULTIPLES_STEP_TWO_MSG, FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class RespondentFactumPopup extends Component {
 
@@ -128,25 +127,14 @@ class RespondentFactumPopup extends Component {
     }
 
     render() {
-        let sections = this.props.getSections(this.sections);
         return (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    The Factum and Appeal Book
-                </div>
-                <div className="info-modal-content">
-                    <div className="info-modal-primary-heading row">
-                        <div className="col-lg-offset-1 col-md-11 col-sm-11 col-lg-11 col-md-offset-1 col-sm-offset-1"> Were you served with any of the following documents?</div>
-                    </div>
-                    {sections}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/appellant-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-                <ReactTooltip/>
-            </div>
+            <InfoPopupWrapper
+                helpType="respondent"
+                title="The Factum and Appeal Book"
+                close={this.props.close}
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 

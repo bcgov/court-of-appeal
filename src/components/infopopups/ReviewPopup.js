@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Help from "./common/Help";
 import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG,
     FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
+import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
 class ReviewPopup extends Component {
 
@@ -101,19 +101,13 @@ class ReviewPopup extends Component {
 
     render () {
         return  (
-            <div id="info-modal" className="modal" style={{display: 'block'}} >
-                <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
-                    Application for Review
-                </div>
-                <div className="info-modal-content">
-                    {this.props.getSections(this.sections)}
-                    <Help
-                        URL="https://www.courtofappealbc.ca/respondent-guidebook"
-                        URLName="Visit: Online Guidebook"
-                    />
-                </div>
-            </div>
+            <InfoPopupWrapper
+                helpType="appellant"
+                title="Application for Review"
+                close={this.props.close}
+            >
+                {this.props.getSections(this.sections)}
+            </InfoPopupWrapper>
         );
     }
 
