@@ -28,7 +28,9 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
                             URLName: "Optional - Transcript Extract Boook",
-                            tooltip: 'If a witness spoke at your original trial/ hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                            tooltip: `<p>If a witness spoke at your original trial or hearing,</p>
+                                      <p>and you mentioned this oral testimony in your Factum,</p>
+                                      <p>you will need to complete a Transcript Extract Book.</p>`,
                         }, 
                         times: "4 copies",                        
                         docLink: {
@@ -43,7 +45,9 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink : {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
                             URLName: "Optional - Appeal Book",
-                            tooltip: 'If you would like to provide information that is not included in the Appellant’s Appeal Book, please complete your own Appeal Book.'
+                            tooltip: `<p>If you would like to provide information that is not</p>
+                                      <p>included in the appellant’s Appeal Book, please complete </p> 
+                                        <p>your own Appeal Book.</p>`
                         }, 
                         times: "4 copies",
                         docLink: {

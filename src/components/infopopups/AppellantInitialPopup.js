@@ -41,7 +41,8 @@ class AppellantInitialPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
                             URLName: "Affidavit of Service",
-                            tooltip: 'To prove that you served the Notice of Appeal, file an affidavit of service.'
+                            tooltip: `<p>To prove that you served the Notice of</p>
+                                      <p>Appeal, file an affidavit of service.</p>`
                         }, 
                         times: "1 copy",
                         docLink: {

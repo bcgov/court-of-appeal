@@ -4,6 +4,7 @@ import Top5 from './forms/Top5.js';
 import ActiveFormList from './components/ActiveFormList.js';
 import NeedHelp from './NeedHelp.js';
 import './dashboard.css';
+import ReactTooltip from 'react-tooltip';
 
 class Dashboard extends Component {
 
@@ -32,6 +33,14 @@ class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
+                <ReactTooltip
+                    multiline={true}
+                    html={true}
+                    effect="solid"
+                    delayHide={1000}
+                    className="right-to-appeal-tooltip"
+                    wrapper="div"
+                />
             </div>
         );
     }

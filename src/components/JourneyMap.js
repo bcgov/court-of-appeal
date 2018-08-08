@@ -1,6 +1,7 @@
 import React from 'react';
 import './journeymap.css';
 import InfoPopup from './infopopups/common/InfoPopup';
+import ReactTooltip from 'react-tooltip';
 
 class JourneyMap extends React.Component {
 
@@ -16,7 +17,7 @@ class JourneyMap extends React.Component {
     }
 
     render() {
-
+ReactTooltip.rebuild();
         if(this.props.mapProps) {
             let targetAreas = this.getAreas();
 

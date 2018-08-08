@@ -30,7 +30,9 @@ class AppealRecordPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(sidebar-link)",
                             URLName: "Optional - Transcript",
-                            tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                            tooltip: `<p>If a witness spoke at your original trial, and you mentioned  </p>
+                                      <p>this oral testimony in your Factum, you will need to complete </p>
+                                      <p>a Transcript Extract Book.</p>`,
                         }, 
                         times: "4 copies",
                         docLink: {

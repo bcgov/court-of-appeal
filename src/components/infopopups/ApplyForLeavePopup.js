@@ -42,7 +42,8 @@ class ApplyForLeavePopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
                             URLName: "Affidavit of Service",
-                            tooltip: 'To prove that you served the Notice of Application for Leave to Appeal, file an affidavit of service.'
+                            tooltip: `<p>To prove that you served the Notice of Application</p>
+                                      <p> for Leave to Appeal, file an affidavit of service.</p>`
                         }, 
                         times: "1 copy",
                         docLink: {

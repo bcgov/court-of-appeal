@@ -29,7 +29,8 @@ class ReviewPopup extends Component {
                     },{ descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
                             URLName: "Optional: Affidavit",
-                            tooltip: 'if you would like to include additional information to support your case, complete this Affidavit.'
+                            tooltip: `<p>If you would like to include additional information</p>
+                                      <p>to support your case, complete this Affidavit.</p>`
                         }, 
                         times: "4 copies",
                         docLink: {

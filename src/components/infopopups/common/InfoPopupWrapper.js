@@ -26,7 +26,15 @@ class InfoPopupWrapper extends Component {
                         URL={this.urls[this.props.helpType]}
                         URLName="Visit: Online Guidebook"
                     />
-                    <ReactTooltip/>
+                    <ReactTooltip
+                        multiline={true}
+                        html={true}
+                        effect="solid"
+                        delayHide={1000}
+                        className="right-to-appeal-tooltip"
+                        wrapper="div"
+                        type="light"
+                    />
                 </div>
             </div>
         );

@@ -19,3 +19,16 @@
 .journey-buttons {
     padding-bottom: 10px;
 }
+.right-to-appeal-tooltip {
+    color: white !important;
+    padding: 20px;
+    font-size: medium !important;
+    background-color: #333333 !important;
+    font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
+    z-index: 1000;
+}
+
+.right-to-appeal-tooltip p {
+    margin-top: 2px ;
+    margin-bottom: 2px ;
+}
