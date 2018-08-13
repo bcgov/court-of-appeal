@@ -7,17 +7,17 @@ class CompleteAppealPopup extends Component {
         super(props);
 
         let content = [
-            {
-                    URL: 'https://www.scc-csc.ca/court-cour/role-eng.aspx#',
-                    URLName: 'Supreme Court of Canada'
-            }
+            `The Court of Appeal decision is final, unless the Supreme Court of Canada
+                agrees to hear your case.  For more information, please see the
+                <a href="http://#" target="_blank">Online Guidebook</a>, or the
+                <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank">Supreme Court</a>website.`
         ];
 
         this.sections = [{
             expandable: false,
             expanded: true,
-            sectionHeading: `The Court of Appeal decision is final, but may be appealed in a higher court.  For more information,
-                             see the Supreme Court of Canada website below.`,
+            sectionHeading: "Your appeal is complete",
+
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
