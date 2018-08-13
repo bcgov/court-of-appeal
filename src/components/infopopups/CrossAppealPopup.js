@@ -6,7 +6,7 @@ class CrossAppealPopup extends Component {
 
     constructor(props) {
         super(props);
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
@@ -39,13 +39,13 @@ class CrossAppealPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 15 days ", endWith: " to file and serve your documents, after receiving the Notice of Appeal or the order granting leave to appeal."}],
             lineHeight: '224px',
-            contentMap: contentMap
+            listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "The Appeal Record and Transcript",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            content: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents."]
+            paragraphContentMap: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents."]
         }]
     }
 

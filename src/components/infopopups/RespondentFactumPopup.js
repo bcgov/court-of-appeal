@@ -8,7 +8,7 @@ class RespondentFactumPopup extends Component {
 
     constructor(props) {
         super(props);
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_STEP_ONE_MSG,
                 rows: [
@@ -28,7 +28,9 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)",
                             URLName: "Optional - Transcript Extract Boook",
-                            tooltip: 'If a witness spoke at your original trial/ hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                            tooltip: `<p>If a witness spoke at your original trial or hearing,</p>
+                                      <p>and you mentioned this oral testimony in your Factum,</p>
+                                      <p>you will need to complete a Transcript Extract Book.</p>`,
                         }, 
                         times: "4 copies",                        
                         docLink: {
@@ -43,7 +45,9 @@ class RespondentFactumPopup extends Component {
                     { descriptionLink : {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)",
                             URLName: "Optional - Appeal Book",
-                            tooltip: 'If you would like to provide information that is not included in the Appellant’s Appeal Book, please complete your own Appeal Book.'
+                            tooltip: `<p>If you would like to provide information that is not</p>
+                                      <p>included in the appellant’s Appeal Book, please complete </p> 
+                                        <p>your own Appeal Book.</p>`
                         }, 
                         times: "4 copies",
                         docLink: {
@@ -69,22 +73,22 @@ class RespondentFactumPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 30 days ", endWith: " to file and serve your documents."}],
             lineHeight: '270px',
-            contentMap: contentMap
+            listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "The Transcript Extract Book",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '62px',
-            content: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
+            paragraphContentMap: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '271px',
-            content: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
-            contentMap: [
+            paragraphContentMap: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
+            listContentMap: [
                 {
                     line: FILE_STEP_ONE_MSG,
                     rows: [
@@ -112,13 +116,13 @@ class RespondentFactumPopup extends Component {
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: '62px',
-            content: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
+            paragraphContentMap: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",
             iconSrc :"/icons/icon-calendar.svg",
             iconClass: "info-modal-icon",
-            content: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
+            paragraphContentMap: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
             "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information.",
                 {
                     URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.3-schedule-the-appeal-for-hearing?ct=t(step-index-link)",

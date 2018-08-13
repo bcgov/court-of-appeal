@@ -10,7 +10,7 @@ class AppealRecordPopup extends Component {
 
     constructor(props) {
         super(props);
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_STEP_ONE_MSG,
                 rows: [
@@ -30,7 +30,9 @@ class AppealRecordPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(sidebar-link)",
                             URLName: "Optional - Transcript",
-                            tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                            tooltip: `<p>If a witness spoke at your original trial, and you mentioned  </p>
+                                      <p>this oral testimony in your Factum, you will need to complete </p>
+                                      <p>a Transcript Extract Book.</p>`,
                         }, 
                         times: "4 copies",
                         docLink: {
@@ -60,13 +62,13 @@ class AppealRecordPopup extends Component {
                     endWith: " to file and serve your documents after submitting the Notice of Appeal."
                 }],
             lineHeight: '236px',
-            contentMap: contentMap
+            listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "Were you served with a Notice of Appearance or Cross Appeal?",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            content: [`If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond 
+            paragraphContentMap: [`If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond 
                         to these documents.`]
         }]
     }

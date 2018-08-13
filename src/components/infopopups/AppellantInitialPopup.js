@@ -41,7 +41,8 @@ class AppellantInitialPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)",
                             URLName: "Affidavit of Service",
-                            tooltip: 'To prove that you served the Notice of Appeal, file an affidavit of service.'
+                            tooltip: `<p>To prove that you served the Notice of</p>
+                                      <p>Appeal, file an affidavit of service.</p>`
                         }, 
                         times: "1 copy",
                         docLink: {
@@ -71,7 +72,7 @@ class AppellantInitialPopup extends Component {
                 endWith: " to file and serve your document after the initial court order is declared."
             }],
             last: false,
-            contentMap: NoticeOfAppeal,
+            listContentMap: NoticeOfAppeal,
             infoModalDivider: false
         },{
             expandable: false,
@@ -84,7 +85,7 @@ class AppellantInitialPopup extends Component {
                 endWith: " to file and serve your Affidavit of Service, after serving the Notice of Appeal to all of the respondents."
             }],
             last: false,
-            contentMap: AffidavitOfService
+            listContentMap: AffidavitOfService
         }]
     }
 

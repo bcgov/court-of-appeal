@@ -6,7 +6,7 @@ class CourtOrderPopup extends Component {
     constructor(props) {
         super(props);
 
-        let content = [
+        let paragraphContentMap = [
             {
                 URLName: "How will I find out about my judgement?",
                 URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
@@ -28,7 +28,7 @@ class CourtOrderPopup extends Component {
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
-            content: content
+            paragraphContentMap: paragraphContentMap
         }]
     }
 

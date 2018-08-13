@@ -20,6 +20,7 @@ import ApplyForLeavePopup from "../ApplyForLeavePopup";
 import LeaveHearingDocumentsPopup from "../LeaveHearingDocumentsPopup";
 import LeaveHearingPopup from "../LeaveHearingPopup"
 import DecisionPopup from "../DecisionPopup";
+import CompleteAppealPopup from "../CompleteAppealPopup";
 
 class InfoPopup extends Component {
 
@@ -67,7 +68,9 @@ class InfoPopup extends Component {
                 'applyforleave': <ApplyForLeavePopup {...props} />,
                 'leavehearing': <LeaveHearingPopup {...props}/>,
                 'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
-                'decision': <DecisionPopup {...props} />
+                'decision': <DecisionPopup {...props} />,
+                'appellantcomplete': <CompleteAppealPopup type="appellant" {...props} />,
+                'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />
             };
             return options[this.props.type] || null;
         } else {

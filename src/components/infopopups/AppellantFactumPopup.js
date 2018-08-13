@@ -31,7 +31,9 @@ class AppellantFactumPopup extends Component {
                     { descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.9-preparing-the-transcript-extract-book?ct=t(step-index-link)",
                             URLName: "Optional - Transcript Extract Book",
-                            tooltip: 'If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.',
+                            tooltip: `<p>If a witness spoke at your original trial, and you </p>
+                                      <p>mentioned this oral testimony in your Factum, you </p>
+                                      <p>will need to complete a Transcript Extract Book.</p>`
                         }, 
                         times: "4 copies",
                         docLink: {
@@ -112,7 +114,7 @@ class AppellantFactumPopup extends Component {
             }],
             lineHeight: '304px',
             expanded: true,
-            contentMap: factumDocList
+            listContentMap: factumDocList
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Factum?",
@@ -120,7 +122,7 @@ class AppellantFactumPopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have ", deadline:" 7 days ", endWith: " to file and serve your documents."}],
             lineHeight: '202px',
-            contentMap: respondentFactumDocList
+            listContentMap: respondentFactumDocList
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Transcript Extract Book or Appeal Book?",
@@ -129,7 +131,7 @@ class AppellantFactumPopup extends Component {
             deadline: null,
             lineHeight: null,
             VLProps: null,
-            content: ["If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond."]
+            paragraphContentMap: ["If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond."]
         }]
     }
 

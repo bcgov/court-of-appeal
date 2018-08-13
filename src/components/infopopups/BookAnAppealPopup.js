@@ -6,7 +6,7 @@ class BookAnAppealPopup extends Component {
     constructor(props) {
         super(props);
 
-        let content = [
+        let paragraphContentMap = [
             {
                 URLName: "BC Court of Appeal locations and contacts",
                 URL: "http://www.courts.gov.bc.ca/court_of_appeal/court_locations_and_contacts.aspx",
@@ -20,7 +20,7 @@ class BookAnAppealPopup extends Component {
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
-            content: content
+            paragraphContentMap: paragraphContentMap
         }]
     }
 

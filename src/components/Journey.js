@@ -30,9 +30,9 @@ class Journey extends Component {
         this.handlePopState = this.handlePopState.bind(this);
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
                         <p>please see our online guidebook for more 
-                        <a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
+                        <u><a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
                         target="_blank">
-                        detailed information.</a></p>`;
+                        detailed information.</a></u></p>`;
         this.respondentQuestion =  "Served with ... ";
         this.appellantQuestion = "Do you have the right to appeal?";
         this.service = props.service;
@@ -40,6 +40,7 @@ class Journey extends Component {
     }
 
     render() {
+        ReactTooltip.rebuild();
         let content = this.journeyMapOrSelectionButtons();
         return (<div>
             {content}
@@ -103,7 +104,8 @@ class Journey extends Component {
                     { coords: "300,270,400,450", function: 'bookappeal', alt: "info about booking your appeal" },
                     { coords: "475,270,560,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
                     { coords: "200,540,320,690", function: 'appellanthearing', alt: "info about the hearing" },
-                    { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" }
+                    { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
+                    { coords: "560,540,670,710", function: 'appellantcomplete', alt: "The appeal process is complete"}
                     ]
             };
         }, () => {
@@ -160,8 +162,9 @@ class Journey extends Component {
                     { coords: "290,10,400,200", function: "crossappeal", alt: "info about the cross appeal" },
                     { coords: "470,10,585,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
                     { coords: "200,270,320,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process"  }
-                    ]
+                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process" },
+                    { coords: "520,270,650,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                ]
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -256,12 +259,6 @@ class Journey extends Component {
                                     data-tip={this.dataTip}
                                 />
                         </div>
-                        <ReactTooltip
-                            multiline={true}
-                            html={true}
-                            effect="solid"
-                            delayHide={1000}
-                            className="right-to-appeal-tooltip"/>
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6">

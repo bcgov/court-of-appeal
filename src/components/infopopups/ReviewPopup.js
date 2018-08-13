@@ -29,7 +29,8 @@ class ReviewPopup extends Component {
                     },{ descriptionLink: {
                             URL: "https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)",
                             URLName: "Optional: Affidavit",
-                            tooltip: 'if you would like to include additional information to support your case, complete this Affidavit.'
+                            tooltip: `<p>If you would like to include additional information</p>
+                                      <p>to support your case, complete this Affidavit.</p>`
                         }, 
                         times: "4 copies",
                         docLink: {
@@ -82,7 +83,7 @@ class ReviewPopup extends Component {
                 endWith: ` to file and serve the document below after the Leave to Appeal was refused. 
                     If necessary, file and serve optional documents at the same time. `
             }],
-            contentMap: noticeOfApplicationMap
+            listContentMap: noticeOfApplicationMap
         },{
             expandable: true,
             expanded: false,
@@ -95,7 +96,7 @@ class ReviewPopup extends Component {
                 endWith: ` to file and serve the document below after filing and serving the Notice of 
                  Application to Vary an Order of a Justice.` }],
             lineHeight: null,
-            contentMap: motionBookMap
+            listContentMap: motionBookMap
         }]
     }
 
