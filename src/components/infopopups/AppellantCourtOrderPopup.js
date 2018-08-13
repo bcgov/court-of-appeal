@@ -6,7 +6,7 @@ class AppellantCourtOrderPopup extends Component {
     constructor(props) {
         super(props);
 
-        let content = [
+        let paragraphContentMap = [
             {
                 URLName: "How will I find out about my judgement?",
                 URL: "https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgement?ct=t(sidebar-link)",
@@ -28,7 +28,7 @@ class AppellantCourtOrderPopup extends Component {
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
-            content: content
+            paragraphContentMap: paragraphContentMap
         }]
     }
 

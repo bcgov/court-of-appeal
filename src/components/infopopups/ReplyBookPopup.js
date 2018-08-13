@@ -11,7 +11,7 @@ class ReplyBookPopup extends Component {
     constructor(props) {
         super(props);
 
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_STEP_ONE_MSG_SINGULAR,
                 rows: [
@@ -46,7 +46,7 @@ class ReplyBookPopup extends Component {
                 endWith: " before the hearing."
             }],
             lineHeight: null,
-            contentMap: contentMap
+            listContentMap: listContentMap
         }]
     }
 

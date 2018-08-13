@@ -69,7 +69,7 @@ class ApplyForLeavePopup extends Component {
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "File the document below ", deadline: " within 30 days ", endWith: " of the decision you want to appeal."}],
             last: false,
-            contentMap: NoticeOfApplicationForLeave,
+            listContentMap: NoticeOfApplicationForLeave,
             infoModalDivider: false
         },{
             expandable: false,
@@ -78,7 +78,7 @@ class ApplyForLeavePopup extends Component {
             iconLine: false,
             deadlinePhrases: [{startWith: "File Affidavit of Service ", deadline: " within 10 days ", endWith: " of serving all respondents."}],
             last: false,
-            contentMap: AffidavitOfService
+            listContentMap: AffidavitOfService
         }]
     }
 

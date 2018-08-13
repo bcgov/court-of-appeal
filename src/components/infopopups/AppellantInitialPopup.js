@@ -72,7 +72,7 @@ class AppellantInitialPopup extends Component {
                 endWith: " to file and serve your document after the initial court order is declared."
             }],
             last: false,
-            contentMap: NoticeOfAppeal,
+            listContentMap: NoticeOfAppeal,
             infoModalDivider: false
         },{
             expandable: false,
@@ -85,7 +85,7 @@ class AppellantInitialPopup extends Component {
                 endWith: " to file and serve your Affidavit of Service, after serving the Notice of Appeal to all of the respondents."
             }],
             last: false,
-            contentMap: AffidavitOfService
+            listContentMap: AffidavitOfService
         }]
     }
 

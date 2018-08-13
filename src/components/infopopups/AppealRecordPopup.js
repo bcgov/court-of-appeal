@@ -10,7 +10,7 @@ class AppealRecordPopup extends Component {
 
     constructor(props) {
         super(props);
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_STEP_ONE_MSG,
                 rows: [
@@ -62,13 +62,13 @@ class AppealRecordPopup extends Component {
                     endWith: " to file and serve your documents after submitting the Notice of Appeal."
                 }],
             lineHeight: '236px',
-            contentMap: contentMap
+            listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "Were you served with a Notice of Appearance or Cross Appeal?",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            content: [`If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond 
+            paragraphContentMap: [`If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond 
                         to these documents.`]
         }]
     }

@@ -17,7 +17,7 @@ class JourneyMap extends React.Component {
     }
 
     render() {
-ReactTooltip.rebuild();
+        ReactTooltip.rebuild();
         if(this.props.mapProps) {
             let targetAreas = this.getAreas();
 

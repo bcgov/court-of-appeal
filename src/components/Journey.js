@@ -105,7 +105,7 @@ class Journey extends Component {
                     { coords: "475,270,560,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
                     { coords: "200,540,320,690", function: 'appellanthearing', alt: "info about the hearing" },
                     { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
-                    { coords: "560,540,670,710", function: 'complete', alt: "The appeal process is complete"}
+                    { coords: "560,540,670,710", function: 'appellantcomplete', alt: "The appeal process is complete"}
                     ]
             };
         }, () => {
@@ -162,8 +162,9 @@ class Journey extends Component {
                     { coords: "290,10,400,200", function: "crossappeal", alt: "info about the cross appeal" },
                     { coords: "470,10,585,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
                     { coords: "200,270,320,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process"  }
-                    ]
+                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process" },
+                    { coords: "520,270,650,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                ]
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);

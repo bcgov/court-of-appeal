@@ -6,7 +6,7 @@ class ReviewHearingPopup extends Component {
     constructor(props) {
         super(props);
 
-        let content = [
+        let paragraphContentMap = [
             {
                 URLName: "What can I do after being refused leave to appeal?",
                 URL: "https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal",
@@ -20,7 +20,7 @@ class ReviewHearingPopup extends Component {
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
-            content: content
+            paragraphContentMap: paragraphContentMap
         }]
     }
 

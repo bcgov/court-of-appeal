@@ -12,7 +12,7 @@ class AppearancePopup extends Component {
 
     constructor(props) {
         super(props);
-        let contentMap = [
+        let listContentMap = [
             {
                 line: FILE_ONLINE_ONE_MSG,
                 rows: [
@@ -47,7 +47,7 @@ class AppearancePopup extends Component {
                 endWith: " to file and serve your Notice of Appearance."
             }],
             last: false,
-            contentMap: contentMap,
+            listContentMap: listContentMap,
             infoModalDivider: false
         },
         {
@@ -60,7 +60,7 @@ class AppearancePopup extends Component {
                 endWith: " to file and serve your Affidavit of Service, after you served the Notice of Appearance."
             }],
             last: false,
-            contentMap: [
+            listContentMap: [
                 {
                     line: FILE_STEP_ONE_MSG_SINGULAR,
                     rows: [

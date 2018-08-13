@@ -83,7 +83,7 @@ class ReviewPopup extends Component {
                 endWith: ` to file and serve the document below after the Leave to Appeal was refused. 
                     If necessary, file and serve optional documents at the same time. `
             }],
-            contentMap: noticeOfApplicationMap
+            listContentMap: noticeOfApplicationMap
         },{
             expandable: true,
             expanded: false,
@@ -96,7 +96,7 @@ class ReviewPopup extends Component {
                 endWith: ` to file and serve the document below after filing and serving the Notice of 
                  Application to Vary an Order of a Justice.` }],
             lineHeight: null,
-            contentMap: motionBookMap
+            listContentMap: motionBookMap
         }]
     }
 

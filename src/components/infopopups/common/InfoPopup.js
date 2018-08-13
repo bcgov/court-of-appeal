@@ -69,7 +69,8 @@ class InfoPopup extends Component {
                 'leavehearing': <LeaveHearingPopup {...props}/>,
                 'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
                 'decision': <DecisionPopup {...props} />,
-                'complete': <CompleteAppealPopup {...props}/>
+                'appellantcomplete': <CompleteAppealPopup type="appellant" {...props} />,
+                'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />
             };
             return options[this.props.type] || null;
         } else {

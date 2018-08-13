@@ -42,9 +42,15 @@ class InfoPopupSection extends Component {
             );
         }
 
-        let listContent= this.props.getListContent(this.props.contentMap);
-        let content = this.props.getContent(this.props.content);
-        let sectionDivider = (<div className="info-modal-divider"/>)
+        let listContent, paragraphContent;
+        if (this.props.getListContent) {
+            listContent= this.props.getListContent(this.props.listContentMap);
+        }
+        if ( this.props.getContent) {
+            paragraphContent = this.props.getContent(this.props.paragraphContentMap);
+        }
+
+        let sectionDivider = (<div className="info-modal-divider"/>);
         if (this.props.infoModalDivider === false) {
             sectionDivider = null;
         }
@@ -80,8 +86,9 @@ class InfoPopupSection extends Component {
                                 {deadline}
                             </div>
                             <div className="ccol col-lg-12 col-md-12 col-sm-12 info-modal-details">
-                                {content}
+                                {paragraphContent}
                                 {listContent}
+                                {this.props.children}
                             </div>
                         </div>
                     </div>

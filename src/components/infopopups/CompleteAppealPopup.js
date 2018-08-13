@@ -1,38 +1,35 @@
 import React, { Component } from 'react';
 import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopupIcon from "./common/InfoPopupIcon";
+import InfoPopupSection from "./common/InfoPopupSection";
 
 class CompleteAppealPopup extends Component {
 
-    constructor(props) {
-        super(props);
-
-        let content = [
-            `The Court of Appeal decision is final, unless the Supreme Court of Canada
-                agrees to hear your case.  For more information, please see the
-                <a href="http://#" target="_blank">Online Guidebook</a>, or the
-                <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank">Supreme Court</a>website.`
-        ];
-
-        this.sections = [{
-            expandable: false,
-            expanded: true,
-            sectionHeading: "Your appeal is complete",
-
-            iconSrc: "/icons/icon-info.svg",
-            iconClass: "info-modal-icon",
-            lineHeight: null,
-            content: content
-        }]
-    }
-
     render () {
+        let urls = {
+            appellant: "step-1-deciding-to-appeal",
+            respondent: "step-1-how-to-respond-to-an-appeal"
+        };
+
         return  (
             <InfoPopupWrapper
                 title="Appeal Process Complete"
                 helpType={this.props.type}
                 close={this.props.close}
             >
-                {this.props.getSections(this.sections)}
+                <InfoPopupSection
+                  sectionHeading="Your appeal process is complete"
+                  iconSrc="/icons/icon-info.svg"
+                  iconClass="info-modal-icon"
+                  expandable={false}
+                  expanded={true}
+                >
+                    The Court of Appeal decision is final, unless the Supreme Court of Canada
+                    agrees to hear your case.  For more information, please see the&nbsp;
+                    <a href={`https://www.courtofappealbc.ca/${this.props.type}-guidebook/${urls[this.props.type]}`} target="_blank">Online Guidebook</a>,
+                    or the&nbsp;
+                    <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank">Supreme Court</a> website.
+                </InfoPopupSection>
             </InfoPopupWrapper>
         );
     }

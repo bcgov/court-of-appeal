@@ -63,7 +63,7 @@ class LeaveHearingDocumentsPopup extends Component {
                 endWith: "before the hearing. "
             }],
             last: false,
-            contentMap: NoticeOfMotion
+            listContentMap: NoticeOfMotion
         }]
     }
 

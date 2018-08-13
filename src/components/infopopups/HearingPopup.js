@@ -6,7 +6,7 @@ class HearingPopup extends Component {
     constructor(props) {
         super(props);
 
-        let content = [
+        let paragraphContentMap = [
             {
                 URLName: "How do I prepare for my hearing?",
                 URL: `https://www.courtofappealbc.ca/${this.props.type}-guidebook/${this.props.link1}`,
@@ -28,7 +28,7 @@ class HearingPopup extends Component {
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
             lineHeight: null,
-            content: content
+            paragraphContentMap: paragraphContentMap
         }]
     }
 

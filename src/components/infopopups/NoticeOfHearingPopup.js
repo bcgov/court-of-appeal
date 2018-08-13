@@ -41,7 +41,7 @@ class NoticeOfHearingPopup extends Component {
                 deadline: " 2 months",
                 endWith: " to file and serve your document after submitting the Certificate of Readiness." }],
             lineHeight: null,
-            contentMap: docList
+            listContentMap: docList
         }]
     }
 
