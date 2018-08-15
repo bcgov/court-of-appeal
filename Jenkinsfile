@@ -12,7 +12,7 @@ def TAG_NAMES = [
 ]
 def APP_URLS = [
   "https://dev.justice.gov.bc.ca/court-of-appeal",
-  "https://${APP_NAME}-${PROJECT_PREFIX}-${TAG_NAMES[1]}.${PATHFINDER_URL}",
+  "https://test.justice.gov.bc.ca/court-of-appeal",
   "https://${APP_NAME}-${PROJECT_PREFIX}-${TAG_NAMES[2]}.${PATHFINDER_URL}"
 ]
 
