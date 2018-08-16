@@ -108,6 +108,9 @@
     margin-left: 95px;
     padding-bottom: 10px;
 }
+.help-info-divider {
+    color: lightgrey
+}
 
 .info-modal-ol {
     padding: 25px 0 10px 0;
