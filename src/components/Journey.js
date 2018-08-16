@@ -24,6 +24,7 @@ class Journey extends Component {
         this.journeyForAppellant = this.journeyForAppellant.bind(this);
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
         this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
+        this.appellantRightToAppeal = this.appellantRightToAppeal.bind(this);
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
@@ -90,11 +91,11 @@ class Journey extends Component {
         });
     }
 
-    leaveToAppealGranted() {
+    appellantRightToAppeal() {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
+                mapSrc: "/images/journeymap/journey-map_appellant-right-to-appeal.png",
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
                 mapProps: [
@@ -106,6 +107,28 @@ class Journey extends Component {
                     { coords: "200,540,320,690", function: 'appellanthearing', alt: "info about the hearing" },
                     { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
                     { coords: "560,540,670,710", function: 'appellantcomplete', alt: "The appeal process is complete"}
+                ]
+            };
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
+    leaveToAppealGranted() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-granted.png",
+                userQuestion: this.appellantQuestion,
+                userState: "Yes",
+                mapProps: [
+                    { coords: "100,10,220,200", function: 'appealrecord', alt: "you need an appeal record and transcript after starting your appeal" },
+                    { coords: "270,10,430,200", function: 'factum', alt: "info about the factum, appeal book, and certificate of readiness" },
+                    { coords: "470,10,590,200", function: 'bookappeal', alt: "info about booking your appeal" },
+                    { coords: "100,290,200,440", function: 'noticeofhearing', alt: "info about the notice of hearing" },
+                    { coords: "250,290,390,440", function: 'appellanthearing', alt: "info about the hearing" },
+                    { coords: "430,290,510,440", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
+                    { coords: "560,290,680,440", function: 'appellantcomplete', alt: "The appeal process is complete"}
                     ]
             };
         }, () => {
@@ -262,7 +285,7 @@ class Journey extends Component {
                     </div>
                     <div className="row">
                         <div className="col col-lg-6 col-med-6 col-sm-6">
-                            <button onClick={this.leaveToAppealGranted}
+                            <button onClick={this.appellantRightToAppeal}
                                     className="btn round-borders btn-journey">
                                 Yes &nbsp;
                                 <i className="fa fa-play"/>
