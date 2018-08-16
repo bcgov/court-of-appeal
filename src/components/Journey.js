@@ -181,12 +181,12 @@ class Journey extends Component {
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
                 mapProps: [
-                    { coords: "115,10,210,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
-                    { coords: "290,10,400,200", function: "crossappeal", alt: "info about the cross appeal" },
-                    { coords: "470,10,585,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
-                    { coords: "200,270,320,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "385,270,500,420", function: 'courtorder', alt: "info about the court order process" },
-                    { coords: "520,270,650,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                    { coords: "90,10,190,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
+                    { coords: "270,10,380,200", function: "crossappeal", alt: "info about the cross appeal" },
+                    { coords: "440,10,550,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
+                    { coords: "190,270,310,400", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "365,270,460,420", function: 'courtorder', alt: "info about the court order process" },
+                    { coords: "540,270,670,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
                 ]
             }
         }, () => {
