@@ -17,8 +17,8 @@ class InfoPopupWrapper extends Component {
         return (
             <div id="info-modal" className="modal" style={{display: 'block'}} >
                 <div className="info-modal-title ">
-                    <span id="close-modal" onClick={this.props.close}>&times;</span>
                     {this.props.title}
+                    <span className="close-info-modal" onClick={this.props.close}>&times;</span>
                 </div>
                 <div className="info-modal-content">
                     {this.props.children}

@@ -6,6 +6,13 @@
     width: 55%;
     font-size: 2em;
     min-width: 800px;
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+}
+
+.close-info-modal {
+    padding: 0 10px;
 }
 
 .info-modal-content {
