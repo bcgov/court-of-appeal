@@ -18,11 +18,11 @@ class Help extends Component {
                             <div>
                                 <a href={this.props.URL} target="_blank">{this.props.URLName}</a>
                             </div>
-                            <div>|</div>
+                            <div className="help-info-divider">|</div>
                             <div>
                                 <a href="mailto:courts.cso@gov.bc.ca">Email: Courts.cso@gov.bc.ca</a>
                             </div>
-                            <div>|</div>
+                            <div className="help-info-divider">|</div>
                             <div>
                                 Call: 1-800-663-6102
                             </div>
