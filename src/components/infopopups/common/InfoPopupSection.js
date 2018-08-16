@@ -29,7 +29,7 @@ class InfoPopupSection extends Component {
         if (this.props.expandable) {
             toggleButton =
                 <div className="col col-lg-2 col-md-2 toggle-expansion-button" >
-                    <i className={this.state.toggleIconClass} />
+                    <img src={this.state.toggleIconImg} />
                 </div>;
         } else {
             toggleButton = <div className="col col-lg-3 col-md-3 toggle-expansion-button" />
@@ -105,13 +105,13 @@ class InfoPopupSection extends Component {
                 return {
                     expanded:false,
                     collapsibleClass: prevState.collapsibleClass.replace("content-showing", "content-hidden"),
-                    toggleIconClass: "fa fa-plus"
+                    toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-plus.svg"
                 }
             } else {
                 return {
                     expanded: true,
                     collapsibleClass: prevState.collapsibleClass.replace("content-hidden", "content-showing"),
-                    toggleIconClass: "fa fa-minus"
+                    toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-minus.svg"
 
                 }
             }
@@ -125,13 +125,13 @@ class InfoPopupSection extends Component {
             return {
                 collapsibleClass: "row content-showing",
                 expanded: true,
-                toggleIconClass: "fa fa-minus"
+                toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-minus.svg"
             };
         } else {
             return {
                 collapsibleClass: "row content-hidden",
                 expanded: false,
-                toggleIconClass: "fa fa-plus"
+                toggleIconImg: process.env.PUBLIC_URL +  "/icons/icon-plus.svg"
             };
         }
     }
