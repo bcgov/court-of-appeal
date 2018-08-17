@@ -112,7 +112,6 @@ class AppellantFactumPopup extends Component {
                 deadline: "  30 days ",
                 endWith: " to file and serve your documents after filing your Appeal Record."
             }],
-            lineHeight: '334px',
             expanded: true,
             listContentMap: factumDocList
         }, {
@@ -121,7 +120,6 @@ class AppellantFactumPopup extends Component {
             iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have ", deadline:" 7 days ", endWith: " to file and serve your documents."}],
-            lineHeight: '232px',
             listContentMap: respondentFactumDocList
         }, {
             expandable: true,
@@ -129,7 +127,6 @@ class AppellantFactumPopup extends Component {
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
             deadline: null,
-            lineHeight: null,
             VLProps: null,
             paragraphContentMap: ["If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond."]
         }]

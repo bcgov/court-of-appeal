@@ -35,13 +35,6 @@ class InfoPopupSection extends Component {
             toggleButton = <div className="col col-lg-3 col-md-3 toggle-expansion-button" />
         }
 
-        let verticalLine = null;
-        if (this.props.lineHeight) {
-            verticalLine = (
-                <div className="vertical-line" style={{height: this.props.lineHeight}}/>
-            );
-        }
-
         let listContent, paragraphContent;
         if (this.props.getListContent) {
             listContent= this.props.getListContent(this.props.listContentMap);

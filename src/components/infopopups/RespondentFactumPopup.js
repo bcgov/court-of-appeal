@@ -72,21 +72,18 @@ class RespondentFactumPopup extends Component {
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 30 days ", endWith: " to file and serve your documents."}],
-            lineHeight: '300px',
             listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "The Transcript Extract Book",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '82px',
             paragraphContentMap: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '291px',
             paragraphContentMap: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
             listContentMap: [
                 {
@@ -115,7 +112,6 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "A Reply to your Factum",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: '82px',
             paragraphContentMap: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
         }, {
             expandable: true,

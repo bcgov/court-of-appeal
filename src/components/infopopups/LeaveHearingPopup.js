@@ -19,7 +19,6 @@ class LeaveHearingPopup extends Component {
             sectionHeading: "For more information about the hearing process to obtain Leave to Appeal, click the link below: ",
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
-            lineHeight: null,
             content: content
         }]
     }

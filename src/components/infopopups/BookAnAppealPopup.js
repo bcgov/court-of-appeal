@@ -19,7 +19,6 @@ class BookAnAppealPopup extends Component {
             sectionHeading: "Contact your registry to reserve a date and time for your appeal. ",
             iconSrc: "/icons/icon-hearing.svg",
             iconClass: "info-modal-icon",
-            lineHeight: null,
             paragraphContentMap: paragraphContentMap
         }]
     }

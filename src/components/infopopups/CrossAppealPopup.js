@@ -38,7 +38,6 @@ class CrossAppealPopup extends Component {
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 15 days ", endWith: " to file and serve your documents, after receiving the Notice of Appeal or the order granting leave to appeal."}],
-            lineHeight: '254px',
             listContentMap: listContentMap
         }, {
             expandable: true,

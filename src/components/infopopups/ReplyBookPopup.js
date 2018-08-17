@@ -45,7 +45,6 @@ class ReplyBookPopup extends Component {
                 deadline: " at least 5 days ",
                 endWith: " before the hearing."
             }],
-            lineHeight: null,
             listContentMap: listContentMap
         }]
     }
