@@ -36,6 +36,9 @@ describe('InfoPopup', ()=> {
 
         let close = ()=>{};
         let leaveGranted = ()=>{};
+        let leaveRefused = ()=>{};
+        let respondToLeaveGranted = ()=>{};
+        let respondToLeaveRefused = ()=>{};
 
         test('can build AppellantFactumPopup', ()=>{            
             let popup = mount(<InfoPopup show="true" type="factum" close={close}/>).instance();
@@ -185,11 +188,43 @@ describe('InfoPopup', ()=> {
             expect(view).toEqual(<LeaveHearingPopup close={close} getSections={popup.getSections}/>);
         });
 
-        test('can build DecisionPopup', ()=>{
-            let popup = mount(<InfoPopup show="true" type="decision" close={close} leaveGranted={leaveGranted()}/>).instance();
+        test('can build respondent DecisionPopup', ()=>{
+            let popup = mount( <InfoPopup
+                show="true"
+                type="respondentdecision"
+                close={close}
+                respondToLeaveGranted={respondToLeaveGranted()}
+                respondToLeaveRefused={respondToLeaveRefused()}
+            />).instance();
             let view = popup.render();
 
-            expect(view).toEqual(<DecisionPopup close={close} getSections={popup.getSections} leaveGranted={leaveGranted()} />);
+            expect(view).toEqual(
+                <DecisionPopup
+                    close={close}
+                    getSections={popup.getSections}
+                    respondToLeaveGranted={respondToLeaveGranted()}
+                    respondToLeaveRefused={respondToLeaveRefused()}
+                    type={"respondent"}
+            />);
+        });
+
+        test('can build appellant DecisionPopup', ()=>{
+            let popup = mount(
+                <InfoPopup
+                    show="true"
+                    type="decision"
+                    close={close}
+                    leaveGranted={leaveGranted()}
+                    leaveRefused={leaveRefused()}
+                />).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(
+                <DecisionPopup
+                    close={close}
+                    getSections={popup.getSections}
+                    leaveGranted={leaveGranted()}
+                    leaveRefused={leaveRefused()}/>);
         });
 
         test('can build appellant CompleteAppealPopup', ()=>{
