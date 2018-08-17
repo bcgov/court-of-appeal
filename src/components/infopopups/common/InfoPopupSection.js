@@ -48,7 +48,7 @@ class InfoPopupSection extends Component {
             sectionDivider = null;
         }
         let iconLine = (
-            <div className="row icon-line" onClick={this.toggleSection}>
+            <div className="row icon-line" onClick={this.toggleSection} style={{ cursor:this.props.expandable?'pointer':'default' }}>
                 <InfoPopupIcon
                     iconSrc={this.props.iconSrc}
                     iconClass={this.props.iconClass}
