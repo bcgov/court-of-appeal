@@ -53,6 +53,8 @@ class JourneyMap extends React.Component {
                         title={this.props.title}
                         leaveGranted={this.props.leaveGranted}
                         leaveRefused={this.props.leaveRefused}
+                        respondToLeaveRefused={this.props.respondToLeaveRefused}
+                        respondToLeaveGranted={this.props.respondToLeaveGranted}
                         redirectToForm7={this.props.redirectToForm7}
                     />
                 </div>
