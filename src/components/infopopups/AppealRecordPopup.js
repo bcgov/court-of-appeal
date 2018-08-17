@@ -61,7 +61,6 @@ class AppealRecordPopup extends Component {
                     deadline: " 60 days ",
                     endWith: " to file and serve your documents after submitting the Notice of Appeal."
                 }],
-            lineHeight: '266px',
             listContentMap: listContentMap
         }, {
             expandable: true,

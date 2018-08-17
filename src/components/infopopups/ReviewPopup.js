@@ -76,7 +76,6 @@ class ReviewPopup extends Component {
             sectionHeading: "Complete a Notice of Application to Vary an Order of Justice",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            lineHeight: "293px",
             deadlinePhrases: [{
                 startWith: "You have  ",
                 deadline: " 7 days ",
@@ -95,7 +94,6 @@ class ReviewPopup extends Component {
                 deadline: " 14 days ",
                 endWith: ` to file and serve the document below after filing and serving the Notice of 
                  Application to Vary an Order of a Justice.` }],
-            lineHeight: null,
             listContentMap: motionBookMap
         }]
     }

@@ -27,7 +27,6 @@ class CourtOrderPopup extends Component {
             sectionHeading: "For more information about the court order process, click the topics below: ",
             iconSrc: "/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            lineHeight: null,
             paragraphContentMap: paragraphContentMap
         }]
     }
