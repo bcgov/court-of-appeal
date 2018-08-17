@@ -112,7 +112,7 @@ class AppellantFactumPopup extends Component {
                 deadline: "  30 days ",
                 endWith: " to file and serve your documents after filing your Appeal Record."
             }],
-            lineHeight: '304px',
+            lineHeight: '334px',
             expanded: true,
             listContentMap: factumDocList
         }, {
@@ -121,7 +121,7 @@ class AppellantFactumPopup extends Component {
             iconSrc :"/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have ", deadline:" 7 days ", endWith: " to file and serve your documents."}],
-            lineHeight: '202px',
+            lineHeight: '232px',
             listContentMap: respondentFactumDocList
         }, {
             expandable: true,
