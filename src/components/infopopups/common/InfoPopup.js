@@ -36,7 +36,8 @@ class InfoPopup extends Component {
                 getSections: this.getSections,
                 leaveGranted: this.props.leaveGranted,
                 leaveRefused: this.props.leaveRefused,
-                redirectToForm7: this.props.redirectToForm7
+                redirectToForm7: this.props.redirectToForm7,
+                title: this.props.title
             };
             let respondentHearingLinks = {
                 link1: "2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)",
@@ -70,7 +71,7 @@ class InfoPopup extends Component {
                 'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
                 'decision': <DecisionPopup {...props} />,
                 'appellantcomplete': <CompleteAppealPopup type="appellant" {...props} />,
-                'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />
+                'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />,
             };
             return options[this.props.type] || null;
         } else {

@@ -162,10 +162,11 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
                 userQuestion: this.appellantQuestion,
                 userState: "No",
+                title: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
                     { coords: "365,10,465,190", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
-
+                    { coords: "510,10,650,190", function: 'appellantcomplete', alt: "what happens when the court of appeals refuses to grant leave to appeal" }
                     ]
             };
         }, () => {
