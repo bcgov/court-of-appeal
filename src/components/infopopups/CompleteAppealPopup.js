@@ -11,6 +11,7 @@ class CompleteAppealPopup extends Component {
             respondent: "step-1-how-to-respond-to-an-appeal"
         };
         let title = this.props.title ? this.props.title : "Appeal Process Complete";
+        let subject = this.props.type === 'respondent' ? "the appellant's" : "your";
 
         return  (
             <InfoPopupWrapper
@@ -26,7 +27,7 @@ class CompleteAppealPopup extends Component {
                   expanded={true}
                 >
                     The Court of Appeal decision is final, unless the Supreme Court of Canada
-                    agrees to hear your case.  For more information, please see the&nbsp;
+                    agrees to hear {subject} case.  For more information, please see the&nbsp;
                     <a href={`https://www.courtofappealbc.ca/${this.props.type}-guidebook/${urls[this.props.type]}`} target="_blank">Online Guidebook</a>,
                     or the&nbsp;
                     <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank">Supreme Court</a> website.

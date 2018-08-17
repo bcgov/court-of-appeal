@@ -36,6 +36,8 @@ class InfoPopup extends Component {
                 getSections: this.getSections,
                 leaveGranted: this.props.leaveGranted,
                 leaveRefused: this.props.leaveRefused,
+                respondToLeaveRefused: this.props.respondToLeaveRefused,
+                respondToLeaveGranted: this.props.respondToLeaveGranted,
                 redirectToForm7: this.props.redirectToForm7,
                 title: this.props.title
             };
@@ -70,6 +72,7 @@ class InfoPopup extends Component {
                 'leavehearing': <LeaveHearingPopup {...props}/>,
                 'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
                 'decision': <DecisionPopup {...props} />,
+                'respondentdecision': <DecisionPopup type={"respondent"} {...props} />,
                 'appellantcomplete': <CompleteAppealPopup type="appellant" {...props} />,
                 'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />,
             };

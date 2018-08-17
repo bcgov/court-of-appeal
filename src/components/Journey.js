@@ -24,6 +24,8 @@ class Journey extends Component {
         this.journeyForAppellant = this.journeyForAppellant.bind(this);
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
         this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
+        this.respondToLeaveRefusedJourney = this.respondToLeaveRefusedJourney.bind(this);
+        this.respondToLeaveGrantedJourney = this.respondToLeaveGrantedJourney.bind(this);
         this.appellantRightToAppeal = this.appellantRightToAppeal.bind(this);
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
@@ -147,7 +149,7 @@ class Journey extends Component {
                     { coords: "100,10,220,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
                     { coords: "280,10,390,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
                     { coords: "440,10,550,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
-                    { coords: "600,10,690,200", function: 'decision', alt: "About the leave to appeal hearing" },
+                    { coords: "600,10,690,200", function: 'decision', alt: "Were you granted leave to appeal or not?" },
                 ]
             };
         }, () => {
@@ -195,6 +197,44 @@ class Journey extends Component {
         });
     }
 
+    respondToLeaveRefusedJourney() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-refused.png",
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Leave to Appeal",
+                mapProps: [
+                    { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
+                    { coords: "380,10,490,160", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "550,10,650,190", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                ]
+            }
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
+    respondToLeaveGrantedJourney() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-granted.png",
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Leave to Appeal ",
+                mapProps: [
+                    { coords: "160,10,260,200", function: "crossappeal", alt: "info about the cross appeal" },
+                    { coords: "370,10,480,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
+                    { coords: "190,270,310,400", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "365,270,460,420", function: 'courtorder', alt: "info about the court order process" },
+                    { coords: "540,270,670,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                ]
+            }
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
     respondToNoticeOfLeaveToAppealJourney() {
         this.setState((prevState) => {
             return {
@@ -205,7 +245,8 @@ class Journey extends Component {
                 mapProps: [
                     { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
                     { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "440,10,550,160", function: 'respondenthearing', alt: "info about the hearing" }
+                    { coords: "440,10,550,160", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "590,10,650,160", function: 'respondentdecision', alt: "was the appellant granted leave or not?" }
                 ]
             }
         }, () => {
@@ -224,6 +265,8 @@ class Journey extends Component {
                         title={this.state.title}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
+                        respondToLeaveRefused={this.respondToLeaveRefusedJourney}
+                        respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
                         redirectToForm7={this.redirectToForm7}
                     />
