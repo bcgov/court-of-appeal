@@ -141,12 +141,6 @@
     padding: 0;
 }
 
-.vertical-line {
-    width: 7px;
-    margin: 7px 0 -9px 27px;
-    background: #f2f2f2;
-    height: 100%;
-}
 .add-vertical-line {
     border-left: solid 7px #f2f2f2;
     padding-left: 30px;
