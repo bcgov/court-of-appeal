@@ -76,7 +76,7 @@ class ReviewPopup extends Component {
             sectionHeading: "Complete a Notice of Application to Vary an Order of Justice",
             iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
-            lineHeight: "263px",
+            lineHeight: "293px",
             deadlinePhrases: [{
                 startWith: "You have  ",
                 deadline: " 7 days ",
