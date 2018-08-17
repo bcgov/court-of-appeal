@@ -77,10 +77,7 @@ class InfoPopupSection extends Component {
             <div className="info-modal-section ">
                 {iconLine}
                 <div className={this.state.collapsibleClass}>
-                    <div className="col col-lg-1 col-md-1 col-sm-1">
-                        {verticalLine}
-                    </div>
-                    <div className=" col col-lg-11 col-md-11 col-sm-11" >
+                    <div className=" col col-lg-11 col-md-11 col-sm-11 add-vertical-line" >
                         <div className="row">
                             <div className=" col col-lg-12 col-md-12 col-sm-12">
                                 {deadline}

@@ -38,7 +38,7 @@
 }
 
 .info-modal-section {
-    padding-bottom: 15px;
+    padding-bottom: 0px;
     margin-top: -5px;
 }
 .info-modal-details {
@@ -146,6 +146,12 @@
     margin: 7px 0 -9px 27px;
     background: #f2f2f2;
     height: 100%;
+}
+.add-vertical-line {
+    border-left: solid 7px #f2f2f2;
+    padding-left: 30px;
+    margin-left: 42px;
+    margin-top: 7px;
 }
 
 .help-contacts {
