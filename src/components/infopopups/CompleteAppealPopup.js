@@ -10,9 +10,8 @@ class CompleteAppealPopup extends Component {
             appellant: "step-1-deciding-to-appeal",
             respondent: "step-1-how-to-respond-to-an-appeal"
         };
-        let title = this.props.title ? this.props.title : "Appeal Process Complete";
+        let title = this.props.completeAppealTitle ? this.props.completeAppealTitle : "Appeal Process Complete";
         let subject = this.props.type === 'respondent' ? "the appellant's" : "your";
-
         return  (
             <InfoPopupWrapper
                 title={title}

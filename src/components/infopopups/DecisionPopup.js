@@ -81,7 +81,7 @@ class DecisionPopup extends Component {
 
     onRefused() {
         this.props.close();
-        this.props.type === 'respondent' ? this.props.respondToLeaveRefused() : this.props.leaveGranted();
+        this.props.type === 'respondent' ? this.props.respondToLeaveRefused() : this.props.leaveRefused();
     }
 
 } export default DecisionPopup;

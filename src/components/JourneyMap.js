@@ -50,7 +50,7 @@ class JourneyMap extends React.Component {
                         show={this.state.showInfoModal}
                         close={this.closeInfoModal}
                         type={this.state.popupType}
-                        title={this.props.title}
+                        completeAppealTitle={this.props.completeAppealTitle}
                         leaveGranted={this.props.leaveGranted}
                         leaveRefused={this.props.leaveRefused}
                         respondToLeaveRefused={this.props.respondToLeaveRefused}

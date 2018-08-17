@@ -15,7 +15,7 @@ class Journey extends Component {
             displayJourneyMap: false,
             mapSrc : null,
             mapProps: null,
-            title: '',
+            completeAppealTitle: '',
             appealButtonClass: 'btn round-borders btn-journey',
             respondButtonClass: 'btn round-borders btn-journey',
         };
@@ -164,7 +164,7 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_appellant-leave-to-appeal-refused.png",
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                title: "Final Decision on Leave to Appeal",
+                completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
                     { coords: "365,10,465,190", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
@@ -262,7 +262,7 @@ class Journey extends Component {
                     <JourneyMap
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
-                        title={this.state.title}
+                        completeAppealTitle={this.state.completeAppealTitle}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                         respondToLeaveRefused={this.respondToLeaveRefusedJourney}
