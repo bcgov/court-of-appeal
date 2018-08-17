@@ -204,6 +204,7 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-refused.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
+                title: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
                     { coords: "380,10,490,160", function: 'respondenthearing', alt: "info about the hearing" },
