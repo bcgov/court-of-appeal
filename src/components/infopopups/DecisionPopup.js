@@ -43,21 +43,21 @@ class DecisionPopup extends Component {
                                <div className="ccol col-lg-12 col-md-12 col-sm-12 info-modal-details">
                                    <div style={{width: '100%'}}>
                                        <div className="row decision-buttons">
+                                            <div className="col col-lg-6 col-med-6 col-sm-6">
+                                               <button
+                                                    className="btn round-borders btn-journey"
+                                                    onClick={this.onGranted}
+                                                >
+                                                    Granted &nbsp;
+                                                    <i className="fa fa-play"/>
+                                                </button>
+                                            </div>
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
                                                <button
                                                    className="btn round-borders btn-journey"
                                                    onClick={this.onRefused}
                                                >
                                                   Refused &nbsp;
-                                                   <i className="fa fa-play"/>
-                                               </button>
-                                           </div>
-                                           <div className="col col-lg-6 col-med-6 col-sm-6">
-                                               <button
-                                                   className="btn round-borders btn-journey"
-                                                   onClick={this.onGranted}
-                                               >
-                                                   Granted &nbsp;
                                                    <i className="fa fa-play"/>
                                                </button>
                                            </div>
