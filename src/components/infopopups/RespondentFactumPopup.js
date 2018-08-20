@@ -84,7 +84,7 @@ class RespondentFactumPopup extends Component {
             sectionHeading: "The Certificate of Readiness",
             iconSrc :"/icons/icon-info.svg",
             iconClass: "info-modal-icon",
-            paragraphContentMap: ["You should have received the appellant's Certificate of Readiness, immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
+            paragraphContentMap: ["You should have received the appellant's Certificate of Readiness immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed, and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
             listContentMap: [
                 {
                     line: FILE_STEP_ONE_MSG,
@@ -119,7 +119,7 @@ class RespondentFactumPopup extends Component {
             iconSrc :"/icons/icon-calendar.svg",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
-            "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information.",
+            "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information:",
                 {
                     URL: "https://www.courtofappealbc.ca/respondent-guidebook/2.3-schedule-the-appeal-for-hearing?ct=t(step-index-link)",
                     URLName: "Schedule the appeal for hearing"}]

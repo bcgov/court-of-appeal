@@ -19,7 +19,7 @@ class CompleteAppealPopup extends Component {
                 close={this.props.close}
             >
                 <InfoPopupSection
-                  sectionHeading="Your appeal process is complete"
+                  sectionHeading="The appeal process is complete."
                   iconSrc="/icons/icon-info.svg"
                   iconClass="info-modal-icon"
                   expandable={false}
