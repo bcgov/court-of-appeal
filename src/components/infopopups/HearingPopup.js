@@ -34,7 +34,7 @@ class HearingPopup extends Component {
     render () {
         return  (
             <InfoPopupWrapper
-                title="Your Hearing"
+                title="The Hearing"
                 helpType={this.props.type}
                 close={this.props.close}
             >

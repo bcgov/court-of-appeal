@@ -34,7 +34,7 @@ class NoticeOfHearingPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "Complete the Notice of Hearing",
-            iconSrc: "/icons/icon-calendar.svg",
+            iconSrc: "/icons/icon-share.svg",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",
