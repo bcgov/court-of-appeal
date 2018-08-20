@@ -15,7 +15,7 @@ class DecisionPopup extends Component {
 
         return  (
            <InfoPopupWrapper
-               title={"Decision on Leave to Appeal"}
+               title={ this.props.title }
                helpType={this.props.type}
                close={this.props.close}
            >
@@ -28,7 +28,7 @@ class DecisionPopup extends Component {
                        <div className="col">
                            <div className="row">
                                <div className="col col-lg-9 col-md-9 col-sm-9 info-modal-section-heading">
-                                   Was {subject} leave to appeal granted or refused?
+                                   { this.props.question }
                                </div>
                            </div>
                        </div>
@@ -81,7 +81,7 @@ class DecisionPopup extends Component {
 
     onRefused() {
         this.props.close();
-        this.props.type === 'respondent' ? this.props.respondToLeaveRefused() : this.props.leaveRefused();
+        this.props.type === 'respondent' ? (this.props.final? this.props.respondToLeaveRefusedFinal()  :  this.props.respondToLeaveRefused()) : this.props.leaveRefused();
     }
 
 } export default DecisionPopup;

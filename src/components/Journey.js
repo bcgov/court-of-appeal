@@ -25,6 +25,7 @@ class Journey extends Component {
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
         this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
         this.respondToLeaveRefusedJourney = this.respondToLeaveRefusedJourney.bind(this);
+        this.respondToLeaveRefusedFinalJourney = this.respondToLeaveRefusedFinalJourney.bind(this);
         this.respondToLeaveGrantedJourney = this.respondToLeaveGrantedJourney.bind(this);
         this.appellantRightToAppeal = this.appellantRightToAppeal.bind(this);
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
@@ -172,11 +173,7 @@ class Journey extends Component {
                 introText: "Your leave to appeal was refused, and your application for review was refused. The decision of the court is final and the appeal process is complete.",
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                mapProps: [
-                    { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
-                    { coords: "365,10,465,190", function: 'reviewhearing', alt: "what you need to know about the review hearing" },
-                    { coords: "510,10,650,190", function: 'appellantcomplete', alt: "what happens when the court of appeals refuses to grant leave to appeal" }
-                    ]
+                mapProps: []
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -218,7 +215,7 @@ class Journey extends Component {
                 mapProps: [
                     { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
                     { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "440,10,550,160", function: 'respondenthearing', alt: "info about the hearing" },
+                    { coords: "440,10,550,160", function: 'respondentleavetoappealhearing', alt: "info about the hearing" },
                     { coords: "590,10,650,160", function: 'respondentdecision', alt: "was the appellant granted leave or not?" }
                 ]
             }
@@ -231,17 +228,34 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                mapSrc: null,
+                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-refused.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The appellant's leave to appeal and application for review were refused. The decision of the court is final and the appeal process is complete.",
-                refusedStep: true,
+                introText: "The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below if you would like to continue to participate in the appeal process.",
+                refusedStep: false,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "380,10,490,160", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "550,10,650,190", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                    { coords: "380,10,490,160", function: 'respondentappealhearing', alt: "info about the hearing" },
+                    { coords: "550,10,650,190", function: 'respondentfinaldecision', alt: "info about the appeal process completion" },
                 ]
+            }
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
+    respondToLeaveRefusedFinalJourney() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                mapSrc: null,
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Leave to Appeal",
+                introText: "The appellant's leave to appeal and application for review was refused.   The decision of the court is final. If you have any questions, please contact the registry.",
+                refusedStep: true,
+                completeAppealTitle: "Final Decision on Leave to Appeal",
+                mapProps: []
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -272,7 +286,7 @@ class Journey extends Component {
 
     journeyMapOrSelectionButtons() {
         let content = null;
-        if (this.state.displayJourneyMap ) {
+        if (this.state.displayJourneyMap ) {            
             content = (
                 <div>
                     <JourneyMap
@@ -283,6 +297,7 @@ class Journey extends Component {
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                         respondToLeaveRefused={this.respondToLeaveRefusedJourney}
+                        respondToLeaveRefusedFinal={this.respondToLeaveRefusedFinalJourney}
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
                         redirectToForm7={this.redirectToForm7}

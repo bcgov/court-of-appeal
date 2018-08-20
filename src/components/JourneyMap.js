@@ -13,7 +13,7 @@ class JourneyMap extends React.Component {
         };
         this.getAreas = this.getAreas.bind(this);
         this.closeInfoModal = this.closeInfoModal.bind(this);
-        this.openInfoModal = this.openInfoModal.bind(this);
+        this.openInfoModal = this.openInfoModal.bind(this);        
     }
 
     render() {
@@ -73,6 +73,7 @@ class JourneyMap extends React.Component {
                         leaveGranted={this.props.leaveGranted}
                         leaveRefused={this.props.leaveRefused}
                         respondToLeaveRefused={this.props.respondToLeaveRefused}
+                        respondToLeaveRefusedFinal={this.props.respondToLeaveRefusedFinal}
                         respondToLeaveGranted={this.props.respondToLeaveGranted}
                         redirectToForm7={this.props.redirectToForm7}
                     />
