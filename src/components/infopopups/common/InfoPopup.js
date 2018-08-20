@@ -39,6 +39,7 @@ class InfoPopup extends Component {
                 leaveGranted: this.props.leaveGranted,
                 leaveRefused: this.props.leaveRefused,
                 respondToLeaveRefused: this.props.respondToLeaveRefused,
+                respondToLeaveRefusedFinal: this.props.respondToLeaveRefusedFinal,
                 respondToLeaveGranted: this.props.respondToLeaveGranted,
                 redirectToForm7: this.props.redirectToForm7,
                 completeAppealTitle: this.props.completeAppealTitle
@@ -75,8 +76,9 @@ class InfoPopup extends Component {
                 'applyforleave': <ApplyForLeavePopup {...props} />,
                 'leavehearing': <LeaveHearingPopup {...props}/>,
                 'leavehearingdocs': <LeaveHearingDocumentsPopup {...props}/>,
-                'decision': <DecisionPopup {...props} />,
-                'respondentdecision': <DecisionPopup type={"respondent"} {...props} />,
+                'decision': <DecisionPopup title="Decision on Leave to Appeal" question="Was your leave to appeal granted or refused?" {...props} />,
+                'respondentdecision': <DecisionPopup title="Decision on Leave to Appeal" question="Was the appellant's leave to appeal granted or refused?" type={"respondent"} {...props} />,
+                'respondentfinaldecision': <DecisionPopup final="true" title="Decision on Leave to Appeal" question="Was the appellant's leave to appeal granted or refused?" type={"respondent"} {...props} />,
                 'appellantcomplete': <CompleteAppealPopup type="appellant" {...props} />,
                 'respondentcomplete': <CompleteAppealPopup type="respondent" {...props} />,
             };

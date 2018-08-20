@@ -25,6 +25,7 @@ class Journey extends Component {
         this.journeyMapOrSelectionButtons = this.journeyMapOrSelectionButtons.bind(this);
         this.respondToNoticeOfLeaveToAppealJourney = this.respondToNoticeOfLeaveToAppealJourney.bind(this);
         this.respondToLeaveRefusedJourney = this.respondToLeaveRefusedJourney.bind(this);
+        this.respondToLeaveRefusedFinalJourney = this.respondToLeaveRefusedFinalJourney.bind(this);
         this.respondToLeaveGrantedJourney = this.respondToLeaveGrantedJourney.bind(this);
         this.appellantRightToAppeal = this.appellantRightToAppeal.bind(this);
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
@@ -236,8 +237,25 @@ class Journey extends Component {
                 mapProps: [
                     { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
                     { coords: "380,10,490,160", function: 'respondentappealhearing', alt: "info about the hearing" },
-                    { coords: "550,10,650,190", function: 'respondentcomplete', alt: "info about the appeal process completion" },
+                    { coords: "550,10,650,190", function: 'respondentfinaldecision', alt: "info about the appeal process completion" },
                 ]
+            }
+        }, () => {
+            this.props.history.push(process.env.PUBLIC_URL, this.state);
+        });
+    }
+
+    respondToLeaveRefusedFinalJourney() {
+        this.setState((prevState) => {
+            return {
+                displayJourneyMap: true,
+                mapSrc: null,
+                userQuestion: this.respondentQuestion,
+                userState: "Notice of Leave to Appeal",
+                introText: "The appellant's leave to appeal and application for review was refused.   The decision of the court is final. If you have any questions, please contact the registry.",
+                refusedStep: true,
+                completeAppealTitle: "Final Decision on Leave to Appeal",
+                mapProps: []
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -268,7 +286,7 @@ class Journey extends Component {
 
     journeyMapOrSelectionButtons() {
         let content = null;
-        if (this.state.displayJourneyMap ) {
+        if (this.state.displayJourneyMap ) {            
             content = (
                 <div>
                     <JourneyMap
@@ -279,6 +297,7 @@ class Journey extends Component {
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
                         respondToLeaveRefused={this.respondToLeaveRefusedJourney}
+                        respondToLeaveRefusedFinal={this.respondToLeaveRefusedFinalJourney}
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
                         redirectToForm7={this.redirectToForm7}
