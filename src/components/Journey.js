@@ -128,9 +128,8 @@ class Journey extends Component {
                 introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process.",
                 refusedStep: false,
                 mapProps: [
-                    { coords: "100,10,220,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
-                    { coords: "280,10,390,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
-                    { coords: "440,10,550,200", function: 'leavehearing', alt: "About the leave to appeal hearing" },
+                    { coords: "180,10,250,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
+                    { coords: "370,10,450,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
                     { coords: "600,10,690,200", function: 'decision', alt: "Were you granted leave to appeal or not?" },
                 ]
             };
