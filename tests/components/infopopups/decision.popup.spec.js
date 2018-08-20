@@ -27,6 +27,8 @@ describe('DecisionPopup', ()=> {
                 close={close}
                 getSections={popup.getSections}
                 leaveGranted={leaveGranted}
+                question="Was your leave to appeal granted or refused?"
+                title="Decision on Leave to Appeal"
             />);
 
         expect(granted).toEqual(false);

@@ -205,6 +205,8 @@ describe('InfoPopup', ()=> {
                     respondToLeaveGranted={respondToLeaveGranted()}
                     respondToLeaveRefused={respondToLeaveRefused()}
                     type={"respondent"}
+                    question="Was the appellant's leave to appeal granted or refused?"
+                    title="Decision on Leave to Appeal"
             />);
         });
 
@@ -224,7 +226,10 @@ describe('InfoPopup', ()=> {
                     close={close}
                     getSections={popup.getSections}
                     leaveGranted={leaveGranted()}
-                    leaveRefused={leaveRefused()}/>);
+                    leaveRefused={leaveRefused()}
+                    question="Was your leave to appeal granted or refused?"
+                    title="Decision on Leave to Appeal"
+                />);
         });
 
         test('can build appellant CompleteAppealPopup', ()=>{
