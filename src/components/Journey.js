@@ -101,6 +101,7 @@ class Journey extends Component {
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
                 introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "200,10,290,190", function: 'appellantinitial', alt: "how to start your appeal" },
                     { coords: "380,10,480,190", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
@@ -125,6 +126,7 @@ class Journey extends Component {
                 userQuestion: this.appellantQuestion,
                 userState: "No",
                 introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "100,10,220,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
                     { coords: "280,10,390,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
@@ -145,6 +147,7 @@ class Journey extends Component {
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
                 introText: "Now that the court has granted you the right to appeal, follow the steps below to complete the appeal. Start by clicking on the first form.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "100,10,220,200", function: 'appealrecord', alt: "you need an appeal record and transcript after starting your appeal" },
                     { coords: "270,10,430,200", function: 'factum', alt: "info about the factum, appeal book, and certificate of readiness" },
@@ -167,7 +170,8 @@ class Journey extends Component {
                 mapSrc: null,
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                introText: "The Court of Appeal decision is final. The appeal process is complete.",
+                introText: "Your leave to appeal was refused, and your application for review was refused. The decision of the court is final and the appeal process is complete.",
+                refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "180,10,290,200", function: 'review', alt: "info about the application for review" },
@@ -188,6 +192,7 @@ class Journey extends Component {
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
                 introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "90,10,190,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
                     { coords: "270,10,380,200", function: "crossappeal", alt: "info about the cross appeal" },
@@ -210,6 +215,7 @@ class Journey extends Component {
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Application for Leave to Appeal",
                 introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
                     { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
@@ -229,7 +235,8 @@ class Journey extends Component {
                 mapSrc: null,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The Court of Appeal decision is final. The appeal process is complete.",
+                introText: "The appellant's leave to appeal and application for review were refused. The decision of the court is final and the appeal process is complete.",
+                refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: [
                     { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
@@ -250,6 +257,7 @@ class Journey extends Component {
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal ",
                 introText: "The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                refusedStep: false,
                 mapProps: [
                     { coords: "160,10,260,200", function: "crossappeal", alt: "info about the cross appeal" },
                     { coords: "370,10,480,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
@@ -279,6 +287,7 @@ class Journey extends Component {
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
                         redirectToForm7={this.redirectToForm7}
+                        refusedStep={this.state.refusedStep}
                     />
                 </div>
             );

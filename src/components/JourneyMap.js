@@ -35,18 +35,31 @@ class JourneyMap extends React.Component {
                 )
             }
 
+            let introductionText = (
+                <div>
+                    { this.props.introText }                        
+                    <br/>
+                    <br/>
+                    Every appeal process is unique. If you have any questions, please visit the &nbsp;
+                    <a href={anchor} target="_blank">Online Guidebook</a> or &nbsp;
+                    <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+                </div>
+            )
+            if (this.props.refusedStep) {
+                introductionText = (
+                    <div>
+                        { this.props.introText }       
+                        &nbsp;                 
+                        If you have any questions, please <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+                    </div>
+                )
+            }
+
             return (
                 <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
                     {this.getBreadCrumbs()}
                     <h2>The Appeal Process</h2>
-                    <div>
-                        { this.props.introText }                        
-                        <br/>
-                        <br/>
-                        Every appeal process is unique. If you have any questions, please visit the &nbsp;
-                        <a href={anchor} target="_blank">Online Guidebook</a> or &nbsp;
-                        <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
-                    </div>
+                    { introductionText }
 
                     { journeyMapImage }
                     <map name="journeymap" >
