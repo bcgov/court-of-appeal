@@ -33,7 +33,9 @@ class JourneyMap extends React.Component {
                     {this.getBreadCrumbs()}
                     <h2>The Appeal Process</h2>
                     <div>
-                        Follow the steps below to complete the appeal. Start by clicking on the first form.
+                        If you do not have the right to appeal, and you still want to appeal your case, 
+                        you must request a leave to appeal from the court. 
+                        Follow the steps below to complete the process. Start by clicking on the first form.
                         Follow the instructions until your appeal process is complete.
                         <br/>
                         <br/>
