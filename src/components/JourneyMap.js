@@ -49,8 +49,8 @@ class JourneyMap extends React.Component {
                 introductionText = (
                     <div>
                         { this.props.introText }       
-                        &nbsp;                 
-                        If you have any questions, please <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+                        &nbsp;  
+                        For more information about the process, please visit the <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#">Supreme Court website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
                     </div>
                 )
             }

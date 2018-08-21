@@ -170,7 +170,7 @@ class Journey extends Component {
                 mapSrc: null,
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                introText: "Your leave to appeal was refused, and your application for review was refused. The decision of the court is final and the appeal process is complete.",
+                introText: "Your leave to appeal was refused, and your application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear your case.",
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: []
@@ -252,7 +252,7 @@ class Journey extends Component {
                 mapSrc: null,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The appellant's leave to appeal and application for review was refused.   The decision of the court is final. If you have any questions, please contact the registry.",
+                introText: "The appellant's leave to appeal was refused, and their application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear their case.",
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 mapProps: []
