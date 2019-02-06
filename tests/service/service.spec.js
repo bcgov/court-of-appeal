@@ -51,21 +51,21 @@ describe('Gateway to API', function() {
     describe('when an error occurs', ()=>{
 
         test('#serviceErrorModal becomes visible', ()=>{
-            let jsdom = require('jsdom').jsdom;
-            let document = jsdom(`
+            const { JSDOM } = require('jsdom');
+            let document = new JSDOM(`
                 <html>
                     <body>
                         <div id="serviceErrorModal" style="display:none">
                             Any content
                         </div>
                     </body>
-                </html>`);
+                </html>`).window.document;
             let window = document.defaultView;
             service = new Service(window);
             service.notifyOfError(()=>{}, {});
             let errorModal = document.querySelector('#serviceErrorModal');
-    
+
             expect(errorModal.style.display).toEqual('block');
-        });        
+        });
     });
 });

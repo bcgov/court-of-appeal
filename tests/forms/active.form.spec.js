@@ -6,11 +6,11 @@ import ActiveFormList from '../../src/components/ActiveFormList';
 let DefaultService = require('../../src/service/default.service');
 
 describe('Active forms section', function() {
-    
+
     test('default service', ()=>{
-        let instance = mount(<ActiveFormList/>).instance();
-        
-        expect(instance.service instanceof DefaultService).toEqual(true);  
+        let instance = mount(<ActiveFormList fetch="false"/>).instance();
+
+        expect(instance.service instanceof DefaultService).toEqual(true);
     });
     test('transforms the data for the list', function(done) {
         let activeFormList = mount(
@@ -24,13 +24,13 @@ describe('Active forms section', function() {
             let cases = activeFormList.state.cases;
             cases[0].modified = moment(cases[0].modified).utc().format('YYYY-MM-DD HH:mm')
             expect(cases).toEqual([
-                { 
+                {
                     id:1501, status:'draft', modified:'2018-03-27 16:15', parties:'Bruce / Clark' ,
                     data:{appellants:[{name:'Bruce'}], respondents:[{name:'Clark'}]}
                 }
             ]);
             done();
-        }, 100);        
+        }, 100);
     });
 
     test('limits the list to first 5', (done)=>{
@@ -48,7 +48,7 @@ describe('Active forms section', function() {
         setTimeout(()=> {
             expect(activeFormList.state.cases.length).toEqual(5);
             done();
-        }, 100);   
+        }, 100);
     });
 
     test ('hides the empty mention when cases are found', ()=> {
@@ -58,16 +58,16 @@ describe('Active forms section', function() {
                     ]});} }}/>,
         ).instance();
         list.fetchCases();
-        
+
         expect(list.state.displayMyCasesEmptyLabel).toEqual(false);
     });
-    
+
     test('display empty mention when no cases are found', ()=> {
         let emptylist = mount(
             <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( { cases: [] }); } }}/>
         ).instance();
         emptylist.fetchCases();
-    
+
         expect(emptylist.state.displayMyCasesEmptyLabel).toEqual(true);
     });
 
@@ -87,8 +87,8 @@ describe('Active forms section', function() {
             ];
             instance = createInstance();
         });
-        test('replaces old value with new value', ()=>{            
-            instance.updateCases({value:'updated'}, 15);    
+        test('replaces old value with new value', ()=>{
+            instance.updateCases({value:'updated'}, 15);
             expect(instance.state.cases[0].data).toEqual({value:'updated'});
         });
         test('do not modify the other cases', ()=>{
@@ -98,7 +98,7 @@ describe('Active forms section', function() {
         test('resists unknown case', ()=>{
             instance.updateCases({value:'updated'}, 666);
             expect(instance.state.cases[0].data).toEqual({value:'old'});
-            expect(instance.state.cases[1].data).toEqual({value:'old'});            
+            expect(instance.state.cases[1].data).toEqual({value:'old'});
         });
     });
 });
