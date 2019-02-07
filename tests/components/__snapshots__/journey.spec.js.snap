@@ -4,7 +4,6 @@ exports[`Journey Journey builds 1`] = `
 ReactWrapper {
   "length": 1,
   Symbol(enzyme.__unrendered__): <MemoryRouter
-    component={undefined}
     initialEntries={
       Array [
         "/",
@@ -50,6 +49,12 @@ ReactWrapper {
                   Object {},
                 ],
               ],
+              "results": Array [
+                Object {
+                  "isThrow": false,
+                  "value": undefined,
+                },
+              ],
             },
             "context": null,
             "props": Object {
@@ -83,6 +88,12 @@ ReactWrapper {
                   },
                   Object {},
                 ],
+              ],
+              "results": Array [
+                Object {
+                  "isThrow": false,
+                  "value": undefined,
+                },
               ],
             },
             "context": null,
@@ -162,6 +173,12 @@ ReactWrapper {
                               Object {},
                             ],
                           ],
+                          "results": Array [
+                            Object {
+                              "isThrow": false,
+                              "value": undefined,
+                            },
+                          ],
                         }
                       }
                       context={null}
@@ -201,6 +218,12 @@ ReactWrapper {
                               Object {},
                             ],
                           ],
+                          "results": Array [
+                            Object {
+                              "isThrow": false,
+                              "value": undefined,
+                            },
+                          ],
                         }
                       }
                       context={null}
@@ -239,6 +262,12 @@ ReactWrapper {
                         },
                         Object {},
                       ],
+                    ],
+                    "results": Array [
+                      Object {
+                        "isThrow": false,
+                        "value": undefined,
+                      },
                     ],
                   }
                 }
@@ -290,6 +319,12 @@ ReactWrapper {
                           Object {},
                         ],
                       ],
+                      "results": Array [
+                        Object {
+                          "isThrow": false,
+                          "value": undefined,
+                        },
+                      ],
                     }
                   }
                   context={null}
@@ -330,6 +365,12 @@ ReactWrapper {
                     },
                     Object {},
                   ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
                 ],
               },
               "context": null,
@@ -413,6 +454,12 @@ ReactWrapper {
                   Object {},
                 ],
               ],
+              "results": Array [
+                Object {
+                  "isThrow": false,
+                  "value": undefined,
+                },
+              ],
             },
             "context": null,
             "props": Object {
@@ -446,6 +493,12 @@ ReactWrapper {
                   },
                   Object {},
                 ],
+              ],
+              "results": Array [
+                Object {
+                  "isThrow": false,
+                  "value": undefined,
+                },
               ],
             },
             "context": null,
@@ -525,6 +578,12 @@ ReactWrapper {
                               Object {},
                             ],
                           ],
+                          "results": Array [
+                            Object {
+                              "isThrow": false,
+                              "value": undefined,
+                            },
+                          ],
                         }
                       }
                       context={null}
@@ -564,6 +623,12 @@ ReactWrapper {
                               Object {},
                             ],
                           ],
+                          "results": Array [
+                            Object {
+                              "isThrow": false,
+                              "value": undefined,
+                            },
+                          ],
                         }
                       }
                       context={null}
@@ -602,6 +667,12 @@ ReactWrapper {
                         },
                         Object {},
                       ],
+                    ],
+                    "results": Array [
+                      Object {
+                        "isThrow": false,
+                        "value": undefined,
+                      },
                     ],
                   }
                 }
@@ -653,6 +724,12 @@ ReactWrapper {
                           Object {},
                         ],
                       ],
+                      "results": Array [
+                        Object {
+                          "isThrow": false,
+                          "value": undefined,
+                        },
+                      ],
                     }
                   }
                   context={null}
@@ -693,6 +770,12 @@ ReactWrapper {
                     },
                     Object {},
                   ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
                 ],
               },
               "context": null,
@@ -740,6 +823,12 @@ ReactWrapper {
               Object {},
             ],
           ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
+          ],
         },
         "updateQueue": null,
       },
@@ -747,6 +836,12 @@ ReactWrapper {
       "componentWillMount": [MockFunction] {
         "calls": Array [
           Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
       "context": Object {},
@@ -760,6 +855,12 @@ ReactWrapper {
       "render": [MockFunction] {
         "calls": Array [
           Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
       "state": null,
@@ -791,6 +892,12 @@ ReactWrapper {
           },
           Object {},
         ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
       ],
     },
   },
@@ -826,6 +933,12 @@ ReactWrapper {
                     Object {},
                   ],
                 ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
+                ],
               },
               "context": null,
               "props": Object {
@@ -859,6 +972,12 @@ ReactWrapper {
                     },
                     Object {},
                   ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
                 ],
               },
               "context": null,
@@ -938,6 +1057,12 @@ ReactWrapper {
                                 Object {},
                               ],
                             ],
+                            "results": Array [
+                              Object {
+                                "isThrow": false,
+                                "value": undefined,
+                              },
+                            ],
                           }
                         }
                         context={null}
@@ -977,6 +1102,12 @@ ReactWrapper {
                                 Object {},
                               ],
                             ],
+                            "results": Array [
+                              Object {
+                                "isThrow": false,
+                                "value": undefined,
+                              },
+                            ],
                           }
                         }
                         context={null}
@@ -1015,6 +1146,12 @@ ReactWrapper {
                           },
                           Object {},
                         ],
+                      ],
+                      "results": Array [
+                        Object {
+                          "isThrow": false,
+                          "value": undefined,
+                        },
                       ],
                     }
                   }
@@ -1066,6 +1203,12 @@ ReactWrapper {
                             Object {},
                           ],
                         ],
+                        "results": Array [
+                          Object {
+                            "isThrow": false,
+                            "value": undefined,
+                          },
+                        ],
                       }
                     }
                     context={null}
@@ -1106,6 +1249,12 @@ ReactWrapper {
                       },
                       Object {},
                     ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
                   ],
                 },
                 "context": null,
@@ -1189,6 +1338,12 @@ ReactWrapper {
                     Object {},
                   ],
                 ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
+                ],
               },
               "context": null,
               "props": Object {
@@ -1222,6 +1377,12 @@ ReactWrapper {
                     },
                     Object {},
                   ],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
                 ],
               },
               "context": null,
@@ -1301,6 +1462,12 @@ ReactWrapper {
                                 Object {},
                               ],
                             ],
+                            "results": Array [
+                              Object {
+                                "isThrow": false,
+                                "value": undefined,
+                              },
+                            ],
                           }
                         }
                         context={null}
@@ -1340,6 +1507,12 @@ ReactWrapper {
                                 Object {},
                               ],
                             ],
+                            "results": Array [
+                              Object {
+                                "isThrow": false,
+                                "value": undefined,
+                              },
+                            ],
                           }
                         }
                         context={null}
@@ -1378,6 +1551,12 @@ ReactWrapper {
                           },
                           Object {},
                         ],
+                      ],
+                      "results": Array [
+                        Object {
+                          "isThrow": false,
+                          "value": undefined,
+                        },
                       ],
                     }
                   }
@@ -1429,6 +1608,12 @@ ReactWrapper {
                             Object {},
                           ],
                         ],
+                        "results": Array [
+                          Object {
+                            "isThrow": false,
+                            "value": undefined,
+                          },
+                        ],
                       }
                     }
                     context={null}
@@ -1469,6 +1654,12 @@ ReactWrapper {
                       },
                       Object {},
                     ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "isThrow": false,
+                      "value": undefined,
+                    },
                   ],
                 },
                 "context": null,
@@ -1516,6 +1707,12 @@ ReactWrapper {
                 Object {},
               ],
             ],
+            "results": Array [
+              Object {
+                "isThrow": false,
+                "value": undefined,
+              },
+            ],
           },
           "updateQueue": null,
         },
@@ -1523,6 +1720,12 @@ ReactWrapper {
         "componentWillMount": [MockFunction] {
           "calls": Array [
             Array [],
+          ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
           ],
         },
         "context": Object {},
@@ -1536,6 +1739,12 @@ ReactWrapper {
         "render": [MockFunction] {
           "calls": Array [
             Array [],
+          ],
+          "results": Array [
+            Object {
+              "isThrow": false,
+              "value": undefined,
+            },
           ],
         },
         "state": null,
@@ -1567,6 +1776,12 @@ ReactWrapper {
             },
             Object {},
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     },

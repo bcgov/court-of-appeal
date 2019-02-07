@@ -41,8 +41,6 @@ exports[`cannot search with invalid entries 1`] = `
             name="number.form-seven"
             onChange={[Function]}
             onKeyPress={[Function]}
-            placeholder={undefined}
-            readOnly={undefined}
             value=""
           />
         </td>
@@ -115,8 +113,6 @@ exports[`valid entries 1`] = `
             name="number.form-seven"
             onChange={[Function]}
             onKeyPress={[Function]}
-            placeholder={undefined}
-            readOnly={undefined}
             value=""
           />
         </td>
