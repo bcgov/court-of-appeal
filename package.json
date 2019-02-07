@@ -49,12 +49,6 @@
       "^.+\\.js?$": "babel-jest"
     }
   },
-  "babel": {
-    "presets": [
-      "env",
-      "react"
-    ]
-  },
   "homepage": "/court-of-appeal",
   "browserslist": [
     ">0.2%",
