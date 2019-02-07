@@ -7,12 +7,9 @@ exports[`should only allow numeric, dash, and parentheses entries 1`] = `
     className="form-field"
     id="number-field"
     maxLength={17}
-    name={undefined}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={undefined}
-    readOnly={undefined}
     size={30}
     value=""
   />

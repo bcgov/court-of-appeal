@@ -2,13 +2,8 @@
 
 exports[`should only allow numeric entries 1`] = `
 <input
-  autoFocus={undefined}
   id="number-field"
-  name={undefined}
   onChange={[Function]}
-  onKeyPress={undefined}
-  placeholder={undefined}
-  readOnly={undefined}
   value=""
 />
 `;

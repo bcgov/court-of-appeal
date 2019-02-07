@@ -5,12 +5,12 @@ import MyDocuments from '../../src/forms/MyDocuments';
 let DefaultService = require('../../src/service/default.service');
 
 describe('MyDocuments', ()=> {
-        
+
     test('default service', ()=>{
-        let instance = mount(<MyDocuments/>).instance();
-        
-        expect(instance.service instanceof DefaultService).toEqual(true);  
-    });    
+        let instance = mount(<MyDocuments fetch="false"/>).instance();
+
+        expect(instance.service instanceof DefaultService).toEqual(true);
+    });
     let cases;
     let createInstance = ()=>{
         let instance = mount(<MyDocuments service={{
@@ -19,7 +19,7 @@ describe('MyDocuments', ()=> {
         return instance;
     };
 
-    describe('fetch cases', ()=>{               
+    describe('fetch cases', ()=>{
         test('happens automatically', ()=> {
             let called = false;
             let service = {
@@ -35,19 +35,19 @@ describe('MyDocuments', ()=> {
                 getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
             };
             mount(<MyDocuments fetch="false" service={service}/>).instance();
-            
-            expect(called).toEqual(false);  
+
+            expect(called).toEqual(false);
         });
         test('unchecks all cases by default', ()=>{
-            cases = [{ checked:true, id:42, data:{} }];  
+            cases = [{ checked:true, id:42, data:{} }];
             let instance = createInstance();
-            
-            expect(instance.state.cases[0].checked).toEqual(false);                    
+
+            expect(instance.state.cases[0].checked).toEqual(false);
         });
         test('sets displayMyCasesEmptyLabel indicator when case collection is empty', ()=>{
             cases = [];
             let instance = createInstance();
-            
+
             expect(instance.state.displayMyCasesEmptyLabel).toEqual(true);
         });
         test('unsets displayMyCasesEmptyLabel indicator when case collection is not empty', ()=>{
@@ -56,22 +56,22 @@ describe('MyDocuments', ()=> {
                 { id:2, data:{value:'old'} }
             ];
             let instance = createInstance();
-            
+
             expect(instance.state.displayMyCasesEmptyLabel).toEqual(false);
         });
     });
-              
+
     describe('max file download', ()=>{
         test('default value', ()=>{
-            let instance = mount(<MyDocuments/>).instance();
-            
-            expect(instance.maxFileDownload).toEqual(5);  
+            let instance = mount(<MyDocuments fetch="false"/>).instance();
+
+            expect(instance.maxFileDownload).toEqual(5);
         });
         test('default value can be overriden', ()=>{
             process.env.REACT_APP_MAX_FILE_DOWNLOAD = 7;
-            let instance = mount(<MyDocuments/>).instance();
-            
-            expect(instance.maxFileDownload).toEqual(7);  
+            let instance = mount(<MyDocuments fetch="false"/>).instance();
+
+            expect(instance.maxFileDownload).toEqual(7);
         });
     });
 
@@ -84,8 +84,8 @@ describe('MyDocuments', ()=> {
             ];
             instance = createInstance();
         });
-        test('replaces old value with new value', ()=>{            
-            instance.updateCases({value:'updated'}, 15);    
+        test('replaces old value with new value', ()=>{
+            instance.updateCases({value:'updated'}, 15);
             expect(instance.state.cases[0].data).toEqual({value:'updated'});
         });
         test('do not modify the other cases', ()=>{
@@ -95,7 +95,7 @@ describe('MyDocuments', ()=> {
         test('resists unknown case', ()=>{
             instance.updateCases({value:'updated'}, 666);
             expect(instance.state.cases[0].data).toEqual({value:'old'});
-            expect(instance.state.cases[1].data).toEqual({value:'old'});            
+            expect(instance.state.cases[1].data).toEqual({value:'old'});
         });
     });
 
@@ -117,10 +117,10 @@ describe('MyDocuments', ()=> {
             expect(instance.state.cases[0].checked).toEqual(true);
             document.find('#select-11').prop('onChange')();
             expect(instance.state.cases[0].checked).toEqual(false);
-            
+
         });
         test('resists unknown case', ()=>{
-            instance.toggleSelected(33);    
+            instance.toggleSelected(33);
             expect(instance.state.cases[0].checked).toEqual(false);
             expect(instance.state.cases[1].checked).toEqual(false);
         });
@@ -143,17 +143,17 @@ describe('MyDocuments', ()=> {
             received = undefined;
             instance = document.instance();
         });
-        test('asks for confirmation', ()=>{            
+        test('asks for confirmation', ()=>{
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#archive-button').at(0).prop('onClick')();
             document.update();
 
             expect(document.find('#are-you-sure-modal').prop('style').display).toEqual('block');
         });
-        test('sends the selected ids', ()=>{            
+        test('sends the selected ids', ()=>{
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#archive-button').at(0).prop('onClick')();
             document.find('#yes-archive').at(0).prop('onClick')();
             document.update();
@@ -163,7 +163,7 @@ describe('MyDocuments', ()=> {
         });
         test('does nothing when no form is selected', ()=>{
             document.find('#archive-button').at(0).prop('onClick')();
-            
+
             expect(document.find('#are-you-sure-modal').prop('style').display).toEqual('none');
             expect(received).toEqual(undefined);
         });
@@ -180,7 +180,7 @@ describe('MyDocuments', ()=> {
                 { id: 5, data:{} },
                 { id:15, data:{} },
                 { id:25, data:{} }
-            ]; 
+            ];
             document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
                 download: (ids, callback)=> { idsSent=ids, callback(answer); }
@@ -192,16 +192,16 @@ describe('MyDocuments', ()=> {
             idsSent = undefined;
             savedData = undefined;
         });
-        test('sends the selected ids', ()=>{            
+        test('sends the selected ids', ()=>{
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#download-button').at(0).prop('onClick')();
 
             expect(idsSent).toEqual([15, 25]);
         });
-        test('saves the received data', ()=>{            
+        test('saves the received data', ()=>{
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#download-button').at(0).prop('onClick')();
 
             expect(savedData).toEqual({value:42});
@@ -209,7 +209,7 @@ describe('MyDocuments', ()=> {
         test('unless error is received', ()=>{
             answer = { error:'any' };
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#download-button').at(0).prop('onClick')();
 
             expect(savedData).toEqual(undefined);
@@ -217,7 +217,7 @@ describe('MyDocuments', ()=> {
         test('do not even download if too much files selected', ()=>{
             instance.maxFileDownload = 1;
             document.find('#select-15').prop('onChange')();
-            document.find('#select-25').prop('onChange')();   
+            document.find('#select-25').prop('onChange')();
             document.find('#download-button').at(0).prop('onClick')();
 
             expect(idsSent).toEqual(undefined);

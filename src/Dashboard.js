@@ -13,7 +13,7 @@ class Dashboard extends Component {
             <div id="topicTemplate" className="template container gov-container form">
                 <div className="row">
                     <div role="main" className="col col-sm-12">
-                        <ActiveFormList />
+                        <ActiveFormList fetch={this.props.fetch} />
                     </div>
                 </div>
                 <div className="row">

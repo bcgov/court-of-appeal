@@ -28,7 +28,7 @@ Service.prototype.notifyOfError = function(callback, options) {
 };
 
 Service.prototype.searchForm7 = function(file, callback) {
-    let self = this;   
+    let self = this;
     request.get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
@@ -71,7 +71,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
 };
 
 
-Service.prototype.getMyCases = function(form, callback) { 
+Service.prototype.getMyCases = function(form, callback) {
     let self = this;
     request.get(this.buildOptions('/api/cases'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
@@ -80,7 +80,7 @@ Service.prototype.getMyCases = function(form, callback) {
         else {
             self.notifyOfError(callback, { cases:[] });
         }
-    }); 
+    });
 };
 
 Service.prototype.savePerson = function(user, callback) {
@@ -114,7 +114,7 @@ Service.prototype.getPersonInfo = function(callback) {
         else {
             self.notifyOfError(callback);
         }
-    }); 
+    });
 };
 Service.prototype.archiveCases = function(ids, callback) {
     let options = this.buildOptions('/api/cases/archive');
@@ -152,7 +152,7 @@ Service.prototype.previewForm = function(id, callback) {
         else {
             self.notifyOfError(callback);
         }
-    }); 
+    });
 };
 Service.prototype.download = function(ids, callback) {
     let options = this.buildOptions('/api/zip?id=' + ids.join('&id='));

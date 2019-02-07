@@ -5,10 +5,11 @@ import './header.css';
 class Header extends Component {
 
     constructor(props) {
-        super(props);   
+        super(props);
         this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
-        this.service = props.service; 
+        this.service = props.service;
         this.state = {
+            fetch: props.fetch !== 'false',
             login: '<?>',
             displayname: '<?>'
         }
@@ -21,9 +22,9 @@ class Header extends Component {
     componentDidMount() {
         this.document = this.element.ownerDocument;
         let window = this.document.defaultView;
-        if (this.service == null) { this.service = new DefaultService(window); }                
+        if (this.service == null) { this.service = new DefaultService(window); }
 
-        this.fetch();
+        if (this.state.fetch) { this.fetch(); }
     }
 
     fetch() {
@@ -66,18 +67,18 @@ class Header extends Component {
                         </div>
                         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                             <div className="bcgov-title">
-                                <h2>Court of Appeal</h2>  
+                                <h2>Court of Appeal</h2>
                             </div>
                         </div>
                         <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                             <div className="pull-right">
                                 <div className="align-right header-top-line">
-                                    <span >Welcome, { this.state.displayname }</span>
+                                    <span id="greetings" >Welcome, { this.state.displayname }</span>
                                     <span> | </span>
                                     <span id="logout" onClick={ this.logout }>Log Out</span>
                                 </div>
                             </div>
-                        </div>                  
+                        </div>
                     </div>
                 </div>
                 <div className="navigationRibbon">
