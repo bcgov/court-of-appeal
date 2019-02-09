@@ -23,7 +23,7 @@ class CaseList extends React.Component {
                 useServiceEmail: false,
                 sendNotifications: false,
                 email: '',
-                selectedRespondentIndex: 0
+                selectedContactIndex: 0
             },
             dataLoss: false,
             displayWarning: 'none',

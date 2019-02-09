@@ -23,7 +23,7 @@ describe('Form2DataSection', ()=> {
         email: 'me@here.net',
         useServiceEmail: false,
         sendNotifications: false,
-        selectedRespondentIndex: 0
+        selectedContactIndex: 0
     }
     let createDocument = ()=>{
         let document = mount(<Form2DataSection
