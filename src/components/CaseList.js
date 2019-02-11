@@ -66,7 +66,7 @@ class CaseList extends React.Component {
         return ([
             <td key={item.id+'edit'}>
                 <button id={'edit-'+item.id} className="btn" onClick={this.openEditModal.bind(this, item.data, item.id)}>
-                    <i className="fa fa-pencil"/></button>
+                    <i className="oi oi-pencil"/></button>
             </td>,
             <td key={item.id+'id'}>{item.id}</td>,
             <td key={item.id+'parties'}>{item.parties}</td>,

@@ -69,7 +69,7 @@
 #validations .validation {
 	font-weight: bold;
 }
-#validations .fa-check-circle {
+#validations .oi-check-circle {
 	color:green;
 }
 #validationModal .success {

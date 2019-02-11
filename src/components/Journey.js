@@ -325,7 +325,7 @@ class Journey extends Component {
                                     onClick={this.journeyForAppellant}
                                     className={this.state.appealButtonClass}>
                                     Starting an Appeal &nbsp;
-                                    <i className="fa fa-play"/>
+                                    <i className="oi oi-media-play"/>
                                 </button>
                             </div>
                             <div className="col col-lg-6 col-med-6 col-sm-6">
@@ -333,7 +333,7 @@ class Journey extends Component {
                                     onClick={this.journeyForRespondent}
                                     className={this.state.respondButtonClass}>
                                     Responding to an Appeal &nbsp;
-                                    <i className="fa fa-play"/>
+                                    <i className="oi oi-media-play"/>
                                 </button>
                             </div>
                         </div>
@@ -354,7 +354,7 @@ class Journey extends Component {
                         <div className="col col-lg-12 col-med-6 col-sm-12 journey-questions">
                             Do you have the right to appeal your case? &nbsp;
                                 <i
-                                    className="fa fa-question-circle"
+                                    className="oi oi-question-mark"
                                     aria-hidden="true"
                                     data-tip={this.dataTip}
                                 />
@@ -365,14 +365,14 @@ class Journey extends Component {
                             <button onClick={this.appellantRightToAppeal}
                                     className="btn round-borders btn-journey">
                                 Yes &nbsp;
-                                <i className="fa fa-play"/>
+                                <i className="oi oi-media-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.leaveToAppealRequired}
                                     className="btn round-borders btn-journey">
                                 No &nbsp;
-                                <i className="fa fa-play"/>
+                                <i className="oi oi-media-play"/>
                             </button>
                         </div>
                     </div>
@@ -398,14 +398,14 @@ class Journey extends Component {
                             <button onClick={this.respondToNoticeOfAppealJourney}
                                     className="btn round-borders btn-journey">
                                 Notice of Appeal &nbsp;
-                                <i className="fa fa-play"/>
+                                <i className="oi oi-media-play"/>
                             </button>
                         </div>
                         <div className="col col-lg-6 col-med-6 col-sm-6">
                             <button onClick={this.respondToNoticeOfLeaveToAppealJourney}
                                     className="btn round-borders btn-journey">
                                 Notice of Application for Leave to Appeal &nbsp;
-                                <i className="fa fa-play"/>
+                                <i className="oi oi-media-play"/>
                             </button>
                         </div>
                     </div>

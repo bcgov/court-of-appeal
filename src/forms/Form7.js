@@ -56,19 +56,19 @@ class Form7 extends Component {
                         <tr>
                             <td>yourself</td>
                             <td className="centered"></td>
-                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"><i className="oi oi-check"></i></td>
                             <td className="centered"></td>
                         </tr>
                         <tr>
                             <td>Kathryn Thomson (account admin)</td>
                             <td className="centered"></td>
-                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"><i className="oi oi-check"></i></td>
                             <td className="centered"></td>
                         </tr>
                         <tr>
                             <td>Patricia White (account admin)</td>
                             <td className="centered"></td>
-                            <td className="centered"><i className="fas fa-check"></i></td>
+                            <td className="centered"><i className="oi oi-check"></i></td>
                             <td className="centered"></td>
                         </tr>
                     </tbody>
