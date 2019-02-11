@@ -220,7 +220,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I would like to receive email notifications when the status of my document changes</div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
-                                    <input id="sendNotifications" ref={(element)=> { this.sendNotificationsCheckbox = element; }}
+                                    <input id="sendNotifications"
                                         type="checkbox"
                                         onChange={this.props.handleFieldChange}
                                         name="respondent.sendNotifications"
@@ -236,7 +236,7 @@ class Form2DataSection extends React.Component {
                                        data-tip="Electronic service will replace in-person service if you select this option."></i>
                                 </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
-                                <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
+                                <input id="useServiceEmail"
                                     type="checkbox"
                                     onChange={this.props.handleFieldChange}
                                     name="respondent.useServiceEmail"
@@ -264,21 +264,15 @@ class Form2DataSection extends React.Component {
                     <input
                         id={`respondentCheckbox-${index}`}
                         type="checkbox"
-                        name={`respondentCheckbox-${index}`}
-                        onClick={this.selectOrDeselectRespondent.bind(this, index)}
+                        name={`list.respondentCheckbox-${index}`}
+                        onChange={this.props.handleFieldChange}
+                        checked={respondent.selected || false}
                     />
                 </div>
                 <div className={'respondent-name'}>
                     <div >{respondent.name}</div>
                 </div>
             </div>)
-    }
-
-    selectOrDeselectRespondent(index, selected, other) {
-        let respondent = this.props.data.respondents[index];
-        console.log("Selected or deselected ", respondent, selected, other)
-        this.props.selectOrDeselectRespondent(index)
-
     }
 }
 
