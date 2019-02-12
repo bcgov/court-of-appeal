@@ -40,7 +40,7 @@
     <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png"/>
     <meta name="theme-color" content="#ffffff"/>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    
+
     <title>E-Filing</title>
 
     <!-- BOOTSTRAP CORE CSS v3.3.6 -->
@@ -65,18 +65,10 @@
     </noscript>
     <div id="react_container"></div>
 
-    <script src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="%PUBLIC_URL%/js/add.includes.if.missing.js"></script>
     <script>
-        if( ! Array.prototype.includes) {
-            Array.prototype.includes = function(item) {
-                for (var i=0; i<this.length; i++) {
-                    if (this[i] == item) {
-                        return true
-                    }
-                }
-                return false
-            }
-        }
+        addIncludesIfMissing()
     </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
