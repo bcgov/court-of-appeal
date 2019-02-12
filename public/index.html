@@ -64,8 +64,20 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="react_container"></div>
-    
-    
+
+    <script src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script>
+        if( ! Array.prototype.includes) {
+            Array.prototype.includes = function(item) {
+                for (var i=0; i<this.length; i++) {
+                    if (this[i] == item) {
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
