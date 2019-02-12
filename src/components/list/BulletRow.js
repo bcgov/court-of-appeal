@@ -7,12 +7,12 @@ class BulletRow extends Component {
 
         let rowcontent = null, description = null;
         if (this.props.row.descriptionLink) {
-            description =  <a href={this.props.row.descriptionLink.URL} target="_blank">{this.props.row.descriptionLink.URLName}</a>;
+            description =  <a href={this.props.row.descriptionLink.URL} target="_blank" rel="noopener noreferrer">{this.props.row.descriptionLink.URLName}</a>;
         } else {
             description = this.props.row.description;
         }
-        
-        
+
+
         description = <div id={'bullet-' + this.props.id}> {description} { this.props.row.descriptionLink!==undefined && this.props.row.descriptionLink.tooltip!==undefined ? <i className="oi oi-question-mark" aria-hidden="true" data-tip={this.props.row.descriptionLink.tooltip}></i> : ``} </div>;
 
         if (this.props.row.onlineForm) {
@@ -23,7 +23,7 @@ class BulletRow extends Component {
                         {description}
                     </div>
                     <div >
-                        <a className={"row-badge"} {...action} style={{padding:'5px', cursor: 'pointer'}}  target="_blank">{this.props.row.documentLink.URLName}</a>
+                        <a className={"row-badge"} {...action} style={{padding:'5px', cursor: 'pointer'}}  target="_blank" rel="noopener noreferrer">{this.props.row.documentLink.URLName}</a>
                     </div>
                 </div>
             )
@@ -41,7 +41,7 @@ class BulletRow extends Component {
                                 <a href={this.props.row.docLink.URL}>{this.props.row.docLink.URLName}</a>
                             </div>
                             <div className="row-badge" >
-                                <a href={this.props.row.pdfLink.URL} target="_blank">{this.props.row.pdfLink.URLName}</a>
+                                <a href={this.props.row.pdfLink.URL} target="_blank" rel="noopener noreferrer">{this.props.row.pdfLink.URLName}</a>
                             </div>
                         </div>
                     </div>

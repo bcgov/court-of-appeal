@@ -33,9 +33,9 @@ class Journey extends Component {
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
         this.handlePopState = this.handlePopState.bind(this);
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
-                        <p>please see our online guidebook for more 
+                        <p>please see our online guidebook for more
                         <u><a href='https://www.courtofappealbc.ca/appellant-guidebook/1.2-do-you-have-a-right-to-appeal-your-case'
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         detailed information.</a></u></p>`;
         this.respondentQuestion =  "Served with ... ";
         this.appellantQuestion = "Do you have the right to appeal?";
@@ -286,7 +286,7 @@ class Journey extends Component {
 
     journeyMapOrSelectionButtons() {
         let content = null;
-        if (this.state.displayJourneyMap ) {            
+        if (this.state.displayJourneyMap ) {
             content = (
                 <div>
                     <JourneyMap

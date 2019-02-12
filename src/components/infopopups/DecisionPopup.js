@@ -11,8 +11,6 @@ class DecisionPopup extends Component {
     }
 
     render () {
-        let subject = this.props.type === "respondent" ? "the appellant's" : "your";
-
         return  (
            <InfoPopupWrapper
                title={ this.props.title }

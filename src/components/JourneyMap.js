@@ -13,7 +13,7 @@ class JourneyMap extends React.Component {
         };
         this.getAreas = this.getAreas.bind(this);
         this.closeInfoModal = this.closeInfoModal.bind(this);
-        this.openInfoModal = this.openInfoModal.bind(this);        
+        this.openInfoModal = this.openInfoModal.bind(this);
     }
 
     render() {
@@ -37,19 +37,19 @@ class JourneyMap extends React.Component {
 
             let introductionText = (
                 <div>
-                    { this.props.introText }                        
+                    { this.props.introText }
                     <br/>
                     <br/>
                     Every appeal process is unique. If you have any questions, please visit the &nbsp;
-                    <a href={anchor} target="_blank">Online Guidebook</a> or &nbsp;
+                    <a href={anchor} target="_blank" rel="noopener noreferrer">Online Guidebook</a> or &nbsp;
                     <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
                 </div>
             )
             if (this.props.refusedStep) {
                 introductionText = (
                     <div>
-                        { this.props.introText }       
-                        &nbsp;  
+                        { this.props.introText }
+                        &nbsp;
                         For more information about the process, please visit the <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#">Supreme Court website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
                     </div>
                 )

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import InfoPopupWrapper from "./common/InfoPopupWrapper";
-import InfoPopupIcon from "./common/InfoPopupIcon";
 import InfoPopupSection from "./common/InfoPopupSection";
 
 class CompleteAppealPopup extends Component {
@@ -27,9 +26,9 @@ class CompleteAppealPopup extends Component {
                 >
                     The Court of Appeal decision is final, unless the Supreme Court of Canada
                     agrees to hear {subject} case.  For more information, please see the&nbsp;
-                    <a href={`https://www.courtofappealbc.ca/${this.props.type}-guidebook/${urls[this.props.type]}`} target="_blank">Online Guidebook</a>,
+                    <a href={`https://www.courtofappealbc.ca/${this.props.type}-guidebook/${urls[this.props.type]}`} target="_blank" rel="noopener noreferrer">Online Guidebook</a>,
                     or the&nbsp;
-                    <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank">Supreme Court</a> website.
+                    <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank" rel="noopener noreferrer">Supreme Court</a> website.
                 </InfoPopupSection>
             </InfoPopupWrapper>
         );
