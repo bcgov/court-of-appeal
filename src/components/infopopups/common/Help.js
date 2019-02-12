@@ -16,7 +16,7 @@ class Help extends Component {
                     <div className="row">
                         <div className="col col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 help-contacts">
                             <div>
-                                <a href={this.props.URL} target="_blank">{this.props.URLName}</a>
+                                <a href={this.props.URL} target="_blank" rel="noopener noreferrer">{this.props.URLName}</a>
                             </div>
                             <div className="help-info-divider">|</div>
                             <div>

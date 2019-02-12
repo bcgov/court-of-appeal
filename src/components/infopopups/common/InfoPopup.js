@@ -57,7 +57,7 @@ class InfoPopup extends Component {
             let options = {
                 'factum': <AppellantFactumPopup {...props} />,
                 'replybook': <ReplyBookPopup {...props} />,
-                'respondenthearing': <HearingPopup {...props} type="respondent" {...respondentHearingLinks} />,                
+                'respondenthearing': <HearingPopup {...props} type="respondent" {...respondentHearingLinks} />,
                 'respondentappealhearing': <RespondingAppealHearingPopup {...props} />,
                 'respondentleavetoappealhearing': <RespondingLeaveToAppealHearingPopup {...props} />,
                 'courtorder': <CourtOrderPopup {...props} />,
@@ -113,7 +113,7 @@ class InfoPopup extends Component {
         let content = contentOrMap.map((value, index) => {
             let paragraph = value;
             if (value.URL) {
-               paragraph = <a href={value.URL} target="_blank">{value.URLName}</a>;
+               paragraph = <a href={value.URL} target="_blank" rel="noopener noreferrer">{value.URLName}</a>;
             }
 
             return (

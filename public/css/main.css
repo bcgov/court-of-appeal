@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Myriad-Pro';
-	src: url('../fonts/MyriadWebPro.ttf');
+	src: url('../fonts/MyriadWebPro.woff') format('woff');
 }
 
 html, body {

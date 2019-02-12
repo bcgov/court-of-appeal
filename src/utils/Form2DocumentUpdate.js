@@ -1,12 +1,11 @@
 let updateDocument = function(document, event) {
-    console.log("Target name: ", event.target.name)
     const field = event.target.name.split(".")[1];
     if (['addressLine1', 'addressLine2', 'city', 'postalCode'].includes(field)){
         let respondents = document.respondents.slice();
         let index = document.selectedContactIndex;
         let address = respondents[index].address || {};
         address[field] = event.target.value;
-        respondents[index].address = address; 
+        respondents[index].address = address;
         document.respondents = respondents;
     }
     if (['useServiceEmail', 'sendNotifications'].includes(field)) {

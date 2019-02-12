@@ -11,8 +11,6 @@ class DecisionPopup extends Component {
     }
 
     render () {
-        let subject = this.props.type === "respondent" ? "the appellant's" : "your";
-
         return  (
            <InfoPopupWrapper
                title={ this.props.title }
@@ -49,7 +47,7 @@ class DecisionPopup extends Component {
                                                     onClick={this.onGranted}
                                                 >
                                                     Granted &nbsp;
-                                                    <i className="fa fa-play"/>
+                                                    <i className="oi oi-media-play"/>
                                                 </button>
                                             </div>
                                            <div className="col col-lg-6 col-med-6 col-sm-6">
@@ -58,7 +56,7 @@ class DecisionPopup extends Component {
                                                    onClick={this.onRefused}
                                                >
                                                   Refused &nbsp;
-                                                   <i className="fa fa-play"/>
+                                                   <i className="oi oi-media-play"/>
                                                </button>
                                            </div>
                                        </div>

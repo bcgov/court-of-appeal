@@ -11,14 +11,14 @@ class Form2DataSection extends React.Component {
         if (this.props.show && this.props.data) {
             let selectedContact = this.props.data.respondents[this.props.data.selectedContactIndex || 0];
             return (
-                <div>    
+                <div>
                     <div className="row">
                         <h2 style={{ fontWeight:'bold' }}>Style of Proceeding (Parties) in Case {this.props.data.formSevenNumber}</h2>
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">BETWEEN:</div>
 
                             <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="appellant-name">{
-                                this.props.data.appellants.map( (item) => item.name ).join(', ') 
+                                this.props.data.appellants.map( (item) => item.name ).join(', ')
                                 }
                             </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Appellant{this.props.data.appellants.length > 1 ? 's' : '' }</div>
@@ -27,7 +27,7 @@ class Form2DataSection extends React.Component {
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
 
                                 <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{
-                                    this.props.data.respondents.map( (item) => item.name ).join(', ') 
+                                    this.props.data.respondents.map( (item) => item.name ).join(', ')
                                 }
                                 </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
@@ -38,7 +38,7 @@ class Form2DataSection extends React.Component {
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
                                     Respondent name(s) &nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Select the names of all those responding to the appeal"></i>
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
                                 </div>
                             </div>
                             <div id="respondentSelectionList" className="col-lg-10 col-md-10 col-sm-6 col-xs-6 respondent-list">
@@ -73,13 +73,13 @@ class Form2DataSection extends React.Component {
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
                                 Mailing address for service &nbsp;
-                                <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                                <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
                             </div>
 
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    Address Line 1  
+                                    Address Line 1
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
@@ -116,7 +116,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    City 
+                                    City
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
@@ -133,7 +133,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    Province 
+                                    Province
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <TextField
@@ -147,7 +147,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    Country 
+                                    Country
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <TextField id="country"
@@ -161,7 +161,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
-                                    Postal code 
+                                    Postal code
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PostalCodeField id="postalCode"
@@ -178,13 +178,13 @@ class Form2DataSection extends React.Component {
                     <div className="row">
                         <div className="row proceeding-style">
                             <div className="col-lg-12 address-row-header">
-                                Contact information                                
+                                Contact information
                             </div>
                             <div className="row address-row">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
                                     Phone&nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PhoneField id="phone"
@@ -200,7 +200,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span id="emailasterisks" className="mandatory-field" style={{display:this.props.data.useServiceEmail || this.props.data.sendNotifications?'inline-block':'none'}}>*</span>
                                     Email address&nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <EmailField id="email"
@@ -212,7 +212,7 @@ class Form2DataSection extends React.Component {
                                         validate={this.props.validate}
                                     />
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <div className="row">
@@ -232,7 +232,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">
                                     I agree to be served documents electronically by another party
-                                    &nbsp;<i className="fa fa-question-circle" aria-hidden="true"
+                                    &nbsp;<i className="oi oi-question-mark" aria-hidden="true"
                                        data-tip="Electronic service will replace in-person service if you select this option."></i>
                                 </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
@@ -244,13 +244,13 @@ class Form2DataSection extends React.Component {
                                     disabled={this.props.readOnly}
                                 />
                                 </div>
-                            </div>                            
+                            </div>
                             <hr/>
                             <ReactTooltip/>
                         </div>
                     </div>
-                    
-                </div>  
+
+                </div>
             )
         } else {
             return null;

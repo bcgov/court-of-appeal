@@ -16,7 +16,7 @@ class Deadline extends Component {
         return (
 
             <div className="deadline ">
-                <i className=" fa fa-exclamation-triangle deadline-alert" />
+                <i className=" oi oi-warning deadline-alert" />
                 <div className="deadline-statement">
                     {deadlineContent}
                 </div>

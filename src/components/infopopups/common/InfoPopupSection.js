@@ -29,7 +29,7 @@ class InfoPopupSection extends Component {
         if (this.props.expandable) {
             toggleButton =
                 <div className="col col-lg-2 col-md-2 toggle-expansion-button" >
-                    <img src={this.state.toggleIconImg} />
+                    <img src={this.state.toggleIconImg} alt=""/>
                 </div>;
         } else {
             toggleButton = <div className="col col-lg-2 col-md-2 toggle-expansion-button" />

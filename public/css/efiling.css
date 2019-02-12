@@ -1,0 +1,10 @@
+.oi-question-mark {
+    border-radius: 50%;
+    border: 1px solid black;
+    font-size: 10px;
+    padding: 0px 0px 0px 4px;
+    width: 15px;
+    height: 15px;
+    top: -1px;
+    text-align: left;
+}
