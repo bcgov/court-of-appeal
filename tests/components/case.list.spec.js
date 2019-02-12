@@ -61,7 +61,7 @@ describe('CaseList', ()=> {
                         email: 'me@here.net',
                         useServiceEmail: false,
                         sendNotifications: false,
-                        selectedRespondentIndex: 0
+                        selectedContactIndex: 0
                     } 
                 },
                 { id:25, data:{} }
@@ -90,6 +90,15 @@ describe('CaseList', ()=> {
             document.find('#editFormModal button#back').prop('onClick')();
             document.update();
             expect(document.find('#editFormModal').prop('style').display).toEqual('none');
+        });
+        test('respondents can be selected and changed', ()=>{
+            document.find('#edit-15').prop('onClick')();
+            document.update();
+            let field = document.find('#respondentCheckbox-0').at(0);
+
+            field.simulate('change', { target: { name:'list.respondentCheckbox-0', checked:true } });
+
+            expect(cases[1].data.respondents[0].selected).toEqual(true);
         });
         test('city can be changed', ()=>{
             document.find('#edit-15').prop('onClick')();
@@ -182,13 +191,13 @@ describe('CaseList', ()=> {
             
             expect(cases[1].data.sendNotifications).toEqual(true);
         });
-        test('chosen respondent can be changed', ()=>{
+        test('chosen contact can be changed', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();
             let field = document.find('select#chosenRespondent').at(0);
             field.simulate('change', { target: { name:'respondent.name', value:1 } });
             
-            expect(cases[1].data.selectedRespondentIndex).toEqual(1);
+            expect(cases[1].data.selectedContactIndex).toEqual(1);
         });
         test('resists unknown address', ()=>{
             let indexOfRespondentWithoutAddress = 2;

@@ -3,7 +3,7 @@ import {GENERAL_ERROR_MSG, INVALID_ADDRESS_MSG} from "../helpers/constants";
 
 let validateForm2 = (document, fields ) => {
 
-        let selectedRespondent = document.respondents[document.selectedRespondentIndex || 0];
+        let selectedRespondent = document.respondents[document.selectedContactIndex || 0];
 
         let validStreetAddress = selectedRespondent.address &&
             selectedRespondent.address.addressLine1 &&

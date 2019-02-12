@@ -90,3 +90,18 @@
     color: red;
     padding-right: 5px;
 }
+
+.respondent-list {
+    margin-top: -5px;
+}
+.respondent-row {
+    display: flex;
+    flex-flow: row;
+    padding: 5px;
+}
+.respondent-checkbox {
+    padding: 3px;
+}
+.respondent-name {
+    padding: 5px;
+}

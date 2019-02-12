@@ -57,10 +57,11 @@ class Form2 extends Component {
                             city: '',
                             province: '',
                             postalCode: ''
-                        }
+                        },
+                        selected: false
                     }
                 ],
-                selectedRespondentIndex: 0,
+                selectedContactIndex: 0,
                 phone: '',
                 useServiceEmail: false,
                 sendNotifications: false,
@@ -157,7 +158,7 @@ class Form2 extends Component {
             email: this.state.document.email,
             useServiceEmail: this.state.document.useServiceEmail,
             sendNotifications: this.state.document.sendNotifications,
-            selectedRespondentIndex: this.state.document.selectedRespondentIndex
+            selectedContactIndex: this.state.document.selectedContactIndex,
         };
         if (!this.state.id) {
             this.service.createForm2(form, (id) => {
@@ -230,14 +231,14 @@ class Form2 extends Component {
     }
 
     formHasData() {
-            let respondent = this.state.document.respondents[this.state.document.selectedRespondentIndex];
-            let hasData = respondent ?
-                (respondent.address.addressLine1 !== '') ||
-                (respondent.address.addressLine2 !== '') ||
-                (respondent.address.city !== '') ||
-                (respondent.address.postalCode !== '') ||
-                (respondent.phone !== '') ||
-                (respondent.email !== '')
+            let selectedContact = this.state.document.respondents[this.state.document.selectedContactIndex];
+            let hasData = selectedContact ?
+                (selectedContact.address.addressLine1 !== '') ||
+                (selectedContact.address.addressLine2 !== '') ||
+                (selectedContact.address.city !== '') ||
+                (selectedContact.address.postalCode !== '') ||
+                (selectedContact.phone !== '') ||
+                (selectedContact.email !== '')
                 : false;
             return ( hasData );
     }

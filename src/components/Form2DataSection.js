@@ -9,7 +9,7 @@ class Form2DataSection extends React.Component {
 
     render() {
         if (this.props.show && this.props.data) {
-            let selectedRespondent = this.props.data.respondents[this.props.data.selectedRespondentIndex || 0];
+            let selectedContact = this.props.data.respondents[this.props.data.selectedContactIndex || 0];
             return (
                 <div>    
                     <div className="row">
@@ -37,17 +37,32 @@ class Form2DataSection extends React.Component {
                         <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
-                                    Respondent's name &nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
+                                    Respondent name(s) &nbsp;
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Select the names of all those responding to the appeal"></i>
                                 </div>
                             </div>
+                            <div id="respondentSelectionList" className="col-lg-10 col-md-10 col-sm-6 col-xs-6 respondent-list">
+                                {this.renderRespondentRow()}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="row proceeding-style">
+                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
+                                <div style={{whiteSpace: 'nowrap'}}>
+                                    Which respondent should we use to auto fill the address&nbsp;
+                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Which respondent's address should be used for service?"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row proceeding-style">
                             <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                 <select id="chosenRespondent"
-                                    className="form-select"
-                                    onChange={this.props.handleFieldChange}
-                                    name={"respondent.name"}
-                                    disabled={this.props.readOnly}
-                                    value={this.props.data.selectedRespondentIndex}
+                                        className="form-select"
+                                        onChange={this.props.handleFieldChange}
+                                        name={"respondent.name"}
+                                        disabled={this.props.readOnly}
+                                        value={this.props.data.selectedContactIndex}
                                 >
                                     {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
                                 </select>
@@ -69,7 +84,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                         <TextField id="addressLine1"
-                                            value={this.props.data && selectedRespondent && selectedRespondent.address ? selectedRespondent.address.addressLine1 : ''}
+                                            value={this.props.data && selectedContact && selectedContact.address ? selectedContact.address.addressLine1 : ''}
                                             handleFieldChange={this.props.handleFieldChange}
                                             name="respondent.addressLine1"
                                             readOnly={this.props.readOnly}
@@ -86,7 +101,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div>
                                     <TextField id="addressLine2"
-                                        value={this.props.data && selectedRespondent && selectedRespondent.address ? selectedRespondent.address.addressLine2 : ''}
+                                        value={this.props.data && selectedContact && selectedContact.address ? selectedContact.address.addressLine2 : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.addressLine2"
                                         readOnly={this.props.readOnly}
@@ -106,7 +121,7 @@ class Form2DataSection extends React.Component {
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                                     <div >
                                     <TextField id="city"
-                                        value={this.props.data && selectedRespondent && selectedRespondent.address ? selectedRespondent.address.city : ''}
+                                        value={this.props.data && selectedContact && selectedContact.address ? selectedContact.address.city : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.city"
                                         readOnly={this.props.readOnly}
@@ -150,7 +165,7 @@ class Form2DataSection extends React.Component {
                                 </div>
                                 <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
                                     <PostalCodeField id="postalCode"
-                                        value={this.props.data && selectedRespondent && selectedRespondent.address ? selectedRespondent.address.postalCode : ''}
+                                        value={this.props.data && selectedContact && selectedContact.address ? selectedContact.address.postalCode : ''}
                                         handleFieldChange={this.props.handleFieldChange}
                                         name="respondent.postalCode"
                                         readOnly={this.props.readOnly}
@@ -205,7 +220,7 @@ class Form2DataSection extends React.Component {
                             <div className="row address-row">
                                 <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I would like to receive email notifications when the status of my document changes</div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
-                                    <input id="sendNotifications" ref={(element)=> { this.sendNotificationsCheckbox = element; }}
+                                    <input id="sendNotifications"
                                         type="checkbox"
                                         onChange={this.props.handleFieldChange}
                                         name="respondent.sendNotifications"
@@ -221,7 +236,7 @@ class Form2DataSection extends React.Component {
                                        data-tip="Electronic service will replace in-person service if you select this option."></i>
                                 </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
-                                <input id="useServiceEmail" ref={(element)=> { this.serviceEmailCheckbox = element; }}
+                                <input id="useServiceEmail"
                                     type="checkbox"
                                     onChange={this.props.handleFieldChange}
                                     name="respondent.useServiceEmail"
@@ -240,6 +255,24 @@ class Form2DataSection extends React.Component {
         } else {
             return null;
         }
+    }
+
+    renderRespondentRow() {
+        return this.props.data.respondents.map( (respondent, index) =>
+            <div key={index} className={'respondent-row'}>
+                <div className={'respondent-checkbox'}>
+                    <input
+                        id={`respondentCheckbox-${index}`}
+                        type="checkbox"
+                        name={`list.respondentCheckbox-${index}`}
+                        onChange={this.props.handleFieldChange}
+                        checked={respondent.selected || false}
+                    />
+                </div>
+                <div className={'respondent-name'}>
+                    <div >{respondent.name}</div>
+                </div>
+            </div>)
     }
 }
 

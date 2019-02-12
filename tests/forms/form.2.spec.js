@@ -59,6 +59,9 @@ describe('Form2', ()=>{
             expect(document.find('#country').at(0).prop('value')).toEqual('Canada');
             expect(document.find('#city').at(0).prop('value')).toEqual('old-city');
         });
+        test.only('the form lists all respondents', ()=> {
+            expect(document.find('#respondentSelectionList').children().length).toEqual(4);
+        });
         test('incoming data are completed with empty address when missing', ()=>{
             expect(document.instance().state.document.respondents[1].address).toEqual({});
         });
@@ -164,8 +167,8 @@ describe('Form2', ()=>{
             test('sends form id', ()=> {
                 expect(sentId).toEqual(42);
             });
-            test('sends updated selectedRespondentIndex', ()=>{
-                expect(sent.selectedRespondentIndex).toEqual(1);
+            test('sends updated selectedContactIndex', ()=>{
+                expect(sent.selectedContactIndex).toEqual(1);
             });
             test('sends updated city', ()=>{
                 expect(sent.respondents[1].address.city).toEqual('new-city');
