@@ -37,7 +37,7 @@ class Form2DataSection extends React.Component {
                         <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
-                                    Respondent's name &nbsp;
+                                    Respondent name(s) &nbsp;
                                     <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
                                 </div>
                             </div>
