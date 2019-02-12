@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneField from '../../src/components/PhoneField';
+import PhoneField from '../../../src/components/PhoneField';
 import renderer from 'react-test-renderer';
 
 test('should only allow numeric, dash, and parentheses entries', ()=> {

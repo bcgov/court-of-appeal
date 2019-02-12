@@ -4,6 +4,7 @@ import TextField from "./TextField";
 import PostalCodeField from "./PostalCodeField";
 import PhoneField from "./PhoneField";
 import EmailField from "./EmailField";
+import SelectableNameList from "./SelectableNameList";
 
 class Form2DataSection extends React.Component {
 
@@ -25,10 +26,13 @@ class Form2DataSection extends React.Component {
                         </div>
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
-
-                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >{
-                                    this.props.data.respondents.map( (item) => item.name ).join(', ')
-                                }
+                            
+                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >
+                                    <SelectableNameList
+                                        respondents={this.props.data.respondents}
+                                        handleFieldChange={this.props.handleFieldChange}
+                                        id={"respondent-list"}
+                                    />
                                 </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
                         </div>
@@ -37,22 +41,9 @@ class Form2DataSection extends React.Component {
                         <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
-                                    Respondent name(s) &nbsp;
-                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
-                                </div>
-                            </div>
-                            <div id="respondentSelectionList" className="col-lg-10 col-md-10 col-sm-6 col-xs-6 respondent-list">
-                                {this.renderRespondentRow()}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="row proceeding-style">
-                            <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
-                                <div style={{whiteSpace: 'nowrap'}}>
                                     Which respondent should we use to auto fill the address&nbsp;
-                                    <i className="fa fa-question-circle" aria-hidden="true" data-tip="Which respondent's address should be used for service?"></i>
-                                </div>
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
+                               </div>
                             </div>
                         </div>
                         <div className="row proceeding-style">
@@ -255,24 +246,6 @@ class Form2DataSection extends React.Component {
         } else {
             return null;
         }
-    }
-
-    renderRespondentRow() {
-        return this.props.data.respondents.map( (respondent, index) =>
-            <div key={index} className={'respondent-row'}>
-                <div className={'respondent-checkbox'}>
-                    <input
-                        id={`respondentCheckbox-${index}`}
-                        type="checkbox"
-                        name={`list.respondentCheckbox-${index}`}
-                        onChange={this.props.handleFieldChange}
-                        checked={respondent.selected || false}
-                    />
-                </div>
-                <div className={'respondent-name'}>
-                    <div >{respondent.name}</div>
-                </div>
-            </div>)
     }
 }
 
