@@ -91,15 +91,6 @@ describe('CaseList', ()=> {
             document.update();
             expect(document.find('#editFormModal').prop('style').display).toEqual('none');
         });
-        test('respondents can be selected and changed', ()=>{
-            document.find('#edit-15').prop('onClick')();
-            document.update();
-            let field = document.find('#respondentCheckbox-0').at(0);
-
-            field.simulate('change', { target: { name:'list.respondentCheckbox-0', checked:true } });
-
-            expect(cases[1].data.respondents[0].selected).toEqual(true);
-        });
         test('city can be changed', ()=>{
             document.find('#edit-15').prop('onClick')();
             document.update();

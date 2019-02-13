@@ -17,9 +17,8 @@ let updateDocument = function(document, event) {
     if ('name' === field) {
         document.selectedContactIndex = event.target.value;
     }
-    if (field.startsWith('respondentCheckbox')) {
-        let index = field.substring(field.indexOf('-') + 1, field.length);
-        document.respondents[index].selected = !document.respondents[index].selected;
+    if (field === 'respondentList') {
+        document.respondents[event.target.value].selected = event.target.selected;
     }
 
     return document;

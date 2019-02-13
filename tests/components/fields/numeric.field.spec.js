@@ -1,5 +1,5 @@
 import React from 'react';
-import NumericField from '../../src/components/NumericField';
+import NumericField from '../../../src/components/NumericField';
 import renderer from 'react-test-renderer';
 
 test('should only allow numeric entries', ()=> {

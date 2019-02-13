@@ -69,10 +69,10 @@ describe('Form2DataSection', ()=> {
         expect(field.text()).toEqual('alpha, beta');
     });
 
-    test('concatenate respondantes names', ()=>{
+    test('Offers respondent selection', ()=>{
         let field = document.find('#respondent-name').at(0);
 
-        expect(field.text()).toEqual('first, second');
+        expect(field.text()).toEqual('Select...');
     });
 
 });

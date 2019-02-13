@@ -59,9 +59,6 @@ describe('Form2', ()=>{
             expect(document.find('#country').at(0).prop('value')).toEqual('Canada');
             expect(document.find('#city').at(0).prop('value')).toEqual('old-city');
         });
-        test.only('the form lists all respondents', ()=> {
-            expect(document.find('#respondentSelectionList').children().length).toEqual(4);
-        });
         test('incoming data are completed with empty address when missing', ()=>{
             expect(document.instance().state.document.respondents[1].address).toEqual({});
         });
