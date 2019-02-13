@@ -18,15 +18,32 @@ class SelectableNameList extends React.Component {
                 id={this.props.id || "name-list"}
                 isClearable={true}
                 isMulti={true}
-                name={"respondentList"}
+                name={"form2.respondentList"}
                 options={this.respondentOptions()}
-                onChange={this.handleFieldChange}
+                onChange={this.handleFieldChange.bind(this)}
             />
         }
     }
-    handleFieldChange(all, e) {
-        console.log("v2:", e)
-        
+    handleFieldChange(state, change) {
+        let e = null;
+        if (change.action === 'select-option') {
+            e = {
+                target: {
+                    name: change.name,
+                    value: change.option.value,
+                    selected: true }
+                }
+        }
+        if (change.action === 'remove-value') {
+            e = {
+                target: {
+                    name: change.name,
+                    value: change.removedValue.value,
+                    selected: false
+                }
+            }
+        }
+        this.props.handleFieldChange(e)
     }
     
     respondentOptions() {
