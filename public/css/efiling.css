@@ -1,10 +1,13 @@
 .oi-question-mark {
     border-radius: 50%;
-    border: 1px solid black;
-    font-size: 10px;
-    padding: 0px 0px 0px 4px;
-    width: 15px;
-    height: 15px;
-    top: -1px;
+    border: 1px solid #036;
+    font-size: 9px;
+    padding: 1px 0px 0px 4px;
+    width: 16px;
+    height: 16px;
+    top: -2px;
     text-align: left;
+    background-color: #036;
+    color: white;
+    font-weight: bold;
 }
