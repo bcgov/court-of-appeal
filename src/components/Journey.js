@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
 import JourneyMap from './JourneyMap';
+import JourneyMap2 from './JourneyMap2'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";
 
@@ -289,7 +290,7 @@ class Journey extends Component {
         if (this.state.displayJourneyMap ) {
             content = (
                 <div>
-                    <JourneyMap
+                    <JourneyMap2
                         introText={this.state.introText}
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
