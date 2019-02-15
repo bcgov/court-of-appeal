@@ -27,7 +27,7 @@ class Form2DataSection extends React.Component {
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
                             
-                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >
+                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-name" >
                                     <SelectableNameList
                                         respondents={this.props.data.respondents}
                                         handleFieldChange={this.props.handleFieldChange}

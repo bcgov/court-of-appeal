@@ -24,6 +24,12 @@ class SelectableNameList extends React.Component {
             }
 
             const styles = {
+                
+                container: ((provided, state)=> {
+                    return {
+                        marginTop:'-13px'
+                    }
+                }),
 
                 multiValueLabel: ((provided, state)=> {
                     return {
