@@ -7,18 +7,25 @@ let updateDocument = function(document, event) {
         address[field] = event.target.value;
         respondents[index].address = address;
         document.respondents = respondents;
-    }
-    if (['useServiceEmail', 'sendNotifications'].includes(field)) {
+    } else if (['useServiceEmail', 'sendNotifications'].includes(field)) {
         document[field] = event.target.checked;
-    }
-    if (['email', 'phone'].includes(field)) {
+    } else if (['email', 'phone'].includes(field)) {
         document[field] = event.target.value;
-    }
-    if ('name' === field) {
+    } else if ('name' === field) {
         document.selectedContactIndex = event.target.value;
-    }
-    if (field === 'respondentList') {
-        document.respondents[event.target.value].selected = event.target.selected;
+    } else if ('respondentList' === field) {
+        if ('clear' === event.action ) {
+            document.respondents.forEach((respondent) => respondent.selected = false)
+        } else {
+            document.respondents[event.target.value].selected = event.target.selected;
+        }
+    } else if ('selectedContact' === field) {
+        if (event.target.value) {
+            document.selectedContactIndex = event.target.value;
+        } else {
+            document.selectedContactIndex = null;
+        }
+        
     }
 
     return document;

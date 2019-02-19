@@ -145,7 +145,7 @@ describe('Form2', ()=>{
         describe('Update', ()=>{
             
             beforeEach(()=>{
-                document.find('select#chosenRespondent').at(0).simulate('change', { target: { name:'respondent.name', value:1 } });
+                document.find('select#chosenContact').at(0).simulate('change', { target: { name:'respondent.name', value:1 } });
 
                 document.find('input#city').at(0).simulate('change', { target: { name:'respondent.city', value:'new-city' } });
                 document.find('input#addressLine1').at(0).simulate('change', { target: { name:'respondent.addressLine1', value:'new-addressLine1' } });

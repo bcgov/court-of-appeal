@@ -4,7 +4,8 @@ import TextField from "./TextField";
 import PostalCodeField from "./PostalCodeField";
 import PhoneField from "./PhoneField";
 import EmailField from "./EmailField";
-import SelectableNameList from "./SelectableNameList";
+import ContactSelect from "./ContactSelect";
+import RespondentListSelect from "./RespondentListSelect";
 
 class Form2DataSection extends React.Component {
 
@@ -27,44 +28,57 @@ class Form2DataSection extends React.Component {
                         <div className="row  proceeding-style">
                             <div className="col-lg-1 col-md-1 col-sm-2 col-xs-2 proceeding-style-col">AND:</div>
                             
-                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-name" >
-                                    <SelectableNameList
-                                        respondents={this.props.data.respondents}
-                                        handleFieldChange={this.props.handleFieldChange}
-                                        id={"respondent-list"}
-                                    />
+                                <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-name" >
+                                    {this.props.data.respondents.map( (item) => item.name ).join(', ')}
                                 </div>
+                               
                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.props.data.respondents.length > 1 ? 's' : '' }</div>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="row proceeding-style">
+                    
+                     <div className="row">
+                         <div className="row proceeding-style">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
                                 <div style={{whiteSpace: 'nowrap'}}>
-                                    Which respondent should we use to auto fill the address&nbsp;
-                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal?"></i>
+                                    Respondent{this.props.data.respondents.length > 1 ? 's (Select one or more)' : '' } &nbsp;
+                                    <i className="oi oi-question-mark" aria-hidden="true" 
+                                       data-tip={this.props.data.respondents.length > 1 ? 
+                                           'What are the names of the parties responding to the appeal?' : 
+                                           'What is the name of the party responding to the appeal?'}/>
                                </div>
                             </div>
                         </div>
-                        <div className="row proceeding-style">
-                            <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-                                <select id="chosenRespondent"
-                                        className="form-select"
-                                        onChange={this.props.handleFieldChange}
-                                        name={"respondent.name"}
-                                        disabled={this.props.readOnly}
-                                        value={this.props.data.selectedContactIndex}
-                                >
-                                    {this.props.data.respondents.map( (respondent, index) => <option key={index} value={index} >{respondent.name}</option>)}
-                                </select>
-                            </div>
-                        </div>
+                         <div className="row proceeding-style">
+                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-name" >
+                                    <RespondentListSelect
+                                        selectedRespondents={this.selectedRespondents()}
+                                        respondents={this.props.data.respondents}
+                                        handleFieldChange={this.props.handleFieldChange}
+                                        id={"respondent-list"}
+                                        isMulti={true}
+                                        name={"form2.respondentList"}
+                                    />
+                                </div>
+                         </div>
+                     </div>
+                    <div className="row">
+                        
                     </div>
                     <div className="row">
                         <div className="row proceeding-style">
-                            <div className="col-lg-12 address-row-header">
+                            <div className="col-lg-12 address-row-header" style={{fontWeight: "bolder"}}>
                                 Mailing address for service &nbsp;
                                 <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                            </div>
+                            
+                            <div className="col-lg-12 ">
+                                <ContactSelect
+                                    selectedRespondents={this.selectedRespondents()}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    id={"respondent-list"}
+                                    isMulti={false}
+                                    name={"form2.contactList"}
+                                />
                             </div>
 
                             <div className="row address-row">
@@ -246,6 +260,10 @@ class Form2DataSection extends React.Component {
         } else {
             return null;
         }
+    }
+
+    selectedRespondents() {
+        return this.props.data.respondents.filter((respondent) => respondent.selected);
     }
 }
 

@@ -30,6 +30,7 @@ class Form2 extends Component {
         this.preview = this.preview.bind(this);
         this.validateForm = this.validateForm.bind(this);
         this.validateField = this.validateField.bind(this);
+        this.selectAllRespondents = this.selectAllRespondents.bind(this);
     }
 
     initialState(formSevenNumber) {
@@ -101,7 +102,7 @@ class Form2 extends Component {
             if (!data.error) {
                 this.setState({notFoundError: ''});
                 const appellants = this.mapIncomingData(data.parties.appellants);
-                const respondents = this.mapIncomingData(data.parties.respondents);
+                const respondents = this.selectAllRespondents(this.mapIncomingData(data.parties.respondents));
                 if (appellants && respondents) {
                     this.setState(update(this.state, {document: {appellants: {$set: appellants}}}));
                     this.setState(update(this.state, {document: {respondents: {$set: respondents}}}));
@@ -373,6 +374,20 @@ class Form2 extends Component {
 
     startNewSearch() {
         this.setState(this.initialState(this.state.formSevenNumber));
+    }
+
+    /**
+     * Select All Respondents by default for a new form 2.
+     * @param respondents
+     * @returns {*}
+     */
+    selectAllRespondents(respondents) {
+        return respondents.map((respondent) => {
+           return {
+               ...respondent,
+               selected: true
+           }
+        });
     }
 }
 
