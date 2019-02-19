@@ -1,5 +1,5 @@
 import React from 'react';
-import EmailField from '../../../src/components/EmailField';
+import EmailField from '../../../src/components/fields/EmailField';
 import renderer from 'react-test-renderer';
 
 test('should only allow numeric, dash, and parentheses entries', ()=> {

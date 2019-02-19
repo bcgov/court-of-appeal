@@ -11,18 +11,17 @@ class ContactSelect extends React.Component {
         let options = this.getOptions(this.props.selectedRespondents);
 
         return (
-            <div className={"row"}>
-                Select respondent here to autofill with their address below&nbsp;
-                <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the name of the party responding to the appeal whose address will be used for service?"/>
+            <div className={"row chosenContact"}>
+                Select a contact name to autofill with their address below; or leave blank and fill in the addresss&nbsp;
                 <SelectableNameList
-                    ariaLabel={"Select a respondent whose address will be the service address, or enter a different address"}
-                    id={"respondent-list"}
+                    ariaLabel={"Select a respondent whose address will be the service address, or leave blank and enter a different address"}
+                    id={"chosenContact"}
                     isClearable={true}
                     isMulti={false}
                     name={"form2.selectedContact"}
                     options={options}
                     handleFieldChange={this.selectContact.bind(this)}
-                    containerStyle={{marginTop: '3px', marginBottom: '15px'}}
+                    containerStyle={{marginTop: '3px', marginBottom: '-5px'}}
                 />
                 
             </div>
@@ -38,8 +37,6 @@ class ContactSelect extends React.Component {
     }
 
     selectContact(selectedOption) {
-        //TODO : handle clear action
-        console.log("Selectd option", selectedOption)
         let e = {
             target: {
                 name: "form2.selectedContact",
@@ -47,7 +44,6 @@ class ContactSelect extends React.Component {
                 label: selectedOption ? selectedOption.label : null
              }
         };
-        
         this.props.handleFieldChange(e)
 
     }

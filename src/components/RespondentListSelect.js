@@ -12,9 +12,8 @@ class RespondentListSelect extends React.Component {
         if (this.props.respondents.length === 1) {
             return this.props.respondents[0].name;
         } else {
-
             let options = this.getOptions(this.props.respondents);
-            let selectedOptions = this.getOptions(this.props.selectedRespondents);
+            let selectedOptions = this.getOptions(this.props.selectedRespondents || []);
             
             return <SelectableNameList
                 ariaLabel={"Select respondents"}
@@ -31,7 +30,6 @@ class RespondentListSelect extends React.Component {
     }
     handleFieldChange(state, change) {
         let e = null;
-        console.log("***** Handling respondent list select change", state, change)
         switch (change.action) {
             case 'select-option':
                 e = {
@@ -59,7 +57,7 @@ class RespondentListSelect extends React.Component {
                 };
                 break;
             default:
-                console.log("WARNING: Action not handled: ", change.action);
+                console.warn("WARNING: Action not handled: ", change.action);
                 return;
         }
         this.props.handleFieldChange(e)

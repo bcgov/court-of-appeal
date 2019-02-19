@@ -70,8 +70,8 @@ describe('Form2DataSection', ()=> {
     });
 
     test('Offers respondent selection', ()=>{
-        let field = document.find('#respondent-name').at(0);
-
+        let field = document.find('#respondent-select').at(0);
+        
         expect(field.text()).toEqual('Select...');
     });
 

@@ -382,6 +382,7 @@ class Form2 extends Component {
      * @returns {*}
      */
     selectAllRespondents(respondents) {
+        if (!respondents) return []
         return respondents.map((respondent) => {
            return {
                ...respondent,

@@ -6,7 +6,6 @@ import AsyncSelect from "react-select";
 class SelectableNameList extends React.Component {
 
     render() {
-        console.log("Passed in style: ", this.props.containerStyle)
         const styles = {
             
             container: ((provided, state)=> {
@@ -40,8 +39,8 @@ class SelectableNameList extends React.Component {
                 }
             }),
             
-        }
-        return <AsyncSelect
+        };
+        return <Select
             ariaLabel={this.props.ariaLabel}
             id={this.props.id}
             isClearable={this.props.isClearable}

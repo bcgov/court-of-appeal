@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactTooltip from "react-tooltip";
-import TextField from "./TextField";
-import PostalCodeField from "./PostalCodeField";
-import PhoneField from "./PhoneField";
-import EmailField from "./EmailField";
+import TextField from "./fields/TextField";
+import PostalCodeField from "./fields/PostalCodeField";
+import PhoneField from "./fields/PhoneField";
+import EmailField from "./fields/EmailField";
 import ContactSelect from "./ContactSelect";
 import RespondentListSelect from "./RespondentListSelect";
 
@@ -49,7 +49,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                          <div className="row proceeding-style">
-                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-name" >
+                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-select" >
                                     <RespondentListSelect
                                         selectedRespondents={this.selectedRespondents()}
                                         respondents={this.props.data.respondents}
@@ -81,7 +81,7 @@ class Form2DataSection extends React.Component {
                                 />
                             </div>
 
-                            <div className="row address-row">
+                            <div className="row address-row address-section">
                                 <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                                     <span className="mandatory-field">*</span>
                                     Address Line 1

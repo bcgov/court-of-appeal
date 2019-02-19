@@ -20,7 +20,7 @@ let updateDocument = function(document, event) {
             document.respondents[event.target.value].selected = event.target.selected;
         }
     } else if ('selectedContact' === field) {
-        if (event.target.value) {
+        if (event.target.value !== null && event.target.value !== undefined) {
             document.selectedContactIndex = event.target.value;
         } else {
             document.selectedContactIndex = null;
