@@ -3,6 +3,9 @@ import SelectableNameList from './SelectableNameList';
 
 
 class RespondentListSelect extends React.Component {
+    componentWillReceiveProps() {
+        console.log("will receive props These are the props", this.props, this.state)
+    }
     
     render() {
         if (!this.props.respondents || this.props.respondents.length === 0) {
@@ -15,17 +18,47 @@ class RespondentListSelect extends React.Component {
             let options = this.getOptions(this.props.respondents);
             let selectedOptions = this.getOptions(this.props.selectedRespondents || []);
             
-            return <SelectableNameList
-                ariaLabel={"Select respondents"}
-                id={"respondent-list"}
-                isClearable={true}
-                isMulti={true}
-                name={"form2.respondentList"}
-                options={options}
-                handleFieldChange={this.handleFieldChange.bind(this)}
-                defaultValue={selectedOptions}
-                containerStyle={{marginTop:'-13px'}}
-            />
+            return (
+                <div  >
+                     <div className={"row "} style={{display: 'flex', flexDirection: 'row-reverse', marginBottom: '20px'}}>
+                         <input id="selectAll"
+                                type="checkbox"
+                                onChange={this.selectAllOrClearRespondents.bind(this)}
+                                name="respondent.selectAllRespondents"
+                                checked={this.props.respondents.length === this.props.selectedRespondents.length}
+                                action="selectAll"
+                                style={{paddingLeft: '10px', marginTop: '2px'}}
+                         />
+                         <div style={{paddingRight: '10px'}} >
+                             Select all
+                         </div>
+                         <input id="selectAll"
+                                type="checkbox"
+                                onChange={this.selectAllOrClearRespondents.bind(this)}
+                                name="respondent.clearRespondents"
+                                checked={this.props.selectedRespondents.length < 1}
+                                action="clear"
+                                style={{marginRight: '30px', marginTop: '2px'}}
+                         />
+                         <div style={{paddingRight: '10px'}} >
+                             Clear all
+                         </div>
+                     </div>
+                    <SelectableNameList
+                        ariaLabel={"Select respondents"}
+                        id={"respondent-list"}
+                        isClearable={true}
+                        isMulti={true}
+                        name={"form2.respondentList"}
+                        options={options}
+                        handleFieldChange={this.handleFieldChange.bind(this)}
+                        defaultValue={selectedOptions}
+                        value={selectedOptions}
+                        containerStyle={{marginTop:'-13px'}}
+                    />
+                </div>
+            );
+             
         }
     }
     handleFieldChange(state, change) {
@@ -68,6 +101,13 @@ class RespondentListSelect extends React.Component {
             return { value: index, label: item.name }
         });
         return list;
+    }
+
+    selectAllOrClearRespondents(e) {
+        let action = e.target.getAttribute('action')
+        if (e.target.value === 'on') {
+            this.props.handleFieldChange({target: {name: 'form2.respondentList'}, action});
+        }
     }
     
 } 

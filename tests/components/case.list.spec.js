@@ -235,6 +235,7 @@ describe('CaseList', ()=> {
             field = document.find('input#addressLine1').at(0).simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });            
             updateAnswer = {};
         });
+        // TODO: simulate change on the select within the found react wrapper
         // test('resets the form-needs-save flag', ()=>{
         //     document.find('button#draft').at(0).prop('onClick')();
         //     expect(document.instance().state.formHasUnsavedChanges).toEqual(false);  

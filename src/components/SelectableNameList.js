@@ -48,6 +48,7 @@ class SelectableNameList extends React.Component {
             name={this.props.name}
             options={this.props.options}
             onChange={this.props.handleFieldChange}
+            value={this.props.value}
             defaultValue={this.props.defaultValue}
             styles={styles}
         />

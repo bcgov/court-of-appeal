@@ -37,10 +37,10 @@ class Form2DataSection extends React.Component {
                     </div>
                     
                      <div className="row">
-                         <div className="row proceeding-style">
+                         <div className="row ">
                             <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
-                                <div style={{whiteSpace: 'nowrap'}}>
-                                    Respondent{this.props.data.respondents.length > 1 ? 's (Select one or more)' : '' } &nbsp;
+                                <div style={{fontWeight: "bolder"}}>
+                                    Responding: &nbsp;
                                     <i className="oi oi-question-mark" aria-hidden="true" 
                                        data-tip={this.props.data.respondents.length > 1 ? 
                                            'What are the names of the parties responding to the appeal?' : 
@@ -49,16 +49,16 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                          <div className="row proceeding-style">
-                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-correspondents" id="respondent-select" >
-                                    <RespondentListSelect
-                                        selectedRespondents={this.selectedRespondents()}
-                                        respondents={this.props.data.respondents}
-                                        handleFieldChange={this.props.handleFieldChange}
-                                        id={"respondent-list"}
-                                        isMulti={true}
-                                        name={"form2.respondentList"}
-                                    />
-                                </div>
+                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-respondents" id="respondent-select" >
+                                <RespondentListSelect
+                                    selectedRespondents={this.selectedRespondents()}
+                                    respondents={this.props.data.respondents}
+                                    handleFieldChange={this.props.handleFieldChange}
+                                    id={"respondent-list"}
+                                    isMulti={true}
+                                    name={"form2.respondentList"}
+                                />
+                            </div>
                          </div>
                      </div>
                     <div className="row">
@@ -263,8 +263,10 @@ class Form2DataSection extends React.Component {
     }
 
     selectedRespondents() {
-        return this.props.data.respondents.filter((respondent) => respondent.selected);
+       return this.props.data.respondents.filter((respondent) => respondent.selected);
     }
+    
+    
 }
 
 export default Form2DataSection;

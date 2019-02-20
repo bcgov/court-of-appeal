@@ -16,6 +16,8 @@ let updateDocument = function(document, event) {
     } else if ('respondentList' === field) {
         if ('clear' === event.action ) {
             document.respondents.forEach((respondent) => respondent.selected = false)
+        } else if ('selectAll' === event.action) {
+            document.respondents.forEach((respondent) => respondent.selected = true);
         } else {
             document.respondents[event.target.value].selected = event.target.selected;
         }
@@ -25,7 +27,6 @@ let updateDocument = function(document, event) {
         } else {
             document.selectedContactIndex = null;
         }
-        
     }
 
     return document;

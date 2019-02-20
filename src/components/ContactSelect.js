@@ -12,7 +12,7 @@ class ContactSelect extends React.Component {
 
         return (
             <div className={"row chosenContact"}>
-                Select a contact name to autofill with their address below; or leave blank and fill in the addresss&nbsp;
+                Select a contact name to autofill with their address below; or leave blank and fill in the address.&nbsp;
                 <SelectableNameList
                     ariaLabel={"Select a respondent whose address will be the service address, or leave blank and enter a different address"}
                     id={"chosenContact"}
@@ -21,7 +21,7 @@ class ContactSelect extends React.Component {
                     name={"form2.selectedContact"}
                     options={options}
                     handleFieldChange={this.selectContact.bind(this)}
-                    containerStyle={{marginTop: '3px', marginBottom: '-5px'}}
+                    containerStyle={{marginTop: '3px', marginBottom: '-5px', marginLeft: '81px', width: '75%'}}
                 />
                 
             </div>

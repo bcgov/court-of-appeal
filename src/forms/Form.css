@@ -116,7 +116,7 @@
 	font-size: smaller;
 }
 .address-section {
-	margin-top: 30px;
+	margin-top: 120px;
 }
 .invalid-field {
 	border-color: red;
@@ -145,4 +145,8 @@
 	background-color: #fbfec4;
 	animation-name: preloaded;
 	animation-duration: 6s;
+}
+
+.selected-respondents {
+	margin-left: 85px;
 }

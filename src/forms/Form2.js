@@ -295,6 +295,7 @@ class Form2 extends Component {
                             saveForm={this.create}
                             closeForm={this.closeForm}
                             validate={this.validateField}
+                            selectAllRespondents={this.selectAllRespondents}
                         />
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
@@ -382,6 +383,7 @@ class Form2 extends Component {
      * @returns {*}
      */
     selectAllRespondents(respondents) {
+        console.log("Selecting all", respondents)
         if (!respondents) return []
         return respondents.map((respondent) => {
            return {
