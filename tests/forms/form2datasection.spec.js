@@ -75,4 +75,19 @@ describe('Form2DataSection', ()=> {
         expect(field.text()).toEqual('Select...');
     });
 
+    test('selects first respondent when there is a single respondent', ()=>{
+        data = {
+            respondents: [ { name:'unique'} ],
+            appellants: [ { name:'alpha' }, { name:'beta' }],
+            phone: '111-111-1111',
+            email: 'me@here.net',
+            useServiceEmail: false,
+            sendNotifications: false,
+            selectedContactIndex: 0
+        }
+        document = createDocument();
+
+        expect(data.respondents[0].selected).toEqual(true)
+    });
+
 });

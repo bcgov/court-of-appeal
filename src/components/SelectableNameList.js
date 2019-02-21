@@ -3,13 +3,14 @@ import Select from "react-select";
 
 
 class SelectableNameList extends React.Component {
-    
+
     render() {
         if (!this.props.respondents || this.props.respondents.length === 0) {
             return null;
         }
-        
+
         if (this.props.respondents.length === 1) {
+            this.props.respondents[0].selected = true
             return this.props.respondents[0].name;
         } else {
             return <Select
@@ -45,19 +46,19 @@ class SelectableNameList extends React.Component {
         }
         this.props.handleFieldChange(e)
     }
-    
+
     respondentOptions() {
         let list = this.props.respondents.map((item, index) => {
             return { value: index, label: item.name }
         });
         return list;
     }
-    
+
     selectedRespondents() {
         let selected = this.props.respondents.filter((respondent) => respondent.selected);
         console.log(selected);
         return selected;
     }
-    
-} 
+
+}
 export default SelectableNameList;
