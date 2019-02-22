@@ -8,7 +8,7 @@ jest.mock('react-router-dom');
 describe('Journey', ()=> {
 
 
-    test.only('Journey builds', () => {
+    test('Journey builds', () => {
 
         let wrapper = mount(
             <MemoryRouter

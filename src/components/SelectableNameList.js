@@ -1,7 +1,5 @@
 import React from "react";
 import Select from "react-select";
-import AsyncSelect from "react-select";
-
 
 class SelectableNameList extends React.Component {
 

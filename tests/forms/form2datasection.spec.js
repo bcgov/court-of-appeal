@@ -72,12 +72,12 @@ describe('Form2DataSection', ()=> {
     test('Offers respondent selection', ()=>{
         let field = document.find('#respondent-select').at(0);
         
-        expect(field.text()).toEqual('Select...');
+        expect(field.text()).toEqual('Select allClear allSelect...');
     });
 
     test('selects first respondent when there is a single respondent', ()=>{
         data = {
-            respondents: [ { name:'unique'} ],
+            respondents: [ { name:'unique', selected: true } ],
             appellants: [ { name:'alpha' }, { name:'beta' }],
             phone: '111-111-1111',
             email: 'me@here.net',
