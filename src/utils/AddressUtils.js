@@ -3,16 +3,18 @@ import {GENERAL_ERROR_MSG, INVALID_ADDRESS_MSG} from "../helpers/constants";
 
 let validateForm2 = (document, fields ) => {
 
-        let selectedRespondent = document.respondents[document.selectedContactIndex || 0];
+        let selectedContact = document.respondents[document.selectedContactIndex || 0];
+        let atLeastOneSelectedRespondent = document.respondents.filter((respondent) => respondent.selected).length > 0
 
-        let validStreetAddress = selectedRespondent.address &&
-            selectedRespondent.address.addressLine1 &&
-            selectedRespondent.address.addressLine1.length > 5 &&
-            selectedRespondent.address.city &&
-            selectedRespondent.address.city.length > 4;
+        let validStreetAddress = selectedContact.address &&
+            selectedContact.address.addressLine1 &&
+            selectedContact.address.addressLine1.length > 5 &&
+            selectedContact.address.city &&
+            selectedContact.address.city.length > 4;
         let validForm = validStreetAddress &&
+            atLeastOneSelectedRespondent &&
             (!document.phone || fields.phoneIsValid) &&
-            (!selectedRespondent.address.postalCode || fields.postalCodeIsValid) &&
+            (!selectedContact.address.postalCode || fields.postalCodeIsValid) &&
             // either 1. no email checkbox is checked or 2. at least one is checked, and there's a valid email:
             ((!document.useServiceEmail && !document.sendNotifications) ||
                 ((document.useServiceEmail || document.sendNotifications)
