@@ -1,5 +1,5 @@
 import React from 'react';
-import PostalCodeField from '../../../src/components/PostalCodeField';
+import PostalCodeField from '../../../src/components/fields/PostalCodeField';
 import renderer from 'react-test-renderer';
 
 test('should only allow valid Canadian postal code characters', ()=> {

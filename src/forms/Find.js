@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DefaultService from '../service/default.service.js';
-import NumericField from '../components/NumericField';
+import NumericField from '../components/fields/NumericField';
 import SpinnerButton from '../components/SpinnerButton';
 
 class Find extends Component {

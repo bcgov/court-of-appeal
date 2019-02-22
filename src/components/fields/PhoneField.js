@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {INVALID_PHONE_MSG} from "../helpers/constants";
+import {INVALID_PHONE_MSG} from "../../helpers/constants";
 
 class PhoneField extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {INVALID_EMAIL_MSG} from "../helpers/constants";
+import {INVALID_EMAIL_MSG} from "../../helpers/constants";
 
 
 class EmailField extends Component {

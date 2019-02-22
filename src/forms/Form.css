@@ -115,6 +115,9 @@
 	padding: 0 0 5px 1px;
 	font-size: smaller;
 }
+.address-section {
+	margin-top: 120px;
+}
 .invalid-field {
 	border-color: red;
 	border-style: solid;

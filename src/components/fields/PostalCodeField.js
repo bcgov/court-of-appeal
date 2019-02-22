@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {INVALID_POSTAL_CODE_MSG} from '../helpers/constants';
+import {INVALID_POSTAL_CODE_MSG} from '../../helpers/constants';
 
 class PostalCodeField extends Component {
 
