@@ -122,7 +122,7 @@ class Form2 extends Component {
     mapIncomingData(parties) {
         if (parties === undefined) { return undefined; }
 
-        return parties.map((entity) => {
+        return parties.map((entity, index) => {
             let entityMap = {};
             if (entity.name) {
                 entityMap['name'] = entity.name;
@@ -141,6 +141,9 @@ class Form2 extends Component {
             } else {
                 entityMap['address'] = {}
             }
+
+            // when entities are their own object in the db, replace the index with the db id
+            entityMap['id'] = index
             return entityMap;
         });
     }
@@ -295,7 +298,6 @@ class Form2 extends Component {
                             saveForm={this.create}
                             closeForm={this.closeForm}
                             validate={this.validateField}
-                            selectAllRespondents={this.selectAllRespondents}
                         />
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
@@ -383,7 +385,6 @@ class Form2 extends Component {
      * @returns {*}
      */
     selectAllRespondents(respondents) {
-        console.log("Selecting all", respondents)
         if (!respondents) return []
         return respondents.map((respondent) => {
            return {

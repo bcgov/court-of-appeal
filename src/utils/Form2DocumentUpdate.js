@@ -11,8 +11,6 @@ let updateDocument = function(document, event) {
         document[field] = event.target.checked;
     } else if (['email', 'phone'].includes(field)) {
         document[field] = event.target.value;
-    } else if ('name' === field) {
-        document.selectedContactIndex = event.target.value;
     } else if ('respondentList' === field) {
         if ('clear' === event.action ) {
             document.respondents.forEach((respondent) => respondent.selected = false)
@@ -25,7 +23,7 @@ let updateDocument = function(document, event) {
         if (event.target.value !== null && event.target.value !== undefined) {
             document.selectedContactIndex = event.target.value;
         } else {
-            document.selectedContactIndex = null;
+            document.selectedContactIndex = undefined;
         }
     }
 

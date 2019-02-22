@@ -3,9 +3,6 @@ import SelectableNameList from './SelectableNameList';
 
 
 class RespondentListSelect extends React.Component {
-    componentWillReceiveProps() {
-        console.log("will receive props These are the props", this.props, this.state)
-    }
     
     render() {
         if (!this.props.respondents || this.props.respondents.length === 0) {
@@ -20,7 +17,7 @@ class RespondentListSelect extends React.Component {
             
             return (
                 <div  >
-                     <div className={"row "} style={{display: 'flex', flexDirection: 'row-reverse', marginBottom: '20px'}}>
+                     <div className={"row "} style={{display: 'flex', flexDirection: 'row-reverse', marginBottom: '15px'}}>
                          <input id="selectAll"
                                 type="checkbox"
                                 onChange={this.selectAllOrClearRespondents.bind(this)}
@@ -97,8 +94,8 @@ class RespondentListSelect extends React.Component {
     }
     
     getOptions(respondents) {
-        let list = respondents.map((item, index) => {
-            return { value: index, label: item.name }
+        let list = respondents.map((respondent, index) => {
+            return { value: respondent.id || index, label: respondent.name }
         });
         return list;
     }

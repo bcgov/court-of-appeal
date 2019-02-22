@@ -51,6 +51,7 @@ class SelectableNameList extends React.Component {
             value={this.props.value}
             defaultValue={this.props.defaultValue}
             styles={styles}
+            isDisabled={this.props.disabled}
         />
     }
 } 

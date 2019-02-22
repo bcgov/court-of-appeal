@@ -49,7 +49,7 @@ class Form2DataSection extends React.Component {
                             </div>
                         </div>
                          <div className="row proceeding-style">
-                            <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 selected-respondents" id="respondent-select" >
+                            <div className="col-lg-offset-1 col-md-offset-1 col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-select" >
                                 <RespondentListSelect
                                     selectedRespondents={this.selectedRespondents()}
                                     respondents={this.props.data.respondents}
@@ -78,6 +78,7 @@ class Form2DataSection extends React.Component {
                                     id={"respondent-list"}
                                     isMulti={false}
                                     name={"form2.contactList"}
+                                    selectedContactIndex={this.props.data.selectedContactIndex}
                                 />
                             </div>
 

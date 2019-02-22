@@ -4,25 +4,29 @@ import SelectableNameList from './SelectableNameList';
 class ContactSelect extends React.Component {
 
     render() {
-        if (!this.props.selectedRespondents || this.props.selectedRespondents.length === 0) {
-            return null;
-        }
-        
+        let disabled = this.props.selectedRespondents.length < 1;
+        let opacity = disabled ? '.5' : '1';
+
         let options = this.getOptions(this.props.selectedRespondents);
 
         return (
-            <div className={"row chosenContact"}>
-                Select a contact name to autofill with their address below; or leave blank and fill in the address.&nbsp;
-                <SelectableNameList
-                    ariaLabel={"Select a respondent whose address will be the service address, or leave blank and enter a different address"}
-                    id={"chosenContact"}
-                    isClearable={true}
-                    isMulti={false}
-                    name={"form2.selectedContact"}
-                    options={options}
-                    handleFieldChange={this.selectContact.bind(this)}
-                    containerStyle={{marginTop: '3px', marginBottom: '-5px', marginLeft: '81px', width: '75%'}}
-                />
+            <div className={"row chosenContact"} style={{opacity: opacity}}>
+                <div>
+                Select a contact name to auto-fill the address.&nbsp;
+                </div>
+                <div className={"col-lg-9 col-md-9 col-lg-offset-1 col-md-offset-1"} style={{paddingLeft: 0, paddingRight: 0}}>
+                    <SelectableNameList
+                        ariaLabel={"Select a respondent whose address will be the service address, or leave blank and enter a different address"}
+                        id={"chosenContact"}
+                        isClearable={true}
+                        isMulti={false}
+                        name={"form2.selectedContact"}
+                        options={options}
+                        handleFieldChange={this.selectContact.bind(this)}
+                        containerStyle={{marginTop: '3px', marginBottom: '-5px', width: '100%', paddingRight: 0}}
+                        disabled={this.props.disabled || disabled}
+                    />
+                </div>
                 
             </div>
             
@@ -30,8 +34,8 @@ class ContactSelect extends React.Component {
     }
 
     getOptions(respondents) {
-        let list = respondents.map((item, index) => {
-            return { value: index, label: item.name }
+        let list = respondents.map((respondent, index) => {
+            return { value: respondent.id || index, label: respondent.name }
         });
         return list;
     }
