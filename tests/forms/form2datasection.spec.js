@@ -14,9 +14,10 @@ describe('Form2DataSection', ()=> {
                     addressLine2: 'new-addressLine2',
                     city: 'old-city',
                     postalCode: 'V1V 1A1'
-                }
+                },
+                selected: true
             },
-            { name:'second'}
+            { name:'second', selected: true}
         ],
         appellants: [ { name:'alpha' }, { name:'beta' }],
         phone: '111-111-1111',
@@ -72,22 +73,7 @@ describe('Form2DataSection', ()=> {
     test('Offers respondent selection', ()=>{
         let field = document.find('#respondent-select').at(0);
         
-        expect(field.text()).toEqual('Select allClear allSelect...');
-    });
-
-    test('selects first respondent when there is a single respondent', ()=>{
-        data = {
-            respondents: [ { name:'unique', selected: true } ],
-            appellants: [ { name:'alpha' }, { name:'beta' }],
-            phone: '111-111-1111',
-            email: 'me@here.net',
-            useServiceEmail: false,
-            sendNotifications: false,
-            selectedContactIndex: 0
-        }
-        document = createDocument();
-
-        expect(data.respondents[0].selected).toEqual(true)
+        expect(field.text()).toEqual('Select allClear allfirstsecond');
     });
 
 });
