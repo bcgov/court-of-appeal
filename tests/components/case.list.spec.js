@@ -186,16 +186,18 @@ describe('CaseList', ()=> {
         //     document.find('#edit-15').prop('onClick')();
         //     document.update();
         //     let field = document.find('#chosenContact').at(0);
-        //     field.simulate('change', { target: { name:'respondent.name', value:1 } });
+        //     field.simulate('change', { target: { name:'respondent.selectedContact', value:1 } });
         //    
         //     expect(cases[1].data.selectedContactIndex).toEqual(1);
         // });
-        // test('resists unknown address', ()=>{
+        // test.only('resists unknown address', ()=>{
         //     let indexOfRespondentWithoutAddress = 2;
         //     document.find('#edit-15').prop('onClick')();
         //     document.update();
-        //     let field = document.find('#chosenContact').at(0);
-        //     field.simulate('change', { target: { name:'respondent.name', value:indexOfRespondentWithoutAddress } });
+        //     let field = document.find('input[name="form2.selectedContact"]').at(0);
+        //     // turns out there is no such input, so the test is broken when built with react-select
+        //     console.log(field.html())
+        //     field.simulate('change', { target: { name:'respondent.selectedContact', value:indexOfRespondentWithoutAddress } });
         //     field = document.find('input#addressLine1').at(0);
         //     field.simulate('change', { target: { name:'respondent.addressLine1', value:'this-address' } });
         //
