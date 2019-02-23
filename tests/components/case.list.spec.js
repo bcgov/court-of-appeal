@@ -41,7 +41,8 @@ describe('CaseList', ()=> {
                                     addressLine2: 'new-addressLine2',
                                     city: 'old-city',
                                     postalCode: 'V1V 1A1'
-                                }
+                                },
+                                selected: true
                             },
                             {
                                 name: 'second',
@@ -50,10 +51,12 @@ describe('CaseList', ()=> {
                                     addressLine2: 'new-addressLine2',
                                     city: 'old-city',
                                     postalCode: 'V1V 1A1'
-                                }
+                                },
+                                selected: false
                             },
                             {
-                                name: 'third-without-address'
+                                name: 'third-without-address',
+                                selected: false
                             },
                         ],
                         appellants: [],
