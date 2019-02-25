@@ -10,7 +10,7 @@ class JourneyMap2 extends React.Component {
         super(props);
         this.state = {
             showInfoModal: false,
-            popupType: ''
+            popupType: 'appearance'
         };
         this.closeInfoModal = this.closeInfoModal.bind(this);
         this.openInfoModal = this.openInfoModal.bind(this);
@@ -62,16 +62,19 @@ class JourneyMap2 extends React.Component {
                                       className={"journey-box p1"}
                                       twoPages={false}
                                       stepTitle={"Notice of Appearance"}
+                                      action={this.iconClicked.bind(this, 'appearance')}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p2"}
                                       twoPages={false}
                                       stepTitle={"Notice of Cross Appeal"}
+                                      action={this.iconClicked.bind(this, 'crossappeal')}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p3"}
                                       twoPages={true}
                                       stepTitle={"Factum and Appeal Book"}
+                                      action={this.iconClicked.bind(this, 'respondentfactum')}
                             />
                         </div>
                         <div className={"journey-right-curve"} />
@@ -81,11 +84,13 @@ class JourneyMap2 extends React.Component {
                                       className={"journey-box p4"}
                                       twoPages={false}
                                       stepTitle={"The Hearing"}
+                                      action={this.iconClicked.bind(this, 'respondenthearing')}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p5"}
                                       twoPages={false}
                                       stepTitle={"Court Order"}
+                                      action={this.iconClicked.bind(this, 'courtorder')}
                             />
                         </div>
                         <div className={"journey-end-circle"} >
@@ -161,6 +166,9 @@ class JourneyMap2 extends React.Component {
         this.props.history.goBack();
     }
 
+    iconClicked(type) {
+        this.setState({popupType: type, showInfoModal: true});
+    }
 
 }
 

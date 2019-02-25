@@ -24,7 +24,8 @@
     position: absolute;
     top: 38%;
     height: 100px;
-    max-width: 100px;
+    max-width: 109px;
+    cursor: pointer;
 }
 
 .file-container {
@@ -97,6 +98,7 @@
     position: relative;
     top: 110%;
     left: -20%;
+    margin-left:11px;
     font-size: large;
     text-align: center;
 }

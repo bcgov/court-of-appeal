@@ -6,7 +6,7 @@ class PageIcon extends React.Component {
     render() {
         let stepTitle = null;
         if (this.props.stepTitle) {
-            stepTitle = <a href={this.props.stepTitle}>{this.props.stepTitle}</a>;
+            stepTitle = <div>{this.props.stepTitle}</div>;
         }
         
         let secondPage = null;
@@ -22,7 +22,7 @@ class PageIcon extends React.Component {
         }
         return (
             <div className={this.props.className}>
-                <div className={"file-container"}>
+                <div className={"file-container"} onClick={this.props.action}>
                     <div className={"file-main top-pg"} />
                     <div className={"file-corner-l top-pg-corner-l"} />
                     <div className={"file-corner-s top-pg-corner-s"} />
