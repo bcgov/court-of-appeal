@@ -61,14 +61,17 @@ class JourneyMap2 extends React.Component {
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p1"}
                                       twoPages={false}
+                                      stepTitle={"Notice of Appearance"}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p2"}
                                       twoPages={false}
+                                      stepTitle={"Notice of Cross Appeal"}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p3"}
                                       twoPages={true}
+                                      stepTitle={"Factum and Appeal Book"}
                             />
                         </div>
                         <div className={"journey-right-curve"} />
@@ -77,10 +80,12 @@ class JourneyMap2 extends React.Component {
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p4"}
                                       twoPages={false}
+                                      stepTitle={"The Hearing"}
                             />
                             <PageIcon style={{height: '100px'}}
                                       className={"journey-box p5"}
                                       twoPages={false}
+                                      stepTitle={"Court Order"}
                             />
                         </div>
                         <div className={"journey-end-circle"} >

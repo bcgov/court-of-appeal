@@ -4,6 +4,10 @@ import './fileicon.css';
 class PageIcon extends React.Component {
 
     render() {
+        let stepTitle = null;
+        if (this.props.stepTitle) {
+            stepTitle = <a href={this.props.stepTitle}>{this.props.stepTitle}</a>;
+        }
         
         let secondPage = null;
         if (this.props.twoPages) {
@@ -24,6 +28,9 @@ class PageIcon extends React.Component {
                     <div className={"file-corner-s top-pg-corner-s"} />
                     <div className={"file-corner-cover top-pg-corner-cover"} />
                     {secondPage}
+                </div>
+                <div className={"step-title"} >
+                    {stepTitle}
                 </div>
             </div>
         )

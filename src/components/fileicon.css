@@ -24,6 +24,7 @@
     position: absolute;
     top: 38%;
     height: 100px;
+    max-width: 100px;
 }
 
 .file-container {
@@ -91,4 +92,11 @@
     width: 30px;
     height: 28.5px;
     background-color: white;
+}
+.step-title {
+    position: relative;
+    top: 110%;
+    left: -20%;
+    font-size: large;
+    text-align: center;
 }
