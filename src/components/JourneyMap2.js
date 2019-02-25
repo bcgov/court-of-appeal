@@ -2,7 +2,7 @@ import React from 'react';
 import './journeymap.css';
 import InfoPopup from './infopopups/common/InfoPopup';
 import ReactTooltip from 'react-tooltip';
-import FileIcon from './FileIcon';
+import PageIcon from './PageIcon';
 
 class JourneyMap2 extends React.Component {
 
@@ -42,7 +42,9 @@ class JourneyMap2 extends React.Component {
                     <div>
                         { this.props.introText }
                         &nbsp;
-                        For more information about the process, please visit the <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#">Supreme Court website</a> or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
+                        For more information about the process, please visit the 
+                        <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#">Supreme Court website</a> 
+                        or <a href="mailto:courts.cso@gov.bc.ca">contact the registry</a>.
                     </div>
                 );
             }
@@ -56,13 +58,31 @@ class JourneyMap2 extends React.Component {
                     <div className={"journey-map-container"}>
                         <div className={"journey-start-circle"} />
                         <div className={"journey-trail-l1"} >
-                            <FileIcon 
-                                className={"journey-box"}
+                            <PageIcon style={{height: '100px'}}
+                                      className={"journey-box p1"}
+                                      twoPages={false}
+                            />
+                            <PageIcon style={{height: '100px'}}
+                                      className={"journey-box p2"}
+                                      twoPages={false}
+                            />
+                            <PageIcon style={{height: '100px'}}
+                                      className={"journey-box p3"}
+                                      twoPages={true}
                             />
                         </div>
                         <div className={"journey-right-curve"} />
                         <div className={"journey-left-curve"} />
-                        <div className={"journey-trail-l2-l3"} />
+                        <div className={"journey-trail-l2-l3"} >
+                            <PageIcon style={{height: '100px'}}
+                                      className={"journey-box p4"}
+                                      twoPages={false}
+                            />
+                            <PageIcon style={{height: '100px'}}
+                                      className={"journey-box p5"}
+                                      twoPages={false}
+                            />
+                        </div>
                         <div className={"journey-end-circle"} >
                             <div className={"oi oi-check journey-final-check"}/>
                         </div>
