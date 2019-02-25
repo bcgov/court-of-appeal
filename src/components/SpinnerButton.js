@@ -24,7 +24,7 @@ class SpinnerButton extends React.Component {
                         className="btn btn-primary btn-green"
                         style={{ width:this.props.width+'px' }}
                 >
-                    <i className="oi oi-ellipses"></i>
+                    <div className="efiling-spinner"></div>
                 </button>
                 </div>
             )
