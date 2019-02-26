@@ -30,12 +30,8 @@ class FormButtonBar extends React.Component {
         return (
             <div className="button-bar not-printable" ref={ (element)=> {this.element = element }}>
                 {this.backButton()}
-                {this.cancelButton()}
                 {this.saveButton()}
-                {this.viewInFullPage()}
                 {this.previewButton()}
-                {this.submitButton()}
-                {this.continueButton()}
                 {this.printButton()}
                 <ReactTooltip/>
             </div>
@@ -59,19 +55,6 @@ class FormButtonBar extends React.Component {
         return button;
     }
 
-    cancelButton() {
-        let button = null;
-        if (this.props.cancel) {
-            button =  (
-                <div>
-                    <button id="cancel" onClick={this.props.cancel} className={this.className}>Cancel
-                    </button>
-                </div>
-            );
-        }
-        return button;
-    }
-
     startSaveSpinner() {
         this.draftButton.startSpinner();
     }
@@ -84,21 +67,8 @@ class FormButtonBar extends React.Component {
             button =  (
                 <div>
                     <SpinnerButton id="draft" width="106" onClick={this.props.save} ref={ (element)=> {this.draftButton = element }}
-                        content='Save as Draft'>                        
+                        content='Save as Draft'>
                     </SpinnerButton>
-                </div>
-            );
-        }
-        return button;
-    }
-
-    viewInFullPage() {
-        let button = null;
-        if (this.props.fullpage) {
-            button =  (
-                <div>
-                    <button id="save-as-draft" onClick={this.props.fullpage} className={this.className}>View in full page
-                    </button>
                 </div>
             );
         }
@@ -123,42 +93,6 @@ class FormButtonBar extends React.Component {
         return button;
     }
 
-    submitButton() {
-        let button = null;
-        if (this.props.submit) {
-            button =  (
-                <div  data-tip={this.props.formErrorMessage}>
-                    <button
-                        id="submit"
-                        onClick={this.props.submit}
-                        className={this.actionClassName}
-                        disabled={this.props.disableSubmit}
-                    >Submit <i className="glyphicon glyphicon-triangle-right"/>
-                    </button>
-                </div>
-            );
-        }
-        return button;
-    }
-
-    continueButton() {
-        let button = null;
-        if (this.props.continue) {
-            let continueMessage = this.props.continueMessage;
-            if (!continueMessage) {
-                continueMessage = "Continue";
-            }
-            button = (
-                <div>
-                    <button id="submit" onClick={this.props.continue} className={this.className}>
-                        <i className="glyphicon glyphicon-triangle-right" />  {continueMessage}
-                    </button>
-                </div>
-            );
-        }
-        return button;
-    }
-
     print() {
         this.downloadButton.startSpinner();
         var styles = `
@@ -173,7 +107,7 @@ class FormButtonBar extends React.Component {
                     font-family: Myriad-Pro, sans-serif;
                     font-size: 8pt;
                     padding: 5px;
-                }                
+                }
                 #form2-preview td {
                     padding: 5px;
                 }
@@ -185,11 +119,11 @@ class FormButtonBar extends React.Component {
                 }
             </style>
         `
-        var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';        
+        var html = '<html><head>' + styles + '</head><body>' + document.getElementById('form2-preview').outerHTML + '</body></html>';
         this.service.generatePdf(html, (data)=>{
             this.downloadButton.stopSpinner();
             console.log(data);
-            if (!data.error) {                
+            if (!data.error) {
                 var blob = new Blob([data], {type: 'application/pdf'});
                 FileSaver.saveAs(blob, 'form.pdf');
             }
@@ -201,7 +135,7 @@ class FormButtonBar extends React.Component {
             button =  (
                 <div>
                     <SpinnerButton id="download-button" width="106" onClick={this.print} ref={ (element)=> {this.downloadButton = element }}
-                        content='Download'>                        
+                        content='Download'>
                     </SpinnerButton>
                 </div>
             );
