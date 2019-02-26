@@ -4,6 +4,7 @@ import InfoPopup from '../infopopups/common/InfoPopup';
 import ReactTooltip from 'react-tooltip';
 import RespondToAppealJourney from './RespondToAppealJourneyMap';
 import RespondToLeaveJourneyMap from "./RespondToLeaveJourneyMap";
+import AppellantRightToAppealJourneyMap from "./AppellantRightToAppealJourneyMap";
 
 class JourneyMap2 extends React.Component {
 
@@ -130,7 +131,8 @@ class JourneyMap2 extends React.Component {
         let props = { iconClicked: this.iconClicked.bind(this) };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
-            'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>
+            'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>,
+            'appellantRightToAppeal': <AppellantRightToAppealJourneyMap {...props}/>
         };
         return options[this.props.journeyType]
     }  

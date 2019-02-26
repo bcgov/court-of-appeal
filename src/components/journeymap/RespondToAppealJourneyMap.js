@@ -1,5 +1,7 @@
 import React from 'react';
-import PageIcon from './PageIcon'
+import PageIcon from './PageIcon';
+import GavelIcon from './GavelIcon';
+let cn = require('classnames');
 
 class RespondToAppealJourneyMap extends React.Component {
     
@@ -8,45 +10,45 @@ class RespondToAppealJourneyMap extends React.Component {
             <div className={"journey-map-container"}>
                 <div className={"journey-start-circle"} />
                 <div className={"journey-trail-l1"} >
-                    <PageIcon style={{height: '100px'}}
-                              className={"journey-box p1"}
+                    <PageIcon style={{left:'20%'}}
                               twoPages={false}
                               stepTitle={"Notice of Appearance"}
                               action={this.iconClicked.bind(this, 'appearance')}
                     />
-                    <PageIcon style={{height: '100px'}}
-                              className={"journey-box p2"}
+                    <PageIcon style={{left:'45%'}}
                               twoPages={false}
                               stepTitle={"Notice of Cross Appeal"}
+                              stepTitleOptional={"(optional)"}
                               action={this.iconClicked.bind(this, 'crossappeal')}
                     />
-                    <PageIcon style={{height: '100px'}}
-                              className={"journey-box p3"}
+                    <PageIcon style={{left:'70%', top: '30px'}}
                               twoPages={true}
                               stepTitle={"Factum and Appeal Book"}
                               action={this.iconClicked.bind(this, 'respondentfactum')}
+                              twoPageClassName={"l1"}
                     />
                 </div>
                 <div className={"journey-right-curve"} />
                 <div className={"journey-left-curve"} />
                 <div className={"journey-trail-l2-l3"} >
-                    <PageIcon style={{height: '100px'}}
-                              className={"journey-box p4"}
+                    <GavelIcon style={{top:'75%', left: '30%'}}
                               twoPages={false}
                               stepTitle={"The Hearing"}
                               action={this.iconClicked.bind(this, 'respondenthearing')}
                     />
-                    <PageIcon style={{height: '100px'}}
-                              className={"journey-box p5"}
+                    <PageIcon style={{top:'75%', left: '50%'}}
                               twoPages={false}
                               stepTitle={"Court Order"}
+                              stepTitleOptional={"(if required)"}
                               action={this.iconClicked.bind(this, 'courtorder')}
                     />
-                </div>
-                <div className={"journey-end-circle"} >
+                    <div className={"journey-end-circle"} onClick={this.iconClicked.bind(this,'respondentcomplete')} >
                     <div className={"oi oi-check journey-final-check"}/>
+                    <div className={cn("end-step-title", "end-step-title-l2")}>
+                    {"Appeal Process Complete"}
+                    </div>
                 </div>
-                
+                </div>
             </div>
         );
     }

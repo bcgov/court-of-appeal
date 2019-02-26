@@ -104,6 +104,7 @@ class Journey extends Component {
                 userState: "Yes",
                 introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete.",
                 refusedStep: false,
+                journeyType: 'appellantRightToAppeal',
                 mapProps: [
                     { coords: "200,10,290,190", function: 'appellantinitial', alt: "how to start your appeal" },
                     { coords: "380,10,480,190", function: 'appealrecord', alt: "info about the appeal record and the transcript" },

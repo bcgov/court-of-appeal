@@ -1,32 +1,3 @@
-.journey-box.p1 {
-    left: 15%;
-}
-
-.journey-box.p2 {
-    left: 45%;
-}
-
-.journey-box.p3 {
-    left: 75%;
-}
-
-.journey-box.p4 {
-    left: 30%;
-    top: 75%;
-}
-
-.journey-box.p5 {
-    left: 53%;
-    top: 75%
-}
-
-.journey-box {
-    position: absolute;
-    top: 38%;
-    height: 100px;
-    max-width: 109px;
-    cursor: pointer;
-}
 
 .file-container {
     position: relative;
@@ -94,15 +65,37 @@
     height: 28.5px;
     background-color: white;
 }
-.step-title {
+.step-title-container {
     position: relative;
     top: 110%;
     left: -20%;
     margin-left:11px;
     font-size: large;
     text-align: center;
+}
+.step-title {
     color: #23527c;
 }
 .step-title:hover {
     text-decoration: underline;
+}
+.step-title-optional:hover {
+    text-decoration: none;
+}
+.step-title-optional {
+    color: black;
+}
+.step-title-wide {
+    width: 180px;
+    left: -65px;
+}
+.cal-container {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    border: 5px solid black;
+    height: 100px;
+    background-color: white;
+    width: 100px;
+    padding: 0 5px;
 }
