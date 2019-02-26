@@ -1,13 +1,13 @@
 .journey-box.p1 {
-    left: 20%;
+    left: 15%;
 }
 
 .journey-box.p2 {
-    left: 50%;
+    left: 45%;
 }
 
 .journey-box.p3 {
-    left: 80%;
+    left: 75%;
 }
 
 .journey-box.p4 {
@@ -101,4 +101,8 @@
     margin-left:11px;
     font-size: large;
     text-align: center;
+    color: #23527c;
+}
+.step-title:hover {
+    text-decoration: underline;
 }

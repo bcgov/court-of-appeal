@@ -1,0 +1,26 @@
+.gavel-icon {
+    position: relative;
+    width: 80%;
+    top: 15%;
+    left: 10%;
+}
+.leave-hearing {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    top:15%;
+}
+.action-end-point {
+    max-width: 120px;
+}
+.end-step-title {
+    position: relative;
+    top: 7.2%;
+    left: -8%;
+    font-size: large;
+    text-align: center;
+    color: #23527c;
+}
+.end-step-title:hover {
+    text-decoration: underline;
+}

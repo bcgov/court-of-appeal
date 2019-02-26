@@ -48,8 +48,8 @@
 .journey-trail-l1 {
     border-bottom: 9px solid #9fbfe2;
     height: 79px;
-    width: 70%;
-    margin: 0 -10px;
+    width: 75%;
+    margin: 0 -10px 120px -10px;
     position: relative;
 }
 .journey-right-curve {
@@ -75,7 +75,7 @@
     border-left-color: transparent;
     border-right-color: transparent;
     height: 100px;
-    width: 62%;
+    width: 65%;
     margin: -9px -10px 120px -10px;
 }
 .journey-end-circle {
@@ -83,7 +83,7 @@
     border-radius: 100px;
     height: 100px;
     width: 100px;
-    margin-top: 35px;
+    margin-top: 20px;
     color: white;
     font: 50px Myriad-Pro, Calibri, Arial, 'sans serif';
 }

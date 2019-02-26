@@ -1,5 +1,5 @@
 import React from 'react';
-import './fileicon.css';
+import './pageeicon.css';
 
 class PageIcon extends React.Component {
 

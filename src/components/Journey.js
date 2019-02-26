@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
-import JourneyMap from './JourneyMap';
-import JourneyMap2 from './JourneyMap2'
+import JourneyMap2 from './journeymap/JourneyMap2'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";
 
@@ -19,6 +18,7 @@ class Journey extends Component {
             completeAppealTitle: '',
             appealButtonClass: 'btn round-borders btn-journey',
             respondButtonClass: 'btn round-borders btn-journey',
+            journeyType: ''
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
@@ -185,11 +185,11 @@ class Journey extends Component {
         this.setState((prevState) => {
             return {
                 displayJourneyMap: true,
-                mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
                 introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
                 refusedStep: false,
+                journeyType: 'respondToNoticeOfAppeal',
                 mapProps: [
                     { coords: "90,10,190,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
                     { coords: "270,10,380,200", function: "crossappeal", alt: "info about the cross appeal" },
@@ -213,6 +213,7 @@ class Journey extends Component {
                 userState: "Notice of Application for Leave to Appeal",
                 introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
                 refusedStep: false,
+                journeyType: 'respondToNoticeOfApplicationForLeaveToAppeal',
                 mapProps: [
                     { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
                     { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
@@ -303,6 +304,7 @@ class Journey extends Component {
                         history={this.props.history}
                         redirectToForm7={this.redirectToForm7}
                         refusedStep={this.state.refusedStep}
+                        journeyType={this.state.journeyType}
                     />
                 </div>
             );

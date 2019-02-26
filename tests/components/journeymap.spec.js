@@ -1,7 +1,7 @@
 require('../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import JourneyMap from "../../src/components/JourneyMap";
+import JourneyMap from "../../src/components/journeymap/JourneyMap";
 
 describe('JourneyMap', ()=> {
 
