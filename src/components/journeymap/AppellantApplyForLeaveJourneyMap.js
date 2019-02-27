@@ -13,16 +13,19 @@ class AppellantApplyForLeaveJourneyMap extends React.Component {
                               twoPages={false}
                               stepTitle={"Initial Documents"}
                               action={this.iconClicked.bind(this, 'applyforleave')}
+                              active={true}
                     />
                     <PageIcon style={{left: '55%'}}
                               twoPages={true}
                               stepTitle={"Hearing Documents"}
                               action={this.iconClicked.bind(this, 'leavehearingdocs')}
+                              active={true}
                     />
                      <GavelEndCircle style={{position: 'absolute', left: '90%', top: '-10%'}}
                               stepTitle={"Decision on Leave to Appeal"}
                               action={this.iconClicked.bind(this, 'decision')}
                               titleStyle={{position: 'absolute', top:'143px', width: '150px', left: '-17px'}}
+                              active={true}
                      />
                 </div>
             </div>

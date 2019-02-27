@@ -7,6 +7,7 @@ import RespondToLeaveJourneyMap from "./RespondToLeaveJourneyMap";
 import AppellantRightToAppealJourneyMap from "./AppellantRightToAppealJourneyMap";
 import AppellantApplyForLeaveJourneyMap from "./AppellantApplyForLeaveJourneyMap";
 import AppellantLeaveGrantedJourneyMap from "./AppellantLeaveGrantedJourneyMap";
+import AppellantLeaveRefusedJourneyMap from "./AppellantLeaveRefusedJourneyMap";
 
 class JourneyMap2 extends React.Component {
 
@@ -136,7 +137,8 @@ class JourneyMap2 extends React.Component {
             'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>,
             'appellantRightToAppeal': <AppellantRightToAppealJourneyMap {...props}/>,
             'leaveToAppealRequired': <AppellantApplyForLeaveJourneyMap {...props} />,
-            'appellantLeaveGranted': <AppellantLeaveGrantedJourneyMap {...props} />
+            'appellantLeaveGranted': <AppellantLeaveGrantedJourneyMap {...props} />,
+            'appellantLeaveRefused': <AppellantLeaveRefusedJourneyMap {...props} />
         };
         return options[this.props.journeyType]
     }  

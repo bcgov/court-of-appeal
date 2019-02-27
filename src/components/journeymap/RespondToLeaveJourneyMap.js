@@ -14,21 +14,24 @@ class RespondToLeaveJourneyMap extends React.Component {
                               twoPages={false}
                               stepTitle={"Notice of Appearance"}
                               action={this.iconClicked.bind(this, 'appearance')}
+                              active={true}
                     />
                     <PageIcon style={{left: '45%'}}
                               twoPages={false}
                               stepTitle={"Reply Book"}
                               action={this.iconClicked.bind(this, 'replybook')}
+                              active={true}
                     />
                     <GavelIcon style={{left: '69%'}}
-                              twoPages={true}
                               stepTitle={"The Hearing"}
-                              action={this.iconClicked.bind(this, 'respondentleavetoappealhearing')}
+                              action={this.iconClicked.bind(this, 'respondentleavetoappealhearing')} 
+                              active={true}
                     />
                      <ClockEndCircle style={{position: 'absolute', left: '90%', top: '-10%'}}
                               stepTitle={"Decision on Leave to Appeal"}
                               action={this.iconClicked.bind(this, 'respondentdecision')}
                               titleStyle={{position: 'absolute', top:'143px', width: '150px', left: '-17px'}}
+                              active={true}
                      />
                 </div>
             </div>

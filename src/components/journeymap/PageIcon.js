@@ -6,13 +6,19 @@ class PageIcon extends React.Component {
 
     render() {
         let stepTitle, stepTitleOptional = null;
+        let active = !!this.props.active;
+        console.log("Active is ", active)
+        
         if (this.props.stepTitleOptional) {
             stepTitleOptional = <span className={"step-title-optional"}>{this.props.stepTitleOptional}</span>;
         }
         if (this.props.stepTitle) {
             stepTitle = (
                 <div>
-                    <span className={"step-title"}>{this.props.stepTitle}</span><br/>
+                    <span className={cn({"step-title": active }, {"step-title-optional" : !active})}>
+                        {this.props.stepTitle}
+                    </span>
+                    <br/>
                     {stepTitleOptional}
                 </div>
             );
@@ -30,7 +36,7 @@ class PageIcon extends React.Component {
             )
         }
         return (
-            <div className={"journey-box"} style={this.props.style} onClick={this.props.action}>
+            <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} onClick={this.props.action}>
                 <div className={"file-container"} >
                     <div className={"file-main top-pg"} />
                     <div className={"file-corner-l top-pg-corner-l"} />

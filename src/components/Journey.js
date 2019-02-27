@@ -177,6 +177,7 @@ class Journey extends Component {
                 introText: "Your leave to appeal was refused, and your application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear your case.",
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
+                journeyType: "appellantLeaveRefused",
                 mapProps: []
             };
         }, () => {

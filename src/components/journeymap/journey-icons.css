@@ -82,4 +82,10 @@
     max-width: 109px;
     cursor: pointer;
 }
+.journey-box.active {
+    cursor:pointer;
+}
+.journey-box.inactive {
+    cursor: auto;
+}
 
