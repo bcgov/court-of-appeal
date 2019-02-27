@@ -5,6 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import RespondToAppealJourney from './RespondToAppealJourneyMap';
 import RespondToLeaveJourneyMap from "./RespondToLeaveJourneyMap";
 import AppellantRightToAppealJourneyMap from "./AppellantRightToAppealJourneyMap";
+import AppellantApplyForLeaveJourneyMap from "./AppellantApplyForLeaveJourneyMap";
+import AppellantLeaveGrantedJourneyMap from "./AppellantLeaveGrantedJourneyMap";
 
 class JourneyMap2 extends React.Component {
 
@@ -12,7 +14,7 @@ class JourneyMap2 extends React.Component {
         super(props);
         this.state = {
             showInfoModal: false,
-            popupType: 'appearance'
+            popupType: ''
         };
         this.closeInfoModal = this.closeInfoModal.bind(this);
         this.openInfoModal = this.openInfoModal.bind(this);
@@ -132,7 +134,9 @@ class JourneyMap2 extends React.Component {
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
             'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>,
-            'appellantRightToAppeal': <AppellantRightToAppealJourneyMap {...props}/>
+            'appellantRightToAppeal': <AppellantRightToAppealJourneyMap {...props}/>,
+            'leaveToAppealRequired': <AppellantApplyForLeaveJourneyMap {...props} />,
+            'appellantLeaveGranted': <AppellantLeaveGrantedJourneyMap {...props} />
         };
         return options[this.props.journeyType]
     }  

@@ -130,6 +130,7 @@ class Journey extends Component {
                 userState: "No",
                 introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process.",
                 refusedStep: false,
+                journeyType: 'leaveToAppealRequired',
                 mapProps: [
                     { coords: "180,10,250,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
                     { coords: "370,10,450,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
@@ -150,6 +151,7 @@ class Journey extends Component {
                 userState: "Yes",
                 introText: "Now that the court has granted you the right to appeal, follow the steps below to complete the appeal. Start by clicking on the first form.",
                 refusedStep: false,
+                journeyType: 'appellantLeaveGranted',
                 mapProps: [
                     { coords: "100,10,220,200", function: 'appealrecord', alt: "you need an appeal record and transcript after starting your appeal" },
                     { coords: "270,10,430,200", function: 'factum', alt: "info about the factum, appeal book, and certificate of readiness" },

@@ -10,6 +10,12 @@
     left: 15%;
     top:15%;
 }
+.appellant-leave-hearing {
+    position: relative;
+    width: 50%;
+    left: 22%;
+    top: 18%;
+}
 .cal-container {
     position: absolute;
     top: -15px;
