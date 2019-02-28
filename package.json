@@ -38,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "PUBLIC_URL='' jest -u",
+    "test": "PUBLIC_URL='' jest",
     "eject": "react-scripts eject",
     "test:coverage": "PUBLIC_URL='' jest --coverage"
   },

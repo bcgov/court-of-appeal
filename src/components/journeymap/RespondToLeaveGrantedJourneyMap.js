@@ -21,7 +21,6 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                               stepTitle={"Factum, Appeal Book and Certificate of Readiness"}
                               action={this.iconClicked.bind(this, 'respondentfactum')}
                               active={true}
-                              twoPageClassName={"l1"}
                     />
                 </div>
                 <div className={"journey-right-curve"} />
