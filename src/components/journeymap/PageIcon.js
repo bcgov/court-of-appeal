@@ -7,7 +7,6 @@ class PageIcon extends React.Component {
     render() {
         let stepTitle, stepTitleOptional = null;
         let active = !!this.props.active;
-        console.log("Active is ", active)
         
         if (this.props.stepTitleOptional) {
             stepTitleOptional = <span className={"step-title-optional"}>{this.props.stepTitleOptional}</span>;

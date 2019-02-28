@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 import '../forms/journey.css';
-import JourneyMap2 from './journeymap/JourneyMap2'
+import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";
 
@@ -105,16 +105,6 @@ class Journey extends Component {
                 introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete.",
                 refusedStep: false,
                 journeyType: 'appellantRightToAppeal',
-                mapProps: [
-                    { coords: "200,10,290,190", function: 'appellantinitial', alt: "how to start your appeal" },
-                    { coords: "380,10,480,190", function: 'appealrecord', alt: "info about the appeal record and the transcript" },
-                    { coords: "90,270,230,450", function: 'factum', alt: "info about the factum" },
-                    { coords: "290,270,390,450", function: 'bookappeal', alt: "info about booking your appeal" },
-                    { coords: "450,270,540,450", function: 'noticeofhearing', alt: "info about the notice of hearing" },
-                    { coords: "200,540,320,690", function: 'appellanthearing', alt: "info about the hearing" },
-                    { coords: "360,540,500,710", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
-                    { coords: "560,540,670,710", function: 'appellantcomplete', alt: "The appeal process is complete"}
-                ]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -131,11 +121,6 @@ class Journey extends Component {
                 introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process.",
                 refusedStep: false,
                 journeyType: 'leaveToAppealRequired',
-                mapProps: [
-                    { coords: "180,10,250,200", function: 'applyforleave', alt: "How to apply for leave to appeal a decision" },
-                    { coords: "370,10,450,200", function: 'leavehearingdocs', alt: "Preparing for the leave to appeal hearing" },
-                    { coords: "600,10,690,200", function: 'decision', alt: "Were you granted leave to appeal or not?" },
-                ]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -152,15 +137,6 @@ class Journey extends Component {
                 introText: "Now that the court has granted you the right to appeal, follow the steps below to complete the appeal. Start by clicking on the first form.",
                 refusedStep: false,
                 journeyType: 'appellantLeaveGranted',
-                mapProps: [
-                    { coords: "100,10,220,200", function: 'appealrecord', alt: "you need an appeal record and transcript after starting your appeal" },
-                    { coords: "270,10,430,200", function: 'factum', alt: "info about the factum, appeal book, and certificate of readiness" },
-                    { coords: "470,10,590,200", function: 'bookappeal', alt: "info about booking your appeal" },
-                    { coords: "100,290,200,440", function: 'noticeofhearing', alt: "info about the notice of hearing" },
-                    { coords: "250,290,390,440", function: 'appellanthearing', alt: "info about the hearing" },
-                    { coords: "430,290,510,440", function: 'appellantcourtorder', alt: "what you need to know about the court order" },
-                    { coords: "560,290,680,440", function: 'appellantcomplete', alt: "The appeal process is complete"}
-                    ]
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -178,7 +154,6 @@ class Journey extends Component {
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 journeyType: "appellantLeaveRefused",
-                mapProps: []
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -194,14 +169,6 @@ class Journey extends Component {
                 introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
                 refusedStep: false,
                 journeyType: 'respondToNoticeOfAppeal',
-                mapProps: [
-                    { coords: "90,10,190,200", function: "appearance", alt: "info about filing a notice of appearance" } ,
-                    { coords: "270,10,380,200", function: "crossappeal", alt: "info about the cross appeal" },
-                    { coords: "440,10,550,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
-                    { coords: "190,270,310,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "365,270,460,420", function: 'courtorder', alt: "info about the court order process" },
-                    { coords: "540,270,670,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
-                ]
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -218,12 +185,6 @@ class Journey extends Component {
                 introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
                 refusedStep: false,
                 journeyType: 'respondToNoticeOfApplicationForLeaveToAppeal',
-                mapProps: [
-                    { coords: "105,10,220,190", function: "leave-application-appearance", alt: "e-file a notice of appearance" },
-                    { coords: "285,10,385,160", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "440,10,550,160", function: 'respondentleavetoappealhearing', alt: "info about the hearing" },
-                    { coords: "590,10,650,160", function: 'respondentdecision', alt: "was the appellant granted leave or not?" }
-                ]
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -240,11 +201,7 @@ class Journey extends Component {
                 introText: "The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below if you would like to continue to participate in the appeal process.",
                 refusedStep: false,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                mapProps: [
-                    { coords: "195,10,295,160", function: 'replybook', alt: "about the Reply Book" },
-                    { coords: "380,10,490,160", function: 'respondentappealhearing', alt: "info about the hearing" },
-                    { coords: "550,10,650,190", function: 'respondentfinaldecision', alt: "info about the appeal process completion" },
-                ]
+                journeyType: 'respondToLeaveRefused',
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -261,7 +218,7 @@ class Journey extends Component {
                 introText: "The appellant's leave to appeal was refused, and their application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear their case.",
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                mapProps: []
+                journeyType: 'respondToLeaveRefusedFinal',
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -277,13 +234,7 @@ class Journey extends Component {
                 userState: "Notice of Leave to Appeal ",
                 introText: "The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
                 refusedStep: false,
-                mapProps: [
-                    { coords: "160,10,260,200", function: "crossappeal", alt: "info about the cross appeal" },
-                    { coords: "370,10,480,200", function: "respondentfactum", alt: "info about the factum and about the appeal book" },
-                    { coords: "190,270,310,400", function: 'respondenthearing', alt: "info about the hearing" },
-                    { coords: "365,270,460,420", function: 'courtorder', alt: "info about the court order process" },
-                    { coords: "540,270,670,420", function: 'respondentcomplete', alt: "info about the appeal process completion" },
-                ]
+                journeyType: 'respondToLeaveGranted',
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -295,7 +246,7 @@ class Journey extends Component {
         if (this.state.displayJourneyMap ) {
             content = (
                 <div>
-                    <JourneyMap2
+                    <JourneyMap
                         introText={this.state.introText}
                         mapSrc={this.state.mapSrc}
                         mapProps={this.state.mapProps}
