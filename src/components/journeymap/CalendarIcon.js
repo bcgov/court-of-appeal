@@ -1,6 +1,7 @@
 import React from 'react';
 import './pageeicon.css';
-import './journey-icons.css'
+import './journey-icons.css';
+let cn = require('classnames');
 
 class GavelIcon extends React.Component {
 
@@ -15,7 +16,7 @@ class GavelIcon extends React.Component {
                 <div className={"cal-container"} >
                     <img src={"/icons/icon-dark-calendar.svg"}/>
                 </div>
-                <div className={"step-title-container"} >
+                <div className={cn("step-title-container",this.props.stepTitleClass)} >
                     {stepTitle}
                 </div>
             </div>

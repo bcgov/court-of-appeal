@@ -49,13 +49,13 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                 <div className={"journey-right-curve l2"} />
                 <div className={"journey-left-curve l2"} />
                 <div className={"journey-trail-l4"} >
-                    <GavelIcon style={{left: '30%', top: '81%'}} 
+                    <GavelIcon style={{left: '30%', top: '79%'}} 
                                className={"journey-box"} 
                                stepTitle={"The Hearing"} 
                                action={this.iconClicked.bind(this, 'appellanthearing')}
                                active={true}
                     />
-                    <PageIcon style={{left: '55%', top: '81%'}}
+                    <PageIcon style={{left: '55%', top: '79%'}}
                               className={"journey-box"}
                               twoPages={false}
                               stepTitle={"Court Order"}

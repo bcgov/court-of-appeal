@@ -65,30 +65,7 @@
     height: 28.5px;
     background-color: white;
 }
-.step-title-container {
-    position: relative;
-    top: 110%;
-    left: -20%;
-    margin-left:11px;
-    font-size: large;
-    text-align: center;
-}
-.step-title {
-    color: #23527c;
-}
-.step-title:hover {
-    text-decoration: underline;
-}
-.step-title-optional:hover {
-    text-decoration: none;
-}
-.step-title-optional {
-    color: black;
-}
-.step-title-wide {
-    width: 180px;
-    left: -65px;
-}
+
 .cal-container {
     position: absolute;
     top: -15px;

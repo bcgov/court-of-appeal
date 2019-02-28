@@ -11,13 +11,14 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
             <div className={"journey-map-container"}>
                 <div className={"journey-start-circle"} />
                 <div className={"journey-trail-l1"} >
-                    <PageIcon style={{left:'20%'}}
+                    <PageIcon style={{left:'10%'}}
                               twoPages={true}
                               stepTitle={"Appeal Record and Transcript"}
                               action={this.iconClicked.bind(this, 'appealrecord')}
                               active={true}
+                              stepTitleClass={"step-title-wide"}
                     />
-                    <PageIcon style={{left:'50%'}}
+                    <PageIcon style={{left:'45%'}}
                               twoPages={true}
                               stepTitle={"Factum, Appeal Book and Certificate of Readiness"}
                               stepTitleClass={"step-title-wide"}
@@ -27,24 +28,25 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     <CalendarIcon style={{left:'80%', top: '30px'}}
                               stepTitle={"Book Appeal Date with Registry"}
                               action={this.iconClicked.bind(this, 'bookappeal')}
+                              stepTitleClass={"step-title-med"}
                               active={true}
                     />
                 </div>
                 <div className={"journey-right-curve"} />
                 <div className={"journey-left-curve"} />
                 <div className={"journey-trail-l2-l3"} >
-                    <PageIcon style={{top:'75%', left: '20%'}}
+                    <PageIcon style={{top:'70%', left: '20%'}}
                               twoPages={false}
                               stepTitle={"Notice of Hearing"}
                               action={this.iconClicked.bind(this, 'noticeofhearing')}
                               active={true}
                     />
-                    <GavelIcon style={{top:'75%', left: '43%'}}
+                    <GavelIcon style={{top:'70%', left: '40%'}}
                               stepTitle={"The Hearing"}
                               action={this.iconClicked.bind(this, 'appellanthearing')}
                               active={true}
                     />
-                    <PageIcon style={{top:'75%', left: '65%'}}
+                    <PageIcon style={{top:'70%', left: '60%'}}
                               twoPages={false}
                               stepTitle={"Court Order"}
                               stepTitleOptional={"(if applicable)"}

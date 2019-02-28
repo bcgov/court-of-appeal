@@ -21,7 +21,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     />
                      <ClockEndCircle style={{position: 'absolute', left: '90%', top: '-10%'}}
                               stepTitle={"Final Decision on Leave to Appeal"}
-                              titleStyle={{position: 'absolute', top:'143px', width: '150px', left: '-17px'}}
+                              titleStyle={{position: 'absolute', top:'143px', width: '150px', left: '-5px'}}
                               active={false}       
                      />
                 </div>
