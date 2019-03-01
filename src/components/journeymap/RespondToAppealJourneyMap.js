@@ -33,12 +33,12 @@ class RespondToAppealJourneyMap extends React.Component {
                 <div className={"journey-right-curve"} />
                 <div className={"journey-left-curve"} />
                 <div className={"journey-trail-l2-l3"} >
-                    <GavelIcon style={{top:'75%', left: '30%'}}
+                    <GavelIcon style={{top:'70%', left: '30%'}}
                               stepTitle={"The Hearing"}
                               action={this.iconClicked.bind(this, 'respondenthearing')}
                               active={true}
                     />
-                    <PageIcon style={{top:'75%', left: '50%'}}
+                    <PageIcon style={{top:'70%', left: '50%'}}
                               twoPages={false}
                               stepTitle={"Court Order"}
                               stepTitleOptional={"(if required)"}

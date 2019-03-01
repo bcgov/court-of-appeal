@@ -248,8 +248,6 @@ class Journey extends Component {
                 <div>
                     <JourneyMap
                         introText={this.state.introText}
-                        mapSrc={this.state.mapSrc}
-                        mapProps={this.state.mapProps}
                         completeAppealTitle={this.state.completeAppealTitle}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}

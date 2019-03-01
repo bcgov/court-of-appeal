@@ -22,6 +22,8 @@ import LeaveHearingDocumentsPopup from "../../../../src/components/infopopups/Le
 import LeaveHearingPopup from "../../../../src/components/infopopups/LeaveHearingPopup";
 import DecisionPopup from "../../../../src/components/infopopups/DecisionPopup";
 import CompleteAppealPopup from "../../../../src/components/infopopups/CompleteAppealPopup";
+import RespondToAppealHearingPopup from "../../../../src/components/infopopups/RespondToAppealHearingPopup";
+import RespondToLeaveToAppealHearingPopup from "../../../../src/components/infopopups/RespondToLeaveToAppealHearingPopup"
 
 describe('InfoPopup', ()=> {    
 
@@ -244,6 +246,20 @@ describe('InfoPopup', ()=> {
             let view = popup.render();
 
             expect(view).toEqual(<CompleteAppealPopup close={close} getSections={popup.getSections} type="respondent" />);
+        });
+
+        test('can build respondent RespondToAppealHearingPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="respondentappealhearing" close={close} />).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<RespondToAppealHearingPopup close={close} getSections={popup.getSections} />);
+        });
+
+        test('can build respondent RespondToLeaveToAppealHearingPopup', ()=>{
+            let popup = mount(<InfoPopup show="true" type="respondentleavetoappealhearing" close={close} />).instance();
+            let view = popup.render();
+
+            expect(view).toEqual(<RespondToLeaveToAppealHearingPopup close={close} getSections={popup.getSections} />);
         });
     });
 });

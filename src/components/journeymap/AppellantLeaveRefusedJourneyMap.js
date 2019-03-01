@@ -10,12 +10,12 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
             <div className={"journey-map-container"}>
                 <div className={"journey-start-circle"} />
                 <div className={"journey-trail-l1"} >
-                    <PageIcon style={{left: '35%'}}
+                    <PageIcon style={{left: '25%'}}
                               twoPages={true}
                               stepTitle={"Application for Review"}
                               active={false}
                     />
-                    <GavelIcon style={{left: '65%'}}
+                    <GavelIcon style={{left: '60%'}}
                               stepTitle={"The Hearing"}
                               active={false}
                     />

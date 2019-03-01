@@ -21,8 +21,8 @@ import LeaveHearingDocumentsPopup from "../LeaveHearingDocumentsPopup";
 import LeaveHearingPopup from "../LeaveHearingPopup"
 import DecisionPopup from "../DecisionPopup";
 import CompleteAppealPopup from "../CompleteAppealPopup";
-import RespondingAppealHearingPopup from "../RespondingAppealHearingPopup";
-import RespondingLeaveToAppealHearingPopup from "../RespondingLeaveToAppealHearingPopup";
+import RespondToAppealHearingPopup from "../RespondToAppealHearingPopup";
+import RespondToLeaveToAppealHearingPopup from "../RespondToLeaveToAppealHearingPopup";
 
 class InfoPopup extends Component {
 
@@ -58,8 +58,8 @@ class InfoPopup extends Component {
                 'factum': <AppellantFactumPopup {...props} />,
                 'replybook': <ReplyBookPopup {...props} />,
                 'respondenthearing': <HearingPopup {...props} type="respondent" {...respondentHearingLinks} />,
-                'respondentappealhearing': <RespondingAppealHearingPopup {...props} />,
-                'respondentleavetoappealhearing': <RespondingLeaveToAppealHearingPopup {...props} />,
+                'respondentappealhearing': <RespondToAppealHearingPopup {...props} />,
+                'respondentleavetoappealhearing': <RespondToLeaveToAppealHearingPopup {...props} />,
                 'courtorder': <CourtOrderPopup {...props} />,
                 'respondentfactum': <RespondentFactumPopup {...props} />,
                 'crossappeal': <CrossAppealPopup {...props} />,
