@@ -1,8 +1,8 @@
-require('../support/enzyme.setup');
+require('../../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import Journey  from "../../src/components/Journey.js";
+import Journey  from "../../../src/components/Journey.js";
 jest.mock('react-router-dom');
 
 describe('Journey', ()=> {

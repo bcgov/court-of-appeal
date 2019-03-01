@@ -1,0 +1,111 @@
+.journey-map-image {
+    width: 713px;
+    padding: 20px;
+}
+
+.journey-breadcrumb {
+    display: flex;
+    flex-flow: row;
+}
+
+.journey-breadcrumb.crumb {
+    padding: 10px 10px 10px 0;
+}
+
+.journey-questions {
+     padding: 10px 0 10px 15px;
+ }
+
+.journey-buttons {
+    padding-bottom: 10px;
+}
+.right-to-appeal-tooltip {
+    color: white !important;
+    padding: 20px;
+    font-size: medium !important;
+    background-color: #333333 !important;
+    font-family: Myriad-Pro, Calibri, Arial, sans-serif;
+    z-index: 1000;
+}
+
+.right-to-appeal-tooltip p {
+    margin-top: 2px ;
+    margin-bottom: 2px ;
+}
+.journey-map-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.journey-start-circle {
+    background-color: #9fbfe2;
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    margin-top: 50px;
+}
+
+.journey-trail-l1 {
+    border-bottom: 9px solid #9fbfe2;
+    height: 79px;
+    width: 75%;
+    margin: 0 -10px 140px -10px;
+    position: relative;
+}
+.journey-right-curve {
+    border: 9px solid #9fbfe2;
+    border-left-color: transparent;
+    width: 17%;
+    border-radius:  0 200px 200px 0;
+    margin-top: 70px;
+    margin-left: -10px;
+    border-left-width: 0;
+}
+.journey-right-curve.l2 {
+    margin-top: 82px;
+    border-left-color: transparent;
+}
+.journey-left-curve {
+    border: 9px solid #9fbfe2;
+    border-right-color: transparent;
+    height: 100px;
+    width: 120px;
+    border-radius:  200px 0 0 200px;
+    /*margin-top: 70px;*/
+    margin: -9px -9px 0 20px;
+}
+.journey-trail-l2-l3 {
+    border: 9px solid #9fbfe2;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    height: 100px;
+    width: 65%;
+    margin: -9px -10px 140px -10px;
+}
+
+.journey-trail-l4 {
+    border: 9px solid #9fbfe2;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    height: 100px;
+    width: 65%;
+    margin: -9px -10px 120px -10px;
+}
+.journey-end-circle {
+    position: absolute;
+    left: 75%;
+    background-color: #9fbfe2;
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+    margin-top: 35px;
+    color: white;
+    font: 50px Myriad-Pro, Calibri, Arial, 'sans serif';
+}
+.journey-end-circle-l2 {
+    margin-top: 35px;
+    cursor: pointer;
+}
+.journey-final-check {
+    margin: 23px 0 0 28px;
+}

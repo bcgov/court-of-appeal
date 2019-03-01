@@ -1,0 +1,78 @@
+
+.file-container {
+    position: relative;
+    top: -5px;
+}
+.bottom-pg {
+    z-index: 2;
+}
+.bottom-pg-corner-l {
+    z-index: 7;
+}
+.bottom-pg-corner-s {
+    z-index: 8;
+}
+.bottom-pg-corner-cover {
+    z-index: 3;
+}
+.top-pg {
+    z-index: 4;
+}
+.top-pg-corner-l {
+    z-index: 9;
+}
+.top-pg-corner-s {
+    z-index: 10;
+}
+.top-pg-corner-cover {
+    z-index: 5;
+}
+
+.second-page {
+    transform: translateX(10px) translateY(-10px) scale(.99);
+}
+.file-main {
+    position: absolute;
+    top: .5px;
+    left: -.5px;
+    border: 5px solid black;
+    height: 90px;
+    width: 70px;
+    background-color: white;
+}
+.file-corner-l {
+    position: absolute;
+    top: 1px;
+    left: 43px;
+    width: 0;
+    height: 0;
+    border-bottom: 27px solid black;
+    border-right: 27px solid transparent;
+}
+.file-corner-s {
+    position: absolute;
+    top: 12px;
+    left: 48px;
+    width: 0px;
+    height: 0px;
+    border-bottom: 12px solid white;
+    border-right: 12px solid transparent;
+}
+.file-corner-cover {
+    position: absolute;
+    left: 42px;
+    width: 30px;
+    height: 28.5px;
+    background-color: white;
+}
+
+.cal-container {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    border: 5px solid black;
+    height: 100px;
+    background-color: white;
+    width: 100px;
+    padding: 0 5px;
+}

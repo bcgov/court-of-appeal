@@ -1,7 +1,7 @@
 import React from 'react';
-import RespondentListSelect from '../../../src/components/RespondentListSelect.js';
+import RespondentListSelect from '../../../src/components/fields/RespondentListSelect.js';
 import { mount } from 'enzyme';
-import SelectableNameList from "../../../src/components/SelectableNameList";
+import SelectableNameList from "../../../src/components/fields/SelectableNameList";
 require('../../support/enzyme.setup');
 
 describe('Respondent Name List', ()=> {

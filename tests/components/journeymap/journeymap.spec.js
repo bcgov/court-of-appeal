@@ -1,18 +1,12 @@
-require('../support/enzyme.setup');
+require('../../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import JourneyMap from "../../src/components/JourneyMap";
+import JourneyMap from "../../../src/components/journeymap/JourneyMap";
 
 describe('JourneyMap', ()=> {
 
     describe('JourneyMap builds', ()=>{
         let history = { location : {state: {}}};
-        test('returns null when there are no props', () => {
-            let journeymap = mount(<JourneyMap title="map title" subtitle="subtitle" history={history}/>);
-            let view = journeymap.instance().render();
-
-            expect(view).toEqual(null);
-        });
 
         let journeymap;
         let mapSrc = "/images/journeymap/journey-map_respondent-leave-to-appeal.png";
@@ -32,9 +26,7 @@ describe('JourneyMap', ()=> {
         test('can build JourneyMap with a modal that can open and close', () => {
 
             let instance = journeymap.instance();
-
-            expect(journeymap.find('#journey-map-image').prop('src')).toEqual(mapSrc);
-
+            
             expect(instance.state.showInfoModal).toEqual(false);
 
             instance.openInfoModal();

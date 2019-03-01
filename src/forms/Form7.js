@@ -31,10 +31,10 @@ class Form7 extends Component {
 
             <div id="steps">
                 <ol>
-                    <li><span className="step-circle in-progress">1</span><span className="step-title in-progress">Access</span></li>
-                    <li><span className="step-circle future">2</span><span className="step-title future">Form 7</span></li>
-                    <li><span className="step-circle future">3</span><span className="step-title future">Preview</span></li>
-                    <li><span className="step-circle future">4</span><span className="step-title future">Payment</span></li>
+                    <li><span className="step-circle in-progress">1</span><span className="step-title-7 in-progress">Access</span></li>
+                    <li><span className="step-circle future">2</span><span className="step-title-7 future">Form 7</span></li>
+                    <li><span className="step-circle future">3</span><span className="step-title-7 future">Preview</span></li>
+                    <li><span className="step-circle future">4</span><span className="step-title-7 future">Payment</span></li>
                 </ol>
             </div>
 

@@ -4,8 +4,8 @@ import TextField from "./fields/TextField";
 import PostalCodeField from "./fields/PostalCodeField";
 import PhoneField from "./fields/PhoneField";
 import EmailField from "./fields/EmailField";
-import ContactSelect from "./ContactSelect";
-import RespondentListSelect from "./RespondentListSelect";
+import ContactSelect from "./fields/ContactSelect";
+import RespondentListSelect from "./fields/RespondentListSelect";
 
 class Form2DataSection extends React.Component {
 

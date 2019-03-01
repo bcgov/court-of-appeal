@@ -1,0 +1,95 @@
+.gavel-icon {
+    position: relative;
+    width: 80%;
+    top: 15%;
+    left: 10%;
+}
+.leave-hearing {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    top:15%;
+}
+.appellant-leave-hearing {
+    position: relative;
+    width: 50%;
+    left: 22%;
+    top: 18%;
+}
+.cal-container {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    border: 5px solid black;
+    height: 100px;
+    background-color: white;
+    width: 80px;
+    padding: 20px 10px;
+}
+.action-end-point {
+    cursor: pointer;
+    max-width: 120px;
+}
+.end-step-title {
+    position: relative;
+    top: 7.5%;
+    left: -8%;
+    font-size: large;
+    text-align: center;
+    color: #23527c;
+}
+.end-step-title:hover {
+    text-decoration: underline;
+}
+.end-step-title-l2 {
+    top: 32px;
+    left: -25px;
+    width: 150px;
+}
+.end-step-title-l3 {
+    top: 30px;
+    left: -25px;
+    width: 150px;
+}
+.step-title-container {
+    position: relative;
+    top: 93%;
+    left: -20%;
+    margin-left:11px;
+    font-size: large;
+    text-align: center;
+}
+.step-title {
+    color: #23527c;
+}
+.step-title:hover {
+    text-decoration: underline;
+}
+.step-title-optional:hover {
+    text-decoration: none;
+}
+.step-title-optional {
+    color: black;
+}
+.step-title-wide {
+    width: 180px;
+    left: -65px;
+}
+.step-title-med {
+    width: 150px;
+    left: -45px;
+}
+.journey-box {
+    position: absolute;
+    top: 38%;
+    height: 100px;
+    max-width: 109px;
+    cursor: pointer;
+}
+.journey-box.active {
+    cursor:pointer;
+}
+.journey-box.inactive {
+    cursor: auto;
+}
+
