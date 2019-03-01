@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InfoPopupWrapper from "./common/InfoPopupWrapper";
 
-class RespondingLeaveToAppealHearingPopup extends Component {
+class RespondToLeaveToAppealHearingPopup extends Component {
 
     constructor(props) {
         super(props);
@@ -27,4 +27,4 @@ class RespondingLeaveToAppealHearingPopup extends Component {
         );
     }
 
-} export default RespondingLeaveToAppealHearingPopup;
+} export default RespondToLeaveToAppealHearingPopup;

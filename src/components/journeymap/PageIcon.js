@@ -36,8 +36,8 @@ class PageIcon extends React.Component {
         }
         return (
             <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} onClick={this.props.action}>
-                <div className={"file-container"} >
-                    <div className={"file-main top-pg"} />
+                <div className={cn("file-container",{"double": this.props.twoPages})}  >
+                    <div className={cn("file-main", "top-pg", {"single": !this.props.twoPages}, {"double": this.props.twoPages})} />
                     <div className={"file-corner-l top-pg-corner-l"} />
                     <div className={"file-corner-s top-pg-corner-s"} />
                     <div className={"file-corner-cover top-pg-corner-cover"} />

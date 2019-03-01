@@ -25,11 +25,7 @@ class JourneyMap extends React.Component {
     }
 
     render() {
-        if (!this.props.show) {
-            return null;
-        }
         ReactTooltip.rebuild();
-       
 
         let anchor;
         if (this.props.respondent){

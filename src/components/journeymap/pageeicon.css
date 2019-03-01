@@ -3,6 +3,9 @@
     position: relative;
     top: -5px;
 }
+.file-container.double {
+    transform: scale(.90) translateY(6px);
+}
 .bottom-pg {
     z-index: 2;
 }
