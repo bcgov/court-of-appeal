@@ -6,16 +6,16 @@ class SpinnerActionIcon extends SpinnerButton {
     buttonOrSpinner() {
         if (this.state.downloading) {
             return (
-                <a href="#" id={this.props.id} title={ this.props.tooltip }>
-                    <span className="action-icon"><i className="oi oi-ellipses"></i></span>
-                </a>
+                <li className="spinner-action spinning" style={{'background':'none', 'paddingLeft':'5px'}} id={this.props.id} title={ this.props.tooltip }>
+                    <div className="efiling-spinner-blue"></div>
+                </li>
             )
         }
         else {
             return (
-                <a href="#" id={this.props.id} onClick={this.props.onClick} title={ this.props.tooltip }>
-                    <span className="action-icon"><span className={ this.props.content }></span></span>
-                </a>
+                <li className="spinner-action not-spinning" style={{'background':'none', 'paddingLeft':'5px'}} id={this.props.id} onClick={this.props.onClick} title={ this.props.tooltip }>
+                    <div className={ this.props.content }></div>
+                </li>
             )
         }
     }
