@@ -14,7 +14,7 @@ class GavelEndCircle extends React.Component {
         return (
             <div className={"action-end-point"} onClick={this.props.action} style={this.props.style}>
                 <div className={cn("journey-end-circle", this.props.className)} >
-                    <img src={"/icons/icon-hearing.svg"} className={"appellant-leave-hearing"}/>
+                    <img src={process.env.PUBLIC_URL + "/icons/icon-hearing.svg"} className={"appellant-leave-hearing"}/>
                 </div>
                 {stepTitle}
             </div>

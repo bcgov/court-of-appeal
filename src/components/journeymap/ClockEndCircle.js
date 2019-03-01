@@ -14,7 +14,7 @@ class ClockEndCircle extends React.Component {
         return (
             <div className={cn("action-end-point", {"journey-box inactive": !this.props.active})} onClick={this.props.action} style={this.props.style}>
                 <div className={cn("journey-end-circle", this.props.className)} >
-                    <img src={"/icons/icon-clock.svg"} className={"leave-hearing"}/>
+                    <img src={process.env.PUBLIC_URL + "/icons/icon-clock.svg"} className={"leave-hearing"}/>
                 </div>
                 {stepTitle}
             </div>

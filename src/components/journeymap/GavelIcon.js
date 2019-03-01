@@ -21,7 +21,7 @@ class GavelIcon extends React.Component {
             <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} onClick={this.props.action}>
                 <div className={"file-container"} >
                     <div className={"file-main top-pg"} >
-                        <img src={"/icons/icon-gavel.svg"} className={"gavel-icon"}/>
+                        <img src={process.env.PUBLIC_URL + "/icons/icon-gavel.svg"} className={"gavel-icon"}/>
                     </div>
                 </div>
                 <div className={"step-title-container"} >
