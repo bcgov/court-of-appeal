@@ -13,13 +13,14 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                 <div className={"journey-trail-l1"} >
                     <PageIcon style={{left: '30%'}}
                               twoPages={false}
-                              stepTitle={"Appeal Documents"}
+                              stepTitle={"Initial Documents"}
                               action={this.iconClicked.bind(this, 'appellantinitial')}
                               active={true}
                     />
                     <PageIcon style={{left: '70%'}}
-                              twoPages={false}
+                              twoPages={true}
                               stepTitle={"Appeal Record and Transcript"}
+                              stepTitleClass={"step-title-wide"}
                               action={this.iconClicked.bind(this, 'appealrecord')}
                               active={true}
                     />
