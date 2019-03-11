@@ -8,11 +8,11 @@ let DefaultService = require('../../src/service/default.service');
 describe('Active forms section', function() {
 
     // tests must be moved to Dashboard component
-    // test('default service', ()=>{
-    //     let instance = mount(<ActiveFormList fetch="false"/>).instance();
-    //
-    //     expect(instance.service instanceof DefaultService).toEqual(true);
-    // });
+    test('default service', ()=>{
+        let instance = mount(<ActiveFormList fetch="false" cases={[]}/>).instance();
+
+        expect(instance.props.cases).toEqual([]);
+    });
     // test('transforms the data for the list', function(done) {
     //     let activeFormList = mount(
     //         <ActiveFormList fetch="false" service={{ getMyCases: (form, callback) => { callback( {cases:[
