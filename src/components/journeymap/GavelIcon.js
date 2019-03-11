@@ -18,10 +18,12 @@ class GavelIcon extends React.Component {
         }
         
         return (
-            <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} onClick={this.props.action}>
-                <div className={"file-container"} >
-                    <div className={"file-main top-pg"} >
-                        <img src={process.env.PUBLIC_URL + "/icons/icon-gavel.svg"} className={"gavel-icon"}/>
+            <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
+                <input type="checkbox" style={{position: 'relative', top: '11%', left: '-25%'}} className={"checkbox-glow"} value={this.props.completed}/>
+                <span style={{position: 'relative', top: '5px', left: '-5%', zIndex: '9'}}>{this.props.order}</span>
+                <div className={"file-container"} onClick={this.props.action}>
+                    <div className={"file-main"} >
+                        <img src={process.env.PUBLIC_URL + "/icons/journey_map_event_hearing.svg"} className={"journey-icon"}/>
                     </div>
                 </div>
                 <div className={"step-title-container"} >

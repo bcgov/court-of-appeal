@@ -3,10 +3,30 @@ import './pageeicon.css';
 let cn = require('classnames');
 
 class PageIcon extends React.Component {
+    
+    constructor(props) {
+        super(props)
+        let url = process.env.PUBLIC_URL;
+        this.imageByState = {
+            'new' : url + '/icons/journey_map_event_default.svg',
+            'draft': url + '/icons/journey_map_form_draft.svg',
+            'completed' : url + '/icons/journey_map_form_approved.svg',
+            'rejected' : url + '/icons/journey_map_form_rejected.svg',
+            'pending': url + '/icons/journey_map_form_pending.svg',
+            'na': url + '/icons/journey_map_form_opt-out.svg'
+        }
+        
+    }
 
     render() {
         let stepTitle, stepTitleOptional = null;
         let active = !!this.props.active;
+        let imgSrc = this.imageByState[this.props.status];
+        
+        if (this.props.twoPages) {
+            imgSrc =  process.env.PUBLIC_URL + "/icons/journey_map_event_multi-page.svg"
+        }
+        let top = this.props.twoPages ? '9px' : '5px';
         
         if (this.props.stepTitleOptional) {
             stepTitleOptional = <span className={"step-title-optional"}>{this.props.stepTitleOptional}</span>;
@@ -23,31 +43,44 @@ class PageIcon extends React.Component {
             );
         }
         
-        let secondPage = null;
         if (this.props.twoPages) {
-            secondPage = (
-                <div>
-                    <div className={"file-main bottom-pg second-page"} />
-                    <div className={"file-corner-l bottom-pg-corner-l second-page"} />
-                    <div className={"file-corner-s bottom-pg-corner-s second-page"} />
-                    <div className={"file-corner-cover bottom-pg-corner-cover second-page"} />
+             return (
+                 <div className={cn("journey-box", {"inactive": !active})} style={this.props.style}>
+                     <input type="checkbox" 
+                            style={{position: 'relative', top: '-25%', left: '-25%'}} 
+                            className={"checkbox-glow"} 
+                            onChange={this.completed.bind(this)}/>
+                     
+                <span style={{position: 'relative', top: top, left: '-5%', zIndex: '9'}}>{this.props.order}</span>
+                <div className={"file-main"} >
+                        <img src={imgSrc} className={"journey-icon"} onClick={this.props.action}/>
+                        <div className={"file-corner-r"} />
+                </div>
+                <div className={cn("step-title-container", this.props.stepTitleClass)} style={{marginTop: '30px'}} onClick={this.props.action}>
+                    {stepTitle}
+                </div>
+            </div>);
+        } else {
+            return (
+                <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
+                    <input type="checkbox" style={{position: 'relative', top: '-25%', left: '-25%'}} className={"checkbox-glow"} onChange={this.completed.bind(this)}/>
+                    <span style={{position: 'relative', top: '5px', left: '-5%', zIndex: '9'}}>{this.props.order}</span>
+                    <div className={"file-main"} >
+                        <img src={imgSrc} className={"journey-icon"} onClick={this.props.action}/>
+                        <div className={"file-corner-r"} />
+                    </div>
+                    <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
+                        {stepTitle}
+                    </div>
                 </div>
             )
         }
-        return (
-            <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} onClick={this.props.action}>
-                <div className={cn("file-container",{"double": this.props.twoPages})}  >
-                    <div className={cn("file-main top-pg")} />
-                    <div className={"file-corner-l top-pg-corner-l"} />
-                    <div className={"file-corner-s top-pg-corner-s"} />
-                    <div className={"file-corner-cover top-pg-corner-cover"} />
-                    {secondPage}
-                </div>
-                <div className={cn("step-title-container", this.props.stepTitleClass)}>
-                    {stepTitle}
-                </div>
-            </div>
-        )
     }
+    
+    completed(e) {
+        console.log( e.target.checked)
+        this.props.completed(this.props.order, e.target.checked)
+    }
+    
 
 } export default PageIcon;

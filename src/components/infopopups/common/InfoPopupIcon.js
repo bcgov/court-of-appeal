@@ -12,4 +12,5 @@ class InfoPopupIcon extends Component {
             </div>
         );
     }
-} export default InfoPopupIcon;
+} 
+export default InfoPopupIcon;

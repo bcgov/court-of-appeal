@@ -44,6 +44,9 @@
     width: 50px;
     margin-top: 50px;
 }
+.completed-step {
+    background-color:  #377d22;
+}
 
 .journey-trail-l1 {
     border-bottom: 9px solid #9fbfe2;
@@ -60,6 +63,10 @@
     margin-top: 70px;
     margin-left: -10px;
     border-left-width: 0;
+}
+.completed-curve {
+    border: 9px solid #377d22;
+    border-left-color: transparent;
 }
 .journey-right-curve.l2 {
     margin-top: 82px;
@@ -83,6 +90,22 @@
     margin: -9px -10px 140px -10px;
 }
 
+.journey-trail-l2 {
+    border: 9px solid #9fbfe2;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    height: 100px;
+    width: 65%;
+    margin: -9px -10px 140px -10px;
+}
+.completed-l1 {
+    border: 9px solid;
+    border-color: #9fbfe2 transparent #377d22 transparent;
+}
+
+.completed-step-l1 {
+    border-bottom: 9px solid #377d22;
+}
 .journey-trail-l4 {
     border: 9px solid #9fbfe2;
     border-left-color: transparent;

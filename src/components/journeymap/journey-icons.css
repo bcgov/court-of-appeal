@@ -43,7 +43,7 @@
 }
 .step-title-container {
     position: relative;
-    top: 93%;
+    top: 75%;
     left: -20%;
     margin-left:11px;
     font-size: large;
@@ -75,6 +75,7 @@
     height: 100px;
     max-width: 109px;
     cursor: pointer;
+    z-index: 5;
 }
 .journey-box.active {
     cursor:pointer;
@@ -82,4 +83,27 @@
 .journey-box.inactive {
     cursor: auto;
 }
+
+.journey-icon:hover {
+    box-shadow: 0 7px 20px rgba(0,0,0,.45);
+    transition: box-shadow .2s ease-in-out;
+}
+.cal-container {
+    position: absolute;
+    top: -24px;
+    left: -.5px;
+    height: 90px;
+    width: 70px;
+    padding: 20px 10px;
+}
+.calendar-image {
+    width: inherit;
+    height: inherit;
+}
+
+.checkbox-glow {
+    cursor: pointer;
+    color: #23527c;
+}
+
 

@@ -132,7 +132,7 @@ class JourneyMap extends React.Component {
     }
     
     getUsersJourney() {
-        let props = { iconClicked: this.iconClicked.bind(this) };
+        let props = { iconClicked: this.iconClicked.bind(this), case: this.props.cases[0] };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
             'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>,
