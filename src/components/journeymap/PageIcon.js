@@ -48,23 +48,23 @@ class PageIcon extends React.Component {
                  <div className={cn("journey-box", {"inactive": !active})} style={this.props.style}>
                      <input type="checkbox" 
                             style={{position: 'relative', top: '-25%', left: '-25%'}} 
-                            className={"checkbox-glow"} 
+                            className={"checkbox-glow checkbox-toggle"} 
                             onChange={this.completed.bind(this)}/>
                      
-                <span style={{position: 'relative', top: top, left: '-5%', zIndex: '9'}}>{this.props.order}</span>
+                <span style={{position: 'relative', top: top, left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                 <div className={"file-main"} >
-                        <img src={imgSrc} className={"journey-icon"} onClick={this.props.action}/>
+                        <img src={imgSrc} className={"journey-icon any-icon"} onClick={this.props.action}/>
                         <div className={"file-corner-r"} />
                 </div>
-                <div className={cn("step-title-container", this.props.stepTitleClass)} style={{marginTop: '30px'}} onClick={this.props.action}>
+                <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
                     {stepTitle}
                 </div>
             </div>);
         } else {
             return (
                 <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
-                    <input type="checkbox" style={{position: 'relative', top: '-25%', left: '-25%'}} className={"checkbox-glow"} onChange={this.completed.bind(this)}/>
-                    <span style={{position: 'relative', top: '5px', left: '-5%', zIndex: '9'}}>{this.props.order}</span>
+                    <input type="checkbox" style={{position: 'relative', top: '-25%', left: '-25%'}} className={"checkbox-glow checkbox-toggle"} onChange={this.completed.bind(this)}/>
+                    <span style={{position: 'relative', top: '5px', left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
                         <img src={imgSrc} className={"journey-icon"} onClick={this.props.action}/>
                         <div className={"file-corner-r"} />
@@ -78,7 +78,6 @@ class PageIcon extends React.Component {
     }
     
     completed(e) {
-        console.log( e.target.checked)
         this.props.completed(this.props.order, e.target.checked)
     }
     

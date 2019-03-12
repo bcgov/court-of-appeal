@@ -6,8 +6,6 @@ let cn = require('classnames');
 
 class RespondToAppealJourneyMap extends React.Component {
     
-    //todo: journey should save journeymap state
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -16,10 +14,9 @@ class RespondToAppealJourneyMap extends React.Component {
                 {status: 'new', type: 'package'},
                 {status: 'new', type: 'file'},
                 {status: 'new', type: 'hearing'},
-                {status: 'new', type: ''}],
+                {status: 'new', type: 'courtorder'}],
             case: props.case
         }
-        console.log("props.case", props.case)
     }
     
     render() {
@@ -27,12 +24,12 @@ class RespondToAppealJourneyMap extends React.Component {
             <div className={"journey-map-container"}>
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
                 <Trail
-                    className={"journey-trail-l1"}
+                    className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status !== 'new'}
+                    lineCompleted={this.state.steps[2.].status === 'completed'}
                     width={'18%'}
                     level={1}
                 />
-                    
                 <PageIcon style={{left:'20%'}}
                           twoPages={false}
                           stepTitle={"Notice of Appearance"}
@@ -42,11 +39,11 @@ class RespondToAppealJourneyMap extends React.Component {
                           status={this.stepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
                 />
-                
                 <Trail
-                    className={"journey-trail-l1"}
+                    className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
-                    width={'27%'}
+                    lineCompleted={this.state.steps[2.].status === 'completed'}
+                    width={'25%'}
                     level={1}
                 />
                 <PageIcon style={{left:'44%' }}
@@ -60,12 +57,13 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                     />
                 
-               <Trail
-                   className={"journey-trail-l1"}
-                   completed={this.state.steps[1].status === 'completed'}
-                   width={'27%'}
-                   level={1}
-               />
+              <Trail
+                  className={"journey-trail-l1-l2"}
+                  completed={this.state.steps[1].status === 'completed'}
+                  lineCompleted={this.state.steps[2.].status === 'completed'}
+                  width={'25%'}
+                  level={1}
+              />
                 <PageIcon style={{left:'68%'}}
                           twoPages={true}
                           stepTitle={"Factum and Appeal Book"}
@@ -76,38 +74,58 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                 />
                 <Trail
-                    className={"journey-trail-l1"}
+                    className={"journey-trail-l1-l2"}
                     completed={this.state.steps[2].status === 'completed'}
+                    lineCompleted={this.state.steps[2.].status === 'completed'}
                     width={'5%'}
                     level={1}
                 />
                 <div className={cn("journey-right-curve",{'completed-curve': this.state.steps[2].status === 'completed'})} />
-                <div className={cn("journey-left-curve",{'completed-curve': this.state.steps[2].status === 'completed'})} />
-                <div className={"journey-trail-l2-l3"} >
-                    <GavelIcon style={{top:'70%', left: '30%'}}
-                              stepTitle={"The Hearing"}
-                              action={this.iconClicked.bind(this, 'respondenthearing')}
-                              active={true}
-                               order={4}
-                               status={this.stepStatus(4)}
-                               
-                    />
-                    <PageIcon style={{top:'70%', left: '50%'}}
-                              twoPages={false}
-                              stepTitle={"Court Order"}
-                              stepTitleOptional={"(if required)"}
-                              action={this.iconClicked.bind(this, 'courtorder')}
-                              active={true}
-                              order={5}
-                              status={this.stepStatus(5)}
-                              completed={this.stepCompleted.bind(this)}
-                    />
-                    <div className={"journey-end-circle journey-end-circle-l2"} onClick={this.iconClicked.bind(this,'respondentcomplete')} >
-                    <div className={"oi oi-check journey-final-check"}/>
-                    <div className={cn("end-step-title", "end-step-title-l2")}>
-                        <span>"Appeal Process Complete"</span>
-                    </div>
+                <div className={cn("journey-left-curve",{'completed-left-curve': this.state.steps[2].status === 'completed'})} />
+                
+                
+                <Trail
+                    className={"journey-trail-l2-l3 last-row"}
+                    completed={this.state.steps[2].status === 'completed'}
+                    width={'25%'}
+                    level={2}
+                />
+                <GavelIcon style={{top:'68%', left: '30%'}}
+                           stepTitle={"The Hearing"}
+                           action={this.iconClicked.bind(this, 'respondenthearing')}
+                           active={true}
+                           order={4}
+                           status={this.stepStatus(4)}
+                           completed={this.stepCompleted.bind(this)}
+                />
+                <Trail
+                    className={"journey-trail-l2-l3 last-row"}
+                    completed={this.state.steps[3].status === 'completed'}
+                    width={'30%'}
+                    level={2}
+                />
+                <PageIcon style={{top:'68%', left: '57%'}}
+                          twoPages={false}
+                          stepTitle={"Court Order"}
+                          stepTitleOptional={"(if required)"}
+                          action={this.iconClicked.bind(this, 'courtorder')}
+                          active={true}
+                          order={5}
+                          status={this.stepStatus(5)}
+                          completed={this.stepCompleted.bind(this)}
+                />
+                <Trail
+                    className={"journey-trail-l2-l3 last-row"}
+                    completed={this.state.steps[4].status === 'completed'}
+                    width={'25%'}
+                    level={2}
+                />
+                <div className={cn("journey-end-circle","journey-end-circle-l2","any-icon",{"completed-step": this.state.steps[4].status === 'completed'})} onClick={this.iconClicked.bind(this,'respondentcomplete')} >
+                <div className={"oi oi-check journey-final-check"}/>
+                <div className={cn("end-step-title", "end-step-title-l2")}>
+                    <span>"Appeal Process Complete"</span>
                 </div>
+                
                 </div>
             </div>
         );

@@ -19,7 +19,7 @@ class GavelIcon extends React.Component {
         
         return (
             <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
-                <input type="checkbox" style={{position: 'relative', top: '11%', left: '-25%'}} className={"checkbox-glow"} value={this.props.completed}/>
+                <input type="checkbox" style={{position: 'relative', top: '11%', left: '-25%'}} className={"checkbox-toggle"} onChange={this.completed.bind(this)}/>
                 <span style={{position: 'relative', top: '5px', left: '-5%', zIndex: '9'}}>{this.props.order}</span>
                 <div className={"file-container"} onClick={this.props.action}>
                     <div className={"file-main"} >
@@ -31,6 +31,10 @@ class GavelIcon extends React.Component {
                 </div>
             </div>
         )
+    }
+    
+    completed(e) {
+        this.props.completed(this.props.order, e.target.checked)
     }
 
 } export default GavelIcon;

@@ -30,6 +30,7 @@ class Journey extends Component {
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
+        this.checkstep = " As you progress through your appeal journey, check the box next to each step below to mark it as complete.";
         this.handlePopState = this.handlePopState.bind(this);
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
                         <p>please see our online guidebook for more
@@ -99,7 +100,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
-                introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete.",
+                introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete. " + this.checkstep,
                 refusedStep: false,
                 journeyType: 'appellantRightToAppeal',
             };
@@ -114,7 +115,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process.",
+                introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process. " + this.checkstep,
                 refusedStep: false,
                 journeyType: 'leaveToAppealRequired',
             };
@@ -160,7 +161,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
-                introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form. " + this.checkstep,
                 refusedStep: false,
                 journeyType: 'respondToNoticeOfAppeal',
             }
@@ -175,7 +176,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Application for Leave to Appeal",
-                introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form." + this.checkstep,
                 refusedStep: false,
                 journeyType: 'respondToNoticeOfApplicationForLeaveToAppeal',
             }
@@ -190,7 +191,7 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below if you would like to continue to participate in the appeal process.",
+                introText: "The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below if you would like to continue to participate in the appeal process. " + this.checkstep,
                 refusedStep: false,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 journeyType: 'respondToLeaveRefused',
@@ -223,7 +224,7 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-granted.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal ",
-                introText: "The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form.",
+                introText: "The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form. " + this.checkstep,
                 refusedStep: false,
                 journeyType: 'respondToLeaveGranted',
             }

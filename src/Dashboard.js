@@ -29,7 +29,7 @@ class Dashboard extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-        if (this.state.fetch) { console.log("Fetching cases")
+        if (this.state.fetch) {
             this.fetchCases(); 
         }
     }
@@ -52,7 +52,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log("cases", this.state.cases)
         return (
             <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
                 <div className="row">
