@@ -7,7 +7,9 @@ class StepCompletedCheckbox extends Component {
             return <input type="checkbox"
                           style={this.props.style}
                           className={"checkbox-glow checkbox-toggle"}
-                          onChange={this.props.onChange}/>
+                          onChange={this.props.onChange}
+                          disabled={this.props.disabled}
+            />
         }
         return null;
     }

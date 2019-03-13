@@ -18,7 +18,7 @@ class GavelIcon extends React.Component {
             stepTitle = <div className={"step-title-optional"}>{this.props.stepTitleOptional}</div>;
         }
         
-        let style = {position: 'relative', top: '5px', left: active ? '-5%' : '7%', zIndex: '9'}
+        let style = {position: 'relative', top: '5px', left: active ? '-11%' : '7%', zIndex: '9'}
         
         return (
             <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
@@ -26,6 +26,7 @@ class GavelIcon extends React.Component {
                      style={{position: 'relative', top: '11%', left: '-25%'}}
                      onChange={this.completed.bind(this)}
                      show={active}
+                     disabled={!this.props.ready}
                  />
                 <span style={style}>{this.props.order}</span>
                 <div className={"file-container"} onClick={this.props.action}>

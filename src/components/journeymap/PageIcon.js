@@ -51,6 +51,7 @@ class PageIcon extends React.Component {
                          style={{position: 'relative', top: '-25%', left: '-25%'}}
                          onChange={this.completed.bind(this)}
                          show={active}
+                         disabled={!this.props.ready}
                      />
                 <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
                 <div className={"file-main"} >
@@ -64,7 +65,12 @@ class PageIcon extends React.Component {
         } else {
             return (
                 <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
-                    <input type="checkbox" style={{position: 'relative', top: '-25%', left: '-25%'}} className={"checkbox-glow checkbox-toggle"} onChange={this.completed.bind(this)}/>
+                    <StepCompletedCheckbox
+                        style={{position: 'relative', top: '-25%', left: '-25%'}}
+                        onChange={this.completed.bind(this)}
+                        show={active}
+                        disabled={!this.props.ready}
+                    />
                     <span style={{position: 'relative', top: '5px', left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
                         <img src={imgSrc} className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>

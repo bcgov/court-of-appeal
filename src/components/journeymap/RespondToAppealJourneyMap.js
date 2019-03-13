@@ -38,6 +38,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           order={1}
                           status={this.stepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2"}
@@ -55,6 +56,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           order={2}
                           status={this.stepStatus(2)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(2,this.state.steps)}
                     />
                 
               <Trail
@@ -72,6 +74,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           order={3}
                           status={this.stepStatus(3)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(3, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2"}
@@ -97,6 +100,7 @@ class RespondToAppealJourneyMap extends React.Component {
                            order={4}
                            status={this.stepStatus(4)}
                            completed={this.stepCompleted.bind(this)}
+                           ready={this.props.isStepReady(4, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}
@@ -113,6 +117,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           order={5}
                           status={this.stepStatus(5)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(5, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}

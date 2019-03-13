@@ -37,6 +37,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                           order={1}
                           status={this.stepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2 last-row"}
@@ -52,6 +53,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                           order={2}
                           status={this.stepStatus(2)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(2, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2 last-row"}
@@ -66,7 +68,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                            order={3}
                            status={this.stepStatus(3)}
                            completed={this.stepCompleted.bind(this)}
-
+                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2 last-row"}

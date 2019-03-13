@@ -36,6 +36,7 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
                           order={1}
                           status={this.stepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
+                          ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2 last-row"}
@@ -49,7 +50,8 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
                            action={this.iconClicked.bind(this, 'respondentappealhearing')}
                            order={2}
                            status={this.stepStatus(2)}
-                           completed={this.stepCompleted.bind(this)} 
+                           completed={this.stepCompleted.bind(this)}
+                           ready={this.props.isStepReady(2, this.state.steps)}
                 />
                 <Trail
                     className={"journey-trail-l1-l2 last-row"}
