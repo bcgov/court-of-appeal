@@ -1,5 +1,6 @@
 import React from 'react';
 import './pageeicon.css';
+import StepCompletedCheckbox from './StepCompletedCheckbox'
 let cn = require('classnames');
 
 class PageIcon extends React.Component {
@@ -46,14 +47,14 @@ class PageIcon extends React.Component {
         if (this.props.twoPages) {
              return (
                  <div className={cn("journey-box", {"inactive": !active})} style={this.props.style}>
-                     <input type="checkbox" 
-                            style={{position: 'relative', top: '-25%', left: '-25%'}} 
-                            className={"checkbox-glow checkbox-toggle"} 
-                            onChange={this.completed.bind(this)}/>
-                     
-                <span style={{position: 'relative', top: top, left: '-10%', zIndex: '9'}}>{this.props.order}</span>
+                     <StepCompletedCheckbox 
+                         style={{position: 'relative', top: '-25%', left: '-25%'}}
+                         onChange={this.completed.bind(this)}
+                         show={active}
+                     />
+                <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
                 <div className={"file-main"} >
-                        <img src={imgSrc} className={"journey-icon any-icon"} onClick={this.props.action}/>
+                        <img src={imgSrc} className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>
                         <div className={"file-corner-r"} />
                 </div>
                 <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
@@ -66,7 +67,7 @@ class PageIcon extends React.Component {
                     <input type="checkbox" style={{position: 'relative', top: '-25%', left: '-25%'}} className={"checkbox-glow checkbox-toggle"} onChange={this.completed.bind(this)}/>
                     <span style={{position: 'relative', top: '5px', left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
-                        <img src={imgSrc} className={"journey-icon"} onClick={this.props.action}/>
+                        <img src={imgSrc} className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>
                         <div className={"file-corner-r"} />
                     </div>
                     <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>

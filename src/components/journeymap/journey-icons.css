@@ -92,6 +92,9 @@
     box-shadow: -5px 9px 20px rgba(0,0,0,.45);
     transition: box-shadow .2s ease-in-out;
 }
+.inactive:hover {
+    box-shadow: none;
+}
 .cal-container {
     position: absolute;
     top: -24px;
