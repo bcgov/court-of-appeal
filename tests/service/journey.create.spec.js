@@ -20,7 +20,7 @@ describe('Create journey', function() {
                 request.on('end', ()=> {
                     response.setHeader('Content-Type', 'application/json');
                     response.statusCode = 201;
-                    sentData = qs.parse(body).data;
+                    sentData = qs.parse(body);
                     response.write(JSON.stringify({id:42}));
                     response.end();
                 }); 
@@ -37,7 +37,7 @@ describe('Create journey', function() {
 
     test('sends data via post inside a data field', function(done) {
         service.createJourney({ any:'field' }, function() {
-            expect(sentData).toEqual('{"any":"field"}');
+            expect(sentData).toEqual({any:"field"});
             done();
         });     
     });

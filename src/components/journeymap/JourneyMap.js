@@ -135,7 +135,8 @@ class JourneyMap extends React.Component {
         let props = { 
             iconClicked: this.iconClicked.bind(this), 
             case: this.props.cases[0],
-            isStepReady: this.isStepReady.bind(this)
+            isStepReady: this.isStepReady.bind(this),
+            service: this.props.service
         };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
@@ -174,6 +175,8 @@ class JourneyMap extends React.Component {
         }
         return false;
     }
+    
+    
 
 }
 

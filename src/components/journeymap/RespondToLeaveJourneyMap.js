@@ -10,6 +10,7 @@ class RespondToLeaveJourneyMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: null,
             steps: [
                 {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
                 {status: 'new', type: 'file'},
@@ -96,10 +97,24 @@ class RespondToLeaveJourneyMap extends React.Component {
         return this.state.steps[stepNumber - 1].status;
     }
 
-    stepCompleted(stepNumber, isComplete) {
+    stepCompleted(stepNumber, isComplete, callback) {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
         this.setState({steps: steps});
+        if (!this.state.id) {
+            this.props.service.createJourney(
+                {
+                    type: 'respondToLeaveJourney',
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : ''
+                },
+                (id) => {
+                    this.setState({id: id})
+                });
+            if (callback) {
+                callback();
+            }
+        }
     }
 }
 export default RespondToLeaveJourneyMap;
