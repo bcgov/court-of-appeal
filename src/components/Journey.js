@@ -251,6 +251,7 @@ class Journey extends Component {
                         refusedStep={this.state.refusedStep}
                         journeyType={this.state.journeyType}
                         cases={this.props.cases}
+                        service={this.service}
                     />
                 </div>
             );

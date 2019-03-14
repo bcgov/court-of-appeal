@@ -171,7 +171,7 @@ Service.prototype.download = function(ids, callback) {
 
 Service.prototype.createJourney = function(journey, callback) {
     let options = this.buildOptions('/api/journey');
-    options.form = { data:JSON.stringify(journey) };
+    options.form = journey;
     let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
