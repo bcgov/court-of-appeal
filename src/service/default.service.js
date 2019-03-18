@@ -56,6 +56,7 @@ Service.prototype.createForm2 = function(form, callback) {
     });
 };
 
+
 Service.prototype.updateForm2 = function(form, id, callback) {
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
@@ -167,4 +168,19 @@ Service.prototype.download = function(ids, callback) {
         }
     });
 };
+
+Service.prototype.createJourney = function(journey, callback) {
+    let options = this.buildOptions('/api/journey');
+    options.form = journey;
+    let self = this;
+    request.post(options, function(err, response, body) {
+        if (response && response.statusCode === 201) {
+            callback(JSON.parse(body).id);
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
+};
+
 module.exports = Service;

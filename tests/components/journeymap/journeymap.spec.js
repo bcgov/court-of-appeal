@@ -9,17 +9,14 @@ describe('JourneyMap', ()=> {
         let history = { location : {state: {}}};
 
         let journeymap;
-        let mapSrc = "/images/journeymap/journey-map_respondent-leave-to-appeal.png";
-        let mapProps = [{coords: "75,10,180,200", function: "appearance", alt: "info about filing a notice of appearance"}];
 
         beforeEach(()=> {
             journeymap = mount(
                 <JourneyMap
                     title={"max wasn't here"}
                     subTitle={"where's max?"}
-                    mapSrc={mapSrc}
-                    mapProps={mapProps}
                     history={history}
+                    cases={[]}
                 />);
         });
 

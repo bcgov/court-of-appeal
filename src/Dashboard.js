@@ -5,20 +5,72 @@ import ActiveFormList from './components/ActiveFormList.js';
 import NeedHelp from './NeedHelp.js';
 import './dashboard.css';
 import ReactTooltip from 'react-tooltip';
+import renderCases from "./components/cases.renderer";
+import findCaseById from "./helpers/find.case.by.id";
+import DefaultService from "./service/default.service";
 
 class Dashboard extends Component {
 
+    constructor(props) {
+        super(props);
+        this.service = props.service;
+        this.state = {
+            fetch: props.fetch !== 'false',
+            cases: [],
+            displayMyCasesEmptyLabel:true
+        };
+        this.fetchCases = this.fetchCases.bind(this);
+        this.updateCases = this.updateCases.bind(this);
+    }
+
+    componentDidMount() {
+
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
+        if (this.state.fetch) {
+            this.fetchCases(); 
+        }
+    }
+
+    fetchCases() {
+        this.service.getMyCases({}, (data) => {
+            let cases = renderCases(data.cases.slice(0, 5));
+            this.setState({
+                cases:cases,
+                displayMyCasesEmptyLabel: (cases.length === 0)
+            });
+        });
+    }
+
+    updateCases(data, id) {
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
+            found.data = data;
+            this.setState({ cases:this.state.cases });
+        });
+    }
+
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form">
+            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
                 <div className="row">
                     <div role="main" className="col col-sm-12">
-                        <ActiveFormList fetch={this.props.fetch} />
+                        <ActiveFormList 
+                            fetch={this.state.fetch}
+                            updateCases={this.updateCases}
+                            fetchCases={this.fetchCases}
+                            service={this.service}
+                            cases={this.state.cases}
+                            displayMyCasesEmptyLabel={this.state.displayMyCasesEmptyLabel}
+                        />
                     </div>
                 </div>
                 <div className="row">
                     <div role="main" className="center-main col col-lg-8" >
-                        <Journey/>
+                        <Journey
+                            cases={this.state.cases}
+                        />
                     </div>
                     <div role="main" className="right-nav-main col col-lg-4"  >
                         <div className="row">

@@ -6,45 +6,7 @@ import renderCases from './cases.renderer';
 import findCaseById from '../helpers/find.case.by.id';
 
 class ActiveFormList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.service = props.service; 
-        this.state = {
-            fetch: props.fetch !== 'false',
-            cases: [],
-            displayMyCasesEmptyLabel:true
-        };
-        this.fetchCases = this.fetchCases.bind(this);
-        this.updateCases = this.updateCases.bind(this);
-    }
-
-    componentDidMount() {
-
-        if (this.service == null) {
-            let window = this.element.ownerDocument.defaultView;
-            this.service = new DefaultService(window);
-        }
-        if (this.state.fetch) { this.fetchCases(); }
-    }
-
-    fetchCases() {
-        this.service.getMyCases({}, (data) => {
-            let cases = renderCases(data.cases.slice(0, 5));
-            this.setState({
-                cases:cases,
-                displayMyCasesEmptyLabel: (cases.length === 0)
-            });
-        });
-    }    
-
-    updateCases(data, id) {
-        findCaseById({id:id, cases:this.state.cases}, (found)=>{
-            found.data = data; 
-            this.setState({ cases:this.state.cases });
-        });       
-    }
-
+    
     render() {
         return (
             <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
@@ -53,11 +15,11 @@ class ActiveFormList extends Component {
 
                 </div>
                 <CaseList
-                    cases={this.state.cases}                   
-                    service={this.service}
-                    updateCases={this.updateCases}
+                    cases={this.props.cases}                   
+                    service={this.props.service}
+                    updateCases={this.props.updateCases}
                 />
-                <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
+                <div id="my-cases-empty-label" style={{ display:this.props.displayMyCasesEmptyLabel ? 'block' : 'none' }}>
                         No open cases found
                 </div>
                 <div>

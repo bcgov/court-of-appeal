@@ -8,7 +8,7 @@ class ClockEndCircle extends React.Component {
     render() {
         let stepTitle = null;
         if (this.props.stepTitle) {
-            stepTitle = <div className={cn({"end-step-title": this.props.active},{"step-title-optional":!this.props.active})} style={this.props.titleStyle}>{this.props.stepTitle}</div>;
+            stepTitle = <div className={cn("end-step-title",{"step-title-optional":!this.props.active})} style={this.props.titleStyle}>{this.props.stepTitle}</div>;
         }
 
         return (

@@ -1,7 +1,8 @@
 
+/** Styles used for css boxes and containers  **/
 .file-container {
     position: relative;
-    top: -5px;
+    top: -25px;
 }
 .file-container.double {
     transform: scale(.90) translateY(9px);
@@ -34,7 +35,7 @@
 .second-page {
     transform: translateX(10px) translateY(-10px) scale(.99);
 }
-.file-main {
+.package-main {
     position: absolute;
     top: .5px;
     left: -.5px;
@@ -42,6 +43,30 @@
     height: 90px;
     width: 70px;
     background-color: white;
+}
+.file-main {
+    position: absolute;
+    top: .5px;
+    left: -.5px;
+    height: 90px;
+    width: 70px;
+}
+.package-container {
+    position: absolute;
+    top: .5px;
+    left: -.5px;
+    height: 90px;
+    width: 70px;
+}
+
+.file-corner-r {
+    position: absolute;
+    top: -12px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    border-top: 47px solid white;
+    border-left: 47px solid transparent;
 }
 .file-corner-l {
     position: absolute;
@@ -67,14 +92,4 @@
     width: 30px;
     height: 28.5px;
     background-color: white;
-}
-.cal-container {
-    position: absolute;
-    top: -5px;
-    left: -.5px;
-    border: 5px solid black;
-    height: 90px;
-    width: 70px;
-    background-color: white;
-    padding: 20px 10px;
 }

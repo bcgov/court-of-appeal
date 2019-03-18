@@ -10,7 +10,7 @@ describe('RespondToLeaveGrantedJourneyMap', ()=> {
         let clicked = '';
         let iconClicked = (action) => {
             clicked = action;
-        }
+        };
 
         let journeymap;
         
@@ -21,6 +21,7 @@ describe('RespondToLeaveGrantedJourneyMap', ()=> {
                     subTitle={"where's max?"}
                     history={history}
                     iconClicked={iconClicked.bind(this)}
+                    isStepReady={()=>{}}
                 />);
         });
 
