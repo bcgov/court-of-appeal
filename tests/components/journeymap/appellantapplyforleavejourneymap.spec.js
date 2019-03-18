@@ -7,10 +7,7 @@ describe('AppellantApplyForLeaveJourneyMap', ()=> {
 
     describe('AppellantApplyForLeaveJourneyMap builds', ()=>{
         let history = { location : {state: {}}};
-        let clicked = '';
-        let iconClicked = (action) => {
-            clicked = action;
-        }
+        let isStepReady = () => {}
 
         let journeymap;
         
@@ -20,16 +17,14 @@ describe('AppellantApplyForLeaveJourneyMap', ()=> {
                     title={"max wasn't here"}
                     subTitle={"where's max?"}
                     history={history}
-                    iconClicked={iconClicked.bind(this)}
+                    isStepReady={isStepReady.bind(this)}
                 />);
         });
 
-        test('can build AppellantApplyForLeaveJourneyMap with icons that respond to click', () => {
+        test('can build AppellantApplyForLeaveJourneyMap', () => {
 
             let instance = journeymap.instance();
-            
-            instance.iconClicked('maxdisappeared');
-            expect(clicked = 'maxdisappeared');
+            expect(instance).toMatchSnapshot();
         });
 
     });

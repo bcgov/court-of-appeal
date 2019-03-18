@@ -7,10 +7,6 @@ describe('RespondToLeaveJourneyMap', ()=> {
 
     describe('RespondToLeaveJourneyMap builds', ()=>{
         let history = { location : {state: {}}};
-        let clicked = '';
-        let iconClicked = (action) => {
-            clicked = action;
-        }
 
         let journeymap;
         
@@ -20,17 +16,14 @@ describe('RespondToLeaveJourneyMap', ()=> {
                     title={"max wasn't here"}
                     subTitle={"where's max?"}
                     history={history}
-                    iconClicked={iconClicked.bind(this)}
                     isStepReady={()=>{}}
                 />);
         });
 
-        test('can build RespondToLeaveJourneyMap with icons that respond to click', () => {
+        test('can build RespondToLeaveJourneyMap', () => {
 
             let instance = journeymap.instance();
-            
-            instance.iconClicked('appearance');
-            expect(clicked = 'appearance');
+            expect(instance).toMatchSnapshot();
 
         });
 

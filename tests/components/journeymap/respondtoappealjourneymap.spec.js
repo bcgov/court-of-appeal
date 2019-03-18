@@ -8,9 +8,6 @@ describe('RespondToAppealJourneyMap', ()=> {
     describe('RespondToAppealJourneyMap builds', ()=>{
         let history = { location : {state: {}}};
         let clicked = '';
-        let iconClicked = (action) => {
-            clicked = action;
-        };
 
         let journeymap;
         
@@ -20,17 +17,13 @@ describe('RespondToAppealJourneyMap', ()=> {
                     title={"max wasn't here"}
                     subTitle={"where's max?"}
                     history={history}
-                    iconClicked={iconClicked.bind(this)}
                     isStepReady={()=>{}}
                 />);
         });
 
-        test('can build RespondToAppealJourneyMap with icons that respond to click', () => {
-
+        test('can build RespondToAppealJourneyMap', () => {
             let instance = journeymap.instance();
-            
-            instance.iconClicked('crossappeal');
-            expect(clicked = 'crossappeal');
+            expect(instance).toMatchSnapshot();
         });
 
     });

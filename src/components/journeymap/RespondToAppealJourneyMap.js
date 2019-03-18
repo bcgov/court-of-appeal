@@ -1,7 +1,8 @@
 import React from 'react';
 import PageIcon from './PageIcon';
 import GavelIcon from './GavelIcon';
-import Trail from './Trail'
+import Trail from './Trail';
+import EndCircle from './EndCircle';
 let cn = require('classnames');
 
 class RespondToAppealJourneyMap extends React.Component {
@@ -26,7 +27,7 @@ class RespondToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status !== 'new'}
-                    lineCompleted={this.state.steps[2.].status === 'completed'}
+                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'18%'}
                     level={1}
                 />
@@ -43,7 +44,7 @@ class RespondToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
-                    lineCompleted={this.state.steps[2.].status === 'completed'}
+                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'25%'}
                     level={1}
                 />
@@ -62,7 +63,7 @@ class RespondToAppealJourneyMap extends React.Component {
               <Trail
                   className={"journey-trail-l1-l2"}
                   completed={this.state.steps[1].status === 'completed'}
-                  lineCompleted={this.state.steps[2.].status === 'completed'}
+                  lineCompleted={this.state.steps[2].status === 'completed'}
                   width={'25%'}
                   level={1}
               />
@@ -79,7 +80,7 @@ class RespondToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[2].status === 'completed'}
-                    lineCompleted={this.state.steps[2.].status === 'completed'}
+                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'5%'}
                     level={1}
                 />
@@ -125,13 +126,14 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'25%'}
                     level={2}
                 />
-                <div className={cn("journey-end-circle","journey-end-circle-l2","any-icon",{"completed-step": this.state.steps[4].status === 'completed'})} onClick={this.iconClicked.bind(this,'respondentcomplete')} >
-                <div className={"oi oi-check journey-final-check"}/>
-                <div className={cn("end-step-title", "end-step-title-l2")}>
-                    <span>"Appeal Process Complete"</span>
-                </div>
-                
-                </div>
+                <EndCircle
+                    stepTitle={"Appeal Process Complete"}
+                    action={this.iconClicked.bind(this,'respondentcomplete')}
+                    active={true}
+                    completed={this.state.steps[4].status === 'completed'}
+                    style={{top: '68%', left: '80%'}}
+
+                />
             </div>
         );
     }
