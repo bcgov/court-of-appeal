@@ -10,7 +10,6 @@ class ClockEndCircle extends React.Component {
         if (this.props.stepTitle) {
             stepTitle = <div className={cn("end-step-title",{"step-title-optional":!this.props.active})} style={this.props.titleStyle}>{this.props.stepTitle}</div>;
         }
-        console.log("active:", this.props.active)
         return (
             
             <div className={cn({"journey-box inactive": !this.props.active},"action-end-point")} onClick={this.props.action} style={this.props.style}>
