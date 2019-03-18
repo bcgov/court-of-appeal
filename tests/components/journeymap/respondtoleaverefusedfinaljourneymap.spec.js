@@ -22,6 +22,7 @@ describe('RespondToLeaveRefusedFinalJourneyMap', ()=> {
                     subTitle={"where's max?"}
                     history={history}
                     iconClicked={iconClicked.bind(this)}
+                    isStepReady={()=>{}}
                 />);
         });
 

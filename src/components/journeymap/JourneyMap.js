@@ -132,7 +132,12 @@ class JourneyMap extends React.Component {
     }
     
     getUsersJourney() {
-        let props = { iconClicked: this.iconClicked.bind(this) };
+        let props = { 
+            iconClicked: this.iconClicked.bind(this), 
+            case: this.props.cases[0],
+            isStepReady: this.isStepReady.bind(this),
+            service: this.props.service
+        };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
             'respondToNoticeOfApplicationForLeaveToAppeal': <RespondToLeaveJourneyMap {...props}/>,
@@ -145,7 +150,33 @@ class JourneyMap extends React.Component {
             'appellantLeaveRefused': <AppellantLeaveRefusedJourneyMap {...props} />,
         };
         return options[this.props.journeyType]
-    }  
+    }
+
+    /** can be set as complete if it's (new or in progress), or (completed and the next one new) **/
+    // TODO move status strings to a helper file so we don't suffer from typos
+    isStepReady(stepNumber, steps) {
+        let stepIndex = stepNumber - 1;
+        let status = steps[stepIndex].status;
+
+        if (stepNumber === 1) {
+            if ( status !== 'completed' ||
+                (status === 'completed' && steps[stepIndex + 1].status === 'new')) {
+                return true;
+            }
+        } else if (stepNumber === steps.length) {
+            if (steps[stepIndex - 1].status === 'completed') {
+                return true;
+            }
+        } else {
+            if ((status !== 'completed' && steps[stepIndex - 1].status === 'completed') ||
+                (status === 'completed' && steps[stepIndex + 1].status === 'new' )) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 
 }
 
