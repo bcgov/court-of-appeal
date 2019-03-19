@@ -112,6 +112,7 @@ AppellantLeaveRefusedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="inactive"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -152,6 +153,7 @@ AppellantLeaveRefusedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="inactive"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -323,6 +325,7 @@ AppellantLeaveRefusedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="inactive"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -363,6 +366,7 @@ AppellantLeaveRefusedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="inactive"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -695,6 +699,7 @@ AppellantLeaveRefusedJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "inactive",
                         "onClick": undefined,
                         "src": "/icons/journey_map_event_multi-page.svg",
@@ -706,6 +711,7 @@ AppellantLeaveRefusedJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "inactive",
                         "onClick": undefined,
                         "src": "/icons/journey_map_event_multi-page.svg",
@@ -755,6 +761,7 @@ AppellantLeaveRefusedJourneyMap {
                         "updateQueue": null,
                       },
                       "stateNode": <img
+                        alt="Page Icon for [object Object]"
                         class="inactive"
                         src="/icons/journey_map_event_multi-page.svg"
                         style="height: 93px;"
@@ -772,6 +779,7 @@ AppellantLeaveRefusedJourneyMap {
                     "memoizedProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="inactive"
                           src="/icons/journey_map_event_multi-page.svg"
                           style={
@@ -797,6 +805,7 @@ AppellantLeaveRefusedJourneyMap {
                     "pendingProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="inactive"
                           src="/icons/journey_map_event_multi-page.svg"
                           style={
@@ -993,6 +1002,7 @@ AppellantLeaveRefusedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="inactive"
                         src="/icons/journey_map_event_multi-page.svg"
                         style="height: 93px;"
@@ -1074,6 +1084,7 @@ AppellantLeaveRefusedJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="inactive"
                       src="/icons/journey_map_event_multi-page.svg"
                       style={
@@ -1141,6 +1152,7 @@ AppellantLeaveRefusedJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="inactive"
                       src="/icons/journey_map_event_multi-page.svg"
                       style={
@@ -1191,6 +1203,7 @@ AppellantLeaveRefusedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="inactive"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -1426,6 +1439,7 @@ AppellantLeaveRefusedJourneyMap {
                             "key": null,
                             "lastEffect": null,
                             "memoizedProps": Object {
+                              "alt": "Gavel Icon for [object Object]",
                               "className": "inactive",
                               "onClick": undefined,
                               "src": "/icons/journey_map_event_hearing.svg",
@@ -1434,6 +1448,7 @@ AppellantLeaveRefusedJourneyMap {
                             "mode": 0,
                             "nextEffect": null,
                             "pendingProps": Object {
+                              "alt": "Gavel Icon for [object Object]",
                               "className": "inactive",
                               "onClick": undefined,
                               "src": "/icons/journey_map_event_hearing.svg",
@@ -1442,6 +1457,7 @@ AppellantLeaveRefusedJourneyMap {
                             "return": [Circular],
                             "sibling": null,
                             "stateNode": <img
+                              alt="Gavel Icon for [object Object]"
                               class="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />,
@@ -1457,6 +1473,7 @@ AppellantLeaveRefusedJourneyMap {
                           "lastEffect": null,
                           "memoizedProps": Object {
                             "children": <img
+                              alt="Gavel Icon for [object Object]"
                               className="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />,
@@ -1467,6 +1484,7 @@ AppellantLeaveRefusedJourneyMap {
                           "nextEffect": null,
                           "pendingProps": Object {
                             "children": <img
+                              alt="Gavel Icon for [object Object]"
                               className="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />,
@@ -1479,6 +1497,7 @@ AppellantLeaveRefusedJourneyMap {
                             class="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               class="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -1498,6 +1517,7 @@ AppellantLeaveRefusedJourneyMap {
                             className="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               className="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -1513,6 +1533,7 @@ AppellantLeaveRefusedJourneyMap {
                             className="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               className="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -1619,6 +1640,7 @@ AppellantLeaveRefusedJourneyMap {
                             class="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               class="inactive"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -1699,6 +1721,7 @@ AppellantLeaveRefusedJourneyMap {
                           className="file-main"
                         >
                           <img
+                            alt="Gavel Icon for [object Object]"
                             className="inactive"
                             src="/icons/journey_map_event_hearing.svg"
                           />
@@ -1760,6 +1783,7 @@ AppellantLeaveRefusedJourneyMap {
                           className="file-main"
                         >
                           <img
+                            alt="Gavel Icon for [object Object]"
                             className="inactive"
                             src="/icons/journey_map_event_hearing.svg"
                           />
@@ -1804,6 +1828,7 @@ AppellantLeaveRefusedJourneyMap {
                         class="file-main"
                       >
                         <img
+                          alt="Gavel Icon for [object Object]"
                           class="inactive"
                           src="/icons/journey_map_event_hearing.svg"
                         />
@@ -2523,6 +2548,7 @@ AppellantLeaveRefusedJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="inactive"
               src="/icons/journey_map_event_multi-page.svg"
               style="height: 93px;"
@@ -2563,6 +2589,7 @@ AppellantLeaveRefusedJourneyMap {
               class="file-main"
             >
               <img
+                alt="Gavel Icon for [object Object]"
                 class="inactive"
                 src="/icons/journey_map_event_hearing.svg"
               />
@@ -2744,6 +2771,7 @@ AppellantLeaveRefusedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="inactive"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -2784,6 +2812,7 @@ AppellantLeaveRefusedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="inactive"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -2955,6 +2984,7 @@ AppellantLeaveRefusedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="inactive"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -2995,6 +3025,7 @@ AppellantLeaveRefusedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="inactive"
                       src="/icons/journey_map_event_hearing.svg"
                     />

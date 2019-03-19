@@ -5,13 +5,16 @@ import CalendarIcon from './CalendarIcon';
 import EndCircle from './EndCircle';
 import Trail from './Trail';
 let cn = require('classnames');
+let JOURNEY_TYPE = require('../../helpers/constants');
 
 class AppellantLeaveGrantedJourneyMap extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            steps: [
+            id: props.journey ? props.journey.id : null,
+            userid: props.journey ? props.journey.userid : null,
+            steps: props.journey ? JSON.parse(props.journey.steps) : [
                 {status: 'new', type: 'appealrecord'},
                 {status: 'new', type: 'factum'},
                 {status: 'new', type: 'bookappeal'},
@@ -172,6 +175,28 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
         this.setState({steps: steps});
+        if (!this.state.id) {
+            this.props.service.createJourney(
+                {
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                },
+                (id) => {
+                    this.setState({id: id})
+                });
+        } else {
+            this.props.service.updateJourney(
+                {
+                    id: this.state.id,
+                    userid: this.state.userid,
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                },this.state.id, (id)=>{console.log("Updated journey", id)});
+        }
     }
 }
 export default AppellantLeaveGrantedJourneyMap;
