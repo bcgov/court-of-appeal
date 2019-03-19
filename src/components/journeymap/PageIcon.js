@@ -23,11 +23,12 @@ class PageIcon extends React.Component {
         let stepTitle, stepTitleOptional = null;
         let active = !!this.props.active;
         let imgSrc = this.imageByState[this.props.status];
+        let checkboxStyle = {position: 'relative', marginTop: 0, left: '-25%'}
         
         if (this.props.twoPages) {
             imgSrc =  process.env.PUBLIC_URL + "/icons/journey_map_event_multi-page.svg"
         }
-        let top = this.props.twoPages ? '9px' : '5px';
+        let top = this.props.twoPages ? '11px' : '5px';
         
         if (this.props.stepTitleOptional) {
             stepTitleOptional = <span className={"step-title-optional"}>{this.props.stepTitleOptional}</span>;
@@ -48,25 +49,30 @@ class PageIcon extends React.Component {
              return (
                  <div className={cn("journey-box", {"inactive": !active})} style={this.props.style}>
                      <StepCompletedCheckbox 
-                         style={{position: 'relative', top: '-25%', left: '-25%'}}
+                         style={checkboxStyle}
                          onChange={this.completed.bind(this)}
                          show={active}
                          disabled={!this.props.ready}
                      />
-                <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
-                <div className={"file-main"} >
-                        <img src={imgSrc} className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>
-                        <div className={"file-corner-r"} />
-                </div>
-                <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
-                    {stepTitle}
-                </div>
-            </div>);
+                    <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
+                    <div className={"file-main"} >
+                            <img src={imgSrc} 
+                                 className={cn({"journey-icon": active}, {"inactive": !active})} 
+                                 onClick={this.props.action}
+                                 style={{height:'93px'}}
+                            />
+                            <div className={"file-corner-r"} style={{top: '-15px'}}/>
+                    </div>
+                    <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
+                        {stepTitle}
+                    </div>
+                 </div>
+             );
         } else {
             return (
                 <div className={cn("journey-box", {"inactive": !active})} style={this.props.style} >
                     <StepCompletedCheckbox
-                        style={{position: 'relative', top: '-25%', left: '-25%'}}
+                        style={checkboxStyle}
                         onChange={this.completed.bind(this)}
                         show={active}
                         disabled={!this.props.ready}

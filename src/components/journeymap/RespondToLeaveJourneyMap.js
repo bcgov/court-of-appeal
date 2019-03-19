@@ -77,11 +77,11 @@ class RespondToLeaveJourneyMap extends React.Component {
                     width={'20%'}
                     level={1}
                 />
-                 <ClockEndCircle style={{position: 'absolute', left: '82%', top: '4px'}}
+                 <ClockEndCircle style={{position: 'absolute', left: '82%'}}
                                  className={cn("any-icon", {"completed-step": this.state.steps[2].status === 'completed'})}
                           stepTitle={"Decision on Leave to Appeal"}
                           action={this.iconClicked.bind(this, 'respondentdecision')}
-                          titleStyle={{position: 'absolute', top:'143px', width: '150px', left: '-17px'}}
+                          titleStyle={{position: 'absolute' , width: '150px', left: '-17px', top: '97px'}}
                           active={true}
                  />
             

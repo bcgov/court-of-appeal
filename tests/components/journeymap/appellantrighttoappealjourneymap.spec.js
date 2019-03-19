@@ -7,11 +7,6 @@ describe('', ()=> {
 
     describe('AppellantRightToAppealJourneyMap builds', ()=>{
         let history = { location : {state: {}}};
-        let clicked = '';
-        let iconClicked = (action) => {
-            clicked = action;
-        }
-
         let journeymap;
         
         beforeEach(()=> {
@@ -20,16 +15,15 @@ describe('', ()=> {
                     title={"max wasn't here"}
                     subTitle={"where's max?"}
                     history={history}
-                    iconClicked={iconClicked.bind(this)}
+                    isStepReady={()=> {}}
                 />);
         });
 
-        test('can build AppellantRightToAppealJourneyMap with icons that respond to click', () => {
+        test('can build AppellantRightToAppealJourneyMap', () => {
 
             let instance = journeymap.instance();
+            expect(instance).toMatchSnapshot();
             
-            instance.iconClicked('elvislives');
-            expect(clicked = 'elvislives');
         });
 
     });
