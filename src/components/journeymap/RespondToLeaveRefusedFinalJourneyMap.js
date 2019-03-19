@@ -3,7 +3,6 @@ import PageIcon from './PageIcon'
 import GavelIcon from './GavelIcon'
 import ClockEndCircle from "./ClockEndCircle";
 import Trail from "./Trail";
-let cn = require("classnames");
 
 class RespondToLeaveRefusedFinalJourneyMap extends React.Component {
     

@@ -4,14 +4,16 @@ import GavelIcon from './GavelIcon'
 import ClockEndCircle from "./ClockEndCircle";
 import Trail from "./Trail";
 let cn = require('classnames')
+let JOURNEY_TYPE = require('../../helpers/constants')
 
 class RespondToLeaveJourneyMap extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
-            steps: [
+            id: props.journey ? props.journey.id : null,
+            userid: props.journey ? props.journey.userid : null,
+            steps: props.journey ? JSON.parse(props.journey.steps) : [
                 {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
                 {status: 'new', type: 'file'},
                 {status: 'new', type: 'hearing'},
@@ -97,23 +99,32 @@ class RespondToLeaveJourneyMap extends React.Component {
         return this.state.steps[stepNumber - 1].status;
     }
 
-    stepCompleted(stepNumber, isComplete, callback) {
+    stepCompleted(stepNumber, isComplete) {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
         this.setState({steps: steps});
         if (!this.state.id) {
             this.props.service.createJourney(
                 {
-                    type: 'respondToLeaveJourney',
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
                     state: 'started',
                     ca_number: this.props.case ? this.props.ca_number : ''
                 },
                 (id) => {
                     this.setState({id: id})
                 });
-            if (callback) {
-                callback();
-            }
+        } else {
+            this.props.service.updateJourney(
+                {
+                    id: this.state.id,
+                    userid: this.state.userid,
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                }, this.state.id, (id) => {
+                    console.log("Updated journey", id)
+                });
         }
     }
 }

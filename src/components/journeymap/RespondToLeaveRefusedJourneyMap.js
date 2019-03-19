@@ -4,13 +4,16 @@ import GavelIcon from './GavelIcon'
 import ClockEndCircle from "./ClockEndCircle";
 import Trail from "./Trail";
 let cn = require('classnames');
+let JOURNEY_TYPE = require('../../helpers/constants');
 
 class RespondToLeaveRefusedJourneyMap extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            steps: [
+            id: props.journey ? props.journey.id : null,
+            userid: props.journey ? props.journey.userid : null,
+            steps: props.journey ? JSON.parse(props.journey.steps) : [
                 {status: 'new', type: 'file'},
                 {status: 'new', type: 'hearing'},
             ],
@@ -83,6 +86,29 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
         this.setState({steps: steps});
+        if (!this.state.id) {
+            this.props.service.createJourney(
+                {
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : ''
+                },
+                (id) => {
+                    this.setState({id: id})
+                });
+        } else {
+            this.props.service.updateJourney(
+                {
+                    id: this.state.id,
+                    userid: this.state.userid,
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                }, this.state.id, (id) => {
+                    console.log("Updated journey", id)
+                });
+        }
     }
 }
 export default RespondToLeaveRefusedJourneyMap;

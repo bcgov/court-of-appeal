@@ -136,7 +136,8 @@ class JourneyMap extends React.Component {
             iconClicked: this.iconClicked.bind(this), 
             case: this.props.cases[0],
             isStepReady: this.isStepReady.bind(this),
-            service: this.props.service
+            service: this.props.service,
+            journey: this.props.journey
         };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,

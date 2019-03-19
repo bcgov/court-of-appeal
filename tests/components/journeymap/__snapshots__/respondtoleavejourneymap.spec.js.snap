@@ -120,6 +120,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -163,6 +164,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -209,6 +211,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -388,6 +391,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -431,6 +435,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -477,6 +482,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -861,6 +867,7 @@ RespondToLeaveJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -869,6 +876,7 @@ RespondToLeaveJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -908,6 +916,7 @@ RespondToLeaveJourneyMap {
                         "updateQueue": null,
                       },
                       "stateNode": <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />,
@@ -924,6 +933,7 @@ RespondToLeaveJourneyMap {
                     "memoizedProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -940,6 +950,7 @@ RespondToLeaveJourneyMap {
                     "pendingProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -1127,6 +1138,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -1210,6 +1222,7 @@ RespondToLeaveJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1270,6 +1283,7 @@ RespondToLeaveJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1319,6 +1333,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -1604,6 +1619,7 @@ RespondToLeaveJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1612,6 +1628,7 @@ RespondToLeaveJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1651,6 +1668,7 @@ RespondToLeaveJourneyMap {
                             "updateQueue": null,
                           },
                           "stateNode": <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />,
@@ -1667,6 +1685,7 @@ RespondToLeaveJourneyMap {
                         "memoizedProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -1683,6 +1702,7 @@ RespondToLeaveJourneyMap {
                         "pendingProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -1870,6 +1890,7 @@ RespondToLeaveJourneyMap {
                           class="file-main"
                         >
                           <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />
@@ -1953,6 +1974,7 @@ RespondToLeaveJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -2013,6 +2035,7 @@ RespondToLeaveJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -2062,6 +2085,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -2353,6 +2377,7 @@ RespondToLeaveJourneyMap {
                                 "key": null,
                                 "lastEffect": null,
                                 "memoizedProps": Object {
+                                  "alt": "Gavel Icon for [object Object]",
                                   "className": "journey-icon",
                                   "onClick": [Function],
                                   "src": "/icons/journey_map_event_hearing.svg",
@@ -2361,6 +2386,7 @@ RespondToLeaveJourneyMap {
                                 "mode": 0,
                                 "nextEffect": null,
                                 "pendingProps": Object {
+                                  "alt": "Gavel Icon for [object Object]",
                                   "className": "journey-icon",
                                   "onClick": [Function],
                                   "src": "/icons/journey_map_event_hearing.svg",
@@ -2369,6 +2395,7 @@ RespondToLeaveJourneyMap {
                                 "return": [Circular],
                                 "sibling": null,
                                 "stateNode": <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />,
@@ -2384,6 +2411,7 @@ RespondToLeaveJourneyMap {
                               "lastEffect": null,
                               "memoizedProps": Object {
                                 "children": <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2395,6 +2423,7 @@ RespondToLeaveJourneyMap {
                               "nextEffect": null,
                               "pendingProps": Object {
                                 "children": <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2408,6 +2437,7 @@ RespondToLeaveJourneyMap {
                                 class="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />
@@ -2427,6 +2457,7 @@ RespondToLeaveJourneyMap {
                                 className="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2443,6 +2474,7 @@ RespondToLeaveJourneyMap {
                                 className="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2550,6 +2582,7 @@ RespondToLeaveJourneyMap {
                                 class="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />
@@ -2635,6 +2668,7 @@ RespondToLeaveJourneyMap {
                               className="file-main"
                             >
                               <img
+                                alt="Gavel Icon for [object Object]"
                                 className="journey-icon"
                                 onClick={[Function]}
                                 src="/icons/journey_map_event_hearing.svg"
@@ -2699,6 +2733,7 @@ RespondToLeaveJourneyMap {
                               className="file-main"
                             >
                               <img
+                                alt="Gavel Icon for [object Object]"
                                 className="journey-icon"
                                 onClick={[Function]}
                                 src="/icons/journey_map_event_hearing.svg"
@@ -2751,6 +2786,7 @@ RespondToLeaveJourneyMap {
                             class="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               class="journey-icon"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -3618,6 +3654,7 @@ RespondToLeaveJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -3661,6 +3698,7 @@ RespondToLeaveJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -3707,6 +3745,7 @@ RespondToLeaveJourneyMap {
               class="file-main"
             >
               <img
+                alt="Gavel Icon for [object Object]"
                 class="journey-icon"
                 src="/icons/journey_map_event_hearing.svg"
               />
@@ -3784,6 +3823,7 @@ RespondToLeaveJourneyMap {
           "type": "hearing",
         },
       ],
+      "userid": null,
     },
     "mode": 0,
     "nextEffect": null,
@@ -3913,6 +3953,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -3956,6 +3997,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -4002,6 +4044,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -4181,6 +4224,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -4224,6 +4268,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -4270,6 +4315,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -4434,6 +4480,7 @@ RespondToLeaveJourneyMap {
         "type": "hearing",
       },
     ],
+    "userid": null,
   },
   "updater": Object {
     "enqueueForceUpdate": [Function],

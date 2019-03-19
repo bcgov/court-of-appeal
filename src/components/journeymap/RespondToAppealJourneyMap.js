@@ -3,6 +3,7 @@ import PageIcon from './PageIcon';
 import GavelIcon from './GavelIcon';
 import Trail from './Trail';
 import EndCircle from './EndCircle';
+let JOURNEY_TYPE = require('../../helpers/constants')
 let cn = require('classnames');
 
 class RespondToAppealJourneyMap extends React.Component {
@@ -10,12 +11,15 @@ class RespondToAppealJourneyMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            steps: [
-                {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
-                {status: 'new', type: 'package'},
-                {status: 'new', type: 'file'},
-                {status: 'new', type: 'hearing'},
-                {status: 'new', type: 'courtorder'}],
+            id: props.journey ? props.journey.id : null,
+            userid: props.journey ? props.journey.userid : null,
+            steps: props.journey ? JSON.parse(props.journey.steps) :
+                [
+                    {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
+                    {status: 'new', type: 'package'},
+                    {status: 'new', type: 'file'},
+                    {status: 'new', type: 'hearing'},
+                    {status: 'new', type: 'courtorder'}],
             case: props.case
         }
     }
@@ -150,6 +154,28 @@ class RespondToAppealJourneyMap extends React.Component {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
         this.setState({steps: steps});
+        if (!this.state.id) {
+            this.props.service.createJourney(
+                {
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                },
+                (id) => {
+                    this.setState({id: id})
+                });
+        } else {
+            this.props.service.updateJourney(
+                {   
+                    id: this.state.id,
+                    userid: this.state.userid,
+                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL,
+                    state: 'started',
+                    ca_number: this.props.case ? this.props.ca_number : '',
+                    steps: JSON.stringify(this.state.steps)
+                },this.state.id, (id)=>{console.log("Updated journey", id)});
+        }
     }
 }
 export default RespondToAppealJourneyMap;
