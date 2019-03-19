@@ -22,8 +22,6 @@
 }
 .end-step-title {
     position: relative;
-    top: 7.5%;
-    left: -8%;
     font-size: large;
     text-align: center;
     color: #23527c;
@@ -32,12 +30,7 @@
     text-decoration: underline;
 }
 .end-step-title-l2 {
-    top: 18px;
-    left: -25px;
-    width: 150px;
-}
-.end-step-title-l3 {
-    top: 30px;
+    top: 12px;
     left: -25px;
     width: 150px;
 }
@@ -48,6 +41,9 @@
     font-size: large;
     text-align: center;
     width: 119px;
+}
+.page-step-title-inactive {
+    top: 98%;
 }
 .step-title {
     color: #23527c;
