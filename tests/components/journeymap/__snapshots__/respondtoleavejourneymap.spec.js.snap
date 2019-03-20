@@ -743,6 +743,7 @@ RespondToLeaveJourneyMap {
                   "key": null,
                   "lastEffect": null,
                   "memoizedProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -757,6 +758,7 @@ RespondToLeaveJourneyMap {
                   "mode": 0,
                   "nextEffect": null,
                   "pendingProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -787,6 +789,7 @@ RespondToLeaveJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -800,6 +803,7 @@ RespondToLeaveJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -1164,6 +1168,7 @@ RespondToLeaveJourneyMap {
                   "_reactInternalInstance": Object {},
                   "context": Object {},
                   "props": Object {
+                    "checked": false,
                     "disabled": true,
                     "onChange": [Function],
                     "show": true,
@@ -1195,6 +1200,7 @@ RespondToLeaveJourneyMap {
               "memoizedProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1256,6 +1262,7 @@ RespondToLeaveJourneyMap {
               "pendingProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1495,6 +1502,7 @@ RespondToLeaveJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1509,6 +1517,7 @@ RespondToLeaveJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1539,6 +1548,7 @@ RespondToLeaveJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1552,6 +1562,7 @@ RespondToLeaveJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1916,6 +1927,7 @@ RespondToLeaveJourneyMap {
                       "_reactInternalInstance": Object {},
                       "context": Object {},
                       "props": Object {
+                        "checked": false,
                         "disabled": true,
                         "onChange": [Function],
                         "show": true,
@@ -1947,6 +1959,7 @@ RespondToLeaveJourneyMap {
                   "memoizedProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2008,6 +2021,7 @@ RespondToLeaveJourneyMap {
                   "pendingProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2247,6 +2261,7 @@ RespondToLeaveJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "checked": undefined,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2261,6 +2276,7 @@ RespondToLeaveJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "checked": undefined,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],

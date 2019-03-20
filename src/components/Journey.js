@@ -373,8 +373,9 @@ class Journey extends Component {
         this.service.getMyJourneys({}, (data) => {
             let journeys = (data.journeys);
             let journeyType = '', introText = '';
-            let index = journeys.length - 1;
-            if ( journeys.length !== 0 ) {
+            
+            if ( journeys && journeys.length !== 0 ) {
+                let index = journeys.length - 1;
                 journeyType = journeys[index].type;
                 introText = JOURNEY_TYPES.INTROTEXT[journeys[index].type]
                 this.setState({
