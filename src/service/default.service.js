@@ -96,6 +96,19 @@ Service.prototype.getMyJourneys = function(form, callback) {
     });
 };
 
+Service.prototype.getMyJourney = function(form, callback) {
+    let self = this;
+    request.get(this.buildOptions('/api/journey'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            self.notifyOfError(callback, { cases:[] });
+        }
+    });
+};
+
+
 Service.prototype.savePerson = function(user, callback) {
     let options = this.buildOptions('/api/persons');
     options.form = { data:user };

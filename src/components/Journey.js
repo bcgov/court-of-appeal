@@ -18,7 +18,8 @@ class Journey extends Component {
             appealButtonClass: 'btn round-borders btn-journey',
             respondButtonClass: 'btn round-borders btn-journey',
             journeyType: '',
-            journey: null
+            journey: null,
+            journeyId: null
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
@@ -246,7 +247,7 @@ class Journey extends Component {
                         completeAppealTitle={this.state.completeAppealTitle}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
-                        respondToLeaveRefused={this.respondToLeaveRefusedJourney}
+                        respondToLeaveRefused={this.respondToLeaveRefusedJoney}
                         respondToLeaveRefusedFinal={this.respondToLeaveRefusedFinalJourney}
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
@@ -256,6 +257,8 @@ class Journey extends Component {
                         cases={this.props.cases}
                         service={this.service}
                         journey={this.state.journey}
+                        journeyId={this.state.journeyId}
+                        startOver={this.startOver.bind(this)}
                     />
                 </div>
             );
@@ -297,6 +300,18 @@ class Journey extends Component {
                 </div>;
         }
         return content;
+    }
+    
+    startOver() {
+        this.setState({ 
+            respondent: false,
+            appellant: false,
+            displayJourneyMap: false,
+            completeAppealTitle: '',
+            appealButtonClass: 'btn round-borders btn-journey',
+            respondButtonClass: 'btn round-borders btn-journey',
+            journeyType: '',
+            journey: null});
     }
 
     renderAppellant() {
@@ -370,21 +385,24 @@ class Journey extends Component {
     }
     
     fetchMyJourneys() {
-        this.service.getMyJourneys({}, (data) => {
-            let journeys = (data.journeys);
-            let journeyType = '', introText = '';
-            
-            if ( journeys && journeys.length !== 0 ) {
-                let index = journeys.length - 1;
-                journeyType = journeys[index].type;
-                introText = JOURNEY_TYPES.INTROTEXT[journeys[index].type]
-                this.setState({
-                    journey: journeys[index],
-                    displayJourneyMap: true,
-                    journeyType: journeyType,
-                    introText: introText
-                });
+        this.service.getMyJourney({}, (data) => {
+            if (!data.error) {
+                let journey = (data.journeys);
+                let journeyType = '', introText = '';
+
+                if ( journey ) {
+                    journeyType = journey.type;
+                    introText = JOURNEY_TYPES.INTROTEXT[journey.type]
+                    this.setState({
+                        journeyId: journey.id,
+                        journey: journey,
+                        displayJourneyMap: true,
+                        journeyType: journeyType,
+                        introText: introText
+                    });
+                }
             }
+            else console.log(data.error)
         });
     }
 

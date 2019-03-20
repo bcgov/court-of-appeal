@@ -13,7 +13,7 @@ class RespondToLeaveJourneyMap extends React.Component {
         this.state = {
             id: props.journey ? props.journey.id : null,
             userid: props.journey ? props.journey.userid : null,
-            steps: props.journey ? JSON.parse(props.journey.steps) : [
+            steps: props.journey && props.journey.steps ? JSON.parse(props.journey.steps) : [
                 {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
                 {status: 'new', type: 'file'},
                 {status: 'new', type: 'hearing'},
@@ -102,30 +102,11 @@ class RespondToLeaveJourneyMap extends React.Component {
     stepCompleted(stepNumber, isComplete) {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
-        this.setState({steps: steps});
-        if (!this.state.id) {
-            this.props.service.createJourney(
-                {
-                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
-                    state: 'started',
-                    ca_number: this.props.case ? this.props.ca_number : ''
-                },
-                (id) => {
-                    this.setState({id: id})
-                });
-        } else {
-            this.props.service.updateJourney(
-                {
-                    id: this.state.id,
-                    userid: this.state.userid,
-                    type: JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
-                    state: 'started',
-                    ca_number: this.props.case ? this.props.ca_number : '',
-                    steps: JSON.stringify(this.state.steps)
-                }, this.state.id, (id) => {
-                    console.log("Updated journey", id)
-                });
-        }
+        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE, this.setId.bind(this)));
+    }
+
+    setId(id) {
+        this.setState({id:id})
     }
 }
 export default RespondToLeaveJourneyMap;
