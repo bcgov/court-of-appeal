@@ -150,3 +150,14 @@
     background: radial-gradient(ellipse at center, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+@keyframes glowing {
+    0% { box-shadow: 0 0 -10px #a7cc61; }
+    40% { box-shadow: 0 0 20px #49a25a; }
+    60% { box-shadow: 0 0 20px #377d22; }
+    100% { box-shadow: 0 0 -10px #3c763d; }
+}
+
+.journey-box-glow {
+    animation: glowing 5000ms;
+}

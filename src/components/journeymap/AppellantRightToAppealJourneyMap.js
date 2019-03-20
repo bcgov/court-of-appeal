@@ -197,29 +197,11 @@ class AppellantRightToAppealJourneyMap extends React.Component {
     stepCompleted(stepNumber, isComplete) {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
-        this.setState({steps: steps});
-        if (!this.state.id) {
-            this.props.service.createJourney(
-                {
-                    type: JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL,
-                    state: 'started',
-                    ca_number: this.props.case ? this.props.ca_number : '',
-                    steps: JSON.stringify(this.state.steps)
-                },
-                (id) => {
-                    this.setState({id: id})
-                });
-        } else {
-            this.props.service.updateJourney(
-                {
-                    id: this.state.id,
-                    userid: this.state.userid,
-                    type: JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL,
-                    state: 'started',
-                    ca_number: this.props.case ? this.props.ca_number : '',
-                    steps: JSON.stringify(this.state.steps)
-                },this.state.id, (id)=>{console.log("Updated journey", id)});
-        }
+        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL, this.setId.bind(this)));
+    }
+
+    setId(id) {
+        this.setState({id:id})
     }
 }
 export default AppellantRightToAppealJourneyMap;
