@@ -195,7 +195,7 @@ Service.prototype.createJourney = function(journey, callback) {
     });
 };
 
-Service.prototype.updateJourney = function(id, journey, callback) {
+Service.prototype.updateJourney = function(journey, id, callback) {
     let options = this.buildOptions(`/api/journey/${id}`);
     options.form = journey;
     let self = this;

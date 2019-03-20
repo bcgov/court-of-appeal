@@ -53,6 +53,7 @@ class PageIcon extends React.Component {
                          onChange={this.completed.bind(this)}
                          show={active}
                          disabled={!this.props.ready}
+                         checked={this.props.status === 'completed'}
                      />
                     <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
@@ -77,6 +78,7 @@ class PageIcon extends React.Component {
                         onChange={this.completed.bind(this)}
                         show={active}
                         disabled={!this.props.ready}
+                        checked={this.props.status === 'completed'}
                     />
                     <span style={{position: 'relative', top: '5px', left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >

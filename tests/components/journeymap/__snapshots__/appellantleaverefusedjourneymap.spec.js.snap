@@ -619,6 +619,7 @@ AppellantLeaveRefusedJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": false,
@@ -632,6 +633,7 @@ AppellantLeaveRefusedJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": false,
@@ -1028,6 +1030,7 @@ AppellantLeaveRefusedJourneyMap {
                   "_reactInternalInstance": Object {},
                   "context": Object {},
                   "props": Object {
+                    "checked": false,
                     "disabled": true,
                     "onChange": [Function],
                     "show": false,
@@ -1059,6 +1062,7 @@ AppellantLeaveRefusedJourneyMap {
               "memoizedProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={false}
@@ -1127,6 +1131,7 @@ AppellantLeaveRefusedJourneyMap {
               "pendingProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={false}

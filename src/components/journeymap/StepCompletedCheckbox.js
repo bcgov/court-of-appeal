@@ -9,6 +9,7 @@ class StepCompletedCheckbox extends Component {
                           className={"checkbox-glow checkbox-toggle"}
                           onChange={this.props.onChange}
                           disabled={this.props.disabled}
+                          checked={this.props.checked}
             />
         }
         return null;
