@@ -3498,7 +3498,7 @@ RespondToAppealJourneyMap {
                                     "key": null,
                                     "lastEffect": null,
                                     "memoizedProps": Object {
-                                      "checked": undefined,
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3513,7 +3513,7 @@ RespondToAppealJourneyMap {
                                     "mode": 0,
                                     "nextEffect": null,
                                     "pendingProps": Object {
-                                      "checked": undefined,
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3544,6 +3544,7 @@ RespondToAppealJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3557,6 +3558,7 @@ RespondToAppealJourneyMap {
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3859,6 +3861,7 @@ RespondToAppealJourneyMap {
                                     "_reactInternalInstance": Object {},
                                     "context": Object {},
                                     "props": Object {
+                                      "checked": false,
                                       "disabled": true,
                                       "onChange": [Function],
                                       "show": true,
@@ -3890,6 +3893,7 @@ RespondToAppealJourneyMap {
                                 "memoizedProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -3956,6 +3960,7 @@ RespondToAppealJourneyMap {
                                 "pendingProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}

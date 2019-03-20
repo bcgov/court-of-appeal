@@ -2561,7 +2561,7 @@ RespondToLeaveGrantedJourneyMap {
                                 "key": null,
                                 "lastEffect": null,
                                 "memoizedProps": Object {
-                                  "checked": undefined,
+                                  "checked": false,
                                   "className": "checkbox-glow checkbox-toggle",
                                   "disabled": true,
                                   "onChange": [Function],
@@ -2576,7 +2576,7 @@ RespondToLeaveGrantedJourneyMap {
                                 "mode": 0,
                                 "nextEffect": null,
                                 "pendingProps": Object {
-                                  "checked": undefined,
+                                  "checked": false,
                                   "className": "checkbox-glow checkbox-toggle",
                                   "disabled": true,
                                   "onChange": [Function],
@@ -2607,6 +2607,7 @@ RespondToLeaveGrantedJourneyMap {
                               "key": null,
                               "lastEffect": null,
                               "memoizedProps": Object {
+                                "checked": false,
                                 "disabled": true,
                                 "onChange": [Function],
                                 "show": true,
@@ -2620,6 +2621,7 @@ RespondToLeaveGrantedJourneyMap {
                               "mode": 0,
                               "nextEffect": null,
                               "pendingProps": Object {
+                                "checked": false,
                                 "disabled": true,
                                 "onChange": [Function],
                                 "show": true,
@@ -2922,6 +2924,7 @@ RespondToLeaveGrantedJourneyMap {
                                 "_reactInternalInstance": Object {},
                                 "context": Object {},
                                 "props": Object {
+                                  "checked": false,
                                   "disabled": true,
                                   "onChange": [Function],
                                   "show": true,
@@ -2953,6 +2956,7 @@ RespondToLeaveGrantedJourneyMap {
                             "memoizedProps": Object {
                               "children": Array [
                                 <StepCompletedCheckbox
+                                  checked={false}
                                   disabled={true}
                                   onChange={[Function]}
                                   show={true}
@@ -3019,6 +3023,7 @@ RespondToLeaveGrantedJourneyMap {
                             "pendingProps": Object {
                               "children": Array [
                                 <StepCompletedCheckbox
+                                  checked={false}
                                   disabled={true}
                                   onChange={[Function]}
                                   show={true}

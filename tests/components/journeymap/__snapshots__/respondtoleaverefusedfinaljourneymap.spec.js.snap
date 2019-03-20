@@ -1354,6 +1354,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": false,
@@ -1367,6 +1368,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": false,
@@ -1663,6 +1665,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                       "_reactInternalInstance": Object {},
                       "context": Object {},
                       "props": Object {
+                        "checked": false,
                         "disabled": true,
                         "onChange": [Function],
                         "show": false,
@@ -1694,6 +1697,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "memoizedProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={false}
@@ -1756,6 +1760,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "pendingProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={false}
