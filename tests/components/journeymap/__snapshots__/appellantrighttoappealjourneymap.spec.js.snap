@@ -3652,7 +3652,7 @@ AppellantRightToAppealJourneyMap {
                                     "key": null,
                                     "lastEffect": null,
                                     "memoizedProps": Object {
-                                      "checked": undefined,
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3667,7 +3667,7 @@ AppellantRightToAppealJourneyMap {
                                     "mode": 0,
                                     "nextEffect": null,
                                     "pendingProps": Object {
-                                      "checked": undefined,
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3698,6 +3698,7 @@ AppellantRightToAppealJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3711,6 +3712,7 @@ AppellantRightToAppealJourneyMap {
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3929,6 +3931,7 @@ AppellantRightToAppealJourneyMap {
                                     "_reactInternalInstance": Object {},
                                     "context": Object {},
                                     "props": Object {
+                                      "checked": false,
                                       "disabled": true,
                                       "onChange": [Function],
                                       "show": true,
@@ -3960,6 +3963,7 @@ AppellantRightToAppealJourneyMap {
                                 "memoizedProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -4011,6 +4015,7 @@ AppellantRightToAppealJourneyMap {
                                 "pendingProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -5116,7 +5121,7 @@ AppellantRightToAppealJourneyMap {
                                                   "key": null,
                                                   "lastEffect": null,
                                                   "memoizedProps": Object {
-                                                    "checked": undefined,
+                                                    "checked": false,
                                                     "className": "checkbox-glow checkbox-toggle",
                                                     "disabled": true,
                                                     "onChange": [Function],
@@ -5131,7 +5136,7 @@ AppellantRightToAppealJourneyMap {
                                                   "mode": 0,
                                                   "nextEffect": null,
                                                   "pendingProps": Object {
-                                                    "checked": undefined,
+                                                    "checked": false,
                                                     "className": "checkbox-glow checkbox-toggle",
                                                     "disabled": true,
                                                     "onChange": [Function],
@@ -5162,6 +5167,7 @@ AppellantRightToAppealJourneyMap {
                                                 "key": null,
                                                 "lastEffect": null,
                                                 "memoizedProps": Object {
+                                                  "checked": false,
                                                   "disabled": true,
                                                   "onChange": [Function],
                                                   "show": true,
@@ -5175,6 +5181,7 @@ AppellantRightToAppealJourneyMap {
                                                 "mode": 0,
                                                 "nextEffect": null,
                                                 "pendingProps": Object {
+                                                  "checked": false,
                                                   "disabled": true,
                                                   "onChange": [Function],
                                                   "show": true,
@@ -5477,6 +5484,7 @@ AppellantRightToAppealJourneyMap {
                                                   "_reactInternalInstance": Object {},
                                                   "context": Object {},
                                                   "props": Object {
+                                                    "checked": false,
                                                     "disabled": true,
                                                     "onChange": [Function],
                                                     "show": true,
@@ -5508,6 +5516,7 @@ AppellantRightToAppealJourneyMap {
                                               "memoizedProps": Object {
                                                 "children": Array [
                                                   <StepCompletedCheckbox
+                                                    checked={false}
                                                     disabled={true}
                                                     onChange={[Function]}
                                                     show={true}
@@ -5574,6 +5583,7 @@ AppellantRightToAppealJourneyMap {
                                               "pendingProps": Object {
                                                 "children": Array [
                                                   <StepCompletedCheckbox
+                                                    checked={false}
                                                     disabled={true}
                                                     onChange={[Function]}
                                                     show={true}

@@ -27,6 +27,7 @@ class GavelIcon extends React.Component {
                      onChange={this.completed.bind(this)}
                      show={active}
                      disabled={!this.props.ready}
+                     checked={this.props.status === 'completed'}
                  />
                 <span style={style}>{this.props.order}</span>
                 <div className={"file-container"} onClick={this.props.action}>
