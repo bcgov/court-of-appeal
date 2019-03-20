@@ -99,24 +99,28 @@ class JourneyMap extends React.Component {
     getBreadCrumbs() {
 
         let history = this.props.history.location.state;
-        let initial = history.appellant ? "Appealing" : "Responding";
-        let secondary = history.userQuestion;
-        let current = history.userState;
-        return <div id="journeyBreadcrumb">
-                <div className="journey-breadcrumb">
-                    <div className="journey-breadcrumb crumb">
-                        <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
-                    </div>
-                    <div className="journey-breadcrumb crumb">/</div>
-                    <div className="journey-breadcrumb crumb">
-                        <a onClick={this.goBack.bind(this)}>{secondary}</a>
-                    </div>
-                    <div className="journey-breadcrumb crumb">/</div>
-                    <div className="journey-breadcrumb crumb">
-                        {current}
+        if (history.appellant || history.respondent) {
+            let initial = history.appellant ? "Appealing" : "Responding";
+            let secondary = history.userQuestion;
+            let current = history.userState;
+            return (
+                <div id="journeyBreadcrumb">
+                    <div className="journey-breadcrumb">
+                        <div className="journey-breadcrumb crumb">
+                            <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
+                        </div>
+                        <div className="journey-breadcrumb crumb">/</div>
+                        <div className="journey-breadcrumb crumb">
+                            <a onClick={this.goBack.bind(this)}>{secondary}</a>
+                        </div>
+                        <div className="journey-breadcrumb crumb">/</div>
+                        <div className="journey-breadcrumb crumb">
+                            {current}
+                        </div>
                     </div>
                 </div>
-            </div>;
+            );
+        } else return null;
     }
 
     goBackTwo() {
@@ -154,7 +158,6 @@ class JourneyMap extends React.Component {
     }
 
     /** can be set as complete if it's (new or in progress), or (completed and the next one new) **/
-    // TODO move status strings to a helper file so we don't suffer from typos
     isStepReady(stepNumber, steps) {
         let stepIndex = stepNumber - 1;
         let status = steps[stepIndex].status;
