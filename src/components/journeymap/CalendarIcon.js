@@ -20,6 +20,7 @@ class CalendarIcon extends React.Component {
                      onChange={this.completed.bind(this)}
                      show={active}
                      disabled={!this.props.ready}
+                     checked={this.props.status === 'completed'}
                  />
                 <span style={{position: 'relative',zIndex: '9'}}>{this.props.order}</span>
                 <div className={"cal-container"}>

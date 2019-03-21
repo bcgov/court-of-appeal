@@ -120,6 +120,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -165,6 +166,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -257,6 +259,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -303,6 +306,7 @@ AppellantLeaveGrantedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -342,6 +346,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -528,6 +533,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -573,6 +579,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -665,6 +672,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -711,6 +719,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -750,6 +759,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -1019,6 +1029,7 @@ AppellantLeaveGrantedJourneyMap {
                   "key": null,
                   "lastEffect": null,
                   "memoizedProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -1033,6 +1044,7 @@ AppellantLeaveGrantedJourneyMap {
                   "mode": 0,
                   "nextEffect": null,
                   "pendingProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -1063,6 +1075,7 @@ AppellantLeaveGrantedJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -1076,6 +1089,7 @@ AppellantLeaveGrantedJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -1143,6 +1157,7 @@ AppellantLeaveGrantedJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_multi-page.svg",
@@ -1154,6 +1169,7 @@ AppellantLeaveGrantedJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_multi-page.svg",
@@ -1203,6 +1219,7 @@ AppellantLeaveGrantedJourneyMap {
                         "updateQueue": null,
                       },
                       "stateNode": <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_multi-page.svg"
                         style="height: 93px;"
@@ -1220,6 +1237,7 @@ AppellantLeaveGrantedJourneyMap {
                     "memoizedProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_multi-page.svg"
@@ -1246,6 +1264,7 @@ AppellantLeaveGrantedJourneyMap {
                     "pendingProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_multi-page.svg"
@@ -1443,6 +1462,7 @@ AppellantLeaveGrantedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_multi-page.svg"
                         style="height: 93px;"
@@ -1470,6 +1490,7 @@ AppellantLeaveGrantedJourneyMap {
                   "_reactInternalInstance": Object {},
                   "context": Object {},
                   "props": Object {
+                    "checked": false,
                     "disabled": true,
                     "onChange": [Function],
                     "show": true,
@@ -1501,6 +1522,7 @@ AppellantLeaveGrantedJourneyMap {
               "memoizedProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1528,6 +1550,7 @@ AppellantLeaveGrantedJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_multi-page.svg"
@@ -1571,6 +1594,7 @@ AppellantLeaveGrantedJourneyMap {
               "pendingProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1598,6 +1622,7 @@ AppellantLeaveGrantedJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_multi-page.svg"
@@ -1657,6 +1682,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -1824,6 +1850,7 @@ AppellantLeaveGrantedJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1838,6 +1865,7 @@ AppellantLeaveGrantedJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1868,6 +1896,7 @@ AppellantLeaveGrantedJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1881,6 +1910,7 @@ AppellantLeaveGrantedJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1948,6 +1978,7 @@ AppellantLeaveGrantedJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_multi-page.svg",
@@ -1959,6 +1990,7 @@ AppellantLeaveGrantedJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_multi-page.svg",
@@ -2008,6 +2040,7 @@ AppellantLeaveGrantedJourneyMap {
                             "updateQueue": null,
                           },
                           "stateNode": <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_multi-page.svg"
                             style="height: 93px;"
@@ -2025,6 +2058,7 @@ AppellantLeaveGrantedJourneyMap {
                         "memoizedProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_multi-page.svg"
@@ -2051,6 +2085,7 @@ AppellantLeaveGrantedJourneyMap {
                         "pendingProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_multi-page.svg"
@@ -2248,6 +2283,7 @@ AppellantLeaveGrantedJourneyMap {
                           class="file-main"
                         >
                           <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_multi-page.svg"
                             style="height: 93px;"
@@ -2275,6 +2311,7 @@ AppellantLeaveGrantedJourneyMap {
                       "_reactInternalInstance": Object {},
                       "context": Object {},
                       "props": Object {
+                        "checked": false,
                         "disabled": true,
                         "onChange": [Function],
                         "show": true,
@@ -2306,6 +2343,7 @@ AppellantLeaveGrantedJourneyMap {
                   "memoizedProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2333,6 +2371,7 @@ AppellantLeaveGrantedJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_multi-page.svg"
@@ -2376,6 +2415,7 @@ AppellantLeaveGrantedJourneyMap {
                   "pendingProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2403,6 +2443,7 @@ AppellantLeaveGrantedJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_multi-page.svg"
@@ -2462,6 +2503,7 @@ AppellantLeaveGrantedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_multi-page.svg"
                         style="height: 93px;"
@@ -2629,6 +2671,7 @@ AppellantLeaveGrantedJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2643,6 +2686,7 @@ AppellantLeaveGrantedJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2673,6 +2717,7 @@ AppellantLeaveGrantedJourneyMap {
                         "key": null,
                         "lastEffect": null,
                         "memoizedProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2686,6 +2731,7 @@ AppellantLeaveGrantedJourneyMap {
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2904,6 +2950,7 @@ AppellantLeaveGrantedJourneyMap {
                           "_reactInternalInstance": Object {},
                           "context": Object {},
                           "props": Object {
+                            "checked": false,
                             "disabled": true,
                             "onChange": [Function],
                             "show": true,
@@ -2935,6 +2982,7 @@ AppellantLeaveGrantedJourneyMap {
                       "memoizedProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -2986,6 +3034,7 @@ AppellantLeaveGrantedJourneyMap {
                       "pendingProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -3328,6 +3377,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "key": null,
                                     "lastEffect": null,
                                     "memoizedProps": Object {
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3342,6 +3392,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "mode": 0,
                                     "nextEffect": null,
                                     "pendingProps": Object {
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3372,6 +3423,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3385,6 +3437,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3452,6 +3505,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "key": null,
                                         "lastEffect": null,
                                         "memoizedProps": Object {
+                                          "alt": "Page Icon for [object Object]",
                                           "className": "journey-icon",
                                           "onClick": [Function],
                                           "src": "/icons/journey_map_event_default.svg",
@@ -3460,6 +3514,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "mode": 0,
                                         "nextEffect": null,
                                         "pendingProps": Object {
+                                          "alt": "Page Icon for [object Object]",
                                           "className": "journey-icon",
                                           "onClick": [Function],
                                           "src": "/icons/journey_map_event_default.svg",
@@ -3499,6 +3554,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "updateQueue": null,
                                         },
                                         "stateNode": <img
+                                          alt="Page Icon for [object Object]"
                                           class="journey-icon"
                                           src="/icons/journey_map_event_default.svg"
                                         />,
@@ -3515,6 +3571,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "memoizedProps": Object {
                                         "children": Array [
                                           <img
+                                            alt="Page Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_default.svg"
@@ -3531,6 +3588,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "pendingProps": Object {
                                         "children": Array [
                                           <img
+                                            alt="Page Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_default.svg"
@@ -3718,6 +3776,7 @@ AppellantLeaveGrantedJourneyMap {
                                         class="file-main"
                                       >
                                         <img
+                                          alt="Page Icon for [object Object]"
                                           class="journey-icon"
                                           src="/icons/journey_map_event_default.svg"
                                         />
@@ -3743,6 +3802,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "_reactInternalInstance": Object {},
                                     "context": Object {},
                                     "props": Object {
+                                      "checked": false,
                                       "disabled": true,
                                       "onChange": [Function],
                                       "show": true,
@@ -3774,6 +3834,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "memoizedProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -3801,6 +3862,7 @@ AppellantLeaveGrantedJourneyMap {
                                       className="file-main"
                                     >
                                       <img
+                                        alt="Page Icon for [object Object]"
                                         className="journey-icon"
                                         onClick={[Function]}
                                         src="/icons/journey_map_event_default.svg"
@@ -3835,6 +3897,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "pendingProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -3862,6 +3925,7 @@ AppellantLeaveGrantedJourneyMap {
                                       className="file-main"
                                     >
                                       <img
+                                        alt="Page Icon for [object Object]"
                                         className="journey-icon"
                                         onClick={[Function]}
                                         src="/icons/journey_map_event_default.svg"
@@ -3912,6 +3976,7 @@ AppellantLeaveGrantedJourneyMap {
                                     class="file-main"
                                   >
                                     <img
+                                      alt="Page Icon for [object Object]"
                                       class="journey-icon"
                                       src="/icons/journey_map_event_default.svg"
                                     />
@@ -4075,6 +4140,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "key": null,
                                         "lastEffect": null,
                                         "memoizedProps": Object {
+                                          "checked": false,
                                           "className": "checkbox-glow checkbox-toggle",
                                           "disabled": true,
                                           "onChange": [Function],
@@ -4089,6 +4155,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "mode": 0,
                                         "nextEffect": null,
                                         "pendingProps": Object {
+                                          "checked": false,
                                           "className": "checkbox-glow checkbox-toggle",
                                           "disabled": true,
                                           "onChange": [Function],
@@ -4119,6 +4186,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "key": null,
                                       "lastEffect": null,
                                       "memoizedProps": Object {
+                                        "checked": false,
                                         "disabled": true,
                                         "onChange": [Function],
                                         "show": true,
@@ -4132,6 +4200,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "mode": 0,
                                       "nextEffect": null,
                                       "pendingProps": Object {
+                                        "checked": false,
                                         "disabled": true,
                                         "onChange": [Function],
                                         "show": true,
@@ -4205,6 +4274,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "key": null,
                                               "lastEffect": null,
                                               "memoizedProps": Object {
+                                                "alt": "Gavel Icon for [object Object]",
                                                 "className": "journey-icon",
                                                 "onClick": [Function],
                                                 "src": "/icons/journey_map_event_hearing.svg",
@@ -4213,6 +4283,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "mode": 0,
                                               "nextEffect": null,
                                               "pendingProps": Object {
+                                                "alt": "Gavel Icon for [object Object]",
                                                 "className": "journey-icon",
                                                 "onClick": [Function],
                                                 "src": "/icons/journey_map_event_hearing.svg",
@@ -4221,6 +4292,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "return": [Circular],
                                               "sibling": null,
                                               "stateNode": <img
+                                                alt="Gavel Icon for [object Object]"
                                                 class="journey-icon"
                                                 src="/icons/journey_map_event_hearing.svg"
                                               />,
@@ -4236,6 +4308,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "lastEffect": null,
                                             "memoizedProps": Object {
                                               "children": <img
+                                                alt="Gavel Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_hearing.svg"
@@ -4247,6 +4320,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "nextEffect": null,
                                             "pendingProps": Object {
                                               "children": <img
+                                                alt="Gavel Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_hearing.svg"
@@ -4260,6 +4334,7 @@ AppellantLeaveGrantedJourneyMap {
                                               class="file-main"
                                             >
                                               <img
+                                                alt="Gavel Icon for [object Object]"
                                                 class="journey-icon"
                                                 src="/icons/journey_map_event_hearing.svg"
                                               />
@@ -4279,6 +4354,7 @@ AppellantLeaveGrantedJourneyMap {
                                               className="file-main"
                                             >
                                               <img
+                                                alt="Gavel Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_hearing.svg"
@@ -4295,6 +4371,7 @@ AppellantLeaveGrantedJourneyMap {
                                               className="file-main"
                                             >
                                               <img
+                                                alt="Gavel Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_hearing.svg"
@@ -4402,6 +4479,7 @@ AppellantLeaveGrantedJourneyMap {
                                               class="file-main"
                                             >
                                               <img
+                                                alt="Gavel Icon for [object Object]"
                                                 class="journey-icon"
                                                 src="/icons/journey_map_event_hearing.svg"
                                               />
@@ -4425,6 +4503,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "_reactInternalInstance": Object {},
                                         "context": Object {},
                                         "props": Object {
+                                          "checked": false,
                                           "disabled": true,
                                           "onChange": [Function],
                                           "show": true,
@@ -4456,6 +4535,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "memoizedProps": Object {
                                       "children": Array [
                                         <StepCompletedCheckbox
+                                          checked={false}
                                           disabled={true}
                                           onChange={[Function]}
                                           show={true}
@@ -4487,6 +4567,7 @@ AppellantLeaveGrantedJourneyMap {
                                             className="file-main"
                                           >
                                             <img
+                                              alt="Gavel Icon for [object Object]"
                                               className="journey-icon"
                                               onClick={[Function]}
                                               src="/icons/journey_map_event_hearing.svg"
@@ -4521,6 +4602,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "pendingProps": Object {
                                       "children": Array [
                                         <StepCompletedCheckbox
+                                          checked={false}
                                           disabled={true}
                                           onChange={[Function]}
                                           show={true}
@@ -4552,6 +4634,7 @@ AppellantLeaveGrantedJourneyMap {
                                             className="file-main"
                                           >
                                             <img
+                                              alt="Gavel Icon for [object Object]"
                                               className="journey-icon"
                                               onClick={[Function]}
                                               src="/icons/journey_map_event_hearing.svg"
@@ -4605,6 +4688,7 @@ AppellantLeaveGrantedJourneyMap {
                                           class="file-main"
                                         >
                                           <img
+                                            alt="Gavel Icon for [object Object]"
                                             class="journey-icon"
                                             src="/icons/journey_map_event_hearing.svg"
                                           />
@@ -4762,6 +4846,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "key": null,
                                             "lastEffect": null,
                                             "memoizedProps": Object {
+                                              "checked": false,
                                               "className": "checkbox-glow checkbox-toggle",
                                               "disabled": true,
                                               "onChange": [Function],
@@ -4776,6 +4861,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "mode": 0,
                                             "nextEffect": null,
                                             "pendingProps": Object {
+                                              "checked": false,
                                               "className": "checkbox-glow checkbox-toggle",
                                               "disabled": true,
                                               "onChange": [Function],
@@ -4806,6 +4892,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "key": null,
                                           "lastEffect": null,
                                           "memoizedProps": Object {
+                                            "checked": false,
                                             "disabled": true,
                                             "onChange": [Function],
                                             "show": true,
@@ -4819,6 +4906,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "mode": 0,
                                           "nextEffect": null,
                                           "pendingProps": Object {
+                                            "checked": false,
                                             "disabled": true,
                                             "onChange": [Function],
                                             "show": true,
@@ -4886,6 +4974,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 "key": null,
                                                 "lastEffect": null,
                                                 "memoizedProps": Object {
+                                                  "alt": "Page Icon for [object Object]",
                                                   "className": "journey-icon",
                                                   "onClick": [Function],
                                                   "src": "/icons/journey_map_event_default.svg",
@@ -4894,6 +4983,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 "mode": 0,
                                                 "nextEffect": null,
                                                 "pendingProps": Object {
+                                                  "alt": "Page Icon for [object Object]",
                                                   "className": "journey-icon",
                                                   "onClick": [Function],
                                                   "src": "/icons/journey_map_event_default.svg",
@@ -4933,6 +5023,7 @@ AppellantLeaveGrantedJourneyMap {
                                                   "updateQueue": null,
                                                 },
                                                 "stateNode": <img
+                                                  alt="Page Icon for [object Object]"
                                                   class="journey-icon"
                                                   src="/icons/journey_map_event_default.svg"
                                                 />,
@@ -4949,6 +5040,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "memoizedProps": Object {
                                                 "children": Array [
                                                   <img
+                                                    alt="Page Icon for [object Object]"
                                                     className="journey-icon"
                                                     onClick={[Function]}
                                                     src="/icons/journey_map_event_default.svg"
@@ -4965,6 +5057,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "pendingProps": Object {
                                                 "children": Array [
                                                   <img
+                                                    alt="Page Icon for [object Object]"
                                                     className="journey-icon"
                                                     onClick={[Function]}
                                                     src="/icons/journey_map_event_default.svg"
@@ -5215,6 +5308,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 class="file-main"
                                               >
                                                 <img
+                                                  alt="Page Icon for [object Object]"
                                                   class="journey-icon"
                                                   src="/icons/journey_map_event_default.svg"
                                                 />
@@ -5240,6 +5334,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "_reactInternalInstance": Object {},
                                             "context": Object {},
                                             "props": Object {
+                                              "checked": false,
                                               "disabled": true,
                                               "onChange": [Function],
                                               "show": true,
@@ -5271,6 +5366,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "memoizedProps": Object {
                                           "children": Array [
                                             <StepCompletedCheckbox
+                                              checked={false}
                                               disabled={true}
                                               onChange={[Function]}
                                               show={true}
@@ -5298,6 +5394,7 @@ AppellantLeaveGrantedJourneyMap {
                                               className="file-main"
                                             >
                                               <img
+                                                alt="Page Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_default.svg"
@@ -5337,6 +5434,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "pendingProps": Object {
                                           "children": Array [
                                             <StepCompletedCheckbox
+                                              checked={false}
                                               disabled={true}
                                               onChange={[Function]}
                                               show={true}
@@ -5364,6 +5462,7 @@ AppellantLeaveGrantedJourneyMap {
                                               className="file-main"
                                             >
                                               <img
+                                                alt="Page Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_default.svg"
@@ -5419,6 +5518,7 @@ AppellantLeaveGrantedJourneyMap {
                                             class="file-main"
                                           >
                                             <img
+                                              alt="Page Icon for [object Object]"
                                               class="journey-icon"
                                               src="/icons/journey_map_event_default.svg"
                                             />
@@ -6630,6 +6730,7 @@ AppellantLeaveGrantedJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_multi-page.svg"
               style="height: 93px;"
@@ -6675,6 +6776,7 @@ AppellantLeaveGrantedJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_multi-page.svg"
               style="height: 93px;"
@@ -6767,6 +6869,7 @@ AppellantLeaveGrantedJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -6813,6 +6916,7 @@ AppellantLeaveGrantedJourneyMap {
               class="file-main"
             >
               <img
+                alt="Gavel Icon for [object Object]"
                 class="journey-icon"
                 src="/icons/journey_map_event_hearing.svg"
               />
@@ -6852,6 +6956,7 @@ AppellantLeaveGrantedJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -6921,6 +7026,7 @@ AppellantLeaveGrantedJourneyMap {
     },
     "memoizedState": Object {
       "case": undefined,
+      "id": null,
       "steps": Array [
         Object {
           "status": "new",
@@ -6947,6 +7053,7 @@ AppellantLeaveGrantedJourneyMap {
           "type": "appellantcourtorder",
         },
       ],
+      "userid": null,
     },
     "mode": 0,
     "nextEffect": null,
@@ -7076,6 +7183,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -7121,6 +7229,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -7213,6 +7322,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -7259,6 +7369,7 @@ AppellantLeaveGrantedJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -7298,6 +7409,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -7484,6 +7596,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -7529,6 +7642,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -7621,6 +7735,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -7667,6 +7782,7 @@ AppellantLeaveGrantedJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -7706,6 +7822,7 @@ AppellantLeaveGrantedJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -7862,6 +7979,7 @@ AppellantLeaveGrantedJourneyMap {
   "refs": Object {},
   "state": Object {
     "case": undefined,
+    "id": null,
     "steps": Array [
       Object {
         "status": "new",
@@ -7888,6 +8006,7 @@ AppellantLeaveGrantedJourneyMap {
         "type": "appellantcourtorder",
       },
     ],
+    "userid": null,
   },
   "updater": Object {
     "enqueueForceUpdate": [Function],

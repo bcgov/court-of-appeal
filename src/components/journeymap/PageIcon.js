@@ -53,6 +53,7 @@ class PageIcon extends React.Component {
                          onChange={this.completed.bind(this)}
                          show={active}
                          disabled={!this.props.ready}
+                         checked={this.props.status === 'completed'}
                      />
                     <span style={{position: 'relative', top: top, left: active ? '-10%' : '9%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
@@ -60,6 +61,7 @@ class PageIcon extends React.Component {
                                  className={cn({"journey-icon": active}, {"inactive": !active})} 
                                  onClick={this.props.action}
                                  style={{height:'93px'}}
+                                 alt={"Page Icon for " + stepTitle}
                             />
                             <div className={"file-corner-r"} style={{top: '-15px'}}/>
                     </div>
@@ -76,10 +78,16 @@ class PageIcon extends React.Component {
                         onChange={this.completed.bind(this)}
                         show={active}
                         disabled={!this.props.ready}
+                        checked={this.props.status === 'completed'}
                     />
                     <span style={{position: 'relative', top: '5px', left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                     <div className={"file-main"} >
-                        <img src={imgSrc} className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>
+                        <img 
+                            src={imgSrc} 
+                            className={cn({"journey-icon": active}, {"inactive": !active})} 
+                            onClick={this.props.action}
+                            alt={"Page Icon for " + stepTitle}
+                        />
                         <div className={"file-corner-r"} />
                     </div>
                     <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
