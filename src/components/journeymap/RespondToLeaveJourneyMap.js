@@ -19,6 +19,14 @@ class RespondToLeaveJourneyMap extends React.Component {
                 {status: 'new', type: 'hearing'},
             ],
             case: props.case
+        };
+        this.updateStepStatus = this.updateStepStatus.bind(this);
+        this.getStepStatus = this.getStepStatus.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.case) {
+            this.updateStepStatus(1, this.props.case.status.toLowerCase())
         }
     }
     
@@ -38,7 +46,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'appearance')}
                           active={true}
                           order={1}
-                          status={this.stepStatus(1)}
+                          status={this.getStepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
@@ -54,7 +62,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'replybook')}
                           active={true}
                           order={2}
-                          status={this.stepStatus(2)}
+                          status={this.getStepStatus(2)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(2, this.state.steps)}
                 />
@@ -69,7 +77,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                            action={this.iconClicked.bind(this, 'respondentleavetoappealhearing')} 
                            active={true}
                            order={3}
-                           status={this.stepStatus(3)}
+                           status={this.getStepStatus(3)}
                            completed={this.stepCompleted.bind(this)}
                            ready={this.props.isStepReady(3, this.state.steps)}
                 />
@@ -95,14 +103,18 @@ class RespondToLeaveJourneyMap extends React.Component {
         this.props.iconClicked(action)
     }
 
-    stepStatus(stepNumber) {
+    getStepStatus(stepNumber) {
         return this.state.steps[stepNumber - 1].status;
     }
 
-    stepCompleted(stepNumber, isComplete) {
+    updateStepStatus(stepNumber, newStatus){
         let steps = this.state.steps;
-        steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
-        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE, this.setId.bind(this)));
+        steps[stepNumber - 1].status = newStatus;
+        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL, this.setId.bind(this)));
+    }
+
+    stepCompleted(stepNumber, isComplete) {
+        this.updateStepStatus(stepNumber, isComplete ? 'completed' : 'new');
     }
 
     setId(id) {

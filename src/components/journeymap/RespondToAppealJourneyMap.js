@@ -22,6 +22,14 @@ class RespondToAppealJourneyMap extends React.Component {
                     {status: 'new', type: 'courtorder'}],
             case: props.case
         }
+        this.updateStepStatus = this.updateStepStatus.bind(this);
+        this.getStepStatus = this.getStepStatus.bind(this);
+    }
+    
+    componentDidMount() {
+        if (this.props.case) {
+            this.updateStepStatus(1, this.props.case.status.toLowerCase())
+        }
     }
     
     render() {
@@ -41,7 +49,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'appearance')}
                           active={true}
                           order={1}
-                          status={this.stepStatus(1)}
+                          status={this.getStepStatus(1)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
@@ -59,7 +67,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'crossappeal')}
                           active={true}
                           order={2}
-                          status={this.stepStatus(2)}
+                          status={this.getStepStatus(2)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(2,this.state.steps)}
                     />
@@ -77,7 +85,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'respondentfactum')}
                           active={true}
                           order={3}
-                          status={this.stepStatus(3)}
+                          status={this.getStepStatus(3)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
@@ -103,7 +111,7 @@ class RespondToAppealJourneyMap extends React.Component {
                            action={this.iconClicked.bind(this, 'respondenthearing')}
                            active={true}
                            order={4}
-                           status={this.stepStatus(4)}
+                           status={this.getStepStatus(4)}
                            completed={this.stepCompleted.bind(this)}
                            ready={this.props.isStepReady(4, this.state.steps)}
                 />
@@ -120,7 +128,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           action={this.iconClicked.bind(this, 'courtorder')}
                           active={true}
                           order={5}
-                          status={this.stepStatus(5)}
+                          status={this.getStepStatus(5)}
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(5, this.state.steps)}
                 />
@@ -146,14 +154,18 @@ class RespondToAppealJourneyMap extends React.Component {
         this.props.iconClicked(action)
     }
     
-    stepStatus(stepNumber) {
+    getStepStatus(stepNumber) {
         return this.state.steps[stepNumber - 1].status;
     }
     
-    stepCompleted(stepNumber, isComplete) {
+    updateStepStatus(stepNumber, newStatus){
         let steps = this.state.steps;
-        steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
+        steps[stepNumber - 1].status = newStatus;
         this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL, this.setId.bind(this)));
+    }
+    
+    stepCompleted(stepNumber, isComplete) {
+        this.updateStepStatus(stepNumber, isComplete ? 'completed' : 'new');
     }
 
     setId(id) {
