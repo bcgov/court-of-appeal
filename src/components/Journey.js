@@ -43,7 +43,7 @@ class Journey extends Component {
         this.appellantQuestion = "Do you have the right to appeal?";
         this.service = props.service;
         this.redirectToForm7 = this.redirectToForm7.bind(this);
-        this.fetchMyJourneys = this.fetchMyJourneys.bind(this);
+        this.fetchMyJourney = this.fetchMyJourney.bind(this);
     }
 
     render() {
@@ -59,7 +59,7 @@ class Journey extends Component {
         window.onpopstate = this.handlePopState;
         this.props.history.push(process.env.PUBLIC_URL, this.state);
         if (this.service == null) { this.service = new DefaultService(window); }
-        this.fetchMyJourneys()
+        this.fetchMyJourney()
     }
 
     componentWillUnmount() {
@@ -384,10 +384,10 @@ class Journey extends Component {
         return content;
     }
     
-    fetchMyJourneys() {
+    fetchMyJourney() {
         this.service.getMyJourney({}, (data) => {
             if (!data.error) {
-                let journey = (data.journeys);
+                let journey = (data.journey);
                 let journeyType = '', introText = '';
 
                 if ( journey ) {
