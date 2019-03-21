@@ -84,9 +84,9 @@ Service.prototype.getMyCases = function(form, callback) {
     });
 };
 
-Service.prototype.getMyJourneys = function(form, callback) {
+Service.prototype.getMyJourney = function(form, callback) {
     let self = this;
-    request.get(this.buildOptions('/api/journeys'), (err, response, body)=>{
+    request.get(this.buildOptions('/api/journey'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
