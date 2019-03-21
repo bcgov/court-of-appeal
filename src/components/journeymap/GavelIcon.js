@@ -27,12 +27,16 @@ class GavelIcon extends React.Component {
                      onChange={this.completed.bind(this)}
                      show={active}
                      disabled={!this.props.ready}
+                     checked={this.props.status === 'completed'}
                  />
                 <span style={style}>{this.props.order}</span>
                 <div className={"file-container"} onClick={this.props.action}>
                     <div className={"file-main"} >
                         <img src={process.env.PUBLIC_URL + "/icons/journey_map_event_hearing.svg"}
-                             className={cn({"journey-icon": active}, {"inactive": !active})} onClick={this.props.action}/>
+                             className={cn({"journey-icon": active}, {"inactive": !active})} 
+                             onClick={this.props.action}
+                             alt={"Gavel Icon for " + stepTitle}
+                        />
                     </div>
                 </div>
                 <div className={"step-title-container"} style={{top:'73px'}} >

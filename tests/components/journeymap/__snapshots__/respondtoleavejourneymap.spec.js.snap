@@ -14,10 +14,10 @@ RespondToLeaveJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -120,6 +120,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -163,6 +164,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -209,6 +211,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -388,6 +391,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -431,6 +435,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -477,6 +482,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -737,6 +743,7 @@ RespondToLeaveJourneyMap {
                   "key": null,
                   "lastEffect": null,
                   "memoizedProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -751,6 +758,7 @@ RespondToLeaveJourneyMap {
                   "mode": 0,
                   "nextEffect": null,
                   "pendingProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -781,6 +789,7 @@ RespondToLeaveJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -794,6 +803,7 @@ RespondToLeaveJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -861,6 +871,7 @@ RespondToLeaveJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -869,6 +880,7 @@ RespondToLeaveJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -908,6 +920,7 @@ RespondToLeaveJourneyMap {
                         "updateQueue": null,
                       },
                       "stateNode": <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />,
@@ -924,6 +937,7 @@ RespondToLeaveJourneyMap {
                     "memoizedProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -940,6 +954,7 @@ RespondToLeaveJourneyMap {
                     "pendingProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -1127,6 +1142,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -1152,6 +1168,7 @@ RespondToLeaveJourneyMap {
                   "_reactInternalInstance": Object {},
                   "context": Object {},
                   "props": Object {
+                    "checked": false,
                     "disabled": true,
                     "onChange": [Function],
                     "show": true,
@@ -1183,6 +1200,7 @@ RespondToLeaveJourneyMap {
               "memoizedProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1210,6 +1228,7 @@ RespondToLeaveJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1243,6 +1262,7 @@ RespondToLeaveJourneyMap {
               "pendingProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1270,6 +1290,7 @@ RespondToLeaveJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1319,6 +1340,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -1480,6 +1502,7 @@ RespondToLeaveJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1494,6 +1517,7 @@ RespondToLeaveJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1524,6 +1548,7 @@ RespondToLeaveJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1537,6 +1562,7 @@ RespondToLeaveJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1604,6 +1630,7 @@ RespondToLeaveJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1612,6 +1639,7 @@ RespondToLeaveJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1651,6 +1679,7 @@ RespondToLeaveJourneyMap {
                             "updateQueue": null,
                           },
                           "stateNode": <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />,
@@ -1667,6 +1696,7 @@ RespondToLeaveJourneyMap {
                         "memoizedProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -1683,6 +1713,7 @@ RespondToLeaveJourneyMap {
                         "pendingProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -1870,6 +1901,7 @@ RespondToLeaveJourneyMap {
                           class="file-main"
                         >
                           <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />
@@ -1895,6 +1927,7 @@ RespondToLeaveJourneyMap {
                       "_reactInternalInstance": Object {},
                       "context": Object {},
                       "props": Object {
+                        "checked": false,
                         "disabled": true,
                         "onChange": [Function],
                         "show": true,
@@ -1926,6 +1959,7 @@ RespondToLeaveJourneyMap {
                   "memoizedProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -1953,6 +1987,7 @@ RespondToLeaveJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -1986,6 +2021,7 @@ RespondToLeaveJourneyMap {
                   "pendingProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2013,6 +2049,7 @@ RespondToLeaveJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -2062,6 +2099,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -2223,6 +2261,7 @@ RespondToLeaveJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2237,6 +2276,7 @@ RespondToLeaveJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2267,6 +2307,7 @@ RespondToLeaveJourneyMap {
                         "key": null,
                         "lastEffect": null,
                         "memoizedProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2280,6 +2321,7 @@ RespondToLeaveJourneyMap {
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2353,6 +2395,7 @@ RespondToLeaveJourneyMap {
                                 "key": null,
                                 "lastEffect": null,
                                 "memoizedProps": Object {
+                                  "alt": "Gavel Icon for [object Object]",
                                   "className": "journey-icon",
                                   "onClick": [Function],
                                   "src": "/icons/journey_map_event_hearing.svg",
@@ -2361,6 +2404,7 @@ RespondToLeaveJourneyMap {
                                 "mode": 0,
                                 "nextEffect": null,
                                 "pendingProps": Object {
+                                  "alt": "Gavel Icon for [object Object]",
                                   "className": "journey-icon",
                                   "onClick": [Function],
                                   "src": "/icons/journey_map_event_hearing.svg",
@@ -2369,6 +2413,7 @@ RespondToLeaveJourneyMap {
                                 "return": [Circular],
                                 "sibling": null,
                                 "stateNode": <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />,
@@ -2384,6 +2429,7 @@ RespondToLeaveJourneyMap {
                               "lastEffect": null,
                               "memoizedProps": Object {
                                 "children": <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2395,6 +2441,7 @@ RespondToLeaveJourneyMap {
                               "nextEffect": null,
                               "pendingProps": Object {
                                 "children": <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2408,6 +2455,7 @@ RespondToLeaveJourneyMap {
                                 class="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />
@@ -2427,6 +2475,7 @@ RespondToLeaveJourneyMap {
                                 className="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2443,6 +2492,7 @@ RespondToLeaveJourneyMap {
                                 className="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_hearing.svg"
@@ -2550,6 +2600,7 @@ RespondToLeaveJourneyMap {
                                 class="file-main"
                               >
                                 <img
+                                  alt="Gavel Icon for [object Object]"
                                   class="journey-icon"
                                   src="/icons/journey_map_event_hearing.svg"
                                 />
@@ -2573,6 +2624,7 @@ RespondToLeaveJourneyMap {
                           "_reactInternalInstance": Object {},
                           "context": Object {},
                           "props": Object {
+                            "checked": false,
                             "disabled": true,
                             "onChange": [Function],
                             "show": true,
@@ -2604,6 +2656,7 @@ RespondToLeaveJourneyMap {
                       "memoizedProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -2635,6 +2688,7 @@ RespondToLeaveJourneyMap {
                               className="file-main"
                             >
                               <img
+                                alt="Gavel Icon for [object Object]"
                                 className="journey-icon"
                                 onClick={[Function]}
                                 src="/icons/journey_map_event_hearing.svg"
@@ -2668,6 +2722,7 @@ RespondToLeaveJourneyMap {
                       "pendingProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -2699,6 +2754,7 @@ RespondToLeaveJourneyMap {
                               className="file-main"
                             >
                               <img
+                                alt="Gavel Icon for [object Object]"
                                 className="journey-icon"
                                 onClick={[Function]}
                                 src="/icons/journey_map_event_hearing.svg"
@@ -2751,6 +2807,7 @@ RespondToLeaveJourneyMap {
                             class="file-main"
                           >
                             <img
+                              alt="Gavel Icon for [object Object]"
                               class="journey-icon"
                               src="/icons/journey_map_event_hearing.svg"
                             />
@@ -3618,6 +3675,7 @@ RespondToLeaveJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -3661,6 +3719,7 @@ RespondToLeaveJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -3707,6 +3766,7 @@ RespondToLeaveJourneyMap {
               class="file-main"
             >
               <img
+                alt="Gavel Icon for [object Object]"
                 class="journey-icon"
                 src="/icons/journey_map_event_hearing.svg"
               />
@@ -3751,7 +3811,7 @@ RespondToLeaveJourneyMap {
       "type": "div",
       "updateQueue": null,
     },
-    "effectTag": 1,
+    "effectTag": 5,
     "expirationTime": 0,
     "firstEffect": null,
     "index": 0,
@@ -3784,6 +3844,7 @@ RespondToLeaveJourneyMap {
           "type": "hearing",
         },
       ],
+      "userid": null,
     },
     "mode": 0,
     "nextEffect": null,
@@ -3807,10 +3868,10 @@ RespondToLeaveJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -3913,6 +3974,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -3956,6 +4018,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -4002,6 +4065,7 @@ RespondToLeaveJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -4181,6 +4245,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -4224,6 +4289,7 @@ RespondToLeaveJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -4270,6 +4336,7 @@ RespondToLeaveJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -4406,6 +4473,7 @@ RespondToLeaveJourneyMap {
   },
   "_reactInternalInstance": Object {},
   "context": Object {},
+  "getStepStatus": [Function],
   "props": Object {
     "history": Object {
       "location": Object {
@@ -4434,7 +4502,9 @@ RespondToLeaveJourneyMap {
         "type": "hearing",
       },
     ],
+    "userid": null,
   },
+  "updateStepStatus": [Function],
   "updater": Object {
     "enqueueForceUpdate": [Function],
     "enqueueReplaceState": [Function],

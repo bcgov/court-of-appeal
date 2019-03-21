@@ -163,4 +163,14 @@
 .completed-step {
     background-color:  #377d22;
 }
+.start-over {
+    display: flex;
+    justify-content: flex-end;
+}
+.start-over button {
+    flex-direction: row-reverse;
+    width: 20%;
+    border: 2px solid green;
+    border-radius: 5px;
+}
 

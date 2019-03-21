@@ -84,6 +84,31 @@ Service.prototype.getMyCases = function(form, callback) {
     });
 };
 
+Service.prototype.getMyJourney = function(form, callback) {
+    let self = this;
+    request.get(this.buildOptions('/api/journey'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            self.notifyOfError(callback, { cases:[] });
+        }
+    });
+};
+
+Service.prototype.getMyJourney = function(form, callback) {
+    let self = this;
+    request.get(this.buildOptions('/api/journey'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            self.notifyOfError(callback, { cases:[] });
+        }
+    });
+};
+
+
 Service.prototype.savePerson = function(user, callback) {
     let options = this.buildOptions('/api/persons');
     options.form = { data:user };
@@ -172,6 +197,34 @@ Service.prototype.download = function(ids, callback) {
 Service.prototype.createJourney = function(journey, callback) {
     let options = this.buildOptions('/api/journey');
     options.form = journey;
+    let self = this;
+    request.post(options, function(err, response, body) {
+        if (response && response.statusCode === 201) {
+            callback(JSON.parse(body).id);
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
+};
+
+Service.prototype.updateJourney = function(journey, id, callback) {
+    let options = this.buildOptions(`/api/journey/${id}`);
+    options.form = journey;
+    let self = this;
+    request.put(options, function(err, response, body) {
+        if (response && response.statusCode === 201) {
+            callback(JSON.parse(body).id);
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
+};
+
+Service.prototype.createStep = function(step, callback) {
+    let options = this.buildOptions('/api/step');
+    options.form = step;
     let self = this;
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {

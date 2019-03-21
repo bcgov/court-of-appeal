@@ -17,11 +17,13 @@ class JourneyMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentJourneyId: props.journeyId || null,
             showInfoModal: false,
             popupType: ''
         };
         this.closeInfoModal = this.closeInfoModal.bind(this);
         this.openInfoModal = this.openInfoModal.bind(this);
+        this.getBreadCrumbsOrRestartButton = this.getBreadCrumbsOrRestartButton.bind(this);
     }
 
     render() {
@@ -58,7 +60,7 @@ class JourneyMap extends React.Component {
 
         return (
             <div className="form-section "  onClick={this.handleClickOffModal.bind(this)}>
-                {this.getBreadCrumbs()}
+                {this.getBreadCrumbsOrRestartButton()}
                 <h2>The Appeal Process</h2>
                 { introductionText }
                 
@@ -96,29 +98,39 @@ class JourneyMap extends React.Component {
         }
     }
 
-    getBreadCrumbs() {
-
+    getBreadCrumbsOrRestartButton() {
         let history = this.props.history.location.state;
-        let initial = history.appellant ? "Appealing" : "Responding";
-        let secondary = history.userQuestion;
-        let current = history.userState;
-        return <div id="journeyBreadcrumb">
-                <div className="journey-breadcrumb">
-                    <div className="journey-breadcrumb crumb">
-                        <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
-                    </div>
-                    <div className="journey-breadcrumb crumb">/</div>
-                    <div className="journey-breadcrumb crumb">
-                        <a onClick={this.goBack.bind(this)}>{secondary}</a>
-                    </div>
-                    <div className="journey-breadcrumb crumb">/</div>
-                    <div className="journey-breadcrumb crumb">
-                        {current}
+        if (history.appellant || history.respondent) {
+            let initial = history.appellant ? "Appealing" : "Responding";
+            let secondary = history.userQuestion;
+            let current = history.userState;
+            return (
+                <div id="journeyBreadcrumb">
+                    <div className="journey-breadcrumb">
+                        <div className="journey-breadcrumb crumb">
+                            <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
+                        </div>
+                        <div className="journey-breadcrumb crumb">/</div>
+                        <div className="journey-breadcrumb crumb">
+                            <a onClick={this.goBack.bind(this)}>{secondary}</a>
+                        </div>
+                        <div className="journey-breadcrumb crumb">/</div>
+                        <div className="journey-breadcrumb crumb">
+                            {current}
+                        </div>
                     </div>
                 </div>
-            </div>;
+            );
+        } else {
+            return (
+                <div className={"start-over"}>
+                    <button onClick={this.props.startOver} >Restart journey</button>
+                </div>
+                    
+            )
+        }
     }
-
+    
     goBackTwo() {
         this.props.history.go(-2);
     }
@@ -136,7 +148,9 @@ class JourneyMap extends React.Component {
             iconClicked: this.iconClicked.bind(this), 
             case: this.props.cases[0],
             isStepReady: this.isStepReady.bind(this),
-            service: this.props.service
+            service: this.props.service,
+            journey: this.props.journey,
+            createOrUpdateJourney: this.createOrUpdateJourney.bind(this)
         };
         let options = {
             'respondToNoticeOfAppeal': <RespondToAppealJourney {...props} />,
@@ -153,7 +167,6 @@ class JourneyMap extends React.Component {
     }
 
     /** can be set as complete if it's (new or in progress), or (completed and the next one new) **/
-    // TODO move status strings to a helper file so we don't suffer from typos
     isStepReady(stepNumber, steps) {
         let stepIndex = stepNumber - 1;
         let status = steps[stepIndex].status;
@@ -176,7 +189,32 @@ class JourneyMap extends React.Component {
         return false;
     }
     
-    
+    createOrUpdateJourney(steps, type, callback) {
+        
+        let ca_number = this.props.cases[0]? this.props.cases[0].ca_number : '';
+        if (!this.state.currentJourneyId) {
+            this.props.service.createJourney(
+                {
+                    type: type,
+                    state: 'started',
+                    ca_number: ca_number,
+                    steps: JSON.stringify(steps)
+                },
+                (id) => {
+                    this.setState({currentJourneyId: id})
+                    callback(id)
+                });
+        } else {
+            this.props.service.updateJourney(
+                {
+                    id: this.state.currentJourneyId,
+                    type: type,
+                    state: 'started',
+                    ca_number: ca_number,
+                    steps: JSON.stringify(steps)
+                },this.state.currentJourneyId, (id)=>{console.log("Updated journey", id, this.state.currentJourneyId)});
+        }
+    }
 
 }
 

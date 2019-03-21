@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import '../forms/active.forms.css';
-import DefaultService from '../service/default.service.js';
 import CaseList from '../components/CaseList.js';
-import renderCases from './cases.renderer';
-import findCaseById from '../helpers/find.case.by.id';
 
 class ActiveFormList extends Component {
     

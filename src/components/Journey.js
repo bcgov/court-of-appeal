@@ -4,6 +4,7 @@ import '../forms/journey.css';
 import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";
+let JOURNEY_TYPES = require('../helpers/constants');
 
 class Journey extends Component {
 
@@ -16,7 +17,9 @@ class Journey extends Component {
             completeAppealTitle: '',
             appealButtonClass: 'btn round-borders btn-journey',
             respondButtonClass: 'btn round-borders btn-journey',
-            journeyType: ''
+            journeyType: '',
+            journey: null,
+            journeyId: null
         };
         this.journeyForRespondent = this.journeyForRespondent.bind(this);
         this.respondToNoticeOfAppealJourney = this.respondToNoticeOfAppealJourney.bind(this);
@@ -30,7 +33,6 @@ class Journey extends Component {
         this.leaveToAppealRequired = this.leaveToAppealRequired.bind(this);
         this.leaveToAppealGranted = this.leaveToAppealGranted.bind(this);
         this.leaveToAppealRefused = this.leaveToAppealRefused.bind(this);
-        this.checkstep = " As you progress through your appeal journey, check the box next to each step below to mark it as complete.";
         this.handlePopState = this.handlePopState.bind(this);
         this.dataTip = `<p>If you don't know whether you have the right to appeal,</p>
                         <p>please see our online guidebook for more
@@ -41,6 +43,7 @@ class Journey extends Component {
         this.appellantQuestion = "Do you have the right to appeal?";
         this.service = props.service;
         this.redirectToForm7 = this.redirectToForm7.bind(this);
+        this.fetchMyJourney = this.fetchMyJourney.bind(this);
     }
 
     render() {
@@ -56,6 +59,7 @@ class Journey extends Component {
         window.onpopstate = this.handlePopState;
         this.props.history.push(process.env.PUBLIC_URL, this.state);
         if (this.service == null) { this.service = new DefaultService(window); }
+        this.fetchMyJourney()
     }
 
     componentWillUnmount() {
@@ -100,9 +104,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
-                introText: "Follow the steps below to complete the appeal. Start by clicking on the first form. Follow the instructions until your appeal process is complete. " + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL],
                 refusedStep: false,
-                journeyType: 'appellantRightToAppeal',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL,
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -115,9 +119,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                introText: "If you do not have the right to appeal, and you would still like to appeal your case, you must apply for leave to appeal from the court. Follow the steps below to complete the process. " + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REQUIRED],
                 refusedStep: false,
-                journeyType: 'leaveToAppealRequired',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REQUIRED,
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -130,9 +134,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "Yes",
-                introText: "Now that the court has granted you the right to appeal, follow the steps below to complete the appeal. Start by clicking on the first form.",
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED],
                 refusedStep: false,
-                journeyType: 'appellantLeaveGranted',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED,
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -145,10 +149,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.appellantQuestion,
                 userState: "No",
-                introText: "Your leave to appeal was refused, and your application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear your case.",
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REFUSED],
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                journeyType: "appellantLeaveRefused",
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REFUSED,
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -161,9 +165,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Appeal",
-                introText: "You are receiving the Notice of Appeal because a previous court case you were in is being appealed. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form. " + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL],
                 refusedStep: false,
-                journeyType: 'respondToNoticeOfAppeal',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -176,9 +180,9 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Application for Leave to Appeal",
-                introText: "You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form." + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE],
                 refusedStep: false,
-                journeyType: 'respondToNoticeOfApplicationForLeaveToAppeal',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -191,10 +195,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below if you would like to continue to participate in the appeal process. " + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED],
                 refusedStep: false,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                journeyType: 'respondToLeaveRefused',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -207,10 +211,10 @@ class Journey extends Component {
                 displayJourneyMap: true,
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal",
-                introText: "The appellant's leave to appeal was refused, and their application for review was refused. The Court of Appeal decision is final, unless the Supreme Court of Canada agrees to hear their case.",
+                introText:JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED_FINAL],
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
-                journeyType: 'respondToLeaveRefusedFinal',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED_FINAL,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -224,9 +228,9 @@ class Journey extends Component {
                 mapSrc: "/images/journeymap/journey-map_respondent-leave-to-appeal-granted.png",
                 userQuestion: this.respondentQuestion,
                 userState: "Notice of Leave to Appeal ",
-                introText: "The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions until the appeal process is complete. Start by clicking on the first form. " + this.checkstep,
+                introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_GRANTED],
                 refusedStep: false,
-                journeyType: 'respondToLeaveGranted',
+                journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_GRANTED,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -243,7 +247,7 @@ class Journey extends Component {
                         completeAppealTitle={this.state.completeAppealTitle}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
-                        respondToLeaveRefused={this.respondToLeaveRefusedJourney}
+                        respondToLeaveRefused={this.respondToLeaveRefusedJoney}
                         respondToLeaveRefusedFinal={this.respondToLeaveRefusedFinalJourney}
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
@@ -252,6 +256,9 @@ class Journey extends Component {
                         journeyType={this.state.journeyType}
                         cases={this.props.cases}
                         service={this.service}
+                        journey={this.state.journey}
+                        journeyId={this.state.journeyId}
+                        startOver={this.startOver.bind(this)}
                     />
                 </div>
             );
@@ -293,6 +300,18 @@ class Journey extends Component {
                 </div>;
         }
         return content;
+    }
+    
+    startOver() {
+        this.setState({ 
+            respondent: false,
+            appellant: false,
+            displayJourneyMap: false,
+            completeAppealTitle: '',
+            appealButtonClass: 'btn round-borders btn-journey',
+            respondButtonClass: 'btn round-borders btn-journey',
+            journeyType: '',
+            journey: null});
     }
 
     renderAppellant() {
@@ -363,6 +382,28 @@ class Journey extends Component {
             );
         }
         return content;
+    }
+    
+    fetchMyJourney() {
+        this.service.getMyJourney({}, (data) => {
+            if (!data.error) {
+                let journey = (data.journey);
+                let journeyType = '', introText = '';
+
+                if ( journey ) {
+                    journeyType = journey.type;
+                    introText = JOURNEY_TYPES.INTROTEXT[journey.type]
+                    this.setState({
+                        journeyId: journey.id,
+                        journey: journey,
+                        displayJourneyMap: true,
+                        journeyType: journeyType,
+                        introText: introText
+                    });
+                }
+            }
+            else console.log(data.error)
+        });
     }
 
     redirectToForm7(){

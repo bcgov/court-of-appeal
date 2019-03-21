@@ -14,10 +14,10 @@ RespondToAppealJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -120,6 +120,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -163,6 +164,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -211,6 +213,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -269,6 +272,7 @@ RespondToAppealJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -308,6 +312,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -494,6 +499,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -537,6 +543,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -585,6 +592,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -643,6 +651,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -682,6 +691,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -951,6 +961,7 @@ RespondToAppealJourneyMap {
                   "key": null,
                   "lastEffect": null,
                   "memoizedProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -965,6 +976,7 @@ RespondToAppealJourneyMap {
                   "mode": 0,
                   "nextEffect": null,
                   "pendingProps": Object {
+                    "checked": false,
                     "className": "checkbox-glow checkbox-toggle",
                     "disabled": true,
                     "onChange": [Function],
@@ -995,6 +1007,7 @@ RespondToAppealJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -1008,6 +1021,7 @@ RespondToAppealJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
+                  "checked": false,
                   "disabled": true,
                   "onChange": [Function],
                   "show": true,
@@ -1075,6 +1089,7 @@ RespondToAppealJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -1083,6 +1098,7 @@ RespondToAppealJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "alt": "Page Icon for [object Object]",
                         "className": "journey-icon",
                         "onClick": [Function],
                         "src": "/icons/journey_map_event_default.svg",
@@ -1122,6 +1138,7 @@ RespondToAppealJourneyMap {
                         "updateQueue": null,
                       },
                       "stateNode": <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />,
@@ -1138,6 +1155,7 @@ RespondToAppealJourneyMap {
                     "memoizedProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -1154,6 +1172,7 @@ RespondToAppealJourneyMap {
                     "pendingProps": Object {
                       "children": Array [
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -1341,6 +1360,7 @@ RespondToAppealJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -1366,6 +1386,7 @@ RespondToAppealJourneyMap {
                   "_reactInternalInstance": Object {},
                   "context": Object {},
                   "props": Object {
+                    "checked": false,
                     "disabled": true,
                     "onChange": [Function],
                     "show": true,
@@ -1397,6 +1418,7 @@ RespondToAppealJourneyMap {
               "memoizedProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1424,6 +1446,7 @@ RespondToAppealJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1457,6 +1480,7 @@ RespondToAppealJourneyMap {
               "pendingProps": Object {
                 "children": Array [
                   <StepCompletedCheckbox
+                    checked={false}
                     disabled={true}
                     onChange={[Function]}
                     show={true}
@@ -1484,6 +1508,7 @@ RespondToAppealJourneyMap {
                     className="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       className="journey-icon"
                       onClick={[Function]}
                       src="/icons/journey_map_event_default.svg"
@@ -1533,6 +1558,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -1696,6 +1722,7 @@ RespondToAppealJourneyMap {
                       "key": null,
                       "lastEffect": null,
                       "memoizedProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1710,6 +1737,7 @@ RespondToAppealJourneyMap {
                       "mode": 0,
                       "nextEffect": null,
                       "pendingProps": Object {
+                        "checked": false,
                         "className": "checkbox-glow checkbox-toggle",
                         "disabled": true,
                         "onChange": [Function],
@@ -1740,6 +1768,7 @@ RespondToAppealJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1753,6 +1782,7 @@ RespondToAppealJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
+                      "checked": false,
                       "disabled": true,
                       "onChange": [Function],
                       "show": true,
@@ -1820,6 +1850,7 @@ RespondToAppealJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1828,6 +1859,7 @@ RespondToAppealJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "alt": "Page Icon for [object Object]",
                             "className": "journey-icon",
                             "onClick": [Function],
                             "src": "/icons/journey_map_event_default.svg",
@@ -1867,6 +1899,7 @@ RespondToAppealJourneyMap {
                             "updateQueue": null,
                           },
                           "stateNode": <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />,
@@ -1883,6 +1916,7 @@ RespondToAppealJourneyMap {
                         "memoizedProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -1899,6 +1933,7 @@ RespondToAppealJourneyMap {
                         "pendingProps": Object {
                           "children": Array [
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_default.svg"
@@ -2149,6 +2184,7 @@ RespondToAppealJourneyMap {
                           class="file-main"
                         >
                           <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_default.svg"
                           />
@@ -2174,6 +2210,7 @@ RespondToAppealJourneyMap {
                       "_reactInternalInstance": Object {},
                       "context": Object {},
                       "props": Object {
+                        "checked": false,
                         "disabled": true,
                         "onChange": [Function],
                         "show": true,
@@ -2205,6 +2242,7 @@ RespondToAppealJourneyMap {
                   "memoizedProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2232,6 +2270,7 @@ RespondToAppealJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -2270,6 +2309,7 @@ RespondToAppealJourneyMap {
                   "pendingProps": Object {
                     "children": Array [
                       <StepCompletedCheckbox
+                        checked={false}
                         disabled={true}
                         onChange={[Function]}
                         show={true}
@@ -2297,6 +2337,7 @@ RespondToAppealJourneyMap {
                         className="file-main"
                       >
                         <img
+                          alt="Page Icon for [object Object]"
                           className="journey-icon"
                           onClick={[Function]}
                           src="/icons/journey_map_event_default.svg"
@@ -2351,6 +2392,7 @@ RespondToAppealJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Page Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_default.svg"
                       />
@@ -2521,6 +2563,7 @@ RespondToAppealJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2535,6 +2578,7 @@ RespondToAppealJourneyMap {
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
+                            "checked": false,
                             "className": "checkbox-glow checkbox-toggle",
                             "disabled": true,
                             "onChange": [Function],
@@ -2565,6 +2609,7 @@ RespondToAppealJourneyMap {
                         "key": null,
                         "lastEffect": null,
                         "memoizedProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2578,6 +2623,7 @@ RespondToAppealJourneyMap {
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
+                          "checked": false,
                           "disabled": true,
                           "onChange": [Function],
                           "show": true,
@@ -2645,6 +2691,7 @@ RespondToAppealJourneyMap {
                               "key": null,
                               "lastEffect": null,
                               "memoizedProps": Object {
+                                "alt": "Page Icon for [object Object]",
                                 "className": "journey-icon",
                                 "onClick": [Function],
                                 "src": "/icons/journey_map_event_multi-page.svg",
@@ -2656,6 +2703,7 @@ RespondToAppealJourneyMap {
                               "mode": 0,
                               "nextEffect": null,
                               "pendingProps": Object {
+                                "alt": "Page Icon for [object Object]",
                                 "className": "journey-icon",
                                 "onClick": [Function],
                                 "src": "/icons/journey_map_event_multi-page.svg",
@@ -2705,6 +2753,7 @@ RespondToAppealJourneyMap {
                                 "updateQueue": null,
                               },
                               "stateNode": <img
+                                alt="Page Icon for [object Object]"
                                 class="journey-icon"
                                 src="/icons/journey_map_event_multi-page.svg"
                                 style="height: 93px;"
@@ -2722,6 +2771,7 @@ RespondToAppealJourneyMap {
                             "memoizedProps": Object {
                               "children": Array [
                                 <img
+                                  alt="Page Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_multi-page.svg"
@@ -2748,6 +2798,7 @@ RespondToAppealJourneyMap {
                             "pendingProps": Object {
                               "children": Array [
                                 <img
+                                  alt="Page Icon for [object Object]"
                                   className="journey-icon"
                                   onClick={[Function]}
                                   src="/icons/journey_map_event_multi-page.svg"
@@ -2945,6 +2996,7 @@ RespondToAppealJourneyMap {
                               class="file-main"
                             >
                               <img
+                                alt="Page Icon for [object Object]"
                                 class="journey-icon"
                                 src="/icons/journey_map_event_multi-page.svg"
                                 style="height: 93px;"
@@ -2972,6 +3024,7 @@ RespondToAppealJourneyMap {
                           "_reactInternalInstance": Object {},
                           "context": Object {},
                           "props": Object {
+                            "checked": false,
                             "disabled": true,
                             "onChange": [Function],
                             "show": true,
@@ -3003,6 +3056,7 @@ RespondToAppealJourneyMap {
                       "memoizedProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -3030,6 +3084,7 @@ RespondToAppealJourneyMap {
                             className="file-main"
                           >
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_multi-page.svg"
@@ -3073,6 +3128,7 @@ RespondToAppealJourneyMap {
                       "pendingProps": Object {
                         "children": Array [
                           <StepCompletedCheckbox
+                            checked={false}
                             disabled={true}
                             onChange={[Function]}
                             show={true}
@@ -3100,6 +3156,7 @@ RespondToAppealJourneyMap {
                             className="file-main"
                           >
                             <img
+                              alt="Page Icon for [object Object]"
                               className="journey-icon"
                               onClick={[Function]}
                               src="/icons/journey_map_event_multi-page.svg"
@@ -3159,6 +3216,7 @@ RespondToAppealJourneyMap {
                           class="file-main"
                         >
                           <img
+                            alt="Page Icon for [object Object]"
                             class="journey-icon"
                             src="/icons/journey_map_event_multi-page.svg"
                             style="height: 93px;"
@@ -3440,6 +3498,7 @@ RespondToAppealJourneyMap {
                                     "key": null,
                                     "lastEffect": null,
                                     "memoizedProps": Object {
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3454,6 +3513,7 @@ RespondToAppealJourneyMap {
                                     "mode": 0,
                                     "nextEffect": null,
                                     "pendingProps": Object {
+                                      "checked": false,
                                       "className": "checkbox-glow checkbox-toggle",
                                       "disabled": true,
                                       "onChange": [Function],
@@ -3484,6 +3544,7 @@ RespondToAppealJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3497,6 +3558,7 @@ RespondToAppealJourneyMap {
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
+                                    "checked": false,
                                     "disabled": true,
                                     "onChange": [Function],
                                     "show": true,
@@ -3570,6 +3632,7 @@ RespondToAppealJourneyMap {
                                           "key": null,
                                           "lastEffect": null,
                                           "memoizedProps": Object {
+                                            "alt": "Gavel Icon for [object Object]",
                                             "className": "journey-icon",
                                             "onClick": [Function],
                                             "src": "/icons/journey_map_event_hearing.svg",
@@ -3578,6 +3641,7 @@ RespondToAppealJourneyMap {
                                           "mode": 0,
                                           "nextEffect": null,
                                           "pendingProps": Object {
+                                            "alt": "Gavel Icon for [object Object]",
                                             "className": "journey-icon",
                                             "onClick": [Function],
                                             "src": "/icons/journey_map_event_hearing.svg",
@@ -3586,6 +3650,7 @@ RespondToAppealJourneyMap {
                                           "return": [Circular],
                                           "sibling": null,
                                           "stateNode": <img
+                                            alt="Gavel Icon for [object Object]"
                                             class="journey-icon"
                                             src="/icons/journey_map_event_hearing.svg"
                                           />,
@@ -3601,6 +3666,7 @@ RespondToAppealJourneyMap {
                                         "lastEffect": null,
                                         "memoizedProps": Object {
                                           "children": <img
+                                            alt="Gavel Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_hearing.svg"
@@ -3612,6 +3678,7 @@ RespondToAppealJourneyMap {
                                         "nextEffect": null,
                                         "pendingProps": Object {
                                           "children": <img
+                                            alt="Gavel Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_hearing.svg"
@@ -3625,6 +3692,7 @@ RespondToAppealJourneyMap {
                                           class="file-main"
                                         >
                                           <img
+                                            alt="Gavel Icon for [object Object]"
                                             class="journey-icon"
                                             src="/icons/journey_map_event_hearing.svg"
                                           />
@@ -3644,6 +3712,7 @@ RespondToAppealJourneyMap {
                                           className="file-main"
                                         >
                                           <img
+                                            alt="Gavel Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_hearing.svg"
@@ -3660,6 +3729,7 @@ RespondToAppealJourneyMap {
                                           className="file-main"
                                         >
                                           <img
+                                            alt="Gavel Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_hearing.svg"
@@ -3767,6 +3837,7 @@ RespondToAppealJourneyMap {
                                           class="file-main"
                                         >
                                           <img
+                                            alt="Gavel Icon for [object Object]"
                                             class="journey-icon"
                                             src="/icons/journey_map_event_hearing.svg"
                                           />
@@ -3790,6 +3861,7 @@ RespondToAppealJourneyMap {
                                     "_reactInternalInstance": Object {},
                                     "context": Object {},
                                     "props": Object {
+                                      "checked": false,
                                       "disabled": true,
                                       "onChange": [Function],
                                       "show": true,
@@ -3821,6 +3893,7 @@ RespondToAppealJourneyMap {
                                 "memoizedProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -3852,6 +3925,7 @@ RespondToAppealJourneyMap {
                                         className="file-main"
                                       >
                                         <img
+                                          alt="Gavel Icon for [object Object]"
                                           className="journey-icon"
                                           onClick={[Function]}
                                           src="/icons/journey_map_event_hearing.svg"
@@ -3886,6 +3960,7 @@ RespondToAppealJourneyMap {
                                 "pendingProps": Object {
                                   "children": Array [
                                     <StepCompletedCheckbox
+                                      checked={false}
                                       disabled={true}
                                       onChange={[Function]}
                                       show={true}
@@ -3917,6 +3992,7 @@ RespondToAppealJourneyMap {
                                         className="file-main"
                                       >
                                         <img
+                                          alt="Gavel Icon for [object Object]"
                                           className="journey-icon"
                                           onClick={[Function]}
                                           src="/icons/journey_map_event_hearing.svg"
@@ -3970,6 +4046,7 @@ RespondToAppealJourneyMap {
                                       class="file-main"
                                     >
                                       <img
+                                        alt="Gavel Icon for [object Object]"
                                         class="journey-icon"
                                         src="/icons/journey_map_event_hearing.svg"
                                       />
@@ -4127,6 +4204,7 @@ RespondToAppealJourneyMap {
                                         "key": null,
                                         "lastEffect": null,
                                         "memoizedProps": Object {
+                                          "checked": false,
                                           "className": "checkbox-glow checkbox-toggle",
                                           "disabled": true,
                                           "onChange": [Function],
@@ -4141,6 +4219,7 @@ RespondToAppealJourneyMap {
                                         "mode": 0,
                                         "nextEffect": null,
                                         "pendingProps": Object {
+                                          "checked": false,
                                           "className": "checkbox-glow checkbox-toggle",
                                           "disabled": true,
                                           "onChange": [Function],
@@ -4171,6 +4250,7 @@ RespondToAppealJourneyMap {
                                       "key": null,
                                       "lastEffect": null,
                                       "memoizedProps": Object {
+                                        "checked": false,
                                         "disabled": true,
                                         "onChange": [Function],
                                         "show": true,
@@ -4184,6 +4264,7 @@ RespondToAppealJourneyMap {
                                       "mode": 0,
                                       "nextEffect": null,
                                       "pendingProps": Object {
+                                        "checked": false,
                                         "disabled": true,
                                         "onChange": [Function],
                                         "show": true,
@@ -4251,6 +4332,7 @@ RespondToAppealJourneyMap {
                                             "key": null,
                                             "lastEffect": null,
                                             "memoizedProps": Object {
+                                              "alt": "Page Icon for [object Object]",
                                               "className": "journey-icon",
                                               "onClick": [Function],
                                               "src": "/icons/journey_map_event_default.svg",
@@ -4259,6 +4341,7 @@ RespondToAppealJourneyMap {
                                             "mode": 0,
                                             "nextEffect": null,
                                             "pendingProps": Object {
+                                              "alt": "Page Icon for [object Object]",
                                               "className": "journey-icon",
                                               "onClick": [Function],
                                               "src": "/icons/journey_map_event_default.svg",
@@ -4298,6 +4381,7 @@ RespondToAppealJourneyMap {
                                               "updateQueue": null,
                                             },
                                             "stateNode": <img
+                                              alt="Page Icon for [object Object]"
                                               class="journey-icon"
                                               src="/icons/journey_map_event_default.svg"
                                             />,
@@ -4314,6 +4398,7 @@ RespondToAppealJourneyMap {
                                           "memoizedProps": Object {
                                             "children": Array [
                                               <img
+                                                alt="Page Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_default.svg"
@@ -4330,6 +4415,7 @@ RespondToAppealJourneyMap {
                                           "pendingProps": Object {
                                             "children": Array [
                                               <img
+                                                alt="Page Icon for [object Object]"
                                                 className="journey-icon"
                                                 onClick={[Function]}
                                                 src="/icons/journey_map_event_default.svg"
@@ -4580,6 +4666,7 @@ RespondToAppealJourneyMap {
                                             class="file-main"
                                           >
                                             <img
+                                              alt="Page Icon for [object Object]"
                                               class="journey-icon"
                                               src="/icons/journey_map_event_default.svg"
                                             />
@@ -4605,6 +4692,7 @@ RespondToAppealJourneyMap {
                                         "_reactInternalInstance": Object {},
                                         "context": Object {},
                                         "props": Object {
+                                          "checked": false,
                                           "disabled": true,
                                           "onChange": [Function],
                                           "show": true,
@@ -4636,6 +4724,7 @@ RespondToAppealJourneyMap {
                                     "memoizedProps": Object {
                                       "children": Array [
                                         <StepCompletedCheckbox
+                                          checked={false}
                                           disabled={true}
                                           onChange={[Function]}
                                           show={true}
@@ -4663,6 +4752,7 @@ RespondToAppealJourneyMap {
                                           className="file-main"
                                         >
                                           <img
+                                            alt="Page Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_default.svg"
@@ -4702,6 +4792,7 @@ RespondToAppealJourneyMap {
                                     "pendingProps": Object {
                                       "children": Array [
                                         <StepCompletedCheckbox
+                                          checked={false}
                                           disabled={true}
                                           onChange={[Function]}
                                           show={true}
@@ -4729,6 +4820,7 @@ RespondToAppealJourneyMap {
                                           className="file-main"
                                         >
                                           <img
+                                            alt="Page Icon for [object Object]"
                                             className="journey-icon"
                                             onClick={[Function]}
                                             src="/icons/journey_map_event_default.svg"
@@ -4784,6 +4876,7 @@ RespondToAppealJourneyMap {
                                         class="file-main"
                                       >
                                         <img
+                                          alt="Page Icon for [object Object]"
                                           class="journey-icon"
                                           src="/icons/journey_map_event_default.svg"
                                         />
@@ -5888,6 +5981,7 @@ RespondToAppealJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -5931,6 +6025,7 @@ RespondToAppealJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -5979,6 +6074,7 @@ RespondToAppealJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_multi-page.svg"
               style="height: 93px;"
@@ -6037,6 +6133,7 @@ RespondToAppealJourneyMap {
               class="file-main"
             >
               <img
+                alt="Gavel Icon for [object Object]"
                 class="journey-icon"
                 src="/icons/journey_map_event_hearing.svg"
               />
@@ -6076,6 +6173,7 @@ RespondToAppealJourneyMap {
             class="file-main"
           >
             <img
+              alt="Page Icon for [object Object]"
               class="journey-icon"
               src="/icons/journey_map_event_default.svg"
             />
@@ -6127,7 +6225,7 @@ RespondToAppealJourneyMap {
       "type": "div",
       "updateQueue": null,
     },
-    "effectTag": 1,
+    "effectTag": 5,
     "expirationTime": 0,
     "firstEffect": null,
     "index": 0,
@@ -6145,6 +6243,7 @@ RespondToAppealJourneyMap {
     },
     "memoizedState": Object {
       "case": undefined,
+      "id": null,
       "steps": Array [
         Object {
           "status": "new",
@@ -6167,6 +6266,7 @@ RespondToAppealJourneyMap {
           "type": "courtorder",
         },
       ],
+      "userid": null,
     },
     "mode": 0,
     "nextEffect": null,
@@ -6190,10 +6290,10 @@ RespondToAppealJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -6296,6 +6396,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -6339,6 +6440,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -6387,6 +6489,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_multi-page.svg"
                       style="height: 93px;"
@@ -6445,6 +6548,7 @@ RespondToAppealJourneyMap {
                       class="file-main"
                     >
                       <img
+                        alt="Gavel Icon for [object Object]"
                         class="journey-icon"
                         src="/icons/journey_map_event_hearing.svg"
                       />
@@ -6484,6 +6588,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Page Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_default.svg"
                     />
@@ -6670,6 +6775,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -6713,6 +6819,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -6761,6 +6868,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_multi-page.svg"
                     style="height: 93px;"
@@ -6819,6 +6927,7 @@ RespondToAppealJourneyMap {
                     class="file-main"
                   >
                     <img
+                      alt="Gavel Icon for [object Object]"
                       class="journey-icon"
                       src="/icons/journey_map_event_hearing.svg"
                     />
@@ -6858,6 +6967,7 @@ RespondToAppealJourneyMap {
                   class="file-main"
                 >
                   <img
+                    alt="Page Icon for [object Object]"
                     class="journey-icon"
                     src="/icons/journey_map_event_default.svg"
                   />
@@ -7001,6 +7111,7 @@ RespondToAppealJourneyMap {
   },
   "_reactInternalInstance": Object {},
   "context": Object {},
+  "getStepStatus": [Function],
   "props": Object {
     "history": Object {
       "location": Object {
@@ -7014,6 +7125,7 @@ RespondToAppealJourneyMap {
   "refs": Object {},
   "state": Object {
     "case": undefined,
+    "id": null,
     "steps": Array [
       Object {
         "status": "new",
@@ -7036,7 +7148,9 @@ RespondToAppealJourneyMap {
         "type": "courtorder",
       },
     ],
+    "userid": null,
   },
+  "updateStepStatus": [Function],
   "updater": Object {
     "enqueueForceUpdate": [Function],
     "enqueueReplaceState": [Function],

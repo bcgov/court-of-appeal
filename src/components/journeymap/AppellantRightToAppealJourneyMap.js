@@ -5,13 +5,16 @@ import GavelIcon from './GavelIcon';
 import EndCircle from './EndCircle';
 import Trail from './Trail';
 let cn = require('classnames');
+let JOURNEY_TYPE = require('../../helpers/constants');
 
 class AppellantRightToAppealJourneyMap extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            steps: [
+            id: props.journey ? props.journey.id : null,
+            userid: props.journey ? props.journey.userid : null,
+            steps: props.journey ? JSON.parse(props.journey.steps) : [
                 {status: 'new', type: 'appellantintial'},
                 {status: 'new', type: 'appealrecord'},
                 {status: 'new', type: 'factum'},
@@ -194,7 +197,11 @@ class AppellantRightToAppealJourneyMap extends React.Component {
     stepCompleted(stepNumber, isComplete) {
         let steps = this.state.steps;
         steps[stepNumber - 1].status = isComplete ? 'completed' : 'new';
-        this.setState({steps: steps});
+        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL, this.setId.bind(this)));
+    }
+
+    setId(id) {
+        this.setState({id:id})
     }
 }
 export default AppellantRightToAppealJourneyMap;
