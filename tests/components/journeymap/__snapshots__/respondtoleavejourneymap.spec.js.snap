@@ -14,10 +14,10 @@ RespondToLeaveJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -3811,7 +3811,7 @@ RespondToLeaveJourneyMap {
       "type": "div",
       "updateQueue": null,
     },
-    "effectTag": 1,
+    "effectTag": 5,
     "expirationTime": 0,
     "firstEffect": null,
     "index": 0,
@@ -3868,10 +3868,10 @@ RespondToLeaveJourneyMap {
       "child": [Circular],
       "effectTag": 1,
       "expirationTime": 0,
-      "firstEffect": null,
+      "firstEffect": [Circular],
       "index": 0,
       "key": null,
-      "lastEffect": null,
+      "lastEffect": [Circular],
       "memoizedProps": Object {
         "Component": [Function],
         "context": null,
@@ -4473,6 +4473,7 @@ RespondToLeaveJourneyMap {
   },
   "_reactInternalInstance": Object {},
   "context": Object {},
+  "getStepStatus": [Function],
   "props": Object {
     "history": Object {
       "location": Object {
@@ -4503,6 +4504,7 @@ RespondToLeaveJourneyMap {
     ],
     "userid": null,
   },
+  "updateStepStatus": [Function],
   "updater": Object {
     "enqueueForceUpdate": [Function],
     "enqueueReplaceState": [Function],
