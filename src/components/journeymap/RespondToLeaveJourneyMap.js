@@ -110,7 +110,7 @@ class RespondToLeaveJourneyMap extends React.Component {
     updateStepStatus(stepNumber, newStatus){
         let steps = this.state.steps;
         steps[stepNumber - 1].status = newStatus;
-        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL, this.setId.bind(this)));
+        this.setState({steps: steps}, this.props.createOrUpdateJourney(this.state.steps,JOURNEY_TYPE.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE, this.setId.bind(this)));
     }
 
     stepCompleted(stepNumber, isComplete) {
