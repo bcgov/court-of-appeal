@@ -144,7 +144,7 @@ class JourneyMap extends React.Component {
     }
     
     getUsersJourney() {
-        let props = { 
+        let props = {
             iconClicked: this.iconClicked.bind(this), 
             case: this.props.cases[0],
             isStepReady: this.isStepReady.bind(this),
