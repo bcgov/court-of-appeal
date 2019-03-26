@@ -32,10 +32,11 @@ export const INTROTEXT = {
         follow the instructions until the appeal process is complete. Start by clicking on the first form. 
         As you progress through your appeal journey, check the box next to each step below to mark it as complete.`,
     respondToNoticeOfApplicationForLeaveToAppeal:
-        `The appellant's leave to appeal was refused. You are served with a Notice of Application to Vary an Order of Justice, 
-        which means the appellant is asking three judges to review the previous judge's decision. Follow the steps below 
-        if you would like to continue to participate in the appeal process. As you progress through your appeal journey, 
-        check the box next to each step below to mark it as complete.`,
+        `You are receiving the Notice of Application for Leave to Appeal because a previous court case you were in is 
+        being appealed, and the appellant is applying to the court for leave to appeal. If you would like to be updated 
+        about the status of the appeal, and would like to participate in the appeal hearing, follow the instructions 
+        until the appeal process is complete. Start by clicking on the first form. As you progress through your appeal 
+        journey, check the box next to each step below to mark it as complete.`,
     respondToLeaveGranted:
         `The appellant's leave to appeal was granted. If you would like to be updated about the status of the appeal, 
         and would like to participate in the appeal hearing, follow the instructions until the appeal process is 
