@@ -247,7 +247,7 @@ class Journey extends Component {
                         completeAppealTitle={this.state.completeAppealTitle}
                         leaveGranted={this.leaveToAppealGranted}
                         leaveRefused={this.leaveToAppealRefused}
-                        respondToLeaveRefused={this.respondToLeaveRefusedJoney}
+                        respondToLeaveRefused={this.respondToLeaveRefusedJourney}
                         respondToLeaveRefusedFinal={this.respondToLeaveRefusedFinalJourney}
                         respondToLeaveGranted={this.respondToLeaveGrantedJourney}
                         history={this.props.history}
