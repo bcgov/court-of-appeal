@@ -137,6 +137,7 @@ class Journey extends Component {
                 introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED],
                 refusedStep: false,
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_GRANTED,
+                journey: null
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -153,6 +154,7 @@ class Journey extends Component {
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REFUSED,
+                journey: null
             };
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -199,6 +201,7 @@ class Journey extends Component {
                 refusedStep: false,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED,
+                journey: null
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -215,6 +218,7 @@ class Journey extends Component {
                 refusedStep: true,
                 completeAppealTitle: "Final Decision on Leave to Appeal",
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_REFUSED_FINAL,
+                journey: null,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
@@ -231,6 +235,7 @@ class Journey extends Component {
                 introText: JOURNEY_TYPES.INTROTEXT[JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_GRANTED],
                 refusedStep: false,
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_LEAVE_GRANTED,
+                journey: null,
             }
         }, () => {
             this.props.history.push(process.env.PUBLIC_URL, this.state);
