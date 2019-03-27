@@ -14,7 +14,7 @@ class RespondToLeaveJourneyMap extends React.Component {
             id: props.journey ? props.journey.id : null,
             userid: props.journey ? props.journey.userid : null,
             steps: props.journey && props.journey.steps ? JSON.parse(props.journey.steps) : [
-                {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form2'},
+                {status: props.case ? props.case.status.toLowerCase() : 'new', type: 'form-2'},
                 {status: 'new', type: 'file'},
                 {status: 'new', type: 'hearing'},
             ],
