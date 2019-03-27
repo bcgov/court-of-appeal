@@ -13,7 +13,6 @@ class PageIcon extends React.Component {
     }
 
     render() {
-        console.log("rendering page icon", this.props.status)
         
         let stepTitle, stepTitleOptional = null;
         let active = !!this.props.active;
@@ -49,7 +48,7 @@ class PageIcon extends React.Component {
                 <span style={{position: 'relative', top: top, left: '-10%', zIndex: '9'}}>{this.props.order}</span>
                 <div className={cn({"journey-icon": active},"file-main", {"inactive": !active})} >
                     {imageToUse}
-                    <div className={"file-corner-r"} />
+                    <div className={"file-corner-r"} style={this.props.twoPages? {top: '-15px'}:{}}/>
                 </div>
                 <div className={cn("step-title-container", this.props.stepTitleClass)} onClick={this.props.action}>
                     {stepTitle}
