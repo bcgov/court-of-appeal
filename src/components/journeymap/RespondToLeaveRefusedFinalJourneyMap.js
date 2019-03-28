@@ -26,7 +26,7 @@ class RespondToLeaveRefusedFinalJourneyMap extends React.Component {
                     width={'31%'}
                     level={1}
                 />
-                <GavelIcon style={{left: '55%', top: '37%'}}
+                <GavelIcon style={{left: '55%', top: '24%'}}
                            stepTitle={"The Hearing"}
                            active={false}
                 />

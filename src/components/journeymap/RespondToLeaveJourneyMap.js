@@ -34,8 +34,16 @@ class RespondToLeaveJourneyMap extends React.Component {
         return (
             <div className={"journey-map-container"}>
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
+                <div
+                    style={{marginLeft: '50px',
+                        borderTop: '9px solid rgb(159, 191, 226)',
+                        width: '80%',
+                        position: 'absolute',
+                        top: '41.5%',
+                        zIndex: '0'
+                    }}/>
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status !== 'new'}
                     width={'18%'}
                     level={1}
@@ -51,9 +59,9 @@ class RespondToLeaveJourneyMap extends React.Component {
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status === 'completed'}
-                    width={'25%'}
+                    width={'21%'}
                     level={1}
                 />
                 <PageIcon style={{left: '42%'}}
@@ -67,9 +75,9 @@ class RespondToLeaveJourneyMap extends React.Component {
                           ready={this.props.isStepReady(2, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[1].status === 'completed'}
-                    width={'25%'}
+                    width={'21%'}
                     level={1}
                 />
                 <GavelIcon style={{left: '64%'}}
@@ -82,7 +90,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                            ready={this.props.isStepReady(3, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[2].status === 'completed'}
                     width={'20%'}
                     level={1}

@@ -31,7 +31,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status !== 'new'}
                     lineCompleted={this.state.steps[1].status === 'completed'}
-                    width={'28%'}
+                    width={'24%'}
                     level={1}
                 />
                     
@@ -49,7 +49,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
                     lineCompleted={this.state.steps[1].status === 'completed'}
-                    width={'30%'}
+                    width={'28%'}
                     level={1}
                 />
                 <PageIcon style={{left:'58%'}}
@@ -67,7 +67,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[1].status === 'completed'}
                     lineCompleted={this.state.steps[1].status === 'completed'}
-                    width={'12%'}
+                    width={'10%'}
                     level={1}
                 />
                 <div className={cn("journey-right-curve",{'completed-curve': this.state.steps[1].status === 'completed'})} />
@@ -78,7 +78,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     width={'25%'}
                     level={2}
                 />
-                <GavelIcon style={{top:'68%', left: '30%'}}
+                <GavelIcon style={{top:'55%', left: '30%'}}
                            stepTitle={"The Hearing"}
                            action={this.iconClicked.bind(this, 'respondenthearing')}
                            active={true}
@@ -93,7 +93,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     width={'30%'}
                     level={2}
                 />
-                <PageIcon style={{top:'68%', left: '57%'}}
+                <PageIcon style={{top:'55%', left: '57%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}
@@ -115,7 +115,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                    action={this.iconClicked.bind(this,'respondentcomplete')}
                    active={true}
                    completed={this.state.steps[3].status === 'completed'}
-                   style={{top: '68%', left: '80%'}}
+                   style={{top: '55%', left: '80%'}}
 
                />
             </div>

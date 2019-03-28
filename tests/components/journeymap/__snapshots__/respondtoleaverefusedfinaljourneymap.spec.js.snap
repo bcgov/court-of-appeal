@@ -98,9 +98,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 25%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive"
                   style="left: 28%;"
@@ -173,12 +176,15 @@ RespondToLeaveRefusedFinalJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 31%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 55%; top: 37%; margin-top: 3px;"
+                  style="left: 55%; top: 24%; margin-top: 3px;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -266,9 +272,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 25%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive action-end-point"
                   style="position: absolute; left: 80%;"
@@ -406,9 +415,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 25%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive"
                 style="left: 28%;"
@@ -481,12 +493,15 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 31%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive"
-                style="left: 55%; top: 37%; margin-top: 3px;"
+                style="left: 55%; top: 24%; margin-top: 3px;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -574,9 +589,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 25%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive action-end-point"
                 style="position: absolute; left: 80%;"
@@ -729,7 +747,38 @@ RespondToLeaveRefusedFinalJourneyMap {
             "_debugOwner": [Circular],
             "_debugSource": null,
             "alternate": null,
-            "child": null,
+            "child": FiberNode {
+              "_debugID": 15,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": [Circular],
+              "_debugSource": null,
+              "alternate": null,
+              "child": null,
+              "effectTag": 0,
+              "expirationTime": 0,
+              "firstEffect": null,
+              "index": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "className": "journey-trail-l1-l2 last-row",
+              },
+              "memoizedState": null,
+              "mode": 0,
+              "nextEffect": null,
+              "pendingProps": Object {
+                "className": "journey-trail-l1-l2 last-row",
+              },
+              "ref": null,
+              "return": [Circular],
+              "sibling": null,
+              "stateNode": <div
+                class="journey-trail-l1-l2 last-row"
+              />,
+              "tag": 5,
+              "type": "div",
+              "updateQueue": null,
+            },
             "effectTag": 0,
             "expirationTime": 0,
             "firstEffect": null,
@@ -737,7 +786,9 @@ RespondToLeaveRefusedFinalJourneyMap {
             "key": null,
             "lastEffect": null,
             "memoizedProps": Object {
-              "className": "journey-trail-l1-l2 last-row",
+              "children": <div
+                className="journey-trail-l1-l2 last-row"
+              />,
               "style": Object {
                 "width": "25%",
               },
@@ -746,7 +797,9 @@ RespondToLeaveRefusedFinalJourneyMap {
             "mode": 0,
             "nextEffect": null,
             "pendingProps": Object {
-              "className": "journey-trail-l1-l2 last-row",
+              "children": <div
+                className="journey-trail-l1-l2 last-row"
+              />,
               "style": Object {
                 "width": "25%",
               },
@@ -755,9 +808,12 @@ RespondToLeaveRefusedFinalJourneyMap {
             "return": [Circular],
             "sibling": null,
             "stateNode": <div
-              class="journey-trail-l1-l2 last-row"
               style="width: 25%;"
-            />,
+            >
+              <div
+                class="journey-trail-l1-l2 last-row"
+              />
+            </div>,
             "tag": 5,
             "type": "div",
             "updateQueue": null,
@@ -790,13 +846,13 @@ RespondToLeaveRefusedFinalJourneyMap {
             "_debugSource": null,
             "alternate": null,
             "child": FiberNode {
-              "_debugID": 15,
+              "_debugID": 16,
               "_debugIsCurrentlyTiming": false,
               "_debugOwner": [Circular],
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 16,
+                "_debugID": 17,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
@@ -836,7 +892,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                 "ref": null,
                 "return": [Circular],
                 "sibling": FiberNode {
-                  "_debugID": 17,
+                  "_debugID": 18,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -872,37 +928,37 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "ref": null,
                   "return": [Circular],
                   "sibling": FiberNode {
-                    "_debugID": 18,
+                    "_debugID": 19,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 20,
+                      "_debugID": 21,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 22,
+                        "_debugID": 23,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 23,
+                          "_debugID": 24,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 25,
+                            "_debugID": 26,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 27,
+                              "_debugID": 28,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -926,7 +982,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 28,
+                                "_debugID": 29,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1013,7 +1069,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                             "ref": null,
                             "return": [Circular],
                             "sibling": FiberNode {
-                              "_debugID": 26,
+                              "_debugID": 27,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -1126,19 +1182,19 @@ RespondToLeaveRefusedFinalJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 24,
+                            "_debugID": 25,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 29,
+                              "_debugID": 30,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 31,
+                                "_debugID": 32,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1162,7 +1218,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 32,
+                                  "_debugID": 33,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -1249,7 +1305,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 30,
+                                "_debugID": 31,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1676,7 +1732,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 21,
+                        "_debugID": 22,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
@@ -1919,19 +1975,19 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 19,
+                      "_debugID": 20,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 33,
+                        "_debugID": 34,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 34,
+                          "_debugID": 35,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -1957,7 +2013,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 35,
+                            "_debugID": 36,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -2530,12 +2586,43 @@ RespondToLeaveRefusedFinalJourneyMap {
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 36,
+                "_debugID": 37,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
-                "child": null,
+                "child": FiberNode {
+                  "_debugID": 38,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": [Circular],
+                  "_debugSource": null,
+                  "alternate": null,
+                  "child": null,
+                  "effectTag": 0,
+                  "expirationTime": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": Object {
+                    "className": "journey-trail-l1-l2 last-row",
+                  },
+                  "memoizedState": null,
+                  "mode": 0,
+                  "nextEffect": null,
+                  "pendingProps": Object {
+                    "className": "journey-trail-l1-l2 last-row",
+                  },
+                  "ref": null,
+                  "return": [Circular],
+                  "sibling": null,
+                  "stateNode": <div
+                    class="journey-trail-l1-l2 last-row"
+                  />,
+                  "tag": 5,
+                  "type": "div",
+                  "updateQueue": null,
+                },
                 "effectTag": 0,
                 "expirationTime": 0,
                 "firstEffect": null,
@@ -2543,7 +2630,9 @@ RespondToLeaveRefusedFinalJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
-                  "className": "journey-trail-l1-l2 last-row",
+                  "children": <div
+                    className="journey-trail-l1-l2 last-row"
+                  />,
                   "style": Object {
                     "width": "31%",
                   },
@@ -2552,7 +2641,9 @@ RespondToLeaveRefusedFinalJourneyMap {
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
-                  "className": "journey-trail-l1-l2 last-row",
+                  "children": <div
+                    className="journey-trail-l1-l2 last-row"
+                  />,
                   "style": Object {
                     "width": "31%",
                   },
@@ -2561,9 +2652,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                 "return": [Circular],
                 "sibling": null,
                 "stateNode": <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 31%;"
-                />,
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>,
                 "tag": 5,
                 "type": "div",
                 "updateQueue": null,
@@ -2596,13 +2690,13 @@ RespondToLeaveRefusedFinalJourneyMap {
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 37,
+                  "_debugID": 39,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 38,
+                    "_debugID": 40,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
@@ -2642,7 +2736,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 39,
+                      "_debugID": 41,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -2678,37 +2772,37 @@ RespondToLeaveRefusedFinalJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 40,
+                        "_debugID": 42,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 42,
+                          "_debugID": 44,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 43,
+                            "_debugID": 45,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 44,
+                              "_debugID": 46,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 47,
+                                "_debugID": 49,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 48,
+                                  "_debugID": 50,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -2732,7 +2826,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 49,
+                                    "_debugID": 51,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -2898,13 +2992,13 @@ RespondToLeaveRefusedFinalJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 45,
+                                "_debugID": 47,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 50,
+                                  "_debugID": 52,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -2934,7 +3028,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 51,
+                                    "_debugID": 53,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -2964,7 +3058,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 52,
+                                      "_debugID": 54,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -3088,25 +3182,25 @@ RespondToLeaveRefusedFinalJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 46,
+                                  "_debugID": 48,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 53,
+                                    "_debugID": 55,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 54,
+                                      "_debugID": 56,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 56,
+                                        "_debugID": 58,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -3136,7 +3230,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 57,
+                                          "_debugID": 59,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -3166,7 +3260,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 58,
+                                            "_debugID": 60,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -3288,7 +3382,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 55,
+                                        "_debugID": 57,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -4376,13 +4470,13 @@ RespondToLeaveRefusedFinalJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 41,
+                          "_debugID": 43,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 59,
+                            "_debugID": 61,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -4730,7 +4824,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "style": Object {
                       "left": "55%",
                       "marginTop": "3px",
-                      "top": "37%",
+                      "top": "24%",
                     },
                   },
                   "memoizedState": null,
@@ -4883,7 +4977,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "style": Object {
                       "left": "55%",
                       "marginTop": "3px",
-                      "top": "37%",
+                      "top": "24%",
                     },
                   },
                   "ref": null,
@@ -4891,7 +4985,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "sibling": null,
                   "stateNode": <div
                     class="journey-box inactive"
-                    style="left: 55%; top: 37%; margin-top: 3px;"
+                    style="left: 55%; top: 24%; margin-top: 3px;"
                   >
                     <span
                       style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -4993,7 +5087,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "55%",
-                    "top": "37%",
+                    "top": "24%",
                   },
                 },
                 "memoizedState": null,
@@ -5004,7 +5098,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "55%",
-                    "top": "37%",
+                    "top": "24%",
                   },
                 },
                 "ref": null,
@@ -5016,12 +5110,43 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 60,
+                    "_debugID": 62,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
-                    "child": null,
+                    "child": FiberNode {
+                      "_debugID": 63,
+                      "_debugIsCurrentlyTiming": false,
+                      "_debugOwner": [Circular],
+                      "_debugSource": null,
+                      "alternate": null,
+                      "child": null,
+                      "effectTag": 0,
+                      "expirationTime": 0,
+                      "firstEffect": null,
+                      "index": 0,
+                      "key": null,
+                      "lastEffect": null,
+                      "memoizedProps": Object {
+                        "className": "journey-trail-l1-l2 last-row",
+                      },
+                      "memoizedState": null,
+                      "mode": 0,
+                      "nextEffect": null,
+                      "pendingProps": Object {
+                        "className": "journey-trail-l1-l2 last-row",
+                      },
+                      "ref": null,
+                      "return": [Circular],
+                      "sibling": null,
+                      "stateNode": <div
+                        class="journey-trail-l1-l2 last-row"
+                      />,
+                      "tag": 5,
+                      "type": "div",
+                      "updateQueue": null,
+                    },
                     "effectTag": 0,
                     "expirationTime": 0,
                     "firstEffect": null,
@@ -5029,7 +5154,9 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
-                      "className": "journey-trail-l1-l2 last-row",
+                      "children": <div
+                        className="journey-trail-l1-l2 last-row"
+                      />,
                       "style": Object {
                         "width": "25%",
                       },
@@ -5038,7 +5165,9 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
-                      "className": "journey-trail-l1-l2 last-row",
+                      "children": <div
+                        className="journey-trail-l1-l2 last-row"
+                      />,
                       "style": Object {
                         "width": "25%",
                       },
@@ -5047,9 +5176,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "return": [Circular],
                     "sibling": null,
                     "stateNode": <div
-                      class="journey-trail-l1-l2 last-row"
                       style="width: 25%;"
-                    />,
+                    >
+                      <div
+                        class="journey-trail-l1-l2 last-row"
+                      />
+                    </div>,
                     "tag": 5,
                     "type": "div",
                     "updateQueue": null,
@@ -5082,19 +5214,19 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 61,
+                      "_debugID": 64,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 62,
+                        "_debugID": 65,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 64,
+                          "_debugID": 67,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5154,7 +5286,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 63,
+                          "_debugID": 66,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5413,7 +5545,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "stepTitle": "The Hearing",
                     "style": Object {
                       "left": "55%",
-                      "top": "37%",
+                      "top": "24%",
                     },
                   },
                   "refs": Object {},
@@ -5544,7 +5676,7 @@ RespondToLeaveRefusedFinalJourneyMap {
             style={
               Object {
                 "left": "55%",
-                "top": "37%",
+                "top": "24%",
               }
             }
           />,
@@ -5609,7 +5741,7 @@ RespondToLeaveRefusedFinalJourneyMap {
             style={
               Object {
                 "left": "55%",
-                "top": "37%",
+                "top": "24%",
               }
             }
           />,
@@ -5649,9 +5781,12 @@ RespondToLeaveRefusedFinalJourneyMap {
           class="journey-start-circle"
         />
         <div
-          class="journey-trail-l1-l2 last-row"
           style="width: 25%;"
-        />
+        >
+          <div
+            class="journey-trail-l1-l2 last-row"
+          />
+        </div>
         <div
           class="journey-box inactive"
           style="left: 28%;"
@@ -5724,12 +5859,15 @@ RespondToLeaveRefusedFinalJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2 last-row"
           style="width: 31%;"
-        />
+        >
+          <div
+            class="journey-trail-l1-l2 last-row"
+          />
+        </div>
         <div
           class="journey-box inactive"
-          style="left: 55%; top: 37%; margin-top: 3px;"
+          style="left: 55%; top: 24%; margin-top: 3px;"
         >
           <span
             style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -5817,9 +5955,12 @@ RespondToLeaveRefusedFinalJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2 last-row"
           style="width: 25%;"
-        />
+        >
+          <div
+            class="journey-trail-l1-l2 last-row"
+          />
+        </div>
         <div
           class="journey-box inactive action-end-point"
           style="position: absolute; left: 80%;"
@@ -5967,9 +6108,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 25%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive"
                   style="left: 28%;"
@@ -6042,12 +6186,15 @@ RespondToLeaveRefusedFinalJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 31%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 55%; top: 37%; margin-top: 3px;"
+                  style="left: 55%; top: 24%; margin-top: 3px;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -6135,9 +6282,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2 last-row"
                   style="width: 25%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box inactive action-end-point"
                   style="position: absolute; left: 80%;"
@@ -6275,9 +6425,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 25%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive"
                 style="left: 28%;"
@@ -6350,12 +6503,15 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 31%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive"
-                style="left: 55%; top: 37%; margin-top: 3px;"
+                style="left: 55%; top: 24%; margin-top: 3px;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -6443,9 +6599,12 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2 last-row"
                 style="width: 25%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2 last-row"
+                />
+              </div>
               <div
                 class="journey-box inactive action-end-point"
                 style="position: absolute; left: 80%;"

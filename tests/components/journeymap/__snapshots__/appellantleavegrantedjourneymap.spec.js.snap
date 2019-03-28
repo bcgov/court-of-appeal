@@ -98,9 +98,12 @@ AppellantLeaveGrantedJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 18%;"
-                />
+                  style="width: 15%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 20%;"
@@ -181,12 +184,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 27%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 45%;"
+                  style="left: 41%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -264,12 +270,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 70%; margin-top: 5px;"
+                  style="left: 62%; margin-top: 5px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -334,9 +343,12 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
                   style="width: 5%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-right-curve"
                 />
@@ -344,12 +356,15 @@ AppellantLeaveGrantedJourneyMap {
                   class="journey-left-curve"
                 />
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 17%;"
-                />
+                  style="width: 10%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 18%;"
+                  style="top: 55%; left: 18%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -433,12 +448,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 41%; margin-top: 3px;"
+                  style="top: 55%; left: 41%; margin-top: 3px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -534,12 +552,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 64%;"
+                  style="top: 55%; left: 64%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -628,12 +649,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
                   style="width: 18%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="action-end-point journey-end-circle any-icon"
-                  style="top: 68%; left: 83%;"
+                  style="top: 55%; left: 83%;"
                 >
                   <div
                     class="oi oi-check journey-final-check"
@@ -766,9 +790,12 @@ AppellantLeaveGrantedJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2"
-                style="width: 18%;"
-              />
+                style="width: 15%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 20%;"
@@ -849,12 +876,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 27%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 45%;"
+                style="left: 41%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -932,12 +962,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 70%; margin-top: 5px;"
+                style="left: 62%; margin-top: 5px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1002,9 +1035,12 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
                 style="width: 5%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-right-curve"
               />
@@ -1012,12 +1048,15 @@ AppellantLeaveGrantedJourneyMap {
                 class="journey-left-curve"
               />
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 17%;"
-              />
+                style="width: 10%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 18%;"
+                style="top: 55%; left: 18%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1101,12 +1140,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 41%; margin-top: 3px;"
+                style="top: 55%; left: 41%; margin-top: 3px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1202,12 +1244,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 64%;"
+                style="top: 55%; left: 64%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1296,12 +1341,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
                 style="width: 18%;"
-              />
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="action-end-point journey-end-circle any-icon"
-                style="top: 68%; left: 83%;"
+                style="top: 55%; left: 83%;"
               >
                 <div
                   class="oi oi-check journey-final-check"
@@ -1449,7 +1497,38 @@ AppellantLeaveGrantedJourneyMap {
             "_debugOwner": [Circular],
             "_debugSource": null,
             "alternate": null,
-            "child": null,
+            "child": FiberNode {
+              "_debugID": 26,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": [Circular],
+              "_debugSource": null,
+              "alternate": null,
+              "child": null,
+              "effectTag": 0,
+              "expirationTime": 0,
+              "firstEffect": null,
+              "index": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "className": "journey-trail-l1-l2",
+              },
+              "memoizedState": null,
+              "mode": 0,
+              "nextEffect": null,
+              "pendingProps": Object {
+                "className": "journey-trail-l1-l2",
+              },
+              "ref": null,
+              "return": [Circular],
+              "sibling": null,
+              "stateNode": <div
+                class="journey-trail-l1-l2"
+              />,
+              "tag": 5,
+              "type": "div",
+              "updateQueue": null,
+            },
             "effectTag": 0,
             "expirationTime": 0,
             "firstEffect": null,
@@ -1457,27 +1536,34 @@ AppellantLeaveGrantedJourneyMap {
             "key": null,
             "lastEffect": null,
             "memoizedProps": Object {
-              "className": "journey-trail-l1-l2",
+              "children": <div
+                className="journey-trail-l1-l2"
+              />,
               "style": Object {
-                "width": "18%",
+                "width": "15%",
               },
             },
             "memoizedState": null,
             "mode": 0,
             "nextEffect": null,
             "pendingProps": Object {
-              "className": "journey-trail-l1-l2",
+              "children": <div
+                className="journey-trail-l1-l2"
+              />,
               "style": Object {
-                "width": "18%",
+                "width": "15%",
               },
             },
             "ref": null,
             "return": [Circular],
             "sibling": null,
             "stateNode": <div
-              class="journey-trail-l1-l2"
-              style="width: 18%;"
-            />,
+              style="width: 15%;"
+            >
+              <div
+                class="journey-trail-l1-l2"
+              />
+            </div>,
             "tag": 5,
             "type": "div",
             "updateQueue": null,
@@ -1493,7 +1579,7 @@ AppellantLeaveGrantedJourneyMap {
             "completed": false,
             "level": 1,
             "lineCompleted": false,
-            "width": "18%",
+            "width": "15%",
           },
           "memoizedState": null,
           "mode": 0,
@@ -1503,7 +1589,7 @@ AppellantLeaveGrantedJourneyMap {
             "completed": false,
             "level": 1,
             "lineCompleted": false,
-            "width": "18%",
+            "width": "15%",
           },
           "ref": null,
           "return": [Circular],
@@ -1514,19 +1600,19 @@ AppellantLeaveGrantedJourneyMap {
             "_debugSource": null,
             "alternate": null,
             "child": FiberNode {
-              "_debugID": 26,
+              "_debugID": 27,
               "_debugIsCurrentlyTiming": false,
               "_debugOwner": [Circular],
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 27,
+                "_debugID": 28,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 31,
+                  "_debugID": 32,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -1612,7 +1698,7 @@ AppellantLeaveGrantedJourneyMap {
                 "ref": null,
                 "return": [Circular],
                 "sibling": FiberNode {
-                  "_debugID": 28,
+                  "_debugID": 29,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -1648,37 +1734,37 @@ AppellantLeaveGrantedJourneyMap {
                   "ref": null,
                   "return": [Circular],
                   "sibling": FiberNode {
-                    "_debugID": 29,
+                    "_debugID": 30,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 32,
+                      "_debugID": 33,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 34,
+                        "_debugID": 35,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 35,
+                          "_debugID": 36,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 37,
+                            "_debugID": 38,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 39,
+                              "_debugID": 40,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -1702,7 +1788,7 @@ AppellantLeaveGrantedJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 40,
+                                "_debugID": 41,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1789,7 +1875,7 @@ AppellantLeaveGrantedJourneyMap {
                             "ref": null,
                             "return": [Circular],
                             "sibling": FiberNode {
-                              "_debugID": 38,
+                              "_debugID": 39,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -1902,19 +1988,19 @@ AppellantLeaveGrantedJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 36,
+                            "_debugID": 37,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 41,
+                              "_debugID": 42,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 43,
+                                "_debugID": 44,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1938,7 +2024,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 44,
+                                  "_debugID": 45,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -2025,7 +2111,7 @@ AppellantLeaveGrantedJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 42,
+                                "_debugID": 43,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -2452,7 +2538,7 @@ AppellantLeaveGrantedJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 33,
+                        "_debugID": 34,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
@@ -2695,19 +2781,19 @@ AppellantLeaveGrantedJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 30,
+                      "_debugID": 31,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 45,
+                        "_debugID": 46,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 46,
+                          "_debugID": 47,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -2733,7 +2819,7 @@ AppellantLeaveGrantedJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 47,
+                            "_debugID": 48,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -3334,12 +3420,43 @@ AppellantLeaveGrantedJourneyMap {
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 48,
+                "_debugID": 49,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
-                "child": null,
+                "child": FiberNode {
+                  "_debugID": 50,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": [Circular],
+                  "_debugSource": null,
+                  "alternate": null,
+                  "child": null,
+                  "effectTag": 0,
+                  "expirationTime": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": Object {
+                    "className": "journey-trail-l1-l2",
+                  },
+                  "memoizedState": null,
+                  "mode": 0,
+                  "nextEffect": null,
+                  "pendingProps": Object {
+                    "className": "journey-trail-l1-l2",
+                  },
+                  "ref": null,
+                  "return": [Circular],
+                  "sibling": null,
+                  "stateNode": <div
+                    class="journey-trail-l1-l2"
+                  />,
+                  "tag": 5,
+                  "type": "div",
+                  "updateQueue": null,
+                },
                 "effectTag": 0,
                 "expirationTime": 0,
                 "firstEffect": null,
@@ -3347,27 +3464,34 @@ AppellantLeaveGrantedJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
-                  "className": "journey-trail-l1-l2",
+                  "children": <div
+                    className="journey-trail-l1-l2"
+                  />,
                   "style": Object {
-                    "width": "27%",
+                    "width": "22%",
                   },
                 },
                 "memoizedState": null,
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
-                  "className": "journey-trail-l1-l2",
+                  "children": <div
+                    className="journey-trail-l1-l2"
+                  />,
                   "style": Object {
-                    "width": "27%",
+                    "width": "22%",
                   },
                 },
                 "ref": null,
                 "return": [Circular],
                 "sibling": null,
                 "stateNode": <div
-                  class="journey-trail-l1-l2"
-                  style="width: 27%;"
-                />,
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>,
                 "tag": 5,
                 "type": "div",
                 "updateQueue": null,
@@ -3383,7 +3507,7 @@ AppellantLeaveGrantedJourneyMap {
                 "completed": false,
                 "level": 1,
                 "lineCompleted": false,
-                "width": "27%",
+                "width": "22%",
               },
               "memoizedState": null,
               "mode": 0,
@@ -3393,7 +3517,7 @@ AppellantLeaveGrantedJourneyMap {
                 "completed": false,
                 "level": 1,
                 "lineCompleted": false,
-                "width": "27%",
+                "width": "22%",
               },
               "ref": null,
               "return": [Circular],
@@ -3404,19 +3528,19 @@ AppellantLeaveGrantedJourneyMap {
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 49,
+                  "_debugID": 51,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 50,
+                    "_debugID": 52,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 54,
+                      "_debugID": 56,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -3502,7 +3626,7 @@ AppellantLeaveGrantedJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 51,
+                      "_debugID": 53,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -3538,37 +3662,37 @@ AppellantLeaveGrantedJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 52,
+                        "_debugID": 54,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 55,
+                          "_debugID": 57,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 57,
+                            "_debugID": 59,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 58,
+                              "_debugID": 60,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 60,
+                                "_debugID": 62,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 62,
+                                  "_debugID": 64,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -3592,7 +3716,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 63,
+                                    "_debugID": 65,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3679,7 +3803,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 61,
+                                  "_debugID": 63,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -3792,19 +3916,19 @@ AppellantLeaveGrantedJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 59,
+                                "_debugID": 61,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 64,
+                                  "_debugID": 66,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 66,
+                                    "_debugID": 68,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3828,7 +3952,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 67,
+                                      "_debugID": 69,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -3915,7 +4039,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 65,
+                                    "_debugID": 67,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -4342,7 +4466,7 @@ AppellantLeaveGrantedJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 56,
+                            "_debugID": 58,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -4585,19 +4709,19 @@ AppellantLeaveGrantedJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 53,
+                          "_debugID": 55,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 68,
+                            "_debugID": 70,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 69,
+                              "_debugID": 71,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -4623,7 +4747,7 @@ AppellantLeaveGrantedJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 70,
+                                "_debugID": 72,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -4968,7 +5092,7 @@ AppellantLeaveGrantedJourneyMap {
                     ],
                     "className": "journey-box",
                     "style": Object {
-                      "left": "45%",
+                      "left": "41%",
                     },
                   },
                   "memoizedState": null,
@@ -5089,7 +5213,7 @@ AppellantLeaveGrantedJourneyMap {
                     ],
                     "className": "journey-box",
                     "style": Object {
-                      "left": "45%",
+                      "left": "41%",
                     },
                   },
                   "ref": null,
@@ -5097,7 +5221,7 @@ AppellantLeaveGrantedJourneyMap {
                   "sibling": null,
                   "stateNode": <div
                     class="journey-box"
-                    style="left: 45%;"
+                    style="left: 41%;"
                   >
                     <input
                       class="checkbox-glow checkbox-toggle"
@@ -5194,7 +5318,7 @@ AppellantLeaveGrantedJourneyMap {
                   "stepTitle": "Factum, Appeal Book and Certificate of Readiness",
                   "stepTitleClass": "step-title-wide",
                   "style": Object {
-                    "left": "45%",
+                    "left": "41%",
                   },
                   "twoPages": true,
                 },
@@ -5211,7 +5335,7 @@ AppellantLeaveGrantedJourneyMap {
                   "stepTitle": "Factum, Appeal Book and Certificate of Readiness",
                   "stepTitleClass": "step-title-wide",
                   "style": Object {
-                    "left": "45%",
+                    "left": "41%",
                   },
                   "twoPages": true,
                 },
@@ -5224,12 +5348,43 @@ AppellantLeaveGrantedJourneyMap {
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 71,
+                    "_debugID": 73,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
-                    "child": null,
+                    "child": FiberNode {
+                      "_debugID": 74,
+                      "_debugIsCurrentlyTiming": false,
+                      "_debugOwner": [Circular],
+                      "_debugSource": null,
+                      "alternate": null,
+                      "child": null,
+                      "effectTag": 0,
+                      "expirationTime": 0,
+                      "firstEffect": null,
+                      "index": 0,
+                      "key": null,
+                      "lastEffect": null,
+                      "memoizedProps": Object {
+                        "className": "journey-trail-l1-l2",
+                      },
+                      "memoizedState": null,
+                      "mode": 0,
+                      "nextEffect": null,
+                      "pendingProps": Object {
+                        "className": "journey-trail-l1-l2",
+                      },
+                      "ref": null,
+                      "return": [Circular],
+                      "sibling": null,
+                      "stateNode": <div
+                        class="journey-trail-l1-l2"
+                      />,
+                      "tag": 5,
+                      "type": "div",
+                      "updateQueue": null,
+                    },
                     "effectTag": 0,
                     "expirationTime": 0,
                     "firstEffect": null,
@@ -5237,27 +5392,34 @@ AppellantLeaveGrantedJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
-                      "className": "journey-trail-l1-l2",
+                      "children": <div
+                        className="journey-trail-l1-l2"
+                      />,
                       "style": Object {
-                        "width": "27%",
+                        "width": "23%",
                       },
                     },
                     "memoizedState": null,
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
-                      "className": "journey-trail-l1-l2",
+                      "children": <div
+                        className="journey-trail-l1-l2"
+                      />,
                       "style": Object {
-                        "width": "27%",
+                        "width": "23%",
                       },
                     },
                     "ref": null,
                     "return": [Circular],
                     "sibling": null,
                     "stateNode": <div
-                      class="journey-trail-l1-l2"
-                      style="width: 27%;"
-                    />,
+                      style="width: 23%;"
+                    >
+                      <div
+                        class="journey-trail-l1-l2"
+                      />
+                    </div>,
                     "tag": 5,
                     "type": "div",
                     "updateQueue": null,
@@ -5273,7 +5435,7 @@ AppellantLeaveGrantedJourneyMap {
                     "completed": false,
                     "level": 1,
                     "lineCompleted": false,
-                    "width": "27%",
+                    "width": "23%",
                   },
                   "memoizedState": null,
                   "mode": 0,
@@ -5283,7 +5445,7 @@ AppellantLeaveGrantedJourneyMap {
                     "completed": false,
                     "level": 1,
                     "lineCompleted": false,
-                    "width": "27%",
+                    "width": "23%",
                   },
                   "ref": null,
                   "return": [Circular],
@@ -5294,19 +5456,19 @@ AppellantLeaveGrantedJourneyMap {
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 72,
+                      "_debugID": 75,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 73,
+                        "_debugID": 76,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 77,
+                          "_debugID": 80,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5392,7 +5554,7 @@ AppellantLeaveGrantedJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 74,
+                          "_debugID": 77,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5424,37 +5586,37 @@ AppellantLeaveGrantedJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 75,
+                            "_debugID": 78,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 78,
+                              "_debugID": 81,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 79,
+                                "_debugID": 82,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 80,
+                                  "_debugID": 83,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 82,
+                                    "_debugID": 85,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 83,
+                                      "_debugID": 86,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -5478,7 +5640,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 84,
+                                        "_debugID": 87,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -5644,13 +5806,13 @@ AppellantLeaveGrantedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 81,
+                                    "_debugID": 84,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 85,
+                                      "_debugID": 88,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -6136,13 +6298,13 @@ AppellantLeaveGrantedJourneyMap {
                             "ref": null,
                             "return": [Circular],
                             "sibling": FiberNode {
-                              "_debugID": 76,
+                              "_debugID": 79,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 86,
+                                "_debugID": 89,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -6396,7 +6558,7 @@ AppellantLeaveGrantedJourneyMap {
                         ],
                         "className": "journey-box",
                         "style": Object {
-                          "left": "70%",
+                          "left": "62%",
                           "marginTop": "5px",
                         },
                       },
@@ -6491,7 +6653,7 @@ AppellantLeaveGrantedJourneyMap {
                         ],
                         "className": "journey-box",
                         "style": Object {
-                          "left": "70%",
+                          "left": "62%",
                           "marginTop": "5px",
                         },
                       },
@@ -6500,7 +6662,7 @@ AppellantLeaveGrantedJourneyMap {
                       "sibling": null,
                       "stateNode": <div
                         class="journey-box"
-                        style="left: 70%; margin-top: 5px;"
+                        style="left: 62%; margin-top: 5px;"
                       >
                         <input
                           class="checkbox-glow checkbox-toggle"
@@ -6584,7 +6746,7 @@ AppellantLeaveGrantedJourneyMap {
                       "stepTitle": "Book Appeal Date with Registry",
                       "stepTitleClass": "step-title-wide",
                       "style": Object {
-                        "left": "70%",
+                        "left": "62%",
                         "marginTop": "5px",
                       },
                     },
@@ -6601,7 +6763,7 @@ AppellantLeaveGrantedJourneyMap {
                       "stepTitle": "Book Appeal Date with Registry",
                       "stepTitleClass": "step-title-wide",
                       "style": Object {
-                        "left": "70%",
+                        "left": "62%",
                         "marginTop": "5px",
                       },
                     },
@@ -6614,12 +6776,43 @@ AppellantLeaveGrantedJourneyMap {
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 87,
+                        "_debugID": 90,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
-                        "child": null,
+                        "child": FiberNode {
+                          "_debugID": 91,
+                          "_debugIsCurrentlyTiming": false,
+                          "_debugOwner": [Circular],
+                          "_debugSource": null,
+                          "alternate": null,
+                          "child": null,
+                          "effectTag": 0,
+                          "expirationTime": 0,
+                          "firstEffect": null,
+                          "index": 0,
+                          "key": null,
+                          "lastEffect": null,
+                          "memoizedProps": Object {
+                            "className": "journey-trail-l1-l2",
+                          },
+                          "memoizedState": null,
+                          "mode": 0,
+                          "nextEffect": null,
+                          "pendingProps": Object {
+                            "className": "journey-trail-l1-l2",
+                          },
+                          "ref": null,
+                          "return": [Circular],
+                          "sibling": null,
+                          "stateNode": <div
+                            class="journey-trail-l1-l2"
+                          />,
+                          "tag": 5,
+                          "type": "div",
+                          "updateQueue": null,
+                        },
                         "effectTag": 0,
                         "expirationTime": 0,
                         "firstEffect": null,
@@ -6627,7 +6820,9 @@ AppellantLeaveGrantedJourneyMap {
                         "key": null,
                         "lastEffect": null,
                         "memoizedProps": Object {
-                          "className": "journey-trail-l1-l2",
+                          "children": <div
+                            className="journey-trail-l1-l2"
+                          />,
                           "style": Object {
                             "width": "5%",
                           },
@@ -6636,7 +6831,9 @@ AppellantLeaveGrantedJourneyMap {
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
-                          "className": "journey-trail-l1-l2",
+                          "children": <div
+                            className="journey-trail-l1-l2"
+                          />,
                           "style": Object {
                             "width": "5%",
                           },
@@ -6645,9 +6842,12 @@ AppellantLeaveGrantedJourneyMap {
                         "return": [Circular],
                         "sibling": null,
                         "stateNode": <div
-                          class="journey-trail-l1-l2"
                           style="width: 5%;"
-                        />,
+                        >
+                          <div
+                            class="journey-trail-l1-l2"
+                          />
+                        </div>,
                         "tag": 5,
                         "type": "div",
                         "updateQueue": null,
@@ -6732,12 +6932,43 @@ AppellantLeaveGrantedJourneyMap {
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 88,
+                              "_debugID": 92,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
-                              "child": null,
+                              "child": FiberNode {
+                                "_debugID": 93,
+                                "_debugIsCurrentlyTiming": false,
+                                "_debugOwner": [Circular],
+                                "_debugSource": null,
+                                "alternate": null,
+                                "child": null,
+                                "effectTag": 0,
+                                "expirationTime": 0,
+                                "firstEffect": null,
+                                "index": 0,
+                                "key": null,
+                                "lastEffect": null,
+                                "memoizedProps": Object {
+                                  "className": "journey-trail-l2-l3 last-row",
+                                },
+                                "memoizedState": null,
+                                "mode": 0,
+                                "nextEffect": null,
+                                "pendingProps": Object {
+                                  "className": "journey-trail-l2-l3 last-row",
+                                },
+                                "ref": null,
+                                "return": [Circular],
+                                "sibling": null,
+                                "stateNode": <div
+                                  class="journey-trail-l2-l3 last-row"
+                                />,
+                                "tag": 5,
+                                "type": "div",
+                                "updateQueue": null,
+                              },
                               "effectTag": 0,
                               "expirationTime": 0,
                               "firstEffect": null,
@@ -6745,27 +6976,34 @@ AppellantLeaveGrantedJourneyMap {
                               "key": null,
                               "lastEffect": null,
                               "memoizedProps": Object {
-                                "className": "journey-trail-l2-l3 last-row",
+                                "children": <div
+                                  className="journey-trail-l2-l3 last-row"
+                                />,
                                 "style": Object {
-                                  "width": "17%",
+                                  "width": "10%",
                                 },
                               },
                               "memoizedState": null,
                               "mode": 0,
                               "nextEffect": null,
                               "pendingProps": Object {
-                                "className": "journey-trail-l2-l3 last-row",
+                                "children": <div
+                                  className="journey-trail-l2-l3 last-row"
+                                />,
                                 "style": Object {
-                                  "width": "17%",
+                                  "width": "10%",
                                 },
                               },
                               "ref": null,
                               "return": [Circular],
                               "sibling": null,
                               "stateNode": <div
-                                class="journey-trail-l2-l3 last-row"
-                                style="width: 17%;"
-                              />,
+                                style="width: 10%;"
+                              >
+                                <div
+                                  class="journey-trail-l2-l3 last-row"
+                                />
+                              </div>,
                               "tag": 5,
                               "type": "div",
                               "updateQueue": null,
@@ -6780,7 +7018,7 @@ AppellantLeaveGrantedJourneyMap {
                               "className": "journey-trail-l2-l3 last-row",
                               "completed": false,
                               "level": 2,
-                              "width": "17%",
+                              "width": "10%",
                             },
                             "memoizedState": null,
                             "mode": 0,
@@ -6789,7 +7027,7 @@ AppellantLeaveGrantedJourneyMap {
                               "className": "journey-trail-l2-l3 last-row",
                               "completed": false,
                               "level": 2,
-                              "width": "17%",
+                              "width": "10%",
                             },
                             "ref": null,
                             "return": [Circular],
@@ -6800,19 +7038,19 @@ AppellantLeaveGrantedJourneyMap {
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 89,
+                                "_debugID": 94,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 90,
+                                  "_debugID": 95,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 94,
+                                    "_debugID": 99,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -6898,7 +7136,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 91,
+                                    "_debugID": 96,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -6934,25 +7172,25 @@ AppellantLeaveGrantedJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 92,
+                                      "_debugID": 97,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 95,
+                                        "_debugID": 100,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 97,
+                                          "_debugID": 102,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 99,
+                                            "_debugID": 104,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -6982,7 +7220,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 100,
+                                              "_debugID": 105,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -7012,7 +7250,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 101,
+                                                "_debugID": 106,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -7136,25 +7374,25 @@ AppellantLeaveGrantedJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 98,
+                                            "_debugID": 103,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 102,
+                                              "_debugID": 107,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 105,
+                                                "_debugID": 110,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 106,
+                                                  "_debugID": 111,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -7242,19 +7480,19 @@ AppellantLeaveGrantedJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 103,
+                                                "_debugID": 108,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 107,
+                                                  "_debugID": 112,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 108,
+                                                    "_debugID": 113,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -7342,7 +7580,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 104,
+                                                  "_debugID": 109,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -7674,7 +7912,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 96,
+                                          "_debugID": 101,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -7925,19 +8163,19 @@ AppellantLeaveGrantedJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 93,
+                                        "_debugID": 98,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 109,
+                                          "_debugID": 114,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 110,
+                                            "_debugID": 115,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -7963,7 +8201,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 111,
+                                              "_debugID": 116,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -8318,7 +8556,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "className": "journey-box",
                                   "style": Object {
                                     "left": "18%",
-                                    "top": "68%",
+                                    "top": "55%",
                                   },
                                 },
                                 "memoizedState": null,
@@ -8443,7 +8681,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "className": "journey-box",
                                   "style": Object {
                                     "left": "18%",
-                                    "top": "68%",
+                                    "top": "55%",
                                   },
                                 },
                                 "ref": null,
@@ -8451,7 +8689,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "sibling": null,
                                 "stateNode": <div
                                   class="journey-box"
-                                  style="top: 68%; left: 18%;"
+                                  style="top: 55%; left: 18%;"
                                 >
                                   <input
                                     class="checkbox-glow checkbox-toggle"
@@ -8554,7 +8792,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "stepTitle": "Notice of Hearing",
                                 "style": Object {
                                   "left": "18%",
-                                  "top": "68%",
+                                  "top": "55%",
                                 },
                                 "twoPages": false,
                               },
@@ -8571,7 +8809,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "stepTitle": "Notice of Hearing",
                                 "style": Object {
                                   "left": "18%",
-                                  "top": "68%",
+                                  "top": "55%",
                                 },
                                 "twoPages": false,
                               },
@@ -8584,12 +8822,43 @@ AppellantLeaveGrantedJourneyMap {
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 112,
+                                  "_debugID": 117,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
-                                  "child": null,
+                                  "child": FiberNode {
+                                    "_debugID": 118,
+                                    "_debugIsCurrentlyTiming": false,
+                                    "_debugOwner": [Circular],
+                                    "_debugSource": null,
+                                    "alternate": null,
+                                    "child": null,
+                                    "effectTag": 0,
+                                    "expirationTime": 0,
+                                    "firstEffect": null,
+                                    "index": 0,
+                                    "key": null,
+                                    "lastEffect": null,
+                                    "memoizedProps": Object {
+                                      "className": "journey-trail-l2-l3 last-row",
+                                    },
+                                    "memoizedState": null,
+                                    "mode": 0,
+                                    "nextEffect": null,
+                                    "pendingProps": Object {
+                                      "className": "journey-trail-l2-l3 last-row",
+                                    },
+                                    "ref": null,
+                                    "return": [Circular],
+                                    "sibling": null,
+                                    "stateNode": <div
+                                      class="journey-trail-l2-l3 last-row"
+                                    />,
+                                    "tag": 5,
+                                    "type": "div",
+                                    "updateQueue": null,
+                                  },
                                   "effectTag": 0,
                                   "expirationTime": 0,
                                   "firstEffect": null,
@@ -8597,27 +8866,34 @@ AppellantLeaveGrantedJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
-                                    "className": "journey-trail-l2-l3 last-row",
+                                    "children": <div
+                                      className="journey-trail-l2-l3 last-row"
+                                    />,
                                     "style": Object {
-                                      "width": "27%",
+                                      "width": "23%",
                                     },
                                   },
                                   "memoizedState": null,
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
-                                    "className": "journey-trail-l2-l3 last-row",
+                                    "children": <div
+                                      className="journey-trail-l2-l3 last-row"
+                                    />,
                                     "style": Object {
-                                      "width": "27%",
+                                      "width": "23%",
                                     },
                                   },
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": null,
                                   "stateNode": <div
-                                    class="journey-trail-l2-l3 last-row"
-                                    style="width: 27%;"
-                                  />,
+                                    style="width: 23%;"
+                                  >
+                                    <div
+                                      class="journey-trail-l2-l3 last-row"
+                                    />
+                                  </div>,
                                   "tag": 5,
                                   "type": "div",
                                   "updateQueue": null,
@@ -8632,7 +8908,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "className": "journey-trail-l2-l3 last-row",
                                   "completed": false,
                                   "level": 2,
-                                  "width": "27%",
+                                  "width": "23%",
                                 },
                                 "memoizedState": null,
                                 "mode": 0,
@@ -8641,7 +8917,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "className": "journey-trail-l2-l3 last-row",
                                   "completed": false,
                                   "level": 2,
-                                  "width": "27%",
+                                  "width": "23%",
                                 },
                                 "ref": null,
                                 "return": [Circular],
@@ -8652,19 +8928,19 @@ AppellantLeaveGrantedJourneyMap {
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 113,
+                                    "_debugID": 119,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 114,
+                                      "_debugID": 120,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 118,
+                                        "_debugID": 124,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -8750,7 +9026,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 115,
+                                        "_debugID": 121,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -8786,37 +9062,37 @@ AppellantLeaveGrantedJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 116,
+                                          "_debugID": 122,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 119,
+                                            "_debugID": 125,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 120,
+                                              "_debugID": 126,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 121,
+                                                "_debugID": 127,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 124,
+                                                  "_debugID": 130,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 125,
+                                                    "_debugID": 131,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -8840,7 +9116,7 @@ AppellantLeaveGrantedJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 126,
+                                                      "_debugID": 132,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -9006,13 +9282,13 @@ AppellantLeaveGrantedJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 122,
+                                                  "_debugID": 128,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 127,
+                                                    "_debugID": 133,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -9042,7 +9318,7 @@ AppellantLeaveGrantedJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 128,
+                                                      "_debugID": 134,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -9072,7 +9348,7 @@ AppellantLeaveGrantedJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 129,
+                                                        "_debugID": 135,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -9196,25 +9472,25 @@ AppellantLeaveGrantedJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 123,
+                                                    "_debugID": 129,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 130,
+                                                      "_debugID": 136,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 131,
+                                                        "_debugID": 137,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
                                                         "alternate": null,
                                                         "child": FiberNode {
-                                                          "_debugID": 133,
+                                                          "_debugID": 139,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
@@ -9244,7 +9520,7 @@ AppellantLeaveGrantedJourneyMap {
                                                           "ref": null,
                                                           "return": [Circular],
                                                           "sibling": FiberNode {
-                                                            "_debugID": 134,
+                                                            "_debugID": 140,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
@@ -9274,7 +9550,7 @@ AppellantLeaveGrantedJourneyMap {
                                                             "ref": null,
                                                             "return": [Circular],
                                                             "sibling": FiberNode {
-                                                              "_debugID": 135,
+                                                              "_debugID": 141,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
@@ -9396,7 +9672,7 @@ AppellantLeaveGrantedJourneyMap {
                                                         "ref": null,
                                                         "return": [Circular],
                                                         "sibling": FiberNode {
-                                                          "_debugID": 132,
+                                                          "_debugID": 138,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
@@ -10484,13 +10760,13 @@ AppellantLeaveGrantedJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 117,
+                                            "_debugID": 123,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 136,
+                                              "_debugID": 142,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -10844,7 +11120,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "style": Object {
                                         "left": "41%",
                                         "marginTop": "3px",
-                                        "top": "68%",
+                                        "top": "55%",
                                       },
                                     },
                                     "memoizedState": null,
@@ -11001,7 +11277,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "style": Object {
                                         "left": "41%",
                                         "marginTop": "3px",
-                                        "top": "68%",
+                                        "top": "55%",
                                       },
                                     },
                                     "ref": null,
@@ -11009,7 +11285,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "sibling": null,
                                     "stateNode": <div
                                       class="journey-box"
-                                      style="top: 68%; left: 41%; margin-top: 3px;"
+                                      style="top: 55%; left: 41%; margin-top: 3px;"
                                     >
                                       <input
                                         class="checkbox-glow checkbox-toggle"
@@ -11124,7 +11400,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "stepTitle": "The Hearing",
                                     "style": Object {
                                       "left": "41%",
-                                      "top": "68%",
+                                      "top": "55%",
                                     },
                                   },
                                   "memoizedState": null,
@@ -11140,7 +11416,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "stepTitle": "The Hearing",
                                     "style": Object {
                                       "left": "41%",
-                                      "top": "68%",
+                                      "top": "55%",
                                     },
                                   },
                                   "ref": null,
@@ -11152,12 +11428,43 @@ AppellantLeaveGrantedJourneyMap {
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 137,
+                                      "_debugID": 143,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
-                                      "child": null,
+                                      "child": FiberNode {
+                                        "_debugID": 144,
+                                        "_debugIsCurrentlyTiming": false,
+                                        "_debugOwner": [Circular],
+                                        "_debugSource": null,
+                                        "alternate": null,
+                                        "child": null,
+                                        "effectTag": 0,
+                                        "expirationTime": 0,
+                                        "firstEffect": null,
+                                        "index": 0,
+                                        "key": null,
+                                        "lastEffect": null,
+                                        "memoizedProps": Object {
+                                          "className": "journey-trail-l2-l3 last-row",
+                                        },
+                                        "memoizedState": null,
+                                        "mode": 0,
+                                        "nextEffect": null,
+                                        "pendingProps": Object {
+                                          "className": "journey-trail-l2-l3 last-row",
+                                        },
+                                        "ref": null,
+                                        "return": [Circular],
+                                        "sibling": null,
+                                        "stateNode": <div
+                                          class="journey-trail-l2-l3 last-row"
+                                        />,
+                                        "tag": 5,
+                                        "type": "div",
+                                        "updateQueue": null,
+                                      },
                                       "effectTag": 0,
                                       "expirationTime": 0,
                                       "firstEffect": null,
@@ -11165,27 +11472,34 @@ AppellantLeaveGrantedJourneyMap {
                                       "key": null,
                                       "lastEffect": null,
                                       "memoizedProps": Object {
-                                        "className": "journey-trail-l2-l3 last-row",
+                                        "children": <div
+                                          className="journey-trail-l2-l3 last-row"
+                                        />,
                                         "style": Object {
-                                          "width": "27%",
+                                          "width": "23%",
                                         },
                                       },
                                       "memoizedState": null,
                                       "mode": 0,
                                       "nextEffect": null,
                                       "pendingProps": Object {
-                                        "className": "journey-trail-l2-l3 last-row",
+                                        "children": <div
+                                          className="journey-trail-l2-l3 last-row"
+                                        />,
                                         "style": Object {
-                                          "width": "27%",
+                                          "width": "23%",
                                         },
                                       },
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": null,
                                       "stateNode": <div
-                                        class="journey-trail-l2-l3 last-row"
-                                        style="width: 27%;"
-                                      />,
+                                        style="width: 23%;"
+                                      >
+                                        <div
+                                          class="journey-trail-l2-l3 last-row"
+                                        />
+                                      </div>,
                                       "tag": 5,
                                       "type": "div",
                                       "updateQueue": null,
@@ -11200,7 +11514,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "className": "journey-trail-l2-l3 last-row",
                                       "completed": false,
                                       "level": 2,
-                                      "width": "27%",
+                                      "width": "23%",
                                     },
                                     "memoizedState": null,
                                     "mode": 0,
@@ -11209,7 +11523,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "className": "journey-trail-l2-l3 last-row",
                                       "completed": false,
                                       "level": 2,
-                                      "width": "27%",
+                                      "width": "23%",
                                     },
                                     "ref": null,
                                     "return": [Circular],
@@ -11220,19 +11534,19 @@ AppellantLeaveGrantedJourneyMap {
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 138,
+                                        "_debugID": 145,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 139,
+                                          "_debugID": 146,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 143,
+                                            "_debugID": 150,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -11318,7 +11632,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 140,
+                                            "_debugID": 147,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -11354,25 +11668,25 @@ AppellantLeaveGrantedJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 141,
+                                              "_debugID": 148,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 144,
+                                                "_debugID": 151,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 146,
+                                                  "_debugID": 153,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 148,
+                                                    "_debugID": 155,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -11402,7 +11716,7 @@ AppellantLeaveGrantedJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 149,
+                                                      "_debugID": 156,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -11432,7 +11746,7 @@ AppellantLeaveGrantedJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 150,
+                                                        "_debugID": 157,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -11556,25 +11870,25 @@ AppellantLeaveGrantedJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 147,
+                                                    "_debugID": 154,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 151,
+                                                      "_debugID": 158,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 154,
+                                                        "_debugID": 161,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
                                                         "alternate": null,
                                                         "child": FiberNode {
-                                                          "_debugID": 155,
+                                                          "_debugID": 162,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
@@ -11662,19 +11976,19 @@ AppellantLeaveGrantedJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 152,
+                                                        "_debugID": 159,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
                                                         "alternate": null,
                                                         "child": FiberNode {
-                                                          "_debugID": 156,
+                                                          "_debugID": 163,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
                                                           "alternate": null,
                                                           "child": FiberNode {
-                                                            "_debugID": 157,
+                                                            "_debugID": 164,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
@@ -11762,7 +12076,7 @@ AppellantLeaveGrantedJourneyMap {
                                                         "ref": null,
                                                         "return": [Circular],
                                                         "sibling": FiberNode {
-                                                          "_debugID": 153,
+                                                          "_debugID": 160,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
@@ -12094,7 +12408,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 145,
+                                                  "_debugID": 152,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -12345,19 +12659,19 @@ AppellantLeaveGrantedJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 142,
+                                                "_debugID": 149,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 158,
+                                                  "_debugID": 165,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 159,
+                                                    "_debugID": 166,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -12383,7 +12697,7 @@ AppellantLeaveGrantedJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 160,
+                                                      "_debugID": 167,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -12403,7 +12717,7 @@ AppellantLeaveGrantedJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 161,
+                                                        "_debugID": 168,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -12806,7 +13120,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "className": "journey-box",
                                           "style": Object {
                                             "left": "64%",
-                                            "top": "68%",
+                                            "top": "55%",
                                           },
                                         },
                                         "memoizedState": null,
@@ -12936,7 +13250,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "className": "journey-box",
                                           "style": Object {
                                             "left": "64%",
-                                            "top": "68%",
+                                            "top": "55%",
                                           },
                                         },
                                         "ref": null,
@@ -12944,7 +13258,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "sibling": null,
                                         "stateNode": <div
                                           class="journey-box"
-                                          style="top: 68%; left: 64%;"
+                                          style="top: 55%; left: 64%;"
                                         >
                                           <input
                                             class="checkbox-glow checkbox-toggle"
@@ -13054,7 +13368,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "stepTitleOptional": "(if applicable)",
                                         "style": Object {
                                           "left": "64%",
-                                          "top": "68%",
+                                          "top": "55%",
                                         },
                                         "twoPages": false,
                                       },
@@ -13073,7 +13387,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "stepTitleOptional": "(if applicable)",
                                         "style": Object {
                                           "left": "64%",
-                                          "top": "68%",
+                                          "top": "55%",
                                         },
                                         "twoPages": false,
                                       },
@@ -13086,12 +13400,43 @@ AppellantLeaveGrantedJourneyMap {
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 162,
+                                          "_debugID": 169,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
-                                          "child": null,
+                                          "child": FiberNode {
+                                            "_debugID": 170,
+                                            "_debugIsCurrentlyTiming": false,
+                                            "_debugOwner": [Circular],
+                                            "_debugSource": null,
+                                            "alternate": null,
+                                            "child": null,
+                                            "effectTag": 0,
+                                            "expirationTime": 0,
+                                            "firstEffect": null,
+                                            "index": 0,
+                                            "key": null,
+                                            "lastEffect": null,
+                                            "memoizedProps": Object {
+                                              "className": "journey-trail-l2-l3 last-row",
+                                            },
+                                            "memoizedState": null,
+                                            "mode": 0,
+                                            "nextEffect": null,
+                                            "pendingProps": Object {
+                                              "className": "journey-trail-l2-l3 last-row",
+                                            },
+                                            "ref": null,
+                                            "return": [Circular],
+                                            "sibling": null,
+                                            "stateNode": <div
+                                              class="journey-trail-l2-l3 last-row"
+                                            />,
+                                            "tag": 5,
+                                            "type": "div",
+                                            "updateQueue": null,
+                                          },
                                           "effectTag": 0,
                                           "expirationTime": 0,
                                           "firstEffect": null,
@@ -13099,7 +13444,9 @@ AppellantLeaveGrantedJourneyMap {
                                           "key": null,
                                           "lastEffect": null,
                                           "memoizedProps": Object {
-                                            "className": "journey-trail-l2-l3 last-row",
+                                            "children": <div
+                                              className="journey-trail-l2-l3 last-row"
+                                            />,
                                             "style": Object {
                                               "width": "18%",
                                             },
@@ -13108,7 +13455,9 @@ AppellantLeaveGrantedJourneyMap {
                                           "mode": 0,
                                           "nextEffect": null,
                                           "pendingProps": Object {
-                                            "className": "journey-trail-l2-l3 last-row",
+                                            "children": <div
+                                              className="journey-trail-l2-l3 last-row"
+                                            />,
                                             "style": Object {
                                               "width": "18%",
                                             },
@@ -13117,9 +13466,12 @@ AppellantLeaveGrantedJourneyMap {
                                           "return": [Circular],
                                           "sibling": null,
                                           "stateNode": <div
-                                            class="journey-trail-l2-l3 last-row"
                                             style="width: 18%;"
-                                          />,
+                                          >
+                                            <div
+                                              class="journey-trail-l2-l3 last-row"
+                                            />
+                                          </div>,
                                           "tag": 5,
                                           "type": "div",
                                           "updateQueue": null,
@@ -13154,13 +13506,13 @@ AppellantLeaveGrantedJourneyMap {
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 163,
+                                            "_debugID": 171,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 164,
+                                              "_debugID": 172,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -13184,13 +13536,13 @@ AppellantLeaveGrantedJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 165,
+                                                "_debugID": 173,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 166,
+                                                  "_debugID": 174,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -13300,7 +13652,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "onClick": [Function],
                                               "style": Object {
                                                 "left": "83%",
-                                                "top": "68%",
+                                                "top": "55%",
                                               },
                                             },
                                             "memoizedState": null,
@@ -13325,7 +13677,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "onClick": [Function],
                                               "style": Object {
                                                 "left": "83%",
-                                                "top": "68%",
+                                                "top": "55%",
                                               },
                                             },
                                             "ref": null,
@@ -13333,7 +13685,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "sibling": null,
                                             "stateNode": <div
                                               class="action-end-point journey-end-circle any-icon"
-                                              style="top: 68%; left: 83%;"
+                                              style="top: 55%; left: 83%;"
                                             >
                                               <div
                                                 class="oi oi-check journey-final-check"
@@ -13365,7 +13717,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "stepTitle": "Appeal Process Complete",
                                             "style": Object {
                                               "left": "83%",
-                                              "top": "68%",
+                                              "top": "55%",
                                             },
                                           },
                                           "memoizedState": null,
@@ -13378,7 +13730,7 @@ AppellantLeaveGrantedJourneyMap {
                                             "stepTitle": "Appeal Process Complete",
                                             "style": Object {
                                               "left": "83%",
-                                              "top": "68%",
+                                              "top": "55%",
                                             },
                                           },
                                           "ref": null,
@@ -13395,7 +13747,7 @@ AppellantLeaveGrantedJourneyMap {
                                               "stepTitle": "Appeal Process Complete",
                                               "style": Object {
                                                 "left": "83%",
-                                                "top": "68%",
+                                                "top": "55%",
                                               },
                                             },
                                             "refs": Object {},
@@ -13450,7 +13802,7 @@ AppellantLeaveGrantedJourneyMap {
                                           "stepTitleOptional": "(if applicable)",
                                           "style": Object {
                                             "left": "64%",
-                                            "top": "68%",
+                                            "top": "55%",
                                           },
                                           "twoPages": false,
                                         },
@@ -13475,7 +13827,7 @@ AppellantLeaveGrantedJourneyMap {
                                         "className": "journey-trail-l2-l3 last-row",
                                         "completed": false,
                                         "level": 2,
-                                        "width": "27%",
+                                        "width": "23%",
                                       },
                                       "refs": Object {},
                                       "state": null,
@@ -13504,7 +13856,7 @@ AppellantLeaveGrantedJourneyMap {
                                       "stepTitle": "The Hearing",
                                       "style": Object {
                                         "left": "41%",
-                                        "top": "68%",
+                                        "top": "55%",
                                       },
                                     },
                                     "refs": Object {},
@@ -13528,7 +13880,7 @@ AppellantLeaveGrantedJourneyMap {
                                     "className": "journey-trail-l2-l3 last-row",
                                     "completed": false,
                                     "level": 2,
-                                    "width": "27%",
+                                    "width": "23%",
                                   },
                                   "refs": Object {},
                                   "state": null,
@@ -13557,7 +13909,7 @@ AppellantLeaveGrantedJourneyMap {
                                   "stepTitle": "Notice of Hearing",
                                   "style": Object {
                                     "left": "18%",
-                                    "top": "68%",
+                                    "top": "55%",
                                   },
                                   "twoPages": false,
                                 },
@@ -13582,7 +13934,7 @@ AppellantLeaveGrantedJourneyMap {
                                 "className": "journey-trail-l2-l3 last-row",
                                 "completed": false,
                                 "level": 2,
-                                "width": "17%",
+                                "width": "10%",
                               },
                               "refs": Object {},
                               "state": null,
@@ -13649,7 +14001,7 @@ AppellantLeaveGrantedJourneyMap {
                         "stepTitle": "Book Appeal Date with Registry",
                         "stepTitleClass": "step-title-wide",
                         "style": Object {
-                          "left": "70%",
+                          "left": "62%",
                           "marginTop": "5px",
                         },
                       },
@@ -13675,7 +14027,7 @@ AppellantLeaveGrantedJourneyMap {
                       "completed": false,
                       "level": 1,
                       "lineCompleted": false,
-                      "width": "27%",
+                      "width": "23%",
                     },
                     "refs": Object {},
                     "state": null,
@@ -13704,7 +14056,7 @@ AppellantLeaveGrantedJourneyMap {
                     "stepTitle": "Factum, Appeal Book and Certificate of Readiness",
                     "stepTitleClass": "step-title-wide",
                     "style": Object {
-                      "left": "45%",
+                      "left": "41%",
                     },
                     "twoPages": true,
                   },
@@ -13730,7 +14082,7 @@ AppellantLeaveGrantedJourneyMap {
                   "completed": false,
                   "level": 1,
                   "lineCompleted": false,
-                  "width": "27%",
+                  "width": "22%",
                 },
                 "refs": Object {},
                 "state": null,
@@ -13785,7 +14137,7 @@ AppellantLeaveGrantedJourneyMap {
               "completed": false,
               "level": 1,
               "lineCompleted": false,
-              "width": "18%",
+              "width": "15%",
             },
             "refs": Object {},
             "state": null,
@@ -13823,7 +14175,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="18%"
+            width="15%"
           />,
           <PageIcon
             action={[Function]}
@@ -13845,7 +14197,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="27%"
+            width="22%"
           />,
           <PageIcon
             action={[Function]}
@@ -13857,7 +14209,7 @@ AppellantLeaveGrantedJourneyMap {
             stepTitleClass="step-title-wide"
             style={
               Object {
-                "left": "45%",
+                "left": "41%",
               }
             }
             twoPages={true}
@@ -13867,7 +14219,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="27%"
+            width="23%"
           />,
           <CalendarIcon
             action={[Function]}
@@ -13879,7 +14231,7 @@ AppellantLeaveGrantedJourneyMap {
             stepTitleClass="step-title-wide"
             style={
               Object {
-                "left": "70%",
+                "left": "62%",
                 "marginTop": "5px",
               }
             }
@@ -13901,7 +14253,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="17%"
+            width="10%"
           />,
           <PageIcon
             action={[Function]}
@@ -13913,7 +14265,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "18%",
-                "top": "68%",
+                "top": "55%",
               }
             }
             twoPages={false}
@@ -13922,7 +14274,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="27%"
+            width="23%"
           />,
           <GavelIcon
             action={[Function]}
@@ -13934,7 +14286,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "41%",
-                "top": "68%",
+                "top": "55%",
               }
             }
           />,
@@ -13942,7 +14294,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="27%"
+            width="23%"
           />,
           <PageIcon
             action={[Function]}
@@ -13956,7 +14308,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "64%",
-                "top": "68%",
+                "top": "55%",
               }
             }
             twoPages={false}
@@ -13975,7 +14327,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "83%",
-                "top": "68%",
+                "top": "55%",
               }
             }
           />,
@@ -13995,7 +14347,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="18%"
+            width="15%"
           />,
           <PageIcon
             action={[Function]}
@@ -14017,7 +14369,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="27%"
+            width="22%"
           />,
           <PageIcon
             action={[Function]}
@@ -14029,7 +14381,7 @@ AppellantLeaveGrantedJourneyMap {
             stepTitleClass="step-title-wide"
             style={
               Object {
-                "left": "45%",
+                "left": "41%",
               }
             }
             twoPages={true}
@@ -14039,7 +14391,7 @@ AppellantLeaveGrantedJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="27%"
+            width="23%"
           />,
           <CalendarIcon
             action={[Function]}
@@ -14051,7 +14403,7 @@ AppellantLeaveGrantedJourneyMap {
             stepTitleClass="step-title-wide"
             style={
               Object {
-                "left": "70%",
+                "left": "62%",
                 "marginTop": "5px",
               }
             }
@@ -14073,7 +14425,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="17%"
+            width="10%"
           />,
           <PageIcon
             action={[Function]}
@@ -14085,7 +14437,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "18%",
-                "top": "68%",
+                "top": "55%",
               }
             }
             twoPages={false}
@@ -14094,7 +14446,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="27%"
+            width="23%"
           />,
           <GavelIcon
             action={[Function]}
@@ -14106,7 +14458,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "41%",
-                "top": "68%",
+                "top": "55%",
               }
             }
           />,
@@ -14114,7 +14466,7 @@ AppellantLeaveGrantedJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={2}
-            width="27%"
+            width="23%"
           />,
           <PageIcon
             action={[Function]}
@@ -14128,7 +14480,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "64%",
-                "top": "68%",
+                "top": "55%",
               }
             }
             twoPages={false}
@@ -14147,7 +14499,7 @@ AppellantLeaveGrantedJourneyMap {
             style={
               Object {
                 "left": "83%",
-                "top": "68%",
+                "top": "55%",
               }
             }
           />,
@@ -14164,9 +14516,12 @@ AppellantLeaveGrantedJourneyMap {
           class="journey-start-circle"
         />
         <div
-          class="journey-trail-l1-l2"
-          style="width: 18%;"
-        />
+          style="width: 15%;"
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-box"
           style="left: 20%;"
@@ -14247,12 +14602,15 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2"
-          style="width: 27%;"
-        />
+          style="width: 22%;"
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 45%;"
+          style="left: 41%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -14330,12 +14688,15 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2"
-          style="width: 27%;"
-        />
+          style="width: 23%;"
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 70%; margin-top: 5px;"
+          style="left: 62%; margin-top: 5px;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -14400,9 +14761,12 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2"
           style="width: 5%;"
-        />
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-right-curve"
         />
@@ -14410,12 +14774,15 @@ AppellantLeaveGrantedJourneyMap {
           class="journey-left-curve"
         />
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 17%;"
-        />
+          style="width: 10%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="journey-box"
-          style="top: 68%; left: 18%;"
+          style="top: 55%; left: 18%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -14499,12 +14866,15 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 27%;"
-        />
+          style="width: 23%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="journey-box"
-          style="top: 68%; left: 41%; margin-top: 3px;"
+          style="top: 55%; left: 41%; margin-top: 3px;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -14600,12 +14970,15 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 27%;"
-        />
+          style="width: 23%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="journey-box"
-          style="top: 68%; left: 64%;"
+          style="top: 55%; left: 64%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -14694,12 +15067,15 @@ AppellantLeaveGrantedJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3 last-row"
           style="width: 18%;"
-        />
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="action-end-point journey-end-circle any-icon"
-          style="top: 68%; left: 83%;"
+          style="top: 55%; left: 83%;"
         >
           <div
             class="oi oi-check journey-final-check"
@@ -14872,9 +15248,12 @@ AppellantLeaveGrantedJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 18%;"
-                />
+                  style="width: 15%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 20%;"
@@ -14955,12 +15334,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 27%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 45%;"
+                  style="left: 41%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -15038,12 +15420,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 70%; margin-top: 5px;"
+                  style="left: 62%; margin-top: 5px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -15108,9 +15493,12 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
                   style="width: 5%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-right-curve"
                 />
@@ -15118,12 +15506,15 @@ AppellantLeaveGrantedJourneyMap {
                   class="journey-left-curve"
                 />
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 17%;"
-                />
+                  style="width: 10%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 18%;"
+                  style="top: 55%; left: 18%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -15207,12 +15598,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 41%; margin-top: 3px;"
+                  style="top: 55%; left: 41%; margin-top: 3px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -15308,12 +15702,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 27%;"
-                />
+                  style="width: 23%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="top: 68%; left: 64%;"
+                  style="top: 55%; left: 64%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -15402,12 +15799,15 @@ AppellantLeaveGrantedJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
                   style="width: 18%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="action-end-point journey-end-circle any-icon"
-                  style="top: 68%; left: 83%;"
+                  style="top: 55%; left: 83%;"
                 >
                   <div
                     class="oi oi-check journey-final-check"
@@ -15540,9 +15940,12 @@ AppellantLeaveGrantedJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2"
-                style="width: 18%;"
-              />
+                style="width: 15%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 20%;"
@@ -15623,12 +16026,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 27%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 45%;"
+                style="left: 41%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -15706,12 +16112,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 70%; margin-top: 5px;"
+                style="left: 62%; margin-top: 5px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -15776,9 +16185,12 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
                 style="width: 5%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-right-curve"
               />
@@ -15786,12 +16198,15 @@ AppellantLeaveGrantedJourneyMap {
                 class="journey-left-curve"
               />
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 17%;"
-              />
+                style="width: 10%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 18%;"
+                style="top: 55%; left: 18%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -15875,12 +16290,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 41%; margin-top: 3px;"
+                style="top: 55%; left: 41%; margin-top: 3px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -15976,12 +16394,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 27%;"
-              />
+                style="width: 23%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="top: 68%; left: 64%;"
+                style="top: 55%; left: 64%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -16070,12 +16491,15 @@ AppellantLeaveGrantedJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
                 style="width: 18%;"
-              />
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="action-end-point journey-end-circle any-icon"
-                style="top: 68%; left: 83%;"
+                style="top: 55%; left: 83%;"
               >
                 <div
                   class="oi oi-check journey-final-check"

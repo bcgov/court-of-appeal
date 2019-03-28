@@ -98,9 +98,12 @@ AppellantRightToAppealJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 28%;"
-                />
+                  style="width: 25%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 30%;"
@@ -187,9 +190,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 35%;"
-                />
+                  style="width: 32%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 60%;"
@@ -270,9 +276,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
                   style="width: 10%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-right-curve"
                 />
@@ -280,12 +289,15 @@ AppellantRightToAppealJourneyMap {
                   class="journey-left-curve"
                 />
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 18%;"
-                />
+                  style="width: 15%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 20%; top: 43%;"
+                  style="left: 20%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -363,12 +375,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 43%; top: 44%;"
+                  style="left: 43%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -423,7 +438,7 @@ AppellantRightToAppealJourneyMap {
                     </div>
                   </div>
                   <div
-                    class="step-title-container"
+                    class="step-title-container step-title-wide"
                   >
                     <div
                       class="step-title"
@@ -433,12 +448,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 68%; top: 43%;"
+                  style="left: 68%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -522,9 +540,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
                   style="width: 5%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-right-curve l2"
                 />
@@ -532,12 +553,15 @@ AppellantRightToAppealJourneyMap {
                   class="journey-left-curve l2"
                 />
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 30%; top: 80%; margin-top: 3px;"
+                  style="left: 30%; top: 69%; margin-top: 3px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -633,12 +657,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 35%;"
-                />
+                  style="width: 32%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 59%; top: 80%;"
+                  style="left: 59%; top: 69%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -722,12 +749,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="action-end-point journey-end-circle any-icon"
-                  style="top: 80%; left: 80%;"
+                  style="top: 69%; left: 80%;"
                 >
                   <div
                     class="oi oi-check journey-final-check"
@@ -860,9 +890,12 @@ AppellantRightToAppealJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2"
-                style="width: 28%;"
-              />
+                style="width: 25%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 30%;"
@@ -949,9 +982,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 35%;"
-              />
+                style="width: 32%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 60%;"
@@ -1032,9 +1068,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
                 style="width: 10%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-right-curve"
               />
@@ -1042,12 +1081,15 @@ AppellantRightToAppealJourneyMap {
                 class="journey-left-curve"
               />
               <div
-                class="journey-trail-l2-l3"
-                style="width: 18%;"
-              />
+                style="width: 15%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 20%; top: 43%;"
+                style="left: 20%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1125,12 +1167,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 43%; top: 44%;"
+                style="left: 43%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1185,7 +1230,7 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="step-title-container"
+                  class="step-title-container step-title-wide"
                 >
                   <div
                     class="step-title"
@@ -1195,12 +1240,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 68%; top: 43%;"
+                style="left: 68%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1284,9 +1332,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
                 style="width: 5%;"
-              />
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-right-curve l2"
               />
@@ -1294,12 +1345,15 @@ AppellantRightToAppealJourneyMap {
                 class="journey-left-curve l2"
               />
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 30%; top: 80%; margin-top: 3px;"
+                style="left: 30%; top: 69%; margin-top: 3px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1395,12 +1449,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 35%;"
-              />
+                style="width: 32%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 59%; top: 80%;"
+                style="left: 59%; top: 69%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1484,12 +1541,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="action-end-point journey-end-circle any-icon"
-                style="top: 80%; left: 80%;"
+                style="top: 69%; left: 80%;"
               >
                 <div
                   class="oi oi-check journey-final-check"
@@ -1637,7 +1697,38 @@ AppellantRightToAppealJourneyMap {
             "_debugOwner": [Circular],
             "_debugSource": null,
             "alternate": null,
-            "child": null,
+            "child": FiberNode {
+              "_debugID": 31,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": [Circular],
+              "_debugSource": null,
+              "alternate": null,
+              "child": null,
+              "effectTag": 0,
+              "expirationTime": 0,
+              "firstEffect": null,
+              "index": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "className": "journey-trail-l1-l2",
+              },
+              "memoizedState": null,
+              "mode": 0,
+              "nextEffect": null,
+              "pendingProps": Object {
+                "className": "journey-trail-l1-l2",
+              },
+              "ref": null,
+              "return": [Circular],
+              "sibling": null,
+              "stateNode": <div
+                class="journey-trail-l1-l2"
+              />,
+              "tag": 5,
+              "type": "div",
+              "updateQueue": null,
+            },
             "effectTag": 0,
             "expirationTime": 0,
             "firstEffect": null,
@@ -1645,27 +1736,34 @@ AppellantRightToAppealJourneyMap {
             "key": null,
             "lastEffect": null,
             "memoizedProps": Object {
-              "className": "journey-trail-l1-l2",
+              "children": <div
+                className="journey-trail-l1-l2"
+              />,
               "style": Object {
-                "width": "28%",
+                "width": "25%",
               },
             },
             "memoizedState": null,
             "mode": 0,
             "nextEffect": null,
             "pendingProps": Object {
-              "className": "journey-trail-l1-l2",
+              "children": <div
+                className="journey-trail-l1-l2"
+              />,
               "style": Object {
-                "width": "28%",
+                "width": "25%",
               },
             },
             "ref": null,
             "return": [Circular],
             "sibling": null,
             "stateNode": <div
-              class="journey-trail-l1-l2"
-              style="width: 28%;"
-            />,
+              style="width: 25%;"
+            >
+              <div
+                class="journey-trail-l1-l2"
+              />
+            </div>,
             "tag": 5,
             "type": "div",
             "updateQueue": null,
@@ -1681,7 +1779,7 @@ AppellantRightToAppealJourneyMap {
             "completed": false,
             "level": 1,
             "lineCompleted": false,
-            "width": "28%",
+            "width": "25%",
           },
           "memoizedState": null,
           "mode": 0,
@@ -1691,7 +1789,7 @@ AppellantRightToAppealJourneyMap {
             "completed": false,
             "level": 1,
             "lineCompleted": false,
-            "width": "28%",
+            "width": "25%",
           },
           "ref": null,
           "return": [Circular],
@@ -1702,19 +1800,19 @@ AppellantRightToAppealJourneyMap {
             "_debugSource": null,
             "alternate": null,
             "child": FiberNode {
-              "_debugID": 31,
+              "_debugID": 32,
               "_debugIsCurrentlyTiming": false,
               "_debugOwner": [Circular],
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 32,
+                "_debugID": 33,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 36,
+                  "_debugID": 37,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -1800,7 +1898,7 @@ AppellantRightToAppealJourneyMap {
                 "ref": null,
                 "return": [Circular],
                 "sibling": FiberNode {
-                  "_debugID": 33,
+                  "_debugID": 34,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -1836,25 +1934,25 @@ AppellantRightToAppealJourneyMap {
                   "ref": null,
                   "return": [Circular],
                   "sibling": FiberNode {
-                    "_debugID": 34,
+                    "_debugID": 35,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 37,
+                      "_debugID": 38,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 39,
+                        "_debugID": 40,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 41,
+                          "_debugID": 42,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -1884,7 +1982,7 @@ AppellantRightToAppealJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 42,
+                            "_debugID": 43,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -1914,7 +2012,7 @@ AppellantRightToAppealJourneyMap {
                             "ref": null,
                             "return": [Circular],
                             "sibling": FiberNode {
-                              "_debugID": 43,
+                              "_debugID": 44,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -2038,25 +2136,25 @@ AppellantRightToAppealJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 40,
+                          "_debugID": 41,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 44,
+                            "_debugID": 45,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 47,
+                              "_debugID": 48,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 48,
+                                "_debugID": 49,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -2144,19 +2242,19 @@ AppellantRightToAppealJourneyMap {
                             "ref": null,
                             "return": [Circular],
                             "sibling": FiberNode {
-                              "_debugID": 45,
+                              "_debugID": 46,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 49,
+                                "_debugID": 50,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 50,
+                                  "_debugID": 51,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -2244,7 +2342,7 @@ AppellantRightToAppealJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 46,
+                                "_debugID": 47,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -2576,7 +2674,7 @@ AppellantRightToAppealJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 38,
+                        "_debugID": 39,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
@@ -2827,19 +2925,19 @@ AppellantRightToAppealJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 35,
+                      "_debugID": 36,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 51,
+                        "_debugID": 52,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 52,
+                          "_debugID": 53,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -2865,7 +2963,7 @@ AppellantRightToAppealJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 53,
+                            "_debugID": 54,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -3482,12 +3580,43 @@ AppellantRightToAppealJourneyMap {
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 54,
+                "_debugID": 55,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
-                "child": null,
+                "child": FiberNode {
+                  "_debugID": 56,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": [Circular],
+                  "_debugSource": null,
+                  "alternate": null,
+                  "child": null,
+                  "effectTag": 0,
+                  "expirationTime": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": Object {
+                    "className": "journey-trail-l1-l2",
+                  },
+                  "memoizedState": null,
+                  "mode": 0,
+                  "nextEffect": null,
+                  "pendingProps": Object {
+                    "className": "journey-trail-l1-l2",
+                  },
+                  "ref": null,
+                  "return": [Circular],
+                  "sibling": null,
+                  "stateNode": <div
+                    class="journey-trail-l1-l2"
+                  />,
+                  "tag": 5,
+                  "type": "div",
+                  "updateQueue": null,
+                },
                 "effectTag": 0,
                 "expirationTime": 0,
                 "firstEffect": null,
@@ -3495,27 +3624,34 @@ AppellantRightToAppealJourneyMap {
                 "key": null,
                 "lastEffect": null,
                 "memoizedProps": Object {
-                  "className": "journey-trail-l1-l2",
+                  "children": <div
+                    className="journey-trail-l1-l2"
+                  />,
                   "style": Object {
-                    "width": "35%",
+                    "width": "32%",
                   },
                 },
                 "memoizedState": null,
                 "mode": 0,
                 "nextEffect": null,
                 "pendingProps": Object {
-                  "className": "journey-trail-l1-l2",
+                  "children": <div
+                    className="journey-trail-l1-l2"
+                  />,
                   "style": Object {
-                    "width": "35%",
+                    "width": "32%",
                   },
                 },
                 "ref": null,
                 "return": [Circular],
                 "sibling": null,
                 "stateNode": <div
-                  class="journey-trail-l1-l2"
-                  style="width: 35%;"
-                />,
+                  style="width: 32%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>,
                 "tag": 5,
                 "type": "div",
                 "updateQueue": null,
@@ -3531,7 +3667,7 @@ AppellantRightToAppealJourneyMap {
                 "completed": false,
                 "level": 1,
                 "lineCompleted": false,
-                "width": "35%",
+                "width": "32%",
               },
               "memoizedState": null,
               "mode": 0,
@@ -3541,7 +3677,7 @@ AppellantRightToAppealJourneyMap {
                 "completed": false,
                 "level": 1,
                 "lineCompleted": false,
-                "width": "35%",
+                "width": "32%",
               },
               "ref": null,
               "return": [Circular],
@@ -3552,19 +3688,19 @@ AppellantRightToAppealJourneyMap {
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 55,
+                  "_debugID": 57,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 56,
+                    "_debugID": 58,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 60,
+                      "_debugID": 62,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -3650,7 +3786,7 @@ AppellantRightToAppealJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 57,
+                      "_debugID": 59,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -3686,37 +3822,37 @@ AppellantRightToAppealJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 58,
+                        "_debugID": 60,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 61,
+                          "_debugID": 63,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 63,
+                            "_debugID": 65,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 64,
+                              "_debugID": 66,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 66,
+                                "_debugID": 68,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 68,
+                                  "_debugID": 70,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -3740,7 +3876,7 @@ AppellantRightToAppealJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 69,
+                                    "_debugID": 71,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3827,7 +3963,7 @@ AppellantRightToAppealJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 67,
+                                  "_debugID": 69,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -3940,19 +4076,19 @@ AppellantRightToAppealJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 65,
+                                "_debugID": 67,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 70,
+                                  "_debugID": 72,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 72,
+                                    "_debugID": 74,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3976,7 +4112,7 @@ AppellantRightToAppealJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 73,
+                                      "_debugID": 75,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -4063,7 +4199,7 @@ AppellantRightToAppealJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 71,
+                                    "_debugID": 73,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -4490,7 +4626,7 @@ AppellantRightToAppealJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 62,
+                            "_debugID": 64,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -4733,19 +4869,19 @@ AppellantRightToAppealJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 59,
+                          "_debugID": 61,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 74,
+                            "_debugID": 76,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 75,
+                              "_debugID": 77,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
@@ -4771,7 +4907,7 @@ AppellantRightToAppealJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 76,
+                                "_debugID": 78,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -5372,12 +5508,43 @@ AppellantRightToAppealJourneyMap {
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 77,
+                    "_debugID": 79,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
-                    "child": null,
+                    "child": FiberNode {
+                      "_debugID": 80,
+                      "_debugIsCurrentlyTiming": false,
+                      "_debugOwner": [Circular],
+                      "_debugSource": null,
+                      "alternate": null,
+                      "child": null,
+                      "effectTag": 0,
+                      "expirationTime": 0,
+                      "firstEffect": null,
+                      "index": 0,
+                      "key": null,
+                      "lastEffect": null,
+                      "memoizedProps": Object {
+                        "className": "journey-trail-l1-l2",
+                      },
+                      "memoizedState": null,
+                      "mode": 0,
+                      "nextEffect": null,
+                      "pendingProps": Object {
+                        "className": "journey-trail-l1-l2",
+                      },
+                      "ref": null,
+                      "return": [Circular],
+                      "sibling": null,
+                      "stateNode": <div
+                        class="journey-trail-l1-l2"
+                      />,
+                      "tag": 5,
+                      "type": "div",
+                      "updateQueue": null,
+                    },
                     "effectTag": 0,
                     "expirationTime": 0,
                     "firstEffect": null,
@@ -5385,7 +5552,9 @@ AppellantRightToAppealJourneyMap {
                     "key": null,
                     "lastEffect": null,
                     "memoizedProps": Object {
-                      "className": "journey-trail-l1-l2",
+                      "children": <div
+                        className="journey-trail-l1-l2"
+                      />,
                       "style": Object {
                         "width": "10%",
                       },
@@ -5394,7 +5563,9 @@ AppellantRightToAppealJourneyMap {
                     "mode": 0,
                     "nextEffect": null,
                     "pendingProps": Object {
-                      "className": "journey-trail-l1-l2",
+                      "children": <div
+                        className="journey-trail-l1-l2"
+                      />,
                       "style": Object {
                         "width": "10%",
                       },
@@ -5403,9 +5574,12 @@ AppellantRightToAppealJourneyMap {
                     "return": [Circular],
                     "sibling": null,
                     "stateNode": <div
-                      class="journey-trail-l1-l2"
                       style="width: 10%;"
-                    />,
+                    >
+                      <div
+                        class="journey-trail-l1-l2"
+                      />
+                    </div>,
                     "tag": 5,
                     "type": "div",
                     "updateQueue": null,
@@ -5490,12 +5664,43 @@ AppellantRightToAppealJourneyMap {
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 78,
+                          "_debugID": 81,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
-                          "child": null,
+                          "child": FiberNode {
+                            "_debugID": 82,
+                            "_debugIsCurrentlyTiming": false,
+                            "_debugOwner": [Circular],
+                            "_debugSource": null,
+                            "alternate": null,
+                            "child": null,
+                            "effectTag": 0,
+                            "expirationTime": 0,
+                            "firstEffect": null,
+                            "index": 0,
+                            "key": null,
+                            "lastEffect": null,
+                            "memoizedProps": Object {
+                              "className": "journey-trail-l2-l3",
+                            },
+                            "memoizedState": null,
+                            "mode": 0,
+                            "nextEffect": null,
+                            "pendingProps": Object {
+                              "className": "journey-trail-l2-l3",
+                            },
+                            "ref": null,
+                            "return": [Circular],
+                            "sibling": null,
+                            "stateNode": <div
+                              class="journey-trail-l2-l3"
+                            />,
+                            "tag": 5,
+                            "type": "div",
+                            "updateQueue": null,
+                          },
                           "effectTag": 0,
                           "expirationTime": 0,
                           "firstEffect": null,
@@ -5503,27 +5708,34 @@ AppellantRightToAppealJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
-                            "className": "journey-trail-l2-l3",
+                            "children": <div
+                              className="journey-trail-l2-l3"
+                            />,
                             "style": Object {
-                              "width": "18%",
+                              "width": "15%",
                             },
                           },
                           "memoizedState": null,
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
-                            "className": "journey-trail-l2-l3",
+                            "children": <div
+                              className="journey-trail-l2-l3"
+                            />,
                             "style": Object {
-                              "width": "18%",
+                              "width": "15%",
                             },
                           },
                           "ref": null,
                           "return": [Circular],
                           "sibling": null,
                           "stateNode": <div
-                            class="journey-trail-l2-l3"
-                            style="width: 18%;"
-                          />,
+                            style="width: 15%;"
+                          >
+                            <div
+                              class="journey-trail-l2-l3"
+                            />
+                          </div>,
                           "tag": 5,
                           "type": "div",
                           "updateQueue": null,
@@ -5539,7 +5751,7 @@ AppellantRightToAppealJourneyMap {
                           "completed": false,
                           "level": 2,
                           "lineCompleted": false,
-                          "width": "18%",
+                          "width": "15%",
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -5549,7 +5761,7 @@ AppellantRightToAppealJourneyMap {
                           "completed": false,
                           "level": 2,
                           "lineCompleted": false,
-                          "width": "18%",
+                          "width": "15%",
                         },
                         "ref": null,
                         "return": [Circular],
@@ -5560,19 +5772,19 @@ AppellantRightToAppealJourneyMap {
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 79,
+                            "_debugID": 83,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 80,
+                              "_debugID": 84,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 84,
+                                "_debugID": 88,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -5658,7 +5870,7 @@ AppellantRightToAppealJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 81,
+                                "_debugID": 85,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -5694,37 +5906,37 @@ AppellantRightToAppealJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 82,
+                                  "_debugID": 86,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 85,
+                                    "_debugID": 89,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 87,
+                                      "_debugID": 91,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 88,
+                                        "_debugID": 92,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 90,
+                                          "_debugID": 94,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 92,
+                                            "_debugID": 96,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -5748,7 +5960,7 @@ AppellantRightToAppealJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 93,
+                                              "_debugID": 97,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -5835,7 +6047,7 @@ AppellantRightToAppealJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 91,
+                                            "_debugID": 95,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -5948,19 +6160,19 @@ AppellantRightToAppealJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 89,
+                                          "_debugID": 93,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 94,
+                                            "_debugID": 98,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 96,
+                                              "_debugID": 100,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -5984,7 +6196,7 @@ AppellantRightToAppealJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 97,
+                                                "_debugID": 101,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -6071,7 +6283,7 @@ AppellantRightToAppealJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 95,
+                                              "_debugID": 99,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -6498,7 +6710,7 @@ AppellantRightToAppealJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 86,
+                                      "_debugID": 90,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -6741,19 +6953,19 @@ AppellantRightToAppealJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 83,
+                                    "_debugID": 87,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 98,
+                                      "_debugID": 102,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 99,
+                                        "_debugID": 103,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -6779,7 +6991,7 @@ AppellantRightToAppealJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 100,
+                                          "_debugID": 104,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -7125,7 +7337,7 @@ AppellantRightToAppealJourneyMap {
                               "className": "journey-box",
                               "style": Object {
                                 "left": "20%",
-                                "top": "43%",
+                                "top": "38%",
                               },
                             },
                             "memoizedState": null,
@@ -7247,7 +7459,7 @@ AppellantRightToAppealJourneyMap {
                               "className": "journey-box",
                               "style": Object {
                                 "left": "20%",
-                                "top": "43%",
+                                "top": "38%",
                               },
                             },
                             "ref": null,
@@ -7255,7 +7467,7 @@ AppellantRightToAppealJourneyMap {
                             "sibling": null,
                             "stateNode": <div
                               class="journey-box"
-                              style="left: 20%; top: 43%;"
+                              style="left: 20%; top: 38%;"
                             >
                               <input
                                 class="checkbox-glow checkbox-toggle"
@@ -7353,7 +7565,7 @@ AppellantRightToAppealJourneyMap {
                             "stepTitleClass": "step-title-wide",
                             "style": Object {
                               "left": "20%",
-                              "top": "43%",
+                              "top": "38%",
                             },
                             "twoPages": true,
                           },
@@ -7371,7 +7583,7 @@ AppellantRightToAppealJourneyMap {
                             "stepTitleClass": "step-title-wide",
                             "style": Object {
                               "left": "20%",
-                              "top": "43%",
+                              "top": "38%",
                             },
                             "twoPages": true,
                           },
@@ -7384,12 +7596,43 @@ AppellantRightToAppealJourneyMap {
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 101,
+                              "_debugID": 105,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
-                              "child": null,
+                              "child": FiberNode {
+                                "_debugID": 106,
+                                "_debugIsCurrentlyTiming": false,
+                                "_debugOwner": [Circular],
+                                "_debugSource": null,
+                                "alternate": null,
+                                "child": null,
+                                "effectTag": 0,
+                                "expirationTime": 0,
+                                "firstEffect": null,
+                                "index": 0,
+                                "key": null,
+                                "lastEffect": null,
+                                "memoizedProps": Object {
+                                  "className": "journey-trail-l2-l3",
+                                },
+                                "memoizedState": null,
+                                "mode": 0,
+                                "nextEffect": null,
+                                "pendingProps": Object {
+                                  "className": "journey-trail-l2-l3",
+                                },
+                                "ref": null,
+                                "return": [Circular],
+                                "sibling": null,
+                                "stateNode": <div
+                                  class="journey-trail-l2-l3"
+                                />,
+                                "tag": 5,
+                                "type": "div",
+                                "updateQueue": null,
+                              },
                               "effectTag": 0,
                               "expirationTime": 0,
                               "firstEffect": null,
@@ -7397,27 +7640,34 @@ AppellantRightToAppealJourneyMap {
                               "key": null,
                               "lastEffect": null,
                               "memoizedProps": Object {
-                                "className": "journey-trail-l2-l3",
+                                "children": <div
+                                  className="journey-trail-l2-l3"
+                                />,
                                 "style": Object {
-                                  "width": "25%",
+                                  "width": "22%",
                                 },
                               },
                               "memoizedState": null,
                               "mode": 0,
                               "nextEffect": null,
                               "pendingProps": Object {
-                                "className": "journey-trail-l2-l3",
+                                "children": <div
+                                  className="journey-trail-l2-l3"
+                                />,
                                 "style": Object {
-                                  "width": "25%",
+                                  "width": "22%",
                                 },
                               },
                               "ref": null,
                               "return": [Circular],
                               "sibling": null,
                               "stateNode": <div
-                                class="journey-trail-l2-l3"
-                                style="width: 25%;"
-                              />,
+                                style="width: 22%;"
+                              >
+                                <div
+                                  class="journey-trail-l2-l3"
+                                />
+                              </div>,
                               "tag": 5,
                               "type": "div",
                               "updateQueue": null,
@@ -7433,7 +7683,7 @@ AppellantRightToAppealJourneyMap {
                               "completed": false,
                               "level": 2,
                               "lineCompleted": false,
-                              "width": "25%",
+                              "width": "22%",
                             },
                             "memoizedState": null,
                             "mode": 0,
@@ -7443,7 +7693,7 @@ AppellantRightToAppealJourneyMap {
                               "completed": false,
                               "level": 2,
                               "lineCompleted": false,
-                              "width": "25%",
+                              "width": "22%",
                             },
                             "ref": null,
                             "return": [Circular],
@@ -7454,19 +7704,19 @@ AppellantRightToAppealJourneyMap {
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 102,
+                                "_debugID": 107,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 103,
+                                  "_debugID": 108,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 107,
+                                    "_debugID": 112,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -7552,7 +7802,7 @@ AppellantRightToAppealJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 104,
+                                    "_debugID": 109,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -7584,37 +7834,37 @@ AppellantRightToAppealJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 105,
+                                      "_debugID": 110,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 108,
+                                        "_debugID": 113,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 109,
+                                          "_debugID": 114,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 110,
+                                            "_debugID": 115,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 112,
+                                              "_debugID": 117,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 113,
+                                                "_debugID": 118,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -7638,7 +7888,7 @@ AppellantRightToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 114,
+                                                  "_debugID": 119,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -7804,13 +8054,13 @@ AppellantRightToAppealJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 111,
+                                              "_debugID": 116,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 115,
+                                                "_debugID": 120,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -8296,13 +8546,13 @@ AppellantRightToAppealJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 106,
+                                        "_debugID": 111,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 116,
+                                          "_debugID": 121,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -8349,7 +8599,7 @@ AppellantRightToAppealJourneyMap {
                                           >
                                             Book Appeal Date with Registry
                                           </div>,
-                                          "className": "step-title-container",
+                                          "className": "step-title-container step-title-wide",
                                           "onClick": [Function],
                                         },
                                         "memoizedState": null,
@@ -8361,14 +8611,14 @@ AppellantRightToAppealJourneyMap {
                                           >
                                             Book Appeal Date with Registry
                                           </div>,
-                                          "className": "step-title-container",
+                                          "className": "step-title-container step-title-wide",
                                           "onClick": [Function],
                                         },
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": null,
                                         "stateNode": <div
-                                          class="step-title-container"
+                                          class="step-title-container step-title-wide"
                                         >
                                           <div
                                             class="step-title"
@@ -8544,7 +8794,7 @@ AppellantRightToAppealJourneyMap {
                                       </div>
                                     </div>,
                                     <div
-                                      className="step-title-container"
+                                      className="step-title-container step-title-wide"
                                       onClick={[Function]}
                                     >
                                       <div
@@ -8557,7 +8807,7 @@ AppellantRightToAppealJourneyMap {
                                   "className": "journey-box",
                                   "style": Object {
                                     "left": "43%",
-                                    "top": "44%",
+                                    "top": "38%",
                                   },
                                 },
                                 "memoizedState": null,
@@ -8639,7 +8889,7 @@ AppellantRightToAppealJourneyMap {
                                       </div>
                                     </div>,
                                     <div
-                                      className="step-title-container"
+                                      className="step-title-container step-title-wide"
                                       onClick={[Function]}
                                     >
                                       <div
@@ -8652,7 +8902,7 @@ AppellantRightToAppealJourneyMap {
                                   "className": "journey-box",
                                   "style": Object {
                                     "left": "43%",
-                                    "top": "44%",
+                                    "top": "38%",
                                   },
                                 },
                                 "ref": null,
@@ -8660,7 +8910,7 @@ AppellantRightToAppealJourneyMap {
                                 "sibling": null,
                                 "stateNode": <div
                                   class="journey-box"
-                                  style="left: 43%; top: 44%;"
+                                  style="left: 43%; top: 38%;"
                                 >
                                   <input
                                     class="checkbox-glow checkbox-toggle"
@@ -8715,7 +8965,7 @@ AppellantRightToAppealJourneyMap {
                                     </div>
                                   </div>
                                   <div
-                                    class="step-title-container"
+                                    class="step-title-container step-title-wide"
                                   >
                                     <div
                                       class="step-title"
@@ -8742,9 +8992,10 @@ AppellantRightToAppealJourneyMap {
                                 "ready": undefined,
                                 "status": "new",
                                 "stepTitle": "Book Appeal Date with Registry",
+                                "stepTitleClass": "step-title-wide",
                                 "style": Object {
                                   "left": "43%",
-                                  "top": "44%",
+                                  "top": "38%",
                                 },
                               },
                               "memoizedState": null,
@@ -8758,9 +9009,10 @@ AppellantRightToAppealJourneyMap {
                                 "ready": undefined,
                                 "status": "new",
                                 "stepTitle": "Book Appeal Date with Registry",
+                                "stepTitleClass": "step-title-wide",
                                 "style": Object {
                                   "left": "43%",
-                                  "top": "44%",
+                                  "top": "38%",
                                 },
                               },
                               "ref": null,
@@ -8772,12 +9024,43 @@ AppellantRightToAppealJourneyMap {
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 117,
+                                  "_debugID": 122,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
-                                  "child": null,
+                                  "child": FiberNode {
+                                    "_debugID": 123,
+                                    "_debugIsCurrentlyTiming": false,
+                                    "_debugOwner": [Circular],
+                                    "_debugSource": null,
+                                    "alternate": null,
+                                    "child": null,
+                                    "effectTag": 0,
+                                    "expirationTime": 0,
+                                    "firstEffect": null,
+                                    "index": 0,
+                                    "key": null,
+                                    "lastEffect": null,
+                                    "memoizedProps": Object {
+                                      "className": "journey-trail-l2-l3",
+                                    },
+                                    "memoizedState": null,
+                                    "mode": 0,
+                                    "nextEffect": null,
+                                    "pendingProps": Object {
+                                      "className": "journey-trail-l2-l3",
+                                    },
+                                    "ref": null,
+                                    "return": [Circular],
+                                    "sibling": null,
+                                    "stateNode": <div
+                                      class="journey-trail-l2-l3"
+                                    />,
+                                    "tag": 5,
+                                    "type": "div",
+                                    "updateQueue": null,
+                                  },
                                   "effectTag": 0,
                                   "expirationTime": 0,
                                   "firstEffect": null,
@@ -8785,27 +9068,34 @@ AppellantRightToAppealJourneyMap {
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
-                                    "className": "journey-trail-l2-l3",
+                                    "children": <div
+                                      className="journey-trail-l2-l3"
+                                    />,
                                     "style": Object {
-                                      "width": "25%",
+                                      "width": "22%",
                                     },
                                   },
                                   "memoizedState": null,
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
-                                    "className": "journey-trail-l2-l3",
+                                    "children": <div
+                                      className="journey-trail-l2-l3"
+                                    />,
                                     "style": Object {
-                                      "width": "25%",
+                                      "width": "22%",
                                     },
                                   },
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": null,
                                   "stateNode": <div
-                                    class="journey-trail-l2-l3"
-                                    style="width: 25%;"
-                                  />,
+                                    style="width: 22%;"
+                                  >
+                                    <div
+                                      class="journey-trail-l2-l3"
+                                    />
+                                  </div>,
                                   "tag": 5,
                                   "type": "div",
                                   "updateQueue": null,
@@ -8821,7 +9111,7 @@ AppellantRightToAppealJourneyMap {
                                   "completed": false,
                                   "level": 2,
                                   "lineCompleted": false,
-                                  "width": "25%",
+                                  "width": "22%",
                                 },
                                 "memoizedState": null,
                                 "mode": 0,
@@ -8831,7 +9121,7 @@ AppellantRightToAppealJourneyMap {
                                   "completed": false,
                                   "level": 2,
                                   "lineCompleted": false,
-                                  "width": "25%",
+                                  "width": "22%",
                                 },
                                 "ref": null,
                                 "return": [Circular],
@@ -8842,19 +9132,19 @@ AppellantRightToAppealJourneyMap {
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 118,
+                                    "_debugID": 124,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 119,
+                                      "_debugID": 125,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 123,
+                                        "_debugID": 129,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -8940,7 +9230,7 @@ AppellantRightToAppealJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 120,
+                                        "_debugID": 126,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -8976,25 +9266,25 @@ AppellantRightToAppealJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 121,
+                                          "_debugID": 127,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 124,
+                                            "_debugID": 130,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 126,
+                                              "_debugID": 132,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 128,
+                                                "_debugID": 134,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -9024,7 +9314,7 @@ AppellantRightToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 129,
+                                                  "_debugID": 135,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -9054,7 +9344,7 @@ AppellantRightToAppealJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 130,
+                                                    "_debugID": 136,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -9178,25 +9468,25 @@ AppellantRightToAppealJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 127,
+                                                "_debugID": 133,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 131,
+                                                  "_debugID": 137,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 134,
+                                                    "_debugID": 140,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 135,
+                                                      "_debugID": 141,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -9284,19 +9574,19 @@ AppellantRightToAppealJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 132,
+                                                    "_debugID": 138,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 136,
+                                                      "_debugID": 142,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 137,
+                                                        "_debugID": 143,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -9384,7 +9674,7 @@ AppellantRightToAppealJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 133,
+                                                      "_debugID": 139,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -9716,7 +10006,7 @@ AppellantRightToAppealJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 125,
+                                              "_debugID": 131,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -9967,19 +10257,19 @@ AppellantRightToAppealJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 122,
+                                            "_debugID": 128,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 138,
+                                              "_debugID": 144,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 139,
+                                                "_debugID": 145,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -10005,7 +10295,7 @@ AppellantRightToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 140,
+                                                  "_debugID": 146,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -10360,7 +10650,7 @@ AppellantRightToAppealJourneyMap {
                                       "className": "journey-box",
                                       "style": Object {
                                         "left": "68%",
-                                        "top": "43%",
+                                        "top": "38%",
                                       },
                                     },
                                     "memoizedState": null,
@@ -10485,7 +10775,7 @@ AppellantRightToAppealJourneyMap {
                                       "className": "journey-box",
                                       "style": Object {
                                         "left": "68%",
-                                        "top": "43%",
+                                        "top": "38%",
                                       },
                                     },
                                     "ref": null,
@@ -10493,7 +10783,7 @@ AppellantRightToAppealJourneyMap {
                                     "sibling": null,
                                     "stateNode": <div
                                       class="journey-box"
-                                      style="left: 68%; top: 43%;"
+                                      style="left: 68%; top: 38%;"
                                     >
                                       <input
                                         class="checkbox-glow checkbox-toggle"
@@ -10596,7 +10886,7 @@ AppellantRightToAppealJourneyMap {
                                     "stepTitle": "Notice of Hearing",
                                     "style": Object {
                                       "left": "68%",
-                                      "top": "43%",
+                                      "top": "38%",
                                     },
                                     "twoPages": false,
                                   },
@@ -10613,7 +10903,7 @@ AppellantRightToAppealJourneyMap {
                                     "stepTitle": "Notice of Hearing",
                                     "style": Object {
                                       "left": "68%",
-                                      "top": "43%",
+                                      "top": "38%",
                                     },
                                     "twoPages": false,
                                   },
@@ -10626,12 +10916,43 @@ AppellantRightToAppealJourneyMap {
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 141,
+                                      "_debugID": 147,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
-                                      "child": null,
+                                      "child": FiberNode {
+                                        "_debugID": 148,
+                                        "_debugIsCurrentlyTiming": false,
+                                        "_debugOwner": [Circular],
+                                        "_debugSource": null,
+                                        "alternate": null,
+                                        "child": null,
+                                        "effectTag": 0,
+                                        "expirationTime": 0,
+                                        "firstEffect": null,
+                                        "index": 0,
+                                        "key": null,
+                                        "lastEffect": null,
+                                        "memoizedProps": Object {
+                                          "className": "journey-trail-l2-l3",
+                                        },
+                                        "memoizedState": null,
+                                        "mode": 0,
+                                        "nextEffect": null,
+                                        "pendingProps": Object {
+                                          "className": "journey-trail-l2-l3",
+                                        },
+                                        "ref": null,
+                                        "return": [Circular],
+                                        "sibling": null,
+                                        "stateNode": <div
+                                          class="journey-trail-l2-l3"
+                                        />,
+                                        "tag": 5,
+                                        "type": "div",
+                                        "updateQueue": null,
+                                      },
                                       "effectTag": 0,
                                       "expirationTime": 0,
                                       "firstEffect": null,
@@ -10639,7 +10960,9 @@ AppellantRightToAppealJourneyMap {
                                       "key": null,
                                       "lastEffect": null,
                                       "memoizedProps": Object {
-                                        "className": "journey-trail-l2-l3",
+                                        "children": <div
+                                          className="journey-trail-l2-l3"
+                                        />,
                                         "style": Object {
                                           "width": "5%",
                                         },
@@ -10648,7 +10971,9 @@ AppellantRightToAppealJourneyMap {
                                       "mode": 0,
                                       "nextEffect": null,
                                       "pendingProps": Object {
-                                        "className": "journey-trail-l2-l3",
+                                        "children": <div
+                                          className="journey-trail-l2-l3"
+                                        />,
                                         "style": Object {
                                           "width": "5%",
                                         },
@@ -10657,9 +10982,12 @@ AppellantRightToAppealJourneyMap {
                                       "return": [Circular],
                                       "sibling": null,
                                       "stateNode": <div
-                                        class="journey-trail-l2-l3"
                                         style="width: 5%;"
-                                      />,
+                                      >
+                                        <div
+                                          class="journey-trail-l2-l3"
+                                        />
+                                      </div>,
                                       "tag": 5,
                                       "type": "div",
                                       "updateQueue": null,
@@ -10744,12 +11072,43 @@ AppellantRightToAppealJourneyMap {
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 142,
+                                            "_debugID": 149,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
-                                            "child": null,
+                                            "child": FiberNode {
+                                              "_debugID": 150,
+                                              "_debugIsCurrentlyTiming": false,
+                                              "_debugOwner": [Circular],
+                                              "_debugSource": null,
+                                              "alternate": null,
+                                              "child": null,
+                                              "effectTag": 0,
+                                              "expirationTime": 0,
+                                              "firstEffect": null,
+                                              "index": 0,
+                                              "key": null,
+                                              "lastEffect": null,
+                                              "memoizedProps": Object {
+                                                "className": "journey-trail-l2-l3 last-row",
+                                              },
+                                              "memoizedState": null,
+                                              "mode": 0,
+                                              "nextEffect": null,
+                                              "pendingProps": Object {
+                                                "className": "journey-trail-l2-l3 last-row",
+                                              },
+                                              "ref": null,
+                                              "return": [Circular],
+                                              "sibling": null,
+                                              "stateNode": <div
+                                                class="journey-trail-l2-l3 last-row"
+                                              />,
+                                              "tag": 5,
+                                              "type": "div",
+                                              "updateQueue": null,
+                                            },
                                             "effectTag": 0,
                                             "expirationTime": 0,
                                             "firstEffect": null,
@@ -10757,27 +11116,34 @@ AppellantRightToAppealJourneyMap {
                                             "key": null,
                                             "lastEffect": null,
                                             "memoizedProps": Object {
-                                              "className": "journey-trail-l2-l3 last-row",
+                                              "children": <div
+                                                className="journey-trail-l2-l3 last-row"
+                                              />,
                                               "style": Object {
-                                                "width": "25%",
+                                                "width": "22%",
                                               },
                                             },
                                             "memoizedState": null,
                                             "mode": 0,
                                             "nextEffect": null,
                                             "pendingProps": Object {
-                                              "className": "journey-trail-l2-l3 last-row",
+                                              "children": <div
+                                                className="journey-trail-l2-l3 last-row"
+                                              />,
                                               "style": Object {
-                                                "width": "25%",
+                                                "width": "22%",
                                               },
                                             },
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": null,
                                             "stateNode": <div
-                                              class="journey-trail-l2-l3 last-row"
-                                              style="width: 25%;"
-                                            />,
+                                              style="width: 22%;"
+                                            >
+                                              <div
+                                                class="journey-trail-l2-l3 last-row"
+                                              />
+                                            </div>,
                                             "tag": 5,
                                             "type": "div",
                                             "updateQueue": null,
@@ -10792,7 +11158,7 @@ AppellantRightToAppealJourneyMap {
                                             "className": "journey-trail-l2-l3 last-row",
                                             "completed": false,
                                             "level": 3,
-                                            "width": "25%",
+                                            "width": "22%",
                                           },
                                           "memoizedState": null,
                                           "mode": 0,
@@ -10801,7 +11167,7 @@ AppellantRightToAppealJourneyMap {
                                             "className": "journey-trail-l2-l3 last-row",
                                             "completed": false,
                                             "level": 3,
-                                            "width": "25%",
+                                            "width": "22%",
                                           },
                                           "ref": null,
                                           "return": [Circular],
@@ -10812,19 +11178,19 @@ AppellantRightToAppealJourneyMap {
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 143,
+                                              "_debugID": 151,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 144,
+                                                "_debugID": 152,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 148,
+                                                  "_debugID": 156,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -10910,7 +11276,7 @@ AppellantRightToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 145,
+                                                  "_debugID": 153,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -10946,37 +11312,37 @@ AppellantRightToAppealJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 146,
+                                                    "_debugID": 154,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 149,
+                                                      "_debugID": 157,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 150,
+                                                        "_debugID": 158,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
                                                         "alternate": null,
                                                         "child": FiberNode {
-                                                          "_debugID": 151,
+                                                          "_debugID": 159,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
                                                           "alternate": null,
                                                           "child": FiberNode {
-                                                            "_debugID": 154,
+                                                            "_debugID": 162,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
                                                             "alternate": null,
                                                             "child": FiberNode {
-                                                              "_debugID": 155,
+                                                              "_debugID": 163,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
@@ -11000,7 +11366,7 @@ AppellantRightToAppealJourneyMap {
                                                               "ref": null,
                                                               "return": [Circular],
                                                               "sibling": FiberNode {
-                                                                "_debugID": 156,
+                                                                "_debugID": 164,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
@@ -11166,13 +11532,13 @@ AppellantRightToAppealJourneyMap {
                                                           "ref": null,
                                                           "return": [Circular],
                                                           "sibling": FiberNode {
-                                                            "_debugID": 152,
+                                                            "_debugID": 160,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
                                                             "alternate": null,
                                                             "child": FiberNode {
-                                                              "_debugID": 157,
+                                                              "_debugID": 165,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
@@ -11202,7 +11568,7 @@ AppellantRightToAppealJourneyMap {
                                                               "ref": null,
                                                               "return": [Circular],
                                                               "sibling": FiberNode {
-                                                                "_debugID": 158,
+                                                                "_debugID": 166,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
@@ -11232,7 +11598,7 @@ AppellantRightToAppealJourneyMap {
                                                                 "ref": null,
                                                                 "return": [Circular],
                                                                 "sibling": FiberNode {
-                                                                  "_debugID": 159,
+                                                                  "_debugID": 167,
                                                                   "_debugIsCurrentlyTiming": false,
                                                                   "_debugOwner": [Circular],
                                                                   "_debugSource": null,
@@ -11356,25 +11722,25 @@ AppellantRightToAppealJourneyMap {
                                                             "ref": null,
                                                             "return": [Circular],
                                                             "sibling": FiberNode {
-                                                              "_debugID": 153,
+                                                              "_debugID": 161,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
                                                               "alternate": null,
                                                               "child": FiberNode {
-                                                                "_debugID": 160,
+                                                                "_debugID": 168,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
                                                                 "alternate": null,
                                                                 "child": FiberNode {
-                                                                  "_debugID": 161,
+                                                                  "_debugID": 169,
                                                                   "_debugIsCurrentlyTiming": false,
                                                                   "_debugOwner": [Circular],
                                                                   "_debugSource": null,
                                                                   "alternate": null,
                                                                   "child": FiberNode {
-                                                                    "_debugID": 163,
+                                                                    "_debugID": 171,
                                                                     "_debugIsCurrentlyTiming": false,
                                                                     "_debugOwner": [Circular],
                                                                     "_debugSource": null,
@@ -11404,7 +11770,7 @@ AppellantRightToAppealJourneyMap {
                                                                     "ref": null,
                                                                     "return": [Circular],
                                                                     "sibling": FiberNode {
-                                                                      "_debugID": 164,
+                                                                      "_debugID": 172,
                                                                       "_debugIsCurrentlyTiming": false,
                                                                       "_debugOwner": [Circular],
                                                                       "_debugSource": null,
@@ -11434,7 +11800,7 @@ AppellantRightToAppealJourneyMap {
                                                                       "ref": null,
                                                                       "return": [Circular],
                                                                       "sibling": FiberNode {
-                                                                        "_debugID": 165,
+                                                                        "_debugID": 173,
                                                                         "_debugIsCurrentlyTiming": false,
                                                                         "_debugOwner": [Circular],
                                                                         "_debugSource": null,
@@ -11556,7 +11922,7 @@ AppellantRightToAppealJourneyMap {
                                                                   "ref": null,
                                                                   "return": [Circular],
                                                                   "sibling": FiberNode {
-                                                                    "_debugID": 162,
+                                                                    "_debugID": 170,
                                                                     "_debugIsCurrentlyTiming": false,
                                                                     "_debugOwner": [Circular],
                                                                     "_debugSource": null,
@@ -12644,13 +13010,13 @@ AppellantRightToAppealJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 147,
+                                                      "_debugID": 155,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 166,
+                                                        "_debugID": 174,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -13004,7 +13370,7 @@ AppellantRightToAppealJourneyMap {
                                                 "style": Object {
                                                   "left": "30%",
                                                   "marginTop": "3px",
-                                                  "top": "80%",
+                                                  "top": "69%",
                                                 },
                                               },
                                               "memoizedState": null,
@@ -13161,7 +13527,7 @@ AppellantRightToAppealJourneyMap {
                                                 "style": Object {
                                                   "left": "30%",
                                                   "marginTop": "3px",
-                                                  "top": "80%",
+                                                  "top": "69%",
                                                 },
                                               },
                                               "ref": null,
@@ -13169,7 +13535,7 @@ AppellantRightToAppealJourneyMap {
                                               "sibling": null,
                                               "stateNode": <div
                                                 class="journey-box"
-                                                style="left: 30%; top: 80%; margin-top: 3px;"
+                                                style="left: 30%; top: 69%; margin-top: 3px;"
                                               >
                                                 <input
                                                   class="checkbox-glow checkbox-toggle"
@@ -13285,7 +13651,7 @@ AppellantRightToAppealJourneyMap {
                                               "stepTitle": "The Hearing",
                                               "style": Object {
                                                 "left": "30%",
-                                                "top": "80%",
+                                                "top": "69%",
                                               },
                                             },
                                             "memoizedState": null,
@@ -13302,7 +13668,7 @@ AppellantRightToAppealJourneyMap {
                                               "stepTitle": "The Hearing",
                                               "style": Object {
                                                 "left": "30%",
-                                                "top": "80%",
+                                                "top": "69%",
                                               },
                                             },
                                             "ref": null,
@@ -13314,12 +13680,43 @@ AppellantRightToAppealJourneyMap {
                                               "_debugSource": null,
                                               "alternate": null,
                                               "child": FiberNode {
-                                                "_debugID": 167,
+                                                "_debugID": 175,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
                                                 "alternate": null,
-                                                "child": null,
+                                                "child": FiberNode {
+                                                  "_debugID": 176,
+                                                  "_debugIsCurrentlyTiming": false,
+                                                  "_debugOwner": [Circular],
+                                                  "_debugSource": null,
+                                                  "alternate": null,
+                                                  "child": null,
+                                                  "effectTag": 0,
+                                                  "expirationTime": 0,
+                                                  "firstEffect": null,
+                                                  "index": 0,
+                                                  "key": null,
+                                                  "lastEffect": null,
+                                                  "memoizedProps": Object {
+                                                    "className": "journey-trail-l2-l3 last-row",
+                                                  },
+                                                  "memoizedState": null,
+                                                  "mode": 0,
+                                                  "nextEffect": null,
+                                                  "pendingProps": Object {
+                                                    "className": "journey-trail-l2-l3 last-row",
+                                                  },
+                                                  "ref": null,
+                                                  "return": [Circular],
+                                                  "sibling": null,
+                                                  "stateNode": <div
+                                                    class="journey-trail-l2-l3 last-row"
+                                                  />,
+                                                  "tag": 5,
+                                                  "type": "div",
+                                                  "updateQueue": null,
+                                                },
                                                 "effectTag": 0,
                                                 "expirationTime": 0,
                                                 "firstEffect": null,
@@ -13327,27 +13724,34 @@ AppellantRightToAppealJourneyMap {
                                                 "key": null,
                                                 "lastEffect": null,
                                                 "memoizedProps": Object {
-                                                  "className": "journey-trail-l2-l3 last-row",
+                                                  "children": <div
+                                                    className="journey-trail-l2-l3 last-row"
+                                                  />,
                                                   "style": Object {
-                                                    "width": "35%",
+                                                    "width": "32%",
                                                   },
                                                 },
                                                 "memoizedState": null,
                                                 "mode": 0,
                                                 "nextEffect": null,
                                                 "pendingProps": Object {
-                                                  "className": "journey-trail-l2-l3 last-row",
+                                                  "children": <div
+                                                    className="journey-trail-l2-l3 last-row"
+                                                  />,
                                                   "style": Object {
-                                                    "width": "35%",
+                                                    "width": "32%",
                                                   },
                                                 },
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": null,
                                                 "stateNode": <div
-                                                  class="journey-trail-l2-l3 last-row"
-                                                  style="width: 35%;"
-                                                />,
+                                                  style="width: 32%;"
+                                                >
+                                                  <div
+                                                    class="journey-trail-l2-l3 last-row"
+                                                  />
+                                                </div>,
                                                 "tag": 5,
                                                 "type": "div",
                                                 "updateQueue": null,
@@ -13362,7 +13766,7 @@ AppellantRightToAppealJourneyMap {
                                                 "className": "journey-trail-l2-l3 last-row",
                                                 "completed": false,
                                                 "level": 3,
-                                                "width": "35%",
+                                                "width": "32%",
                                               },
                                               "memoizedState": null,
                                               "mode": 0,
@@ -13371,7 +13775,7 @@ AppellantRightToAppealJourneyMap {
                                                 "className": "journey-trail-l2-l3 last-row",
                                                 "completed": false,
                                                 "level": 3,
-                                                "width": "35%",
+                                                "width": "32%",
                                               },
                                               "ref": null,
                                               "return": [Circular],
@@ -13382,19 +13786,19 @@ AppellantRightToAppealJourneyMap {
                                                 "_debugSource": null,
                                                 "alternate": null,
                                                 "child": FiberNode {
-                                                  "_debugID": 168,
+                                                  "_debugID": 177,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 169,
+                                                    "_debugID": 178,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 173,
+                                                      "_debugID": 182,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -13480,7 +13884,7 @@ AppellantRightToAppealJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 170,
+                                                      "_debugID": 179,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -13516,25 +13920,25 @@ AppellantRightToAppealJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 171,
+                                                        "_debugID": 180,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
                                                         "alternate": null,
                                                         "child": FiberNode {
-                                                          "_debugID": 174,
+                                                          "_debugID": 183,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
                                                           "alternate": null,
                                                           "child": FiberNode {
-                                                            "_debugID": 176,
+                                                            "_debugID": 185,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
                                                             "alternate": null,
                                                             "child": FiberNode {
-                                                              "_debugID": 178,
+                                                              "_debugID": 187,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
@@ -13564,7 +13968,7 @@ AppellantRightToAppealJourneyMap {
                                                               "ref": null,
                                                               "return": [Circular],
                                                               "sibling": FiberNode {
-                                                                "_debugID": 179,
+                                                                "_debugID": 188,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
@@ -13594,7 +13998,7 @@ AppellantRightToAppealJourneyMap {
                                                                 "ref": null,
                                                                 "return": [Circular],
                                                                 "sibling": FiberNode {
-                                                                  "_debugID": 180,
+                                                                  "_debugID": 189,
                                                                   "_debugIsCurrentlyTiming": false,
                                                                   "_debugOwner": [Circular],
                                                                   "_debugSource": null,
@@ -13718,25 +14122,25 @@ AppellantRightToAppealJourneyMap {
                                                             "ref": null,
                                                             "return": [Circular],
                                                             "sibling": FiberNode {
-                                                              "_debugID": 177,
+                                                              "_debugID": 186,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
                                                               "alternate": null,
                                                               "child": FiberNode {
-                                                                "_debugID": 181,
+                                                                "_debugID": 190,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
                                                                 "alternate": null,
                                                                 "child": FiberNode {
-                                                                  "_debugID": 184,
+                                                                  "_debugID": 193,
                                                                   "_debugIsCurrentlyTiming": false,
                                                                   "_debugOwner": [Circular],
                                                                   "_debugSource": null,
                                                                   "alternate": null,
                                                                   "child": FiberNode {
-                                                                    "_debugID": 185,
+                                                                    "_debugID": 194,
                                                                     "_debugIsCurrentlyTiming": false,
                                                                     "_debugOwner": [Circular],
                                                                     "_debugSource": null,
@@ -13824,19 +14228,19 @@ AppellantRightToAppealJourneyMap {
                                                                 "ref": null,
                                                                 "return": [Circular],
                                                                 "sibling": FiberNode {
-                                                                  "_debugID": 182,
+                                                                  "_debugID": 191,
                                                                   "_debugIsCurrentlyTiming": false,
                                                                   "_debugOwner": [Circular],
                                                                   "_debugSource": null,
                                                                   "alternate": null,
                                                                   "child": FiberNode {
-                                                                    "_debugID": 186,
+                                                                    "_debugID": 195,
                                                                     "_debugIsCurrentlyTiming": false,
                                                                     "_debugOwner": [Circular],
                                                                     "_debugSource": null,
                                                                     "alternate": null,
                                                                     "child": FiberNode {
-                                                                      "_debugID": 187,
+                                                                      "_debugID": 196,
                                                                       "_debugIsCurrentlyTiming": false,
                                                                       "_debugOwner": [Circular],
                                                                       "_debugSource": null,
@@ -13924,7 +14328,7 @@ AppellantRightToAppealJourneyMap {
                                                                   "ref": null,
                                                                   "return": [Circular],
                                                                   "sibling": FiberNode {
-                                                                    "_debugID": 183,
+                                                                    "_debugID": 192,
                                                                     "_debugIsCurrentlyTiming": false,
                                                                     "_debugOwner": [Circular],
                                                                     "_debugSource": null,
@@ -14256,7 +14660,7 @@ AppellantRightToAppealJourneyMap {
                                                           "ref": null,
                                                           "return": [Circular],
                                                           "sibling": FiberNode {
-                                                            "_debugID": 175,
+                                                            "_debugID": 184,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
@@ -14507,19 +14911,19 @@ AppellantRightToAppealJourneyMap {
                                                         "ref": null,
                                                         "return": [Circular],
                                                         "sibling": FiberNode {
-                                                          "_debugID": 172,
+                                                          "_debugID": 181,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
                                                           "alternate": null,
                                                           "child": FiberNode {
-                                                            "_debugID": 188,
+                                                            "_debugID": 197,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
                                                             "alternate": null,
                                                             "child": FiberNode {
-                                                              "_debugID": 189,
+                                                              "_debugID": 198,
                                                               "_debugIsCurrentlyTiming": false,
                                                               "_debugOwner": [Circular],
                                                               "_debugSource": null,
@@ -14545,7 +14949,7 @@ AppellantRightToAppealJourneyMap {
                                                               "ref": null,
                                                               "return": [Circular],
                                                               "sibling": FiberNode {
-                                                                "_debugID": 190,
+                                                                "_debugID": 199,
                                                                 "_debugIsCurrentlyTiming": false,
                                                                 "_debugOwner": [Circular],
                                                                 "_debugSource": null,
@@ -14900,7 +15304,7 @@ AppellantRightToAppealJourneyMap {
                                                     "className": "journey-box",
                                                     "style": Object {
                                                       "left": "59%",
-                                                      "top": "80%",
+                                                      "top": "69%",
                                                     },
                                                   },
                                                   "memoizedState": null,
@@ -15025,7 +15429,7 @@ AppellantRightToAppealJourneyMap {
                                                     "className": "journey-box",
                                                     "style": Object {
                                                       "left": "59%",
-                                                      "top": "80%",
+                                                      "top": "69%",
                                                     },
                                                   },
                                                   "ref": null,
@@ -15033,7 +15437,7 @@ AppellantRightToAppealJourneyMap {
                                                   "sibling": null,
                                                   "stateNode": <div
                                                     class="journey-box"
-                                                    style="left: 59%; top: 80%;"
+                                                    style="left: 59%; top: 69%;"
                                                   >
                                                     <input
                                                       class="checkbox-glow checkbox-toggle"
@@ -15137,7 +15541,7 @@ AppellantRightToAppealJourneyMap {
                                                   "stepTitle": "Court Order",
                                                   "style": Object {
                                                     "left": "59%",
-                                                    "top": "80%",
+                                                    "top": "69%",
                                                   },
                                                   "twoPages": false,
                                                 },
@@ -15155,7 +15559,7 @@ AppellantRightToAppealJourneyMap {
                                                   "stepTitle": "Court Order",
                                                   "style": Object {
                                                     "left": "59%",
-                                                    "top": "80%",
+                                                    "top": "69%",
                                                   },
                                                   "twoPages": false,
                                                 },
@@ -15168,12 +15572,43 @@ AppellantRightToAppealJourneyMap {
                                                   "_debugSource": null,
                                                   "alternate": null,
                                                   "child": FiberNode {
-                                                    "_debugID": 191,
+                                                    "_debugID": 200,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
                                                     "alternate": null,
-                                                    "child": null,
+                                                    "child": FiberNode {
+                                                      "_debugID": 201,
+                                                      "_debugIsCurrentlyTiming": false,
+                                                      "_debugOwner": [Circular],
+                                                      "_debugSource": null,
+                                                      "alternate": null,
+                                                      "child": null,
+                                                      "effectTag": 0,
+                                                      "expirationTime": 0,
+                                                      "firstEffect": null,
+                                                      "index": 0,
+                                                      "key": null,
+                                                      "lastEffect": null,
+                                                      "memoizedProps": Object {
+                                                        "className": "journey-trail-l2-l3 last-row",
+                                                      },
+                                                      "memoizedState": null,
+                                                      "mode": 0,
+                                                      "nextEffect": null,
+                                                      "pendingProps": Object {
+                                                        "className": "journey-trail-l2-l3 last-row",
+                                                      },
+                                                      "ref": null,
+                                                      "return": [Circular],
+                                                      "sibling": null,
+                                                      "stateNode": <div
+                                                        class="journey-trail-l2-l3 last-row"
+                                                      />,
+                                                      "tag": 5,
+                                                      "type": "div",
+                                                      "updateQueue": null,
+                                                    },
                                                     "effectTag": 0,
                                                     "expirationTime": 0,
                                                     "firstEffect": null,
@@ -15181,27 +15616,34 @@ AppellantRightToAppealJourneyMap {
                                                     "key": null,
                                                     "lastEffect": null,
                                                     "memoizedProps": Object {
-                                                      "className": "journey-trail-l2-l3 last-row",
+                                                      "children": <div
+                                                        className="journey-trail-l2-l3 last-row"
+                                                      />,
                                                       "style": Object {
-                                                        "width": "25%",
+                                                        "width": "22%",
                                                       },
                                                     },
                                                     "memoizedState": null,
                                                     "mode": 0,
                                                     "nextEffect": null,
                                                     "pendingProps": Object {
-                                                      "className": "journey-trail-l2-l3 last-row",
+                                                      "children": <div
+                                                        className="journey-trail-l2-l3 last-row"
+                                                      />,
                                                       "style": Object {
-                                                        "width": "25%",
+                                                        "width": "22%",
                                                       },
                                                     },
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": null,
                                                     "stateNode": <div
-                                                      class="journey-trail-l2-l3 last-row"
-                                                      style="width: 25%;"
-                                                    />,
+                                                      style="width: 22%;"
+                                                    >
+                                                      <div
+                                                        class="journey-trail-l2-l3 last-row"
+                                                      />
+                                                    </div>,
                                                     "tag": 5,
                                                     "type": "div",
                                                     "updateQueue": null,
@@ -15216,7 +15658,7 @@ AppellantRightToAppealJourneyMap {
                                                     "className": "journey-trail-l2-l3 last-row",
                                                     "completed": false,
                                                     "level": 3,
-                                                    "width": "25%",
+                                                    "width": "22%",
                                                   },
                                                   "memoizedState": null,
                                                   "mode": 0,
@@ -15225,7 +15667,7 @@ AppellantRightToAppealJourneyMap {
                                                     "className": "journey-trail-l2-l3 last-row",
                                                     "completed": false,
                                                     "level": 3,
-                                                    "width": "25%",
+                                                    "width": "22%",
                                                   },
                                                   "ref": null,
                                                   "return": [Circular],
@@ -15236,13 +15678,13 @@ AppellantRightToAppealJourneyMap {
                                                     "_debugSource": null,
                                                     "alternate": null,
                                                     "child": FiberNode {
-                                                      "_debugID": 192,
+                                                      "_debugID": 202,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
                                                       "alternate": null,
                                                       "child": FiberNode {
-                                                        "_debugID": 193,
+                                                        "_debugID": 203,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -15266,13 +15708,13 @@ AppellantRightToAppealJourneyMap {
                                                         "ref": null,
                                                         "return": [Circular],
                                                         "sibling": FiberNode {
-                                                          "_debugID": 194,
+                                                          "_debugID": 204,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
                                                           "alternate": null,
                                                           "child": FiberNode {
-                                                            "_debugID": 195,
+                                                            "_debugID": 205,
                                                             "_debugIsCurrentlyTiming": false,
                                                             "_debugOwner": [Circular],
                                                             "_debugSource": null,
@@ -15382,7 +15824,7 @@ AppellantRightToAppealJourneyMap {
                                                         "onClick": [Function],
                                                         "style": Object {
                                                           "left": "80%",
-                                                          "top": "80%",
+                                                          "top": "69%",
                                                         },
                                                       },
                                                       "memoizedState": null,
@@ -15407,7 +15849,7 @@ AppellantRightToAppealJourneyMap {
                                                         "onClick": [Function],
                                                         "style": Object {
                                                           "left": "80%",
-                                                          "top": "80%",
+                                                          "top": "69%",
                                                         },
                                                       },
                                                       "ref": null,
@@ -15415,7 +15857,7 @@ AppellantRightToAppealJourneyMap {
                                                       "sibling": null,
                                                       "stateNode": <div
                                                         class="action-end-point journey-end-circle any-icon"
-                                                        style="top: 80%; left: 80%;"
+                                                        style="top: 69%; left: 80%;"
                                                       >
                                                         <div
                                                           class="oi oi-check journey-final-check"
@@ -15447,7 +15889,7 @@ AppellantRightToAppealJourneyMap {
                                                       "stepTitle": "Appeal Process Complete",
                                                       "style": Object {
                                                         "left": "80%",
-                                                        "top": "80%",
+                                                        "top": "69%",
                                                       },
                                                     },
                                                     "memoizedState": null,
@@ -15460,7 +15902,7 @@ AppellantRightToAppealJourneyMap {
                                                       "stepTitle": "Appeal Process Complete",
                                                       "style": Object {
                                                         "left": "80%",
-                                                        "top": "80%",
+                                                        "top": "69%",
                                                       },
                                                     },
                                                     "ref": null,
@@ -15477,7 +15919,7 @@ AppellantRightToAppealJourneyMap {
                                                         "stepTitle": "Appeal Process Complete",
                                                         "style": Object {
                                                           "left": "80%",
-                                                          "top": "80%",
+                                                          "top": "69%",
                                                         },
                                                       },
                                                       "refs": Object {},
@@ -15501,7 +15943,7 @@ AppellantRightToAppealJourneyMap {
                                                       "className": "journey-trail-l2-l3 last-row",
                                                       "completed": false,
                                                       "level": 3,
-                                                      "width": "25%",
+                                                      "width": "22%",
                                                     },
                                                     "refs": Object {},
                                                     "state": null,
@@ -15531,7 +15973,7 @@ AppellantRightToAppealJourneyMap {
                                                     "stepTitle": "Court Order",
                                                     "style": Object {
                                                       "left": "59%",
-                                                      "top": "80%",
+                                                      "top": "69%",
                                                     },
                                                     "twoPages": false,
                                                   },
@@ -15556,7 +15998,7 @@ AppellantRightToAppealJourneyMap {
                                                   "className": "journey-trail-l2-l3 last-row",
                                                   "completed": false,
                                                   "level": 3,
-                                                  "width": "35%",
+                                                  "width": "32%",
                                                 },
                                                 "refs": Object {},
                                                 "state": null,
@@ -15586,7 +16028,7 @@ AppellantRightToAppealJourneyMap {
                                                 "stepTitle": "The Hearing",
                                                 "style": Object {
                                                   "left": "30%",
-                                                  "top": "80%",
+                                                  "top": "69%",
                                                 },
                                               },
                                               "refs": Object {},
@@ -15610,7 +16052,7 @@ AppellantRightToAppealJourneyMap {
                                               "className": "journey-trail-l2-l3 last-row",
                                               "completed": false,
                                               "level": 3,
-                                              "width": "25%",
+                                              "width": "22%",
                                             },
                                             "refs": Object {},
                                             "state": null,
@@ -15677,7 +16119,7 @@ AppellantRightToAppealJourneyMap {
                                       "stepTitle": "Notice of Hearing",
                                       "style": Object {
                                         "left": "68%",
-                                        "top": "43%",
+                                        "top": "38%",
                                       },
                                       "twoPages": false,
                                     },
@@ -15703,7 +16145,7 @@ AppellantRightToAppealJourneyMap {
                                     "completed": false,
                                     "level": 2,
                                     "lineCompleted": false,
-                                    "width": "25%",
+                                    "width": "22%",
                                   },
                                   "refs": Object {},
                                   "state": null,
@@ -15730,9 +16172,10 @@ AppellantRightToAppealJourneyMap {
                                   "ready": undefined,
                                   "status": "new",
                                   "stepTitle": "Book Appeal Date with Registry",
+                                  "stepTitleClass": "step-title-wide",
                                   "style": Object {
                                     "left": "43%",
-                                    "top": "44%",
+                                    "top": "38%",
                                   },
                                 },
                                 "refs": Object {},
@@ -15757,7 +16200,7 @@ AppellantRightToAppealJourneyMap {
                                 "completed": false,
                                 "level": 2,
                                 "lineCompleted": false,
-                                "width": "25%",
+                                "width": "22%",
                               },
                               "refs": Object {},
                               "state": null,
@@ -15787,7 +16230,7 @@ AppellantRightToAppealJourneyMap {
                               "stepTitleClass": "step-title-wide",
                               "style": Object {
                                 "left": "20%",
-                                "top": "43%",
+                                "top": "38%",
                               },
                               "twoPages": true,
                             },
@@ -15813,7 +16256,7 @@ AppellantRightToAppealJourneyMap {
                             "completed": false,
                             "level": 2,
                             "lineCompleted": false,
-                            "width": "18%",
+                            "width": "15%",
                           },
                           "refs": Object {},
                           "state": null,
@@ -15906,7 +16349,7 @@ AppellantRightToAppealJourneyMap {
                   "completed": false,
                   "level": 1,
                   "lineCompleted": false,
-                  "width": "35%",
+                  "width": "32%",
                 },
                 "refs": Object {},
                 "state": null,
@@ -15960,7 +16403,7 @@ AppellantRightToAppealJourneyMap {
               "completed": false,
               "level": 1,
               "lineCompleted": false,
-              "width": "28%",
+              "width": "25%",
             },
             "refs": Object {},
             "state": null,
@@ -15998,7 +16441,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="28%"
+            width="25%"
           />,
           <PageIcon
             action={[Function]}
@@ -16019,7 +16462,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="35%"
+            width="32%"
           />,
           <PageIcon
             action={[Function]}
@@ -16054,7 +16497,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="18%"
+            width="15%"
           />,
           <PageIcon
             action={[Function]}
@@ -16067,7 +16510,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "20%",
-                "top": "43%",
+                "top": "38%",
               }
             }
             twoPages={true}
@@ -16077,7 +16520,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="25%"
+            width="22%"
           />,
           <CalendarIcon
             action={[Function]}
@@ -16086,10 +16529,11 @@ AppellantRightToAppealJourneyMap {
             order={4}
             status="new"
             stepTitle="Book Appeal Date with Registry"
+            stepTitleClass="step-title-wide"
             style={
               Object {
                 "left": "43%",
-                "top": "44%",
+                "top": "38%",
               }
             }
           />,
@@ -16098,7 +16542,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="25%"
+            width="22%"
           />,
           <PageIcon
             action={[Function]}
@@ -16110,7 +16554,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "68%",
-                "top": "43%",
+                "top": "38%",
               }
             }
             twoPages={false}
@@ -16132,7 +16576,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="25%"
+            width="22%"
           />,
           <GavelIcon
             action={[Function]}
@@ -16145,7 +16589,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "30%",
-                "top": "80%",
+                "top": "69%",
               }
             }
           />,
@@ -16153,7 +16597,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="35%"
+            width="32%"
           />,
           <PageIcon
             action={[Function]}
@@ -16166,7 +16610,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "59%",
-                "top": "80%",
+                "top": "69%",
               }
             }
             twoPages={false}
@@ -16175,7 +16619,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="25%"
+            width="22%"
           />,
           <EndCircle
             action={[Function]}
@@ -16185,7 +16629,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "80%",
-                "top": "80%",
+                "top": "69%",
               }
             }
           />,
@@ -16205,7 +16649,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="28%"
+            width="25%"
           />,
           <PageIcon
             action={[Function]}
@@ -16226,7 +16670,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={1}
             lineCompleted={false}
-            width="35%"
+            width="32%"
           />,
           <PageIcon
             action={[Function]}
@@ -16261,7 +16705,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="18%"
+            width="15%"
           />,
           <PageIcon
             action={[Function]}
@@ -16274,7 +16718,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "20%",
-                "top": "43%",
+                "top": "38%",
               }
             }
             twoPages={true}
@@ -16284,7 +16728,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="25%"
+            width="22%"
           />,
           <CalendarIcon
             action={[Function]}
@@ -16293,10 +16737,11 @@ AppellantRightToAppealJourneyMap {
             order={4}
             status="new"
             stepTitle="Book Appeal Date with Registry"
+            stepTitleClass="step-title-wide"
             style={
               Object {
                 "left": "43%",
-                "top": "44%",
+                "top": "38%",
               }
             }
           />,
@@ -16305,7 +16750,7 @@ AppellantRightToAppealJourneyMap {
             completed={false}
             level={2}
             lineCompleted={false}
-            width="25%"
+            width="22%"
           />,
           <PageIcon
             action={[Function]}
@@ -16317,7 +16762,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "68%",
-                "top": "43%",
+                "top": "38%",
               }
             }
             twoPages={false}
@@ -16339,7 +16784,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="25%"
+            width="22%"
           />,
           <GavelIcon
             action={[Function]}
@@ -16352,7 +16797,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "30%",
-                "top": "80%",
+                "top": "69%",
               }
             }
           />,
@@ -16360,7 +16805,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="35%"
+            width="32%"
           />,
           <PageIcon
             action={[Function]}
@@ -16373,7 +16818,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "59%",
-                "top": "80%",
+                "top": "69%",
               }
             }
             twoPages={false}
@@ -16382,7 +16827,7 @@ AppellantRightToAppealJourneyMap {
             className="journey-trail-l2-l3 last-row"
             completed={false}
             level={3}
-            width="25%"
+            width="22%"
           />,
           <EndCircle
             action={[Function]}
@@ -16392,7 +16837,7 @@ AppellantRightToAppealJourneyMap {
             style={
               Object {
                 "left": "80%",
-                "top": "80%",
+                "top": "69%",
               }
             }
           />,
@@ -16409,9 +16854,12 @@ AppellantRightToAppealJourneyMap {
           class="journey-start-circle"
         />
         <div
-          class="journey-trail-l1-l2"
-          style="width: 28%;"
-        />
+          style="width: 25%;"
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-box"
           style="left: 30%;"
@@ -16498,9 +16946,12 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2"
-          style="width: 35%;"
-        />
+          style="width: 32%;"
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-box"
           style="left: 60%;"
@@ -16581,9 +17032,12 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l1-l2"
           style="width: 10%;"
-        />
+        >
+          <div
+            class="journey-trail-l1-l2"
+          />
+        </div>
         <div
           class="journey-right-curve"
         />
@@ -16591,12 +17045,15 @@ AppellantRightToAppealJourneyMap {
           class="journey-left-curve"
         />
         <div
-          class="journey-trail-l2-l3"
-          style="width: 18%;"
-        />
+          style="width: 15%;"
+        >
+          <div
+            class="journey-trail-l2-l3"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 20%; top: 43%;"
+          style="left: 20%; top: 38%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -16674,12 +17131,15 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3"
-          style="width: 25%;"
-        />
+          style="width: 22%;"
+        >
+          <div
+            class="journey-trail-l2-l3"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 43%; top: 44%;"
+          style="left: 43%; top: 38%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -16734,7 +17194,7 @@ AppellantRightToAppealJourneyMap {
             </div>
           </div>
           <div
-            class="step-title-container"
+            class="step-title-container step-title-wide"
           >
             <div
               class="step-title"
@@ -16744,12 +17204,15 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3"
-          style="width: 25%;"
-        />
+          style="width: 22%;"
+        >
+          <div
+            class="journey-trail-l2-l3"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 68%; top: 43%;"
+          style="left: 68%; top: 38%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -16833,9 +17296,12 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3"
           style="width: 5%;"
-        />
+        >
+          <div
+            class="journey-trail-l2-l3"
+          />
+        </div>
         <div
           class="journey-right-curve l2"
         />
@@ -16843,12 +17309,15 @@ AppellantRightToAppealJourneyMap {
           class="journey-left-curve l2"
         />
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 25%;"
-        />
+          style="width: 22%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 30%; top: 80%; margin-top: 3px;"
+          style="left: 30%; top: 69%; margin-top: 3px;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -16944,12 +17413,15 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 35%;"
-        />
+          style="width: 32%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="journey-box"
-          style="left: 59%; top: 80%;"
+          style="left: 59%; top: 69%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -17033,12 +17505,15 @@ AppellantRightToAppealJourneyMap {
           </div>
         </div>
         <div
-          class="journey-trail-l2-l3 last-row"
-          style="width: 25%;"
-        />
+          style="width: 22%;"
+        >
+          <div
+            class="journey-trail-l2-l3 last-row"
+          />
+        </div>
         <div
           class="action-end-point journey-end-circle any-icon"
-          style="top: 80%; left: 80%;"
+          style="top: 69%; left: 80%;"
         >
           <div
             class="oi oi-check journey-final-check"
@@ -17215,9 +17690,12 @@ AppellantRightToAppealJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 28%;"
-                />
+                  style="width: 25%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 30%;"
@@ -17304,9 +17782,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
-                  style="width: 35%;"
-                />
+                  style="width: 32%;"
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-box"
                   style="left: 60%;"
@@ -17387,9 +17868,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l1-l2"
                   style="width: 10%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l1-l2"
+                  />
+                </div>
                 <div
                   class="journey-right-curve"
                 />
@@ -17397,12 +17881,15 @@ AppellantRightToAppealJourneyMap {
                   class="journey-left-curve"
                 />
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 18%;"
-                />
+                  style="width: 15%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 20%; top: 43%;"
+                  style="left: 20%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -17480,12 +17967,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 43%; top: 44%;"
+                  style="left: 43%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -17540,7 +18030,7 @@ AppellantRightToAppealJourneyMap {
                     </div>
                   </div>
                   <div
-                    class="step-title-container"
+                    class="step-title-container step-title-wide"
                   >
                     <div
                       class="step-title"
@@ -17550,12 +18040,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 68%; top: 43%;"
+                  style="left: 68%; top: 38%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -17639,9 +18132,12 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3"
                   style="width: 5%;"
-                />
+                >
+                  <div
+                    class="journey-trail-l2-l3"
+                  />
+                </div>
                 <div
                   class="journey-right-curve l2"
                 />
@@ -17649,12 +18145,15 @@ AppellantRightToAppealJourneyMap {
                   class="journey-left-curve l2"
                 />
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 30%; top: 80%; margin-top: 3px;"
+                  style="left: 30%; top: 69%; margin-top: 3px;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -17750,12 +18249,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 35%;"
-                />
+                  style="width: 32%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="journey-box"
-                  style="left: 59%; top: 80%;"
+                  style="left: 59%; top: 69%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -17839,12 +18341,15 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="journey-trail-l2-l3 last-row"
-                  style="width: 25%;"
-                />
+                  style="width: 22%;"
+                >
+                  <div
+                    class="journey-trail-l2-l3 last-row"
+                  />
+                </div>
                 <div
                   class="action-end-point journey-end-circle any-icon"
-                  style="top: 80%; left: 80%;"
+                  style="top: 69%; left: 80%;"
                 >
                   <div
                     class="oi oi-check journey-final-check"
@@ -17977,9 +18482,12 @@ AppellantRightToAppealJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                class="journey-trail-l1-l2"
-                style="width: 28%;"
-              />
+                style="width: 25%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 30%;"
@@ -18066,9 +18574,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
-                style="width: 35%;"
-              />
+                style="width: 32%;"
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-box"
                 style="left: 60%;"
@@ -18149,9 +18660,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l1-l2"
                 style="width: 10%;"
-              />
+              >
+                <div
+                  class="journey-trail-l1-l2"
+                />
+              </div>
               <div
                 class="journey-right-curve"
               />
@@ -18159,12 +18673,15 @@ AppellantRightToAppealJourneyMap {
                 class="journey-left-curve"
               />
               <div
-                class="journey-trail-l2-l3"
-                style="width: 18%;"
-              />
+                style="width: 15%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 20%; top: 43%;"
+                style="left: 20%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -18242,12 +18759,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 43%; top: 44%;"
+                style="left: 43%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -18302,7 +18822,7 @@ AppellantRightToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  class="step-title-container"
+                  class="step-title-container step-title-wide"
                 >
                   <div
                     class="step-title"
@@ -18312,12 +18832,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 68%; top: 43%;"
+                style="left: 68%; top: 38%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -18401,9 +18924,12 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3"
                 style="width: 5%;"
-              />
+              >
+                <div
+                  class="journey-trail-l2-l3"
+                />
+              </div>
               <div
                 class="journey-right-curve l2"
               />
@@ -18411,12 +18937,15 @@ AppellantRightToAppealJourneyMap {
                 class="journey-left-curve l2"
               />
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 30%; top: 80%; margin-top: 3px;"
+                style="left: 30%; top: 69%; margin-top: 3px;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -18512,12 +19041,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 35%;"
-              />
+                style="width: 32%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="journey-box"
-                style="left: 59%; top: 80%;"
+                style="left: 59%; top: 69%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -18601,12 +19133,15 @@ AppellantRightToAppealJourneyMap {
                 </div>
               </div>
               <div
-                class="journey-trail-l2-l3 last-row"
-                style="width: 25%;"
-              />
+                style="width: 22%;"
+              >
+                <div
+                  class="journey-trail-l2-l3 last-row"
+                />
+              </div>
               <div
                 class="action-end-point journey-end-circle any-icon"
-                style="top: 80%; left: 80%;"
+                style="top: 69%; left: 80%;"
               >
                 <div
                   class="oi oi-check journey-final-check"

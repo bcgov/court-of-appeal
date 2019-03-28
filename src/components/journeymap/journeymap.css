@@ -34,7 +34,7 @@
 }
 .journey-map-container {
     position:relative;
-    padding-top: 50px;
+    padding: 50px 10px 100px 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,14 +45,38 @@
     height: 50px;
     width: 50px;
     margin: 23px -5px 0 15px;
+    z-index:1;
 }
-
 .journey-trail-l1 {
     border-bottom: 9px solid #9fbfe2;
     height: 79px;
     width: 75%;
     margin: 0 -10px 140px -10px;
     position: relative;
+}
+.journey-trail-l1-moveable {
+    border-top: 9px solid #9fbfe2;
+    height:0;
+    position: relative;
+    margin-top:42.5px;
+}
+@keyframes glowing {
+    0% {width: 0;}
+    20% { width: 100%;}
+    40% { box-shadow: 0 0 -10px #a7cc61; border-top-width: 9px;  }
+    50% { box-shadow: 0 0 20px #49a25a; border-top-width: 10px; }
+    90% { box-shadow: 0 0 20px #49a25a; border-top-width: 10px; }
+    100% { box-shadow: 0 0 -10px #3c763d; border-top-width: 9px; }
+}
+
+.journey-trail-l1-moveable.completed-step-l1 {
+    animation: glowing 5000ms;
+}
+.journey-trail-basis {
+    border-top:#9fbfe2;
+    z-index: 0;
+    margin-top: -9px;
+    width: 100%
 }
 
 .journey-trail-l1-l2 {

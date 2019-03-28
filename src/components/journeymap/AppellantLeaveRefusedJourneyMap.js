@@ -16,7 +16,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     level={1}
                 />
                 <PageIcon 
-                    style={{left: '25%', top: '29%'}}
+                    style={{left: '25%', top: '16%'}}
                     twoPages={true}
                     stepTitle={"Application for Review"}
                     active={false}
@@ -28,7 +28,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     level={1}
                 />
                 <GavelIcon 
-                    style={{left: '56%', top: '40%'}}
+                    style={{left: '56%', top: '24%'}}
                     stepTitle={"The Hearing"}
                     active={false}
                 />
@@ -38,7 +38,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     level={1}
                 />
                  <ClockEndCircle 
-                     style={{position: 'absolute', left: '80%', top: '30%'}}
+                     style={{position: 'absolute', left: '80%', top: '16%'}}
                      stepTitle={"Final Decision on Leave to Appeal"}
                      titleStyle={{position: 'absolute', top: '97px', width: '150px', left: '-30px'}}
                      active={false}
