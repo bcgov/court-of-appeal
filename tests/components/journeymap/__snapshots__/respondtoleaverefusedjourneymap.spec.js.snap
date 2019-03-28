@@ -1924,6 +1924,7 @@ RespondToLeaveRefusedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -1999,6 +2000,7 @@ RespondToLeaveRefusedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -2300,6 +2302,7 @@ RespondToLeaveRefusedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -2420,6 +2423,7 @@ RespondToLeaveRefusedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -4592,6 +4596,7 @@ RespondToLeaveRefusedJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": [Function],
                             "style": Object {
                               "top": "73px",
                             },
@@ -4606,6 +4611,7 @@ RespondToLeaveRefusedJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": [Function],
                             "style": Object {
                               "top": "73px",
                             },
@@ -4878,6 +4884,7 @@ RespondToLeaveRefusedJourneyMap {
                       </div>,
                       <div
                         className="step-title-container"
+                        onClick={[Function]}
                         style={
                           Object {
                             "top": "73px",
@@ -5033,6 +5040,7 @@ RespondToLeaveRefusedJourneyMap {
                       </div>,
                       <div
                         className="step-title-container"
+                        onClick={[Function]}
                         style={
                           Object {
                             "top": "73px",

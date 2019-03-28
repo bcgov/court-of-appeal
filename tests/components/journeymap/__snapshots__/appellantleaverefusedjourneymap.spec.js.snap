@@ -1838,6 +1838,7 @@ AppellantLeaveRefusedJourneyMap {
                         />,
                       ],
                       "className": "file-main inactive",
+                      "onClick": undefined,
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -1913,6 +1914,7 @@ AppellantLeaveRefusedJourneyMap {
                         />,
                       ],
                       "className": "file-main inactive",
+                      "onClick": undefined,
                     },
                     "ref": null,
                     "return": [Circular],
@@ -4432,6 +4434,7 @@ AppellantLeaveRefusedJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": undefined,
                             "style": Object {
                               "top": "73px",
                             },
@@ -4446,6 +4449,7 @@ AppellantLeaveRefusedJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": undefined,
                             "style": Object {
                               "top": "73px",
                             },
