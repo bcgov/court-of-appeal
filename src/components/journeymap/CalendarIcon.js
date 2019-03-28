@@ -23,7 +23,7 @@ class CalendarIcon extends React.Component {
                      checked={this.props.status === 'completed'}
                  />
                 <span style={{position: 'relative',zIndex: '9'}}>{this.props.order}</span>
-                <div className={"cal-container"}>
+                <div className={"cal-container"} onClick={this.props.action}>
                     <div className={cn("journey-icon","calendar-image")}>
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 86 114" xmlSpace="preserve">
@@ -41,7 +41,7 @@ class CalendarIcon extends React.Component {
                         </svg>
                     </div>
                 </div>
-                <div className={cn("step-title-container",this.props.stepTitleClass)} >
+                <div className={cn("step-title-container",this.props.stepTitleClass)} onClick={this.props.action}>
                     {stepTitle}
                 </div>
             </div>

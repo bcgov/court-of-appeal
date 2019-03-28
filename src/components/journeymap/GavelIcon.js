@@ -63,7 +63,7 @@ class GavelIcon extends React.Component {
 
                     </div>
                 </div>
-                <div className={"step-title-container"} style={{top:'73px'}} >
+                <div className={"step-title-container"} style={{top:'73px'}} onClick={this.props.action}>
                     {stepTitle}
                 </div>
             </div>
