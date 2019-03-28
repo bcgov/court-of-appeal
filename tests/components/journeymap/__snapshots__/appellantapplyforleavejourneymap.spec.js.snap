@@ -1897,6 +1897,7 @@ AppellantApplyForLeaveJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -1975,6 +1976,7 @@ AppellantApplyForLeaveJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -2282,6 +2284,7 @@ AppellantApplyForLeaveJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -2405,6 +2408,7 @@ AppellantApplyForLeaveJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -3800,6 +3804,7 @@ AppellantApplyForLeaveJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -3875,6 +3880,7 @@ AppellantApplyForLeaveJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "ref": null,
                         "return": [Circular],
@@ -4176,6 +4182,7 @@ AppellantApplyForLeaveJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -4296,6 +4303,7 @@ AppellantApplyForLeaveJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"

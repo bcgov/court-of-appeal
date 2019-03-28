@@ -2437,6 +2437,7 @@ RespondToAppealJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -2515,6 +2516,7 @@ RespondToAppealJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -2822,6 +2824,7 @@ RespondToAppealJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -2945,6 +2948,7 @@ RespondToAppealJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -4283,6 +4287,7 @@ RespondToAppealJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -4361,6 +4366,7 @@ RespondToAppealJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "ref": null,
                         "return": [Circular],
@@ -4731,6 +4737,7 @@ RespondToAppealJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -4859,6 +4866,7 @@ RespondToAppealJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -6268,6 +6276,7 @@ RespondToAppealJourneyMap {
                                 />,
                               ],
                               "className": "journey-icon file-main",
+                              "onClick": [Function],
                             },
                             "memoizedState": null,
                             "mode": 0,
@@ -6343,6 +6352,7 @@ RespondToAppealJourneyMap {
                                 />,
                               ],
                               "className": "journey-icon file-main",
+                              "onClick": [Function],
                             },
                             "ref": null,
                             "return": [Circular],
@@ -6644,6 +6654,7 @@ RespondToAppealJourneyMap {
                           </span>,
                           <div
                             className="journey-icon file-main"
+                            onClick={[Function]}
                           >
                             <svg
                               id="Layer_1"
@@ -6764,6 +6775,7 @@ RespondToAppealJourneyMap {
                           </span>,
                           <div
                             className="journey-icon file-main"
+                            onClick={[Function]}
                           >
                             <svg
                               id="Layer_1"
@@ -9054,6 +9066,7 @@ RespondToAppealJourneyMap {
                                             The Hearing
                                           </div>,
                                           "className": "step-title-container",
+                                          "onClick": [Function],
                                           "style": Object {
                                             "top": "73px",
                                           },
@@ -9068,6 +9081,7 @@ RespondToAppealJourneyMap {
                                             The Hearing
                                           </div>,
                                           "className": "step-title-container",
+                                          "onClick": [Function],
                                           "style": Object {
                                             "top": "73px",
                                           },
@@ -9340,6 +9354,7 @@ RespondToAppealJourneyMap {
                                     </div>,
                                     <div
                                       className="step-title-container"
+                                      onClick={[Function]}
                                       style={
                                         Object {
                                           "top": "73px",
@@ -9496,6 +9511,7 @@ RespondToAppealJourneyMap {
                                     </div>,
                                     <div
                                       className="step-title-container"
+                                      onClick={[Function]}
                                       style={
                                         Object {
                                           "top": "73px",
@@ -10773,6 +10789,7 @@ RespondToAppealJourneyMap {
                                               />,
                                             ],
                                             "className": "journey-icon file-main",
+                                            "onClick": [Function],
                                           },
                                           "memoizedState": null,
                                           "mode": 0,
@@ -10851,6 +10868,7 @@ RespondToAppealJourneyMap {
                                               />,
                                             ],
                                             "className": "journey-icon file-main",
+                                            "onClick": [Function],
                                           },
                                           "ref": null,
                                           "return": [Circular],
@@ -11221,6 +11239,7 @@ RespondToAppealJourneyMap {
                                         </span>,
                                         <div
                                           className="journey-icon file-main"
+                                          onClick={[Function]}
                                         >
                                           <svg
                                             id="Layer_1"
@@ -11350,6 +11369,7 @@ RespondToAppealJourneyMap {
                                         </span>,
                                         <div
                                           className="journey-icon file-main"
+                                          onClick={[Function]}
                                         >
                                           <svg
                                             id="Layer_1"

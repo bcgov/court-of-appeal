@@ -1838,6 +1838,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                         />,
                       ],
                       "className": "file-main inactive",
+                      "onClick": undefined,
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -1913,6 +1914,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                         />,
                       ],
                       "className": "file-main inactive",
+                      "onClick": undefined,
                     },
                     "ref": null,
                     "return": [Circular],
@@ -4428,6 +4430,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": undefined,
                             "style": Object {
                               "top": "73px",
                             },
@@ -4442,6 +4445,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                               The Hearing
                             </div>,
                             "className": "step-title-container",
+                            "onClick": undefined,
                             "style": Object {
                               "top": "73px",
                             },

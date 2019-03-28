@@ -2249,6 +2249,7 @@ RespondToLeaveGrantedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -2327,6 +2328,7 @@ RespondToLeaveGrantedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -2634,6 +2636,7 @@ RespondToLeaveGrantedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -2757,6 +2760,7 @@ RespondToLeaveGrantedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -4154,6 +4158,7 @@ RespondToLeaveGrantedJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -4229,6 +4234,7 @@ RespondToLeaveGrantedJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "ref": null,
                         "return": [Circular],
@@ -4530,6 +4536,7 @@ RespondToLeaveGrantedJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -4650,6 +4657,7 @@ RespondToLeaveGrantedJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -6942,6 +6950,7 @@ RespondToLeaveGrantedJourneyMap {
                                         The Hearing
                                       </div>,
                                       "className": "step-title-container",
+                                      "onClick": [Function],
                                       "style": Object {
                                         "top": "73px",
                                       },
@@ -6956,6 +6965,7 @@ RespondToLeaveGrantedJourneyMap {
                                         The Hearing
                                       </div>,
                                       "className": "step-title-container",
+                                      "onClick": [Function],
                                       "style": Object {
                                         "top": "73px",
                                       },
@@ -7228,6 +7238,7 @@ RespondToLeaveGrantedJourneyMap {
                                 </div>,
                                 <div
                                   className="step-title-container"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "top": "73px",
@@ -7384,6 +7395,7 @@ RespondToLeaveGrantedJourneyMap {
                                 </div>,
                                 <div
                                   className="step-title-container"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "top": "73px",
@@ -8661,6 +8673,7 @@ RespondToLeaveGrantedJourneyMap {
                                           />,
                                         ],
                                         "className": "journey-icon file-main",
+                                        "onClick": [Function],
                                       },
                                       "memoizedState": null,
                                       "mode": 0,
@@ -8739,6 +8752,7 @@ RespondToLeaveGrantedJourneyMap {
                                           />,
                                         ],
                                         "className": "journey-icon file-main",
+                                        "onClick": [Function],
                                       },
                                       "ref": null,
                                       "return": [Circular],
@@ -9109,6 +9123,7 @@ RespondToLeaveGrantedJourneyMap {
                                     </span>,
                                     <div
                                       className="journey-icon file-main"
+                                      onClick={[Function]}
                                     >
                                       <svg
                                         id="Layer_1"
@@ -9238,6 +9253,7 @@ RespondToLeaveGrantedJourneyMap {
                                     </span>,
                                     <div
                                       className="journey-icon file-main"
+                                      onClick={[Function]}
                                     >
                                       <svg
                                         id="Layer_1"
