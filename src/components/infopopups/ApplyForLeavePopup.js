@@ -65,7 +65,7 @@ class ApplyForLeavePopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "Notice of Application for Leave to Appeal",
-            iconSrc: "/icons/icon-share.svg",
+            iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "File the document below ", deadline: " within 30 days ", endWith: " of the decision you want to appeal."}],
             last: false,

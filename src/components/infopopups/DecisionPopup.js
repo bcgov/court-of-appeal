@@ -20,7 +20,7 @@ class DecisionPopup extends Component {
                <div className="info-modal-section ">
                    <div className="row" >
                        <InfoPopupIcon
-                           iconSrc="/icons/icon-hearing.svg"
+                           iconType="hearing"
                            iconClass="info-modal-icon"
                        />
                        <div className="col">

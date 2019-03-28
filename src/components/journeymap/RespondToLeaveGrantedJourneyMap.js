@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import GavelIcon from './GavelIcon';
+import FormIcon from './journeyicons/FormIcon';
+import GavelIcon from './journeyicons/GavelIcon';
 import Trail from './Trail';
-import EndCircle from './EndCircle';
+import EndCircle from './journeyicons/EndCircle';
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants')
 
@@ -35,7 +35,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     level={1}
                 />
                     
-                <PageIcon style={{left:'30%'}}
+                <FormIcon style={{left:'30%'}}
                           twoPages={false}
                           stepTitle={"Notice of Appearance"}
                           action={this.iconClicked.bind(this, 'appearance')}
@@ -52,7 +52,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     width={'28%'}
                     level={1}
                 />
-                <PageIcon style={{left:'58%'}}
+                <FormIcon style={{left:'58%'}}
                           twoPages={true}
                           stepTitle={"Factum, Appeal Book and Certificate of Readiness"}
                           stepTitleClass={"step-title-wide"}
@@ -93,7 +93,7 @@ class RespondToLeaveGrantedJourneyMap extends React.Component {
                     width={'30%'}
                     level={2}
                 />
-                <PageIcon style={{top:'55%', left: '57%'}}
+                <FormIcon style={{top:'55%', left: '57%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}

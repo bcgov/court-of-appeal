@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import GavelIcon from './GavelIcon';
-import CalendarIcon from './CalendarIcon';
-import EndCircle from './EndCircle';
+import FormIcon from './journeyicons/FormIcon';
+import GavelIcon from './journeyicons/GavelIcon';
+import CalendarIcon from './journeyicons/CalendarIcon';
+import EndCircle from './journeyicons/EndCircle';
 import Trail from './Trail';
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants');
@@ -36,7 +36,7 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     width={'15%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left:'20%'}}
                     twoPages={true}
                     stepTitle={"Appeal Record and Transcript"}
@@ -55,7 +55,7 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     width={'22%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left:'41%'}}
                     twoPages={true}
                     stepTitle={"Factum, Appeal Book and Certificate of Readiness"}
@@ -100,7 +100,7 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     width={'10%'}
                     level={2}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{top:'55%', left: '18%'}}
                     twoPages={false}
                     stepTitle={"Notice of Hearing"}
@@ -133,7 +133,7 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                      width={'23%'}
                      level={2}
                  />
-                <PageIcon 
+                <FormIcon 
                     style={{top:'55%', left: '64%'}}
                     twoPages={false}
                     stepTitle={"Court Order"}

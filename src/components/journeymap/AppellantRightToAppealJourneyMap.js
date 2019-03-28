@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import CalendarIcon from './CalendarIcon';
-import GavelIcon from './GavelIcon';
-import EndCircle from './EndCircle';
+import FormIcon from './journeyicons/FormIcon';
+import CalendarIcon from './journeyicons/CalendarIcon';
+import GavelIcon from './journeyicons/GavelIcon';
+import EndCircle from './journeyicons/EndCircle';
 import Trail from './Trail';
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants');
@@ -37,7 +37,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                    width={'25%'}
                    level={1}
                />
-                <PageIcon style={{left: '30%'}}
+                <FormIcon style={{left: '30%'}}
                           twoPages={false}
                           stepTitle={"Initial Documents"}
                           action={this.iconClicked.bind(this, 'appellantinitial')}
@@ -54,7 +54,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     width={'32%'}
                     level={1}
                 />
-                <PageIcon style={{left: '60%'}}
+                <FormIcon style={{left: '60%'}}
                           twoPages={true}
                           stepTitle={"Appeal Record and Transcript"}
                           stepTitleClass={"step-title-wide"}
@@ -82,7 +82,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     width={'15%'}
                     level={2}
                 />
-                <PageIcon style={{left: '20%', top: '38%'}}
+                <FormIcon style={{left: '20%', top: '38%'}}
                           twoPages={true}
                           stepTitle={"Factum, Appeal Book, and Certificate of Readiness"}
                           action={this.iconClicked.bind(this, 'factum')}
@@ -118,7 +118,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     width={'22%'}
                     level={2}
                 />
-                 <PageIcon style={{left: '68%', top: '38%'}}
+                 <FormIcon style={{left: '68%', top: '38%'}}
                            twoPages={false}
                            stepTitle={"Notice of Hearing"}
                            action={this.iconClicked.bind(this, 'noticeofhearing')}
@@ -159,7 +159,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     width={'32%'}
                     level={3}
                 />
-                <PageIcon style={{left: '59%', top: '69%'}}
+                <FormIcon style={{left: '59%', top: '69%'}}
                           className={"journey-box"}
                           twoPages={false}
                           stepTitle={"Court Order"}

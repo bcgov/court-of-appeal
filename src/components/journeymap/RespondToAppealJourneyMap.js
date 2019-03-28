@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import GavelIcon from './GavelIcon';
+import FormIcon from './journeyicons/FormIcon';
+import GavelIcon from './journeyicons/GavelIcon';
 import Trail from './Trail';
-import EndCircle from './EndCircle';
+import EndCircle from './journeyicons/EndCircle';
 let JOURNEY_TYPE = require('../../helpers/constants')
 let cn = require('classnames');
 
@@ -43,7 +43,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'15%'}
                     level={1}
                 />
-                <PageIcon style={{left:'20%'}}
+                <FormIcon style={{left:'20%'}}
                           twoPages={false}
                           stepTitle={"Notice of Appearance"}
                           action={this.iconClicked.bind(this, 'appearance')}
@@ -60,7 +60,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'24%'}
                     level={1}
                 />
-                <PageIcon style={{left:'44%' }}
+                <FormIcon style={{left:'44%' }}
                           twoPages={false}
                           stepTitle={"Notice of Cross Appeal"}
                           stepTitleOptional={"(optional)"}
@@ -79,7 +79,7 @@ class RespondToAppealJourneyMap extends React.Component {
                   width={'24%'}
                   level={1}
               />
-                <PageIcon style={{left:'68%'}}
+                <FormIcon style={{left:'68%'}}
                           twoPages={true}
                           stepTitle={"Factum and Appeal Book"}
                           action={this.iconClicked.bind(this, 'respondentfactum')}
@@ -114,7 +114,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'30%'}
                     level={2}
                 />
-                <PageIcon style={{top:'55%', left: '57%'}}
+                <FormIcon style={{top:'55%', left: '57%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}

@@ -105,7 +105,7 @@ class AppellantFactumPopup extends Component {
         this.sections = [{
             expandable: true,
             sectionHeading: "Complete the Factum, Appeal Book and Certificate of Readiness",
-            iconSrc: "/icons/icon-share.svg",
+            iconType: 'share',
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",
@@ -117,14 +117,14 @@ class AppellantFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Factum?",
-            iconSrc :"/icons/icon-share.svg",
+            iconType :"share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have ", deadline:" 7 days ", endWith: " to file and serve your documents."}],
             listContentMap: respondentFactumDocList
         }, {
             expandable: true,
             sectionHeading: "Were you served with a respondent's Transcript Extract Book or Appeal Book?",
-            iconSrc: "/icons/icon-info.svg",
+            iconType: "info",
             iconClass: "info-modal-icon",
             deadline: null,
             VLProps: null,

@@ -54,7 +54,7 @@ class AppealRecordPopup extends Component {
             expandable: true,
             expanded: true,
             sectionHeading: "Complete the Appeal Record and Transcript",
-            iconSrc: "/icons/icon-share.svg",
+            iconType: 'share',
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                     startWith: "You have ",
@@ -65,7 +65,7 @@ class AppealRecordPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "Were you served with a Notice of Appearance or Cross Appeal?",
-            iconSrc :"/icons/icon-info.svg",
+            iconType: 'info',
             iconClass: "info-modal-icon",
             paragraphContentMap: [`If you are served with a copy of the respondent's Notice of Appearance or Cross Appeal, you do not have to respond 
                         to these documents.`]

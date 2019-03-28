@@ -132,38 +132,28 @@ RespondToLeaveRefusedJourneyMap {
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       y="0px"
                     >
-                      <g>
-                        <g>
-                          <g>
-                            <path
-                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                            />
-                            <polygon
-                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <polygon
-                            points="70.6,8.8 70.6,26 87.8,26 		"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <g>
-                          <g>
-                            <path
-                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                            />
-                            <polygon
-                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <polygon
-                            points="59.7,18.8 59.7,36 76.9,36 		"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                      </g>
+                      <path
+                        d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                      />
+                      <polygon
+                        points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                        style="fill: #FFFFFF;"
+                      />
+                      <polygon
+                        points="70.6,8.8 70.6,26 87.8,26 		"
+                        style="fill: #FFFFFF;"
+                      />
+                      <path
+                        d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                      />
+                      <polygon
+                        points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                        style="fill: #FFFFFF;"
+                      />
+                      <polygon
+                        points="59.7,18.8 59.7,36 76.9,36 "
+                        style="fill: #FFFFFF;"
+                      />
                     </svg>
                     <div
                       class="file-corner-r"
@@ -465,38 +455,28 @@ RespondToLeaveRefusedJourneyMap {
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     y="0px"
                   >
-                    <g>
-                      <g>
-                        <g>
-                          <path
-                            d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                          />
-                          <polygon
-                            points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="70.6,8.8 70.6,26 87.8,26 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                      <g>
-                        <g>
-                          <path
-                            d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                          />
-                          <polygon
-                            points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="59.7,18.8 59.7,36 76.9,36 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                    </g>
+                    <path
+                      d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                    />
+                    <polygon
+                      points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="70.6,8.8 70.6,26 87.8,26 		"
+                      style="fill: #FFFFFF;"
+                    />
+                    <path
+                      d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                    />
+                    <polygon
+                      points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="59.7,18.8 59.7,36 76.9,36 "
+                      style="fill: #FFFFFF;"
+                    />
                   </svg>
                   <div
                     class="file-corner-r"
@@ -1037,175 +1017,7 @@ RespondToLeaveRefusedJourneyMap {
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
-                          "child": FiberNode {
-                            "_debugID": 27,
-                            "_debugIsCurrentlyTiming": false,
-                            "_debugOwner": [Circular],
-                            "_debugSource": null,
-                            "alternate": null,
-                            "child": FiberNode {
-                              "_debugID": 29,
-                              "_debugIsCurrentlyTiming": false,
-                              "_debugOwner": [Circular],
-                              "_debugSource": null,
-                              "alternate": null,
-                              "child": null,
-                              "effectTag": 0,
-                              "expirationTime": 0,
-                              "firstEffect": null,
-                              "index": 0,
-                              "key": null,
-                              "lastEffect": null,
-                              "memoizedProps": Object {
-                                "d": "M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z",
-                              },
-                              "memoizedState": null,
-                              "mode": 0,
-                              "nextEffect": null,
-                              "pendingProps": Object {
-                                "d": "M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z",
-                              },
-                              "ref": null,
-                              "return": [Circular],
-                              "sibling": FiberNode {
-                                "_debugID": 30,
-                                "_debugIsCurrentlyTiming": false,
-                                "_debugOwner": [Circular],
-                                "_debugSource": null,
-                                "alternate": null,
-                                "child": null,
-                                "effectTag": 0,
-                                "expirationTime": 0,
-                                "firstEffect": null,
-                                "index": 1,
-                                "key": null,
-                                "lastEffect": null,
-                                "memoizedProps": Object {
-                                  "points": "91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			",
-                                  "style": Object {
-                                    "fill": "#FFFFFF",
-                                  },
-                                },
-                                "memoizedState": null,
-                                "mode": 0,
-                                "nextEffect": null,
-                                "pendingProps": Object {
-                                  "points": "91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			",
-                                  "style": Object {
-                                    "fill": "#FFFFFF",
-                                  },
-                                },
-                                "ref": null,
-                                "return": [Circular],
-                                "sibling": null,
-                                "stateNode": <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style="fill: #FFFFFF;"
-                                />,
-                                "tag": 5,
-                                "type": "polygon",
-                                "updateQueue": null,
-                              },
-                              "stateNode": <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />,
-                              "tag": 5,
-                              "type": "path",
-                              "updateQueue": null,
-                            },
-                            "effectTag": 0,
-                            "expirationTime": 0,
-                            "firstEffect": null,
-                            "index": 0,
-                            "key": null,
-                            "lastEffect": null,
-                            "memoizedProps": Object {
-                              "children": Array [
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />,
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />,
-                              ],
-                            },
-                            "memoizedState": null,
-                            "mode": 0,
-                            "nextEffect": null,
-                            "pendingProps": Object {
-                              "children": Array [
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />,
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />,
-                              ],
-                            },
-                            "ref": null,
-                            "return": [Circular],
-                            "sibling": FiberNode {
-                              "_debugID": 28,
-                              "_debugIsCurrentlyTiming": false,
-                              "_debugOwner": [Circular],
-                              "_debugSource": null,
-                              "alternate": null,
-                              "child": null,
-                              "effectTag": 0,
-                              "expirationTime": 0,
-                              "firstEffect": null,
-                              "index": 1,
-                              "key": null,
-                              "lastEffect": null,
-                              "memoizedProps": Object {
-                                "points": "70.6,8.8 70.6,26 87.8,26 		",
-                                "style": Object {
-                                  "fill": "#FFFFFF",
-                                },
-                              },
-                              "memoizedState": null,
-                              "mode": 0,
-                              "nextEffect": null,
-                              "pendingProps": Object {
-                                "points": "70.6,8.8 70.6,26 87.8,26 		",
-                                "style": Object {
-                                  "fill": "#FFFFFF",
-                                },
-                              },
-                              "ref": null,
-                              "return": [Circular],
-                              "sibling": null,
-                              "stateNode": <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style="fill: #FFFFFF;"
-                              />,
-                              "tag": 5,
-                              "type": "polygon",
-                              "updateQueue": null,
-                            },
-                            "stateNode": <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>,
-                            "tag": 5,
-                            "type": "g",
-                            "updateQueue": null,
-                          },
+                          "child": null,
                           "effectTag": 0,
                           "expirationTime": 0,
                           "firstEffect": null,
@@ -1213,57 +1025,13 @@ RespondToLeaveRefusedJourneyMap {
                           "key": null,
                           "lastEffect": null,
                           "memoizedProps": Object {
-                            "children": Array [
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>,
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />,
-                            ],
+                            "d": "M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z",
                           },
                           "memoizedState": null,
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
-                            "children": Array [
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>,
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />,
-                            ],
+                            "d": "M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z",
                           },
                           "ref": null,
                           "return": [Circular],
@@ -1273,14 +1041,62 @@ RespondToLeaveRefusedJourneyMap {
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
-                            "child": FiberNode {
-                              "_debugID": 31,
+                            "child": null,
+                            "effectTag": 0,
+                            "expirationTime": 0,
+                            "firstEffect": null,
+                            "index": 1,
+                            "key": null,
+                            "lastEffect": null,
+                            "memoizedProps": Object {
+                              "points": "91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 ",
+                              "style": Object {
+                                "fill": "#FFFFFF",
+                              },
+                            },
+                            "memoizedState": null,
+                            "mode": 0,
+                            "nextEffect": null,
+                            "pendingProps": Object {
+                              "points": "91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 ",
+                              "style": Object {
+                                "fill": "#FFFFFF",
+                              },
+                            },
+                            "ref": null,
+                            "return": [Circular],
+                            "sibling": FiberNode {
+                              "_debugID": 27,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
-                              "child": FiberNode {
-                                "_debugID": 33,
+                              "child": null,
+                              "effectTag": 0,
+                              "expirationTime": 0,
+                              "firstEffect": null,
+                              "index": 2,
+                              "key": null,
+                              "lastEffect": null,
+                              "memoizedProps": Object {
+                                "points": "70.6,8.8 70.6,26 87.8,26 		",
+                                "style": Object {
+                                  "fill": "#FFFFFF",
+                                },
+                              },
+                              "memoizedState": null,
+                              "mode": 0,
+                              "nextEffect": null,
+                              "pendingProps": Object {
+                                "points": "70.6,8.8 70.6,26 87.8,26 		",
+                                "style": Object {
+                                  "fill": "#FFFFFF",
+                                },
+                              },
+                              "ref": null,
+                              "return": [Circular],
+                              "sibling": FiberNode {
+                                "_debugID": 28,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
@@ -1289,7 +1105,7 @@ RespondToLeaveRefusedJourneyMap {
                                 "effectTag": 0,
                                 "expirationTime": 0,
                                 "firstEffect": null,
-                                "index": 0,
+                                "index": 3,
                                 "key": null,
                                 "lastEffect": null,
                                 "memoizedProps": Object {
@@ -1304,7 +1120,7 @@ RespondToLeaveRefusedJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 34,
+                                  "_debugID": 29,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -1313,11 +1129,11 @@ RespondToLeaveRefusedJourneyMap {
                                   "effectTag": 0,
                                   "expirationTime": 0,
                                   "firstEffect": null,
-                                  "index": 1,
+                                  "index": 4,
                                   "key": null,
                                   "lastEffect": null,
                                   "memoizedProps": Object {
-                                    "points": "80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			",
+                                    "points": "80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 ",
                                     "style": Object {
                                       "fill": "#FFFFFF",
                                     },
@@ -1326,16 +1142,54 @@ RespondToLeaveRefusedJourneyMap {
                                   "mode": 0,
                                   "nextEffect": null,
                                   "pendingProps": Object {
-                                    "points": "80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			",
+                                    "points": "80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 ",
                                     "style": Object {
                                       "fill": "#FFFFFF",
                                     },
                                   },
                                   "ref": null,
                                   "return": [Circular],
-                                  "sibling": null,
+                                  "sibling": FiberNode {
+                                    "_debugID": 30,
+                                    "_debugIsCurrentlyTiming": false,
+                                    "_debugOwner": [Circular],
+                                    "_debugSource": null,
+                                    "alternate": null,
+                                    "child": null,
+                                    "effectTag": 0,
+                                    "expirationTime": 0,
+                                    "firstEffect": null,
+                                    "index": 5,
+                                    "key": null,
+                                    "lastEffect": null,
+                                    "memoizedProps": Object {
+                                      "points": "59.7,18.8 59.7,36 76.9,36 ",
+                                      "style": Object {
+                                        "fill": "#FFFFFF",
+                                      },
+                                    },
+                                    "memoizedState": null,
+                                    "mode": 0,
+                                    "nextEffect": null,
+                                    "pendingProps": Object {
+                                      "points": "59.7,18.8 59.7,36 76.9,36 ",
+                                      "style": Object {
+                                        "fill": "#FFFFFF",
+                                      },
+                                    },
+                                    "ref": null,
+                                    "return": [Circular],
+                                    "sibling": null,
+                                    "stateNode": <polygon
+                                      points="59.7,18.8 59.7,36 76.9,36 "
+                                      style="fill: #FFFFFF;"
+                                    />,
+                                    "tag": 5,
+                                    "type": "polygon",
+                                    "updateQueue": null,
+                                  },
                                   "stateNode": <polygon
-                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
+                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
                                     style="fill: #FFFFFF;"
                                   />,
                                   "tag": 5,
@@ -1349,197 +1203,27 @@ RespondToLeaveRefusedJourneyMap {
                                 "type": "path",
                                 "updateQueue": null,
                               },
-                              "effectTag": 0,
-                              "expirationTime": 0,
-                              "firstEffect": null,
-                              "index": 0,
-                              "key": null,
-                              "lastEffect": null,
-                              "memoizedProps": Object {
-                                "children": Array [
-                                  <path
-                                    d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                  />,
-                                  <polygon
-                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                    style={
-                                      Object {
-                                        "fill": "#FFFFFF",
-                                      }
-                                    }
-                                  />,
-                                ],
-                              },
-                              "memoizedState": null,
-                              "mode": 0,
-                              "nextEffect": null,
-                              "pendingProps": Object {
-                                "children": Array [
-                                  <path
-                                    d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                  />,
-                                  <polygon
-                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                    style={
-                                      Object {
-                                        "fill": "#FFFFFF",
-                                      }
-                                    }
-                                  />,
-                                ],
-                              },
-                              "ref": null,
-                              "return": [Circular],
-                              "sibling": FiberNode {
-                                "_debugID": 32,
-                                "_debugIsCurrentlyTiming": false,
-                                "_debugOwner": [Circular],
-                                "_debugSource": null,
-                                "alternate": null,
-                                "child": null,
-                                "effectTag": 0,
-                                "expirationTime": 0,
-                                "firstEffect": null,
-                                "index": 1,
-                                "key": null,
-                                "lastEffect": null,
-                                "memoizedProps": Object {
-                                  "points": "59.7,18.8 59.7,36 76.9,36 		",
-                                  "style": Object {
-                                    "fill": "#FFFFFF",
-                                  },
-                                },
-                                "memoizedState": null,
-                                "mode": 0,
-                                "nextEffect": null,
-                                "pendingProps": Object {
-                                  "points": "59.7,18.8 59.7,36 76.9,36 		",
-                                  "style": Object {
-                                    "fill": "#FFFFFF",
-                                  },
-                                },
-                                "ref": null,
-                                "return": [Circular],
-                                "sibling": null,
-                                "stateNode": <polygon
-                                  points="59.7,18.8 59.7,36 76.9,36 		"
-                                  style="fill: #FFFFFF;"
-                                />,
-                                "tag": 5,
-                                "type": "polygon",
-                                "updateQueue": null,
-                              },
-                              "stateNode": <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style="fill: #FFFFFF;"
-                                />
-                              </g>,
+                              "stateNode": <polygon
+                                points="70.6,8.8 70.6,26 87.8,26 		"
+                                style="fill: #FFFFFF;"
+                              />,
                               "tag": 5,
-                              "type": "g",
+                              "type": "polygon",
                               "updateQueue": null,
                             },
-                            "effectTag": 0,
-                            "expirationTime": 0,
-                            "firstEffect": null,
-                            "index": 1,
-                            "key": null,
-                            "lastEffect": null,
-                            "memoizedProps": Object {
-                              "children": Array [
-                                <g>
-                                  <path
-                                    d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                  />
-                                  <polygon
-                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                    style={
-                                      Object {
-                                        "fill": "#FFFFFF",
-                                      }
-                                    }
-                                  />
-                                </g>,
-                                <polygon
-                                  points="59.7,18.8 59.7,36 76.9,36 		"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />,
-                              ],
-                            },
-                            "memoizedState": null,
-                            "mode": 0,
-                            "nextEffect": null,
-                            "pendingProps": Object {
-                              "children": Array [
-                                <g>
-                                  <path
-                                    d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                  />
-                                  <polygon
-                                    points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                    style={
-                                      Object {
-                                        "fill": "#FFFFFF",
-                                      }
-                                    }
-                                  />
-                                </g>,
-                                <polygon
-                                  points="59.7,18.8 59.7,36 76.9,36 		"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />,
-                              ],
-                            },
-                            "ref": null,
-                            "return": [Circular],
-                            "sibling": null,
-                            "stateNode": <g>
-                              <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style="fill: #FFFFFF;"
-                                />
-                              </g>
-                              <polygon
-                                points="59.7,18.8 59.7,36 76.9,36 		"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>,
+                            "stateNode": <polygon
+                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                              style="fill: #FFFFFF;"
+                            />,
                             "tag": 5,
-                            "type": "g",
+                            "type": "polygon",
                             "updateQueue": null,
                           },
-                          "stateNode": <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>,
+                          "stateNode": <path
+                            d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                          />,
                           "tag": 5,
-                          "type": "g",
+                          "type": "path",
                           "updateQueue": null,
                         },
                         "effectTag": 0,
@@ -1550,271 +1234,158 @@ RespondToLeaveRefusedJourneyMap {
                         "lastEffect": null,
                         "memoizedProps": Object {
                           "children": Array [
-                            <g>
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
+                            <path
+                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                            />,
+                            <polygon
+                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
                                 }
-                              />
-                            </g>,
-                            <g>
-                              <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="59.7,18.8 59.7,36 76.9,36 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
+                              }
+                            />,
+                            <polygon
+                              points="70.6,8.8 70.6,26 87.8,26 		"
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
                                 }
-                              />
-                            </g>,
+                              }
+                            />,
+                            <path
+                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                            />,
+                            <polygon
+                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
+                                }
+                              }
+                            />,
+                            <polygon
+                              points="59.7,18.8 59.7,36 76.9,36 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
+                                }
+                              }
+                            />,
                           ],
+                          "id": "Layer_1",
+                          "version": "1.1",
+                          "viewBox": "0 0 96.6 124.3",
+                          "x": "0px",
+                          "xmlSpace": "preserve",
+                          "xmlns": "http://www.w3.org/2000/svg",
+                          "xmlnsXlink": "http://www.w3.org/1999/xlink",
+                          "y": "0px",
                         },
                         "memoizedState": null,
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
                           "children": Array [
-                            <g>
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
+                            <path
+                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                            />,
+                            <polygon
+                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
                                 }
-                              />
-                            </g>,
-                            <g>
-                              <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="59.7,18.8 59.7,36 76.9,36 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
+                              }
+                            />,
+                            <polygon
+                              points="70.6,8.8 70.6,26 87.8,26 		"
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
                                 }
-                              />
-                            </g>,
+                              }
+                            />,
+                            <path
+                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                            />,
+                            <polygon
+                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
+                                }
+                              }
+                            />,
+                            <polygon
+                              points="59.7,18.8 59.7,36 76.9,36 "
+                              style={
+                                Object {
+                                  "fill": "#FFFFFF",
+                                }
+                              }
+                            />,
                           ],
+                          "id": "Layer_1",
+                          "version": "1.1",
+                          "viewBox": "0 0 96.6 124.3",
+                          "x": "0px",
+                          "xmlSpace": "preserve",
+                          "xmlns": "http://www.w3.org/2000/svg",
+                          "xmlnsXlink": "http://www.w3.org/1999/xlink",
+                          "y": "0px",
                         },
                         "ref": null,
                         "return": [Circular],
                         "sibling": null,
-                        "stateNode": <g>
-                          <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <g>
-                            <g>
-                              <path
-                                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                              />
-                              <polygon
-                                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="59.7,18.8 59.7,36 76.9,36 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                        </g>,
+                        "stateNode": <svg
+                          id="Layer_1"
+                          version="1.1"
+                          viewBox="0 0 96.6 124.3"
+                          x="0px"
+                          xml:space="preserve"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          y="0px"
+                        >
+                          <path
+                            d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                          />
+                          <polygon
+                            points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                            style="fill: #FFFFFF;"
+                          />
+                          <polygon
+                            points="70.6,8.8 70.6,26 87.8,26 		"
+                            style="fill: #FFFFFF;"
+                          />
+                          <path
+                            d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                          />
+                          <polygon
+                            points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                            style="fill: #FFFFFF;"
+                          />
+                          <polygon
+                            points="59.7,18.8 59.7,36 76.9,36 "
+                            style="fill: #FFFFFF;"
+                          />
+                        </svg>,
                         "tag": 5,
-                        "type": "g",
+                        "type": "svg",
                         "updateQueue": null,
                       },
-                      "effectTag": 0,
+                      "effectTag": 1,
                       "expirationTime": 0,
                       "firstEffect": null,
                       "index": 0,
                       "key": null,
                       "lastEffect": null,
-                      "memoizedProps": Object {
-                        "children": <g>
-                          <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <g>
-                            <g>
-                              <path
-                                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                              />
-                              <polygon
-                                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <polygon
-                              points="59.7,18.8 59.7,36 76.9,36 		"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                        </g>,
-                        "id": "Layer_1",
-                        "version": "1.1",
-                        "viewBox": "0 0 96.6 124.3",
-                        "x": "0px",
-                        "xmlSpace": "preserve",
-                        "xmlns": "http://www.w3.org/2000/svg",
-                        "xmlnsXlink": "http://www.w3.org/1999/xlink",
-                        "y": "0px",
-                      },
+                      "memoizedProps": Object {},
                       "memoizedState": null,
                       "mode": 0,
                       "nextEffect": null,
-                      "pendingProps": Object {
-                        "children": <g>
-                          <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <g>
-                            <g>
-                              <path
-                                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                              />
-                              <polygon
-                                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <polygon
-                              points="59.7,18.8 59.7,36 76.9,36 		"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                        </g>,
-                        "id": "Layer_1",
-                        "version": "1.1",
-                        "viewBox": "0 0 96.6 124.3",
-                        "x": "0px",
-                        "xmlSpace": "preserve",
-                        "xmlns": "http://www.w3.org/2000/svg",
-                        "xmlnsXlink": "http://www.w3.org/1999/xlink",
-                        "y": "0px",
-                      },
+                      "pendingProps": Object {},
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
@@ -1856,51 +1427,22 @@ RespondToLeaveRefusedJourneyMap {
                         "type": "div",
                         "updateQueue": null,
                       },
-                      "stateNode": <svg
-                        id="Layer_1"
-                        version="1.1"
-                        viewBox="0 0 96.6 124.3"
-                        x="0px"
-                        xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        y="0px"
-                      >
-                        <g>
-                          <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <g>
-                            <g>
-                              <path
-                                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                              />
-                              <polygon
-                                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="59.7,18.8 59.7,36 76.9,36 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                        </g>
-                      </svg>,
-                      "tag": 5,
-                      "type": "svg",
+                      "stateNode": TwoPageIcon {
+                        "_reactInternalFiber": [Circular],
+                        "_reactInternalInstance": Object {},
+                        "context": Object {},
+                        "props": Object {},
+                        "refs": Object {},
+                        "state": null,
+                        "updater": Object {
+                          "enqueueForceUpdate": [Function],
+                          "enqueueReplaceState": [Function],
+                          "enqueueSetState": [Function],
+                          "isMounted": [Function],
+                        },
+                      },
+                      "tag": 2,
+                      "type": [Function],
                       "updateQueue": null,
                     },
                     "effectTag": 0,
@@ -1911,65 +1453,7 @@ RespondToLeaveRefusedJourneyMap {
                     "lastEffect": null,
                     "memoizedProps": Object {
                       "children": Array [
-                        <svg
-                          id="Layer_1"
-                          version="1.1"
-                          viewBox="0 0 96.6 124.3"
-                          x="0px"
-                          xmlSpace="preserve"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          y="0px"
-                        >
-                          <g>
-                            <g>
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <g>
-                              <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="59.7,18.8 59.7,36 76.9,36 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                          </g>
-                        </svg>,
+                        <TwoPageIcon />,
                         <div
                           className="file-corner-r"
                           style={
@@ -1987,65 +1471,7 @@ RespondToLeaveRefusedJourneyMap {
                     "nextEffect": null,
                     "pendingProps": Object {
                       "children": Array [
-                        <svg
-                          id="Layer_1"
-                          version="1.1"
-                          viewBox="0 0 96.6 124.3"
-                          x="0px"
-                          xmlSpace="preserve"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          y="0px"
-                        >
-                          <g>
-                            <g>
-                              <g>
-                                <path
-                                  d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                                />
-                                <polygon
-                                  points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="70.6,8.8 70.6,26 87.8,26 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                            <g>
-                              <g>
-                                <path
-                                  d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                                />
-                                <polygon
-                                  points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                  style={
-                                    Object {
-                                      "fill": "#FFFFFF",
-                                    }
-                                  }
-                                />
-                              </g>
-                              <polygon
-                                points="59.7,18.8 59.7,36 76.9,36 		"
-                                style={
-                                  Object {
-                                    "fill": "#FFFFFF",
-                                  }
-                                }
-                              />
-                            </g>
-                          </g>
-                        </svg>,
+                        <TwoPageIcon />,
                         <div
                           className="file-corner-r"
                           style={
@@ -2067,13 +1493,13 @@ RespondToLeaveRefusedJourneyMap {
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 35,
+                        "_debugID": 31,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 36,
+                          "_debugID": 32,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -2099,7 +1525,7 @@ RespondToLeaveRefusedJourneyMap {
                           "ref": null,
                           "return": [Circular],
                           "sibling": FiberNode {
-                            "_debugID": 37,
+                            "_debugID": 33,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -2244,38 +1670,28 @@ RespondToLeaveRefusedJourneyMap {
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                         y="0px"
                       >
-                        <g>
-                          <g>
-                            <g>
-                              <path
-                                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                              />
-                              <polygon
-                                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="70.6,8.8 70.6,26 87.8,26 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <g>
-                            <g>
-                              <path
-                                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                              />
-                              <polygon
-                                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                                style="fill: #FFFFFF;"
-                              />
-                            </g>
-                            <polygon
-                              points="59.7,18.8 59.7,36 76.9,36 		"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                        </g>
+                        <path
+                          d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                        />
+                        <polygon
+                          points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                          style="fill: #FFFFFF;"
+                        />
+                        <polygon
+                          points="70.6,8.8 70.6,26 87.8,26 		"
+                          style="fill: #FFFFFF;"
+                        />
+                        <path
+                          d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                        />
+                        <polygon
+                          points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                          style="fill: #FFFFFF;"
+                        />
+                        <polygon
+                          points="59.7,18.8 59.7,36 76.9,36 "
+                          style="fill: #FFFFFF;"
+                        />
                       </svg>
                       <div
                         class="file-corner-r"
@@ -2360,65 +1776,7 @@ RespondToLeaveRefusedJourneyMap {
                     className="journey-icon file-main"
                     onClick={[Function]}
                   >
-                    <svg
-                      id="Layer_1"
-                      version="1.1"
-                      viewBox="0 0 96.6 124.3"
-                      x="0px"
-                      xmlSpace="preserve"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      y="0px"
-                    >
-                      <g>
-                        <g>
-                          <g>
-                            <path
-                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                            />
-                            <polygon
-                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <polygon
-                            points="70.6,8.8 70.6,26 87.8,26 		"
-                            style={
-                              Object {
-                                "fill": "#FFFFFF",
-                              }
-                            }
-                          />
-                        </g>
-                        <g>
-                          <g>
-                            <path
-                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                            />
-                            <polygon
-                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <polygon
-                            points="59.7,18.8 59.7,36 76.9,36 		"
-                            style={
-                              Object {
-                                "fill": "#FFFFFF",
-                              }
-                            }
-                          />
-                        </g>
-                      </g>
-                    </svg>
+                    <TwoPageIcon />
                     <div
                       className="file-corner-r"
                       style={
@@ -2481,65 +1839,7 @@ RespondToLeaveRefusedJourneyMap {
                     className="journey-icon file-main"
                     onClick={[Function]}
                   >
-                    <svg
-                      id="Layer_1"
-                      version="1.1"
-                      viewBox="0 0 96.6 124.3"
-                      x="0px"
-                      xmlSpace="preserve"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      y="0px"
-                    >
-                      <g>
-                        <g>
-                          <g>
-                            <path
-                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                            />
-                            <polygon
-                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <polygon
-                            points="70.6,8.8 70.6,26 87.8,26 		"
-                            style={
-                              Object {
-                                "fill": "#FFFFFF",
-                              }
-                            }
-                          />
-                        </g>
-                        <g>
-                          <g>
-                            <path
-                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                            />
-                            <polygon
-                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                              style={
-                                Object {
-                                  "fill": "#FFFFFF",
-                                }
-                              }
-                            />
-                          </g>
-                          <polygon
-                            points="59.7,18.8 59.7,36 76.9,36 		"
-                            style={
-                              Object {
-                                "fill": "#FFFFFF",
-                              }
-                            }
-                          />
-                        </g>
-                      </g>
-                    </svg>
+                    <TwoPageIcon />
                     <div
                       className="file-corner-r"
                       style={
@@ -2599,38 +1899,28 @@ RespondToLeaveRefusedJourneyMap {
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     y="0px"
                   >
-                    <g>
-                      <g>
-                        <g>
-                          <path
-                            d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                          />
-                          <polygon
-                            points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="70.6,8.8 70.6,26 87.8,26 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                      <g>
-                        <g>
-                          <path
-                            d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                          />
-                          <polygon
-                            points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="59.7,18.8 59.7,36 76.9,36 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                    </g>
+                    <path
+                      d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                    />
+                    <polygon
+                      points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="70.6,8.8 70.6,26 87.8,26 		"
+                      style="fill: #FFFFFF;"
+                    />
+                    <path
+                      d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                    />
+                    <polygon
+                      points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="59.7,18.8 59.7,36 76.9,36 "
+                      style="fill: #FFFFFF;"
+                    />
                   </svg>
                   <div
                     class="file-corner-r"
@@ -2698,13 +1988,13 @@ RespondToLeaveRefusedJourneyMap {
               "_debugSource": null,
               "alternate": null,
               "child": FiberNode {
-                "_debugID": 38,
+                "_debugID": 34,
                 "_debugIsCurrentlyTiming": false,
                 "_debugOwner": [Circular],
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 39,
+                  "_debugID": 35,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
@@ -2804,19 +2094,19 @@ RespondToLeaveRefusedJourneyMap {
                 "_debugSource": null,
                 "alternate": null,
                 "child": FiberNode {
-                  "_debugID": 40,
+                  "_debugID": 36,
                   "_debugIsCurrentlyTiming": false,
                   "_debugOwner": [Circular],
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 41,
+                    "_debugID": 37,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 45,
+                      "_debugID": 41,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -2902,7 +2192,7 @@ RespondToLeaveRefusedJourneyMap {
                     "ref": null,
                     "return": [Circular],
                     "sibling": FiberNode {
-                      "_debugID": 42,
+                      "_debugID": 38,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -2938,37 +2228,37 @@ RespondToLeaveRefusedJourneyMap {
                       "ref": null,
                       "return": [Circular],
                       "sibling": FiberNode {
-                        "_debugID": 43,
+                        "_debugID": 39,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 46,
+                          "_debugID": 42,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 47,
+                            "_debugID": 43,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 48,
+                              "_debugID": 44,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 51,
+                                "_debugID": 47,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 52,
+                                  "_debugID": 48,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -2992,7 +2282,7 @@ RespondToLeaveRefusedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 53,
+                                    "_debugID": 49,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3158,13 +2448,13 @@ RespondToLeaveRefusedJourneyMap {
                               "ref": null,
                               "return": [Circular],
                               "sibling": FiberNode {
-                                "_debugID": 49,
+                                "_debugID": 45,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 54,
+                                  "_debugID": 50,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -3194,7 +2484,7 @@ RespondToLeaveRefusedJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 55,
+                                    "_debugID": 51,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
@@ -3224,7 +2514,7 @@ RespondToLeaveRefusedJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 56,
+                                      "_debugID": 52,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -3348,25 +2638,25 @@ RespondToLeaveRefusedJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 50,
+                                  "_debugID": 46,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 57,
+                                    "_debugID": 53,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 58,
+                                      "_debugID": 54,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 60,
+                                        "_debugID": 56,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -3396,7 +2686,7 @@ RespondToLeaveRefusedJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 61,
+                                          "_debugID": 57,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -3426,7 +2716,7 @@ RespondToLeaveRefusedJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 62,
+                                            "_debugID": 58,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -3548,7 +2838,7 @@ RespondToLeaveRefusedJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 59,
+                                        "_debugID": 55,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -4636,13 +3926,13 @@ RespondToLeaveRefusedJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 44,
+                          "_debugID": 40,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
                           "alternate": null,
                           "child": FiberNode {
-                            "_debugID": 63,
+                            "_debugID": 59,
                             "_debugIsCurrentlyTiming": false,
                             "_debugOwner": [Circular],
                             "_debugSource": null,
@@ -5300,13 +4590,13 @@ RespondToLeaveRefusedJourneyMap {
                   "_debugSource": null,
                   "alternate": null,
                   "child": FiberNode {
-                    "_debugID": 64,
+                    "_debugID": 60,
                     "_debugIsCurrentlyTiming": false,
                     "_debugOwner": [Circular],
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 65,
+                      "_debugID": 61,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
@@ -5406,19 +4696,19 @@ RespondToLeaveRefusedJourneyMap {
                     "_debugSource": null,
                     "alternate": null,
                     "child": FiberNode {
-                      "_debugID": 66,
+                      "_debugID": 62,
                       "_debugIsCurrentlyTiming": false,
                       "_debugOwner": [Circular],
                       "_debugSource": null,
                       "alternate": null,
                       "child": FiberNode {
-                        "_debugID": 67,
+                        "_debugID": 63,
                         "_debugIsCurrentlyTiming": false,
                         "_debugOwner": [Circular],
                         "_debugSource": null,
                         "alternate": null,
                         "child": FiberNode {
-                          "_debugID": 69,
+                          "_debugID": 65,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5478,7 +4768,7 @@ RespondToLeaveRefusedJourneyMap {
                         "ref": null,
                         "return": [Circular],
                         "sibling": FiberNode {
-                          "_debugID": 68,
+                          "_debugID": 64,
                           "_debugIsCurrentlyTiming": false,
                           "_debugOwner": [Circular],
                           "_debugSource": null,
@@ -5787,7 +5077,7 @@ RespondToLeaveRefusedJourneyMap {
               "type": [Function],
               "updateQueue": null,
             },
-            "stateNode": PageIcon {
+            "stateNode": FormIcon {
               "_reactInternalFiber": [Circular],
               "_reactInternalInstance": Object {},
               "context": Object {},
@@ -5864,7 +5154,7 @@ RespondToLeaveRefusedJourneyMap {
             level={1}
             width="25%"
           />,
-          <PageIcon
+          <FormIcon
             action={[Function]}
             active={true}
             completed={[Function]}
@@ -5940,7 +5230,7 @@ RespondToLeaveRefusedJourneyMap {
             level={1}
             width="25%"
           />,
-          <PageIcon
+          <FormIcon
             action={[Function]}
             active={true}
             completed={[Function]}
@@ -6046,38 +5336,28 @@ RespondToLeaveRefusedJourneyMap {
               xmlns:xlink="http://www.w3.org/1999/xlink"
               y="0px"
             >
-              <g>
-                <g>
-                  <g>
-                    <path
-                      d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                    />
-                    <polygon
-                      points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                      style="fill: #FFFFFF;"
-                    />
-                  </g>
-                  <polygon
-                    points="70.6,8.8 70.6,26 87.8,26 		"
-                    style="fill: #FFFFFF;"
-                  />
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                    />
-                    <polygon
-                      points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                      style="fill: #FFFFFF;"
-                    />
-                  </g>
-                  <polygon
-                    points="59.7,18.8 59.7,36 76.9,36 		"
-                    style="fill: #FFFFFF;"
-                  />
-                </g>
-              </g>
+              <path
+                d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+              />
+              <polygon
+                points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                style="fill: #FFFFFF;"
+              />
+              <polygon
+                points="70.6,8.8 70.6,26 87.8,26 		"
+                style="fill: #FFFFFF;"
+              />
+              <path
+                d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+              />
+              <polygon
+                points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                style="fill: #FFFFFF;"
+              />
+              <polygon
+                points="59.7,18.8 59.7,36 76.9,36 "
+                style="fill: #FFFFFF;"
+              />
             </svg>
             <div
               class="file-corner-r"
@@ -6403,38 +5683,28 @@ RespondToLeaveRefusedJourneyMap {
                       xmlns:xlink="http://www.w3.org/1999/xlink"
                       y="0px"
                     >
-                      <g>
-                        <g>
-                          <g>
-                            <path
-                              d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                            />
-                            <polygon
-                              points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <polygon
-                            points="70.6,8.8 70.6,26 87.8,26 		"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <g>
-                          <g>
-                            <path
-                              d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                            />
-                            <polygon
-                              points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                              style="fill: #FFFFFF;"
-                            />
-                          </g>
-                          <polygon
-                            points="59.7,18.8 59.7,36 76.9,36 		"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                      </g>
+                      <path
+                        d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                      />
+                      <polygon
+                        points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                        style="fill: #FFFFFF;"
+                      />
+                      <polygon
+                        points="70.6,8.8 70.6,26 87.8,26 		"
+                        style="fill: #FFFFFF;"
+                      />
+                      <path
+                        d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                      />
+                      <polygon
+                        points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                        style="fill: #FFFFFF;"
+                      />
+                      <polygon
+                        points="59.7,18.8 59.7,36 76.9,36 "
+                        style="fill: #FFFFFF;"
+                      />
                     </svg>
                     <div
                       class="file-corner-r"
@@ -6736,38 +6006,28 @@ RespondToLeaveRefusedJourneyMap {
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     y="0px"
                   >
-                    <g>
-                      <g>
-                        <g>
-                          <path
-                            d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
-                          />
-                          <polygon
-                            points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="70.6,8.8 70.6,26 87.8,26 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                      <g>
-                        <g>
-                          <path
-                            d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
-                          />
-                          <polygon
-                            points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 			"
-                            style="fill: #FFFFFF;"
-                          />
-                        </g>
-                        <polygon
-                          points="59.7,18.8 59.7,36 76.9,36 		"
-                          style="fill: #FFFFFF;"
-                        />
-                      </g>
-                    </g>
+                    <path
+                      d="M95,26L70.9,1.8L69.1,0H10.9v5.2v103.9v5.2h85.7V27.5L95,26z M91.4,109.1H16.1V5.2h49.3v26h26V109.1z M87.8,26H70.6V8.8 L87.8,26z"
+                    />
+                    <polygon
+                      points="91.4,31.2 65.4,31.2 65.4,5.2 16.1,5.2 16.1,109.1 91.4,109.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="70.6,8.8 70.6,26 87.8,26 		"
+                      style="fill: #FFFFFF;"
+                    />
+                    <path
+                      d="M84.1,36L60,11.8L58.2,10H0v5.2v103.9v5.2h85.7V37.5L84.1,36z M80.5,119.1H5.2V15.2h49.3v26h26V119.1z M76.9,36H59.7 V18.8L76.9,36z"
+                    />
+                    <polygon
+                      points="80.5,41.2 54.5,41.2 54.5,15.2 5.2,15.2 5.2,119.1 80.5,119.1 "
+                      style="fill: #FFFFFF;"
+                    />
+                    <polygon
+                      points="59.7,18.8 59.7,36 76.9,36 "
+                      style="fill: #FFFFFF;"
+                    />
                   </svg>
                   <div
                     class="file-corner-r"

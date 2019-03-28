@@ -19,7 +19,7 @@ class CompleteAppealPopup extends Component {
             >
                 <InfoPopupSection
                   sectionHeading="The appeal process is complete."
-                  iconSrc="/icons/icon-info.svg"
+                  iconType="info"
                   iconClass="info-modal-icon"
                   expandable={false}
                   expanded={true}

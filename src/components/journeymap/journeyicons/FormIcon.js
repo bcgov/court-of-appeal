@@ -1,10 +1,10 @@
 import React from 'react';
 import './pageeicon.css';
 import StepCompletedCheckbox from './StepCompletedCheckbox';
-import TwoPageIcon from '../iconSVG/TwoPageIcon';
-import SinglePageIcon from '../iconSVG/SinglePageIcon';
-import DraftPageIcon from '../iconSVG/DraftPageIcon';
-import ApprovedFormIcon from '../iconSVG/ApprovedFormIcon';
+import TwoPageIcon from '../../iconSVG/TwoPageIcon';
+import SinglePageIcon from '../../iconSVG/SinglePageIcon';
+import DraftPageIcon from '../../iconSVG/DraftPageIcon';
+import ApprovedFormIcon from '../../iconSVG/ApprovedFormIcon';
 
 let cn = require('classnames');
 

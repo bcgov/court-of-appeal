@@ -35,14 +35,14 @@ class CrossAppealPopup extends Component {
             expandable: true,
             expanded: true,
             sectionHeading: "The Notice of Appeal or the order granting leave to appeal",
-            iconSrc: "/icons/icon-share.svg",
+           iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 15 days ", endWith: " to file and serve your documents, after receiving the Notice of Appeal or the order granting leave to appeal."}],
             listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "The Appeal Record and Transcript",
-            iconSrc :"/icons/icon-info.svg",
+            iconType :"info",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents."]
         }]

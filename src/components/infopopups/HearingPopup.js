@@ -25,7 +25,7 @@ class HearingPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "For more information about the hearing process, click the topics below: ",
-            iconSrc: "/icons/icon-hearing.svg",
+           iconType: "hearing",
             iconClass: "info-modal-icon",
             paragraphContentMap: paragraphContentMap
         }]
