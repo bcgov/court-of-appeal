@@ -74,7 +74,7 @@ class ReviewPopup extends Component {
             expandable: true,
             expanded: true,
             sectionHeading: "Complete a Notice of Application to Vary an Order of Justice",
-            iconSrc: "/icons/icon-share.svg",
+           iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have  ",
@@ -87,7 +87,7 @@ class ReviewPopup extends Component {
             expandable: true,
             expanded: false,
             sectionHeading: "Complete a Motion Book",
-            iconSrc: "/icons/icon-share.svg",
+           iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",

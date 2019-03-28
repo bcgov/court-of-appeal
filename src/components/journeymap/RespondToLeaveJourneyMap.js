@@ -1,7 +1,7 @@
 import React from 'react';
-import PageIcon from './PageIcon'
-import GavelIcon from './GavelIcon'
-import ClockEndCircle from "./ClockEndCircle";
+import FormIcon from './journeyicons/FormIcon'
+import GavelIcon from './journeyicons/GavelIcon'
+import ClockEndCircle from "./journeyicons/ClockEndCircle";
 import Trail from "./Trail";
 let cn = require('classnames')
 let JOURNEY_TYPE = require('../../helpers/constants')
@@ -48,7 +48,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                     width={'18%'}
                     level={1}
                 />
-                <PageIcon style={{left: '20%'}}
+                <FormIcon style={{left: '20%'}}
                           twoPages={false}
                           stepTitle={"Notice of Appearance"}
                           action={this.iconClicked.bind(this, 'appearance')}
@@ -64,7 +64,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                     width={'21%'}
                     level={1}
                 />
-                <PageIcon style={{left: '42%'}}
+                <FormIcon style={{left: '42%'}}
                           twoPages={false}
                           stepTitle={"Reply Book"}
                           action={this.iconClicked.bind(this, 'replybook')}

@@ -1,7 +1,7 @@
 import React from 'react';
-import PageIcon from './PageIcon'
-import GavelIcon from './GavelIcon'
-import ClockEndCircle from "./ClockEndCircle";
+import FormIcon from './journeyicons/FormIcon'
+import GavelIcon from './journeyicons/GavelIcon'
+import ClockEndCircle from "./journeyicons/ClockEndCircle";
 import Trail from "./Trail";
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants');
@@ -31,7 +31,7 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
                     width={'25%'}
                     level={1}
                 />
-                <PageIcon style={{left: '28%'}}
+                <FormIcon style={{left: '28%'}}
                           twoPages={true}
                           stepTitle={"Application for Review"}
                           active={true}

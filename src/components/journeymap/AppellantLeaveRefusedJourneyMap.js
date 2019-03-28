@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import GavelIcon from './GavelIcon';
+import FormIcon from './journeyicons/FormIcon';
+import GavelIcon from './journeyicons/GavelIcon';
 import Trail from './Trail';
-import ClockEndCircle from "./ClockEndCircle";
+import ClockEndCircle from "./journeyicons/ClockEndCircle";
 
 class AppellantLeaveRefusedJourneyMap extends React.Component {
     
@@ -15,7 +15,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     width={'25%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left: '25%', top: '16%'}}
                     twoPages={true}
                     stepTitle={"Application for Review"}
