@@ -5,13 +5,6 @@ let cn = require('classnames');
 
 class PageIcon extends React.Component {
     
-    constructor(props) {
-        super(props)
-        
-        
-
-    }
-
     render() {
         
         let stepTitle, stepTitleOptional = null;
@@ -46,7 +39,7 @@ class PageIcon extends React.Component {
                     checked={this.props.status === 'completed'}
                 />
                 <span style={{position: 'relative', top: top, left: '-10%', zIndex: '9'}}>{this.props.order}</span>
-                <div className={cn({"journey-icon": active},"file-main", {"inactive": !active})} >
+                <div className={cn({"journey-icon": active},"file-main", {"inactive": !active})} onClick={this.props.action}>
                     {imageToUse}
                     <div className={"file-corner-r"} style={this.props.twoPages? {top: '-15px'}:{}}/>
                 </div>

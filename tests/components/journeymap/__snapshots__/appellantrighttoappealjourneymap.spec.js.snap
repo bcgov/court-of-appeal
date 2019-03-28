@@ -2743,6 +2743,7 @@ AppellantRightToAppealJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -2821,6 +2822,7 @@ AppellantRightToAppealJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -3128,6 +3130,7 @@ AppellantRightToAppealJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -3251,6 +3254,7 @@ AppellantRightToAppealJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -4648,6 +4652,7 @@ AppellantRightToAppealJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -4723,6 +4728,7 @@ AppellantRightToAppealJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "ref": null,
                         "return": [Circular],
@@ -5024,6 +5030,7 @@ AppellantRightToAppealJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -5144,6 +5151,7 @@ AppellantRightToAppealJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -6652,6 +6660,7 @@ AppellantRightToAppealJourneyMap {
                                       />,
                                     ],
                                     "className": "journey-icon file-main",
+                                    "onClick": [Function],
                                   },
                                   "memoizedState": null,
                                   "mode": 0,
@@ -6727,6 +6736,7 @@ AppellantRightToAppealJourneyMap {
                                       />,
                                     ],
                                     "className": "journey-icon file-main",
+                                    "onClick": [Function],
                                   },
                                   "ref": null,
                                   "return": [Circular],
@@ -7028,6 +7038,7 @@ AppellantRightToAppealJourneyMap {
                                 </span>,
                                 <div
                                   className="journey-icon file-main"
+                                  onClick={[Function]}
                                 >
                                   <svg
                                     id="Layer_1"
@@ -7149,6 +7160,7 @@ AppellantRightToAppealJourneyMap {
                                 </span>,
                                 <div
                                   className="journey-icon file-main"
+                                  onClick={[Function]}
                                 >
                                   <svg
                                     id="Layer_1"
@@ -8227,6 +8239,7 @@ AppellantRightToAppealJourneyMap {
                                           </svg>
                                         </div>,
                                         "className": "cal-container",
+                                        "onClick": [Function],
                                       },
                                       "memoizedState": null,
                                       "mode": 0,
@@ -8278,6 +8291,7 @@ AppellantRightToAppealJourneyMap {
                                           </svg>
                                         </div>,
                                         "className": "cal-container",
+                                        "onClick": [Function],
                                       },
                                       "ref": null,
                                       "return": [Circular],
@@ -8336,6 +8350,7 @@ AppellantRightToAppealJourneyMap {
                                             Book Appeal Date with Registry
                                           </div>,
                                           "className": "step-title-container",
+                                          "onClick": [Function],
                                         },
                                         "memoizedState": null,
                                         "mode": 0,
@@ -8347,6 +8362,7 @@ AppellantRightToAppealJourneyMap {
                                             Book Appeal Date with Registry
                                           </div>,
                                           "className": "step-title-container",
+                                          "onClick": [Function],
                                         },
                                         "ref": null,
                                         "return": [Circular],
@@ -8479,6 +8495,7 @@ AppellantRightToAppealJourneyMap {
                                     </span>,
                                     <div
                                       className="cal-container"
+                                      onClick={[Function]}
                                     >
                                       <div
                                         className="journey-icon calendar-image"
@@ -8528,6 +8545,7 @@ AppellantRightToAppealJourneyMap {
                                     </div>,
                                     <div
                                       className="step-title-container"
+                                      onClick={[Function]}
                                     >
                                       <div
                                         className="step-title"
@@ -8572,6 +8590,7 @@ AppellantRightToAppealJourneyMap {
                                     </span>,
                                     <div
                                       className="cal-container"
+                                      onClick={[Function]}
                                     >
                                       <div
                                         className="journey-icon calendar-image"
@@ -8621,6 +8640,7 @@ AppellantRightToAppealJourneyMap {
                                     </div>,
                                     <div
                                       className="step-title-container"
+                                      onClick={[Function]}
                                     >
                                       <div
                                         className="step-title"
@@ -9863,6 +9883,7 @@ AppellantRightToAppealJourneyMap {
                                               />,
                                             ],
                                             "className": "journey-icon file-main",
+                                            "onClick": [Function],
                                           },
                                           "memoizedState": null,
                                           "mode": 0,
@@ -9941,6 +9962,7 @@ AppellantRightToAppealJourneyMap {
                                               />,
                                             ],
                                             "className": "journey-icon file-main",
+                                            "onClick": [Function],
                                           },
                                           "ref": null,
                                           "return": [Circular],
@@ -10248,6 +10270,7 @@ AppellantRightToAppealJourneyMap {
                                         </span>,
                                         <div
                                           className="journey-icon file-main"
+                                          onClick={[Function]}
                                         >
                                           <svg
                                             id="Layer_1"
@@ -10372,6 +10395,7 @@ AppellantRightToAppealJourneyMap {
                                         </span>,
                                         <div
                                           className="journey-icon file-main"
+                                          onClick={[Function]}
                                         >
                                           <svg
                                             id="Layer_1"
@@ -12674,6 +12698,7 @@ AppellantRightToAppealJourneyMap {
                                                           The Hearing
                                                         </div>,
                                                         "className": "step-title-container",
+                                                        "onClick": [Function],
                                                         "style": Object {
                                                           "top": "73px",
                                                         },
@@ -12688,6 +12713,7 @@ AppellantRightToAppealJourneyMap {
                                                           The Hearing
                                                         </div>,
                                                         "className": "step-title-container",
+                                                        "onClick": [Function],
                                                         "style": Object {
                                                           "top": "73px",
                                                         },
@@ -12960,6 +12986,7 @@ AppellantRightToAppealJourneyMap {
                                                   </div>,
                                                   <div
                                                     className="step-title-container"
+                                                    onClick={[Function]}
                                                     style={
                                                       Object {
                                                         "top": "73px",
@@ -13116,6 +13143,7 @@ AppellantRightToAppealJourneyMap {
                                                   </div>,
                                                   <div
                                                     className="step-title-container"
+                                                    onClick={[Function]}
                                                     style={
                                                       Object {
                                                         "top": "73px",
@@ -14395,6 +14423,7 @@ AppellantRightToAppealJourneyMap {
                                                             />,
                                                           ],
                                                           "className": "journey-icon file-main",
+                                                          "onClick": [Function],
                                                         },
                                                         "memoizedState": null,
                                                         "mode": 0,
@@ -14473,6 +14502,7 @@ AppellantRightToAppealJourneyMap {
                                                             />,
                                                           ],
                                                           "className": "journey-icon file-main",
+                                                          "onClick": [Function],
                                                         },
                                                         "ref": null,
                                                         "return": [Circular],
@@ -14780,6 +14810,7 @@ AppellantRightToAppealJourneyMap {
                                                       </span>,
                                                       <div
                                                         className="journey-icon file-main"
+                                                        onClick={[Function]}
                                                       >
                                                         <svg
                                                           id="Layer_1"
@@ -14904,6 +14935,7 @@ AppellantRightToAppealJourneyMap {
                                                       </span>,
                                                       <div
                                                         className="journey-icon file-main"
+                                                        onClick={[Function]}
                                                       >
                                                         <svg
                                                           id="Layer_1"
