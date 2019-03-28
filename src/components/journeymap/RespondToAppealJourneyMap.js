@@ -40,7 +40,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status !== 'new'}
                     lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'18%'}
+                    width={'15%'}
                     level={1}
                 />
                 <PageIcon style={{left:'20%'}}
@@ -57,7 +57,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
                     lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'25%'}
+                    width={'24%'}
                     level={1}
                 />
                 <PageIcon style={{left:'44%' }}
@@ -76,7 +76,7 @@ class RespondToAppealJourneyMap extends React.Component {
                   className={"journey-trail-l1-l2"}
                   completed={this.state.steps[1].status === 'completed'}
                   lineCompleted={this.state.steps[2].status === 'completed'}
-                  width={'25%'}
+                  width={'24%'}
                   level={1}
               />
                 <PageIcon style={{left:'68%'}}
@@ -89,13 +89,6 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
-                <Trail
-                    className={"journey-trail-l1-l2"}
-                    completed={this.state.steps[2].status === 'completed'}
-                    lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'5%'}
-                    level={1}
-                />
                 <div className={cn("journey-right-curve",{'completed-curve': this.state.steps[2].status === 'completed'})} />
                 <div className={cn("journey-left-curve",{'completed-left-curve': this.state.steps[2].status === 'completed'})} />
                 
@@ -106,7 +99,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'25%'}
                     level={2}
                 />
-                <GavelIcon style={{top:'68%', left: '30%'}}
+                <GavelIcon style={{top:'55%', left: '30%'}}
                            stepTitle={"The Hearing"}
                            action={this.iconClicked.bind(this, 'respondenthearing')}
                            active={true}
@@ -121,7 +114,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     width={'30%'}
                     level={2}
                 />
-                <PageIcon style={{top:'68%', left: '57%'}}
+                <PageIcon style={{top:'55%', left: '57%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}
@@ -143,7 +136,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     action={this.iconClicked.bind(this,'respondentcomplete')}
                     active={true}
                     completed={this.state.steps[4].status === 'completed'}
-                    style={{top: '68%', left: '80%'}}
+                    style={{top: '55%', left: '80%'}}
 
                 />
             </div>

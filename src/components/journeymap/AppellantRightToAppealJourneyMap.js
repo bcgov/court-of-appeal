@@ -34,7 +34,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                    className={"journey-trail-l1-l2"}
                    completed={this.state.steps[0].status !== 'new'}
                    lineCompleted={this.state.steps[1].status === 'completed'}
-                   width={'28%'}
+                   width={'25%'}
                    level={1}
                />
                 <PageIcon style={{left: '30%'}}
@@ -51,7 +51,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
                     lineCompleted={this.state.steps[1].status === 'completed'}
-                    width={'35%'}
+                    width={'32%'}
                     level={1}
                 />
                 <PageIcon style={{left: '60%'}}
@@ -79,10 +79,10 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l2-l3"}
                     completed={this.state.steps[1].status === 'completed'}
                     lineCompleted={this.state.steps[4].status === 'completed'}
-                    width={'18%'}
+                    width={'15%'}
                     level={2}
                 />
-                <PageIcon style={{left: '20%', top: '43%'}}
+                <PageIcon style={{left: '20%', top: '38%'}}
                           twoPages={true}
                           stepTitle={"Factum, Appeal Book, and Certificate of Readiness"}
                           action={this.iconClicked.bind(this, 'factum')}
@@ -97,12 +97,13 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l2-l3"}
                     completed={this.state.steps[2].status === 'completed'}
                     lineCompleted={this.state.steps[4].status === 'completed'}
-                    width={'25%'}
+                    width={'22%'}
                     level={2}
                     
                 />
-                <CalendarIcon style={{left: '43%', top: '44%'/*wtf calendar icon?!?*/}}
+                <CalendarIcon style={{left: '43%', top: '38%'/*wtf calendar icon?!?*/}}
                               stepTitle={"Book Appeal Date with Registry"}
+                              stepTitleClass={"step-title-wide"}
                               action={this.iconClicked.bind(this, 'bookappeal')}
                               active={true}
                               order={4}
@@ -114,10 +115,10 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     className={"journey-trail-l2-l3"}
                     completed={this.state.steps[3].status === 'completed'}
                     lineCompleted={this.state.steps[4].status === 'completed'}
-                    width={'25%'}
+                    width={'22%'}
                     level={2}
                 />
-                 <PageIcon style={{left: '68%', top: '43%'}}
+                 <PageIcon style={{left: '68%', top: '38%'}}
                            twoPages={false}
                            stepTitle={"Notice of Hearing"}
                            action={this.iconClicked.bind(this, 'noticeofhearing')}
@@ -139,10 +140,10 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}
                     completed={this.state.steps[4].status === 'completed'}
-                    width={'25%'}
+                    width={'22%'}
                     level={3}
                 />
-                <GavelIcon style={{left: '30%', top: '80%'}} 
+                <GavelIcon style={{left: '30%', top: '69%'}} 
                            className={"journey-box"} 
                            stepTitle={"The Hearing"} 
                            action={this.iconClicked.bind(this, 'appellanthearing')}
@@ -155,10 +156,10 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}
                     completed={this.state.steps[5].status === 'completed'}
-                    width={'35%'}
+                    width={'32%'}
                     level={3}
                 />
-                <PageIcon style={{left: '59%', top: '80%'}}
+                <PageIcon style={{left: '59%', top: '69%'}}
                           className={"journey-box"}
                           twoPages={false}
                           stepTitle={"Court Order"}
@@ -172,7 +173,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}
                     completed={this.state.steps[6].status === 'completed'}
-                    width={'25%'}
+                    width={'22%'}
                     level={3}
                 />
                 <EndCircle
@@ -180,7 +181,7 @@ class AppellantRightToAppealJourneyMap extends React.Component {
                     action={this.iconClicked.bind(this,'appellantcomplete')}
                     active={true}
                     completed={this.state.steps[6].status === 'completed'}
-                    style={{top: '80%', left: '80%'}}
+                    style={{top: '69%', left: '80%'}}
                     
                 />
             </div>
