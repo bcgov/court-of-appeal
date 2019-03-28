@@ -2614,6 +2614,7 @@ AppellantLeaveGrantedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "memoizedState": null,
                     "mode": 0,
@@ -2689,6 +2690,7 @@ AppellantLeaveGrantedJourneyMap {
                         />,
                       ],
                       "className": "journey-icon file-main",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "return": [Circular],
@@ -2990,6 +2992,7 @@ AppellantLeaveGrantedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -3110,6 +3113,7 @@ AppellantLeaveGrantedJourneyMap {
                   </span>,
                   <div
                     className="journey-icon file-main"
+                    onClick={[Function]}
                   >
                     <svg
                       id="Layer_1"
@@ -4500,6 +4504,7 @@ AppellantLeaveGrantedJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "memoizedState": null,
                         "mode": 0,
@@ -4575,6 +4580,7 @@ AppellantLeaveGrantedJourneyMap {
                             />,
                           ],
                           "className": "journey-icon file-main",
+                          "onClick": [Function],
                         },
                         "ref": null,
                         "return": [Circular],
@@ -4876,6 +4882,7 @@ AppellantLeaveGrantedJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -4996,6 +5003,7 @@ AppellantLeaveGrantedJourneyMap {
                       </span>,
                       <div
                         className="journey-icon file-main"
+                        onClick={[Function]}
                       >
                         <svg
                           id="Layer_1"
@@ -6071,6 +6079,7 @@ AppellantLeaveGrantedJourneyMap {
                                 </svg>
                               </div>,
                               "className": "cal-container",
+                              "onClick": [Function],
                             },
                             "memoizedState": null,
                             "mode": 0,
@@ -6122,6 +6131,7 @@ AppellantLeaveGrantedJourneyMap {
                                 </svg>
                               </div>,
                               "className": "cal-container",
+                              "onClick": [Function],
                             },
                             "ref": null,
                             "return": [Circular],
@@ -6180,6 +6190,7 @@ AppellantLeaveGrantedJourneyMap {
                                   Book Appeal Date with Registry
                                 </div>,
                                 "className": "step-title-container step-title-wide",
+                                "onClick": [Function],
                               },
                               "memoizedState": null,
                               "mode": 0,
@@ -6191,6 +6202,7 @@ AppellantLeaveGrantedJourneyMap {
                                   Book Appeal Date with Registry
                                 </div>,
                                 "className": "step-title-container step-title-wide",
+                                "onClick": [Function],
                               },
                               "ref": null,
                               "return": [Circular],
@@ -6323,6 +6335,7 @@ AppellantLeaveGrantedJourneyMap {
                           </span>,
                           <div
                             className="cal-container"
+                            onClick={[Function]}
                           >
                             <div
                               className="journey-icon calendar-image"
@@ -6372,6 +6385,7 @@ AppellantLeaveGrantedJourneyMap {
                           </div>,
                           <div
                             className="step-title-container step-title-wide"
+                            onClick={[Function]}
                           >
                             <div
                               className="step-title"
@@ -6416,6 +6430,7 @@ AppellantLeaveGrantedJourneyMap {
                           </span>,
                           <div
                             className="cal-container"
+                            onClick={[Function]}
                           >
                             <div
                               className="journey-icon calendar-image"
@@ -6465,6 +6480,7 @@ AppellantLeaveGrantedJourneyMap {
                           </div>,
                           <div
                             className="step-title-container step-title-wide"
+                            onClick={[Function]}
                           >
                             <div
                               className="step-title"
@@ -7825,6 +7841,7 @@ AppellantLeaveGrantedJourneyMap {
                                           />,
                                         ],
                                         "className": "journey-icon file-main",
+                                        "onClick": [Function],
                                       },
                                       "memoizedState": null,
                                       "mode": 0,
@@ -7903,6 +7920,7 @@ AppellantLeaveGrantedJourneyMap {
                                           />,
                                         ],
                                         "className": "journey-icon file-main",
+                                        "onClick": [Function],
                                       },
                                       "ref": null,
                                       "return": [Circular],
@@ -8210,6 +8228,7 @@ AppellantLeaveGrantedJourneyMap {
                                     </span>,
                                     <div
                                       className="journey-icon file-main"
+                                      onClick={[Function]}
                                     >
                                       <svg
                                         id="Layer_1"
@@ -8334,6 +8353,7 @@ AppellantLeaveGrantedJourneyMap {
                                     </span>,
                                     <div
                                       className="journey-icon file-main"
+                                      onClick={[Function]}
                                     >
                                       <svg
                                         id="Layer_1"
@@ -10518,6 +10538,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 The Hearing
                                               </div>,
                                               "className": "step-title-container",
+                                              "onClick": [Function],
                                               "style": Object {
                                                 "top": "73px",
                                               },
@@ -10532,6 +10553,7 @@ AppellantLeaveGrantedJourneyMap {
                                                 The Hearing
                                               </div>,
                                               "className": "step-title-container",
+                                              "onClick": [Function],
                                               "style": Object {
                                                 "top": "73px",
                                               },
@@ -10804,6 +10826,7 @@ AppellantLeaveGrantedJourneyMap {
                                         </div>,
                                         <div
                                           className="step-title-container"
+                                          onClick={[Function]}
                                           style={
                                             Object {
                                               "top": "73px",
@@ -10960,6 +10983,7 @@ AppellantLeaveGrantedJourneyMap {
                                         </div>,
                                         <div
                                           className="step-title-container"
+                                          onClick={[Function]}
                                           style={
                                             Object {
                                               "top": "73px",
@@ -12237,6 +12261,7 @@ AppellantLeaveGrantedJourneyMap {
                                                   />,
                                                 ],
                                                 "className": "journey-icon file-main",
+                                                "onClick": [Function],
                                               },
                                               "memoizedState": null,
                                               "mode": 0,
@@ -12315,6 +12340,7 @@ AppellantLeaveGrantedJourneyMap {
                                                   />,
                                                 ],
                                                 "className": "journey-icon file-main",
+                                                "onClick": [Function],
                                               },
                                               "ref": null,
                                               "return": [Circular],
@@ -12685,6 +12711,7 @@ AppellantLeaveGrantedJourneyMap {
                                             </span>,
                                             <div
                                               className="journey-icon file-main"
+                                              onClick={[Function]}
                                             >
                                               <svg
                                                 id="Layer_1"
@@ -12814,6 +12841,7 @@ AppellantLeaveGrantedJourneyMap {
                                             </span>,
                                             <div
                                               className="journey-icon file-main"
+                                              onClick={[Function]}
                                             >
                                               <svg
                                                 id="Layer_1"
