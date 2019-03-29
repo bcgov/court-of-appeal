@@ -10,7 +10,7 @@ class RespondToLeaveToAppealHearingPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "The appeal will be heard by a single judge sitting in Chambers who will grant or refuse to leave to appeal.",
-            iconSrc: "/icons/icon-hearing.svg",
+           iconType: "hearing",
             iconClass: "info-modal-icon"
         }]
     }

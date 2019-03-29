@@ -69,20 +69,20 @@ class RespondentFactumPopup extends Component {
             expandable: true,
             expanded: true,
             sectionHeading: "The Factum and Appeal Book",
-            iconSrc: "/icons/icon-share.svg",
+           iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{startWith: "You have  ", deadline: " 30 days ", endWith: " to file and serve your documents."}],
             listContentMap: listContentMap
         }, {
             expandable: true,
             sectionHeading: "The Transcript Extract Book",
-            iconSrc :"/icons/icon-info.svg",
+            iconType :"info",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "The Certificate of Readiness",
-            iconSrc :"/icons/icon-info.svg",
+            iconType :"info",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["You should have received the appellant's Certificate of Readiness immediately after receiving the Factum. If you have not received the Certificate of Readiness, contact the appellant or the registry to see if one has been filed.  If a Certificate of Readiness has not been filed, and you would like the appeal to proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately after your Factum."],
             listContentMap: [
@@ -110,13 +110,13 @@ class RespondentFactumPopup extends Component {
         }, {
             expandable: true,
             sectionHeading: "A Reply to your Factum",
-            iconSrc :"/icons/icon-info.svg",
+            iconType :"info",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["If you are served with the appellant's Reply to your Factum, you do not have to respond to this document."]
         }, {
             expandable: true,
             sectionHeading: "A Notice of Hearing",
-            iconSrc :"/icons/icon-calendar.svg",
+            iconType :"calendar",
             iconClass: "info-modal-icon",
             paragraphContentMap: ["You should be served a Notice of Hearing from the appellant, which will tell you the date and length of your hearing." +
             "  However, if you were the one who submitted the Certificate of Readiness, please click the link for more information:",

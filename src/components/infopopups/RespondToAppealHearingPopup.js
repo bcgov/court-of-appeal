@@ -10,7 +10,7 @@ class RespondToAppealHearingPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "A division of three judges will review the decision of the single judge who heard the appeal.",
-            iconSrc: "/icons/icon-hearing.svg",
+           iconType: "hearing",
             iconClass: "info-modal-icon"
         }]
     }
