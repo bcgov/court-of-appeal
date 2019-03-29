@@ -52,7 +52,7 @@ class InfoPopupSection extends Component {
         let iconLine = (
             <div className="row icon-line" onClick={iconLineClickEvent} style={{ cursor:this.props.expandable?'pointer':'default' }}>
                 <InfoPopupIcon
-                    iconSrc={this.props.iconSrc}
+                    iconType={this.props.iconType}
                     iconClass={this.props.iconClass}
                 />
                 <div className="col">

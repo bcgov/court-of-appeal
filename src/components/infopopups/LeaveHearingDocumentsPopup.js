@@ -51,7 +51,7 @@ class LeaveHearingDocumentsPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "Notice of Motion and Motion Book",
-            iconSrc: "/icons/icon-share.svg",
+           iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",

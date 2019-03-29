@@ -1,8 +1,8 @@
 import React from 'react';
-import PageIcon from './PageIcon';
-import GavelIcon from './GavelIcon';
-import CalendarIcon from './CalendarIcon';
-import EndCircle from './EndCircle';
+import FormIcon from './journeyicons/FormIcon';
+import GavelIcon from './journeyicons/GavelIcon';
+import CalendarIcon from './journeyicons/CalendarIcon';
+import EndCircle from './journeyicons/EndCircle';
 import Trail from './Trail';
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants');
@@ -33,10 +33,10 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status !== 'new'}
                     lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'18%'}
+                    width={'15%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left:'20%'}}
                     twoPages={true}
                     stepTitle={"Appeal Record and Transcript"}
@@ -52,11 +52,11 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[0].status === 'completed'}
                     lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'27%'}
+                    width={'22%'}
                     level={1}
                 />
-                <PageIcon 
-                    style={{left:'45%'}}
+                <FormIcon 
+                    style={{left:'41%'}}
                     twoPages={true}
                     stepTitle={"Factum, Appeal Book and Certificate of Readiness"}
                     stepTitleClass={"step-title-wide"}
@@ -71,11 +71,11 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     className={"journey-trail-l1-l2"}
                     completed={this.state.steps[1].status === 'completed'}
                     lineCompleted={this.state.steps[2].status === 'completed'}
-                    width={'27%'}
+                    width={'23%'}
                     level={1}
                 />
                 <CalendarIcon 
-                    style={{left:'70%', marginTop: '5px'}}
+                    style={{left:'62%', marginTop: '5px'}}
                     stepTitle={"Book Appeal Date with Registry"}
                     action={this.iconClicked.bind(this, 'bookappeal')}
                     stepTitleClass={"step-title-wide"}
@@ -97,11 +97,11 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                 <Trail
                     className={"journey-trail-l2-l3 last-row"}
                     completed={this.state.steps[2].status === 'completed'}
-                    width={'17%'}
+                    width={'10%'}
                     level={2}
                 />
-                <PageIcon 
-                    style={{top:'68%', left: '18%'}}
+                <FormIcon 
+                    style={{top:'55%', left: '18%'}}
                     twoPages={false}
                     stepTitle={"Notice of Hearing"}
                     action={this.iconClicked.bind(this, 'noticeofhearing')}
@@ -114,11 +114,11 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                  <Trail
                      className={"journey-trail-l2-l3 last-row"}
                      completed={this.state.steps[3].status === 'completed'}
-                     width={'27%'}
+                     width={'23%'}
                      level={2}
                  />
                 <GavelIcon 
-                    style={{top:'68%', left: '41%'}}
+                    style={{top:'55%', left: '41%'}}
                     stepTitle={"The Hearing"}
                     action={this.iconClicked.bind(this, 'appellanthearing')}
                     active={true}
@@ -130,11 +130,11 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                  <Trail
                      className={"journey-trail-l2-l3 last-row"}
                      completed={this.state.steps[4].status === 'completed'}
-                     width={'27%'}
+                     width={'23%'}
                      level={2}
                  />
-                <PageIcon 
-                    style={{top:'68%', left: '64%'}}
+                <FormIcon 
+                    style={{top:'55%', left: '64%'}}
                     twoPages={false}
                     stepTitle={"Court Order"}
                     stepTitleOptional={"(if applicable)"}
@@ -157,7 +157,7 @@ class AppellantLeaveGrantedJourneyMap extends React.Component {
                     action={this.iconClicked.bind(this,'appellantcomplete')}
                     active={true}
                     completed={this.state.steps[5].status === 'completed'}
-                    style={{top: '68%', left: '83%'}}
+                    style={{top: '55%', left: '83%'}}
                 />
             </div>
         );

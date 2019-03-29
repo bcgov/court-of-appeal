@@ -64,7 +64,7 @@ class AppellantInitialPopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: "Notice of Appeal",
-            iconSrc: "/icons/icon-share.svg",
+            iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",

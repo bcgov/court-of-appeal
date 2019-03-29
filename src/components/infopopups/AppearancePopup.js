@@ -39,7 +39,7 @@ class AppearancePopup extends Component {
             expandable: false,
             expanded: true,
             sectionHeading: `Were you served with a ${this.props.noticeType}?`,
-            iconSrc: "/icons/icon-share.svg",
+            iconType: "share",
             iconClass: "info-modal-icon",
             deadlinePhrases: [{
                 startWith: "You have ",

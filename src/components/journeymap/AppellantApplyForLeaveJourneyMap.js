@@ -1,6 +1,6 @@
 import React from 'react';
-import PageIcon from './PageIcon'
-import GavelEndCircle from "./GavelEndCircle";
+import FormIcon from './journeyicons/FormIcon'
+import GavelEndCircle from "./journeyicons/GavelEndCircle";
 import Trail from "./Trail";
 let cn = require('classnames');
 let JOURNEY_TYPE = require('../../helpers/constants');
@@ -30,7 +30,7 @@ class AppellantApplyForLeaveJourneyMap extends React.Component {
                     width={'28%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left: '28%'}}
                     twoPages={false}
                     stepTitle={"Initial Documents"}
@@ -47,7 +47,7 @@ class AppellantApplyForLeaveJourneyMap extends React.Component {
                     width={'30%'}
                     level={1}
                 />
-                <PageIcon 
+                <FormIcon 
                     style={{left: '58%'}}
                     twoPages={true}
                     stepTitle={"Hearing Documents"}
