@@ -90,24 +90,14 @@ Service.prototype.getMyJourney = function(form, callback) {
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
+        else if (response && response.statusCode === 404) {
+            callback({ error:{ code:404, message:'not found' } });
+        }
         else {
-            self.notifyOfError(callback, { cases:[] });
+            self.notifyOfError(callback);
         }
     });
 };
-
-Service.prototype.getMyJourney = function(form, callback) {
-    let self = this;
-    request.get(this.buildOptions('/api/journey'), (err, response, body)=>{
-        if (response && response.statusCode === 200) {
-            callback(JSON.parse(body));
-        }
-        else {
-            self.notifyOfError(callback, { cases:[] });
-        }
-    });
-};
-
 
 Service.prototype.savePerson = function(user, callback) {
     let options = this.buildOptions('/api/persons');
@@ -125,7 +115,8 @@ Service.prototype.savePerson = function(user, callback) {
 
 Service.prototype.buildOptions = function(url) {
     return {
-        url: this.base() + url
+        url: this.base() + url,
+        'content-type': 'application/json'
     };
 };
 Service.prototype.getPersonInfo = function(callback) {
