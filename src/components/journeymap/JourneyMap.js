@@ -207,7 +207,6 @@ class JourneyMap extends React.Component {
         } else {
             this.props.service.updateJourney(
                 {
-                    id: this.state.currentJourneyId,
                     type: type,
                     state: 'started',
                     ca_number: ca_number,
