@@ -36,10 +36,19 @@ class RespondToAppealJourneyMap extends React.Component {
         return (
             <div className={"journey-map-container"}>
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
+
+                <div
+                    style={{marginLeft: '50px',
+                        borderTop: '9px solid rgb(159, 191, 226)',
+                        width: '60%',
+                        position: 'absolute',
+                        top: '25%',
+                        zIndex: '1'
+                    }}/>
+
                 <Trail
-                    className={"journey-trail-l1-l2"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status !== 'new'}
-                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'15%'}
                     level={1}
                 />
@@ -54,9 +63,8 @@ class RespondToAppealJourneyMap extends React.Component {
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status === 'completed'}
-                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'24%'}
                     level={1}
                 />
@@ -73,9 +81,8 @@ class RespondToAppealJourneyMap extends React.Component {
                     />
                 
               <Trail
-                  className={"journey-trail-l1-l2"}
+                  className={"journey-trail-l1-moveable"}
                   completed={this.state.steps[1].status === 'completed'}
-                  lineCompleted={this.state.steps[2].status === 'completed'}
                   width={'24%'}
                   level={1}
               />
@@ -89,56 +96,8 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
-                <div className={cn("journey-right-curve",{'completed-curve': this.state.steps[2].status === 'completed'})} />
-                <div className={cn("journey-left-curve",{'completed-left-curve': this.state.steps[2].status === 'completed'})} />
-                
-                
-                <Trail
-                    className={"journey-trail-l2-l3 last-row"}
-                    completed={this.state.steps[2].status === 'completed'}
-                    width={'25%'}
-                    level={2}
-                />
-                <GavelIcon style={{top:'55%', left: '30%'}}
-                           stepTitle={"The Hearing"}
-                           action={this.iconClicked.bind(this, 'respondenthearing')}
-                           active={true}
-                           order={4}
-                           status={this.getStepStatus(4)}
-                           completed={this.stepCompleted.bind(this)}
-                           ready={this.props.isStepReady(4, this.state.steps)}
-                />
-                <Trail
-                    className={"journey-trail-l2-l3 last-row"}
-                    completed={this.state.steps[3].status === 'completed'}
-                    width={'30%'}
-                    level={2}
-                />
-                <FormIcon style={{top:'55%', left: '57%'}}
-                          twoPages={false}
-                          stepTitle={"Court Order"}
-                          stepTitleOptional={"(if required)"}
-                          action={this.iconClicked.bind(this, 'courtorder')}
-                          active={true}
-                          order={5}
-                          status={this.getStepStatus(5)}
-                          completed={this.stepCompleted.bind(this)}
-                          ready={this.props.isStepReady(5, this.state.steps)}
-                />
-                <Trail
-                    className={"journey-trail-l2-l3 last-row"}
-                    completed={this.state.steps[4].status === 'completed'}
-                    width={'25%'}
-                    level={2}
-                />
-                <EndCircle
-                    stepTitle={"Appeal Process Complete"}
-                    action={this.iconClicked.bind(this,'respondentcomplete')}
-                    active={true}
-                    completed={this.state.steps[4].status === 'completed'}
-                    style={{top: '55%', left: '80%'}}
-
-                />
+                <div className={cn("journey-circle-right",{'circling': this.state.steps[2].status === 'completed'})} />
+                <div className={"square"} />
             </div>
         );
     }

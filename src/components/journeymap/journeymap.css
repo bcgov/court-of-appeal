@@ -45,7 +45,7 @@
     height: 50px;
     width: 50px;
     margin: 23px -5px 0 15px;
-    z-index:1;
+    z-index:2;
 }
 .journey-trail-l1 {
     border-bottom: 9px solid #9fbfe2;
@@ -88,13 +88,12 @@
     position: relative;
 }
 .journey-right-curve {
-    border: 9px solid #9fbfe2;
-    border-left-color: transparent;
+    border: 9px solid ;
+    border-color: #9fbfe2 #9fbfe2 #9fbfe2 transparent;
     width: 25%;
     border-radius:  0 200px 200px 0;
     margin-top: 42px;
     margin-left: -10px;
-    border-left-width: 0;
 }
 .completed-curve {
     border: 9px solid #377d22;
@@ -157,6 +156,7 @@
 
 .completed-step-l1 {
     border-top: 9px solid #377d22;
+    z-index: 2;
 }
 
 .completed-step-l1-l2 {
@@ -198,3 +198,37 @@
     border-radius: 5px;
 }
 
+.journey-circle-right {
+    border: 9px solid;
+    border-color: #9fbfe2 #9fbfe2 #377d22 #377d22;
+    border-radius: 180px;
+    transform: rotate(45deg);
+    width: 180px;
+    height: 180px;
+    margin-top:6%;
+    z-index: 1;
+}
+.circling {
+    animation: rotatetogreen 2s linear forwards;
+}
+.square {
+    width: 100px;
+    position:absolute;
+    top: 24.5%;
+    left: 111.8%;
+    z-index: 2;
+    height: 180px;
+    background-color: white;
+    transform: translateX(-300px);
+    border-top: 9px solid lightblue;
+    border-bottom: 9px solid lightblue;
+}
+@keyframes rotatetogreen {
+    0% { transform: rotate(45deg)}
+    /*  50% { transform: rotate(120deg)} */
+    30% {transform: rotate(225deg)}
+    40% { box-shadow: 0 0 -10px #a7cc61; border-width: 9px;  }
+    50% { box-shadow: 0 0 10px #49a25a; border-width: 10px; }
+    90% { box-shadow: 0 0 10px #49a25a; border-width: 10px; }
+    100% { box-shadow: 0 0 -10px #3c763d; border-width: 9px; transform: rotate(225deg);}
+}
