@@ -207,6 +207,7 @@
     height: 180px;
     margin-top:6%;
     z-index: 1;
+    fill-opacity: 0;
 }
 .circling {
     animation: rotatetogreen 2s linear forwards;
@@ -228,7 +229,7 @@
     /*  50% { transform: rotate(120deg)} */
     30% {transform: rotate(225deg)}
     40% { box-shadow: 0 0 -10px #a7cc61; border-width: 9px;  }
-    50% { box-shadow: 0 0 10px #49a25a; border-width: 10px; }
-    90% { box-shadow: 0 0 10px #49a25a; border-width: 10px; }
+    50% { box-shadow: 0 0 15px #49a25a; border-width: 10px; }
+    90% { box-shadow: 0 0 15px #49a25a; border-width: 10px; }
     100% { box-shadow: 0 0 -10px #3c763d; border-width: 9px; transform: rotate(225deg);}
 }
