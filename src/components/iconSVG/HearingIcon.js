@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class HearingIcon extends Component {
 
     render() {
-        console.log("Calling render in hearing icon")
         return (
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 51.9 58.8" xmlSpace="preserve">
                 <path fill="white" d="M13.1,19.3l15-15c1-1,1-2.6,0-3.5s-2.6-1-3.5,0l-15,15c-1,1-1,2.6,0,3.5C10.5,20.3,12.1,20.3,13.1,19.3z"/>

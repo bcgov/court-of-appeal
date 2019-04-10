@@ -8,6 +8,7 @@ import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
 import Form2Preview from "../components/Form2Preview";
+import ProgressStatusBar from "../components/ProgressStatusBar/ProgressStatusBar";
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
@@ -15,7 +16,7 @@ class Form2 extends Component {
 
     constructor(props) {
         super(props);
-        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+        this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = props.service;
         this.state = this.initialState();
 
@@ -261,6 +262,12 @@ class Form2 extends Component {
                     </li>
                 </ol>
             </div>
+
+              <ProgressStatusBar
+                  activeStep={this.state.showForm2 ? 2 : 1}
+                  steps={["Access","Form 2","Preview","Payment"]}
+              />
+
             <div className="row">
                 <div id="main-content" role="main" className="contentPageMainColumn col-sm-12">
                     <div className="form-title not-printable">
