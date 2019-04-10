@@ -1,3 +1,5 @@
+import renderer from "react-test-renderer";
+
 require('../support/enzyme.setup');
 import React from 'react';
 import Form2 from '../../src/forms/Form2';
@@ -5,7 +7,6 @@ import { mount } from 'enzyme';
 let DefaultService = require('../../src/service/default.service');
 
 describe('Form2', ()=>{
-
     let document;
 
     describe('starting state', ()=>{
