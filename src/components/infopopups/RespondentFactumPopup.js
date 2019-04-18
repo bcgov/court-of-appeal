@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import {
     FILE_STEP_ONE_MSG, FILE_MULTIPLES_STEP_TWO_MSG, FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class RespondentFactumPopup extends Component {
 
@@ -128,13 +128,13 @@ class RespondentFactumPopup extends Component {
 
     render() {
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 helpType="respondent"
                 title="The Factum and Appeal Book"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

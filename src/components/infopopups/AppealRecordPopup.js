@@ -4,7 +4,7 @@ import {
     FILE_MULTIPLES_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class AppealRecordPopup extends Component {
 
@@ -75,7 +75,7 @@ class AppealRecordPopup extends Component {
     render() {
         let sections = this.props.getSections(this.sections);
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title={"Appeal Record and Transcript"}
                 helpType="appellant"
                 close={this.props.close}
@@ -83,7 +83,7 @@ class AppealRecordPopup extends Component {
                 <div className="info-modal-primary-heading row">
                 </div>
                 {sections}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

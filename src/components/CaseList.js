@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
-import Form2Preview from "./Form2Preview";
+import Form2Preview from "../forms/Form2Preview";
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
@@ -237,7 +237,7 @@ class CaseList extends React.Component {
             if(!data.error) { 
                 this.service.previewForm(id, (html)=>{
                     if (!html.error) {
-                        this.setState({editMode: false, previewMode: true, previewContent:html });
+                        this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {previewContent: html}});
                     }
                 });
             }

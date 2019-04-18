@@ -5,7 +5,7 @@ import {
     FILE_STEP_ONE_MSG,
     FILE_STEP_ONE_MSG_SINGULAR
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class AppellantFactumPopup extends Component {
 
@@ -136,13 +136,13 @@ class AppellantFactumPopup extends Component {
 
         let sections = this.props.getSections(this.sections);
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="The Factum, Appeal Book and Certificate of Readiness"
                 helpType="appellant"
                 close={this.props.close}
             >
                 {sections}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

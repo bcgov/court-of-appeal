@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 import {FILE_STEP_ONE_MSG_SINGULAR, FILE_STEP_THREE_MSG, FILE_STEP_TWO_MSG} from "../../helpers/constants";
 
 class CrossAppealPopup extends Component {
@@ -50,7 +50,7 @@ class CrossAppealPopup extends Component {
 
     render() {
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title=" Cross Appeal (Optional)"
                 helpType="respondent"
                 close={this.props.close}
@@ -59,7 +59,7 @@ class CrossAppealPopup extends Component {
                     Were you served with any of the following documents?
                 </div>
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

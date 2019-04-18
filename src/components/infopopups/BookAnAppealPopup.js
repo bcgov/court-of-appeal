@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class BookAnAppealPopup extends Component {
 
@@ -25,13 +25,13 @@ class BookAnAppealPopup extends Component {
 
     render () {
         return  (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="Book Appeal Date"
                 helpType="appellant"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 
