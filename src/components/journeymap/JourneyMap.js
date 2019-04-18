@@ -1,6 +1,6 @@
 import React from 'react';
 import './journeymap.css';
-import InfoPopup from '../infopopups/common/InfoPopup';
+import InfoPopupFactory from '../infopopups/common/InfoPopupFactory';
 import ReactTooltip from 'react-tooltip';
 import RespondToAppealJourney from './RespondToAppealJourneyMap';
 import RespondToLeaveJourneyMap from "./RespondToLeaveJourneyMap";
@@ -65,7 +65,7 @@ class JourneyMap extends React.Component {
                 { introductionText }
                 
                 {this.getUsersJourney()}
-                <InfoPopup
+                <InfoPopupFactory
                     show={this.state.showInfoModal}
                     close={this.closeInfoModal}
                     type={this.state.popupType}

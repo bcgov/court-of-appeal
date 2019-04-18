@@ -33,7 +33,7 @@ describe('App', ()=>{
 
     test('can load Form2', ()=>{
         const app = mount(
-            <MemoryRouter initialEntries={[ '/form.2.html' ]}>
+            <MemoryRouter initialEntries={[ '/form2' ]}>
                 <App fetch="false"/>
             </MemoryRouter>
         );

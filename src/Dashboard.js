@@ -63,6 +63,7 @@ class Dashboard extends Component {
                             service={this.service}
                             cases={this.state.cases}
                             displayMyCasesEmptyLabel={this.state.displayMyCasesEmptyLabel}
+                            history={this.props.history}
                         />
                     </div>
                 </div>

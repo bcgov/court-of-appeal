@@ -9,6 +9,12 @@ let DefaultService = require('../../src/service/default.service');
 describe('Form2', ()=>{
     let document;
 
+    let history = {
+        replace(path, state) {
+           return;
+        },
+        location:{}
+    };
     describe('starting state', ()=>{
         
         beforeEach(()=>{
@@ -50,7 +56,8 @@ describe('Form2', ()=>{
         };
         beforeEach(()=>{
             document = mount(<Form2 
-                service={{ searchForm7: (number, callback)=> { callback(data); } }}
+                service={{ searchForm7: (number, callback)=> { callback(data);} }}
+                history={history}
             />);
             document.find('#find-button').at(0).prop('onClick')();
             document.update();
@@ -90,8 +97,8 @@ describe('Form2', ()=>{
         });
         test('resists no data', ()=> {
             document = mount(<Form2 
-                service={{ searchForm7: (number, callback)=> { 
-                    callback(null); } }}
+                service={{ searchForm7: (number, callback)=> { callback(null); } }}
+                history={history}
             />);
             document.find('#find-button').at(0).prop('onClick')();
             document.update();
@@ -165,21 +172,6 @@ describe('Form2', ()=>{
             test('sends form id', ()=> {
                 expect(sentId).toEqual(42);
             });
-            // test('sends updated selectedContactIndex', ()=>{
-            //     expect(sent.selectedContactIndex).toEqual(1);
-            // });
-            // test('sends updated city', ()=>{
-            //     expect(sent.respondents[1].address.city).toEqual('new-city');
-            // });
-            // test('sends updated addressLine1', ()=>{
-            //     expect(sent.respondents[1].address.addressLine1).toEqual('new-addressLine1');
-            // });
-            // test('sends updated addressLine2', ()=>{
-            //     expect(sent.respondents[1].address.addressLine2).toEqual('new-addressLine2');
-            // });
-            // test('sends updated postal code', ()=>{
-            //     expect(sent.respondents[1].address.postalCode).toEqual('V2V 2B2');
-            // });
             test('sends updated phone', ()=>{
                 expect(sent.phone).toEqual('111-222-3333');
             });
@@ -310,51 +302,4 @@ describe('Form2', ()=>{
         });
     });
 
-    describe('Preview Dialog', ()=>{
-        let data = {
-            parties: {
-                respondents: [
-                    {
-                        name: 'first',
-                        address: {
-                            addressLine1: 'old-addressLine1',
-                            addressLine2: 'old-addressLine2',
-                            city: 'old-city',
-                            postalCode: 'V1V 1A1'
-                        }
-                    }
-                ],
-                appellants: []
-            }
-        };
-        beforeEach(()=>{
-            document = mount(<Form2 
-                service={{ 
-                    searchForm7: (number, callback)=> { callback(data); } ,
-                    createForm2: (form, callback)=> { callback(42); },
-                    previewForm: (id, callback)=> { callback('<div>this-preview</div>'); }
-                }}
-            />);
-            document.find('#find-button').at(0).prop('onClick')();
-            document.update();            
-        });
-        test('starts hidden', ()=>{
-            expect(document.find('#viewFormModal').prop('style').display).toEqual('none');
-        });
-        test('can be displayed', ()=>{
-            document.find('button#preview').at(0).prop('onClick')();
-            document.update();
-
-            expect(document.find('#viewFormModal').prop('style').display).toEqual('block');
-            expect(document.find('#viewFormModal').html()).toContain('this-preview');
-        });
-        test('can be closed', ()=>{
-            document.find('button#preview').at(0).prop('onClick')();
-            document.update();
-            document.find('#viewFormModal button#back').at(0).prop('onClick')();
-            document.update();
-
-            expect(document.find('#viewFormModal').prop('style').display).toEqual('none');
-        });
-    });
 });

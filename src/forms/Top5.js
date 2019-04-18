@@ -28,7 +28,7 @@ class Top5 extends Component {
                 <h3>Most Used Forms</h3>
                 <ol>
                     <li><a id="form7" onClick={this.redirectToForm7} style={{cursor:'pointer'}} >Notice of Appeal (Form 7)</a></li>
-                    <li><a id="form2" href={`${process.env.PUBLIC_URL}/form.2.html`} target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
+                    <li><a id="form2" href={`${process.env.PUBLIC_URL}/form2`} target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
                     <li>Certificate of Readiness</li>
                     <li>Affidavit</li>
                     <li>Notice of Hearing Appeal</li>

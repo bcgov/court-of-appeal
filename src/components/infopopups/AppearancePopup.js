@@ -6,7 +6,7 @@ import {
     FILE_STEP_ONE_MSG_SINGULAR,
     FILE_MULTIPLES_STEP_TWO_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class AppearancePopup extends Component {
 
@@ -25,7 +25,7 @@ class AppearancePopup extends Component {
                             },
                         documentLink:
                             {
-                                URL: process.env.PUBLIC_URL + "/form.2.html",
+                                URL: process.env.PUBLIC_URL + "/form2",
                                 URLName: "Online form"
                             }
                     }
@@ -88,13 +88,13 @@ class AppearancePopup extends Component {
     render() {
 
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="Notice of Appearance"
                 helpType="respondent"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

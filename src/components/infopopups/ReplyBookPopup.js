@@ -4,7 +4,7 @@ import {
     FILE_STEP_ONE_MSG_SINGULAR,
     FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class ReplyBookPopup extends Component {
 
@@ -51,13 +51,13 @@ class ReplyBookPopup extends Component {
 
     render () {
         return  (
-            <InfoPopupWrapper
+            <InfoPopup
                 helpType="respondent"
                 title="Hearing Documents: Reply Book"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 
