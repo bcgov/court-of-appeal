@@ -5,7 +5,7 @@ import {
     SERVE_EACH_RESPONDENT_MSG,
     FILE_STEP_TWO_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class ApplyForLeavePopup extends Component {
 
@@ -84,13 +84,13 @@ class ApplyForLeavePopup extends Component {
 
     render() {
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="Initial Documents"
                 helpType="appellant"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

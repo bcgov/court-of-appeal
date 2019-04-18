@@ -7,8 +7,7 @@ import DefaultService from '../service/default.service.js';
 import update from 'immutability-helper';
 import Form2DataSection from "../components/Form2DataSection";
 import FormButtonBar from "../components/FormButtonBar";
-import Form2Preview from "../components/Form2Preview";
-import ProgressStatusBar from "../components/ProgressStatusBar/ProgressStatusBar";
+import ProgressStatusBar from "../components/progress/ProgressStatusBar";
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
@@ -21,11 +20,10 @@ class Form2 extends Component {
         this.state = this.initialState();
 
         this.found = this.found.bind(this);
-        this.create = this.create.bind(this);
+        this.createOrUpdate = this.createOrUpdate.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.closeForm = this.closeForm.bind(this);
         this.closeDataLossWarning = this.closeDataLossWarning.bind(this);
-        this.closePreview = this.closePreview.bind(this);
         this.acceptDataLoss = this.acceptDataLoss.bind(this);
         this.formHasData = this.formHasData.bind(this);
         this.preview = this.preview.bind(this);
@@ -35,6 +33,10 @@ class Form2 extends Component {
     }
 
     initialState(formSevenNumber) {
+        this.getUserForm2()
+        if (this.props.history && this.props.history.location.state) {
+            return this.props.history.location.state;
+        }
         return {
             formSevenNumber: formSevenNumber || 'CA',
             document: {
@@ -98,7 +100,6 @@ class Form2 extends Component {
     }
 
     found(data) {
-
         if (data) {
             if (!data.error) {
                 this.setState({notFoundError: ''});
@@ -110,7 +111,10 @@ class Form2 extends Component {
                     this.setState({
                         displayData: 'block',
                         showForm2: true
+                    }, ()=>{
+                        if(this.props.history) this.props.history.replace(this.props.history.location.pathname, this.state)
                     });
+
                 } else {
                     this.setState({notFoundError: 'Something went wrong with the document requested'});
                 }
@@ -153,7 +157,7 @@ class Form2 extends Component {
         this.props.history.push(process.env.PUBLIC_URL + '/');
     }
 
-    create(event, callback) {
+    createOrUpdate(event, callback) {
         this.formButtonBar.startSaveSpinner();
         var form = {
             formSevenNumber: this.state.formSevenNumber,
@@ -172,8 +176,12 @@ class Form2 extends Component {
                     this.setState({
                         formHasUnsavedChanges: false,
                         id: id
-                    });   
-                    if (callback) { callback(); }             
+                    }, () => {
+                        if(this.props.history) this.props.history.replace(this.props.history.location.pathname, this.state);
+                        if (callback) {
+                            callback();
+                        }
+                    });
                 }                
             });
         }
@@ -182,27 +190,23 @@ class Form2 extends Component {
                 this.formButtonBar.stopSaveSpinner();           
                 this.setState({
                     formHasUnsavedChanges: false
-                });                  
-                if (callback) { callback(); }            
+                }, () => {
+                    if(this.props.history) this.props.history.replace(this.props.history.location.pathname, this.state);
+                    if (callback) { callback(); }
+                });
             });
         }
     }
 
-    preview() {
-        this.create(null, ()=>{
+    preview(e) {
+        this.createOrUpdate(e, ()=>{
             this.service.previewForm(this.state.id, (html)=>{
                 if (!html.error) {
-                    this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
+                    this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {previewContent: html}});
+                    // this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
                 }
             });    
         });
-    }
-
-    closePreview() {
-        this.setState({
-            previewMode: false,
-            displayPreview: 'none'
-        })
     }
 
     openDataLossWarning() {
@@ -264,7 +268,7 @@ class Form2 extends Component {
             </div>
 
               <ProgressStatusBar
-                  activeStep={this.state.showForm2 ? 2 : 1}
+                  activeStep={this.getStep()}
                   steps={["Access","Form 2","Preview","Payment"]}
               />
 
@@ -302,13 +306,13 @@ class Form2 extends Component {
                             show={this.state.showForm2}
                             handleFieldChange={this.handleFieldChange}
                             data={this.state.document}
-                            saveForm={this.create}
+                            saveForm={this.createOrUpdate}
                             closeForm={this.closeForm}
                             validate={this.validateField}
                         />
                         <FormButtonBar
                             back={this.openDataLossWarning.bind(this)}
-                            save={this.create}
+                            save={this.createOrUpdate}
                             preview={this.preview}
                             disablePreview={this.state.previewShouldBeDisabled}
                             formErrorMessage={this.state.previewButtonErrorMsg}
@@ -316,32 +320,6 @@ class Form2 extends Component {
                             ref={ (element)=> {this.formButtonBar = element }}
                         />
                     </div>
-
-                    <div id="viewFormModal" className="modal" style={{display: this.state.displayPreview}}>
-                        <div className="modal-title  not-printable">
-                            <span id="close-modal" onClick={this.closePreview}>&times;</span>
-                            Preview Form 2
-                        </div>
-                        <div className="modal-content">
-                            <div className="form-section">
-                                <Form2Preview
-                                    closeForm={this.closeForm}
-                                    show={this.state.showForm2}
-                                    content={this.state.previewContent}
-                                    className="case-list-modal"
-                                    data={this.state.document}
-                                    formSevenNumber= {this.state.formSevenNumber}
-                                    validate={this.validateField}
-                                />
-                                <FormButtonBar
-                                    back={this.closePreview.bind(this)}
-                                    printable="yes"
-                                    backMessage="Back to editing"
-                                    disableSubmit={this.state.submitShouldBeDisabled}
-                                />
-                            </div>
-                        </div>
-                    </div>    
 
                     <div id="dataLossWarning" className="modal not-printable"
                          style={{ display:(this.state.displayWarning) }} >
@@ -370,7 +348,7 @@ class Form2 extends Component {
       validateForm() {
             let [valid, validStreetAddress] = validateForm2(this.state.document, this.state);
             this.setState({
-                previewShouldBeDisabled: !valid, 
+                previewShouldBeDisabled: !valid,
                 submitShouldBeDisabled: !valid,
                 previewButtonErrorMsg: errorMessage(valid, validStreetAddress)
             });
@@ -399,6 +377,17 @@ class Form2 extends Component {
                selected: true
            }
         });
+    }
+
+    getStep() {
+        if (!this.state.showForm2) return 1;
+        if (this.state.showForm2 && !this.state.previewMode) return 2;
+        else return 3;
+
+    }
+
+    getUserForm2() {
+        // to do : get the existing form 2 data for the user
     }
 }
 

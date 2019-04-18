@@ -4,7 +4,7 @@ import {
     FILE_STEP_ONE_MSG,
     SERVE_EACH_RESPONDENT_MSG,
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class LeaveHearingDocumentsPopup extends Component {
 
@@ -69,13 +69,13 @@ class LeaveHearingDocumentsPopup extends Component {
 
     render() {
         return (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="Hearing Documents"
                 helpType="appellant"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FILE_STEP_ONE_MSG_SINGULAR, SERVE_EACH_RESPONDENT_MSG, FILE_STEP_TWO_MSG } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class NoticeOfHearingPopup extends Component {
 
@@ -46,13 +46,13 @@ class NoticeOfHearingPopup extends Component {
 
     render () {
         return  (
-            <InfoPopupWrapper
+            <InfoPopup
                 title="Notice of Hearing"
                 close={this.props.close}
                 helpType="appellant"
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

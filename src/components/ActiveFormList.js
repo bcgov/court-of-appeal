@@ -15,6 +15,7 @@ class ActiveFormList extends Component {
                     cases={this.props.cases}                   
                     service={this.props.service}
                     updateCases={this.props.updateCases}
+                    history={this.props.history}
                 />
                 <div id="my-cases-empty-label" style={{ display:this.props.displayMyCasesEmptyLabel ? 'block' : 'none' }}>
                         No open cases found
