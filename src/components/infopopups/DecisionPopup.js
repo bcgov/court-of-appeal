@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 import InfoPopupIcon from "./common/InfoPopupIcon";
 
 class DecisionPopup extends Component {
@@ -12,7 +12,7 @@ class DecisionPopup extends Component {
 
     render () {
         return  (
-           <InfoPopupWrapper
+           <InfoPopup
                title={ this.props.title }
                helpType={this.props.type}
                close={this.props.close}
@@ -68,7 +68,7 @@ class DecisionPopup extends Component {
                    <div className="info-modal-divider"/>
                </div>
 
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

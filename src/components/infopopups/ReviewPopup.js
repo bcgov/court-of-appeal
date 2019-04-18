@@ -4,7 +4,7 @@ import {
     FILE_STEP_ONE_MSG,
     FILE_STEP_THREE_MSG
 } from "../../helpers/constants";
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 
 class ReviewPopup extends Component {
 
@@ -100,13 +100,13 @@ class ReviewPopup extends Component {
 
     render () {
         return  (
-            <InfoPopupWrapper
+            <InfoPopup
                 helpType="appellant"
                 title="Application for Review"
                 close={this.props.close}
             >
                 {this.props.getSections(this.sections)}
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

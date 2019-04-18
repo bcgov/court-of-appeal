@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InfoPopupWrapper from "./common/InfoPopupWrapper";
+import InfoPopup from "./common/InfoPopup";
 import InfoPopupSection from "./common/InfoPopupSection";
 
 class CompleteAppealPopup extends Component {
@@ -12,7 +12,7 @@ class CompleteAppealPopup extends Component {
         let title = this.props.completeAppealTitle ? this.props.completeAppealTitle : "Appeal Process Complete";
         let subject = this.props.type === 'respondent' ? "the appellant's" : "your";
         return  (
-            <InfoPopupWrapper
+            <InfoPopup
                 title={title}
                 helpType={this.props.type}
                 close={this.props.close}
@@ -30,7 +30,7 @@ class CompleteAppealPopup extends Component {
                     or the&nbsp;
                     <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#" target="_blank" rel="noopener noreferrer">Supreme Court</a> website.
                 </InfoPopupSection>
-            </InfoPopupWrapper>
+            </InfoPopup>
         );
     }
 

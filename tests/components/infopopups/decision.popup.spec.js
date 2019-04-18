@@ -1,7 +1,7 @@
 require('../../support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import InfoPopup from '../../../src/components/infopopups/common/InfoPopup';
+import InfoPopupFactory from '../../../src/components/infopopups/common/InfoPopupFactory';
 import DecisionPopup from "../../../src/components/infopopups/DecisionPopup";
 
 describe('DecisionPopup', ()=> {
@@ -14,7 +14,7 @@ describe('DecisionPopup', ()=> {
         
     test('can be built', ()=>{            
         let popup = mount(
-            <InfoPopup
+            <InfoPopupFactory
                 show="true"
                 type="decision"
                 close={close}
