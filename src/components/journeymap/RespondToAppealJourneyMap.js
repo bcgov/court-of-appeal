@@ -3,8 +3,6 @@ import FormIcon from './journeyicons/FormIcon';
 import GavelIcon from './journeyicons/GavelIcon';
 import Trail from './Trail';
 import EndCircle from './journeyicons/EndCircle';
-import RightTurn from './RightTurn';
-import LeftTurn from './LeftTurn';
 import ReturnTrail from "./ReturnTrail";
 let JOURNEY_TYPE = require('../../helpers/constants')
 let cn = require('classnames');
@@ -100,7 +98,7 @@ class RespondToAppealJourneyMap extends React.Component {
                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
                <ReturnTrail
-                   steps={this.state.steps}
+                   priorstep={this.state.steps[2]}
                />
                  <div
                      style={{marginLeft: '141px',

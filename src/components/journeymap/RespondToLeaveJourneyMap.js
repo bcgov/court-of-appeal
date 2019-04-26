@@ -80,7 +80,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                     width={'21%'}
                     level={1}
                 />
-                <GavelIcon style={{left: '64%'}}
+                <GavelIcon style={{left: '64%', marginTop: '2px'}}
                            stepTitle={"The Hearing"}
                            action={this.iconClicked.bind(this, 'respondentleavetoappealhearing')} 
                            active={true}

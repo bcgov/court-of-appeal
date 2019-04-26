@@ -174,7 +174,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+                  style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -466,7 +466,7 @@ RespondToLeaveRefusedFinalJourneyMap {
               </div>
               <div
                 class="journey-box inactive"
-                style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+                style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -3366,7 +3366,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "style": Object {
                       "left": "55%",
                       "marginTop": "21px",
-                      "top": "24%",
+                      "top": "20%",
                       "zIndex": "13",
                     },
                   },
@@ -3505,7 +3505,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "style": Object {
                       "left": "55%",
                       "marginTop": "21px",
-                      "top": "24%",
+                      "top": "20%",
                       "zIndex": "13",
                     },
                   },
@@ -3514,7 +3514,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "sibling": null,
                   "stateNode": <div
                     class="journey-box inactive"
-                    style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+                    style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
                   >
                     <span
                       style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -3601,7 +3601,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "55%",
-                    "top": "24%",
+                    "top": "20%",
                   },
                 },
                 "memoizedState": null,
@@ -3612,7 +3612,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "55%",
-                    "top": "24%",
+                    "top": "20%",
                   },
                 },
                 "ref": null,
@@ -4059,7 +4059,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                     "stepTitle": "The Hearing",
                     "style": Object {
                       "left": "55%",
-                      "top": "24%",
+                      "top": "20%",
                     },
                   },
                   "refs": Object {},
@@ -4190,7 +4190,7 @@ RespondToLeaveRefusedFinalJourneyMap {
             style={
               Object {
                 "left": "55%",
-                "top": "24%",
+                "top": "20%",
               }
             }
           />,
@@ -4255,7 +4255,7 @@ RespondToLeaveRefusedFinalJourneyMap {
             style={
               Object {
                 "left": "55%",
-                "top": "24%",
+                "top": "20%",
               }
             }
           />,
@@ -4371,7 +4371,7 @@ RespondToLeaveRefusedFinalJourneyMap {
         </div>
         <div
           class="journey-box inactive"
-          style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+          style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
         >
           <span
             style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -4673,7 +4673,7 @@ RespondToLeaveRefusedFinalJourneyMap {
                 </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+                  style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -4965,7 +4965,7 @@ RespondToLeaveRefusedFinalJourneyMap {
               </div>
               <div
                 class="journey-box inactive"
-                style="left: 55%; top: 24%; margin-top: 21px; z-index: 13;"
+                style="left: 55%; top: 20%; margin-top: 21px; z-index: 13;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"

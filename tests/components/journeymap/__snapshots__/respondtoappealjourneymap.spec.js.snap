@@ -5164,28 +5164,6 @@ RespondToAppealJourneyMap {
                             "lastEffect": null,
                             "memoizedProps": Object {
                               "circling": false,
-                              "steps": Array [
-                                Object {
-                                  "status": "new",
-                                  "type": "form-2",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "package",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "file",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "hearing",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "courtorder",
-                                },
-                              ],
                               "style": Object {
                                 "left": "67px",
                                 "position": "absolute",
@@ -5198,28 +5176,6 @@ RespondToAppealJourneyMap {
                             "nextEffect": null,
                             "pendingProps": Object {
                               "circling": false,
-                              "steps": Array [
-                                Object {
-                                  "status": "new",
-                                  "type": "form-2",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "package",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "file",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "hearing",
-                                },
-                                Object {
-                                  "status": "new",
-                                  "type": "courtorder",
-                                },
-                              ],
                               "style": Object {
                                 "left": "67px",
                                 "position": "absolute",
@@ -5946,28 +5902,6 @@ RespondToAppealJourneyMap {
                                   "lastEffect": null,
                                   "memoizedProps": Object {
                                     "circling": false,
-                                    "steps": Array [
-                                      Object {
-                                        "status": "new",
-                                        "type": "form-2",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "package",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "file",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "hearing",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "courtorder",
-                                      },
-                                    ],
                                     "style": Object {
                                       "left": "73%",
                                       "position": "absolute",
@@ -5979,28 +5913,6 @@ RespondToAppealJourneyMap {
                                   "nextEffect": null,
                                   "pendingProps": Object {
                                     "circling": false,
-                                    "steps": Array [
-                                      Object {
-                                        "status": "new",
-                                        "type": "form-2",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "package",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "file",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "hearing",
-                                      },
-                                      Object {
-                                        "status": "new",
-                                        "type": "courtorder",
-                                      },
-                                    ],
                                     "style": Object {
                                       "left": "73%",
                                       "position": "absolute",
@@ -6016,28 +5928,6 @@ RespondToAppealJourneyMap {
                                     "context": Object {},
                                     "props": Object {
                                       "circling": false,
-                                      "steps": Array [
-                                        Object {
-                                          "status": "new",
-                                          "type": "form-2",
-                                        },
-                                        Object {
-                                          "status": "new",
-                                          "type": "package",
-                                        },
-                                        Object {
-                                          "status": "new",
-                                          "type": "file",
-                                        },
-                                        Object {
-                                          "status": "new",
-                                          "type": "hearing",
-                                        },
-                                        Object {
-                                          "status": "new",
-                                          "type": "courtorder",
-                                        },
-                                      ],
                                       "style": Object {
                                         "left": "73%",
                                         "position": "absolute",
@@ -6123,28 +6013,6 @@ RespondToAppealJourneyMap {
                               "context": Object {},
                               "props": Object {
                                 "circling": false,
-                                "steps": Array [
-                                  Object {
-                                    "status": "new",
-                                    "type": "form-2",
-                                  },
-                                  Object {
-                                    "status": "new",
-                                    "type": "package",
-                                  },
-                                  Object {
-                                    "status": "new",
-                                    "type": "file",
-                                  },
-                                  Object {
-                                    "status": "new",
-                                    "type": "hearing",
-                                  },
-                                  Object {
-                                    "status": "new",
-                                    "type": "courtorder",
-                                  },
-                                ],
                                 "style": Object {
                                   "left": "67px",
                                   "position": "absolute",
@@ -6175,30 +6043,6 @@ RespondToAppealJourneyMap {
                             "children": Array [
                               <LeftTurn
                                 circling={false}
-                                steps={
-                                  Array [
-                                    Object {
-                                      "status": "new",
-                                      "type": "form-2",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "package",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "file",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "hearing",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "courtorder",
-                                    },
-                                  ]
-                                }
                                 style={
                                   Object {
                                     "left": "67px",
@@ -6240,30 +6084,6 @@ RespondToAppealJourneyMap {
                               />,
                               <RightTurn
                                 circling={false}
-                                steps={
-                                  Array [
-                                    Object {
-                                      "status": "new",
-                                      "type": "form-2",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "package",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "file",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "hearing",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "courtorder",
-                                    },
-                                  ]
-                                }
                                 style={
                                   Object {
                                     "left": "73%",
@@ -6288,30 +6108,6 @@ RespondToAppealJourneyMap {
                             "children": Array [
                               <LeftTurn
                                 circling={false}
-                                steps={
-                                  Array [
-                                    Object {
-                                      "status": "new",
-                                      "type": "form-2",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "package",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "file",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "hearing",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "courtorder",
-                                    },
-                                  ]
-                                }
                                 style={
                                   Object {
                                     "left": "67px",
@@ -6353,30 +6149,6 @@ RespondToAppealJourneyMap {
                               />,
                               <RightTurn
                                 circling={false}
-                                steps={
-                                  Array [
-                                    Object {
-                                      "status": "new",
-                                      "type": "form-2",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "package",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "file",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "hearing",
-                                    },
-                                    Object {
-                                      "status": "new",
-                                      "type": "courtorder",
-                                    },
-                                  ]
-                                }
                                 style={
                                   Object {
                                     "left": "73%",
@@ -6486,55 +6258,19 @@ RespondToAppealJourneyMap {
                         "key": null,
                         "lastEffect": null,
                         "memoizedProps": Object {
-                          "steps": Array [
-                            Object {
-                              "status": "new",
-                              "type": "form-2",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "package",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "file",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "hearing",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "courtorder",
-                            },
-                          ],
+                          "priorstep": Object {
+                            "status": "new",
+                            "type": "file",
+                          },
                         },
                         "memoizedState": null,
                         "mode": 0,
                         "nextEffect": null,
                         "pendingProps": Object {
-                          "steps": Array [
-                            Object {
-                              "status": "new",
-                              "type": "form-2",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "package",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "file",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "hearing",
-                            },
-                            Object {
-                              "status": "new",
-                              "type": "courtorder",
-                            },
-                          ],
+                          "priorstep": Object {
+                            "status": "new",
+                            "type": "file",
+                          },
                         },
                         "ref": null,
                         "return": [Circular],
@@ -9987,28 +9723,10 @@ RespondToAppealJourneyMap {
                           "_reactInternalInstance": Object {},
                           "context": Object {},
                           "props": Object {
-                            "steps": Array [
-                              Object {
-                                "status": "new",
-                                "type": "form-2",
-                              },
-                              Object {
-                                "status": "new",
-                                "type": "package",
-                              },
-                              Object {
-                                "status": "new",
-                                "type": "file",
-                              },
-                              Object {
-                                "status": "new",
-                                "type": "hearing",
-                              },
-                              Object {
-                                "status": "new",
-                                "type": "courtorder",
-                              },
-                            ],
+                            "priorstep": Object {
+                              "status": "new",
+                              "type": "file",
+                            },
                           },
                           "refs": Object {},
                           "state": null,
@@ -10282,29 +10000,11 @@ RespondToAppealJourneyMap {
             twoPages={true}
           />,
           <ReturnTrail
-            steps={
-              Array [
-                Object {
-                  "status": "new",
-                  "type": "form-2",
-                },
-                Object {
-                  "status": "new",
-                  "type": "package",
-                },
-                Object {
-                  "status": "new",
-                  "type": "file",
-                },
-                Object {
-                  "status": "new",
-                  "type": "hearing",
-                },
-                Object {
-                  "status": "new",
-                  "type": "courtorder",
-                },
-              ]
+            priorstep={
+              Object {
+                "status": "new",
+                "type": "file",
+              }
             }
           />,
           <div
@@ -10475,29 +10175,11 @@ RespondToAppealJourneyMap {
             twoPages={true}
           />,
           <ReturnTrail
-            steps={
-              Array [
-                Object {
-                  "status": "new",
-                  "type": "form-2",
-                },
-                Object {
-                  "status": "new",
-                  "type": "package",
-                },
-                Object {
-                  "status": "new",
-                  "type": "file",
-                },
-                Object {
-                  "status": "new",
-                  "type": "hearing",
-                },
-                Object {
-                  "status": "new",
-                  "type": "courtorder",
-                },
-              ]
+            priorstep={
+              Object {
+                "status": "new",
+                "type": "file",
+              }
             }
           />,
           <div

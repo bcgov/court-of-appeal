@@ -237,7 +237,7 @@ RespondToLeaveJourneyMap {
                 </div>
                 <div
                   class="journey-box"
-                  style="left: 64%; margin-top: 21px; z-index: 13;"
+                  style="left: 64%; margin-top: 2px; z-index: 13;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -600,7 +600,7 @@ RespondToLeaveJourneyMap {
               </div>
               <div
                 class="journey-box"
-                style="left: 64%; margin-top: 21px; z-index: 13;"
+                style="left: 64%; margin-top: 2px; z-index: 13;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -4517,7 +4517,7 @@ RespondToLeaveJourneyMap {
                           "className": "journey-box",
                           "style": Object {
                             "left": "64%",
-                            "marginTop": "21px",
+                            "marginTop": "2px",
                             "zIndex": "13",
                           },
                         },
@@ -4659,7 +4659,7 @@ RespondToLeaveJourneyMap {
                           "className": "journey-box",
                           "style": Object {
                             "left": "64%",
-                            "marginTop": "21px",
+                            "marginTop": "2px",
                             "zIndex": "13",
                           },
                         },
@@ -4668,7 +4668,7 @@ RespondToLeaveJourneyMap {
                         "sibling": null,
                         "stateNode": <div
                           class="journey-box"
-                          style="left: 64%; margin-top: 21px; z-index: 13;"
+                          style="left: 64%; margin-top: 2px; z-index: 13;"
                         >
                           <input
                             class="checkbox-glow checkbox-toggle"
@@ -4768,6 +4768,7 @@ RespondToLeaveJourneyMap {
                         "stepTitle": "The Hearing",
                         "style": Object {
                           "left": "64%",
+                          "marginTop": "2px",
                         },
                       },
                       "memoizedState": null,
@@ -4783,6 +4784,7 @@ RespondToLeaveJourneyMap {
                         "stepTitle": "The Hearing",
                         "style": Object {
                           "left": "64%",
+                          "marginTop": "2px",
                         },
                       },
                       "ref": null,
@@ -5243,6 +5245,7 @@ RespondToLeaveJourneyMap {
                           "stepTitle": "The Hearing",
                           "style": Object {
                             "left": "64%",
+                            "marginTop": "2px",
                           },
                         },
                         "refs": Object {},
@@ -5480,6 +5483,7 @@ RespondToLeaveJourneyMap {
             style={
               Object {
                 "left": "64%",
+                "marginTop": "2px",
               }
             }
           />,
@@ -5588,6 +5592,7 @@ RespondToLeaveJourneyMap {
             style={
               Object {
                 "left": "64%",
+                "marginTop": "2px",
               }
             }
           />,
@@ -5769,7 +5774,7 @@ RespondToLeaveJourneyMap {
         </div>
         <div
           class="journey-box"
-          style="left: 64%; margin-top: 21px; z-index: 13;"
+          style="left: 64%; margin-top: 2px; z-index: 13;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -6160,7 +6165,7 @@ RespondToLeaveJourneyMap {
                 </div>
                 <div
                   class="journey-box"
-                  style="left: 64%; margin-top: 21px; z-index: 13;"
+                  style="left: 64%; margin-top: 2px; z-index: 13;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -6523,7 +6528,7 @@ RespondToLeaveJourneyMap {
               </div>
               <div
                 class="journey-box"
-                style="left: 64%; margin-top: 21px; z-index: 13;"
+                style="left: 64%; margin-top: 2px; z-index: 13;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"

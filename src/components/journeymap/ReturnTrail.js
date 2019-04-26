@@ -11,14 +11,13 @@ class ReturnTrail extends Component {
         return (
             <div style={{position: 'relative', top: '84px', width:'100%', height: '169px', marginBottom: '80px'}}>
                  <LeftTurn
-                     steps={this.props.steps}
                      style={{
                          position: 'absolute',
                          top: '56px',
                          left: '67px',
                          zIndex: '10'
                      }}
-                     circling={this.props.steps[2].status === 'completed'}
+                     circling={this.props.priorstep.status === 'completed'}
                  />
                 <Trail
                     style={{
@@ -29,9 +28,9 @@ class ReturnTrail extends Component {
                         zIndex: '11'
                     }}
                     className={"journey-return-trail"}
-                    completed={this.props.steps[2].status === 'completed'}
+                    completed={this.props.priorstep.status === 'completed'}
                     width={'75%'}
-                    circling={this.props.steps[2].status === 'completed'}
+                    circling={this.props.priorstep.status === 'completed'}
                 />
                 <Trail
                     style={{
@@ -47,11 +46,10 @@ class ReturnTrail extends Component {
                     circling={false}
                 />
                 <RightTurn
-                    steps={this.props.steps}
                     style={{position: 'absolute',
-                        left: '73%',
+                        left: this.props.startpoint || '73%',
                         top: '-115px'}}
-                    circling={this.props.steps[2].status === 'completed'}
+                    circling={this.props.priorstep.status === 'completed'}
                 />
 
             </div>
