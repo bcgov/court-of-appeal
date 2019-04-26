@@ -60,7 +60,7 @@
     height: 100px;
     max-width: 109px;
     cursor: pointer;
-    z-index: 5;
+    z-index: 11;
 }
 .journey-box.active {
     cursor:pointer;
