@@ -37,7 +37,7 @@ class RespondToLeaveJourneyMap extends React.Component {
                 <div
                     style={{marginLeft: '50px',
                         borderTop: '9px solid rgb(159, 191, 226)',
-                        width: '60%',
+                        width: '79%',
                         position: 'absolute',
                         top: '41.5%',
                         zIndex: '0'

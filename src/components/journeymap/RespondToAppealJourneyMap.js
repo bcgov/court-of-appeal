@@ -37,7 +37,6 @@ class RespondToAppealJourneyMap extends React.Component {
         return (
             <div className={"journey-map-container"} >
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
-
                 <div
                     style={{marginLeft: '50px',
                         borderTop: '9px solid rgb(159, 191, 226)',
@@ -46,7 +45,6 @@ class RespondToAppealJourneyMap extends React.Component {
                         top: '92px',
                         zIndex: '1'
                     }}/>
-
                 <Trail
                     className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status !== 'new'}
