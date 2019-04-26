@@ -45,7 +45,7 @@
     height: 50px;
     width: 50px;
     margin: 23px -5px 0 15px;
-    z-index:2;
+    z-index:5;
 }
 .journey-trail-l1 {
     border-bottom: 9px solid #9fbfe2;
@@ -63,14 +63,14 @@
 @keyframes glowing {
     0% {width: 0;}
     20% { width: 100%;}
-    40% { box-shadow: 0 0 -10px #a7cc61; border-top-width: 9px;  }
-    50% { box-shadow: 0 0 20px #49a25a; border-top-width: 10px; }
-    90% { box-shadow: 0 0 20px #49a25a; border-top-width: 10px; }
-    100% { box-shadow: 0 0 -10px #3c763d; border-top-width: 9px; }
+    40% { box-shadow: 0 0 -10px #a7cc61;  }
+    50% { box-shadow: 0 0 10px #49a25a;  }
+    90% { box-shadow: 0 0 10px #49a25a;  }
+    100% { box-shadow: 0 0 -10px #3c763d; }
 }
 
 .journey-trail-l1-moveable.completed-step-l1 {
-    animation: glowing 5000ms;
+    animation: glowing 2000ms;
 }
 .journey-trail-basis {
     border-top:#9fbfe2;
@@ -173,6 +173,7 @@
 }
 .journey-end-circle {
     position: absolute;
+    z-index: 11;
     left: 81%;
     background-color: #9fbfe2;
     border-radius: 100px;
@@ -198,38 +199,3 @@
     border-radius: 5px;
 }
 
-.journey-circle-right {
-    border: 9px solid;
-    border-color: #9fbfe2 #9fbfe2 #377d22 #377d22;
-    border-radius: 180px;
-    transform: rotate(45deg);
-    width: 180px;
-    height: 180px;
-    margin-top:6%;
-    z-index: 1;
-    fill-opacity: 0;
-}
-.circling {
-    animation: rotatetogreen 2s linear forwards;
-}
-.square {
-    width: 100px;
-    position:absolute;
-    top: 24.5%;
-    left: 111.8%;
-    z-index: 2;
-    height: 180px;
-    background-color: white;
-    transform: translateX(-300px);
-    border-top: 9px solid lightblue;
-    border-bottom: 9px solid lightblue;
-}
-@keyframes rotatetogreen {
-    0% { transform: rotate(45deg)}
-    /*  50% { transform: rotate(120deg)} */
-    30% {transform: rotate(225deg)}
-    40% { box-shadow: 0 0 -10px #a7cc61; border-width: 9px;  }
-    50% { box-shadow: 0 0 15px #49a25a; border-width: 10px; }
-    90% { box-shadow: 0 0 15px #49a25a; border-width: 10px; }
-    100% { box-shadow: 0 0 -10px #3c763d; border-width: 9px; transform: rotate(225deg);}
-}
