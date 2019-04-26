@@ -22,7 +22,7 @@ class ReturnTrail extends Component {
                  />
                 <Trail
                     style={{
-                        width: '65%',
+                        width: '52%',
                         left: '21%',
                         position: 'absolute',
                         top: '13.5px',
@@ -35,10 +35,10 @@ class ReturnTrail extends Component {
                 />
                 <Trail
                     style={{
-                        width: '53%',
+                        width: '52%',
                         left: '21%',
                         position: 'absolute',
-                        top: '14px',
+                        top: '13.5px',
                         zIndex: '10'
                     }}
                     className={"journey-return-trail"}

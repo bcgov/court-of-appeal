@@ -8,10 +8,12 @@ class RightTurn extends Component {
             <div className={"right-turn"} style={this.props.style}>
                 <div style={{position:'relative'}} >
                     <div className={cn("journey-circle-right",{'circling': this.props.circling})} />
+                    <div className={cn("journey-circle-right",{'circling-inside': this.props.circling})} />
                     <div className={cn("square")}/>
                     <div className={cn("bend-top-border")}/>
                     <div className={cn("bend-bottom-border")}/>
                     <div className={cn("bend-top-border",{'top-completed': this.props.circling})}/>
+                    <div className={cn("bend-bottom-border",{'bottom-completed': this.props.circling})}/>
                 </div>
             </div>
         );
