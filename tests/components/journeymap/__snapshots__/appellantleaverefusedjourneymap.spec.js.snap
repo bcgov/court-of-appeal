@@ -174,7 +174,7 @@ AppellantLeaveRefusedJourneyMap {
                 </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+                  style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -466,7 +466,7 @@ AppellantLeaveRefusedJourneyMap {
               </div>
               <div
                 class="journey-box inactive"
-                style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+                style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -3370,7 +3370,7 @@ AppellantLeaveRefusedJourneyMap {
                     "style": Object {
                       "left": "56%",
                       "marginTop": "21px",
-                      "top": "24%",
+                      "top": "17.5%",
                       "zIndex": "13",
                     },
                   },
@@ -3509,7 +3509,7 @@ AppellantLeaveRefusedJourneyMap {
                     "style": Object {
                       "left": "56%",
                       "marginTop": "21px",
-                      "top": "24%",
+                      "top": "17.5%",
                       "zIndex": "13",
                     },
                   },
@@ -3518,7 +3518,7 @@ AppellantLeaveRefusedJourneyMap {
                   "sibling": null,
                   "stateNode": <div
                     class="journey-box inactive"
-                    style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+                    style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
                   >
                     <span
                       style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -3605,7 +3605,7 @@ AppellantLeaveRefusedJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "56%",
-                    "top": "24%",
+                    "top": "17.5%",
                   },
                 },
                 "memoizedState": null,
@@ -3616,7 +3616,7 @@ AppellantLeaveRefusedJourneyMap {
                   "stepTitle": "The Hearing",
                   "style": Object {
                     "left": "56%",
-                    "top": "24%",
+                    "top": "17.5%",
                   },
                 },
                 "ref": null,
@@ -4068,7 +4068,7 @@ AppellantLeaveRefusedJourneyMap {
                     "stepTitle": "The Hearing",
                     "style": Object {
                       "left": "56%",
-                      "top": "24%",
+                      "top": "17.5%",
                     },
                   },
                   "refs": Object {},
@@ -4201,7 +4201,7 @@ AppellantLeaveRefusedJourneyMap {
             style={
               Object {
                 "left": "56%",
-                "top": "24%",
+                "top": "17.5%",
               }
             }
           />,
@@ -4268,7 +4268,7 @@ AppellantLeaveRefusedJourneyMap {
             style={
               Object {
                 "left": "56%",
-                "top": "24%",
+                "top": "17.5%",
               }
             }
           />,
@@ -4385,7 +4385,7 @@ AppellantLeaveRefusedJourneyMap {
         </div>
         <div
           class="journey-box inactive"
-          style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+          style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
         >
           <span
             style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -4687,7 +4687,7 @@ AppellantLeaveRefusedJourneyMap {
                 </div>
                 <div
                   class="journey-box inactive"
-                  style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+                  style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
                 >
                   <span
                     style="position: relative; top: 5px; left: 7%; z-index: 9;"
@@ -4979,7 +4979,7 @@ AppellantLeaveRefusedJourneyMap {
               </div>
               <div
                 class="journey-box inactive"
-                style="left: 56%; top: 24%; margin-top: 21px; z-index: 13;"
+                style="left: 56%; top: 17.5%; margin-top: 21px; z-index: 13;"
               >
                 <span
                   style="position: relative; top: 5px; left: 7%; z-index: 9;"

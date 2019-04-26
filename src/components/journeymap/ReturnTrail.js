@@ -9,7 +9,7 @@ class ReturnTrail extends Component {
 
     render() {
         return (
-            <div style={{position: 'relative', top: '84px', width:'100%', height: '169px', marginBottom: '80px'}}>
+            <div style={{position: 'relative', top: this.props.top || '84px', width:'100%', height: '169px', marginBottom: '80px'}}>
                  <LeftTurn
                      style={{
                          position: 'absolute',

@@ -98,7 +98,7 @@ RespondToLeaveJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+                  style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
                 />
                 <div
                   style="width: 18%;"
@@ -461,7 +461,7 @@ RespondToLeaveJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+                style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
               />
               <div
                 style="width: 18%;"
@@ -846,7 +846,7 @@ RespondToLeaveJourneyMap {
               "marginLeft": "50px",
               "position": "absolute",
               "top": "41.5%",
-              "width": "60%",
+              "width": "79%",
               "zIndex": "0",
             },
           },
@@ -859,7 +859,7 @@ RespondToLeaveJourneyMap {
               "marginLeft": "50px",
               "position": "absolute",
               "top": "41.5%",
-              "width": "60%",
+              "width": "79%",
               "zIndex": "0",
             },
           },
@@ -5391,7 +5391,7 @@ RespondToLeaveJourneyMap {
             "updateQueue": null,
           },
           "stateNode": <div
-            style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+            style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
           />,
           "tag": 5,
           "type": "div",
@@ -5422,7 +5422,7 @@ RespondToLeaveJourneyMap {
                 "marginLeft": "50px",
                 "position": "absolute",
                 "top": "41.5%",
-                "width": "60%",
+                "width": "79%",
                 "zIndex": "0",
               }
             }
@@ -5531,7 +5531,7 @@ RespondToLeaveJourneyMap {
                 "marginLeft": "50px",
                 "position": "absolute",
                 "top": "41.5%",
-                "width": "60%",
+                "width": "79%",
                 "zIndex": "0",
               }
             }
@@ -5635,7 +5635,7 @@ RespondToLeaveJourneyMap {
           class="journey-start-circle"
         />
         <div
-          style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+          style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
         />
         <div
           style="width: 18%;"
@@ -6026,7 +6026,7 @@ RespondToLeaveJourneyMap {
                   class="journey-start-circle"
                 />
                 <div
-                  style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+                  style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
                 />
                 <div
                   style="width: 18%;"
@@ -6389,7 +6389,7 @@ RespondToLeaveJourneyMap {
                 class="journey-start-circle"
               />
               <div
-                style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 60%; position: absolute; top: 41.5%; z-index: 0;"
+                style="margin-left: 50px; border-top: 9px solid rgb(159, 191, 226); width: 79%; position: absolute; top: 41.5%; z-index: 0;"
               />
               <div
                 style="width: 18%;"
