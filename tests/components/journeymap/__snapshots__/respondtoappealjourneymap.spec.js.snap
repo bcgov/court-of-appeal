@@ -343,14 +343,14 @@ RespondToAppealJourneyMap {
                     </div>
                   </div>
                   <div
-                    style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                    style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                   >
                     <div
                       class="journey-return-trail"
                     />
                   </div>
                   <div
-                    style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                    style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                   >
                     <div
                       class="journey-return-trail"
@@ -367,6 +367,9 @@ RespondToAppealJourneyMap {
                         class="journey-circle-right"
                       />
                       <div
+                        class="journey-circle-right"
+                      />
+                      <div
                         class="square"
                       />
                       <div
@@ -378,6 +381,9 @@ RespondToAppealJourneyMap {
                       <div
                         class="bend-top-border"
                       />
+                      <div
+                        class="bend-bottom-border"
+                      />
                     </div>
                   </div>
                 </div>
@@ -386,7 +392,7 @@ RespondToAppealJourneyMap {
                 />
                 <div
                   class="journey-box"
-                  style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+                  style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -475,7 +481,7 @@ RespondToAppealJourneyMap {
                 </div>
                 <div
                   class="journey-box"
-                  style="top: 69%; left: 57%;"
+                  style="top: 69%; left: 54%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -922,14 +928,14 @@ RespondToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                  style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                 >
                   <div
                     class="journey-return-trail"
                   />
                 </div>
                 <div
-                  style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                  style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                 >
                   <div
                     class="journey-return-trail"
@@ -946,6 +952,9 @@ RespondToAppealJourneyMap {
                       class="journey-circle-right"
                     />
                     <div
+                      class="journey-circle-right"
+                    />
+                    <div
                       class="square"
                     />
                     <div
@@ -957,6 +966,9 @@ RespondToAppealJourneyMap {
                     <div
                       class="bend-top-border"
                     />
+                    <div
+                      class="bend-bottom-border"
+                    />
                   </div>
                 </div>
               </div>
@@ -965,7 +977,7 @@ RespondToAppealJourneyMap {
               />
               <div
                 class="journey-box"
-                style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+                style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -1054,7 +1066,7 @@ RespondToAppealJourneyMap {
               </div>
               <div
                 class="journey-box"
-                style="top: 69%; left: 57%;"
+                style="top: 69%; left: 54%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -5275,7 +5287,7 @@ RespondToAppealJourneyMap {
                                     "left": "21%",
                                     "position": "absolute",
                                     "top": "13.5px",
-                                    "width": "65%",
+                                    "width": "52%",
                                     "zIndex": "11",
                                   },
                                 },
@@ -5290,7 +5302,7 @@ RespondToAppealJourneyMap {
                                     "left": "21%",
                                     "position": "absolute",
                                     "top": "13.5px",
-                                    "width": "65%",
+                                    "width": "52%",
                                     "zIndex": "11",
                                   },
                                 },
@@ -5298,7 +5310,7 @@ RespondToAppealJourneyMap {
                                 "return": [Circular],
                                 "sibling": null,
                                 "stateNode": <div
-                                  style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                                  style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                                 >
                                   <div
                                     class="journey-return-trail"
@@ -5322,7 +5334,7 @@ RespondToAppealJourneyMap {
                                   "left": "21%",
                                   "position": "absolute",
                                   "top": "13.5px",
-                                  "width": "65%",
+                                  "width": "52%",
                                   "zIndex": "11",
                                 },
                                 "width": "75%",
@@ -5338,7 +5350,7 @@ RespondToAppealJourneyMap {
                                   "left": "21%",
                                   "position": "absolute",
                                   "top": "13.5px",
-                                  "width": "65%",
+                                  "width": "52%",
                                   "zIndex": "11",
                                 },
                                 "width": "75%",
@@ -5402,8 +5414,8 @@ RespondToAppealJourneyMap {
                                     "style": Object {
                                       "left": "21%",
                                       "position": "absolute",
-                                      "top": "14px",
-                                      "width": "53%",
+                                      "top": "13.5px",
+                                      "width": "52%",
                                       "zIndex": "10",
                                     },
                                   },
@@ -5417,8 +5429,8 @@ RespondToAppealJourneyMap {
                                     "style": Object {
                                       "left": "21%",
                                       "position": "absolute",
-                                      "top": "14px",
-                                      "width": "53%",
+                                      "top": "13.5px",
+                                      "width": "52%",
                                       "zIndex": "10",
                                     },
                                   },
@@ -5426,7 +5438,7 @@ RespondToAppealJourneyMap {
                                   "return": [Circular],
                                   "sibling": null,
                                   "stateNode": <div
-                                    style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                                    style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                                   >
                                     <div
                                       class="journey-return-trail"
@@ -5449,8 +5461,8 @@ RespondToAppealJourneyMap {
                                   "style": Object {
                                     "left": "21%",
                                     "position": "absolute",
-                                    "top": "14px",
-                                    "width": "53%",
+                                    "top": "13.5px",
+                                    "width": "52%",
                                     "zIndex": "10",
                                   },
                                   "width": "75%",
@@ -5465,8 +5477,8 @@ RespondToAppealJourneyMap {
                                   "style": Object {
                                     "left": "21%",
                                     "position": "absolute",
-                                    "top": "14px",
-                                    "width": "53%",
+                                    "top": "13.5px",
+                                    "width": "52%",
                                     "zIndex": "10",
                                   },
                                   "width": "75%",
@@ -5529,13 +5541,13 @@ RespondToAppealJourneyMap {
                                           "key": null,
                                           "lastEffect": null,
                                           "memoizedProps": Object {
-                                            "className": "square",
+                                            "className": "journey-circle-right",
                                           },
                                           "memoizedState": null,
                                           "mode": 0,
                                           "nextEffect": null,
                                           "pendingProps": Object {
-                                            "className": "square",
+                                            "className": "journey-circle-right",
                                           },
                                           "ref": null,
                                           "return": [Circular],
@@ -5553,13 +5565,13 @@ RespondToAppealJourneyMap {
                                             "key": null,
                                             "lastEffect": null,
                                             "memoizedProps": Object {
-                                              "className": "bend-top-border",
+                                              "className": "square",
                                             },
                                             "memoizedState": null,
                                             "mode": 0,
                                             "nextEffect": null,
                                             "pendingProps": Object {
-                                              "className": "bend-top-border",
+                                              "className": "square",
                                             },
                                             "ref": null,
                                             "return": [Circular],
@@ -5577,13 +5589,13 @@ RespondToAppealJourneyMap {
                                               "key": null,
                                               "lastEffect": null,
                                               "memoizedProps": Object {
-                                                "className": "bend-bottom-border",
+                                                "className": "bend-top-border",
                                               },
                                               "memoizedState": null,
                                               "mode": 0,
                                               "nextEffect": null,
                                               "pendingProps": Object {
-                                                "className": "bend-bottom-border",
+                                                "className": "bend-top-border",
                                               },
                                               "ref": null,
                                               "return": [Circular],
@@ -5601,40 +5613,102 @@ RespondToAppealJourneyMap {
                                                 "key": null,
                                                 "lastEffect": null,
                                                 "memoizedProps": Object {
-                                                  "className": "bend-top-border",
+                                                  "className": "bend-bottom-border",
                                                 },
                                                 "memoizedState": null,
                                                 "mode": 0,
                                                 "nextEffect": null,
                                                 "pendingProps": Object {
-                                                  "className": "bend-top-border",
+                                                  "className": "bend-bottom-border",
                                                 },
                                                 "ref": null,
                                                 "return": [Circular],
-                                                "sibling": null,
+                                                "sibling": FiberNode {
+                                                  "_debugID": 102,
+                                                  "_debugIsCurrentlyTiming": false,
+                                                  "_debugOwner": [Circular],
+                                                  "_debugSource": null,
+                                                  "alternate": null,
+                                                  "child": null,
+                                                  "effectTag": 0,
+                                                  "expirationTime": 0,
+                                                  "firstEffect": null,
+                                                  "index": 5,
+                                                  "key": null,
+                                                  "lastEffect": null,
+                                                  "memoizedProps": Object {
+                                                    "className": "bend-top-border",
+                                                  },
+                                                  "memoizedState": null,
+                                                  "mode": 0,
+                                                  "nextEffect": null,
+                                                  "pendingProps": Object {
+                                                    "className": "bend-top-border",
+                                                  },
+                                                  "ref": null,
+                                                  "return": [Circular],
+                                                  "sibling": FiberNode {
+                                                    "_debugID": 103,
+                                                    "_debugIsCurrentlyTiming": false,
+                                                    "_debugOwner": [Circular],
+                                                    "_debugSource": null,
+                                                    "alternate": null,
+                                                    "child": null,
+                                                    "effectTag": 0,
+                                                    "expirationTime": 0,
+                                                    "firstEffect": null,
+                                                    "index": 6,
+                                                    "key": null,
+                                                    "lastEffect": null,
+                                                    "memoizedProps": Object {
+                                                      "className": "bend-bottom-border",
+                                                    },
+                                                    "memoizedState": null,
+                                                    "mode": 0,
+                                                    "nextEffect": null,
+                                                    "pendingProps": Object {
+                                                      "className": "bend-bottom-border",
+                                                    },
+                                                    "ref": null,
+                                                    "return": [Circular],
+                                                    "sibling": null,
+                                                    "stateNode": <div
+                                                      class="bend-bottom-border"
+                                                    />,
+                                                    "tag": 5,
+                                                    "type": "div",
+                                                    "updateQueue": null,
+                                                  },
+                                                  "stateNode": <div
+                                                    class="bend-top-border"
+                                                  />,
+                                                  "tag": 5,
+                                                  "type": "div",
+                                                  "updateQueue": null,
+                                                },
                                                 "stateNode": <div
-                                                  class="bend-top-border"
+                                                  class="bend-bottom-border"
                                                 />,
                                                 "tag": 5,
                                                 "type": "div",
                                                 "updateQueue": null,
                                               },
                                               "stateNode": <div
-                                                class="bend-bottom-border"
+                                                class="bend-top-border"
                                               />,
                                               "tag": 5,
                                               "type": "div",
                                               "updateQueue": null,
                                             },
                                             "stateNode": <div
-                                              class="bend-top-border"
+                                              class="square"
                                             />,
                                             "tag": 5,
                                             "type": "div",
                                             "updateQueue": null,
                                           },
                                           "stateNode": <div
-                                            class="square"
+                                            class="journey-circle-right"
                                           />,
                                           "tag": 5,
                                           "type": "div",
@@ -5659,6 +5733,9 @@ RespondToAppealJourneyMap {
                                             className="journey-circle-right"
                                           />,
                                           <div
+                                            className="journey-circle-right"
+                                          />,
+                                          <div
                                             className="square"
                                           />,
                                           <div
@@ -5669,6 +5746,9 @@ RespondToAppealJourneyMap {
                                           />,
                                           <div
                                             className="bend-top-border"
+                                          />,
+                                          <div
+                                            className="bend-bottom-border"
                                           />,
                                         ],
                                         "style": Object {
@@ -5684,6 +5764,9 @@ RespondToAppealJourneyMap {
                                             className="journey-circle-right"
                                           />,
                                           <div
+                                            className="journey-circle-right"
+                                          />,
+                                          <div
                                             className="square"
                                           />,
                                           <div
@@ -5694,6 +5777,9 @@ RespondToAppealJourneyMap {
                                           />,
                                           <div
                                             className="bend-top-border"
+                                          />,
+                                          <div
+                                            className="bend-bottom-border"
                                           />,
                                         ],
                                         "style": Object {
@@ -5710,6 +5796,9 @@ RespondToAppealJourneyMap {
                                           class="journey-circle-right"
                                         />
                                         <div
+                                          class="journey-circle-right"
+                                        />
+                                        <div
                                           class="square"
                                         />
                                         <div
@@ -5720,6 +5809,9 @@ RespondToAppealJourneyMap {
                                         />
                                         <div
                                           class="bend-top-border"
+                                        />
+                                        <div
+                                          class="bend-bottom-border"
                                         />
                                       </div>,
                                       "tag": 5,
@@ -5744,6 +5836,9 @@ RespondToAppealJourneyMap {
                                           className="journey-circle-right"
                                         />
                                         <div
+                                          className="journey-circle-right"
+                                        />
+                                        <div
                                           className="square"
                                         />
                                         <div
@@ -5754,6 +5849,9 @@ RespondToAppealJourneyMap {
                                         />
                                         <div
                                           className="bend-top-border"
+                                        />
+                                        <div
+                                          className="bend-bottom-border"
                                         />
                                       </div>,
                                       "className": "right-turn",
@@ -5778,6 +5876,9 @@ RespondToAppealJourneyMap {
                                           className="journey-circle-right"
                                         />
                                         <div
+                                          className="journey-circle-right"
+                                        />
+                                        <div
                                           className="square"
                                         />
                                         <div
@@ -5788,6 +5889,9 @@ RespondToAppealJourneyMap {
                                         />
                                         <div
                                           className="bend-top-border"
+                                        />
+                                        <div
+                                          className="bend-bottom-border"
                                         />
                                       </div>,
                                       "className": "right-turn",
@@ -5811,6 +5915,9 @@ RespondToAppealJourneyMap {
                                           class="journey-circle-right"
                                         />
                                         <div
+                                          class="journey-circle-right"
+                                        />
+                                        <div
                                           class="square"
                                         />
                                         <div
@@ -5821,6 +5928,9 @@ RespondToAppealJourneyMap {
                                         />
                                         <div
                                           class="bend-top-border"
+                                        />
+                                        <div
+                                          class="bend-bottom-border"
                                         />
                                       </div>
                                     </div>,
@@ -5958,8 +6068,8 @@ RespondToAppealJourneyMap {
                                     "style": Object {
                                       "left": "21%",
                                       "position": "absolute",
-                                      "top": "14px",
-                                      "width": "53%",
+                                      "top": "13.5px",
+                                      "width": "52%",
                                       "zIndex": "10",
                                     },
                                     "width": "75%",
@@ -5989,7 +6099,7 @@ RespondToAppealJourneyMap {
                                     "left": "21%",
                                     "position": "absolute",
                                     "top": "13.5px",
-                                    "width": "65%",
+                                    "width": "52%",
                                     "zIndex": "11",
                                   },
                                   "width": "75%",
@@ -6107,7 +6217,7 @@ RespondToAppealJourneyMap {
                                     "left": "21%",
                                     "position": "absolute",
                                     "top": "13.5px",
-                                    "width": "65%",
+                                    "width": "52%",
                                     "zIndex": "11",
                                   }
                                 }
@@ -6121,8 +6231,8 @@ RespondToAppealJourneyMap {
                                   Object {
                                     "left": "21%",
                                     "position": "absolute",
-                                    "top": "14px",
-                                    "width": "53%",
+                                    "top": "13.5px",
+                                    "width": "52%",
                                     "zIndex": "10",
                                   }
                                 }
@@ -6220,7 +6330,7 @@ RespondToAppealJourneyMap {
                                     "left": "21%",
                                     "position": "absolute",
                                     "top": "13.5px",
-                                    "width": "65%",
+                                    "width": "52%",
                                     "zIndex": "11",
                                   }
                                 }
@@ -6234,8 +6344,8 @@ RespondToAppealJourneyMap {
                                   Object {
                                     "left": "21%",
                                     "position": "absolute",
-                                    "top": "14px",
-                                    "width": "53%",
+                                    "top": "13.5px",
+                                    "width": "52%",
                                     "zIndex": "10",
                                   }
                                 }
@@ -6321,14 +6431,14 @@ RespondToAppealJourneyMap {
                               </div>
                             </div>
                             <div
-                              style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                              style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                             >
                               <div
                                 class="journey-return-trail"
                               />
                             </div>
                             <div
-                              style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                              style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                             >
                               <div
                                 class="journey-return-trail"
@@ -6345,6 +6455,9 @@ RespondToAppealJourneyMap {
                                   class="journey-circle-right"
                                 />
                                 <div
+                                  class="journey-circle-right"
+                                />
+                                <div
                                   class="square"
                                 />
                                 <div
@@ -6355,6 +6468,9 @@ RespondToAppealJourneyMap {
                                 />
                                 <div
                                   class="bend-top-border"
+                                />
+                                <div
+                                  class="bend-bottom-border"
                                 />
                               </div>
                             </div>
@@ -6469,19 +6585,19 @@ RespondToAppealJourneyMap {
                             "_debugSource": null,
                             "alternate": null,
                             "child": FiberNode {
-                              "_debugID": 102,
+                              "_debugID": 104,
                               "_debugIsCurrentlyTiming": false,
                               "_debugOwner": [Circular],
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 103,
+                                "_debugID": 105,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 107,
+                                  "_debugID": 109,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -6567,7 +6683,7 @@ RespondToAppealJourneyMap {
                                 "ref": null,
                                 "return": [Circular],
                                 "sibling": FiberNode {
-                                  "_debugID": 104,
+                                  "_debugID": 106,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -6603,25 +6719,25 @@ RespondToAppealJourneyMap {
                                   "ref": null,
                                   "return": [Circular],
                                   "sibling": FiberNode {
-                                    "_debugID": 105,
+                                    "_debugID": 107,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 108,
+                                      "_debugID": 110,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 109,
+                                        "_debugID": 111,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 110,
+                                          "_debugID": 112,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
@@ -6645,7 +6761,7 @@ RespondToAppealJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 111,
+                                            "_debugID": 113,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -6681,7 +6797,7 @@ RespondToAppealJourneyMap {
                                             "ref": null,
                                             "return": [Circular],
                                             "sibling": FiberNode {
-                                              "_debugID": 112,
+                                              "_debugID": 114,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -6711,7 +6827,7 @@ RespondToAppealJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 113,
+                                                "_debugID": 115,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -6741,7 +6857,7 @@ RespondToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 114,
+                                                  "_debugID": 116,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -6771,7 +6887,7 @@ RespondToAppealJourneyMap {
                                                   "ref": null,
                                                   "return": [Circular],
                                                   "sibling": FiberNode {
-                                                    "_debugID": 115,
+                                                    "_debugID": 117,
                                                     "_debugIsCurrentlyTiming": false,
                                                     "_debugOwner": [Circular],
                                                     "_debugSource": null,
@@ -6801,7 +6917,7 @@ RespondToAppealJourneyMap {
                                                     "ref": null,
                                                     "return": [Circular],
                                                     "sibling": FiberNode {
-                                                      "_debugID": 116,
+                                                      "_debugID": 118,
                                                       "_debugIsCurrentlyTiming": false,
                                                       "_debugOwner": [Circular],
                                                       "_debugSource": null,
@@ -6831,7 +6947,7 @@ RespondToAppealJourneyMap {
                                                       "ref": null,
                                                       "return": [Circular],
                                                       "sibling": FiberNode {
-                                                        "_debugID": 117,
+                                                        "_debugID": 119,
                                                         "_debugIsCurrentlyTiming": false,
                                                         "_debugOwner": [Circular],
                                                         "_debugSource": null,
@@ -6861,7 +6977,7 @@ RespondToAppealJourneyMap {
                                                         "ref": null,
                                                         "return": [Circular],
                                                         "sibling": FiberNode {
-                                                          "_debugID": 118,
+                                                          "_debugID": 120,
                                                           "_debugIsCurrentlyTiming": false,
                                                           "_debugOwner": [Circular],
                                                           "_debugSource": null,
@@ -7613,13 +7729,13 @@ RespondToAppealJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 106,
+                                      "_debugID": 108,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 119,
+                                        "_debugID": 121,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -7941,7 +8057,7 @@ RespondToAppealJourneyMap {
                                 ],
                                 "className": "journey-box",
                                 "style": Object {
-                                  "left": "31%",
+                                  "left": "25%",
                                   "marginTop": "21px",
                                   "top": "65%",
                                   "zIndex": "13",
@@ -8084,7 +8200,7 @@ RespondToAppealJourneyMap {
                                 ],
                                 "className": "journey-box",
                                 "style": Object {
-                                  "left": "31%",
+                                  "left": "25%",
                                   "marginTop": "21px",
                                   "top": "65%",
                                   "zIndex": "13",
@@ -8095,7 +8211,7 @@ RespondToAppealJourneyMap {
                               "sibling": null,
                               "stateNode": <div
                                 class="journey-box"
-                                style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+                                style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
                               >
                                 <input
                                   class="checkbox-glow checkbox-toggle"
@@ -8194,7 +8310,7 @@ RespondToAppealJourneyMap {
                               "status": "new",
                               "stepTitle": "The Hearing",
                               "style": Object {
-                                "left": "31%",
+                                "left": "25%",
                                 "top": "65%",
                               },
                             },
@@ -8210,7 +8326,7 @@ RespondToAppealJourneyMap {
                               "status": "new",
                               "stepTitle": "The Hearing",
                               "style": Object {
-                                "left": "31%",
+                                "left": "25%",
                                 "top": "65%",
                               },
                             },
@@ -8223,13 +8339,13 @@ RespondToAppealJourneyMap {
                               "_debugSource": null,
                               "alternate": null,
                               "child": FiberNode {
-                                "_debugID": 120,
+                                "_debugID": 122,
                                 "_debugIsCurrentlyTiming": false,
                                 "_debugOwner": [Circular],
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 121,
+                                  "_debugID": 123,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
@@ -8347,19 +8463,19 @@ RespondToAppealJourneyMap {
                                 "_debugSource": null,
                                 "alternate": null,
                                 "child": FiberNode {
-                                  "_debugID": 122,
+                                  "_debugID": 124,
                                   "_debugIsCurrentlyTiming": false,
                                   "_debugOwner": [Circular],
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 123,
+                                    "_debugID": 125,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 127,
+                                      "_debugID": 129,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -8445,7 +8561,7 @@ RespondToAppealJourneyMap {
                                     "ref": null,
                                     "return": [Circular],
                                     "sibling": FiberNode {
-                                      "_debugID": 124,
+                                      "_debugID": 126,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -8481,25 +8597,25 @@ RespondToAppealJourneyMap {
                                       "ref": null,
                                       "return": [Circular],
                                       "sibling": FiberNode {
-                                        "_debugID": 125,
+                                        "_debugID": 127,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
                                         "alternate": null,
                                         "child": FiberNode {
-                                          "_debugID": 128,
+                                          "_debugID": 130,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 130,
+                                            "_debugID": 132,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 131,
+                                              "_debugID": 133,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -8529,7 +8645,7 @@ RespondToAppealJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 132,
+                                                "_debugID": 134,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -8559,7 +8675,7 @@ RespondToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 133,
+                                                  "_debugID": 135,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -8720,7 +8836,7 @@ RespondToAppealJourneyMap {
                                           "ref": null,
                                           "return": [Circular],
                                           "sibling": FiberNode {
-                                            "_debugID": 129,
+                                            "_debugID": 131,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -8805,19 +8921,19 @@ RespondToAppealJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 126,
+                                          "_debugID": 128,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 134,
+                                            "_debugID": 136,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
                                             "alternate": null,
                                             "child": FiberNode {
-                                              "_debugID": 135,
+                                              "_debugID": 137,
                                               "_debugIsCurrentlyTiming": false,
                                               "_debugOwner": [Circular],
                                               "_debugSource": null,
@@ -8843,7 +8959,7 @@ RespondToAppealJourneyMap {
                                               "ref": null,
                                               "return": [Circular],
                                               "sibling": FiberNode {
-                                                "_debugID": 136,
+                                                "_debugID": 138,
                                                 "_debugIsCurrentlyTiming": false,
                                                 "_debugOwner": [Circular],
                                                 "_debugSource": null,
@@ -8863,7 +8979,7 @@ RespondToAppealJourneyMap {
                                                 "ref": null,
                                                 "return": [Circular],
                                                 "sibling": FiberNode {
-                                                  "_debugID": 137,
+                                                  "_debugID": 139,
                                                   "_debugIsCurrentlyTiming": false,
                                                   "_debugOwner": [Circular],
                                                   "_debugSource": null,
@@ -9172,7 +9288,7 @@ RespondToAppealJourneyMap {
                                     ],
                                     "className": "journey-box",
                                     "style": Object {
-                                      "left": "57%",
+                                      "left": "54%",
                                       "top": "69%",
                                     },
                                   },
@@ -9237,7 +9353,7 @@ RespondToAppealJourneyMap {
                                     ],
                                     "className": "journey-box",
                                     "style": Object {
-                                      "left": "57%",
+                                      "left": "54%",
                                       "top": "69%",
                                     },
                                   },
@@ -9246,7 +9362,7 @@ RespondToAppealJourneyMap {
                                   "sibling": null,
                                   "stateNode": <div
                                     class="journey-box"
-                                    style="top: 69%; left: 57%;"
+                                    style="top: 69%; left: 54%;"
                                   >
                                     <input
                                       class="checkbox-glow checkbox-toggle"
@@ -9326,7 +9442,7 @@ RespondToAppealJourneyMap {
                                   "stepTitle": "Court Order",
                                   "stepTitleOptional": "(if required)",
                                   "style": Object {
-                                    "left": "57%",
+                                    "left": "54%",
                                     "top": "69%",
                                   },
                                   "twoPages": false,
@@ -9344,7 +9460,7 @@ RespondToAppealJourneyMap {
                                   "stepTitle": "Court Order",
                                   "stepTitleOptional": "(if required)",
                                   "style": Object {
-                                    "left": "57%",
+                                    "left": "54%",
                                     "top": "69%",
                                   },
                                   "twoPages": false,
@@ -9358,13 +9474,13 @@ RespondToAppealJourneyMap {
                                   "_debugSource": null,
                                   "alternate": null,
                                   "child": FiberNode {
-                                    "_debugID": 138,
+                                    "_debugID": 140,
                                     "_debugIsCurrentlyTiming": false,
                                     "_debugOwner": [Circular],
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 139,
+                                      "_debugID": 141,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
@@ -9482,13 +9598,13 @@ RespondToAppealJourneyMap {
                                     "_debugSource": null,
                                     "alternate": null,
                                     "child": FiberNode {
-                                      "_debugID": 140,
+                                      "_debugID": 142,
                                       "_debugIsCurrentlyTiming": false,
                                       "_debugOwner": [Circular],
                                       "_debugSource": null,
                                       "alternate": null,
                                       "child": FiberNode {
-                                        "_debugID": 141,
+                                        "_debugID": 143,
                                         "_debugIsCurrentlyTiming": false,
                                         "_debugOwner": [Circular],
                                         "_debugSource": null,
@@ -9512,13 +9628,13 @@ RespondToAppealJourneyMap {
                                         "ref": null,
                                         "return": [Circular],
                                         "sibling": FiberNode {
-                                          "_debugID": 142,
+                                          "_debugID": 144,
                                           "_debugIsCurrentlyTiming": false,
                                           "_debugOwner": [Circular],
                                           "_debugSource": null,
                                           "alternate": null,
                                           "child": FiberNode {
-                                            "_debugID": 143,
+                                            "_debugID": 145,
                                             "_debugIsCurrentlyTiming": false,
                                             "_debugOwner": [Circular],
                                             "_debugSource": null,
@@ -9782,7 +9898,7 @@ RespondToAppealJourneyMap {
                                     "stepTitle": "Court Order",
                                     "stepTitleOptional": "(if required)",
                                     "style": Object {
-                                      "left": "57%",
+                                      "left": "54%",
                                       "top": "69%",
                                     },
                                     "twoPages": false,
@@ -9842,7 +9958,7 @@ RespondToAppealJourneyMap {
                                 "status": "new",
                                 "stepTitle": "The Hearing",
                                 "style": Object {
-                                  "left": "31%",
+                                  "left": "25%",
                                   "top": "65%",
                                 },
                               },
@@ -10213,7 +10329,7 @@ RespondToAppealJourneyMap {
             stepTitle="The Hearing"
             style={
               Object {
-                "left": "31%",
+                "left": "25%",
                 "top": "65%",
               }
             }
@@ -10242,7 +10358,7 @@ RespondToAppealJourneyMap {
             stepTitleOptional="(if required)"
             style={
               Object {
-                "left": "57%",
+                "left": "54%",
                 "top": "69%",
               }
             }
@@ -10406,7 +10522,7 @@ RespondToAppealJourneyMap {
             stepTitle="The Hearing"
             style={
               Object {
-                "left": "31%",
+                "left": "25%",
                 "top": "65%",
               }
             }
@@ -10435,7 +10551,7 @@ RespondToAppealJourneyMap {
             stepTitleOptional="(if required)"
             style={
               Object {
-                "left": "57%",
+                "left": "54%",
                 "top": "69%",
               }
             }
@@ -10725,14 +10841,14 @@ RespondToAppealJourneyMap {
             </div>
           </div>
           <div
-            style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+            style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
           >
             <div
               class="journey-return-trail"
             />
           </div>
           <div
-            style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+            style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
           >
             <div
               class="journey-return-trail"
@@ -10749,6 +10865,9 @@ RespondToAppealJourneyMap {
                 class="journey-circle-right"
               />
               <div
+                class="journey-circle-right"
+              />
+              <div
                 class="square"
               />
               <div
@@ -10760,6 +10879,9 @@ RespondToAppealJourneyMap {
               <div
                 class="bend-top-border"
               />
+              <div
+                class="bend-bottom-border"
+              />
             </div>
           </div>
         </div>
@@ -10768,7 +10890,7 @@ RespondToAppealJourneyMap {
         />
         <div
           class="journey-box"
-          style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+          style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -10857,7 +10979,7 @@ RespondToAppealJourneyMap {
         </div>
         <div
           class="journey-box"
-          style="top: 69%; left: 57%;"
+          style="top: 69%; left: 54%;"
         >
           <input
             class="checkbox-glow checkbox-toggle"
@@ -11340,14 +11462,14 @@ RespondToAppealJourneyMap {
                     </div>
                   </div>
                   <div
-                    style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                    style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                   >
                     <div
                       class="journey-return-trail"
                     />
                   </div>
                   <div
-                    style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                    style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                   >
                     <div
                       class="journey-return-trail"
@@ -11364,6 +11486,9 @@ RespondToAppealJourneyMap {
                         class="journey-circle-right"
                       />
                       <div
+                        class="journey-circle-right"
+                      />
+                      <div
                         class="square"
                       />
                       <div
@@ -11375,6 +11500,9 @@ RespondToAppealJourneyMap {
                       <div
                         class="bend-top-border"
                       />
+                      <div
+                        class="bend-bottom-border"
+                      />
                     </div>
                   </div>
                 </div>
@@ -11383,7 +11511,7 @@ RespondToAppealJourneyMap {
                 />
                 <div
                   class="journey-box"
-                  style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+                  style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -11472,7 +11600,7 @@ RespondToAppealJourneyMap {
                 </div>
                 <div
                   class="journey-box"
-                  style="top: 69%; left: 57%;"
+                  style="top: 69%; left: 54%;"
                 >
                   <input
                     class="checkbox-glow checkbox-toggle"
@@ -11919,14 +12047,14 @@ RespondToAppealJourneyMap {
                   </div>
                 </div>
                 <div
-                  style="width: 65%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
+                  style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 11;"
                 >
                   <div
                     class="journey-return-trail"
                   />
                 </div>
                 <div
-                  style="width: 53%; left: 21%; position: absolute; top: 14px; z-index: 10;"
+                  style="width: 52%; left: 21%; position: absolute; top: 13.5px; z-index: 10;"
                 >
                   <div
                     class="journey-return-trail"
@@ -11943,6 +12071,9 @@ RespondToAppealJourneyMap {
                       class="journey-circle-right"
                     />
                     <div
+                      class="journey-circle-right"
+                    />
+                    <div
                       class="square"
                     />
                     <div
@@ -11954,6 +12085,9 @@ RespondToAppealJourneyMap {
                     <div
                       class="bend-top-border"
                     />
+                    <div
+                      class="bend-bottom-border"
+                    />
                   </div>
                 </div>
               </div>
@@ -11962,7 +12096,7 @@ RespondToAppealJourneyMap {
               />
               <div
                 class="journey-box"
-                style="top: 65%; left: 31%; margin-top: 21px; z-index: 13;"
+                style="top: 65%; left: 25%; margin-top: 21px; z-index: 13;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"
@@ -12051,7 +12185,7 @@ RespondToAppealJourneyMap {
               </div>
               <div
                 class="journey-box"
-                style="top: 69%; left: 57%;"
+                style="top: 69%; left: 54%;"
               >
                 <input
                   class="checkbox-glow checkbox-toggle"

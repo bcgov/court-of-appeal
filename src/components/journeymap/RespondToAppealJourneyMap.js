@@ -111,7 +111,7 @@ class RespondToAppealJourneyMap extends React.Component {
                          zIndex: '1',
                          marginBottom: '81px'
                      }}/>
-                <GavelIcon style={{top:'65%', left: '31%'}}
+                <GavelIcon style={{top:'65%', left: '25%'}}
                            stepTitle={"The Hearing"}
                            action={this.iconClicked.bind(this, 'respondenthearing')}
                            active={true}
@@ -128,7 +128,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     style={{position: 'absolute', marginLeft:'30%', top:'70.3%',width: '30%'}}
                     level={2}
                 />
-                <FormIcon style={{top:'69%', left: '57%'}}
+                <FormIcon style={{top:'69%', left: '54%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}
