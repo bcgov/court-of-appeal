@@ -262,7 +262,7 @@ AppellantLeaveRefusedJourneyMap {
                   >
                     <img
                       class="leave-hearing"
-                      src="undefined/icons/icon-clock.svg"
+                      src="/icons/icon-clock.svg"
                     />
                   </div>
                   <div
@@ -554,7 +554,7 @@ AppellantLeaveRefusedJourneyMap {
                 >
                   <img
                     class="leave-hearing"
-                    src="undefined/icons/icon-clock.svg"
+                    src="/icons/icon-clock.svg"
                   />
                 </div>
                 <div
@@ -3758,21 +3758,21 @@ AppellantLeaveRefusedJourneyMap {
                           "lastEffect": null,
                           "memoizedProps": Object {
                             "className": "leave-hearing",
-                            "src": "undefined/icons/icon-clock.svg",
+                            "src": "/icons/icon-clock.svg",
                           },
                           "memoizedState": null,
                           "mode": 0,
                           "nextEffect": null,
                           "pendingProps": Object {
                             "className": "leave-hearing",
-                            "src": "undefined/icons/icon-clock.svg",
+                            "src": "/icons/icon-clock.svg",
                           },
                           "ref": null,
                           "return": [Circular],
                           "sibling": null,
                           "stateNode": <img
                             class="leave-hearing"
-                            src="undefined/icons/icon-clock.svg"
+                            src="/icons/icon-clock.svg"
                           />,
                           "tag": 5,
                           "type": "img",
@@ -3787,7 +3787,7 @@ AppellantLeaveRefusedJourneyMap {
                         "memoizedProps": Object {
                           "children": <img
                             className="leave-hearing"
-                            src="undefined/icons/icon-clock.svg"
+                            src="/icons/icon-clock.svg"
                           />,
                           "className": "journey-end-circle",
                         },
@@ -3797,7 +3797,7 @@ AppellantLeaveRefusedJourneyMap {
                         "pendingProps": Object {
                           "children": <img
                             className="leave-hearing"
-                            src="undefined/icons/icon-clock.svg"
+                            src="/icons/icon-clock.svg"
                           />,
                           "className": "journey-end-circle",
                         },
@@ -3857,7 +3857,7 @@ AppellantLeaveRefusedJourneyMap {
                         >
                           <img
                             class="leave-hearing"
-                            src="undefined/icons/icon-clock.svg"
+                            src="/icons/icon-clock.svg"
                           />
                         </div>,
                         "tag": 5,
@@ -3877,7 +3877,7 @@ AppellantLeaveRefusedJourneyMap {
                           >
                             <img
                               className="leave-hearing"
-                              src="undefined/icons/icon-clock.svg"
+                              src="/icons/icon-clock.svg"
                             />
                           </div>,
                           <div
@@ -3912,7 +3912,7 @@ AppellantLeaveRefusedJourneyMap {
                           >
                             <img
                               className="leave-hearing"
-                              src="undefined/icons/icon-clock.svg"
+                              src="/icons/icon-clock.svg"
                             />
                           </div>,
                           <div
@@ -3949,7 +3949,7 @@ AppellantLeaveRefusedJourneyMap {
                         >
                           <img
                             class="leave-hearing"
-                            src="undefined/icons/icon-clock.svg"
+                            src="/icons/icon-clock.svg"
                           />
                         </div>
                         <div
@@ -4473,7 +4473,7 @@ AppellantLeaveRefusedJourneyMap {
           >
             <img
               class="leave-hearing"
-              src="undefined/icons/icon-clock.svg"
+              src="/icons/icon-clock.svg"
             />
           </div>
           <div
@@ -4775,7 +4775,7 @@ AppellantLeaveRefusedJourneyMap {
                   >
                     <img
                       class="leave-hearing"
-                      src="undefined/icons/icon-clock.svg"
+                      src="/icons/icon-clock.svg"
                     />
                   </div>
                   <div
@@ -5067,7 +5067,7 @@ AppellantLeaveRefusedJourneyMap {
                 >
                   <img
                     class="leave-hearing"
-                    src="undefined/icons/icon-clock.svg"
+                    src="/icons/icon-clock.svg"
                   />
                 </div>
                 <div
