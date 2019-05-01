@@ -28,7 +28,7 @@ class AppellantLeaveRefusedJourneyMap extends React.Component {
                     level={1}
                 />
                 <GavelIcon 
-                    style={{left: '56%', top: '24%'}}
+                    style={{left: '56%', top: '17.5%'}}
                     stepTitle={"The Hearing"}
                     active={false}
                 />

@@ -3,6 +3,7 @@ import FormIcon from './journeyicons/FormIcon';
 import GavelIcon from './journeyicons/GavelIcon';
 import Trail from './Trail';
 import EndCircle from './journeyicons/EndCircle';
+import ReturnTrail from "./ReturnTrail";
 let JOURNEY_TYPE = require('../../helpers/constants')
 let cn = require('classnames');
 
@@ -34,12 +35,19 @@ class RespondToAppealJourneyMap extends React.Component {
     
     render() {
         return (
-            <div className={"journey-map-container"}>
+            <div className={"journey-map-container"} >
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
+                <div
+                    style={{marginLeft: '50px',
+                        borderTop: '9px solid rgb(159, 191, 226)',
+                        width: '65%',
+                        position: 'absolute',
+                        top: '92px',
+                        zIndex: '1'
+                    }}/>
                 <Trail
-                    className={"journey-trail-l1-l2"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status !== 'new'}
-                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'15%'}
                     level={1}
                 />
@@ -54,9 +62,8 @@ class RespondToAppealJourneyMap extends React.Component {
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status === 'completed'}
-                    lineCompleted={this.state.steps[2].status === 'completed'}
                     width={'24%'}
                     level={1}
                 />
@@ -71,11 +78,10 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(2,this.state.steps)}
                     />
-                
+
               <Trail
-                  className={"journey-trail-l1-l2"}
+                  className={"journey-trail-l1-moveable"}
                   completed={this.state.steps[1].status === 'completed'}
-                  lineCompleted={this.state.steps[2].status === 'completed'}
                   width={'24%'}
                   level={1}
               />
@@ -89,17 +95,19 @@ class RespondToAppealJourneyMap extends React.Component {
                           completed={this.stepCompleted.bind(this)}
                           ready={this.props.isStepReady(3, this.state.steps)}
                 />
-                <div className={cn("journey-right-curve",{'completed-curve': this.state.steps[2].status === 'completed'})} />
-                <div className={cn("journey-left-curve",{'completed-left-curve': this.state.steps[2].status === 'completed'})} />
-                
-                
-                <Trail
-                    className={"journey-trail-l2-l3 last-row"}
-                    completed={this.state.steps[2].status === 'completed'}
-                    width={'25%'}
-                    level={2}
-                />
-                <GavelIcon style={{top:'55%', left: '30%'}}
+               <ReturnTrail
+                   priorstep={this.state.steps[2]}
+               />
+                 <div
+                     style={{marginLeft: '141px',
+                         borderTop: '9px solid rgb(159, 191, 226)',
+                         width: '65%',
+                         position: 'absolute',
+                         top: '374px',
+                         zIndex: '1',
+                         marginBottom: '81px'
+                     }}/>
+                <GavelIcon style={{top:'65%', left: '25%'}}
                            stepTitle={"The Hearing"}
                            action={this.iconClicked.bind(this, 'respondenthearing')}
                            active={true}
@@ -108,13 +116,15 @@ class RespondToAppealJourneyMap extends React.Component {
                            completed={this.stepCompleted.bind(this)}
                            ready={this.props.isStepReady(4, this.state.steps)}
                 />
+
                 <Trail
-                    className={"journey-trail-l2-l3 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[3].status === 'completed'}
                     width={'30%'}
+                    style={{position: 'absolute', marginLeft:'30%', top:'70.3%',width: '30%'}}
                     level={2}
                 />
-                <FormIcon style={{top:'55%', left: '57%'}}
+                <FormIcon style={{top:'69%', left: '54%'}}
                           twoPages={false}
                           stepTitle={"Court Order"}
                           stepTitleOptional={"(if required)"}
@@ -126,9 +136,10 @@ class RespondToAppealJourneyMap extends React.Component {
                           ready={this.props.isStepReady(5, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l2-l3 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[4].status === 'completed'}
-                    width={'25%'}
+                    width={'30%'}
+                    style={{position: 'absolute', width: '30%', left: '60%', top: '70.3%'}}
                     level={2}
                 />
                 <EndCircle
@@ -136,7 +147,7 @@ class RespondToAppealJourneyMap extends React.Component {
                     action={this.iconClicked.bind(this,'respondentcomplete')}
                     active={true}
                     completed={this.state.steps[4].status === 'completed'}
-                    style={{top: '55%', left: '80%'}}
+                    style={{top: '70%', left: '80%'}}
 
                 />
             </div>

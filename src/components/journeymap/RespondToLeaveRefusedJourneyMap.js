@@ -25,8 +25,17 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
         return (
             <div className={"journey-map-container"}>
                 <div className={cn("journey-start-circle", {"completed-step": this.state.steps[0].status !== 'new'})} />
+                <div
+                    style={{marginLeft: '50px',
+                        borderTop: '9px solid rgb(159, 191, 226)',
+                        width: '75%',
+                        position: 'absolute',
+                        top: '92px',
+                        zIndex: '1'
+                    }}/>
+
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status !== 'new'}
                     width={'25%'}
                     level={1}
@@ -42,12 +51,12 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
                           ready={this.props.isStepReady(1, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[0].status === 'completed'}
                     width={'31%'}
                     level={1}
                 />
-                <GavelIcon style={{left: '55%'}}
+                <GavelIcon style={{left: '55%', marginTop:'2px'}}
                            stepTitle={"The Hearing"}
                            active={true} 
                            action={this.iconClicked.bind(this, 'respondentappealhearing')}
@@ -57,7 +66,7 @@ class RespondToLeaveRefusedJourneyMap extends React.Component {
                            ready={this.props.isStepReady(2, this.state.steps)}
                 />
                 <Trail
-                    className={"journey-trail-l1-l2 last-row"}
+                    className={"journey-trail-l1-moveable"}
                     completed={this.state.steps[1].status === 'completed'}
                     width={'25%'}
                     level={1}

@@ -3,6 +3,7 @@ import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
 import Form2Preview from "../forms/Form2Preview";
+import './caselist.css';
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 let { updateDocument } = require('../utils/Form2DocumentUpdate');
 
@@ -111,7 +112,7 @@ class CaseList extends React.Component {
     modals() {
         return (
         <div>
-            <div id="editFormModal" className="modal"
+            <div id="editFormModal" className="modal editformmodal"
                     style={{display: (this.state.editMode ? 'block' : 'none')}}>
                 <div className=" modal-title ">
                     <span id="close-modal" onClick={this.cancel}>&times;</span>
