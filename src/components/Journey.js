@@ -306,9 +306,9 @@ class Journey extends Component {
         }
         return content;
     }
-    
+
     startOver() {
-        this.setState({ 
+        this.setState({
             respondent: false,
             appellant: false,
             displayJourneyMap: false,
@@ -388,7 +388,7 @@ class Journey extends Component {
         }
         return content;
     }
-    
+
     fetchMyJourney() {
         this.service.getMyJourney({}, (data) => {
             if (!data.error) {
@@ -406,8 +406,7 @@ class Journey extends Component {
                         introText: introText
                     });
                 }
-            }
-            else console.log(data.error)
+            }            
         });
     }
 
