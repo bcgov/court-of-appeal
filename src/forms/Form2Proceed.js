@@ -2,19 +2,29 @@ import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
 import FormButtonBar from '../components/FormButtonBar';
 import './Form2Proceed.css';
+import DefaultService from "../service/default.service";
+import SpinnerButton from '../components/SpinnerButton';
 
 class Form2Proceed extends Component {
 
     constructor(props) {
         super(props);
+        this.service = props.service;
         this.state = props.location ? props.location.state : {};
         this.cancel = this.cancel.bind(this)
         this.confirm = this.confirm.bind(this)
     }
 
+    componentDidMount() {
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
+    }
+
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form" >
+            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
                 <div id="breadcrumbContainer">
                     <ol className="breadcrumb">
@@ -60,7 +70,9 @@ class Form2Proceed extends Component {
                             This amount will be billed using the payment info of your account.
                             <div style={{textAlign:'right', paddingTop:'15px'}}>
                                 <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
-                                <button id="payment-confirmed" onClick={this.confirm} className="btn btn-primary round-borders action-button">Confirmation</button>
+                                <SpinnerButton id="payment-confirmed" width="150" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
+                                    content='Confirmation'>
+                                </SpinnerButton>
                             </div>
                         </div>
                     </div>
@@ -74,7 +86,13 @@ class Form2Proceed extends Component {
     }
 
     confirm() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted',state: { formId:this.state.formId }});
+        this.submitButton.startSpinner();
+        this.service.submit(this.state.formId, (data)=>{
+            this.submitButton.stopSpinner();
+            if (!data.error) {
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted',state: { formId:this.state.formId }});
+            }
+        })
     }
 }
 export default Form2Proceed;

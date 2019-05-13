@@ -227,4 +227,17 @@ Service.prototype.createStep = function(step, callback) {
     });
 };
 
+Service.prototype.submit = function(id, callback) {
+    let self = this;
+    let options = this.buildOptions(`/api/forms/${id}/submit`);
+    request.post(options, function(err, response, body) {
+        if (response && response.statusCode === 201) {
+            callback(JSON.parse(body));
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
+};
+
 module.exports = Service;
