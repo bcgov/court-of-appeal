@@ -18,10 +18,10 @@ class SpinnerButton extends React.Component {
     buttonOrSpinner() {
         if (this.state.downloading) {
             return (
-                <div>
+                <div style={{display:'inline-block'}}>
                 <button id={this.props.id}
                         disabled="true"
-                        className="btn btn-primary btn-green"
+                        className="btn btn-primary btn-green action-button"
                         style={{ width:this.props.width+'px' }}
                 >
                     <div className="efiling-spinner"></div>
@@ -31,7 +31,7 @@ class SpinnerButton extends React.Component {
         }
         else {
             return (
-                <div>
+                <div style={{display:'inline-block'}}>
                 <button id={this.props.id}
                         onClick={this.props.onClick}
                         className="btn btn-primary round-borders action-button"
