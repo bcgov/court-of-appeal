@@ -202,7 +202,7 @@ class Form2 extends Component {
         this.createOrUpdate(e, ()=>{
             this.service.previewForm(this.state.id, (html)=>{
                 if (!html.error) {
-                    this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {
+                    this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
                         formId:this.state.id,
                         previewContent: html
                     }});
