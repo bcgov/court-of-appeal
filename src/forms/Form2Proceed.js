@@ -25,7 +25,7 @@ class Form2Proceed extends Component {
                             <a href="/form2">Notice of Appearance (Form 2)</a>
                         </li>
                         <li>
-                            <a href="/preview/form2">Preview (Form 2)</a>
+                            <a href="/preview">Preview</a>
                         </li>
                         <li>
                             <a href="">Proceed</a>
@@ -74,7 +74,7 @@ class Form2Proceed extends Component {
     }
 
     confirm() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: { formId:this.state.formId }});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted',state: { formId:this.state.formId }});
     }
 }
 export default Form2Proceed;

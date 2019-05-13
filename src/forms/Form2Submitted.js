@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
 import FormButtonBar from '../components/FormButtonBar';
-import './Form2Preview.css';
 
-class Form2Preview extends Component {
+class Form2Submitted extends Component {
 
     constructor(props) {
         super(props);
         this.state = props.location ? props.location.state : {};
-        this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
-        this.form2Path = props.form2Path || this.homePath + '/form2';
-        this.service = this.props.service;
-        this.proceed = this.proceed.bind(this)
+        this.done = this.done.bind(this)
     }
 
     render() {
@@ -27,28 +23,32 @@ class Form2Preview extends Component {
                             <a href="/form2">Notice of Appearance (Form 2)</a>
                         </li>
                         <li>
-                            <a href="">Preview (Form 2)</a>
+                            <a href="/preview">Preview</a>
+                        </li>
+                        <li>
+                            <a href="/process">Proceed</a>
+                        </li>
+                        <li>
+                            <a href="">Done</a>
                         </li>
                     </ol>
                 </div>
 
                   <ProgressStatusBar
-                      activeStep={3}
+                      activeStep={5}
                       steps={["Access","Form 2","Preview","Payment"]}
                   />
 
                 <div className="row">
                     <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
                         <div className="preview-title  not-printable">
-                            Preview Form 2
+                            Form Submitted
                         </div>
                         <div className="form-section">
-                            <div dangerouslySetInnerHTML={{__html: this.state ? this.state.previewContent : "No form available for preview"}} />
-                            <FormButtonBar
-                                back={this.goBack.bind(this)}
-                                backMessage="Back to editing"
-                                proceed={this.proceed}
-                            />
+                            Your Notice of Appearance has been submitted and accepted.
+                            <div style={{textAlign:'right', paddingTop:'15px'}}>
+                                <button id="done" onClick={this.done} className="btn btn-primary round-borders action-button">Done</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,12 +56,8 @@ class Form2Preview extends Component {
         );
     }
 
-    proceed(e) {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed', state: { formId:this.state.formId }});
-    }
-
-    goBack() {
-        this.props.history.goBack();
+    done() {
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: {}});
     }
 }
-export default Form2Preview;
+export default Form2Submitted;
