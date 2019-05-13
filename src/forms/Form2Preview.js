@@ -11,6 +11,7 @@ class Form2Preview extends Component {
         this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.form2Path = props.form2Path || this.homePath + '/form2';
         this.service = this.props.service;
+        this.proceed = this.proceed.bind(this)
     }
 
     render() {
@@ -45,15 +46,18 @@ class Form2Preview extends Component {
                             <div dangerouslySetInnerHTML={{__html: this.state ? this.state.previewContent : "No form available for preview"}} />
                             <FormButtonBar
                                 back={this.goBack.bind(this)}
-                                printable="yes"
                                 backMessage="Back to editing"
-                                disableSubmit={this.state? this.state.submitShouldBeDisabled : ()=>{}}
+                                proceed={this.proceed}
                             />
                         </div>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    proceed(e) {
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed/form2', state: { formId:this.state.formId }});
     }
 
     goBack() {
