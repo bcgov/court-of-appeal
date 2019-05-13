@@ -182,12 +182,12 @@ class Form2 extends Component {
                             callback();
                         }
                     });
-                }                
+                }
             });
         }
         else {
-            this.service.updateForm2(form, this.state.id, (data) => {     
-                this.formButtonBar.stopSaveSpinner();           
+            this.service.updateForm2(form, this.state.id, (data) => {
+                this.formButtonBar.stopSaveSpinner();
                 this.setState({
                     formHasUnsavedChanges: false
                 }, () => {
@@ -202,10 +202,13 @@ class Form2 extends Component {
         this.createOrUpdate(e, ()=>{
             this.service.previewForm(this.state.id, (html)=>{
                 if (!html.error) {
-                    this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {previewContent: html}});
+                    this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {
+                        formId:this.state.id,
+                        previewContent: html
+                    }});
                     // this.setState({editMode: false, previewMode: true, displayPreview: 'block', previewContent:html });
                 }
-            });    
+            });
         });
     }
 

@@ -33,6 +33,7 @@ class FormButtonBar extends React.Component {
                 {this.saveButton()}
                 {this.previewButton()}
                 {this.printButton()}
+                {this.proceedButton()}
                 <ReactTooltip/>
             </div>
         );
@@ -137,6 +138,24 @@ class FormButtonBar extends React.Component {
                     <SpinnerButton id="download-button" width="106" onClick={this.print} ref={ (element)=> {this.downloadButton = element }}
                         content='Download'>
                     </SpinnerButton>
+                </div>
+            );
+        }
+        return button;
+    }
+
+    proceedButton() {
+        let button = null;
+        if (this.props.proceed) {
+            button =  (
+                <div data-tip={this.props.formErrorMessage}>
+                    <button
+                        id="proceed"
+                        onClick={this.props.proceed}
+                        className={this.actionClassName}
+                        disabled={this.props.disableProceed}
+                    >Proceed <i className="glyphicon glyphicon-triangle-right"/>
+                    </button>
                 </div>
             );
         }
