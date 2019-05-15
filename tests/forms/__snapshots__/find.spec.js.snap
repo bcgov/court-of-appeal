@@ -45,7 +45,13 @@ exports[`cannot search with invalid entries 1`] = `
           />
         </td>
         <td>
-          <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+              }
+            }
+          >
             <button
               className="btn btn-primary round-borders action-button"
               disabled={true}
@@ -117,7 +123,13 @@ exports[`valid entries 1`] = `
           />
         </td>
         <td>
-          <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+              }
+            }
+          >
             <button
               className="btn btn-primary round-borders action-button"
               disabled={true}
