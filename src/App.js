@@ -5,6 +5,7 @@ import Dashboard from './Dashboard.js';
 import { Route } from "react-router-dom";
 import Form7 from './forms/Form7.js';
 import Form2 from './forms/Form2.js';
+import Form2Start from './forms/Form2Start'
 import Form2Access from './forms/Form2Access'
 import Form2Preview from './forms/Form2Preview'
 import Form2Proceed from './forms/Form2Proceed'
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path={this.homePath} component={Dashboard} props={{fetch:this.props.fetch}} />
           <Route path={process.env.PUBLIC_URL + '/form.7.html'} component={Form7} />
           <Route path={process.env.PUBLIC_URL + '/form2'} component={Form2} />
+          <Route path={process.env.PUBLIC_URL + '/start'} component={Form2Start} />
           <Route path={process.env.PUBLIC_URL + '/access'} component={Form2Access} />
           <Route path={process.env.PUBLIC_URL + '/preview'} component={Form2Preview} />
           <Route path={process.env.PUBLIC_URL + '/proceed'} component={Form2Proceed} />
