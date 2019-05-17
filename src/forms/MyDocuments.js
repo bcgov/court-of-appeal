@@ -118,7 +118,7 @@ class MyDocuments extends Component {
         }
     }
     create() {
-        window.location = '/form2'
+        window.location = '/start'
     }
 
     render() {
