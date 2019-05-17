@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
-import FormButtonBar from '../components/FormButtonBar';
 
 class Form2Submitted extends Component {
 
