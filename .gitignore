@@ -69,3 +69,5 @@ Thumbs.db
 # Sonar generated files #
 #########################################
 .scannerwork
+
+*.pdf
