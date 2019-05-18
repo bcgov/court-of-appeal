@@ -10,8 +10,10 @@ class Form2Access extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : { caseNumber: '12345 (fake)'};
+        this.state.users = []
         console.log(this.state);
         this.next = this.next.bind(this)
+        this.isThisYou = this.isThisYou.bind(this)
     }
 
     componentDidMount() {
@@ -19,6 +21,15 @@ class Form2Access extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+
+        this.service.getAccountUsers((data)=>{
+            let users = data.info.client
+            if (typeof users !== 'object') {
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
+            } else {
+                this.setState({ users: users, account:data.info.account })
+            }
+        })
     }
 
     render() {
@@ -51,6 +62,32 @@ class Form2Access extends Component {
                                 Court of Appeal Case #{ this.state.caseNumber }
                             </div>
                             The following users will have access to the package containing this Notice of Appearance once it is submitted.
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th style={{ textAlign:'center'}}>Read only</th>
+                                        <th style={{ textAlign:'center'}}>Update</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.users.map((user) => {
+                                            return (
+                                                <tr key={user.clientId}>
+                                                    <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
+                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? 'V': ''}</td>
+                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? 'V': ''}</td>
+                                                    <td></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+
                             <div style={{textAlign:'right', paddingTop:'15px'}}>
                                 <button id="continue-to-form" onClick={this.next} className="btn btn-primary round-borders action-button">Fill Notice of Appeal form</button>
                             </div>
@@ -61,8 +98,12 @@ class Form2Access extends Component {
         );
     }
 
+    isThisYou(user) {
+        return (user.clientId == this.state.account.clientId) ? ' (yourself)' : ''
+    }
+
     next() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: {}});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
     }
 }
 export default Form2Access;
