@@ -240,4 +240,17 @@ Service.prototype.submit = function(id, callback) {
     });
 };
 
+Service.prototype.getAccountUsers = function(callback) {
+    let self = this;
+    let options = this.buildOptions(`/api/accountusers`);
+    request.get(options, function(err, response, body) {
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
+}
+
 module.exports = Service;

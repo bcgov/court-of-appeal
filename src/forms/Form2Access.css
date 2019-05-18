@@ -5,3 +5,11 @@
 #continue-to-form {
     width:200px;
 }
+table {
+    width: 100%;
+    border: 2px solid rgb(28, 92, 151);
+}
+th {
+    background-color: rgb(230, 234, 242);
+    color: rgb(28, 92, 151);
+}
