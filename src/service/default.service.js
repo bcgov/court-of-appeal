@@ -247,6 +247,9 @@ Service.prototype.getAccountUsers = function(callback) {
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
+        else if (response && response.statusCode === 404) {
+            callback({ error: { code:404 }});
+        }
         else {
             self.notifyOfError(callback);
         }

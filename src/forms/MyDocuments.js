@@ -118,7 +118,7 @@ class MyDocuments extends Component {
         }
     }
     create() {
-        window.location = '/start'
+        window.location = process.env.PUBLIC_URL + '/start'
     }
 
     render() {

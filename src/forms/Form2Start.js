@@ -11,6 +11,7 @@ class Form2Start extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : { };
+        this.state.notFoundError = ''
         this.search = this.search.bind(this)
     }
 
@@ -67,7 +68,7 @@ class Form2Start extends Component {
                                             <SpinnerButton width="52" onClick={this.search} content='Find' ref={ (el)=> { this.findButton = el }}/>
                                         </td>
                                         <td>
-                                            <div className="error-message">{this.props.notFoundError}</div>
+                                            <div className="error-message">{this.state.notFoundError}</div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -85,7 +86,12 @@ class Form2Start extends Component {
         this.service.searchForm7(caseNumber, (data) => {
             this.findButton.stopSpinner();
 
-            this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: { caseNumber:caseNumber, parties:data.parties }});
+            if (data && !data.error) {
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: { caseNumber:caseNumber, parties:data.parties }});
+            }
+            else {
+                this.setState({notFoundError: 'No such Court of Appeal document found'});
+            }
         });
     }
 }

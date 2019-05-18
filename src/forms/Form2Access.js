@@ -23,10 +23,14 @@ class Form2Access extends Component {
         }
 
         this.service.getAccountUsers((data)=>{
-            let users = data.info.client
-            if (typeof users !== 'object') {
+            let moveOver = false
+            if (data.error) { moveOver = true }
+
+            if (moveOver) {
                 this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
-            } else {
+            }
+            else {
+                let users = data.info.client
                 this.setState({ users: users, account:data.info.account })
             }
         })
@@ -63,7 +67,7 @@ class Form2Access extends Component {
                             </div>
                             The following users will have access to the package containing this Notice of Appearance once it is submitted.
 
-                            <table>
+                            <table className="users">
                                 <thead>
                                     <tr>
                                         <th>User</th>
