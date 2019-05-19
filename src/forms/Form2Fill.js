@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
+import './Form.css';
 import './Form2Fill.css';
 import DefaultService from "../service/default.service";
 
@@ -46,12 +47,29 @@ class Form2Fill extends Component {
 
                 <div className="row">
                     <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="preview-title  not-printable">
-                            NOTICE OF APPEARANCE
+                    <div className="page-title-section">
+                            <div className="page-title">Notice of Appearance</div>
+                        <div className="page-subtitle">Form 2 (RULES 5 (A), 13(A) AND 17(A))</div>
+                    </div>
+                        <div className="form-section">
+                            <div className="section-title">
+                                When Do You Use the Notice of Appearance (Form2)?
+                            </div>
+                            <p>
+                                If you have been served a Notice of Appeal (Form 7), and you want to respond,
+                                fill out the Notice of Appearance (Form 2). If you do not respond,
+                                you will not be includedin future court proceedings related to this case,
+                                and will not have access to the case documents filed.
+                            </p>
+                            <p>
+                                You have 10 days to serve a filed copy of the Notice of Appearance to the appelant,
+                                after receiving a Notice of Appeal.
+                            </p>
                         </div>
                         <div className="form-section">
-                            When Do You Use the Notice of Appearance (Form2)?
-
+                            <div className="section-title">
+                                Style of Proceeding (Parties) in Case
+                            </div>
                         </div>
                     </div>
                 </div>

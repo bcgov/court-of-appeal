@@ -145,3 +145,19 @@
 	animation-name: preloaded;
 	animation-duration: 6s;
 }
+.page-title-section {
+    background-color: var(--header-background);
+    color: white;
+    margin: auto;
+    padding: 20px;
+}
+.page-title {
+    font-size: 2.5rem;
+}
+.page-subtitle {
+
+}
+.section-title {
+    font-size: larger;
+    margin-bottom: 20px;
+}
