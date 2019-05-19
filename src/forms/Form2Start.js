@@ -3,15 +3,18 @@ import ProgressStatusBar from '../components/progress/ProgressStatusBar';
 import './Form2Start.css';
 import DefaultService from "../service/default.service";
 import SpinnerButton from '../components/SpinnerButton';
+import { forceCA } from './force.ca'
 
 class Form2Start extends Component {
 
     constructor(props) {
         super(props);
-        this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : { };
-        this.state.notFoundError = ''
+        this.state = {
+            notFoundError: '',
+            caseNumber: 'CA'
+        }
         this.search = this.search.bind(this)
     }
 
@@ -30,7 +33,7 @@ class Form2Start extends Component {
                 <div id="breadcrumbContainer">
                     <ol className="breadcrumb">
                         <li>
-                            <a id="home" href={this.homePath}>Home</a>
+                            <a id="home" href={process.env.PUBLIC_URL}>Home</a>
                         </li>
                     </ol>
                 </div>
@@ -62,10 +65,18 @@ class Form2Start extends Component {
                                     <tr>
                                         <td><input disabled value="Court of Appeal" /></td>
                                         <td>
-                                            <input autoFocus value={ this.state.caseNumber } ref={ (el)=> { this.caseNumberField = el }}></input>
+                                            <input  ref= { el => this.caseNumberField = el }
+                                                    autoFocus
+                                                    value= { this.state.caseNumber }
+                                                    onChange= { e => forceCA(e.target.value, this)}
+                                                    onKeyPress= { e => e.charCode == 13 ? this.search():null } />
                                         </td>
                                         <td>
-                                            <SpinnerButton width="52" onClick={this.search} content='Find' ref={ (el)=> { this.findButton = el }}/>
+                                            <SpinnerButton  ref= { el => this.findButton = el }
+                                                            content= 'Find'
+                                                            width= "52"
+                                                            disabled= { this.state.caseNumber.length < 7 }
+                                                            onClick= { this.search } />
                                         </td>
                                         <td>
                                             <div className="error-message">{this.state.notFoundError}</div>
@@ -81,8 +92,10 @@ class Form2Start extends Component {
     }
 
     search() {
+        let caseNumber = this.state.caseNumber
+        if (caseNumber.length < 7) { return }
+
         this.findButton.startSpinner()
-        let caseNumber = this.caseNumberField.value
         this.service.searchForm7(caseNumber, (data) => {
             this.findButton.stopSpinner();
 
@@ -90,7 +103,7 @@ class Form2Start extends Component {
                 this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: { caseNumber:caseNumber, parties:data.parties }});
             }
             else {
-                this.setState({notFoundError: 'No such Court of Appeal document found'});
+                this.setState({ notFoundError: 'No such Court of Appeal document found' });
             }
         });
     }
