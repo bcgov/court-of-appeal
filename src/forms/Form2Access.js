@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
+import './Form.css';
 import './Form2Access.css';
 import DefaultService from "../service/default.service";
 
@@ -65,11 +66,11 @@ class Form2Access extends Component {
 
                 <div className="row">
                     <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="preview-title  not-printable">
-                            Notice of Appearance Access
+                        <div className="page-title-section">
+                            <div className="page-title">Notice of Appearance Access</div>
                         </div>
                         <div className="form-section">
-                            <div className="access-case-number-reminder">
+                            <div className="section-title">
                                 Court of Appeal Case #{ this.state.caseNumber }
                             </div>
                             The following users will have access to the package containing this Notice of Appearance once it is submitted.
@@ -78,9 +79,9 @@ class Form2Access extends Component {
                                 <thead>
                                     <tr>
                                         <th>User</th>
-                                        <th style={{ textAlign:'center'}}>Read only</th>
-                                        <th style={{ textAlign:'center'}}>Update</th>
-                                        <th>Remove</th>
+                                        <th className="account-users-action-header">Read only</th>
+                                        <th className="account-users-action-header">Update</th>
+                                        <th className="account-users-action-header">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>

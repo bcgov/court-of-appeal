@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../components/progress/ProgressStatusBar';
+import './Form.css';
 import './Form2Start.css';
 import DefaultService from "../service/default.service";
 import SpinnerButton from '../components/SpinnerButton';
@@ -44,11 +45,12 @@ class Form2Start extends Component {
 
                 <div className="row">
                     <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="preview-title  not-printable">
-                            Notice of Appearance
+                        <div className="page-title-section">
+                            <div className="page-title">Notice of Appearance</div>
+                            <div className="page-subtitle">Form 2</div>
                         </div>
                         <div className="form-section">
-                            <div>
+                            <div className="section-title">
                                 Lower Court Case Information
                             </div>
                             <div>
