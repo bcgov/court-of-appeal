@@ -10,7 +10,6 @@ class Form2Start extends Component {
     constructor(props) {
         super(props);
         this.service = props.service;
-        this.state = props.location && props.location.state ? props.location.state : { };
         this.state = {
             notFoundError: '',
             caseNumber: 'CA'
