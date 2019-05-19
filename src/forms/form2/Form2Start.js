@@ -70,7 +70,7 @@ class Form2Start extends Component {
                                                     autoFocus
                                                     value= { this.state.caseNumber }
                                                     onChange= { e => forceCA(e.target.value, this)}
-                                                    onKeyPress= { e => e.charCode == 13 ? this.search():null } />
+                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
                                         </td>
                                         <td>
                                             <SpinnerButton  ref= { el => this.findButton = el }
