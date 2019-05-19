@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ProgressStatusBar from '../components/progress/ProgressStatusBar';
-import './Form.css';
+import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
+import '../Form.css';
 import './Form2Start.css';
-import DefaultService from "../service/default.service";
-import SpinnerButton from '../components/SpinnerButton';
+import DefaultService from "../../service/default.service";
+import SpinnerButton from '../../components/SpinnerButton';
 import { forceCA } from './force.ca'
 
 class Form2Start extends Component {

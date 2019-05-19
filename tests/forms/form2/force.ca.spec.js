@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { forceCA } = require('../../src/forms/force.ca')
+const { forceCA } = require('../../../src/forms/form2/force.ca')
 
 describe('force.ca', ()=>{
 
