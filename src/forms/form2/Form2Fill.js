@@ -5,6 +5,7 @@ import '../Form.css';
 import './Form2Fill.css';
 import DefaultService from "../../service/default.service";
 import RespondentListSelect from "../../components/fields/RespondentListSelect";
+import ContactSelect from "../../components/fields/ContactSelect";
 
 class Form2Fill extends Component {
 
@@ -13,19 +14,23 @@ class Form2Fill extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
-        console.log(this.state);
         this.backToAccess = this.backToAccess.bind(this)
         this.selectedRespondents = this.selectedRespondents.bind(this)
         this.updateSelectedRespondents = this.updateSelectedRespondents.bind(this)
-        this.selectAllRespondents = this.selectAllRespondents.bind(this);
+        this.selectAllRespondents = this.selectAllRespondents.bind(this)
+        this.updateSelectedContact = this.updateSelectedContact.bind(this)
+        this.displaySelected = this.displaySelected.bind(this)
+        this.updateContact = this.updateContact.bind(this)
     }
 
     componentDidMount() {
+        console.log('state', this.state);
         if (this.service == null) {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
         this.selectAllRespondents()
+        this.setState({ selectedContactIndex: 0 })
     }
 
     render() {
@@ -96,8 +101,8 @@ class Form2Fill extends Component {
                                 <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 proceeding-style-col">Respondent{this.state.parties.respondents.length > 1 ? 's' : '' }</div>
                             </div>
 
-                            <div className="row ">
-                               <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 respondent-name-label">
+                            <div className="row">
+                               <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6">
                                    <div style={{fontWeight: "bolder"}}>
                                        Responding: &nbsp;
                                        <i className="oi oi-question-mark" aria-hidden="true"
@@ -109,7 +114,7 @@ class Form2Fill extends Component {
                            </div>
 
                            <div className="row proceeding-style">
-                              <div className="col-lg-offset-1 col-md-offset-1 col-lg-9 col-md-9 col-sm-8 col-xs-8" id="respondent-select" >
+                              <div className="col-lg-offset-1 col-md-offset-1 col-lg-9 col-md-9 col-sm-8 col-xs-8">
                                   <RespondentListSelect
                                       selectedRespondents={this.selectedRespondents()}
                                       respondents={this.state.parties.respondents}
@@ -120,6 +125,106 @@ class Form2Fill extends Component {
                                   />
                               </div>
                            </div>
+
+                           <div className="row">
+                              <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                  <div style={{fontWeight: "bolder"}}>
+                                  Mailing address for service &nbsp;
+                                  <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                                 </div>
+                              </div>
+                          </div>
+
+                          <div className="row">
+                              <div className="col-lg-12 ">
+                                  <ContactSelect
+                                      selectedRespondents={this.selectedRespondents()}
+                                      handleFieldChange={this.updateSelectedContact}
+                                      id={"respondent-list"}
+                                      isMulti={false}
+                                      name={"form2.contactList"}
+                                      selectedIndex={this.state.selectedContactIndex}
+                                  />
+                              </div>
+                          </div>
+
+                          <div className="row address-row address-section">
+                            <div className="row">
+                                  <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                      <span className="mandatory-field">*</span>
+                                      Address Line 1
+                                  </div>
+                                  <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                      <div>
+                                          <input id="addressLine1"
+                                              value={this.displaySelected('addressLine1')}
+                                              onChange={ e => this.updateContact('addressLine1', e.target.value) }/>
+                                          <div className="row address-hint">
+                                              Street address, P.O. box, company name, c/o
+                                          </div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                  Address Line 2
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                  <div>
+                                      <input id="addressLine2"
+                                          value={this.displaySelected('addressLine2')}
+                                          onChange={ e => this.updateContact('addressLine2', e.target.value) }/>
+                                      <div className="row address-hint">
+                                          Apartment, suite, unit, building, floor, etc.
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    City
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                <div>
+                                    <input id="city"
+                                          value={this.displaySelected('city')}
+                                          onChange={ e => this.updateContact('city', e.target.value) }/>
+                                </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    Province
+                                </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-readonly-value">
+                                    BC
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    Country
+                                </div>
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-readonly-value">
+                                    Canada
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Postal Code
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                <div>
+                                    <input id="postalcode"
+                                          value={this.displaySelected('postalCode')}
+                                          onChange={ e => this.updateContact('postalCode', e.target.value) }/>
+                                </div>
+                                </div>
+                            </div>
+
+                          </div>
+
                         </div>
                     </div>
                 </div>
@@ -149,6 +254,24 @@ class Form2Fill extends Component {
     }
     selectAllRespondents() {
         this.updateSelectedRespondents({ action:'selectAll' })
+    }
+    updateSelectedContact(event) {
+        this.setState({ selectedContactIndex: event.target.value })
+    }
+    displaySelected(field) {
+        let value = ''
+        if (this.state.selectedContactIndex >= 0) {
+            value = this.state.parties.respondents[this.state.selectedContactIndex].solicitor.address[field]
+        }
+        return value
+    }
+    updateContact(field, value) {
+        if (this.state.selectedContactIndex >= 0) {
+            let parties = this.state.parties
+            let respondents = parties.respondents
+            respondents[this.state.selectedContactIndex].solicitor.address[field] = value
+            this.setState({ parties:parties })
+        }
     }
 }
 export default Form2Fill;

@@ -8,6 +8,7 @@ class ContactSelect extends React.Component {
         let opacity = disabled ? '.5' : '1';
 
         let options = this.getOptions(this.props.selectedRespondents);
+        let value = options[this.props.selectedIndex]
 
         return (
             <div className={"row chosenContact"} style={{opacity: opacity}}>
@@ -22,14 +23,15 @@ class ContactSelect extends React.Component {
                         isMulti={false}
                         name={"form2.selectedContact"}
                         options={options}
+                        value = {value}
                         handleFieldChange={this.selectContact.bind(this)}
                         containerStyle={{marginTop: '3px', marginBottom: '-5px', width: '100%', paddingRight: 0}}
                         disabled={this.props.disabled || disabled}
                     />
                 </div>
-                
+
             </div>
-            
+
         );
     }
 
@@ -41,6 +43,7 @@ class ContactSelect extends React.Component {
     }
 
     selectContact(selectedOption) {
+        console.log(selectedOption);
         let e = {
             target: {
                 name: "form2.selectedContact",
@@ -51,5 +54,5 @@ class ContactSelect extends React.Component {
         this.props.handleFieldChange(e)
 
     }
-    
+
 } export default ContactSelect;
