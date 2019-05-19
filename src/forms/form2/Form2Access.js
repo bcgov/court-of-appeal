@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ProgressStatusBar from '../components/progress/ProgressStatusBar';
-import './Form.css';
+import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
+import '../Form.css';
 import './Form2Access.css';
-import DefaultService from "../service/default.service";
+import DefaultService from "../../service/default.service";
 
 class Form2Access extends Component {
 

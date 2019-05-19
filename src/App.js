@@ -5,9 +5,9 @@ import Dashboard from './Dashboard.js';
 import { Route } from "react-router-dom";
 import Form7 from './forms/Form7.js';
 import Form2 from './forms/Form2.js';
-import Form2Start from './forms/Form2Start'
-import Form2Fill from './forms/Form2Fill'
-import Form2Access from './forms/Form2Access'
+import Form2Start from './forms/form2/Form2Start'
+import Form2Fill from './forms/form2/Form2Fill'
+import Form2Access from './forms/form2/Form2Access'
 import Form2Preview from './forms/Form2Preview'
 import Form2Proceed from './forms/Form2Proceed'
 import Form2Submitted from './forms/Form2Submitted'
