@@ -31,6 +31,7 @@ class Form2Access extends Component {
             }
             else {
                 let users = data.info.client
+                if (users.length === undefined ) { users =[users] }
                 this.setState({ users: users, account:data.info.account })
             }
         })
@@ -82,8 +83,8 @@ class Form2Access extends Component {
                                             return (
                                                 <tr key={user.clientId}>
                                                     <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
-                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? 'V': ''}</td>
-                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? 'V': ''}</td>
+                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? (<span className="oi oi-check"></span>): ''}</td>
+                                                    <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? (<span className="oi oi-check"></span>): ''}</td>
                                                     <td></td>
                                                 </tr>
                                             )
