@@ -13,3 +13,9 @@ table.users th {
     background-color: rgb(230, 234, 242);
     color: rgb(28, 92, 151);
 }
+.account-users-searching {
+    text-align: center;
+}
+.account-users-searching .efiling-spinner-blue {
+    display: inline-block;
+}
