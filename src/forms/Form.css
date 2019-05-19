@@ -105,18 +105,7 @@
 .address-row-header {
 	padding-bottom:12px;
 }
-.address-label {
-	text-align: right;
-	padding: 5px;
-}
-.address-hint {
-	color: slategrey;
-	padding: 0 0 5px 1px;
-	font-size: smaller;
-}
-.address-section {
-	margin-top: 20px;
-}
+
 .invalid-field {
 	border-color: red;
 	border-style: solid;
