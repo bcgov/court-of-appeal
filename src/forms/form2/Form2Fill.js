@@ -327,25 +327,11 @@ class Form2Fill extends Component {
     }
 
     backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: {
-            formId: this.state.formId,
-            caseNumber:this.state.caseNumber,
-            parties:this.state.parties,
-            selectedContactIndex: this.state.selectedContactIndex,
-            useServiceEmail: this.state.useServiceEmail,
-            sendNotifications: this.state.sendNotifications
-        }});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: this.state })
     }
     continue() {
         this.save(()=>{
-            this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
-                formId: this.state.formId,
-                caseNumber:this.state.caseNumber,
-                parties:this.state.parties,
-                selectedContactIndex: this.state.selectedContactIndex,
-                useServiceEmail: this.state.useServiceEmail,
-                sendNotifications: this.state.sendNotifications
-            }})
+            this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })
         })
     }
     selectedRespondents() {
