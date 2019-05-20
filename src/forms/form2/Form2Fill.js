@@ -362,7 +362,7 @@ class Form2Fill extends Component {
     save() {
         this.saveButton.startSpinner()
         var form = {
-            caseNumber: this.state.caseNumber,
+            formSevenNumber: this.state.caseNumber,
             appellants: this.state.parties.appellants,
             respondents: this.state.parties.respondents,
             useServiceEmail: this.state.useServiceEmail,
