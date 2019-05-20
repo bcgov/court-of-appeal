@@ -21,7 +21,7 @@ class SpinnerButton extends React.Component {
                 <div style={{display:'inline-block'}}>
                 <button id={this.props.id}
                         disabled="true"
-                        className="btn btn-primary btn-green action-button"
+                        className={ 'btn btn-primary btn-green round-borders action-button ' + this.props.addClass }
                         style={{ width:this.props.width+'px' }}
                 >
                     <div className="efiling-spinner"></div>
@@ -34,7 +34,7 @@ class SpinnerButton extends React.Component {
                 <div style={{display:'inline-block'}}>
                 <button id={this.props.id}
                         onClick={this.props.onClick}
-                        className="btn btn-primary round-borders action-button"
+                        className={ 'btn btn-primary round-borders action-button ' + this.props.addClass }
                         style={{ width:this.props.width+'px' }}
                         disabled={this.props.disabled}
                 >

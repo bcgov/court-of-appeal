@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultService from "../service/default.service";
 import Form2DataSection from "./Form2DataSection";
 import FormButtonBar from "./FormButtonBar";
-import Form2Preview from "../forms/Form2Preview";
+import Form2Preview from "../forms/form2/Form2Preview";
 import './caselist.css';
 let { validateForm2, errorMessage } = require('../utils/AddressUtils');
 let { updateDocument } = require('../utils/Form2DocumentUpdate');
@@ -75,7 +75,7 @@ class CaseList extends React.Component {
             <td key={item.id+'date'} className="text-right">{item.modified}</td>,
         ])
     }
-    
+
     renderLine(item) {
         return (
             <tr className="case-item" key={item.id}>
@@ -194,17 +194,17 @@ class CaseList extends React.Component {
         this.formButtonBar.startSaveSpinner();
         this.service.updateForm2(
             this.state.selectedDocument, this.state.selectedDocumentId,
-            (data) => {     
-                this.formButtonBar.stopSaveSpinner();           
-                if (data.error) {                    
+            (data) => {
+                this.formButtonBar.stopSaveSpinner();
+                if (data.error) {
                     this.setState({
                         formHasUnsavedChanges: false
-                    });                    
+                    });
                 } else {
                     this.setState({
                         formHasUnsavedChanges: false
                     });
-                    this.props.updateCases(doc, id);                    
+                    this.props.updateCases(doc, id);
                 }
                 if (callback) { callback(id, data); }
             });
@@ -233,9 +233,9 @@ class CaseList extends React.Component {
         this.setState({editMode: true, previewMode: false});
     }
 
-    preview() {        
+    preview() {
         this.updateForm2(null, (id, data)=>{
-            if(!data.error) { 
+            if(!data.error) {
                 this.service.previewForm(id, (html)=>{
                     if (!html.error) {
                         this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview/form2',state: {previewContent: html}});
@@ -261,7 +261,7 @@ class CaseList extends React.Component {
     validateForm() {
         let [valid, validStreetAddress] = validateForm2(this.state.selectedDocument, this.state);
         this.setState({
-            previewShouldBeDisabled: !valid, 
+            previewShouldBeDisabled: !valid,
             submitShouldBeDisabled: !valid,
             previewButtonErrorMsg: errorMessage(valid, validStreetAddress)
         });

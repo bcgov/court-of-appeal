@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ProgressStatusBar from '../components/progress/ProgressStatusBar';
+import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Proceed.css';
-import DefaultService from "../service/default.service";
-import SpinnerButton from '../components/SpinnerButton';
+import DefaultService from "../../service/default.service";
+import SpinnerButton from '../../components/SpinnerButton';
 
 class Form2Proceed extends Component {
 
@@ -69,7 +69,7 @@ class Form2Proceed extends Component {
                             This amount will be billed using the payment info of your account.
                             <div style={{textAlign:'right', paddingTop:'15px'}}>
                                 <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
-                                <SpinnerButton id="payment-confirmed" width="150" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
+                                <SpinnerButton id="payment-confirmed" width="150" addClass="proceed-confirmation" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
                                     content='Confirmation'>
                                 </SpinnerButton>
                             </div>

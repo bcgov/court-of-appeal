@@ -30,6 +30,7 @@ class Form2Fill extends Component {
         this.updateUseServiceEmail = this.updateUseServiceEmail.bind(this)
         this.updatesendNotifications = this.updatesendNotifications.bind(this)
         this.save = this.save.bind(this)
+        this.continue = this.continue.bind(this)
     }
 
     componentDidMount() {
@@ -37,6 +38,7 @@ class Form2Fill extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+
         this.setState({
             parties: standardizeParties(this.state.parties)
         }, ()=>{
@@ -297,11 +299,31 @@ class Form2Fill extends Component {
                           </div>
 
                           <hr/>
-                          <div style={{textAlign:'right', paddingTop:'15px'}}>
-                              <SpinnerButton  ref= { el => this.saveButton = el }
-                                              content= 'Save'
-                                              width= "52"
-                                              onClick= { this.save } />
+                          <div className="row">
+                            <div className="col-xs-4" style={{textAlign:'left', padding:'0px'}}>
+                                <div >
+                                    <button id="back"
+                                            className="btn btn-primary round-borders"
+                                            onClick={this.backToAccess}>
+                                            <i className="glyphicon glyphicon-triangle-left" />
+                                            Back
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="col-xs-4" style={{textAlign:'center', padding:'0px'}}>
+                                <SpinnerButton  ref= { el => this.saveButton = el }
+                                                content= "Save as Draft"
+                                                width= "100"
+                                                onClick= { this.save } />
+                            </div>
+                            <div className="col-xs-4" style={{textAlign:'right', padding:'0px'}}>
+                                <button id="continue"
+                                        className="btn btn-primary round-borders action-button"
+                                        onClick={this.continue}>
+                                        Continue
+                                        <i className="glyphicon glyphicon-triangle-right" />
+                                </button>
+                            </div>
                           </div>
 
                         </div>
@@ -314,7 +336,19 @@ class Form2Fill extends Component {
     }
 
     backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: {
+            caseNumber:this.state.caseNumber,
+            parties:this.state.parties
+        }});
+    }
+    continue() {
+        this.save(()=>{
+            this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
+                formId: this.state.formId,
+                caseNumber:this.state.caseNumber,
+                parties:this.state.parties
+            }})
+        })
     }
     selectedRespondents() {
        return this.state.parties.respondents.filter((respondent) => respondent.selected);
@@ -359,7 +393,7 @@ class Form2Fill extends Component {
     updateUseServiceEmail(event) {
         this.setState({ useServiceEmail: event.target.checked });
     }
-    save() {
+    save(next) {
         this.saveButton.startSpinner()
         var form = {
             formSevenNumber: this.state.caseNumber,
@@ -370,11 +404,13 @@ class Form2Fill extends Component {
             selectedContactIndex: this.state.selectedContactIndex,
         }
         if (!this.state.id) {
-            this.service.createForm2(form, (id) => {
+            this.service.createForm2(form, (formId) => {
                 this.saveButton.stopSpinner()
-                if (!id.error) {
+                if (!formId.error) {
                     this.setState({
-                        id: id
+                        formId: formId
+                    }, ()=>{
+                        if (next) { next() }
                     })
                 }
             })
@@ -382,6 +418,7 @@ class Form2Fill extends Component {
         else {
             this.service.updateForm2(form, this.state.id, (data) => {
                 this.saveButton.stopSpinner()
+                if (next) { next() }
             })
         }
     }

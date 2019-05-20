@@ -53,7 +53,7 @@ exports[`cannot search with invalid entries 1`] = `
             }
           >
             <button
-              className="btn btn-primary round-borders action-button"
+              className="btn btn-primary round-borders action-button undefined"
               disabled={true}
               id="find-button"
               onClick={[Function]}
@@ -131,7 +131,7 @@ exports[`valid entries 1`] = `
             }
           >
             <button
-              className="btn btn-primary round-borders action-button"
+              className="btn btn-primary round-borders action-button undefined"
               disabled={true}
               id="find-button"
               onClick={[Function]}
