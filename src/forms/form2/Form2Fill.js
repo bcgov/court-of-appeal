@@ -6,6 +6,7 @@ import './Form2Fill.css';
 import DefaultService from "../../service/default.service";
 import RespondentListSelect from "../../components/fields/RespondentListSelect";
 import ContactSelect from "../../components/fields/ContactSelect";
+import SpinnerButton from '../../components/SpinnerButton';
 import { standardizeParties } from './standardize.parties'
 
 class Form2Fill extends Component {
@@ -28,6 +29,7 @@ class Form2Fill extends Component {
         this.updateContact = this.updateContact.bind(this)
         this.updateUseServiceEmail = this.updateUseServiceEmail.bind(this)
         this.updateSendNotification = this.updateSendNotification.bind(this)
+        this.save = this.save.bind(this)
     }
 
     componentDidMount() {
@@ -294,6 +296,14 @@ class Form2Fill extends Component {
                               </div>
                           </div>
 
+                          <hr/>
+                          <div style={{textAlign:'right', paddingTop:'15px'}}>
+                              <SpinnerButton  ref= { el => this.saveButton = el }
+                                              content= 'Save'
+                                              width= "52"
+                                              onClick= { this.save } />
+                          </div>
+
                         </div>
                     </div>
                 </div>
@@ -348,6 +358,32 @@ class Form2Fill extends Component {
     }
     updateUseServiceEmail(event) {
         this.setState({ useServiceEmail: event.target.checked });
+    }
+    save() {
+        this.saveButton.startSpinner()
+        var form = {
+            caseNumber: this.state.caseNumber,
+            appellants: this.state.parties.appellants,
+            respondents: this.state.parties.respondents,
+            useServiceEmail: this.state.useServiceEmail,
+            sendNotification: this.state.sendNotification,
+            selectedContactIndex: this.state.selectedContactIndex,
+        }
+        if (!this.state.id) {
+            this.service.createForm2(form, (id) => {
+                this.saveButton.stopSpinner()
+                if (!id.error) {
+                    this.setState({
+                        id: id
+                    })
+                }
+            })
+        }
+        else {
+            this.service.updateForm2(form, this.state.id, (data) => {
+                this.saveButton.stopSpinner()
+            })
+        }
     }
 }
 export default Form2Fill;
