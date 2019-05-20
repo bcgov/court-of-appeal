@@ -211,7 +211,17 @@ class CaseList extends React.Component {
     }
 
     openEditModal(data, id) {
-        this.setState({selectedDocument: data, editMode: true, selectedDocumentId: id, selected: data});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
+            formId: id,
+            caseNumber: data.formSevenNumber,
+            parties: {
+                appellants: data.appellants,
+                respondents: data.respondents
+            },
+            selectedContactIndex: data.selectedContactIndex,
+            useServiceEmail: data.useServiceEmail,
+            sendNotifications: data.sendNotifications
+        }})
     }
 
     closeEditModal() {

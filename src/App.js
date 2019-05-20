@@ -35,7 +35,7 @@ class App extends Component {
           <Route path={process.env.PUBLIC_URL + '/preview'} component={Form2Preview} />
           <Route path={process.env.PUBLIC_URL + '/proceed'} component={Form2Proceed} />
           <Route path={process.env.PUBLIC_URL + '/submitted'} component={Form2Submitted} />
-          <Route path={process.env.PUBLIC_URL + '/my-documents.html'} render={()=><MyDocuments fetch={this.props.fetch}/>} />
+          <Route path={process.env.PUBLIC_URL + '/my-documents.html'} component={MyDocuments} props={{fetch:this.props.fetch}} />
           <Route path={process.env.PUBLIC_URL + '/notifications.html'} component={Notifications} />
           <Footer />
         </div>

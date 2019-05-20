@@ -147,6 +147,7 @@ class MyDocuments extends Component {
                                     </div>
                                 </div>
                                 <MultiSelectionCaseList
+                                    history={this.props.history}
                                     cases={this.state.cases}
                                     service={this.service}
                                     updateCases={this.updateCases}
