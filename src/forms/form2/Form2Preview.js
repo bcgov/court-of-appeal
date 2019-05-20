@@ -15,6 +15,7 @@ class Form2Preview extends Component {
         this.form2Path = props.form2Path || this.homePath + '/form2';
         this.service = this.props.service;
 
+        this.backToAccess = this.backToAccess.bind(this)
         this.backToFill = this.backToFill.bind(this)
         this.proceed = this.proceed.bind(this)
         this.download = this.download.bind(this)
@@ -93,10 +94,16 @@ class Form2Preview extends Component {
         );
     }
 
-    proceed(e) {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed', state: { formId:this.state.formId }});
+    backToAccess() {
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: {
+            formId: this.state.formId,
+            caseNumber:this.state.caseNumber,
+            parties:this.state.parties,
+            selectedContactIndex: this.state.selectedContactIndex,
+            useServiceEmail: this.state.useServiceEmail,
+            sendNotifications: this.state.sendNotifications
+        }});
     }
-
     backToFill() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
             formId: this.state.formId,
@@ -106,6 +113,16 @@ class Form2Preview extends Component {
             useServiceEmail: this.state.useServiceEmail,
             sendNotifications: this.state.sendNotifications
         }})
+    }
+    proceed(e) {
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed', state: {
+            formId:this.state.formId,
+            caseNumber:this.state.caseNumber,
+            parties:this.state.parties,
+            selectedContactIndex: this.state.selectedContactIndex,
+            useServiceEmail: this.state.useServiceEmail,
+            sendNotifications: this.state.sendNotifications
+        }});
     }
 
     download() {
