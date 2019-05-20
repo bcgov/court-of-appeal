@@ -16,9 +16,9 @@ class Form2Fill extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
-        this.state.useServiceEmail = false
-        this.state.sendNotifications = false
-        this.state.selectedContactIndex = 0
+        if (this.state.useServiceEmail === undefined) { this.state.useServiceEmail = false }
+        if (this.state.sendNotifications === undefined) { this.state.sendNotifications = false }
+        if (this.state.selectedContactIndex === undefined) { this.state.selectedContactIndex = 0 }
 
         this.backToAccess = this.backToAccess.bind(this)
         this.selectedRespondents = this.selectedRespondents.bind(this)
@@ -38,12 +38,10 @@ class Form2Fill extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-
         this.setState({
             parties: standardizeParties(this.state.parties)
         }, ()=>{
             this.selectAllRespondents()
-            this.setState({ selectedContactIndex: 0 })
         })
     }
 
@@ -279,7 +277,7 @@ class Form2Fill extends Component {
                                           <input id="sendNotificationss"
                                               type="checkbox"
                                               checked= { this.state.sendNotifications }
-                                              onClick= { this.updatesendNotifications }/>
+                                              onChange= { this.updatesendNotifications }/>
                                       </div>
                                   </div>
                                   <div className="row address-row">
@@ -306,7 +304,7 @@ class Form2Fill extends Component {
                                             className="btn btn-primary round-borders"
                                             onClick={this.backToAccess}>
                                             <i className="glyphicon glyphicon-triangle-left" />
-                                            Back
+                                            Back to Access
                                     </button>
                                 </div>
                             </div>
@@ -346,7 +344,10 @@ class Form2Fill extends Component {
             this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
                 formId: this.state.formId,
                 caseNumber:this.state.caseNumber,
-                parties:this.state.parties
+                parties:this.state.parties,
+                selectedContactIndex: this.state.selectedContactIndex,
+                useServiceEmail: this.state.useServiceEmail,
+                sendNotifications: this.state.sendNotifications
             }})
         })
     }
@@ -410,7 +411,7 @@ class Form2Fill extends Component {
                     this.setState({
                         formId: formId
                     }, ()=>{
-                        if (next) { next() }
+                        if (typeof next == 'function') { next() }
                     })
                 }
             })

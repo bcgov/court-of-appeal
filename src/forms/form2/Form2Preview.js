@@ -30,7 +30,7 @@ class Form2Preview extends Component {
                 if (!html.error) {
                     this.setState({ previewContent: html })
                 }
-            })            
+            })
         }
     }
 
@@ -101,7 +101,10 @@ class Form2Preview extends Component {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
             formId: this.state.formId,
             caseNumber:this.state.caseNumber,
-            parties:this.state.parties
+            parties:this.state.parties,
+            selectedContactIndex: this.state.selectedContactIndex,
+            useServiceEmail: this.state.useServiceEmail,
+            sendNotifications: this.state.sendNotifications
         }})
     }
 

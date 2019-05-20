@@ -125,7 +125,10 @@ class Form2Access extends Component {
     next() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
             caseNumber:this.state.caseNumber,
-            parties:this.state.parties
+            parties:this.state.parties,
+            selectedContactIndex: this.state.selectedContactIndex,
+            useServiceEmail: this.state.useServiceEmail,
+            sendNotifications: this.state.sendNotifications
         }});
     }
 }

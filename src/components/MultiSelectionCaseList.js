@@ -3,13 +3,16 @@ import CaseList from './CaseList.js';
 
 class MultiSelectionCaseList extends CaseList {
 
-    toggleSelection(item) {        
+    constructor(props) {
+        super(props);
+    }
+    toggleSelection(item) {
         this.props.toggleSelected(item.id);
     }
     columns(item) {
         var columns = [
             <td key={item.id+'select'}>
-                <input id={'select-'+item.id} type="checkbox" value={item.id} checked={item.checked} 
+                <input id={'select-'+item.id} type="checkbox" value={item.id} checked={item.checked}
                         onChange={this.toggleSelection.bind(this, item)} />
             </td>
         ];
@@ -33,12 +36,12 @@ class MultiSelectionCaseList extends CaseList {
                     <tbody>
                     {
                         this.props.cases.map((item) =>
-                            this.renderLine(item) 
+                            this.renderLine(item)
                         )
                     }
                     </tbody>
                 </table>
-                { this.modals() }                
+                { this.modals() }
             </div>
         );
     }
