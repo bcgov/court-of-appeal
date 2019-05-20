@@ -13,7 +13,6 @@ class Form2Access extends Component {
         this.state = props.location && props.location.state ? props.location.state : { caseNumber: '12345 (fake)'};
         this.state.users = []
         this.state.searching = false
-        console.log(this.state);
         this.next = this.next.bind(this)
         this.isThisYou = this.isThisYou.bind(this)
         this.searching = false
@@ -124,7 +123,10 @@ class Form2Access extends Component {
     }
 
     next() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
+            caseNumber:this.state.caseNumber,
+            parties:this.state.parties
+        }});
     }
 }
 export default Form2Access;

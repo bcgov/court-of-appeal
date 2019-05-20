@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import ProgressStatusBar from '../components/progress/ProgressStatusBar';
-import FormButtonBar from '../components/FormButtonBar';
+import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
+import FormButtonBar from '../../components/FormButtonBar';
 import './Form2Preview.css';
+import DefaultService from "../../service/default.service";
 
 class Form2Preview extends Component {
 
@@ -14,9 +15,16 @@ class Form2Preview extends Component {
         this.proceed = this.proceed.bind(this)
     }
 
+    componentDidMount() {
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
+    }
+
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form" >
+            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
                 <div id="breadcrumbContainer">
                     <ol className="breadcrumb">
@@ -61,7 +69,11 @@ class Form2Preview extends Component {
     }
 
     goBack() {
-        this.props.history.goBack();
+        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
+            formId: this.state.formId,
+            caseNumber:this.state.caseNumber,
+            parties:this.state.parties
+        }})
     }
 }
 export default Form2Preview;
