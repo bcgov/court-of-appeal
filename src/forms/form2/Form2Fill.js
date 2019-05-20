@@ -17,7 +17,7 @@ class Form2Fill extends Component {
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
         this.state.useServiceEmail = false
-        this.state.sendNotification = false
+        this.state.sendNotifications = false
         this.state.selectedContactIndex = 0
 
         this.backToAccess = this.backToAccess.bind(this)
@@ -28,7 +28,7 @@ class Form2Fill extends Component {
         this.displaySelected = this.displaySelected.bind(this)
         this.updateContact = this.updateContact.bind(this)
         this.updateUseServiceEmail = this.updateUseServiceEmail.bind(this)
-        this.updateSendNotification = this.updateSendNotification.bind(this)
+        this.updatesendNotifications = this.updatesendNotifications.bind(this)
         this.save = this.save.bind(this)
     }
 
@@ -256,7 +256,7 @@ class Form2Fill extends Component {
                                   </div>
                                   <div className="row address-row">
                                       <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
-                                          <span id="emailasterisks" className="mandatory-field" style={{display:(this.state.useServiceEmail || this.state.sendNotification)?'inline-block':'none'}}>*</span>
+                                          <span id="emailasterisks" className="mandatory-field" style={{display:(this.state.useServiceEmail || this.state.sendNotifications)?'inline-block':'none'}}>*</span>
                                           Email address&nbsp;
                                           <i className="oi oi-question-mark" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
                                       </div>
@@ -274,10 +274,10 @@ class Form2Fill extends Component {
                                   <div className="row address-row">
                                       <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I would like to receive email notifications when the status of my document changes</div>
                                       <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
-                                          <input id="sendNotifications"
+                                          <input id="sendNotificationss"
                                               type="checkbox"
-                                              checked= { this.state.sendNotification }
-                                              onClick= { this.updateSendNotification }/>
+                                              checked= { this.state.sendNotifications }
+                                              onClick= { this.updatesendNotifications }/>
                                       </div>
                                   </div>
                                   <div className="row address-row">
@@ -353,8 +353,8 @@ class Form2Fill extends Component {
             this.setState({ parties:parties })
         }
     }
-    updateSendNotification(event) {
-        this.setState({ sendNotification: event.target.checked })
+    updatesendNotifications(event) {
+        this.setState({ sendNotifications: event.target.checked })
     }
     updateUseServiceEmail(event) {
         this.setState({ useServiceEmail: event.target.checked });
@@ -366,7 +366,7 @@ class Form2Fill extends Component {
             appellants: this.state.parties.appellants,
             respondents: this.state.parties.respondents,
             useServiceEmail: this.state.useServiceEmail,
-            sendNotification: this.state.sendNotification,
+            sendNotifications: this.state.sendNotifications,
             selectedContactIndex: this.state.selectedContactIndex,
         }
         if (!this.state.id) {
