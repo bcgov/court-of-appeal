@@ -10,7 +10,7 @@ import Form2Fill from './forms/form2/Form2Fill'
 import Form2Access from './forms/form2/Form2Access'
 import Form2Preview from './forms/form2/Form2Preview'
 import Form2Proceed from './forms/form2/Form2Proceed'
-import Form2Submitted from './forms/Form2Submitted'
+import Form2Submitted from './forms/form2/Form2Submitted'
 import MyDocuments from './forms/MyDocuments.js';
 import Notifications from './notifications.js';
 

@@ -45,76 +45,71 @@ class Form2Access extends Component {
 
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
+        <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-                <div id="breadcrumbContainer">
-                    <ol className="breadcrumb">
-                        <li>
-                            <a id="home" href={this.homePath}>Home</a>
-                        </li>
-                        <li>
-                            <a href={this.homePath + 'start'}>Start</a>
-                        </li>
-                    </ol>
+            <div id="breadcrumbContainer">
+                <ol className="breadcrumb">
+                    <li><a id="home" href={this.homePath}>Home</a></li>
+                    <li><a href={this.homePath + 'start'}>Start</a></li>
+                </ol>
+            </div>
+
+            <ProgressStatusBar activeStep={1} steps={["Access","Form 2","Preview","Payment"]}/>
+
+            <div className="row section section-gray">
+                <div className="col-xs-12">
+                    <div className="page-title">Notice of Appearance Access</div>
                 </div>
+            </div>
 
-                  <ProgressStatusBar
-                      activeStep={1}
-                      steps={["Access","Form 2","Preview","Payment"]}
-                  />
+            <div className="row section section-white">
+                <div className="col-xs-12">
+                    <div className="section-title">
+                        Court of Appeal Case #{ this.state.caseNumber }
+                    </div>
+                    The following users will have access to the package containing this Notice of Appearance once it is submitted.
 
-                <div className="row">
-                    <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="page-title-section">
-                            <div className="page-title">Notice of Appearance Access</div>
-                        </div>
-                        <div className="form-section">
-                            <div className="section-title">
-                                Court of Appeal Case #{ this.state.caseNumber }
-                            </div>
-                            The following users will have access to the package containing this Notice of Appearance once it is submitted.
-
-                            <table className="users">
-                                <thead>
+                    <table className="users">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th className="account-users-action-header">Read only</th>
+                                <th className="account-users-action-header">Update</th>
+                                <th className="account-users-action-header">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.searching ?
                                     <tr>
-                                        <th>User</th>
-                                        <th className="account-users-action-header">Read only</th>
-                                        <th className="account-users-action-header">Update</th>
-                                        <th className="account-users-action-header">Remove</th>
+                                        <td colSpan="4" className="account-users-searching">
+                                            <div className="efiling-spinner-blue"></div>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this.state.searching ?
-                                            <tr>
-                                                <td colSpan="4" className="account-users-searching">
-                                                    <div className="efiling-spinner-blue"></div>
-                                                </td>
+
+                                :
+                                    this.state.users.map((user) => {
+                                        return (
+                                            <tr key={user.clientId}>
+                                                <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
+                                                <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? (<span className="oi oi-check"></span>): ''}</td>
+                                                <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? (<span className="oi oi-check"></span>): ''}</td>
+                                                <td></td>
                                             </tr>
+                                        )
+                                    })
 
-                                        :
-                                            this.state.users.map((user) => {
-                                                return (
-                                                    <tr key={user.clientId}>
-                                                        <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
-                                                        <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? (<span className="oi oi-check"></span>): ''}</td>
-                                                        <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? (<span className="oi oi-check"></span>): ''}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                )
-                                            })
+                            }
+                        </tbody>
+                    </table>
 
-                                    }
-                                </tbody>
-                            </table>
-
-                            <div style={{textAlign:'right', paddingTop:'15px'}}>
-                                <button id="continue-to-form" onClick={this.next} className="btn btn-primary round-borders action-button">Fill Notice of Appeal form</button>
-                            </div>
-                        </div>
+                    <div style={{textAlign:'right', paddingTop:'15px'}}>
+                        <button id="continue-to-form" onClick={this.next} className="btn btn-primary round-borders action-button">Fill Notice of Appeal form</button>
                     </div>
                 </div>
             </div>
+
+        </div>
         );
     }
 

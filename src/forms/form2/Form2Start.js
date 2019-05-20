@@ -28,67 +28,64 @@ class Form2Start extends Component {
 
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
+        <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-                <div id="breadcrumbContainer">
-                    <ol className="breadcrumb">
-                        <li>
-                            <a id="home" href={process.env.PUBLIC_URL}>Home</a>
-                        </li>
-                    </ol>
-                </div>
+            <div id="breadcrumbContainer">
+                <ol className="breadcrumb">
+                    <li><a id="home" href={process.env.PUBLIC_URL}>Home</a></li>
+                </ol>
+            </div>
 
-                  <ProgressStatusBar
-                      activeStep={1}
-                      steps={["Access","Form 2","Preview","Payment"]}
-                  />
+            <ProgressStatusBar activeStep={1} steps={["Access","Form 2","Preview","Payment"]}/>
 
-                <div className="row">
-                    <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="page-title-section">
-                            <div className="page-title">Notice of Appearance</div>
-                            <div className="page-subtitle">Form 2</div>
-                        </div>
-                        <div className="form-section">
-                            <div className="section-title">
-                                Lower Court Case Information
-                            </div>
-                            <div>
-                                Find the Suprem Court case appeal you are responding to by entering the following case information:
-                            </div>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>LEVEL OF COURT</td>
-                                        <td>COURT OF APPEAL FILE NO.</td>
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input disabled value="Court of Appeal" /></td>
-                                        <td>
-                                            <input  ref= { el => this.caseNumberField = el }
-                                                    autoFocus
-                                                    value= { this.state.caseNumber }
-                                                    onChange= { e => forceCA(e.target.value, this)}
-                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
-                                        </td>
-                                        <td>
-                                            <SpinnerButton  ref= { el => this.findButton = el }
-                                                            content= 'Find'
-                                                            width= "52"
-                                                            disabled= { this.state.caseNumber.length < 7 }
-                                                            onClick= { this.search } />
-                                        </td>
-                                        <td>
-                                            <div className="error-message">{this.state.notFoundError}</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <div className="row section section-gray">
+                <div className="col-xs-12">
+                    <div className="page-title">Notice of Appearance</div>
+                    <div className="page-subtitle">Form 2</div>
                 </div>
             </div>
+
+            <div className="row section section-white">
+                <div className="col-xs-12">
+                    <div className="section-title">
+                        Lower Court Case Information
+                    </div>
+                    <div>
+                        Find the Suprem Court case appeal you are responding to by entering the following case information:
+                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>LEVEL OF COURT</td>
+                                <td>COURT OF APPEAL FILE NO.</td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td><input disabled value="Court of Appeal" /></td>
+                                <td>
+                                    <input  ref= { el => this.caseNumberField = el }
+                                            autoFocus
+                                            value= { this.state.caseNumber }
+                                            onChange= { e => forceCA(e.target.value, this)}
+                                            onKeyPress= { e => e.charCode === 13 ? this.search():null } />
+                                </td>
+                                <td>
+                                    <SpinnerButton  ref= { el => this.findButton = el }
+                                                    content= 'Find'
+                                                    width= "52"
+                                                    disabled= { this.state.caseNumber.length < 7 }
+                                                    onClick= { this.search } />
+                                </td>
+                                <td>
+                                    <div className="error-message">{this.state.notFoundError}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
         );
     }
 
