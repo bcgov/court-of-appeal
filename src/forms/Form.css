@@ -140,6 +140,28 @@
     margin: auto;
     padding: 20px;
 }
+.section {
+    margin: 14px;
+	padding: 17px 30px;
+	font-family: Myriad-Pro, sans-serif;
+	font-size: medium;
+}
+.section-white {
+    background-color: white;
+    border: 1px solid white;
+    color: rgb(73, 73, 73);
+}
+.section-gray {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: black;
+}
+.section-thin {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 .page-title {
     font-size: 2.5rem;
 }
@@ -149,4 +171,8 @@
 .section-title {
     font-size: larger;
     margin-bottom: 20px;
+}
+.right {
+    text-align: right;
+    padding-right: 0px;
 }

@@ -3,6 +3,8 @@ import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import FormButtonBar from '../../components/FormButtonBar';
 import './Form2Preview.css';
 import DefaultService from "../../service/default.service";
+import save from '../save-file'
+import SpinnerButton from '../../components/SpinnerButton';
 
 class Form2Preview extends Component {
 
@@ -12,7 +14,10 @@ class Form2Preview extends Component {
         this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.form2Path = props.form2Path || this.homePath + '/form2';
         this.service = this.props.service;
+
+        this.backToFill = this.backToFill.bind(this)
         this.proceed = this.proceed.bind(this)
+        this.download = this.download.bind(this)
     }
 
     componentDidMount() {
@@ -20,47 +25,71 @@ class Form2Preview extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+        if (this.state.formId) {
+            this.service.previewForm(this.state.formId, (html)=>{
+                if (!html.error) {
+                    this.setState({ previewContent: html })
+                }
+            })            
+        }
     }
 
     render() {
         return (
-            <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
+        <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-                <div id="breadcrumbContainer">
-                    <ol className="breadcrumb">
-                        <li>
-                            <a id="home" href={this.homePath}>Home</a>
-                        </li>
-                        <li>
-                            <a href="/form2">Notice of Appearance (Form 2)</a>
-                        </li>
-                        <li>
-                            <a href="">Preview (Form 2)</a>
-                        </li>
-                    </ol>
-                </div>
+            <div id="breadcrumbContainer">
+                <ol className="breadcrumb">
+                    <li><a id="home" href={this.homePath}>Home</a></li>
+                    <li><a href={this.homePath + 'start'}>Start</a></li>
+                    <li><a href='#' onClick={this.backToAccess}>Access</a></li>
+                    <li><a href='#' onClick={this.backToFill}>Fill</a></li>
+                </ol>
+            </div>
 
-                  <ProgressStatusBar
-                      activeStep={3}
-                      steps={["Access","Form 2","Preview","Payment"]}
-                  />
+            <ProgressStatusBar activeStep={3} steps={["Access","Form 2","Preview","Payment"]}/>
 
-                <div className="row">
-                    <div id="viewFormModal" className="col col-lg-12 col-md-12 col-sm-12 preview-form">
-                        <div className="preview-title  not-printable">
-                            Preview Form 2
-                        </div>
-                        <div className="form-section">
-                            <div dangerouslySetInnerHTML={{__html: this.state ? this.state.previewContent : "No form available for preview"}} />
-                            <FormButtonBar
-                                back={this.goBack.bind(this)}
-                                backMessage="Back to editing"
-                                proceed={this.proceed}
-                            />
-                        </div>
+            <div className="row section section-gray">
+                <div className="col-xs-12">
+                    <div className="page-title">Preview Your Form</div>
+                    <div className="page-subtitle">
+                        Your can review your form here to ensure everything to correct before submitting.
+                        If edits are required, you may still go back and make the necessary changes.
                     </div>
                 </div>
             </div>
+            <div className="row section section-gray section-thin right">
+                <div className="col-xs-12 right">
+                    <button id="back"
+                            className="btn btn-primary round-borders"
+                            style= {{ marginRight:'15px' }}
+                            onClick={this.backToFill}>
+                            <i className="glyphicon glyphicon-edit" />  Go Back and Edit
+                    </button>
+                    <SpinnerButton  ref= { el => this.downloadButton = el }
+                                    content= 'Download PDF'
+                                    width= "120"
+                                    onClick= { this.download } />
+                </div>
+            </div>
+            <div className="row section section-white">
+                <div className="col-xs-12">
+                    <div dangerouslySetInnerHTML={{__html: this.state.previewContent ? this.state.previewContent : "Loading..."}} />
+                </div>
+            </div>
+
+            <div className="row section section-gray right">
+                <div className="col-xs-12 right">
+                    <button id="proceed"
+                            className="btn btn-primary round-borders action-button"
+                            onClick={this.proceed}>
+                            Continue
+                            <i className="glyphicon glyphicon-triangle-right" />
+                    </button>
+                </div>
+            </div>
+
+        </div>
         );
     }
 
@@ -68,12 +97,23 @@ class Form2Preview extends Component {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed', state: { formId:this.state.formId }});
     }
 
-    goBack() {
+    backToFill() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: {
             formId: this.state.formId,
             caseNumber:this.state.caseNumber,
             parties:this.state.parties
         }})
+    }
+
+    download() {
+        let ids = [this.state.formId]
+        this.downloadButton.startSpinner()
+        this.service.download(ids, (data) => {
+            this.downloadButton.stopSpinner()
+            if (!data.error) {
+                save(data);
+            }
+        });
     }
 }
 export default Form2Preview;
