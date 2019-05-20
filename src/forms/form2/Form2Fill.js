@@ -6,6 +6,7 @@ import './Form2Fill.css';
 import DefaultService from "../../service/default.service";
 import RespondentListSelect from "../../components/fields/RespondentListSelect";
 import ContactSelect from "../../components/fields/ContactSelect";
+import { standardizeParties } from './standardize.parties'
 
 class Form2Fill extends Component {
 
@@ -14,6 +15,10 @@ class Form2Fill extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
+        this.state.useServiceEmail = false
+        this.state.sendNotification = false
+        this.state.selectedContactIndex = 0
+
         this.backToAccess = this.backToAccess.bind(this)
         this.selectedRespondents = this.selectedRespondents.bind(this)
         this.updateSelectedRespondents = this.updateSelectedRespondents.bind(this)
@@ -21,16 +26,21 @@ class Form2Fill extends Component {
         this.updateSelectedContact = this.updateSelectedContact.bind(this)
         this.displaySelected = this.displaySelected.bind(this)
         this.updateContact = this.updateContact.bind(this)
+        this.updateUseServiceEmail = this.updateUseServiceEmail.bind(this)
+        this.updateSendNotification = this.updateSendNotification.bind(this)
     }
 
     componentDidMount() {
-        console.log('state', this.state);
         if (this.service == null) {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-        this.selectAllRespondents()
-        this.setState({ selectedContactIndex: 0 })
+        this.setState({
+            parties: standardizeParties(this.state.parties)
+        }, ()=>{
+            this.selectAllRespondents()
+            this.setState({ selectedContactIndex: 0 })
+        })
     }
 
     render() {
@@ -225,6 +235,65 @@ class Form2Fill extends Component {
 
                           </div>
 
+                          <div className="row">
+                              <div className="row proceeding-style">
+                                  <div className="col-lg-12 address-row-header">
+                                      Contact information
+                                  </div>
+                                  <div className="row address-row">
+                                      <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                          <span className="mandatory-field">*</span>
+                                          Phone&nbsp;
+                                          <i className="oi oi-question-mark" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
+                                      </div>
+                                      <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
+                                          <input id="phone"
+                                              value={this.displaySelected('phone')}
+                                              onChange={ e => this.updateContact('phone', e.target.value) }/>
+                                      </div>
+                                  </div>
+                                  <div className="row address-row">
+                                      <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                          <span id="emailasterisks" className="mandatory-field" style={{display:(this.state.useServiceEmail || this.state.sendNotification)?'inline-block':'none'}}>*</span>
+                                          Email address&nbsp;
+                                          <i className="oi oi-question-mark" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
+                                      </div>
+                                      <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
+                                          <input id="email"
+                                              value={this.displaySelected('email')}
+                                              onChange={ e => this.updateContact('email', e.target.value) }/>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div className="row">
+                              <div className="row address-row-header">
+                                  <div className="row address-row">
+                                      <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">I would like to receive email notifications when the status of my document changes</div>
+                                      <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
+                                          <input id="sendNotifications"
+                                              type="checkbox"
+                                              checked= { this.state.sendNotification }
+                                              onClick= { this.updateSendNotification }/>
+                                      </div>
+                                  </div>
+                                  <div className="row address-row">
+                                      <div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">
+                                          I agree to be served documents electronically by another party
+                                          &nbsp;<i className="oi oi-question-mark" aria-hidden="true"
+                                             data-tip="Electronic service will replace in-person service if you select this option."></i>
+                                      </div>
+                                      <div className="col-lg-5 col-md-5 col-sm-5 col-xs-5 " style={{textAlign: 'left'}}>
+                                          <input id="useServiceEmail"
+                                              type="checkbox"
+                                              checked= { this.state.useServiceEmail }
+                                              onChange= { this.updateUseServiceEmail }/>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
                         </div>
                     </div>
                 </div>
@@ -260,18 +329,25 @@ class Form2Fill extends Component {
     }
     displaySelected(field) {
         let value = ''
-        if (this.state.selectedContactIndex >= 0) {
-            value = this.state.parties.respondents[this.state.selectedContactIndex].solicitor.address[field]
+        if (this.state.selectedContactIndex >= 0
+            && this.state.parties.respondents[this.state.selectedContactIndex].address) {
+            value = this.state.parties.respondents[this.state.selectedContactIndex].address[field]
         }
-        return value
+        return value ? value: ''
     }
     updateContact(field, value) {
         if (this.state.selectedContactIndex >= 0) {
             let parties = this.state.parties
             let respondents = parties.respondents
-            respondents[this.state.selectedContactIndex].solicitor.address[field] = value
+            respondents[this.state.selectedContactIndex].address[field] = value
             this.setState({ parties:parties })
         }
+    }
+    updateSendNotification(event) {
+        this.setState({ sendNotification: event.target.checked })
+    }
+    updateUseServiceEmail(event) {
+        this.setState({ useServiceEmail: event.target.checked });
     }
 }
 export default Form2Fill;
