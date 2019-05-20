@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
-import FormButtonBar from '../../components/FormButtonBar';
 import './Form2Preview.css';
 import DefaultService from "../../service/default.service";
 import save from '../save-file'
