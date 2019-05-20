@@ -43,7 +43,6 @@ class ContactSelect extends React.Component {
     }
 
     selectContact(selectedOption) {
-        console.log(selectedOption);
         let e = {
             target: {
                 name: "form2.selectedContact",
