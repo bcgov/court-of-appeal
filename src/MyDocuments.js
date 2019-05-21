@@ -101,7 +101,7 @@ class MyDocuments extends Component {
 
     download() {
         let ids = this.state.cases.reduce(this.onlySelected, []);
-        if (ids.length == 0) { return }
+        if (ids.length === 0) { return }
 
         if (ids.length > this.maxFileDownload) {
             this.setState({ displayErrorDialog:true });
