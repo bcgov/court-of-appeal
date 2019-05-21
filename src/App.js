@@ -3,8 +3,6 @@ import Header from './Header.js';
 import Footer from './Footer.js';
 import Dashboard from './Dashboard.js';
 import { Route } from "react-router-dom";
-import Form7 from './forms/Form7.js';
-import Form2 from './forms/Form2.js';
 import Form2Start from './forms/form2/Form2Start'
 import Form2Fill from './forms/form2/Form2Fill'
 import Form2Access from './forms/form2/Form2Access'
@@ -27,8 +25,6 @@ class App extends Component {
         <div className="full-height">
           <Header fetch={this.props.fetch}/>
           <Route exact path={this.homePath} component={Dashboard} props={{fetch:this.props.fetch}} />
-          <Route path={process.env.PUBLIC_URL + '/form.7.html'} component={Form7} />
-          <Route path={process.env.PUBLIC_URL + '/form2'} component={Form2} />
           <Route path={process.env.PUBLIC_URL + '/start'} component={Form2Start} />
           <Route path={process.env.PUBLIC_URL + '/access'} component={Form2Access} />
           <Route path={process.env.PUBLIC_URL + '/fill'} component={Form2Fill} />

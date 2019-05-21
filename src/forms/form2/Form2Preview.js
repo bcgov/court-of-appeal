@@ -11,7 +11,6 @@ class Form2Preview extends Component {
         super(props);
         this.state = props.location ? props.location.state : {};
         this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
-        this.form2Path = props.form2Path || this.homePath + '/form2';
         this.service = this.props.service;
 
         this.backToAccess = this.backToAccess.bind(this)

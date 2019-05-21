@@ -68,7 +68,7 @@ class CaseList extends React.Component {
             <td key={item.id+'edit'}
                 className="edit-cell"
                 id={'edit-'+item.id}
-                onClick={this.openEditModal.bind(this, item.data, item.id)}>
+                onClick={this.editForm.bind(this, item.data, item.id)}>
                     <i className="oi oi-pencil"/>
             </td>,
             <td key={item.id+'id'}>{item.id}</td>,
@@ -212,7 +212,7 @@ class CaseList extends React.Component {
             });
     }
 
-    openEditModal(data, id) {
+    editForm(data, id) {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
             formId: id,
             caseNumber: data.formSevenNumber,

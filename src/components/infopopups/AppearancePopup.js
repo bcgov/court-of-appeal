@@ -1,7 +1,7 @@
 import React, { Component }from 'react';
 import {
-    FILE_ONLINE_ONE_MSG, 
-    FILE_STEP_THREE_MSG, 
+    FILE_ONLINE_ONE_MSG,
+    FILE_STEP_THREE_MSG,
     FILE_STEP_TWO_MSG,
     FILE_STEP_ONE_MSG_SINGULAR,
     FILE_MULTIPLES_STEP_TWO_MSG
@@ -25,7 +25,7 @@ class AppearancePopup extends Component {
                             },
                         documentLink:
                             {
-                                URL: process.env.PUBLIC_URL + "/form2",
+                                URL: process.env.PUBLIC_URL + "/start",
                                 URLName: "Online form"
                             }
                     }
