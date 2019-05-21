@@ -306,6 +306,7 @@ class Form2Fill extends Component {
                     <div className="col-xs-4" style={{textAlign:'center', padding:'0px'}}>
                         <SpinnerButton  ref= { el => this.saveButton = el }
                                         content= "Save as Draft"
+                                        id= "save-as-draft"
                                         width= "100"
                                         onClick= { this.save } />
                     </div>
