@@ -31,6 +31,8 @@ class Form2Fill extends Component {
         this.updatesendNotifications = this.updatesendNotifications.bind(this)
         this.save = this.save.bind(this)
         this.continue = this.continue.bind(this)
+        this.disableSave = this.disableSave.bind(this)
+        this.disableContinue = this.disableContinue.bind(this)
     }
 
     componentDidMount() {
@@ -308,12 +310,14 @@ class Form2Fill extends Component {
                                         content= "Save as Draft"
                                         id= "save-as-draft"
                                         width= "100"
+                                        disabled= { this.disableSave() }
                                         onClick= { this.save } />
                     </div>
                     <div className="col-xs-4" style={{textAlign:'right', padding:'0px'}}>
-                        <button id="continue"
-                                className="btn btn-primary round-borders action-button"
-                                onClick={this.continue}>
+                        <button id= "continue"
+                                className= "btn btn-primary round-borders action-button"
+                                disabled= { this.disableContinue() }
+                                onClick= { this.continue }>
                                 Continue
                                 <i className="glyphicon glyphicon-triangle-right" />
                         </button>
@@ -406,6 +410,23 @@ class Form2Fill extends Component {
                 if (next) { next() }
             })
         }
+    }
+    disableSave() {
+        let disabled = false
+
+        if (this.displaySelected('addressLine1') === '') { disabled=true }
+        if (this.displaySelected('city') === '') { disabled=true }
+        if (this.displaySelected('postalCode') === '') { disabled=true }
+        if (this.displaySelected('phone') === '') { disabled=true }
+
+        if (this.displaySelected('email') === '' && (
+            this.state.useServiceEmail || this.state.sendNotifications
+        )) { disabled=true }
+
+        return disabled
+    }
+    disableContinue() {
+        return this.disableSave()
     }
 }
 export default Form2Fill;
