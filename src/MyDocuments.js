@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import './active.forms.css';
-import DefaultService from '../service/default.service.js';
-import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
-import renderCases from '../components/cases.renderer';
+import DefaultService from './service/default.service.js';
+import MultiSelectionCaseList from './components/MultiSelectionCaseList.js';
+import renderCases from './components/cases.renderer';
 import './MyDocuments.css';
-import SpinnerActionIcon from '../components/SpinnerActionIcon';
-import findCaseById from '../helpers/find.case.by.id';
+import SpinnerActionIcon from './components/SpinnerActionIcon';
+import findCaseById from './helpers/find.case.by.id';
 
 class MyDocuments extends Component {
 
@@ -34,7 +33,7 @@ class MyDocuments extends Component {
         if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
             this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
         }
-        this.save = require('./save-file');
+        this.save = require('./helpers/save-file');
     }
 
     componentDidMount() {
