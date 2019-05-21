@@ -3,9 +3,6 @@ import CaseList from './CaseList.js';
 
 class MultiSelectionCaseList extends CaseList {
 
-    constructor(props) {
-        super(props);
-    }
     toggleSelection(item) {
         this.props.toggleSelected(item.id);
     }
@@ -21,7 +18,7 @@ class MultiSelectionCaseList extends CaseList {
     }
     render() {
         return (
-            <div id="case-list" ref={ (element)=> {this.element = element} } onClick={this.handleClickOffForm.bind(this)}>
+            <div id="case-list" ref={ (element)=> {this.element = element} } >
                 <table id="my-cases" className="not-printable" >
                     <thead>
                         <tr className="header">
@@ -41,7 +38,6 @@ class MultiSelectionCaseList extends CaseList {
                     }
                     </tbody>
                 </table>
-                { this.modals() }
             </div>
         );
     }

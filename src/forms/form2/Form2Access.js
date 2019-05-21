@@ -114,7 +114,7 @@ class Form2Access extends Component {
     }
 
     isThisYou(user) {
-        return (user.clientId == this.state.account.clientId) ? ' (yourself)' : ''
+        return (user.clientId === this.state.account.clientId) ? ' (yourself)' : ''
     }
 
     next() {
