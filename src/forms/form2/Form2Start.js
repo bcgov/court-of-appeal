@@ -65,6 +65,7 @@ class Form2Start extends Component {
                                 <td>
                                     <input  ref= { el => this.caseNumberField = el }
                                             autoFocus
+                                            id= "file-no"
                                             value= { this.state.caseNumber }
                                             onChange= { e => forceCA(e.target.value, this)}
                                             onKeyPress= { e => e.charCode === 13 ? this.search():null } />
@@ -72,6 +73,7 @@ class Form2Start extends Component {
                                 <td>
                                     <SpinnerButton  ref= { el => this.findButton = el }
                                                     content= 'Find'
+                                                    id= "find-button"
                                                     width= "52"
                                                     disabled= { this.state.caseNumber.length < 7 }
                                                     onClick= { this.search } />
