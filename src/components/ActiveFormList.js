@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../forms/active.forms.css';
+import '../MyDocuments.css';
 import CaseList from '../components/CaseList.js';
 
 class ActiveFormList extends Component {
-    
+
     render() {
         return (
             <div id="active-forms" className="form-section" ref={ (element)=> {this.element = element }}>
@@ -12,7 +12,7 @@ class ActiveFormList extends Component {
 
                 </div>
                 <CaseList
-                    cases={this.props.cases}                   
+                    cases={this.props.cases}
                     service={this.props.service}
                     updateCases={this.props.updateCases}
                     history={this.props.history}

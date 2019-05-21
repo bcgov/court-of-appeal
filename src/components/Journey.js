@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
-import '../forms/journey.css';
+import './journey.css';
 import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";
@@ -406,7 +406,7 @@ class Journey extends Component {
                         introText: introText
                     });
                 }
-            }            
+            }
         });
     }
 

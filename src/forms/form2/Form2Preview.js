@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Preview.css';
 import DefaultService from "../../service/default.service";
-import save from '../save-file'
+import save from '../../helpers/save-file'
 import SpinnerButton from '../../components/SpinnerButton';
 
 class Form2Preview extends Component {
