@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
+import './Form2.css';
 import './Form2Start.css';
 import DefaultService from "../../service/default.service";
 import SpinnerButton from '../../components/SpinnerButton';
