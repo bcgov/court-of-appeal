@@ -60,7 +60,9 @@ class CaseList extends React.Component {
             },
             selectedContactIndex: data.selectedContactIndex,
             useServiceEmail: data.useServiceEmail,
-            sendNotifications: data.sendNotifications
+            sendNotifications: data.sendNotifications,
+            authorizations: data.authorizations,
+            account: data.account
         }})
     }
 
