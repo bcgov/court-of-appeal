@@ -31,12 +31,6 @@ class Form2Start extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <div id="breadcrumbContainer">
-                <ol className="breadcrumb">
-                    <li><a id="home" href={process.env.PUBLIC_URL}>Home</a></li>
-                </ol>
-            </div>
-
             <ProgressStatusBar activeStep={1} steps={["Access","Form 2","Preview","Payment"]}/>
 
             <div className="row section section-gray">
