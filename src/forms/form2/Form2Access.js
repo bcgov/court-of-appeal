@@ -58,13 +58,6 @@ class Form2Access extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <div id="breadcrumbContainer">
-                <ol className="breadcrumb">
-                    <li><a id="home" href={this.homePath}>Home</a></li>
-                    <li><a href={this.homePath + 'start'}>Start</a></li>
-                </ol>
-            </div>
-
             <ProgressStatusBar activeStep={1} steps={["Access","Form 2","Preview","Payment"]}/>
 
             <div className="row section section-gray">

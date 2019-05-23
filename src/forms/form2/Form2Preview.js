@@ -17,6 +17,7 @@ class Form2Preview extends Component {
         this.backToFill = this.backToFill.bind(this)
         this.proceed = this.proceed.bind(this)
         this.download = this.download.bind(this)
+        this.isReadonly = this.isReadonly.bind(this)
     }
 
     componentDidMount() {
@@ -37,15 +38,6 @@ class Form2Preview extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <div id="breadcrumbContainer">
-                <ol className="breadcrumb">
-                    <li><a id="home" href={this.homePath}>Home</a></li>
-                    <li><a href={this.homePath + 'start'}>Start</a></li>
-                    <li><a href='#' onClick={this.backToAccess}>Access</a></li>
-                    <li><a href='#' onClick={this.backToFill}>Fill</a></li>
-                </ol>
-            </div>
-
             <ProgressStatusBar activeStep={3} steps={["Access","Form 2","Preview","Payment"]}/>
 
             <div className="row section section-gray">
@@ -60,6 +52,7 @@ class Form2Preview extends Component {
             <div className="row section section-gray section-thin right">
                 <div className="col-xs-12 right">
                     <button id="back"
+                            disabled= { this.isReadonly() }
                             className="btn btn-primary round-borders"
                             style= {{ marginRight:'15px' }}
                             onClick={this.backToFill}>
@@ -80,6 +73,7 @@ class Form2Preview extends Component {
             <div className="row section section-gray right">
                 <div className="col-xs-12 right">
                     <button id="proceed"
+                            disabled= { this.isReadonly() }
                             className="btn btn-primary round-borders action-button"
                             onClick={this.proceed}>
                             Proceed
@@ -111,6 +105,13 @@ class Form2Preview extends Component {
                 save(data);
             }
         });
+    }
+
+    isReadonly() {        
+        let myClientId = this.state.account.clientId
+        let myPriviledges = this.state.authorizations.find(user => user.clientId === myClientId)
+
+        return !myPriviledges.isAdmin
     }
 }
 export default Form2Preview;
