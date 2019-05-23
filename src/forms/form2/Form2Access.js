@@ -14,9 +14,12 @@ class Form2Access extends Component {
         if (this.state.authorizations === undefined) { this.state.authorizations = [] }
         if (this.state.account === undefined) { this.state.account = {} }
         this.state.searching = false
+        this.displayAddUserSection = false
+
         this.next = this.next.bind(this)
         this.isThisYou = this.isThisYou.bind(this)
-        this.searching = false
+        this.addUser = this.addUser.bind(this)
+        this.userAdded = this.userAdded.bind(this)
     }
 
     componentDidMount() {
@@ -106,6 +109,25 @@ class Form2Access extends Component {
                         </tbody>
                     </table>
 
+                    <button id="add-users"
+                            onClick={this.addUser}
+                            className="btn btn-primary round-borders">
+                            Add User
+                    </button>
+
+                    <div ref={ el=> this.addUserSection = el }
+                         style={{ display:this.state.displayAddUserSection?'block':'none' }}>
+                        <select id="add-user-selection" onChange={ (e)=> this.userAdded(e.target.value) }>
+                            <option></option>
+                            {
+                                this.state.authorizations.filter(item => !item.isActive).map((user)=>{
+                                    return (
+                                        <option key={user.clientId} value={user.clientId}>{user.surname + ' ' + user.givenName}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -129,6 +151,20 @@ class Form2Access extends Component {
 
     next() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
+    }
+
+    addUser() {
+        this.setState({ displayAddUserSection: true })
+    }
+
+    userAdded(clientId) {
+        let authorizations = this.state.authorizations
+        let user = authorizations.find(user => user.clientId == clientId)
+        user.isActive = true
+        this.setState({
+            authorizations: authorizations,
+            displayAddUserSection: false
+        })
     }
 }
 export default Form2Access;
