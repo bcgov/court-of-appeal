@@ -1,8 +1,32 @@
 import React from 'react';
 import './caselist.css';
+import DefaultService from '../service/default.service.js';
 
 class CaseList extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            account: {}
+        }
+    }
+    componentDidMount() {
+        if (this.service == null) {
+            let window = this.element.ownerDocument.defaultView;
+            this.service = new DefaultService(window);
+        }
+        this.service.getPersonInfo((person)=> {
+            console.log('person', person);
+            if (!person.error) {
+                this.setState({
+                    account: {
+                        accountId: person.accountId,
+                        clientId: person.clientId
+                    }
+                });
+            }
+        });
+    }
     editCell(item) {
         return (
             item.status === 'Draft' ?
@@ -70,7 +94,7 @@ class CaseList extends React.Component {
             useServiceEmail: data.useServiceEmail,
             sendNotifications: data.sendNotifications,
             authorizations: data.authorizations,
-            account: data.account
+            account: this.state.account
         }})
     }
 
