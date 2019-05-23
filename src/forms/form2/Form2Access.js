@@ -10,6 +10,7 @@ class Form2Access extends Component {
         super(props);
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
+
         this.state = props.location && props.location.state ? props.location.state : { caseNumber: '12345 (fake)'};
         if (this.state.authorizations === undefined) { this.state.authorizations = [] }
         if (this.state.account === undefined) { this.state.account = {} }
@@ -20,6 +21,10 @@ class Form2Access extends Component {
         this.isThisYou = this.isThisYou.bind(this)
         this.addUser = this.addUser.bind(this)
         this.userAdded = this.userAdded.bind(this)
+        this.makeAdmin = this.makeAdmin.bind(this)
+        this.makeReader = this.makeReader.bind(this)
+        this.noMoreUserToAdd = this.noMoreUserToAdd.bind(this)
+        this.userRemoved = this.userRemoved.bind(this)
     }
 
     componentDidMount() {
@@ -98,9 +103,18 @@ class Form2Access extends Component {
                                         return (
                                             <tr key={user.clientId}>
                                                 <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
-                                                <td style={{ textAlign:'center'}}>{!user.isAdmin ? (<span className="oi oi-check"></span>): ''}</td>
-                                                <td style={{ textAlign:'center'}}>{user.isAdmin ? (<span className="oi oi-check"></span>): ''}</td>
-                                                <td></td>
+                                                <td style={{ textAlign:'center', cursor:(user.isAdmin && user.isEditable)?'pointer':'normal' }}
+                                                    onClick={ e => this.makeReader(user.clientId) }>
+                                                    {!user.isAdmin ? (<span className="oi oi-check"></span>): ''}
+                                                </td>
+                                                <td style={{ textAlign:'center', cursor:(!user.isAdmin && user.isEditable)?'pointer':'normal' }}
+                                                    onClick={ e => this.makeAdmin(user.clientId) }>
+                                                    {user.isAdmin ? (<span className="oi oi-check"></span>): ''}
+                                                </td>
+                                                <td style={{ textAlign:'center', cursor:(user.isEditable)?'pointer':'normal' }}
+                                                    onClick={ e => this.userRemoved(user.clientId) }>
+                                                    {user.isEditable ? (<span className="oi oi-minus"></span>): ''}
+                                                </td>
                                             </tr>
                                         )
                                     })
@@ -110,13 +124,16 @@ class Form2Access extends Component {
                     </table>
 
                     <button id="add-users"
-                            onClick={this.addUser}
-                            className="btn btn-primary round-borders">
+                            disabled= { this.noMoreUserToAdd() }
+                            onClick= { this.addUser }
+                            className= "btn btn-primary round-borders">
                             Add User
                     </button>
 
                     <div ref={ el=> this.addUserSection = el }
-                         style={{ display:this.state.displayAddUserSection?'block':'none' }}>
+                         style={{
+                             marginTop: '15px',
+                             display:this.state.displayAddUserSection?'block':'none' }}>
                         <select id="add-user-selection" onChange={ (e)=> this.userAdded(e.target.value) }>
                             <option></option>
                             {
@@ -164,6 +181,39 @@ class Form2Access extends Component {
         this.setState({
             authorizations: authorizations,
             displayAddUserSection: false
+        })
+    }
+    noMoreUserToAdd() {
+        return this.state.authorizations.filter(item => !item.isActive).length == 0
+    }
+    makeAdmin(clientId) {
+        let authorizations = this.state.authorizations
+        let user = authorizations.find(user => user.clientId == clientId)
+        if (user.isEditable) {
+            user.isAdmin = true
+        }
+        this.setState({
+            authorizations: authorizations
+        })
+    }
+    makeReader(clientId) {
+        let authorizations = this.state.authorizations
+        let user = authorizations.find(user => user.clientId == clientId)
+        if (user.isEditable) {
+            user.isAdmin = false
+        }
+        this.setState({
+            authorizations: authorizations
+        })
+    }
+    userRemoved(clientId) {
+        let authorizations = this.state.authorizations
+        let user = authorizations.find(user => user.clientId == clientId)
+        if (user.isEditable) {
+            user.isActive = false
+        }
+        this.setState({
+            authorizations: authorizations
         })
     }
 }
