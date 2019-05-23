@@ -391,6 +391,8 @@ class Form2Fill extends Component {
             useServiceEmail: this.state.useServiceEmail,
             sendNotifications: this.state.sendNotifications,
             selectedContactIndex: this.state.selectedContactIndex,
+            account: this.state.account,
+            authorizations: this.state.authorizations
         }
         if (!this.state.id) {
             this.service.createForm2(form, (formId) => {

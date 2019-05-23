@@ -11,7 +11,8 @@ class Form2Access extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : { caseNumber: '12345 (fake)'};
-        this.state.users = []
+        if (this.state.authorizations === undefined) { this.state.authorizations = [] }
+        if (this.state.account === undefined) { this.state.account = {} }
         this.state.searching = false
         this.next = this.next.bind(this)
         this.isThisYou = this.isThisYou.bind(this)
@@ -23,24 +24,26 @@ class Form2Access extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+        if (this.state.authorizations.length === 0) {
+            this.setState( { searching:true }, ()=>{
+                this.service.getAccountUsers((data)=>{
+                    this.setState( { searching:false }, ()=>{
+                        let moveOver = false
+                        if (data.error) { moveOver = true }
 
-        this.setState( { searching:true }, ()=>{
-            this.service.getAccountUsers((data)=>{
-                this.setState( { searching:false }, ()=>{
-                    let moveOver = false
-                    if (data.error) { moveOver = true }
-
-                    if (moveOver) {
-                        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
-                    }
-                    else {
-                        let users = data.info.client
-                        if (users.length === undefined ) { users =[users] }
-                        this.setState({ users: users, account:data.info.account })
-                    }
+                        if (moveOver) {
+                            this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
+                        }
+                        else {
+                            this.setState({
+                                account:data.info.account,
+                                authorizations: data.info.authorizations
+                            })
+                        }
+                    })
                 })
             })
-        })
+        }
     }
 
     render() {
@@ -88,12 +91,12 @@ class Form2Access extends Component {
                                     </tr>
 
                                 :
-                                    this.state.users.map((user) => {
+                                    this.state.authorizations.filter((user)=> user.isActive).map((user) => {
                                         return (
                                             <tr key={user.clientId}>
                                                 <td>{user.surname + ' ' + user.givenName + this.isThisYou(user)}</td>
-                                                <td style={{ textAlign:'center'}}>{user.isAdmin === 'false' ? (<span className="oi oi-check"></span>): ''}</td>
-                                                <td style={{ textAlign:'center'}}>{user.isAdmin === 'true' ? (<span className="oi oi-check"></span>): ''}</td>
+                                                <td style={{ textAlign:'center'}}>{!user.isAdmin ? (<span className="oi oi-check"></span>): ''}</td>
+                                                <td style={{ textAlign:'center'}}>{user.isAdmin ? (<span className="oi oi-check"></span>): ''}</td>
                                                 <td></td>
                                             </tr>
                                         )
