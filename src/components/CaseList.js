@@ -3,14 +3,22 @@ import './caselist.css';
 
 class CaseList extends React.Component {
 
+    editCell(item) {
+        return (
+            item.status === 'Draft' ?
+                <td key={item.id+'edit'}
+                    className="edit-cell"
+                    id={'edit-'+item.id}
+                    onClick={this.editForm.bind(this, item.data, item.id)}>
+                        <i className="oi oi-pencil"/>
+                </td>
+                :
+                <td key={item.id+'edit'}></td>
+        )
+    }
     columns(item) {
         return ([
-            <td key={item.id+'edit'}
-                className="edit-cell"
-                id={'edit-'+item.id}
-                onClick={this.editForm.bind(this, item.data, item.id)}>
-                    <i className="oi oi-pencil"/>
-            </td>,
+            this.editCell(item) ,
             <td key={item.id+'id'}>{item.id}</td>,
             <td key={item.id+'parties'}>{item.parties}</td>,
             <td key={item.id+'status'}>{item.status}</td>,
