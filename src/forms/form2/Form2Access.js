@@ -106,9 +106,16 @@ class Form2Access extends Component {
                         </tbody>
                     </table>
 
-                    <div style={{textAlign:'right', paddingTop:'15px'}}>
-                        <button id="continue-to-form" onClick={this.next} className="btn btn-primary round-borders action-button">Fill Notice of Appeal form</button>
-                    </div>
+                </div>
+            </div>
+
+            <div className="row section section-gray right">
+                <div className="col-xs-12 right">
+                    <button id="continue-to-form"
+                            onClick={this.next}
+                            className="btn btn-primary round-borders action-button">
+                            Fill Notice of Appeal form
+                    </button>
                 </div>
             </div>
 

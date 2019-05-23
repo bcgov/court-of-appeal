@@ -82,7 +82,7 @@ class Form2Preview extends Component {
                     <button id="proceed"
                             className="btn btn-primary round-borders action-button"
                             onClick={this.proceed}>
-                            Continue
+                            Proceed
                             <i className="glyphicon glyphicon-triangle-right" />
                     </button>
                 </div>
