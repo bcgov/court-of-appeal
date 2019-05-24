@@ -1,5 +1,5 @@
 let FileSaver = require('file-saver');
-let save = require('../../src/forms/save-file');
+let save = require('../../src/helpers/save-file');
 
 describe('Save file', ()=>{
 
@@ -11,9 +11,9 @@ describe('Save file', ()=>{
         dataInBlob = data;
         type = options.type;
     };
-    FileSaver.saveAs = (blob, name)=>{ 
-        filename = name; 
-    };    
+    FileSaver.saveAs = (blob, name)=>{
+        filename = name;
+    };
 
     beforeEach(()=>{
         save({ value:42 });

@@ -151,6 +151,7 @@ class MyDocuments extends Component {
                                     service={this.service}
                                     updateCases={this.updateCases}
                                     toggleSelected={this.toggleSelected}
+                                    fetch={this.props.fetch}
                                 />
                                 <div id="my-cases-empty-label" style={{ display:this.state.displayMyCasesEmptyLabel?'block':'none' }}>
                                         No open cases found

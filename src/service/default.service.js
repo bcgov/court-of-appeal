@@ -12,7 +12,10 @@ let Service = function(window) {
 };
 
 Service.prototype.base = function() {
-    return (this.apiUrl === undefined ? '' : this.apiUrl) + process.env.PUBLIC_URL;
+    let base = (this.apiUrl === undefined || this.apiUrl === null || this.apiUrl === 'null' ? '' : this.apiUrl)
+                + process.env.PUBLIC_URL;
+
+    return base
 };
 
 Service.prototype.notifyOfError = function(callback, options) {

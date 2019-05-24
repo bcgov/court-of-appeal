@@ -30,7 +30,7 @@ class Dashboard extends Component {
             this.service = new DefaultService(window);
         }
         if (this.state.fetch) {
-            this.fetchCases(); 
+            this.fetchCases();
         }
     }
 
@@ -56,7 +56,7 @@ class Dashboard extends Component {
             <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
                 <div className="row">
                     <div role="main" className="col col-sm-12">
-                        <ActiveFormList 
+                        <ActiveFormList
                             fetch={this.state.fetch}
                             updateCases={this.updateCases}
                             fetchCases={this.fetchCases}
@@ -71,6 +71,7 @@ class Dashboard extends Component {
                     <div role="main" className="center-main col col-lg-8" >
                         <Journey
                             cases={this.state.cases}
+                            service={this.service}
                         />
                     </div>
                     <div role="main" className="right-nav-main col col-lg-4"  >
