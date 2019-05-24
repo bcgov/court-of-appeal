@@ -107,9 +107,12 @@ class Form2Preview extends Component {
         });
     }
 
-    isReadonly() {        
+    isReadonly() {
         let myClientId = this.state.account.clientId
+        if (!myClientId) { return false }
+
         let myPriviledges = this.state.authorizations.find(user => user.clientId === myClientId)
+        if (!myPriviledges) { return false }
 
         return !myPriviledges.isAdmin
     }

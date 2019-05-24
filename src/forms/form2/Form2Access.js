@@ -40,7 +40,7 @@ class Form2Access extends Component {
                         if (data.error) { moveOver = true }
 
                         if (moveOver) {
-                            this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:this.state.caseNumber, parties:this.state.parties }});
+                            this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state});
                         }
                         else {
                             this.setState({
