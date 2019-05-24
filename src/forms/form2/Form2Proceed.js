@@ -84,7 +84,7 @@ class Form2Proceed extends Component {
         this.service.submit(this.state.formId, (data)=>{
             this.submitButton.stopSpinner();
             if (!data.error) {
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted',state: { formId:this.state.formId }});
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted', state: this.state })
             }
         })
     }
