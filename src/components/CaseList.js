@@ -6,7 +6,9 @@ class CaseList extends React.Component {
 
     constructor(props) {
         super(props);
+        this.service = props.service;
         this.state = {
+            fetch: props.fetch !== 'false',
             account: {}
         }
     }
@@ -15,17 +17,18 @@ class CaseList extends React.Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-        this.service.getPersonInfo((person)=> {
-            console.log('person', person);
-            if (!person.error) {
-                this.setState({
-                    account: {
-                        accountId: person.accountId,
-                        clientId: person.clientId
-                    }
-                });
-            }
-        });
+        if (this.state.fetch) {
+            this.service.getPersonInfo((person)=> {
+                if (!person.error) {
+                    this.setState({
+                        account: {
+                            accountId: person.accountId,
+                            clientId: person.clientId
+                        }
+                    });
+                }
+            });
+        }
     }
     editCell(item) {
         return (

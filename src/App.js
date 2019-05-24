@@ -24,14 +24,14 @@ class App extends Component {
 
         <div className="full-height">
           <Header fetch={this.props.fetch}/>
-          <Route exact path={this.homePath} component={Dashboard} props={{fetch:this.props.fetch}} />
+          <Route exact path={this.homePath} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>
           <Route path={process.env.PUBLIC_URL + '/start'} component={Form2Start} />
           <Route path={process.env.PUBLIC_URL + '/access'} component={Form2Access} />
           <Route path={process.env.PUBLIC_URL + '/fill'} component={Form2Fill} />
           <Route path={process.env.PUBLIC_URL + '/preview'} component={Form2Preview} />
           <Route path={process.env.PUBLIC_URL + '/proceed'} component={Form2Proceed} />
           <Route path={process.env.PUBLIC_URL + '/submitted'} component={Form2Submitted} />
-          <Route path={process.env.PUBLIC_URL + '/my-documents.html'} component={MyDocuments} props={{fetch:this.props.fetch}} />
+          <Route path={process.env.PUBLIC_URL + '/my-documents.html'} render={(any) => <MyDocuments {...any} fetch={this.props.fetch} service={this.props.service}  />}/>
           <Route path={process.env.PUBLIC_URL + '/notifications.html'} component={Notifications} />
           <Footer />
         </div>

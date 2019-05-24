@@ -1,8 +1,8 @@
-require('../support/enzyme.setup');
+require('./support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import MyDocuments from '../../src/forms/MyDocuments';
-let DefaultService = require('../../src/service/default.service');
+import MyDocuments from '../src/MyDocuments';
+let DefaultService = require('../src/service/default.service');
 
 describe('MyDocuments', ()=> {
 
@@ -11,10 +11,11 @@ describe('MyDocuments', ()=> {
 
         expect(instance.service instanceof DefaultService).toEqual(true);
     });
-    let cases;
+    let cases = []
     let createInstance = ()=>{
         let instance = mount(<MyDocuments service={{
-            getMyCases: (params, callback)=> { callback({ cases:cases }); }
+            getMyCases: (params, callback)=> { callback({ cases:cases }); },
+            getPersonInfo: (callback)=>{ callback({}) }
         }}/>).instance();
         return instance;
     };
@@ -23,7 +24,8 @@ describe('MyDocuments', ()=> {
         test('happens automatically', ()=> {
             let called = false;
             let service = {
-                getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
+                getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); },
+                getPersonInfo: (callback)=>{ callback({}) }
             };
             mount(<MyDocuments service={service}/>).instance();
 
@@ -32,7 +34,8 @@ describe('MyDocuments', ()=> {
         test('unless specified otherwise', ()=> {
             let called = false;
             let service = {
-                getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); }
+                getMyCases: (params, callback)=> { called=true; callback({ cases:[] }); },
+                getPersonInfo: (callback)=>{ callback({}) }
             };
             mount(<MyDocuments fetch="false" service={service}/>).instance();
 
@@ -63,13 +66,13 @@ describe('MyDocuments', ()=> {
 
     describe('max file download', ()=>{
         test('default value', ()=>{
-            let instance = mount(<MyDocuments fetch="false"/>).instance();
+            let instance = createInstance();
 
             expect(instance.maxFileDownload).toEqual(5);
         });
         test('default value can be overriden', ()=>{
             process.env.REACT_APP_MAX_FILE_DOWNLOAD = 7;
-            let instance = mount(<MyDocuments fetch="false"/>).instance();
+            let instance = createInstance();
 
             expect(instance.maxFileDownload).toEqual(7);
         });
@@ -108,7 +111,8 @@ describe('MyDocuments', ()=> {
                 { id:22, data:{} }
             ];
             document = mount(<MyDocuments service={{
-                getMyCases: (params, callback)=> { callback({ cases:cases }); }
+                getMyCases: (params, callback)=> { callback({ cases:cases }); },
+                getPersonInfo: (callback)=>{ callback({}) }
             }}/>);
             instance = document.instance();
         });
@@ -138,7 +142,8 @@ describe('MyDocuments', ()=> {
             ];
             document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
-                archiveCases: (ids, callback)=> { received=ids, callback(); }
+                archiveCases: (ids, callback)=> { received=ids, callback(); },
+                getPersonInfo: (callback)=>{ callback({}) }
             }}/>);
             received = undefined;
             instance = document.instance();
@@ -183,7 +188,8 @@ describe('MyDocuments', ()=> {
             ];
             document = mount(<MyDocuments service={{
                 getMyCases: (params, callback)=> { callback({ cases:cases }); },
-                download: (ids, callback)=> { idsSent=ids, callback(answer); }
+                download: (ids, callback)=> { idsSent=ids, callback(answer); },
+                getPersonInfo: (callback)=>{ callback({}) }
             }}/>);
             instance = document.instance();
             instance.save = function(data) {
