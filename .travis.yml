@@ -8,4 +8,4 @@ addons:
       secure: $SONAR_TOKEN
 script:
   - npm run test:coverage
-  - sonar-scanner
+  - ./sonar.sh
