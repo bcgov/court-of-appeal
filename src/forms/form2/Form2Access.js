@@ -146,7 +146,7 @@ class Form2Access extends Component {
                     <button id="continue-to-form"
                             onClick={this.next}
                             className="btn btn-primary round-borders action-button">
-                            Fill Notice of Appeal form
+                            Fill Notice of Appearance form
                     </button>
                 </div>
             </div>
