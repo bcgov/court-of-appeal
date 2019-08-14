@@ -7,7 +7,6 @@ class Form2Submitted extends Component {
     constructor(props) {
         super(props);
         this.state = props.location ? props.location.state : {};
-        this.state.packageNumber = '?'
 
         this.done = this.done.bind(this)
     }
@@ -33,7 +32,7 @@ class Form2Submitted extends Component {
                         <tbody>
                             <tr>
                                 <th>Package Number:</th>
-                                <td>{ this.state.packageNumber }</td>
+                                <td id="package-number">{ this.state.packageNumber }</td>
                             </tr>
                             <tr>
                                 <th>Your File #:</th>
