@@ -92,6 +92,8 @@ http {
         add_header X-XSS-Protection 1;
         add_header X-Frame-Options DENY;
 
+        %DEV_SM_VARIABLES%
+
         %REMOVE_BASE_HREF%
 
         %API_CONFIG_SECTION%
@@ -107,7 +109,8 @@ http {
 
             # Deploy-time configurable
             %HTTP_BASIC%
-			proxy_set_header    SMGOV_USERGUID  $http_smgov_userguid;
+            add_header    SMGOV_USERGUID  $http_smgov_userguid;
+            add_header    SMGOV_USERDISPLAYNAME  $http_smgov_userdisplayname;
         }
 
         # redirect server error pages to the static page /50x.html
