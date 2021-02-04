@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "10.15.1"
+addons:
+  sonarcloud:
+    organization: "bcgov-github"
+    token:
+      secure: $SONAR_TOKEN
+script:
+  - npm run test:coverage
+  - ./sonar.sh

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should only allow valid Canadian postal code characters 1`] = `
+<div>
+  <input
+    className="form-field"
+    id="number-field"
+    maxLength={7}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="Valid Canadian postal code"
+    size={30}
+    title=""
+    value=""
+  />
+  <div
+    className="error-message"
+  >
+    
+  </div>
+</div>
+`;

@@ -1,0 +1,22 @@
+#form2-preview {
+    background-color: white;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: Myriad-Pro, sans-serif;
+    font-size: medium;
+}
+
+#form2-preview td {
+    padding: 5px;
+}
+.preview-form {
+    padding-right: 15px;
+}
+.preview-title {
+    background-color: var(--header-background);
+    color: white;
+    margin: auto;
+    padding: 20px;
+    font-size: 2.5rem;
+}

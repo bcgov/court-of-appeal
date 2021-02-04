@@ -1,0 +1,17 @@
+.dashboard-section {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
+.dashboard-section h3 {
+    text-decoration: underline;
+}
+.center-main {
+    padding-right: 0;
+}
+.right-nav-main {
+    padding-right: 0;
+    padding-left: 0;
+}
