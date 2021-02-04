@@ -1,0 +1,133 @@
+.no-padding {
+    padding: 0px;
+}
+
+#downloadErrorModal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 110px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.download-error-modal-title {
+    background-color: red;
+	color: white;
+    margin: auto;
+    padding: 20px;
+    width: 350px;
+	font-size: 2rem;
+}
+
+.download-error-modal-content {
+    background-color: #fefefe;
+    color: rgb(0,0,0);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 350px;
+}
+
+#download-error-close-modal {
+    float: right;
+    font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#are-you-sure-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 110px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.are-you-sure-modal-header {
+    background-color: var(--header-background);
+    color: white;
+    margin: auto;
+    padding: 10px;
+    width: 350px;
+    font-size: large;
+}
+
+.are-you-sure-modal-title {
+    display:inline-block;
+}
+
+.are-you-sure-close-modal {
+    float: right;
+    font-size: 28px;
+    margin-top: -7px;
+	cursor: pointer;
+}
+
+.are-you-sure-modal-content {
+    background-color: #fefefe;
+    color: rgb(0,0,0);
+    margin: auto;
+    padding: 20px 20px 25px 10px;
+    border: 1px solid #888;
+    width: 350px;
+    font-size: medium;
+}
+
+.yes-archive {
+    background-color: var(--action-button);
+	color: white;
+    margin-left: 20px;
+}
+.yes-archive:hover {
+    background-color: var(--actioned-green);
+    color: white;
+    margin-left: 20px;
+}
+.yes-archive, .cancel-archive {
+    margin-top: 20px;
+}
+.cancel-archive {
+    background-color: var(--header-background);
+    color: white;
+    margin-right: 20px;
+}
+.cancel-archive:hover {
+    background-color: var(--sub-header-background);
+    color: white;
+    margin-right: 20px;
+}
+#active-forms {
+    width: 100%;
+}
+
+#active-forms table {
+    width: 100%;
+}
+
+#active-forms table tr.header {
+    border-bottom: 1px solid black;
+    white-space: nowrap;
+}
+
+#active-forms table td.near-deadline {
+    width: 5px;
+    color: red;
+}
+#active-forms table#my-cases tbody tr:nth-child(even) td {
+    background-color: rgb(240, 240, 240);
+}
+#my-cases-empty-label {
+    font-style: italic
+}

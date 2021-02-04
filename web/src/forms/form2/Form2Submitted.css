@@ -1,0 +1,14 @@
+.receipt-summary-table th, .receipt-table td {
+    padding-left: 0px;
+    min-width: 15px;
+}
+
+.receipt-table {
+    width:100%;
+    border-collapse: collapse;
+}
+
+.receipt-table th, .receipt-table td {
+    padding-left: 0px;
+    min-width: 15px;
+}

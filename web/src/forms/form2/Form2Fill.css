@@ -1,0 +1,19 @@
+.address-label {
+	text-align: right;
+	padding: 5px;
+}
+.address-hint {
+	color: slategrey;
+	padding: 0 0 5px 1px;
+	font-size: smaller;
+}
+.address-section {
+	margin-top: 20px;
+}
+.address-readonly-value {
+    text-align: left;
+	padding: 5px 5px 5px 15px;
+}
+.left {
+    margin-left: 0px;
+}
