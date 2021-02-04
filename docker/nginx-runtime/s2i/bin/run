@@ -60,6 +60,8 @@ read -r -d '' _CONFIG_SECTION << EOF
             proxy_buffer_size       128k;
             proxy_buffers           4 256k;
             proxy_busy_buffers_size 256k;
+            proxy_set_header    SMGOV_USERGUID  \$http_smgov_userguid;
+            proxy_set_header    SMGOV_USERDISPLAYNAME  \$http_smgov_userdisplayname;
         }
 EOF
 
@@ -140,6 +142,20 @@ getRemoveBaseHref() {
   fi
 }
 
+# This is intended for use in development environments only.
+getDevSmVariables() {
+  unset devSmVariables
+  
+  if [ ! -z "${SMGOV_USERGUID}" ] && [ ! -z "${SMGOV_USERDISPLAYNAME}" ]; then
+    read -r -d '' devSmVariables << EOF
+        set \$http_smgov_userguid ${SMGOV_USERGUID};
+        set \$http_smgov_userdisplayname ${SMGOV_USERDISPLAYNAME};
+EOF
+  fi
+
+  echo "${devSmVariables}"
+}
+
 if [ -n "$HTTP_BASIC_USERNAME" ] && [ -n "$HTTP_BASIC_PASSWORD" ]; then
     echo "---> Generating .htpasswd file"
     `echo "$HTTP_BASIC_USERNAME:$(openssl passwd -crypt $HTTP_BASIC_PASSWORD)" > /tmp/.htpasswd`
@@ -154,6 +170,8 @@ export RealIpFrom="${RealIpFrom:-172.51.0.0/16}"
 export WEB_BASE_HREF="${WEB_BASE_HREF:-/}"
 export REMOVE_BASE_HREF=$(getRemoveBaseHref ${WEB_BASE_HREF})
 export API_URL=$(getApiUrl)
+DEV_SM_VARIABLES=$(getDevSmVariables)
+DEV_SM_VARIABLES="$(echo "${DEV_SM_VARIABLES}" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/\$/\\$/g')"
 if [ ! -z "${API_URL}" ]; then
 	# ================================================================================
 	# If an API_URL is defined, generate an /api proxy configuration section and
@@ -185,10 +203,11 @@ echo "AdditionalRealIpFromRules = ${AdditionalRealIpFromRules}"
 echo "API_URL = ${API_URL}"
 echo "HTTP_BASIC = ${HTTP_BASIC}"
 echo "WEB_BASE_HREF = ${WEB_BASE_HREF}"
+echo "DEV_SM_VARIABLES = ${DEV_SM_VARIABLES}"
 
 REPLACE_VARS="
   RealIpFrom IpFilterRules AdditionalRealIpFromRules
-  HTTP_BASIC WEB_BASE_HREF REMOVE_BASE_HREF API_CONFIG_SECTION LISTEN_CONFIG_SECTION
+  HTTP_BASIC WEB_BASE_HREF REMOVE_BASE_HREF API_CONFIG_SECTION LISTEN_CONFIG_SECTION DEV_SM_VARIABLES
 "
 
 sed "$(makeReplacementPattern $REPLACE_VARS)" /tmp/nginx.conf.template > /etc/nginx/nginx.conf
