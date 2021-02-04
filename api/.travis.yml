@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "10.15.1"
+addons:
+  postgresql: "9.5"
+  sonarcloud:
+    organization: "bcgov-github"
+    token:
+      secure: $SONAR_TOKEN
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database ci;' -U postgres
+  - export PGHOST=localhost
+  - export PGDATABASE=ci
+  - export PGUSER=postgres
+  - export PGPASSWORD=
+script:
+  - npm run test:coverage
+  - npm run coverage:report
+  - ./sonar.sh
