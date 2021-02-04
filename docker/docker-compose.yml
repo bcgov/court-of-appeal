@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  api:
+    image: "${COMPOSE_PROJECT_NAME}-api"
+    environment:
+      - PGUSER=${POSTGRESQL_USER}
+      - PGPASSWORD=${POSTGRESQL_PASSWORD}
+      - PGDATABASE=${POSTGRESQL_DATABASE}
+      - PGHOST=db
+      - DEV_MODE=${DEV_MODE}
+      - NODE_ENV=${NODE_ENV}
+      - DEBUG_PORT=${DEBUG_PORT}
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+    command: >
+      /bin/bash -c 'while !</dev/tcp/db/5432; do sleep 1; echo Waiting for database connection ...; done; /usr/libexec/s2i/run;'
+
+  db:
+    image: centos/postgresql-12-centos7
+    environment:
+      - POSTGRESQL_USER=${POSTGRESQL_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+      - POSTGRESQL_ADMIN_PASSWORD=${POSTGRESQL_ADMIN_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./tmp:/tmp2
+      
+  web:
+    image: "${COMPOSE_PROJECT_NAME}-web"
+    environment:
+      - API_URL=${API_URL}
+      - USE_SELF_SIGNED_SSL=${USE_SELF_SIGNED_SSL}
+      - IpFilterRules=${IpFilterRules}
+      - RealIpFrom=${RealIpFrom}
+      - WEB_BASE_HREF=${WEB_BASE_HREF}
+    ports:
+      - 8080:8080
+    depends_on:
+      - api
