@@ -198,6 +198,9 @@ configureEnvironment () {
   # api
   export SMGOV_USERGUID=${SMGOV_USERGUID:-\'95EB360C2C384711AD1818664D85FE76\'}
   export SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME:-\'User\, Test\'}
+  export HUB_URL=${HUB_URL:http://hub-jag-efiling-dev.pathfinder.gov.bc.ca}
+  export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
+  
   # db
   export POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE:-appdb}
   export POSTGRESQL_USER=${POSTGRESQL_USER:-coa}

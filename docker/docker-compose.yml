@@ -10,6 +10,8 @@ services:
       - DEV_MODE=${DEV_MODE}
       - NODE_ENV=${NODE_ENV}
       - DEBUG_PORT=${DEBUG_PORT}
+      - HUB_URL=${HUB_URL}
+      - HUB_TIMEOUT=${HUB_TIMEOUT}
     ports:
       - 8081:8080
     depends_on:
