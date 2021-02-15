@@ -1,0 +1,11 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/db/db-build.yaml
+#=========================================================
+NAME=db
+OUTPUT_IMAGE_TAG=latest
+SOURCE_IMAGE_KIND=ImageStreamTag
+SOURCE_IMAGE_NAME=postgresql
+SOURCE_IMAGE_TAG=12
+SOURCE_IMAGE_NAMESPACE=openshift

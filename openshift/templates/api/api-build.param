@@ -1,0 +1,20 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/api/api-build.yaml
+#=========================================================
+NAME=api
+NAMESPACE=876c6c
+ENV_NAME=tools
+GIT_REPO_URL=https://github.com/bcgov/court-of-appeal.git
+GIT_REF=main
+SOURCE_CONTEXT_DIR=api
+KIND_OF_IMAGE=ImageStreamTag
+SOURCE_IMAGE_NAME=nodejs
+SOURCE_IMAGE_TAG=12
+SOURCE_IMAGE_NAMESPACE=openshift
+OUTPUT_IMAGE_TAG=latest
+CPU_LIMIT=1
+MEMORY_LIMIT=4Gi
+CPU_REQUEST=250m
+MEMORY_REQUEST=2Gi
