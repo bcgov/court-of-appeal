@@ -1,0 +1,22 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/api/api-deploy.yaml
+#=========================================================
+# NAME=api
+# APP_NAME=court-of-appeal
+# ROLE=api
+# NAMESPACE_NAME=876c6c
+# IMAGE_NAMESPACE=876c6c-tools
+# DATABASE_SERVICE_NAME=db
+TAG_NAME=prod
+# DATABASE_DEPLOYMENT_NAME=db
+# HUB_URL=
+# HUB_HOST=
+# HUB_TIMEOUT=10000
+MIN_REPLICAS=3
+MAX_REPLICAS=6
+# CPU_REQUEST=10m
+# CPU_LIMIT=500m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=1Gi
