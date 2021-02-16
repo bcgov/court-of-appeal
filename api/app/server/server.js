@@ -11,7 +11,7 @@ function Server() {
     this.app = express();
     this.headers = [
         { name:'Access-Control-Allow-Origin', value:'*' },
-        { name:'Access-Control-Allow-Headers', value:'smgov_userguid,smgov_userdisplayname,Content-Type, Authorization, Content-Length, X-Requested-With' },
+        { name:'Access-Control-Allow-Headers', value:'Content-Type, Authorization, Content-Length, X-Requested-With' },
         { name:'Access-Control-Allow-Methods', value:'GET, PUT, POST, OPTIONS' },
         { name:'Content-Type', value:'application/json' },
     ];
@@ -85,7 +85,7 @@ Server.prototype.start = function (port, ip, done) {
         next();
     });
 
-    this.app.use(morgan(':method :url :req[smgov_userguid]', { immediate:true }));
+    this.app.use(morgan(':method :url', { immediate:true }));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.restAdaptor.route(this.app, this.keycloak);

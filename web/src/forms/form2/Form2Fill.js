@@ -20,7 +20,6 @@ class Form2Fill extends Component {
         if (this.state.sendNotifications === undefined) { this.state.sendNotifications = false }
         if (this.state.selectedContactIndex === undefined) { this.state.selectedContactIndex = 0 }
 
-        this.backToAccess = this.backToAccess.bind(this)
         this.selectedRespondents = this.selectedRespondents.bind(this)
         this.updateSelectedRespondents = this.updateSelectedRespondents.bind(this)
         this.selectAllRespondents = this.selectAllRespondents.bind(this)
@@ -51,7 +50,7 @@ class Form2Fill extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={2} steps={["Access","Form 2","Preview","Payment"]} />
+            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","E-Filing"]} />
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -287,16 +286,6 @@ class Form2Fill extends Component {
 
                   <hr/>
                   <div className="row">
-                    <div className="col-xs-4" style={{textAlign:'left', padding:'0px'}}>
-                        <div >
-                            <button id="back"
-                                    className="btn btn-primary round-borders"
-                                    onClick={this.backToAccess}>
-                                    <i className="glyphicon glyphicon-triangle-left" />
-                                    Back to Access
-                            </button>
-                        </div>
-                    </div>
                     <div className="col-xs-4" style={{textAlign:'center', padding:'0px'}}>
                         <SpinnerButton  ref= { el => this.saveButton = el }
                                         content= "Save as Draft"
@@ -323,9 +312,6 @@ class Form2Fill extends Component {
         );
     }
 
-    backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: this.state })
-    }
     continue() {
         this.save(()=>{
             this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })

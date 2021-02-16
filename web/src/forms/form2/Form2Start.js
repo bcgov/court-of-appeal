@@ -31,7 +31,7 @@ class Form2Start extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={1} steps={["Access","Form 2","Preview","Payment"]}/>
+            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","E-Filing"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -95,7 +95,7 @@ class Form2Start extends Component {
             this.findButton.stopSpinner();
 
             if (data && !data.error) {
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: { caseNumber:caseNumber, parties:data.parties }});
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:caseNumber, parties:data.parties }});
             }
             else {
                 this.setState({ notFoundError: 'No such Court of Appeal document found' });

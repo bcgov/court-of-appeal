@@ -54,9 +54,8 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     app.get('/api/login', keycloak.protect(), (request, response) => {
         let redirectUrl = request.query.redirectUrl || "/";
         response.redirect(redirectUrl)
-    }
-   );
-   
+    });
+
    app.get('/api/forms', keycloak.protect(), (request, response)=> {
         this.searchFormSeven.now({ file:request.query.file }, (data)=> {
             searchFormSevenResponse(data, response);
@@ -64,7 +63,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     });
 
     app.post('/api/forms', keycloak.protect(), (request, response)=> {
-        let login = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         this.savePerson.now(login, (id)=> {
             if (id.error) {
                 createFormTwoResponse(id, response);
@@ -111,7 +110,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
     app.get('/api/cases', keycloak.protect(), (request, response)=> {
-        let login = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         this.myCases.now(login, (data)=> {
             myCasesResponse(data, response);
         });
@@ -124,7 +123,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
     app.post('/api/persons/customization', keycloak.protect(), (request, response)=> {
-        let login = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         let params = request.body;
         let customization = params.customization;
         this.saveCustomization.now(login, customization, (data)=>{
@@ -192,7 +191,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         }
     });
     app.post('/api/journey', keycloak.protect(), (request, response)=> {
-        let login = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         this.savePerson.now(login, (data)=> {
             if (data.error) {
                 createJourneyResponse(data, response);
@@ -221,7 +220,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
     app.post('/api/forms/:id/submit', keycloak.protect(), (request, response) => {
-        let login = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         let id = request.params.id;
         this.previewForm2.now(id, (html)=> {
             console.log('preview error', html.error);
@@ -239,8 +238,29 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             }
         });
     });
+    app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
+        let login = request.kauth.grant.id_token.content['universal-id'];
+        let name = request.kauth.grant.id_token.content.display_name;
+        this.connectPerson.now(login, (data)=>{
+            if (!data.error) {
+                this.getPersonInfo.now(login, (user)=>{
+                    personInfoResponse({
+                        error: user.error,
+                        login:login,
+                        name:name,
+                        customization:user.customization?user.customization:undefined,
+                        clientId: user.clientId,
+                        accountId: user.accountId
+                    }, response);
+                });
+            }
+            else {
+                personInfoResponse(data, response);
+            }
+        })
+    });
     app.get('/api/accountusers', keycloak.protect(), (request, response)=> {
-        let userguid = request.headers['smgov_userguid'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         this.accountUsers.now(userguid, (data)=> {
             accountUsersResponse(data, response);
         });

@@ -15,7 +15,7 @@ class Form2Submitted extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={5} steps={["Access","Form 2","Preview","Payment"]} />
+            <ProgressStatusBar activeStep={5} steps={["Form 2","Preview","E-Filing"]} />
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
