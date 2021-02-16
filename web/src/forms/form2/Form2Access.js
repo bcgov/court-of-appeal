@@ -33,6 +33,11 @@ class Form2Access extends Component {
             this.service = new DefaultService(window);
         }
         if (this.state.authorizations.length === 0) {
+            /*this.setState({
+                account:
+                authorizations: data.info.authorizations
+            })*/
+            /*
             this.setState( { searching:true }, ()=>{
                 this.service.getAccountUsers((data)=>{
                     this.setState( { searching:false }, ()=>{
@@ -50,7 +55,7 @@ class Form2Access extends Component {
                         }
                     })
                 })
-            })
+            })*/
         }
     }
 
