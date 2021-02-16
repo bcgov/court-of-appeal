@@ -44,10 +44,7 @@ class Header extends Component {
     }
 
     logout() {
-        let document = this.element.ownerDocument;
-        let window = document.defaultView;
-        document.cookie = 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        window.location = 'https://logon.gov.bc.ca/clp-cgi/logoff.cgi?returl=http%3a%2f%2fdev.justice.gov.bc.ca%2fcourt-of-appeal&retnow=1';
+        this.service.redirectToLogout()
     }
 
     closeErrorModal() {

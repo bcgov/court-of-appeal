@@ -2,9 +2,12 @@ let RestAdaptor = require('./rest.adaptor');
 let express = require('express');
 let bodyParser = require("body-parser");
 let morgan = require('morgan');
+let Keycloak = require('keycloak-connect');
+var session = require('express-session');
 
 function Server() {
     this.restAdaptor = new RestAdaptor();
+
     this.app = express();
     this.headers = [
         { name:'Access-Control-Allow-Origin', value:'*' },
@@ -16,6 +19,60 @@ function Server() {
 }
 
 Server.prototype.start = function (port, ip, done) {
+    if (!process.env.KEYCLOAK_CLIENT_ID || !process.env.KEYCLOAK_AUTH_URL || !process.env.KEYCLOAK_REALM || !process.env.KEYCLOAK_SECRET) {
+        console.error('Keycloak environment variables not provided, exiting... ')
+        process.kill(process.pid, 'SIGTERM')
+    }
+
+    //TODO remove memoryStore, use something else 
+    var memoryStore = new session.MemoryStore();
+
+    this.app.use(session({
+        secret: '545454',
+        resave: false,
+        saveUninitialized: true,
+        store: memoryStore
+        }));
+            
+    this.keycloak = new Keycloak(
+        { store: memoryStore, idpHint: 'bceid' },
+        {
+            'realm': process.env.KEYCLOAK_REALM,
+            'bearer-only': false,
+            'auth-server-url': process.env.KEYCLOAK_AUTH_URL,
+            'ssl-required': 'external',
+            'resource': process.env.KEYCLOAK_CLIENT_ID,
+            'credentials': {
+                'secret': process.env.KEYCLOAK_SECRET
+            }
+        });
+
+    //Rewrite the host, protocol headers, for keycloak. 
+    this.app.use(function (request, response, next) {
+        if (request.header('x-forwarded-host')) {
+            request.headers.protocol = request.header('x-forwarded-proto');
+            request.headers.host = request.header('x-forwarded-host') + ":" + request.header('x-forwarded-port');
+        }
+        next();
+    })
+    Keycloak.prototype.logoutUrl = function (redirectUrl) {
+        var keycloakLogoutUrl = this.config.realmUrl +
+        '/protocol/openid-connect/logout' +
+        '?post_logout_redirect_uri=' + encodeURIComponent(redirectUrl);
+        var siteMinderLogoutUrl = `https://logontest.gov.bc.ca/clp-cgi/logoff.cgi?returl=${keycloakLogoutUrl}&retnow=1`
+        return siteMinderLogoutUrl;
+    };
+      
+    Keycloak.prototype.redirectToLogin = function(req) {
+        var apiReqMatcher = /\/api\/login/i;
+        return apiReqMatcher.test(req.originalUrl || req.url);
+    };
+
+    this.app.use(this.keycloak.middleware({
+        logout: '/api/logout',
+        admin: '/'
+    }));
+
     this.app.use((request, response, next)=>{
         for (let i=0; i<this.requestheaders.length; i++) {
             let header = this.requestheaders[i];
@@ -27,19 +84,11 @@ Server.prototype.start = function (port, ip, done) {
         }
         next();
     });
-    this.app.use((request, response, next)=>{
-        if (request.method !== 'OPTIONS' && request.headers['smgov_userguid'] === undefined) {
-            console.log(request.headers);
-            response.statusCode = 401;
-            response.end(JSON.stringify({ message:'unauthorized' }));
-        } else {
-            next();
-        }
-    });
+
     this.app.use(morgan(':method :url :req[smgov_userguid]', { immediate:true }));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
-    this.restAdaptor.route(this.app);
+    this.restAdaptor.route(this.app, this.keycloak);
     this.server = this.app.listen(port, ip, done);
 };
 
