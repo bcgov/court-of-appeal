@@ -32,6 +32,10 @@ Service.prototype.redirectToLogin = function() {
     window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location.origin}`);
 }
 
+Service.prototype.redirectToLogout = function() {
+    window.location.replace(`${this.apiUrl}/api/logout?redirect_url=${window.location.origin}`);
+}
+
 Service.prototype.searchForm7 = function(file, callback) {
     let self = this;
     request.get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{

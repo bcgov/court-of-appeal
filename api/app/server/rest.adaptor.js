@@ -9,9 +9,7 @@ let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
 let ifNoError = require('./errors.handling');
 let pdf = require('html-pdf');
 let archiver = require('archiver');
-let Keycloak = require('keycloak-connect');
-var session = require('express-session');
-const { v4: uuidv4 } = require('uuid');
+
 const SubmitEFiling = require('../features/submit.efiling');
 
 let RestAdaptor = function() {
@@ -44,52 +42,9 @@ RestAdaptor.prototype.useDatabase = function(database) {
     this.saveAuthorizations.useDatabase(database);
     this.submitForm.useDatabase(database);
 };
-RestAdaptor.prototype.route = function(app) {
-    //TODO remove memoryStore, use something else 
-    var memoryStore = new session.MemoryStore();
-
-    app.use(session({
-        secret: '545454',
-        resave: false,
-        saveUninitialized: true,
-        store: memoryStore
-      }));
-
-    //rewrite the host, protocol headers. 
-    app.use(function (request, response, next) {
-        if (request.header('x-forwarded-host')) {
-            request.headers.protocol = request.header('x-forwarded-proto');
-            request.headers.host = request.header('x-forwarded-host') + ":" + request.header('x-forwarded-port');
-        }
-        next();
-    })
-
-    var keycloak = new Keycloak(
-        { store: memoryStore },
-        {
-            'realm': process.env.KEYCLOAK_REALM,
-            'bearer-only': false,
-            'auth-server-url': process.env.KEYCLOAK_AUTH_URL,
-            'ssl-required': 'external',
-            'resource': process.env.KEYCLOAK_CLIENT_ID,
-            'credentials': {
-                'secret': process.env.KEYCLOAK_SECRET
-            }
-        });
-
-    Keycloak.prototype.redirectToLogin = function(req) {
-           var apiReqMatcher = /\/api\/login/i;
-           return apiReqMatcher.test(req.originalUrl || req.url);
-    };
-
-    app.use(keycloak.middleware({
-        logout: '/api/logout',
-        admin: '/'
-    }));
-   
+RestAdaptor.prototype.route = function(app, keycloak) {
     app.post('/api/efiling/submit', (request, response) => {
-        this.submit
-        
+
     });
 
     app.get('/api/headers', (request, response) => {
@@ -258,7 +213,9 @@ RestAdaptor.prototype.route = function(app) {
         });
     });
     app.get('/api/journey', keycloak.protect(), (request, response)=> {
-        let login = request.headers['smgov_userguid'];
+        login = request.kauth.grant.id_token.content['universal-id'];
+        console.log('Universal ID: '+ login);
+        console.log('Preferred Username: ' + request.kauth.grant.id_token.content.preferred_username);
         this.myJourney.now(login, (data)=> {
             myJourneyResponse(data, response);
         });
@@ -282,34 +239,13 @@ RestAdaptor.prototype.route = function(app) {
             }
         });
     });
-    app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
-        let login = request.headers['smgov_userguid'];
-        let name = request.headers['smgov_userdisplayname'];
-        this.connectPerson.now(login, (data)=>{
-            if (!data.error) {
-                this.getPersonInfo.now(login, (user)=>{
-                    personInfoResponse({
-                        error: user.error,
-                        login:login,
-                        name:name,
-                        customization:user.customization?user.customization:undefined,
-                        clientId: user.clientId,
-                        accountId: user.accountId
-                    }, response);
-                });
-            }
-            else {
-                personInfoResponse(data, response);
-            }
-        })
-    });
     app.get('/api/accountusers', keycloak.protect(), (request, response)=> {
         let userguid = request.headers['smgov_userguid'];
         this.accountUsers.now(userguid, (data)=> {
             accountUsersResponse(data, response);
         });
     });
-    app.get('/*', function (req, res) { res.send( JSON.stringify({ message: 'pong' }) ); });
+    app.get('/*', keycloak.protect(), function (req, res) { res.send( JSON.stringify({ message: 'pong' }) ); });
 };
 
 
