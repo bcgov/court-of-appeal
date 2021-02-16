@@ -12,9 +12,7 @@ let Service = function(window) {
 };
 
 Service.prototype.base = function() {
-    let base = (this.apiUrl === undefined || this.apiUrl === null || this.apiUrl === 'null' ? '' : this.apiUrl)
-                + process.env.PUBLIC_URL;
-
+    let base = window.location.origin + process.env.PUBLIC_URL;
     return base
 };
 
@@ -30,6 +28,10 @@ Service.prototype.notifyOfError = function(callback, options) {
     }
 };
 
+Service.prototype.redirectToLogin = function() {
+    window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location.origin}`);
+}
+
 Service.prototype.searchForm7 = function(file, callback) {
     let self = this;
     request.get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
@@ -38,6 +40,9 @@ Service.prototype.searchForm7 = function(file, callback) {
         }
         else if (response && response.statusCode === 404) {
             callback(undefined);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -52,6 +57,9 @@ Service.prototype.createForm2 = function(form, callback) {
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -68,6 +76,9 @@ Service.prototype.updateForm2 = function(form, id, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -80,6 +91,9 @@ Service.prototype.getMyCases = function(form, callback) {
     request.get(this.buildOptions('/api/cases'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback, { cases:[] });
@@ -96,6 +110,9 @@ Service.prototype.getMyJourney = function(form, callback) {
         else if (response && response.statusCode === 404) {
             callback({ error:{ code:404, message:'not found' } });
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -109,6 +126,9 @@ Service.prototype.savePerson = function(user, callback) {
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(body);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -131,6 +151,9 @@ Service.prototype.getPersonInfo = function(callback) {
         else if (response && response.statusCode === 404) {
             callback({ error:{ code:404, message:'not found' } });
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -143,6 +166,9 @@ Service.prototype.archiveCases = function(ids, callback) {
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -158,6 +184,9 @@ Service.prototype.generatePdf = function(html, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -168,6 +197,9 @@ Service.prototype.previewForm = function(id, callback) {
     request.get(this.buildOptions('/api/forms/'+id+'/preview'), (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(body);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -181,6 +213,9 @@ Service.prototype.download = function(ids, callback) {
     request.get(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -196,6 +231,9 @@ Service.prototype.createJourney = function(journey, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -209,6 +247,9 @@ Service.prototype.updateJourney = function(journey, id, callback) {
     request.put(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -224,6 +265,9 @@ Service.prototype.createStep = function(step, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
+        }
         else {
             self.notifyOfError(callback);
         }
@@ -236,6 +280,9 @@ Service.prototype.submit = function(id, callback) {
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body));
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);
@@ -252,6 +299,9 @@ Service.prototype.getAccountUsers = function(callback) {
         }
         else if (response && response.statusCode === 404) {
             callback({ error: { code:404 }});
+        }
+        else if (response && response.statusCode == 403) {
+            self.redirectToLogin();
         }
         else {
             self.notifyOfError(callback);

@@ -38,12 +38,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-dev": "cross-env PROXY=http://localhost:8080 react-scripts start",
+    "start-dev": "cross-env NODE_ENV=development REACT_APP_API_URL=http://localhost:8080 react-scripts start",
     "build": "react-scripts build",
     "test": "unset REACT_APP_API_URL ; PUBLIC_URL='' jest",
     "eject": "react-scripts eject",
     "test:coverage": "PUBLIC_URL='' jest --coverage"
   },
+  "proxy": "http://localhost:8080",
   "jest": {
     "testEnvironment": "node",
     "transform": {
