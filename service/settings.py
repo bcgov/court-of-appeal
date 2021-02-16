@@ -10,6 +10,8 @@ CHES_AUTH_URL = os.environ.get("CHES_AUTH_URL", "")
 CHES_EMAIL_URL = os.environ.get("CHES_EMAIL_URL", "")
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "")
 SENDER_NAME = os.environ.get("SENDER_NAME", "")
+EMAIL_SERVICE_CLIENT_ID = os.environ.get("EMAIL_SERVICE_CLIENT_ID", "")
+EMAIL_SERVICE_CLIENT_SECRET = os.environ.get("EMAIL_SERVICE_CLIENT_SECRET", "")
 
 # Efiling
 EFILING_APP_NAME = os.environ.get("EFILING_APP_NAME", "Court Of Appeal")
