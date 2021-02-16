@@ -9,9 +9,7 @@ ConnectPerson.prototype.useDatabase = function(database) {
 
 ConnectPerson.prototype.now = function(login, callback) {
     this.database.savePerson({ login:login }, (id)=>{
-        this.hub.isAuthorized(login, (info)=>{
             this.database.savePersonConnectionInfo(login, info, callback)
-        })
     });
 };
 

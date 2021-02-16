@@ -1,24 +1,24 @@
 var extractCaseType = function(data) {
-    return data['soap:Envelope']['soap:Body']['SearchByCaseNumberResponse'] ?
-           data['soap:Envelope']['soap:Body']['SearchByCaseNumberResponse']['SearchByCaseNumberResult']['CaseType'] :
-           data['soap:Envelope']['soap:Body']['ViewCasePartyResponse'] ?
-           data['soap:Envelope']['soap:Body']['ViewCasePartyResponse']['ViewCasePartyResult']['CaseType'] :
+    return data.SearchByCaseNumberResponse ?
+           data.SearchByCaseNumberResult.CaseType :
+           data.ViewCasePartyResult ?
+           data.ViewCasePartyResult.CaseType :
            undefined;
 };
 
 var extractParties = function(data) {
-    return data['soap:Envelope']['soap:Body']['ViewCasePartyResponse'] ?
-           data['soap:Envelope']['soap:Body']['ViewCasePartyResponse']['ViewCasePartyResult']['Parties']['Party'] :
+    return data.ViewCasePartyResult ?
+            data.ViewCasePartyResult.Parties.Party:
            undefined;
 };
 
 var buildPartyInfo = function(party) {
     let info = {};
-    if (party['FirstName']) {
+    if (party.FirstName) {
         info.name = name(party)
     }
-    if (party['Organization']) {
-        info.organization = party['Organization'];
+    if (party.Organization) {
+        info.organization = party.Organization;
     }
     if (lawyer(party)) {
         info.solicitor = {
@@ -31,35 +31,35 @@ var buildPartyInfo = function(party) {
 var rawAppellants = function(parties) {
     var found = [];
     parties.forEach((party)=>{
-        if (party['PartyRole'] == 'Appellant') { found.push(party); }
+        if (party.PartyRole == 'Appellant') { found.push(party); }
     });
     return found;
 };
 var rawRespondents = function(parties) {
     var found = [];
     parties.forEach((party)=>{
-        if (party['PartyRole'] == 'Respondent') { found.push(party); }
+        if (party.PartyRole == 'Respondent') { found.push(party); }
     });
     return found;
 };
-var name = function(dude) {
-    return dude['FirstName']+' '+dude['LastName'];
+var name = function(person) {
+    return person.FirstName + ' ' + person.LastName;
 };
 var lawyer = function(party) {
-    return party['LegalRepresentation'] ? party['LegalRepresentation']['Lawyer'] : null;
+    return party.LegalRepresentation ? party.LegalRepresentation.Lawyer : null;
 };
 var lawyerFirm = function(party) {
-    return lawyer(party)['Firm'];
+    return lawyer(party)[0].Firm;
 };
 var lawyerFirmAddress = function(party) {
     var firm = lawyerFirm(party);
 
     return {
-        addressLine1:firm['Address1'],
-        addressLine2:firm['Address2'],
-        city:firm['City'],
-        postalCode:firm['PostalCode'],
-        province:firm['Province']
+        addressLine1:firm.Address1,
+        addressLine2:firm.Address2,
+        city:firm.City,
+        postalCode:firm.PostalCode,
+        province:firm.Province
     };
 };
 
