@@ -15,9 +15,6 @@ Persons.prototype.findByLogin = function(login, callback) {
 Persons.prototype.saveCustomization = function(person, callback) {
     execute('update person set customization=$2 where login=$1', [person.login, person.customization], callback);
 };
-Persons.prototype.saveConnectionInfo = function(login, accountId, clientId, callback) {
-    execute('update person set account_id=$1, client_id=$2 where login=$3', [accountId, clientId, login], callback)
-};
 
 module.exports = {
     Persons:Persons

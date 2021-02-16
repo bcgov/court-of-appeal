@@ -12,7 +12,6 @@ class Form2Proceed extends Component {
         this.state = props.location ? props.location.state : {};
         this.cancel = this.cancel.bind(this)
         this.confirm = this.confirm.bind(this)
-        this.backToAccess = this.backToAccess.bind(this)
         this.backToFill = this.backToFill.bind(this)
         this.backToPreview = this.backToPreview.bind(this)
     }
@@ -28,7 +27,7 @@ class Form2Proceed extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={4} steps={["Access","Form 2","Preview","Payment"]}/>
+            <ProgressStatusBar activeStep={3} steps={["Form 2","Preview","E-Filing"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -65,9 +64,6 @@ class Form2Proceed extends Component {
         );
     }
 
-    backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: this.state })
-    }
     backToFill() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
     }

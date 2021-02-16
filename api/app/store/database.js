@@ -127,11 +127,6 @@ Database.prototype.savePerson = function(person, callback) {
         }
     }));
 };
-Database.prototype.savePersonConnectionInfo = function(login, info, callback) {
-    this.persons.saveConnectionInfo(login, info.accountId, info.clientId, ifError({notify:callback}).otherwise((rows)=> {
-        callback(login)
-    }));
-};
 Database.prototype.saveCustomization = function(person, callback) {
     this.savePerson(person, ()=>{
         this.persons.saveCustomization(person, ifError({notify:callback}).otherwise((rows, error)=> {
@@ -162,11 +157,7 @@ Database.prototype.personInfo = function(login, callback) {
         else {
             let person = rows[0];
             callback({
-                login:person.login,
-                name:person.name,
-                customization:JSON.parse(person.customization),
-                clientId:person.client_id,
-                accountId:person.account_id
+                login:person.login
             });
         }
     }));
