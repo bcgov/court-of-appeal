@@ -15,8 +15,9 @@ EMAIL_SERVICE_CLIENT_SECRET = os.environ.get("EMAIL_SERVICE_CLIENT_SECRET", "")
 
 # Efiling
 EFILING_APP_NAME = os.environ.get("EFILING_APP_NAME", "Court Of Appeal")
-EFILING_COURT_LEVEL = os.environ.get("EFILING_COURT_LEVEL", "S")
-EFILING_COURT_CLASS = os.environ.get("EFILING_COURT_CLASS", "P")
+EFILING_COURT_LEVEL = os.environ.get("EFILING_COURT_LEVEL", "A")
+EFILING_COURT_CLASS = os.environ.get("EFILING_COURT_CLASS", "O")  # https://bcgov.github.io/jag-file-submission/#/data?id=court-classification
+EFILING_COURT_DIVISION = os.environ.get("EFILING_COURT_DIVISION", "I")
 EFILING_HUB_API_BASE_URL = os.environ.get("EFILING_HUB_API_BASE_URL", "")
 EFILING_HUB_KEYCLOAK_BASE_URL = os.environ.get("EFILING_HUB_KEYCLOAK_BASE_URL", "")
 EFILING_HUB_KEYCLOAK_CLIENT_ID = os.environ.get("EFILING_HUB_KEYCLOAK_CLIENT_ID", "")
