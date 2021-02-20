@@ -12,7 +12,6 @@ class EFilingSubmission(EFilingHubCallerBase):
         self.packaging = packaging
         self.submission_id = None
         self.access_token = None
-        self.refresh_token = None
         EFilingHubCallerBase.__init__(self)
 
     def _clean_error_message(self, details):
@@ -31,18 +30,14 @@ class EFilingSubmission(EFilingHubCallerBase):
             if not self._get_token():
                 raise Exception("EFH - Unable to get API Token")
 
-        headers = self._set_headers(headers, bceid_guid, transaction_id)
-        response = requests.post(url, headers=headers, data=data, files=files)
-        logger.debug("EFH - Get API %d %s", response.status_code, response.text)
-
-        if response.status_code == 401:
-            if self._refresh_token():
-                headers = self._set_headers(headers, bceid_guid, transaction_id)
-                response = requests.post(url, headers=headers, data=data, files=files)
-                logger.debug(
-                    "EFH - Get API Retry %d %s", response.status_code, response.text
-                )
-
+        for try_number in range(1):
+            if (try_number > 0):
+                self._get_token()
+            headers = self._set_headers(headers, bceid_guid, transaction_id)
+            response = requests.post(url, headers=headers, json=data, files=files)
+            logger.debug("EFH - Get API %d %s", response.status_code, response.text)
+            if response.status_code != 401:
+                return response
         return response
 
     def upload_documents(self, bceid_guid, transaction_id, files):
@@ -50,6 +45,7 @@ class EFilingSubmission(EFilingHubCallerBase):
             response = self._get_api(
                 f"{self.api_base_url}/submission/documents",
                 bceid_guid,
+                data={},
                 headers={},
                 transaction_id=transaction_id,
                 files=files,
@@ -64,7 +60,10 @@ class EFilingSubmission(EFilingHubCallerBase):
             logger.error("Error: {}".format(e))
             return None
 
-    # transaction_id and submission_id come from previous requests (ie upload_documents).
+    """ transaction_id and submission_id come from previous requests (ie upload_documents).
+        These are split up intentionally, incase clients want to upload their own documents
+        in a seperate step which could prove to be problematic.
+    """
     def generate_efiling_url(self, bceid_guid, transaction_id, submission_id, data):
         package_data = self.packaging.build_efiling_body(data)
         logger.debug(f"submission_id:{submission_id}")
@@ -88,9 +87,3 @@ class EFilingSubmission(EFilingHubCallerBase):
             return None, self._clean_error_message(response["details"])
 
         return None, f"{response['error']} - {response['message']}"
-
-    # May or may not use.
-    def upload_and_submit(self, bceid_guid, transaction_id, data, files):
-        upload_result = self.upload_documents(bceid_guid, transaction_id, files)
-        submission_id = upload_result['submission_id']
-        return self.generate_efiling_url(bceid_guid, transaction_id, submission_id, data)
