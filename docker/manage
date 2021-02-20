@@ -115,6 +115,7 @@ build-web() {
   echo -e "----------------------------------------------------------------------------------------------------"
   ${S2I_EXE} build \
     --copy \
+	-s 'file://./yarn-builder/s2i/bin' \
     '../web' \
     'yarn-builder' \
     ${COMPOSE_PROJECT_NAME}'-web-artifacts'
@@ -211,7 +212,7 @@ configureEnvironment () {
   # api
   export SMGOV_USERGUID=${SMGOV_USERGUID:-\'95EB360C2C384711AD1818664D85FE76\'}
   export SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME:-\'User\, Test\'}
-  export HUB_URL=${HUB_URL:http://hub-jag-efiling-dev.pathfinder.gov.bc.ca}
+  export HUB_URL=${HUB_URL:-http://service:5000}
   export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
   
   # db

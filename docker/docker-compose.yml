@@ -16,10 +16,12 @@ services:
       - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
       - KEYCLOAK_REALM=${KEYCLOAK_REALM}
       - KEYCLOAK_SECRET=${KEYCLOAK_SECRET}
+      - COOKIE_SECRET=${COOKIE_SECRET}
     ports:
       - 8081:8080
     depends_on:
       - db
+      - service
     command: >
       /bin/bash -c 'while !</dev/tcp/db/5432; do sleep 1; echo Waiting for database connection ...; done; /usr/libexec/s2i/run;'
 
@@ -65,8 +67,6 @@ services:
       - IpFilterRules=${IpFilterRules}
       - RealIpFrom=${RealIpFrom}
       - WEB_BASE_HREF=${WEB_BASE_HREF}
-      - SMGOV_USERGUID=${SMGOV_USERGUID}
-      - SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME}
     ports:
       - 8080:8080
     depends_on:
