@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Trail from "./Trail";
 let cn = require("classnames");
 class RightTurn extends Component {
 

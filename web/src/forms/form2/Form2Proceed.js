@@ -27,34 +27,20 @@ class Form2Proceed extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={3} steps={["Form 2","Preview","E-Filing"]}/>
+            <ProgressStatusBar activeStep={3} steps={["Form 2","Preview","Submit"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
-                    <div className="page-title">Confirm Payment Amount</div>
+                    <div className="page-title">Submit through E-Filing</div>
                 </div>
             </div>
 
             <div className="row section section-white">
                 <div className="col-xs-12">
-                    <table width="100%">
-                        <tbody>
-                            <tr style={{fontWeight:'bold'}}>
-                                <td>Fee Type</td><td style={{textAlign:'right'}}>Fee Amount</td>
-                            </tr>
-                            <tr style={{}}>
-                                <td>CSO Fee</td><td style={{textAlign:'right'}}>$7.00</td>
-                            </tr>
-                            <tr style={{ borderTop:'1px solid black' }}>
-                                <td style={{fontWeight:'bold'}}>Total:</td><td style={{textAlign:'right'}}>$7.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    This amount will be billed using the payment info of your account.
                     <div style={{textAlign:'right', paddingTop:'15px'}}>
                         <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
                         <SpinnerButton id="payment-confirmed" width="150" addClass="proceed-confirmation" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
-                            content='Confirmation'>
+                            content='Submit'>
                         </SpinnerButton>
                     </div>
                 </div>
