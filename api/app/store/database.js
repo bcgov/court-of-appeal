@@ -1,7 +1,6 @@
 let { Forms } = require('./forms');
 let { Persons } = require('./persons');
 let { Journey } = require('./journey');
-let { Authorizations } = require('./authorizations');
 
 let ifError = function(please) {
     return {
@@ -22,7 +21,6 @@ let Database = function() {
     this.forms = new Forms();
     this.persons = new Persons();
     this.journey = new Journey();
-    this.authorizations = new Authorizations()
 };
 
 Database.prototype.createJourney = function(journey, callback) {
@@ -92,11 +90,12 @@ Database.prototype.updateForm = function(form, callback) {
         })
     );
 };
+
 Database.prototype.submitForm = function(id, callback) {
     this.forms.updateStatus(id, 'Submitted', ifError({notify:callback}).otherwise((rows)=>{
         callback(rows);
     }))
-}
+};
 
 Database.prototype.myCases = function(login, callback) {
     this.forms.selectByLogin(login, ifError({notify:callback}).otherwise((rows)=> {
@@ -115,6 +114,7 @@ Database.prototype.myCases = function(login, callback) {
         }));
     }));
 };
+
 Database.prototype.savePerson = function(person, callback) {
     this.persons.findByLogin(person.login, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length ==0) {
@@ -127,6 +127,7 @@ Database.prototype.savePerson = function(person, callback) {
         }
     }));
 };
+
 Database.prototype.saveCustomization = function(person, callback) {
     this.savePerson(person, ()=>{
         this.persons.saveCustomization(person, ifError({notify:callback}).otherwise((rows, error)=> {
@@ -134,11 +135,13 @@ Database.prototype.saveCustomization = function(person, callback) {
         }));
     });
 };
+
 Database.prototype.archiveCases = function(ids, callback) {
     this.forms.archive(ids, ifError({notify:callback}).otherwise((rows)=> {
         callback(rows);
     }));
 };
+
 Database.prototype.formData = function(id, callback) {
     this.forms.selectOne(id, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length === 0) {
@@ -149,6 +152,7 @@ Database.prototype.formData = function(id, callback) {
         }
     }));
 };
+
 Database.prototype.personInfo = function(login, callback) {
     this.persons.findByLogin(login, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length ==0) {
@@ -162,11 +166,4 @@ Database.prototype.personInfo = function(login, callback) {
         }
     }));
 };
-Database.prototype.saveAuthorization = function(formId, authorization, callback) {
-    this.authorizations.create(formId, authorization, callback)
-};
-Database.prototype.deleteAuthorizations = function(formId, callback) {
-    this.authorizations.delete(formId, callback)
-};
-
 module.exports = Database;

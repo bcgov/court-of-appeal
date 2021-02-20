@@ -17,22 +17,6 @@ Forms.prototype.selectByLogin = function(login, callback) {
         AND     forms.person_id = person.id
         AND     forms.status <> 'archived'
 
-        union
-
-        SELECT  forms.id,
-                authorizations.is_admin,
-                forms.type,
-                forms.status,
-                forms.modified,
-                forms.data,
-                forms.person_id
-        FROM    authorizations, forms, person
-        WHERE   authorizations.is_active = true
-        AND     forms.id = authorizations.form_id
-        AND     person.client_id = authorizations.client_id
-        AND     person.login = $1
-        AND     forms.status <> 'archived'
-
         ORDER BY modified DESC
     `;
     execute(select, [login], callback);
@@ -57,12 +41,14 @@ Forms.prototype.create = function(options, callback) {
             execute('SELECT last_value FROM forms_id_seq;', [], callback);
         });
 };
+
 Forms.prototype.update = function(form, callback) {
     execute('update forms set type = $1, status = $2, data = $3, modified = current_timestamp where id = $4',
         [form.type, form.status, form.data, form.id], function() {
             execute('SELECT last_value FROM forms_id_seq;', [], callback);
         });
 };
+
 Forms.prototype.archive = function(ids, callback) {
     let statements = [];
     for (var i=0; i<ids.length; i++) {
@@ -70,6 +56,7 @@ Forms.prototype.archive = function(ids, callback) {
     }
     execute(statements, [], callback);
 };
+
 Forms.prototype.updateStatus = function(id, status, callback) {
     execute('update forms set status = $2, modified = current_timestamp where id = $1', [id, status], callback);
 };

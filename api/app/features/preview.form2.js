@@ -42,21 +42,26 @@ PreviewForm2.prototype.reduce = function(array) {
 PreviewForm2.prototype.filterSelected = function(array) {
     return array.filter((item)=> item.selected);
 };
+
 PreviewForm2.prototype.label = function(array) {
     return array.length > 1 ? 's': '';
 };
+
 PreviewForm2.prototype.address = function(data) {
     return data.respondents[data.selectedContactIndex].address;
 };
+
 PreviewForm2.prototype.extract = function(field, data) {
     return  this.address(data) && this.address(data)[field] ? this.address(data)[field] : '';
 };
+
 PreviewForm2.prototype.removeIfBlock = function(name, html) {
     let startIndex = html.indexOf('{if ' + name + '}');
     let endIndex = html.indexOf('{endif ' + name + '}');
 
     return html.substring(0, startIndex).trim() + html.substring(endIndex + ('{endif ' + name + '}').length);
 };
+
 PreviewForm2.prototype.removeIfCondition = function(name, html) {
     let startIndex = html.indexOf('{if ' + name + '}');    
     let tmp = html.substring(0, startIndex).trim() + html.substring(startIndex + ('{if ' + name + '}').length);
