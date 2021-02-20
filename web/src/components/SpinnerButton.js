@@ -20,7 +20,7 @@ class SpinnerButton extends React.Component {
             return (
                 <div style={{display:'inline-block'}}>
                 <button id={this.props.id}
-                        disabled="true"
+                        disabled={true}
                         className={ 'btn btn-primary btn-green round-borders action-button ' + this.props.addClass }
                         style={{ width:this.props.width+'px' }}
                 >

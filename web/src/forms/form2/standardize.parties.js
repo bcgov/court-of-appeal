@@ -5,10 +5,16 @@ let standardize = function(entities) {
         let entityMap = {};
         if (entity.name) {
             entityMap['name'] = entity.name;
+            entityMap['firstName'] = entity.firstName;
+            entityMap['lastName'] = entity.lastName;
         } else if (entity.organization) {
             entityMap['name'] = entity.organization;
+            entityMap['firstName'] = entity.organization;
+            entityMap['organization'] = entity.organization;
         } else if (entity.solicitor) {
             entityMap['name'] = entity.solicitor.name;
+            entityMap['firstName'] = entity.solicitor.firstName;
+            entityMap['lastName'] = entity.solicitor.lastName;
         }
 
         if (entity.solicitor && entity.solicitor.address) {

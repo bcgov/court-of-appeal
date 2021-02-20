@@ -50,7 +50,7 @@ class Form2Fill extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","E-Filing"]} />
+            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","Submit"]} />
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -369,8 +369,7 @@ class Form2Fill extends Component {
             useServiceEmail: this.state.useServiceEmail,
             sendNotifications: this.state.sendNotifications,
             selectedContactIndex: this.state.selectedContactIndex,
-            account: this.state.account,
-            authorizations: this.state.authorizations
+            account: this.state.account
         }
         if (!this.state.id) {
             this.service.createForm2(form, (formId) => {

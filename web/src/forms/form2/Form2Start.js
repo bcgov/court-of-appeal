@@ -31,7 +31,7 @@ class Form2Start extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","E-Filing"]}/>
+            <ProgressStatusBar activeStep={1} steps={["Form 2","Preview","Submit"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -46,7 +46,7 @@ class Form2Start extends Component {
                         Lower Court Case Information
                     </div>
                     <div>
-                        Find the Suprem Court case appeal you are responding to by entering the following case information:
+                        Find the Supreme Court case appeal you are responding to by entering the following case information:
                     </div>
                     <table>
                         <tbody>

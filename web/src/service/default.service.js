@@ -29,11 +29,11 @@ Service.prototype.notifyOfError = function(callback, options) {
 };
 
 Service.prototype.redirectToLogin = function() {
-    window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location.origin}`);
+    window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location}`);
 }
 
 Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.apiUrl}/api/logout?redirect_url=${window.location.origin}`);
+    window.location.replace(`${this.apiUrl}/api/logout?redirect_url=${window.location}`);
 }
 
 Service.prototype.searchForm7 = function(file, callback) {
@@ -45,7 +45,7 @@ Service.prototype.searchForm7 = function(file, callback) {
         else if (response && response.statusCode === 404) {
             callback(undefined);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -62,7 +62,7 @@ Service.prototype.createForm2 = function(form, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -80,7 +80,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -96,7 +96,7 @@ Service.prototype.getMyCases = function(form, callback) {
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -114,7 +114,7 @@ Service.prototype.getMyJourney = function(form, callback) {
         else if (response && response.statusCode === 404) {
             callback({ error:{ code:404, message:'not found' } });
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -131,7 +131,7 @@ Service.prototype.savePerson = function(user, callback) {
         if (response && response.statusCode === 201) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -155,7 +155,7 @@ Service.prototype.getPersonInfo = function(callback) {
         else if (response && response.statusCode === 404) {
             callback({ error:{ code:404, message:'not found' } });
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -171,7 +171,7 @@ Service.prototype.archiveCases = function(ids, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -188,7 +188,7 @@ Service.prototype.generatePdf = function(html, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -202,7 +202,7 @@ Service.prototype.previewForm = function(id, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -218,7 +218,7 @@ Service.prototype.download = function(ids, callback) {
         if (response && response.statusCode === 200) {
             callback(body);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -235,7 +235,7 @@ Service.prototype.createJourney = function(journey, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -252,7 +252,7 @@ Service.prototype.updateJourney = function(journey, id, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -269,7 +269,7 @@ Service.prototype.createStep = function(step, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -304,7 +304,7 @@ Service.prototype.getAccountUsers = function(callback) {
         else if (response && response.statusCode === 404) {
             callback({ error: { code:404 }});
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -312,5 +312,7 @@ Service.prototype.getAccountUsers = function(callback) {
         }
     });
 }
+
+
 
 module.exports = Service;
