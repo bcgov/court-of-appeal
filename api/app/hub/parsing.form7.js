@@ -16,6 +16,8 @@ var buildPartyInfo = function(party) {
     let info = {};
     if (party.FirstName) {
         info.name = name(party)
+        info.firstName = party.FirstName;
+        info.lastName = party.LastName;
     }
     if (party.Organization) {
         info.organization = party.Organization;
@@ -23,11 +25,14 @@ var buildPartyInfo = function(party) {
     if (lawyer(party)) {
         info.solicitor = {
             name: name(lawyer(party)),
+            firstName: lawyer(party).FirstName,
+            lastName: lawyer(party).LastName,
             address: lawyerFirmAddress(party)
         }
     }
     return info;
 };
+
 var rawAppellants = function(parties) {
     var found = [];
     parties.forEach((party)=>{
@@ -35,6 +40,7 @@ var rawAppellants = function(parties) {
     });
     return found;
 };
+
 var rawRespondents = function(parties) {
     var found = [];
     parties.forEach((party)=>{
@@ -42,18 +48,21 @@ var rawRespondents = function(parties) {
     });
     return found;
 };
+
 var name = function(person) {
     return person.FirstName + ' ' + person.LastName;
 };
+
 var lawyer = function(party) {
     return party.LegalRepresentation ? party.LegalRepresentation.Lawyer : null;
 };
+
 var lawyerFirm = function(party) {
     return lawyer(party)[0].Firm;
 };
+
 var lawyerFirmAddress = function(party) {
     var firm = lawyerFirm(party);
-
     return {
         addressLine1:firm.Address1,
         addressLine2:firm.Address2,

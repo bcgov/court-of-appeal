@@ -1,4 +1,5 @@
 const { default: axios } = require('axios');
+const { v4: uuidv4 } = require('uuid');
 var { request } = require('http');
 var { extractBody } = require('./extract.body')
 var {
@@ -7,14 +8,17 @@ var {
     rawAppellants,
     rawRespondents,
     extractCaseType
-} = require('./parsing');
+} = require('./parsing.form7');
+
+const { buildEFilingPackage } = require('./build.efiling');
 
 function Hub(url, timeout) {
     this.url = url;
     this.host = this.extractHost(url)
     this.port = this.extractPort(url)
     this.timeout = timeout;
-}
+};
+
 Hub.prototype.extractHost = function(url) {
     var value = url.substring(url.indexOf('://')+3)
     if (value.indexOf(':') != -1) {
@@ -24,13 +28,15 @@ Hub.prototype.extractHost = function(url) {
         return value.substring(0, value.indexOf('/'))
     }
     return value
-}
+};
+
 Hub.prototype.extractPort = function(url) {
     var value = url.substring(url.indexOf('://')+3)
     value = value.substring(value.indexOf(':')+1)
     var port = parseInt(value)
     return isNaN(port) ? 80 : port
-}
+};
+
 Hub.prototype.accountUsers = function(userguid, callback) {
     var info = {
         method: 'GET',
@@ -60,45 +66,37 @@ Hub.prototype.accountUsers = function(userguid, callback) {
         callback({ error: {code:503} })
     });
     please.end();
-}
-Hub.prototype.submitForm = function(login, formData, pdf, callback) {
-    var options = {
-        method: 'POST',
-        host: this.host,
-        port: this.port,
-        path: '/save',
-        timeout: this.timeout,
-        headers: {
-            'smgov_userguid': login, //todo
-            'data': JSON.stringify(formData)
-        }
+};
+
+Hub.prototype.submitForm = async function(bceidGuid, data, pdf, callback) {
+    let efilingData = buildEFilingPackage(data, pdf);
+    let transactionId = uuidv4();
+    let submissionId;
+    try {
+        let url = `http://${this.host}:${this.port}/efiling/uploadForm2`;
+        const document_submit = await axios.post(url, {bceidGuid, transactionId, pdf});
+        submissionId = document_submit.data.submissionId;
+    } catch (error) {
+        console.log(error);
     }
-    var timedout = false
-    var save = request(options, function(response) {
-        if (timedout) { return }
-        extractBody(response, (body)=>{
-            var data = JSON.parse(body);
-            if (response.statusCode === 200) {
-                    callback(data)
-            }
-            else {
-                var answer = { error: {code:response.statusCode} }
-                if (data.message) {
-                    answer.error.message = data.message
-                }
-                callback(answer);
-            }
-        })
-    });
-    save.on('error', (err)=>{
-        callback({ error: {code:503} })
-    })
-    save.on('timeout', (err)=>{
-        timedout = true
-        callback({ error: {code:503} })
-    });
-    save.end(pdf);
-}
+
+    //This is very unlikely to happen, as we're in control of the document generation.
+    if (!submissionId) {
+        console.log('No submissionId returned from document upload.')
+        callback('Error with document upload.')
+        return;
+    }
+
+    try {
+        const url = `http://${this.host}:${this.port}/efiling/submit`
+        const efiling_submit = await axios.post(url, 
+            {bceidGuid, transactionId, submissionId, 'data': efilingData});
+        callback(efiling_submit);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 Hub.prototype.searchForm7 = function(file, callback) {
     var options = {
         method: 'GET',
@@ -153,29 +151,6 @@ Hub.prototype.searchForm7 = function(file, callback) {
         callback({ error: {code:503} })
     })
     search.end()
-}
-Hub.prototype.submitEFiling = async function(files, bceidGuid, transactionId, files, data, callback) {
-    const document_submit = await axios.post(`http://${this.host}:${this.port}/efiling/uploadDocuments`,
-    {
-        bceidGuid,
-        transactionId,
-        files
-    });
-
-    let submissionId = document_submit.submission_id;
-    if (!submissionId) {
-        callback(document_submit)
-        return;
-    }
-
-    const efiling_submit = await axios.post(`http://${this.host}:${this.port}/efiling/submit`,
-    {
-        bceidGuid,
-        transactionId, 
-        submissionId,
-        data
-    });
-
-    callback(efiling_submit);
 };
+
 module.exports = Hub;

@@ -3,20 +3,24 @@ let send503 = function(response) {
     response.write(JSON.stringify({message:'service unavailable'}));
     response.end();
 };
+
 let send404 = function(response) {
     response.statusCode = 404;
     response.end(JSON.stringify({message:'not found'}));
 };
+
 let send500 = function(message, response) {
     response.statusCode = 500;
     response.write(message);
     response.end();
 };
+
 let send403 = function(message, response) {
     response.statusCode = 403;
     response.write(JSON.stringify({message:message}));
     response.end();
 };
+
 module.exports = function(data, response) {
     let withoutError = { then: (doThat)=> { doThat(); }};
     let errorFound = { then: (stop)=> {}};

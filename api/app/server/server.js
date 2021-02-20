@@ -3,8 +3,9 @@ let express = require('express');
 let bodyParser = require("body-parser");
 let morgan = require('morgan');
 let Keycloak = require('keycloak-connect');
-var session = require('express-session');
-
+let pg = require('pg')
+let session = require('express-session');
+var pgSession = require('connect-pg-simple')(session);
 function Server() {
     this.restAdaptor = new RestAdaptor();
 
@@ -19,33 +20,38 @@ function Server() {
 }
 
 Server.prototype.start = function (port, ip, done) {
+    // Keycloak Start
     if (!process.env.KEYCLOAK_CLIENT_ID || !process.env.KEYCLOAK_AUTH_URL || !process.env.KEYCLOAK_REALM || !process.env.KEYCLOAK_SECRET) {
         console.error('Keycloak environment variables not provided, exiting... ')
         process.kill(process.pid, 'SIGTERM')
     }
 
-    //TODO remove memoryStore, use something else 
-    var memoryStore = new session.MemoryStore();
+    var pgStore = new pgSession({
+      pool: new pg.Pool(),
+    });
 
-    this.app.use(session({
-        secret: '545454',
+    this.app.use(
+      session({
+        secret: process.env.COOKIE_SECRET,
         resave: false,
-        saveUninitialized: true,
-        store: memoryStore
-        }));
-            
+        saveUninitialized: false,
+        store: pgStore,
+      })
+    );
+
     this.keycloak = new Keycloak(
-        { store: memoryStore, idpHint: 'bceid' },
-        {
-            'realm': process.env.KEYCLOAK_REALM,
-            'bearer-only': false,
-            'auth-server-url': process.env.KEYCLOAK_AUTH_URL,
-            'ssl-required': 'external',
-            'resource': process.env.KEYCLOAK_CLIENT_ID,
-            'credentials': {
-                'secret': process.env.KEYCLOAK_SECRET
-            }
-        });
+      { store: pgStore, idpHint: "bceid" },
+      {
+        realm: process.env.KEYCLOAK_REALM,
+        "bearer-only": false,
+        "auth-server-url": process.env.KEYCLOAK_AUTH_URL,
+        "ssl-required": "external",
+        resource: process.env.KEYCLOAK_CLIENT_ID,
+        credentials: {
+          secret: process.env.KEYCLOAK_SECRET,
+        },
+      }
+    );
 
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
@@ -72,6 +78,7 @@ Server.prototype.start = function (port, ip, done) {
         logout: '/api/logout',
         admin: '/'
     }));
+    // Keycloak END
 
     this.app.use((request, response, next)=>{
         for (let i=0; i<this.requestheaders.length; i++) {

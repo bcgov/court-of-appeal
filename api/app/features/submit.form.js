@@ -1,11 +1,13 @@
 let SubmitForm = function() {
 };
+
 SubmitForm.prototype.useHub = function(hub) {
     this.hub = hub;
-}
+};
+
 SubmitForm.prototype.useDatabase = function(database) {
     this.database = database;
-}
+};
 
 SubmitForm.prototype.now = function(login, id, pdf, callback) {
     this.database.formData(id, (data)=> {

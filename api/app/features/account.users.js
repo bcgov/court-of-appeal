@@ -20,7 +20,6 @@ AccountUsers.prototype.now = function(userguid, callback) {
                     user.isEditable = !user.isAdmin
                 }
                 data.client = undefined
-                data.authorizations = users
 
                 callback(data)
             }
