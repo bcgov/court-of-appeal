@@ -1,6 +1,5 @@
 import logging
-from flask import request
-from flask import Flask
+from flask import Flask, request, abort
 from waitress import serve
 from zeep import helpers
 from utils.ches_email import ChesEmail
@@ -17,6 +16,8 @@ def form7_search():
     case_number = request.args.get('caseNumber')
     form7_search = Form7Search()
     result = form7_search.execute_search(case_number)
+    if (result == 'NOT FOUND'):
+        abort(404)
     return helpers.serialize_object(result)
 
 
@@ -61,4 +62,4 @@ def submit():
 
 
 if __name__ == "__main__":
-    serve(app, host='0.0.0.0', port=5000)
+    serve(app, host='0.0.0.0', port=5000, threaded=True)

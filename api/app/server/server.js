@@ -94,11 +94,12 @@ Server.prototype.start = function (port, ip, done) {
         //if the IDIR user is detected It will log them out, and attempt to login with BCEID. 
         if (!["/api/login","/api/logout"].some(v => request.url.includes(v)) && request.kauth && request.kauth.grant) {
             let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
-            if (notBCEID) 
+            if (notBCEID) {
                 response.sendStatus(403)
+                return;
+            }
         }
-        else 
-            next();
+        next();
     });
 
     this.app.use(morgan(':method :url', { immediate:true }));
