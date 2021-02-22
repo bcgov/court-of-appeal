@@ -62,4 +62,4 @@ def submit():
 
 
 if __name__ == "__main__":
-    serve(app, host='0.0.0.0', port=5000, threaded=True)
+    serve(app, host='0.0.0.0', port=5000)

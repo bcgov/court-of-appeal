@@ -39,7 +39,7 @@ class Form7Search:
     def execute_search(self, case_number) -> {}:
         search_by_case_number = self.client.service.SearchByCaseNumber(case_number)
 
-        if search_by_case_number is None:
+        if search_by_case_number is None or search_by_case_number["CaseId"] == -1:
             return self.handle_not_found(case_number)
         elif search_by_case_number["CaseType"] == "Civil":
             return self.handle_civil_search(search_by_case_number["CaseId"])
