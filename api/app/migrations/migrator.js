@@ -1,5 +1,5 @@
 let fs = require('fs');
-let { execute } = require('yop-postgresql');
+let { execute } = require('app/lib/yop.postgresql');
 
 let Migrator = function() {
 };

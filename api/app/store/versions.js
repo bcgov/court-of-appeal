@@ -1,10 +1,10 @@
-let { execute } = require('yop-postgresql');
+let { execute, executePool } = require('app/lib/yop.postgresql');
 
 let Versions = function() {
 };
 
 Versions.prototype.selectAll = function(callback) {
-    execute('select id from versions', [], callback);
+    executePool('select id from versions', [], callback);
 };
 
 module.exports = {
