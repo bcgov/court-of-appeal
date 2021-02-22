@@ -198,8 +198,6 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.get('/api/journey', keycloak.protect(), (request, response)=> {
         login = request.kauth.grant.id_token.content['universal-id'];
-        console.log('Universal ID: '+ login);
-        console.log('Preferred Username: ' + request.kauth.grant.id_token.content.preferred_username);
         this.myJourney.now(login, (data)=> {
             myJourneyResponse(data, response);
         });

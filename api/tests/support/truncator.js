@@ -1,4 +1,4 @@
-var { execute } = require('yop-postgresql');
+var { execute } = require('../../app/libs/yop.postgresql');
 var { expect } = require('chai')
 
 var Truncator = function() {
