@@ -2,6 +2,7 @@ const { whenDev } = require("@craco/craco");
 
 module.exports = {
     devServer: whenDev(() => ({
+        historyApiFallback: true,
 		proxy: {
 			'/api': {
 				target: 'http://localhost:8080',
