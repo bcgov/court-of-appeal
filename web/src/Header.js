@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DefaultService from './service/default.service.js';
 import './header.css';
 
@@ -83,9 +84,9 @@ class Header extends Component {
                         <div className="container">
                             <div id="row">
                                 <div className="col-xs-6 text-left">
-                                    <a href={this.homePath}>HOME</a>
-                                    <a href={process.env.PUBLIC_URL + '/my-documents.html'}>MY DOCUMENTS</a>
-                                    <a href={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</a>
+                                    <Link to='/'>HOME</Link>
+                                    <Link to='/my-documents'>MY DOCUMENTS</Link>
+                                    <Link to='/'>ALL DOCUMENTS</Link>
                                 </div>
                                 <div className="col-xs-6 text-right icons">
                                     <a href={process.env.PUBLIC_URL}>

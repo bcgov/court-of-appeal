@@ -34,7 +34,7 @@ describe('App', ()=>{
 
     test('can load MyDocuments', ()=>{
         const app = mount(
-            <MemoryRouter initialEntries={[ '/my-documents.html' ]}>
+            <MemoryRouter initialEntries={[ '/my-documents' ]}>
                 <App fetch="false" service={ {getPersonInfo:(callback)=>{ callback({}) } }}/>
             </MemoryRouter>
         );
