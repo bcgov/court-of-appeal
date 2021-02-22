@@ -22,7 +22,7 @@ class ActiveFormList extends Component {
                         No open cases found
                 </div>
                 <div>
-                    <Link to='/my-documents' className="btn btn-primary round-borders">View All Documents</Link>
+                    <Link to={process.env.PUBLIC_URL + '/my-documents'} className="btn btn-primary round-borders">View All Documents</Link>
                 </div>
             </div>
         )
