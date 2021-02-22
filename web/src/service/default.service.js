@@ -1,5 +1,4 @@
 let request = require('request');
-
 let Service = function(window) {
     this.window = window;
     this.apiUrl = undefined;
@@ -70,7 +69,6 @@ Service.prototype.createForm2 = function(form, callback) {
         }
     });
 };
-
 
 Service.prototype.updateForm2 = function(form, id, callback) {
     let options = this.buildOptions(`/api/forms/${id}`);
@@ -146,6 +144,7 @@ Service.prototype.buildOptions = function(url) {
         'content-type': 'application/json'
     };
 };
+
 Service.prototype.getPersonInfo = function(callback) {
     let self = this;
     request.get(this.buildOptions('/api/persons/connected'), (err, response, body)=>{
@@ -163,6 +162,7 @@ Service.prototype.getPersonInfo = function(callback) {
         }
     });
 };
+
 Service.prototype.archiveCases = function(ids, callback) {
     let options = this.buildOptions('/api/cases/archive');
     options.form = { ids:JSON.stringify(ids) };
@@ -179,6 +179,7 @@ Service.prototype.archiveCases = function(ids, callback) {
         }
     });
 };
+
 Service.prototype.generatePdf = function(html, callback) {
     let options = this.buildOptions('/api/pdf');
     let self = this;
@@ -196,6 +197,7 @@ Service.prototype.generatePdf = function(html, callback) {
         }
     });
 };
+
 Service.prototype.previewForm = function(id, callback) {
     let self = this;
     request.get(this.buildOptions('/api/forms/'+id+'/preview'), (err, response, body)=>{
@@ -210,6 +212,7 @@ Service.prototype.previewForm = function(id, callback) {
         }
     });
 };
+
 Service.prototype.download = function(ids, callback) {
     let options = this.buildOptions('/api/zip?id=' + ids.join('&id='));
     options.encoding = null;

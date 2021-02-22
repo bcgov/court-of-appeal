@@ -2,7 +2,7 @@ const crypto = require('crypto')
 
 var buildEFilingPackage = function(data, pdf) {
     let efilingPackage = {};
-    efilingPackage.location = "B.C. Court of Appeal";
+    efilingPackage.locationCode = "COA";
     efilingPackage.parties = [];
     efilingPackage.documents = [
         {

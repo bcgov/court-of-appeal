@@ -46,7 +46,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         let redirectUrl = request.query.redirectUrl || "/";
         let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
         if (notBCEID) 
-            response.redirect(redirectUrl + "/api/logout");
+            response.redirect(`/api/logout?redirect_url=${redirectUrl}`);
         else 
             response.redirect(redirectUrl);
     });

@@ -60,7 +60,8 @@ Server.prototype.start = function (port, ip, done) {
             request.headers.host = request.header('x-forwarded-host') + ":" + request.header('x-forwarded-port');
         }
         next();
-    })
+    });
+
     Keycloak.prototype.logoutUrl = function (redirectUrl) {
         var keycloakLogoutUrl = this.config.realmUrl +
         '/protocol/openid-connect/logout' +
@@ -89,7 +90,15 @@ Server.prototype.start = function (port, ip, done) {
             let header = this.headers[i];
             response.setHeader(header.name, header.value);
         }
-        next();
+        //This will force the frontend to hit /api/login, and will check there for IDIR user
+        //if the IDIR user is detected It will log them out, and attempt to login with BCEID. 
+        if (!["/api/login","/api/logout"].some(v => request.url.includes(v)) && request.kauth && request.kauth.grant) {
+            let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
+            if (notBCEID) 
+                response.sendStatus(403)
+        }
+        else 
+            next();
     });
 
     this.app.use(morgan(':method :url', { immediate:true }));
