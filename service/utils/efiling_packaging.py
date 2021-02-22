@@ -16,7 +16,7 @@ class EfilingPackaging:
             "clientAppName": self.app_name,
             "filingPackage": {
                 "court": {
-                    "location": data["location"],
+                    "location": data["locationCode"],
                     "level": self.court_level,
                     "courtClass": self.court_class,
                     "division": self.court_division,
