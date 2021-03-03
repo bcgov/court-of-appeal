@@ -1,8 +1,9 @@
 # Uses the 'testConnection' script from https://github.com/BCDevOps/openshift-developer-tools
 # Example:
-# echo -e "web\n api\n db" | xargs -I {} testConnection -n 876c6c-dev -f TestConnections.txt -p {}
+# echo -e "web\n api\n backup\n db" | xargs -I {} testConnection -n 876c6c-dev -f TestConnections.txt -p {}
 
 google.com:80
 web:8080
 api:8080
+backup:5432
 db:5432
