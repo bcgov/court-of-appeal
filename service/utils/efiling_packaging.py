@@ -4,7 +4,7 @@ import settings
 logger = logging.getLogger(__name__)
 
 
-class EfilingPackaging:
+class EFilingPackaging:
     def __init__(self):
         self.app_name = settings.EFILING_APP_NAME
         self.court_level = settings.EFILING_COURT_LEVEL
@@ -22,27 +22,31 @@ class EfilingPackaging:
                     "division": self.court_division,
                     "fileNumber": "",
                 },
-                "documents": self.build_documents(data["documents"]),
-                "parties": data["parties"],
-                "navigationUrls": {
-                    "success": data["successUrl"],
-                    "error": data["errorUrl"],
-                    "cancel": data["cancelUrl"],
-                },
+                "documents": [
+                    {
+                        "name": document["name"],
+                        "type": document["type"],
+                        "isAmendment": False,
+                        "isSupremeCourtScheduling": False,
+                        "data": document["data"],
+                        "md5": document["md5"],
+                    }
+                    for document in data["documents"]
+                ],
+                "parties": [
+                    {
+                        "partyType": party["partyType"],
+                        "roleType": party["roleType"],
+                        "firstName": party["firstName"],
+                        "middleName": party["middleName"],
+                        "lastName": party["lastName"],
+                    }
+                    for party in data["parties"]
+                ],
             },
+            "navigationUrls": {
+                "success": data["successUrl"],
+                "error": data["errorUrl"],
+                "cancel": data["cancelUrl"],
+            }
         }
-
-    def build_documents(self, documents) -> {}:
-        built_documents = []
-        for document in documents:
-            built_documents.append(
-                {
-                    "name": document["name"],
-                    "type": document["type"],
-                    "isAmendment": False,
-                    "isSupremeCourtScheduling": False,
-                    "data": document["data"],
-                    "md5": document["md5"],
-                }
-            )
-        return built_documents

@@ -214,7 +214,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             else {
                 pdf.create(html).toBuffer((err, pdf)=> {
                     if (err) console.log('pdf creation error', err);
-                    this.submitForm.now(bceidGuid, id, pdf, (data)=>{
+                    this.submitForm.now(request, bceidGuid, id, pdf, (data)=>{
                         submitForm2Response(data, response);
                     })
                 });

@@ -4,7 +4,7 @@ from waitress import serve
 from zeep import helpers
 from utils.ches_email import ChesEmail
 from utils.efiling_submission import EFilingSubmission
-from utils.efiling_packaging import EfilingPackaging
+from utils.efiling_packaging import EFilingPackaging
 from utils.form7_search import Form7Search
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def document_upload():
     transaction_id = payload['transactionId']
     pdf_data = payload['pdf']['data']
     files = [("files", ('form2.pdf', "".join(map(chr, pdf_data)), 'application/pdf'))]
-    packaging = EfilingPackaging()
+    packaging = EFilingPackaging()
     efiling = EFilingSubmission(packaging)
     response = efiling.upload_documents(bceid_guid, transaction_id, files)
     return response
@@ -55,7 +55,7 @@ def submit():
     transaction_id = payload['transactionId']
     submission_id = payload['submissionId']
     data = payload['data']
-    packaging = EfilingPackaging()
+    packaging = EFilingPackaging()
     efiling = EFilingSubmission(packaging)
     response = efiling.generate_efiling_url(bceid_guid, transaction_id, submission_id, data)
     return response

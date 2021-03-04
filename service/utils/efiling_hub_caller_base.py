@@ -1,5 +1,4 @@
 # Special thanks to eDivorce for this.
-import json
 import logging
 import requests
 import settings
@@ -9,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class EFilingHubCallerBase:
-
     def __init__(self):
         self.client_id = settings.EFILING_HUB_KEYCLOAK_CLIENT_ID
         self.client_secret = settings.EFILING_HUB_KEYCLOAK_SECRET
@@ -29,23 +27,16 @@ class EFilingHubCallerBase:
         response = requests.post(self._token_url(), headers=headers, data=payload, auth=auth)
         logger.debug('EFH - Get Token %d', response.status_code)
         if response.status_code == 200:
-            response = json.loads(response.text)
+            response = response.json()
             if 'access_token' in response:
                 self.access_token = response['access_token']
-                """ Refresh token wont populate from this unless the option
-                "Use Refresh Tokens For Client Credentials Grant" is checked.
-                this goes against the OAuthSpec though, we currently have it off.
-                """
                 return True
         return False
 
     def _set_headers(self, headers, bceid_guid=None, transaction_id=None):
-        headers.update({
-            'Authorization': f'Bearer {self.access_token}'
-        })
+        headers.update({"Authorization": f"Bearer {self.access_token}"})
         if transaction_id:
-            headers.update({
-                'X-User-Id': bceid_guid,
-                'X-Transaction-Id': transaction_id
-            })
+            headers.update({"X-Transaction-Id": transaction_id})
+        if bceid_guid:
+            headers.update({"X-User-Id": bceid_guid})
         return headers
