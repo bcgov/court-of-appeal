@@ -9,7 +9,8 @@ module.exports = {
 				headers: {
 					Connection: 'keep-alive',
 					'X-Forwarded-Host': 'localhost',
-					'X-Forwarded-Port': '3000'
+					'X-Forwarded-Port': '3000',
+					'X-Forwarded-Proto': 'http'
 				},
 				changeOrigin: true
 			}

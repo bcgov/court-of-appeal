@@ -22,15 +22,22 @@ class Form7Search:
         return (
             "SecurityFlags" in case_basics
             and case_basics.SecurityFlags is not None
-            and case_basics.SecurityFlags.SecurityFlag.Name == "Publication Ban"
+            and case_basics.SecurityFlags.SecurityFlag
+            and any(
+                x.Name == "Publication Ban"
+                for x in case_basics.SecurityFlags.SecurityFlag
+            )
         )
 
     def _has_restricted_files(self, case_basics):
         return (
             "SecurityFlags" in case_basics
             and case_basics.SecurityFlags is not None
-            and case_basics.SecurityFlags.SecurityFlag.Name
-            == "Family &amp; Restricted Files"
+            and case_basics.SecurityFlags.SecurityFlag
+            and any(
+                x.Name == "Family & Restricted Files"
+                for x in case_basics.SecurityFlags.SecurityFlag
+            )
         )
 
     def _has_family_law(self, case_basics):

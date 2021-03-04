@@ -68,8 +68,8 @@ Hub.prototype.accountUsers = function(userguid, callback) {
     please.end();
 };
 
-Hub.prototype.submitForm = async function(bceidGuid, data, pdf, callback) {
-    let efilingData = buildEFilingPackage(data, pdf);
+Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callback) {
+    let efilingData = buildEFilingPackage(request, data, pdf);
     let transactionId = uuidv4();
     let submissionId;
     try {

@@ -54,15 +54,13 @@ class EFilingSubmission(EFilingHubCallerBase):
                 logger.error(
                     f"Error submitting documents for: {bceid_guid}, {transaction_id}"
                 )
-                return
+                return response.json()
             return response.json()
         except Exception as e:
             logger.error("Error: {}".format(e))
             return None
 
     """ transaction_id and submission_id come from previous requests (ie upload_documents).
-        These are split up intentionally, incase clients want to upload their own documents
-        in a seperate step which could prove to be problematic.
     """
     def generate_efiling_url(self, bceid_guid, transaction_id, submission_id, data):
         package_data = self.packaging.build_efiling_body(data)
@@ -76,7 +74,7 @@ class EFilingSubmission(EFilingHubCallerBase):
             transaction_id=transaction_id,
             data=package_data,
         )
-
+        
         if response.status_code == 200:
             response = json.loads(response.text)
             return response["efilingUrl"], "success"
