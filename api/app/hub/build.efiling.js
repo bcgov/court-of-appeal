@@ -47,9 +47,15 @@ var buildEFilingPackage = function(request, data, pdf) {
         efilingPackage.parties.push(party);
     });
 
-    efilingPackage.successUrl = `${request.headers.protocol}://${request.headers.host.replace(":443", "").replace(":80","")}/${data.formId}/submitted/success`;
-    efilingPackage.errorUrl = `${request.headers.protocol}://${request.headers.host.replace(":443", "").replace(":80","")}/${data.formId}/submitted/error`;
-    efilingPackage.cancelUrl = `${request.headers.protocol}://${request.headers.host.replace(":443", "").replace(":80","")}/${data.formId}/submitted/cancel`;
+    const host = `${request.headers.host}`;
+    if (host.endsWith(":80"))
+        host = host.replace(":80","");
+    if (host.endsWith(":443"))
+        host = host.replace(":443","");
+
+    efilingPackage.successUrl = `${request.headers.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/success`;
+    efilingPackage.errorUrl = `${request.headers.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/error`;
+    efilingPackage.cancelUrl = `${request.headers.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/cancel`;
 
     return efilingPackage;
 }
