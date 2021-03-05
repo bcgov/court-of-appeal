@@ -41,7 +41,7 @@ def document_upload():
     bceid_guid = payload['bceidGuid']
     transaction_id = payload['transactionId']
     pdf_data = payload['pdf']['data']
-    files = [("files", ('form2.pdf', "".join(map(chr, pdf_data)), 'application/pdf'))]
+    files = [("files", ('form2.pdf', bytearray(pdf_data), 'application/pdf'))]
     packaging = EFilingPackaging()
     efiling = EFilingSubmission(packaging)
     response = efiling.upload_documents(bceid_guid, transaction_id, files)
@@ -57,8 +57,8 @@ def submit():
     data = payload['data']
     packaging = EFilingPackaging()
     efiling = EFilingSubmission(packaging)
-    response = efiling.generate_efiling_url(bceid_guid, transaction_id, submission_id, data)
-    return response
+    url, message = efiling.generate_efiling_url(bceid_guid, transaction_id, submission_id, data)
+    return {"url": url, "message": message}
 
 
 if __name__ == "__main__":

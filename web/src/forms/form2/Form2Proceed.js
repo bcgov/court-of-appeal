@@ -37,6 +37,7 @@ class Form2Proceed extends Component {
 
             <div className="row section section-white">
                 <div className="col-xs-12">
+                    By submitting, you will be redirected to the E-Filing Hub.
                     <div style={{textAlign:'right', paddingTop:'15px'}}>
                         <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
                         <SpinnerButton id="payment-confirmed" width="150" addClass="proceed-confirmation" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
@@ -65,9 +66,8 @@ class Form2Proceed extends Component {
         this.submitButton.startSpinner();
         this.service.submit(this.state.formId, (data)=>{
             this.submitButton.stopSpinner();
-            if (!data.error) {
-                this.state.packageNumber = data.packageNumber
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted', state: this.state })
+            if (!data.error && data.message === "success") {
+                window.location.replace(data.url);
             }
         })
     }
