@@ -9,16 +9,19 @@ SubmitForm.prototype.useDatabase = function(database) {
     this.database = database;
 };
 
+SubmitForm.prototype.createSubmission = function (transactionId, submissionId){
+    this.database.createSubmission(transactionId, submissionId);
+};
+
 SubmitForm.prototype.now = function(request, login, id, pdf, callback) {
     this.database.formData(id, (data)=> {
         if (data.error) { callback(data) }
         else {
-            this.hub.submitForm(request, login, data, pdf, (data)=>{
+            data.formId = id;
+            this.hub.submitForm(request, login, data, pdf, (data, transactionId, submissionId)=>{
                 if (data.error) { callback(data) }
                 else {
-                    this.database.submitForm(id, ()=>{
-                        callback(data)
-                    })
+                    callback(data, transactionId, submissionId);
                 }
             });
         }

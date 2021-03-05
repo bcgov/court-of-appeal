@@ -214,13 +214,23 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             else {
                 pdf.create(html).toBuffer((err, pdf)=> {
                     if (err) console.log('pdf creation error', err);
-                    this.submitForm.now(request, bceidGuid, id, pdf, (data)=>{
+                    this.submitForm.now(request, bceidGuid, id, pdf, (data, transactionId, submissionId)=>{
+                        //Write to DB.  TransactionId, SubmissionId
+                        this.submitForm.createSubmission(transactionId, submissionId);
                         submitForm2Response(data, response);
                     })
                 });
             }
         });
     });
+
+    app.put('/api/forms/:id/submit', keycloak.protect(), (request, response) => {
+        let bceidGuid = request.kauth.grant.id_token.content['universal-id'];
+        let id = request.params.id;
+        //Ensure package belongs to user. 
+        //update packageNumber, packageUrl
+    });
+
 
     app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
         let login = request.kauth.grant.id_token.content['universal-id'];

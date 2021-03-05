@@ -1,6 +1,7 @@
 let { Forms } = require('./forms');
 let { Persons } = require('./persons');
 let { Journey } = require('./journey');
+let { EFilingSubmissions } = require('./efiling.submissions');
 
 let ifError = function(please) {
     return {
@@ -21,6 +22,7 @@ let Database = function() {
     this.forms = new Forms();
     this.persons = new Persons();
     this.journey = new Journey();
+    this.efilingsubmissions = new EFilingSubmissions();
 };
 
 Database.prototype.createJourney = function(journey, callback) {
@@ -54,6 +56,10 @@ Database.prototype.myJourney = function(login, callback) {
         }
     }));
 };
+
+Database.prototype.createSubmission = function (transactionId, submissionId) {
+    this.efilingsubmissions.createSubmission(transactionId, submissionId);
+}
 
 Database.prototype.createForm = function(form, callback) {
     this.forms.selectByFormTypeUseridAndCaseNumber(form.person_id, form.type, JSON.parse(form.data).formSevenNumber, (err, rows) => {

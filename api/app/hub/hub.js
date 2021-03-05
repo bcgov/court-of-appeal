@@ -77,13 +77,13 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
         const document_submit = await axios.post(url, {bceidGuid, transactionId, pdf});
         submissionId = document_submit.data.submissionId;
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 
     //This is very unlikely to happen, as we're in control of the document generation.
     if (!submissionId) {
         console.log('No submissionId returned from document upload.')
-        callback('Error with document upload.')
+        callback({ error: {code:500, message: 'Error with document upload.'}})
         return;
     }
 
@@ -91,9 +91,11 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
         const url = `http://${this.host}:${this.port}/efiling/submit`
         const efiling_submit = await axios.post(url, 
             {bceidGuid, transactionId, submissionId, 'data': efilingData});
-        callback(efiling_submit);
+        const data = efiling_submit.data;
+        callback(data, transactionId, submissionId);
     } catch (error) {
         console.log(error);
+        callback({ error: {code:500, message: 'Error with submission.'}})
     }
 };
 
