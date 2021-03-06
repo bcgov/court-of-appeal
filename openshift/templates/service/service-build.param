@@ -1,0 +1,16 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/service/service-build.yaml
+#=========================================================
+NAME=service
+NAMESPACE=876c6c
+ENV_NAME=tools
+GIT_REPO_URL=https://github.com/bcgov/court-of-appeal.git
+GIT_REF=develop
+SOURCE_CONTEXT_DIR=service
+KIND_OF_IMAGE=DockerImage
+SOURCE_IMAGE_NAME=registry.access.redhat.com/ubi8/python-38
+SOURCE_IMAGE_TAG=latest
+PIP_INDEX_URL=
+OUTPUT_IMAGE_TAG=latest
