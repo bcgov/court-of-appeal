@@ -265,7 +265,6 @@ parameters:
     description: The base namespace name for the project.
     required: true
     value: 876c6c
-
   - name: IMAGE_NAMESPACE
     displayName: Image Namespace
     required: true
