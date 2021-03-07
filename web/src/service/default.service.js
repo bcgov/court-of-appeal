@@ -5,9 +5,6 @@ let Service = function(window) {
     if (typeof window !== 'undefined') {
         this.apiUrl = window.location.origin;
     }
-    if (process.env.NODE_ENV === 'development' && process.env.REACT_APP_API_URL !== undefined) {
-        this.apiUrl = process.env.REACT_APP_API_URL;
-    }
 };
 
 Service.prototype.base = function() {

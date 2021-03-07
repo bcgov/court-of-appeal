@@ -30,6 +30,7 @@ Server.prototype.start = function (port, ip, done) {
       pool: new pg.Pool(),
     });
 
+    this.app.set('trust proxy', true)
     this.app.use(
       session({
         secret: process.env.COOKIE_SECRET,
@@ -56,7 +57,6 @@ Server.prototype.start = function (port, ip, done) {
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
         if (request.header('x-forwarded-host')) {
-            request.protocol = request.header('x-forwarded-proto');
             if (request.header('x-forwarded-port').includes('443','80'))
                 request.headers.host = request.header('x-forwarded-host');
             else
