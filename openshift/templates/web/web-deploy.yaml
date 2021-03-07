@@ -253,7 +253,6 @@ parameters:
     description: Role
     required: true
     value: web
-
   - name: NAMESPACE_NAME
     displayName: Namespace Name
     description: The base namespace name for the project.
