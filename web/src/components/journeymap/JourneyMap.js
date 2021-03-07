@@ -100,7 +100,7 @@ class JourneyMap extends React.Component {
 
     getBreadCrumbsOrRestartButton() {
         let history = this.props.history.location.state;
-        if (history.appellant || history.respondent) {
+        if (history && (history.appellant || history.respondent)) {
             let initial = history.appellant ? "Appealing" : "Responding";
             let secondary = history.userQuestion;
             let current = history.userState;
