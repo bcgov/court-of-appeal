@@ -126,18 +126,18 @@ objects:
               ports:
                 - containerPort: ${{PORT_NUMBER}}
                   protocol: TCP
-              readinessProbe:
-                initialDelaySeconds: 3
-                timeoutSeconds: 30
-                httpGet:
-                  path: /health/
-                  port: ${{PORT_NUMBER}}
-              livenessProbe:
-                initialDelaySeconds: 120
-                timeoutSeconds: 30
-                httpGet:
-                  path: /health/
-                  port: ${{PORT_NUMBER}}
+              # readinessProbe:
+              #   initialDelaySeconds: 3
+              #   timeoutSeconds: 30
+              #   httpGet:
+              #     path: /health/
+              #     port: ${{PORT_NUMBER}}
+              # livenessProbe:
+              #   initialDelaySeconds: 120
+              #   timeoutSeconds: 30
+              #   httpGet:
+              #     path: /health/
+              #     port: ${{PORT_NUMBER}}
               env:
                 - name: FLASK_ENV
                   value: ${FLASK_ENV}
@@ -397,4 +397,4 @@ parameters:
     displayName: Resources Memory Limit
     description: The resources Memory limit (in Mi, Gi, etc) for this build.
     required: true
-    value: 512mi
+    value: 512Mi
