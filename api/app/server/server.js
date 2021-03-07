@@ -56,8 +56,11 @@ Server.prototype.start = function (port, ip, done) {
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
         if (request.header('x-forwarded-host')) {
-            request.headers.protocol = request.header('x-forwarded-proto');
-            request.headers.host = request.header('x-forwarded-host') + ":" + request.header('x-forwarded-port');
+            request.protocol = request.header('x-forwarded-proto');
+            if (request.header('x-forwarded-port').includes('443','80'))
+                request.headers.host = request.header('x-forwarded-host');
+            else
+                request.headers.host = request.header('x-forwarded-host') + ":" + request.header('x-forwarded-port'); 
         }
         next();
     });
