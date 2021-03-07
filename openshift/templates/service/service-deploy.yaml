@@ -3,14 +3,7 @@ kind: Template
 apiVersion: v1
 metadata:
   name: ${NAME}-deployment-template
-  annotations:
-    description:
-      Deployment template for a django server connected to a PostGreSQL
-      database.
-    tags: django
-    iconClass: icon-python
 objects:
-
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
@@ -21,12 +14,12 @@ objects:
         env: ${TAG_NAME}
     spec:
       description: |
-        Allow the front-end application to access the API.
+        Allow the API to access the Service.
       ingress:
         - from:
             - podSelector:
                 matchLabels:
-                  role: web
+                  role: api
                   app: ${APP_NAME}
                   env: ${TAG_NAME}
               namespaceSelector:
@@ -35,53 +28,12 @@ objects:
                   environment: ${TAG_NAME}
           ports:
             - protocol: TCP
-              port: 8080
+              port: ${{PORT_NUMBER}}
       podSelector:
         matchLabels:
           role: ${ROLE}
           app: ${APP_NAME}
           env: ${TAG_NAME}
-
-  # - kind: ExternalNetwork
-  #   apiVersion: security.devops.gov.bc.ca/v1alpha1
-  #   metadata:
-  #     name: ${NAME}
-  #     network: ${NAME}
-  #     labels:
-  #       name: ${NAME}
-  #       network: ${NAME}
-  #       app: ${APP_NAME}
-  #       env: ${TAG_NAME}
-  #   spec:
-  #     description: |
-  #       Define the network parameters for accessing remote resources.
-  #     entries:
-  #       # - ${OIDC_RP_HOST}
-  #     servicePorts:
-  #       - tcp/443
-
-  # - kind: NetworkSecurityPolicy
-  #   apiVersion: security.devops.gov.bc.ca/v1alpha1
-  #   metadata:
-  #     name: ${NAME}
-  #     labels:
-  #       name: ${NAME}
-  #       app: ${APP_NAME}
-  #       env: ${TAG_NAME}
-  #   spec:
-  #     description: |
-  #       Allow the application's API to talk to either the database, plus a defined set of external resources.
-  #     source:
-  #       - - role=${ROLE}
-  #         - app=${APP_NAME}
-  #         - env=${TAG_NAME}
-  #         - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
-  #     destination:
-  #       - - role=db
-  #         - app=${APP_NAME}
-  #         - env=${TAG_NAME}
-  #         - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
-  #       - - ext:name=${NAME}
 
   - kind: Service
     apiVersion: v1
@@ -94,12 +46,11 @@ objects:
         env: ${TAG_NAME}
       annotations:
         description: Exposes and load balances the application pods
-        service.alpha.openshift.io/dependencies: "[{name: ${DATABASE_SERVICE_NAME}, kind: Service}]"
     spec:
       ports:
-        - name: 8080-tcp
-          port: 8080
-          targetPort: 8080
+        - name: ${PORT_NUMBER}-tcp
+          port: ${{PORT_NUMBER}}
+          targetPort: ${{PORT_NUMBER}}
       selector:
         name: ${NAME}
 
@@ -113,12 +64,23 @@ objects:
         role: ${ROLE}
         env: ${TAG_NAME}
     stringData:
-      keycloak-auth-url: ${KEYCLOAK_AUTH_URL}
-      keycloak-client-id: ${KEYCLOAK_CLIENT_ID}
-      keycloak-realm: ${KEYCLOAK_REALM}
-      keycloak-secret: ${KEYCLOAK_SECRET}
+      coa-username: ${COA_USERNAME}
+      coa-password: ${COA_PASSWORD}
+      coa-search-endpoint: ${COA_SEARCH_ENDPOINT}
 
-      cookie-secret: ${COOKIE_SECRET}
+      email-service-url: ${EMAIL_SERVICE_URL}
+      email-service-auth-url: ${EMAIL_SERVICE_AUTH_URL}
+      email-service-client-id: ${EMAIL_SERVICE_CLIENT_ID}
+      email-service-client-secret: ${EMAIL_SERVICE_CLIENT_SECRET}
+      sender-email: ${SENDER_EMAIL}
+      sender-name: ${SENDER_NAME}
+
+      efiling-app-name: ${EFILING_APP_NAME}
+      efiling-auth-url: ${EFILING_HUB_KEYCLOAK_BASE_URL}
+      efiling-auth-realm: ${EFILING_HUB_KEYCLOAK_REALM}
+      efiling-client-id: ${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+      efiling-client-secret: ${EFILING_HUB_KEYCLOAK_SECRET}
+      efiling-base-url: ${EFILING_HUB_API_BASE_URL}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -162,73 +124,100 @@ objects:
             - name: ${NAME}
               image:
               ports:
-                - containerPort: 8080
+                - containerPort: ${{PORT_NUMBER}}
                   protocol: TCP
               # readinessProbe:
               #   initialDelaySeconds: 3
               #   timeoutSeconds: 30
               #   httpGet:
               #     path: /health/
-              #     port: 8080
+              #     port: ${{PORT_NUMBER}}
               # livenessProbe:
               #   initialDelaySeconds: 120
               #   timeoutSeconds: 30
               #   httpGet:
               #     path: /health/
-              #     port: 8080
+              #     port: ${{PORT_NUMBER}}
               env:
-                - name: PGHOST
-                  value: ${DATABASE_SERVICE_NAME}
-                - name: PGDATABASE
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${DATABASE_DEPLOYMENT_NAME}
-                      key: database-name
-                - name: PGUSER
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${DATABASE_DEPLOYMENT_NAME}
-                      key: database-user
-                - name: PGPASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${DATABASE_DEPLOYMENT_NAME}
-                      key: database-password
+                - name: FLASK_ENV
+                  value: ${FLASK_ENV}
 
-                - name: HUB_URL
-                  value: ${HUB_URL}
-                - name: HUB_TIMEOUT
-                  value: ${HUB_TIMEOUT}
+                - name: COA_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-username
+                - name: COA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-password
+                - name: COA_SEARCH_ENDPOINT
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-search-endpoint
+                - name: CHES_EMAIL_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-url
+                - name: CHES_AUTH_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-auth-url
+                - name: EMAIL_SERVICE_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-client-id
+                - name: EMAIL_SERVICE_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-client-secret
+                - name: SENDER_EMAIL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: sender-email
+                - name: SENDER_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: sender-name
 
-                - name: KEYCLOAK_AUTH_URL
+                - name: EFILING_APP_NAME
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
-                      key: keycloak-auth-url
-                - name: KEYCLOAK_CLIENT_ID
+                      key: efiling-app-name
+                - name: EFILING_HUB_KEYCLOAK_BASE_URL
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
-                      key: keycloak-client-id
-                - name: KEYCLOAK_REALM
+                      key: efiling-auth-url
+                - name: EFILING_HUB_KEYCLOAK_REALM
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
-                      key: keycloak-realm
-                - name: KEYCLOAK_SECRET
+                      key: efiling-auth-realm
+                - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
-                      key: keycloak-secret
-
-                - name: COOKIE_SECRET
+                      key: efiling-client-id
+                - name: EFILING_HUB_KEYCLOAK_SECRET
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
-                      key: cookie-secret
-
-                - name: WEB_BASE_HREF
-                  value: ${WEB_BASE_HREF}
+                      key: efiling-client-secret
+                - name: EFILING_HUB_API_BASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-base-url
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -258,7 +247,7 @@ parameters:
     displayName: Name
     description: The name assigned to all of the OpenShift resources associated to the server instance.
     required: true
-    value: api
+    value: service
 
   - name: APP_NAME
     displayName: App Name
@@ -269,78 +258,113 @@ parameters:
     displayName: Role
     description: Role
     required: true
-    value: api
+    value: service
 
   - name: NAMESPACE_NAME
     displayName: Namespace Name
     description: The base namespace name for the project.
     required: true
     value: 876c6c
-
   - name: IMAGE_NAMESPACE
     displayName: Image Namespace
     required: true
     description: The namespace of the OpenShift project containing the imagestream for the application.
     value: 876c6c-tools
-  - name: DATABASE_SERVICE_NAME
-    displayName: Database Service Name
-    description: The name of the database server/service.
+
+  - name: PORT_NUMBER
+    displayName: Port Number
+    description: The port number on which the application listens.
     required: true
-    value: db
+    value: "5000"
+  - name: FLASK_ENV
+    displayName: Flask Environment
+    description: The Flask Deployment Environment
+    required: true
+    value: production
+
+  - name: COA_USERNAME
+    displayName: COA Web Service Username
+    description: The username for authenticating with the COA web services endpoint.
+    required: false
+    value:
+  - name: COA_PASSWORD
+    displayName: COA Web Service Password
+    description: The password for authenticating with the COA web services endpoint.
+    required: false
+    value:
+  - name: COA_SEARCH_ENDPOINT
+    displayName: COA Search Endpoint
+    description: The URL of the COA search endpoint.
+    required: false
+    value:
+
+  - name: EMAIL_SERVICE_URL
+    displayName: Email Service API URL
+    description: Email Service API URL
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_AUTH_URL
+    displayName: Email Service Auth URL
+    description: Email Service Auth URL
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_CLIENT_ID
+    displayName: Email Service Client Id
+    description: Email Service Client Id
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_CLIENT_SECRET
+    displayName: Email Service Client Secret
+    description: Email Service Client Secret
+    required: false
+    value: ""
+  - name: SENDER_EMAIL
+    displayName: Sender Email Address
+    description: Sender Email Address
+    required: false
+    value: ""
+  - name: SENDER_NAME
+    displayName: Sender Name
+    description: Sender Name
+    required: false
+    value: ""
+
   - name: TAG_NAME
     displayName: Environment TAG name
     description: The TAG name for this environment, e.g., dev, test, prod
     value: dev
     required: true
-  - name: DATABASE_DEPLOYMENT_NAME
-    displayName: Database Deployment Name
-    description: The name associated to the database deployment resources.  In particular, this is used to wire up the credentials associated to the database.
+
+  - name: EFILING_APP_NAME
+    displayName: EFILING Application Name
+    description: EFILING Application Name
     required: true
-    value: db
-
-  - name: HUB_URL
-    displayName: Hub Url
-    description: Hub Url
-    required: false
-    value: http://service:5000
-  - name: HUB_TIMEOUT
-    displayName: Hub Timeout
-    description: Hub Timeout
-    required: true
-    value: "10000"
-
-  - name: KEYCLOAK_AUTH_URL
-    displayName: KeyCloak Authentication Url
-    description: KeyCloak Authentication Url
+    value: Court Of Appeal
+  - name: EFILING_HUB_KEYCLOAK_BASE_URL
+    displayName: EFILING authentication url
+    description: EFILING authentication url
     required: false
     value:
-  - name: KEYCLOAK_REALM
-    displayName: KeyCloak Realm
-    description: KeyCloak Realm
+  - name: EFILING_HUB_KEYCLOAK_REALM
+    displayName: EFILING Authentication Realm
+    description: EFILING Authentication Realm
     required: false
     value:
-  - name: KEYCLOAK_CLIENT_ID
-    displayName: KeyCloak Client Id
-    description: KeyCloak Client Id
+  - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
+    displayName: EFILING Service Client Id
+    description: EFILING Service Client Id
     required: false
     value:
-  - name: KEYCLOAK_SECRET
-    displayName: KeyCloak Client Secret
-    description: KeyCloak Client Secret
+  - name: EFILING_HUB_KEYCLOAK_SECRET
+    displayName: EFILING Service Client Secret
+    description: EFILING Service Client Secret
     required: false
     value:
-
-  - name: COOKIE_SECRET
-    displayName: Cookie Secret
-    description: Cookie Secret
+  - name: EFILING_HUB_API_BASE_URL
+    displayName: EFILING base url
+    description: EFILING base url
     required: false
     value:
-
-  - name: WEB_BASE_HREF
-    displayName: Web Base Href
-    description: Web Base Href
-    required: false
-    value: /court-of-appeal/
 
   - name: MIN_REPLICAS
     displayName: Minimum Replicas

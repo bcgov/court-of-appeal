@@ -153,7 +153,7 @@ build-service() {
   ${S2I_EXE} build \
     --copy \
     '../service' \
-    'centos/python-38-centos7' \
+    'registry.access.redhat.com/ubi8/python-38' \
     ${COMPOSE_PROJECT_NAME}"-service" 
   echo -e "===================================================================================================="
 }

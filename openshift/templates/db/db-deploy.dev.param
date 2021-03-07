@@ -6,6 +6,8 @@
 # NAME=db
 # APP_NAME=court-of-appeal
 # ROLE=db
+# BACKUP_APP_NAME=Backup
+# NAMESPACE_NAME=876c6c
 # IMAGE_NAMESPACE=876c6c-tools
 # SOURCE_IMAGE_NAME=db
 TAG_NAME=dev
