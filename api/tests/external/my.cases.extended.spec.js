@@ -3,7 +3,7 @@ var Server = require('../../app/server/server');
 var Database = require('../../app/store/database');
 var Migrator = require('../../app/migrations/migrator');
 var Truncator = require('../support/truncator');
-var { execute } = require('yop-postgresql');
+var { execute } = require('../../app/libs/yop.postgresql');
 var { request, localhost5000json } = require('../support/request');
 
 describe('Extended my cases end point', function() {

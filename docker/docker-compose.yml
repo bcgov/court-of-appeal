@@ -12,10 +12,17 @@ services:
       - DEBUG_PORT=${DEBUG_PORT}
       - HUB_URL=${HUB_URL}
       - HUB_TIMEOUT=${HUB_TIMEOUT}
+      - KEYCLOAK_AUTH_URL=${KEYCLOAK_AUTH_URL}
+      - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
+      - KEYCLOAK_REALM=${KEYCLOAK_REALM}
+      - KEYCLOAK_SECRET=${KEYCLOAK_SECRET}
+      - COOKIE_SECRET=${COOKIE_SECRET}
+      - WEB_BASE_HREF=${WEB_BASE_HREF}
     ports:
       - 8081:8080
     depends_on:
       - db
+      - service
     command: >
       /bin/bash -c 'while !</dev/tcp/db/5432; do sleep 1; echo Waiting for database connection ...; done; /usr/libexec/s2i/run;'
 
@@ -30,7 +37,29 @@ services:
       - 5432:5432
     volumes:
       - ./tmp:/tmp2
-      
+  
+  service:
+    image: "${COMPOSE_PROJECT_NAME}-service"
+    environment:
+      - FLASK_ENV=${FLASK_ENV}
+      - COA_PASSWORD=${COA_PASSWORD}
+      - COA_SEARCH_ENDPOINT=${COA_SEARCH_ENDPOINT}
+      - COA_USERNAME=${COA_USERNAME}
+      - CHES_AUTH_URL=${CHES_AUTH_URL}
+      - CHES_EMAIL_URL=${CHES_EMAIL_URL}
+      - SENDER_EMAIL=${SENDER_EMAIL}
+      - SENDER_NAME=${SENDER_NAME}
+      - EMAIL_SERVICE_CLIENT_ID=${EMAIL_SERVICE_CLIENT_ID}
+      - EMAIL_SERVICE_CLIENT_SECRET=${EMAIL_SERVICE_CLIENT_SECRET}
+      - EFILING_APP_NAME=${EFILING_APP_NAME}
+      - EFILING_HUB_API_BASE_URL=${EFILING_HUB_API_BASE_URL}
+      - EFILING_HUB_KEYCLOAK_BASE_URL=${EFILING_HUB_KEYCLOAK_BASE_URL}
+      - EFILING_HUB_KEYCLOAK_CLIENT_ID=${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+      - EFILING_HUB_KEYCLOAK_REALM=${EFILING_HUB_KEYCLOAK_REALM}
+      - EFILING_HUB_KEYCLOAK_SECRET=${EFILING_HUB_KEYCLOAK_SECRET}
+    ports:
+      - 5000:5000
+
   web:
     image: "${COMPOSE_PROJECT_NAME}-web"
     environment:
@@ -39,8 +68,6 @@ services:
       - IpFilterRules=${IpFilterRules}
       - RealIpFrom=${RealIpFrom}
       - WEB_BASE_HREF=${WEB_BASE_HREF}
-      - SMGOV_USERGUID=${SMGOV_USERGUID}
-      - SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME}
     ports:
       - 8080:8080
     depends_on:

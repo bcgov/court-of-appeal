@@ -12,7 +12,6 @@ class Form2Proceed extends Component {
         this.state = props.location ? props.location.state : {};
         this.cancel = this.cancel.bind(this)
         this.confirm = this.confirm.bind(this)
-        this.backToAccess = this.backToAccess.bind(this)
         this.backToFill = this.backToFill.bind(this)
         this.backToPreview = this.backToPreview.bind(this)
     }
@@ -28,34 +27,21 @@ class Form2Proceed extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={4} steps={["Access","Form 2","Preview","Payment"]}/>
+            <ProgressStatusBar activeStep={3} steps={["Form 2","Preview","Submit"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
-                    <div className="page-title">Confirm Payment Amount</div>
+                    <div className="page-title">Submit through E-Filing</div>
                 </div>
             </div>
 
             <div className="row section section-white">
                 <div className="col-xs-12">
-                    <table width="100%">
-                        <tbody>
-                            <tr style={{fontWeight:'bold'}}>
-                                <td>Fee Type</td><td style={{textAlign:'right'}}>Fee Amount</td>
-                            </tr>
-                            <tr style={{}}>
-                                <td>CSO Fee</td><td style={{textAlign:'right'}}>$7.00</td>
-                            </tr>
-                            <tr style={{ borderTop:'1px solid black' }}>
-                                <td style={{fontWeight:'bold'}}>Total:</td><td style={{textAlign:'right'}}>$7.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    This amount will be billed using the payment info of your account.
+                    By submitting, you will be redirected to the E-Filing Hub.
                     <div style={{textAlign:'right', paddingTop:'15px'}}>
                         <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
                         <SpinnerButton id="payment-confirmed" width="150" addClass="proceed-confirmation" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
-                            content='Confirmation'>
+                            content='Submit'>
                         </SpinnerButton>
                     </div>
                 </div>
@@ -65,9 +51,6 @@ class Form2Proceed extends Component {
         );
     }
 
-    backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: this.state })
-    }
     backToFill() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
     }
@@ -83,9 +66,8 @@ class Form2Proceed extends Component {
         this.submitButton.startSpinner();
         this.service.submit(this.state.formId, (data)=>{
             this.submitButton.stopSpinner();
-            if (!data.error) {
-                this.state.packageNumber = data.packageNumber
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/submitted', state: this.state })
+            if (!data.error && data.message === "success") {
+                window.location.replace(data.url);
             }
         })
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../MyDocuments.css';
 import CaseList from '../components/CaseList.js';
 
@@ -21,7 +22,7 @@ class ActiveFormList extends Component {
                         No open cases found
                 </div>
                 <div>
-                    <a href={`${process.env.PUBLIC_URL}/my-documents.html`} className="btn btn-primary round-borders">View All Documents</a>
+                    <Link to={process.env.PUBLIC_URL + '/my-documents'} className="btn btn-primary round-borders">View All Documents</Link>
                 </div>
             </div>
         )

@@ -13,11 +13,9 @@ class Form2Preview extends Component {
         this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = this.props.service;
 
-        this.backToAccess = this.backToAccess.bind(this)
         this.backToFill = this.backToFill.bind(this)
         this.proceed = this.proceed.bind(this)
         this.download = this.download.bind(this)
-        this.isReadonly = this.isReadonly.bind(this)
     }
 
     componentDidMount() {
@@ -38,7 +36,7 @@ class Form2Preview extends Component {
         return (
         <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
 
-            <ProgressStatusBar activeStep={3} steps={["Access","Form 2","Preview","Payment"]}/>
+            <ProgressStatusBar activeStep={2} steps={["Form 2","Preview","Submit"]}/>
 
             <div className="row section section-gray">
                 <div className="col-xs-12">
@@ -52,7 +50,6 @@ class Form2Preview extends Component {
             <div className="row section section-gray section-thin right">
                 <div className="col-xs-12 right">
                     <button id="back"
-                            disabled= { this.isReadonly() }
                             className="btn btn-primary round-borders"
                             style= {{ marginRight:'15px' }}
                             onClick={this.backToFill}>
@@ -73,7 +70,6 @@ class Form2Preview extends Component {
             <div className="row section section-gray right">
                 <div className="col-xs-12 right">
                     <button id="proceed"
-                            disabled= { this.isReadonly() }
                             className="btn btn-primary round-borders action-button"
                             onClick={this.proceed}>
                             Proceed
@@ -86,9 +82,6 @@ class Form2Preview extends Component {
         );
     }
 
-    backToAccess() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/access',state: this.state })
-    }
     backToFill() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
     }
@@ -107,14 +100,5 @@ class Form2Preview extends Component {
         });
     }
 
-    isReadonly() {
-        let myClientId = this.state.account.clientId
-        if (!myClientId) { return false }
-
-        let myPriviledges = this.state.authorizations.find(user => user.clientId === myClientId)
-        if (!myPriviledges) { return false }
-
-        return !myPriviledges.isAdmin
-    }
 }
 export default Form2Preview;

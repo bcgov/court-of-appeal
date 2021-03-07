@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var { execute } = require('yop-postgresql');
+var { execute } = require('../../app/libs/yop.postgresql');
 var { request, localhost5000json } = require('../support/request');
 
 describe('start script', function() {

@@ -1,3 +1,5 @@
+const { default: axios } = require('axios');
+const { v4: uuidv4 } = require('uuid');
 var { request } = require('http');
 var { extractBody } = require('./extract.body')
 var {
@@ -6,14 +8,17 @@ var {
     rawAppellants,
     rawRespondents,
     extractCaseType
-} = require('./parsing');
+} = require('./parsing.form7');
+
+const { buildEFilingPackage } = require('./build.efiling');
 
 function Hub(url, timeout) {
     this.url = url;
     this.host = this.extractHost(url)
     this.port = this.extractPort(url)
     this.timeout = timeout;
-}
+};
+
 Hub.prototype.extractHost = function(url) {
     var value = url.substring(url.indexOf('://')+3)
     if (value.indexOf(':') != -1) {
@@ -23,13 +28,15 @@ Hub.prototype.extractHost = function(url) {
         return value.substring(0, value.indexOf('/'))
     }
     return value
-}
+};
+
 Hub.prototype.extractPort = function(url) {
     var value = url.substring(url.indexOf('://')+3)
     value = value.substring(value.indexOf(':')+1)
     var port = parseInt(value)
     return isNaN(port) ? 80 : port
-}
+};
+
 Hub.prototype.accountUsers = function(userguid, callback) {
     var info = {
         method: 'GET',
@@ -59,78 +66,39 @@ Hub.prototype.accountUsers = function(userguid, callback) {
         callback({ error: {code:503} })
     });
     please.end();
-}
-Hub.prototype.isAuthorized = function(guid, callback) {
-    var options = {
-        method: 'GET',
-        host: this.host,
-        port: this.port,
-        path: '/isAuthorized?userguid=' + guid,
-        timeout: this.timeout
-    }
-    var timedout = false
-    var authorized = request(options, function(response) {
-        if (timedout) { return }
-        if (response.statusCode === 200) {
-            extractBody(response, (body)=>{
-                var data = JSON.parse(body);
-                var info = data['soap:Envelope']['soap:Body']['ns2:isAuthorizedUserResponse']['return']
-                info.clientId = parseInt(info.clientId)
-                info.accountId = parseInt(info.accountId)
-                callback(info)
-            })
-        }
-        else {
-            callback({ error: {code:response.statusCode} });
-        }
-    });
-    authorized.on('error', (err)=>{
-        callback({ error: {code:503} })
-    })
-    authorized.on('timeout', (err)=>{
-        timedout = true
-        callback({ error: {code:503} })
-    });
-    authorized.end();
 };
-Hub.prototype.submitForm = function(login, formData, pdf, callback) {
-    var options = {
-        method: 'POST',
-        host: this.host,
-        port: this.port,
-        path: '/save',
-        timeout: this.timeout,
-        headers: {
-            'smgov_userguid': login,
-            'data': JSON.stringify(formData)
-        }
+
+Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callback) {
+    let efilingData = buildEFilingPackage(request, data, pdf);
+    let transactionId = uuidv4();
+    let submissionId;
+    try {
+        let url = `http://${this.host}:${this.port}/efiling/uploadForm2`;
+        const document_submit = await axios.post(url, {bceidGuid, transactionId, pdf});
+        submissionId = document_submit.data.submissionId;
+    } catch (error) {
+        console.log(error.message);
     }
-    var timedout = false
-    var save = request(options, function(response) {
-        if (timedout) { return }
-        extractBody(response, (body)=>{
-            var data = JSON.parse(body);
-            if (response.statusCode === 200) {
-                    callback(data)
-            }
-            else {
-                var answer = { error: {code:response.statusCode} }
-                if (data.message) {
-                    answer.error.message = data.message
-                }
-                callback(answer);
-            }
-        })
-    });
-    save.on('error', (err)=>{
-        callback({ error: {code:503} })
-    })
-    save.on('timeout', (err)=>{
-        timedout = true
-        callback({ error: {code:503} })
-    });
-    save.end(pdf);
-}
+
+    //This is very unlikely to happen, as we're in control of the document generation.
+    if (!submissionId) {
+        console.log('No submissionId returned from document upload.')
+        callback({ error: {code:500, message: 'Error with document upload.'}})
+        return;
+    }
+
+    try {
+        const url = `http://${this.host}:${this.port}/efiling/submit`
+        const efiling_submit = await axios.post(url, 
+            {bceidGuid, transactionId, submissionId, 'data': efilingData});
+        const data = efiling_submit.data;
+        callback(data, transactionId, submissionId);
+    } catch (error) {
+        console.log(error);
+        callback({ error: {code:500, message: 'Error with submission.'}})
+    }
+};
+
 Hub.prototype.searchForm7 = function(file, callback) {
     var options = {
         method: 'GET',

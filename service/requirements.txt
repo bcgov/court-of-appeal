@@ -1,0 +1,5 @@
+# Main
+flask>=1.1.2
+zeep>=4.0.0
+python-keycloak>=0.24.0
+waitress>=1.4.4

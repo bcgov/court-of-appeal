@@ -5,7 +5,7 @@ var Migrator = require('../../app/migrations/migrator');
 var Truncator = require('../support/truncator');
 var {
     execute
-} = require('yop-postgresql');
+} = require('../../app/libs/yop.postgresql');
 var {
     request,
     localhost5000json

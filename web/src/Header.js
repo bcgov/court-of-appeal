@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DefaultService from './service/default.service.js';
 import './header.css';
 
@@ -44,10 +45,7 @@ class Header extends Component {
     }
 
     logout() {
-        let document = this.element.ownerDocument;
-        let window = document.defaultView;
-        document.cookie = 'login=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        window.location = 'https://logon.gov.bc.ca/clp-cgi/logoff.cgi?returl=http%3a%2f%2fdev.justice.gov.bc.ca%2fcourt-of-appeal&retnow=1';
+        this.service.redirectToLogout()
     }
 
     closeErrorModal() {
@@ -86,9 +84,9 @@ class Header extends Component {
                         <div className="container">
                             <div id="row">
                                 <div className="col-xs-6 text-left">
-                                    <a href={this.homePath}>HOME</a>
-                                    <a href={process.env.PUBLIC_URL + '/my-documents.html'}>MY DOCUMENTS</a>
-                                    <a href={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</a>
+                                    <Link to={process.env.PUBLIC_URL + '/'}>HOME</Link>
+                                    <Link to={process.env.PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
+                                    <Link to={process.env.PUBLIC_URL + '/'}>ALL DOCUMENTS</Link>
                                 </div>
                                 <div className="col-xs-6 text-right icons">
                                     <a href={process.env.PUBLIC_URL}>

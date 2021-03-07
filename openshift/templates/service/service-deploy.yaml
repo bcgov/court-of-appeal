@@ -1,0 +1,400 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: ${NAME}-deployment-template
+objects:
+  - kind: NetworkPolicy
+    apiVersion: networking.k8s.io/v1
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+        app: ${APP_NAME}
+        env: ${TAG_NAME}
+    spec:
+      description: |
+        Allow the API to access the Service.
+      ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                  role: api
+                  app: ${APP_NAME}
+                  env: ${TAG_NAME}
+              namespaceSelector:
+                matchLabels:
+                  name: ${NAMESPACE_NAME}
+                  environment: ${TAG_NAME}
+          ports:
+            - protocol: TCP
+              port: ${{PORT_NUMBER}}
+      podSelector:
+        matchLabels:
+          role: ${ROLE}
+          app: ${APP_NAME}
+          env: ${TAG_NAME}
+
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+        app: ${APP_NAME}
+        role: ${ROLE}
+        env: ${TAG_NAME}
+      annotations:
+        description: Exposes and load balances the application pods
+    spec:
+      ports:
+        - name: ${PORT_NUMBER}-tcp
+          port: ${{PORT_NUMBER}}
+          targetPort: ${{PORT_NUMBER}}
+      selector:
+        name: ${NAME}
+
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+        app: ${APP_NAME}
+        role: ${ROLE}
+        env: ${TAG_NAME}
+    stringData:
+      coa-username: ${COA_USERNAME}
+      coa-password: ${COA_PASSWORD}
+      coa-search-endpoint: ${COA_SEARCH_ENDPOINT}
+
+      email-service-url: ${EMAIL_SERVICE_URL}
+      email-service-auth-url: ${EMAIL_SERVICE_AUTH_URL}
+      email-service-client-id: ${EMAIL_SERVICE_CLIENT_ID}
+      email-service-client-secret: ${EMAIL_SERVICE_CLIENT_SECRET}
+      sender-email: ${SENDER_EMAIL}
+      sender-name: ${SENDER_NAME}
+
+      efiling-app-name: ${EFILING_APP_NAME}
+      efiling-auth-url: ${EFILING_HUB_KEYCLOAK_BASE_URL}
+      efiling-auth-realm: ${EFILING_HUB_KEYCLOAK_REALM}
+      efiling-client-id: ${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+      efiling-client-secret: ${EFILING_HUB_KEYCLOAK_SECRET}
+      efiling-base-url: ${EFILING_HUB_API_BASE_URL}
+    type: Opaque
+
+  - kind: DeploymentConfig
+    apiVersion: v1
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+        app: ${APP_NAME}
+        role: ${ROLE}
+        env: ${TAG_NAME}
+      annotations:
+        description: Defines how to deploy the application server
+    spec:
+      strategy:
+        type: Rolling
+      triggers:
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - ${NAME}
+            from:
+              kind: ImageStreamTag
+              namespace: ${IMAGE_NAMESPACE}
+              name: ${NAME}:${TAG_NAME}
+        - type: ConfigChange
+      replicas: 1
+      selector:
+        name: ${NAME}
+      template:
+        metadata:
+          name: ${NAME}
+          labels:
+            name: ${NAME}
+            app: ${APP_NAME}
+            role: ${ROLE}
+            env: ${TAG_NAME}
+        spec:
+          containers:
+            - name: ${NAME}
+              image:
+              ports:
+                - containerPort: ${{PORT_NUMBER}}
+                  protocol: TCP
+              # readinessProbe:
+              #   initialDelaySeconds: 3
+              #   timeoutSeconds: 30
+              #   httpGet:
+              #     path: /health/
+              #     port: ${{PORT_NUMBER}}
+              # livenessProbe:
+              #   initialDelaySeconds: 120
+              #   timeoutSeconds: 30
+              #   httpGet:
+              #     path: /health/
+              #     port: ${{PORT_NUMBER}}
+              env:
+                - name: FLASK_ENV
+                  value: ${FLASK_ENV}
+
+                - name: COA_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-username
+                - name: COA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-password
+                - name: COA_SEARCH_ENDPOINT
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-search-endpoint
+                - name: CHES_EMAIL_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-url
+                - name: CHES_AUTH_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-auth-url
+                - name: EMAIL_SERVICE_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-client-id
+                - name: EMAIL_SERVICE_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: email-service-client-secret
+                - name: SENDER_EMAIL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: sender-email
+                - name: SENDER_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: sender-name
+
+                - name: EFILING_APP_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-app-name
+                - name: EFILING_HUB_KEYCLOAK_BASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-auth-url
+                - name: EFILING_HUB_KEYCLOAK_REALM
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-auth-realm
+                - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-client-id
+                - name: EFILING_HUB_KEYCLOAK_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-client-secret
+                - name: EFILING_HUB_API_BASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-base-url
+              resources:
+                requests:
+                  cpu: ${CPU_REQUEST}
+                  memory: ${MEMORY_REQUEST}
+                limits:
+                  cpu: ${CPU_LIMIT}
+                  memory: ${MEMORY_LIMIT}
+
+  - kind: HorizontalPodAutoscaler
+    apiVersion: autoscaling/v1
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+        app: ${APP_NAME}
+        role: ${ROLE}
+        env: ${TAG_NAME}
+    spec:
+      scaleTargetRef:
+        kind: DeploymentConfig
+        name: ${NAME}
+      minReplicas: ${{MIN_REPLICAS}}
+      maxReplicas: ${{MAX_REPLICAS}}
+
+parameters:
+  - name: NAME
+    displayName: Name
+    description: The name assigned to all of the OpenShift resources associated to the server instance.
+    required: true
+    value: service
+
+  - name: APP_NAME
+    displayName: App Name
+    description: App Name
+    required: true
+    value: court-of-appeal
+  - name: ROLE
+    displayName: Role
+    description: Role
+    required: true
+    value: service
+
+  - name: NAMESPACE_NAME
+    displayName: Namespace Name
+    description: The base namespace name for the project.
+    required: true
+    value: 876c6c
+
+  - name: IMAGE_NAMESPACE
+    displayName: Image Namespace
+    required: true
+    description: The namespace of the OpenShift project containing the imagestream for the application.
+    value: 876c6c-tools
+
+  - name: PORT_NUMBER
+    displayName: Port Number
+    description: The port number on which the application listens.
+    required: true
+    value: "5000"
+  - name: FLASK_ENV
+    displayName: Flask Environment
+    description: The Flask Deployment Environment
+    required: true
+    value: production
+
+  - name: COA_USERNAME
+    displayName: COA Web Service Username
+    description: The username for authenticating with the COA web services endpoint.
+    required: false
+    value:
+  - name: COA_PASSWORD
+    displayName: COA Web Service Password
+    description: The password for authenticating with the COA web services endpoint.
+    required: false
+    value:
+  - name: COA_SEARCH_ENDPOINT
+    displayName: COA Search Endpoint
+    description: The URL of the COA search endpoint.
+    required: false
+    value:
+
+  - name: EMAIL_SERVICE_URL
+    displayName: Email Service API URL
+    description: Email Service API URL
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_AUTH_URL
+    displayName: Email Service Auth URL
+    description: Email Service Auth URL
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_CLIENT_ID
+    displayName: Email Service Client Id
+    description: Email Service Client Id
+    required: false
+    value: ""
+  - name: EMAIL_SERVICE_CLIENT_SECRET
+    displayName: Email Service Client Secret
+    description: Email Service Client Secret
+    required: false
+    value: ""
+  - name: SENDER_EMAIL
+    displayName: Sender Email Address
+    description: Sender Email Address
+    required: false
+    value: ""
+  - name: SENDER_NAME
+    displayName: Sender Name
+    description: Sender Name
+    required: false
+    value: ""
+
+  - name: TAG_NAME
+    displayName: Environment TAG name
+    description: The TAG name for this environment, e.g., dev, test, prod
+    value: dev
+    required: true
+
+  - name: EFILING_APP_NAME
+    displayName: EFILING Application Name
+    description: EFILING Application Name
+    required: true
+    value: Court Of Appeal
+  - name: EFILING_HUB_KEYCLOAK_BASE_URL
+    displayName: EFILING authentication url
+    description: EFILING authentication url
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_REALM
+    displayName: EFILING Authentication Realm
+    description: EFILING Authentication Realm
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
+    displayName: EFILING Service Client Id
+    description: EFILING Service Client Id
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_SECRET
+    displayName: EFILING Service Client Secret
+    description: EFILING Service Client Secret
+    required: false
+    value:
+  - name: EFILING_HUB_API_BASE_URL
+    displayName: EFILING base url
+    description: EFILING base url
+    required: false
+    value:
+
+  - name: MIN_REPLICAS
+    displayName: Minimum Replicas
+    description: The minimum number of pods to have running.
+    required: true
+    value: "3"
+  - name: MAX_REPLICAS
+    displayName: Maximum Replicas
+    description: The maximum number of pods to have running.
+    required: true
+    value: "6"
+
+  - name: CPU_REQUEST
+    displayName: Resources CPU Request
+    description: The resources CPU request (in cores) for this build.
+    required: true
+    value: 250m
+  - name: CPU_LIMIT
+    displayName: Resources CPU Limit
+    description: The resources CPU limit (in cores) for this build.
+    required: true
+    value: 500m
+  - name: MEMORY_REQUEST
+    displayName: Resources Memory Request
+    description: The resources Memory request (in Mi, Gi, etc) for this build.
+    required: true
+    value: 256Mi
+  - name: MEMORY_LIMIT
+    displayName: Resources Memory Limit
+    description: The resources Memory limit (in Mi, Gi, etc) for this build.
+    required: true
+    value: 512Mi

@@ -64,6 +64,7 @@ exit 1
 build-all() {
  build-web
  build-api
+ build-service
 }
 
 echoGreen() {
@@ -114,6 +115,7 @@ build-web() {
   echo -e "----------------------------------------------------------------------------------------------------"
   ${S2I_EXE} build \
     --copy \
+	-s 'file://./yarn-builder/s2i/bin' \
     '../web' \
     'yarn-builder' \
     ${COMPOSE_PROJECT_NAME}'-web-artifacts'
@@ -142,6 +144,18 @@ build-api() {
 
 build-db() {
   echo
+}
+
+build-service() {
+  echo -e "\n\n===================================================================================================="
+  echoGreen "Building ${COMPOSE_PROJECT_NAME}-service image using s2i ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  ${S2I_EXE} build \
+    --copy \
+    '../service' \
+    'registry.access.redhat.com/ubi8/python-38' \
+    ${COMPOSE_PROJECT_NAME}"-service" 
+  echo -e "===================================================================================================="
 }
 
 toLower() {
@@ -198,7 +212,7 @@ configureEnvironment () {
   # api
   export SMGOV_USERGUID=${SMGOV_USERGUID:-\'95EB360C2C384711AD1818664D85FE76\'}
   export SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME:-\'User\, Test\'}
-  export HUB_URL=${HUB_URL:http://hub-jag-efiling-dev.pathfinder.gov.bc.ca}
+  export HUB_URL=${HUB_URL:-http://service:5000}
   export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
   
   # db
@@ -210,6 +224,9 @@ configureEnvironment () {
   # web
   export API_URL=${API_URL:-http://api:8080/api}
   export WEB_BASE_HREF=${WEB_BASE_HREF-/court-of-appeal/}
+
+  #service
+  export FLASK_ENV=${FLASK_ENV:-production}
 }
 
 # =================================================================================================================
@@ -222,8 +239,9 @@ case "$COMMAND" in
   start|up)
     _startupParams=$(getStartupParams $@)
     configureEnvironment $@
+    echo ${_startupParams}
     docker-compose up -d ${_startupParams}
-    docker-compose logs -f
+    ##docker-compose logs -f
     ;;
   stop)
     configureEnvironment $@
@@ -236,7 +254,7 @@ case "$COMMAND" in
   build)
 buildImage=$(toLower ${1})
     shift || buildImage=all
-    buildImage=$(echo ${buildImage} | sed s~^vcr-~~)
+    buildImage=$(echo ${buildImage} | sed s~^coa-~~)
     case "$buildImage" in
       *=*)
         buildImage=all

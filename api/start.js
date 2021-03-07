@@ -1,3 +1,4 @@
+require('app-module-path').addPath(__dirname);
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
@@ -23,7 +24,8 @@ server.useDatabase(database);
 
 console.log('migrating...');
 migrator.migrateNow(function(error) {
-    console.log(error);
+    if (error)
+        console.log('Error: ' + error);
     console.log('migrations done');
     server.start(port, ip, function() {
         console.log(ip + ' listening on port ' + port);

@@ -92,8 +92,6 @@ http {
         add_header X-XSS-Protection 1;
         add_header X-Frame-Options DENY;
 
-        %DEV_SM_VARIABLES%
-
         %REMOVE_BASE_HREF%
 
         %API_CONFIG_SECTION%

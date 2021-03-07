@@ -57,7 +57,6 @@ objects:
   #       Define the network parameters for accessing remote resources.
   #     entries:
   #       # - ${OIDC_RP_HOST}
-  #       - ${HUB_HOST}
   #     servicePorts:
   #       - tcp/443
 
@@ -114,17 +113,12 @@ objects:
         role: ${ROLE}
         env: ${TAG_NAME}
     stringData:
-      hub-url: ${HUB_URL}
-      hub-host: ${HUB_HOST}
-      # oidc-rp-provider-endpoint: ${OIDC_RP_PROVIDER_ENDPOINT}
-      # oidc-rp-client-secret: ${OIDC_RP_CLIENT_SECRET}
-      # oidc-rp-host: ${OIDC_RP_HOST}
-      # encryption-key: ${DATA_SECURITY_KEY}
-      # efiling-auth-url: ${EFILING_AUTH_URL}
-      # efiling-client-id: ${EFILING_CLIENT_ID}
-      # efiling-client-secret: ${EFILING_CLIENT_SECRET}
-      # efiling-base-url: ${EFILING_BASE_URL}
-      # siteminder-logoff-url: ${SITEMINDER_LOGOFF_URL}
+      keycloak-auth-url: ${KEYCLOAK_AUTH_URL}
+      keycloak-client-id: ${KEYCLOAK_CLIENT_ID}
+      keycloak-realm: ${KEYCLOAK_REALM}
+      keycloak-secret: ${KEYCLOAK_SECRET}
+
+      cookie-secret: ${COOKIE_SECRET}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -202,55 +196,39 @@ objects:
                       key: database-password
 
                 - name: HUB_URL
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: hub-url
+                  value: ${HUB_URL}
                 - name: HUB_TIMEOUT
                   value: ${HUB_TIMEOUT}
 
-                # - name: OIDC_RP_PROVIDER_ENDPOINT
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: oidc-rp-provider-endpoint
-                # - name: OIDC_RP_CLIENT_SECRET
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: oidc-rp-client-secret
-                # - name: OIDC_RP_KC_IDP_HINT
-                #   value: ${OIDC_RP_KC_IDP_HINT}
-                # - name: DATA_SECURITY_KEY
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: encryption-key
-                # - name: EFILING_AUTH_URL
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: efiling-auth-url
-                # - name: EFILING_CLIENT_ID
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: efiling-client-id
-                # - name: EFILING_CLIENT_SECRET
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: efiling-client-secret
-                # - name: EFILING_BASE_URL
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: efiling-base-url
-                # - name: SITEMINDER_LOGOFF_URL
-                #   valueFrom:
-                #     secretKeyRef:
-                #       name: ${NAME}
-                #       key: siteminder-logoff-url
+                - name: KEYCLOAK_AUTH_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: keycloak-auth-url
+                - name: KEYCLOAK_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: keycloak-client-id
+                - name: KEYCLOAK_REALM
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: keycloak-realm
+                - name: KEYCLOAK_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: keycloak-secret
+
+                - name: COOKIE_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: cookie-secret
+
+                - name: WEB_BASE_HREF
+                  value: ${WEB_BASE_HREF}
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -324,88 +302,62 @@ parameters:
     displayName: Hub Url
     description: Hub Url
     required: false
-    value: 
-  - name: HUB_HOST
-    displayName: Hub Host
-    description: Hub Host
-    required: true
-    value: 
+    value: http://service:5000
   - name: HUB_TIMEOUT
     displayName: Hub Timeout
     description: Hub Timeout
     required: true
     value: "10000"
 
-  # - name: OIDC_RP_PROVIDER_ENDPOINT
-  #   displayName: OIDC RP Provider Endpoint
-  #   description: OIDC RP Provider Endpoint.
-  #   required: false
-  #   value:
-  # - name: OIDC_RP_HOST
-  #   displayName: OIDC RP Hostname
-  #   description: OIDC RP Hostname.  The api-deploy.overrides.sh will parse this from the supplied OIDC_RP_PROVIDER_ENDPOINT, and fetch it from a secret for updates.
-  #   required: false
-  #   value:
-  # - name: OIDC_RP_CLIENT_SECRET
-  #   displayName: OIDC RP Client Secret
-  #   description: OIDC RP Client Secret
-  #   required: false
-  #   value:
-  # - name: OIDC_RP_KC_IDP_HINT
-  #   displayName: OIDC RP KeyCloak IDP Hint
-  #   description: OIDC RP KeyCloak IDP Hint
-  #   required: false
-  #   value: bceid
+  - name: KEYCLOAK_AUTH_URL
+    displayName: KeyCloak Authentication Url
+    description: KeyCloak Authentication Url
+    required: false
+    value:
+  - name: KEYCLOAK_REALM
+    displayName: KeyCloak Realm
+    description: KeyCloak Realm
+    required: false
+    value:
+  - name: KEYCLOAK_CLIENT_ID
+    displayName: KeyCloak Client Id
+    description: KeyCloak Client Id
+    required: false
+    value:
+  - name: KEYCLOAK_SECRET
+    displayName: KeyCloak Client Secret
+    description: KeyCloak Client Secret
+    required: false
+    value:
 
-  # - name: DATA_SECURITY_KEY
-  #   displayName: Data Security (Encryption) Key
-  #   description: The Encryption Key for the environment.
-  #   generate: expression
-  #   from: "[a-zA-Z0-9]{32}"
+  - name: COOKIE_SECRET
+    displayName: Cookie Secret
+    description: Cookie Secret
+    required: false
+    value:
 
-  # - name: EFILING_AUTH_URL
-  #   displayName: EFILING authentication url
-  #   description: EFILING authentication url
-  #   required: false
-  #   value:
-  # - name: EFILING_CLIENT_ID
-  #   displayName: EFILING Service Client Id
-  #   description: EFILING Service Client Id
-  #   required: false
-  #   value:
-  # - name: EFILING_CLIENT_SECRET
-  #   displayName: EFILING Service Client Secret
-  #   description: EFILING Service Client Secret
-  #   required: false
-  #   value:
-  # - name: EFILING_BASE_URL
-  #   displayName: EFILING base url
-  #   description: EFILING base url
-  #   required: false
-  #   value:
-
-  # - name: SITEMINDER_LOGOFF_URL
-  #   displayName: Siteminder Logoff URL
-  #   description: Siteminder Logoff URL
-  #   required: false
-  #   value:
+  - name: WEB_BASE_HREF
+    displayName: Web Base Href
+    description: Web Base Href
+    required: false
+    value: /court-of-appeal/
 
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
     required: true
-    value: "1"
+    value: "3"
   - name: MAX_REPLICAS
     displayName: Maximum Replicas
     description: The maximum number of pods to have running.
     required: true
-    value: "1"
+    value: "6"
 
   - name: CPU_REQUEST
     displayName: Resources CPU Request
     description: The resources CPU request (in cores) for this build.
     required: true
-    value: 10m
+    value: 250m
   - name: CPU_LIMIT
     displayName: Resources CPU Limit
     description: The resources CPU limit (in cores) for this build.
@@ -415,9 +367,9 @@ parameters:
     displayName: Resources Memory Request
     description: The resources Memory request (in Mi, Gi, etc) for this build.
     required: true
-    value: 10Mi
+    value: 256Mi
   - name: MEMORY_LIMIT
     displayName: Resources Memory Limit
     description: The resources Memory limit (in Mi, Gi, etc) for this build.
     required: true
-    value: 1Gi
+    value: 512Mi
