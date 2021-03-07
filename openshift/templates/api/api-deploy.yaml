@@ -57,7 +57,6 @@ objects:
   #       Define the network parameters for accessing remote resources.
   #     entries:
   #       # - ${OIDC_RP_HOST}
-  #       - ${HUB_HOST}
   #     servicePorts:
   #       - tcp/443
 
@@ -114,9 +113,6 @@ objects:
         role: ${ROLE}
         env: ${TAG_NAME}
     stringData:
-      hub-url: ${HUB_URL}
-      hub-host: ${HUB_HOST}
-
       keycloak-auth-url: ${KEYCLOAK_AUTH_URL}
       keycloak-client-id: ${KEYCLOAK_CLIENT_ID}
       keycloak-realm: ${KEYCLOAK_REALM}
@@ -199,13 +195,10 @@ objects:
                       name: ${DATABASE_DEPLOYMENT_NAME}
                       key: database-password
 
+                - name: HUB_URL
+                  value: ${HUB_URL}
                 - name: HUB_TIMEOUT
                   value: ${HUB_TIMEOUT}
-                - name: HUB_URL
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: hub-url
 
                 - name: KEYCLOAK_AUTH_URL
                   valueFrom:
@@ -309,12 +302,7 @@ parameters:
     displayName: Hub Url
     description: Hub Url
     required: false
-    value: 
-  - name: HUB_HOST
-    displayName: Hub Host
-    description: Hub Host
-    required: true
-    value: 
+    value: http://service:5000
   - name: HUB_TIMEOUT
     displayName: Hub Timeout
     description: Hub Timeout

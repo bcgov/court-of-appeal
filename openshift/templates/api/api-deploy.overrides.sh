@@ -14,9 +14,6 @@ fi
 
 if createOperation; then
   # Ask the user to supply the sensitive parameters ...
-  readParameter "HUB_URL - Please provide the url for the filing hub.  The default is a blank string." HUB_URL "" "false"
-  parseHostnameParameter "HUB_URL" "HUB_HOST"
-
   readParameter "KEYCLOAK_AUTH_URL - Please provide the url for the KeyCloak authentication endpoint.  The default is a blank string." KEYCLOAK_AUTH_URL "" "false"
   readParameter "KEYCLOAK_REALM - Please provide the KeyCloak authentication realm.  The default is a blank string." KEYCLOAK_REALM "" "false"
   readParameter "KEYCLOAK_CLIENT_ID - Please provide the KeyCloak Client ID.  The default is a blank string." KEYCLOAK_CLIENT_ID "" "false"
@@ -27,18 +24,12 @@ else
   # Secrets are removed from the configurations during update operations ...
   printStatusMsg "Update operation detected ...\nSkipping the prompts for secrets ... \n"
 
-  writeParameter "HUB_URL" "prompt_skipped" "false"
-
   writeParameter "KEYCLOAK_AUTH_URL" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_REALM" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_CLIENT_ID" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_SECRET" "prompt_skipped" "false"
 
   writeParameter "COOKIE_SECRET" "prompt_skipped" "false"
-
-  # Get HUB_HOST from secret
-  printStatusMsg "Getting HUB_HOST for the ExternalNetwork definition from secret ...\n"
-  writeParameter "HUB_HOST" $(getSecret "${NAME}" "hub-host") "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
