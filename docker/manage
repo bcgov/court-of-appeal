@@ -115,7 +115,6 @@ build-web() {
   echo -e "----------------------------------------------------------------------------------------------------"
   ${S2I_EXE} build \
     --copy \
-	-s 'file://./yarn-builder/s2i/bin' \
     '../web' \
     'yarn-builder' \
     ${COMPOSE_PROJECT_NAME}'-web-artifacts'
