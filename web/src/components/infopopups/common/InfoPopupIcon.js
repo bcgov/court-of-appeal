@@ -22,6 +22,7 @@ class InfoPopupIcon extends Component {
 
     getIconSVG(type) {
         switch (type) {
+            default:
             case 'share': return <ShareIcon/>;
             case 'info': return <InfoIcon/>;
             case 'hearing': return <HearingIcon/>;

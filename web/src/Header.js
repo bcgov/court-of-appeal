@@ -87,14 +87,6 @@ class Header extends Component {
                                     <Link to={process.env.PUBLIC_URL + '/'}>HOME</Link>
                                     <Link to={process.env.PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
                                 </div>
-                                <div className="col-xs-6 text-right icons">
-                                    <a href={process.env.PUBLIC_URL}>
-                                        <span className="oi oi-cog" title="profile" aria-hidden="true"></span>
-                                    </a>
-                                    <a href={process.env.PUBLIC_URL}>
-                                        <span className="oi oi-info" title="help" aria-hidden="true"></span>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>

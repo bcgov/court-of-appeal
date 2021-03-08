@@ -285,7 +285,7 @@ Service.prototype.submit = function(id, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body));
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {

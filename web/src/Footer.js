@@ -40,9 +40,8 @@ class Footer extends Component {
                                         <a href="http://gov.bc.ca/copyright" target="_self">Copyright</a>
                                     </li>
                                     <li>
-                                        <a href="" target="_self">Contact Us</a>
+                                        <a href={this.homePath + 'contact'} target="_self">Contact Us</a>
                                     </li>
-                                    <li style={{color:'white'}}>v{this.state.commit}</li>
                                 </ul>
                             </div>
                         </div>

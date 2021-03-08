@@ -75,7 +75,7 @@ class EFilingSubmission(EFilingHubCallerBase):
             transaction_id=transaction_id,
             data=package_data,
         )
-        
+
         if response.status_code == 200:
             response = json.loads(response.text)
             return response["efilingUrl"], "success"

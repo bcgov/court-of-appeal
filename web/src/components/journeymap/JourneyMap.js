@@ -108,11 +108,11 @@ class JourneyMap extends React.Component {
                 <div id="journeyBreadcrumb">
                     <div className="journey-breadcrumb">
                         <div className="journey-breadcrumb crumb">
-                            <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
+                            <button type="button" className="btn btn-link" id="home" onClick={this.goBackTwo.bind(this)}>{initial}</button>
                         </div>
                         <div className="journey-breadcrumb crumb">/</div>
                         <div className="journey-breadcrumb crumb">
-                            <a onClick={this.goBack.bind(this)}>{secondary}</a>
+                            <button type="button" className="btn btn-link" onClick={this.goBack.bind(this)}>{secondary}</button>
                         </div>
                         <div className="journey-breadcrumb crumb">/</div>
                         <div className="journey-breadcrumb crumb">
