@@ -7,12 +7,13 @@ let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
       myJourneyResponse, submitForm2Response, accountUsersResponse } = require('./responses');
 let ifNoError = require('./errors.handling');
-let pdf = require('html-pdf');
+let pdf = require('html-pdf-node');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
     this.submitForm = new SubmitForm()
     this.connectPerson = new ConnectPerson()
+    this.defaultPdfOptions = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox', '--local-url-access=false'] };
 };
 
 RestAdaptor.prototype.useHub = function(hub) {
@@ -121,9 +122,9 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         response.writeHead(200, {'Content-type': 'application/pdf'});
         let params = request.body;
         let html = params.html;
-        pdf.create(html).toStream(function(err, stream){
+        pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
             stream.pipe(response);
-        });
+        })
     });
 
     app.get('/api/forms/:id/preview', keycloak.protect(), (request, response) => {
@@ -146,9 +147,9 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                         reject(error);
                     }
                     else {
-                        pdf.create(html).toStream(function(err, stream) {
+                        pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
                             const name = 'form2-' + id + '.pdf';
-                            archive.append(stream, { name: name });
+                            archive.append(pdfBuffer, { name: name });
                             resolve();
                         });
                     }
@@ -212,9 +213,9 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 submitForm2Response(html, response);
             }
             else {
-                pdf.create(html).toBuffer((err, pdf)=> {
+                pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
                     if (err) console.log('pdf creation error', err);
-                    this.submitForm.now(request, bceidGuid, id, pdf, (data, transactionId, submissionId)=>{
+                    this.submitForm.now(request, bceidGuid, id, pdfBuffer, (data, transactionId, submissionId)=>{
                         //Write to DB.  TransactionId, SubmissionId
                         this.submitForm.createSubmission(transactionId, submissionId);
                         submitForm2Response(data, response);
@@ -261,7 +262,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
     
-    app.get('/*', keycloak.protect(), function (req, res) { res.send( JSON.stringify({ message: 'pong' }) ); });
+    app.get('/api/health', function (req, res) { res.send(); });
 };
 
 

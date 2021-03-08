@@ -25,9 +25,6 @@ class Footer extends Component {
                                         <a href={this.homePath} target="_self">Home</a>
                                     </li>
                                     <li>
-                                        <a href={this.homePath} target="_self">About this site</a>
-                                    </li>
-                                    <li>
                                         <a href="http://gov.bc.ca/disclaimer/" target="_self">Disclaimer</a>
                                     </li>
                                     <li>
@@ -38,9 +35,6 @@ class Footer extends Component {
                                     </li>
                                     <li>
                                         <a href="http://gov.bc.ca/copyright" target="_self">Copyright</a>
-                                    </li>
-                                    <li>
-                                        <a href={this.homePath + 'contact'} target="_self">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>

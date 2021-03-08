@@ -1,6 +1,6 @@
 let RestAdaptor = require('./rest.adaptor');
 let express = require('express');
-let bodyParser = require("body-parser");
+let helmet = require('helmet');
 let morgan = require('morgan');
 let Keycloak = require('keycloak-connect');
 let pg = require('pg')
@@ -29,10 +29,11 @@ Server.prototype.start = function (port, ip, done) {
     var pgStore = new pgSession({
       pool: new pg.Pool(),
     });
-
+    this.app.use(helmet());
     this.app.set('trust proxy', true)
     this.app.use(
       session({
+        name: 'session',
         secret: process.env.COOKIE_SECRET,
         resave: false,
         saveUninitialized: false,
@@ -105,8 +106,8 @@ Server.prototype.start = function (port, ip, done) {
     });
 
     this.app.use(morgan(':method :url', { immediate:true }));
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.json());   
+    this.app.use(express.urlencoded({extended: true})); 
     this.restAdaptor.route(this.app, this.keycloak);
     this.server = this.app.listen(port, ip, done);
 };

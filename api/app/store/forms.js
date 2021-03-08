@@ -22,10 +22,6 @@ Forms.prototype.selectByLogin = function(login, callback) {
     executePool(select, [login], callback);
 };
 
-Forms.prototype.selectOne = function(id, callback) {
-    executePool('select type, status, modified, data from forms where id = $1', [id], callback);
-};
-
 Forms.prototype.selectByFormTypeUseridAndCaseNumber = function(userid, type, caseNumber, callback) {
     let select = `select id, type, status, data
                     from forms
@@ -59,6 +55,11 @@ Forms.prototype.archive = function(ids, callback) {
 
 Forms.prototype.updateStatus = function(id, status, callback) {
     executePool('update forms set status = $2, modified = current_timestamp where id = $1', [id, status], callback);
+};
+
+// Test only
+Forms.prototype.selectOne = function(id, callback) {
+    executePool('select type, status, modified, data from forms where id = $1', [id], callback);
 };
 
 module.exports = {

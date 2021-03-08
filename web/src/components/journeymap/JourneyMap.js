@@ -211,7 +211,7 @@ class JourneyMap extends React.Component {
                     state: 'started',
                     ca_number: ca_number,
                     steps: JSON.stringify(steps)
-                },this.state.currentJourneyId, (id)=>{console.log("Updated journey", id, this.state.currentJourneyId)});
+                },this.state.currentJourneyId, (id)=>{});
         }
     }
 

@@ -22,8 +22,8 @@ PreviewForm2.prototype.now = function(id, callback) {
                 .replace('{selectedContactCity}', this.extract('city', data))
                 .replace('{selectedContactProvince}', this.extract('province', data))
                 .replace('{selectedContactPostalCode}', this.extract('postalCode', data))
-                .replace('{selectedContactPhone}', data.phone)
-                .replace('{selectedContactEmail}', data.useServiceEmail ? data.email : '')
+                .replace('{selectedContactPhone}',  this.extract('phone', data))
+                .replace('{selectedContactEmail}', data.useServiceEmail ? this.extract('email', data): '')
                 ;
             if (!data.useServiceEmail) {
                 html = this.removeIfBlock('useServiceEmail', html);
