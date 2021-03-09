@@ -64,10 +64,5 @@ module.exports = {
             response.statusCode = 201;
             response.json(data);
         });
-    },
-    accountUsersResponse: (info, response)=> {
-        ifNoError(info, response).then(()=> {
-            response.json({ info: info });
-        });
     }
 };

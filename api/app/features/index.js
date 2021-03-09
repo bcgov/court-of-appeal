@@ -10,9 +10,8 @@ let PersonInfo = require('./person.info');
 let SaveCustomization = require('./save.customization');
 let CreateJourney = require('./create.journey');
 let UpdateJourney = require('./update.journey');
-let SubmitForm = require('./submit.form')
-let AccountUsers = require('./account.users')
-let ConnectPerson = require('./connect.person')
+let SubmitForm = require('./submit.form');
+let ConnectPerson = require('./connect.person');
 
 module.exports = {
     SearchFormSeven:SearchFormSeven,
@@ -28,6 +27,5 @@ module.exports = {
     CreateJourney:CreateJourney,
     UpdateJourney:UpdateJourney,
     SubmitForm:SubmitForm,
-    AccountUsers:AccountUsers,
     ConnectPerson:ConnectPerson
 }

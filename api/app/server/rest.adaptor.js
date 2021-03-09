@@ -1,11 +1,11 @@
 let { SearchFormSeven, MyCases, CreateFormTwo, SavePerson, UpdateFormTwo,
     ArchiveCases, PreviewForm2, PersonInfo, SaveCustomization, CreateJourney,
-    MyJourney, UpdateJourney, SubmitForm, AccountUsers,
+    MyJourney, UpdateJourney, SubmitForm,
     ConnectPerson} = require('../features');
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, savePersonResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, submitForm2Response, accountUsersResponse } = require('./responses');
+      myJourneyResponse, submitForm2Response } = require('./responses');
 let ifNoError = require('./errors.handling');
 let pdf = require('html-pdf-node');
 let archiver = require('archiver');
@@ -19,7 +19,6 @@ let RestAdaptor = function() {
 RestAdaptor.prototype.useHub = function(hub) {
     this.searchFormSeven = new SearchFormSeven(hub);
     this.submitForm.useHub(hub);
-    this.accountUsers = new AccountUsers(hub);
     this.connectPerson.useHub(hub);
 };
 RestAdaptor.prototype.useDatabase = function(database) {
@@ -199,7 +198,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         let login = request.kauth.grant.id_token.content['universal-id'];
         this.previewForm2.now(login, id, (html)=> {
             if (html.error) {
-                console.log('preview error', html.error);
+                console.log('submit error', html.error);
                 submitForm2Response(html, response);
             }
             else {
@@ -245,13 +244,6 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         })
     });
 
-    app.get('/api/accountusers', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.accountUsers.now(login, (data)=> {
-            accountUsersResponse(data, response);
-        });
-    });
-    
     app.get('/api/health', function (req, res) { res.send(); });
 };
 
