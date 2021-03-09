@@ -148,14 +148,18 @@ Database.prototype.archiveCases = function(ids, callback) {
     }));
 };
 
-Database.prototype.formData = function(id, callback) {
-    this.forms.selectOne(id, ifError({notify:callback}).otherwise((rows)=> {
-        if (rows.length === 0) {
+Database.prototype.formData = function(login, id, callback) {
+    this.forms.hasPermissionToForm(login, id, ifError({notify:callback}).otherwise((rows)=> {
+        if (rows.length > 0) {
+            this.forms.selectOne(id, ifError({notify:callback}).otherwise((rows)=> {
+                if (rows.length === 0) 
+                    callback({ error: {code:404} });
+                else 
+                    callback(JSON.parse(rows[0].data));
+            }));
+        }
+        else 
             callback({ error: {code:404} });
-        }
-        else {
-            callback(JSON.parse(rows[0].data));
-        }
     }));
 };
 

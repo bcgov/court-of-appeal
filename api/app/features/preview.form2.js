@@ -5,8 +5,8 @@ let PreviewForm2 = function(database) {
     this.template = fs.readFileSync('./app/features/templates/form2.preview.html').toString();
 };
 
-PreviewForm2.prototype.now = function(id, callback) {
-    this.database.formData(id, (data)=>{
+PreviewForm2.prototype.now = function(login, id, callback) {
+    this.database.formData(login, id, (data)=>{
         if (data.error) { callback(data); }
         else {
             const selected = this.filterSelected(data.respondents);

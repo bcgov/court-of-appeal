@@ -109,6 +109,12 @@ Server.prototype.start = function (port, ip, done) {
     this.app.use(express.json());   
     this.app.use(express.urlencoded({extended: true})); 
     this.restAdaptor.route(this.app, this.keycloak);
+
+    process.on('unhandledRejection', function(reason) {
+        console.log("Unhandled Rejection:", reason);
+        process.exit(1);
+    });
+
     this.server = this.app.listen(port, ip, done);
 };
 

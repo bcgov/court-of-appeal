@@ -14,7 +14,7 @@ SubmitForm.prototype.createSubmission = function (transactionId, submissionId){
 };
 
 SubmitForm.prototype.now = function(request, login, id, pdf, callback) {
-    this.database.formData(id, (data)=> {
+    this.database.formData(login, id, (data)=> {
         if (data.error) { callback(data) }
         else {
             data.formId = id;

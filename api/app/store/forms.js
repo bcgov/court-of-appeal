@@ -57,10 +57,18 @@ Forms.prototype.updateStatus = function(id, status, callback) {
     executePool('update forms set status = $2, modified = current_timestamp where id = $1', [id, status], callback);
 };
 
-// Test only
 Forms.prototype.selectOne = function(id, callback) {
     executePool('select type, status, modified, data from forms where id = $1', [id], callback);
 };
+
+Forms.prototype.hasPermissionToForm = function(login, id, callback) {
+    let select = `select forms.id from forms, person 
+                  WHERE person.login = $1 AND 
+                        forms.person_id = person.id AND 
+                        forms.id = $2`;
+
+    executePool(select, [login, id], callback)
+}
 
 module.exports = {
     Forms:Forms

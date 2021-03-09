@@ -39,10 +39,6 @@ RestAdaptor.prototype.useDatabase = function(database) {
     this.submitForm.useDatabase(database);
 };
 RestAdaptor.prototype.route = function(app, keycloak) {
-    app.get('/api/headers', (request, response) => {
-        response.send(request.headers)
-    });
-
     app.get('/api/login', keycloak.protect(), (request, response) => {
         let redirectUrl = request.query.redirectUrl || "/";
         let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
@@ -102,15 +98,6 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
 
-    app.post('/api/persons/customization', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        let params = request.body;
-        let customization = params.customization;
-        this.saveCustomization.now(login, customization, (data)=>{
-            personInfoResponse(data, response);
-        });
-    });
-
     app.post('/api/cases/archive', keycloak.protect(), (request, response)=> {
         let ids = JSON.parse(request.body.ids);
         this.archiveCases.now(ids, (data)=> {
@@ -129,9 +116,10 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.get('/api/forms/:id/preview', keycloak.protect(), (request, response) => {
         let id = request.params.id;
-        this.previewForm2.now(id, (html)=> {
+        let login = request.kauth.grant.id_token.content['universal-id'];
+        this.previewForm2.now(login, id, (html)=> {
             previewForm2Response(html, response);
-        })
+        });
     });
 
     app.get('/api/zip', keycloak.protect(), async (request, response)=>{
@@ -139,9 +127,10 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         var self = this;
         let ids = typeof request.query.id == 'string' ? [request.query.id] : request.query.id;
         var archive = archiver('zip');
+        let login = request.kauth.grant.id_token.content['universal-id'];
         var doItForEach = (id) => {
             var p = new Promise((resolve, reject)=>{
-                self.previewForm2.now(id, (html)=> {
+                self.previewForm2.now(login, id, (html)=> {
                     if (html.error) {
                         error = html.error;
                         reject(error);
@@ -198,7 +187,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     });
 
     app.get('/api/journey', keycloak.protect(), (request, response)=> {
-        login = request.kauth.grant.id_token.content['universal-id'];
+        let login = request.kauth.grant.id_token.content['universal-id'];
         this.myJourney.now(login, (data)=> {
             myJourneyResponse(data, response);
         });
@@ -207,7 +196,8 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     app.post('/api/forms/:id/submit', keycloak.protect(), (request, response) => {
         let bceidGuid = request.kauth.grant.id_token.content['universal-id'];
         let id = request.params.id;
-        this.previewForm2.now(id, (html)=> {
+        let login = request.kauth.grant.id_token.content['universal-id'];
+        this.previewForm2.now(login, id, (html)=> {
             if (html.error) {
                 console.log('preview error', html.error);
                 submitForm2Response(html, response);
