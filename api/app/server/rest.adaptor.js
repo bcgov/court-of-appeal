@@ -3,7 +3,7 @@ let { executeAsync } = require('app/lib/yop.postgresql');
 let { CreateFormTwo, PreviewForm2, SubmitForm,
     } = require('../features');
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
-      updateFormTwoResponse, savePersonResponse, personInfoResponse,
+      updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
       myJourneyResponse, serviceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let ifNoError = require('./errors.handling');
@@ -36,7 +36,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.post('/api/forms', keycloak.protect(), (request, response)=> {
         const login = request.session.universalId;
-        this.database.savePerson({ login:login }, (id)=> {
+        this.database.savePerson(login, (id)=> {
             if (id.error) {
                 createFormTwoResponse(id, response);
             }
@@ -67,14 +67,6 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         const login = request.session.universalId;
         this.database.myCases(login, (data)=> {
             myCasesResponse(data, response);
-        });
-    });
-
-    app.post('/api/persons', keycloak.protect(), (request, response)=> {
-        let params = request.body;
-        let person = params.data;
-        this.database.savePerson(person, (data)=> {
-            savePersonResponse(data, response);
         });
     });
 
@@ -146,7 +138,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.post('/api/journey', keycloak.protect(), (request, response)=> {
         const login = request.session.universalId;
-        this.database.savePerson({login:login}, (data)=> {
+        this.database.savePerson(login, (data)=> {
             if (data.error) {
                 createJourneyResponse(data, response);
             }
