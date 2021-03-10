@@ -9,6 +9,7 @@ PreviewForm2.prototype.now = function(login, id, callback) {
     this.database.formData(login, id, (data)=>{
         if (data.error) { callback(data); }
         else {
+            data = JSON.parse(data.data)
             const selected = this.filterSelected(data.respondents);
             var html = this.template
                 .replace('{formSevenNumber}', data.formSevenNumber)

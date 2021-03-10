@@ -23,7 +23,7 @@ class MultiSelectionCaseList extends CaseList {
                     <thead>
                         <tr className="header">
                             <td></td>
-                            <td>Edit</td>
+                            <td>Action</td>
                             <td>File #</td>
                             <td>Parties</td>
                             <td>Status</td>

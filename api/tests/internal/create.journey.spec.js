@@ -3,7 +3,6 @@ const Database = require('../../app/store/database');
 const Migrator = require('../../app/migrations/migrator');
 const Truncator = require('../support/truncator');
 const { Journey } = require('../../app/store/journey');
-const CreateJourney = require('../../app/features/create.journey');
 const SavePerson = require('../../app/features/save.person');
 
 describe('Create journey', function() {
@@ -15,7 +14,6 @@ describe('Create journey', function() {
 
     beforeEach(function(success) {
         database = new Database();
-        createJourney = new CreateJourney(database);
         savePerson = new SavePerson(database);
         journey = new Journey();
         let migrator = new Migrator();

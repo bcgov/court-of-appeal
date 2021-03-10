@@ -9,7 +9,7 @@ class Form2Preview extends Component {
 
     constructor(props) {
         super(props);
-        this.state = props.location ? props.location.state : {};
+        this.state = props.location && props.location.state  ? props.location.state : {};
         this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
         this.service = this.props.service;
 

@@ -1,7 +1,7 @@
 let { Forms } = require('./forms');
 let { Persons } = require('./persons');
 let { Journey } = require('./journey');
-let { EFilingSubmissions } = require('./efiling.submissions');
+let { EFiling } = require('./efiling');
 
 let ifError = function(please) {
     return {
@@ -22,9 +22,10 @@ let Database = function() {
     this.forms = new Forms();
     this.persons = new Persons();
     this.journey = new Journey();
-    this.efilingsubmissions = new EFilingSubmissions();
+    this.efiling = new EFiling();
 };
 
+// Legacy methods.
 Database.prototype.createJourney = function(journey, callback) {
     this.journey.selectByUserId(journey.userid, ifError({notify:callback}).otherwise((rows)=> {
         if (!rows || rows.length === 0) {
@@ -56,10 +57,6 @@ Database.prototype.myJourney = function(login, callback) {
         }
     }));
 };
-
-Database.prototype.createSubmission = function (transactionId, submissionId) {
-    this.efilingsubmissions.createSubmission(transactionId, submissionId);
-}
 
 Database.prototype.createForm = function(form, callback) {
     this.forms.selectByFormTypeUseridAndCaseNumber(form.person_id, form.type, JSON.parse(form.data).formSevenNumber, (err, rows) => {
@@ -97,8 +94,8 @@ Database.prototype.updateForm = function(form, callback) {
     );
 };
 
-Database.prototype.submitForm = function(id, callback) {
-    this.forms.updateStatus(id, 'Submitted', ifError({notify:callback}).otherwise((rows)=>{
+Database.prototype.submitForm = function(id, userId, callback) {
+    this.forms.updateStatus(id, userId, 'Submitted', ifError({notify:callback}).otherwise((rows)=>{
         callback(rows);
     }))
 };
@@ -115,6 +112,7 @@ Database.prototype.myCases = function(login, callback) {
                 type: row.type,
                 status: row.status,
                 modified: modified,
+                packageUrl: row.package_url,
                 data: JSON.parse(row.data)
             };
         }));
@@ -122,7 +120,7 @@ Database.prototype.myCases = function(login, callback) {
 };
 
 Database.prototype.savePerson = function(person, callback) {
-    this.persons.findByLogin(person.login, ifError({notify:callback}).otherwise((rows)=> {
+    this.persons.findByLogin(person, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length ==0) {
             this.persons.create(person, ifError({notify:callback}).otherwise((rows)=>{
                 callback(rows[0].last_value);
@@ -134,16 +132,8 @@ Database.prototype.savePerson = function(person, callback) {
     }));
 };
 
-Database.prototype.saveCustomization = function(person, callback) {
-    this.savePerson(person, ()=>{
-        this.persons.saveCustomization(person, ifError({notify:callback}).otherwise((rows, error)=> {
-            callback(person);
-        }));
-    });
-};
-
-Database.prototype.archiveCases = function(ids, callback) {
-    this.forms.archive(ids, ifError({notify:callback}).otherwise((rows)=> {
+Database.prototype.archiveCases = function(userid, ids, callback) {
+    this.forms.archive(userid, ids, ifError({notify:callback}).otherwise((rows)=> {
         callback(rows);
     }));
 };
@@ -155,7 +145,7 @@ Database.prototype.formData = function(login, id, callback) {
                 if (rows.length === 0) 
                     callback({ error: {code:404} });
                 else 
-                    callback(JSON.parse(rows[0].data));
+                    callback(rows[0]);
             }));
         }
         else 
@@ -171,9 +161,26 @@ Database.prototype.personInfo = function(login, callback) {
         else {
             let person = rows[0];
             callback({
-                login:person.login
+                login:person.login,
+                id:person.id
             });
         }
     }));
 };
+
+// New methods. These shouldn't provide "error codes".
+Database.prototype.createEFilingSubmission = async function (submissionId, transactionId, userId, formId) {
+    let rows = await this.efiling.createEFilingSubmission(submissionId, transactionId, userId, formId);
+    await this.efiling.updateFormLastEFilingSubmission(formId, userId, rows[0].id);
+}
+
+Database.prototype.updateEFilingSubmissionUrlAndNumber = async function (formId, personId, packageNumber, packageUrl) {
+    await this.efiling.updateEFilingSubmissionUrlAndNumber(formId, personId, packageNumber, packageUrl);
+    await this.efiling.updateFormToSubmitted(formId, personId);
+}
+
+Database.prototype.getEFilingInformation = async function(formId, personId) {
+    return await this.efiling.getEFilingInformation(formId, personId);
+}
+
 module.exports = Database;

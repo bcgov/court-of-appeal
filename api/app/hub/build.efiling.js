@@ -6,6 +6,7 @@ var buildEFilingPackage = function(request, data, pdf) {
     efilingPackage.fileNumber = data.formSevenNumber.replace("CA", "");
     efilingPackage.locationCode = "COA";
     efilingPackage.parties = [];
+    efilingPackage.organizationParties = [];
     efilingPackage.documents = [
         {
             "name": "form2.pdf",
@@ -18,12 +19,10 @@ var buildEFilingPackage = function(request, data, pdf) {
         party = {};
         if (appellant.organization || appellant.lastName == "") {
             party = {
-                "partyType": "IND", //"ORG",
                 "roleType": "APL",
-                "firstName": "",
-                "middleName": "",
-                "lastName": appellant.firstName || "",
+                "name": appellant.firstName || "",
             };
+            efilingPackage.organizationParties.push(party);
         }
         else {
             party = {
@@ -33,24 +32,34 @@ var buildEFilingPackage = function(request, data, pdf) {
                 "middleName": "",
                 "lastName": appellant.lastName || ""
             };
+            efilingPackage.parties.push(party);
         }
-        efilingPackage.parties.push(party);
     });
     data.respondents.forEach((respondent) => {
-        party = {
-            "partyType": "IND", //respondent.organization ? "ORG": "IND",
-            "roleType": "RES",
-            "firstName": respondent.firstName || "",
-            "middleName": "",
-            "lastName": respondent.lastName || ""
+        party = {};
+        if (respondent.organization || respondent.lastName == "") {
+            party = {
+                "roleType": "RES",
+                "name": respondent.firstName || "",
+            };
+            efilingPackage.organizationParties.push(party);
         }
-        efilingPackage.parties.push(party);
+        else {
+            party = {
+                "partyType": "IND",
+                "roleType": "RES",
+                "firstName": respondent.firstName || "",
+                "middleName": "",
+                "lastName": respondent.lastName || ""
+            };
+            efilingPackage.parties.push(party);
+        }
     });
 
     const host = `${request.headers.host}`;
-    efilingPackage.successUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/success`;
-    efilingPackage.errorUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/error`;
-    efilingPackage.cancelUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}${data.formId}/submitted/cancel`;
+    efilingPackage.successUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}api/forms/${data.formId}/success`;
+    efilingPackage.errorUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}submitted/error`;
+    efilingPackage.cancelUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}submitted/cancel`;
 
     return efilingPackage;
 }

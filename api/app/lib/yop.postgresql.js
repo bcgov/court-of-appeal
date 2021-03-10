@@ -11,6 +11,11 @@ var executeSync = async function(usePool, sql, params) {
     return rows
 }
 
+var executeAsync = async function (sql, params) {
+    const { rows } = await pool.query(sql, params);
+    return rows;
+}
+
 var executePool = function(sql, params, callback) {
     if (typeof params == 'function') {
         callback = params
@@ -96,5 +101,6 @@ var run = function(usePool, sql, params, callback) {
 module.exports = {
     execute: execute,
     executePool: executePool,
-    executeSync: executeSync
+    executeSync: executeSync,
+    executeAsync: executeAsync
 };

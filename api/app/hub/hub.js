@@ -1,7 +1,6 @@
 const { default: axios } = require('axios');
 const { v4: uuidv4 } = require('uuid');
 var { request } = require('http');
-var { extractBody } = require('./extract.body')
 var {
     extractParties,
     buildPartyInfo,
@@ -52,7 +51,7 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
     //This is very unlikely to happen, as we're in control of the document generation.
     if (!submissionId) {
         console.log('No submissionId returned from document upload.')
-        callback({ error: {code:500, message: 'Error with document upload.'}})
+        callback({ error: {code:500, message: 'Error with document upload.'}}, transactionId, null)
         return;
     }
 
@@ -64,7 +63,7 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
         callback(data, transactionId, submissionId);
     } catch (error) {
         console.log(error);
-        callback({ error: {code:500, message: 'Error with submission.'}})
+        callback({ error: {code:500, message: 'Error with submission.'}}, transactionId, submissionId)
     }
 };
 

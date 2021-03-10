@@ -29,6 +29,7 @@ class App extends Component {
           <Route path={process.env.PUBLIC_URL + '/preview'} component={Form2Preview} />
           <Route path={process.env.PUBLIC_URL + '/proceed'} component={Form2Proceed} />
           <Route path={process.env.PUBLIC_URL + '/:id/submitted/*'} component={Form2Submitted} />
+          <Route path={process.env.PUBLIC_URL + '/submitted/*'} component={Form2Submitted} />
           <Route path={process.env.PUBLIC_URL + '/my-documents'} render={(any) => <MyDocuments {...any} fetch={this.props.fetch} service={this.props.service}  />}/>
           <Route path={process.env.PUBLIC_URL + '/notifications'} component={Notifications} />
           <Footer />

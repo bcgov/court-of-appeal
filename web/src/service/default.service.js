@@ -1,5 +1,7 @@
 let request = require('request');
+
 let Service = function(window) {
+    
     this.window = window;
     this.apiUrl = undefined;
     if (typeof window !== 'undefined') {
@@ -140,6 +142,24 @@ Service.prototype.buildOptions = function(url) {
         url: this.base() + url,
         'content-type': 'application/json'
     };
+};
+
+Service.prototype.getSubmittedInfo = function (callback){
+    let self = this;
+    request.get(this.buildOptions('/api/persons/connected'), (err, response, body)=>{
+        if (response && response.statusCode === 200) {
+            callback(JSON.parse(body));
+        }
+        else if (response && response.statusCode === 404) {
+            callback({ error:{ code:404, message:'not found' } });
+        }
+        else if (response && response.statusCode === 403) {
+            self.redirectToLogin();
+        }
+        else {
+            self.notifyOfError(callback);
+        }
+    });
 };
 
 Service.prototype.getPersonInfo = function(callback) {
@@ -311,8 +331,7 @@ Service.prototype.getAccountUsers = function(callback) {
             self.notifyOfError(callback);
         }
     });
-}
-
+};
 
 
 module.exports = Service;

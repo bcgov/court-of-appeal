@@ -1,61 +1,42 @@
-let { SearchFormSeven, MyCases, CreateFormTwo, SavePerson, UpdateFormTwo,
-    ArchiveCases, PreviewForm2, PersonInfo, SaveCustomization, CreateJourney,
-    MyJourney, UpdateJourney, SubmitForm,
-    ConnectPerson} = require('../features');
+let { executeAsync } = require('app/lib/yop.postgresql');
+
+let { CreateFormTwo, PreviewForm2, SubmitForm,
+    } = require('../features');
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, savePersonResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, submitForm2Response } = require('./responses');
+      myJourneyResponse, serviceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let ifNoError = require('./errors.handling');
 let pdf = require('html-pdf-node');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
     this.submitForm = new SubmitForm()
-    this.connectPerson = new ConnectPerson()
     this.defaultPdfOptions = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox', '--local-url-access=false'] };
 };
 
 RestAdaptor.prototype.useHub = function(hub) {
-    this.searchFormSeven = new SearchFormSeven(hub);
+    this.hub = hub;
     this.submitForm.useHub(hub);
-    this.connectPerson.useHub(hub);
 };
 RestAdaptor.prototype.useDatabase = function(database) {
-    this.myCases = new MyCases(database);
-    this.myJourney = new MyJourney(database);
+    this.database = database;
     this.createFormTwo = new  CreateFormTwo(database);
-    this.updateFormTwo = new UpdateFormTwo(database);
-    this.savePerson = new SavePerson(database);
-    this.archiveCases = new ArchiveCases(database);
     this.previewForm2 = new PreviewForm2(database);
-    this.getPersonInfo = new PersonInfo(database);
-    this.saveCustomization = new SaveCustomization(database);
-    this.createJourney = new CreateJourney(database);
-    this.updateJourney = new UpdateJourney(database);
-
-    this.connectPerson.useDatabase(database);
     this.submitForm.useDatabase(database);
 };
 RestAdaptor.prototype.route = function(app, keycloak) {
-    app.get('/api/login', keycloak.protect(), (request, response) => {
-        let redirectUrl = request.query.redirectUrl || "/";
-        let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
-        if (notBCEID) 
-            response.redirect(`/api/logout?redirect_url=${redirectUrl}`);
-        else 
-            response.redirect(redirectUrl);
-    });
 
+   // Legacy routes.
    app.get('/api/forms', keycloak.protect(), (request, response)=> {
-        this.searchFormSeven.now({ file:request.query.file }, (data)=> {
+        this.hub.searchForm7(request.query.file, (data)=> {
             searchFormSevenResponse(data, response);
         });
     });
 
     app.post('/api/forms', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.savePerson.now(login, (id)=> {
+        const login = request.session.universalId;
+        this.database.savePerson({ login:login }, (id)=> {
             if (id.error) {
                 createFormTwoResponse(id, response);
             }
@@ -74,7 +55,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.put('/api/forms/:id', keycloak.protect(), (request, response)=> {
         let data = request.body.data;
-        this.updateFormTwo.now(request.params.id, data, (data)=> {
+        this.database.updateFormTwo({id: request.params.id, type:'form-2', data: data }, (data)=> {
             if (!data.error) 
                 updateFormTwoResponse(data, response);
             else 
@@ -83,8 +64,8 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     });
 
     app.get('/api/cases', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.myCases.now(login, (data)=> {
+        const login = request.session.universalId;
+        this.database.myCases(login, (data)=> {
             myCasesResponse(data, response);
         });
     });
@@ -92,14 +73,15 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     app.post('/api/persons', keycloak.protect(), (request, response)=> {
         let params = request.body;
         let person = params.data;
-        this.savePerson.now(person, (data)=> {
+        this.database.savePerson(person, (data)=> {
             savePersonResponse(data, response);
         });
     });
 
     app.post('/api/cases/archive', keycloak.protect(), (request, response)=> {
+        const userId = request.session.userId;
         let ids = JSON.parse(request.body.ids);
-        this.archiveCases.now(ids, (data)=> {
+        this.database.archiveCases(userId, ids, (data)=> {
             archiveCasesResponse(data, response);
         });
     });
@@ -114,8 +96,8 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     });
 
     app.get('/api/forms/:id/preview', keycloak.protect(), (request, response) => {
-        let id = request.params.id;
-        let login = request.kauth.grant.id_token.content['universal-id'];
+        const id = request.params.id;
+        const login = request.session.universalId;
         this.previewForm2.now(login, id, (html)=> {
             previewForm2Response(html, response);
         });
@@ -126,7 +108,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         var self = this;
         let ids = typeof request.query.id == 'string' ? [request.query.id] : request.query.id;
         var archive = archiver('zip');
-        let login = request.kauth.grant.id_token.content['universal-id'];
+        const login = request.session.universalId;
         var doItForEach = (id) => {
             var p = new Promise((resolve, reject)=>{
                 self.previewForm2.now(login, id, (html)=> {
@@ -136,7 +118,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                     }
                     else {
                         pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
-                            const name = 'form2-' + id + '.pdf';
+                            const name = `form2-${id}.pdf`;
                             archive.append(pdfBuffer, { name: name });
                             resolve();
                         });
@@ -163,78 +145,45 @@ RestAdaptor.prototype.route = function(app, keycloak) {
     });
 
     app.post('/api/journey', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.savePerson.now(login, (data)=> {
+        const login = request.session.universalId;
+        this.database.savePerson({login:login}, (data)=> {
             if (data.error) {
                 createJourneyResponse(data, response);
             }
             else {
                 let params = request.body;
                 params.userid = data;
-                this.createJourney.now(params, (data)=> {
+                this.database.createJourney(params, (data)=> {
                     createJourneyResponse(data, response);
-
                 });
             }
         });
     });
 
     app.put('/api/journey/:id', keycloak.protect(), (request, response)=> {
-        this.updateJourney.now(request.params.id, request.body, (data)=> {
+        request.body.id = request.params.id;
+        this.database.updateJourney(request.params.id, request.body, (data)=> {
             createJourneyResponse(data, response);
         });
     });
 
     app.get('/api/journey', keycloak.protect(), (request, response)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.myJourney.now(login, (data)=> {
+        const login = request.session.universalId;
+        this.database.myJourney(login, (data)=> {
             myJourneyResponse(data, response);
         });
     });
 
-    app.post('/api/forms/:id/submit', keycloak.protect(), (request, response) => {
-        let bceidGuid = request.kauth.grant.id_token.content['universal-id'];
-        let id = request.params.id;
-        let login = request.kauth.grant.id_token.content['universal-id'];
-        this.previewForm2.now(login, id, (html)=> {
-            if (html.error) {
-                console.log('submit error', html.error);
-                submitForm2Response(html, response);
-            }
-            else {
-                pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
-                    if (err) console.log('pdf creation error', err);
-                    this.submitForm.now(request, bceidGuid, id, pdfBuffer, (data, transactionId, submissionId)=>{
-                        //Write to DB.  TransactionId, SubmissionId
-                        this.submitForm.createSubmission(transactionId, submissionId);
-                        submitForm2Response(data, response);
-                    })
-                });
-            }
-        });
-    });
-
-    app.put('/api/forms/:id/submit', keycloak.protect(), (request, response) => {
-        let bceidGuid = request.kauth.grant.id_token.content['universal-id'];
-        let id = request.params.id;
-        //Ensure package belongs to user. 
-        //update packageNumber, packageUrl
-    });
-
-
     app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
-        let login = request.kauth.grant.id_token.content['universal-id'];
+        const login = request.session.universalId;
         let name = request.kauth.grant.id_token.content.display_name;
-        this.connectPerson.now(login, (data)=>{
+        this.database.savePerson(login, (data)=>{
             if (data && !data.error) {
-                this.getPersonInfo.now(login, (user)=>{
+                this.database.personInfo(login, (user)=>{
                     personInfoResponse({
                         error: user.error,
                         login:login,
-                        name:name,
-                        customization:user.customization?user.customization:undefined,
-                        clientId: user.clientId,
-                        accountId: user.accountId
+                        name:name
                     }, response);
                 });
             }
@@ -242,6 +191,88 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 personInfoResponse(data, response);
             }
         })
+    });
+
+    // New routes.
+    app.get('/api/forms/:id/submit', keycloak.protect(), async (request, response) => {
+        const formId = request.params.id;
+        const userId = request.session.userId;
+        try {
+            let data = await this.database.getEFilingInformation(formId, userId);
+            if (data.length === 0)
+                notFoundResponse(response);
+            else {
+                json = JSON.parse(data[0].data)
+                result = {
+                    packageNumber: data[0].package_number,
+                    packageUrl: data[0].package_url,
+                    caseNumber: json.formSevenNumber
+                }
+                successJsonResponse(result, response);
+            }
+        }
+        catch (error) { serviceUnavailableResponse(error, response); }
+    });
+
+    app.post('/api/forms/:id/submit', keycloak.protect(), async (request, response) => {
+        const id = request.params.id;
+        const userId = request.session.userId;
+        const login = request.session.universalId;
+        try {
+            let html = await new Promise((resolve, reject) => {
+                this.previewForm2.now(login, id, (html)=> {
+                    if (html.error) 
+                        reject(html)
+                    else 
+                        resolve(html);
+                });
+            });
+
+            let pdfBuffer = await pdf.generatePdf({ content: html }, this.defaultPdfOptions);
+
+            let submit = await new Promise((resolve, reject) => { 
+                this.submitForm.now(request, login, id, pdfBuffer, (data, transactionId, submissionId) => {
+                    if (data.error) 
+                        reject({data, transactionId, submissionId});
+                    else 
+                        resolve({data,transactionId, submissionId});
+                });
+            });
+
+            let rows = await this.database.createEFilingSubmission(submit.submissionId, submit.transactionId, userId, id);
+            noContentJsonResponse(submit.data, response);
+        }
+        catch (error) { serviceUnavailableResponse(error, response); }
+    });
+
+    app.get('/api/forms/:id/success', keycloak.protect(), async (request, response) => {
+        const userId = request.session.userId;
+        const formId = request.params.id;
+        let data = request.query.packageRef;
+        let buff = new Buffer.from(data, 'base64');
+        const packageUrl = buff.toString('ascii');
+        const packageNumber = packageUrl.split('/').pop();
+        try {
+            await this.database.updateEFilingSubmissionUrlAndNumber(formId, userId, packageNumber, packageUrl);
+        }
+        catch (error) { serviceUnavailableResponse(error, response); }
+        response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}${formId}/submitted/success`);
+    });
+
+    app.get('/api/login', keycloak.protect(), (request, response) => {
+        let redirectUrl = request.query.redirectUrl || "/";
+        const universalId = request.kauth.grant.id_token.content['universal-id'];
+        let notBCEID = !universalId;
+        if (notBCEID) 
+            response.redirect(`/api/logout?redirect_url=${redirectUrl}`);
+        else 
+        {
+            this.database.savePerson(universalId, (id) => {
+                request.session.userId = id;
+                request.session.universalId = universalId;
+                response.redirect(redirectUrl);
+            });
+        }
     });
 
     app.get('/api/health', function (req, res) { res.send(); });

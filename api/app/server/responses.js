@@ -64,5 +64,27 @@ module.exports = {
             response.statusCode = 201;
             response.json(data);
         });
+    },
+    updateSubmissionResponse:  (data, response)=> {
+        ifNoError(data, response).then(()=> {
+            response.statusCode = 201;
+            response.json(data);
+        });
+    },
+    successJsonResponse: (data, response) => {
+        response.json(data);
+    },
+    noContentJsonResponse: (data, response) => {
+        response.statusCode = 201;
+        response.json(data);  
+    },
+    notFoundResponse: (response) => {
+        response.statusCode = 404;
+        response.end();
+    },
+    serviceUnavailableResponse: (error, response) => {
+        console.error(error);
+        response.statusCode = 503;
+        response.end();
     }
 };
