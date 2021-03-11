@@ -43,7 +43,13 @@ BEGIN
     ) THEN
         alter table person drop client_id;
     END IF;
-    alter table person
-        ADD UNIQUE (login);
+    IF EXISTS ( 
+        select column_name 
+        FROM information_schema.columns
+        where table_name='person' and column_name='login' and is_nullable='YES'
+    ) THEN 
+        alter table person add unique (login);
+        alter table person alter column login set not null;
+    END IF;
 END
 $do$
