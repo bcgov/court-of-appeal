@@ -1,7 +1,9 @@
+
 let { Forms } = require('./forms');
 let { Persons } = require('./persons');
 let { Journey } = require('./journey');
 let { EFiling } = require('./efiling');
+let DatabaseEncryption = require('./database.encryption');
 
 let ifError = function(please) {
     return {
@@ -23,6 +25,7 @@ let Database = function() {
     this.persons = new Persons();
     this.journey = new Journey();
     this.efiling = new EFiling();
+    this.encryption = new DatabaseEncryption(process.env.DATABASE_ENCRYPTION_KEY_32_BYTES);
 };
 
 // Legacy methods.
@@ -59,18 +62,22 @@ Database.prototype.myJourney = function(login, callback) {
 };
 
 Database.prototype.createForm = function(form, callback) {
+    let self = this;
     this.forms.selectByFormTypeUseridAndCaseNumber(form.person_id, form.type, JSON.parse(form.data).formSevenNumber, (err, rows) => {
         if (!rows || rows.length < 1 ) {
+            const encrypted_data = self.encryption.encrypt(form.data);
+            form.data = encrypted_data;
             this.forms.create(form, ifError({notify:callback}).otherwise((rows)=> {
                 callback(rows[0].last_value);
             }));
         } else {
             let existingForm = rows[0];
+            const encrypted_data = self.encryption.encrypt(form.data);
             this.forms.update({
                     id:existingForm.id,
                     type:existingForm.type,
                     status:form.status,
-                    data:(form.data)
+                    data:(encrypted_data)
                 },
                 ifError({notify:callback}).otherwise((rows)=>{
                     callback(rows[0].last_value);
@@ -82,11 +89,12 @@ Database.prototype.createForm = function(form, callback) {
 };
 
 Database.prototype.updateForm = function(form, callback) {
+    const encrypted_data = this.encryption.encrypt(form.data);
     this.forms.update({
             id:form.id,
             type:form.type,
             status:'Draft',
-            data:form.data
+            data:encrypted_data
         },
         ifError({notify:callback}).otherwise((rows)=>{
             callback(rows[0].last_value);
@@ -94,18 +102,14 @@ Database.prototype.updateForm = function(form, callback) {
     );
 };
 
-Database.prototype.submitForm = function(id, userId, callback) {
-    this.forms.updateStatus(id, userId, 'Submitted', ifError({notify:callback}).otherwise((rows)=>{
-        callback(rows);
-    }))
-};
-
 Database.prototype.myCases = function(login, callback) {
+    let self = this;
     this.forms.selectByLogin(login, ifError({notify:callback}).otherwise((rows)=> {
         callback(rows.map(function(row) {
             let modified = row.modified;
             modified = JSON.stringify(modified).toString();
             modified = modified.substring(1, modified.lastIndexOf('.'))+'Z';
+            data = self.encryption.decrypt(JSON.parse(row.data));
             return {
                 id: row.id,
                 personId: row.person_id,
@@ -113,7 +117,7 @@ Database.prototype.myCases = function(login, callback) {
                 status: row.status,
                 modified: modified,
                 packageUrl: row.package_url,
-                data: JSON.parse(row.data)
+                data: JSON.parse(data)
             };
         }));
     }));
@@ -139,13 +143,17 @@ Database.prototype.archiveCases = function(userid, ids, callback) {
 };
 
 Database.prototype.formData = function(login, id, callback) {
+    let self = this;
     this.forms.hasPermissionToForm(login, id, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length > 0) {
             this.forms.selectOne(id, ifError({notify:callback}).otherwise((rows)=> {
                 if (rows.length === 0) 
                     callback({ error: {code:404} });
-                else 
+                else {
+                    const decrypted_data = self.encryption.decrypt(JSON.parse(rows[0].data));
+                    rows[0].data = decrypted_data;
                     callback(rows[0]);
+                }
             }));
         }
         else 
@@ -180,7 +188,12 @@ Database.prototype.updateEFilingSubmissionUrlAndNumber = async function (formId,
 }
 
 Database.prototype.getEFilingInformation = async function(formId, personId) {
-    return await this.efiling.getEFilingInformation(formId, personId);
+    let form = await this.efiling.getEFilingInformation(formId, personId);
+    if (form.length > 0) {
+        data = this.encryption.decrypt(JSON.parse(form[0].data));
+        form[0].data = data;
+    }
+    return form;
 }
 
 module.exports = Database;

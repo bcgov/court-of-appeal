@@ -6,7 +6,6 @@ let Forms = function() {
 Forms.prototype.selectByLogin = function(login, callback) {
     var select = `
         SELECT  forms.id,
-                true as is_admin,
                 type,
                 status,
                 modified,

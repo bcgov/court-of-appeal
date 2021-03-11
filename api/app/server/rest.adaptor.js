@@ -231,7 +231,11 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 });
             });
 
-            let rows = await this.database.createEFilingSubmission(submit.submissionId, submit.transactionId, userId, id);
+            if (submit.data.message === "success")
+                await this.database.createEFilingSubmission(submit.submissionId, submit.transactionId, userId, id);
+            else 
+                console.error(`Error submitting formId: ${id}, userId: ${userId}, message: ${submit.data.message}`)
+
             noContentJsonResponse(submit.data, response);
         }
         catch (error) { serviceUnavailableResponse(error, response); }
