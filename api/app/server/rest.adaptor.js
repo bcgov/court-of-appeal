@@ -1,18 +1,16 @@
-let { executeAsync } = require('app/lib/yop.postgresql');
-
+const axios = require('axios');
+const fs = require('fs');
 let { CreateFormTwo, PreviewForm2, SubmitForm,
     } = require('../features');
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, serviceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
+      myJourneyResponse, logErrorAndServiceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let ifNoError = require('./errors.handling');
-let pdf = require('html-pdf-node');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
     this.submitForm = new SubmitForm()
-    this.defaultPdfOptions = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox', '--local-url-access=false'] };
 };
 
 RestAdaptor.prototype.useHub = function(hub) {
@@ -78,16 +76,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         });
     });
 
-    app.post('/api/pdf', keycloak.protect(), (request, response) => {
-        response.writeHead(200, {'Content-type': 'application/pdf'});
-        let params = request.body;
-        let html = params.html;
-        pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
-            stream.pipe(response);
-        })
-    });
-
-    app.get('/api/forms/:id/preview', keycloak.protect(), (request, response) => {
+  app.get('/api/forms/:id/preview', keycloak.protect(), (request, response) => {
         const id = request.params.id;
         const login = request.session.universalId;
         this.previewForm2.now(login, id, (html)=> {
@@ -103,17 +92,27 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         const login = request.session.universalId;
         var doItForEach = (id) => {
             var p = new Promise((resolve, reject)=>{
-                self.previewForm2.now(login, id, (html)=> {
+                self.previewForm2.now(login, id, async (html)=> {
                     if (html.error) {
                         error = html.error;
                         reject(error);
                     }
                     else {
-                        pdf.generatePdf({ content: html }, this.defaultPdfOptions).then(pdfBuffer => {
+                        try {
                             const name = `form2-${id}.pdf`;
-                            archive.append(pdfBuffer, { name: name });
+                            let response = await axios.post(
+                              `${process.env.PDF_SERVICE_URL}/pdf?filename=${name}`,
+                              (data = Buffer.from(html, "utf-8")),
+                              { responseType: "arraybuffer" }
+                            );
+                            archive.append(response.data, { name: name });
                             resolve();
-                        });
+                        }
+                        catch (err) {
+                            console.error(err);
+                            error = { error: {code:503} };
+                            reject(error);
+                        }
                     }
                 });
             });
@@ -124,15 +123,13 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 var id = ids[index];
                 await doItForEach(id);
             }
+            archive.finalize();
+            response.setHeader('Content-type', 'application/zip');
+            response.attachment('forms.zip');
+            archive.pipe(response);
         }
-        catch (ignored) {}
-        finally {
-            ifNoError({error:error}, response).then(()=> {
-                archive.finalize();
-                response.setHeader('Content-type', 'application/zip');
-                response.attachment('forms.zip');
-                archive.pipe(response);
-            });
+        catch (err2) {
+            logErrorAndServiceUnavailableResponse(err2, response);
         }
     });
 
@@ -203,7 +200,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 successJsonResponse(result, response);
             }
         }
-        catch (error) { serviceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
     });
 
     app.post('/api/forms/:id/submit', keycloak.protect(), async (request, response) => {
@@ -238,7 +235,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
             noContentJsonResponse(submit.data, response);
         }
-        catch (error) { serviceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
     });
 
     app.get('/api/forms/:id/success', keycloak.protect(), async (request, response) => {
@@ -251,7 +248,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         try {
             await this.database.updateEFilingSubmissionUrlAndNumber(formId, userId, packageNumber, packageUrl);
         }
-        catch (error) { serviceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
         response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}${formId}/submitted/success`);
     });
 

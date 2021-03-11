@@ -39,6 +39,11 @@ services:
     volumes:
       - ./tmp:/tmp2
   
+  pdf:
+    image: bcgovimages/weasyprint
+    ports:
+      - 8083:5001
+
   service:
     image: "${COMPOSE_PROJECT_NAME}-service"
     environment:

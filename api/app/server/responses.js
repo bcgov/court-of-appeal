@@ -82,7 +82,7 @@ module.exports = {
         response.statusCode = 404;
         response.end();
     },
-    serviceUnavailableResponse: (error, response) => {
+    logErrorAndServiceUnavailableResponse: (error, response) => {
         console.error(error);
         response.statusCode = 503;
         response.end();
