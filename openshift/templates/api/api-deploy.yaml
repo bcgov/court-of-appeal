@@ -119,6 +119,8 @@ objects:
       keycloak-secret: ${KEYCLOAK_SECRET}
 
       cookie-secret: ${COOKIE_SECRET}
+
+      encryption-key: ${DATA_SECURITY_KEY}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -226,6 +228,12 @@ objects:
                     secretKeyRef:
                       name: ${NAME}
                       key: cookie-secret
+
+                - name: DATABASE_ENCRYPTION_KEY_32_BYTES
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: encryption-key
 
                 - name: WEB_BASE_HREF
                   value: ${WEB_BASE_HREF}
@@ -335,6 +343,12 @@ parameters:
     description: Cookie Secret
     required: false
     value:
+
+  - name: DATA_SECURITY_KEY
+    displayName: Data Security (Encryption) Key
+    description: The Encryption Key for the environment.
+    generate: expression
+    from: "[a-zA-Z0-9]{32}"
 
   - name: WEB_BASE_HREF
     displayName: Web Base Href
