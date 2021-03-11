@@ -59,8 +59,10 @@ Server.prototype.start = function (port, ip, done) {
     this.app.use(function (request, response, next) {
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
-            if (request.headers.host.endsWith(':443'))
+            if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
+            else
+                request.headers.host = `${request.headers.host}:${request.header('x-forwarded-port')}`;
         }
         next();
     });
