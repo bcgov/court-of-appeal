@@ -201,6 +201,8 @@ objects:
                   value: ${HUB_URL}
                 - name: HUB_TIMEOUT
                   value: ${HUB_TIMEOUT}
+                - name: PDF_SERVICE_URL
+                  value: ${PDF_SERVICE_URL}
 
                 - name: KEYCLOAK_AUTH_URL
                   valueFrom:
@@ -316,6 +318,11 @@ parameters:
     description: Hub Timeout
     required: true
     value: "10000"
+  - name: PDF_SERVICE_URL
+    displayName: PDF Service URL
+    description: Internal URL to the PDF service.
+    required: true
+    value: http://pdf:5001
 
   - name: KEYCLOAK_AUTH_URL
     displayName: KeyCloak Authentication Url
@@ -343,7 +350,6 @@ parameters:
     description: Cookie Secret
     required: false
     value:
-
   - name: DATA_SECURITY_KEY
     displayName: Data Security (Encryption) Key
     description: The Encryption Key for the environment.
