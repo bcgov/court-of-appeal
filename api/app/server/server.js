@@ -66,7 +66,6 @@ Server.prototype.start = function (port, ip, done) {
         if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
             request.headers.host += `:${request.header('x-forwarded-port')}`;
 
-        console.log(request.headers.host);
         next();
     });
 
@@ -110,7 +109,9 @@ Server.prototype.start = function (port, ip, done) {
         next();
     });
 
-    this.app.use(morgan(':method :url', { immediate:true }));
+    this.app.use(morgan(':method :url', { immediate:true,
+        skip: function (req, res) { return req.path == '/api/health' }
+     }));
     this.app.use(express.json());   
     this.app.use(express.urlencoded({extended: true})); 
     this.restAdaptor.route(this.app, this.keycloak);
