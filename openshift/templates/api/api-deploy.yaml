@@ -166,18 +166,18 @@ objects:
               ports:
                 - containerPort: 8080
                   protocol: TCP
-              # readinessProbe:
-              #   initialDelaySeconds: 3
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: 8080
-              # livenessProbe:
-              #   initialDelaySeconds: 120
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: 8080
+              readinessProbe:
+                initialDelaySeconds: 3
+                timeoutSeconds: 30
+                httpGet:
+                  path: /api/health/
+                  port: 8080
+              livenessProbe:
+                initialDelaySeconds: 120
+                timeoutSeconds: 30
+                httpGet:
+                  path: /api/health/
+                  port: 8080
               env:
                 - name: PGHOST
                   value: ${DATABASE_SERVICE_NAME}
