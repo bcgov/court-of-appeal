@@ -6,7 +6,6 @@ let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
       myJourneyResponse, logErrorAndServiceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
-let ifNoError = require('./errors.handling');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
@@ -217,7 +216,12 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 });
             });
 
-            let pdfBuffer = await pdf.generatePdf({ content: html }, this.defaultPdfOptions);
+            const name = `form2-${id}.pdf`;
+            let pdfBuffer = await axios.post(
+                `${process.env.PDF_SERVICE_URL}/pdf?filename=${name}`,
+                (data = Buffer.from(html, "utf-8")),
+                { responseType: "arraybuffer" }
+            );
 
             let submit = await new Promise((resolve, reject) => { 
                 this.submitForm.now(request, login, id, pdfBuffer, (data, transactionId, submissionId) => {
