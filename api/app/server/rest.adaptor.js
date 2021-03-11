@@ -217,14 +217,14 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             });
 
             const name = `form2-${id}.pdf`;
-            let response = await axios.post(
+            let pdfResponse = await axios.post(
                 `${process.env.PDF_SERVICE_URL}/pdf?filename=${name}`,
                 (data = Buffer.from(html, "utf-8")),
                 { responseType: "arraybuffer" }
             );
 
             let submit = await new Promise((resolve, reject) => { 
-                this.submitForm.now(request, login, id, response.data, (data, transactionId, submissionId) => {
+                this.submitForm.now(request, login, id, pdfResponse.data, (data, transactionId, submissionId) => {
                     if (data.error) 
                         reject({data, transactionId, submissionId});
                     else 

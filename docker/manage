@@ -146,6 +146,10 @@ build-db() {
   echo
 }
 
+build-pdf() {
+  echo
+}
+
 build-service() {
   echo -e "\n\n===================================================================================================="
   echoGreen "Building ${COMPOSE_PROJECT_NAME}-service image using s2i ..."

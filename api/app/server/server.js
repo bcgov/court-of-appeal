@@ -61,9 +61,12 @@ Server.prototype.start = function (port, ip, done) {
             request.headers.host = request.header('x-forwarded-host');
             if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
-            else
-                request.headers.host = `${request.headers.host}:${request.header('x-forwarded-port')}`;
         }
+        //Docker fix
+        if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
+            request.headers.host += `:${request.header('x-forwarded-port')}`;
+
+        console.log(request.headers.host);
         next();
     });
 

@@ -21,7 +21,8 @@ class Form2Submitted extends Component {
     }
 
     componentDidMount() {
-        this.fetchSubmittedInfo(this.state.id);
+        if (this.state.success)
+            this.fetchSubmittedInfo(this.state.id);
     }
 
     render() {
