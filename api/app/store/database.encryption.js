@@ -6,13 +6,14 @@ class DatabaseEncryption {
         this.key = key || 'pb3pFYeS7B9mVNsXhFfSx57g1GQsnb8J';
         this.iv = crypto.randomBytes(16);
     }
+
     encrypt(text) {
         let cipher = crypto.createCipheriv(this.algorithm, Buffer.from(this.key), this.iv);
         let encrypted = cipher.update(text);
         encrypted = Buffer.concat([encrypted, cipher.final()]);
         return { iv: this.iv.toString('hex'), content: encrypted.toString('hex') };
-       }
-       
+    }
+
     decrypt(hash) {
         if (!hash.iv || !hash.content) {
             console.warn("Warning unencrypted data detected.");

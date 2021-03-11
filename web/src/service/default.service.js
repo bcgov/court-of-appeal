@@ -144,24 +144,6 @@ Service.prototype.buildOptions = function(url) {
     };
 };
 
-Service.prototype.getSubmittedInfo = function (callback){
-    let self = this;
-    request.get(this.buildOptions('/api/persons/connected'), (err, response, body)=>{
-        if (response && response.statusCode === 200) {
-            callback(JSON.parse(body));
-        }
-        else if (response && response.statusCode === 404) {
-            callback({ error:{ code:404, message:'not found' } });
-        }
-        else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
-        }
-        else {
-            self.notifyOfError(callback);
-        }
-    });
-};
-
 Service.prototype.getPersonInfo = function(callback) {
     let self = this;
     request.get(this.buildOptions('/api/persons/connected'), (err, response, body)=>{
