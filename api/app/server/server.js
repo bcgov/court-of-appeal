@@ -110,7 +110,7 @@ Server.prototype.start = function (port, ip, done) {
     });
 
     this.app.use(morgan(':method :url', { immediate:true,
-        skip: function (req, res) { return req.path == '/api/health' }
+        skip: function (req, res) { return req.path == '/api/health/' }
      }));
     this.app.use(express.json());   
     this.app.use(express.urlencoded({extended: true})); 
