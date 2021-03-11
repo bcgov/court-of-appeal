@@ -3,9 +3,9 @@ let { executePool } = require('app/lib/yop.postgresql');
 let Persons = function() {
 };
 
-Persons.prototype.create = function(options, callback) {
+Persons.prototype.create = function(login, callback) {
     executePool('insert into person(login) values($1);',
-        [options.login], ()=> {
+        [login], ()=> {
             executePool('SELECT last_value FROM person_id_seq;', [], callback);
         });
 };
