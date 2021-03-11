@@ -119,6 +119,8 @@ objects:
       keycloak-secret: ${KEYCLOAK_SECRET}
 
       cookie-secret: ${COOKIE_SECRET}
+
+      encryption-key: ${DATA_SECURITY_KEY}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -164,18 +166,18 @@ objects:
               ports:
                 - containerPort: 8080
                   protocol: TCP
-              # readinessProbe:
-              #   initialDelaySeconds: 3
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: 8080
-              # livenessProbe:
-              #   initialDelaySeconds: 120
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: 8080
+              readinessProbe:
+                initialDelaySeconds: 3
+                timeoutSeconds: 30
+                httpGet:
+                  path: /api/health/
+                  port: 8080
+              livenessProbe:
+                initialDelaySeconds: 120
+                timeoutSeconds: 30
+                httpGet:
+                  path: /api/health/
+                  port: 8080
               env:
                 - name: PGHOST
                   value: ${DATABASE_SERVICE_NAME}
@@ -199,6 +201,8 @@ objects:
                   value: ${HUB_URL}
                 - name: HUB_TIMEOUT
                   value: ${HUB_TIMEOUT}
+                - name: PDF_SERVICE_URL
+                  value: ${PDF_SERVICE_URL}
 
                 - name: KEYCLOAK_AUTH_URL
                   valueFrom:
@@ -226,6 +230,12 @@ objects:
                     secretKeyRef:
                       name: ${NAME}
                       key: cookie-secret
+
+                - name: DATABASE_ENCRYPTION_KEY_32_BYTES
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: encryption-key
 
                 - name: WEB_BASE_HREF
                   value: ${WEB_BASE_HREF}
@@ -308,6 +318,11 @@ parameters:
     description: Hub Timeout
     required: true
     value: "10000"
+  - name: PDF_SERVICE_URL
+    displayName: PDF Service URL
+    description: Internal URL to the PDF service.
+    required: true
+    value: http://pdf:5001
 
   - name: KEYCLOAK_AUTH_URL
     displayName: KeyCloak Authentication Url
@@ -335,6 +350,11 @@ parameters:
     description: Cookie Secret
     required: false
     value:
+  - name: DATA_SECURITY_KEY
+    displayName: Data Security (Encryption) Key
+    description: The Encryption Key for the environment.
+    generate: expression
+    from: "[a-zA-Z0-9]{32}"
 
   - name: WEB_BASE_HREF
     displayName: Web Base Href

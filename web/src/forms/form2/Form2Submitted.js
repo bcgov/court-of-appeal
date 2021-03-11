@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Submitted.css';
@@ -11,11 +12,17 @@ class Form2Submitted extends Component {
         this.state = {};
         this.state.id = props.match.params.id;
         this.state.success = props.location.pathname.includes("success");
-        this.state.cancelled = props.location.pathname.includes("cancelled");
+        this.state.cancelled = props.location.pathname.includes("cancel");
         this.state.error = props.location.pathname.includes("error");
         this.state.errorMessage = params.get("message") ;
         this.state.activeStep = this.state.success ? 4 : 3;
+        this.service = props.service;
         this.done = this.done.bind(this)
+    }
+
+    componentDidMount() {
+        if (this.state.success)
+            this.fetchSubmittedInfo(this.state.id);
     }
 
     render() {
@@ -77,7 +84,7 @@ class Form2Submitted extends Component {
                                 </tr>
                                 <tr>
                                     <th>E-Filing Url:</th>
-                                    <td>sdfasdfs</td>
+                                    <td><a href={ this.state.packageUrl }>{ this.state.packageUrl }</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -93,6 +100,16 @@ class Form2Submitted extends Component {
         );
     }
 
+    async fetchSubmittedInfo() {
+        try {
+            let response = await axios.get(`/api/forms/${this.state.id}/submit`);
+            let data = response.data;
+            this.setState({caseNumber: data.caseNumber, packageNumber: data.packageNumber, packageUrl: data.packageUrl})
+        }
+        catch (err){
+            console.error(err);
+        }
+    }
     done() {
         this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: {}});
     }

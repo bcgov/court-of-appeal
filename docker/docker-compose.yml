@@ -18,6 +18,8 @@ services:
       - KEYCLOAK_SECRET=${KEYCLOAK_SECRET}
       - COOKIE_SECRET=${COOKIE_SECRET}
       - WEB_BASE_HREF=${WEB_BASE_HREF}
+      - DATABASE_ENCRYPTION_KEY_32_BYTES=${DATABASE_ENCRYPTION_KEY_32_BYTES}
+      - PDF_SERVICE_URL=${PDF_SERVICE_URL}
     ports:
       - 8081:8080
     depends_on:
@@ -38,6 +40,11 @@ services:
     volumes:
       - ./tmp:/tmp2
   
+  pdf:
+    image: bcgovimages/weasyprint
+    ports:
+      - 8083:5001
+
   service:
     image: "${COMPOSE_PROJECT_NAME}-service"
     environment:

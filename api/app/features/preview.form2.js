@@ -5,10 +5,11 @@ let PreviewForm2 = function(database) {
     this.template = fs.readFileSync('./app/features/templates/form2.preview.html').toString();
 };
 
-PreviewForm2.prototype.now = function(id, callback) {
-    this.database.formData(id, (data)=>{
+PreviewForm2.prototype.now = function(login, id, callback) {
+    this.database.formData(login, id, (data)=>{
         if (data.error) { callback(data); }
         else {
+            data = JSON.parse(data.data)
             const selected = this.filterSelected(data.respondents);
             var html = this.template
                 .replace('{formSevenNumber}', data.formSevenNumber)
@@ -22,8 +23,8 @@ PreviewForm2.prototype.now = function(id, callback) {
                 .replace('{selectedContactCity}', this.extract('city', data))
                 .replace('{selectedContactProvince}', this.extract('province', data))
                 .replace('{selectedContactPostalCode}', this.extract('postalCode', data))
-                .replace('{selectedContactPhone}', data.phone)
-                .replace('{selectedContactEmail}', data.useServiceEmail ? data.email : '')
+                .replace('{selectedContactPhone}',  this.extract('phone', data))
+                .replace('{selectedContactEmail}', data.useServiceEmail ? this.extract('email', data): '')
                 ;
             if (!data.useServiceEmail) {
                 html = this.removeIfBlock('useServiceEmail', html);

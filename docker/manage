@@ -65,6 +65,7 @@ build-all() {
  build-web
  build-api
  build-service
+ build-pdf
 }
 
 echoGreen() {
@@ -145,6 +146,10 @@ build-db() {
   echo
 }
 
+build-pdf() {
+  echo
+}
+
 build-service() {
   echo -e "\n\n===================================================================================================="
   echoGreen "Building ${COMPOSE_PROJECT_NAME}-service image using s2i ..."
@@ -213,6 +218,7 @@ configureEnvironment () {
   export SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME:-\'User\, Test\'}
   export HUB_URL=${HUB_URL:-http://service:5000}
   export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
+  export PDF_SERVICE_URL=${PDF_SERVICE_URL-http://pdf:5001}
   
   # db
   export POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE:-appdb}

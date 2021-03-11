@@ -54,7 +54,6 @@ Journey.prototype.selectByUserId = function(userid, callback) {
     executePool(select, [userid], callback);
 };
 
-
 module.exports = {
     Journey:Journey
 };

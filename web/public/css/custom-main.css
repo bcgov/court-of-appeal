@@ -29,7 +29,7 @@ html {
 
 body {
     color: #494949;
-    font-family: Myriad-Pro, Calibri, Arial, "sans serif";
+    font-family: Myriad-Pro, Calibri, Arial, "sans serif" !important;
     font-size: 13px;
 }
 

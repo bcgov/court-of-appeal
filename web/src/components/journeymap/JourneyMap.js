@@ -100,7 +100,7 @@ class JourneyMap extends React.Component {
 
     getBreadCrumbsOrRestartButton() {
         let history = this.props.history.location.state;
-        if (history.appellant || history.respondent) {
+        if (history && (history.appellant || history.respondent)) {
             let initial = history.appellant ? "Appealing" : "Responding";
             let secondary = history.userQuestion;
             let current = history.userState;
@@ -108,11 +108,11 @@ class JourneyMap extends React.Component {
                 <div id="journeyBreadcrumb">
                     <div className="journey-breadcrumb">
                         <div className="journey-breadcrumb crumb">
-                            <a id="home" onClick={this.goBackTwo.bind(this)}>{initial}</a>
+                            <button type="button" className="btn btn-link" id="home" onClick={this.goBackTwo.bind(this)}>{initial}</button>
                         </div>
                         <div className="journey-breadcrumb crumb">/</div>
                         <div className="journey-breadcrumb crumb">
-                            <a onClick={this.goBack.bind(this)}>{secondary}</a>
+                            <button type="button" className="btn btn-link" onClick={this.goBack.bind(this)}>{secondary}</button>
                         </div>
                         <div className="journey-breadcrumb crumb">/</div>
                         <div className="journey-breadcrumb crumb">
@@ -211,7 +211,7 @@ class JourneyMap extends React.Component {
                     state: 'started',
                     ca_number: ca_number,
                     steps: JSON.stringify(steps)
-                },this.state.currentJourneyId, (id)=>{console.log("Updated journey", id, this.state.currentJourneyId)});
+                },this.state.currentJourneyId, (id)=>{});
         }
     }
 

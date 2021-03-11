@@ -40,7 +40,9 @@ class CaseList extends React.Component {
                         <i className="oi oi-pencil"/>
                 </td>
                 :
-                <td key={item.id+'edit'}></td>
+                <td key={item.id+'edit'} className="edit-cell">
+                        <i onClick={() => window.open(item.packageUrl)} className="oi oi-magnifying-glass"/>
+                </td>
         )
     }
     columns(item) {
@@ -48,7 +50,9 @@ class CaseList extends React.Component {
             this.editCell(item) ,
             <td key={item.id+'id'}>{item.id}</td>,
             <td key={item.id+'parties'}>{item.parties}</td>,
-            <td key={item.id+'status'}>{item.status}</td>,
+            <td key={item.id+'status'}>
+                {item.status}
+            </td>,
             <td key={item.id+'date'} className="text-right">{item.modified}</td>,
         ])
     }
@@ -66,7 +70,7 @@ class CaseList extends React.Component {
                 <table id="my-cases" className="not-printable" >
                     <thead>
                         <tr className="header">
-                            <td>Edit</td>
+                            <td>Action</td>
                             <td>File #</td>
                             <td>Parties</td>
                             <td>Status</td>

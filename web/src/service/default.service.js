@@ -1,5 +1,7 @@
 let request = require('request');
+
 let Service = function(window) {
+    
     this.window = window;
     this.apiUrl = undefined;
     if (typeof window !== 'undefined') {
@@ -177,24 +179,6 @@ Service.prototype.archiveCases = function(ids, callback) {
     });
 };
 
-Service.prototype.generatePdf = function(html, callback) {
-    let options = this.buildOptions('/api/pdf');
-    let self = this;
-    options.form = { html:html };
-    options.encoding = null;
-    request.post(options, function(err, response, body) {
-        if (response && response.statusCode === 200) {
-            callback(body);
-        }
-        else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
-        }
-        else {
-            self.notifyOfError(callback);
-        }
-    });
-};
-
 Service.prototype.previewForm = function(id, callback) {
     let self = this;
     request.get(this.buildOptions('/api/forms/'+id+'/preview'), (err, response, body)=>{
@@ -285,7 +269,7 @@ Service.prototype.submit = function(id, callback) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body));
         }
-        else if (response && response.statusCode == 403) {
+        else if (response && response.statusCode === 403) {
             self.redirectToLogin();
         }
         else {
@@ -311,8 +295,7 @@ Service.prototype.getAccountUsers = function(callback) {
             self.notifyOfError(callback);
         }
     });
-}
-
+};
 
 
 module.exports = Service;

@@ -1,7 +1,6 @@
 const { default: axios } = require('axios');
 const { v4: uuidv4 } = require('uuid');
 var { request } = require('http');
-var { extractBody } = require('./extract.body')
 var {
     extractParties,
     buildPartyInfo,
@@ -37,37 +36,6 @@ Hub.prototype.extractPort = function(url) {
     return isNaN(port) ? 80 : port
 };
 
-Hub.prototype.accountUsers = function(userguid, callback) {
-    var info = {
-        method: 'GET',
-        host: this.host,
-        port: this.port,
-        path: '/accountUsers?userguid=' + userguid,
-        timeout: this.timeout
-    }
-    var timedout = false
-    var please = request(info, function(response) {
-        if (timedout) { return }
-        if (response.statusCode === 200) {
-            extractBody(response, (body)=>{
-                var data = JSON.parse(body);
-                callback(data['soap:Envelope']['soap:Body']['ns2:getCsoClientProfilesResponse']['return'])
-            })
-        }
-        else {
-            callback({ error: {code:response.statusCode} });
-        }
-    });
-    please.on('error', (err)=>{
-        callback({ error: {code:503} })
-    })
-    please.on('timeout', (err)=>{
-        timedout = true
-        callback({ error: {code:503} })
-    });
-    please.end();
-};
-
 Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callback) {
     let efilingData = buildEFilingPackage(request, data, pdf);
     let transactionId = uuidv4();
@@ -83,7 +51,7 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
     //This is very unlikely to happen, as we're in control of the document generation.
     if (!submissionId) {
         console.log('No submissionId returned from document upload.')
-        callback({ error: {code:500, message: 'Error with document upload.'}})
+        callback({ error: {code:500, message: 'Error with document upload.'}}, transactionId, null)
         return;
     }
 
@@ -95,7 +63,7 @@ Hub.prototype.submitForm = async function(request, bceidGuid, data, pdf, callbac
         callback(data, transactionId, submissionId);
     } catch (error) {
         console.log(error);
-        callback({ error: {code:500, message: 'Error with submission.'}})
+        callback({ error: {code:500, message: 'Error with submission.'}}, transactionId, submissionId)
     }
 };
 

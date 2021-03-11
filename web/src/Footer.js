@@ -25,9 +25,6 @@ class Footer extends Component {
                                         <a href={this.homePath} target="_self">Home</a>
                                     </li>
                                     <li>
-                                        <a href={this.homePath} target="_self">About this site</a>
-                                    </li>
-                                    <li>
                                         <a href="http://gov.bc.ca/disclaimer/" target="_self">Disclaimer</a>
                                     </li>
                                     <li>
@@ -39,10 +36,6 @@ class Footer extends Component {
                                     <li>
                                         <a href="http://gov.bc.ca/copyright" target="_self">Copyright</a>
                                     </li>
-                                    <li>
-                                        <a href="" target="_self">Contact Us</a>
-                                    </li>
-                                    <li style={{color:'white'}}>v{this.state.commit}</li>
                                 </ul>
                             </div>
                         </div>

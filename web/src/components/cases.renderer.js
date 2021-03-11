@@ -25,7 +25,8 @@ let render = function(cases) {
             parties: parties(item.data),
             status: item.status,
             modified: moment(item.modified).format('YYYY-MM-DD HH:mm'),
-            data: item.data
+            data: item.data,
+            packageUrl: item.packageUrl
         };
     });
 };

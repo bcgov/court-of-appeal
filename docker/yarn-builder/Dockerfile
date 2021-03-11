@@ -9,7 +9,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.s
 RUN chmod +x /opt/app-root/src/.nvm/nvm.sh \
     && unset NPM_CONFIG_PREFIX \
     && source /opt/app-root/src/.nvm/nvm.sh \
-    && nvm install 10.15.1 \
+    && nvm install 10.23.1 \
     && nvm ls \
     && node -v
 

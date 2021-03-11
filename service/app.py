@@ -9,6 +9,13 @@ from utils.form7_search import Form7Search
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
+# Health check
+@app.route("/health")
+def health():
+    return ''
+
 
 # CSO
 @app.route("/form7s")

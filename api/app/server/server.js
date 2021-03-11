@@ -1,6 +1,6 @@
 let RestAdaptor = require('./rest.adaptor');
 let express = require('express');
-let bodyParser = require("body-parser");
+let helmet = require('helmet');
 let morgan = require('morgan');
 let Keycloak = require('keycloak-connect');
 let pg = require('pg')
@@ -29,10 +29,11 @@ Server.prototype.start = function (port, ip, done) {
     var pgStore = new pgSession({
       pool: new pg.Pool(),
     });
-
+    this.app.use(helmet());
     this.app.set('trust proxy', true)
     this.app.use(
       session({
+        name: 'session',
         secret: process.env.COOKIE_SECRET,
         resave: false,
         saveUninitialized: false,
@@ -58,9 +59,13 @@ Server.prototype.start = function (port, ip, done) {
     this.app.use(function (request, response, next) {
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
-            if (request.headers.host.endsWith(':443'))
+            if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
         }
+        //Docker fix
+        if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
+            request.headers.host += `:${request.header('x-forwarded-port')}`;
+
         next();
     });
 
@@ -104,10 +109,18 @@ Server.prototype.start = function (port, ip, done) {
         next();
     });
 
-    this.app.use(morgan(':method :url', { immediate:true }));
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(morgan(':method :url', { immediate:true,
+        skip: function (req, res) { return req.path == '/api/health' }
+     }));
+    this.app.use(express.json());   
+    this.app.use(express.urlencoded({extended: true})); 
     this.restAdaptor.route(this.app, this.keycloak);
+
+    process.on('unhandledRejection', function(reason) {
+        console.log("Unhandled Rejection:", reason);
+        process.exit(1);
+    });
+
     this.server = this.app.listen(port, ip, done);
 };
 

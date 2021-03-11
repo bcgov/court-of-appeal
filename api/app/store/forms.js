@@ -6,24 +6,21 @@ let Forms = function() {
 Forms.prototype.selectByLogin = function(login, callback) {
     var select = `
         SELECT  forms.id,
-                true as is_admin,
                 type,
                 status,
                 modified,
                 data,
-                forms.person_id
-        FROM    forms, person
-        WHERE   person.login = $1
-        AND     forms.person_id = person.id
+                forms.person_id,
+                efiling_submissions.package_url
+        FROM    forms
+        JOIN person on forms.person_id = person.id
+        LEFT JOIN efiling_submissions on efiling_submissions.id = forms.last_efiling_submission_id
+        WHERE   person.login = $1 
         AND     forms.status <> 'archived'
 
         ORDER BY modified DESC
     `;
     executePool(select, [login], callback);
-};
-
-Forms.prototype.selectOne = function(id, callback) {
-    executePool('select type, status, modified, data from forms where id = $1', [id], callback);
 };
 
 Forms.prototype.selectByFormTypeUseridAndCaseNumber = function(userid, type, caseNumber, callback) {
@@ -49,17 +46,30 @@ Forms.prototype.update = function(form, callback) {
         });
 };
 
-Forms.prototype.archive = function(ids, callback) {
+Forms.prototype.archive = function(userid, ids, callback) {
     let statements = [];
     for (var i=0; i<ids.length; i++) {
-        statements.push({ sql:`update forms set status='archived' where id = $1`, params:[ids[i]] });
+        statements.push({ sql:`update forms set status='archived' where id = $1 and person_id = $2`, params:[ids[i], userid] });
     }
     executePool(statements, [], callback);
 };
 
-Forms.prototype.updateStatus = function(id, status, callback) {
-    executePool('update forms set status = $2, modified = current_timestamp where id = $1', [id, status], callback);
+Forms.prototype.updateStatus = function(id, userId, status, callback) {
+    executePool('update forms set status = $2, modified = current_timestamp where id = $1 and person_id = $3', [id, status, userId], callback);
 };
+
+Forms.prototype.selectOne = function(id, callback) {
+    executePool('select type, status, modified, data, last_efiling_submission_id from forms where id = $1', [id], callback);
+};
+
+Forms.prototype.hasPermissionToForm = function(login, id, callback) {
+    let select = `select forms.id from forms, person 
+                  WHERE person.login = $1 AND 
+                        forms.person_id = person.id AND 
+                        forms.id = $2`;
+
+    executePool(select, [login, id], callback)
+}
 
 module.exports = {
     Forms:Forms
