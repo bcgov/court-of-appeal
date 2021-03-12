@@ -15,7 +15,10 @@
 # WEB_BASE_HREF=/court-of-appeal/
 # AdditionalRealIpFromRules=
 # IpFilterRules=
-# HTTP_BASIC=auth_basic 'restricted';
+# NGINX_CONF_TEMPLATE_FILE_NAME=nginx.conf.template
+# NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME=nginx-conf-template
+# NGINX_CONF_TEMPLATE_MOUNT_PATH=/tmp/
+HTTP_BASIC=auth_basic 'restricted';
 # HTTP_BASIC_USERNAME=
 # HTTP_BASIC_PASSWORD=
 APPLICATION_DOMAIN=court-of-appeal-dev.silver.devops.bcgov

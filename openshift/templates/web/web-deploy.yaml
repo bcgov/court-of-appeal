@@ -84,6 +84,14 @@ objects:
             role: ${ROLE}
             env: ${TAG_NAME}
         spec:
+          volumes:
+            - name: ${NAME}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume
+              configMap:
+                name: ${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}
+                items:
+                  - key: ${NGINX_CONF_TEMPLATE_FILE_NAME}
+                    path: ${NGINX_CONF_TEMPLATE_FILE_NAME}
+
           containers:
             - image: ${NAME}
               imagePullPolicy: Always
@@ -125,6 +133,12 @@ objects:
                 limits:
                   cpu: ${CPU_LIMIT}
                   memory: ${MEMORY_LIMIT}
+
+              volumeMounts:
+                - name: ${NAME}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume
+                  mountPath: ${NGINX_CONF_TEMPLATE_MOUNT_PATH}${NGINX_CONF_TEMPLATE_FILE_NAME}
+                  subPath: ${NGINX_CONF_TEMPLATE_FILE_NAME}
+
               livenessProbe:
                 httpGet:
                   path: /nginx_status
@@ -305,6 +319,23 @@ parameters:
     displayName: Ip Filter Rules
     name: IpFilterRules
     value:
+
+  - name: NGINX_CONF_TEMPLATE_FILE_NAME
+    displayName: Config File Name
+    description: The name of the configuration file.
+    required: true
+    value: nginx.conf.template
+  - name: NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME
+    displayName: Config Map Name
+    description: The name of the configuration map.
+    required: true
+    value: nginx-conf-template
+  - name: NGINX_CONF_TEMPLATE_MOUNT_PATH
+    displayName: Config Mount Path
+    description: The path to use to mount the config file.
+    required: true
+    value: /tmp/
+
   - name: HTTP_BASIC
     displayName: HTTP Basic Nginx Config Line
     description:
