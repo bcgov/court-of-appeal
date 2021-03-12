@@ -62,18 +62,21 @@ Server.prototype.start = function (port, ip, done) {
 
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
+            
+            //Openshift fix
             if (request.headers.host.endsWith(':443')) { 
                 request.headers.host = request.headers.host.split(':')[0];
-                console.log('BEFORE: ' + request.originalUrl);
-                if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
-                    request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
-                    console.log('AFTER: ' + request.originalUrl);
-                }
             }
+            console.log('BEFORE: ' + request.originalUrl);
+            if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
+                request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
+                console.log('AFTER: ' + request.originalUrl);
+            }
+
+            //Docker fix
+            if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
+                request.headers.host += `:${request.header('x-forwarded-port')}`;
         }
-        //Docker fix
-        if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
-            request.headers.host += `:${request.header('x-forwarded-port')}`;
 
         next();
     });
