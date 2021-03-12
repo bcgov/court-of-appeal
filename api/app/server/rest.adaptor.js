@@ -261,7 +261,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         const universalId = request.kauth.grant.id_token.content['universal-id'];
         let notBCEID = !universalId;
         if (notBCEID) 
-            response.redirect(`/api/logout?redirect_url=${redirectUrl}`);
+            response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}api/logout?redirect_url=${redirectUrl}`);
         else 
         {
             this.database.savePerson(universalId, (id) => {
