@@ -136,7 +136,8 @@ getRemoveBaseHref() {
   # Base href must have a leading and trailing slash
   BASE="$1"
   if [ ! -z "${BASE}" ] && [ "${BASE}" != "/" ]; then
-    echo "rewrite ^${BASE}(.*)\$ /\$1 last;"
+    # Block direct API proxying, this forces the baseUrl to be present for API calls.
+    echo "rewrite ^/api(.*)\$ /\direct-api-404;\r\n\trewrite ^${BASE}(.*)\$ /\$1;" 
   fi
 }
 

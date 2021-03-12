@@ -57,25 +57,27 @@ Server.prototype.start = function (port, ip, done) {
 
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
-        console.log('Original Url:');
-        console.log(request.originalUrl);
-
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
-            
+
             //Openshift fix
             if (request.headers.host.endsWith(':443')) { 
                 request.headers.host = request.headers.host.split(':')[0];
-            }
-            console.log('BEFORE: ' + request.originalUrl);
-            if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
-                request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
-                console.log('AFTER: ' + request.originalUrl);
             }
 
             //Docker fix
             if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
                 request.headers.host += `:${request.header('x-forwarded-port')}`;
+        }
+
+        //OriginalUrl is used to form our callback url for keycloak.
+        if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
+            request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
+            var oldRedirect = response.redirect;
+            response.redirect = function(url) {
+                arguments[0] = url.includes('/api/login') ? `${process.env.WEB_BASE_HREF}${url}`.replace("//","/") : url;
+                oldRedirect.apply(response, arguments);
+            }
         }
 
         next();
@@ -112,11 +114,13 @@ Server.prototype.start = function (port, ip, done) {
         //This will force the frontend to hit /api/login, and will check there for IDIR user
         //if the IDIR user is detected It will log them out, and attempt to login with BCEID. 
         if (!["/api/login","/api/logout"].some(v => request.url.includes(v)) && request.kauth && request.kauth.grant) {
-            request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
             let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
             if (notBCEID) {
-                response.sendStatus(403)
+                response.sendStatus(403);
                 return;
+            } else if (request.session && !request.session.universalId) {
+                //If we skip login, we might pass keycloak, but don't have a universalId in our session.
+                request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
             }
         }
         next();
