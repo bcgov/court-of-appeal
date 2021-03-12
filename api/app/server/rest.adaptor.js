@@ -5,7 +5,7 @@ let { CreateFormTwo, PreviewForm2, SubmitForm,
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, logErrorAndInternalServerResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
+      myJourneyResponse, internalErrorJsonResponse, logErrorAndInternalServerResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
