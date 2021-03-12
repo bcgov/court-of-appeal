@@ -27,11 +27,11 @@ Service.prototype.notifyOfError = function(callback, options) {
 };
 
 Service.prototype.redirectToLogin = function() {
-    window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location}`);
+    window.location.replace(`${this.base()}/api/login?redirectUrl=${window.location}`);
 }
 
 Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.apiUrl}/api/logout?redirect_url=${window.location}`);
+    window.location.replace(`${this.base()}/api/logout?redirect_url=${window.location}`);
 }
 
 Service.prototype.searchForm7 = function(file, callback) {
