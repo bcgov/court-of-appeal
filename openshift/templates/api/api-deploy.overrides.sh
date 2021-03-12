@@ -14,6 +14,8 @@ fi
 
 if createOperation; then
   # Ask the user to supply the sensitive parameters ...
+  readParameter "DATA_SECURITY_KEY - Please provide the encryption key for the application environment.  If left blank, a 32 character long base64 encoded value will be randomly generated using openssl:" DATA_SECURITY_KEY $(generateKey 32 | fold -w 32 | head -n 1) "false"
+
   readParameter "KEYCLOAK_AUTH_URL - Please provide the url for the KeyCloak authentication endpoint.  The default is a blank string." KEYCLOAK_AUTH_URL "" "false"
   readParameter "KEYCLOAK_REALM - Please provide the KeyCloak authentication realm.  The default is a blank string." KEYCLOAK_REALM "" "false"
   readParameter "KEYCLOAK_CLIENT_ID - Please provide the KeyCloak Client ID.  The default is a blank string." KEYCLOAK_CLIENT_ID "" "false"
@@ -23,6 +25,8 @@ if createOperation; then
 else
   # Secrets are removed from the configurations during update operations ...
   printStatusMsg "Update operation detected ...\nSkipping the prompts for secrets ... \n"
+
+  writeParameter "DATA_SECURITY_KEY" "prompt_skipped" "false"
 
   writeParameter "KEYCLOAK_AUTH_URL" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_REALM" "prompt_skipped" "false"

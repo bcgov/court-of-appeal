@@ -126,18 +126,18 @@ objects:
               ports:
                 - containerPort: ${{PORT_NUMBER}}
                   protocol: TCP
-              # readinessProbe:
-              #   initialDelaySeconds: 3
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: ${{PORT_NUMBER}}
-              # livenessProbe:
-              #   initialDelaySeconds: 120
-              #   timeoutSeconds: 30
-              #   httpGet:
-              #     path: /health/
-              #     port: ${{PORT_NUMBER}}
+              readinessProbe:
+                initialDelaySeconds: 3
+                timeoutSeconds: 30
+                httpGet:
+                  path: /health
+                  port: ${{PORT_NUMBER}}
+              livenessProbe:
+                initialDelaySeconds: 120
+                timeoutSeconds: 30
+                httpGet:
+                  path: /health
+                  port: ${{PORT_NUMBER}}
               env:
                 - name: FLASK_ENV
                   value: ${FLASK_ENV}
