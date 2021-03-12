@@ -107,8 +107,6 @@ http {
 
             # Deploy-time configurable
             %HTTP_BASIC%
-            add_header    SMGOV_USERGUID  $http_smgov_userguid;
-            add_header    SMGOV_USERDISPLAYNAME  $http_smgov_userdisplayname;
         }
 
         # redirect server error pages to the static page /50x.html
