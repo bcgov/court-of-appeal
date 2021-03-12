@@ -59,13 +59,16 @@ Server.prototype.start = function (port, ip, done) {
     this.app.use(function (request, response, next) {
         console.log('Original Url:');
         console.log(request.originalUrl);
-        console.log('Url:');
-        console.log(request.url);
 
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
             if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
+                if (request.originalUrl.includes('api/login') || request.originalUrl.includes('api/logout')){
+                    request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
+                    console.log('New Original Url:');
+                    console.log(request.originalUrl);
+                }
             }
         //Docker fix
         if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
