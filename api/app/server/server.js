@@ -57,11 +57,16 @@ Server.prototype.start = function (port, ip, done) {
 
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
+        console.log('Original Url:');
+        console.log(request.originalUrl);
+        console.log('Url:');
+        console.log(request.url);
+
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
             if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
-        }
+            }
         //Docker fix
         if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
             request.headers.host += `:${request.header('x-forwarded-port')}`;
