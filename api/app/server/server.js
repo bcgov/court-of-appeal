@@ -64,7 +64,7 @@ Server.prototype.start = function (port, ip, done) {
             request.headers.host = request.header('x-forwarded-host');
             if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
                 request.headers.host = request.headers.host.split(':')[0];
-                if (request.originalUrl.startsWith('api/login') || request.originalUrl.startsWith('api/logout')){
+                if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')){
                     request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
                 }
             }
