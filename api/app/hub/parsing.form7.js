@@ -20,6 +20,7 @@ var buildPartyInfo = function(party) {
         info.lastName = party.LastName;
     }
     if (party.Organization) {
+        info.name = party.Organization;
         info.organization = party.Organization;
     }
     if (lawyer(party)) {

@@ -37,10 +37,10 @@ var buildEFilingPackage = function(request, data, pdf) {
     });
     data.respondents.forEach((respondent) => {
         party = {};
-        if (respondent.organization || respondent.lastName == "") {
+        if (respondent.organization || respondent.lastName == "" || !respondent.lastName) {
             party = {
                 "roleType": "RES",
-                "name": respondent.firstName || "",
+                "name": respondent.firstName || respondent.name,
             };
             efilingPackage.organizationParties.push(party);
         }

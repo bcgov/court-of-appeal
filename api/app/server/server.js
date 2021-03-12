@@ -65,9 +65,9 @@ Server.prototype.start = function (port, ip, done) {
                 request.headers.host = request.headers.host.split(':')[0];
             }
 
-            //Docker fix
-            if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
-                request.headers.host += `:${request.header('x-forwarded-port')}`;
+        //Docker fix
+        if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
+            request.headers.host += `:${request.header('x-forwarded-port')}`;
         }
 
         //OriginalUrl is used to form our callback url for keycloak.

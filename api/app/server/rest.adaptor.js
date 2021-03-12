@@ -5,7 +5,7 @@ let { CreateFormTwo, PreviewForm2, SubmitForm,
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, logErrorAndServiceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
+      myJourneyResponse, logErrorAndInternalServerResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
@@ -128,7 +128,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             archive.pipe(response);
         }
         catch (err2) {
-            logErrorAndServiceUnavailableResponse(err2, response);
+            logErrorAndInternalServerResponse(err2, response);
         }
     });
 
@@ -199,7 +199,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 successJsonResponse(result, response);
             }
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
     });
 
     app.post('/api/forms/:id/submit', keycloak.protect(), async (request, response) => {
@@ -232,14 +232,16 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 });
             });
 
-            if (submit.data.message === "success")
+            if (submit.data.message === "success") {
                 await this.database.createEFilingSubmission(submit.submissionId, submit.transactionId, userId, id);
-            else 
+                noContentJsonResponse(submit.data, response);
+            }
+            else {
                 console.error(`Error submitting formId: ${id}, userId: ${userId}, message: ${submit.data.message}`)
-
-            noContentJsonResponse(submit.data, response);
+                internalErrorJsonResponse(submit.data.message, response);
+            }
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
     });
 
     app.get('/api/forms/:id/success', keycloak.protect(), async (request, response) => {
@@ -252,7 +254,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         try {
             await this.database.updateEFilingSubmissionUrlAndNumber(formId, userId, packageNumber, packageUrl);
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
         response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}${formId}/submitted/success`);
     });
 

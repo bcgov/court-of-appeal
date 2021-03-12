@@ -69,6 +69,9 @@ class Form2Proceed extends Component {
             if (!data.error && data.message === "success") {
                 window.location.replace(data.url);
             }
+            else {
+                alert(data.message);
+            }
         })
     }
 }
