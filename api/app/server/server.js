@@ -62,12 +62,15 @@ Server.prototype.start = function (port, ip, done) {
 
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
-            if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
+            if (request.headers.host.endsWith(':443')) { 
                 request.headers.host = request.headers.host.split(':')[0];
-                if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')){
+                console.log('BEFORE: ' + request.originalUrl);
+                if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
                     request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
+                    console.log('AFTER: ' + request.originalUrl);
                 }
             }
+        }
         //Docker fix
         if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
             request.headers.host += `:${request.header('x-forwarded-port')}`;
@@ -106,6 +109,7 @@ Server.prototype.start = function (port, ip, done) {
         //This will force the frontend to hit /api/login, and will check there for IDIR user
         //if the IDIR user is detected It will log them out, and attempt to login with BCEID. 
         if (!["/api/login","/api/logout"].some(v => request.url.includes(v)) && request.kauth && request.kauth.grant) {
+            request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
             let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
             if (notBCEID) {
                 response.sendStatus(403)

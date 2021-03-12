@@ -266,7 +266,6 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         {
             this.database.savePerson(universalId, (id) => {
                 request.session.userId = id;
-                request.session.universalId = universalId;
                 response.redirect(redirectUrl);
             });
         }
