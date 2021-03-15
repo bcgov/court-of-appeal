@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DefaultService from './service/default.service.js';
 import MultiSelectionCaseList from './components/MultiSelectionCaseList.js';
 import renderCases from './components/cases.renderer';
@@ -22,7 +23,6 @@ class MyDocuments extends Component {
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.archive = this.archive.bind(this);
-        this.create = this.create.bind(this);
         this.toggleSelected = this.toggleSelected.bind(this);
         this.download = this.download.bind(this);
         this.onlySelected = this.onlySelected.bind(this);
@@ -116,9 +116,6 @@ class MyDocuments extends Component {
             });
         }
     }
-    create() {
-        window.location = process.env.PUBLIC_URL + '/start'
-    }
 
     render() {
         return (
@@ -139,9 +136,11 @@ class MyDocuments extends Component {
                                             <SpinnerActionIcon id="archive-button" tooltip="archive" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
                                                 content='oi oi-box'>
                                             </SpinnerActionIcon>
-                                            <SpinnerActionIcon id="create-button" tooltip="create" onClick={this.create} ref={ (element)=> {this.createButton = element }}
-                                                content='oi oi-plus'>
-                                            </SpinnerActionIcon>
+                                            <Link to={process.env.PUBLIC_URL  + '/start'}>
+                                                <SpinnerActionIcon id="create-button" tooltip="create" ref={ (element)=> {this.createButton = element }}
+                                                    content='oi oi-plus'>
+                                                </SpinnerActionIcon>
+                                            </Link>
                                         </ul>
                                     </div>
                                 </div>
