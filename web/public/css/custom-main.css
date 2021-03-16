@@ -5,6 +5,10 @@
     src: url('../fonts/MyriadWebPro.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'BC Sans';
+    src: url('../fonts/BCSans-Regular.woff') format('woff');
+}
 
 /* background image */
 
