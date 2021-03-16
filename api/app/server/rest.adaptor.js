@@ -25,7 +25,17 @@ RestAdaptor.prototype.useDatabase = function(database) {
 RestAdaptor.prototype.route = function(app, keycloak) {
 
    // Legacy routes.
-   app.get('/api/forms', keycloak.protect(), (request, response)=> {
+   app.get('/api/forms', keycloak.protect(), async (request, response)=> {
+        //Need to write database for this search.
+        const userId = request.session.userId;
+        const ipAddress = request.header('x-real-ip');
+        try {
+            await this.database.writeAuditCaseSearch(userId, ipAddress, request.query.file, 'form7');
+        }
+        catch (error){
+            logErrorAndInternalServerResponse(error, response);
+            return;
+        }
         this.hub.searchForm7(request.query.file, (data)=> {
             searchFormSevenResponse(data, response);
         });
@@ -238,7 +248,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             }
             else {
                 console.error(`Error submitting formId: ${id}, userId: ${userId}, message: ${submit.data.message}`)
-                internalErrorJsonResponse(submit.data.message, response);
+                internalErrorJsonResponse(submit.data, response);
             }
         }
         catch (error) { logErrorAndInternalServerResponse(error, response); }
