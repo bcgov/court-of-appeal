@@ -17,10 +17,10 @@ var buildEFilingPackage = function(request, data, pdf) {
     ];
     data.appellants.forEach((appellant) => {
         party = {};
-        if (appellant.organization || appellant.lastName == "") {
+        if (appellant.organization || !appellant.lastName || appellant.lastName == "") {
             party = {
                 "roleType": "APL",
-                "name": appellant.firstName || "",
+                "name": appellant.firstName || appellant.name,
             };
             efilingPackage.organizationParties.push(party);
         }
