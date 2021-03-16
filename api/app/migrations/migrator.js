@@ -23,8 +23,9 @@ Migrator.prototype.migrateNow = function(done) {
         this.file('/15.add.session.table.sql'),
         this.file('/16.add.efiling.submission.table.sql'),
         this.file('/17.alter.tables.add.columns.sql'),
+        this.file('/18.create.table.audit.cases.sql'),
         'truncate table versions',
-        { sql:'insert into versions(id) values($1)', params:[17] }
+        { sql:'insert into versions(id) values($1)', params:[18] }
     ];
     execute(calls, function(error, rows) {
         done(error);

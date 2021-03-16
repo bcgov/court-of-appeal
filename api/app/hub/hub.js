@@ -97,9 +97,17 @@ Hub.prototype.searchForm7 = function(file, callback) {
                     else {
                         var parties = extractParties(data);
                         if (parties) {
+                            let appellants = rawAppellants(parties).map(buildPartyInfo);
+                            let respondents = rawRespondents(parties).map(buildPartyInfo);
+                            if (!respondents || respondents.length === 0 || !appellants || appellants.length === 0)
+                            {
+                                console.error(`Bad file: ${file} missing appellants or respondents.`);
+                                callback({ error: {code:404} });
+                                return;
+                            }
                             callback({
-                                appellants: rawAppellants(parties).map(buildPartyInfo),
-                                respondents: rawRespondents(parties).map(buildPartyInfo)
+                                appellants: appellants,
+                                respondents: respondents
                             });
                         }
                         else {

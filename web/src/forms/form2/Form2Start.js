@@ -17,6 +17,8 @@ class Form2Start extends Component {
             caseNumber: 'CA'
         }
         this.search = this.search.bind(this)
+        if (props.location.search)
+            this.state.caseNumber = new URLSearchParams(this.props.location.search).get("case");
     }
 
     componentDidMount() {
@@ -24,6 +26,8 @@ class Form2Start extends Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
+        if (this.state.caseNumber.length > 2)
+            this.search();
         this.caseNumberField.focus()
     }
 
