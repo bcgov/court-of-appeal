@@ -174,7 +174,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
         const login = request.session.universalId;
-        let name = request.kauth.grant.id_token.content.display_name;
+        let name = request.session.displayName;
         this.database.savePerson(login, (data)=>{
             if (data && !data.error) {
                 this.database.personInfo(login, (user)=>{

@@ -41,6 +41,7 @@ Server.prototype.start = function (port, ip, done) {
       })
     );
 
+
     this.keycloak = new Keycloak(
       { store: pgStore, idpHint: "bceid" },
       {
@@ -54,6 +55,16 @@ Server.prototype.start = function (port, ip, done) {
         },
       }
     );
+
+    if (process.env.MOCK_KEYCLOAK){
+        this.keycloak.protect = function () {
+            return function protect (request, response, next) {
+                request.session.universalId = process.env.MOCK_UNIVERSAL_ID;
+                request.session.userId = 16;
+                next();
+            }
+        }
+    }
 
     //Rewrite the host, protocol headers, for keycloak. 
     this.app.use(function (request, response, next) {
@@ -121,6 +132,8 @@ Server.prototype.start = function (port, ip, done) {
             } else if (request.session && !request.session.universalId) {
                 //If we skip login, we might pass keycloak, but don't have a universalId in our session.
                 request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
+                request.session.displayName = request.kauth.grant.id_token.content.display_name;
+               
             }
         }
         next();
