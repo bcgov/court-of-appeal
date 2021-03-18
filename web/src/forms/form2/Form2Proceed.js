@@ -38,6 +38,14 @@ class Form2Proceed extends Component {
             <div className="row section section-white">
                 <div className="col-xs-12">
                     By submitting, you will be redirected to the E-Filing Hub.
+
+                    { this.state.submissionError && 
+                        <div> 
+                            <br/>
+                            <h2 style={{color: "red"}}> Error from E-Filing Hub: {this.state.submissionError} </h2>
+                            If this error persists please contact support.
+                        </div>
+                    }
                     <div style={{textAlign:'right', paddingTop:'15px'}}>
                         <button id="payment-cancelled" onClick={this.cancel} className="btn btn-primary round-borders action-button white">Cancel</button>
                         <SpinnerButton id="payment-confirmed" width="150" addClass="proceed-confirmation" onClick={this.confirm} ref={ (element)=> {this.submitButton = element }}
@@ -63,11 +71,17 @@ class Form2Proceed extends Component {
     }
 
     confirm() {
+        let self = this;
         this.submitButton.startSpinner();
         this.service.submit(this.state.formId, (data)=>{
             this.submitButton.stopSpinner();
             if (!data.error && data.message === "success") {
                 window.location.replace(data.url);
+            }
+            else {
+                self.setState({
+                    submissionError: data.message
+                });
             }
         })
     }

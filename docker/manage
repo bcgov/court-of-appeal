@@ -214,8 +214,6 @@ configureEnvironment () {
   done
 
   # api
-  export SMGOV_USERGUID=${SMGOV_USERGUID:-\'95EB360C2C384711AD1818664D85FE76\'}
-  export SMGOV_USERDISPLAYNAME=${SMGOV_USERDISPLAYNAME:-\'User\, Test\'}
   export HUB_URL=${HUB_URL:-http://service:5000}
   export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
   export PDF_SERVICE_URL=${PDF_SERVICE_URL-http://pdf:5001}

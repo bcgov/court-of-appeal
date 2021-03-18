@@ -17,10 +17,10 @@ var buildEFilingPackage = function(request, data, pdf) {
     ];
     data.appellants.forEach((appellant) => {
         party = {};
-        if (appellant.organization || appellant.lastName == "") {
+        if (appellant.organization || !appellant.lastName || appellant.lastName == "") {
             party = {
                 "roleType": "APL",
-                "name": appellant.firstName || "",
+                "name": appellant.firstName || appellant.name,
             };
             efilingPackage.organizationParties.push(party);
         }
@@ -37,10 +37,10 @@ var buildEFilingPackage = function(request, data, pdf) {
     });
     data.respondents.forEach((respondent) => {
         party = {};
-        if (respondent.organization || respondent.lastName == "") {
+        if (respondent.organization || respondent.lastName == "" || !respondent.lastName) {
             party = {
                 "roleType": "RES",
-                "name": respondent.firstName || "",
+                "name": respondent.firstName || respondent.name,
             };
             efilingPackage.organizationParties.push(party);
         }

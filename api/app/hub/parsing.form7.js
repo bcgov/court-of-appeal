@@ -7,7 +7,7 @@ var extractCaseType = function(data) {
 };
 
 var extractParties = function(data) {
-    return data.ViewCasePartyResult ?
+    return data.ViewCasePartyResult && data.ViewCasePartyResult.Parties ?
             data.ViewCasePartyResult.Parties.Party:
            undefined;
 };
@@ -19,8 +19,9 @@ var buildPartyInfo = function(party) {
         info.firstName = party.FirstName;
         info.lastName = party.LastName;
     }
-    if (party.Organization) {
-        info.organization = party.Organization;
+    if (party.Organization) { //|| !party.FirstName) {
+        info.name = party.Organization; //|| party.LastName;
+        info.organization = party.Organization; //|| party.LastName;
     }
     if (lawyer(party)) {
         info.solicitor = {

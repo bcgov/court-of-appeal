@@ -14,6 +14,15 @@ Service.prototype.base = function() {
     return base
 };
 
+Service.prototype.isJson = function (target) {
+    try {
+        JSON.parse(target);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 Service.prototype.notifyOfError = function(callback, options) {
     let data = { error:{ code:503, message:'service unavailable' } };
     Object.assign(data, options);
@@ -27,11 +36,11 @@ Service.prototype.notifyOfError = function(callback, options) {
 };
 
 Service.prototype.redirectToLogin = function() {
-    window.location.replace(`${this.apiUrl}/api/login?redirectUrl=${window.location}`);
+    window.location.replace(`${this.base()}/api/login?redirectUrl=${window.location}`);
 }
 
 Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.apiUrl}/api/logout?redirect_url=${window.location}`);
+    window.location.replace(`${this.base()}/api/logout?redirect_url=${window.location}`);
 }
 
 Service.prototype.searchForm7 = function(file, callback) {
@@ -266,7 +275,7 @@ Service.prototype.submit = function(id, callback) {
     let self = this;
     let options = this.buildOptions(`/api/forms/${id}/submit`);
     request.post(options, function(err, response, body) {
-        if (response && response.statusCode === 201) {
+        if (response && self.isJson(body)) {
             callback(JSON.parse(body));
         }
         else if (response && response.statusCode === 403) {

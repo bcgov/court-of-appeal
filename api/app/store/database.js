@@ -3,6 +3,8 @@ let { Forms } = require('./forms');
 let { Persons } = require('./persons');
 let { Journey } = require('./journey');
 let { EFiling } = require('./efiling');
+let { Audit } = require('./audit');
+
 let DatabaseEncryption = require('./database.encryption');
 
 let ifError = function(please) {
@@ -25,6 +27,7 @@ let Database = function() {
     this.persons = new Persons();
     this.journey = new Journey();
     this.efiling = new EFiling();
+    this.audit = new Audit();
     this.encryption = new DatabaseEncryption(process.env.DATABASE_ENCRYPTION_KEY_32_BYTES);
 };
 
@@ -194,6 +197,10 @@ Database.prototype.getEFilingInformation = async function(formId, personId) {
         form[0].data = data;
     }
     return form;
+}
+
+Database.prototype.writeAuditCaseSearch = async function(personId, caseNumber, ipAddress, type) {
+    await this.audit.writeAuditCaseSearch(personId, caseNumber, ipAddress, type);
 }
 
 module.exports = Database;

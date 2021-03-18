@@ -59,12 +59,26 @@ Server.prototype.start = function (port, ip, done) {
     this.app.use(function (request, response, next) {
         if (request.header('x-forwarded-host')) {
             request.headers.host = request.header('x-forwarded-host');
-            if (request.headers.host.endsWith(':443') || request.headers.host.endsWith(':80')) 
+
+            //Openshift fix
+            if (request.headers.host.endsWith(':443')) { 
                 request.headers.host = request.headers.host.split(':')[0];
-        }
+            }
+
         //Docker fix
         if (request.header('x-forwarded-port') && request.header('x-forwarded-port') != '443')
             request.headers.host += `:${request.header('x-forwarded-port')}`;
+        }
+
+        //OriginalUrl is used to form our callback url for keycloak.
+        if (request.originalUrl.startsWith('/api/login') || request.originalUrl.startsWith('/api/logout')) {
+            request.originalUrl = `${process.env.WEB_BASE_HREF}${request.originalUrl.slice(1)}`;
+            var oldRedirect = response.redirect;
+            response.redirect = function(url) {
+                arguments[0] = url.includes('/api/login') ? `${process.env.WEB_BASE_HREF}${url}`.replace("//","/") : url;
+                oldRedirect.apply(response, arguments);
+            }
+        }
 
         next();
     });
@@ -102,15 +116,18 @@ Server.prototype.start = function (port, ip, done) {
         if (!["/api/login","/api/logout"].some(v => request.url.includes(v)) && request.kauth && request.kauth.grant) {
             let notBCEID = !request.kauth.grant.id_token.content['universal-id'];
             if (notBCEID) {
-                response.sendStatus(403)
+                response.sendStatus(403);
                 return;
+            } else if (request.session && !request.session.universalId) {
+                //If we skip login, we might pass keycloak, but don't have a universalId in our session.
+                request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
             }
         }
         next();
     });
 
     this.app.use(morgan(':method :url', { immediate:true,
-        skip: function (req, res) { return req.path == '/api/health' }
+        skip: function (req, res) { return req.path == '/api/health/' }
      }));
     this.app.use(express.json());   
     this.app.use(express.urlencoded({extended: true})); 

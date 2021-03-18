@@ -5,7 +5,7 @@ let { CreateFormTwo, PreviewForm2, SubmitForm,
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, logErrorAndServiceUnavailableResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
+      myJourneyResponse, internalErrorJsonResponse, logErrorAndInternalServerResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
@@ -25,7 +25,17 @@ RestAdaptor.prototype.useDatabase = function(database) {
 RestAdaptor.prototype.route = function(app, keycloak) {
 
    // Legacy routes.
-   app.get('/api/forms', keycloak.protect(), (request, response)=> {
+   app.get('/api/forms', keycloak.protect(), async (request, response)=> {
+        //Need to write database for this search.
+        const userId = request.session.userId;
+        const ipAddress = request.header('x-real-ip');
+        try {
+            await this.database.writeAuditCaseSearch(userId, ipAddress, request.query.file, 'form7');
+        }
+        catch (error){
+            logErrorAndInternalServerResponse(error, response);
+            return;
+        }
         this.hub.searchForm7(request.query.file, (data)=> {
             searchFormSevenResponse(data, response);
         });
@@ -128,7 +138,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             archive.pipe(response);
         }
         catch (err2) {
-            logErrorAndServiceUnavailableResponse(err2, response);
+            logErrorAndInternalServerResponse(err2, response);
         }
     });
 
@@ -199,7 +209,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 successJsonResponse(result, response);
             }
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
     });
 
     app.post('/api/forms/:id/submit', keycloak.protect(), async (request, response) => {
@@ -232,14 +242,16 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 });
             });
 
-            if (submit.data.message === "success")
+            if (submit.data.message === "success") {
                 await this.database.createEFilingSubmission(submit.submissionId, submit.transactionId, userId, id);
-            else 
+                noContentJsonResponse(submit.data, response);
+            }
+            else {
                 console.error(`Error submitting formId: ${id}, userId: ${userId}, message: ${submit.data.message}`)
-
-            noContentJsonResponse(submit.data, response);
+                internalErrorJsonResponse(submit.data, response);
+            }
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
     });
 
     app.get('/api/forms/:id/success', keycloak.protect(), async (request, response) => {
@@ -252,7 +264,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         try {
             await this.database.updateEFilingSubmissionUrlAndNumber(formId, userId, packageNumber, packageUrl);
         }
-        catch (error) { logErrorAndServiceUnavailableResponse(error, response); }
+        catch (error) { logErrorAndInternalServerResponse(error, response); }
         response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}${formId}/submitted/success`);
     });
 
@@ -261,12 +273,12 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         const universalId = request.kauth.grant.id_token.content['universal-id'];
         let notBCEID = !universalId;
         if (notBCEID) 
-            response.redirect(`/api/logout?redirect_url=${redirectUrl}`);
+            response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}api/logout?redirect_url=${redirectUrl}`);
         else 
         {
             this.database.savePerson(universalId, (id) => {
+                request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
                 request.session.userId = id;
-                request.session.universalId = universalId;
                 response.redirect(redirectUrl);
             });
         }

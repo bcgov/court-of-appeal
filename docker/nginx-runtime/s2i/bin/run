@@ -60,8 +60,6 @@ read -r -d '' _CONFIG_SECTION << EOF
             proxy_buffer_size       128k;
             proxy_buffers           4 256k;
             proxy_busy_buffers_size 256k;
-            proxy_set_header    SMGOV_USERGUID  \$http_smgov_userguid;
-            proxy_set_header    SMGOV_USERDISPLAYNAME  \$http_smgov_userdisplayname;
         }
 EOF
 
@@ -138,7 +136,8 @@ getRemoveBaseHref() {
   # Base href must have a leading and trailing slash
   BASE="$1"
   if [ ! -z "${BASE}" ] && [ "${BASE}" != "/" ]; then
-    echo "rewrite ^${BASE}(.*)\$ /\$1 last;"
+    # Block direct API proxying, this forces the baseUrl to be present for API calls.
+    echo "rewrite ^/api(.*)\$ /\direct-api-404;\r\n\trewrite ^${BASE}(.*)\$ /\$1;" 
   fi
 }
 
