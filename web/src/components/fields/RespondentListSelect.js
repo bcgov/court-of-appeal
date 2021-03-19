@@ -10,6 +10,9 @@ class RespondentListSelect extends React.Component {
         }
         
         if (this.props.respondents.length === 1) {
+            if (!this.props.respondents[0].name){
+                throw "No name for respondent.";
+            }
             return this.props.respondents[0].name;
         } else {
             let options = this.getOptions(this.props.respondents);
