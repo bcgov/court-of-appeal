@@ -20,7 +20,7 @@ class EFilingPackaging:
                     "level": self.court_level,
                     "courtClass": self.court_class,
                     "division": self.court_division,
-                    "fileNumber": "",
+                    "fileNumber": "CA"+data["fileNumber"],
                 },
                 "documents": [
                     {
