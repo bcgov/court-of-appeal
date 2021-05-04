@@ -129,11 +129,10 @@ Server.prototype.start = function (port, ip, done) {
             if (notBCEID) {
                 response.sendStatus(403);
                 return;
-            } else if (request.session && !request.session.universalId) {
+            } else if (request.session && (!request.session.universalId || !request.session.displayName)) {
                 //If we skip login, we might pass keycloak, but don't have a universalId in our session.
                 request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
                 request.session.displayName = request.kauth.grant.id_token.content.display_name;
-               
             }
         }
         next();
