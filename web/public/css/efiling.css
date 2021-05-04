@@ -17,6 +17,7 @@
   100% { transform: rotate(360deg); }
 }
 .efiling-spinner {
+  min-width: 30px;
   animation: spin 1s linear infinite;
   background-repeat: no-repeat;
   background-position: center;

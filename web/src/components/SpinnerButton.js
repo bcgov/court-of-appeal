@@ -39,6 +39,7 @@ class SpinnerButton extends React.Component {
                         disabled={this.props.disabled}
                 >
                         { this.props.content }
+                        <i style={{ display: this.props.showArrow ? "inline-block" : "none" }} className="glyphicon glyphicon-triangle-right" />
                 </button>
                 </div>
             )

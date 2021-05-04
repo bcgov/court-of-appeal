@@ -10,7 +10,7 @@ class NeedHelp extends Component {
                         Phone: 1-800-663-6102
                 </p>
                 <p>
-                        E-mail: Courts.cso@gov.bc.ca
+                        E-mail: <a href="mailto:Courts.cso@gov.bc.ca">Courts.cso@gov.bc.ca</a>
                 </p>
             </div>
         )

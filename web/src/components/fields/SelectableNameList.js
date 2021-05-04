@@ -19,7 +19,7 @@ class SelectableNameList extends React.Component {
                     ...provided,
                     backgroundColor: 'white',
                     borderWidth: '0',
-                    fontSize: 'medium',
+                    fontSize: '14px',
                     margin: '3px'
                 }
             }),

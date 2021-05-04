@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactTooltip from "react-tooltip";
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
@@ -8,6 +8,7 @@ import RespondentListSelect from "../../components/fields/RespondentListSelect";
 import ContactSelect from "../../components/fields/ContactSelect";
 import SpinnerButton from '../../components/SpinnerButton';
 import { standardizeParties } from './standardize.parties'
+import validator from 'validator';
 
 class Form2Fill extends Component {
 
@@ -16,16 +17,16 @@ class Form2Fill extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
+        if (this.state.serviceInformation === undefined) { this.state.serviceInformation = { province: 'British Columbia', country: 'Canada', selectedContactIndex: 0} }
         if (this.state.useServiceEmail === undefined) { this.state.useServiceEmail = false }
         if (this.state.sendNotifications === undefined) { this.state.sendNotifications = false }
-        if (this.state.selectedContactIndex === undefined) { this.state.selectedContactIndex = 0 }
 
         this.selectedRespondents = this.selectedRespondents.bind(this)
         this.updateSelectedRespondents = this.updateSelectedRespondents.bind(this)
         this.selectAllRespondents = this.selectAllRespondents.bind(this)
         this.updateSelectedContact = this.updateSelectedContact.bind(this)
         this.displaySelected = this.displaySelected.bind(this)
-        this.updateContact = this.updateContact.bind(this)
+        this.updateServiceInformation = this.updateServiceInformation.bind(this)
         this.updateUseServiceEmail = this.updateUseServiceEmail.bind(this)
         this.updatesendNotifications = this.updatesendNotifications.bind(this)
         this.save = this.save.bind(this)
@@ -62,16 +63,16 @@ class Form2Fill extends Component {
             <div className="row section section-white">
                 <div className="col-xs-12">
                     <div className="section-title">
-                        When Do You Use the Notice of Appearance (Form2)?
+                        When Do You Use the Notice of Appearance (Form 2)?
                     </div>
                     <p>
                         If you have been served a Notice of Appeal (Form 7), and you want to respond,
                         fill out the Notice of Appearance (Form 2). If you do not respond,
-                        you will not be includedin future court proceedings related to this case,
+                        you will not be included in future court proceedings related to this case,
                         and will not have access to the case documents filed.
                     </p>
                     <p>
-                        You have 10 days to serve a filed copy of the Notice of Appearance to the appelant,
+                        You have 10 days to serve a filed copy of the Notice of Appearance to the appellant,
                         after receiving a Notice of Appeal.
                     </p>
                 </div>
@@ -125,30 +126,137 @@ class Form2Fill extends Component {
                           />
                       </div>
                    </div>
-
                    <div className="row">
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <div style={{fontWeight: "bolder"}}>
-                          Mailing address for service &nbsp;
-                          <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
-                         </div>
-                      </div>
-                  </div>
-
-                  <div className="row">
-                      <div className="col-lg-12 ">
-                          <ContactSelect
-                              selectedRespondents={this.selectedRespondents()}
-                              handleFieldChange={this.updateSelectedContact}
-                              id={"respondent-list"}
-                              isMulti={false}
-                              name={"form2.contactList"}
-                              selectedIndex={this.state.selectedContactIndex}
-                          />
-                      </div>
-                  </div>
-
-                  <div className="row address-row address-section">
+                        <div style={{fontWeight: "bolder", paddingLeft: '15px'}}>
+                          Representation &nbsp;
+                        </div>
+                        <h4 className="col-lg-12 address-row-header" style={{marginBottom: '0px', fontSize: '14px'}}>
+                            Are you self-represented?
+                        </h4>
+                        <div className="col-lg-offset-1">
+                            <div onClick={e => this.setSelfRepresented(true)}>
+                                <input type="radio" onChange={() => {}} checked={this.state.selfRepresented === true}/>
+                                <label className="noselect" style={{marginLeft: '5px', marginRight: '10px'}} >
+                                    Yes
+                                </label>
+                            </div>
+                            <div onClick={e => this.setSelfRepresented(false)}>
+                                <input type="radio" onChange={() => {}} checked={this.state.selfRepresented === false}/>
+                                <label className="noselect" style={{marginLeft: '5px'}}>
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <br/>
+                   </div>
+                   { this.state.selfRepresented === true &&
+                   <Fragment>
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div style={{fontWeight: "bolder"}}>
+                                Mailing address for service &nbsp;
+                                <i className="oi oi-question-mark" aria-hidden="true" data-tip="What is the address where you would like to receive documents?"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-12 ">
+                                <ContactSelect
+                                    selectedRespondents={this.selectedRespondents()}
+                                    handleFieldChange={this.updateSelectedContact}
+                                    id={"respondent-list"}
+                                    isMulti={false}
+                                    name={"form2.contactList"}
+                                    selectedIndex={this.state.serviceInformation.selectedContactIndex}
+                                />
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                  </Fragment>
+                }
+                { this.state.selfRepresented !== undefined && 
+                    <div style={{fontWeight: "bolder", paddingLeft: '15px'}}>
+                        Service Information &nbsp;
+                        <br/>
+                    </div>
+                }
+                <div id="serviceInformation" style={{opacity: this.selectedRespondents().length < 1 ? '.5' : '1'}}>
+                    { this.state.selfRepresented === false && 
+                        <Fragment>
+                            <div className="row"> 
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Counsel's Name
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                <div>
+                                    <input id="counselName"
+                                        value={this.displaySelected('counselName')}
+                                        onChange={ e => this.updateServiceInformation('counselName', e.target.value) }
+                                        />
+                                </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    Firm Name
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+                                    <div>
+                                        <input id="firmName"
+                                            value={this.displaySelected('firmName')}
+                                            onChange={ e => this.updateServiceInformation('firmName', e.target.value) }
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                        </Fragment>                                
+                        }
+                        { this.state.selfRepresented !== undefined && 
+                        <Fragment>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span className="mandatory-field">*</span>
+                                    {this.state.selfRepresented === false ? "Firm's" : ""} Phone&nbsp;
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
+                                    <input id="phone"
+                                        className={`${this.state.badPhone ? "invalid-field" : ""}`}
+                                        value={this.displaySelected('phone')}
+                                        onChange={ e => this.updateServiceInformation('phone', e.target.value) }/>
+                                        <div className="row address-hint">
+                                        ex. 604-567-8901 x1234
+                                    </div>
+                                    
+                                    <div className="row address-hint"  style={{color:'red', display: (this.state.badPhone ? 'block': 'none' )}}>
+                                            Please enter at least 10 digits.
+                                        </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
+                                    <span id="emailasterisks" className="mandatory-field" style={{display:(this.state.useServiceEmail || this.state.sendNotifications)?'inline-block':'none'}}>*</span>
+                                    Email address&nbsp;
+                                    <i className="oi oi-question-mark" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
+                                </div>
+                                <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
+                                    <input id="email"
+                                        className={`${this.state.badEmail? "invalid-field" : ""}`}
+                                        value={this.displaySelected('email')}
+                                        onChange={ e => this.updateServiceInformation('email', e.target.value) }
+                                        />
+                                        <div className="row address-hint" style={{color:'red', display: (this.state.badEmail ? 'block': 'none' )}}>
+                                            Please enter a valid email.
+                                        </div>
+                                </div>
+                            </div>
+                        </Fragment>
+                        }
+                { this.state.selfRepresented !== undefined &&
+                <Fragment>
                     <div className="row">
                           <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
                               <span className="mandatory-field">*</span>
@@ -158,7 +266,8 @@ class Form2Fill extends Component {
                               <div>
                                   <input id="addressLine1"
                                       value={this.displaySelected('addressLine1')}
-                                      onChange={ e => this.updateContact('addressLine1', e.target.value) }/>
+                                      onChange={ e => this.updateServiceInformation('addressLine1', e.target.value) }
+                                       style={{minWidth: '400px'}} />
                                   <div className="row address-hint">
                                       Street address, P.O. box, company name, c/o
                                   </div>
@@ -173,7 +282,7 @@ class Form2Fill extends Component {
                           <div>
                               <input id="addressLine2"
                                   value={this.displaySelected('addressLine2')}
-                                  onChange={ e => this.updateContact('addressLine2', e.target.value) }/>
+                                  onChange={ e => this.updateServiceInformation('addressLine2', e.target.value) }  style={{minWidth: '400px'}} />
                               <div className="row address-hint">
                                   Apartment, suite, unit, building, floor, etc.
                               </div>
@@ -189,7 +298,7 @@ class Form2Fill extends Component {
                         <div>
                             <input id="city"
                                   value={this.displaySelected('city')}
-                                  onChange={ e => this.updateContact('city', e.target.value) }/>
+                                  onChange={ e => this.updateServiceInformation('city', e.target.value) } />
                         </div>
                         </div>
                     </div>
@@ -214,47 +323,26 @@ class Form2Fill extends Component {
                             <span className="mandatory-field">*</span>
                             Postal Code
                         </div>
+ 
                         <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6">
                         <div>
                             <input id="postalcode"
+                                  className={`${this.state.badPostalCode ? "invalid-field" : ""}`}
                                   value={this.displaySelected('postalCode')}
-                                  onChange={ e => this.updateContact('postalCode', e.target.value) }/>
+                                  onChange={ e => this.updateServiceInformation('postalCode', e.target.value) }/>
+                            <div className="row address-hint" style={{color:'red', display: (this.state.badPostalCode ? 'block': 'none' )}}>
+                                        Please enter a valid postal code.
+                            </div>
                         </div>
                         </div>
                     </div>
+                </Fragment>
+                }
 
-                  </div>
-
+                { this.state.selfRepresented !== undefined &&
+                <Fragment>
                   <div className="row">
-                      <div className="row proceeding-style">
-                          <div className="col-lg-12 address-row-header">
-                              Contact information
-                          </div>
-                          <div className="row address-row">
-                              <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
-                                  <span className="mandatory-field">*</span>
-                                  Phone&nbsp;
-                                  <i className="oi oi-question-mark" aria-hidden="true" data-tip="The registry may contact you by phone to schedule your appeal"></i>
-                              </div>
-                              <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                  <input id="phone"
-                                      value={this.displaySelected('phone')}
-                                      onChange={ e => this.updateContact('phone', e.target.value) }/>
-                              </div>
-                          </div>
-                          <div className="row address-row">
-                              <div className="col-lg-2 col-md-2 col-sm-6 col-xs-6 address-label">
-                                  <span id="emailasterisks" className="mandatory-field" style={{display:(this.state.useServiceEmail || this.state.sendNotifications)?'inline-block':'none'}}>*</span>
-                                  Email address&nbsp;
-                                  <i className="oi oi-question-mark" aria-hidden="true" data-tip="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below)"></i>
-                              </div>
-                              <div className="col-lg-10 col-md-10 col-sm-6 col-xs-6 ">
-                                  <input id="email"
-                                      value={this.displaySelected('email')}
-                                      onChange={ e => this.updateContact('email', e.target.value) }/>
-                              </div>
-                          </div>
-                      </div>
+                        <br/>
                   </div>
 
                   <div className="row">
@@ -286,49 +374,87 @@ class Form2Fill extends Component {
 
                   <hr/>
                   <div className="row">
-                    <div className="col-xs-4" style={{textAlign:'center', padding:'0px'}}>
+                    <div className="col-xs-6" style={{textAlign:'left', padding:'0px'}}>
                         <SpinnerButton  ref= { el => this.saveButton = el }
                                         content= "Save as Draft"
                                         id= "save-as-draft"
-                                        width= "100"
                                         disabled= { this.disableSave() }
                                         onClick= { this.save } />
                     </div>
-                    <div className="col-xs-4" style={{textAlign:'right', padding:'0px'}}>
-                        <button id= "continue"
-                                className= "btn btn-primary round-borders action-button"
-                                disabled= { this.disableContinue() }
-                                onClick= { this.continue }>
-                                Continue
-                                <i className="glyphicon glyphicon-triangle-right" />
-                        </button>
+                    <div className="col-xs-6 right" style={{textAlign:'right', padding:'0px'}}>
+                        <SpinnerButton ref= { el => this.continueButton = el }
+                                            content= "Continue"
+                                            id= "continue"
+                                            disabled= { this.disableContinue() }
+                                            onClick= { this.continue } 
+                                            showArrow={true}
+                                            >
+                        </SpinnerButton>
                     </div>
                   </div>
+                  </Fragment>
+                }
+                </div>
                 </div>
             </div>
-
             <ReactTooltip/>
         </div>
         );
     }
 
     continue() {
-        this.save(()=>{
-            this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })
-        })
+        let validated = true;
+        let serviceInformation = this.state.serviceInformation
+        if (!validator.isPostalCode(serviceInformation['postalCode'], 'CA')) {
+            validated = false;
+            this.setState({badPostalCode: true});
+        }        
+        if (serviceInformation['email'] && 
+        serviceInformation['email'].length > 0 && 
+            !validator.isEmail(serviceInformation['email'])) {
+                validated = false;
+            this.setState({badEmail: true});
+        }
+        if (serviceInformation['phone'] && 
+        serviceInformation['phone'].length !== 0 && 
+        serviceInformation['phone'].replace( /\D+/g, '').length < 10)
+        {
+            validated = false;
+            this.setState({badPhone: true});
+        }
+        if (validated) {
+            this.save(()=>{
+                this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })
+            })
+        }
+    }
+    setSelfRepresented(state) {
+        let parties = this.state.parties
+        let respondents = parties.respondents
+        this.setState({selfRepresented: state});
+        let serviceInformation = this.state.serviceInformation;
+        serviceInformation.name = respondents[0].name;
+        this.setState({ serviceInformation: serviceInformation }, () => {
+              ReactTooltip.rebuild();
+            });
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
     selectedRespondents() {
-       return this.state.parties.respondents.filter((respondent) => respondent.selected);
+       return this.state.parties.respondents.filter((respondent) => respondent.responding);
     }
     updateSelectedRespondents(event) {
         let parties = this.state.parties
         let respondents = parties.respondents
         if ('clear' === event.action ) {
-            respondents.forEach((respondent) => respondent.selected = false)
+            respondents.forEach((respondent) => respondent.responding = false)
         } else if ('selectAll' === event.action) {
-            respondents.forEach((respondent) => respondent.selected = true);
+            respondents.forEach((respondent) => respondent.responding = true);
         } else {
-            respondents[event.target.value].selected = event.target.selected;
+            respondents[event.target.value].responding = event.target.responding;
         }
         this.setState({ parties:parties })
     }
@@ -336,23 +462,31 @@ class Form2Fill extends Component {
         this.updateSelectedRespondents({ action:'selectAll' })
     }
     updateSelectedContact(event) {
-        this.setState({ selectedContactIndex: event.target.value })
+        let parties = this.state.parties
+        let respondents = parties.respondents
+        this.setState({
+          serviceInformation: {
+            ...this.state.serviceInformation,
+            selectedContactIndex: event.target.value,
+            name: respondents[event.target.value].name,
+            ...respondents[event.target.value].address,
+          }
+        });
     }
     displaySelected(field) {
-        let value = ''
-        if (this.state.selectedContactIndex >= 0
-            && this.state.parties.respondents[this.state.selectedContactIndex].address) {
-            value = this.state.parties.respondents[this.state.selectedContactIndex].address[field]
-        }
-        return value ? value: ''
+        return field in this.state.serviceInformation ? this.state.serviceInformation[field] || '' : ''
     }
-    updateContact(field, value) {
-        if (this.state.selectedContactIndex >= 0) {
-            let parties = this.state.parties
-            let respondents = parties.respondents
-            respondents[this.state.selectedContactIndex].address[field] = value
-            this.setState({ parties:parties })
-        }
+    updateServiceInformation(field, value) {
+        if (field === 'email')
+            this.setState({badEmail: false});
+        if (field === 'phone')
+            this.setState({badPhone: false});
+        if (field === 'postalCode')
+            this.setState({badPostalCode: false});
+        
+        let serviceInformation = this.state.serviceInformation
+        serviceInformation[field] = value;
+        this.setState({ serviceInformation: serviceInformation })
     }
     updatesendNotifications(event) {
         this.setState({ sendNotifications: event.target.checked })
@@ -361,19 +495,35 @@ class Form2Fill extends Component {
         this.setState({ useServiceEmail: event.target.checked });
     }
     save(next) {
+        // Clean up the data.
+        if (this.state.selfRepresented) {
+            delete this.state.serviceInformation.counselName;
+            delete this.state.serviceInformation.firmName;
+            let serviceInformation = this.state.serviceInformation;
+            this.setState({ serviceInformation: serviceInformation });
+        } else {
+            delete this.state.serviceInformation.selectedContactIndex;
+            delete this.state.serviceInformation.name;
+            this.setState({ serviceInformation: this.state.serviceInformation });
+        }
+
         this.saveButton.startSpinner()
+        this.continueButton.startSpinner()
         var form = {
             formSevenNumber: this.state.caseNumber,
             appellants: this.state.parties.appellants,
             respondents: this.state.parties.respondents,
+            service: this.state.service,
             useServiceEmail: this.state.useServiceEmail,
             sendNotifications: this.state.sendNotifications,
-            selectedContactIndex: this.state.selectedContactIndex,
-            account: this.state.account
+            serviceInformation: this.state.serviceInformation,
+            selfRepresented: this.state.selfRepresented,
+            version: '0.1'
         }
         if (!this.state.id) {
             this.service.createForm2(form, (formId) => {
                 this.saveButton.stopSpinner()
+                this.continueButton.stopSpinner()
                 if (!formId.error) {
                     this.setState({
                         formId: formId
@@ -386,6 +536,7 @@ class Form2Fill extends Component {
         else {
             this.service.updateForm2(form, this.state.id, (data) => {
                 this.saveButton.stopSpinner()
+                this.continueButton.stopSpinner()
                 if (next) { next() }
             })
         }
@@ -393,6 +544,7 @@ class Form2Fill extends Component {
     disableSave() {
         let disabled = false
 
+        if (this.state.selfRepresented === true && this.selectedRespondents().length < 1) { disabled = true }
         if (this.displaySelected('addressLine1') === '') { disabled=true }
         if (this.displaySelected('city') === '') { disabled=true }
         if (this.displaySelected('postalCode') === '') { disabled=true }

@@ -26,7 +26,7 @@ let standardize = function(entities) {
         } else {
             entityMap['address'] = {}
         }
-
+        entityMap['partyId'] = entity.partyId;
         entityMap['id'] = index
         return entityMap;
     });

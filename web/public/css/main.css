@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'Myriad-Pro';
-	src: url('../fonts/MyriadWebPro.woff') format('woff');
+	font-family: 'BC Sans Regular';
+	src: url('../fonts/BCSans-Regular.otf') format('otf');
 }
 
 html, body {
@@ -8,7 +8,8 @@ html, body {
 }
 
 body {
-	font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
+	font-family: 'BC Sans Regular', Calibri, Arial, 'sans serif';
+	-webkit-font-smoothing: antialiased;
 	background-color: #f1f1f1;
 	color: #494949;
 	font-size: 13px;
@@ -16,6 +17,16 @@ body {
 
 a {
 	color: #1a5a96;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }
 
 h1, h2, h3, h4, h5 {
@@ -45,7 +56,7 @@ table {
 }
 
 td {
-	padding: 4px;
+	padding: 2px;
 }
 
 th {
@@ -71,6 +82,10 @@ th {
 	border: none;
 	/* 	border-bottom: 2px solid #fcba19; */
 	/* 	padding-bottom: 5px; */
+}
+
+#header .container {
+	margin-bottom: 3px;
 }
 
 #header .header-main-left, #header .header-main-right {
@@ -1049,8 +1064,8 @@ ul.leftNav>li:first-child {
 }
 
 #topicTemplate h4 {
-	margin-top: 1.33em;
-	margin-bottom: 1.33em;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
 }
 
 #topicTemplate hr {

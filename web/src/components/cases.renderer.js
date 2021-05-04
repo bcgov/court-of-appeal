@@ -22,6 +22,7 @@ let render = function(cases) {
     return cases.map(function(item) { 
         return {
             id:item.id,
+            caseNumber: item.data.formSevenNumber,
             parties: parties(item.data),
             status: item.status,
             modified: moment(item.modified).format('YYYY-MM-DD HH:mm'),

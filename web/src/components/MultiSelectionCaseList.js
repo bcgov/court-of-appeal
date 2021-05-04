@@ -25,6 +25,7 @@ class MultiSelectionCaseList extends CaseList {
                             <td></td>
                             <td>Action</td>
                             <td>File #</td>
+                            <td>Case #</td>
                             <td>Parties</td>
                             <td>Status</td>
                             <td className="text-right">Recently Modified</td>

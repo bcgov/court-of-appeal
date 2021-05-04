@@ -63,8 +63,7 @@ describe.skip('CaseList', ()=> {
                         phone: '111-111-1111',
                         email: 'me@here.net',
                         useServiceEmail: false,
-                        sendNotifications: false,
-                        selectedContactIndex: 0
+                        sendNotifications: false
                     }
                 },
                 { id:25, data:{} }

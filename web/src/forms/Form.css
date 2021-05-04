@@ -64,8 +64,7 @@
 	padding: 15px;
 	margin-bottom: 15px;
 	border: 1px solid white;
-	font-family: Myriad-Pro, sans-serif;
-	font-size: medium;
+	font-family: 'BC Sans Regular', sans-serif;
 }
 .form-section h3 {
 	font-weight: 600;
@@ -143,8 +142,7 @@
 .section {
     margin: 14px;
 	padding: 17px 30px;
-	font-family: Myriad-Pro, sans-serif;
-	font-size: medium;
+	font-family: 'BC Sans Regular', sans-serif;
 }
 .section-white {
     background-color: white;
@@ -175,4 +173,7 @@
 .right {
     text-align: right;
     padding-right: 0px;
+}
+.invalid {
+	border-color: red;
 }

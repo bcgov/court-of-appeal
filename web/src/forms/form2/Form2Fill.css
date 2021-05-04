@@ -17,3 +17,10 @@
 .left {
     margin-left: 0px;
 }
+#serviceInformation .row {
+	padding-bottom: 3px;
+}
+
+#serviceInformation input {
+	margin-top: 2px;
+}

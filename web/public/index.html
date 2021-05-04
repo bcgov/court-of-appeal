@@ -45,9 +45,6 @@
     <!-- BOOTSTRAP CORE CSS v3.3.6 -->
     <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.min.css"/>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link rel="stylesheet" href="%PUBLIC_URL%/css/ie10-viewport-bug-workaround.css"/>
-
     <!-- STANDARD CSS -->
     <link type="text/css" href="%PUBLIC_URL%/css/main.css" rel="stylesheet"/>
 
@@ -79,7 +76,10 @@
     <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
     <script src="%PUBLIC_URL%/js/misc.js"></script>
     <script src="%PUBLIC_URL%/js/navMenu.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="%PUBLIC_URL%/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Issue workaround for React v16. -->
+    <script>
+      // See https://github.com/facebook/react/issues/20829#issuecomment-802088260
+      if (!crossOriginIsolated) SharedArrayBuffer = ArrayBuffer;
+    </script>
   </body>
 </html>
