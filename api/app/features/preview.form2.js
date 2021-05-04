@@ -9,7 +9,7 @@ PreviewForm2.prototype.now = function(login, id, callback) {
     this.database.formData(login, id, (data)=>{
         if (data.error) { callback(data); }
         else {
-            data = JSON.parse(data.data)
+            data = JSON.parse(data.data);
             const selected = this.filterSelected(data.respondents);
             var html = this.template
                 .replace('{formSevenNumber}', data.formSevenNumber)
@@ -25,7 +25,9 @@ PreviewForm2.prototype.now = function(login, id, callback) {
                 .replace('{selectedContactPostalCode}', this.extract('postalCode', data))
                 .replace('{selectedContactPhone}',  this.extract('phone', data))
                 .replace('{selectedContactEmail}', data.useServiceEmail ? this.extract('email', data): '')
-                ;
+                .replace('{respondentOrSolicitor}', data.selfRepresented ? data.serviceInformation.name : this.extract('counselName', data))
+                .replace('{respondentOrSolicitorText}', data.selfRepresented ? 'Respondent' : 'Solicitor')
+                .replace('{respondents}', this.reduce(data.respondents));
             if (!data.useServiceEmail) {
                 html = this.removeIfBlock('useServiceEmail', html);
             } else {
@@ -41,19 +43,19 @@ PreviewForm2.prototype.reduce = function(array) {
 };
 
 PreviewForm2.prototype.filterSelected = function(array) {
-    return array.filter((item)=> item.selected);
+    return array.filter((item)=> item.responding);
 };
 
 PreviewForm2.prototype.label = function(array) {
     return array.length > 1 ? 's': '';
 };
 
-PreviewForm2.prototype.address = function(data) {
-    return data.respondents[data.selectedContactIndex].address;
+PreviewForm2.prototype.serviceInformation = function(data) {
+    return data.serviceInformation;
 };
 
 PreviewForm2.prototype.extract = function(field, data) {
-    return  this.address(data) && this.address(data)[field] ? this.address(data)[field] : '';
+    return  this.serviceInformation(data) && this.serviceInformation(data)[field] ? this.serviceInformation(data)[field] : '';
 };
 
 PreviewForm2.prototype.removeIfBlock = function(name, html) {
