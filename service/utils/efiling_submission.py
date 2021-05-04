@@ -2,6 +2,7 @@
 import json
 import logging
 import requests
+import settings
 from .efiling_hub_caller_base import EFilingHubCallerBase
 
 logger = logging.getLogger(__name__)
@@ -12,6 +13,7 @@ class EFilingSubmission(EFilingHubCallerBase):
         self.packaging = packaging
         self.submission_id = None
         self.access_token = None
+        self.log_traces = settings.EFILING_LOG_SUBMISSION_TRACES
         EFilingHubCallerBase.__init__(self)
 
     def _clean_error_message(self, details):
@@ -67,6 +69,12 @@ class EFilingSubmission(EFilingHubCallerBase):
         logger.debug(f"submission_id:{submission_id}")
         logger.debug("data:")
         logger.debug(json.dumps(package_data, indent=4))
+        if self.log_traces:
+            formSeven = package_data["filingPackage"]["documents"][0]["data"]["formSevenNumber"]
+            f = open(f"traces/{formSeven}-{submission_id}.txt", "a")
+            f.write(json.dumps(package_data, indent=4))
+            f.write("\n")
+            f.close()
 
         response = self._get_api(
             f"{self.api_base_url}/submission/{submission_id}/generateUrl",

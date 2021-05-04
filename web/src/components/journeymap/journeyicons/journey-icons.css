@@ -16,7 +16,7 @@
 }
 .end-step-title {
     position: relative;
-    font-size: large;
+    font-size: 16px;
     text-align: center;
     color: #23527c;
 }
@@ -32,7 +32,7 @@
     position: relative;
     top: 75%;
     left: -20%;
-    font-size: large;
+    font-size: 16px;
     text-align: center;
     width: 119px;
 }

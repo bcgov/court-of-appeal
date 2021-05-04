@@ -25,18 +25,19 @@ RestAdaptor.prototype.useDatabase = function(database) {
 RestAdaptor.prototype.route = function(app, keycloak) {
 
    // Legacy routes.
-   app.get('/api/forms', keycloak.protect(), async (request, response)=> {
+   app.post('/api/searchForm7', keycloak.protect(), async (request, response)=> {
         //Need to write database for this search.
         const userId = request.session.userId;
         const ipAddress = request.header('x-real-ip');
+        const body = request.body;
         try {
-            await this.database.writeAuditCaseSearch(userId, ipAddress, request.query.file, 'form7');
+            await this.database.writeAuditCaseSearch(userId, ipAddress, body.file + '|' + body.lastName + '|' + body.firstName + '|' + body.organizationName, 'form7');
         }
         catch (error){
             logErrorAndInternalServerResponse(error, response);
             return;
         }
-        this.hub.searchForm7(request.query.file, (data)=> {
+        this.hub.searchForm7({ 'file': body.file, 'lastName': body.lastName, 'firstName': body.firstName, 'organizationName': body.organizationName, 'searchBy': body.searchBy}, (data)=> {
             searchFormSevenResponse(data, response);
         });
     });
@@ -160,7 +161,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.put('/api/journey/:id', keycloak.protect(), (request, response)=> {
         request.body.id = request.params.id;
-        this.database.updateJourney(request.params.id, request.body, (data)=> {
+        this.database.updateJourney(request.body, (data)=> {
             createJourneyResponse(data, response);
         });
     });
@@ -174,7 +175,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.get('/api/persons/connected', keycloak.protect(), (request, response, next)=> {
         const login = request.session.universalId;
-        let name = request.kauth.grant.id_token.content.display_name;
+        let name = request.session.displayName;
         this.database.savePerson(login, (data)=>{
             if (data && !data.error) {
                 this.database.personInfo(login, (user)=>{

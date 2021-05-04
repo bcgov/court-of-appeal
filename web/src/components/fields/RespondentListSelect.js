@@ -10,6 +10,9 @@ class RespondentListSelect extends React.Component {
         }
         
         if (this.props.respondents.length === 1) {
+            if (!this.props.respondents[0].name){
+                throw new Error('No name for respondent.');
+            }
             return this.props.respondents[0].name;
         } else {
             let options = this.getOptions(this.props.respondents);
@@ -17,7 +20,7 @@ class RespondentListSelect extends React.Component {
             
             return (
                 <div  >
-                     <div className={"row "} style={{display: 'flex', flexDirection: 'row-reverse', marginBottom: '15px'}}>
+                     <div className={"row"} style={{display: 'flex', flexDirection: 'row-reverse', marginBottom: '15px'}}>
                          <input id="selectAll"
                                 type="checkbox"
                                 onChange={this.selectAllOrClearRespondents.bind(this)}
@@ -66,7 +69,7 @@ class RespondentListSelect extends React.Component {
                     target: {
                         name: change.name,
                         value: change.option.value,
-                        selected: true }
+                        responding: true }
                 };
                 break;
             case 'remove-value':
@@ -74,7 +77,7 @@ class RespondentListSelect extends React.Component {
                     target: {
                         name: change.name,
                         value: change.removedValue.value,
-                        selected: false
+                        responding: false
                     }
                 };
                 break;

@@ -17,18 +17,6 @@ class CaseList extends React.Component {
             let window = this.element.ownerDocument.defaultView;
             this.service = new DefaultService(window);
         }
-        if (this.state.fetch) {
-            this.service.getPersonInfo((person)=> {
-                if (!person.error) {
-                    this.setState({
-                        account: {
-                            accountId: person.accountId,
-                            clientId: person.clientId
-                        }
-                    });
-                }
-            });
-        }
     }
     editCell(item) {
         return (
@@ -37,11 +25,11 @@ class CaseList extends React.Component {
                     className="edit-cell"
                     id={'edit-'+item.id}
                     onClick={this.editForm.bind(this, item.data, item.id)}>
-                        <i className="oi oi-pencil"/>
+                        <i style={{transform: 'translate(15px,0)'}} className="oi oi-pencil"/>
                 </td>
                 :
                 <td key={item.id+'edit'} className="edit-cell">
-                        <i onClick={() => window.open(item.packageUrl)} className="oi oi-magnifying-glass"/>
+                        <i style={{transform: 'translate(15px,0)'}} onClick={() => window.open(item.packageUrl)} className="oi oi-magnifying-glass"/>
                 </td>
         )
     }
@@ -49,6 +37,7 @@ class CaseList extends React.Component {
         return ([
             this.editCell(item) ,
             <td key={item.id+'id'}>{item.id}</td>,
+            <td key={item.id+'caseNumber'}>{item.caseNumber}</td>,
             <td key={item.id+'parties'}>{item.parties}</td>,
             <td key={item.id+'status'}>
                 {item.status}
@@ -72,6 +61,7 @@ class CaseList extends React.Component {
                         <tr className="header">
                             <td>Action</td>
                             <td>File #</td>
+                            <td>Case #</td>
                             <td>Parties</td>
                             <td>Status</td>
                             <td className="text-right">Recently Modified</td>
@@ -97,10 +87,10 @@ class CaseList extends React.Component {
                 appellants: data.appellants,
                 respondents: data.respondents
             },
-            selectedContactIndex: data.selectedContactIndex,
+            serviceInformation: data.serviceInformation,
             useServiceEmail: data.useServiceEmail,
             sendNotifications: data.sendNotifications,
-            account: this.state.account
+            selfRepresented: data.selfRepresented
         }})
     }
 

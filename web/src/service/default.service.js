@@ -43,9 +43,11 @@ Service.prototype.redirectToLogout = function() {
     window.location.replace(`${this.base()}/api/logout?redirect_url=${window.location}`);
 }
 
-Service.prototype.searchForm7 = function(file, callback) {
+Service.prototype.searchForm7 = function(file, lastName, firstName, organizationName, searchBy, callback) {
     let self = this;
-    request.get(this.buildOptions('/api/forms?file=' + file), (err, response, body)=>{
+    let options = this.buildOptions(`/api/searchForm7`);
+    options.form = { file: file, lastName: lastName, firstName: firstName, organizationName: organizationName, searchBy: searchBy };
+    request.post(options, (err, response, body)=>{
         if (response && response.statusCode === 200) {
             callback(JSON.parse(body));
         }
@@ -65,6 +67,7 @@ Service.prototype.createForm2 = function(form, callback) {
     let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
     let self = this;
+    console.log(JSON.stringify(form, null, 2));
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);

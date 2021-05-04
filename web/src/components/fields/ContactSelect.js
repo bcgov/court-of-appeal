@@ -15,11 +15,11 @@ class ContactSelect extends React.Component {
                 <div>
                 Select a contact name to auto-fill the address.&nbsp;
                 </div>
-                <div className={"col-lg-9 col-md-9 col-lg-offset-1 col-md-offset-1"} style={{paddingLeft: 0, paddingRight: 0, paddingBottom: '30px'}}>
+                <div className={"col-lg-9 col-md-9 col-lg-offset-1 col-md-offset-1"} style={{paddingLeft: 0, paddingRight: 0}}>
                     <SelectableNameList
                         ariaLabel={"Select a respondent whose address will be the service address, or leave blank and enter a different address"}
                         id={"chosenContact"}
-                        isClearable={true}
+                        isClearable={false}
                         isMulti={false}
                         name={"form2.selectedContact"}
                         options={options}

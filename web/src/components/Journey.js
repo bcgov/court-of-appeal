@@ -391,7 +391,7 @@ class Journey extends Component {
 
     fetchMyJourney() {
         this.service.getMyJourney({}, (data) => {
-            if (!data.error) {
+            if (!data.error && data.journey && data.journey.type) {
                 let journey = (data.journey);
                 let journeyType = '', introText = '';
 

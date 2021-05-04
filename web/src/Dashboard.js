@@ -17,10 +17,13 @@ class Dashboard extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             cases: [],
-            displayMyCasesEmptyLabel:true
+            displayMyCasesEmptyLabel:true,
+            closeBrowserCheck: false,
+            isIE11: this.isIE11()
         };
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
+        this.closeBrowserCheck = this.closeBrowserCheck.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +35,13 @@ class Dashboard extends Component {
         if (this.state.fetch) {
             this.fetchCases();
         }
+    }
+
+    isIE11() {
+        const ua = window.navigator.userAgent; 
+        const msie = ua.indexOf('MSIE ');
+        const trident = ua.indexOf('Trident/'); 
+        return (msie > 0 || trident > 0);
     }
 
     fetchCases() {
@@ -51,9 +61,24 @@ class Dashboard extends Component {
         });
     }
 
+    closeBrowserCheck() {
+        this.setState({ closeBrowserCheck : true });
+    }
+
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
+                { this.state.isIE11 && !this.state.closeBrowserCheck && 
+                    <div id="info-modal" className={"info-modal"} style={{display: 'block'}} >
+                        <div className="info-modal-title" style={{backgroundColor: 'red'}}>
+                        IE 11 detected - Modern browser required
+                            <span className="close-info-modal" onClick={this.closeBrowserCheck}>&times;</span>
+                        </div>
+                        <div className="info-modal-content">
+                            A modern browser such as Google Chrome, Mozilla Firefox or Microsoft Edge is required for this site.
+                        </div>
+                    </div>
+                }
                 <div className="row">
                     <div role="main" className="col col-sm-12">
                         <ActiveFormList

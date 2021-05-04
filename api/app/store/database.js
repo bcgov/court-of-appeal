@@ -56,7 +56,7 @@ Database.prototype.updateJourney = function(journey, callback) {
 Database.prototype.myJourney = function(login, callback) {
     this.journey.selectByLogin(login, ifError({notify:callback}).otherwise((rows)=> {
         if (rows.length === 0) {
-            callback({ error: {code:404} });
+            callback({});
         }
         else {
             callback(rows[0]);

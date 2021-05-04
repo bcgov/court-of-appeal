@@ -15,7 +15,7 @@ var buildEFilingPackage = function(request, data, pdf) {
             "md5": crypto.createHash('md5').update(pdf).digest("hex")
         }
     ];
-    data.appellants.forEach((appellant) => {
+    /*data.appellants.forEach((appellant) => {
         party = {};
         if (appellant.organization || !appellant.lastName || appellant.lastName == "") {
             party = {
@@ -54,7 +54,7 @@ var buildEFilingPackage = function(request, data, pdf) {
             };
             efilingPackage.parties.push(party);
         }
-    });
+    });*/
 
     const host = `${request.headers.host}`;
     efilingPackage.successUrl = `${request.protocol}://${host}${process.env.WEB_BASE_HREF}api/forms/${data.formId}/success`;

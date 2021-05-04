@@ -19,9 +19,12 @@ var buildPartyInfo = function(party) {
         info.firstName = party.FirstName;
         info.lastName = party.LastName;
     }
-    if (party.Organization) { //|| !party.FirstName) {
-        info.name = party.Organization; //|| party.LastName;
-        info.organization = party.Organization; //|| party.LastName;
+    else if (party.Organization) { 
+        info.name = party.Organization;
+        info.organization = party.Organization;
+    }
+    else {
+        throw new Error("Couldn't find person or organization in party.");
     }
     if (lawyer(party)) {
         info.solicitor = {
@@ -31,6 +34,7 @@ var buildPartyInfo = function(party) {
             address: lawyerFirmAddress(party)
         }
     }
+    info.partyId = party.PartyID;
     return info;
 };
 

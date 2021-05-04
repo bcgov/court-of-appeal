@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
 import './Form2.css';
@@ -14,7 +14,11 @@ class Form2Start extends Component {
         this.service = props.service;
         this.state = {
             notFoundError: '',
-            caseNumber: 'CA'
+            caseNumber: 'CA',
+            respondentSelection: 'Individual',
+            respondentFirstName: '',
+            respondentLastName: '',
+            respondentOrganization: ''
         }
         this.search = this.search.bind(this)
         if (props.location.search)
@@ -55,12 +59,11 @@ class Form2Start extends Component {
                     <table>
                         <tbody>
                             <tr>
-                                <td>LEVEL OF COURT</td>
-                                <td>COURT OF APPEAL FILE NO.</td>
-                                <td> </td>
+                                <td>Level of Court</td>
+                                <td><input disabled value="Court of Appeal" /></td>
                             </tr>
                             <tr>
-                                <td><input disabled value="Court of Appeal" /></td>
+                                <td>Court of Appeal File no.</td>
                                 <td>
                                     <input  ref= { el => this.caseNumberField = el }
                                             autoFocus
@@ -69,20 +72,83 @@ class Form2Start extends Component {
                                             onChange= { e => forceCA(e.target.value, this)}
                                             onKeyPress= { e => e.charCode === 13 ? this.search():null } />
                                 </td>
+                            </tr>
+                            <tr>
+                                <td><h5>Respondent</h5></td>
                                 <td>
-                                    <SpinnerButton  ref= { el => this.findButton = el }
-                                                    content= 'Find'
-                                                    id= "find-button"
-                                                    width= "52"
-                                                    disabled= { this.state.caseNumber.length < 7 }
-                                                    onClick= { this.search } />
-                                </td>
-                                <td>
-                                    <div className="error-message">{this.state.notFoundError}</div>
+                                    <div onClick={e => this.onValueChange("Individual", this)}>
+                                        <input type="radio" onChange={() => {}} checked={this.state.respondentSelection === "Individual"}/>
+                                        <label className="noselect" style={{marginLeft: '5px', marginRight: '10px'}} >
+                                            Individual
+                                        </label>
+                                    </div>
+                                    <div onClick={e => this.onValueChange("Organization", this)}>
+                                        <input type="radio" onChange={() => {}} value="Organization" checked={this.state.respondentSelection === "Organization"}/>
+                                        <label className="noselect" style={{marginLeft: '5px'}}>
+                                            Organization
+                                        </label>
+                                    </div>
                                 </td>
                             </tr>
+                            { this.state.respondentSelection === 'Individual' &&
+                             <Fragment>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>
+                                        <input  
+                                                    id= "respondent-first-name"
+                                                    value= { this.state.respondentFirstName }
+                                                    onChange= { e => this.setState({ respondentFirstName: e.target.value }) }
+                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td>
+                                        <input 
+                                                    autoFocus
+                                                    id= "respondent-last-name"
+                                                    value= { this.state.respondentLastName }
+                                                    onChange= { e => this.setState({ respondentLastName: e.target.value })}
+                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
+                                    </td>
+                                    <td>
+                                        <SpinnerButton  ref= { el => this.findButton = el }
+                                                        content= 'Find'
+                                                        id= "find-button"
+                                                        width= "52"
+                                                        disabled= { this.state.caseNumber.length < 7 || this.state.respondentLastName.length === 0 || this.state.respondentFirstName.length === 0 }
+                                                        onClick= { this.search } />
+                                    </td>
+                                </tr> 
+                            </Fragment> 
+                            }
+                            { this.state.respondentSelection !== 'Individual' &&
+                                <Fragment>
+                                <tr>
+                                    <td>Organization</td>
+                                    <td>
+                                        <input  ref= { el => this.caseNumberField = el }
+                                                    autoFocus
+                                                    id= "respondent-organization"
+                                                    value= { this.state.respondentOrganization }
+                                                    onChange= { e => this.setState({ respondentOrganization: e.target.value }) }
+                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
+                                    </td>
+                                    <td>
+                                        <SpinnerButton  ref= { el => this.findButton = el }
+                                                        content= 'Find'
+                                                        id= "find-button"
+                                                        width= "52"
+                                                        disabled= { this.state.caseNumber.length < 7 && this.state.respondentOrganization.length === 0 }
+                                                        onClick= { this.search } />
+                                    </td>
+                                </tr>
+                                </Fragment>
+                            }
                         </tbody>
                     </table>
+                    <div className="error-message">{this.state.notFoundError}</div>
                 </div>
             </div>
 
@@ -90,20 +156,36 @@ class Form2Start extends Component {
         );
     }
 
+    onValueChange(value, stateOwner) {
+        stateOwner.setState({
+            respondentSelection: value
+        });
+        if (value === 'Individual')
+        stateOwner.setState({
+            respondentOrganization: ''
+        });
+        if (value === 'Organization')
+        stateOwner.setState({
+            respondentFirstName: '',
+            respondentLastName: ''
+        });
+      }
+
     search() {
         let caseNumber = this.state.caseNumber
+        let respondentFirstName = this.state.respondentFirstName
+        let respondentLastName = this.state.respondentLastName
+        let respondentOrganization = this.state.respondentOrganization
+        let searchBy = this.state.respondentSelection
         if (caseNumber.length < 7) { return }
 
         this.findButton.startSpinner()
-        this.service.searchForm7(caseNumber, (data) => {
+        this.service.searchForm7(caseNumber, respondentLastName.toLowerCase(), respondentFirstName.toLowerCase(), respondentOrganization.toLowerCase(), searchBy, (data) => {
             this.findButton.stopSpinner();
-
-            if (data && !data.error) {
+            if (data && !data.error) 
                 this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:caseNumber, parties:data.parties }});
-            }
-            else {
+            else 
                 this.setState({ notFoundError: 'No such Court of Appeal document found' });
-            }
         });
     }
 }
