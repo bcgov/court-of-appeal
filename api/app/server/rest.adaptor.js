@@ -269,6 +269,13 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}${formId}/submitted/success`);
     });
 
+    app.get('/api/logoff', (request, response) => {
+        let redirectUrl = request.query.redirect_url || "/";
+        request.session.destroy((err) => {
+            response.redirect(`${request.protocol}://${request.headers.host}${process.env.WEB_BASE_HREF}api/logout?redirect_url=${redirectUrl}`);
+        })
+    });
+
     app.get('/api/login', keycloak.protect(), (request, response) => {
         let redirectUrl = request.query.redirectUrl || "/";
         const universalId = request.kauth.grant.id_token.content['universal-id'];

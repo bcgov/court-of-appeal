@@ -40,7 +40,7 @@ Service.prototype.redirectToLogin = function() {
 }
 
 Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.base()}/api/logout?redirect_url=${window.location}`);
+    window.location.replace(`${this.base()}/api/logoff?redirect_url=${window.location}`);
 }
 
 Service.prototype.searchForm7 = function(file, lastName, firstName, organizationName, searchBy, callback) {
