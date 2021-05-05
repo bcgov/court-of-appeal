@@ -56,7 +56,7 @@ class Form2Start extends Component {
                     <div>
                         Find the Supreme Court case appeal you are responding to by entering the following case information:
                     </div>
-                    <table>
+                    <table id="startTable">
                         <tbody>
                             <tr>
                                 <td>Level of Court</td>
