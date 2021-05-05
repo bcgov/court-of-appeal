@@ -13,6 +13,10 @@
 	text-align: left;
 }
 
+#startTable td {
+	padding: 4px;
+}
+
 .modal {
     display: none;
     position: fixed; 
