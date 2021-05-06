@@ -17,7 +17,7 @@ PreviewForm2.prototype.now = function(login, id, callback) {
                 .replace('{appellantsLabel}', 'Appellant' + this.label(data.appellants))
                 .replace('{respondents}', this.reduce(data.respondents))
                 .replace('{respondentsLabel}', 'Respondent' + this.label(selected))
-                .replace('{selectedRespondents}', this.reduce(selected))
+                .replace(/{selectedRespondents}/g, this.reduce(selected))
                 .replace('{selectedContactAddress1}', this.extract('addressLine1', data))
                 .replace('{selectedContactAddress2}', this.extract('addressLine2', data))
                 .replace('{selectedContactCity}', this.extract('city', data))
@@ -25,9 +25,15 @@ PreviewForm2.prototype.now = function(login, id, callback) {
                 .replace('{selectedContactPostalCode}', this.extract('postalCode', data))
                 .replace('{selectedContactPhone}',  this.extract('phone', data))
                 .replace('{selectedContactEmail}', data.useServiceEmail ? this.extract('email', data): '')
-                .replace('{respondentOrSolicitor}', data.selfRepresented ? data.serviceInformation.name : this.extract('counselName', data))
-                .replace('{respondentOrSolicitorText}', data.selfRepresented ? 'Respondent' : 'Solicitor')
-                .replace('{respondents}', this.reduce(data.respondents));
+                .replace('{respondentFirmName}', this.extract('firmName', data))
+                .replace(/{respondentOrSolicitor}/g, data.selfRepresented ? data.serviceInformation.name : this.extract('counselName', data))
+                .replace('{respondentOrSolicitorText}', data.selfRepresented ? 'Respondent' : 'Solicitor');
+            
+            if (data.selfRepresented) {
+                html = this.removeIfBlock('notSelfRepresented', html);
+            } else {
+                html = this.removeIfCondition('notSelfRepresented', html);
+            }
             if (!data.useServiceEmail) {
                 html = this.removeIfBlock('useServiceEmail', html);
             } else {

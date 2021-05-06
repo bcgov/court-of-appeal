@@ -27,7 +27,8 @@ let standardize = function(entities) {
             entityMap['address'] = {}
         }
         entityMap['partyId'] = entity.partyId;
-        entityMap['id'] = index
+        entityMap['id'] = index;
+        entityMap['responding'] = entity.responding;
         return entityMap;
     });
 }

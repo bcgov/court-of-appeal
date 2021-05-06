@@ -43,7 +43,9 @@ class Form2Fill extends Component {
         this.setState({
             parties: standardizeParties(this.state.parties)
         }, ()=>{
-            this.selectAllRespondents()
+           if (!this.state.parties.respondents.some((respondent) => respondent.responding)) {
+                this.selectAllRespondents()
+           }
         })
     }
 
@@ -149,7 +151,7 @@ class Form2Fill extends Component {
                         </div>
                         <br/>
                    </div>
-                   { this.state.selfRepresented === true &&
+                   { this.state.selfRepresented !== undefined &&
                    <Fragment>
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -502,8 +504,6 @@ class Form2Fill extends Component {
             let serviceInformation = this.state.serviceInformation;
             this.setState({ serviceInformation: serviceInformation });
         } else {
-            delete this.state.serviceInformation.selectedContactIndex;
-            delete this.state.serviceInformation.name;
             this.setState({ serviceInformation: this.state.serviceInformation });
         }
 
@@ -520,7 +520,7 @@ class Form2Fill extends Component {
             selfRepresented: this.state.selfRepresented,
             version: '0.1'
         }
-        if (!this.state.id) {
+        if (!this.state.formId) {
             this.service.createForm2(form, (formId) => {
                 this.saveButton.stopSpinner()
                 this.continueButton.stopSpinner()
@@ -534,17 +534,17 @@ class Form2Fill extends Component {
             })
         }
         else {
-            this.service.updateForm2(form, this.state.id, (data) => {
+            this.service.updateForm2(form, this.state.formId, (data) => {
                 this.saveButton.stopSpinner()
                 this.continueButton.stopSpinner()
-                if (next) { next() }
+                if (typeof next == 'function') { next() }
             })
         }
     }
     disableSave() {
         let disabled = false
 
-        if (this.state.selfRepresented === true && this.selectedRespondents().length < 1) { disabled = true }
+        if (this.selectedRespondents().length < 1) { disabled = true }
         if (this.displaySelected('addressLine1') === '') { disabled=true }
         if (this.displaySelected('city') === '') { disabled=true }
         if (this.displaySelected('postalCode') === '') { disabled=true }

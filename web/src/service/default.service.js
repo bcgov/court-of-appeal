@@ -85,6 +85,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     let self = this;
+    console.log(JSON.stringify(form, null, 2));
     request.put(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);
