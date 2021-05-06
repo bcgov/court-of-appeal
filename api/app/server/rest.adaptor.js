@@ -63,7 +63,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
 
     app.put('/api/forms/:id', keycloak.protect(), (request, response)=> {
         let data = request.body.data;
-        this.database.updateFormTwo({id: request.params.id, type:'form-2', data: data }, (data)=> {
+        this.database.updateForm({id: request.params.id, type:'form-2', data: data }, (data)=> {
             if (!data.error) 
                 updateFormTwoResponse(data, response);
             else 

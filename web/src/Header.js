@@ -12,7 +12,7 @@ class Header extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             login: '<?>',
-            displayname: '<?>'
+            displayname: ''
         }
 
         this.fetch = this.fetch.bind(this);

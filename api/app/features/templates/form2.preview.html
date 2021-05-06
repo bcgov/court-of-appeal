@@ -49,6 +49,10 @@
     <tr><td><strong>Address for service:</strong></td></tr>
     <tr>
         <td>
+            {if notSelfRepresented}
+            {respondentFirmName}
+            <br/>
+            {endif notSelfRepresented}
             {selectedContactAddress1}
             &nbsp;
             {selectedContactAddress2}
@@ -73,6 +77,6 @@
         <br/>
         ............................................................................................................
         <br/>
-        <em>{respondentOrSolicitor} {respondentOrSolicitorText} for the Respondents, {respondents}</em>
+        <em>{respondentOrSolicitor} {respondentOrSolicitorText} for the Respondents, {selectedRespondents}</em>
     </p>
 </div>
