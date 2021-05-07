@@ -17,7 +17,7 @@ class Form2Fill extends Component {
         this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
-        if (this.state.serviceInformation === undefined) { this.state.serviceInformation = { province: 'British Columbia', country: 'Canada', selectedContactIndex: 0} }
+        if (this.state.serviceInformation === undefined) { this.state.serviceInformation = { province: 'British Columbia', country: 'Canada', selectedContactIndex: null} }
         if (this.state.useServiceEmail === undefined) { this.state.useServiceEmail = false }
         if (this.state.sendNotifications === undefined) { this.state.sendNotifications = false }
 

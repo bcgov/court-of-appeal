@@ -78,15 +78,15 @@ class Form2Start extends Component {
                                 <td>
                                     <div onClick={e => this.onValueChange("Individual", this)}>
                                         <input type="radio" onChange={() => {}} checked={this.state.respondentSelection === "Individual"}/>
-                                        <label className="noselect" style={{marginLeft: '5px', marginRight: '10px'}} >
+                                        <span className="noselect" style={{marginLeft: '5px', marginRight: '10px'}} >
                                             Individual
-                                        </label>
+                                        </span>
                                     </div>
                                     <div onClick={e => this.onValueChange("Organization", this)}>
                                         <input type="radio" onChange={() => {}} value="Organization" checked={this.state.respondentSelection === "Organization"}/>
-                                        <label className="noselect" style={{marginLeft: '5px'}}>
+                                        <span className="noselect" style={{marginLeft: '5px'}}>
                                             Organization
-                                        </label>
+                                        </span>
                                     </div>
                                 </td>
                             </tr>
@@ -133,7 +133,8 @@ class Form2Start extends Component {
                                                     id= "respondent-organization"
                                                     value= { this.state.respondentOrganization }
                                                     onChange= { e => this.setState({ respondentOrganization: e.target.value }) }
-                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null } />
+                                                    onKeyPress= { e => e.charCode === 13 ? this.search():null }
+                                                    style={{minWidth: "300px"}} />
                                     </td>
                                     <td>
                                         <SpinnerButton  ref= { el => this.findButton = el }
