@@ -102,7 +102,7 @@ class Form2Submitted extends Component {
 
     async fetchSubmittedInfo() {
         try {
-            let response = await axios.get(`/api/forms/${this.state.id}/submit`);
+            let response = await axios.get(`${process.env.PUBLIC_URL}/api/forms/${this.state.id}/submit`);
             let data = response.data;
             this.setState({caseNumber: data.caseNumber, packageNumber: data.packageNumber, packageUrl: data.packageUrl})
         }
