@@ -1,3 +1,4 @@
+const queryString = require('query-string');
 const axios = require('axios');
 const fs = require('fs');
 let { CreateFormTwo, PreviewForm2, SubmitForm,
@@ -261,7 +262,8 @@ RestAdaptor.prototype.route = function(app, keycloak) {
         let data = request.query.packageRef;
         let buff = new Buffer.from(data, 'base64');
         const packageUrl = buff.toString('ascii');
-        const packageNumber = packageUrl.split('/').pop();
+        const parsed = queryString.parse(packageUrl.split("?")[1]);
+        const packageNumber = parsed['packageNo'];
         try {
             await this.database.updateEFilingSubmissionUrlAndNumber(formId, userId, packageNumber, packageUrl);
         }
