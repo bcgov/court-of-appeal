@@ -476,9 +476,7 @@ class Form2Fill extends Component {
         }
     }
     setSelfRepresented(state) {
-        this.setState({selfRepresented: state});
-        let serviceInformation = this.state.serviceInformation;
-        this.setState({ serviceInformation: serviceInformation }, () => {
+        this.setState({ selfRepresented: state, serviceInformation: this.state.serviceInformation }, () => {
               ReactTooltip.rebuild();
             });
         window.scrollTo({
@@ -506,13 +504,13 @@ class Form2Fill extends Component {
         this.updateSelectedRespondents({ action:'selectAll' })
     }
     updateSelectedContact(event) {
-        let respondents = this.state.parties.respondents;
+        let respondent = this.state.parties.respondents[event.target.value];
         this.setState({
           serviceInformation: {
             ...this.state.serviceInformation,
             selectedContactId: event.target.value,
-            name: respondents[event.target.value].name,
-            ...respondents[event.target.value].solicitor,
+            ...respondent.solicitor,
+            name: respondent.name
           }
         });
     }

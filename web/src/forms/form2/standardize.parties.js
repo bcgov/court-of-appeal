@@ -13,8 +13,8 @@ let standardize = function(entities) {
             entityMap['organization'] = entity.organization;
         } else if (entity.solicitor) {
             entityMap['name'] = entity.solicitor.name;
-            entityMap['firstName'] = entity.solicitor.firstName;
-            entityMap['lastName'] = entity.solicitor.lastName;
+            entityMap['firstName'] = entity.solicitor.counselFirstName;
+            entityMap['lastName'] = entity.solicitor.counselLastName;
         }
 
         entityMap['solicitor'] = entity.solicitor || {};
