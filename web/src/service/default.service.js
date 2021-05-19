@@ -23,6 +23,12 @@ Service.prototype.isJson = function (target) {
     return true;
 }
 
+Service.prototype.printEFilingJson = function (form) {
+    let formCopy = form;
+    delete formCopy.appellants;
+    console.log(JSON.stringify(formCopy, null, 2));
+}
+
 Service.prototype.notifyOfError = function(callback, options) {
     let data = { error:{ code:503, message:'service unavailable' } };
     Object.assign(data, options);
@@ -67,7 +73,7 @@ Service.prototype.createForm2 = function(form, callback) {
     let options = this.buildOptions('/api/forms');
     options.form = { data:JSON.stringify(form) };
     let self = this;
-    console.log(JSON.stringify(form, null, 2));
+    self.printEFilingJson(form);
     request.post(options, function(err, response, body) {
         if (response && response.statusCode === 201) {
             callback(JSON.parse(body).id);
@@ -85,7 +91,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
     let options = this.buildOptions(`/api/forms/${id}`);
     options.form = { data:JSON.stringify(form) };
     let self = this;
-    console.log(JSON.stringify(form, null, 2));
+    self.printEFilingJson(form);
     request.put(options, function(err, response, body) {
         if (response && response.statusCode === 200) {
             callback(body);

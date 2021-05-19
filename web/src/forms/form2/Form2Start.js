@@ -181,7 +181,7 @@ class Form2Start extends Component {
         if (caseNumber.length < 7) { return }
 
         this.findButton.startSpinner()
-        this.service.searchForm7(caseNumber, respondentLastName.toLowerCase(), respondentFirstName.toLowerCase(), respondentOrganization.toLowerCase(), searchBy, (data) => {
+        this.service.searchForm7(caseNumber, respondentLastName.trim().toLowerCase(), respondentFirstName.trim().toLowerCase(), respondentOrganization.trim().toLowerCase(), searchBy, (data) => {
             this.findButton.stopSpinner();
             if (data && !data.error) 
                 this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:caseNumber, parties:data.parties }});

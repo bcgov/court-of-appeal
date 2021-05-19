@@ -32,7 +32,7 @@ class RespondentListSelect extends React.Component {
                          <div style={{paddingRight: '10px'}} >
                              Select all
                          </div>
-                         <input id="selectAll"
+                         <input id="clearAll"
                                 type="checkbox"
                                 onChange={this.selectAllOrClearRespondents.bind(this)}
                                 name="respondent.clearRespondents"

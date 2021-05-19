@@ -28,10 +28,10 @@ var buildPartyInfo = function(party) {
     }
     if (lawyer(party)) {
         info.solicitor = {
-            name: name(lawyer(party)),
-            firstName: lawyer(party).FirstName,
-            lastName: lawyer(party).LastName,
-            address: lawyerFirmAddress(party)
+            name: name(lawyer(party)[0]),
+            counselFirstName: lawyer(party)[0].FirstName,
+            counselLastName: lawyer(party)[0].LastName,
+            ...lawyerFirmAddress(party)
         }
     }
     info.partyId = party.PartyID;
@@ -69,6 +69,8 @@ var lawyerFirm = function(party) {
 var lawyerFirmAddress = function(party) {
     var firm = lawyerFirm(party);
     return {
+        firmName: firm.FirmName,
+        firmPhone: firm.Phone,
         addressLine1:firm.Address1,
         addressLine2:firm.Address2,
         city:firm.City,

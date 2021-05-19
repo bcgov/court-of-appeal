@@ -289,6 +289,7 @@ RestAdaptor.prototype.route = function(app, keycloak) {
             this.database.savePerson(universalId, (id) => {
                 request.session.universalId = request.kauth.grant.id_token.content['universal-id'];
                 request.session.userId = id;
+                request.session.displayName = request.kauth.grant.id_token.content.display_name;
                 response.redirect(redirectUrl);
             });
         }

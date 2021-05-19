@@ -3,13 +3,21 @@ import SelectableNameList from './SelectableNameList';
 
 class ContactSelect extends React.Component {
 
+    componentDidUpdate() {
+        //Check for invalid options.
+        let options = this.getOptions(this.props.selectedRespondents);
+        let value = options.find(op => op.value === this.props.selectedId);
+        if (options.length > 0 && value == null) {
+            this.selectContact(options[0]);
+        }
+    }
+
     render() {
         let disabled = this.props.selectedRespondents.length < 1;
         let opacity = disabled ? '.5' : '1';
 
         let options = this.getOptions(this.props.selectedRespondents);
-        let value = options[this.props.selectedIndex]
-
+        let value = options.find(op => op.value === this.props.selectedId);
         return (
             <div className={"row chosenContact"} style={{opacity: opacity}}>
                 <div>
@@ -29,20 +37,17 @@ class ContactSelect extends React.Component {
                         disabled={this.props.disabled || disabled}
                     />
                 </div>
-
             </div>
-
         );
     }
 
     getOptions(respondents) {
-        let list = respondents.map((respondent, index) => {
-            return { value: respondent.id || index, label: respondent.name }
+        return respondents.map((respondent) => {
+            return { value: respondent.id, label: respondent.name }
         });
-        return list;
     }
 
-    selectContact(selectedOption) {
+    selectContact(selectedOption) {      
         let e = {
             target: {
                 name: "form2.selectedContact",
@@ -51,7 +56,6 @@ class ContactSelect extends React.Component {
              }
         };
         this.props.handleFieldChange(e)
-
     }
 
 } export default ContactSelect;

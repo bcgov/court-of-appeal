@@ -13,19 +13,11 @@ let standardize = function(entities) {
             entityMap['organization'] = entity.organization;
         } else if (entity.solicitor) {
             entityMap['name'] = entity.solicitor.name;
-            entityMap['firstName'] = entity.solicitor.firstName;
-            entityMap['lastName'] = entity.solicitor.lastName;
+            entityMap['firstName'] = entity.solicitor.counselFirstName;
+            entityMap['lastName'] = entity.solicitor.counselLastName;
         }
 
-        if (entity.solicitor && entity.solicitor.address) {
-            entityMap['address'] = entity.solicitor.address;
-        } else if (entity.organization && entity.organization.address) {
-            entityMap['address'] = entity.organization.address;
-        } else if (entity.address) {
-            entityMap['address'] = entity.address;
-        } else {
-            entityMap['address'] = {}
-        }
+        entityMap['solicitor'] = entity.solicitor || {};
         entityMap['partyId'] = entity.partyId;
         entityMap['id'] = index;
         entityMap['responding'] = entity.responding;
