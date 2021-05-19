@@ -54,7 +54,7 @@ class Form7Search:
             return {"SearchByCaseNumberResult": search_by_case_number}
 
     def handle_not_found(self, case_number):
-        logger.info("Case not found")
+        logger.info("Case not found: " + case_number)
         return "NOT FOUND"
 
     def handle_civil_search(self, case_id) -> {}:
