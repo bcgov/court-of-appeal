@@ -54,7 +54,6 @@ class ContactSelect extends React.Component {
              }
         };
         this.props.handleFieldChange(e)
-
     }
 
 } export default ContactSelect;
