@@ -8,7 +8,10 @@ class ContactSelect extends React.Component {
         let opacity = disabled ? '.5' : '1';
 
         let options = this.getOptions(this.props.selectedRespondents);
-        let value = options[this.props.selectedIndex]
+        let value = options.find(op => op.value === this.props.selectedId);
+        if (options.length > 0 && value == null) {
+            this.selectContact(options[0]);
+        }
 
         return (
             <div className={"row chosenContact"} style={{opacity: opacity}}>
@@ -36,13 +39,13 @@ class ContactSelect extends React.Component {
     }
 
     getOptions(respondents) {
-        let list = respondents.map((respondent, index) => {
-            return { value: respondent.id || index, label: respondent.name }
+        let list = respondents.map((respondent) => {
+            return { value: respondent.id, label: respondent.name }
         });
         return list;
     }
 
-    selectContact(selectedOption) {
+    selectContact(selectedOption) {      
         let e = {
             target: {
                 name: "form2.selectedContact",
