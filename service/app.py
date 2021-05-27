@@ -9,13 +9,12 @@ from utils.form7_search import Form7Search
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
-    
+
 # Health check
 @app.route("/health")
 def health():
