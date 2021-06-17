@@ -309,7 +309,7 @@ class Form2Fill extends Component {
                                       type="text"
                                        style={{minWidth: '400px'}} />
                                   <div className="row address-hint">
-                                      Street address, P.O. box, company name, c/o
+                                      Street address
                                   </div>
                               </div>
                           </div>
