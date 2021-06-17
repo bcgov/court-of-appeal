@@ -51,10 +51,10 @@ class Form2Start extends Component {
             <div className="row section section-white">
                 <div className="col-xs-12">
                     <div className="section-title">
-                        Lower Court Case Information
+                        Court of Appeal Case Information
                     </div>
                     <div>
-                        Find the Supreme Court case appeal you are responding to by entering the following case information:
+                        Find the Court of Appeal case appeal you are responding to by entering the following case information:
                     </div>
                     <table id="startTable">
                         <tbody>
