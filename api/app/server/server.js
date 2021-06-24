@@ -134,9 +134,15 @@ Server.prototype.start = function (port, ip, done) {
         next();
     });
 
-    this.app.use(morgan(':method :url', { immediate:true,
+    //Optional chaining in newer versions of node.
+    morgan.token('sub', function (req, res) {  
+        return (req.kauth && req.kauth.grant && req.kauth.grant.id_token && req.kauth.grant.id_token.content) ? req.kauth.grant.id_token.content.sub : '';
+    })
+
+    this.app.use(morgan(':date - :sub - :method :url', { immediate:true,
         skip: function (req, res) { return req.path == '/api/health/' }
-     }));
+    }));
+    
     this.app.use(express.json());   
     this.app.use(express.urlencoded({extended: true})); 
     this.restAdaptor.route(this.app, this.keycloak);
