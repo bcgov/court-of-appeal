@@ -12,14 +12,14 @@
     }
 </style>
 <div id="form2-preview">
-    <h2 style="text-align:center;margin-top:50px;">FORM 2<h2>
-    <h3 style="text-align:center;">(RULES 5 (A), 13 (A) AND 17 (A))</h3>
+    <h2 style="text-align:center;margin-top:50px;margin-bottom:15px;">FORM 2</h2>
+    <h3 style="text-align:center;margin-top:0px;">(RULES 5 (A), 13 (A) AND 17 (A))</h3>
     <div style="text-align:right">
         <span>Court of Appeal File No. </span>
         <span>{formSevenNumber}</span>
     </div>
 
-    <h3 style="text-align:center;margin-top:50px;margin-bottom:30px">COURT OF APPEAL</h3>
+    <h3 style="text-align:center;margin-bottom:30px">COURT OF APPEAL</h3>
     <table style="width:100%"><tbody>
     <tr>
         <td style="font-weight:bold; vertical-align:top;">BETWEEN:</td>
@@ -37,7 +37,7 @@
     </tr>
     </tbody></table>
 
-    <h3 style="text-align:center;margin-top:50px">NOTICE OF APPEARANCE</h3>
+    <h3 style="text-align:center;margin-top:30px">NOTICE OF APPEARANCE</h3>
     <table style="width:100%"><tbody>
     <tr>
         <td>
@@ -47,7 +47,9 @@
     <tr>
         <td>{selectedRespondents}</td>
     </tr>
-    <tr><td>&nbsp;</td></tr>
+    <tr>       
+        <td colspan="3" style="height:15px"></td>
+    </tr>
     <tr><td><strong>Address for service:</strong></td></tr>
     <tr>
         <td>
@@ -64,6 +66,9 @@
             Canada
         </td>
     </tr>
+    <tr>       
+        <td colspan="3" style="height:15px"></td>
+    </tr>
     {if useServiceEmail}
     <tr><td><strong>I agree to accept documents served to the following email address:</strong></td></tr>
     <tr>
@@ -72,9 +77,12 @@
         </td>
     </tr>
     {endif useServiceEmail}
+    <tr>       
+        <td colspan="3" style="height:15px"></td>
+    </tr>
     </tbody></table>
 
-    <p style="text-align:right;margin-top:50px">
+    <p style="text-align:right;">
         <span style="margin-right:150px;">&#34;Electronically Filed&#34;</span>
         <br/>
         ............................................................................................................
