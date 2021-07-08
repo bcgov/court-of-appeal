@@ -10,5 +10,5 @@ jobs:
         - name: OWASP ZAP Baseline Scan
           uses: zaproxy/action-baseline@v0.4.0
           with:
-            token: "disabled"
+            token: ""
             target: ${{ secrets.OWASP_SCAN_URL }}
