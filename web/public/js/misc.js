@@ -351,10 +351,8 @@ $(document).mouseup(function(e) {
 	}		
 	
 	// Close any navigation tile menus
-	if ($(".explore ul").not(target.closest(".explore").find("ul")).length > 0) {
-    	$(".explore ul").not(target.closest(".explore").find("ul")).slideUp(200, 'linear', function () { });
-	}
-    
+    $(".explore ul").not(target.closest(".explore").find("ul")).slideUp(200, 'linear', function () { });
+
 });
 
 var scrollTimer;
