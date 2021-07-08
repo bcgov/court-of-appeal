@@ -27,7 +27,7 @@ jobs:
     - name: Change to web
       run: |
         pwd             
-        cd web
+        cd /home/runner/work/court-of-appeal/court-of-appeal/web
         pwd            
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
