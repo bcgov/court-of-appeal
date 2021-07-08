@@ -137,7 +137,7 @@ build-api() {
   ${S2I_EXE} build \
     --copy \
     '../api' \
-    'centos/nodejs-10-centos7:10' \
+    'centos/nodejs-12-centos7' \
     ${COMPOSE_PROJECT_NAME}"-api" 
   echo -e "===================================================================================================="
 }
