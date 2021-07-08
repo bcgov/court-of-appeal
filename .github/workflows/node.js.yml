@@ -13,8 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      working-directory: web
+    defaults:
+      run:
+        working-directory: ./app
 
     strategy:
       matrix:
