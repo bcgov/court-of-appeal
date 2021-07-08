@@ -487,3 +487,4 @@ dist
 .yarn/build-state.yml
 .pnp.*
 docker/seed
+web/build
