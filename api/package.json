@@ -19,10 +19,9 @@
     "devDependencies": {
         "chai": "latest",
         "deep-equal": "^1.0.1",
-        "jsdom": "latest",
-        "mocha": "latest",
-        "nyc": "^13.3.0",
-        "pdf2json": "^1.1.7",
+        "mocha": "^8.4.0",
+        "nyc": "^15.1.0",
+        "pdf2json": "1.2.0",
         "unzip-stream": "^0.3.0"
     },
     "engines": {
