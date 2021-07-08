@@ -29,7 +29,9 @@ Server.prototype.start = function (port, ip, done) {
     var pgStore = new pgSession({
       pool: new pg.Pool(),
     });
-    this.app.use(helmet());
+    this.app.use(helmet({
+        frameguard: { action: 'deny' }
+    }));
     this.app.set('trust proxy', true)
     this.app.use(
       session({
