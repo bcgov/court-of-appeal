@@ -64,7 +64,7 @@
 	padding: 15px;
 	margin-bottom: 15px;
 	border: 1px solid white;
-	font-family: 'BC Sans Regular', sans-serif;
+	font-family: 'BC Sans', sans-serif;
 }
 .form-section h3 {
 	font-weight: 600;
@@ -142,7 +142,7 @@
 .section {
     margin: 14px;
 	padding: 17px 30px;
-	font-family: 'BC Sans Regular', sans-serif;
+	font-family: 'BC Sans', sans-serif;
 }
 .section-white {
     background-color: white;

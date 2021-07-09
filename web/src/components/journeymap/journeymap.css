@@ -30,7 +30,7 @@
     padding: 20px;
     font-size: medium !important;
     background-color: #333333 !important;
-    font-family: 'BC Sans Regular', Calibri, Arial, sans-serif;
+    font-family: 'BC Sans', Calibri, Arial, sans-serif;
     z-index: 1000;
 }
 
@@ -186,7 +186,7 @@
     height: 93px;
     width: 93px;
     color: white;
-    font: 50px 'BC Sans Regular', Calibri, Arial, 'sans serif';
+    font: 50px 'BC Sans', Calibri, Arial, 'sans serif';
 }
 .journey-final-check {
     margin: 20px 0 0 24px;

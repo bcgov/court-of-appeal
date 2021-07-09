@@ -10,20 +10,22 @@ import Form2Proceed from './forms/form2/Form2Proceed'
 import Form2Submitted from './forms/form2/Form2Submitted'
 import MyDocuments from './MyDocuments.js';
 import Notifications from './notifications.js';
+import Landing from './Landing.js';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+    
     this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
   }
 
   render() {
     return (
-
         <div className="full-height">
           <Header fetch={this.props.fetch}/>
-          <Route exact path={this.homePath} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>
+          <Route exact path={this.homePath} component={Landing} />
+          <Route path={process.env.PUBLIC_URL + '/dashboard'} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>
           <Route path={process.env.PUBLIC_URL + '/start'} component={Form2Start} />
           <Route path={process.env.PUBLIC_URL + '/fill'} component={Form2Fill} />
           <Route path={process.env.PUBLIC_URL + '/preview'} component={Form2Preview} />

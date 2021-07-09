@@ -9,7 +9,7 @@ import renderCases from "./components/cases.renderer";
 import findCaseById from "./helpers/find.case.by.id";
 import DefaultService from "./service/default.service";
 
-class Dashboard extends Component {
+class LandingPage extends Component {
 
     constructor(props) {
         super(props);
@@ -43,6 +43,23 @@ class Dashboard extends Component {
         return (msie > 0 || trident > 0);
     }
 
+    fetchCases() {
+        this.service.getMyCases({}, (data) => {
+            let cases = renderCases(data.cases.slice(0, 5));
+            this.setState({
+                cases:cases,
+                displayMyCasesEmptyLabel: (cases.length === 0)
+            });
+        });
+    }
+
+    updateCases(data, id) {
+        findCaseById({id:id, cases:this.state.cases}, (found)=>{
+            found.data = data;
+            this.setState({ cases:this.state.cases });
+        });
+    }
+
     closeBrowserCheck() {
         this.setState({ closeBrowserCheck : true });
     }
@@ -63,48 +80,32 @@ class Dashboard extends Component {
                 }
                 <div className="row">
                     <div role="main" className="col col-sm-12">
-                        <ActiveFormList
-                            fetch={this.state.fetch}
-                            updateCases={this.updateCases}
-                            fetchCases={this.fetchCases}
-                            service={this.service}
-                            cases={this.state.cases}
-                            displayMyCasesEmptyLabel={this.state.displayMyCasesEmptyLabel}
-                            history={this.props.history}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div role="main" className="center-main col col-lg-8" >
-                        <Journey
-                            cases={this.state.cases}
-                            service={this.service}
-                        />
-                    </div>
-                    <div role="main" className="right-nav-main col col-lg-4"  >
-                        <div className="row">
-                            <div className="col col-lg-12">
-                                <Top5/>
+                        
+                        <div id="landing-page-dialog" ref={ (element)=> {this.element = element }}>
+                            <div className="not-printable">
+                                <h1 style={{ display:'inline-block', fontSize: '33px', color: '#313132' }}>Court of Appeal</h1>
+                            </div>
+                            <div className="row">
+                            <div className="col-md-4 form-section">
+                                <h2>New Users </h2>
+
+                                <a className="btn btn-primary btn-same-width">Register for a BCeID</a>
+                            </div>
+                     
+                            <div className="col-md-4 form-section">
+                              <h2>Returning Users</h2>
+
+                              <a className="btn btn-primary btn-same-width">Login with existing BCeID
+                                                </a>
+                            </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div role="main" className="col col-lg-12">
-                                <NeedHelp/>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-                <ReactTooltip
-                    multiline={true}
-                    html={true}
-                    effect="solid"
-                    delayHide={1000}
-                    className="right-to-appeal-tooltip"
-                    wrapper="div"
-                />
             </div>
         );
     }
 }
 
-export default Dashboard;
+export default LandingPage;
