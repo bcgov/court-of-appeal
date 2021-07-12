@@ -141,7 +141,7 @@ Server.prototype.start = function (port, ip, done) {
         return (req.kauth && req.kauth.grant && req.kauth.grant.id_token && req.kauth.grant.id_token.content) ? req.kauth.grant.id_token.content.sub : '';
     });
 
-    morgan.token('clientIp', function (req, res) { return req.headers['X-Forwarded-For'] });
+    morgan.token('clientIp', function (req, res) { return req.headers['x-forwarded-for'] });
 
     this.app.use(morgan(':date - :clientIp - :sub - :method :url', { immediate:true,
         skip: function (req, res) { return req.path == '/api/health/' }
