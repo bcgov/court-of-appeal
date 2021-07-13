@@ -1,5 +1,6 @@
 import React from 'react';
 import './caselist.css';
+import { PUBLIC_URL } from '../config/environment';
 import DefaultService from '../service/default.service.js';
 
 class CaseList extends React.Component {
@@ -80,7 +81,7 @@ class CaseList extends React.Component {
     }
 
     editForm(data, id) {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: {
+        this.props.history.push({pathname: PUBLIC_URL + '/preview',state: {
             formId: id,
             caseNumber: data.formSevenNumber,
             parties: {

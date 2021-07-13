@@ -1,4 +1,5 @@
 let request = require('request');
+const PUBLIC_URL = require('../config/environment').PUBLIC_URL;
 
 let Service = function(window) {
     
@@ -10,7 +11,7 @@ let Service = function(window) {
 };
 
 Service.prototype.base = function() {
-    let base = window.location.origin + process.env.PUBLIC_URL;
+    let base = window.location.origin + PUBLIC_URL;
     return base
 };
 

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DefaultService from './service/default.service.js';
 import './header.css';
+import { PUBLIC_URL } from './config/environment';
 
 class Header extends Component {
 
     constructor(props) {
         super(props);
-        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+        this.homePath = (PUBLIC_URL === "") ? '/' : PUBLIC_URL;
         this.service = props.service;
         this.state = {
             fetch: props.fetch !== 'false',
@@ -60,7 +61,7 @@ class Header extends Component {
                     <div id="header-main-row" className="row">
                         <div className="col-xs-3 col-sm-3 col-md-2 col-lg-2 header-main-left">
                             <div id="logo">
-                                <a href="http://gov.bc.ca"><img src={process.env.PUBLIC_URL + '/images/gov3_bc_logo.png'} alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
+                                <a href="http://gov.bc.ca"><img src={PUBLIC_URL + '/images/gov3_bc_logo.png'} alt="Province of British Columbia" title="Province of British Columbia logo" /></a>
                             </div>
                         </div>
                         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
@@ -84,8 +85,8 @@ class Header extends Component {
                         <div className="container">
                             <div id="row">
                                 <div className="col-xs-6 text-left">
-                                    <Link to={process.env.PUBLIC_URL + '/'}>HOME</Link>
-                                    <Link to={process.env.PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
+                                    <Link to={PUBLIC_URL + '/'}>HOME</Link>
+                                    <Link to={PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
                                 </div>
                             </div>
                         </div>

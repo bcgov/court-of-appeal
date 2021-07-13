@@ -9,12 +9,13 @@ import ContactSelect from "../../components/fields/ContactSelect";
 import SpinnerButton from '../../components/SpinnerButton';
 import { standardizeParties } from './standardize.parties'
 import validator from 'validator';
+import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Fill extends Component {
 
     constructor(props) {
         super(props);
-        this.homePath = (process.env.PUBLIC_URL === '') ? '/' : process.env.PUBLIC_URL
+        this.homePath = (PUBLIC_URL === '') ? '/' : PUBLIC_URL
         this.service = props.service;
         this.state = props.location && props.location.state ? props.location.state : {};
         if (this.state.serviceInformation === undefined) { this.state.serviceInformation = { province: 'British Columbia', country: 'Canada', selectedContactId: null} }
@@ -471,7 +472,7 @@ class Form2Fill extends Component {
         }
         if (validated) {
             this.save(()=>{
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })
+                this.props.history.push({pathname: PUBLIC_URL + '/preview',state: this.state })
             })
         }
     }

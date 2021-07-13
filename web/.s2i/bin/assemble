@@ -70,4 +70,4 @@ echo "---> Building application from source"
 yarn build
 
 echo "---> Removing node modules from image"
-rm -rf ./node_modules 
+rm -rf ./node_modules

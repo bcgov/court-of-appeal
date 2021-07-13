@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Proceed.css';
-import DefaultService from "../../service/default.service";
+import DefaultService from '../../service/default.service';
 import SpinnerButton from '../../components/SpinnerButton';
+import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Proceed extends Component {
 
@@ -82,14 +83,14 @@ class Form2Proceed extends Component {
     }
 
     backToFill() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
+        this.props.history.push({pathname: PUBLIC_URL + '/fill',state: this.state })
     }
     backToPreview() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/preview',state: this.state })
+        this.props.history.push({pathname: PUBLIC_URL + '/preview',state: this.state })
     }
 
     cancel() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: {}});
+        this.props.history.push({pathname: PUBLIC_URL + '/',state: {}});
     }
 
     confirm() {

@@ -1,3 +1,4 @@
+const config = require('../config/environment');
 let RestAdaptor = require('./rest.adaptor');
 let express = require('express');
 let helmet = require('helmet');
@@ -5,7 +6,8 @@ let morgan = require('morgan');
 let Keycloak = require('keycloak-connect');
 let pg = require('pg')
 let session = require('express-session');
-var pgSession = require('connect-pg-simple')(session);
+let pgSession = require('connect-pg-simple')(session);
+
 function Server() {
     this.restAdaptor = new RestAdaptor();
 
@@ -97,10 +99,8 @@ Server.prototype.start = function (port, ip, done) {
     });
 
     Keycloak.prototype.logoutUrl = function (redirectUrl) {
-        var keycloakLogoutUrl = this.config.realmUrl +
-        '/protocol/openid-connect/logout' +
-        '?post_logout_redirect_uri=' + encodeURIComponent(redirectUrl);
-        var siteMinderLogoutUrl = `https://logontest.gov.bc.ca/clp-cgi/logoff.cgi?returl=${keycloakLogoutUrl}&retnow=1`
+        const keycloakLogoutUrl = `${this.config.realmUrl}/protocol/openid-connect/logout?post_logout_redirect_uri=${encodeURIComponent(redirectUrl)}`
+        const siteMinderLogoutUrl = `${config.SM_LOGOUT_URL_PREFIX}?returl=${keycloakLogoutUrl}&retnow=1`
         return siteMinderLogoutUrl;
     };
       
