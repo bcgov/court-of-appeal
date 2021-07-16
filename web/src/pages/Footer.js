@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PUBLIC_URL, REACT_APP_COMMIT } from './config/environment';
+import { PUBLIC_URL, REACT_APP_COMMIT } from '../config/environment';
 
 class Footer extends Component {
 

@@ -1,7 +1,7 @@
 require('./support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import Footer from '../src/Footer';
+import Footer from '../src/pages/Footer';
 
 test('source code displayed', ()=>{
     process.env.REACT_APP_COMMIT = '123456789'

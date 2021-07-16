@@ -1,7 +1,7 @@
 require('./support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import Header from '../src/Header';
+import Header from '../src/pages/Header';
 let DefaultService = require('../src/service/default.service');
 
 describe('Header', ()=>{

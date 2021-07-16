@@ -1,7 +1,7 @@
 require('./support/enzyme.setup');
 import React from 'react';
 import { mount } from 'enzyme';
-import MyDocuments from '../src/MyDocuments';
+import MyDocuments from '../src/pages/MyDocuments';
 let DefaultService = require('../src/service/default.service');
 
 describe('MyDocuments', ()=> {

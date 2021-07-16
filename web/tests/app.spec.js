@@ -3,9 +3,9 @@ import React from 'react';
 import { MemoryRouter } from 'react-router';
 import { mount } from 'enzyme';
 import App from '../src/App';
-import Dashboard from '../src/Dashboard.js';
-import Notifications from '../src/notifications.js';
-import MyDocuments from '../src/MyDocuments.js';
+import Dashboard from '../src/pages/Dashboard.js';
+import Notifications from '../src/pages/notifications.js';
+import MyDocuments from '../src/pages/MyDocuments.js';
 
 describe('App', ()=>{
 

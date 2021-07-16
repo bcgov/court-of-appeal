@@ -5,6 +5,12 @@
 
 html, body {
 	height: 100%;
+	position: relative;
+	min-height: 100%;
+}
+
+#react_container {
+	height: 100%;
 }
 
 body {
@@ -13,6 +19,7 @@ body {
 	background-color: #f1f1f1;
 	color: #494949;
 	font-size: 13px;
+	margin-bottom: 60px;
 }
 
 a {

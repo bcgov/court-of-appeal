@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import DefaultService from './service/default.service.js';
-import MultiSelectionCaseList from './components/MultiSelectionCaseList.js';
-import renderCases from './components/cases.renderer';
-import './MyDocuments.css';
-import SpinnerActionIcon from './components/SpinnerActionIcon';
-import findCaseById from './helpers/find.case.by.id';
-import { REACT_APP_MAX_FILE_DOWNLOAD, PUBLIC_URL } from './config/environment';
+import DefaultService from '../service/default.service.js';
+import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
+import renderCases from '../components/cases.renderer';
+import '../styles/MyDocuments.css';
+import SpinnerActionIcon from '../components/SpinnerActionIcon';
+import findCaseById from '../helpers/find.case.by.id';
+import { REACT_APP_MAX_FILE_DOWNLOAD, PUBLIC_URL } from '../config/environment';
 
 class MyDocuments extends Component {
 
@@ -34,7 +34,7 @@ class MyDocuments extends Component {
         if (REACT_APP_MAX_FILE_DOWNLOAD !== undefined && REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
             this.maxFileDownload = parseInt(REACT_APP_MAX_FILE_DOWNLOAD, 10);
         }
-        this.save = require('./helpers/save-file');
+        this.save = require('../helpers/save-file');
     }
 
     componentDidMount() {

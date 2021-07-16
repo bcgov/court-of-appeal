@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../MyDocuments.css';
+import '../styles/MyDocuments.css';
 import CaseList from '../components/CaseList.js';
 import { PUBLIC_URL } from '../config/environment';
 
