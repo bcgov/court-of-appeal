@@ -1,5 +1,5 @@
 import React from 'react';
-import './caselist.css';
+import './CaseList.css';
 import { PUBLIC_URL } from '../config/environment';
 import DefaultService from '../service/default.service.js';
 

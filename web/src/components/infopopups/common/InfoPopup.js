@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './infopopup.css';
+import './InfoPopup.css';
 import Help from './Help';
 import ReactTooltip from 'react-tooltip';
 

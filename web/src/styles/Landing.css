@@ -2,7 +2,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    top: 100px;
+    top: 60px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -115,7 +115,7 @@
 .row-flex.intro-page .content-column h2 {
     font-size: 30px;
     font-weight: 600;
-    margin: 42px 0 0;
+    margin: 140px 0 0;
 }
 
 .flex-column {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './infopopup.css';
+import './InfoPopup.css';
 import InfoPopupSection from './InfoPopupSection';
 import AppellantFactumPopup from "../AppellantFactumPopup";
 import ReplyBookPopup from "../ReplyBookPopup";

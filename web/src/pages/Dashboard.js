@@ -3,7 +3,7 @@ import Journey from '../components/Journey.js';
 import Top5 from '../forms/Top5.js';
 import ActiveFormList from '../components/ActiveFormList.js';
 import NeedHelp from './NeedHelp.js';
-import '../styles/dashboard.css';
+import '../styles/Dashboard.css';
 import ReactTooltip from 'react-tooltip';
 import renderCases from "../components/cases.renderer";
 import findCaseById from "../helpers/find.case.by.id";

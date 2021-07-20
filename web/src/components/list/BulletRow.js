@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../infopopups/common/infopopup.css';
+import '../infopopups/common/InfoPopup.css';
 
 class BulletRow extends Component {
 

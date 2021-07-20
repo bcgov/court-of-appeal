@@ -9,10 +9,10 @@ import Form2Preview from './forms/form2/Form2Preview'
 import Form2Proceed from './forms/form2/Form2Proceed'
 import Form2Submitted from './forms/form2/Form2Submitted'
 import MyDocuments from './pages/MyDocuments.js';
-import Notifications from './pages/notifications.js';
+import Notifications from './pages/Notifications.js';
 import Landing from './pages/Landing.js';
 import { PUBLIC_URL } from './config/environment';
-import { PageNotFound } from "./pages/PageNotFound";
+import { PageNotFound } from './pages/PageNotFound';
 
 class App extends Component {
 
@@ -20,12 +20,16 @@ class App extends Component {
     super(props);
     
     this.homePath = (PUBLIC_URL === "") ? '/' : PUBLIC_URL;
+    // TODO:// is logged in? We need to use this check for several things,
+      //    header currently has this.state.loggedIn but it's not really implemented
+      //    need to impelment that and use it in the header, and here, anywhere in the app that finds a user is NOT
+      //    logged in should forward the user to the Landing.js page
   }
 
   render() {
     return (
         <div className="full-height">
-            <Header fetch={this.props.fetch} />
+            <Header fetch={this.props.fetch} isLoggedIn={this.props.isLoggedIn} />
             <Switch>
                 <Route exact path={this.homePath} component={Landing} showHeaderMenu={false} />
                 <Route path={PUBLIC_URL + '/dashboard'} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>

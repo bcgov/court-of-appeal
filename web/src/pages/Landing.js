@@ -3,7 +3,7 @@ import Journey from '../components/Journey.js';
 import Top5 from '../forms/Top5.js';
 import ActiveFormList from '../components/ActiveFormList.js';
 import NeedHelp from './NeedHelp.js';
-import '../styles/dashboard.css';
+import '../styles/Dashboard.css';
 import '../styles/Landing.css';
 import ReactTooltip from 'react-tooltip';
 import renderCases from "../components/cases.renderer";
@@ -21,11 +21,13 @@ class LandingPage extends Component {
             cases: [],
             displayMyCasesEmptyLabel: true,
             closeBrowserCheck: false,
-            isIE11: this.isIE11()
+            isIE11: this.isIE11(),
+            baseUrl: null
         };
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.closeBrowserCheck = this.closeBrowserCheck.bind(this);
+        this.handleNavigateToBceidLogin = this.handleNavigateToBceidLogin.bind(this);
     }
 
     componentDidMount() {
@@ -35,6 +37,11 @@ class LandingPage extends Component {
         }
         if (this.state.fetch) {
             this.fetchCases();
+        }
+        if (this.state.baseUrl == null) {
+            this.setState({
+                baseUrl: this.service.base()
+            });
         }
     }
 
@@ -66,6 +73,11 @@ class LandingPage extends Component {
         this.setState({ closeBrowserCheck : true });
     }
 
+    handleNavigateToBceidLogin(e) {
+        e.preventDefault();
+        window.location.replace(`${this.service.base()}/api/login?redirectUrl=${window.location}`);
+    }
+
     render() {
         return (
             <div className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
@@ -79,7 +91,7 @@ class LandingPage extends Component {
                             </div>
                             <div className="flex-column right">
                                 <h3 className="landing-h3" style={{marginLeft: '63px'}}>Returning Users</h3>
-                                <a className="btn btn-primary btn-same-width button-align" href={BCEID_LOGIN_URL}>Login with existing BCeID</a>
+                                <a className="btn btn-primary btn-same-width button-align" onClick={this.handleNavigateToBceidLogin}>Login with existing BCeID</a>
                             </div>
                         </div>
                     </div>

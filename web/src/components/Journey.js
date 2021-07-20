@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
-import './journey.css';
+import './Journey.css';
 import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
 import DefaultService from "../service/default.service";

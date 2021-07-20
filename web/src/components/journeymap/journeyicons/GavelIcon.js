@@ -1,6 +1,6 @@
 import React from 'react';
-import './pageeicon.css';
-import './journey-icons.css';
+import './PageeIcon.css';
+import './JourneyIcons.css';
 import PropTypes from 'prop-types';
 import StepCompletedCheckbox from './StepCompletedCheckbox';
 let cn = require('classnames');

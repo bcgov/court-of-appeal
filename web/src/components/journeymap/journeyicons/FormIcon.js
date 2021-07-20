@@ -1,5 +1,5 @@
 import React from 'react';
-import './pageeicon.css';
+import './PageeIcon.css';
 import StepCompletedCheckbox from './StepCompletedCheckbox';
 import TwoPageIcon from '../../iconSVG/TwoPageIcon';
 import SinglePageIcon from '../../iconSVG/SinglePageIcon';

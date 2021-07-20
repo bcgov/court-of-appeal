@@ -1,6 +1,6 @@
 import React from 'react';
-import './pageeicon.css';
-import './journey-icons.css'
+import './PageeIcon.css';
+import './JourneyIcons.css'
 import { PUBLIC_URL } from '../../../config/environment';
 
 let cn = require('classnames');

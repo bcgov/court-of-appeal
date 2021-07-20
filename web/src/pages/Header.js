@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import DefaultService from '../service/default.service.js';
-import '../styles/header.css';
+import '../styles/Header.css';
 import {PUBLIC_URL} from '../config/environment';
 
 class Header extends Component {
@@ -14,10 +14,9 @@ class Header extends Component {
             fetch: props.fetch !== 'false',
             login: '<?>',
             displayname: '',
-            // TODO:// make this real from above
-            loggedIn: true
+            user: {loggedIn: false, displayName: ''}
         }
-
+        this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
         this.fetch = this.fetch.bind(this);
         this.logout = this.logout.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
@@ -33,6 +32,25 @@ class Header extends Component {
         if (this.state.fetch) {
             this.fetch();
         }
+        this.isUserLoggedIn();
+    }
+
+    /**
+     * sets state based on the users current login status
+     */
+    isUserLoggedIn() {
+        if (window.location.href == `${window.location.origin}${PUBLIC_URL}`) {
+            return;
+        }
+        this.service.isUserLoggedIn((res) => {
+            this.setState({
+                user: {loggedIn: res.loggedIn, displayName: res.displayName}
+            })
+        });
+    }
+
+    logout() {
+        this.service.redirectToLogout()
     }
 
     fetch() {
@@ -51,17 +69,14 @@ class Header extends Component {
         });
     }
 
-    logout() {
-        this.service.redirectToLogout()
-    }
-
     closeErrorModal() {
         this.document.getElementById('serviceErrorModal').style.display = 'none';
     }
 
     render() {
-        const showAppMenu = this.state.loggedIn;
-        const showUserLogout = this.state.loggedIn;
+        const user = this.state;
+        const showAppMenu = user.loggedIn;
+        const showUserLogout = user.loggedIn;
 
         return (
             <div id="header" role="banner" ref={(element) => {

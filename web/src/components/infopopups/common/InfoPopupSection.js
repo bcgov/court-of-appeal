@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './infopopup.css';
+import './InfoPopup.css';
 import InfoPopupIcon from "./InfoPopupIcon";
 import Deadline from './Deadline';
 import { PUBLIC_URL } from '../../../config/environment';
