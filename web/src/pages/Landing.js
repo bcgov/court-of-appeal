@@ -79,6 +79,45 @@ class Landing extends Component {
             // return <Redirect to={PUBLIC_URL + '/dashboard'} push={true} />
         }
 
+        if (this.state.isIE11 && !this.state.closeBrowserCheck) {
+            return (<div id="topicTemplate" className="row-flex intro-page template container gov-container form" ref={ (element)=> {this.element = element }}>
+                    { this.state.isIE11 && !this.state.closeBrowserCheck &&
+                    <div id="info-modal" className={"info-modal"} style={{display: 'block'}} >
+                        <div className="info-modal-title" style={{backgroundColor: 'red'}}>
+                            IE 11 detected - Modern browser required
+                            <span className="close-info-modal" onClick={this.closeBrowserCheck}>&times;</span>
+                        </div>
+                        <div className="info-modal-content">
+                            A modern browser such as Google Chrome, Mozilla Firefox or Microsoft Edge is required for this site.
+                        </div>
+                    </div>
+                    }
+                    <div className="row">
+                        <div role="main" className="col col-sm-12">
+                            <div className="not-printable">
+                                <h1 style={{ display:'inline-block', fontSize: '33px', color: '#313132' }}>Court of Appeal</h1>
+                            </div>
+                            <div id="landing-page-dialog" ref={ (element)=> {this.element = element }} className="form-section">
+                                <div className="row">
+                                    <div className="col-md-6 form-section">
+                                        <h2>New Users </h2>
+                                        <a className="btn btn-primary btn-same-width" href={BCEID_REGISTER_URL}>Register for a BCeID
+                                        </a>
+                                    </div>
+                                    <div className="col-md-6 form-section">
+                                        <h2>Returning Users</h2>
+                                        <a className="btn btn-primary btn-same-width" href={BCEID_LOGIN_URL}>Login with existing BCeID
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
                 <div className="col shroud" ref={ (element)=> {this.element = element }}>
