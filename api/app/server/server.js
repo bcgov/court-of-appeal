@@ -139,9 +139,11 @@ Server.prototype.start = function (port, ip, done) {
     //Optional chaining in newer versions of node.
     morgan.token('sub', function (req, res) {  
         return (req.kauth && req.kauth.grant && req.kauth.grant.id_token && req.kauth.grant.id_token.content) ? req.kauth.grant.id_token.content.sub : '';
-    })
+    });
 
-    this.app.use(morgan(':date - :sub - :method :url', { immediate:true,
+    morgan.token('clientIp', function (req, res) { return (req.headers['x-forwarded-for'] || '').split(',')[0] });
+
+    this.app.use(morgan(':date - :clientIp - :sub - :method :url', { immediate:true,
         skip: function (req, res) { return req.path == '/api/health/' }
     }));
     
