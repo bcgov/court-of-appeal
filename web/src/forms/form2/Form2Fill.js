@@ -3,11 +3,11 @@ import ReactTooltip from "react-tooltip";
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
 import './Form2Fill.css';
-import DefaultService from "../../service/default.service";
+import DefaultService from "../../service/api-service";
 import RespondentListSelect from "../../components/fields/RespondentListSelect";
 import ContactSelect from "../../components/fields/ContactSelect";
 import SpinnerButton from '../../components/SpinnerButton';
-import { standardizeParties } from './standardize.parties'
+import { standardizeParties } from './standardize-parties'
 import validator from 'validator';
 import { PUBLIC_URL } from '../../config/environment';
 

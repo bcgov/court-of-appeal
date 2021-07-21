@@ -18,19 +18,17 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    
+    this.state = {
+        user: {loggedIn: false, displayName: ''}
+    }
     this.homePath = (PUBLIC_URL === "") ? '/' : PUBLIC_URL;
-    // TODO:// is logged in? We need to use this check for several things,
-      //    header currently has this.state.loggedIn but it's not really implemented
-      //    need to impelment that and use it in the header, and here, anywhere in the app that finds a user is NOT
-      //    logged in should forward the user to the Landing.js page
   }
 
   render() {
     return (
         <div className="full-height">
-            <Header fetch={this.props.fetch} isLoggedIn={this.props.isLoggedIn} />
-            <Switch>
+            <Header fetch={this.props.fetch} />
+            {/*<Switch>*/}
                 <Route exact path={this.homePath} component={Landing} showHeaderMenu={false} />
                 <Route path={PUBLIC_URL + '/dashboard'} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>
                 <Route path={PUBLIC_URL + '/start'} component={Form2Start} />
@@ -41,8 +39,8 @@ class App extends Component {
                 <Route path={PUBLIC_URL + '/submitted/*'} component={Form2Submitted} />
                 <Route path={PUBLIC_URL + '/my-documents'} render={(any) => <MyDocuments {...any} fetch={this.props.fetch} service={this.props.service}  />}/>
                 <Route path={PUBLIC_URL + '/notifications'} component={Notifications} />
-                <Route><PageNotFound status={404} homePath={this.homePath} /></Route>
-            </Switch>
+                {/*<Route><PageNotFound status={404} homePath={this.homePath} /></Route>*/}
+            {/*</Switch>*/}
             <Footer />
         </div>
     );

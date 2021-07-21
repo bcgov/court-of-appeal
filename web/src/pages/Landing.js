@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
-import Journey from '../components/Journey.js';
-import Top5 from '../forms/Top5.js';
-import ActiveFormList from '../components/ActiveFormList.js';
-import NeedHelp from './NeedHelp.js';
 import '../styles/Dashboard.css';
 import '../styles/Landing.css';
-import ReactTooltip from 'react-tooltip';
-import renderCases from "../components/cases.renderer";
-import findCaseById from "../helpers/find.case.by.id";
-import DefaultService from "../service/default.service";
-import { BCEID_LOGIN_URL, BCEID_REGISTER_URL } from '../config/environment';
+import renderCases from "../components/CasesRenderer";
+import findCaseById from "../helpers/find-case-by-id";
+import DefaultService from "../service/api-service";
+import {BCEID_LOGIN_URL, BCEID_REGISTER_URL, PUBLIC_URL} from '../config/environment';
+import {getUser, isUserLoggedIn} from '../helpers/user';
+import {Redirect} from "react-router-dom";
+import {console_debug_log} from "../helpers/utils";
 
-class LandingPage extends Component {
+class Landing extends Component {
 
     constructor(props) {
         super(props);
@@ -21,13 +19,12 @@ class LandingPage extends Component {
             cases: [],
             displayMyCasesEmptyLabel: true,
             closeBrowserCheck: false,
-            isIE11: this.isIE11(),
-            baseUrl: null
+            isIE11: this.isIE11()
         };
         this.fetchCases = this.fetchCases.bind(this);
         this.updateCases = this.updateCases.bind(this);
         this.closeBrowserCheck = this.closeBrowserCheck.bind(this);
-        this.handleNavigateToBceidLogin = this.handleNavigateToBceidLogin.bind(this);
+        // this.handleNavigateToBceidLogin = this.handleNavigateToBceidLogin.bind(this);
     }
 
     componentDidMount() {
@@ -38,11 +35,7 @@ class LandingPage extends Component {
         if (this.state.fetch) {
             this.fetchCases();
         }
-        if (this.state.baseUrl == null) {
-            this.setState({
-                baseUrl: this.service.base()
-            });
-        }
+        isUserLoggedIn(this.service);
     }
 
     isIE11() {
@@ -73,12 +66,19 @@ class LandingPage extends Component {
         this.setState({ closeBrowserCheck : true });
     }
 
-    handleNavigateToBceidLogin(e) {
+    handleNavigateToBceidLogin = (e) => {
         e.preventDefault();
         window.location.replace(`${this.service.base()}/api/login?redirectUrl=${window.location}`);
     }
 
     render() {
+        if (getUser().loggedIn) {
+            console_debug_log('loggedIn, redirecting from landing page to dashboard');
+            // this.props.history.push(PUBLIC_URL + '/dashboard');
+            // return <Redirect to={PUBLIC_URL + '/dashboard'} push={true} />
+            // return <Redirect to={PUBLIC_URL + '/dashboard'} push={true} />
+        }
+
         return (
             <div className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
                 <div className="col shroud" ref={ (element)=> {this.element = element }}>
@@ -138,5 +138,5 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+export default Landing;
 

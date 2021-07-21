@@ -40,7 +40,7 @@ Service.prototype.isUserLoggedIn = function(callback) {
         } else if (response.statusCode === 200) {
             callback(JSON.parse(body));
         } else if (response.statusCode === 404) {
-            callback({ loggedIn: false, displayName: '', error: { code: 404 }});
+            callback({error: { code: 404 }});
         } else if (response.statusCode === 403) {
             callback({loggedIn: false, displayName: ''})
         } else {

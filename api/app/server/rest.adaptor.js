@@ -8,7 +8,6 @@ let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
       myJourneyResponse, internalErrorJsonResponse, logErrorAndInternalServerResponse,
     notFoundResponse, successJsonResponse, noContentJsonResponse } = require('./responses');
-
 let archiver = require('archiver');
 
 let RestAdaptor = function() {

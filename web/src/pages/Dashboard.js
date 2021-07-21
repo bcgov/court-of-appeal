@@ -5,9 +5,9 @@ import ActiveFormList from '../components/ActiveFormList.js';
 import NeedHelp from './NeedHelp.js';
 import '../styles/Dashboard.css';
 import ReactTooltip from 'react-tooltip';
-import renderCases from "../components/cases.renderer";
-import findCaseById from "../helpers/find.case.by.id";
-import DefaultService from "../service/default.service";
+import renderCases from "../components/CasesRenderer";
+import findCaseById from "../helpers/find-case-by-id";
+import DefaultService from "../service/api-service";
 
 class Dashboard extends Component {
 

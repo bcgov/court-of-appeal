@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import DefaultService from '../service/default.service.js';
+import DefaultService from '../service/api-service.js';
 import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
-import renderCases from '../components/cases.renderer';
+import renderCases from '../components/CasesRenderer';
 import '../styles/MyDocuments.css';
 import SpinnerActionIcon from '../components/SpinnerActionIcon';
-import findCaseById from '../helpers/find.case.by.id';
+import findCaseById from '../helpers/find-case-by-id';
 import { REACT_APP_MAX_FILE_DOWNLOAD, PUBLIC_URL } from '../config/environment';
 
 class MyDocuments extends Component {

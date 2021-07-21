@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DefaultService from '../service/default.service.js';
+import DefaultService from '../service/api-service.js';
 import { PUBLIC_URL } from '../config/environment';
 
 class Top5 extends Component {

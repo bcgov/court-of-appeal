@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import DefaultService from '../service/default.service.js';
+import DefaultService from '../service/api-service.js';
 import '../styles/Header.css';
 import {PUBLIC_URL} from '../config/environment';
+import {getUser, isUserLoggedIn} from '../helpers/user';
+import {console_debug_log} from "../helpers/utils";
 
 class Header extends Component {
 
@@ -14,9 +16,7 @@ class Header extends Component {
             fetch: props.fetch !== 'false',
             login: '<?>',
             displayname: '',
-            user: {loggedIn: false, displayName: ''}
         }
-        this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
         this.fetch = this.fetch.bind(this);
         this.logout = this.logout.bind(this);
         this.closeErrorModal = this.closeErrorModal.bind(this);
@@ -32,25 +32,11 @@ class Header extends Component {
         if (this.state.fetch) {
             this.fetch();
         }
-        this.isUserLoggedIn();
-    }
-
-    /**
-     * sets state based on the users current login status
-     */
-    isUserLoggedIn() {
-        if (window.location.href == `${window.location.origin}${PUBLIC_URL}`) {
-            return;
-        }
-        this.service.isUserLoggedIn((res) => {
-            this.setState({
-                user: {loggedIn: res.loggedIn, displayName: res.displayName}
-            })
-        });
+        isUserLoggedIn(this.service);
     }
 
     logout() {
-        this.service.redirectToLogout()
+        this.service.redirectToLogout();
     }
 
     fetch() {
@@ -74,9 +60,8 @@ class Header extends Component {
     }
 
     render() {
-        const user = this.state;
-        const showAppMenu = user.loggedIn;
-        const showUserLogout = user.loggedIn;
+        const loggedIn = getUser().loggedIn;
+        console_debug_log(`Header - user loggedIn: ${loggedIn}`);
 
         return (
             <div id="header" role="banner" ref={(element) => {
@@ -99,13 +84,13 @@ class Header extends Component {
                             </div>
                             <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                                 <div className="pull-right">
-                                    { showUserLogout ?
+                                    {loggedIn ?
                                         <div className="align-right header-top-line">
                                             <span id="greetings">Welcome, {this.state.displayname}</span>
-                                            <span> | </span>
-                                            <span id="logout" onClick={this.logout}>Log Out</span>
+                                            {/*<span> | </span>*/}
+                                            {/*<span id="logout" onClick={this.logout}>Log Out</span>*/}
                                         </div>
-                                      : <></>
+                                        : <></>
                                     }
                                 </div>
                             </div>
@@ -116,11 +101,11 @@ class Header extends Component {
                             <div className="container">
                                 <div id="row">
                                     <div className="col-xs-6 text-left">
-                                        { showAppMenu ?
-                                                <>
-                                                    <Link to={PUBLIC_URL + '/'}>HOME</Link>
-                                                    <Link to={PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
-                                                </>
+                                        {loggedIn ?
+                                            <>
+                                                <Link to={PUBLIC_URL + '/'}>HOME</Link>
+                                                <Link to={PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
+                                            </>
                                             : <></>
                                         }
                                     </div>

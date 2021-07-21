@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Proceed.css';
-import DefaultService from '../../service/default.service';
+import DefaultService from '../../service/api-service';
 import SpinnerButton from '../../components/SpinnerButton';
 import { PUBLIC_URL } from '../../config/environment';
 

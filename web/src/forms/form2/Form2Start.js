@@ -3,9 +3,9 @@ import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
 import './Form2.css';
 import './Form2Start.css';
-import DefaultService from "../../service/default.service";
+import DefaultService from "../../service/api-service";
 import SpinnerButton from '../../components/SpinnerButton';
-import { forceCA } from './force.ca'
+import { forceCA } from './force-ca'
 import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Start extends Component {

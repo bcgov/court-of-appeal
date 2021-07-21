@@ -1,7 +1,7 @@
 import React from 'react';
 import './CaseList.css';
 import { PUBLIC_URL } from '../config/environment';
-import DefaultService from '../service/default.service.js';
+import DefaultService from '../service/api-service.js';
 
 class CaseList extends React.Component {
 

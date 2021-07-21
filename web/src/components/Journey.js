@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import './Journey.css';
 import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
-import DefaultService from "../service/default.service";
+import DefaultService from "../service/api-service";
 import { PUBLIC_URL } from '../config/environment';
 let JOURNEY_TYPES = require('../helpers/constants');
 

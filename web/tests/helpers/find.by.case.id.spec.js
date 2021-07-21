@@ -1,5 +1,5 @@
 let { expect } = require('chai')
-import findCaseById from '../../src/helpers/find.case.by.id'
+import findCaseById from '../../src/helpers/find-case-by-id'
 
 describe('Find by case id', ()=>{
     it('is available', ()=>{
