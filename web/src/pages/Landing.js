@@ -42,7 +42,7 @@ class Landing extends Component {
 
     handleNavigateToBceidLogin = (e) => {
         e.preventDefault();
-        window.location.replace(`${this.service.base()}/api/login?redirectUrl=${window.location}`);
+        window.location.replace(`${this.service.base()}/api/login?redirectUrl=${window.location}/dashboard`);
     }
 
     render() {
