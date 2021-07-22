@@ -2,7 +2,12 @@ const { whenDev } = require("@craco/craco");
 
 module.exports = {
 	devServer: whenDev(() => ({
-        historyApiFallback: false,
+        historyApiFallback: {
+			rewrites: [
+				{ from: /^\/dashboard/, to: '/court-of-appeal/dashboard' },
+			  ],
+		},
+		clientLogLevel: 'debug',
 		hot: true,
 		proxy: {
 			'/court-of-appeal/api': {
