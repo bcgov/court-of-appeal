@@ -62,7 +62,6 @@ class Header extends Component {
         const {loggedIn} = this.state;
         const showMenu = loggedIn;
         const showWelcome = loggedIn;
-        const showLogoutMenu = isDevelopmentEnviromment();
 
         return (
             <div id="header" role="banner" ref={(element) => {
@@ -88,11 +87,8 @@ class Header extends Component {
                                     {showWelcome ?
                                         <div className="align-right header-top-line">
                                             <span id="greetings">Welcome, {this.state.displayname}</span>
-                                            {showLogoutMenu ?
-                                                <><span> | </span>
-                                                    <span id="logout" onClick={this.logout}>DEV ONLY - Log Out</span></>
-                                                : <></>
-                                            }
+                                            <span> | </span>
+                                            <span id="logout" onClick={this.logout}>Log Out</span>
                                         </div>
                                         : <></>
                                     }
