@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import DefaultService from '../service/api-service.js';
 import '../styles/Header.css';
-import {PUBLIC_URL} from '../config/environment';
+import {PUBLIC_URL, isDevelopmentEnviromment} from '../config/environment';
 import {getUser, isUserLoggedIn} from '../helpers/user';
 import {console_debug_log} from "../helpers/utils";
 
@@ -15,11 +15,8 @@ class Header extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             login: '<?>',
-            displayname: '',
+            displayname: ''
         }
-        this.fetch = this.fetch.bind(this);
-        this.logout = this.logout.bind(this);
-        this.closeErrorModal = this.closeErrorModal.bind(this);
     }
 
     componentDidMount() {
@@ -32,14 +29,18 @@ class Header extends Component {
         if (this.state.fetch) {
             this.fetch();
         }
-        isUserLoggedIn(this.service);
+        // isUserLoggedIn(this.service);
+        const checkIfUserIsLoggedIn = async () => {
+            await isUserLoggedIn(this.service);
+        }
+        checkIfUserIsLoggedIn();
     }
 
-    logout() {
+    logout = () => {
         this.service.redirectToLogout();
     }
 
-    fetch() {
+    fetch = () => {
         this.service.getPersonInfo((person) => {
             if (!person.error) {
                 let display = '<?>';
@@ -55,13 +56,23 @@ class Header extends Component {
         });
     }
 
-    closeErrorModal() {
+    closeErrorModal = () => {
         this.document.getElementById('serviceErrorModal').style.display = 'none';
     }
 
     render() {
         const loggedIn = getUser().loggedIn;
         console_debug_log(`Header - user loggedIn: ${loggedIn}`);
+        // TODO:// something is going on goofy here, and it needs to be fixed. For
+        //  some reason the landing page isn't getting rendered when the bceid login redirects us back here
+        //  only this header render is called and this is silly!
+        if (loggedIn && window.location.href === `${window.location.origin + PUBLIC_URL}`) {
+            console_debug_log('in header - loggedIn, redirecting from landing page to dashboard');
+            // TODO:// this barely works correctly!
+            // return (<div ref={ (element)=> {this.element = element }}>
+            //     <Redirect to={PUBLIC_URL + '/dashboard'} push={false} />
+            // </div>);
+        }
 
         return (
             <div id="header" role="banner" ref={(element) => {
@@ -87,8 +98,11 @@ class Header extends Component {
                                     {loggedIn ?
                                         <div className="align-right header-top-line">
                                             <span id="greetings">Welcome, {this.state.displayname}</span>
-                                            {/*<span> | </span>*/}
-                                            {/*<span id="logout" onClick={this.logout}>Log Out</span>*/}
+                                            {isDevelopmentEnviromment ?
+                                                <><span> | </span>
+                                                    <span id="logout" onClick={this.logout}>Log Out</span></>
+                                                : <></>
+                                            }
                                         </div>
                                         : <></>
                                     }

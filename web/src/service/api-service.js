@@ -1,5 +1,7 @@
 let request = require('request');
 const PUBLIC_URL = require('../config/environment').PUBLIC_URL;
+// import {setUser} from '../helpers/user';
+const setUser = require('../helpers/user').setUser;
 
 let Service = function(window) {
     
@@ -12,7 +14,7 @@ let Service = function(window) {
 
 Service.prototype.base = function() {
     let base = window.location.origin + PUBLIC_URL;
-    return base
+    return base;
 };
 
 Service.prototype.isJson = function (target) {
@@ -53,14 +55,14 @@ Service.prototype.isUserLoggedIn = function(callback) {
  * redirects our user to the landing page if they're not already on the landing page
  */
 Service.prototype.redirectToLandingPage = function() {
-    // this was the url that was used to redirectToLogin before using the landing page: window.location.replace(`${this.base()}/api/login?redirectUrl=${window.location}`);
     if (window.location.href !== `${this.base()}`) {
         window.location.replace(`${this.base()}`);
     }
 };
 
 Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.base()}/api/logoff?redirect_url=${window.location}`);
+    setUser(false, '');
+    window.location.replace(`${this.base()}/api/logoff?redirect_url=${this.base()}`);
 };
 
 Service.prototype.notifyOfError = function(callback, options) {

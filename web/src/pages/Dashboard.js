@@ -6,8 +6,8 @@ import NeedHelp from './NeedHelp.js';
 import '../styles/Dashboard.css';
 import ReactTooltip from 'react-tooltip';
 import renderCases from "../components/CasesRenderer";
+import DefaultService from '../service/api-service';
 import findCaseById from "../helpers/find-case-by-id";
-import DefaultService from "../service/api-service";
 
 class Dashboard extends Component {
 
@@ -21,9 +21,6 @@ class Dashboard extends Component {
             closeBrowserCheck: false,
             isIE11: this.isIE11()
         };
-        this.fetchCases = this.fetchCases.bind(this);
-        this.updateCases = this.updateCases.bind(this);
-        this.closeBrowserCheck = this.closeBrowserCheck.bind(this);
     }
 
     componentDidMount() {
@@ -36,21 +33,38 @@ class Dashboard extends Component {
         }
     }
 
-    isIE11() {
+    isIE11 = () => {
         const ua = window.navigator.userAgent; 
         const msie = ua.indexOf('MSIE ');
         const trident = ua.indexOf('Trident/'); 
         return (msie > 0 || trident > 0);
     }
 
-    closeBrowserCheck() {
+    fetchCases = () => {
+        this.service.getMyCases({}, (data) => {
+            let cases = renderCases(data.cases.slice(0, 5));
+            this.setState({
+                cases: cases,
+                displayMyCasesEmptyLabel: (cases.length === 0)
+            });
+        });
+    }
+
+    updateCases = (data, id) => {
+        findCaseById({id:id, cases: this.state.cases}, (found)=>{
+            found.data = data;
+            this.setState({ cases: this.state.cases });
+        });
+    }
+
+    closeBrowserCheck = () => {
         this.setState({ closeBrowserCheck : true });
     }
 
     render() {
         return (
             <div id="topicTemplate" className="template container gov-container form" ref={ (element)=> {this.element = element }}>
-                { this.state.isIE11 && !this.state.closeBrowserCheck && 
+                { this.state.isIE11 && !this.state.closeBrowserCheck &&
                     <div id="info-modal" className={"info-modal"} style={{display: 'block'}} >
                         <div className="info-modal-title" style={{backgroundColor: 'red'}}>
                         IE 11 detected - Modern browser required

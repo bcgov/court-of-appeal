@@ -12,7 +12,6 @@ import MyDocuments from './pages/MyDocuments.js';
 import Notifications from './pages/Notifications.js';
 import Landing from './pages/Landing.js';
 import { PUBLIC_URL } from './config/environment';
-import { PageNotFound } from './pages/PageNotFound';
 
 class App extends Component {
 
@@ -28,8 +27,8 @@ class App extends Component {
     return (
         <div className="full-height">
             <Header fetch={this.props.fetch} />
-            {/*<Switch>*/}
-                <Route exact path={this.homePath} component={Landing} showHeaderMenu={false} />
+            <Switch>
+                <Route exact path={this.homePath} component={Landing} />
                 <Route path={PUBLIC_URL + '/dashboard'} render={(any) => <Dashboard {...any} fetch={this.props.fetch}  service={this.props.service} />}/>
                 <Route path={PUBLIC_URL + '/start'} component={Form2Start} />
                 <Route path={PUBLIC_URL + '/fill'} component={Form2Fill} />
@@ -39,8 +38,7 @@ class App extends Component {
                 <Route path={PUBLIC_URL + '/submitted/*'} component={Form2Submitted} />
                 <Route path={PUBLIC_URL + '/my-documents'} render={(any) => <MyDocuments {...any} fetch={this.props.fetch} service={this.props.service}  />}/>
                 <Route path={PUBLIC_URL + '/notifications'} component={Notifications} />
-                {/*<Route><PageNotFound status={404} homePath={this.homePath} /></Route>*/}
-            {/*</Switch>*/}
+            </Switch>
             <Footer />
         </div>
     );
