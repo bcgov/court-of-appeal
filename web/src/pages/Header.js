@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import DefaultService from '../service/api-service.js';
 import '../styles/Header.css';
 import {PUBLIC_URL, isDevelopmentEnviromment} from '../config/environment';
-import {getUser, isUserLoggedIn} from '../helpers/user';
-import {console_debug_log} from "../helpers/utils";
+import {checkIfUserIsLoggedIn} from '../helpers/user';
 
 class Header extends Component {
 
@@ -15,7 +14,8 @@ class Header extends Component {
         this.state = {
             fetch: props.fetch !== 'false',
             login: '<?>',
-            displayname: ''
+            displayname: '',
+            loggedIn: false
         }
     }
 
@@ -29,11 +29,9 @@ class Header extends Component {
         if (this.state.fetch) {
             this.fetch();
         }
-        // isUserLoggedIn(this.service);
-        const checkIfUserIsLoggedIn = async () => {
-            await isUserLoggedIn(this.service);
-        }
-        checkIfUserIsLoggedIn();
+        checkIfUserIsLoggedIn(this.service, (user) => {
+            this.setState({loggedIn: user.loggedIn});
+        });
     }
 
     logout = () => {
@@ -61,18 +59,10 @@ class Header extends Component {
     }
 
     render() {
-        const loggedIn = getUser().loggedIn;
-        console_debug_log(`Header - user loggedIn: ${loggedIn}`);
-        // TODO:// something is going on goofy here, and it needs to be fixed. For
-        //  some reason the landing page isn't getting rendered when the bceid login redirects us back here
-        //  only this header render is called and this is silly!
-        if (loggedIn && window.location.href === `${window.location.origin + PUBLIC_URL}`) {
-            console_debug_log('in header - loggedIn, redirecting from landing page to dashboard');
-            // TODO:// this barely works correctly!
-            // return (<div ref={ (element)=> {this.element = element }}>
-            //     <Redirect to={PUBLIC_URL + '/dashboard'} push={false} />
-            // </div>);
-        }
+        const {loggedIn} = this.state;
+        const showMenu = loggedIn;
+        const showWelcome = loggedIn;
+        const showLogoutMenu = isDevelopmentEnviromment();
 
         return (
             <div id="header" role="banner" ref={(element) => {
@@ -95,12 +85,12 @@ class Header extends Component {
                             </div>
                             <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                                 <div className="pull-right">
-                                    {loggedIn ?
+                                    {showWelcome ?
                                         <div className="align-right header-top-line">
                                             <span id="greetings">Welcome, {this.state.displayname}</span>
-                                            {isDevelopmentEnviromment ?
+                                            {showLogoutMenu ?
                                                 <><span> | </span>
-                                                    <span id="logout" onClick={this.logout}>Log Out</span></>
+                                                    <span id="logout" onClick={this.logout}>DEV ONLY - Log Out</span></>
                                                 : <></>
                                             }
                                         </div>
@@ -115,9 +105,9 @@ class Header extends Component {
                             <div className="container">
                                 <div id="row">
                                     <div className="col-xs-6 text-left">
-                                        {loggedIn ?
+                                        {showMenu ?
                                             <>
-                                                <Link to={PUBLIC_URL + '/'}>HOME</Link>
+                                                <Link to={PUBLIC_URL + (loggedIn ? '/dashboard' : '/')}>HOME</Link>
                                                 <Link to={PUBLIC_URL + '/my-documents'}>MY DOCUMENTS</Link>
                                             </>
                                             : <></>

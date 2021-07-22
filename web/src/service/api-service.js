@@ -1,6 +1,5 @@
 let request = require('request');
 const PUBLIC_URL = require('../config/environment').PUBLIC_URL;
-// import {setUser} from '../helpers/user';
 const setUser = require('../helpers/user').setUser;
 
 let Service = function(window) {
@@ -33,7 +32,7 @@ Service.prototype.isJson = function (target) {
  * returns error or {loggedIn: boolean, displayName: string}
  * @param callback
  */
-Service.prototype.isUserLoggedIn = function(callback) {
+Service.prototype.checkIfUserIsLoggedIn = function(callback) {
     let self = this;
     let options = this.buildOptions(`/api/is_logged_in`);
     request.get(options, function(err, response, body) {

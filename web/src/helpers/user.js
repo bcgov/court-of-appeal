@@ -1,5 +1,4 @@
 import React from 'react';
-import {PUBLIC_URL} from "../config/environment";
 const USER_KEY = 'user';
 
 /**
@@ -33,11 +32,12 @@ export function clearUser() {
 /**
  * sets state based on the users current login status
  */
-export function isUserLoggedIn(service) {
-    service.isUserLoggedIn((res) => {
+export function checkIfUserIsLoggedIn(service, callback=null) {
+    service.checkIfUserIsLoggedIn((res) => {
         setUser(res.loggedIn, res.displayName);
-        if (window.location.href == `${window.location.origin}${PUBLIC_URL}`) {
-            return;
+        const user = getUser();
+        if (callback !== null) {
+            callback(user);
         }
     });
 };
