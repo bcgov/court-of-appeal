@@ -1,5 +1,4 @@
 require('app-module-path').addPath(__dirname);
-const config = require('./app/config/environment');
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
@@ -11,9 +10,6 @@ var migrator = new Migrator();
 var Server = require('./app/server/server');
 var server = new Server();
 
-if (config.getEnvironmentName() === config.TEST_ENV) {
-    server.useService(require('./tests/support/in.memory.service.js'));
-}
 if (process.env.HUB_URL !=='undefined' && process.env.HUB_URL !==undefined) {
     console.log('hub is ' + process.env.HUB_URL);
     let timeout = (process.env.HUB_TIMEOUT!=='undefined' && process.env.HUB_TIMEOUT!==undefined) ?
