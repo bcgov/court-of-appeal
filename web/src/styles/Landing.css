@@ -20,7 +20,7 @@
 }
 
 
-.col {
+.landing-col {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     font-family: BC Sans,Calibri,Arial,Sans Serif;
@@ -167,4 +167,12 @@
 
 .button-align {
     font-size: 20px;
+}
+
+.landing-left-col {
+    padding-right: 30px;
+}
+
+.landing-right-col {
+    padding-left: 30px;
 }

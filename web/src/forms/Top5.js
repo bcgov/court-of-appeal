@@ -28,7 +28,7 @@ class Top5 extends Component {
             <div className="form-section not-printable" ref={ (element)=> {this.element = element }}>
                 <h3>Most Used Forms</h3>
                 <ol>
-                    <li><button type="button" className="btn btn-link" id="form7" onClick={this.redirectToForm7} style={{cursor:'pointer', fontSize:'16px', border:'0px', verticalAlign: 'top'}} >Notice of Appeal (Form 7)</button></li>
+                    <li><button type="button" className="btn btn-link" id="form7" onClick={this.redirectToForm7} style={{cursor:'pointer', fontSize:'14px', border:'0px', verticalAlign: 'top'}} >Notice of Appeal (Form 7)</button></li>
                     <li><a id="form2" href={`${PUBLIC_URL}/start`} target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
                     <li>Certificate of Readiness</li>
                     <li>Affidavit</li>

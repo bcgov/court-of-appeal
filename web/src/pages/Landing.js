@@ -53,8 +53,8 @@ class Landing extends Component {
         }
 
         const loginPanel = (
-            <div className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
-                <div className="col shroud" ref={ (element)=> {this.element = element }}>
+            <div id="landingPage" className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
+                <div className="landing-col shroud" ref={ (element)=> {this.element = element }}>
  
 
                     <div className="col-flex content-column">
@@ -62,11 +62,11 @@ class Landing extends Component {
                         <div className="flex-wrapper shaded-box">
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-md-6">            
+                                <div style={{paddingRight:"30px;"}} className="col-md-6 landing-left-col" >            
                                     <h3 className="landing-h3">New Users</h3>
                                     <a className="btn btn-primary btn-same-width button-align" href={BCEID_REGISTER_URL}>Register for a BCeID</a></div>
                                 <div className="col-md-6"/>   
-                                <div className="col-md-6">           
+                                <div className="col-md-6 landing-right-col" >           
                                     <h3 className="landing-h3">Returning Users</h3>
                                     <a className="btn btn-primary btn-same-width button-align" onClick={this.handleNavigateToBceidLogin}>Login with existing BCeID</a></div>
                             </div>
