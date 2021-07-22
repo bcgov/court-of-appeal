@@ -11,7 +11,7 @@ var migrator = new Migrator();
 var Server = require('./app/server/server');
 var server = new Server();
 
-if (config.getEnvironmentName() !== config.PRODUCTION_ENV) {
+if (config.getEnvironmentName() === config.TEST_ENV) {
     server.useService(require('./tests/support/in.memory.service.js'));
 }
 if (process.env.HUB_URL !=='undefined' && process.env.HUB_URL !==undefined) {
