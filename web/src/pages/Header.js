@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import DefaultService from '../service/api-service.js';
 import '../styles/Header.css';
-import {PUBLIC_URL, isDevelopmentEnviromment} from '../config/environment';
+import {PUBLIC_URL} from '../config/environment';
 import {checkIfUserIsLoggedIn} from '../helpers/user';
 
 class Header extends Component {

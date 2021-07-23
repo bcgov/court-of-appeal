@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import '../styles/Dashboard.css';
 import '../styles/Landing.css';
 import DefaultService from "../service/api-service";
-import {BCEID_REGISTER_URL, PUBLIC_URL} from '../config/environment';
+import {getBceidRegisterUrl, PUBLIC_URL} from '../config/environment';
 import {checkIfUserIsLoggedIn} from '../helpers/user';
 
 class Landing extends Component {
@@ -62,9 +62,9 @@ class Landing extends Component {
                         <div className="flex-wrapper shaded-box">
                         <div className="container-fluid">
                             <div className="row">
-                                <div style={{paddingRight:"30px;"}} className="col-md-6 landing-left-col" >            
+                                <div style={{paddingRight: "30px"}} className="col-md-6 landing-left-col" >
                                     <h3 className="landing-h3">New Users</h3>
-                                    <a className="btn btn-primary btn-same-width button-align" href={BCEID_REGISTER_URL}>Register for a BCeID</a></div>
+                                    <a className="btn btn-primary btn-same-width button-align" href={getBceidRegisterUrl()}>Register for a BCeID</a></div>
                                 <div className="col-md-6"/>   
                                 <div className="col-md-6 landing-right-col" >           
                                     <h3 className="landing-h3">Returning Users</h3>
