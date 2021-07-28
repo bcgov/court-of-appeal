@@ -148,12 +148,17 @@ Server.prototype.start = function (port, ip, done) {
     }));
     
     this.app.use(express.json());   
-    this.app.use(express.urlencoded({extended: true})); 
+    this.app.use(express.urlencoded({extended: true}));
     this.restAdaptor.route(this.app, this.keycloak);
 
+    // enable our generic error handler
+    this.app.use((error, req, res, next) => { // generic handler
+        res.status(500).send(error)
+    });
+
+    // don't allow unhandledRejection to kill process
     process.on('unhandledRejection', function(reason) {
         console.log("Unhandled Rejection:", reason);
-        process.exit(1);
     });
 
     this.server = this.app.listen(port, ip, done);

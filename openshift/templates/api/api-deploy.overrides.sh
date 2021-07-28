@@ -22,6 +22,7 @@ if createOperation; then
   readParameter "KEYCLOAK_SECRET - Please provide the KeyCloak Client Secret.  The default is a blank string." KEYCLOAK_SECRET "" "false"
 
   readParameter "COOKIE_SECRET - Please provide the Cookie Secret for the environemnt.  The default is a blank string." COOKIE_SECRET "" "false"
+  readParameter "SM_LOGOUT_URL_PREFIX - Please provide the Siteminder logout url prefix for the environemnt.  The default is a blank string." SM_LOGOUT_URL_PREFIX "" "false"
 else
   # Secrets are removed from the configurations during update operations ...
   printStatusMsg "Update operation detected ...\nSkipping the prompts for secrets ... \n"
@@ -34,6 +35,7 @@ else
   writeParameter "KEYCLOAK_SECRET" "prompt_skipped" "false"
 
   writeParameter "COOKIE_SECRET" "prompt_skipped" "false"
+  writeParameter "SM_LOGOUT_URL_PREFIX" "prompt_skipped" "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
