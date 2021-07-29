@@ -4,9 +4,6 @@ const PRODUCTION_ENV = 'production';
 const NODE_ENV = process.env.NODE_ENV;
 const SM_LOGOUT_URL_PREFIX = process.env.SM_LOGOUT_URL_PREFIX;
 
-// TODO:// we should really throw all process.env usages into this one place, for now using it to determine NODE_ENV,
-//  and SM_LOGOUT_URL_PREFIX
-
 const getEnvironmentName = () => {
     if (NODE_ENV === DEVELOPMENT_ENV || NODE_ENV == null) {
         return DEVELOPMENT_ENV;

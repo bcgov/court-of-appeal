@@ -119,7 +119,6 @@ objects:
       keycloak-secret: ${KEYCLOAK_SECRET}
 
       cookie-secret: ${COOKIE_SECRET}
-      sm-logout-url-prefix: ${SM_LOGOUT_URL_PREFIX}
       encryption-key: ${DATA_SECURITY_KEY}
     type: Opaque
 
@@ -231,11 +230,7 @@ objects:
                       name: ${NAME}
                       key: cookie-secret
                 - name: SM_LOGOUT_URL_PREFIX
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: sm-logout-url-prefix
-
+                  value: ${SM_LOGOUT_URL_PREFIX}
                 - name: DATABASE_ENCRYPTION_KEY_32_BYTES
                   valueFrom:
                     secretKeyRef:
