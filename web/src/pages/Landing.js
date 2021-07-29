@@ -55,23 +55,26 @@ class Landing extends Component {
         const loginPanel = (
             <div id="landingPage" className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
                 <div className="landing-col shroud" ref={ (element)=> {this.element = element }}>
- 
-
                     <div className="col-flex content-column">
                         <h2 className="shaded-box landing-h2">Welcome to Court of Appeal</h2>
                         <div className="flex-wrapper shaded-box">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div style={{paddingRight: "30px"}} className="col-md-6 landing-left-col" >
-                                    <h3 className="landing-h3">New Users</h3>
-                                    <a className="btn btn-primary btn-same-width button-align" href={getBceidRegisterUrl()}>Register for a BCeID</a></div>
-                                <div className="col-md-6"/>   
-                                <div className="col-md-6 landing-right-col" >           
-                                    <h3 className="landing-h3">Returning Users</h3>
-                                    <a className="btn btn-primary btn-same-width button-align" onClick={this.handleNavigateToBceidLogin}>Login with existing BCeID</a></div>
+                            <div className="container-fluid">
+                                <div className="row">
+                                    <div style={{paddingRight: "30px"}} className="col-md-6 landing-left-col" >
+                                        <h3 className="landing-h3">New Users</h3>
+                                        <a className="btn btn-primary btn-same-width button-align" href={getBceidRegisterUrl()}>Register for a BCeID</a>
+                                    </div>
+                                    <div className="col-md-6"/>
+                                    <div className="col-md-6 landing-right-col" >
+                                        <h3 className="landing-h3">Returning Users</h3>
+                                        <a className="btn btn-primary btn-same-width button-align" onClick={this.handleNavigateToBceidLogin}>Login with existing BCeID</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
+                    <div className="landing-credit-div">
+                        <a className="landing-credit-a" href="https://commons.wikimedia.org/wiki/File:Law_Courts_building_interior_2018.jpg" target="_blank">Background image created by Wpcpey</a>, <a className="landing-credit-a" href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>, via Wikimedia Commons
                     </div>
                 </div>
             </div>
