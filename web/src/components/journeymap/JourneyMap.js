@@ -1,5 +1,5 @@
 import React from 'react';
-import './journeymap.css';
+import './JourneyMap.css';
 import InfoPopupFactory from '../infopopups/common/InfoPopupFactory';
 import ReactTooltip from 'react-tooltip';
 import RespondToAppealJourney from './RespondToAppealJourneyMap';

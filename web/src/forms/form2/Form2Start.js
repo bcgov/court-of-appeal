@@ -3,9 +3,10 @@ import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import '../Form.css';
 import './Form2.css';
 import './Form2Start.css';
-import DefaultService from "../../service/default.service";
+import DefaultService from "../../service/api-service";
 import SpinnerButton from '../../components/SpinnerButton';
-import { forceCA } from './force.ca'
+import { forceCA } from './force-ca'
+import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Start extends Component {
 
@@ -184,7 +185,7 @@ class Form2Start extends Component {
         this.service.searchForm7(caseNumber, respondentLastName.trim().toLowerCase(), respondentFirstName.trim().toLowerCase(), respondentOrganization.trim().toLowerCase(), searchBy, (data) => {
             this.findButton.stopSpinner();
             if (data && !data.error) 
-                this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: { caseNumber:caseNumber, parties:data.parties }});
+                this.props.history.push({pathname: PUBLIC_URL + '/fill',state: { caseNumber:caseNumber, parties:data.parties }});
             else 
                 this.setState({ notFoundError: 'No such Court of Appeal document found' });
         });

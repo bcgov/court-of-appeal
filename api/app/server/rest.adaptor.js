@@ -6,7 +6,8 @@ let { CreateFormTwo, PreviewForm2, SubmitForm,
 let { searchFormSevenResponse, myCasesResponse, createFormTwoResponse,
       updateFormTwoResponse, personInfoResponse,
       archiveCasesResponse, previewForm2Response, createJourneyResponse,
-      myJourneyResponse, internalErrorJsonResponse, logErrorAndInternalServerResponse, notFoundResponse, successJsonResponse,  noContentJsonResponse } = require('./responses');
+      myJourneyResponse, internalErrorJsonResponse, logErrorAndInternalServerResponse,
+    notFoundResponse, successJsonResponse, noContentJsonResponse } = require('./responses');
 let archiver = require('archiver');
 
 let RestAdaptor = function() {
@@ -293,6 +294,13 @@ RestAdaptor.prototype.route = function(app, keycloak) {
                 response.redirect(redirectUrl);
             });
         }
+    });
+
+    app.get('/api/is_logged_in', keycloak.protect(), (request, response) => {
+        const userId = request.session.userId;
+        const universalId = request.session.universalId;
+        const displayName = request.session.displayName;
+        successJsonResponse({displayName: displayName, loggedIn: true}, response);
     });
 
     app.get('/api/health', function (req, res) { res.send(); });

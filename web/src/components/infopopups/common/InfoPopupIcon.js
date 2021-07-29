@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './infopopup.css';
+import './InfoPopup.css';
 import ShareIcon from "../../iconSVG/ShareIcon";
 import InfoIcon from "../../iconSVG/InfoIcon";
 import HearingIcon from "../../iconSVG/HearingIcon";

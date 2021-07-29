@@ -1,18 +1,25 @@
 @font-face {
-	font-family: 'BC Sans Regular';
+	font-family: 'BC Sans';
 	src: url('../fonts/BCSans-Regular.otf') format('opentype');
 }
 
 html, body {
 	height: 100%;
+	position: relative;
+	min-height: 100%;
+}
+
+#react_container {
+	height: 100%;
 }
 
 body {
-	font-family: 'BC Sans Regular', Calibri, Arial, 'sans serif';
+	font-family: 'BC Sans', Calibri, Arial, 'sans serif';
 	-webkit-font-smoothing: antialiased;
 	background-color: #f1f1f1;
 	color: #494949;
 	font-size: 13px;
+	margin-bottom: 60px;
 }
 
 a {
@@ -239,6 +246,15 @@ th {
 	#header-links>ul li>a {
 		padding: 0;
 	}
+}
+
+#landing-page-dialog {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header-main-row {
+	padding-bottom: 10px;
 }
 
 #header-main-row2 {

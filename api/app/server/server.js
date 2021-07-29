@@ -1,3 +1,4 @@
+const config = require('../config/environment');
 let RestAdaptor = require('./rest.adaptor');
 let express = require('express');
 let helmet = require('helmet');
@@ -5,7 +6,8 @@ let morgan = require('morgan');
 let Keycloak = require('keycloak-connect');
 let pg = require('pg')
 let session = require('express-session');
-var pgSession = require('connect-pg-simple')(session);
+let pgSession = require('connect-pg-simple')(session);
+
 function Server() {
     this.restAdaptor = new RestAdaptor();
 
@@ -97,10 +99,8 @@ Server.prototype.start = function (port, ip, done) {
     });
 
     Keycloak.prototype.logoutUrl = function (redirectUrl) {
-        var keycloakLogoutUrl = this.config.realmUrl +
-        '/protocol/openid-connect/logout' +
-        '?post_logout_redirect_uri=' + encodeURIComponent(redirectUrl);
-        var siteMinderLogoutUrl = `https://logontest.gov.bc.ca/clp-cgi/logoff.cgi?returl=${keycloakLogoutUrl}&retnow=1`
+        const keycloakLogoutUrl = `${this.config.realmUrl}/protocol/openid-connect/logout?post_logout_redirect_uri=${encodeURIComponent(redirectUrl)}`
+        const siteMinderLogoutUrl = `${config.SM_LOGOUT_URL_PREFIX}?returl=${keycloakLogoutUrl}&retnow=1`
         return siteMinderLogoutUrl;
     };
       
@@ -148,12 +148,17 @@ Server.prototype.start = function (port, ip, done) {
     }));
     
     this.app.use(express.json());   
-    this.app.use(express.urlencoded({extended: true})); 
+    this.app.use(express.urlencoded({extended: true}));
     this.restAdaptor.route(this.app, this.keycloak);
 
+    // enable our generic error handler
+    this.app.use((error, req, res, next) => { // generic handler
+        res.status(500).send(error)
+    });
+
+    // don't allow unhandledRejection to kill process
     process.on('unhandledRejection', function(reason) {
         console.log("Unhandled Rejection:", reason);
-        process.exit(1);
     });
 
     this.server = this.app.listen(port, ip, done);

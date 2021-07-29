@@ -1,4 +1,6 @@
 let request = require('request');
+const PUBLIC_URL = require('../config/environment').PUBLIC_URL;
+const setUser = require('../helpers/user').setUser;
 
 let Service = function(window) {
     
@@ -10,8 +12,8 @@ let Service = function(window) {
 };
 
 Service.prototype.base = function() {
-    let base = window.location.origin + process.env.PUBLIC_URL;
-    return base
+    let base = window.location.origin + PUBLIC_URL;
+    return base;
 };
 
 Service.prototype.isJson = function (target) {
@@ -21,13 +23,46 @@ Service.prototype.isJson = function (target) {
         return false;
     }
     return true;
-}
+};
 
-Service.prototype.printEFilingJson = function (form) {
-    let formCopy = form;
-    delete formCopy.appellants;
-    console.log(JSON.stringify(formCopy, null, 2));
-}
+/**
+ * primary check for user logged in state
+ * checks with the api to determine if the user is actually logged in
+ * modifies the output based on the bad http 403 response printed in the body
+ * returns error or {loggedIn: boolean, displayName: string}
+ * @param callback
+ */
+Service.prototype.checkIfUserIsLoggedIn = function(callback) {
+    let self = this;
+    let options = this.buildOptions(`/api/is_logged_in`);
+    request.get(options, function(err, response, body) {
+        if (!response) {
+            self.notifyOfError(callback);
+        } else if (response.statusCode === 200) {
+            callback(JSON.parse(body));
+        } else if (response.statusCode === 404) {
+            callback({error: { code: 404 }});
+        } else if (response.statusCode === 403) {
+            callback({loggedIn: false, displayName: ''})
+        } else {
+            self.notifyOfError(callback);
+        }
+    });
+};
+
+/**
+ * redirects our user to the landing page if they're not already on the landing page
+ */
+Service.prototype.redirectToLandingPage = function() {
+    if (window.location.href !== `${this.base()}`) {
+        window.location.replace(`${this.base()}`);
+    }
+};
+
+Service.prototype.redirectToLogout = function() {
+    setUser(false, '');
+    window.location.replace(`${this.base()}/api/logoff?redirect_url=${this.base()}`);
+};
 
 Service.prototype.notifyOfError = function(callback, options) {
     let data = { error:{ code:503, message:'service unavailable' } };
@@ -41,12 +76,10 @@ Service.prototype.notifyOfError = function(callback, options) {
     }
 };
 
-Service.prototype.redirectToLogin = function() {
-    window.location.replace(`${this.base()}/api/login?redirectUrl=${window.location}`);
-}
-
-Service.prototype.redirectToLogout = function() {
-    window.location.replace(`${this.base()}/api/logoff?redirect_url=${window.location}`);
+Service.prototype.printEFilingJson = function (form) {
+    let formCopy = form;
+    delete formCopy.appellants;
+    console.log(JSON.stringify(formCopy, null, 2));
 }
 
 Service.prototype.searchForm7 = function(file, lastName, firstName, organizationName, searchBy, callback) {
@@ -61,7 +94,7 @@ Service.prototype.searchForm7 = function(file, lastName, firstName, organization
             callback(undefined);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -79,7 +112,7 @@ Service.prototype.createForm2 = function(form, callback) {
             callback(JSON.parse(body).id);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -97,7 +130,7 @@ Service.prototype.updateForm2 = function(form, id, callback) {
             callback(body);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -113,7 +146,7 @@ Service.prototype.getMyCases = function(form, callback) {
             callback(JSON.parse(body));
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback, { cases:[] });
@@ -131,7 +164,7 @@ Service.prototype.getMyJourney = function(form, callback) {
             callback({ error:{ code:404, message:'not found' } });
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -148,7 +181,7 @@ Service.prototype.savePerson = function(user, callback) {
             callback(body);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -173,7 +206,7 @@ Service.prototype.getPersonInfo = function(callback) {
             callback({ error:{ code:404, message:'not found' } });
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -190,7 +223,7 @@ Service.prototype.archiveCases = function(ids, callback) {
             callback(body);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -205,7 +238,7 @@ Service.prototype.previewForm = function(id, callback) {
             callback(body);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -222,7 +255,7 @@ Service.prototype.download = function(ids, callback) {
             callback(body);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -239,7 +272,7 @@ Service.prototype.createJourney = function(journey, callback) {
             callback(JSON.parse(body).id);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -256,7 +289,7 @@ Service.prototype.updateJourney = function(journey, id, callback) {
             callback(JSON.parse(body).id);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -273,7 +306,7 @@ Service.prototype.createStep = function(step, callback) {
             callback(JSON.parse(body).id);
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -289,7 +322,7 @@ Service.prototype.submit = function(id, callback) {
             callback(JSON.parse(body));
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
@@ -308,13 +341,12 @@ Service.prototype.getAccountUsers = function(callback) {
             callback({ error: { code:404 }});
         }
         else if (response && response.statusCode === 403) {
-            self.redirectToLogin();
+            self.redirectToLandingPage();
         }
         else {
             self.notifyOfError(callback);
         }
     });
 };
-
 
 module.exports = Service;

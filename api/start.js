@@ -9,7 +9,7 @@ var migrator = new Migrator();
 
 var Server = require('./app/server/server');
 var server = new Server();
-server.useService(require('./tests/support/in.memory.service.js'));
+
 if (process.env.HUB_URL !=='undefined' && process.env.HUB_URL !==undefined) {
     console.log('hub is ' + process.env.HUB_URL);
     let timeout = (process.env.HUB_TIMEOUT!=='undefined' && process.env.HUB_TIMEOUT!==undefined) ?

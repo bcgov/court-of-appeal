@@ -50,6 +50,7 @@
     "start": "react-scripts start",
     "start-dev": "cross-env NODE_ENV=development REACT_APP_API_URL=http://localhost:9991 craco start --verbose",
     "build": "react-scripts build",
+
     "test": "unset REACT_APP_API_URL ; PUBLIC_URL='' jest",
     "eject": "react-scripts eject",
     "test:coverage": "PUBLIC_URL='' jest --coverage"
@@ -74,7 +75,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "homepage": "/court-of-appeal",
+  "homepage": "/court-of-appeal/",
   "browserslist": [
     ">0.2%",
     "not dead",

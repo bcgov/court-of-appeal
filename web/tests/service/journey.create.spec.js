@@ -1,4 +1,4 @@
-let Service = require('../../src/service/default.service');
+let Service = require('../../src/service/api-service');
 let qs = require('querystring');
 let LocalServer = require('../support/local.server');
 

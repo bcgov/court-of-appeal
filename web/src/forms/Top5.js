@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import DefaultService from '../service/default.service.js';
+import DefaultService from '../service/api-service.js';
+import { PUBLIC_URL } from '../config/environment';
 
 class Top5 extends Component {
 
@@ -28,7 +29,7 @@ class Top5 extends Component {
                 <h3>Most Used Forms</h3>
                 <ol>
                     <li><button type="button" className="btn btn-link" id="form7" onClick={this.redirectToForm7} style={{cursor:'pointer', fontSize:'14px', border:'0px', verticalAlign: 'top'}} >Notice of Appeal (Form 7)</button></li>
-                    <li><a id="form2" href={`${process.env.PUBLIC_URL}/start`} target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
+                    <li><a id="form2" href={`${PUBLIC_URL}/start`} target="_self">Notice of Appearance (Form 2)</a>&nbsp;</li>
                     <li>Certificate of Readiness</li>
                     <li>Affidavit</li>
                     <li>Notice of Hearing Appeal</li>

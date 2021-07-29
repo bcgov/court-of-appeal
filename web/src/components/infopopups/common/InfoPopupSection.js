@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './infopopup.css';
+import './InfoPopup.css';
 import InfoPopupIcon from "./InfoPopupIcon";
 import Deadline from './Deadline';
+import { PUBLIC_URL } from '../../../config/environment';
 
 class InfoPopupSection extends Component {
 
@@ -97,13 +98,13 @@ class InfoPopupSection extends Component {
                 return {
                     expanded:false,
                     collapsibleClass: prevState.collapsibleClass.replace("content-showing", "content-hidden"),
-                    toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-plus.svg"
+                    toggleIconImg: PUBLIC_URL + "/icons/icon-plus.svg"
                 }
             } else {
                 return {
                     expanded: true,
                     collapsibleClass: prevState.collapsibleClass.replace("content-hidden", "content-showing"),
-                    toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-minus.svg"
+                    toggleIconImg: PUBLIC_URL + "/icons/icon-minus.svg"
 
                 }
             }
@@ -117,13 +118,13 @@ class InfoPopupSection extends Component {
             return {
                 collapsibleClass: "row content-showing",
                 expanded: true,
-                toggleIconImg: process.env.PUBLIC_URL + "/icons/icon-minus.svg"
+                toggleIconImg: PUBLIC_URL + "/icons/icon-minus.svg"
             };
         } else {
             return {
                 collapsibleClass: "row content-hidden",
                 expanded: false,
-                toggleIconImg: process.env.PUBLIC_URL +  "/icons/icon-plus.svg"
+                toggleIconImg: PUBLIC_URL +  "/icons/icon-plus.svg"
             };
         }
     }

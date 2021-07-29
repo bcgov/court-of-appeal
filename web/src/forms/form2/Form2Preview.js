@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Preview.css';
-import DefaultService from "../../service/default.service";
+import DefaultService from "../../service/api-service";
 import save from '../../helpers/save-file'
 import SpinnerButton from '../../components/SpinnerButton';
+import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Preview extends Component {
 
     constructor(props) {
         super(props);
         this.state = props.location && props.location.state  ? props.location.state : {};
-        this.homePath = props.homePath || (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+        this.homePath = props.homePath || (PUBLIC_URL === "") ? '/' : PUBLIC_URL;
         this.service = this.props.service;
 
         this.backToFill = this.backToFill.bind(this)
@@ -83,10 +84,10 @@ class Form2Preview extends Component {
     }
 
     backToFill() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/fill',state: this.state })
+        this.props.history.push({pathname: PUBLIC_URL + '/fill',state: this.state })
     }
     proceed(e) {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/proceed', state: this.state })
+        this.props.history.push({pathname: PUBLIC_URL + '/proceed', state: this.state })
     }
 
     download() {

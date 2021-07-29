@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { PUBLIC_URL, REACT_APP_COMMIT } from '../config/environment';
 
 class Footer extends Component {
 
     constructor(props) {
         super(props);   
-        this.homePath = (process.env.PUBLIC_URL === "") ? '/' : process.env.PUBLIC_URL;
+        this.homePath = (PUBLIC_URL === "") ? '/' : PUBLIC_URL;
         this.state = {
-            commit: process.env.REACT_APP_COMMIT!==undefined
-                ?process.env.REACT_APP_COMMIT.substr(0, 7)
+            commit: REACT_APP_COMMIT!==undefined
+                ?REACT_APP_COMMIT.substr(0, 7)
                 :'Unknown'
         }
     }
@@ -15,7 +16,6 @@ class Footer extends Component {
     render() {
         return (
             <div id="footer" role="contentinfo">
-                <img className="back-to-top" src={process.env.PUBLIC_URL + '/images/back-to-top.png'} alt="Back to top" title="Back to top" style={{display: 'inline'}} />
                 <div id="footerWrapper">
                     <div id="footerAdminSection">
                         <div id="footerAdminLinksContainer" className="container">

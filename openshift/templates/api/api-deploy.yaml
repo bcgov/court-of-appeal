@@ -119,7 +119,6 @@ objects:
       keycloak-secret: ${KEYCLOAK_SECRET}
 
       cookie-secret: ${COOKIE_SECRET}
-
       encryption-key: ${DATA_SECURITY_KEY}
     type: Opaque
 
@@ -230,7 +229,8 @@ objects:
                     secretKeyRef:
                       name: ${NAME}
                       key: cookie-secret
-
+                - name: SM_LOGOUT_URL_PREFIX
+                  value: ${SM_LOGOUT_URL_PREFIX}
                 - name: DATABASE_ENCRYPTION_KEY_32_BYTES
                   valueFrom:
                     secretKeyRef:
@@ -350,18 +350,21 @@ parameters:
     description: Cookie Secret
     required: false
     value:
+  - name: SM_LOGOUT_URL_PREFIX
+    displayName: Siteminder logout url prefix
+    description: Siteminder logout url prefix
+    required: true
+    value:
   - name: DATA_SECURITY_KEY
     displayName: Data Security (Encryption) Key
     description: The Encryption Key for the environment.
     generate: expression
     from: "[a-zA-Z0-9]{32}"
-
   - name: WEB_BASE_HREF
     displayName: Web Base Href
     description: Web Base Href
     required: false
     value: /court-of-appeal/
-
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.

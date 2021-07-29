@@ -6,6 +6,7 @@ import {
     FILE_STEP_ONE_MSG_SINGULAR,
     FILE_MULTIPLES_STEP_TWO_MSG
 } from "../../helpers/constants";
+import { PUBLIC_URL } from '../../config/environment';
 import InfoPopup from "./common/InfoPopup";
 
 class AppearancePopup extends Component {
@@ -25,7 +26,7 @@ class AppearancePopup extends Component {
                             },
                         documentLink:
                             {
-                                URL: process.env.PUBLIC_URL + "/start",
+                                URL: PUBLIC_URL + "/start",
                                 URLName: "Online form"
                             }
                     }

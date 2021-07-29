@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
-import './journey.css';
+import './Journey.css';
 import JourneyMap from './journeymap/JourneyMap'
 import { withRouter } from 'react-router-dom';
-import DefaultService from "../service/default.service";
+import DefaultService from '../service/api-service';
+import { PUBLIC_URL } from '../config/environment';
+const DASHBOARD_URL = `${PUBLIC_URL}/dashboard`;
 let JOURNEY_TYPES = require('../helpers/constants');
 
 class Journey extends Component {
@@ -57,7 +59,7 @@ class Journey extends Component {
 
     componentDidMount() {
         window.onpopstate = this.handlePopState;
-        this.props.history.push(process.env.PUBLIC_URL, this.state);
+        this.props.history.push(DASHBOARD_URL, this.state);
         if (this.service == null) { this.service = new DefaultService(window); }
         this.fetchMyJourney()
     }
@@ -80,7 +82,7 @@ class Journey extends Component {
                 respondButtonClass: 'btn round-borders selected btn-journey '
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
 
     }
@@ -94,7 +96,7 @@ class Journey extends Component {
                 appealButtonClass: 'btn round-borders btn-journey selected'
             }
         }, ()=> {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -109,7 +111,7 @@ class Journey extends Component {
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_RIGHT_TO_APPEAL,
             };
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -124,7 +126,7 @@ class Journey extends Component {
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_APPELLANT_LEAVE_REQUIRED,
             };
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -140,7 +142,7 @@ class Journey extends Component {
                 journey: null
             };
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -157,7 +159,7 @@ class Journey extends Component {
                 journey: null
             };
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -172,7 +174,7 @@ class Journey extends Component {
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_APPEAL,
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -187,7 +189,7 @@ class Journey extends Component {
                 journeyType: JOURNEY_TYPES.JOURNEY_TYPE_RESPOND_TO_NOTICE_OF_LEAVE,
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -204,7 +206,7 @@ class Journey extends Component {
                 journey: null
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -221,7 +223,7 @@ class Journey extends Component {
                 journey: null,
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 
@@ -238,7 +240,7 @@ class Journey extends Component {
                 journey: null,
             }
         }, () => {
-            this.props.history.push(process.env.PUBLIC_URL, this.state);
+            this.props.history.push(DASHBOARD_URL, this.state);
         });
     }
 

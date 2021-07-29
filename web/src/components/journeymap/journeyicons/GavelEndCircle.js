@@ -1,6 +1,6 @@
 import React from 'react';
-import './pageeicon.css';
-import './journey-icons.css'
+import './PageeIcon.css';
+import './JourneyIcons.css'
 let cn = require('classnames');
 
 class GavelEndCircle extends React.Component {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import DefaultService from './service/default.service.js';
-import MultiSelectionCaseList from './components/MultiSelectionCaseList.js';
-import renderCases from './components/cases.renderer';
-import './MyDocuments.css';
-import SpinnerActionIcon from './components/SpinnerActionIcon';
-import findCaseById from './helpers/find.case.by.id';
+import DefaultService from '../service/api-service.js';
+import MultiSelectionCaseList from '../components/MultiSelectionCaseList.js';
+import renderCases from '../components/CasesRenderer';
+import '../styles/MyDocuments.css';
+import SpinnerActionIcon from '../components/SpinnerActionIcon';
+import findCaseById from '../helpers/find-case-by-id';
+import { REACT_APP_MAX_FILE_DOWNLOAD, PUBLIC_URL } from '../config/environment';
 
 class MyDocuments extends Component {
 
@@ -30,10 +31,10 @@ class MyDocuments extends Component {
         this.closeConfirmArchiveModal = this.closeConfirmArchiveModal.bind(this);
         this.yesArchive = this.yesArchive.bind(this);
         this.maxFileDownload = 5;
-        if (process.env.REACT_APP_MAX_FILE_DOWNLOAD !== undefined && process.env.REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
-            this.maxFileDownload = parseInt(process.env.REACT_APP_MAX_FILE_DOWNLOAD, 10);
+        if (REACT_APP_MAX_FILE_DOWNLOAD !== undefined && REACT_APP_MAX_FILE_DOWNLOAD !== 'undefined') {
+            this.maxFileDownload = parseInt(REACT_APP_MAX_FILE_DOWNLOAD, 10);
         }
-        this.save = require('./helpers/save-file');
+        this.save = require('../helpers/save-file');
     }
 
     componentDidMount() {
@@ -136,7 +137,7 @@ class MyDocuments extends Component {
                                             <SpinnerActionIcon id="archive-button" tooltip="archive" onClick={this.archive} ref={ (element)=> {this.archiveButton = element }}
                                                 content='oi oi-box'>
                                             </SpinnerActionIcon>
-                                            <Link to={process.env.PUBLIC_URL  + '/start'}>
+                                            <Link to={PUBLIC_URL  + '/start'}>
                                                 <SpinnerActionIcon id="create-button" tooltip="create" ref={ (element)=> {this.createButton = element }}
                                                     content='oi oi-plus'>
                                                 </SpinnerActionIcon>

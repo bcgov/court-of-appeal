@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import moment from 'moment';
 import ActiveFormList from '../../src/components/ActiveFormList';
-let DefaultService = require('../../src/service/default.service');
+let DefaultService = require('../../src/service/api-service');
 
 describe('Active forms section', function() {
 

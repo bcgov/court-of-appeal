@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RightTurn from "./RightTurn";
 import LeftTurn from "./LeftTurn";
 import Trail from "./Trail";
-import './returntrail.css';
+import './ReturnTrail.css';
 
 class ReturnTrail extends Component {
 

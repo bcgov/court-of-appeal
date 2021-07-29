@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import ProgressStatusBar from '../../components/progress/ProgressStatusBar';
 import './Form2Submitted.css';
+import { PUBLIC_URL } from '../../config/environment';
 
 class Form2Submitted extends Component {
 
@@ -102,7 +103,7 @@ class Form2Submitted extends Component {
 
     async fetchSubmittedInfo() {
         try {
-            let response = await axios.get(`${process.env.PUBLIC_URL}/api/forms/${this.state.id}/submit`);
+            let response = await axios.get(`${PUBLIC_URL}/api/forms/${this.state.id}/submit`);
             let data = response.data;
             this.setState({caseNumber: data.caseNumber, packageNumber: data.packageNumber, packageUrl: data.packageUrl})
         }
@@ -111,7 +112,7 @@ class Form2Submitted extends Component {
         }
     }
     done() {
-        this.props.history.push({pathname: process.env.PUBLIC_URL + '/',state: {}});
+        this.props.history.push({pathname: PUBLIC_URL + '/',state: {}});
     }
 }
 export default Form2Submitted;
