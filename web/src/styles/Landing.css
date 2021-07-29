@@ -176,3 +176,19 @@
 .landing-right-col {
     padding-left: 50px;
 }
+
+.landing-credit-div {
+    bottom: 60px;
+    right: 20px;
+    position: absolute;
+    color: white;
+    font-size: 9px;
+}
+
+.landing-credit-a {
+    color: white;
+    link: white;
+    visited: white;
+    hover: white;
+    active: white;
+}
