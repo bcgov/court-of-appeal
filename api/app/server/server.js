@@ -148,7 +148,7 @@ Server.prototype.start = function (port, ip, done) {
     }));
     
     this.app.use(express.json());   
-    this.app.use(express.urlencoded({extended: true}));
+    this.app.use(express.urlencoded({extended: true, limit: '10mb'}));
     this.restAdaptor.route(this.app, this.keycloak);
 
     // enable our generic error handler
