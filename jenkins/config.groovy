@@ -19,21 +19,18 @@ class config {
 
   // Apps - Listed in the order they should be tagged
   // Do not deploy schema-spy into prod
-  public static final String[] APPS = ['db', 'pdf', 'service', 'api', 'web', 'backup']
-  public static final String[] PROD_APPS = ['db', 'pdf', 'service', 'api', 'web', 'backup']
+  public static final String[] APPS = ['db', 'api', 'schema-spy', 'web', 'pdf', 'backup']
+  public static final String[] PROD_APPS = ['db', 'api', 'web', 'pdf', 'backup']
   public static final String SCHEMA_SPY_APP_NAME = "schema-spy"
   
   // Build configuration
-  public static final String[] BUILDS = ['web', 'api', 'service']
+  public static final String[] BUILDS = ['web', 'api']
   
-  public static final String[]  WEB_BUILDS = ['web-runtime', 'web-builder', 'web-artifacts', 'web']
+  public static final String[]  WEB_BUILDS = ['web-runtime', 'web-artifacts', 'web']
   public static final String  WEB_APP_NAME = "${this.BUILDS[0]}"
   
   public static final String[]  API_BUILDS = ["${this.BUILDS[1]}"]
   public static final String  API_APP_NAME = "${this.BUILDS[1]}"
-
-  public static final String[]  SERVICE_BUILDS = ["${this.BUILDS[2]}"]
-  public static final String  SERVICE_APP_NAME = "${this.BUILDS[2]}"
 }
 
 return new config();

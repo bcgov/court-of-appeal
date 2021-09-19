@@ -28,7 +28,7 @@ objects:
           FROM ${DESTINATION_IMAGE_REPOSITORY}${DESTINATION_IMAGE} as destination
 
           # Copy the client application artifacts into the image ...
-          COPY --from=source /opt/app-root/src/build/. /tmp/app/dist/
+          COPY --from=source /opt/app-root/src/dist/. /tmp/app/dist/
 
           # Since the runtime image is itself an s2i image we need to
           # short circuit the s2i lifecycle.

@@ -81,10 +81,11 @@ http {
     # ======================================================
 
     server {
-        %LISTEN_CONFIG_SECTION%
-        
-        # Allow large headers.
-        large_client_header_buffers 4 32k;
+        listen       8080;
+        server_name  localhost;
+
+        client_max_body_size 200M;
+
         # add in most common security headers
         add_header Content-Security-Policy "default-src * data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
         add_header Strict-Transport-Security "max-age=86400; includeSubDomains";
@@ -111,7 +112,7 @@ http {
 
         # redirect server error pages to the static page /50x.html
         error_page   500 502 503 504  /50x.html;
-        location = 50x.html {
+        location = /50x.html {
             root   /usr/share/nginx/html;
         }
 
@@ -130,12 +131,5 @@ http {
             access_log off;
         }
 
-        # serve the fathom analytics tracking code, if available
-        location =/fathom.js {
-            root /tmp;
-            gzip            on;
-            gzip_min_length 1000;
-            gzip_types      *;
-        }
     }
 }

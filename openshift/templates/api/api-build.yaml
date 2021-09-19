@@ -34,6 +34,9 @@ objects:
             kind: ${KIND_OF_IMAGE}
             namespace: ${SOURCE_IMAGE_NAMESPACE}
             name: ${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}
+          env:
+            - name: PIP_INDEX_URL
+              value: ${PIP_INDEX_URL}
       output:
         to:
           kind: ImageStreamTag
@@ -41,13 +44,7 @@ objects:
       triggers:
         - type: ImageChange
         - type: ConfigChange
-      resources:
-        requests:
-          cpu: ${CPU_REQUEST}
-          memory: ${MEMORY_REQUEST}
-        limits:
-          cpu: ${CPU_LIMIT}
-          memory: ${MEMORY_LIMIT}
+
 parameters:
   - name: NAME
     displayName: Name
@@ -69,7 +66,9 @@ parameters:
 
   - name: GIT_REPO_URL
     displayName: Git Repo URL
-    description: The URL to your GIT repo, don't use the this default unless your just experimenting.
+    description:
+      The URL to your GIT repo, don't use the this default unless your just
+      experimenting.
     required: true
     value: https://github.com/bcgov/court-of-appeal.git
   - name: GIT_REF
@@ -91,40 +90,23 @@ parameters:
     displayName: Source Image Name
     required: true
     description: The name of the source image.
-    value: nodejs
+    value: python
   - name: SOURCE_IMAGE_TAG
     displayName: Source Image Tag
     required: true
     description: The tag of the source image.
-    value: "12"
+    value: "3.6"
   - name: SOURCE_IMAGE_NAMESPACE
     displayName: Namespace
     required: true
     description: The Namespace where the ImageStream resides.
     value: openshift
+  - name: PIP_INDEX_URL
+    displayName: Custom PyPi Index URL
+    description: The custom PyPi index URL
+    value:
   - name: OUTPUT_IMAGE_TAG
     displayName: Output Image Tag
     description: The tag given to the built image.
     required: true
     value: latest
-
-  - name: CPU_LIMIT
-    displayName: Resources CPU Limit
-    description: The resources CPU limit (in cores) for this build.
-    required: true
-    value: "1"
-  - name: MEMORY_LIMIT
-    displayName: Resources Memory Limit
-    description: The resources Memory limit (in Mi, Gi, etc) for this build.
-    required: true
-    value: 4Gi
-  - name: CPU_REQUEST
-    displayName: Resources CPU Request
-    description: The resources CPU request (in cores) for this build.
-    required: true
-    value: 250m
-  - name: MEMORY_REQUEST
-    displayName: Resources Memory Request
-    description: The resources Memory request (in Mi, Gi, etc) for this build.
-    required: true
-    value: 2Gi

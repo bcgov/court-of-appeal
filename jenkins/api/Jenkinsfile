@@ -185,18 +185,18 @@ node {
       }
     }
 
-    // stage("Update ${schemaSpy} instance in ${destination}") {
-    //   script {
-    //     openshift.withCluster() {
-    //       openshift.withProject("${namespace}-${destination}") {
-    //         echo "Recycling ${schemaSpy}${appSuffix} in ${namespace}-${destination} to refresh schema..."
-    //         def dc = openshift.selector('dc', "${schemaSpy}${appSuffix}")
-    //           dc.scale("--replicas=0")
-    //           dc.scale("--replicas=1")
-    //       }
-    //     }
-    //   }
-    // }
+    stage("Update ${schemaSpy} instance in ${destination}") {
+      script {
+        openshift.withCluster() {
+          openshift.withProject("${namespace}-${destination}") {
+            echo "Recycling ${schemaSpy}${appSuffix} in ${namespace}-${destination} to refresh schema..."
+            def dc = openshift.selector('dc', "${schemaSpy}${appSuffix}")
+              dc.scale("--replicas=0")
+              dc.scale("--replicas=1")
+            }
+          }
+        }
+    }
   }
   else {
     stage('No Changes') {
