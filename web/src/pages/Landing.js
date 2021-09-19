@@ -56,7 +56,39 @@ class Landing extends Component {
             <div id="landingPage" className="row-flex intro-page" ref={ (element)=> {this.element = element }}>
                 <div className="landing-col shroud" ref={ (element)=> {this.element = element }}>
                     <div className="col-flex content-column">
-                        <h2 className="shaded-box landing-h2">Welcome to Court of Appeal</h2>
+                        {/* <MM> */}
+                        <h2 className="shaded-box landing-h2">Welcome to the Court of Appeal Application</h2>
+                        <div className="shaded-box landing-desc">
+                            
+                            <div className="heading-desc">This service will help you fill out Court of Appeal forms</div>
+                            <div className="desc-title">How it Works</div>
+                            <div className="row desc-body">
+                                <div style={{paddingRight: "40px"}} className="col-md-6 landing-left-col" >
+                                    <div className="row">
+                                        <div className="desc-number col-md-4">1</div>
+                                        <div className="desc-step col-md-8">Answer Questions</div>
+                                    </div>
+                                    
+                                    <div className="desc-step-body">
+                                        Our completely free and secure online application will assist you in completing 			                   
+                                        required forms and you can save your work so, you can proceed at your own pace.
+                                    </div>
+                                </div>
+                               
+                                <div style={{paddingRight: "30px"}} className="col-md-6" >
+                                    <div className="row">
+                                        <div className="desc-number col-md-4">2</div>
+                                        <div className="desc-step col-md-8">Print or File Online</div>
+                                    </div>
+                                        
+                                    <div className="desc-step-body">
+                                        Once you’re done with the questions, you can print your papers and file at the court 
+                                        registry or file them online.
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        {/* <MM> */}
                         <div className="flex-wrapper shaded-box">
                             <div className="container-fluid">
                                 <div className="row">
