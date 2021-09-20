@@ -19,13 +19,20 @@
                 href="mailto:courts.cso@gov.bc.ca">contact the registry
             </a>.
         </p>
+        <JourneyMap />
     </b-card>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
    
-    @Component
+    import JourneyMap from "../JourneyMap/JourneyMap.vue"
+
+    @Component({
+        components:{
+           JourneyMap
+        }
+    })
     export default class AppealProcess extends Vue {
 
         
