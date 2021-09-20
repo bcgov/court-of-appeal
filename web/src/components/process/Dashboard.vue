@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import JourneyMap from "./JourneyMap.vue"
+import JourneyMap from "./JourneyMap/JourneyMap.vue"
 
 
 @Component({

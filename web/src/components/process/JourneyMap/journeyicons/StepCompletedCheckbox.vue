@@ -1,0 +1,30 @@
+<template>
+    <input  type="checkbox"            
+            class="checkbox-glow checkbox-toggle"
+            onChange="this.props.onChange"
+            :disabled="disabled"
+            :checked="checked"
+    />
+</template>
+
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
+
+@Component
+export default class StepCompletedCheckbox extends Vue {
+
+
+    @Prop({required: false})
+    onChange!: any;    
+
+    @Prop({required: false})
+    disabled!: boolean;
+
+    @Prop({required: false})
+    checked!: boolean;
+
+}
+</script>
+<style scoped>
+@import "./JourneyIcons.css";
+</style>
