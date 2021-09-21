@@ -148,6 +148,64 @@
     margin-bottom: 40px;
 }
 
+.heading-desc {
+    padding-top: 2rem;
+}
+
+.landing-desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 36px;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.landing-desc .desc-title {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 36px;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 3rem;
+}
+
+.landing-desc .desc-body {
+    margin-top: 2rem;
+
+}
+
+.landing-desc .desc-body .desc-number {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: white;
+    margin-bottom: 0px;
+    margin-left: 1rem;
+    padding: 0rem;
+    border: #ffffff 2px solid;
+    border-radius: 20px;
+    width: 3.35rem;
+}
+
+.landing-desc .desc-body .desc-step {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 36px;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.landing-desc .desc-body .desc-step-body {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    color: white;
+    margin-bottom: 0px;
+    margin-left: 1rem;
+    text-align: left;
+    text-align:justify;
+}
+
 .landing-h3 {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
