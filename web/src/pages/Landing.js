@@ -68,7 +68,7 @@ class Landing extends Component {
                                         <div className="desc-step col-md-8">Answer Questions</div>
                                     </div>
                                     <div className="desc-step-body">
-                                    Our secure online application will provide you information and assist you in completing Court of Appeal forms.
+                                    Our secure online application will provide you with information and assist you in completing Court of Appeal forms.
                                     </div>
                                 </div>
                                 <div style={{paddingRight: "15px"}} className="col-md-6" >
@@ -78,7 +78,7 @@ class Landing extends Component {
                                     </div>
                                         
                                     <div className="desc-step-body">
-                                        When you have completed the forms, you can print your papers and file at the court 
+                                        Once you have completed the forms, you will be able to print the forms and file at the court 
                                         registry or file them online.
                                     </div>
                                 </div>

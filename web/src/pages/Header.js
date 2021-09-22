@@ -79,7 +79,7 @@ class Header extends Component {
                             </div>
                             <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                                 <div className="bcgov-title">
-                                    <h2>Court of Appeal Application</h2>
+                                    <h2>Court of Appeal Application Beta</h2>
                                 </div>
                             </div>
                             <div className="col-xs-4 col-sm-4 col-md-5 col-lg-5">
