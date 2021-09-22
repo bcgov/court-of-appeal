@@ -1,6 +1,6 @@
 <template>
     <b-card border-variant="white">
-        <h1>Need help?</h1>
+        <h3>Need help?</h3>
         <p>Phone: 1-800-663-6102</p>
         <p>E-mail: 
             <a href="mailto:Courts.CSO@gov.bc.ca">Courts.CSO@gov.bc.ca</a>

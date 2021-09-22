@@ -2,7 +2,7 @@
     <b-card border-variant="white" id="documents">  
         <b-row v-if="enableActions">
             <b-col cols="9">
-                <h1>{{title}}</h1>
+                <h3>{{title}}</h3>
             </b-col>
             <b-col  cols="3">
                 <b-button 
@@ -33,7 +33,7 @@
         </b-row>
         <b-row v-else>
             <b-col>
-                <h1>{{title}}</h1>
+                <h3>{{title}}</h3>
             </b-col>            
         </b-row>          
         <b-row>
@@ -106,9 +106,9 @@
                 </b-badge>                    
             </b-row>            
             <template v-slot:modal-title>
-                <h2 class="mb-0 text-light">Confirm Archive Application</h2>                                  
+                <h3 class="mb-0 text-light">Confirm Archive Application</h3>                                  
             </template>
-            <h4 >Are you sure you want to archive your <b>"{{applicationsToArchive}}"</b> application?</h4>            
+            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive}}"</b> application?</h4>            
             <template v-slot:modal-footer>
                 <b-button variant="danger" @click="confirmArchiveApplication()">Confirm</b-button>
                 <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-archive')">Cancel</b-button>

@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import MyDocumentsTable from "@/components/process/myDocuments/MyDocumentsTable.vue";
+import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 
 @Component({

@@ -1,6 +1,6 @@
 <template>
     <b-card border-variant="white">
-        <h1>Most Used Forms</h1>
+        <h3>Most Used Forms</h3>
         <ol>
             <li>Notice of Appeal (Form 7) </li>
             <li>Notice of Appearance (Form 2)</li>

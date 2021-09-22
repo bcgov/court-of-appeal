@@ -1,7 +1,7 @@
 <template>
     <b-card border-variant="white">
         
-        <h1>The Appeal Process</h1>
+        <h3>The Appeal Process</h3>
         <p>
             You are receiving the Notice of Appeal because a previous court case you were in is being appealed. 
             If you would like to be updated about the status of the appeal, and would like to participate in the 

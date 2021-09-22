@@ -1,6 +1,6 @@
 import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
-import MyDocuments from "@/components/process/myDocuments/MyDocuments.vue";
+import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
 import store from "@/store";
