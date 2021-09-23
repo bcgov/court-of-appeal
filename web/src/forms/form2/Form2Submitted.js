@@ -112,7 +112,7 @@ class Form2Submitted extends Component {
         }
     }
     done() {
-        this.props.history.push({pathname: PUBLIC_URL + '/',state: {}});
+        this.props.history.push({pathname: PUBLIC_URL + '/dashboard',state: {}});
     }
 }
 export default Form2Submitted;
