@@ -2,8 +2,7 @@ const DEVELOPMENT_ENV = 'development';
 const TEST_ENV = 'test';
 const PRODUCTION_ENV = 'production';
 const NODE_ENV = process.env.NODE_ENV;
-const SM_LOGOUT_URL_PREFIX = process.env.SM_LOGOUT_URL_PREFIX;
-
+const SM_LOGOUT_URL_PREFIX = process.env.SM_LOGOUT_URL_PREFIX || "https://logontest.gov.bc.ca/clp-cgi/logoff.cgi";
 const getEnvironmentName = () => {
     if (NODE_ENV === DEVELOPMENT_ENV || NODE_ENV == null) {
         return DEVELOPMENT_ENV;
