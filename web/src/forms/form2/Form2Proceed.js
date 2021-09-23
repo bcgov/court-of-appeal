@@ -87,7 +87,7 @@ class Form2Proceed extends Component {
     }
 
     cancel() {
-        this.props.history.push({pathname: PUBLIC_URL + '/',state: {}});
+        this.props.history.push({pathname: PUBLIC_URL + '/dashboard',state: {}});
     }
 
     confirm() {
