@@ -41,16 +41,13 @@ class Form2Proceed extends Component {
             <div className="row section section-gray">
               <div className="col-xs-12">
                 <div className="page-title">Submit through E-Filing</div>
-              </div>
-            </div>
-
-            <div className="row section section-white">
-              <div className="col-xs-12">
-                By submitting, you will be redirected to the E-Filing Hub.
-                {this.state.submissionError && (
+                <div className="page-subtitle">
+                  By submitting, you will be redirected to the E-Filing Hub.
+                </div>
+                {(this.state.submissionError) && (
                   <div>
                     <br />
-                    <h2 style={{ color: "red" }}>
+                    <h2 style={{ color: "red", marginBottom: '0px' }}>
                       {" "}
                       Error from E-Filing Hub: {this.state.submissionError}{" "}
                     </h2>
