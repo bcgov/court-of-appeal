@@ -3,7 +3,7 @@
     margin-bottom: 15px;
     border: 1px solid white;
     border-radius: 5px;
-    font-family: 'BC Sans', sans-serif;
+    font-family: 'BC Sans', sans-serif !important;
     font-size: medium;
 }
 
