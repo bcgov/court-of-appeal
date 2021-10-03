@@ -1,0 +1,350 @@
+<template>
+    <b-card v-if="dataReady" class="ml-4 border-white">
+        <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+
+        
+        <b-row class="ml-2" style="font-weight: 700;">
+            <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.toString()}}</span></b-col>
+            <b-col cols="2" class="text-primary">Appellant</b-col>
+        </b-row>
+        <b-row class="mt-3 ml-2" style="font-weight: 700;">
+            <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.toString()}}</span></b-col>
+            <b-col cols="2" class="text-info">Respondent</b-col>
+        </b-row>
+
+        <p 
+            class="mt-3" 
+            style="font-weight: 700;"
+            >Responding: 
+            <b-icon-question-circle-fill 
+                class="text-primary"
+                v-b-tooltip.hover.noninteractive
+                title="The name of the party responding to the appeal."/>            
+        </p>
+        <p class="ml-5" style="font-weight: 200;">{{respondentNames.toString()}}</p>
+
+        <p class="ml-3 mb-0" style="font-weight: 700;">Representation</p>
+
+        <b-form-group
+            class="mx-3" 
+            label-cols-sm="3"
+            content-cols-sm="3"
+            label="Are you self-represented?" 
+            label-for="representation">
+            <b-form-radio-group
+                id="representation"
+                style="max-width:25%" 
+                v-model="form2Info.selfRepresented"
+                :options="representationOptions"                
+            ></b-form-radio-group>
+           
+        </b-form-group>
+
+        
+
+            <p  
+                style="font-weight: 700;"
+                >Mailing address for service: 
+                <b-icon-question-circle-fill 
+                    class="text-primary"
+                    v-b-tooltip.hover.noninteractive
+                    title="The address where you would like to receive documents."/>            
+            </p>           
+
+            <b-form-group 
+                class="mx-3" 
+                label-cols-sm="3"
+                content-cols-sm="3"
+                label="Select a contact name to auto-fill the address." 
+                label-for="contact">
+                <b-form-select 
+                    id="contact"
+                    v-model="respondentName"                    
+                    :options="respondentNames">
+                </b-form-select>
+            </b-form-group>
+
+            <p style="font-weight: 700;">Service Information</p>  
+
+
+
+            <b-row  v-if="form2Info.selfRepresented">
+                <b-col cols="3">
+                    Phone <span class="text-danger">*</span>
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        title="The registry may contact you by phone to schedule your appeal."/>
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.phone">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">ex. 604-567-8901 x1234
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-card no-body border-variant="white" v-else >
+
+                <b-row class="mt-2">
+                    <b-col cols="3">
+                        Counsel's First Name <span class="text-danger">*</span>                   
+                    </b-col>
+                    <b-col cols="4">
+                        <b-form-input 
+                            style="width: 100%"                        
+                            v-model="form2Info.serviceInformation.counselFirstName">
+                        </b-form-input>  
+                    </b-col>
+                </b-row>
+
+                <b-row class="mt-2">
+                    <b-col cols="3">
+                        Counsel's Last Name <span class="text-danger">*</span>                   
+                    </b-col>
+                    <b-col cols="4">
+                        <b-form-input 
+                            style="width: 100%"                        
+                            v-model="form2Info.serviceInformation.counselLastName">
+                        </b-form-input>  
+                    </b-col>
+                </b-row>
+
+                <b-row class="mt-2">
+                    <b-col cols="3">
+                        Firm Name <span class="text-danger">*</span>                   
+                    </b-col>
+                    <b-col cols="4">
+                        <b-form-input 
+                            style="width: 100%"                        
+                            v-model="form2Info.serviceInformation.firmName">
+                        </b-form-input>  
+                    </b-col>
+                </b-row>
+
+                <b-row class="mt-2">
+                    <b-col cols="3">
+                        Firm's Phone <span class="text-danger">*</span>
+                        <b-icon-question-circle-fill 
+                            class="text-primary"
+                            v-b-tooltip.hover.noninteractive
+                            title="The registry may contact you by phone to schedule your appeal."/>
+                    </b-col>
+                    <b-col cols="4">
+                        <b-form-input 
+                            style="width: 100%"                        
+                            v-model="form2Info.serviceInformation.firmPhone">
+                        </b-form-input>
+                        <span 
+                            style="font-size: 0.75rem;" 
+                            class="text-secondary ml-2">ex. 604-567-8901 x1234
+                        </span>   
+                    </b-col>
+                </b-row>
+
+            </b-card>
+
+            <b-row class="mt-2">
+                <b-col cols="3">
+                    Email address
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        title="Receive electronic document status change notifications or be served 
+                        electonically by another party (you need to agree to this using the checkboxes below."/>
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.email">
+                    </b-form-input>
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">
+                    Address Line 1 <span class="text-danger">*</span>                   
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.addressLine1">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">Street address
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">
+                    Address Line 2                   
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.addressLine2">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">Apartment, suite, unit, building, floor, etc.
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">
+                    City <span class="text-danger">*</span>                   
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.city">
+                    </b-form-input>  
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">Province</b-col>
+                <b-col cols="4">BC</b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">Country</b-col>
+                <b-col cols="4">Canada</b-col>
+            </b-row>
+
+            <b-row class="mt-2">
+                <b-col cols="3">
+                    Postal Code <span class="text-danger">*</span>                   
+                </b-col>
+                <b-col cols="4">
+                    <b-form-input 
+                        style="width: 100%"                        
+                        v-model="form2Info.serviceInformation.postalCode">
+                    </b-form-input>  
+                </b-col>
+            </b-row>     
+
+        
+
+
+
+        
+
+  
+
+        <!-- <b-button 
+            style="float: right;" 
+            variant="success"
+            @click="SaveForm()"
+            >Find
+        </b-button> -->
+               
+        
+    </b-card>
+</template>
+
+<script lang="ts">
+
+import { form2DataInfoType } from '@/types/Information';
+import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
+import { Component, Vue } from 'vue-property-decorator';
+
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
+
+@Component
+export default class Form2StyleOfProceeding extends Vue {
+
+    @informationState.State
+    public partiesJson: partiesDataJsonDataType;
+
+    @informationState.State
+    public fileNumber: string;
+    
+    dataReady = false;
+    applicantNames: string[] = [];
+    respondentNames: string[] = [];
+
+    applicants: applicantJsonDataType[] = [];
+    respondents: respondentsJsonDataType[] = [];
+    notFound = false;
+    representationOptions = [
+        {text: 'Yes', value: true},
+        {text: 'No', value: false}
+    ];
+    respondentName = "";
+
+    form2Info = {} as form2DataInfoType;
+
+    mounted() {
+        this.dataReady = false;
+        this.extractInfo();
+        this.dataReady = true;        
+    }
+
+    public extractInfo(){
+
+        this.applicants = this.partiesJson.appellants;
+        this.respondents = this.partiesJson.respondents;
+        this.applicantNames = [];
+        this.respondentNames = [];
+
+        for (const respondent of this.respondents){
+            this.respondentNames.push(respondent.name);  
+        }
+
+        for (const applicant of this.applicants){
+            this.applicantNames.push(applicant.name);  
+        }
+
+        this.form2Info.appellants = this.applicants;
+        this.form2Info.respondents = this.respondents;
+        this.form2Info.formSevenNumber = this.fileNumber;
+        this.form2Info.serviceInformation = {} as serviceInformationJsonDataType;
+        this.form2Info.serviceInformation.province = "British Columbia";
+        this.form2Info.serviceInformation.country = "Canada";
+
+    }
+
+    public saveForm() {
+        this.notFound = false;
+        console.log('save and continue');
+
+        const body: form2DataInfoType = {"formSevenNumber":"CA39029","appellants":[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931,"id":0}],"respondents":[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932,"id":0,"responding":true}],"useServiceEmail":true,"sendNotifications":true,"serviceInformation":{"province":"British Columbia","country":"Canada","selectedContactId":0,"name":"Two TEST","addressLine1":"4 - 5 st","addressLine2":null,"city":"Coquitlam","postalCode":"V7Y 1C6","phone":"9876543234","email":"email@yahoo.com"},"selfRepresented":true,"version":"0.1"};
+
+        const url = 'api/forms';
+        this.$http.post(url, body )
+            .then(response => {
+                if(response.data){
+                    this.navigateToPreviewPage();
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
+                this.notFound = true;
+            })
+
+        
+    }
+
+    public navigateToPreviewPage() {
+
+        this.$router.push({name: "preview" }) 
+
+    }
+
+}
+</script>
+
+<style scoped lang="scss">
+
+
+
+</style>

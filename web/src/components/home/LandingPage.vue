@@ -99,7 +99,7 @@ export default class LandingPage extends Vue {
         await SessionManager.getUserInfo(this.$store);
         if(this.$store.state.Common.userId !== ""){
             this.isLoggedIn = true
-            this.$router.push({ name: "applicant-status" });
+            this.$router.push({ name: "dashboard" });
         }else{
             this.isLoggedIn = false;
             this.pageReady = true;

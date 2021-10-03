@@ -1,5 +1,5 @@
 <template>
-    <b-card>       
+    <b-card border-variant="white">       
         
         <b-container class="container">
             

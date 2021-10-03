@@ -1,6 +1,9 @@
 import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
+import StartForm2 from "@/components/process/AppealProcess/StartForm2.vue";
+import FillForm2 from "@/components/process/AppealProcess/FillForm2.vue";
+import PreviewForm2 from "@/components/process/AppealProcess/PreviewForm2.vue";
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
 import store from "@/store";
@@ -33,6 +36,24 @@ const routes = [
       name: "my-documents",
       // beforeEnter: authGuard,
       component: MyDocuments
+    },
+    {
+      path: "/start",
+      name: "start",
+      // beforeEnter: authGuard,
+      component: StartForm2
+    },
+    {
+      path: "/fill",
+      name: "fill",
+      // beforeEnter: authGuard,
+      component: FillForm2
+    },
+    {
+      path: "/preview",
+      name: "preview",
+      // beforeEnter: authGuard,
+      component: PreviewForm2
     }
 ];
 

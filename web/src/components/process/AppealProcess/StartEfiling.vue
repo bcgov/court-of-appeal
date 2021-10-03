@@ -91,7 +91,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
+
 import Tooltip from "@/components/survey/Tooltip.vue";
+import { pathwayTypeInfoType } from '@/types/Information';
 
 @Component({
     components:{        
@@ -99,6 +105,10 @@ import Tooltip from "@/components/survey/Tooltip.vue";
     }
 })
 export default class StartEfiling extends Vue {
+
+    @informationState.Action
+    public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
+   
 
     startAppeal = false;
     respondToAppeal = false;
@@ -124,20 +134,34 @@ export default class StartEfiling extends Vue {
     }
 
     public hasRightToAppealPath() {
-        // emit to parent and display process component
+
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.hasRightToAppeal = true;
+        this.UpdatePathType(pathType);
+
     }
 
     public noRightToAppealPath() {
-        // emit to parent and display process component
-        
+
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.noRightToAppeal = true;
+        this.UpdatePathType(pathType);   
+
     }
 
     public noticeOfAppealPath() {
-        // emit to parent and display process component
+        
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.noticeOfAppealResponse = true;
+        this.UpdatePathType(pathType);
+
     }
 
     public noticeOfApplicationPath() {
-        // emit to parent and display process component
+        
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.noticeOfApplicationResponse = true;
+        this.UpdatePathType(pathType);
         
     }
 

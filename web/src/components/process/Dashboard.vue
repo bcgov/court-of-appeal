@@ -32,7 +32,7 @@
                         </b-button>
                     </b-row>
 
-                    <appeal-process v-if="journeyStarted"></appeal-process>
+                    <appeal-process v-if="journeyStarted" v-bind:processType="processType"></appeal-process>
                     <start-efiling v-else ></start-efiling>
 
                     
@@ -50,18 +50,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
-import AppealProcess from "@/components/process/appealProcess/AppealProcess.vue";
-import StartEfiling from "@/components/process/appealProcess/StartEfiling.vue";
+import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue";
+import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
+import { pathwayTypeInfoType } from '@/types/Information';
 
 @Component({
     components:{
@@ -74,6 +75,8 @@ import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json'
 })
 export default class DashboardPage extends Vue {
 
+    @informationState.State
+    public pathType: pathwayTypeInfoType;
     
     @informationState.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
@@ -85,9 +88,31 @@ export default class DashboardPage extends Vue {
     dataLoaded = false;    
     journeyStarted = false;
     error = '';
+    processType = '';
 
     casesJson: caseJsonDataType[] = [];
     journeyJson = {} as journeyJsonDataType;
+
+    @Watch('pathType')
+    setPath(newPath: pathwayTypeInfoType) 
+    {
+        if (newPath.hasRightToAppeal){
+            this.journeyStarted = true;
+            this.processType = 'hasRightToAppeal';
+        } else if (newPath.noRightToAppeal){
+            this.journeyStarted = true;
+            this.processType = 'noRightToAppeal';
+        } else if (newPath.noticeOfAppealResponse){
+            this.journeyStarted = true;
+            this.processType = 'noticeOfAppealResponse';
+        } else if (newPath.noticeOfApplicationResponse){
+            this.journeyStarted = true;
+            this.processType = 'noticeOfApplicationResponse';
+        } else {
+            this.journeyStarted = false;
+        }
+            
+    }
 
     mounted() {  
         this.dataLoaded = false;

@@ -36,7 +36,7 @@ export interface applicantJsonDataType {
     lastName: string;
     solicitor: solicitorJsonDataType;
     partyId: number;
-    id: number;
+    id?: number;
 }
 
 export interface solicitorJsonDataType {
@@ -58,19 +58,28 @@ export interface respondentsJsonDataType {
     lastName: string;
     solicitor: solicitorJsonDataType;
     partyId: number;
-    id: number;
-    responding: boolean;
+    id?: number;
+    responding?: boolean;
 }
 
 export interface serviceInformationJsonDataType {
     province: string;
     country: string;
     selectedContactId: number;
-    name: string;
+    name?: string;
+    counselFirstName?: string;
+    counselLastName?: string;
+    firmName?: string;
+    firmPhone?: string;
     addressLine1: string;
     addressLine2?: string;
     city: string;
     postalCode: string;
-    phone: string;
-    email: string;
+    phone?: string;
+    email?: string;
+}
+
+export interface partiesDataJsonDataType {
+    appellants: applicantJsonDataType[];
+    respondents: respondentsJsonDataType[];
 }
