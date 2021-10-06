@@ -7,9 +7,9 @@ export const getBceidRegisterUrl = () => {
     const DEV = ['0.0.0.0', 'localhost', 'dev.'];
     const TEST = ['test.'];
 
-    if (DEV.indexOf(host) > -1) {
+    if (DEV.some(s=> host.includes(s))) {
         return 'https://www.development.bceid.ca/os/?2201';
-    } else if (TEST.indexOf(host) > -1) {
+    } else if (TEST.some(s=> host.includes(s))) {
         return 'https://www.test.bceid.ca/os/?8601';
     } else {
         return 'https://www.bceid.ca/os/?7611';
