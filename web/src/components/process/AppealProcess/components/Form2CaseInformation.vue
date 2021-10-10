@@ -120,7 +120,7 @@ export default class Form2CaseInformation extends Vue {
         const partiesData = {appellants:[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931}],respondents:[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932}]}
         this.UpdatePartiesJson(partiesData);
         this.UpdateFileNumber(this.searchParams.file)
-        this.$router.push({name: "fill" })
+        this.$router.push({name: "fill"})
         //if doesn't exists
         this.notFound = true;
     }

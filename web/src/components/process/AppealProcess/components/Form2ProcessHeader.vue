@@ -6,33 +6,30 @@
 
                 <div v-if="stepsCompleted.first">
                     <b-icon-check-circle-fill class="ml-5 mt-3" variant="success" style="width: 57px;height: 57px;"/>
-                    <span class="text-secondary ml-3 mb-5" style="font-size: 18px; display: inline-block;">Form 2</span>                
+                    <span class="text-success ml-3 mb-5" style="font-size: 18px; font-weight: 600px; display: inline-block;">Form 2</span>                
                 </div>
                 <div v-else>
                     <step-number class="ml-5 mt-3" v-bind:stepNumber="1" v-bind:active="true"/>
                     <span class="text-dark" style="font-size: 18px; display: inline;">Form 2</span>
-                </div>
-               
+                </div>               
 
             </b-col>
             <b-col cols="4" >
                 <div v-if="stepsCompleted.second">
                     <b-icon-check-circle-fill class="ml-5 mt-3" variant="success" style="width: 57px;height: 57px;"/>
-                    <span class="text-secondary ml-3 mb-5" style="font-size: 18px; display: inline;">Preview</span>                
+                    <span class="text-success ml-3 mb-5" style="font-size: 18px; font-weight: 600px; display: inline;">Preview</span>                
                 </div>
                 <div v-else>
                     <step-number class="ml-5 mt-3"  v-bind:stepNumber="2" v-bind:active="stepsCompleted.first"/>
                     <span :class="stepsCompleted.first?'text-dark':'text-secondary'" style="font-size: 18px; display: inline;">Preview</span>
-                </div>
-
-               
+                </div>               
                 
             </b-col>
             <b-col cols="4">
 
                 <div v-if="stepsCompleted.third">
                     <b-icon-check-circle-fill class="ml-5 mt-3" variant="success" style="width: 57px;height: 57px;"/>
-                    <span class="text-secondary ml-2 mb-5" style="font-size: 18px; display: inline-block;">Submit</span>                
+                    <span class="text-success ml-2 mb-5" style="font-size: 18px; display: font-weight: 600px; inline-block;">Submit</span>                
                 </div>
                 <div v-else>
                     <step-number class="ml-5 mt-3"  v-bind:stepNumber="3" v-bind:active="stepsCompleted.first && stepsCompleted.second"/>

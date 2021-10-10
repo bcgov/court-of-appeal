@@ -4,6 +4,7 @@ import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
 import StartForm2 from "@/components/process/AppealProcess/StartForm2.vue";
 import FillForm2 from "@/components/process/AppealProcess/FillForm2.vue";
 import PreviewForm2 from "@/components/process/AppealProcess/PreviewForm2.vue";
+import SubmitForm2 from "@/components/process/AppealProcess/SubmitForm2.vue";
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
 import store from "@/store";
@@ -53,7 +54,15 @@ const routes = [
       path: "/preview",
       name: "preview",
       // beforeEnter: authGuard,
-      component: PreviewForm2
+      component: PreviewForm2,
+      props: true
+    },
+    {
+      path: "/proceed",
+      name: "proceed",
+      // beforeEnter: authGuard,
+      component: SubmitForm2,
+      props: true
     }
 ];
 

@@ -1,4 +1,4 @@
-import { pathwayTypeInfoType } from '@/types/Information';
+import { form2DataInfoType, pathwayTypeInfoType } from '@/types/Information';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -11,6 +11,7 @@ class Information extends VuexModule {
     public journeyJson = {} as journeyJsonDataType;
     public pathType = {} as pathwayTypeInfoType;
     public partiesJson = {} as partiesDataJsonDataType;
+    public form2Info = {} as form2DataInfoType;
     public fileNumber = "";    
 
     @Mutation
@@ -51,6 +52,16 @@ class Information extends VuexModule {
     @Action
     public UpdatePartiesJson(newPartiesJson: partiesDataJsonDataType): void {
         this.context.commit('setPartiesJson', newPartiesJson);
+    }
+
+    @Mutation
+    public setForm2Info(form2Info: form2DataInfoType): void {   
+        this.form2Info = form2Info;
+    }
+    
+    @Action
+    public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
+        this.context.commit('setForm2Info', newForm2Info);
     }
 
     @Mutation

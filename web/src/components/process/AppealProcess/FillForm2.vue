@@ -34,7 +34,7 @@
            
         </b-card>
 
-        <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white">
+        <b-card border-variant="white" bg-variant="white" class="mt-3">
             <form-2-style-of-proceeding/>
         </b-card>       
         
@@ -43,10 +43,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
-import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
 
 import Form2ProcessHeader from "@/components/process/AppealProcess/components/Form2ProcessHeader.vue";
 import Form2StyleOfProceeding from "@/components/process/AppealProcess/components/Form2StyleOfProceeding.vue";
