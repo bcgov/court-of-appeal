@@ -61,21 +61,6 @@
                 class="mt-2">Solicitor for the Respondents, {{respondentNames.toString()}}
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 </template>
 

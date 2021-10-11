@@ -1,6 +1,7 @@
 <template>
 <div>
     <b-button  v-on:click="trail1 = !trail1">H</b-button>
+    <b-button  v-on:click="displayWindow()">modal</b-button>
     <div class="journey-map-container">
 
         <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
@@ -195,6 +196,41 @@
             titleStyle="margin-top: 6rem;"            
         />
     </div>
+
+    <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+      <template v-slot:modal-title>
+        <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
+      </template>
+
+      <b-row no-gutters>
+          <b-col cols="1">
+              <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+
+          </b-col>
+          <b-col cols="11" style="padding: 0 0 0 2rem;">
+              <notice-of-hearing-window-content/>
+          </b-col>
+
+      </b-row>
+
+      
+
+      
+      <template v-slot:modal-footer>
+        <instruction-window-footer/>
+      </template>
+      <template v-slot:modal-header-close>
+        <b-button
+          variant="outline-primary text-white"
+          style="font-weight: bold; font-size: 1.25em;"
+          class="closeButton"
+          @click="showWindow = false"
+          >&times;</b-button
+        >
+      </template>
+    </b-modal>
+
+    
 </div>
 </template>
 
@@ -206,6 +242,9 @@ import ReturnTrail from './ReturnTrail.vue'
 import CalendarIcon from './journeyicons/CalendarIcon.vue'
 import GavelIcon from './journeyicons/GavelIcon.vue'
 import EndCircle from './journeyicons/EndCircle.vue'
+import InstructionWindowFooter from './components/InstructionWindowFooter.vue'
+import PathSidebar from './components/PathSidebar.vue'
+import NoticeOfHearingWindowContent from './components/NoticeOfHearingWindowContent.vue'
 
 @Component({
     components:{
@@ -214,12 +253,39 @@ import EndCircle from './journeyicons/EndCircle.vue'
         ReturnTrail,
         CalendarIcon,
         GavelIcon,
-        EndCircle
+        EndCircle,
+        InstructionWindowFooter,
+        PathSidebar,
+        NoticeOfHearingWindowContent
     }
 })
 export default class JourneyMap extends Vue {
 
-trail1 = false
+    trail1 = false
+
+    showWindow = false;
+    windowTitle = '';
+    pathType = '';
+    pathHeight = '';
+    noticeOfHearingHeight = '11rem';
+
+    displayWindow(){
+        
+        this.windowTitle = "Notice of Hearing";
+        this.pathType = "share";
+        this.pathHeight = this.noticeOfHearingHeight;
+        this.showWindow = true;
+
+    }
+
 
 }
 </script>
+
+<style scoped lang="scss">
+
+
+</style>
+
+
+
