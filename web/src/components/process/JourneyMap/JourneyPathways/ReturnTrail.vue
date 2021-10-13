@@ -4,7 +4,7 @@
             :style="{
                 position: 'absolute',
                 top: '56px',
-                left: '67px',
+                left: '27px',
                 zIndex: '10'
             }"
             :circling="status == 'completed'"
@@ -74,6 +74,4 @@ export default class ReturnTrail extends Vue {
 
 }
 </script>
-<style scoped>
-@import "./ReturnTrail.css";
-</style>
+

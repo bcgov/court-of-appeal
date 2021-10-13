@@ -1,200 +1,19 @@
 <template>
 <div>
-    <b-button  v-on:click="trail1 = !trail1">H</b-button>
+
     <b-button  v-on:click="displayWindow()">modal</b-button>
-    <div class="journey-map-container">
 
-        <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
-            
-        <div
-            :style="{marginLeft: '50px',
-                borderTop: '9px solid rgb(159, 191, 226)',
-                width: '65%',
-                position: 'absolute',
-                top: '92px',
-                zIndex: '1'}"
-        />
-
-        <Trail                
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='25%'
-            level=1                
-        />
-
-        <FormIcon   
-            style="left: 30%"
-            :twoPages="false"
-            stepTitle="Initial Documents"
-            action="this.iconClicked.bind(this, 'appellantinitial')"
-            :active="false"                       
-            order=1
-            status="new"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(1, this.state.steps)"
-            :ready="true"
-        />
-                    
-        <Trail
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='32%'
-            level=1
-        />
-
-        <FormIcon 
-            style="left: 60%"
-            :twoPages="true"
-            stepTitle="Appeal Record and Transcript"
-            stepTitleClass="step-title-wide"
-            action="this.iconClicked.bind(this, 'appealrecord')"
-            :active="true"
-            order=2
-            status="twoPages"
-            :ready="true"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(2,this.state.steps)"
-        />
-
-        <ReturnTrail
-            :status="trail1?'completed':''"
-            startpoint='68%'
-        />
-
-        <div
-            :style="{marginLeft: '204px',
-                borderTop: '9px solid rgb(159, 191, 226)',
-                width: '53%',
-                position: 'absolute',
-                top: '79%',
-                zIndex: '1',
-                marginBottom: '81px'}"
-        />
-
-        <FormIcon 
-            :style="{top: '46%', left: '24%'}"
-            :twoPages="true"
-            stepTitle="Factum, Appeal Book, and Certificate of Readiness"
-            action="this.iconClicked.bind(this, 'factum')"
-            stepTitleClass="step-title-wide"
-            :active="true"
-            order=3
-            status="twoPages"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(3, this.state.steps)"
-            :ready="true"
-        />
-
-        <Trail
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='27%'
-            :style="{top: '46%', left: '25%', position: 'absolute'}"
-            level=2
-        />
-
-        <CalendarIcon 
-            :style="{top: '46%', left: '46%'}"
-            stepTitle="Book Appeal Date with Registry"
-            stepTitleClass="step-title-wide"
-            action="this.iconClicked.bind(this, 'bookappeal')"
-            :active="true"
-            order=4
-            :status="trail1?'completed':''"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(4, this.state.steps)"
-            :ready="true"
-        />
-
-        <Trail
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='27%'
-            :style="{top: '46%', left: '50%', position: 'absolute'}"
-            level=2
-        />
-
-        <FormIcon 
-            :style="{top: '46%', left: '70%'}"
-            :twoPages="false"
-            stepTitle="Notice of Hearing"
-            action="this.iconClicked.bind(this, 'noticeofhearing')"
-            :active="true"
-            order=5
-            :status="'new'"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(5, this.state.steps)"
-            :ready="true"
-        />
-
-        <ReturnTrail
-            priorstep="this.state.steps[4]"
-            :status="trail1?'completed':''"
-            top='117px'
-            startpoint='71%'
-        />
-            
-        <div
-            :style="{marginLeft: '204px',
-                borderTop: '9px solid rgb(159, 191, 226)',
-                width: '62%',
-                position: 'absolute',
-                top: '91%',
-                zIndex: '1',
-                marginBottom: '81px'}"
-        />
-
-        <GavelIcon 
-            :style="{left: '24%', top: '82%'}"
-            className="journey-box" 
-            stepTitle="The Hearing" 
-            action="this.iconClicked.bind(this, 'appellanthearing')"
-            :active="true"
-            order=6
-            :status="trail1?'completed':''"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(6, this.state.steps)"
-            :ready="true"
-        />
-
-        <Trail
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='35%'
-            :style="{top: '85.05%', left: '25%', position: 'absolute'}"
-            level=3
-        />
-
-        <FormIcon 
-            :style="{left: '54%', top: '84.7%'}"
-            class="journey-box"
-            :twoPages="false"
-            stepTitle="Court Order"
-            action="this.iconClicked.bind(this, 'appellantcourtorder')"
-            :active="true"
-            order=7
-            :status="'new'"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(7, this.state.steps)"
-            :ready="true"
-        />
-
-        <Trail
-            className="journey-trail-l1-moveable"
-            :completed="trail1"
-            width='33%'
-            :style="{top: '85.05%', left: '58%', position: 'absolute', marginBottom: '100px'}"
-            level=3
-        />
-
-        <EndCircle
-            stepTitle="Appeal Process Complete"
-            action="this.iconClicked.bind(this,'appellantcomplete')"
-            :active="true"
-            :completed="trail1"
-            :style="{top: '84.7%', left: '82%'}"
-            titleStyle="margin-top: 6rem;"            
-        />
+    <div>        
+        <AppellantApplyForLeaveJourneyMap />
+        <AppellantLeaveGrantedJourneyMap />
+        <AppellantLeaveRefusedJourneyMap />
+        <AppellantRightToAppealJourneyMap />
+        
+        <RespondToAppealJourneyMap />
+        <RespondToLeaveGrantedJourneyMap />
+        <RespondToLeaveJourneyMap />
+        <RespondToLeaveRefusedFinalJourneyMap />
+        <RespondToLeaveRefusedJourneyMap />
     </div>
 
     <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
@@ -220,9 +39,6 @@
             </b-col>
 
         </b-row>
-
-      
-
       
       <template v-slot:modal-footer>
         <instruction-window-footer/>
@@ -264,6 +80,19 @@ import DecisionOnLeaveToAppealWindowContent from './components/startAppeal/noRig
 import NoticeOfAppearanceWindowContent from './components/respondToAppeal/noticeOfAppeal/NoticeOfAppearanceWindowContent.vue';
 import { journeyStepType } from '@/types/Information';
 
+
+import AppellantApplyForLeaveJourneyMap from './JourneyPathways/AppellantApplyForLeaveJourneyMap.vue'
+import AppellantLeaveGrantedJourneyMap from './JourneyPathways/AppellantLeaveGrantedJourneyMap.vue'
+import AppellantLeaveRefusedJourneyMap from './JourneyPathways/AppellantLeaveRefusedJourneyMap.vue'
+import AppellantRightToAppealJourneyMap from './JourneyPathways/AppellantRightToAppealJourneyMap.vue'
+
+import RespondToAppealJourneyMap from './JourneyPathways/RespondToAppealJourneyMap.vue'
+import RespondToLeaveGrantedJourneyMap from './JourneyPathways/RespondToLeaveGrantedJourneyMap.vue'
+import RespondToLeaveJourneyMap from './JourneyPathways/RespondToLeaveJourneyMap.vue'
+import RespondToLeaveRefusedFinalJourneyMap from './JourneyPathways/RespondToLeaveRefusedFinalJourneyMap.vue'
+import RespondToLeaveRefusedJourneyMap from './JourneyPathways/RespondToLeaveRefusedJourneyMap.vue'
+
+
 @Component({
     components:{
         Trail,
@@ -283,7 +112,18 @@ import { journeyStepType } from '@/types/Information';
         AppealProcessCompleteWindowContent,
         HearingDocumentsMotionWindowContent,
         DecisionOnLeaveToAppealWindowContent,
-        NoticeOfAppearanceWindowContent
+        NoticeOfAppearanceWindowContent,
+       
+        AppellantApplyForLeaveJourneyMap,
+        AppellantLeaveGrantedJourneyMap,
+        AppellantLeaveRefusedJourneyMap,
+        AppellantRightToAppealJourneyMap,
+
+        RespondToAppealJourneyMap,
+        RespondToLeaveGrantedJourneyMap,
+        RespondToLeaveJourneyMap,
+        RespondToLeaveRefusedFinalJourneyMap,
+        RespondToLeaveRefusedJourneyMap
     }
 })
 export default class JourneyMap extends Vue {

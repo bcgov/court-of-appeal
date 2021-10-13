@@ -1,13 +1,13 @@
 <template>
      <div v-bind:class="{'journey-box': true, 'inactive': !active}">       
         <step-completed-checkbox
-            :style="{position: 'relative', marginTop: 0, left: '-25%'}"
+            :style="{position: 'relative', marginTop: 0, left: '-35%'}"
             onChange="this.completed.bind(this)"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
-        <span :style="{position: 'relative', top: (twoPages ? '11px' : '5px'), left: '-10%', zIndex: '9'}">{{order}}</span>
+        <span :style="{position: 'relative', top: (twoPages ? '11px' : '5px'), left: '-28%', zIndex: '9'}">{{order}}</span>
         <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}" onClick="this.props.action">
             <two-page-icon v-if="twoPages || status=='twoPages'"/>
             <single-page-icon v-else-if="status=='new'"/>
@@ -23,7 +23,7 @@
                     {{stepTitle}}
                 </span>
                 <br/>
-                <span v-if="stepTitleOptional" class="step-title-optional">{stepTitleOptional}</span>
+                <span v-if="stepTitleOptional" class="step-title-optional">{{stepTitleOptional}}</span>
             </div>
         </div>
     </div>
@@ -92,8 +92,3 @@ export default class FormIcon extends Vue {
 
 }
 </script>
-
-<style scoped>
-@import "./PageeIcon.css";
-/*@import "./JourneyIcons.css";*/
-</style>

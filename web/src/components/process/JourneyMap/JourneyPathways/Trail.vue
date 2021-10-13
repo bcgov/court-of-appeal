@@ -33,6 +33,3 @@ export default class Trail extends Vue {
 
 }
 </script>
-<style scoped>
-@import './JourneyMap.css'
-</style>

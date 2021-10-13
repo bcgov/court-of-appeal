@@ -1,9 +1,4 @@
-import React, { Component } from 'react';
-
-class HearingIcon extends Component {
-
-    render() {
-        return (
+<template>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 51.9 58.8" xmlSpace="preserve">
                 <path fill="white" d="M13.1,19.3l15-15c1-1,1-2.6,0-3.5s-2.6-1-3.5,0l-15,15c-1,1-1,2.6,0,3.5C10.5,20.3,12.1,20.3,13.1,19.3z"/>
                 <path fill="white" d="M51.1,23.7c-1-1-2.6-1-3.5,0l-15,15c-1,1-1,2.6,0,3.5c1,1,2.6,1,3.5,0l15-15C52.1,26.3,52.1,24.7,51.1,23.7z"/>
@@ -12,7 +7,13 @@ class HearingIcon extends Component {
                 <path fill="white" d="M49.4,55h-1.3v-1.3c0-1.4-1.1-2.5-2.5-2.5H19.4c-1.4,0-2.5,1.1-2.5,2.5V55h-1.3c-1.4,0-2.5,0.8-2.5,1.9
                         c0,1,1.1,1.9,2.5,1.9h3.8h26.3h3.8c1.4,0,2.5-0.8,2.5-1.9C51.9,55.9,50.7,55,49.4,55z"/>
             </svg>
-        );
-    }
+</template>
+
+<script lang="ts">
+import { Component, Vue} from 'vue-property-decorator';
+
+@Component
+export default class HearingIcon extends Vue {
+
 }
-export default HearingIcon;
+</script>
