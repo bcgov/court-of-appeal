@@ -31,3 +31,21 @@ export interface form2DataInfoType {
     selfRepresented?: boolean;
     version?: string;
 }
+
+export interface journeyStepType {
+    noticeOfHearing?: boolean;
+    bookAppealDate?: boolean;
+    initialDocumentsNoticeOfAppeal?: boolean;
+    initialDocumentsNoticeOfApplicationForLeaveToAppeal?: boolean;
+    appealRecordAndTranscript?: boolean;
+    factumAppealBookAndCertificateOfReadiness?: boolean;
+    theHearing?: boolean;
+    courtOrder?: boolean;
+    appealProcessComplete?: boolean;
+    hearingDocumentsMotion?: boolean;
+    decisionOnLeaveToAppeal?: boolean;
+    noticeOfAppearance?: boolean;
+    hearingDocumentsReplyBook?: boolean;
+    crossAppeal?: boolean;
+    factumAndAppealBook?: boolean;    
+}
