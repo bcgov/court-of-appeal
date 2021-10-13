@@ -26,15 +26,20 @@
                 <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
-                <notice-of-hearing-window-content v-if="windowType.noticeOfHearing"/>
+
+                <initial-documents-notice-of-appeal-window-content v-if="windowType.initialDocumentsNoticeOfAppeal"/> 
                 <book-appeal-date-window-content v-else-if="windowType.bookAppealDate"/>
-                <initial-documents-notice-of-appeal-window-content v-else-if="windowType.initialDocumentsNoticeOfAppeal"/>
-                <the-hearing-window-content v-else-if="windowType.theHearing"/>
+                <notice-of-hearing-window-content v-else-if="windowType.noticeOfHearing"/>                
+                <the-hearing-window-content v-else-if="windowType.theHearing"/>                
                 <court-order-window-content v-else-if="windowType.courtOrder"/>
                 <appeal-process-complete-window-content v-else-if="windowType.appealProcessComplete"/>
+
                 <initial-documents-notice-of-application-for-leave-to-appeal-window-content v-else-if="windowType.initialDocumentsNoticeOfApplicationForLeaveToAppeal"/>
                 <hearing-documents-motion-window-content v-else-if="windowType.hearingDocumentsMotion"/>
                 <decision-on-leave-to-appeal-window-content v-else-if="windowType.decisionOnLeaveToAppeal"/>
+                
+                
+                
                 <notice-of-appearance-window-content v-else-if="windowType.noticeOfAppearance"/>
             </b-col>
 
