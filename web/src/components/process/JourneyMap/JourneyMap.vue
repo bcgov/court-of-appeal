@@ -60,12 +60,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Trail from './Trail.vue';
-import FormIcon from './journeyicons/FormIcon.vue';
-import ReturnTrail from './ReturnTrail.vue';
-import CalendarIcon from './journeyicons/CalendarIcon.vue';
-import GavelIcon from './journeyicons/GavelIcon.vue';
-import EndCircle from './journeyicons/EndCircle.vue';
+
 import InstructionWindowFooter from './components/InstructionWindowFooter.vue';
 import PathSidebar from './components/PathSidebar.vue';
 import NoticeOfHearingWindowContent from './components/startAppeal/hasRightToAppeal/NoticeOfHearingWindowContent.vue';
@@ -95,12 +90,6 @@ import RespondToLeaveRefusedJourneyMap from './JourneyPathways/RespondToLeaveRef
 
 @Component({
     components:{
-        Trail,
-        FormIcon,
-        ReturnTrail,
-        CalendarIcon,
-        GavelIcon,
-        EndCircle,
         InstructionWindowFooter,
         PathSidebar,
         NoticeOfHearingWindowContent,
