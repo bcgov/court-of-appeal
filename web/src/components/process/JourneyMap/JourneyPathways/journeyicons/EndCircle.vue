@@ -1,6 +1,7 @@
 <template>
     <div :class="{'action-end-point': true, 'journey-end-circle': true, 'any-icon': true, 'completed-step': completed}" onClick="this.props.action">
-        <div class="oi oi-check journey-final-check"/>
+        <!-- <div class="oi oi-check journey-final-check"/> -->
+        <img style="margin-top:-1.2rem;" src='../../../../../../public/icons/icon_approved.svg' class="leave-hearing" alt=""/>
         <div class="end-step-title end-step-title-l2">
             <div class="end-step-title" :style="titleStyle">{{stepTitle}}</div>
         </div>
@@ -25,9 +26,6 @@ export default class EndCircle extends Vue {
 
 }
 </script>
-<style scoped>
-@import './PageeIcon.css';
-@import './JourneyIcons.css';
-</style>
+
 
 

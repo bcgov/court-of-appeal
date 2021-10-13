@@ -1,0 +1,153 @@
+.leave-hearing {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    top:15%;
+}
+.appellant-leave-hearing {
+    position: relative;
+    width: 50%;
+    left: 22%;
+    top: 18%;
+}
+.action-end-point {
+    cursor: pointer;
+    max-width: 120px;
+}
+.end-step-title {
+    position: relative;
+    font-size: 16px;
+    text-align: center;
+    color: #23527c;
+}
+.end-step-title:hover {
+    text-decoration: underline;
+}
+.end-step-title-l2 {
+    top: 12px;
+    left: -25px;
+    width: 150px;
+}
+.step-title-container {
+    position: relative;
+    top: 75%;
+    left: -20%;
+    font-size: 16px;
+    text-align: center;
+    width: 119px;
+}
+.page-step-title-inactive {
+    top: 98%;
+}
+.step-title {
+    color: #23527c;
+}
+.step-title:hover {
+    text-decoration: underline;
+}
+.step-title-optional:hover {
+    text-decoration: none;
+}
+.step-title-optional {
+    color: black;
+}
+.step-title-wide {
+    width: 180px;
+    left: -57px;
+}
+.journey-box {
+    position: absolute;
+    height: 100px;
+    max-width: 109px;
+    cursor: pointer;
+    z-index: 11;
+}
+.journey-box.active {
+    cursor:pointer;
+}
+.journey-box.inactive {
+    cursor: auto;
+}
+.any-icon:hover {
+    box-shadow: -5px 5px 9px 1px rgba(0,0,0,.45);
+    transition: box-shadow .3s ease-in-out;
+}
+.journey-icon:hover {
+    box-shadow: -5px 5px 9px 1px  rgba(0,0,0,.45);
+    transition: box-shadow .2s ease-in-out;
+}
+.inactive:hover {
+    box-shadow: none;
+}
+.cal-container {
+    position: absolute;
+    top: -24px;
+    left: -.5px;
+    height: 90px;
+    width: 70px;
+    padding: 20px 10px;
+}
+.calendar-image {
+    width: inherit;
+    height: inherit;
+}
+
+.checkbox-toggle {
+    float:left;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    text-align: center;
+    background: white;
+ 
+    /* auto, since non-WebKit browsers doesn't support input styling */
+    margin: auto 10px;
+    border: 1px solid #333333; /* Mobile Safari */
+    -webkit-appearance: none;
+    /*-moz-appearance: none;*/
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+
+    outline:none;
+
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.checkbox-toggle:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+    box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+}
+
+.checkbox-toggle:checked {
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+    box-shadow: 0px 0px 3px 3px rgba(155, 155, 255, 0.2);
+}
+.checkbox-toggle:after {
+    content: '';
+    text-shadow: 0 -1px 0 #bfbfbf;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin: auto;
+}
+
+.checkbox-toggle:checked:after {
+    color: #2a679c;
+    text-shadow: 0 1px 0 #3c763d;
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(155, 155, 255, 0.2);
+    box-shadow: 0px 0px 1px 1px rgba(155, 155, 255, 0.2);
+
+    background: #87e0fd; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #a7cc61), color-stop(40%, #49a25a), color-stop(100%, #377d22)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #a7cc61 0%, #49a25a 40%, #377d22 100%); /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}

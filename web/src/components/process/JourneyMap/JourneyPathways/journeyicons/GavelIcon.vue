@@ -3,13 +3,13 @@
         :style="{marginTop: '21px', zIndex: '13'}"
     >
         <StepCompletedCheckbox
-            :style="{position: 'relative', marginTop: '0', left: '-25%'}"
+            :style="{position: 'relative', marginTop: '0', left: '-35%'}"
             onChange="this.completed.bind(this)"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
-        <span :style="{position: 'relative', top: '5px', left: active ? '-11%' : '7%', zIndex: '9'}">{{order}}</span>
+        <span :style="{position: 'relative', top: '5px', left: active ? '-28%' : '27%', zIndex: '9'}">{{order}}</span>
         <div class="file-container" onClick="this.props.action">
             <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -93,42 +93,3 @@ export default class GavelIcon extends Vue {
 
 }
 </script>
-
-<style scoped>
-@import "./PageeIcon.css";
-@import "./JourneyIcons.css";
-</style>
-
-
-import PropTypes from 'prop-types';
-
-
-
-
-class GavelIcon extends React.Component {
-
-    render() {
-        let stepTitle = null;
-        let active = this.props.active;
-        if (this.props.stepTitle) {
-            stepTitle = <div className={cn({"step-title": active}, {"step-title-optional": !active})}>{this.props.stepTitle}</div>;
-        }
-        if (this.props.stepTitleOptional) {
-            stepTitle = <div className={"step-title-optional"}>{this.props.stepTitleOptional}</div>;
-        }
-        
-        let style = {position: 'relative', top: '5px', left: active ? '-11%' : '7%', zIndex: '9'}
-        
-        return (
-            
-        )
-    }
-    
-    completed(e) {
-        this.props.completed(this.props.order, e.target.checked)
-    }
-
-} export default GavelIcon;
-GavelIcon.propTypes = {
-    active: PropTypes.bool
-}

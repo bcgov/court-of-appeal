@@ -1,6 +1,6 @@
 <template>
     <input  type="checkbox"            
-            class="checkbox-glow checkbox-toggle"
+            class=" checkbox-toggle"
             onChange="this.props.onChange"
             :disabled="disabled"
             :checked="checked"
@@ -25,6 +25,3 @@ export default class StepCompletedCheckbox extends Vue {
 
 }
 </script>
-<style scoped>
-@import "./JourneyIcons.css";
-</style>

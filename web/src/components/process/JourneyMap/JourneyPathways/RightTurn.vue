@@ -1,6 +1,6 @@
 <template>
-    <div class="right-turn" :style="styles">
-        <div style="{position:'relative'}" >
+    <div class="right-turn">
+        <div :style="{position:'relative'}" >
             <div :class="{'journey-circle-right': true, 'circling': circling}" />
             <div :class="{'journey-circle-right': true, 'circling-inside': circling}" />
             <div class="square"/>
@@ -18,20 +18,13 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component
 export default class RightTurn extends Vue {
 
-
-    @Prop({required: false})
-    styles!: any;
-
     @Prop({required: false})
     circling!: boolean;
 
-
-    mounted(){
-        console.log(this.styles)
-    }
-
 }
 </script>
+
+
 
 
 

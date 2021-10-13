@@ -1,13 +1,13 @@
 <template>
     <div :class="{'journey-box': true, 'inactive': !active}">
         <StepCompletedCheckbox
-            :style="{position: 'relative', top: '-7px', left: '-16%'}"
+            :style="{position: 'relative', top: '-7px', left: '-25%'}"
             onChange="this.completed.bind(this)"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
-        <span :style="{position: 'relative', zIndex: '9'}">{{order}}</span>
+        <span :style="{position: 'relative',top:'-1px',left: '-20%', zIndex: '9'}">{{order}}</span>
         <div class="cal-container" onClick="this.props.action">
             <div class="journey-icon calendar-image">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div :class="['step-title-container', stepTitleClass]" onClick="this.props.action">
-            <div class="step-title">{{stepTitle}}</div>
+            <div class="step-title" style="width:10rem; margin:0 auto; padding-left:1rem;">{{stepTitle}}</div>
         </div>
     </div>
 </template>
@@ -74,8 +74,3 @@ export default class  CalendarIcon extends Vue {
     // }
 }
 </script>
-
-<style scoped>
-@import './PageeIcon.css';
-@import './JourneyIcons.css';
-</style>
