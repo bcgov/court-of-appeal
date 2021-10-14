@@ -56,6 +56,10 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue";
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
@@ -84,6 +88,8 @@ export default class DashboardPage extends Vue {
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
 
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;    
 
     dataLoaded = false;    
     journeyStarted = false;
@@ -98,16 +104,16 @@ export default class DashboardPage extends Vue {
     {
         if (newPath.hasRightToAppeal){
             this.journeyStarted = true;
-            this.processType = 'hasRightToAppeal';
+            this.toggleSteps(this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo, true)            
         } else if (newPath.noRightToAppeal){
             this.journeyStarted = true;
-            this.processType = 'noRightToAppeal';
+            this.toggleSteps(this.stPgNo.APP_APPLY_LEAVE._StepNo, true)
         } else if (newPath.noticeOfAppealResponse){
             this.journeyStarted = true;
-            this.processType = 'noticeOfAppealResponse';
+            this.toggleSteps(this.stPgNo.RSP_TO_APPEAL._StepNo, true)
         } else if (newPath.noticeOfApplicationResponse){
             this.journeyStarted = true;
-            this.processType = 'noticeOfApplicationResponse';
+            this.toggleSteps(this.stPgNo.RSP_TO_LEAVE._StepNo, true)
         } else {
             this.journeyStarted = false;
         }
@@ -161,6 +167,7 @@ export default class DashboardPage extends Vue {
 
     public restartJourney() {
         this.journeyStarted = false;
+        this.$store.commit("Application/ResetStepsAndPages");
     }
 
     public navigateToDocumentsPage() {
@@ -172,7 +179,17 @@ export default class DashboardPage extends Vue {
     // TODO connect to backend
     public initSteps(){
         this.$store.commit("Application/init");
+        this.$store.dispatch("Application/UpdateStPgNo");
     }
+
+    public toggleSteps(stepId, activeIndicator) {       
+        this.$store.commit("Application/setStepActive", {
+            currentStep: stepId,
+            active: activeIndicator
+        });
+    }
+
+
 
 
 
