@@ -94,7 +94,7 @@
             :style="{left: '25%', top: '65%'}"
             class="journey-box" 
             stepTitle="The Hearing" 
-            @action="displayWindow('Appeal Process Complete')"
+            @action="displayWindow('The Hearing')"
             :active="true"
             order=4
             :status="trail1?'completed':''"
@@ -116,7 +116,7 @@
             :twoPages="false"
             stepTitle="Court Order"
             stepTitleOptional="(if required)"
-            @action="displayWindow('Appeal Process Complete')"
+            @action="displayWindow('Court Order')"
             stepTitleClass="step-title-wide"
             :active="true"
             order=5
@@ -157,6 +157,9 @@
             <b-col cols="11" style="padding: 0 0 0 2rem;">                
                 
                 <notice-of-appearance-rsp-to-appeal-pg v-if="noticeOfAppearanceContent"/>
+                <the-hearing-rsp-to-appeal-pg v-if="theHearingContent"/>
+                <court-order-rsp-to-appeal-pg v-if="courtOrderContent"/>
+                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>
 
             </b-col>
 
@@ -193,7 +196,9 @@ import EndCircle from './journeyicons/EndCircle.vue'
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
 import NoticeOfAppearanceRspToAppealPg from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
-
+import TheHearingRspToAppealPg from '../components/RspToAppeal/TheHearingRspToAppealPg.vue';
+import CourtOrderRspToAppealPg from '../components/RspToAppeal/CourtOrderRspToAppealPg.vue';
+import AppealProcessCompleteRspToAppealPg from '../components/RspToAppeal/AppealProcessCompleteRspToAppealPg.vue';
 
 @Component({
     components:{
@@ -205,7 +210,10 @@ import NoticeOfAppearanceRspToAppealPg from '../components/RspToAppeal/NoticeOfA
         EndCircle,
         InstructionWindowFooter,
         PathSidebar,      
-        NoticeOfAppearanceRspToAppealPg
+        NoticeOfAppearanceRspToAppealPg,
+        TheHearingRspToAppealPg,
+        CourtOrderRspToAppealPg,
+        AppealProcessCompleteRspToAppealPg
     }
 })
 export default class RespondToAppealJourneyMap extends Vue {
@@ -217,18 +225,39 @@ export default class RespondToAppealJourneyMap extends Vue {
     pathType = '';
     pathHeight = '';    
     noticeOfAppearanceContent = false; 
+    theHearingContent = false;
+    courtOrderContent = false;
+    appealProcessCompleteContent = false;
    
 
     displayWindow(contentType: string){
 
         this.noticeOfAppearanceContent = false; 
+        this.theHearingContent = false;28
+        this.courtOrderContent = false;
+        this.appealProcessCompleteContent = false;
 
         if (contentType == "Notice of Appearance"){
             this.windowTitle = "Notice of Appearance";
             this.pathType = "share";
             this.pathHeight = '28rem';
             this.noticeOfAppearanceContent = true;
-        }        
+        } else if (contentType == "The Hearing"){
+            this.windowTitle = "The Hearing";
+            this.pathType = "gavel";
+            this.pathHeight = '6rem';
+            this.theHearingContent = true;
+        } else if (contentType == "Court Order"){
+            this.windowTitle = "Court Order";
+            this.pathType = "info";
+            this.pathHeight = '6rem';
+            this.courtOrderContent = true;
+        } else if (contentType == "Appeal Process Complete"){
+            this.windowTitle = "Appeal Process Complete";
+            this.pathType = "info";
+            this.pathHeight = '3rem';
+            this.appealProcessCompleteContent = true;
+        }       
         this.showWindow = true;
     }
 

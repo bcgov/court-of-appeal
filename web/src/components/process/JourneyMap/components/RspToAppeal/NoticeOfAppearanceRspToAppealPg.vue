@@ -102,7 +102,7 @@
                     File the indicated number of copies with the registry.
                 </li>
                 <li>
-                    Serve one copy to each respondent.
+                    Serve one copy to each party.
                 </li>
             </ol>
         </b-row>    
