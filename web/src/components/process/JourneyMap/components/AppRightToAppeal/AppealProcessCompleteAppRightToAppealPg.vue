@@ -28,7 +28,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class AppealProcessCompleteWindowContent extends Vue { 
+export default class AppealProcessCompleteAppRightToAppealPg extends Vue { 
 
 
 }

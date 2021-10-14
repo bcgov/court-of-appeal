@@ -3,26 +3,26 @@
 
         <b-row class="mt-3 ml-4">            
             <div style="text-align: left; font-weight: bold;">
-                For more information about the court order process, click the topics below:
+                For more information about the hearing process, click the topics below:
             </div>            
         </b-row>        
 
         <b-row class="mt-4 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgement?ct=t(sidebar-link)"
-                target="_blank">How will I find out about my judgement?
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.3-how-to-prepare-for-the-hearing?ct=t(step-index-link)"
+                target="_blank">How do I prepare for my hearing?
             </a>                               
         </b-row>
         <b-row class="mt-2 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/appellant-guidebook/4.3-court-orders?ct=t(sidebar-link)"
-                target="_blank">Who is responsible for preparing the Court Order?
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.4-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                target="_blank">What will happen at my hearing?
             </a>                               
         </b-row>
         <b-row class="mt-2 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/appellant-guidebook/4.2-costs?ct=t(sidebar-link)"
-                target="_blank">Who is responsible for paying for the hearing?
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                target="_blank">What can I expect after my hearing?
             </a>                               
         </b-row>        
         
@@ -33,7 +33,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class CourtOrderWindowContent extends Vue { 
+export default class TheHearingRspToAppealPg extends Vue { 
 
 
 }

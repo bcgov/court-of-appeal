@@ -195,17 +195,68 @@
             titleStyle="margin-top: 1.5rem;"            
         />
     </div>
+
+    <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+        <template v-slot:modal-title>
+            <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
+        </template>
+
+        <b-row no-gutters>
+            <b-col cols="1">
+                <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+            </b-col>
+            <b-col cols="11" style="padding: 0 0 0 2rem;">
+
+                <initial-documents-notice-of-appeal-window-content v-if="windowType.initialDocumentsNoticeOfAppealHasRight"/> 
+                <book-appeal-date-window-content v-else-if="windowType.bookAppealDateHasRight"/>
+                <notice-of-hearing-window-content v-else-if="windowType.noticeOfHearingHasRight"/>                
+                <the-hearing-start-appeal-window-content v-else-if="windowType.theHearingStartAppeal"/>                
+                <court-order-window-content v-else-if="windowType.courtOrder"/>
+                <appeal-process-complete-window-content v-else-if="windowType.appealProcessCompleteHasRight"/>
+               
+            </b-col>
+
+        </b-row>
+      
+      <template v-slot:modal-footer>
+        <instruction-window-footer/>
+      </template>
+      <template v-slot:modal-header-close>
+        <b-button
+          variant="outline-primary text-white"
+          style="font-weight: bold; font-size: 1.25em;"
+          class="closeButton"
+          @click="showWindow = false"
+          >&times;</b-button
+        >
+      </template>
+    </b-modal>
 </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
+import { journeyStepType } from '@/types/Information';
 import Trail from './Trail.vue'
 import FormIcon from './journeyicons/FormIcon.vue'
 import ReturnTrail from './ReturnTrail.vue'
 import CalendarIcon from './journeyicons/CalendarIcon.vue'
 import GavelIcon from './journeyicons/GavelIcon.vue'
 import EndCircle from './journeyicons/EndCircle.vue'
+
+import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
+import PathSidebar from '../components/PathSidebar.vue';
+import NoticeOfHearingWindowContent from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
+import BookAppealDateWindowContent from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
+import InitialDocumentsNoticeOfAppealWindowContent from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
+import TheHearingStartAppealWindowContent from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
+import CourtOrderWindowContent from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
+import AppealProcessCompleteWindowContent from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
+
+
+
+
 
 @Component({
     components:{
@@ -214,12 +265,60 @@ import EndCircle from './journeyicons/EndCircle.vue'
         ReturnTrail,
         CalendarIcon,
         GavelIcon,
-        EndCircle
+        EndCircle,
+        InstructionWindowFooter,
+        PathSidebar,
+        NoticeOfHearingWindowContent,
+        BookAppealDateWindowContent,
+        InitialDocumentsNoticeOfAppealWindowContent,
+        TheHearingStartAppealWindowContent,
+        CourtOrderWindowContent,
+        AppealProcessCompleteWindowContent
     }
 })
 export default class AppellantRightToAppealJourneyMap extends Vue {
 
-trail1 = false
+trail1 = false;
+    showWindow = false;
+    windowTitle = '';
+    pathType = '';
+    pathHeight = '';
+    noticeOfHearingHeight = '11rem';
+    bookAppealDateHeight = '2rem';
+    initialDocumentsNoticeOfAppealHeight = '32rem';
+    theHearingStartAppealHeight = '6rem';
+    courtOrderHeight = '6rem';
+    appealProcessCompleteHeight = '3rem';
+    windowType = {theHearing: true} as journeyStepType;
+
+    displayWindow(){
+        if (this.windowType.noticeOfHearingHasRight){
+            this.windowTitle = "Notice of Hearing";
+            this.pathType = "share";
+            this.pathHeight = this.noticeOfHearingHeight;
+        } else if (this.windowType.bookAppealDateHasRight){
+            this.windowTitle = "Book Appeal Date";
+            this.pathType = "gavel";
+            this.pathHeight = this.bookAppealDateHeight;
+        } else if (this.windowType.initialDocumentsNoticeOfAppealHasRight){
+            this.windowTitle = "Initial Documents";
+            this.pathType = "share";
+            this.pathHeight = this.initialDocumentsNoticeOfAppealHeight;
+        } else if (this.windowType.theHearingStartAppeal){
+            this.windowTitle = "The Hearing";
+            this.pathType = "gavel";
+            this.pathHeight = this.theHearingStartAppealHeight;
+        } else if (this.windowType.courtOrder){
+            this.windowTitle = "Court Order";
+            this.pathType = "info";
+            this.pathHeight = this.courtOrderHeight;
+        } else if (this.windowType.appealProcessCompleteHasRight){
+            this.windowTitle = "Appeal Process Complete";
+            this.pathType = "info";
+            this.pathHeight = this.appealProcessCompleteHeight;
+        } 
+    }
+
 
 }
 </script>

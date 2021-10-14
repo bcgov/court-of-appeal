@@ -42,7 +42,7 @@ const informationState = namespace("Information");
 import { pathwayTypeInfoType } from '@/types/Information';
 
 @Component
-export default class DecisionOnLeaveToAppealWindowContent extends Vue {  
+export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {  
 
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void

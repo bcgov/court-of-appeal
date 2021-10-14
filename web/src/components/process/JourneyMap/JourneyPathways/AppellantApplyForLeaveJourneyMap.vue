@@ -71,6 +71,45 @@
             :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}"            
         />
     </div>
+
+
+    <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+        <template v-slot:modal-title>
+            <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
+        </template>
+
+        <b-row no-gutters>
+            <b-col cols="1">
+                <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+            </b-col>
+            <b-col cols="11" style="padding: 0 0 0 2rem;">
+
+              
+                <initial-documents-notice-of-application-for-leave-to-appeal-window-content v-if="windowType.initialDocumentsNoticeOfApplicationForLeaveToAppeal"/>
+                <hearing-documents-motion-window-content v-else-if="windowType.hearingDocumentsMotion"/>
+                <decision-on-leave-to-appeal-window-content v-else-if="windowType.decisionOnLeaveToAppeal"/>
+                
+            </b-col>
+
+        </b-row>
+      
+      <template v-slot:modal-footer>
+        <instruction-window-footer/>
+      </template>
+      <template v-slot:modal-header-close>
+        <b-button
+          variant="outline-primary text-white"
+          style="font-weight: bold; font-size: 1.25em;"
+          class="closeButton"
+          @click="showWindow = false"
+          >&times;</b-button
+        >
+      </template>
+    </b-modal>
+
+
+
+
 </div>
 </template>
 
@@ -83,16 +122,63 @@ import CalendarIcon from './journeyicons/CalendarIcon.vue'
 import GavelIcon from './journeyicons/GavelIcon.vue'
 import GavelEndCircle from './journeyicons/GavelEndCircle.vue'
 
+import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
+import PathSidebar from '../components/PathSidebar.vue';
+import InitialDocumentsNoticeOfApplicationForLeaveToAppealWindowContent from '../components/AppApplyLeave/InitialDocumentsAppApplyLeavePg.vue'
+import HearingDocumentsMotionWindowContent from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
+import DecisionOnLeaveToAppealWindowContent from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
+import { journeyStepType } from '@/types/Information';
+
+
 @Component({
     components:{
         Trail,
         FormIcon,
-        GavelEndCircle
+        GavelEndCircle,
+        InstructionWindowFooter,
+        PathSidebar,       
+        InitialDocumentsNoticeOfApplicationForLeaveToAppealWindowContent,
+       
+        HearingDocumentsMotionWindowContent,
+        DecisionOnLeaveToAppealWindowContent,
     }
 })
 export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
 trail1 = false
+    showWindow = false;
+    windowTitle = '';
+    pathType = '';
+    pathHeight = '';
+
+    initialDocumentsNoticeOfApplicationForLeaveToAppealHeight = '28rem';
+    hearingDocumentsMotionHeight = '16rem';
+    decisionOnLeaveToAppealHeight = '0';
+   
+    windowType = {theHearing: true} as journeyStepType;
+
+    displayWindow(){
+
+         if (this.windowType.initialDocumentsNoticeOfApplicationForLeaveToAppeal){
+            this.windowTitle = "Initial Documents";
+            this.pathType = "share";
+            this.pathHeight = this.initialDocumentsNoticeOfApplicationForLeaveToAppealHeight;
+        } else if (this.windowType.hearingDocumentsMotion){
+            this.windowTitle = "Hearing Documents";
+            this.pathType = "share";
+            this.pathHeight = this.hearingDocumentsMotionHeight;
+        } else if (this.windowType.decisionOnLeaveToAppeal){
+            this.windowTitle = "Decision on Leave to Appeal";
+            this.pathType = "gavel";
+            this.pathHeight = this.decisionOnLeaveToAppealHeight;
+        } 
+        
+        
+        this.showWindow = true;
+
+    }
+
+
 
 }
 </script>
