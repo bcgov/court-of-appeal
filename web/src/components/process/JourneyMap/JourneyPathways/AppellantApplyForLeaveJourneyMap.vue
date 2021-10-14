@@ -25,7 +25,7 @@
             style="left: 28%"
             :twoPages="false"
             stepTitle="Initial Documents"
-            action="this.iconClicked.bind(this, 'applyforleave')"
+            @action="displayWindow('Initial Documents')"
             :active="true"                       
             order=1
             status="new"
@@ -46,7 +46,7 @@
             :twoPages="true"
             stepTitle="Hearing Documents"
             stepTitleClass="step-title-wide"
-            action="this.iconClicked.bind(this, 'leavehearingdocs')"
+            @action="displayWindow('Initial Documents')"
             :active="true"
             order=2
             status="twoPages"
@@ -64,7 +64,7 @@
 
         <GavelEndCircle
             stepTitle="Decision on Leave to Appeal"
-            action="this.iconClicked.bind(this,'decision')"
+            @action="displayWindow('Initial Documents')"
             :active="true"
             :completed="trail1"
             :style="{position: 'absolute', left: '82%'}"
@@ -157,9 +157,9 @@ trail1 = false
    
     windowType = {theHearing: true} as journeyStepType;
 
-    displayWindow(){
+    displayWindow(type){
 
-         if (this.windowType.initialDocumentsNoticeOfApplicationForLeaveToAppeal){
+         if (type == "Initial Documents"){
             this.windowTitle = "Initial Documents";
             this.pathType = "share";
             this.pathHeight = this.initialDocumentsNoticeOfApplicationForLeaveToAppealHeight;
