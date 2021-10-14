@@ -14,18 +14,18 @@
                 zIndex: '1'}"
         />
 
-        <Trail                
+        <trail                
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='25%'
             level=1                
         />
 
-        <FormIcon   
+        <form-icon   
             style="left: 30%"
             :twoPages="false"
             stepTitle="Initial Documents"
-            action="this.iconClicked.bind(this, 'appellantinitial')"
+            @action="displayWindow('Initial Documents')"
             :active="true"                       
             order=1
             status="new"
@@ -34,19 +34,19 @@
             :ready="true"
         />
                     
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='32%'
             level=1
         />
 
-        <FormIcon 
+        <form-icon 
             style="left: 60%"
             :twoPages="true"
             stepTitle="Appeal Record and Transcript"
             stepTitleClass="step-title-wide"
-            action="this.iconClicked.bind(this, 'appealrecord')"
+            @action="displayWindow('Appeal Record and Transcript')"
             :active="true"
             order=2
             status="twoPages"
@@ -55,7 +55,7 @@
             readys="this.props.isStepReady(2,this.state.steps)"
         />
 
-        <ReturnTrail
+        <return-trail
             :status="trail1?'completed':''"
             startpoint='70%'
         />
@@ -70,11 +70,11 @@
                 marginBottom: '81px'}"
         />
 
-        <FormIcon 
+        <form-icon 
             :style="{top: '46%', left: '21%'}"
             :twoPages="true"
             stepTitle="Factum, Appeal Book, and Certificate of Readiness"
-            action="this.iconClicked.bind(this, 'factum')"
+            @action="displayWindow('Factum, Appeal Book, and Certificate of Readiness')"
             stepTitleClass="step-title-wide"
             :active="true"
             order=3
@@ -84,7 +84,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='27%'
@@ -92,11 +92,11 @@
             level=2
         />
 
-        <CalendarIcon 
+        <calendar-icon 
             :style="{top: '46.75%', left: '44%', height:'6rem'}"
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
-            action="this.iconClicked.bind(this, 'bookappeal')"
+            @action="displayWindow('Book Appeal Date')"
             :active="true"
             order=4
             :status="trail1?'completed':''"
@@ -105,7 +105,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='27%'
@@ -113,11 +113,11 @@
             level=2
         />
 
-        <FormIcon 
+        <form-icon 
             :style="{top: '46%', left: '70%'}"
             :twoPages="false"
             stepTitle="Notice of Hearing"
-            action="this.iconClicked.bind(this, 'noticeofhearing')"
+            @action="displayWindow('Notice of Hearing')"
             :active="true"
             order=5
             :status="'new'"
@@ -126,7 +126,7 @@
             :ready="true"
         />
 
-        <ReturnTrail
+        <return-trail
             priorstep="this.state.steps[4]"
             :status="trail1?'completed':''"
             top='117px'
@@ -143,11 +143,11 @@
                 marginBottom: '81px'}"
         />
 
-        <GavelIcon 
+        <gavel-icon 
             :style="{left: '24%', top: '82%'}"
             class="journey-box" 
             stepTitle="The Hearing" 
-            action="this.iconClicked.bind(this, 'appellanthearing')"
+            @action="displayWindow('The Hearing')"
             :active="true"
             order=6
             :status="trail1?'completed':''"
@@ -156,7 +156,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='35%'
@@ -164,12 +164,12 @@
             level=3
         />
 
-        <FormIcon 
+        <form-icon 
             :style="{left: '54%', top: '84.7%'}"
             class="journey-box"
             :twoPages="false"
             stepTitle="Court Order"
-            action="this.iconClicked.bind(this, 'appellantcourtorder')"
+            @action="displayWindow('Court Order')"
             :active="true"
             order=7
             :status="'new'"
@@ -178,7 +178,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='33%'
@@ -186,9 +186,9 @@
             level=3
         />
 
-        <EndCircle
+        <end-circle
             stepTitle="Appeal Process Complete"
-            action="this.iconClicked.bind(this,'appellantcomplete')"
+            @action="displayWindow('Appeal Process Complete')"
             :active="true"
             :completed="trail1"
             :style="{top: '84.7%', left: '82%'}"
@@ -207,12 +207,12 @@
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
 
-                <initial-documents-notice-of-appeal-window-content v-if="windowType.initialDocumentsNoticeOfAppealHasRight"/> 
-                <book-appeal-date-window-content v-else-if="windowType.bookAppealDateHasRight"/>
-                <notice-of-hearing-window-content v-else-if="windowType.noticeOfHearingHasRight"/>                
-                <the-hearing-start-appeal-window-content v-else-if="windowType.theHearingStartAppeal"/>                
-                <court-order-window-content v-else-if="windowType.courtOrder"/>
-                <appeal-process-complete-window-content v-else-if="windowType.appealProcessCompleteHasRight"/>
+                <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
+                <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
+                <notice-of-hearing-app-right-to-appeal-pg v-else-if="noticeOfHearingContent"/>                
+                <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
+                <court-order-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
+                <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                
             </b-col>
 
@@ -237,7 +237,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { journeyStepType } from '@/types/Information';
 import Trail from './Trail.vue'
 import FormIcon from './journeyicons/FormIcon.vue'
 import ReturnTrail from './ReturnTrail.vue'
@@ -247,16 +246,12 @@ import EndCircle from './journeyicons/EndCircle.vue'
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
-import NoticeOfHearingWindowContent from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
-import BookAppealDateWindowContent from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
-import InitialDocumentsNoticeOfAppealWindowContent from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
-import TheHearingStartAppealWindowContent from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
-import CourtOrderWindowContent from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
-import AppealProcessCompleteWindowContent from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
-
-
-
-
+import NoticeOfHearingAppRightToAppealPg from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
+import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
+import InitialDocumentsAppRightToAppealPg from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
+import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
+import CourtOrderAppRightToAppealPg from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
+import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
 
 @Component({
     components:{
@@ -268,63 +263,89 @@ import AppealProcessCompleteWindowContent from '../components/AppRightToAppeal/A
         EndCircle,
         InstructionWindowFooter,
         PathSidebar,
-        NoticeOfHearingWindowContent,
-        BookAppealDateWindowContent,
-        InitialDocumentsNoticeOfAppealWindowContent,
-        TheHearingStartAppealWindowContent,
-        CourtOrderWindowContent,
-        AppealProcessCompleteWindowContent
+        NoticeOfHearingAppRightToAppealPg,
+        BookAppealDateAppRightToAppealPg,
+        InitialDocumentsAppRightToAppealPg,
+        TheHearingAppRightToAppealPg,
+        CourtOrderAppRightToAppealPg,
+        AppealProcessCompleteAppRightToAppealPg
     }
 })
 export default class AppellantRightToAppealJourneyMap extends Vue {
 
-trail1 = false;
+    trail1 = false;
     showWindow = false;
     windowTitle = '';
     pathType = '';
     pathHeight = '';
-    noticeOfHearingHeight = '11rem';
-    bookAppealDateHeight = '2rem';
-    initialDocumentsNoticeOfAppealHeight = '32rem';
-    theHearingStartAppealHeight = '6rem';
-    courtOrderHeight = '6rem';
-    appealProcessCompleteHeight = '3rem';
-    windowType = {theHearing: true} as journeyStepType;
+    initialDocumentsContent = false;
+    bookAppealDateContent = false;
+    noticeOfHearingContent = false;
+    theHearingContent = false;
+    courtOrderContent = false;
+    appealProcessCompleteContent = false; 
 
-    displayWindow(){
-        if (this.windowType.noticeOfHearingHasRight){
-            this.windowTitle = "Notice of Hearing";
-            this.pathType = "share";
-            this.pathHeight = this.noticeOfHearingHeight;
-        } else if (this.windowType.bookAppealDateHasRight){
-            this.windowTitle = "Book Appeal Date";
-            this.pathType = "gavel";
-            this.pathHeight = this.bookAppealDateHeight;
-        } else if (this.windowType.initialDocumentsNoticeOfAppealHasRight){
+    displayWindow(contentType: string){
+
+        this.initialDocumentsContent = false;
+        this.bookAppealDateContent = false;
+        this.noticeOfHearingContent = false;
+        this.theHearingContent = false;
+        this.courtOrderContent = false;
+        this.appealProcessCompleteContent = false; 
+
+        if (contentType == "Initial Documents"){
+
             this.windowTitle = "Initial Documents";
             this.pathType = "share";
-            this.pathHeight = this.initialDocumentsNoticeOfAppealHeight;
-        } else if (this.windowType.theHearingStartAppeal){
+            this.pathHeight = '32rem';
+            this.initialDocumentsContent = true;
+
+        } else if (contentType == "Book Appeal Date"){
+
+            this.windowTitle = "Book Appeal Date";
+            this.pathType = "gavel";
+            this.pathHeight = '2rem';
+            this.bookAppealDateContent = true;
+
+        } else if (contentType == "Notice of Hearing"){
+
+            this.windowTitle = "Notice of Hearing";
+            this.pathType = "share";
+            this.pathHeight = '11rem';
+            this.noticeOfHearingContent = true;
+
+        }  else if (contentType == "The Hearing"){
+
             this.windowTitle = "The Hearing";
             this.pathType = "gavel";
-            this.pathHeight = this.theHearingStartAppealHeight;
-        } else if (this.windowType.courtOrder){
+            this.pathHeight = '6rem';
+            this.theHearingContent = true;
+
+        } else if (contentType == "Court Order"){
+
             this.windowTitle = "Court Order";
             this.pathType = "info";
-            this.pathHeight = this.courtOrderHeight;
-        } else if (this.windowType.appealProcessCompleteHasRight){
+            this.pathHeight = '6rem';
+            this.courtOrderContent = true;
+
+        } else if (contentType == "Appeal Process Complete"){
+
             this.windowTitle = "Appeal Process Complete";
             this.pathType = "info";
-            this.pathHeight = this.appealProcessCompleteHeight;
-        } 
+            this.pathHeight = '3rem';
+            this.appealProcessCompleteContent = true;
+        }
+        this.showWindow = true; 
     }
 
 
 }
 </script>
+
 <style scoped>
-@import './journeyStyles/JourneyMap.css';
-@import "./journeyStyles/ReturnTrail.css";
-@import './journeyStyles/JourneyIcons.css';
-@import './journeyStyles/PageeIcon.css';
+    @import './journeyStyles/JourneyMap.css';
+    @import "./journeyStyles/ReturnTrail.css";
+    @import './journeyStyles/JourneyIcons.css';
+    @import './journeyStyles/PageeIcon.css';
 </style>

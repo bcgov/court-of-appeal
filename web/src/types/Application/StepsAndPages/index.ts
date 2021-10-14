@@ -1,4 +1,4 @@
-export interface stepsAndPagesNumberInfoType{
+export interface stepsAndPagesNumberInfoType {
     APP_RIGHT_TO_APPEAL: APP_RIGHT_TO_APPEAL_stPgTypes;
     APP_APPLY_LEAVE: APP_APPLY_LEAVE_stPgTypes;
     RSP_TO_APPEAL: RSP_TO_APPEAL_stPgTypes; 
@@ -12,7 +12,7 @@ export interface stepsAndPagesNumberInfoType{
 
 }
  
-export interface APP_RIGHT_TO_APPEAL_stPgTypes{
+export interface APP_RIGHT_TO_APPEAL_stPgTypes {
     _StepNo: number;   
     
     InitialDocuments: number;
@@ -25,7 +25,7 @@ export interface APP_RIGHT_TO_APPEAL_stPgTypes{
     AppealProcessComplete: number;
 }
 
-export interface APP_APPLY_LEAVE_stPgTypes{
+export interface APP_APPLY_LEAVE_stPgTypes {
     _StepNo: number;
     
     InitialDocuments: number;
@@ -33,7 +33,7 @@ export interface APP_APPLY_LEAVE_stPgTypes{
     DecisionOnLeaveToAppeal: number; 
 }
   
-export interface RSP_TO_APPEAL_stPgTypes{
+export interface RSP_TO_APPEAL_stPgTypes {
     _StepNo: number;
     
     NoticeOfAppearance: number;

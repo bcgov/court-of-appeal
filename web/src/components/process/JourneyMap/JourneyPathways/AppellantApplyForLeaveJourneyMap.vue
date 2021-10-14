@@ -14,14 +14,14 @@
                 zIndex: '1'}"
         />
 
-        <Trail                
+        <trail                
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='28%'
             level=1                
         />
 
-       <FormIcon   
+        <form-icon   
             style="left: 28%"
             :twoPages="false"
             stepTitle="Initial Documents"
@@ -34,19 +34,19 @@
             :ready="true"
         />
                     
-         <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='30%'
             level=1
         />
 
-        <FormIcon 
+        <form-icon 
             style="left: 58%"
             :twoPages="true"
             stepTitle="Hearing Documents"
             stepTitleClass="step-title-wide"
-            @action="displayWindow('Initial Documents')"
+            @action="displayWindow('Hearing Documents')"
             :active="true"
             order=2
             status="twoPages"
@@ -55,16 +55,16 @@
             readys="this.props.isStepReady(2,this.state.steps)"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='25%'
             level=1
         />
 
-        <GavelEndCircle
+        <gavel-end-circle
             stepTitle="Decision on Leave to Appeal"
-            @action="displayWindow('Initial Documents')"
+            @action="displayWindow('Decision on Leave')"
             :active="true"
             :completed="trail1"
             :style="{position: 'absolute', left: '82%'}"
@@ -74,20 +74,21 @@
 
 
     <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+
         <template v-slot:modal-title>
             <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
         </template>
 
         <b-row no-gutters>
+
             <b-col cols="1">
                 <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
-
               
-                <initial-documents-notice-of-application-for-leave-to-appeal-window-content v-if="windowType.initialDocumentsNoticeOfApplicationForLeaveToAppeal"/>
-                <hearing-documents-motion-window-content v-else-if="windowType.hearingDocumentsMotion"/>
-                <decision-on-leave-to-appeal-window-content v-else-if="windowType.decisionOnLeaveToAppeal"/>
+                <initial-documents-app-apply-leave-pg v-if="initialDocumentsContent"/>
+                <hearing-documents-motion-app-apply-leave-pg v-else-if="hearingDocumentsContent"/>
+                <decision-on-leave-to-appeal-app-apply-leave-pg v-else-if="decisionOnLeave"/>
                 
             </b-col>
 
@@ -96,6 +97,7 @@
       <template v-slot:modal-footer>
         <instruction-window-footer/>
       </template>
+      
       <template v-slot:modal-header-close>
         <b-button
           variant="outline-primary text-white"
@@ -105,29 +107,24 @@
           >&times;</b-button
         >
       </template>
+
     </b-modal>
-
-
-
 
 </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Trail from './Trail.vue'
-import FormIcon from './journeyicons/FormIcon.vue'
-import ReturnTrail from './ReturnTrail.vue'
-import CalendarIcon from './journeyicons/CalendarIcon.vue'
-import GavelIcon from './journeyicons/GavelIcon.vue'
-import GavelEndCircle from './journeyicons/GavelEndCircle.vue'
+
+import Trail from './Trail.vue';
+import FormIcon from './journeyicons/FormIcon.vue';
+import GavelEndCircle from './journeyicons/GavelEndCircle.vue';
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
-import InitialDocumentsNoticeOfApplicationForLeaveToAppealWindowContent from '../components/AppApplyLeave/InitialDocumentsAppApplyLeavePg.vue'
-import HearingDocumentsMotionWindowContent from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
-import DecisionOnLeaveToAppealWindowContent from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
-import { journeyStepType } from '@/types/Information';
+import InitialDocumentsAppApplyLeavePg from '../components/AppApplyLeave/InitialDocumentsAppApplyLeavePg.vue';
+import HearingDocumentsMotionAppApplyLeavePg from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
+import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
 
 
 @Component({
@@ -137,54 +134,59 @@ import { journeyStepType } from '@/types/Information';
         GavelEndCircle,
         InstructionWindowFooter,
         PathSidebar,       
-        InitialDocumentsNoticeOfApplicationForLeaveToAppealWindowContent,
-       
-        HearingDocumentsMotionWindowContent,
-        DecisionOnLeaveToAppealWindowContent,
+        InitialDocumentsAppApplyLeavePg,       
+        HearingDocumentsMotionAppApplyLeavePg,
+        DecisionOnLeaveToAppealAppApplyLeavePg
     }
 })
 export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
-trail1 = false
+    trail1 = false
     showWindow = false;
     windowTitle = '';
     pathType = '';
     pathHeight = '';
 
-    initialDocumentsNoticeOfApplicationForLeaveToAppealHeight = '28rem';
-    hearingDocumentsMotionHeight = '16rem';
-    decisionOnLeaveToAppealHeight = '0';
-   
-    windowType = {theHearing: true} as journeyStepType;
+    initialDocumentsContent = false;
+    hearingDocumentsContent = false;
+    decisionOnLeave = false;
 
-    displayWindow(type){
+    displayWindow(contentType: string){
 
-         if (type == "Initial Documents"){
+        this.initialDocumentsContent = false;
+        this.hearingDocumentsContent = false;
+        this.decisionOnLeave = false;
+
+        if (contentType == "Initial Documents"){
+
             this.windowTitle = "Initial Documents";
             this.pathType = "share";
-            this.pathHeight = this.initialDocumentsNoticeOfApplicationForLeaveToAppealHeight;
-        } else if (this.windowType.hearingDocumentsMotion){
+            this.pathHeight = '28rem';
+            this.initialDocumentsContent = true;
+
+        } else if (contentType == "Hearing Documents"){
+
             this.windowTitle = "Hearing Documents";
             this.pathType = "share";
-            this.pathHeight = this.hearingDocumentsMotionHeight;
-        } else if (this.windowType.decisionOnLeaveToAppeal){
+            this.pathHeight = '16rem';
+            this.hearingDocumentsContent = true;
+
+        } else if (contentType == "Decision on Leave"){
+            
             this.windowTitle = "Decision on Leave to Appeal";
             this.pathType = "gavel";
-            this.pathHeight = this.decisionOnLeaveToAppealHeight;
-        } 
-        
-        
+            this.pathHeight = '0';
+            this.decisionOnLeave = true;
+        }         
         this.showWindow = true;
-
     }
-
-
 
 }
 </script>
+
 <style scoped>
-@import './journeyStyles/JourneyMap.css';
-@import "./journeyStyles/ReturnTrail.css";
-@import './journeyStyles/JourneyIcons.css';
-@import './journeyStyles/PageeIcon.css';
+    @import './journeyStyles/JourneyMap.css';
+    @import "./journeyStyles/ReturnTrail.css";
+    @import './journeyStyles/JourneyIcons.css';
+    @import './journeyStyles/PageeIcon.css';
 </style>
