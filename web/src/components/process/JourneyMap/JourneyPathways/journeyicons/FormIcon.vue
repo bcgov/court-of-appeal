@@ -2,13 +2,13 @@
      <div v-bind:class="{'journey-box': true, 'inactive': !active}">       
         <step-completed-checkbox
             :style="{position: 'relative', marginTop: 0, left: '-35%'}"
-            onChange="this.completed.bind(this)"
+            @onChange="completed"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
         <span :style="{position: 'relative', top: (twoPages ? '11px' : '5px'), left: '-28%', zIndex: '9'}">{{order}}</span>
-        <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}" onClick="this.props.action">
+        <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}" @click="action">
             <two-page-icon v-if="twoPages || status=='twoPages'"/>
             <single-page-icon v-else-if="status=='new'"/>
             <draft-page-icon v-else-if="status=='draft'"/>
@@ -17,7 +17,7 @@
 
             <div class="file-corner-r" :style="twoPages? 'top: -15px':''"/>
         </div>
-        <div :class="['step-title-container', stepTitleClass]" onClick="this.props.action">            
+        <div :class="['step-title-container', stepTitleClass]" @click="action">            
             <div v-if="stepTitle">
                 <span :class="{'step-title': active , 'step-title-optional' : !active}">
                     {{stepTitle}}
@@ -73,22 +73,20 @@ export default class FormIcon extends Vue {
     @Prop({required: true})
     order!: number;    
 
-    // @Prop({required: false})
-    // action!: any;
-
     @Prop({required: false})
     stepTitleClass!: string;
 
-    // @Prop({required: false})
-    // completed!: boolean;
-
-
-    // completed(e) {
-    //     this.props.completed(this.props.order, e.target.checked)
-    // }
+    
     // mounted(){
     //     console.log(this.stepTitle)
     // }
+
+    public action(){
+        this.$emit('action')
+    }
+    public completed() {
+        this.$emit('completed', this.order)
+    }
 
 }
 </script>

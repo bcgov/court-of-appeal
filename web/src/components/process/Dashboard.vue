@@ -117,7 +117,7 @@ export default class DashboardPage extends Vue {
     mounted() {  
         this.dataLoaded = false;
         this.loadInfo();
-       
+        this.initSteps();
     }
 
     public loadInfo () {
@@ -168,6 +168,13 @@ export default class DashboardPage extends Vue {
         this.$router.push({name: "my-documents" }) 
 
     }
+
+    // TODO connect to backend
+    public initSteps(){
+        this.$store.commit("Application/init");
+    }
+
+
 
 
 }

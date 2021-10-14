@@ -1,6 +1,6 @@
 
 <template>
-    <div :class="{'journey-box inactive': !active,'action-end-point':true}" onClick="this.props.action">
+    <div :class="{'journey-box inactive': !active,'action-end-point':true}" @click="action">
         <div  :class="{'journey-end-circle':true, className:true, 'completed-step': completed }" >
             <img style="margin-top:-1.2rem;" src='../../../../../../public/icons/icon_pending.svg' class="leave-hearing" alt=""/>
         </div>
@@ -31,6 +31,10 @@ export default class ClockEndCircle extends Vue {
 
     @Prop({required: false})
     completed!: boolean;
+
+    public action(){
+        this.$emit('action')
+    }
 
     mounted(){
         

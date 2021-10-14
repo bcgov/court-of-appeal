@@ -1,5 +1,5 @@
 <template>
-    <div class="action-end-point" onClick="this.props.action" >
+    <div class="action-end-point" @click="action" >
         <div :class="{'any-icon':true,'journey-end-circle':true, 'completed-step': completed}" >
             <svg class="appellant-leave-hearing" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 51.9 58.8" xmlSpace="preserve">
@@ -34,6 +34,10 @@ export default class GavelEndCircle extends Vue {
 
     @Prop({required: false})
     titleStyle!: string;
+
+    public action(){
+        this.$emit('action')
+    }
 
 }
 </script>

@@ -40,14 +40,12 @@ export interface applicationInfoType extends applicationStepOnlyInfoType {
 export interface stepInfoType {
     id?: string;
     name?: string;
-    type: string;
     label: string;
-    icon: string;
+    type: string;
     result?: resultInfoType;    
     pages?: pageInfoType[];
     currentPage?: number | string;
     active: boolean;
-    lastUpdate?: Date | null;
   }
 
   export interface pageInfoType {

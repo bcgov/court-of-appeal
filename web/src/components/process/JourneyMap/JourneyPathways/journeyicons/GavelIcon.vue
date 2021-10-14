@@ -4,13 +4,13 @@
     >
         <StepCompletedCheckbox
             :style="{position: 'relative', marginTop: '0', left: '-35%'}"
-            onChange="this.completed.bind(this)"
+            @onChange="completed"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
         <span :style="{position: 'relative', top: '5px', left: active ? '-28%' : '27%', zIndex: '9'}">{{order}}</span>
-        <div class="file-container" onClick="this.props.action">
+        <div class="file-container" @click="action">
             <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 85.7 114.3" xmlSpace="preserve">
@@ -35,7 +35,7 @@
 
             </div>
         </div>
-        <div class="step-title-container" :style="{top:'73px'}" onClick="this.props.action">
+        <div class="step-title-container" :style="{top:'73px'}" @click="action">
             <div v-if="stepTitle" :class="{'step-title': active, 'step-title-optional': !active}">{{stepTitle}}</div>
             <div v-if="stepTitleOptional" class="step-title-optional">{{stepTitleOptional}}</div>
         </div>
@@ -74,19 +74,16 @@ export default class GavelIcon extends Vue {
     @Prop({required: true})
     order!: number;    
 
-    // @Prop({required: false})
-    // action!: any;
-
     @Prop({required: false})
     stepTitleClass!: string;
 
-    // @Prop({required: false})
-    // completed!: boolean;
+    public action(){
+        this.$emit('action')
+    }
+    public completed() {
+        this.$emit('completed', this.order)
+    }
 
-
-    // completed(e) {
-    //     this.props.completed(this.props.order, e.target.checked)
-    // }
     // mounted(){
     //     console.log(this.stepTitle)
     // }

@@ -1,9 +1,9 @@
 <template>
-    <input  type="checkbox"            
-            class=" checkbox-toggle"
-            onChange="this.props.onChange"
-            :disabled="disabled"
-            :checked="checked"
+    <input  type= "checkbox"            
+            class= "checkbox-toggle"
+            @change= "onChange"
+            :disabled= "disabled"
+            :checked= "checked"
     />
 </template>
 
@@ -11,17 +11,17 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
-export default class StepCompletedCheckbox extends Vue {
-
-
-    @Prop({required: false})
-    onChange!: any;    
+export default class StepCompletedCheckbox extends Vue {    
 
     @Prop({required: false})
     disabled!: boolean;
 
     @Prop({required: false})
     checked!: boolean;
+
+    public onChange() {
+        this.$emit('onChange')
+    }
 
 }
 </script>

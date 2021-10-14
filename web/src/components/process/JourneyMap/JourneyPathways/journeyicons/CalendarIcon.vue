@@ -2,13 +2,13 @@
     <div :class="{'journey-box': true, 'inactive': !active}">
         <StepCompletedCheckbox
             :style="{position: 'relative', top: '-7px', left: '-25%'}"
-            onChange="this.completed.bind(this)"
+            @onChange="completed"
             :show="active"
             :disabled="!ready"
             :checked="status == 'completed'"
         />
         <span :style="{position: 'relative',top:'-1px',left: '-20%', zIndex: '9'}">{{order}}</span>
-        <div class="cal-container" onClick="this.props.action">
+        <div class="cal-container" @click="action">
             <div class="journey-icon calendar-image">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             viewBox="0 0 86 114" xmlSpace="preserve">
@@ -26,7 +26,7 @@
                 </svg>
             </div>
         </div>
-        <div :class="['step-title-container', stepTitleClass]" onClick="this.props.action">
+        <div :class="['step-title-container', stepTitleClass]" @click="action">
             <div class="step-title" style="width:10rem; margin:0 auto; padding-left:1rem;">{{stepTitle}}</div>
         </div>
     </div>
@@ -48,9 +48,6 @@ export default class  CalendarIcon extends Vue {
     status!: string;
 
     @Prop({required: false})
-    action!: any;
-
-    @Prop({required: false})
     stepTitleClass!: string;
 
     @Prop({required: false})
@@ -66,11 +63,11 @@ export default class  CalendarIcon extends Vue {
     stepTitle!: string;
 
 
-    // @Prop({required: false})
-    // completed!: boolean;
-
-    // completed(e) {
-    //     this.props.completed(this.props.order, e.target.checked)
-    // }
+    public action(){
+        this.$emit('action')
+    }
+    public completed() {
+        this.$emit('completed', this.order)
+    }
 }
 </script>
