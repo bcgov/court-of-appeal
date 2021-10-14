@@ -1,13 +1,13 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 The appeal process is complete.
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-5" > 
+        <b-row class="mt-4" > 
             <p>The Court of Appeal decision is final, unless the Supreme Court of Canada agrees 
             to hear the appellant's case. For more information, please see the
             <a 
@@ -28,7 +28,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class AppealProcessCompleteAppLeaveGrantedPg extends Vue { 
+export default class AppealProcessCompleteAppRightToAppealPg extends Vue { 
 
 
 }
