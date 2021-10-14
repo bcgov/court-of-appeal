@@ -14,18 +14,18 @@
                 zIndex: '1'}"
         />
 
-        <Trail                
+        <trail                
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='15%'
             level=1                
         />
 
-        <FormIcon   
+        <form-icon   
             style="left: 20%"
             :twoPages="false"
             stepTitle="Notice of Appearance"
-            action="this.iconClicked.bind(this, 'appearance')"
+            @action="displayWindow('Notice of Appearance')"
             :active="true"                       
             order=1
             status="new"
@@ -34,19 +34,19 @@
             :ready="true"
         />
                     
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='24%'
             level=1
         />
 
-        <FormIcon 
+        <form-icon 
             style="left: 44%"
             :twoPages="false"
             stepTitle="Notice of Cross Appeal"
             stepTitleOptional="(optional)"
-            action="this.iconClicked.bind(this, 'crossappeal')"
+            @action="displayWindow('Notice of Cross Appeal')"
             :active="true"
             order=2
             status="new"
@@ -55,18 +55,18 @@
             readys="this.props.isStepReady(2,this.state.steps)"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='24%'
             level=1
         />
 
-        <FormIcon 
+        <form-icon 
             style="left: 68%"
             :twoPages="true"
             stepTitle="Factum and Appeal Book"
-            action="this.iconClicked.bind(this, 'respondentfactum')"
+            @action="displayWindow('Factum and Appeal Book')"
             :active="true"
             order=3
             status="twoPages"
@@ -75,7 +75,7 @@
             readys="this.props.isStepReady(2,this.state.steps)"
         />
 
-        <ReturnTrail
+        <return-trail
             :status="trail1?'completed':''"
             startpoint='70%'
         />
@@ -90,11 +90,11 @@
                 marginBottom: '81px'}"
         />
 
-        <GavelIcon 
+        <gavel-icon 
             :style="{left: '25%', top: '65%'}"
             class="journey-box" 
             stepTitle="The Hearing" 
-            action="this.iconClicked.bind(this, 'respondenthearing')"
+            @action="displayWindow('Appeal Process Complete')"
             :active="true"
             order=4
             :status="trail1?'completed':''"
@@ -103,7 +103,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             :style="{position: 'absolute', marginLeft:'30%', top:'70.3%',width: '30%'}"
@@ -111,12 +111,12 @@
             level=2
         />
 
-        <FormIcon 
+        <form-icon 
             :style="{top: '69%', left: '54%'}"
             :twoPages="false"
             stepTitle="Court Order"
             stepTitleOptional="(if required)"
-            action="this.iconClicked.bind(this, 'courtorder')"
+            @action="displayWindow('Appeal Process Complete')"
             stepTitleClass="step-title-wide"
             :active="true"
             order=5
@@ -126,7 +126,7 @@
             :ready="true"
         />
 
-        <Trail
+        <trail
             className="journey-trail-l1-moveable"
             :completed="trail1"
             width='30%'
@@ -134,9 +134,9 @@
             level=2
         />
 
-        <EndCircle
+        <end-circle
             stepTitle="Appeal Process Complete"
-            action="this.iconClicked.bind(this,'respondentcomplete')"
+            @action="displayWindow('Appeal Process Complete')"
             :active="true"
             :completed="trail1"
             :style="{top: '70%', left: '80%'}"
@@ -145,6 +145,7 @@
     </div>
 
     <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+
         <template v-slot:modal-title>
             <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
         </template>
@@ -153,11 +154,10 @@
             <b-col cols="1">
                 <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
             </b-col>
-            <b-col cols="11" style="padding: 0 0 0 2rem;">             
-               
+            <b-col cols="11" style="padding: 0 0 0 2rem;">                
                 
-                
-                <notice-of-appearance-window-content v-if="windowType.noticeOfAppearance"/>
+                <notice-of-appearance-rsp-to-appeal-pg v-if="noticeOfAppearanceContent"/>
+
             </b-col>
 
         </b-row>
@@ -165,6 +165,7 @@
       <template v-slot:modal-footer>
         <instruction-window-footer/>
       </template>
+
       <template v-slot:modal-header-close>
         <b-button
           variant="outline-primary text-white"
@@ -174,12 +175,8 @@
           >&times;</b-button
         >
       </template>
+
     </b-modal>
-
-
-
-
-
 
 </div>
 </template>
@@ -195,8 +192,7 @@ import EndCircle from './journeyicons/EndCircle.vue'
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
-import NoticeOfAppearanceWindowContent from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
-import { journeyStepType } from '@/types/Information';
+import NoticeOfAppearanceRspToAppealPg from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
 
 
 @Component({
@@ -209,7 +205,7 @@ import { journeyStepType } from '@/types/Information';
         EndCircle,
         InstructionWindowFooter,
         PathSidebar,      
-        NoticeOfAppearanceWindowContent,
+        NoticeOfAppearanceRspToAppealPg
     }
 })
 export default class RespondToAppealJourneyMap extends Vue {
@@ -219,18 +215,19 @@ export default class RespondToAppealJourneyMap extends Vue {
     showWindow = false;
     windowTitle = '';
     pathType = '';
-    pathHeight = '';
+    pathHeight = '';    
+    noticeOfAppearanceContent = false; 
+   
 
-    
-    noticeOfAppearanceHeight = '28rem';
-    windowType = {theHearing: true} as journeyStepType;
+    displayWindow(contentType: string){
 
-    displayWindow(){
+        this.noticeOfAppearanceContent = false; 
 
-        if (this.windowType.noticeOfAppearance){
+        if (contentType == "Notice of Appearance"){
             this.windowTitle = "Notice of Appearance";
             this.pathType = "share";
-            this.pathHeight = this.noticeOfAppearanceHeight;
+            this.pathHeight = '28rem';
+            this.noticeOfAppearanceContent = true;
         }        
         this.showWindow = true;
     }

@@ -102,7 +102,7 @@
                     File the indicated number of copies with the registry.
                 </li>
                 <li>
-                    Serve one copy to each respondent.
+                    Serve one copy to each party.
                 </li>
             </ol>
         </b-row>    
@@ -117,7 +117,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class NoticeOfAppearanceRspToLeavePg extends Vue {
+export default class NoticeOfAppearanceRspToAppealPg extends Vue {
 
 
     public startNewDocument(){

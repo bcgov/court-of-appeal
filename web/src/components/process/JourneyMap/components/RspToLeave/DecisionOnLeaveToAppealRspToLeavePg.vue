@@ -3,7 +3,7 @@
 
         <b-row class="mt-3 ml-4">            
             <div style="text-align: left; font-weight: bold;">
-                Was your leave to appeal granted or refused?
+                Was the appellant's leave to appeal granted or refused?
             </div>            
         </b-row>   
 
@@ -11,7 +11,7 @@
             <b-col>              
                 <b-button 
                     block
-                    @click="hasRightToAppealPath" 
+                    @click="resToLeaveGrantedPath" 
                     variant="outline-primary bg-success text-white" 
                     >
                     Granted
@@ -21,7 +21,7 @@
             <b-col>
                 <b-button 
                     block
-                    @click="noRightToAppealPath" 
+                    @click="resToLeaveRefusedPath" 
                     variant="outline-primary bg-success text-white" 
                 >Refused
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -42,25 +42,21 @@ const informationState = namespace("Information");
 import { pathwayTypeInfoType } from '@/types/Information';
 
 @Component
-export default class DecisionOnLeaveToAppealRspToLeavePg extends Vue {  
+export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {  
 
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
-    public hasRightToAppealPath() {
-
-        const pathType = {} as pathwayTypeInfoType;
-        pathType.hasRightToAppeal = true;
-        this.UpdatePathType(pathType);
+    public resToLeaveGrantedPath() {
+        //TODO: update to use new store
+        
         //TODO: close the window
 
     }
 
-    public noRightToAppealPath() {
+    public resToLeaveRefusedPath() {
 
-        const pathType = {} as pathwayTypeInfoType;
-        pathType.noRightToAppeal = true;
-        this.UpdatePathType(pathType); 
+        //TODO: update to use new store
         //TODO: close the window
     }
 }
