@@ -88,7 +88,7 @@
               
                 <initial-documents-app-apply-leave-pg v-if="initialDocumentsContent"/>
                 <hearing-documents-motion-app-apply-leave-pg v-else-if="hearingDocumentsContent"/>
-                <decision-on-leave-to-appeal-app-apply-leave-pg v-else-if="decisionOnLeave"/>
+                <decision-on-leave-to-appeal-app-apply-leave-pg v-else-if="decisionOnLeaveContent"/>
                 
             </b-col>
 
@@ -149,13 +149,13 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
     initialDocumentsContent = false;
     hearingDocumentsContent = false;
-    decisionOnLeave = false;
+    decisionOnLeaveContent = false;
 
     displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
         this.hearingDocumentsContent = false;
-        this.decisionOnLeave = false;
+        this.decisionOnLeaveContent = false;
 
         if (contentType == "Initial Documents"){
 
@@ -176,7 +176,7 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
             this.windowTitle = "Decision on Leave to Appeal";
             this.pathType = "gavel";
             this.pathHeight = '0';
-            this.decisionOnLeave = true;
+            this.decisionOnLeaveContent = true;
         }         
         this.showWindow = true;
     }

@@ -117,7 +117,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class NoticeOfAppearanceRspToLeavePg extends Vue {
+export default class NoticeOfAppearanceRspToAppealPg extends Vue {
 
 
     public startNewDocument(){

@@ -1,7 +1,7 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-2">            
             <div style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appeal?
             </div>            
@@ -117,7 +117,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class NoticeOfAppearanceRspToLeavePg extends Vue {
+export default class NoticeOfAppearanceRspToLeaveGrantedPg extends Vue {
 
 
     public startNewDocument(){

@@ -3,26 +3,26 @@
 
         <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
-                For more information about the hearing process, click the topics below:
+                For more information about the court order process, click the topics below:
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-1" >            
+        <b-row class="mt-4 ml-3" >            
             <a 
                 href="https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
-                target="_blank">How do I prepare for my hearing?
+                target="_blank">How will I find out about my judgement?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-1" >            
+        <b-row class="mt-2 ml-3" >            
             <a 
                 href="https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
-                target="_blank">What will happen at my hearing?
+                target="_blank">Who is responsible for paying for the hearing?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-1">            
+        <b-row class="mt-2 ml-3" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(step-index-link)"
-                target="_blank">What can I expect after my hearing?
+                href="https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(sidebar-link)"
+                target="_blank">How do I prepare my court order?
             </a>                               
         </b-row>        
         
@@ -33,7 +33,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class TheHearingRspToAppealPg extends Vue { 
+export default class CourtOrderRspToLeaveGrantedPg extends Vue { 
 
 
 }

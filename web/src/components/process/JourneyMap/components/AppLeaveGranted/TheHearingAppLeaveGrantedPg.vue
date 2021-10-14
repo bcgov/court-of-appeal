@@ -1,27 +1,27 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3">            
+        <b-row class="mt-3 ml-4">            
             <div style="text-align: left; font-weight: bold;">
                 For more information about the hearing process, click the topics below:
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-1" >            
+        <b-row class="mt-4 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.3-how-to-prepare-for-the-hearing?ct=t(step-index-link)"
                 target="_blank">How do I prepare for my hearing?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-1" >            
+        <b-row class="mt-2 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.4-what-happens-at-the-hearing?ct=t(sidebar-link)"
                 target="_blank">What will happen at my hearing?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-1">            
+        <b-row class="mt-2 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(step-index-link)"
+                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
                 target="_blank">What can I expect after my hearing?
             </a>                               
         </b-row>        
@@ -33,7 +33,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class TheHearingRspToAppealPg extends Vue { 
+export default class TheHearingAppLeaveGrantedPg extends Vue { 
 
 
 }
