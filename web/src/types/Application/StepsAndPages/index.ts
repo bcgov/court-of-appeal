@@ -1,164 +1,101 @@
 export interface stepsAndPagesNumberInfoType{
-    GETSTART: GETSTARTstPgTypes;
-    PO: POstPgTypes;
-    COMMON: COMMONstPgTypes;    
-    FLM: FLMstPgTypes;
-    CM: CMstPgTypes
-    PPM: PPMstPgTypes
-    RELOC: RELOCstPgTypes;
-    ENFRC: ENFRCstPgTypes;
-    SUBMIT: SUBMITstPgTypes;
-}
+    APP_RIGHT_TO_APPEAL: APP_RIGHT_TO_APPEAL_stPgTypes;
+    APP_APPLY_LEAVE: APP_APPLY_LEAVE_stPgTypes;
+    RSP_TO_APPEAL: RSP_TO_APPEAL_stPgTypes; 
+    RSP_TO_LEAVE: RSP_TO_LEAVE_stPgTypes;
+    
+    APP_LEAVE_GRANTED: APP_LEAVE_GRANTED_stPgTypes;
+    APP_LEAVE_REFUSED: APP_LEAVE_REFUSED_stPgTypes;
+    RSP_TO_LEAVE_GRANTED: RSP_TO_LEAVE_GRANTED_stPgTypes;
+    RSP_TO_LEAVE_REFUSED_FINAL: RSP_TO_LEAVE_REFUSED_FINAL_stPgTypes;
+    RSP_TO_LEAVE_REFUSED: RSP_TO_LEAVE_REFUSED_stPgTypes;
 
+}
  
-export interface GETSTARTstPgTypes{
+export interface APP_RIGHT_TO_APPEAL_stPgTypes{
     _StepNo: number;   
     
-    GettingStarted: number;
+    InitialDocuments: number;
+    AppealRecordAndTranscript: number;
+    FactumAppealBookAndCertificateOfReadiness: number;
+    BookAppealDateWithRegistry: number;
+    NoticeOfHearing: number;
+    TheHearing: number;
+    CourtOrder: number;
+    AppealProcessComplete: number;
 }
 
-export interface POstPgTypes{
+export interface APP_APPLY_LEAVE_stPgTypes{
     _StepNo: number;
     
-    PoQuestionnaire: number;
-    YourinformationPO: number;
-    ProtectionFromWhom: number;
-    PoFilingLocation: number;
-    RemovePerson: number;
-    NoGo: number;
-    NoContact: number;
-    WeaponsFirearms: number;
-    Background: number;
-    YourStory: number;
-    OtherParty: number;
-    About: number;
-    Urgency: number;
-    ReviewYourAnswers: number;
-    PreviewForms: number;    
+    InitialDocuments: number;
+    HearingDocuments: number;
+    DecisionOnLeaveToAppeal: number; 
 }
   
-export interface COMMONstPgTypes{
+export interface RSP_TO_APPEAL_stPgTypes{
     _StepNo: number;
     
-    SafetyCheck: number;
-    Notice: number;
-    YourInformation: number;
-    OtherPartyCommon: number;
-    FilingLocation: number;
+    NoticeOfAppearance: number;
+    NoticeOfCrossAppeal: number;
+    FactumAndAppealBook: number;
+    TheHearing: number;
+    CourtOrder: number;
+    AppealProcessComplete: number;
 }
 
-export interface FLMstPgTypes{
-    _StepNo: number;
-
-    FlmQuestionnaire: number;
-    FlmBackground: number;
-    ChildrenInfo: number;
-    ParentingArrangements: number;
-    ParentalResponsibilities: number;
-    ParentingTime: number;
-    OtherParentingArrangements: number;
-    ParentingOrderAgreement: number;
-    AboutParentingArrangements: number;
-    ParentingArrangementChanges: number;
-    BestInterestsOfChild: number;
-    ChildSupport: number;
-    ChildSupportCurrentArrangements: number;
-    IncomeAndEarningPotential: number;
-    AboutChildSupportOrder: number;
-    ChildSupportOrderAgreement: number;
-    AboutExistingChildSupport: number;
-    CalculatingChildSupport: number;
-    UndueHardship: number;
-    SpecialAndExtraordinaryExpenses: number;
-    AboutChildSupportChanges: number;
-    UnpaidChildSupport: number;
-    ContactWithChild: number;
-    ContactWithChildOrder: number;
-    AboutContactWithChildOrder: number;
-    ContactWithChildBestInterestsOfChild: number;
-    GuardianOfChild: number;
-    GuardianOfChildBestInterestsOfChild: number;
-    IndigenousAncestryOfChild: number;
-    SpousalSupport: number;
-    SpousalSupportIncomeAndEarningPotential: number;
-    AboutSpousalSupportOrder: number;
-    ExistingSpousalSupportOrderAgreement: number;
-    ExistingSpousalSupportFinalOrder: number;
-    ExistingSpousalSupportAgreement: number;
-    CalculatingSpousalSupport: number;
-    AboutExistingSpousalSupportOrder: number;
-    UnpaidSpousalSupport: number;
-    FlmAdditionalDocuments: number;
-    ReviewYourAnswersFLM: number;
-    PreviewFormsFLM: number;
-}
-
-export interface CMstPgTypes{
-    _StepNo: number;
-
-    CmQuestionnaire: number;
-    OtherPersons: number;
-    WithoutNoticeOrAttendance: number;
-    ByConsent: number;
-    CmNotice: number;
-    Scheduling: number;
-    AboutCaseManagementOrder: number;
-    CmChildrenInfo: number;
-    AttendanceUsingElectronicCommunication: number;
-    ChangingOrCancellingAServiceOrNotice: number;
-    ChangingOrCancellingAnyOtherRequirement: number;
-    RequiringAccessToInformation: number;
-    RecognizingAnOrderFromOutsideBc: number; 
-    ContactInformationOtherParty: number;   
-    ReviewYourAnswersCM: number;
-    PreviewForm10CM: number;
-    PreviewForm11CM: number;
-}
-
-export interface PPMstPgTypes{
+export interface RSP_TO_LEAVE_stPgTypes{
     _StepNo: number;
     
-    PpmQuestionnaire: number;
-    PriorityParentingMatterOrder: number;
-    PpmBackground: number;
-    PpmChildrenInfo: number;
-    AboutPriorityParentingMatterOrder: number;
-    ReviewYourAnswersPPM: number;
-    PreviewFormsPPM: number;  
+    NoticeOfAppearance: number;    
+    ReplyBook: number;    
+    TheHearing: number;   
+    DecisionOnLeaveToAppeal: number;
 }
 
-export interface RELOCstPgTypes{
+export interface APP_LEAVE_GRANTED_stPgTypes{
+    _StepNo: number;   
+    
+    AppealRecordAndTranscript: number;
+    FactumAppealBookAndCertificateOfReadiness: number;
+    BookAppealDateWithRegistry: number;    
+    NoticeOfHearing: number;
+    TheHearing: number;
+    CourtOrder: number;
+    AppealProcessComplete: number;
+}
+
+export interface APP_LEAVE_REFUSED_stPgTypes{
     _StepNo: number;
     
-    RelocQuestionnaire: number;
-    RelocChildrenInfo: number;
-    RelocChildBestInterestInfo: number;
-    ReviewYourAnswersRELOC: number;
-    PreviewFormsRELOC: number;
+    ApplicationForReview: number;
+    TheHearing: number;   
+    FinalDecisionOnLeaveToAppeal: number;
 }
 
-export interface ENFRCstPgTypes{
+export interface RSP_TO_LEAVE_GRANTED_stPgTypes{
+    _StepNo: number;   
+    
+    NoticeOfAppearance: number;
+    FactumAppealBookAndCertificateOfReadiness: number;    
+    TheHearing: number;
+    CourtOrder: number;
+    AppealProcessComplete: number;
+}
+
+export interface RSP_TO_LEAVE_REFUSED_FINAL_stPgTypes{
     _StepNo: number;
     
-    EnfrcQuestionnaire: number;
-    DetermineAnAmountOwingForExpenses: number;
-    DetermineArrears: number;
-    EnforceAgreementOrOrder: number;
-    EnforceChangeOrSetAsideDetermination: number;
-    AboutTheOrderEnforcement: number;
-    ReviewYourAnswersENFRC: number;
-    PreviewForm26ENFRC: number;
-    PreviewForm27ENFRC: number;
-    PreviewForm28ENFRC: number;
-    PreviewForm29ENFRC : number;   
+    ApplicationForReview: number;
+    TheHearing: number;   
+    FinalDecisionOnLeaveToAppeal: number;
 }
 
-export interface SUBMITstPgTypes{
+export interface RSP_TO_LEAVE_REFUSED_stPgTypes{
     _StepNo: number;
-
-    FilingOptions: number;
-    ReviewAndPrint: number;
-    ReviewAndSave: number;
-    ReviewAndSubmit: number;
-    NextSteps: number;    
+    
+    ApplicationForReview: number;
+    TheHearing: number;   
+    FinalDecisionOnLeaveToAppeal: number;
 }
+
