@@ -33,18 +33,28 @@ export interface form2DataInfoType {
 }
 
 export interface journeyStepType {
-    noticeOfHearing?: boolean;
-    bookAppealDate?: boolean;
-    initialDocumentsNoticeOfAppeal?: boolean;
+
+
+    appRighttoAppeal? 
+
+    noticeOfHearingHasRight?: boolean;
+    bookAppealDateHasRight?: boolean;
+    initialDocumentsNoticeOfAppealHasRight?: boolean;
+    appealProcessCompleteHasRight?: boolean;
+    theHearingStartAppeal?: boolean;
+
+
+
     initialDocumentsNoticeOfApplicationForLeaveToAppeal?: boolean;
     appealRecordAndTranscript?: boolean;
     factumAppealBookAndCertificateOfReadiness?: boolean;
-    theHearing?: boolean;
+    
     courtOrder?: boolean;
-    appealProcessComplete?: boolean;
+    
     hearingDocumentsMotion?: boolean;
     decisionOnLeaveToAppeal?: boolean;
     noticeOfAppearance?: boolean;
+    theHearingRespondToAppeal?: boolean;
     hearingDocumentsReplyBook?: boolean;
     crossAppeal?: boolean;
     factumAndAppealBook?: boolean;    

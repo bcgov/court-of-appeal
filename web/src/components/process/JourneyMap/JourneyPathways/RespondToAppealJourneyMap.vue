@@ -143,6 +143,44 @@
             titleStyle="margin-top: 1.5rem;"            
         />
     </div>
+
+    <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
+        <template v-slot:modal-title>
+            <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
+        </template>
+
+        <b-row no-gutters>
+            <b-col cols="1">
+                <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+            </b-col>
+            <b-col cols="11" style="padding: 0 0 0 2rem;">             
+               
+                
+                
+                <notice-of-appearance-window-content v-if="windowType.noticeOfAppearance"/>
+            </b-col>
+
+        </b-row>
+      
+      <template v-slot:modal-footer>
+        <instruction-window-footer/>
+      </template>
+      <template v-slot:modal-header-close>
+        <b-button
+          variant="outline-primary text-white"
+          style="font-weight: bold; font-size: 1.25em;"
+          class="closeButton"
+          @click="showWindow = false"
+          >&times;</b-button
+        >
+      </template>
+    </b-modal>
+
+
+
+
+
+
 </div>
 </template>
 
@@ -155,6 +193,12 @@ import CalendarIcon from './journeyicons/CalendarIcon.vue'
 import GavelIcon from './journeyicons/GavelIcon.vue'
 import EndCircle from './journeyicons/EndCircle.vue'
 
+import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
+import PathSidebar from '../components/PathSidebar.vue';
+import NoticeOfAppearanceWindowContent from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
+import { journeyStepType } from '@/types/Information';
+
+
 @Component({
     components:{
         Trail,
@@ -162,19 +206,43 @@ import EndCircle from './journeyicons/EndCircle.vue'
         ReturnTrail,
         CalendarIcon,
         GavelIcon,
-        EndCircle
+        EndCircle,
+        InstructionWindowFooter,
+        PathSidebar,      
+        NoticeOfAppearanceWindowContent,
     }
 })
 export default class RespondToAppealJourneyMap extends Vue {
 
-trail1 = false
+    trail1 = false;
+
+    showWindow = false;
+    windowTitle = '';
+    pathType = '';
+    pathHeight = '';
+
+    
+    noticeOfAppearanceHeight = '28rem';
+    windowType = {theHearing: true} as journeyStepType;
+
+    displayWindow(){
+
+        if (this.windowType.noticeOfAppearance){
+            this.windowTitle = "Notice of Appearance";
+            this.pathType = "share";
+            this.pathHeight = this.noticeOfAppearanceHeight;
+        }        
+        this.showWindow = true;
+    }
+
 
 }
 </script>
+
 <style scoped>
-@import './journeyStyles/JourneyMap.css';
-@import "./journeyStyles/ReturnTrail.css";
-@import './journeyStyles/JourneyIcons.css';
-@import './journeyStyles/PageeIcon.css';
+    @import './journeyStyles/JourneyMap.css';
+    @import "./journeyStyles/ReturnTrail.css";
+    @import './journeyStyles/JourneyIcons.css';
+    @import './journeyStyles/PageeIcon.css';
 </style>
 

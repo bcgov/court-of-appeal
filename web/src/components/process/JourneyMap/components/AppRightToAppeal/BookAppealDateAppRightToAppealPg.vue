@@ -21,7 +21,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class BookAppealDateWindowContent extends Vue { 
+export default class BookAppealDateAppRightToAppealPg extends Vue { 
 
 
 }

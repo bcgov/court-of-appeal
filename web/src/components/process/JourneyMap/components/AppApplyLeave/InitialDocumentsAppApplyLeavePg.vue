@@ -133,7 +133,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class initialDocumentsNoticeOfApplicationForLeaveToAppealWindowContent extends Vue {  
+export default class InitialDocumentsAppApplyLeavePg extends Vue {  
     
 
 

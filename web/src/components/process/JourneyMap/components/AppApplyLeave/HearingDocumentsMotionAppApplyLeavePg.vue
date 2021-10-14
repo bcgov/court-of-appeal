@@ -109,7 +109,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class HearingDocumentsMotionWindowContent extends Vue {
+export default class HearingDocumentsMotionAppApplyLeavePg extends Vue {
 
 }
 </script>

@@ -33,7 +33,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class TheHearingWindowContent extends Vue { 
+export default class TheHearingAppRightToAppealPg extends Vue { 
 
 
 }

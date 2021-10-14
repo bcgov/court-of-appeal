@@ -69,7 +69,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class NoticeOfHearingWindowContent extends Vue {  
+export default class NoticeOfHearingAppRightToAppealPg extends Vue {  
     
 
 
