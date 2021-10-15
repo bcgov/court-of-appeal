@@ -209,7 +209,6 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
     appealProcessCompleteContent = false;   
 
     displayWindow(contentType: string){
-
         
         this.noticeOfAppearanceContent = false;
         this.theHearingContent = false;
