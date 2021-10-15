@@ -68,6 +68,9 @@ import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
 import { pathwayTypeInfoType } from '@/types/Information';
 
+import { toggleStep} from '@/components/utils/StepsPagesFunctions';
+
+
 @Component({
     components:{
         MyDocumentsTable,
@@ -104,16 +107,16 @@ export default class DashboardPage extends Vue {
     {
         if (newPath.hasRightToAppeal){
             this.journeyStarted = true;
-            this.toggleSteps(this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo, true)            
+            toggleStep(this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo, true)            
         } else if (newPath.noRightToAppeal){
             this.journeyStarted = true;
-            this.toggleSteps(this.stPgNo.APP_APPLY_LEAVE._StepNo, true)
+            toggleStep(this.stPgNo.APP_APPLY_LEAVE._StepNo, true)
         } else if (newPath.noticeOfAppealResponse){
             this.journeyStarted = true;
-            this.toggleSteps(this.stPgNo.RSP_TO_APPEAL._StepNo, true)
+            toggleStep(this.stPgNo.RSP_TO_APPEAL._StepNo, true)
         } else if (newPath.noticeOfApplicationResponse){
             this.journeyStarted = true;
-            this.toggleSteps(this.stPgNo.RSP_TO_LEAVE._StepNo, true)
+            toggleStep(this.stPgNo.RSP_TO_LEAVE._StepNo, true)
         } else {
             this.journeyStarted = false;
         }
@@ -173,7 +176,6 @@ export default class DashboardPage extends Vue {
     public navigateToDocumentsPage() {
 
         this.$router.push({name: "my-documents" }) 
-
     }
 
     // TODO connect to backend
@@ -181,18 +183,6 @@ export default class DashboardPage extends Vue {
         this.$store.commit("Application/init");
         this.$store.dispatch("Application/UpdateStPgNo");
     }
-
-    public toggleSteps(stepId, activeIndicator) {       
-        this.$store.commit("Application/setStepActive", {
-            currentStep: stepId,
-            active: activeIndicator
-        });
-    }
-
-
-
-
-
 
 }
 </script>

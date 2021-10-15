@@ -1,11 +1,11 @@
 <template>
 <div v-if="dataReady">
-    <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+
     <div class="journey-map-container">
 
         <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
             
-        <div
+        <div 
             :style="{marginLeft: '50px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '79%',
@@ -26,11 +26,9 @@
             :twoPages="false"
             stepTitle="Initial Documents"
             @action="displayWindow('Initial Documents')"
-            @completed="completed"
+            @completed="completed"            
             order=1
-            :active="pageState[0].active"
-            :status="pageState[0].status"                        
-            :ready="pageState[0].ready"
+            v-bind="pageState[0]"           
         />
                     
         <trail
@@ -48,9 +46,7 @@
             @action="displayWindow('Hearing Documents')"
             @completed="completed"
             order=2
-            :active="pageState[1].active"
-            :status="pageState[1].status"                        
-            :ready="pageState[1].ready"            
+            v-bind="pageState[1]"                       
         />
 
         <trail
@@ -67,9 +63,7 @@
             :style="{position: 'absolute', left: '82%'}"
             :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}" 
             order=3
-            :active="pageState[2].active"
-            :status="pageState[2].status"                        
-            :ready="pageState[2].ready"        
+            v-bind="pageState[2]"            
         />
     </div>
 
@@ -126,7 +120,8 @@ import PathSidebar from '../components/PathSidebar.vue';
 import InitialDocumentsAppApplyLeavePg from '../components/AppApplyLeave/InitialDocumentsAppApplyLeavePg.vue';
 import HearingDocumentsMotionAppApplyLeavePg from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
 import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
-import { togglePage, pageStatus, prevPageStatus, nextPageStatus } from '@/components/utils/StepsPagesFunctions';
+
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
 
 import { namespace } from "vuex-class";
 import "@/store/modules/application";
@@ -151,7 +146,6 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
     @applicationState.State
     public stPgNo!: stepsAndPagesNumberInfoType;
     
-    trail1 = false
     showWindow = false;
     windowTitle = '';
     pathType = '';
@@ -170,9 +164,12 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
     mounted(){
         this.dataReady = false;
+
         this.currentStep = this.stPgNo.APP_APPLY_LEAVE._StepNo;
         this.numOfPages = Object.keys(this.stPgNo.APP_APPLY_LEAVE).length-1;
-        this.evaluatePageState();
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
         this.dataReady = true;
     }
 
@@ -207,36 +204,13 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
     }
 
     public completed(order, checked){
-
-        order--;
-
-        if(  checked && prevPageStatus(order, this.currentStep) && !nextPageStatus(order, this.currentStep)||
-            !checked && prevPageStatus(order, this.currentStep) && !nextPageStatus(order, this.currentStep)
-        ){
-            togglePage(order, checked, this.currentStep);        
-        }
-
-        this.evaluateCompletedTrails()
-        this.evaluatePageState()
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
     }
 
-    public evaluateCompletedTrails(){
-        this.completedTrail = []
-        for(let pageNum=0; pageNum<this.numOfPages; pageNum++){
-            this.completedTrail.push(pageStatus(pageNum, this.currentStep))
-        }
-    }
-
-    public evaluatePageState(){
-        this.pageState = [];
-        for(let pageNum=0; pageNum<=this.numOfPages; pageNum++){
-
-            const active = pageStatus(pageNum, this.currentStep)
-            const ready = prevPageStatus(pageNum, this.currentStep) && !nextPageStatus(pageNum, this.currentStep)
-
-            this.pageState.push({active:active, status:"new", ready:ready})
-        }
-    }
+    
 
 
 }

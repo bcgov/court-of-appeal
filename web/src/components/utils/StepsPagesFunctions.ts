@@ -1,5 +1,12 @@
 import store from '@/store';
 
+export function toggleStep(stepId, activeIndicator) {       
+    store.commit("Application/setStepActive", {
+        currentStep: stepId,
+        active: activeIndicator
+    });
+}
+
 export function togglePages(pageArr, activeIndicator, currentStep) {  
           
     for (const inx in pageArr) {
@@ -18,7 +25,6 @@ export function togglePage(currentPage, activeIndicator, currentStep) {
         currentPage: currentPage,
         active: activeIndicator
     });
-
 }
 
 export function stepStatus( currentStep) {  

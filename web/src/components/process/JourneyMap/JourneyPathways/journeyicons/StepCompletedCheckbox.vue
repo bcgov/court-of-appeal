@@ -4,6 +4,7 @@
             @change= "onChange"
             :disabled= "disabled"
             :checked= "checked"
+            :style="disabled?'cursor: not-allowed':''"
     />
 </template>
 

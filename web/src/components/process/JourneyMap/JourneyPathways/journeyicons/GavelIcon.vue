@@ -81,12 +81,8 @@ export default class GavelIcon extends Vue {
         this.$emit('action')
     }
     public completed(checked) {
-        this.$emit('completed', this.order, checked)
+        this.$emit('completed', this.order-1, checked)
     }
-
-    // mounted(){
-    //     console.log(this.stepTitle)
-    // }
 
 }
 </script>
