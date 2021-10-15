@@ -33,7 +33,7 @@ class Application extends VuexModule {
         // Appellant Apply For Leave Journey Map
         let s = {} as stepInfoType;
     
-        s.active = true;
+        s.active = false;
         s.id = "0";
         s.name = "APP_APPLY_LEAVE";
         s.label = "Appellant Apply For Leave Journey Map";
@@ -45,7 +45,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "InitialDocuments";
         p.label = "Initial Documents";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -81,7 +81,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "AppealRecordAndTranscript";
         p.label = "Appeal Record and Transcript";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -89,7 +89,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "FactumAppealBookAndCertificateOfReadiness";
         p.label = "Factum, Appeal Book and Certificate of Readiness";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -97,7 +97,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "BookAppealDateWithRegistry";
         p.label = "Book Appeal Date with Registry";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -105,7 +105,7 @@ class Application extends VuexModule {
         p.key = "3";
         p.name = "NoticeOfHearing";
         p.label = "Notice of Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -113,7 +113,7 @@ class Application extends VuexModule {
         p.key = "4";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -121,7 +121,7 @@ class Application extends VuexModule {
         p.key = "5";
         p.name = "CourtOrder";
         p.label = "Court Order";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -185,7 +185,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "InitialDocuments";
         p.label = "Initial Documents";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -193,7 +193,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "AppealRecordAndTranscript";
         p.label = "Appeal Record and Transcript";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -201,7 +201,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "FactumAppealBookAndCertificateOfReadiness";
         p.label = "Factum, Appeal Book, and Certificate of Readiness";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -209,7 +209,7 @@ class Application extends VuexModule {
         p.key = "3";
         p.name = "BookAppealDateWithRegistry";
         p.label = "Book Appeal Date with Registry";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -217,7 +217,7 @@ class Application extends VuexModule {
         p.key = "4";
         p.name = "NoticeOfHearing";
         p.label = "Notice of Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -225,7 +225,7 @@ class Application extends VuexModule {
         p.key = "5";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -233,7 +233,7 @@ class Application extends VuexModule {
         p.key = "6";
         p.name = "CourtOrder";
         p.label = "Court Order";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -241,7 +241,7 @@ class Application extends VuexModule {
         p.key = "7";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -261,7 +261,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "NoticeOfAppearance";
         p.label = "Notice of Appearance";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -269,7 +269,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "NoticeOfCrossAppeal";
         p.label = "Notice of Cross Appeal";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -277,7 +277,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "FactumAndAppealBook";
         p.label = "Factum and Appeal Book";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -285,7 +285,7 @@ class Application extends VuexModule {
         p.key = "3";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -293,7 +293,7 @@ class Application extends VuexModule {
         p.key = "4";
         p.name = "CourtOrder";
         p.label = "Court Order";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -301,7 +301,7 @@ class Application extends VuexModule {
         p.key = "5";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -321,7 +321,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "NoticeOfAppearance";
         p.label = "Notice of Appearance";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -329,7 +329,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "FactumAppealBookAndCertificateOfReadiness";
         p.label = "Factum, Appeal Book and Certificate of Readiness";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -337,7 +337,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -345,7 +345,7 @@ class Application extends VuexModule {
         p.key = "3";
         p.name = "CourtOrder";
         p.label = "Court Order";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -353,7 +353,7 @@ class Application extends VuexModule {
         p.key = "4";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
        
@@ -373,7 +373,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "NoticeOfAppearance";
         p.label = "Notice of Appearance";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -381,7 +381,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "ReplyBook";
         p.label = "Reply Book";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -389,7 +389,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -397,7 +397,7 @@ class Application extends VuexModule {
         p.key = "3";
         p.name = "DecisionOnLeaveToAppeal";
         p.label = "Decision on Leave to Appeal";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -417,7 +417,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "ApplicationForReview";
         p.label = "Application for Review";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -425,7 +425,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -433,7 +433,7 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "FinalDecisionOnLeaveToAppeal";
         p.label = "Final Decision on Leave to Appeal";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -454,7 +454,7 @@ class Application extends VuexModule {
         p.key = "0";
         p.name = "ApplicationForReview";
         p.label = "Application for Review";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -462,7 +462,7 @@ class Application extends VuexModule {
         p.key = "1";
         p.name = "TheHearing";
         p.label = "The Hearing";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
 
@@ -470,13 +470,13 @@ class Application extends VuexModule {
         p.key = "2";
         p.name = "FinalDecisionOnLeaveToAppeal";
         p.label = "Final Decision on Leave to Appeal";
-        p.active = true;
+        p.active = false;
         p.progress = 0;    
         s.pages.push(p);
     
         this.steps.push(s);
 
-        //console.log(this.steps)
+        console.log(this.steps)
         
     }
     @Action
@@ -666,18 +666,7 @@ class Application extends VuexModule {
     @Action
     public checkAllCompleted() {
         let newAllCompleted = false;
-        if(this.steps[0].result){
-            for(const selectedform of this.steps[0].result.selectedForms){
-
-                if(this.pathwayCompleted[selectedform]) 
-                    newAllCompleted = true;
-                else{
-                    newAllCompleted = false;
-                    break;
-                }
-            }            
-        }
-        if(!newAllCompleted)this.context.commit("setCurrentStepPage", { currentStep:this.stPgNo.SUBMIT._StepNo, currentPage:0 });
+       
         this.context.commit("setAllCompleted", newAllCompleted)
     }
 
@@ -706,8 +695,19 @@ class Application extends VuexModule {
         this.stPgNo = stPgNo;
     }
     @Action
-    public UpdateStPgNo(newStPgNo) {
-        const stepsAndPagesNumber = {GETSTART: {}, PO: {}, COMMON: {}, FLM: {}, CM: {}, PPM: {}, RELOC: {}, ENFRC: {}, SUBMIT: {}} as stepsAndPagesNumberInfoType
+    public UpdateStPgNo() {
+        const stepsAndPagesNumber = {             
+            APP_RIGHT_TO_APPEAL: {},
+            APP_APPLY_LEAVE: {},
+            RSP_TO_APPEAL: {},
+            RSP_TO_LEAVE: {},    
+            APP_LEAVE_GRANTED: {},
+            APP_LEAVE_REFUSED: {},
+            RSP_TO_LEAVE_GRANTED: {},
+            RSP_TO_LEAVE_REFUSED_FINAL: {},
+            RSP_TO_LEAVE_REFUSED: {}
+        } as stepsAndPagesNumberInfoType;
+
         const steps = this.steps
         for(const step of steps){
             stepsAndPagesNumber[step.name]._StepNo = Number(step.id)           
@@ -719,6 +719,19 @@ class Application extends VuexModule {
     }
 
    
+    @Mutation
+    public ResetStepsAndPages() {
+        const steps = this.steps
+        for(const step of steps){            
+            steps[step.id].active = false;
+            steps[step.id].currentPage = 0;
+            for(const page of step.pages){
+                steps[step.id].pages[page.key].active = false;
+                steps[step.id].pages[page.key].progress = 0; 
+            }
+        }
+    }
+
 
     @Mutation
     public setCurrentApplication(application): void {

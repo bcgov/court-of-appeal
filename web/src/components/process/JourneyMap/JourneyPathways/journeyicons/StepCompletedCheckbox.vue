@@ -4,6 +4,7 @@
             @change= "onChange"
             :disabled= "disabled"
             :checked= "checked"
+            :style="disabled?'cursor: not-allowed':''"
     />
 </template>
 
@@ -19,8 +20,11 @@ export default class StepCompletedCheckbox extends Vue {
     @Prop({required: false})
     checked!: boolean;
 
-    public onChange() {
-        this.$emit('onChange')
+    public onChange(event) {        
+        Vue.nextTick(()=>{
+            
+            this.$emit('onChange', event?.target?.checked)
+        })
     }
 
 }

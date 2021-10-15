@@ -1,11 +1,11 @@
 <template>
-<div>
-    <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+<div v-if="dataReady">
+
     <div class="journey-map-container">
 
-        <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+        <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
             
-        <div
+        <div 
             :style="{marginLeft: '50px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '79%',
@@ -16,7 +16,7 @@
 
         <trail                
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='28%'
             level=1                
         />
@@ -26,17 +26,14 @@
             :twoPages="false"
             stepTitle="Initial Documents"
             @action="displayWindow('Initial Documents')"
-            :active="true"                       
+            @completed="completed"            
             order=1
-            status="new"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(1, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[0]"           
         />
                     
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='30%'
             level=1
         />
@@ -47,17 +44,14 @@
             stepTitle="Hearing Documents"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Hearing Documents')"
-            :active="true"
+            @completed="completed"
             order=2
-            status="twoPages"
-            :ready="true"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(2,this.state.steps)"
+            v-bind="pageState[1]"                       
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[1]"
             width='25%'
             level=1
         />
@@ -65,10 +59,11 @@
         <gavel-end-circle
             stepTitle="Decision on Leave to Appeal"
             @action="displayWindow('Decision on Leave')"
-            :active="true"
-            :completed="trail1"
+            :completed="completedTrail[1]"
             :style="{position: 'absolute', left: '82%'}"
-            :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}"            
+            :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}" 
+            order=3
+            v-bind="pageState[2]"            
         />
     </div>
 
@@ -126,6 +121,12 @@ import InitialDocumentsAppApplyLeavePg from '../components/AppApplyLeave/Initial
 import HearingDocumentsMotionAppApplyLeavePg from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
 import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
 
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
+
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 @Component({
     components:{
@@ -139,19 +140,40 @@ import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/
         DecisionOnLeaveToAppealAppApplyLeavePg
     }
 })
+
 export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
-    trail1 = false
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
+    
     showWindow = false;
     windowTitle = '';
     pathType = '';
     pathHeight = '';
 
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
+
+
     initialDocumentsContent = false;
     hearingDocumentsContent = false;
     decisionOnLeaveContent = false;
 
-    displayWindow(contentType: string){
+    mounted(){
+        this.dataReady = false;
+
+        this.currentStep = this.stPgNo.APP_APPLY_LEAVE._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.APP_APPLY_LEAVE).length-1;
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
+        this.dataReady = true;
+    }
+
+    public displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
         this.hearingDocumentsContent = false;
@@ -180,6 +202,16 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
         }         
         this.showWindow = true;
     }
+
+    public completed(order, checked){
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+    }
+
+    
+
 
 }
 </script>

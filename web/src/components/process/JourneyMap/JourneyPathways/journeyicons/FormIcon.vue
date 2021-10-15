@@ -76,16 +76,12 @@ export default class FormIcon extends Vue {
     @Prop({required: false})
     stepTitleClass!: string;
 
-    
-    // mounted(){
-    //     console.log(this.stepTitle)
-    // }
 
     public action(){
         this.$emit('action')
     }
-    public completed() {
-        this.$emit('completed', this.order)
+    public completed(checked) {
+        this.$emit('completed', this.order-1, checked)
     }
 
 }
