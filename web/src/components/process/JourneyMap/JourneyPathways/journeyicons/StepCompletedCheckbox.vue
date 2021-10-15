@@ -19,8 +19,11 @@ export default class StepCompletedCheckbox extends Vue {
     @Prop({required: false})
     checked!: boolean;
 
-    public onChange() {
-        this.$emit('onChange')
+    public onChange(event) {        
+        Vue.nextTick(()=>{
+            
+            this.$emit('onChange', event?.target?.checked)
+        })
     }
 
 }

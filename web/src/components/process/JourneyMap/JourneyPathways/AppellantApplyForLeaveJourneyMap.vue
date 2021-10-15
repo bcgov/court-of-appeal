@@ -1,9 +1,9 @@
 <template>
-<div>
+<div v-if="dataReady">
     <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
     <div class="journey-map-container">
 
-        <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+        <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
             
         <div
             :style="{marginLeft: '50px',
@@ -16,7 +16,7 @@
 
         <trail                
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='28%'
             level=1                
         />
@@ -26,17 +26,16 @@
             :twoPages="false"
             stepTitle="Initial Documents"
             @action="displayWindow('Initial Documents')"
-            :active="true"                       
+            @completed="completed"
             order=1
-            status="new"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(1, this.state.steps)"
-            :ready="true"
+            :active="pageState[0].active"
+            :status="pageState[0].status"                        
+            :ready="pageState[0].ready"
         />
                     
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='30%'
             level=1
         />
@@ -47,17 +46,16 @@
             stepTitle="Hearing Documents"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Hearing Documents')"
-            :active="true"
+            @completed="completed"
             order=2
-            status="twoPages"
-            :ready="true"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(2,this.state.steps)"
+            :active="pageState[1].active"
+            :status="pageState[1].status"                        
+            :ready="pageState[1].ready"            
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[1]"
             width='25%'
             level=1
         />
@@ -65,10 +63,13 @@
         <gavel-end-circle
             stepTitle="Decision on Leave to Appeal"
             @action="displayWindow('Decision on Leave')"
-            :active="true"
-            :completed="trail1"
+            :completed="completedTrail[1]"
             :style="{position: 'absolute', left: '82%'}"
-            :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}"            
+            :titleStyle="{position: 'absolute', top:'97px', width: '150px', left: '-17px'}" 
+            order=3
+            :active="pageState[2].active"
+            :status="pageState[2].status"                        
+            :ready="pageState[2].ready"        
         />
     </div>
 
@@ -125,7 +126,12 @@ import PathSidebar from '../components/PathSidebar.vue';
 import InitialDocumentsAppApplyLeavePg from '../components/AppApplyLeave/InitialDocumentsAppApplyLeavePg.vue';
 import HearingDocumentsMotionAppApplyLeavePg from '../components/AppApplyLeave/HearingDocumentsMotionAppApplyLeavePg.vue';
 import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/DecisionOnLeaveToAppealAppApplyLeavePg.vue';
+import { togglePage, pageStatus, prevPageStatus, nextPageStatus } from '@/components/utils/StepsPagesFunctions';
 
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 @Component({
     components:{
@@ -139,19 +145,38 @@ import DecisionOnLeaveToAppealAppApplyLeavePg from '../components/AppApplyLeave/
         DecisionOnLeaveToAppealAppApplyLeavePg
     }
 })
+
 export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
+    
     trail1 = false
     showWindow = false;
     windowTitle = '';
     pathType = '';
     pathHeight = '';
 
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
+
+
     initialDocumentsContent = false;
     hearingDocumentsContent = false;
     decisionOnLeaveContent = false;
 
-    displayWindow(contentType: string){
+    mounted(){
+        this.dataReady = false;
+        this.currentStep = this.stPgNo.APP_APPLY_LEAVE._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.APP_APPLY_LEAVE).length-1;
+        this.evaluatePageState();
+        this.dataReady = true;
+    }
+
+    public displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
         this.hearingDocumentsContent = false;
@@ -180,6 +205,39 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
         }         
         this.showWindow = true;
     }
+
+    public completed(order, checked){
+
+        order--;
+
+        if(  checked && prevPageStatus(order, this.currentStep) && !nextPageStatus(order, this.currentStep)||
+            !checked && prevPageStatus(order, this.currentStep) && !nextPageStatus(order, this.currentStep)
+        ){
+            togglePage(order, checked, this.currentStep);        
+        }
+
+        this.evaluateCompletedTrails()
+        this.evaluatePageState()
+    }
+
+    public evaluateCompletedTrails(){
+        this.completedTrail = []
+        for(let pageNum=0; pageNum<this.numOfPages; pageNum++){
+            this.completedTrail.push(pageStatus(pageNum, this.currentStep))
+        }
+    }
+
+    public evaluatePageState(){
+        this.pageState = [];
+        for(let pageNum=0; pageNum<=this.numOfPages; pageNum++){
+
+            const active = pageStatus(pageNum, this.currentStep)
+            const ready = prevPageStatus(pageNum, this.currentStep) && !nextPageStatus(pageNum, this.currentStep)
+
+            this.pageState.push({active:active, status:"new", ready:ready})
+        }
+    }
+
 
 }
 </script>
