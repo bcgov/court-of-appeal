@@ -145,7 +145,7 @@
                 :style="{top: '70%', left: '84%'}"
                 titleStyle="margin-top: 1.5rem;"
                 @action="displayWindow('Appeal Process Complete')"
-                @completed="completed"
+                :completed="completedTrail[5]"
                 order=7
                 v-bind="pageState[6]"                                       
             />
