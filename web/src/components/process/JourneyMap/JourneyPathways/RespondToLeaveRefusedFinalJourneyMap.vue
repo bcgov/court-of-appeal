@@ -1,9 +1,8 @@
 <template>
-<div>
-    <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+<div v-if="dataReady">
     <div class="journey-map-container">
 
-        <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+        <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
             
         <div
             :style="{marginLeft: '50px',
@@ -16,7 +15,7 @@
 
         <Trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='25%'
             level=1
         />
@@ -26,17 +25,14 @@
             :twoPages="true"
             stepTitle="Application for Review"            
             action="this.iconClicked.bind(this, 'applicationforReview')"
-            :active="true"                       
+            @completed="completed"            
             order=1
-            status="twopages"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(1, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[0]"
         />
 
         <Trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='31%'
             level=1
         />
@@ -46,17 +42,14 @@
             stepTitle="The Hearing"
             class="journey-box"             
             action="this.iconClicked.bind(this, 'respondentleavetoappealhearing')"
-            :active="true"
+            @completed="completed"            
             order=2
-            :status="trail1?'completed':''"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(6, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[1]"            
         />
 
         <Trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[1]"
             width='25%'
             level=1
         />
@@ -65,8 +58,9 @@
             :style="{position: 'absolute', left: '80%', top: '22%'}"
             stepTitle="Final Decision on Leave to Appeal"
             :titleStyle="{position: 'absolute', top: '97px', width: '150px', left: '-22px'}"
-            :active="true"
-            :completed="trail1"
+            :completed="completedTrail[1]"
+            order=3
+            v-bind="pageState[2]"
         />
     </div>
 </div>
@@ -80,6 +74,13 @@ import FormIcon from './journeyicons/FormIcon.vue'
 import GavelIcon from './journeyicons/GavelIcon.vue'
 import ClockEndCircle from './journeyicons/ClockEndCircle.vue'
 
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
+
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+
 @Component({
     components:{
         Trail,
@@ -90,7 +91,32 @@ import ClockEndCircle from './journeyicons/ClockEndCircle.vue'
 })
 export default class RespondToLeaveRefusedFinalJourneyMap extends Vue {
 
-trail1 = false
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
+
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
+
+    mounted(){
+        this.dataReady = false;
+
+        this.currentStep = this.stPgNo.RSP_TO_LEAVE_REFUSED._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.RSP_TO_LEAVE_REFUSED).length-1;
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
+        this.dataReady = true;
+    }
+
+    public completed(order, checked){
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+    }
 
 }
 </script>

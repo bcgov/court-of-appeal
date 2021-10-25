@@ -1,9 +1,8 @@
 <template>
-    <div>
-        <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+    <div v-if="dataReady">
         <div class="journey-map-container">
 
-            <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+            <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
                 
             <div
                 :style="{marginLeft: '50px',
@@ -16,7 +15,7 @@
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[0]"
                 width='25%'
                 level=1
             />
@@ -26,17 +25,14 @@
                 :twoPages="true"
                 stepTitle="Application for Review"            
                 @action="displayWindow('Application for Review')"
-                :active="true"                       
+                @completed="completed"            
                 order=1
-                status="twopages"
-                completed="this.stepCompleted.bind(this)"
-                readys="this.props.isStepReady(1, this.state.steps)"
-                :ready="true"
+                v-bind="pageState[0]"
             />
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[0]"
                 width='31%'
                 level=1
             />
@@ -46,17 +42,14 @@
                 stepTitle="The Hearing"
                 class="journey-box"             
                 @action="displayWindow('The Hearing')"
-                :active="true"
+                @completed="completed"            
                 order=2
-                :status="trail1?'completed':''"
-                completed="this.stepCompleted.bind(this)"
-                readys="this.props.isStepReady(6, this.state.steps)"
-                :ready="true"
+                v-bind="pageState[1]"
             />
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[1]"
                 width='25%'
                 level=1
             />
@@ -65,9 +58,10 @@
                 :style="{position: 'absolute', left: '80%', top: '22%'}"
                 stepTitle="Final Decision on Leave to Appeal"
                 :titleStyle="{position: 'absolute', top: '97px', width: '150px', left: '-22px'}"
-                :active="true"
                 @action="displayWindow('Final Decision on Leave to Appeal')"
-                :completed="trail1"
+                :completed="completedTrail[1]"
+                order=3
+                v-bind="pageState[2]"
             />
         </div>
 
@@ -126,6 +120,13 @@ import ApplicationForReviewRspToLeaveRefusedPg from '../components/RspToLeaveRef
 import TheHearingRspToLeaveRefusedPg from '../components/RspToLeaveRefused/TheHearingRspToLeaveRefusedPg.vue';
 import FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg from '../components/RspToLeaveRefused/FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg.vue';
 
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
+
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+
 @Component({
     components:{
         Trail,
@@ -140,8 +141,16 @@ import FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg from '../components/RspTo
     }
 })
 export default class RespondToLeaveRefusedJourneyMap extends Vue {
+    
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
 
-    trail1 = false;
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
+
     showWindow = false;
     windowTitle = '';
     pathType = '';
@@ -149,9 +158,27 @@ export default class RespondToLeaveRefusedJourneyMap extends Vue {
 
     applicationForReviewContent = false;
     theHearingContent = false;   
-    finalDecisionOnLeaveToAppealContent = false;   
+    finalDecisionOnLeaveToAppealContent = false; 
+    
+    mounted(){
+        this.dataReady = false;
 
-    displayWindow(contentType: string){
+        this.currentStep = this.stPgNo.RSP_TO_LEAVE_REFUSED._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.RSP_TO_LEAVE_REFUSED).length-1;
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
+        this.dataReady = true;
+    }
+
+    public completed(order, checked){
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+    }
+
+    public displayWindow(contentType: string){
         
         this.applicationForReviewContent = false;
         this.theHearingContent = false;   

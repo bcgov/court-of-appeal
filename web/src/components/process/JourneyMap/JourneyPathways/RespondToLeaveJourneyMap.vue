@@ -1,9 +1,8 @@
 <template>
-    <div>
-        <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+    <div v-if="dataReady">
         <div class="journey-map-container">
 
-            <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+            <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
                 
             <div
                 :style="{marginLeft: '50px',
@@ -16,7 +15,7 @@
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[0]"
                 width='18%'
                 level=1
             />
@@ -26,17 +25,14 @@
                 :twoPages="false"
                 stepTitle="Notice of Appearance"
                 @action="displayWindow('Notice of Appearance')"
-                :active="true"                       
+                @completed="completed"            
                 order=1
-                status="new"
-                completed="this.stepCompleted.bind(this)"
-                readys="this.props.isStepReady(1, this.state.steps)"
-                :ready="true"
+                v-bind="pageState[0]"                
             />
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[0]"
                 width='21%'
                 level=1
             />
@@ -46,17 +42,14 @@
                 :twoPages="false"
                 stepTitle="Reply Book"
                 @action="displayWindow('Reply Book')"
-                :active="true"                       
+                @completed="completed"            
                 order=2
-                status="new"
-                completed="this.stepCompleted.bind(this)"
-                readys="this.props.isStepReady(1, this.state.steps)"
-                :ready="true"
+                v-bind="pageState[1]"                
             />
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[1]"
                 width='21%'
                 level=1
             />
@@ -66,17 +59,14 @@
                 stepTitle="The Hearing"
                 class="journey-box"             
                 @action="displayWindow('The Hearing')"
-                :active="true"
+                @completed="completed"            
                 order=3
-                :status="trail1?'completed':''"
-                completed="this.stepCompleted.bind(this)"
-                readys="this.props.isStepReady(6, this.state.steps)"
-                :ready="true"
+                v-bind="pageState[2]"                
             />
 
             <trail
                 className="journey-trail-l1-moveable"
-                :completed="trail1"
+                :completed="completedTrail[2]"
                 width='25%'
                 level=1
             />
@@ -86,8 +76,10 @@
                 stepTitle="Decision on Leave to Appeal"
                 @action="displayWindow('Decision on Leave to Appeal')"
                 :titleStyle="{position: 'absolute', top: '97px', width: '150px', left: '-22px'}"
-                :active="true"
-                :completed="trail1"
+                :completed="completedTrail[2]"
+                order=4
+                v-bind="pageState[3]"
+            
             />
 
         </div>
@@ -150,6 +142,13 @@ import ReplyBookRspToLeavePg from '../components/RspToLeave/ReplyBookRspToLeaveP
 import TheHearingRspToLeavePg from '../components/RspToLeave/TheHearingRspToLeavePg.vue';
 import DecisionOnLeaveToAppealRspToLeavePg from '../components/RspToLeave/DecisionOnLeaveToAppealRspToLeavePg.vue';
 
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
+
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+
 @Component({
     components:{
         Trail,
@@ -165,8 +164,15 @@ import DecisionOnLeaveToAppealRspToLeavePg from '../components/RspToLeave/Decisi
     }
 })
 export default class RespondToLeaveJourneyMap extends Vue {
+    
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
 
-    trail1 = false;
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
 
     showWindow = false;
     windowTitle = '';
@@ -176,9 +182,26 @@ export default class RespondToLeaveJourneyMap extends Vue {
     replyBookContent = false;
     theHearingContent = false;
     decisionOnLeaveToAppealContent = false;
-   
 
-    displayWindow(contentType: string){
+    mounted(){
+        this.dataReady = false;
+
+        this.currentStep = this.stPgNo.RSP_TO_LEAVE._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.RSP_TO_LEAVE).length-1;
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
+        this.dataReady = true;
+    }
+
+    public completed(order, checked){
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+    }
+
+    public displayWindow(contentType: string){
 
         this.noticeOfAppearanceContent = false; 
         this.replyBookContent = false;

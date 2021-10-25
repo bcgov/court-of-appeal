@@ -22,7 +22,7 @@
         
         <FormIcon 
             :style="{left: '25%'}"
-            twoPages={true}
+            :twoPages="true"
             stepTitle="Application for Review"
             action="this.iconClicked.bind(this, 'applicationForReview')"
             @completed="completed"            

@@ -1,9 +1,8 @@
 <template>
-<div>
-    <b-button  v-on:click="trail1 = !trail1">GLOW</b-button>
+<div v-if="dataReady">
     <div class="journey-map-container">
 
-        <div :class="{'journey-start-circle':true, 'completed-step': trail1}" />        
+        <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
             
         <div
             :style="{marginLeft: '50px',
@@ -16,7 +15,7 @@
 
         <trail                
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='25%'
             level=1                
         />
@@ -26,17 +25,14 @@
             :twoPages="false"
             stepTitle="Initial Documents"
             @action="displayWindow('Initial Documents')"
-            :active="true"                       
+            @completed="completed"            
             order=1
-            status="new"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(1, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[0]"           
         />
                     
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[0]"
             width='32%'
             level=1
         />
@@ -47,23 +43,20 @@
             stepTitle="Appeal Record and Transcript"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Appeal Record and Transcript')"
-            :active="true"
+            @completed="completed"            
             order=2
-            status="twoPages"
-            :ready="true"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(2,this.state.steps)"
+            v-bind="pageState[1]"            
         />
 
         <return-trail
-            :status="trail1?'completed':''"
+            :status="completedTrail[1]?'completed':''"
             startpoint='70%'
         />
 
         <div
             :style="{marginLeft: '204px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '3%',
+                width: '53%',
                 position: 'absolute',
                 top: '374px',
                 zIndex: '1',
@@ -76,17 +69,14 @@
             stepTitle="Factum, Appeal Book, and Certificate of Readiness"
             @action="displayWindow('Factum, Appeal Book, and Certificate of Readiness')"
             stepTitleClass="step-title-wide"
-            :active="true"
+            @completed="completed"            
             order=3
-            status="twoPages"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(3, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[2]"
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[2]"
             width='27%'
             :style="{top: '46%', left: '25%', position: 'absolute'}"
             level=2
@@ -97,17 +87,14 @@
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
-            :active="true"
+            @completed="completed"            
             order=4
-            :status="trail1?'completed':''"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(4, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[3]"
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[3]"
             width='27%'
             :style="{top: '46%', left: '50%', position: 'absolute'}"
             level=2
@@ -118,17 +105,14 @@
             :twoPages="false"
             stepTitle="Notice of Hearing"
             @action="displayWindow('Notice of Hearing')"
-            :active="true"
+            @completed="completed"            
             order=5
-            :status="'new'"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(5, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[4]"            
         />
 
         <return-trail
             priorstep="this.state.steps[4]"
-            :status="trail1?'completed':''"
+            :status="completedTrail[4]?'completed':''"
             top='117px'
             startpoint='71%'
         />
@@ -136,7 +120,7 @@
         <div
             :style="{marginLeft: '204px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '2%',
+                width: '52%',
                 position: 'absolute',
                 top: '91%',
                 zIndex: '1',
@@ -148,17 +132,14 @@
             class="journey-box" 
             stepTitle="The Hearing" 
             @action="displayWindow('The Hearing')"
-            :active="true"
+            @completed="completed"            
             order=6
-            :status="trail1?'completed':''"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(6, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[5]"            
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[5]"
             width='35%'
             :style="{top: '85.05%', left: '25%', position: 'absolute'}"
             level=3
@@ -170,17 +151,14 @@
             :twoPages="false"
             stepTitle="Court Order"
             @action="displayWindow('Court Order')"
-            :active="true"
+            @completed="completed"            
             order=7
-            :status="'new'"
-            completed="this.stepCompleted.bind(this)"
-            readys="this.props.isStepReady(7, this.state.steps)"
-            :ready="true"
+            v-bind="pageState[6]"
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="trail1"
+            :completed="completedTrail[6]"
             width='33%'
             :style="{top: '85.05%', left: '58%', position: 'absolute', marginBottom: '100px'}"
             level=3
@@ -188,11 +166,12 @@
 
         <end-circle
             stepTitle="Appeal Process Complete"
-            @action="displayWindow('Appeal Process Complete')"
-            :active="true"
-            :completed="trail1"
             :style="{top: '84.7%', left: '82%'}"
-            titleStyle="margin-top: 1.5rem;"            
+            titleStyle="margin-top: 1.5rem;" 
+            @action="displayWindow('Appeal Process Complete')"
+            :completed="completedTrail[6]"
+            order=8
+            v-bind="pageState[7]" 
         />
     </div>
 
@@ -253,6 +232,13 @@ import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHear
 import CourtOrderAppRightToAppealPg from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
 import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
 
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
+
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application")
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+
 @Component({
     components:{
         Trail,
@@ -272,8 +258,16 @@ import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToApp
     }
 })
 export default class AppellantRightToAppealJourneyMap extends Vue {
+    
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
 
-    trail1 = false;
+    dataReady = false;
+    completedTrail :boolean[] = []
+    numOfPages = 0;
+    currentStep = 0;
+    pageState : {active:boolean; status:string; ready:boolean;}[] = []
+
     showWindow = false;
     windowTitle = '';
     pathType = '';
@@ -285,7 +279,25 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
     courtOrderContent = false;
     appealProcessCompleteContent = false; 
 
-    displayWindow(contentType: string){
+    mounted(){
+        this.dataReady = false;
+
+        this.currentStep = this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.APP_RIGHT_TO_APPEAL).length-1;
+
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        
+        this.dataReady = true;
+    }
+
+    public completed(order, checked){
+        
+        activatePage(order, checked, this.currentStep)
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+    }
+
+    public displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
         this.bookAppealDateContent = false;
