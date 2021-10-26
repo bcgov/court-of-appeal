@@ -253,7 +253,7 @@ export default class RespondToAppealJourneyMap extends Vue {
     courtOrderContent = false;
     appealProcessCompleteContent = false;
 
-    updated=0;5
+    updated=0;
 
     mounted(){
         this.dataReady = false;

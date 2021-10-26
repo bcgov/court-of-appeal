@@ -182,11 +182,14 @@
 
         <b-row no-gutters>
             <b-col cols="1">
-                <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
+                <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
 
                 <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
+                <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
+                <factum-appeal-book-certificate-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/>              
+
                 <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
                 <notice-of-hearing-app-right-to-appeal-pg v-else-if="noticeOfHearingContent"/>                
                 <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
@@ -196,6 +199,8 @@
             </b-col>
 
         </b-row>
+
+
       
       <template v-slot:modal-footer>
         <instruction-window-footer/>
@@ -225,9 +230,13 @@ import EndCircle from './journeyicons/EndCircle.vue'
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
-import NoticeOfHearingAppRightToAppealPg from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
-import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
+
 import InitialDocumentsAppRightToAppealPg from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
+
+import AppealRecordTranscriptAppRightToAppealPg from '../components/AppRightToAppeal/AppealRecordTranscriptAppRightToAppealPg.vue';
+import FactumAppealBookCertificateAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookCertificateAppRightToAppealPg.vue';
+import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
+import NoticeOfHearingAppRightToAppealPg from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
 import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
 import CourtOrderAppRightToAppealPg from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
 import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
@@ -248,10 +257,12 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         GavelIcon,
         EndCircle,
         InstructionWindowFooter,
-        PathSidebar,
-        NoticeOfHearingAppRightToAppealPg,
-        BookAppealDateAppRightToAppealPg,
+        PathSidebar,  
         InitialDocumentsAppRightToAppealPg,
+        AppealRecordTranscriptAppRightToAppealPg,
+        FactumAppealBookCertificateAppRightToAppealPg,
+        BookAppealDateAppRightToAppealPg,
+        NoticeOfHearingAppRightToAppealPg,
         TheHearingAppRightToAppealPg,
         CourtOrderAppRightToAppealPg,
         AppealProcessCompleteAppRightToAppealPg
@@ -273,11 +284,14 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
     pathTypes = [] as string[];
     pathHeights = [] as string[];
     initialDocumentsContent = false;
+    appealRecordTranscriptContent = false;
+    factumAppealBookCertificateContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false; 
+    updated=0;
 
     mounted(){
         this.dataReady = false;
@@ -297,9 +311,16 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
     }
 
+    public adjustHeights(index: number, pathHeight: string){       
+        this.updated++;
+        this.pathHeights[index] = pathHeight;
+    }
+
     public displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
+        this.appealRecordTranscriptContent = false;
+        this.factumAppealBookCertificateContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
         this.theHearingContent = false;
@@ -312,6 +333,20 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathTypes = ["share"];
             this.pathHeights = ['32rem'];
             this.initialDocumentsContent = true;
+
+        } else if (contentType == "Appeal Record and Transcript"){
+
+            this.windowTitle = "Appeal Record and Transcript";
+            this.pathTypes = ["share", "info"];
+            this.pathHeights = ['15rem', '0'];
+            this.appealRecordTranscriptContent = true;
+
+        } else if (contentType == "Factum, Appeal Book, and Certificate of Readiness"){
+
+            this.windowTitle = "The Factum, Appeal Book and Certificate of Readiness";
+            this.pathTypes = ["share", "share", "info"];
+            this.pathHeights = ['20rem', '0', '0'];
+            this.factumAppealBookCertificateContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
