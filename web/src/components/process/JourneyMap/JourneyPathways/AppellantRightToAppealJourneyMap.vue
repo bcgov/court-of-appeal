@@ -182,7 +182,7 @@
 
         <b-row no-gutters>
             <b-col cols="1">
-                <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+                <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
 
@@ -270,8 +270,8 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     showWindow = false;
     windowTitle = '';
-    pathType = '';
-    pathHeight = '';
+    pathTypes = [] as string[];
+    pathHeights = [] as string[];
     initialDocumentsContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
@@ -309,43 +309,43 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         if (contentType == "Initial Documents"){
 
             this.windowTitle = "Initial Documents";
-            this.pathType = "share";
-            this.pathHeight = '32rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['32rem'];
             this.initialDocumentsContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
-            this.pathType = "gavel";
-            this.pathHeight = '2rem';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['2rem'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){
 
             this.windowTitle = "Notice of Hearing";
-            this.pathType = "share";
-            this.pathHeight = '11rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['11rem'];
             this.noticeOfHearingContent = true;
 
         }  else if (contentType == "The Hearing"){
 
             this.windowTitle = "The Hearing";
-            this.pathType = "gavel";
-            this.pathHeight = '6rem';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['6rem'];
             this.theHearingContent = true;
 
         } else if (contentType == "Court Order"){
 
             this.windowTitle = "Court Order";
-            this.pathType = "info";
-            this.pathHeight = '6rem';
+            this.pathTypes = ["info"];
+            this.pathHeights = ['6rem'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){
 
             this.windowTitle = "Appeal Process Complete";
-            this.pathType = "info";
-            this.pathHeight = '3rem';
+            this.pathTypes = ["info"];
+            this.pathHeights = ['3rem'];
             this.appealProcessCompleteContent = true;
         }
         this.showWindow = true; 
