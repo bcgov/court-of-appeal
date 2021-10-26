@@ -160,10 +160,12 @@
             <b-row no-gutters>
 
                 <b-col cols="1">
-                    <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
+                    <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">
                 
+                    <appeal-record-transcript-app-leave-granted-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
+                    <factum-appeal-book-certificate-app-leave-granted-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/> 
                     <book-appeal-date-app-leave-granted-pg v-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-leave-granted-pg v-else-if="noticeOfHearingContent"/>
                     <the-hearing-app-leave-granted-pg v-else-if="theHearingContent"/>
@@ -204,6 +206,9 @@ import EndCircle from './journeyicons/EndCircle.vue'
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
+
+import AppealRecordTranscriptAppLeaveGrantedPg from '../components/AppLeaveGranted/AppealRecordTranscriptAppLeaveGrantedPg.vue';
+import FactumAppealBookCertificateAppLeaveGrantedPg from '../components/AppLeaveGranted/FactumAppealBookCertificateAppLeaveGrantedPg.vue';
 import BookAppealDateAppLeaveGrantedPg from '../components/AppLeaveGranted/BookAppealDateAppLeaveGrantedPg.vue';
 import NoticeOfHearingAppLeaveGrantedPg from '../components/AppLeaveGranted/NoticeOfHearingAppLeaveGrantedPg.vue';
 import TheHearingAppLeaveGrantedPg from '../components/AppLeaveGranted/TheHearingAppLeaveGrantedPg.vue';
@@ -227,6 +232,8 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         EndCircle,
         InstructionWindowFooter,
         PathSidebar,
+        AppealRecordTranscriptAppLeaveGrantedPg,
+        FactumAppealBookCertificateAppLeaveGrantedPg,
         BookAppealDateAppLeaveGrantedPg,
         NoticeOfHearingAppLeaveGrantedPg,
         TheHearingAppLeaveGrantedPg,
@@ -244,12 +251,14 @@ export default class AppellantLeaveGrantedJourneyMap extends Vue {
     pathTypes = [] as string[];
     pathHeights = [] as string[];
 
+    appealRecordTranscriptContent = false;
+    factumAppealBookCertificateContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false;
-
+    updated=0;
     dataReady = false;
     completedTrail :boolean[] = []
     numOfPages = 0;
@@ -267,15 +276,36 @@ export default class AppellantLeaveGrantedJourneyMap extends Vue {
         this.dataReady = true;
     }
 
+    public adjustHeights(index: number, pathHeight: string) {
+        this.updated++;
+        this.pathHeights[index] = pathHeight;
+    }
+
     public displayWindow(contentType: string){
 
+        this.appealRecordTranscriptContent = false;
+        this.factumAppealBookCertificateContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
         this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false;
 
-        if (contentType == "Book Appeal Date"){
+        if (contentType == "Appeal Record and Transcript"){
+
+            this.windowTitle = "Appeal Record and Transcript";
+            this.pathTypes = ["share", "info"];
+            this.pathHeights = ['15rem', '0'];
+            this.appealRecordTranscriptContent = true;
+
+        } else if (contentType == "Factum, Appeal Book and Certificate of Readiness"){
+
+            this.windowTitle = "The Factum, Appeal Book and Certificate of Readiness";
+            this.pathTypes = ["share", "share", "info"];
+            this.pathHeights = ['20rem', '0', '0'];
+            this.factumAppealBookCertificateContent = true;
+
+        } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
             this.pathTypes = ["gavel"];
@@ -320,6 +350,8 @@ export default class AppellantLeaveGrantedJourneyMap extends Vue {
         this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
         this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
     }
+
+    
 
 }
 </script>
