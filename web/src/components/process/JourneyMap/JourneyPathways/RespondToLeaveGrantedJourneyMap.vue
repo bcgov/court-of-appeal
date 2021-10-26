@@ -122,7 +122,7 @@
             <b-row no-gutters>
 
                 <b-col cols="1">
-                    <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+                    <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">
                 
@@ -204,8 +204,8 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
     
     showWindow = false;
     windowTitle = '';
-    pathType = '';
-    pathHeight = '';
+    pathTypes = [] as string[];
+    pathHeights = [] as string[];
 
     noticeOfAppearanceContent = false;
     theHearingContent = false;
@@ -240,29 +240,29 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
         if (contentType == "Notice of Appearance"){
 
             this.windowTitle = "Notice of Appearance";
-            this.pathType = "share";
-            this.pathHeight = '28rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['28rem'];
             this.noticeOfAppearanceContent = true;
 
         } else if (contentType == "The Hearing"){
             
             this.windowTitle = "The Hearing";
-            this.pathType = "gavel";
-            this.pathHeight = '6rem';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['6rem'];
             this.theHearingContent = true;
 
         } else if (contentType == "Court Order"){
 
             this.windowTitle = "Court Order";
-            this.pathType = "info";
-            this.pathHeight = '6rem';
+            this.pathTypes = ["info"];
+            this.pathHeights = ['6rem'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){
             
             this.windowTitle = "Appeal Process Complete";
-            this.pathType = "info";
-            this.pathHeight = '3rem';
+            this.pathTypes = ["info"];
+            this.pathHeights = ['3rem'];
             this.appealProcessCompleteContent = true;
         } 
 

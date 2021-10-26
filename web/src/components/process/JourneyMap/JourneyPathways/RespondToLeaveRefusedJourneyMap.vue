@@ -74,7 +74,7 @@
             <b-row no-gutters>
 
                 <b-col cols="1">
-                    <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+                    <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">                
                     
@@ -153,8 +153,8 @@ export default class RespondToLeaveRefusedJourneyMap extends Vue {
 
     showWindow = false;
     windowTitle = '';
-    pathType = '';
-    pathHeight = '';
+    pathTypes = [] as string[];
+    pathHeights = [] as string[];
 
     applicationForReviewContent = false;
     theHearingContent = false;   
@@ -187,22 +187,22 @@ export default class RespondToLeaveRefusedJourneyMap extends Vue {
         if (contentType == "Application for Review"){
 
             this.windowTitle = "Hearing Documents: Reply Book";
-            this.pathType = "share";
-            this.pathHeight = '12rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['12rem'];
             this.applicationForReviewContent = true;
 
         } else if (contentType == "The Hearing"){
             
             this.windowTitle = "The Hearing";
-            this.pathType = "gavel";
-            this.pathHeight = '0';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['0'];
             this.theHearingContent = true;
 
         } else if (contentType == "Final Decision on Leave to Appeal"){
             
             this.windowTitle = "Final Decision on Leave to Appeal";
-            this.pathType = "info";
-            this.pathHeight = '3rem';
+            this.pathTypes = ["info"];
+            this.pathHeights = ['3rem'];
             this.finalDecisionOnLeaveToAppealContent = true;
         } 
 

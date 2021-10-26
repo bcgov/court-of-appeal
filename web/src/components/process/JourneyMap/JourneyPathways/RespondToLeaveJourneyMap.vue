@@ -92,7 +92,7 @@
 
             <b-row no-gutters>
                 <b-col cols="1">
-                    <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+                    <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">                
                     
@@ -176,8 +176,8 @@ export default class RespondToLeaveJourneyMap extends Vue {
 
     showWindow = false;
     windowTitle = '';
-    pathType = '';
-    pathHeight = '';    
+    pathTypes = [] as string[];
+    pathHeights = [] as string[];    
     noticeOfAppearanceContent = false; 
     replyBookContent = false;
     theHearingContent = false;
@@ -210,23 +210,23 @@ export default class RespondToLeaveJourneyMap extends Vue {
 
         if (contentType == "Notice of Appearance"){
             this.windowTitle = "Notice of Appearance";
-            this.pathType = "share";
-            this.pathHeight = '28rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['28rem'];
             this.noticeOfAppearanceContent = true;
         } else if (contentType == "Reply Book"){
             this.windowTitle = "Hearing Documents: Reply Book";
-            this.pathType = "share";
-            this.pathHeight = '12rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['12rem'];
             this.replyBookContent = true;
         } else if (contentType == "The Hearing"){
             this.windowTitle = "The Hearing";
-            this.pathType = "gavel";
-            this.pathHeight = '0';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['0'];
             this.theHearingContent = true;
         } else if (contentType == "Decision on Leave to Appeal"){
             this.windowTitle = "Decision on Leave to Appeal";
-            this.pathType = "gavel";
-            this.pathHeight = '0';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['0'];
             this.decisionOnLeaveToAppealContent = true;
         }       
         this.showWindow = true;

@@ -77,7 +77,7 @@
         <b-row no-gutters>
 
             <b-col cols="1">
-                <path-sidebar v-bind:pathType="pathType" v-bind:pathHeight="pathHeight"/>
+                <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
             </b-col>
             <b-col cols="11" style="padding: 0 0 0 2rem;">
               
@@ -148,8 +148,8 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
     
     showWindow = false;
     windowTitle = '';
-    pathType = '';
-    pathHeight = '';
+    pathTypes = [] as string[];
+    pathHeights = [] as string[];
 
     dataReady = false;
     completedTrail :boolean[] = []
@@ -182,22 +182,22 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
         if (contentType == "Initial Documents"){
 
             this.windowTitle = "Initial Documents";
-            this.pathType = "share";
-            this.pathHeight = '28rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['28rem'];
             this.initialDocumentsContent = true;
 
         } else if (contentType == "Hearing Documents"){
 
             this.windowTitle = "Hearing Documents";
-            this.pathType = "share";
-            this.pathHeight = '16rem';
+            this.pathTypes = ["share"];
+            this.pathHeights = ['16rem'];
             this.hearingDocumentsContent = true;
 
         } else if (contentType == "Decision on Leave"){
             
             this.windowTitle = "Decision on Leave to Appeal";
-            this.pathType = "gavel";
-            this.pathHeight = '0';
+            this.pathTypes = ["gavel"];
+            this.pathHeights = ['0'];
             this.decisionOnLeaveContent = true;
         }         
         this.showWindow = true;
