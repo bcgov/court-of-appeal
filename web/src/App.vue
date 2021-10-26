@@ -1,7 +1,7 @@
 <template>
     <div class="app-outer fill-body" id="app">
         <navigation-topbar/>
-        <menu-bar/>
+        <menu-bar v-if="userName"/>
         <main class="app-content fill-body">
             <router-view/>
         </main>
@@ -15,6 +15,10 @@ import NavigationTopbar from "./components/NavigationTopbar.vue";
 import MenuBar from "./components/MenuBar.vue";
 import NavigationFooter from "./components/NavigationFooter.vue";
 
+import { namespace } from "vuex-class";   
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 @Component({
     components: {
         NavigationTopbar,
@@ -24,6 +28,7 @@ import NavigationFooter from "./components/NavigationFooter.vue";
 })
 
 export default class App extends Vue {
-
+    @commonState.State
+    public userName!: string;
 }
 </script>

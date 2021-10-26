@@ -31,7 +31,7 @@ export const SessionManager = {
                     this.logout(store);
                 }
                 const userName = response.data.display_name || response.data.first_name + " " + response.data.last_name;
-                store.commit("Application/setUserName", userName);
+                store.commit("Common/setUserName", userName);
                 store.commit("Common/setUserId", userId);
                 store.commit("Common/setUserLocation",userLocation);
                 store.commit("Common/setEfilingEnabled", efilingEnabled);               

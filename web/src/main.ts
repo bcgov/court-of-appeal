@@ -32,7 +32,7 @@ const router = new VueRouter({
     }
 });
 
-// Redirect to /family-law-act/
+// Redirect to /court-of-appeal/
 if(!location.pathname.includes('/result/'))
     history.pushState({page: "home"}, "", process.env.BASE_URL)
 

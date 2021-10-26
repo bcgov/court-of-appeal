@@ -7,7 +7,10 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 class Common extends VuexModule {
     public existingApplication = false;
     public documentTypesJson = [];
-    public userId = '';
+
+    public userType = ""
+    public userName = ""
+    public userId = ""
     public userLocation = '';
     public efilingEnabled = false;
 
@@ -20,6 +23,24 @@ class Common extends VuexModule {
     @Action
     public UpdateExistingApplication(newExistingApplication: boolean): void {
         this.context.commit('setExistingApplication', newExistingApplication)
+    }
+
+    @Mutation
+    public setUserType(userType): void {
+        this.userType = userType;
+    }
+    @Action
+    public UpdateUserType(newUserType) {
+        this.context.commit("setUserType", newUserType);
+    }
+
+    @Mutation
+    public  setUserName(userName: string): void {
+        this.userName = userName;
+    }
+    @Action
+    public UpdateUserName(newUserName: string) {
+        this.context.commit("setUserName", newUserName);
     }
     
     @Mutation

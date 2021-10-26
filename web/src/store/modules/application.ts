@@ -14,9 +14,7 @@ class Application extends VuexModule {
     public version = "1.0"
 
     public currentStep = 1    
-    public userType = ""
-    public userName = ""
-    public userId = ""
+
 
     public allCompleted = false;
     public pathwayCompleted = { protectionOrder:false, familyLawMatter:false, caseMgmt:false, priorityParenting:false, childReloc:false, agreementEnfrc:false} //{Protection Order, Family Law Matters, Case management, Priority parenting, Relocation of a child, Enforcement of agreements}
@@ -27,7 +25,6 @@ class Application extends VuexModule {
     public init(): void {
 
         this.currentStep = 0;
-        this.userName = "";
         this.steps = new Array<stepInfoType>();
 
         // Appellant Apply For Leave Journey Map
@@ -495,14 +492,7 @@ class Application extends VuexModule {
         this.context.commit("setVersion", newVersion);
     }
 
-    @Mutation
-    public setUserType(userType): void {
-        this.userType = userType;
-    }
-    @Action
-    public UpdateUserType(newUserType) {
-        this.context.commit("setUserType", newUserType);
-    }
+    
     
     @Mutation
     public  setCurrentStep(currentStep): void {
@@ -520,24 +510,6 @@ class Application extends VuexModule {
     @Action
     public UpdateCurrentStepPage({ currentStep, currentPage }) {
         this.context.commit("setCurrentStepPage", { currentStep, currentPage });
-    }
-
-    @Mutation
-    public  setUserName(userName): void {
-        this.userName = userName;
-    }
-    @Action
-    public UpdateUserName(newUserName) {
-        this.context.commit("setUserName", newUserName);
-    }
-    
-    @Mutation
-    public setUserId(userId): void {
-        this.userId = userId;
-    }
-    @Action
-    public UpdateUserId(newUserId) {
-        this.context.commit("setUserId", newUserId);
     }
 
     // @Mutation
@@ -739,8 +711,6 @@ class Application extends VuexModule {
         this.steps = application.steps;
         this.currentStep = application.currentStep;
         this.allCompleted = application.allCompleted;
-        this.userType = application.userType;
-        this.userName = application.userName;
         this.version = application.version;
     }
     @Action

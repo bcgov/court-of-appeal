@@ -26,9 +26,6 @@ export interface applicationInfoType extends applicationStepOnlyInfoType {
     currentStep?: number | string;
     allCompleted: boolean;
     lastPrinted: Date;
-    userType: string;
-    userName: string;
-    userId: string;
     applicantName: string;
     respondentName: string;
     protectedPartyName: nameInfoType;
