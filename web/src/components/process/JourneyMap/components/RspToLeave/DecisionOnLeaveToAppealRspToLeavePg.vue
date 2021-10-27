@@ -38,26 +38,39 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
+import "@/store/modules/application";
+const applicationState = namespace("Application");
 
 import { pathwayTypeInfoType } from '@/types/Information';
+import { stepsAndPagesNumberInfoType } from '@/types/Application/StepsAndPages';
+
+import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
+
 
 @Component
 export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {  
 
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;
+    
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
     public resToLeaveGrantedPath() {
-        //TODO: update to use new store
         
-        //TODO: close the window
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.rspToLeaveGranted = true;
+        this.UpdatePathType(pathType);                
+        this.$emit('closeWindow');
 
     }
 
     public resToLeaveRefusedPath() {
 
-        //TODO: update to use new store
-        //TODO: close the window
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.rspToLeaveRefused = true;
+        this.UpdatePathType(pathType);
+        this.$emit('closeWindow');
     }
 }
 </script>

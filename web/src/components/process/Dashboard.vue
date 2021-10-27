@@ -32,7 +32,7 @@
                         </b-button>
                     </b-row>
 
-                    <appeal-process v-if="journeyStarted" v-bind:processType="processType"></appeal-process>
+                    <appeal-process v-if="journeyStarted" :key="updated"></appeal-process>
                     <start-efiling v-else ></start-efiling>
 
                     
@@ -68,7 +68,7 @@ import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
 import { pathwayTypeInfoType } from '@/types/Information';
 
-import { toggleStep} from '@/components/utils/StepsPagesFunctions';
+import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 
 
 @Component({
@@ -97,7 +97,7 @@ export default class DashboardPage extends Vue {
     dataLoaded = false;    
     journeyStarted = false;
     error = '';
-    processType = '';
+    updated = 0;
 
     casesJson: caseJsonDataType[] = [];
     journeyJson = {} as journeyJsonDataType;
@@ -105,21 +105,42 @@ export default class DashboardPage extends Vue {
     @Watch('pathType')
     setPath(newPath: pathwayTypeInfoType) 
     {
-        if (newPath.hasRightToAppeal){
+        toggleAllSteps(false);
+        console.log('changed')
+        
+
+        if (newPath.appRightToAppeal){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo, true)            
-        } else if (newPath.noRightToAppeal){
+        } else if (newPath.appApplyLeave){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.APP_APPLY_LEAVE._StepNo, true)
-        } else if (newPath.noticeOfAppealResponse){
+        } else if (newPath.appLeaveRefused){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.APP_LEAVE_REFUSED._StepNo, true)
+        } else if (newPath.appLeaveGranted){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.APP_LEAVE_GRANTED._StepNo, true)
+        } else if (newPath.rspToAppeal){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.RSP_TO_APPEAL._StepNo, true)
-        } else if (newPath.noticeOfApplicationResponse){
+        } else if (newPath.rspToLeave){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.RSP_TO_LEAVE._StepNo, true)
+        } else if (newPath.rspToLeaveGranted){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.RSP_TO_LEAVE_GRANTED._StepNo, true)
+        } else if (newPath.rspToLeaveRefused){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.RSP_TO_LEAVE_REFUSED._StepNo, true)
+        } else if (newPath.rspToLeaveRefusedFinal){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.RSP_TO_LEAVE_REFUSED_FINAL._StepNo, true)
         } else {
             this.journeyStarted = false;
         }
+
+        Vue.nextTick(()=> this.updated++);
             
     }
 

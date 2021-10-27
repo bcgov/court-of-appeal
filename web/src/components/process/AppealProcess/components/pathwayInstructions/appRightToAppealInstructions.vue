@@ -15,7 +15,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class hasRightToAppealInstructions extends Vue {     
+export default class appRightToAppealInstructions extends Vue {     
 
 }
 

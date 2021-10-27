@@ -80,7 +80,7 @@
                     
                     <application-for-review-rsp-to-leave-refused-pg v-if="applicationForReviewContent"/>
                     <the-hearing-rsp-to-leave-refused-pg v-else-if="theHearingContent"/>                    
-                    <final-decision-on-leave-to-appeal-rsp-to-leave-refused-pg v-else-if="finalDecisionOnLeaveToAppealContent"/>
+                    <final-decision-on-leave-to-appeal-rsp-to-leave-refused-pg @closeWindow="showWindow = false" v-else-if="finalDecisionOnLeaveToAppealContent"/>
                     
                 </b-col>
 
