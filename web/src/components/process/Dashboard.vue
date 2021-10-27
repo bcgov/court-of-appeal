@@ -106,9 +106,7 @@ export default class DashboardPage extends Vue {
     setPath(newPath: pathwayTypeInfoType) 
     {
         toggleAllSteps(false);
-        console.log('changed')
         
-
         if (newPath.appRightToAppeal){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo, true)            
