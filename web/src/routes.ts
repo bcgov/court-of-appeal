@@ -30,37 +30,38 @@ const routes = [
     {
       path: "/dashboard",
       name: "dashboard",
+      beforeEnter: authGuard,
       component: DashboardPage
     },
     {
       path: "/my-documents",
       name: "my-documents",
-      // beforeEnter: authGuard,
+      beforeEnter: authGuard,
       component: MyDocuments
     },
     {
       path: "/start",
       name: "start",
-      // beforeEnter: authGuard,
+      beforeEnter: authGuard,
       component: StartForm2
     },
     {
       path: "/fill",
       name: "fill",
-      // beforeEnter: authGuard,
+      beforeEnter: authGuard,
       component: FillForm2
     },
     {
       path: "/preview",
       name: "preview",
-      // beforeEnter: authGuard,
+      beforeEnter: authGuard,
       component: PreviewForm2,
       props: true
     },
     {
       path: "/proceed",
       name: "proceed",
-      // beforeEnter: authGuard,
+      beforeEnter: authGuard,
       component: SubmitForm2,
       props: true
     }

@@ -75,6 +75,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { SessionManager } from "@/components/utils/utils";
 
+import {getBceidRegisterUrl} from "./BCeID_URLs"
+
 import { namespace } from "vuex-class";   
 import "@/store/modules/common";
 import { documentTypesJsonInfoType, locationsInfoType } from '@/types/Common';
@@ -89,6 +91,9 @@ export default class LandingPage extends Vue {
     @commonState.Action
     public UpdateLocationsInfo!: (newLocationsInfo: locationsInfoType[]) => void
 
+    @commonState.State
+    public userId!: string;
+
     isLoggedIn = false;
     pageReady = false;
     safetyInst = false;
@@ -97,7 +102,7 @@ export default class LandingPage extends Vue {
         this.pageReady = false;
         this.safetyInst = false;
         await SessionManager.getUserInfo(this.$store);
-        if(this.$store.state.Common.userId !== ""){
+        if(this.userId){
             this.isLoggedIn = true
             this.$router.push({ name: "dashboard" });
         }else{
@@ -107,10 +112,11 @@ export default class LandingPage extends Vue {
     }
   
     public navigate(userType) {
-        //console.log(new URL(location.href))
-        //this.$store.commit("Application/setUserType", userType); 
-        //this.$router.push({ name: "applicant-status" });       
-        this.$router.push({ name: "dashboard" });
+        if(userType == 'new'){
+            window.location.replace(getBceidRegisterUrl());
+        }else{
+           this.$router.push({ name: "dashboard" }); 
+        }           
     }
   
 }

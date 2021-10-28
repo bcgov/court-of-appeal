@@ -26,7 +26,7 @@
                     Court of Appeal                    
                 </div>
 
-                <!-- <div class="navbar-extra">
+                <div class="navbar-extra">
                     <div id="app-profile">
                         <div v-if="userName" style="padding-right: rem">
                             <b-dropdown id="profileDropdown"
@@ -37,12 +37,11 @@
                                 <template #button-content style="background-color: #003366">
                                     <span class="fa fa-user"></span> {{ userName }}
                                 </template>
-                                <b-dropdown-item @click="logout(false)">Logout</b-dropdown-item>
-                                <b-dropdown-item @click="viewStatus()">Previous Applications</b-dropdown-item>
+                                <b-dropdown-item @click="logout(false)">Logout</b-dropdown-item>                                
                             </b-dropdown>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <button class="navbar-toggler"
                         type="button"
@@ -64,8 +63,15 @@ import { Component, Vue } from "vue-property-decorator";
 import { SessionManager } from "@/components/utils/utils";
 import moment from "moment-timezone";
 
+import { namespace } from "vuex-class";   
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 @Component
 export default class NavigationTopbar extends Vue {
+    
+    @commonState.State
+    public userName!: string;
 
     error = "";
     contactUs = false;
@@ -76,41 +82,36 @@ export default class NavigationTopbar extends Vue {
         this.tips = false;
     }
 
-    get userName() {
-
-        return this.$store.state.Application.userName;
-    }
-
     public logout(isQuickExit) {
 
         const emptyApplicationRoutes = ["/", "/status", "/serviceLocator"];
 
         if (emptyApplicationRoutes.indexOf(this.$route.fullPath) == -1) {
 
-            const lastUpdated = moment().format();
-            this.$store.commit("Application/setLastUpdated", lastUpdated);
-            const application = this.$store.state.Application;
-            application.type = Vue.filter("translateTypes")(
-                this.$store.state.Application.types
-            );
+            // const lastUpdated = moment().format();
+            // this.$store.commit("Application/setLastUpdated", lastUpdated);
+            // const application = this.$store.state.Application;
+            // application.type = Vue.filter("translateTypes")(
+            //     this.$store.state.Application.types
+            // );
 
-            const applicationId = application.id;
-            const header = {
-                responseType: "json",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            };
+            // const applicationId = application.id;
+            // const header = {
+            //     responseType: "json",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     }
+            // };
 
-            this.$http.put("/app/" + applicationId + "/", application, header).then(
-                res => {
-                    this.error = "";
-                },
-                err => {
-                    console.error(err);
-                    this.error = err;
-                }
-            );
+            // this.$http.put("/app/" + applicationId + "/", application, header).then(
+            //     res => {
+            //         this.error = "";
+            //     },
+            //     err => {
+            //         console.error(err);
+            //         this.error = err;
+            //     }
+            // );
         }
         Vue.nextTick().then(() => {
 
@@ -122,10 +123,6 @@ export default class NavigationTopbar extends Vue {
 
     }
 
-    public viewStatus() {
-
-        this.$router.push({ name: "applicant-status" });
-    }
 }
 </script>
 

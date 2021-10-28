@@ -1,4 +1,4 @@
-import Common from '@/store/modules/information';
+import Common from '@/store/modules/common';
 import Application from '@/store/modules/application';
 import Information from '@/store/modules/information';
 import Vue from "vue";
