@@ -92,11 +92,7 @@ export interface RSP_TO_LEAVE_GRANTED_stPgTypes{
 }
 
 export interface RSP_TO_LEAVE_REFUSED_FINAL_stPgTypes{
-    _StepNo: number;
-    
-    ApplicationForReview: number;
-    TheHearing: number;   
-    FinalDecisionOnLeaveToAppeal: number;
+    _StepNo: number;    
 }
 
 export interface RSP_TO_LEAVE_REFUSED_stPgTypes{

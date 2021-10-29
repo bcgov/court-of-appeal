@@ -14,7 +14,7 @@
         <rsp-to-leave-refused-instructions v-else-if="rspToLeaveRefused" />
         <rsp-to-leave-refused-final-instructions v-else-if="rspToLeaveRefusedFinal" />
         
-        <p v-if="!appLeaveRefused && !appLeaveRefusedFinal">
+        <p v-if="!appLeaveRefused && !appLeaveRefusedFinal && !rspToLeaveRefusedFinal">
             Every appeal process is unique. If you have any questions, please visit the 
             <a 
                 href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 

@@ -410,30 +410,6 @@ class Application extends VuexModule {
         s.pages = new Array<pageInfoType>();
         s.currentPage = 0;        
 
-        p = {} as pageInfoType;
-        p.key = "0";
-        p.name = "ApplicationForReview";
-        p.label = "Application for Review";
-        p.active = false;
-        p.progress = 0;    
-        s.pages.push(p);
-
-        p = {} as pageInfoType;
-        p.key = "1";
-        p.name = "TheHearing";
-        p.label = "The Hearing";
-        p.active = false;
-        p.progress = 0;    
-        s.pages.push(p);
-
-        p = {} as pageInfoType;
-        p.key = "2";
-        p.name = "FinalDecisionOnLeaveToAppeal";
-        p.label = "Final Decision on Leave to Appeal";
-        p.active = false;
-        p.progress = 0;    
-        s.pages.push(p);
-
         this.steps.push(s);
 
         //Respond To Leave Refused Journey Map
