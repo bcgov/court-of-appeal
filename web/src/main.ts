@@ -15,12 +15,15 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "font-awesome/css/font-awesome.min.css";
 import { SessionManager } from "@/components/utils/utils";
 
+import UpdateJourneyMap from "./prototypes/UpdateJourneyMap"
+
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(VueRouter);
 Vue.use(VueCookies);
-Vue.use(http)
+Vue.use(http);
+Vue.use(UpdateJourneyMap);
 Vue.component('loading-spinner', LoadingSpinner);
 
 const router = new VueRouter({

@@ -222,21 +222,24 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
         this.currentStep = this.stPgNo.RSP_TO_LEAVE_GRANTED._StepNo;
         this.numOfPages = Object.keys(this.stPgNo.RSP_TO_LEAVE_GRANTED).length-1;
 
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        this.getJourneyMapCurrentState();
         
         this.dataReady = true;
+    }
+
+    public completed(order, checked){        
+        activatePage(order, checked, this.currentStep)
+        this.getJourneyMapCurrentState();
+    }
+
+    public getJourneyMapCurrentState(){
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep);
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
     }
 
     public adjustHeights(index: number, pathHeight: string) {
         this.updated++;
         this.pathHeights[index] = pathHeight;
-    }
-
-    public completed(order, checked){
-        
-        activatePage(order, checked, this.currentStep)
-        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
     }
 
     public displayWindow(contentType: string){

@@ -183,12 +183,12 @@ export default class RespondToLeaveJourneyMap extends Vue {
     decisionOnLeaveToAppealContent = false;
 
     mounted(){
+        console.log('RSP To Leave')
         this.dataReady = false;
 
         this.currentStep = this.stPgNo.RSP_TO_LEAVE._StepNo;
         this.numOfPages = Object.keys(this.stPgNo.RSP_TO_LEAVE).length-1;
-
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        this.getJourneyMapCurrentState();
         
         this.dataReady = true;
     }
@@ -196,8 +196,12 @@ export default class RespondToLeaveJourneyMap extends Vue {
     public completed(order, checked){
         
         activatePage(order, checked, this.currentStep)
-        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
+        this.getJourneyMapCurrentState();
+    }
+
+    public getJourneyMapCurrentState(){
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep);
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
     }
 
     public displayWindow(contentType: string){

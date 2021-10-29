@@ -215,9 +215,9 @@ export default class MyDocumentsTable extends Vue {
        
         for (const docJson of this.casesJson) {                
             const doc = {isChecked: false, fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'', last_efiling_submission:{package_number:'',package_url:''}};
-            console.log(docJson)
+            //console.log(docJson)
             doc.fileNumber = docJson.id;
-            doc.caseNumber = docJson.data.formSevenNumber;
+            //doc.caseNumber = docJson.data.formSevenNumber;
             doc.status = docJson.status;
             doc.modifiedDate = docJson.modified;
 

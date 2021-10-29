@@ -32,11 +32,14 @@ class JourneyMapView(APIView):
         uid = request.user.id
         journey = get_journeymap_for_user(uid)
         if journey is None:
-            return HttpResponseNotFound("detail Not found.")
+            return Response(None)
 
         steps_dec = settings.ENCRYPTOR.decrypt(journey.key_id, journey.steps)
         steps = json.loads(steps_dec)
-        data = {"steps": steps}
+        data = {
+            "steps": steps, 
+            "version": journey.version
+        }
         
         return Response(data)
 
@@ -55,14 +58,16 @@ class JourneyMapView(APIView):
             db_journey = Journeymap(            
                 steps=steps_enc,
                 key_id=steps_key_id,
+                version=body.get("version"),
                 user_id=uid
             )
 
             db_journey.save()
             return Response("success")
         else:
-            journey.steps = steps_enc,
-            journey.key_id = steps_key_id,
+            journey.steps = steps_enc
+            journey.key_id = steps_key_id
+            journey.version = body.get("version")
             journey.save()
             return Response("success")
         

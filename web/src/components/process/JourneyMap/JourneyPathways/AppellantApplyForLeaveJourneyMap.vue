@@ -167,10 +167,19 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
 
         this.currentStep = this.stPgNo.APP_APPLY_LEAVE._StepNo;
         this.numOfPages = Object.keys(this.stPgNo.APP_APPLY_LEAVE).length-1;
-
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
+        this.getJourneyMapCurrentState();
         
         this.dataReady = true;
+    }
+
+    public completed(order, checked){        
+        activatePage(order, checked, this.currentStep)
+        this.getJourneyMapCurrentState();
+    }
+
+    public getJourneyMapCurrentState(){
+        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep);
+        this.pageState = evaluatePageState(this.numOfPages, this.currentStep);
     }
 
     public displayWindow(contentType: string){
@@ -202,16 +211,6 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
         }         
         this.showWindow = true;
     }
-
-    public completed(order, checked){
-        
-        activatePage(order, checked, this.currentStep)
-        this.completedTrail = evaluateCompletedTrails(this.numOfPages, this.currentStep)
-        this.pageState = evaluatePageState(this.numOfPages, this.currentStep)
-    }
-
-    
-
 
 }
 </script>

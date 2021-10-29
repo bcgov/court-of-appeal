@@ -565,45 +565,45 @@ class Application extends VuexModule {
         this.context.commit("setStepActive", { currentStep, active });
     }
 
-    @Mutation
-    public gotoPrevStepPage({ prevStep, prevPage }): void {
-        if (prevStep != this.currentStep) {
-          this.currentStep = prevStep;
-        }
+    // @Mutation
+    // public gotoPrevStepPage({ prevStep, prevPage }): void {
+    //     if (prevStep != this.currentStep) {
+    //       this.currentStep = prevStep;
+    //     }
     
-        if (prevPage != this.steps[prevStep].currentPage) {
-          this.steps[prevStep].currentPage = prevPage;
-        }
-        window.scrollTo(0, 0);
-    }
-    @Action
-    public UpdateGotoPrevStepPage() {
-        const prevStepPage = this.context.getters["getPrevStepPage"];
+    //     if (prevPage != this.steps[prevStep].currentPage) {
+    //       this.steps[prevStep].currentPage = prevPage;
+    //     }
+    //     window.scrollTo(0, 0);
+    // }
+    // @Action
+    // public UpdateGotoPrevStepPage() {
+    //     const prevStepPage = this.context.getters["getPrevStepPage"];
     
-        if (prevStepPage != null) {
-          this.context.commit("gotoPrevStepPage", prevStepPage);
-        }
-    }    
+    //     if (prevStepPage != null) {
+    //       this.context.commit("gotoPrevStepPage", prevStepPage);
+    //     }
+    // }    
 
-    @Mutation
-    public gotoNextStepPage({ nextStep, nextPage }): void {
-        if (nextStep != this.currentStep) {
-            this.currentStep = nextStep;
-        }
+    // @Mutation
+    // public gotoNextStepPage({ nextStep, nextPage }): void {
+    //     if (nextStep != this.currentStep) {
+    //         this.currentStep = nextStep;
+    //     }
     
-        if (nextPage != this.steps[nextStep].currentPage) {
-            this.steps[nextStep].currentPage = nextPage;
-        }
-        window.scrollTo(0, 0);
-    }    
-    @Action
-    public UpdateGotoNextStepPage() {
-        const nextStepPage = this.context.getters["getNextStepPage"];
+    //     if (nextPage != this.steps[nextStep].currentPage) {
+    //         this.steps[nextStep].currentPage = nextPage;
+    //     }
+    //     window.scrollTo(0, 0);
+    // }    
+    // @Action
+    // public UpdateGotoNextStepPage() {
+    //     const nextStepPage = this.context.getters["getNextStepPage"];
     
-        if (nextStepPage != null) {
-            this.context.commit("gotoNextStepPage", nextStepPage);
-        }
-    }
+    //     if (nextStepPage != null) {
+    //         this.context.commit("gotoNextStepPage", nextStepPage);
+    //     }
+    // }
     
     @Mutation
     public setPageActive({ currentStep, currentPage, active }): void {
@@ -629,64 +629,64 @@ class Application extends VuexModule {
     }
     
 
-    @Mutation
-    public setStepResultData({ step, data }): void {
-        step.result = {...step.result, ...data};
-    }
-    @Action
-    public UpdateStepResultData({ step, data }) {
-        this.context.commit("setScrollToLocationName","");
-        this.context.commit("setStepResultData", { step, data });
-    } 
+    // @Mutation
+    // public setStepResultData({ step, data }): void {
+    //     step.result = {...step.result, ...data};
+    // }
+    // @Action
+    // public UpdateStepResultData({ step, data }) {
+    //     this.context.commit("setScrollToLocationName","");
+    //     this.context.commit("setStepResultData", { step, data });
+    // } 
 
-    @Mutation
-    public setCommonStepResults({ data }): void {
-        this.steps[0].result = {...this.steps[0].result, ...data};
-    }
-    @Action
-    public UpdateCommonStepResults({ data }) {
-        this.context.commit("setCommonStepResults", { data });
-    }   
+    // @Mutation
+    // public setCommonStepResults({ data }): void {
+    //     this.steps[0].result = {...this.steps[0].result, ...data};
+    // }
+    // @Action
+    // public UpdateCommonStepResults({ data }) {
+    //     this.context.commit("setCommonStepResults", { data });
+    // }   
 
-    @Mutation
-    public setPathwayCompletedFull(newPathwayCompleted): void {
-        this.pathwayCompleted = newPathwayCompleted;
-    }
-    @Action
-    public UpdatePathwayCompletedFull(newPathwayCompleted) {
-        this.context.commit("setPathwayCompletedFull",newPathwayCompleted);
-    }
+    // @Mutation
+    // public setPathwayCompletedFull(newPathwayCompleted): void {
+    //     this.pathwayCompleted = newPathwayCompleted;
+    // }
+    // @Action
+    // public UpdatePathwayCompletedFull(newPathwayCompleted) {
+    //     this.context.commit("setPathwayCompletedFull",newPathwayCompleted);
+    // }
 
-    @Mutation
-    public setAllCompleted(allCompleted): void {
-        this.allCompleted = allCompleted;
-    }
-    @Action
-    public checkAllCompleted() {
-        let newAllCompleted = false;
+    // @Mutation
+    // public setAllCompleted(allCompleted): void {
+    //     this.allCompleted = allCompleted;
+    // }
+    // @Action
+    // public checkAllCompleted() {
+    //     let newAllCompleted = false;
        
-        this.context.commit("setAllCompleted", newAllCompleted)
-    }
+    //     this.context.commit("setAllCompleted", newAllCompleted)
+    // }
 
-    @Mutation
-    public setPathwayCompleted({pathway, isCompleted}): void {
-        this.pathwayCompleted[pathway] = isCompleted;        
-    }
-    @Action
-    public UpdatePathwayCompleted({pathway, isCompleted}) { 
-        this.context.commit("setPathwayCompleted", {pathway, isCompleted}); 
-        this.context.commit("setCommonStepResults",{data:{'pathwayCompleted':this.pathwayCompleted}});            
-        this.context.dispatch("checkAllCompleted")
-    }    
+    // @Mutation
+    // public setPathwayCompleted({pathway, isCompleted}): void {
+    //     this.pathwayCompleted[pathway] = isCompleted;        
+    // }
+    // @Action
+    // public UpdatePathwayCompleted({pathway, isCompleted}) { 
+    //     this.context.commit("setPathwayCompleted", {pathway, isCompleted}); 
+    //     this.context.commit("setCommonStepResults",{data:{'pathwayCompleted':this.pathwayCompleted}});            
+    //     this.context.dispatch("checkAllCompleted")
+    // }    
     
-    @Mutation
-    public setApplicationId(id): void {
-        this.id = id;
-    }
-    @Action
-    public UpdateApplicationId(newId) {
-        this.context.commit("setApplicationId", newId);
-    }
+    // @Mutation
+    // public setApplicationId(id): void {
+    //     this.id = id;
+    // }
+    // @Action
+    // public UpdateApplicationId(newId) {
+    //     this.context.commit("setApplicationId", newId);
+    // }
 
     @Mutation
     public setStPgNo(stPgNo): void {
@@ -732,80 +732,89 @@ class Application extends VuexModule {
         }
     }
 
-
     @Mutation
-    public setCurrentApplication(application): void {
-        this.id = application.id;
-        this.steps = application.steps;
-        this.currentStep = application.currentStep;
-        this.allCompleted = application.allCompleted;
-        this.version = application.version;
+    public setCurrentSteps({steps:steps, version:version}): void {        
+        this.steps = steps;        
+        this.version = version;
     }
     @Action
-    public UpdateCurrentApplication(newApplication) {
-        this.context.commit("setCurrentApplication", newApplication);
+    public UpdateCurrentSteps(steps, version) {
+        this.context.commit("setCurrentApplication", {steps:steps, version:version});
     }
 
+    // @Mutation
+    // public setCurrentApplication(application): void {
+    //     this.id = application.id;
+    //     this.steps = application.steps;
+    //     this.currentStep = application.currentStep;
+    //     this.allCompleted = application.allCompleted;
+    //     this.version = application.version;
+    // }
+    // @Action
+    // public UpdateCurrentApplication(newApplication) {
+    //     this.context.commit("setCurrentApplication", newApplication);
+    // }
 
-    get getPrevStepPage(): { prevStep: number; prevPage: number } {
 
-        let prevStepPage: { prevStep: number; prevPage: number };    
-        let sIndex = Number(this.currentStep);
-        let pIndex = Number(this.steps[sIndex].currentPage) - 1;
+    // get getPrevStepPage(): { prevStep: number; prevPage: number } {
+
+    //     let prevStepPage: { prevStep: number; prevPage: number };    
+    //     let sIndex = Number(this.currentStep);
+    //     let pIndex = Number(this.steps[sIndex].currentPage) - 1;
     
-        while (prevStepPage == null && sIndex >= 0) {
-            const s = this.steps[sIndex];
+    //     while (prevStepPage == null && sIndex >= 0) {
+    //         const s = this.steps[sIndex];
         
-            if (s.active) {
-                while (prevStepPage == null && pIndex >= 0) {
-                    if (s.pages[pIndex].active) {
-                        prevStepPage = { prevStep: sIndex, prevPage: pIndex };
-                    } else {
-                        pIndex--;
-                    }
-                }
-            }
+    //         if (s.active) {
+    //             while (prevStepPage == null && pIndex >= 0) {
+    //                 if (s.pages[pIndex].active) {
+    //                     prevStepPage = { prevStep: sIndex, prevPage: pIndex };
+    //                 } else {
+    //                     pIndex--;
+    //                 }
+    //             }
+    //         }
         
-            // go to previous step
-            sIndex--;
+    //         // go to previous step
+    //         sIndex--;
         
-            if (sIndex >= 0) {
-                pIndex = this.steps[sIndex].pages.length - 1;
-            }
-        }
+    //         if (sIndex >= 0) {
+    //             pIndex = this.steps[sIndex].pages.length - 1;
+    //         }
+    //     }
     
-        return prevStepPage;
-    }
+    //     return prevStepPage;
+    // }
 
-    get getNextStepPage(): { nextStep: number; nextPage: number } {
+    // get getNextStepPage(): { nextStep: number; nextPage: number } {
 
-        let nextStepPage: { nextStep: number; nextPage: number };    
-        let sIndex = Number(this.currentStep);       
-        let pIndex = Number(this.steps[sIndex].currentPage) + 1;
+    //     let nextStepPage: { nextStep: number; nextPage: number };    
+    //     let sIndex = Number(this.currentStep);       
+    //     let pIndex = Number(this.steps[sIndex].currentPage) + 1;
         
-        while (nextStepPage == null && sIndex < this.steps.length) {
-            const s = this.steps[sIndex];
+    //     while (nextStepPage == null && sIndex < this.steps.length) {
+    //         const s = this.steps[sIndex];
         
-            if (s.active) {
-                while (nextStepPage == null && pIndex < s.pages.length) {
-                    if (s.pages[pIndex] && s.pages[pIndex].active) {
-                        nextStepPage = { nextStep: sIndex, nextPage: pIndex };
-                    } else {
-                        pIndex++;
-                    }
-                }
-            }
+    //         if (s.active) {
+    //             while (nextStepPage == null && pIndex < s.pages.length) {
+    //                 if (s.pages[pIndex] && s.pages[pIndex].active) {
+    //                     nextStepPage = { nextStep: sIndex, nextPage: pIndex };
+    //                 } else {
+    //                     pIndex++;
+    //                 }
+    //             }
+    //         }
     
-            // go to next step
-            sIndex++;
+    //         // go to next step
+    //         sIndex++;
     
-            if (sIndex < this.steps.length) {
-                pIndex = 0;
-            }
-        }
+    //         if (sIndex < this.steps.length) {
+    //             pIndex = 0;
+    //         }
+    //     }
 
-        return nextStepPage;
-    }
+    //     return nextStepPage;
+    // }
 
 }
 

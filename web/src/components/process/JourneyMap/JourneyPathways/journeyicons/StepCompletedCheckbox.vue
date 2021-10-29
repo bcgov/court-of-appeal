@@ -24,6 +24,7 @@ export default class StepCompletedCheckbox extends Vue {
         Vue.nextTick(()=>{
             
             this.$emit('onChange', event?.target?.checked)
+            Vue.prototype.$UpdateJourney();
         })
     }
 

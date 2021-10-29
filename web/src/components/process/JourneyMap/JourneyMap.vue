@@ -1,20 +1,15 @@
 <template>
-<div>   
-
-    <div>        
-        <appellant-apply-for-leave-journey-map v-if="appApplyLeave"/>
-        <appellant-leave-granted-journey-map v-if="appLeaveGranted"/>
-        <appellant-leave-refused-journey-map v-if="appLeaveRefused"/>
-        <appellant-right-to-appeal-journey-map v-if="appRightToAppeal"/>
-        
-        <respond-to-appeal-journey-map v-if="rspToAppeal"/>
-        <respond-to-leave-granted-journey-map v-if="rspToLeaveGranted"/>
-        <respond-to-leave-journey-map v-if="rspToLeave"/>
-        <respond-to-leave-refused-final-journey-map v-if="rspToLeaveRefusedFinal"/>
-        <respond-to-leave-refused-journey-map v-if="rspToLeaveRefused"/>
-    </div>
-
+<div v-if="dataReady">      
+    <appellant-apply-for-leave-journey-map v-if="appApplyLeave"/>
+    <appellant-leave-granted-journey-map v-if="appLeaveGranted"/>
+    <appellant-leave-refused-journey-map v-if="appLeaveRefused"/>
+    <appellant-right-to-appeal-journey-map v-if="appRightToAppeal"/>
     
+    <respond-to-appeal-journey-map v-if="rspToAppeal"/>
+    <respond-to-leave-granted-journey-map v-if="rspToLeaveGranted"/>
+    <respond-to-leave-journey-map v-if="rspToLeave"/>
+    <respond-to-leave-refused-final-journey-map v-if="rspToLeaveRefusedFinal"/>
+    <respond-to-leave-refused-journey-map v-if="rspToLeaveRefused"/>
 </div>
 </template>
 
@@ -61,6 +56,8 @@ export default class JourneyMap extends Vue {
     @applicationState.State
     public steps!: stepInfoType[]; 
 
+    dataReady = false
+
     appApplyLeave = false;
     appLeaveGranted = false;
     appLeaveRefused = false;
@@ -72,7 +69,8 @@ export default class JourneyMap extends Vue {
     rspToLeaveRefused = false;
 
     mounted(){
-
+ console.log('MAP')
+        this.dataReady = false;
         this.appApplyLeave = this.steps[this.stPgNo.APP_APPLY_LEAVE._StepNo].active;
         this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active || this.steps[this.stPgNo.APP_LEAVE_GRANTED_FINAL._StepNo].active;
         this.appLeaveRefused = this.steps[this.stPgNo.APP_LEAVE_REFUSED._StepNo].active;
@@ -82,6 +80,7 @@ export default class JourneyMap extends Vue {
         this.rspToLeaveGranted = this.steps[this.stPgNo.RSP_TO_LEAVE_GRANTED._StepNo].active;
         this.rspToLeaveRefused = this.steps[this.stPgNo.RSP_TO_LEAVE_REFUSED._StepNo].active;
         this.rspToLeaveRefusedFinal = this.steps[this.stPgNo.RSP_TO_LEAVE_REFUSED_FINAL._StepNo].active;
+        this.dataReady = true;
     } 
 
 }
