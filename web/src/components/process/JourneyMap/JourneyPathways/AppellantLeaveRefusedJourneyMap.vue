@@ -180,7 +180,7 @@ export default class AppellantLeaveRefusedJourneyMap extends Vue {
 
         if (contentType == "Application for Review"){
 
-            this.windowTitle = "Hearing Documents: Reply Book";
+            this.windowTitle = "Application for Review";
             this.pathTypes = ["share"];
             this.pathHeights = ['12rem'];
             this.applicationForReviewContent = true;
@@ -189,7 +189,7 @@ export default class AppellantLeaveRefusedJourneyMap extends Vue {
             
             this.windowTitle = "The Hearing";
             this.pathTypes = ["gavel"];
-            this.pathHeights = ['0'];
+            this.pathHeights = ['6rem'];
             this.theHearingContent = true;
 
         } else if (contentType == "Final Decision on Leave to Appeal"){

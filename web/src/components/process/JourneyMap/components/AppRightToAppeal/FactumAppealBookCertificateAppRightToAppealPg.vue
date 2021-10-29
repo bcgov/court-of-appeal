@@ -51,7 +51,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_Final.dotx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_Final.dotx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -59,7 +59,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_respondent_Final.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_respondent_Final.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF
@@ -86,7 +86,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -94,7 +94,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF
@@ -115,7 +115,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -123,7 +123,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF
@@ -144,7 +144,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -152,7 +152,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form14.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF
@@ -223,7 +223,7 @@
                                 </b-col>
                                 <b-col class="pl-0" cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2011.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2011.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -231,7 +231,7 @@
                                 </b-col>
                                 <b-col class="pl-0" cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2011.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2011.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF

@@ -8,6 +8,13 @@
             appeal journey, check the box next to each step below to 
             mark it as complete.
         </p>
+
+        <p>
+            In addition, you will need to follow the steps below to 
+            complete the appeal. Start by clicking on the first form. 
+            As you progress through your appeal journey, check the 
+            box next to each step below to mark it as complete.
+        </p>
         
     </b-card>
 </template>

@@ -11,7 +11,7 @@
             <b-col>              
                 <b-button 
                     block
-                    @click="resToLeaveGrantedPath" 
+                    @click="appLeaveGrantedFinalPath" 
                     variant="outline-primary bg-success text-white" 
                     >
                     Granted
@@ -21,7 +21,7 @@
             <b-col>
                 <b-button 
                     block
-                    @click="resToLeaveRefusedFinalPath" 
+                    @click="appLeaveRefusedFinalPath" 
                     variant="outline-primary bg-success text-white" 
                 >Refused
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -47,19 +47,19 @@ export default class FinalDecisionOnLeaveToAppealAppLeaveRefusedPg extends Vue {
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
-    public resToLeaveGrantedPath() {
+    public appLeaveGrantedFinalPath() {
         
         const pathType = {} as pathwayTypeInfoType;
-        pathType.rspToLeaveGranted = true;
+        pathType.appLeaveGrantedFinal = true;
         this.UpdatePathType(pathType);        
         this.$emit('closeWindow');
 
     }
 
-    public resToLeaveRefusedFinalPath() {
+    public appLeaveRefusedFinalPath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.rspToLeaveRefusedFinal = true;
+        pathType.appLeaveRefusedFinal = true;
         this.UpdatePathType(pathType);
         this.$emit('closeWindow');
     }

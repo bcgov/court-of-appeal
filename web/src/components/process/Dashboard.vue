@@ -119,6 +119,12 @@ export default class DashboardPage extends Vue {
         } else if (newPath.appLeaveGranted){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.APP_LEAVE_GRANTED._StepNo, true)
+        } else if (newPath.appLeaveRefusedFinal){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.APP_LEAVE_REFUSED_FINAL._StepNo, true)
+        } else if (newPath.appLeaveGrantedFinal){
+            this.journeyStarted = true;
+            toggleStep(this.stPgNo.APP_LEAVE_GRANTED_FINAL._StepNo, true)
         } else if (newPath.rspToAppeal){
             this.journeyStarted = true;
             toggleStep(this.stPgNo.RSP_TO_APPEAL._StepNo, true)

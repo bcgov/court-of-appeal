@@ -52,7 +52,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -60,7 +60,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form8.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF

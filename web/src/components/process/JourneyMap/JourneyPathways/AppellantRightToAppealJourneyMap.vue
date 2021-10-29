@@ -180,40 +180,45 @@
             <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
         </template>
 
-        <b-row no-gutters>
-            <b-col cols="1">
-                <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
-            </b-col>
-            <b-col cols="11" style="padding: 0 0 0 2rem;">
+        <b-card no-body class="bg-white border-white">
 
-                <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
-                <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
-                <factum-appeal-book-certificate-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/>              
+            <b-row v-if="initialDocumentsContent" style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" class="mb-1 ml-5">Would you like to start your appeal?</b-row>            
 
-                <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
-                <notice-of-hearing-app-right-to-appeal-pg v-else-if="noticeOfHearingContent"/>                
-                <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
-                <court-order-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
-                <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
-               
-            </b-col>
+            <b-row no-gutters>
+                <b-col cols="1">
+                    <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
+                </b-col>
+                <b-col cols="11" style="padding: 0 0 0 1rem;">
 
-        </b-row>
+                    <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
+                    <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
+                    <factum-appeal-book-certificate-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/>              
+
+                    <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
+                    <notice-of-hearing-app-right-to-appeal-pg v-else-if="noticeOfHearingContent"/>                
+                    <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
+                    <court-order-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
+                    <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
+                
+                </b-col>
+            </b-row>
+
+        </b-card>
 
 
       
-      <template v-slot:modal-footer>
-        <instruction-window-footer/>
-      </template>
-      <template v-slot:modal-header-close>
-        <b-button
-          variant="outline-primary text-white"
-          style="font-weight: bold; font-size: 1.25em;"
-          class="closeButton"
-          @click="showWindow = false"
-          >&times;</b-button
-        >
-      </template>
+        <template v-slot:modal-footer>
+            <instruction-window-footer/>
+        </template>
+        <template v-slot:modal-header-close>
+            <b-button
+            variant="outline-primary text-white"
+            style="font-weight: bold; font-size: 1.25em;"
+            class="closeButton"
+            @click="showWindow = false"
+            >&times;</b-button
+            >
+        </template>
     </b-modal>
 </div>
 </template>
@@ -330,7 +335,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
             this.windowTitle = "Initial Documents";
             this.pathTypes = ["share"];
-            this.pathHeights = ['32rem'];
+            this.pathHeights = ['29rem'];
             this.initialDocumentsContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){

@@ -80,7 +80,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -88,7 +88,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF

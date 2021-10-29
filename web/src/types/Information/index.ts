@@ -4,6 +4,8 @@ export interface pathwayTypeInfoType {
     appApplyLeave?: boolean;
     appLeaveGranted?: boolean;
     appLeaveRefused?: boolean;
+    appLeaveRefusedFinal?: boolean;
+    appLeaveGrantedFinal?: boolean;
     appRightToAppeal?: boolean;
     rspToAppeal?: boolean;
     rspToLeaveGranted?: boolean;

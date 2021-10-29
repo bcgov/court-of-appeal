@@ -74,7 +74,7 @@ export default class JourneyMap extends Vue {
     mounted(){
 
         this.appApplyLeave = this.steps[this.stPgNo.APP_APPLY_LEAVE._StepNo].active;
-        this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active;
+        this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active || this.steps[this.stPgNo.APP_LEAVE_GRANTED_FINAL._StepNo].active;
         this.appLeaveRefused = this.steps[this.stPgNo.APP_LEAVE_REFUSED._StepNo].active;
         this.appRightToAppeal = this.steps[this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo].active;
         this.rspToAppeal = this.steps[this.stPgNo.RSP_TO_APPEAL._StepNo].active;

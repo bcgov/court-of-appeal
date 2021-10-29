@@ -1,19 +1,13 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="ml-4">            
-            <div style="text-align: left; font-weight: bold; font-size: 2rem;">
-                Would you like to start your appeal?
-            </div>            
-        </b-row>
-
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
                 Notice of Appeal
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 mx-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
             </b-col>
@@ -58,7 +52,7 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 mx-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3" scale="2"/>
             </b-col>
@@ -91,7 +85,7 @@
                                 </b-col>
                                 <b-col cols="1" >
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">DOC
@@ -99,7 +93,7 @@
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
-                                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
                                         class="p-1 bg-white text-primary border-primary">PDF
@@ -126,15 +120,11 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class InitialDocumentsAppRightToAppealPg extends Vue {  
-    
-
+export default class InitialDocumentsAppRightToAppealPg extends Vue { 
 
 }
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>

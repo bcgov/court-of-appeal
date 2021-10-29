@@ -473,6 +473,32 @@ class Application extends VuexModule {
     
         this.steps.push(s);
 
+        //Appellant Leave Refused Final Journey Map
+        s = {} as stepInfoType;
+
+        s.active = false;
+        s.id = "9";
+        s.name = "APP_LEAVE_REFUSED_FINAL";
+        s.label = "Appellant Leave Refused Final Journey Map";       
+        s.type = "AppellantLeaveRefusedFinalJourneyMap";
+        s.pages = new Array<pageInfoType>();
+        s.currentPage = 0;
+
+        this.steps.push(s);
+
+        //Appellant Leave Granted Final Journey Map
+        s = {} as stepInfoType;
+
+        s.active = false;
+        s.id = "10";
+        s.name = "APP_LEAVE_GRANTED_FINAL";
+        s.label = "Appellant Leave Granted Final Journey Map";       
+        s.type = "AppellantLeaveGrantedFinalJourneyMap";
+        s.pages = new Array<pageInfoType>();
+        s.currentPage = 0;
+
+        this.steps.push(s);
+
         console.log(this.steps)
         
     }
@@ -675,6 +701,8 @@ class Application extends VuexModule {
             RSP_TO_LEAVE: {},    
             APP_LEAVE_GRANTED: {},
             APP_LEAVE_REFUSED: {},
+            APP_LEAVE_GRANTED_FINAL: {},
+            APP_LEAVE_REFUSED_FINAL: {},
             RSP_TO_LEAVE_GRANTED: {},
             RSP_TO_LEAVE_REFUSED_FINAL: {},
             RSP_TO_LEAVE_REFUSED: {}
