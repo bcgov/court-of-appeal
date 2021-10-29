@@ -1,13 +1,13 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-0">            
             <div style="text-align: left; font-weight: bold;">
                 Complete the Notice of Hearing
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-0 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
             </b-col>
@@ -22,7 +22,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"
@@ -69,9 +69,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class NoticeOfHearingAppRightToAppealPg extends Vue {  
-    
-
+export default class NoticeOfHearingAppRightToAppealPg extends Vue {
 
 }
 </script>

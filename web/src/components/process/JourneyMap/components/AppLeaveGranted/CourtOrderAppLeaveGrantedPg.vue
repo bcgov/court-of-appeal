@@ -7,19 +7,19 @@
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-3" >            
+        <b-row class="mt-4 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgement?ct=t(sidebar-link)"
                 target="_blank">How will I find out about my judgement?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-3" >            
+        <b-row class="mt-2 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/appellant-guidebook/4.3-court-orders?ct=t(sidebar-link)"
                 target="_blank">Who is responsible for preparing the Court Order?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-3" >            
+        <b-row class="mt-2 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/appellant-guidebook/4.2-costs?ct=t(sidebar-link)"
                 target="_blank">Who is responsible for paying for the hearing?

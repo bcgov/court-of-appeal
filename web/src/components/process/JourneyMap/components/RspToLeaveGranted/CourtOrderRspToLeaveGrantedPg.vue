@@ -7,19 +7,19 @@
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-3" >            
+        <b-row class="mt-4 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
                 target="_blank">How will I find out about my judgement?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-3" >            
+        <b-row class="mt-2 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
                 target="_blank">Who is responsible for paying for the hearing?
             </a>                               
         </b-row>
-        <b-row class="mt-2 ml-3" >            
+        <b-row class="mt-2 ml-5" >            
             <a 
                 href="https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(sidebar-link)"
                 target="_blank">How do I prepare my court order?

@@ -1,7 +1,7 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
                 For more information about the court order process, click the topics below:
             </div>            

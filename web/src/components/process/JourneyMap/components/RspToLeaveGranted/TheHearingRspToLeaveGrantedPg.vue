@@ -1,8 +1,8 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
-            <div style="text-align: left; font-weight: bold;">
+        <b-row class="mt-3 ml-0">            
+            <div style="text-align: left; font-weight: bold; padding:0;">
                 For more information about the hearing process, click the topics below:
             </div>            
         </b-row>        

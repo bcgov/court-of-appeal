@@ -1,7 +1,7 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-2">            
+        <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
                 Complete the Notice of Hearing
             </div>            
@@ -22,7 +22,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"

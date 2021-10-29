@@ -2,7 +2,7 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
                 The Notice of Appeal or the order granting leave to appeal
             </b-col> 
             <b-col cols="1">
@@ -40,7 +40,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/297_2001a#part4"
@@ -80,7 +80,7 @@
         </b-row> 
 
         <b-row :class="showNoaInfo?'mt-4 ml-0': 'mt-5 ml-0'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
                 The Appeal Record and Transcript
             </b-col> 
             <b-col cols="1">
@@ -101,16 +101,13 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showAppealRecordInfo" class="mt-3 ml-3" >
+        <b-row v-if="showAppealRecordInfo" class="mt-3 ml-0" >
 
             <p style="padding: 0;">
                 If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.
             </p>
-
        
-        </b-row>   
-
-
+        </b-row> 
         
     </b-card>
 </template>
@@ -125,7 +122,6 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
     showNoaInfo = true;
     showAppealRecordInfo = false;
 
-
     public showNoa(show: boolean){
         if (show) {
             this.showNoaInfo = true;
@@ -133,8 +129,7 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
         } else {
             this.showNoaInfo = false;
             this.$emit('adjustHeights', 0, "0");
-        }
-        
+        }        
     }
 
     public showAppealRecord(show: boolean){
@@ -146,12 +141,9 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
             this.$emit('adjustHeights', 1, "0");
         }
     }
-
 }
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>
