@@ -20,3 +20,5 @@
 """
 
 from api.models.user import User
+from api.models.case import Case
+from api.models.journeymap import Journeymap
