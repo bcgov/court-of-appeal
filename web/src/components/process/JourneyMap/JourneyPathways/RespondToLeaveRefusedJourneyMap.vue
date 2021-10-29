@@ -80,7 +80,7 @@
                     
                     <application-for-review-rsp-to-leave-refused-pg v-if="applicationForReviewContent"/>
                     <the-hearing-rsp-to-leave-refused-pg v-else-if="theHearingContent"/>                    
-                    <final-decision-on-leave-to-appeal-rsp-to-leave-refused-pg v-else-if="finalDecisionOnLeaveToAppealContent"/>
+                    <final-decision-on-leave-to-appeal-rsp-to-leave-refused-pg @closeWindow="showWindow = false" v-else-if="finalDecisionOnLeaveToAppealContent"/>
                     
                 </b-col>
 
@@ -108,11 +108,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Trail from './Trail.vue'
-import FormIcon from './journeyicons/FormIcon.vue'
+import { namespace } from "vuex-class";
 
-import GavelIcon from './journeyicons/GavelIcon.vue'
-import ClockEndCircle from './journeyicons/ClockEndCircle.vue'
+import "@/store/modules/application";
+const applicationState = namespace("Application");
+
+import Trail from './Trail.vue';
+import FormIcon from './journeyicons/FormIcon.vue';
+import GavelIcon from './journeyicons/GavelIcon.vue';
+import ClockEndCircle from './journeyicons/ClockEndCircle.vue';
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
@@ -120,12 +124,8 @@ import ApplicationForReviewRspToLeaveRefusedPg from '../components/RspToLeaveRef
 import TheHearingRspToLeaveRefusedPg from '../components/RspToLeaveRefused/TheHearingRspToLeaveRefusedPg.vue';
 import FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg from '../components/RspToLeaveRefused/FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg.vue';
 
-import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
-
-import { namespace } from "vuex-class";
-import "@/store/modules/application";
-const applicationState = namespace("Application")
-import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
+import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations';
+import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages";
 
 @Component({
     components:{

@@ -122,12 +122,12 @@
             <b-row no-gutters>
 
                 <b-col cols="1">
-                    <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
+                    <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">
-                
                     
                     <notice-of-appearance-rsp-to-leave-granted-pg v-if="noticeOfAppearanceContent"/>
+                    <factum-appeal-book-certificate-rsp-to-leave-granted-pg @adjustHeights="adjustHeights" v-else-if="factumAppealBookCertificateContent"/> 
                     <the-hearing-rsp-to-leave-granted-pg v-else-if="theHearingContent"/>
                     <court-order-rsp-to-leave-granted-pg v-else-if="courtOrderContent"/>
                     <appeal-process-complete-rsp-to-leave-granted-pg v-else-if="appealProcessCompleteContent"/>
@@ -165,6 +165,7 @@ import EndCircle from './journeyicons/EndCircle.vue'
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
 import NoticeOfAppearanceRspToLeaveGrantedPg from '../components/RspToLeaveGranted/NoticeOfAppearanceRspToLeaveGrantedPg.vue';
+import FactumAppealBookCertificateRspToLeaveGrantedPg from '../components/RspToLeaveGranted/FactumAppealBookRspToLeaveGrantedPg.vue';
 import TheHearingRspToLeaveGrantedPg from '../components/RspToLeaveGranted/TheHearingRspToLeaveGrantedPg.vue';
 import CourtOrderRspToLeaveGrantedPg from '../components/RspToLeaveGranted/CourtOrderRspToLeaveGrantedPg.vue';
 import AppealProcessCompleteRspToLeaveGrantedPg from '../components/RspToLeaveGranted/AppealProcessCompleteRspToLeaveGrantedPg.vue';
@@ -186,6 +187,7 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         InstructionWindowFooter,
         PathSidebar,
         NoticeOfAppearanceRspToLeaveGrantedPg,
+        FactumAppealBookCertificateRspToLeaveGrantedPg,
         TheHearingRspToLeaveGrantedPg,
         CourtOrderRspToLeaveGrantedPg,
         AppealProcessCompleteRspToLeaveGrantedPg
@@ -198,6 +200,7 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
 
     dataReady = false;
     completedTrail :boolean[] = []
+    updated=0;
     numOfPages = 0;
     currentStep = 0;
     pageState : {active:boolean; status:string; ready:boolean;}[] = []
@@ -208,6 +211,7 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
     pathHeights = [] as string[];
 
     noticeOfAppearanceContent = false;
+    factumAppealBookCertificateContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false;   
@@ -223,6 +227,11 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
         this.dataReady = true;
     }
 
+    public adjustHeights(index: number, pathHeight: string) {
+        this.updated++;
+        this.pathHeights[index] = pathHeight;
+    }
+
     public completed(order, checked){
         
         activatePage(order, checked, this.currentStep)
@@ -233,6 +242,7 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
     public displayWindow(contentType: string){
         
         this.noticeOfAppearanceContent = false;
+        this.factumAppealBookCertificateContent = false;
         this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false;
@@ -243,6 +253,13 @@ export default class RespondToLeaveGrantedJourneyMap extends Vue {
             this.pathTypes = ["share"];
             this.pathHeights = ['28rem'];
             this.noticeOfAppearanceContent = true;
+
+        } else if (contentType == "Factum, Appeal Book and Certificate of Readiness"){
+
+            this.windowTitle = "The Factum, Appeal Book and Certificate of Readiness";
+            this.pathTypes = ["share", "info", "info", "info", "calendar"];
+            this.pathHeights = ['17rem', '0', '0', '0', '0'];
+            this.factumAppealBookCertificateContent = true;
 
         } else if (contentType == "The Hearing"){
             

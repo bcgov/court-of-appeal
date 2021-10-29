@@ -17,7 +17,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class noticeOfAppealResponseInstructions extends Vue {     
+export default class rspToAppealInstructions extends Vue {     
 
 }
 

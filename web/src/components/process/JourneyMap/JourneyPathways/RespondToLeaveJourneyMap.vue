@@ -97,10 +97,9 @@
                 <b-col cols="11" style="padding: 0 0 0 2rem;">                
                     
                     <notice-of-appearance-rsp-to-leave-pg v-if="noticeOfAppearanceContent"/>
-
-                    <reply-book-rsp-to-leave-pg v-if="replyBookContent"/>
-                    <the-hearing-rsp-to-leave-pg v-if="theHearingContent"/>
-                    <decision-on-leave-to-appeal-rsp-to-leave-pg v-if="decisionOnLeaveToAppealContent"/>
+                    <reply-book-rsp-to-leave-pg v-else-if="replyBookContent"/>
+                    <the-hearing-rsp-to-leave-pg v-else-if="theHearingContent"/>
+                    <decision-on-leave-to-appeal-rsp-to-leave-pg @closeWindow="showWindow = false" v-else-if="decisionOnLeaveToAppealContent"/>
 
                 </b-col>
 

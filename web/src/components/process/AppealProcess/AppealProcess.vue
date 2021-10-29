@@ -2,12 +2,17 @@
     <b-card border-variant="white">
         
         <h3>The Appeal Process</h3>
-        <has-right-to-appeal-instructions v-if="processType == 'hasRightToAppeal'"/>
-        <no-right-to-appeal-instructions v-if="processType == 'noRightToAppeal'" />
-        <notice-of-appeal-response-instructions v-if="processType == 'noticeOfAppealResponse'" />
-        <notice-of-application-response-instructions v-if="processType == 'noticeOfApplicationResponse'" />
+        <app-right-to-appeal-instructions v-if="appRightToAppeal"/>
+        <app-apply-leave-instructions v-if="appApplyLeave" />
+        <app-leave-refused-instructions v-if="appLeaveRefused" />
+        <app-leave-granted-instructions v-if="appLeaveGranted" />
+        <rsp-to-appeal-instructions v-if="rspToAppeal" />
+        <rsp-to-leave-instructions v-if="rspToLeave" />
+        <rsp-to-leave-granted-instructions v-if="rspToLeaveGranted" />
+        <rsp-to-leave-refused-instructions v-if="rspToLeaveRefused" />
+        <rsp-to-leave-refused-final-instructions v-if="rspToLeaveRefusedFinal" />
         
-        <p>
+        <p v-if="!appLeaveRefused">
             Every appeal process is unique. If you have any questions, please visit the 
             <a 
                 href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
@@ -22,27 +27,70 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+import "@/store/modules/application";
+const applicationState = namespace("Application");
+
+import { stepInfoType } from '@/types/Application';
+import { stepsAndPagesNumberInfoType } from '@/types/Application/StepsAndPages';
 
 import JourneyMap from "../JourneyMap/JourneyMap.vue";
-import hasRightToAppealInstructions from "./components/pathwayInstructions/hasRightToAppealInstructions.vue";
-import noRightToAppealInstructions from "./components/pathwayInstructions/noRightToAppealInstructions.vue";
-import noticeOfAppealResponseInstructions from "./components/pathwayInstructions/noticeOfAppealResponseInstructions.vue";
-import noticeOfApplicationResponseInstructions from "./components/pathwayInstructions/noticeOfApplicationResponseInstructions.vue";
+import appRightToAppealInstructions from "./components/pathwayInstructions/appRightToAppealInstructions.vue";
+import appApplyLeaveInstructions from "./components/pathwayInstructions/appApplyLeaveInstructions.vue";
+import appLeaveRefusedInstructions from "./components/pathwayInstructions/appLeaveRefusedInstructions.vue";
+import appLeaveGrantedInstructions from "./components/pathwayInstructions/appLeaveGrantedInstructions.vue";
+
+import rspToAppealInstructions from "./components/pathwayInstructions/rspToAppealInstructions.vue";
+import rspToLeaveInstructions from "./components/pathwayInstructions/rspToLeaveInstructions.vue";
+import rspToLeaveGrantedInstructions from "./components/pathwayInstructions/rspToLeaveGrantedInstructions.vue";
+import rspToLeaveRefusedInstructions from "./components/pathwayInstructions/rspToLeaveRefusedInstructions.vue";
+import rspToLeaveRefusedFinalInstructions from "./components/pathwayInstructions/rspToLeaveRefusedFinalInstructions.vue";
 
 @Component({
     components:{
         JourneyMap,
-        hasRightToAppealInstructions,
-        noRightToAppealInstructions,
-        noticeOfAppealResponseInstructions,
-        noticeOfApplicationResponseInstructions
+        appRightToAppealInstructions,
+        appApplyLeaveInstructions,
+        appLeaveRefusedInstructions,
+        appLeaveGrantedInstructions,
+        rspToAppealInstructions,
+        rspToLeaveInstructions,
+        rspToLeaveGrantedInstructions,
+        rspToLeaveRefusedInstructions,
+        rspToLeaveRefusedFinalInstructions
     }
 })
 export default class AppealProcess extends Vue {
 
-    @Prop({required: true})
-    processType!: string;
+    @applicationState.State
+    public stPgNo!: stepsAndPagesNumberInfoType;  
+
+    @applicationState.State
+    public steps!: stepInfoType[]; 
+
+
+    appApplyLeave = false;
+    appLeaveGranted = false;
+    appLeaveRefused = false;
+    appRightToAppeal = false;
+    rspToAppeal = false;   
+    rspToLeave = false; 
+    rspToLeaveRefusedFinal = false;
+    rspToLeaveRefused = false;
+    rspToLeaveGranted = false;
+
+    mounted(){
+        this.appApplyLeave = this.steps[this.stPgNo.APP_APPLY_LEAVE._StepNo].active;
+        this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active;
+        this.appLeaveRefused = this.steps[this.stPgNo.APP_LEAVE_REFUSED._StepNo].active;
+        this.appRightToAppeal = this.steps[this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo].active;
+        this.rspToAppeal = this.steps[this.stPgNo.RSP_TO_APPEAL._StepNo].active;
+        this.rspToLeave = this.steps[this.stPgNo.RSP_TO_LEAVE._StepNo].active;
+        this.rspToLeaveGranted = this.steps[this.stPgNo.RSP_TO_LEAVE_GRANTED._StepNo].active;
+        this.rspToLeaveRefused = this.steps[this.stPgNo.RSP_TO_LEAVE_REFUSED._StepNo].active;
+        this.rspToLeaveRefusedFinal = this.steps[this.stPgNo.RSP_TO_LEAVE_REFUSED_FINAL._StepNo].active;
+    } 
 
     
 

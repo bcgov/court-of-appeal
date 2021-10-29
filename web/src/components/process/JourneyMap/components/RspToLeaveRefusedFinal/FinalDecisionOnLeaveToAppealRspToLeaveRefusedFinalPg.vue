@@ -21,7 +21,7 @@
             <b-col>
                 <b-button 
                     block
-                    @click="resToLeaveRefusedPath" 
+                    @click="resToLeaveRefusedFinalPath" 
                     variant="outline-primary bg-success text-white" 
                 >Refused
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -38,21 +38,12 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
-import "@/store/modules/application";
-const applicationState = namespace("Application");
 
 import { pathwayTypeInfoType } from '@/types/Information';
-import { stepsAndPagesNumberInfoType } from '@/types/Application/StepsAndPages';
-
-import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
-
 
 @Component
-export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {  
+export default class FinalDecisionOnLeaveToAppealRspToLeaveRefusedFinalPg extends Vue {  
 
-    @applicationState.State
-    public stPgNo!: stepsAndPagesNumberInfoType;
-    
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
@@ -60,15 +51,15 @@ export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {
         
         const pathType = {} as pathwayTypeInfoType;
         pathType.rspToLeaveGranted = true;
-        this.UpdatePathType(pathType);                
+        this.UpdatePathType(pathType);        
         this.$emit('closeWindow');
 
     }
 
-    public resToLeaveRefusedPath() {
+    public resToLeaveRefusedFinalPath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.rspToLeaveRefused = true;
+        pathType.rspToLeaveRefusedFinal = true;
         this.UpdatePathType(pathType);
         this.$emit('closeWindow');
     }

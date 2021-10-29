@@ -41,7 +41,7 @@
                 <b-col>              
                     <b-button 
                         block
-                        @click="hasRightToAppealPath" 
+                        @click="appRightToAppealPath" 
                         variant="outline-primary bg-success text-white" 
                         >
                         Yes
@@ -51,7 +51,7 @@
                 <b-col>
                     <b-button 
                         block
-                        @click="noRightToAppealPath" 
+                        @click="appApplyLeavePath" 
                         variant="outline-primary bg-success text-white" 
                     >No
                         <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -67,7 +67,7 @@
                 <b-col>              
                     <b-button 
                         block
-                        @click="noticeOfAppealPath" 
+                        @click="responseToAppealPath" 
                         variant="outline-primary bg-success text-white" 
                         >
                         Notice of Appeal
@@ -77,7 +77,7 @@
                 <b-col>
                     <b-button 
                         block
-                        @click="noticeOfApplicationPath" 
+                        @click="responseToLeavePath" 
                         variant="outline-primary bg-success text-white" 
                     >Notice of Application for Leave to Appeal
                         <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -133,34 +133,34 @@ export default class StartEfiling extends Vue {
         this.switchDisableRow(false);
     }
 
-    public hasRightToAppealPath() {
+    public appRightToAppealPath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.hasRightToAppeal = true;
+        pathType.appRightToAppeal = true;
         this.UpdatePathType(pathType);
 
     }
 
-    public noRightToAppealPath() {
+    public appApplyLeavePath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.noRightToAppeal = true;
+        pathType.appApplyLeave = true;
         this.UpdatePathType(pathType);   
 
     }
 
-    public noticeOfAppealPath() {
+    public responseToAppealPath() {
         
         const pathType = {} as pathwayTypeInfoType;
-        pathType.noticeOfAppealResponse = true;
+        pathType.rspToAppeal = true;
         this.UpdatePathType(pathType);
 
     }
 
-    public noticeOfApplicationPath() {
+    public responseToLeavePath() {
         
         const pathType = {} as pathwayTypeInfoType;
-        pathType.noticeOfApplicationResponse = true;
+        pathType.rspToLeave = true;
         this.UpdatePathType(pathType);
         
     }

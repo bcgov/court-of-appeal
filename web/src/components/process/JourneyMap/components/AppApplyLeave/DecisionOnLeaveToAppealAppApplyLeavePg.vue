@@ -11,7 +11,7 @@
             <b-col>              
                 <b-button 
                     block
-                    @click="hasRightToAppealPath" 
+                    @click="appLeaveGrantedPath" 
                     variant="outline-primary bg-success text-white" 
                     >
                     Granted
@@ -21,7 +21,7 @@
             <b-col>
                 <b-button 
                     block
-                    @click="noRightToAppealPath" 
+                    @click="appLeaveRefusedPath" 
                     variant="outline-primary bg-success text-white" 
                 >Refused
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -47,21 +47,21 @@ export default class DecisionOnLeaveToAppealRspToLeavePg extends Vue {
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
-    public hasRightToAppealPath() {
+    public appLeaveGrantedPath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.hasRightToAppeal = true;
+        pathType.appLeaveGranted = true;
         this.UpdatePathType(pathType);
-        //TODO: close the window
+        this.$emit('closeWindow');        
 
     }
 
-    public noRightToAppealPath() {
+    public appLeaveRefusedPath() {
 
         const pathType = {} as pathwayTypeInfoType;
-        pathType.noRightToAppeal = true;
+        pathType.appLeaveRefused = true;
         this.UpdatePathType(pathType); 
-        //TODO: close the window
+        this.$emit('closeWindow');
     }
 }
 </script>

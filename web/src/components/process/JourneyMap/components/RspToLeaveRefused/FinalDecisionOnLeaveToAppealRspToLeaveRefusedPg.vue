@@ -21,7 +21,7 @@
             <b-col>
                 <b-button 
                     block
-                    @click="resToLeaveRefusedPath" 
+                    @click="resToLeaveRefusedFinalPath" 
                     variant="outline-primary bg-success text-white" 
                 >Refused
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -48,16 +48,20 @@ export default class FinalDecisionOnLeaveToAppealRspToLeaveRefusedPg extends Vue
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
 
     public resToLeaveGrantedPath() {
-        //TODO: update to use new store
         
-        //TODO: close the window
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.rspToLeaveGranted = true;
+        this.UpdatePathType(pathType);        
+        this.$emit('closeWindow');
 
     }
 
-    public resToLeaveRefusedPath() {
+    public resToLeaveRefusedFinalPath() {
 
-        //TODO: update to use new store
-        //TODO: close the window
+        const pathType = {} as pathwayTypeInfoType;
+        pathType.rspToLeaveRefusedFinal = true;
+        this.UpdatePathType(pathType);
+        this.$emit('closeWindow');
     }
 }
 </script>

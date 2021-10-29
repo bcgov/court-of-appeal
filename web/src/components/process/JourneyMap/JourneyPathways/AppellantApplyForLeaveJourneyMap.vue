@@ -83,7 +83,7 @@
               
                 <initial-documents-app-apply-leave-pg v-if="initialDocumentsContent"/>
                 <hearing-documents-motion-app-apply-leave-pg v-else-if="hearingDocumentsContent"/>
-                <decision-on-leave-to-appeal-app-apply-leave-pg v-else-if="decisionOnLeaveContent"/>
+                <decision-on-leave-to-appeal-app-apply-leave-pg @closeWindow="showWindow = false" v-else-if="decisionOnLeaveContent"/>
                 
             </b-col>
 

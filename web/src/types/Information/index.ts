@@ -1,10 +1,15 @@
 import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from "./json"
 
 export interface pathwayTypeInfoType {
-    hasRightToAppeal?: boolean;
-    noRightToAppeal?: boolean;
-    noticeOfAppealResponse?: boolean;
-    noticeOfApplicationResponse?: boolean;
+    appApplyLeave?: boolean;
+    appLeaveGranted?: boolean;
+    appLeaveRefused?: boolean;
+    appRightToAppeal?: boolean;
+    rspToAppeal?: boolean;
+    rspToLeaveGranted?: boolean;
+    rspToLeave?: boolean;
+    rspToLeaveRefusedFinal?: boolean;
+    rspToLeaveRefused?: boolean;
 }
 
 export interface form2StatusInfoType {

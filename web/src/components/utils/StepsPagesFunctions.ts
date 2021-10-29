@@ -1,10 +1,23 @@
 import store from '@/store';
+import _ from 'underscore';
 
 export function toggleStep(stepId, activeIndicator) {       
     store.commit("Application/setStepActive", {
         currentStep: stepId,
         active: activeIndicator
     });
+}
+
+export function toggleAllSteps(activeIndicator) {  
+    const stPgNo = store.state.Application.stPgNo
+    const stepsArr = _.range(0, Object.keys(stPgNo).length)    
+    
+    for (const inx in stepsArr) {
+        store.commit("Application/setStepActive", {
+            currentStep: inx,
+            active: activeIndicator
+        });
+    }
 }
 
 export function togglePages(pageArr, activeIndicator, currentStep) {  
