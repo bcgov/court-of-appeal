@@ -27,3 +27,4 @@ requests>=2.18.4,<3
 pillow>=8.1.0
 numpy>=1.19.5
 jsonschema>=3.2.0,<4
+zeep>=4.0.0

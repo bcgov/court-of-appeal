@@ -30,7 +30,11 @@ from django.urls import path
 
 
 from api.views import (
+    CaseView,
     UserView,
+    JourneyMapView,
+    FormToPdfView,
+    Form7SearchView    
 )
 
 
@@ -50,14 +54,15 @@ urlpatterns = [
     # Swagger documentation
     # url(r'^$', SwaggerSchemaView.as_view()),
     #url(r"^accept-terms$", AcceptTermsView.as_view()),
-    #path("app/<int:pk>/", ApplicationView.as_view()),
-    #path("app-list/", ApplicationListView.as_view()),
-    #path("app/", ApplicationView.as_view()),
-    #path("survey-print/<int:application_id>/", SurveyPdfView.as_view()),
+    path("case/<int:pk>/", CaseView.as_view()),
+    path("journey/", JourneyMapView.as_view()),
+    path("case/", CaseView.as_view()),
+    path("form-print/<int:case_id>/", FormToPdfView.as_view()),
     path("user-info/", UserView.as_view()),
+    path("form7s/", Form7SearchView.as_view())
     #path("efiling/document-types/", EFilingDocumentTypesView.as_view()),
     #path("efiling/locations/", EFilingLocationView.as_view()),
-    #path("efiling/<int:application_id>/submit/", EFilingSubmitView.as_view()),
+    #path("efiling/<int:case_id>/submit/", EFilingSubmitView.as_view()),
 ]
 
 if settings.OIDC_ENABLED:

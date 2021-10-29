@@ -12,7 +12,7 @@ import os
 from corsheaders.defaults import default_headers
 
 from core import database
-#from core.encryption import Encryptor
+from core.encryption import Encryptor
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -267,7 +267,7 @@ EFILING_HUB_KEYCLOAK_CLIENT_ID = os.environ.get("EFILING_HUB_KEYCLOAK_CLIENT_ID"
 EFILING_HUB_KEYCLOAK_REALM = os.environ.get("EFILING_HUB_KEYCLOAK_REALM", "")
 EFILING_HUB_KEYCLOAK_SECRET = os.environ.get("EFILING_HUB_KEYCLOAK_SECRET", "")
 
-#ENCRYPTOR = Encryptor("DATA_SECURITY_KEY")
+ENCRYPTOR = Encryptor("DATA_SECURITY_KEY")
 FORCE_SCRIPT_NAME = os.getenv("WEB_BASE_HREF", DEFAULT_BASE_URL)
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", DEFAULT_BASE_URL)
 SITEMINDER_LOGOFF_URL = os.getenv("SITEMINDER_LOGOFF_URL", "https://logontest.gov.bc.ca/clp-cgi/logoff.cgi")
