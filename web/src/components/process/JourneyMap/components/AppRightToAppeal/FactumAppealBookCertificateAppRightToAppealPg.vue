@@ -2,7 +2,7 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
                 Complete the Factum, Appeal Book and Certificate of Readiness
             </b-col> 
             <b-col cols="1">
@@ -173,7 +173,7 @@
 
 
         <b-row :class="showFactumInfo?'mt-2 ml-0':'mt-4 ml-0'" style="padding-top: 0.85rem;">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
                 Were you served with a respondent's Factum?
             </b-col> 
             <b-col cols="1">
@@ -211,7 +211,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row style="width: 115%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.8-replies?ct=t(sidebar-link)"
@@ -251,7 +251,7 @@
         </b-row> 
 
         <b-row :class="showRespondentFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
                 Were you served with a respondent's Transcript Extract Book or Appeal Book?
             </b-col> 
             <b-col cols="1">
@@ -272,12 +272,11 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespondentTranscriptInfo" class="mt-2 ml-3" >
+        <b-row v-if="showRespondentTranscriptInfo" class="mt-2 ml-0" >
             <p style="padding: 0;">
                 If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond.
             </p>       
         </b-row>
-
         
     </b-card>
 </template>

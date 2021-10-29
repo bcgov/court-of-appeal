@@ -363,7 +363,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
             this.windowTitle = "Notice of Hearing";
             this.pathTypes = ["share"];
-            this.pathHeights = ['11rem'];
+            this.pathHeights = ['12rem'];
             this.noticeOfHearingContent = true;
 
         }  else if (contentType == "The Hearing"){

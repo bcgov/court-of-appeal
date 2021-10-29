@@ -1,7 +1,7 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appeal?
             </div>            
@@ -16,13 +16,13 @@
             </b-col>           
         </b-row>
 
-        <b-row class="mt-4" >
+        <b-row class="mt-4">
             <ol>
                 <li>
                     Complete the online form below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 135%;" class="my-1">
+                            <b-row style="width: 125%;" class="my-1">
                                 <b-col cols="9">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)"
@@ -68,7 +68,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 115%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)"
@@ -105,10 +105,8 @@
                     Serve one copy to each party.
                 </li>
             </ol>
-        </b-row>    
-
-
-        
+        </b-row> 
+                
     </b-card>
 </template>
 

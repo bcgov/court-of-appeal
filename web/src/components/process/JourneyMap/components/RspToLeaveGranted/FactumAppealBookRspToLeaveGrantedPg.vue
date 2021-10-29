@@ -2,7 +2,7 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
                 The Factum and Appeal Book
             </b-col> 
             <b-col cols="1">
@@ -23,7 +23,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showFactumInfo" class="mt-4 ml-1 mr-5 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row v-if="showFactumInfo" class="mt-4 ml-0 mr-5 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
             </b-col>
@@ -149,7 +149,7 @@
         </b-row> 
 
         <b-row :class="showFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
                 The Transcript Extract Book
             </b-col> 
             <b-col cols="1">
@@ -170,14 +170,14 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showTranscriptInfo" class="mt-2 ml-3" >
+        <b-row v-if="showTranscriptInfo" class="mt-2 ml-0" >
             <p style="padding: 0;">
                 If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document.
             </p>       
         </b-row> 
 
         <b-row class="mt-4 ml-0" style="padding-top: 0.85rem;">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
                 The Certificate of Readiness
             </b-col> 
             <b-col cols="1">
@@ -198,7 +198,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showCertificateInfo" class="mt-2 ml-3" >
+        <b-row v-if="showCertificateInfo" class="mt-2 ml-0" >
 
             <p style="padding: 0;">
                 You should have received the appellant's Certificate of Readiness immediately after receiving the Factum. 
@@ -213,7 +213,7 @@
                     Complete either the .DOC or .PDF below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row style="width: 112%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.12-if-the-appellant-does-not-prepare-a-certificate-of-readiness?ct=t(sidebar-link)"
@@ -253,7 +253,7 @@
         </b-row>  
 
         <b-row :class="showCertificateInfo?'mt-0 ml-0': 'mt-4 ml-0'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
                 A Reply to your Factum
             </b-col> 
             <b-col cols="1">
@@ -274,14 +274,14 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showReplyInfo" class="mt-2 ml-3" >
+        <b-row v-if="showReplyInfo" class="mt-2 ml-0" >
             <p style="padding: 0;">
                 If you are served with the appellant's Reply to your Factum, you do not have to respond to this document.
             </p>       
         </b-row> 
 
         <b-row class="mt-4 ml-0" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
                 A Notice of Hearing
             </b-col> 
             <b-col cols="1">
@@ -302,7 +302,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoticeInfo" class="mt-3 ml-3" >
+        <b-row v-if="showNoticeInfo" class="mt-3 ml-0" >
             <p style="padding: 0;">
                 You should be served a Notice of Hearing from the appellant, 
                 which will tell you the date and length of your hearing. However, 
@@ -315,9 +315,7 @@
                     target="_blank">Schedule the appeal for hearing
                 </a> 
             </p>       
-        </b-row>  
-
-
+        </b-row>
         
     </b-card>
 </template>
@@ -389,7 +387,5 @@ export default class FactumAppealBookRspToLeaveGrantedPg extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>

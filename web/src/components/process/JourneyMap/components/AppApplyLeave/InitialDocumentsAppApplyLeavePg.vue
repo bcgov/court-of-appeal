@@ -1,7 +1,7 @@
 <template>
     <b-card style="width: 90%;" class="bg-white border-white">        
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
                 Notice of Application for Leave to Appeal
             </div>            
@@ -27,7 +27,7 @@
                     Complete the online form below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 137%;" class="my-1">
+                            <b-row style="width: 125%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
@@ -82,7 +82,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 113%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)"

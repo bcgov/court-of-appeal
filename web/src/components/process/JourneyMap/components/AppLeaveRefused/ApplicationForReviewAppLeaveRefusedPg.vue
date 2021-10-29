@@ -13,7 +13,7 @@
                     Complete either the .DOCs or .PDFs below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 121%;" class="my-1">
+                            <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
@@ -42,7 +42,7 @@
                             </b-row>
                         </li>
                         <li>
-                            <b-row style="width: 121%;" class="my-1">
+                            <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href=""
@@ -108,7 +108,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row style="width: 113%;" class="my-1">
                                 <b-col cols="8">
                                     <a 
                                         href=""
