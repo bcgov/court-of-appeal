@@ -38,18 +38,18 @@ import { stepInfoType } from '@/types/Application';
 import { stepsAndPagesNumberInfoType } from '@/types/Application/StepsAndPages';
 
 import JourneyMap from "../JourneyMap/JourneyMap.vue";
-import appRightToAppealInstructions from "./components/pathwayInstructions/appRightToAppealInstructions.vue";
-import appApplyLeaveInstructions from "./components/pathwayInstructions/appApplyLeaveInstructions.vue";
-import appLeaveRefusedInstructions from "./components/pathwayInstructions/appLeaveRefusedInstructions.vue";
-import appLeaveGrantedInstructions from "./components/pathwayInstructions/appLeaveGrantedInstructions.vue";
-import appLeaveRefusedFinalInstructions from "./components/pathwayInstructions/appLeaveRefusedFinalInstructions.vue";
-import appLeaveGrantedFinalInstructions from "./components/pathwayInstructions/appLeaveGrantedFinalInstructions.vue";
+import appRightToAppealInstructions from "./pathwayInstructions/appRightToAppealInstructions.vue";
+import appApplyLeaveInstructions from "./pathwayInstructions/appApplyLeaveInstructions.vue";
+import appLeaveRefusedInstructions from "./pathwayInstructions/appLeaveRefusedInstructions.vue";
+import appLeaveGrantedInstructions from "./pathwayInstructions/appLeaveGrantedInstructions.vue";
+import appLeaveRefusedFinalInstructions from "./pathwayInstructions/appLeaveRefusedFinalInstructions.vue";
+import appLeaveGrantedFinalInstructions from "./pathwayInstructions/appLeaveGrantedFinalInstructions.vue";
 
-import rspToAppealInstructions from "./components/pathwayInstructions/rspToAppealInstructions.vue";
-import rspToLeaveInstructions from "./components/pathwayInstructions/rspToLeaveInstructions.vue";
-import rspToLeaveGrantedInstructions from "./components/pathwayInstructions/rspToLeaveGrantedInstructions.vue";
-import rspToLeaveRefusedInstructions from "./components/pathwayInstructions/rspToLeaveRefusedInstructions.vue";
-import rspToLeaveRefusedFinalInstructions from "./components/pathwayInstructions/rspToLeaveRefusedFinalInstructions.vue";
+import rspToAppealInstructions from "./pathwayInstructions/rspToAppealInstructions.vue";
+import rspToLeaveInstructions from "./pathwayInstructions/rspToLeaveInstructions.vue";
+import rspToLeaveGrantedInstructions from "./pathwayInstructions/rspToLeaveGrantedInstructions.vue";
+import rspToLeaveRefusedInstructions from "./pathwayInstructions/rspToLeaveRefusedInstructions.vue";
+import rspToLeaveRefusedFinalInstructions from "./pathwayInstructions/rspToLeaveRefusedFinalInstructions.vue";
 
 @Component({
     components:{

@@ -15,7 +15,7 @@
             <b-button
                 style="float: right;" 
                 variant="success"
-                @click="onPrint()"
+                @click="savePdf()"
                 >Download PDF
                 <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
             </b-button>
@@ -46,7 +46,7 @@ import moment from 'moment';
 export default class Form2 extends Vue {
 
     @Prop({required: true})
-    applicationId!: string;
+    caseId!: string;
     
     @informationState.State
     public form2Info: form2DataInfoType;
@@ -62,14 +62,14 @@ export default class Form2 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = Vue.filter('getPathwayPdfType')("priorityParenting")
-        const pdf_name = "form2-" + this.applicationId;
+        const pdf_type = "FORM"
+        const pdf_name = "form2-" + this.caseId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = ``;
-        const bottomRightText = `" "`
-        const url = '/survey-print/'+this.applicationId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const bottomRightText = `" "`;        
+        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -87,11 +87,34 @@ export default class Form2 extends Vue {
         this.$http.post(url,body, options)
         .then(res => {
             const currentDate = moment().format();
-            this.$store.commit("Application/setLastPrinted", currentDate); 
-            
+            this.$store.commit("Application/setLastPrinted", currentDate);            
                 
         },err => {
             console.error(err);        
+        });
+    }
+
+    public savePdf(){        
+        const pdfType = "FORM"
+        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const options = {
+            responseType: "blob",
+            headers: {
+            "Content-Type": "application/json",
+            }
+        }
+        this.$http.get(url, options)
+        .then(res => {
+            const blob = res.data;
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.download = pdfType+".pdf";
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
+
+        },err => {
+            console.error(err);
         });
     }
 

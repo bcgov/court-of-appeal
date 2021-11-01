@@ -1,10 +1,10 @@
 import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
-import StartForm2 from "@/components/process/AppealProcess/StartForm2.vue";
-import FillForm2 from "@/components/process/AppealProcess/FillForm2.vue";
-import PreviewForm2 from "@/components/process/AppealProcess/PreviewForm2.vue";
-import SubmitForm2 from "@/components/process/AppealProcess/SubmitForm2.vue";
+import StartForm2 from "@/components/process/Form2/StartForm2.vue";
+import FillForm2 from "@/components/process/Form2/FillForm2.vue";
+import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
+import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
 import store from "@/store";

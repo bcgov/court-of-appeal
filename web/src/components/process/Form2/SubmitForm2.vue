@@ -44,7 +44,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form2ProcessHeader from "@/components/process/AppealProcess/components/Form2ProcessHeader.vue";
+import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import { form2StatusInfoType } from '@/types/Information';
 
 @Component({

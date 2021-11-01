@@ -10,11 +10,12 @@ class Case(models.Model):
     modified = models.DateTimeField(blank=True, null=True)    
     package_url = models.CharField(max_length=200, null=True)
 
-    data = models.JSONField(blank=True, null=True)
+    # encryption key identifier
+    key_id = models.CharField(max_length=32, blank=True, null=True)
+    # stored encrypted when key_id is set
+    data = models.BinaryField(blank=True, null=True)
 
     package_number = models.CharField(max_length=100, null=True)
-
-    version = models.CharField(max_length=32, blank=True, null=True)
 
     user = models.ForeignKey(
         "User",

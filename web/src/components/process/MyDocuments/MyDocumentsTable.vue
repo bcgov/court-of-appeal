@@ -1,12 +1,12 @@
 <template>
     <b-card border-variant="white" id="documents">  
-        <b-row v-if="enableActions">
+        <b-row v-if="enableActions" class="mb-2">
             <b-col cols="9">
                 <h3>{{title}}</h3>
             </b-col>
             <b-col  cols="3">
                 <b-button 
-                    class="mr-2 bg-transparent outline-primary"
+                    class="mr-2  bg-transparent border border-primary"
                     size="lg"
                     @click="downloadDocument"
                     v-b-tooltip.hover.noninteractive
@@ -14,7 +14,7 @@
                     <b-icon-download variant="primary"/>
                 </b-button>
                 <b-button 
-                    class="mr-2 bg-transparent border-primary" 
+                    class="mr-2 bg-transparent border border-primary" 
                     size="lg"
                     @click="archiveDocument"
                     v-b-tooltip.hover.noninteractive
@@ -22,7 +22,7 @@
                     <b-icon-archive-fill variant="primary"/>
                 </b-button>
                 <b-button 
-                    class="bg-transparent outline-primary"
+                    class="bg-transparent border border-primary"
                     size="lg"
                     @click="createDocument"
                     v-b-tooltip.hover.noninteractive
@@ -215,9 +215,9 @@ export default class MyDocumentsTable extends Vue {
        
         for (const docJson of this.casesJson) {                
             const doc = {isChecked: false, fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'', last_efiling_submission:{package_number:'',package_url:''}};
-            //console.log(docJson)
+            console.log(docJson)
             doc.fileNumber = docJson.id;
-            //doc.caseNumber = docJson.data.formSevenNumber;
+            doc.caseNumber = docJson.data.formSevenNumber;
             doc.status = docJson.status;
             doc.modifiedDate = docJson.modified;
 

@@ -20,22 +20,21 @@ LOGGER = logging.getLogger(__name__)
 class CaseView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
-    # def encrypt_steps(self, steps):
-    #     try:
-    #         steps_bin = json.dumps(steps).encode("ascii")
-    #         (steps_key_id, steps_enc) = settings.ENCRYPTOR.encrypt(steps_bin)
-    #         return (steps_key_id, steps_enc)
-    #     except Exception as ex:
-    #         LOGGER.error("ERROR! %s", ex)
+    def encrypt_data(self, data):
+        try:
+            data_bin = json.dumps(data).encode("ascii")
+            (data_key_id, data_enc) = settings.ENCRYPTOR.encrypt(data_bin)
+            return (data_key_id, data_enc)
+        except Exception as ex:
+            LOGGER.error("ERROR! %s", ex)
 
     def get(self, request, pk=None, format=None):
         uid = request.user.id
         if pk:
-            case = get_case_for_user(pk, uid)
-        
+            case = get_case_for_user(pk, uid)        
 
-        # # steps_dec = settings.ENCRYPTOR.decrypt(application.key_id, application.steps)
-        # # steps = json.loads(steps_dec)
+            data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
+            case_data = json.loads(data_dec)
         # # submission = EFilingSubmission.objects.filter(
         # #     id=application.last_efiling_submission_id
         # # ).first()
@@ -45,20 +44,24 @@ class CaseView(APIView):
                     "modified": case.modified,
                     "personId": case.user_id,                
                     # "packageNumber": submission.package_number if submission is not None else "",
-                    # "packageUrl": submission.package_url if submission is not None else "",                
-                    "version": case.version}
+                    # "packageUrl": submission.package_url if submission is not None else "", 
+                    "data": case_data,               
+                    }
         else:
             cases = get_case_for_user(pk, uid)
             data = list()
             for case in cases:
+                data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
+                case_data = json.loads(data_dec)
                 data.append({"id": case.id,
                     "type": case.type,  
                     "status":case.status,              
                     "modified": case.modified,
-                    "personId": case.user_id,                
+                    "personId": case.user_id,
+                    "data": case_data,            
                     # "packageNumber": submission.package_number if submission is not None else "",
                     # "packageUrl": submission.package_url if submission is not None else "",                
-                    "version": case.version})            
+                    })            
         return Response(data)
 
     def post(self, request: Request):
@@ -70,17 +73,18 @@ class CaseView(APIView):
         if not body:
             return HttpResponseBadRequest("Missing request body")
 
-        # (steps_key_id, steps_enc) = self.encrypt_steps(body["steps"])
+        (data_key_id, data_enc) = self.encrypt_data(body["data"])
 
         db_app = Case(            
             type=body.get("type"),
-            status=body.get("status"),            
+            status="Draft",            
             modified = timezone.now(),
-            version=body.get("version"),            
+            data=data_enc,
+            key_id=data_key_id,            
             user_id=uid)
 
         db_app.save()
-        return Response({"app_id": db_app.pk})
+        return Response({"case_id": db_app.pk})
 
     def put(self, request, pk, format=None):
         uid = request.user.id
@@ -92,12 +96,13 @@ class CaseView(APIView):
         if not app:
             return HttpResponseNotFound("No record found")
 
-        # (steps_key_id, steps_enc) = self.encrypt_steps(body["steps"])
+        (data_key_id, data_enc) = self.encrypt_data(body["data"])        
 
         app.modified = timezone.now()
         app.type = body.get("type")
         app.status = body.get("status")        
-        app.version = body.get("version")
+        app.data = data_enc
+        app.key_id = data_key_id
         app.save()
 
         return Response("success")

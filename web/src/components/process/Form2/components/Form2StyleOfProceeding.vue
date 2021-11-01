@@ -1,48 +1,49 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+        <div>
+            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
 
-        
-        <b-row class="ml-2" style="font-weight: 700;">
-            <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.toString()}}</span></b-col>
-            <b-col cols="2" class="text-primary">Appellant</b-col>
-        </b-row>
-        <b-row class="mt-3 ml-2" style="font-weight: 700;">
-            <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.toString()}}</span></b-col>
-            <b-col cols="2" class="text-info">Respondent</b-col>
-        </b-row>
+            
+            <b-row class="ml-2" style="font-weight: 700;">
+                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                <b-col cols="2" class="text-primary">Appellant</b-col>
+            </b-row>
+            <b-row class="mt-3 ml-2" style="font-weight: 700;">
+                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                <b-col cols="2" class="text-info">Respondent</b-col>
+            </b-row>
 
-        <p 
-            class="mt-3" 
-            style="font-weight: 700;"
-            >Responding: 
-            <b-icon-question-circle-fill 
-                class="text-primary"
-                v-b-tooltip.hover.noninteractive
-                title="The name of the party responding to the appeal."/>            
-        </p>
-        <p class="ml-5" style="font-weight: 200;">{{respondentNames.toString()}}</p>
+            <p 
+                class="mt-3" 
+                style="font-weight: 700;"
+                >Responding: 
+                <b-icon-question-circle-fill 
+                    class="text-primary"
+                    v-b-tooltip.hover.noninteractive
+                    title="The name of the party responding to the appeal."/>            
+            </p>
+            <p class="ml-5" style="font-weight: 200;">{{respondentNames.join(', ')}}</p>
 
-        <p class="ml-3 mb-0" style="font-weight: 700;">Representation</p>
+            <p class="ml-3 mb-0" style="font-weight: 700;">Representation</p>
 
-        <b-form-group
-            class="mx-3" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Are you self-represented?" 
-            label-for="representation">
-            <b-form-radio-group
-                id="representation"
-                style="max-width:25%"
-                @change="toggleRepresentation" 
-                v-model="form2Info.selfRepresented"
-                :options="representationOptions"                
-            ></b-form-radio-group>
-           
-        </b-form-group>
+            <b-form-group
+                class="mx-3" 
+                label-cols-sm="3"
+                content-cols-sm="3"
+                label="Are you self-represented?" 
+                label-for="representation">
+                <b-form-radio-group
+                    id="representation"
+                    style="max-width:25%"
+                    @change="toggleRepresentation" 
+                    v-model="form2Info.selfRepresented"
+                    :options="representationOptions"                
+                ></b-form-radio-group>
+            
+            </b-form-group>
+        </div>
 
-        
-
+        <div v-if="form2Info.selfRepresented !=null">
             <p  
                 style="font-weight: 700;"
                 >Mailing address for service: 
@@ -283,6 +284,8 @@
                     </b-button>
                 </b-col>
             </b-row>
+
+        </div>
         
     </b-card>
 </template>
@@ -324,8 +327,7 @@ export default class Form2StyleOfProceeding extends Vue {
         {text: 'No', value: false}
     ];
 
-    respondentName = "";
-    applicationId = "";   
+    respondentName = "";  
 
     mounted() {
         this.dataReady = false;
@@ -385,36 +387,34 @@ export default class Form2StyleOfProceeding extends Vue {
         
         console.log('save and continue');
 
-        const body: form2DataInfoType = {"formSevenNumber":"CA39029","appellants":[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931,"id":0}],"respondents":[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932,"id":0,"responding":true}],"useServiceEmail":true,"sendNotifications":true,"serviceInformation":{"province":"British Columbia","country":"Canada","selectedContactId":0,"name":"Two TEST","addressLine1":"4 - 5 st","addressLine2":null,"city":"Coquitlam","postalCode":"V7Y 1C6","phone":"9876543234","email":"email@yahoo.com"},"selfRepresented":true,"version":"0.1"};
-        // Add functionality to determine put or post
-        const url = 'api/forms';
-        // this.$http.post(url, body )
-        //     .then(response => {
-        //         if(response.data){
-        //              this.applicationId = response.data.id;
-                        this.UpdateForm2Info(this.form2Info);
-                        this.navigateToPreviewPage();
-            //                            
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
-               
-            // })
+        const form2data: form2DataInfoType = {"formSevenNumber":"CA39029","appellants":[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931,"id":0}],"respondents":[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932,"id":0,"responding":true}],"useServiceEmail":true,"sendNotifications":true,"serviceInformation":{"province":"British Columbia","country":"Canada","selectedContactId":0,"name":"Two TEST","addressLine1":"4 - 5 st","addressLine2":null,"city":"Coquitlam","postalCode":"V7Y 1C6","phone":"9876543234","email":"email@yahoo.com"},"selfRepresented":true,"version":"0.1"};
 
-        
+        const url = '/case/';
+        const body = {
+            type: "form-2",
+            data: form2data
+        }  
+        //TODO Add functionality to determine put or post
+
+        this.$http.post(url, body )
+        .then(response => {
+            if(response.data){
+                const caseId = response.data.case_id;
+                this.UpdateForm2Info(this.form2Info);
+                this.navigateToPreviewPage(caseId);                           
+            }
+        }, err => {
+            const errMsg = err.response.data.error;
+            
+        })
     }
 
-    public navigateToPreviewPage() {
-
-        this.$router.push({name: "preview", params: {applicationId: this.applicationId}}) 
-
+    public navigateToPreviewPage(caseId) {        
+        this.$router.push({name: "preview", params: {caseId: caseId}}) 
     }
 
 }
 </script>
 
 <style scoped lang="scss">
-
-
-
 </style>

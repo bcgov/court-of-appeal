@@ -1,5 +1,5 @@
 <template>
-    <b-card border-variant="white">       
+    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">       
         
         <b-container class="container">
             
@@ -22,7 +22,27 @@ import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.
 })
 export default class MyDocuments extends Vue {
     
-   
+    windowHeight = 0;
+    footerHeight = 0;
+    headerHeight = 0;
+    menubarHeight = 0;
+    mounted()
+    {        
+        window.addEventListener('resize', this.getWindowHeight);
+        this.getWindowHeight()
+    }
+
+    public getWindowHeight() {
+        this.windowHeight = document.documentElement.clientHeight;
+        this.footerHeight = (document.getElementsByName("navigation-footer")[0] as HTMLElement)?.clientHeight;
+        this.headerHeight = (document.getElementsByName("navigation-topbar")[0] as HTMLElement)?.clientHeight;
+        this.menubarHeight = (document.getElementsByName("menu-bar")[0] as HTMLElement)?.clientHeight;
+    }
+    
+    get getHeight() {
+        
+        return this.windowHeight-this.footerHeight-this.headerHeight-this.menubarHeight-1 + 'px'
+    }
 }
 </script>
 

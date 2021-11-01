@@ -1,5 +1,5 @@
 <template>
-	<header class="app-header">
+	<header name="menu-bar" class="app-header">
 		<b-navbar toggleable="lg" class="navbar navbar-expand-lg navbar-dark" style="background-color: #38598a;">    
 			
             

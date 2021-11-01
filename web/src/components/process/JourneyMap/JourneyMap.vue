@@ -67,7 +67,6 @@ export default class JourneyMap extends Vue {
     rspToLeaveRefused = false;
 
     mounted(){
- console.log('MAP')
         this.dataReady = false;
         this.appApplyLeave = this.steps[this.stPgNo.APP_APPLY_LEAVE._StepNo].active;
         this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active || this.steps[this.stPgNo.APP_LEAVE_GRANTED_FINAL._StepNo].active;

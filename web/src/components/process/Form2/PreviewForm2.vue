@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3">
-            <form-2 v-bind:applicationId="applicationId"/>            
+            <form-2 v-bind:caseId="caseId"/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3">                
@@ -37,8 +37,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form2ProcessHeader from "@/components/process/AppealProcess/components/Form2ProcessHeader.vue";
-import Form2 from "@/components/process/AppealProcess/components/pdf/Form2.vue"
+import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
+import Form2 from "@/components/process/Form2/components/pdf/Form2.vue"
 
 import { form2StatusInfoType } from '@/types/Information';
 
@@ -51,12 +51,12 @@ import { form2StatusInfoType } from '@/types/Information';
 export default class PreviewForm2 extends Vue {
 
     stepsCompleted = {} as form2StatusInfoType; 
-    applicationId = '';  
+    caseId = '';  
     dataReady = false;
 
     mounted() {
         this.dataReady = false;  
-        this.applicationId = this.$route.params.applicationId;
+        this.caseId = this.$route.params.caseId;
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -66,7 +66,7 @@ export default class PreviewForm2 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed", params: {applicationId: this.applicationId} }); 
+        this.$router.push({name: "proceed", params: {applicationId: this.caseId} }); 
     }
 }
 </script>

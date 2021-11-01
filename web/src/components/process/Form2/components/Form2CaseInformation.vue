@@ -1,5 +1,5 @@
 <template>
-    <b-card class="ml-4 border-white">
+    <b-card v-if="dataReady" class="ml-4 border-white">
         <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
 
         <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
@@ -106,6 +106,8 @@ export default class Form2CaseInformation extends Vue {
     
     levelOfCourt = "Court of Appeal";
 
+    dataReady = false;
+
     searchParams = {} as form2SearchInfoType;
     notFound = false;
     respondentOptions = [
@@ -113,16 +115,42 @@ export default class Form2CaseInformation extends Vue {
         {text: 'Organization', value: 'org'}
     ];
 
+    mounted(){
+        this.dataReady = false;
+        //TODO
+        this.searchParams.file = "CA39029"
+        this.searchParams.searchBy = "ind"
+        this.searchParams.lastName = "Test"
+        this.searchParams.firstName = "Two"
+        this.dataReady = true; 
+    }
+
     public findFile(){
+        
         this.notFound = false;
+        
+        const url = '/form7s/?caseNumber='+this.searchParams.file; 
+        this.$http.get(url)
+        .then(res => {
+
+        },err => {
+            console.error(err); 
+            this.notFound = true;       
+        });
+
         console.log('search');
+        
         //if data exists:
-        const partiesData = {appellants:[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931}],respondents:[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932}]}
+        //TODO change here
+        const partiesData = {
+            appellants: [{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931}],
+            respondents:[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932}]
+        }
         this.UpdatePartiesJson(partiesData);
         this.UpdateFileNumber(this.searchParams.file)
         this.$router.push({name: "fill"})
         //if doesn't exists
-        this.notFound = true;
+        
     }
 
 
