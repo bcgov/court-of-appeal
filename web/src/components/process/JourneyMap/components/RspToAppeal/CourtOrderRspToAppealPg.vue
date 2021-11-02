@@ -9,13 +9,13 @@
 
         <b-row class="mt-4 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgment?ct=t(step-index-link)"
                 target="_blank">How will I find out about my judgement?
             </a>                               
         </b-row>
         <b-row class="mt-2 ml-5" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/appellant-guidebook/4.2-costs?ct=t(sidebar-link)"
                 target="_blank">Who is responsible for paying for the hearing?
             </a>                               
         </b-row>
