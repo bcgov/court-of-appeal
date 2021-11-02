@@ -1,7 +1,7 @@
 <template>
     <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">       
         
-        <b-container class="container">
+        <b-container v-if="dataLoaded" class="container">
             
             <my-documents-table v-bind:enableActions="true" v-bind:title="'My Documents'"></my-documents-table>
             
@@ -13,7 +13,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
+import { caseJsonDataType } from '@/types/Information/json';
 
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
 
 @Component({
     components:{
@@ -21,15 +25,36 @@ import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.
     }
 })
 export default class MyDocuments extends Vue {
+
+    @informationState.Action
+    public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
     
     windowHeight = 0;
     footerHeight = 0;
     headerHeight = 0;
     menubarHeight = 0;
+
+    dataLoaded = false;
+
     mounted()
-    {        
+    {
+        this.dataLoaded = false;     
         window.addEventListener('resize', this.getWindowHeight);
         this.getWindowHeight()
+        this.loadCases ();
+    }
+
+    public loadCases () {
+        this.$http.get('/case/')
+        .then((response) => {
+            if(response?.data){            
+                this.UpdateCasesJson(response.data)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;       
+        });
     }
 
     public getWindowHeight() {
@@ -39,8 +64,7 @@ export default class MyDocuments extends Vue {
         this.menubarHeight = (document.getElementsByName("menu-bar")[0] as HTMLElement)?.clientHeight;
     }
     
-    get getHeight() {
-        
+    get getHeight() {        
         return this.windowHeight-this.footerHeight-this.headerHeight-this.menubarHeight-1 + 'px'
     }
 }

@@ -49,20 +49,21 @@ export default class Form2 extends Vue {
     caseId!: string;
     
     @informationState.State
-    public form2Info: form2DataInfoType;
+    public currentCaseId: string;
+
+    @informationState.Action
+    public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void
 
     result = {} as form2DataInfoType;
     dataReady = false;
    
     mounted(){
         this.dataReady = false;
-        this.result = this.getForm2Data();       
-        this.dataReady = true;
-        Vue.nextTick(()=> this.onPrint())
+        this.getForm2Data(); 
     }   
            
     public onPrint() { 
-        const pdf_type = "FORM"
+        const pdf_type = "FORM2"
         const pdf_name = "form2-" + this.caseId;
         const el= document.getElementById("print");
 
@@ -85,9 +86,7 @@ export default class Form2 extends Vue {
         }  
 
         this.$http.post(url,body, options)
-        .then(res => {
-            const currentDate = moment().format();
-            this.$store.commit("Application/setLastPrinted", currentDate);            
+        .then(res => {                       
                 
         },err => {
             console.error(err);        
@@ -95,7 +94,7 @@ export default class Form2 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "FORM"
+        const pdfType = "FORM2"
         const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
@@ -122,10 +121,21 @@ export default class Form2 extends Vue {
         this.$router.push({name: "fill" })
     }
  
-    public getForm2Data() {   
-        
-        //TODO: use api GET call to gather data
-        return this.form2Info;
+    public getForm2Data() {        
+       
+        this.$http.get('/case/'+this.currentCaseId+'/')
+        .then((response) => {
+            if(response?.data?.data){            
+                            
+                this.result = response.data.data
+                this.UpdateForm2Info(this.result)                         
+                this.dataReady = true;
+                Vue.nextTick(()=> this.onPrint())
+            }
+                
+        },(err) => {
+        console.log(err)        
+        });      
     }
 }
 </script>
