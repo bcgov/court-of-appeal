@@ -139,7 +139,10 @@ export default class MyDocumentsTable extends Vue {
     enableActions!: boolean;
     
     @informationState.State
-    public casesJson!: any[]; 
+    public casesJson!: any[];
+    
+    @informationState.Action
+    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     allDocumentsChecked = false;    
     selectedDocuments: string[] = [];
@@ -225,9 +228,10 @@ export default class MyDocumentsTable extends Vue {
         }      
     }
 
-    public resumeApplication(documentId) {
-
-        this.$router.push({name: "preview" }) 
+    public resumeApplication(caseId) {
+        console.log(caseId)
+        this.UpdateCurrentCaseId(caseId);
+        this.$router.push({name: "preview", params: {caseId: caseId}}) 
 
     }
 

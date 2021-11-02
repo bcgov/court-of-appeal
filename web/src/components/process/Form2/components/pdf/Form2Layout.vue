@@ -15,13 +15,13 @@
 
         <div class="my-3 row" style="font-weight: 700;">
             <div class="col-md-10">
-                BETWEEN: <span style="font-weight: 200; margin-left: 5rem;">{{applicantNames.toString()}}</span>
+                BETWEEN: <span style="font-weight: 200; margin-left: 5rem;">{{applicantNames.join(", ")}}</span>
             </div>
             <div class="col-md-2">Appellant</div>
         </div>
         <div class="my-3 row" style="font-weight: 700;">
             <div class="col-md-10">
-                AND: <span style="font-weight: 200; margin-left: 7rem;">{{respondentNames.toString()}}</span>
+                AND: <span style="font-weight: 200; margin-left: 7rem;">{{respondentNames.join(", ")}}</span>
             </div>
             <div class="col-md-2">Respondent</div>
         </div>
@@ -30,7 +30,7 @@
 
         <div class="mt-4">
             <div  style="font-weight: 700;">Enter an appearance on behalf of:</div>
-            <div class="mt-2" >{{respondentNames.toString()}}</div> 
+            <div class="mt-2" >{{respondentNames.join(", ")}}</div> 
         </div>
 
         <div class="mt-4">
@@ -66,16 +66,21 @@
 
 <script lang="ts">
 import { form2DataInfoType } from '@/types/Information';
-import { applicantJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
+import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
 
 @Component
 export default class Form2Layout extends Vue {
 
     @Prop({required:true})
     result!: form2DataInfoType; 
+
+    @informationState.Action
+    public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];
@@ -92,7 +97,7 @@ export default class Form2Layout extends Vue {
     }
    
     public extractInfo(){
-        console.log(this.result)
+        
         this.applicants = this.result.appellants;
         this.respondents = this.result.respondents;
         this.applicantNames = [];
@@ -105,8 +110,12 @@ export default class Form2Layout extends Vue {
         for (const applicant of this.applicants){
             this.applicantNames.push(applicant.name);  
         }
-               
-       
+        
+        if(!this.result.serviceInformation){
+            const result = this.result
+            result.serviceInformation = {} as serviceInformationJsonDataType
+            this.UpdateForm2Info(result);
+        }
     } 
 }
 

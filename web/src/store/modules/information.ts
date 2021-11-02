@@ -12,13 +12,13 @@ class Information extends VuexModule {
     public pathType = {} as pathwayTypeInfoType;
     public partiesJson = {} as partiesDataJsonDataType;
     public form2Info = {} as form2DataInfoType;
-    public fileNumber = "";    
+    public fileNumber = "";  
+    public currentCaseId = null;  
 
     @Mutation
     public setCasesJson(casesJson: caseJsonDataType[]): void {   
         this.casesJson = casesJson;
-    }
-    
+    }    
     @Action
     public UpdateCasesJson(newCasesJson: caseJsonDataType[]): void {
         this.context.commit('setCasesJson', newCasesJson);
@@ -27,8 +27,7 @@ class Information extends VuexModule {
     @Mutation
     public setJourneyJson(journeyJson: journeyJsonDataType): void {   
         this.journeyJson = journeyJson;
-    }
-    
+    }    
     @Action
     public UpdateJourneyJson(newJourneyJson: journeyJsonDataType): void {
         this.context.commit('setJourneyJson', newJourneyJson);
@@ -37,8 +36,7 @@ class Information extends VuexModule {
     @Mutation
     public setPathType(pathType: pathwayTypeInfoType): void {   
         this.pathType = pathType;
-    }
-    
+    }    
     @Action
     public UpdatePathType(newPathType: pathwayTypeInfoType): void {
         this.context.commit('setPathType', newPathType);
@@ -47,8 +45,7 @@ class Information extends VuexModule {
     @Mutation
     public setPartiesJson(partiesJson: partiesDataJsonDataType): void {   
         this.partiesJson = partiesJson;
-    }
-    
+    }    
     @Action
     public UpdatePartiesJson(newPartiesJson: partiesDataJsonDataType): void {
         this.context.commit('setPartiesJson', newPartiesJson);
@@ -57,8 +54,7 @@ class Information extends VuexModule {
     @Mutation
     public setForm2Info(form2Info: form2DataInfoType): void {   
         this.form2Info = form2Info;
-    }
-    
+    }    
     @Action
     public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
         this.context.commit('setForm2Info', newForm2Info);
@@ -67,11 +63,19 @@ class Information extends VuexModule {
     @Mutation
     public setFileNumber(fileNumber: string): void {   
         this.fileNumber = fileNumber;
-    }
-    
+    }    
     @Action
     public UpdateFileNumber(newFileNumber: string): void {
         this.context.commit('setFileNumber', newFileNumber);
+    }
+
+    @Mutation
+    public setCurrentCaseId(currentCaseId: string): void {   
+        this.currentCaseId = currentCaseId;
+    }    
+    @Action
+    public UpdateCurrentCaseId(newCurrentCaseId: string): void {
+        this.context.commit('setCurrentCaseId', newCurrentCaseId);
     }
     
 }
