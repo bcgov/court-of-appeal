@@ -1,85 +1,71 @@
 {
-  "name": "coa-web",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bootstrap": "^4.3.1",
-    "classnames": "^2.2.6",
-    "file-saver": "^1.3.8",
-    "immutability-helper": "^2.6.6",
-    "lodash": "4.17.21",
-    "moment": "^2.22.1",
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-select": "^3.2.0",
-    "react-tooltip": "^3.6.0",
-    "request": "^2.88.2",
-    "validator": "^13.6.0"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
-    "@craco/craco": "^6.2.0",
-    "chai": "^4.1.2",
-    "cross-env": "^7.0.2",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest-css-modules-transform": "^1.0.5",
-    "react-scripts": "^4.0.3",
-    "react-test-renderer": "^16.8.1",
-    "sinon": "^6.1.2",
-    "sinon-chai": "^3.2.0"
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "cypress:open": "cd tests && cypress open"
   },
   "resolutions": {
-    "glob-parent": "^5.1.2",
     "normalize-url": "^4.5.1",
     "css-what": "^5.0.1",
-    "trim-newlines": "^3.0.1",
-    "lodash": "4.17.21",
-    "react-scripts/eslint-webpack-plugin": "2.3.0"
+    "trim-newlines": "^3.0.1"
   },
-  "engines": {
-    "node": ">=10.15.1",
-    "npm": ">=3.10.10"
+  "dependencies": {
+    "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.3/bcgov-bootstrap-theme-1.1.3.tgz",
+    "@types/underscore": "^1.10.0",
+    "ace-builds": "^1.4.8",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.15.0",
+    "core-js": "^3.6.4",
+    "jquery": "^3.6.0",
+    "moment-timezone": "^0.5.32",
+    "node-sass": "^6.0.1",
+    "popper.js": "^1.16.1",
+    "sass-loader": "^8.0.2",
+    "save": "^2.4.0",
+    "showdown": "~1.9.1",
+    "survey-creator": "^1.5.5",
+    "survey-vue": "^1.5.5",
+    "surveyjs-widgets": "^1.5.5",
+    "ts-loader": "^6.2.1",
+    "underscore": "^1.10.2",
+    "vue": "^2.6.10",
+    "vue-axios": "^2.1.5",
+    "vue-class-component": "6.3.2",
+    "vue-cookies": "^1.7.4",
+    "vue-fontawesome": "0.0.2",
+    "vue-fontawesome-icon": "^1.3.0",
+    "vue-property-decorator": "^9.0.0",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.1.5",
+    "vuex": "^3.3.0",
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^0.17.0",
+    "yorkie": "^2.0.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "start-dev": "cross-env NODE_ENV=development REACT_APP_API_URL=http://localhost:9991 craco start --verbose",
-    "build": "react-scripts build",
-
-    "test": "unset REACT_APP_API_URL ; PUBLIC_URL='' jest",
-    "eject": "react-scripts eject",
-    "test:coverage": "PUBLIC_URL='' jest --coverage"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "transform": {
-      ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform",
-      "^.+\\.js?$": "babel-jest"
-    }
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
-  "homepage": "/court-of-appeal/",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "@cypress/skip-test": "^2.6.0",
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-router": "^4.5.13",
+    "@vue/cli-plugin-typescript": "^4.5.13",
+    "@vue/cli-plugin-vuex": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "typescript": "4.3.5",
+    "vue-cli-plugin-vuetify": "~2.0.5",
+    "vue-template-compiler": "^2.6.11"
+  }
 }
