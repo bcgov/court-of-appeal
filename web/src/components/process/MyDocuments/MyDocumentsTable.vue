@@ -79,7 +79,23 @@
                                 title="Resume Application">
                                 <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
                             </b-button>
+                            <b-button v-else-if="row.item.status == 'Submitted'" size="sm" variant="transparent" class="my-0 py-0"
+                                @click="navigateToEFilingHub(row.item.package_url)"
+                                    v-b-tooltip.hover.noninteractive
+                                    title="Navigate To Submitted Application">
+                                    <span class="fa fa-paper-plane btn-icon-left text-info"/>                    
+                            </b-button>
                             
+                        </template>
+
+                        <template v-slot:cell(status)="row">                  
+                            <span>{{ row.item.status}}</span>
+                            <span 
+                                v-if="row.item.pdf_types"
+                                style="font-size:14px; padding:0; transform:translate(2px,-1px);" 
+                                class="far fa-file-pdf btn-icon-left text-primary ml-1"
+                                v-b-tooltip.hover.noninteractive
+                                title="PDF generated"/> 
                         </template>
                         
                         
@@ -269,6 +285,10 @@ export default class MyDocumentsTable extends Vue {
                 console.error(err);
             });
         }
+    }
+
+    public navigateToEFilingHub(package_url) {
+        location.replace(package_url)
     }
 
     public archiveDocument() {
