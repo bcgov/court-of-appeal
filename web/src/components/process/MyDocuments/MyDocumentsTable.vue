@@ -109,7 +109,19 @@
                                 v-b-tooltip.hover.noninteractive
                                 title="PDF generated"/> 
                         </template>
-                        
+
+                        <template v-slot:cell(parties)="row">                  
+                            <span 
+                                v-b-tooltip.hover.noninteractive
+                                :title="row.item.appNames">{{ row.item.appNames | truncate-word-after(10)}}
+                            </span>
+                            <b class="text-info"> / </b>
+                            <span 
+                                v-b-tooltip.hover.noninteractive
+                                :title="row.item.resNames">{{ row.item.resNames | truncate-word-after(10)}}
+                            </span>
+                           
+                        </template>
                         
                         <template v-slot:cell(modifiedDate)="row">                  
                             <span>{{ row.item.modifiedDate | beautify-date-weekday}}</span>
@@ -144,6 +156,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+import { caseJsonDataType } from "@/types/Information/json";
 const informationState = namespace("Information");
 
 @Component
@@ -156,7 +169,7 @@ export default class MyDocumentsTable extends Vue {
     enableActions!: boolean;
     
     @informationState.State
-    public casesJson!: any[];
+    public casesJson!: caseJsonDataType[];
     
     @informationState.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
@@ -226,14 +239,38 @@ export default class MyDocumentsTable extends Vue {
     //TODO: when extending to use throughout the province, the timezone should be changed accordingly    
         this.documentsList = [];
         for (const docJson of this.casesJson) {                
-            const doc = {isChecked: false, pdf_types:'', fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'' ,packageUrl:''};
+            const doc = {
+                isChecked: false, 
+                pdf_types:'', 
+                fileNumber:0, 
+                caseNumber:'', 
+                parties:'', 
+                appNames: '', 
+                resNames: '', 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:''
+            };
             //console.log(docJson)
             doc.fileNumber = docJson.id;
             doc.caseNumber = docJson.data.formSevenNumber;
             doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
-            
+            const appellants = docJson.data.appellants;
+            const respondents = docJson.data.respondents;
+            const app_names = [];
+            const res_names = [];
+            for (const app of appellants){
+                app_names.push(app.name)                
+            }
+            for (const res of respondents){
+                res_names.push(res.name)                
+            }
+            doc.appNames = app_names.join(', ')
+            doc.resNames = res_names.join(', ');
+
             this.documentsList.push(doc);
         }      
     }
