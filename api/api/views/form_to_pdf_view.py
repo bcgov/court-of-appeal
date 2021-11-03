@@ -98,8 +98,8 @@ class FormToPdfView(generics.GenericAPIView):
         html = request.data['html']
         json_data = request.data['json_data']
         user_id = request.user.id
-        app = get_case_for_user(case_id, user_id)
-        if not app:
+        case = get_case_for_user(case_id, user_id)
+        if not case:
             return HttpResponseNotFound(no_record_found)
 
         name = request.query_params.get("name")
@@ -132,8 +132,8 @@ class FormToPdfView(generics.GenericAPIView):
                 )
             pdf_result.save()
 
-            # app.last_printed = timezone.now()
-            # app.save()
+            case.pdf_types = pdf_type
+            case.save()
         except Exception as ex:
             LOGGER.error("ERROR: Pdf generation failed %s", ex)
             raise

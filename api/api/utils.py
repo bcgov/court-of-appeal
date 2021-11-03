@@ -55,14 +55,18 @@ def get_firstname_lastname(display_name, user_type):
     return None, None
 
 
-def get_case_for_user(pk, uid):
+def get_case_for_user(pk, uid, includeArchives=False):
     if uid is None:
         raise Http404
     try:
         if pk:
             return Case.objects.get(pk=pk, user_id=uid)
         else:
-            return Case.objects.filter(user_id=uid)
+            if includeArchives:
+                return Case.objects.filter(user_id=uid)
+            else:
+                return Case.objects.filter(user_id=uid, archive=False)
+
     except Case.DoesNotExist:
         raise Http404
 

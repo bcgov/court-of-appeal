@@ -3,7 +3,7 @@
         
         <b-container v-if="dataLoaded" class="container">
             
-            <my-documents-table v-bind:enableActions="true" v-bind:title="'My Documents'"></my-documents-table>
+            <my-documents-table @reload="loadCases()" v-bind:enableActions="true" v-bind:title="'My Documents'"></my-documents-table>
             
         </b-container>
     </b-card>
@@ -45,7 +45,8 @@ export default class MyDocuments extends Vue {
     }
 
     public loadCases () {
-        this.$http.get('/case/')
+        this.dataLoaded = false;
+        this.$http.get('/case/?includeArchives=true')
         .then((response) => {
             if(response?.data){            
                 this.UpdateCasesJson(response.data)
