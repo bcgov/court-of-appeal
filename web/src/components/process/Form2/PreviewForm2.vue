@@ -1,27 +1,27 @@
 <template>
     <b-card v-if="dataReady" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
-        <template #header bg-variant="white" border-variant="white">            
+        <b-card-header header-bg-variant="light" header-border-variant="white">            
             <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
-        </template>
+        </b-card-header>
 
-        <b-card text-variant="dark" border-variant="light" bg-variant="light" class="my-2">
+        <b-card text-variant="dark" border-variant="light" bg-variant="light" class="my-2 mx-4">
 
-            <div class="ml-5" style="font-size: 2rem;">
+            <b-row class="ml-5" style="font-size: 2rem;">
                 Preview Your Form
-            </div> 
-            <div class="ml-5" style="font-size: 14px;">
+            </b-row> 
+            <b-row class="ml-5" style="font-size: 14px;">
                 Your can review your form here to ensure everything to correct before submitting. 
                 If edits are required, you may still go back and make the necessary changes.
-            </div>           
+            </b-row>           
            
         </b-card>
 
-        <b-card border-variant="light" bg-variant="light" class="mt-3">
+        <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
             <form-2 v-bind:caseId="caseId"/>            
         </b-card> 
 
-        <b-card border-variant="light" bg-variant="light" class="mt-3">                
+        <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
             <b-button
                 style="float: right;" 
                 variant="success"

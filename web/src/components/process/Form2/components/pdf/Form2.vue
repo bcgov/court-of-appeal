@@ -1,31 +1,32 @@
 <template>
-<div v-if="dataReady">  
+    <b-card v-if="dataReady" class="bg-light border-light" >  
 
-    <b-row >
-        <b-col cols="10">
-            <b-button 
-                style="float: right;" 
-                variant="primary"
-                @click="navigateToEditPage()"
-                ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                Go Back and Edit
-            </b-button>
-        </b-col>
-        <b-col cols="2">
-            <b-button
-                style="float: right;" 
-                variant="success"
-                @click="savePdf()"
-                >Download PDF
-                <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
-            </b-button>
-        </b-col>
-    </b-row>  
-  
-    <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-        <form-2-layout v-bind:result="result"/>
+        <b-row>
+            <b-col cols="8" class="ml-3">
+                <b-button 
+                    style="float: right;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>
+            </b-col>
+            <b-col cols="3">
+                <b-button
+                    style="float: left;" 
+                    variant="success"
+                    @click="savePdf()"
+                    >Download PDF
+                    <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
+                </b-button>
+            </b-col>
+        </b-row>  
+    
+        <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
+            <form-2-layout v-bind:result="result"/>
+        </b-card>
+
     </b-card>
-</div>
 </template>
 
 <script lang="ts">
