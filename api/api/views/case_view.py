@@ -29,7 +29,10 @@ class CaseView(APIView):
             LOGGER.error("ERROR! %s", ex)
 
     def get(self, request, pk=None, format=None):
+        
         uid = request.user.id
+        includeArchives = bool(request.query_params.get("includeArchives")=="true")
+
         if pk:
             case = get_case_for_user(pk, uid)        
 
@@ -42,13 +45,15 @@ class CaseView(APIView):
                     "type": case.type,  
                     "status":case.status,              
                     "modified": case.modified,
-                    "personId": case.user_id,                
+                    "personId": case.user_id,
+                    "archive": case.archive,
+                    "pdf_types": case.pdf_types,              
                     # "packageNumber": submission.package_number if submission is not None else "",
                     # "packageUrl": submission.package_url if submission is not None else "", 
                     "data": case_data,               
                     }
         else:
-            cases = get_case_for_user(pk, uid)
+            cases = get_case_for_user(pk, uid, includeArchives)
             data = list()
             for case in cases:
                 data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
@@ -58,6 +63,8 @@ class CaseView(APIView):
                     "status":case.status,              
                     "modified": case.modified,
                     "personId": case.user_id,
+                    "archive": case.archive,
+                    "pdf_types": case.pdf_types,
                     "data": case_data,            
                     # "packageNumber": submission.package_number if submission is not None else "",
                     # "packageUrl": submission.package_url if submission is not None else "",                
@@ -87,25 +94,43 @@ class CaseView(APIView):
         return Response({"case_id": db_app.pk})
 
     def put(self, request, pk, format=None):
+        
         uid = request.user.id
         body = request.data
         if not body:
             return HttpResponseBadRequest("Missing request body")
 
-        app = get_case_for_user(pk, uid)
-        if not app:
-            return HttpResponseNotFound("No record found")
+        case_ids = request.query_params.getlist("id")
+        if not case_ids:
+            case = get_case_for_user(pk, uid)
+            if not case:
+                return HttpResponseNotFound("No record found")
 
-        (data_key_id, data_enc) = self.encrypt_data(body["data"])        
+            (data_key_id, data_enc) = self.encrypt_data(body["data"])        
 
-        app.modified = timezone.now()
-        app.type = body.get("type")
-        app.status = body.get("status")        
-        app.data = data_enc
-        app.key_id = data_key_id
-        app.save()
+            case.modified = timezone.now()
+            case.type = body.get("type")
+            case.status = body.get("status")        
+            case.data = data_enc
+            case.key_id = data_key_id
+            case.package_url = body.get("package_url")
+            case.package_number = body.get("package_number")
+            case.save()
+            return Response("success")
+        else:
+            for caseId in case_ids:
+                case = get_case_for_user(caseId, uid)
+                if not case:
+                    continue
 
-        return Response("success")
+                case.modified = timezone.now()                
+                if body.get("status"):
+                    case.status = body.get("status")
+                        
+                case.archive = body.get("archive")
+                case.save()
+
+            return Response("success")
 
     # def delete(self, request, pk, format=None):
     #     uid = request.user.id

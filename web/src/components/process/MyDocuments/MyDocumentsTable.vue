@@ -1,5 +1,15 @@
 <template>
-    <b-card border-variant="white" id="documents">  
+    <b-card border-variant="white" id="documents"> 
+
+        <b-alert
+            :show="errorMsgDismissCountDown"
+            dismissible
+            variant="danger"
+            @dismissed="errorMsgDismissCountDown=0"
+            @dismiss-count-down="errorMsgCountDownChanged"
+        > 
+            {{errorMsg}}
+        </b-alert>
         <b-row v-if="enableActions" class="mb-2">
             <b-col cols="9">
                 <h3>{{title}}</h3>
@@ -46,7 +56,7 @@
                     <b-table  :items="documentsList"
                         :fields="documentsFields"
                         class="mx-4"
-                        sort-by="lastUpdated"
+                        sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
                         sort-icon-left
@@ -58,6 +68,8 @@
                         <template v-if="enableActions" v-slot:head(select) >                                  
                             <b-form-checkbox                            
                                 class="m-0"
+                                v-b-tooltip.hover.left
+                                title="Select All"
                                 v-model="allDocumentsChecked"
                                 @change="checkAllDocuments"                                                                       					
                                 size="sm"/>
@@ -93,7 +105,7 @@
                             <span 
                                 v-if="row.item.pdf_types"
                                 style="font-size:14px; padding:0; transform:translate(2px,-1px);" 
-                                class="far fa-file-pdf btn-icon-left text-primary ml-1"
+                                class="far fa-file-pdf btn-icon-left text-success ml-1"
                                 v-b-tooltip.hover.noninteractive
                                 title="PDF generated"/> 
                         </template>
@@ -109,18 +121,7 @@
         </b-row>
 
 
-        <b-modal v-model="confirmArchive" id="bv-modal-confirm-archive" header-class="bg-warning text-light">
-            <b-row v-if="archiveError" id="ArchiveError" class="h4 mx-2">
-                <b-badge class="mx-1 mt-2"
-                    style="width: 20rem;"
-                    v-b-tooltip.hover
-                    :title="archiveErrorMsgDesc"
-                    variant="danger"> {{archiveErrorMsg}}
-                    <b-icon class="ml-3"
-                        icon = x-square-fill
-                        @click="archiveError = false"/>
-                </b-badge>                    
-            </b-row>            
+        <b-modal v-model="confirmArchive" id="bv-modal-confirm-archive" header-class="bg-warning text-light">                    
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Archive Application</h3>                                  
             </template>
@@ -160,8 +161,7 @@ export default class MyDocumentsTable extends Vue {
     @informationState.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
-    allDocumentsChecked = false;    
-    selectedDocuments: string[] = [];
+    allDocumentsChecked = false;
     
     documentsList = [];
   
@@ -171,8 +171,7 @@ export default class MyDocumentsTable extends Vue {
             label:'',                  
             tdClass: 'border-top', 
             cellStyle: 'font-size: 16px;', 
-            sortable:false
-            
+            sortable:false            
         },
         {
             key: "action",
@@ -183,7 +182,7 @@ export default class MyDocumentsTable extends Vue {
         {
             key: "fileNumber",
             label: "File #",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         },
         {
@@ -201,45 +200,40 @@ export default class MyDocumentsTable extends Vue {
         {
             key: "status",
             label: "Status",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         },
         {
             key: "modifiedDate",
             label: "Recently Modified",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         }
     ];
 
-    checkedDocs = [];
-
     confirmArchive = false;
-    currentApplication = {};
     applicationsToArchive = [];
-    indexesToArchive = [-1];
 
-    archiveErrorMsg = "";
-    archiveErrorMsgDesc = "";
-    archiveError = false;
+    errorMsg = "";
+    errorMsgDismissCountDown = 0;
+   
 
-    mounted() {  
-
-        this.extractDocuments();
-       
+    mounted() {
+        this.extractDocuments();       
     }
 
     public extractDocuments () {
     //TODO: when extending to use throughout the province, the timezone should be changed accordingly    
-       
+        this.documentsList = [];
         for (const docJson of this.casesJson) {                
-            const doc = {isChecked: false, fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'', last_efiling_submission:{package_number:'',package_url:''}};
-            console.log(docJson)
+            const doc = {isChecked: false, pdf_types:'', fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'' ,packageUrl:''};
+            //console.log(docJson)
             doc.fileNumber = docJson.id;
             doc.caseNumber = docJson.data.formSevenNumber;
-            doc.status = docJson.status;
+            doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
-
+            doc.pdf_types = docJson.pdf_types;
+            
             this.documentsList.push(doc);
         }      
     }
@@ -282,7 +276,9 @@ export default class MyDocumentsTable extends Vue {
                 link.click();
                 setTimeout(() => URL.revokeObjectURL(link.href), 1000);
             },err => {
-                console.error(err);
+                          
+                this.errorMsg = "PDF file has not been generated for the selected documents !"
+                this.errorMsgDismissCountDown = 5;                
             });
         }
     }
@@ -292,33 +288,39 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public archiveDocument() {
-        this.archiveErrorMsg = '';
-        this.archiveErrorMsgDesc = '';        
-        this.archiveError = false;
 
         const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
         
         this.applicationsToArchive = checkedFileIdsList;
-        //   this.applicationToArchive = application;
-        //   this.indexesToArchive = index;
         if(checkedFileIdsList.length>0){
-            this.confirmArchive=true;
+            this.confirmArchive=true;            
         }
     }
 
-    public confirmArchiveApplication() {
-        // this.$http.delete('/app/'+ this.applicationsToArchive['fileNumber'] + '/')
-        // .then((response) => {
-        //     //   var indexToArchive = this.documents.findIndex((app) =>{if(app.id == this.applicationToArchive['id'])return true});
-        //     //   if(indexToArchive>=0)this.documents.splice(indexToArchive, 1);
+    public confirmArchiveApplication() { 
+        
+        let pdfIds = ''       
+        for(const fileId of this.applicationsToArchive)
+            pdfIds+= '&id='+fileId;
+        
+        const url = '/case/0/?'+pdfIds;
+        const body = {
+            archive: true
+        } 
 
-        // },err => {
-        //     const errMsg = err.response.data.error;
-        //     this.archiveErrorMsg = errMsg.slice(0,60) + (errMsg.length>60?' ...':'');
-        //     this.archiveErrorMsgDesc = errMsg;
-        //     this.archiveError = true;
-        // });
+        this.$http.put(url, body)
+        .then(response => {
+            
+            if(response?.data =="success")
+                this.$emit('reload')
+
+        }, err => {
+            this.errorMsg = "Error while archiving !"
+            this.errorMsgDismissCountDown = 2;
+        })
+        
         this.confirmArchive=false;
+
     }
 
     public checkAllDocuments(checked){
@@ -330,14 +332,19 @@ export default class MyDocumentsTable extends Vue {
     public toggleSelectedDocuments() {  
         Vue.nextTick(()=>{
 
-            this.checkedDocs = this.documentsList.filter(document=>{return document.isChecked});
+            const checkedDocs = this.documentsList.filter(document=>{return document.isChecked});
             
-            if(this.checkedDocs.length == this.documentsList.length)
+            if(checkedDocs.length == this.documentsList.length)
                 this.allDocumentsChecked = true;
             else
                 this.allDocumentsChecked = false;                       
         })        
 	}
+
+    public errorMsgCountDownChanged(dismissCountDown){
+        this.errorMsgDismissCountDown = dismissCountDown
+    }
+
 
 
 
