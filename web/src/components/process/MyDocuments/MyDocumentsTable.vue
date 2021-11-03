@@ -108,7 +108,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Archive Application</h3>                                  
             </template>
-            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive}}"</b> application?</h4>            
+            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive.join(', ')}}"</b> application<span v-if="applicationsToArchive.length>1" >s</span>?</h4>            
             <template v-slot:modal-footer>
                 <b-button variant="danger" @click="confirmArchiveApplication()">Confirm</b-button>
                 <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-archive')">Cancel</b-button>
@@ -240,17 +240,50 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public downloadDocument() {
-        console.log('downloading')
+        
+        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
 
+        if(checkedFileIdsList.length>0){
+            let pdfIds = ''
+            for(const fileId of checkedFileIdsList)
+                pdfIds+= '&id='+fileId;
+
+            const pdf_type = 'FORM';
+            const url = '/form-print/0/?pdf_type='+pdf_type+pdfIds;
+            const options = {
+                responseType: "blob",
+                headers: {
+                "Content-Type": "application/json",
+                }
+            }
+            this.$http.get(url, options)
+            .then(res => {
+                const blob = res.data;
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.download = pdf_type+".zip";
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+            },err => {
+                console.error(err);
+            });
+        }
     }
 
     public archiveDocument() {
         this.archiveErrorMsg = '';
-        this.archiveErrorMsgDesc = '';
+        this.archiveErrorMsgDesc = '';        
         this.archiveError = false;
+
+        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
+        
+        this.applicationsToArchive = checkedFileIdsList;
         //   this.applicationToArchive = application;
         //   this.indexesToArchive = index;
-        this.confirmArchive=true;
+        if(checkedFileIdsList.length>0){
+            this.confirmArchive=true;
+        }
     }
 
     public confirmArchiveApplication() {

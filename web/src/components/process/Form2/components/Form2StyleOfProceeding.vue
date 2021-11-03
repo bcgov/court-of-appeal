@@ -479,8 +479,6 @@ export default class Form2StyleOfProceeding extends Vue {
 
     public saveForm(draft: boolean) {
         
-        this.toggleRepresentation();
-        
         if(this.checkStates())
         {
             const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';

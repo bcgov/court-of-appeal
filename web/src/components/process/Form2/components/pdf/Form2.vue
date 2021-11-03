@@ -63,7 +63,7 @@ export default class Form2 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "FORM2"
+        const pdf_type = "FORM"
         const pdf_name = "form2-" + this.caseId;
         const el= document.getElementById("print");
 
@@ -94,7 +94,8 @@ export default class Form2 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "FORM2"
+        const pdfType = "FORM"
+        const pdfName ="FORM2"
         const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
@@ -108,7 +109,7 @@ export default class Form2 extends Vue {
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
             document.body.appendChild(link);
-            link.download = pdfType+".pdf";
+            link.download = pdfName+".pdf";
             link.click();
             setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
 
