@@ -5,7 +5,26 @@
             <div style="text-align: left; font-weight: bold;">
                 Notice of Application to Vary and Affidavit
             </div>            
-        </b-row>       
+        </b-row>
+        <b-row class="mt-1 ml-1">            
+            <div style="text-align: left; ">
+                If your application for leave to appeal is denied, you may want to bring an application to vary that decision.
+            </div>            
+        </b-row>  
+
+        <b-row class="mt-3 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                File the document below 
+                    <span 
+                        class="text-danger" 
+                        style="font-weight: bold;">within 7 days
+                    </span> 
+                of the decision denying leave to appeal.
+            </b-col>           
+        </b-row>      
 
         <b-row class="mt-4" >
             <ol>
@@ -14,9 +33,9 @@
                     <ul>
                         <li>
                             <b-row style="width: 110%;" class="my-1">
-                                <b-col cols="8">
+                                <b-col cols="8">                                    
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
+                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Notice of Application to Vary
                                     </a>                                    
                                 </b-col>
@@ -44,10 +63,11 @@
                         <li>
                             <b-row style="width: 110%;" class="my-1">
                                 <b-col cols="8">
-                                    <a 
+                                    Affidavit
+                                    <!-- <a 
                                         href=""
                                         target="_blank">Affidavit
-                                    </a>                                    
+                                    </a>                                     -->
                                 </b-col>
                                 <b-col cols="2" >
                                     6 copies
@@ -109,9 +129,9 @@
                     <ul>
                         <li>
                             <b-row style="width: 113%;" class="my-1">
-                                <b-col cols="8">
+                                <b-col cols="8">                                    
                                     <a 
-                                        href=""
+                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Motion Book to Vary
                                     </a>
                                 </b-col>

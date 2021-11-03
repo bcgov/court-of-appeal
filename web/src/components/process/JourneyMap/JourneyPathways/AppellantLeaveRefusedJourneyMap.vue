@@ -185,7 +185,7 @@ export default class AppellantLeaveRefusedJourneyMap extends Vue {
 
             this.windowTitle = "Application for Review";
             this.pathTypes = ["share"];
-            this.pathHeights = ['33rem'];
+            this.pathHeights = ['40rem'];
             this.applicationForReviewContent = true;
 
         } else if (contentType == "The Hearing"){
