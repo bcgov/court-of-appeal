@@ -48,4 +48,4 @@ pdf/*.pdf
 /__pycache__
 
 
-web/package-lock.json
+#web/package-lock.json
