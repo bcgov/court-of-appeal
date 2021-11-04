@@ -39,6 +39,12 @@ export interface form2DataInfoType {
     version?: string;
 }
 
+export interface packageInfoType {
+    packageNumber: string;
+    fileNumber: string;
+    eFilingUrl: string;
+}
+
 export interface journeyStepType {
 
 

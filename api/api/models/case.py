@@ -7,15 +7,18 @@ class Case(models.Model):
     )
     type = models.CharField(max_length=100, default="", blank=True)
     status = models.CharField(max_length=100, default="", blank=True)    
-    modified = models.DateTimeField(blank=True, null=True)    
-    package_url = models.CharField(max_length=200, null=True)
+    modified = models.DateTimeField(blank=True, null=True) 
 
+    package_url = models.CharField(max_length=200, null=True)
+    package_number = models.CharField(max_length=100, null=True)
+    
+    archive = models.BooleanField(blank=True, default=False, null=True)
+    pdf_types = models.CharField(max_length=100, default="", blank=True)
+    
     # encryption key identifier
     key_id = models.CharField(max_length=32, blank=True, null=True)
     # stored encrypted when key_id is set
-    data = models.BinaryField(blank=True, null=True)
-
-    package_number = models.CharField(max_length=100, null=True)
+    data = models.BinaryField(blank=True, null=True)  
 
     user = models.ForeignKey(
         "User",

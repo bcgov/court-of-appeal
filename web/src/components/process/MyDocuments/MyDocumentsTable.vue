@@ -1,5 +1,15 @@
 <template>
-    <b-card border-variant="white" id="documents">  
+    <b-card border-variant="white" id="documents"> 
+
+        <b-alert
+            :show="errorMsgDismissCountDown"
+            dismissible
+            variant="danger"
+            @dismissed="errorMsgDismissCountDown=0"
+            @dismiss-count-down="errorMsgCountDownChanged"
+        > 
+            {{errorMsg}}
+        </b-alert>
         <b-row v-if="enableActions" class="mb-2">
             <b-col cols="9">
                 <h3>{{title}}</h3>
@@ -46,7 +56,7 @@
                     <b-table  :items="documentsList"
                         :fields="documentsFields"
                         class="mx-4"
-                        sort-by="lastUpdated"
+                        sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
                         sort-icon-left
@@ -58,6 +68,8 @@
                         <template v-if="enableActions" v-slot:head(select) >                                  
                             <b-form-checkbox                            
                                 class="m-0"
+                                v-b-tooltip.hover.left
+                                title="Select All"
                                 v-model="allDocumentsChecked"
                                 @change="checkAllDocuments"                                                                       					
                                 size="sm"/>
@@ -79,9 +91,37 @@
                                 title="Resume Application">
                                 <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
                             </b-button>
+                            <b-button v-else-if="row.item.status == 'Submitted'" size="sm" variant="transparent" class="my-0 py-0"
+                                @click="navigateToEFilingHub(row.item.package_url)"
+                                    v-b-tooltip.hover.noninteractive
+                                    title="Navigate To Submitted Application">
+                                    <span class="fa fa-paper-plane btn-icon-left text-info"/>                    
+                            </b-button>
                             
                         </template>
-                        
+
+                        <template v-slot:cell(status)="row">                  
+                            <span>{{ row.item.status}}</span>
+                            <span 
+                                v-if="row.item.pdf_types"
+                                style="font-size:14px; padding:0; transform:translate(2px,-1px);" 
+                                class="far fa-file-pdf btn-icon-left text-success ml-1"
+                                v-b-tooltip.hover.noninteractive
+                                title="PDF generated"/> 
+                        </template>
+
+                        <template v-slot:cell(parties)="row">                  
+                            <span 
+                                v-b-tooltip.hover.noninteractive
+                                :title="row.item.appNames">{{ row.item.appNames | truncate-word-after(10)}}
+                            </span>
+                            <b class="text-info"> / </b>
+                            <span 
+                                v-b-tooltip.hover.noninteractive
+                                :title="row.item.resNames">{{ row.item.resNames | truncate-word-after(10)}}
+                            </span>
+                           
+                        </template>
                         
                         <template v-slot:cell(modifiedDate)="row">                  
                             <span>{{ row.item.modifiedDate | beautify-date-weekday}}</span>
@@ -93,22 +133,11 @@
         </b-row>
 
 
-        <b-modal v-model="confirmArchive" id="bv-modal-confirm-archive" header-class="bg-warning text-light">
-            <b-row v-if="archiveError" id="ArchiveError" class="h4 mx-2">
-                <b-badge class="mx-1 mt-2"
-                    style="width: 20rem;"
-                    v-b-tooltip.hover
-                    :title="archiveErrorMsgDesc"
-                    variant="danger"> {{archiveErrorMsg}}
-                    <b-icon class="ml-3"
-                        icon = x-square-fill
-                        @click="archiveError = false"/>
-                </b-badge>                    
-            </b-row>            
+        <b-modal v-model="confirmArchive" id="bv-modal-confirm-archive" header-class="bg-warning text-light">                    
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Archive Application</h3>                                  
             </template>
-            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive}}"</b> application?</h4>            
+            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive.join(', ')}}"</b> application<span v-if="applicationsToArchive.length>1" >s</span>?</h4>            
             <template v-slot:modal-footer>
                 <b-button variant="danger" @click="confirmArchiveApplication()">Confirm</b-button>
                 <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-archive')">Cancel</b-button>
@@ -127,6 +156,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+import { caseJsonDataType } from "@/types/Information/json";
 const informationState = namespace("Information");
 
 @Component
@@ -139,13 +169,12 @@ export default class MyDocumentsTable extends Vue {
     enableActions!: boolean;
     
     @informationState.State
-    public casesJson!: any[];
+    public casesJson!: caseJsonDataType[];
     
     @informationState.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
-    allDocumentsChecked = false;    
-    selectedDocuments: string[] = [];
+    allDocumentsChecked = false;
     
     documentsList = [];
   
@@ -155,8 +184,7 @@ export default class MyDocumentsTable extends Vue {
             label:'',                  
             tdClass: 'border-top', 
             cellStyle: 'font-size: 16px;', 
-            sortable:false
-            
+            sortable:false            
         },
         {
             key: "action",
@@ -167,7 +195,7 @@ export default class MyDocumentsTable extends Vue {
         {
             key: "fileNumber",
             label: "File #",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         },
         {
@@ -185,44 +213,63 @@ export default class MyDocumentsTable extends Vue {
         {
             key: "status",
             label: "Status",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         },
         {
             key: "modifiedDate",
             label: "Recently Modified",
-            sortable: false,
+            sortable: true,
             tdClass: "border-top"
         }
     ];
 
-    checkedDocs = [];
-
     confirmArchive = false;
-    currentApplication = {};
     applicationsToArchive = [];
-    indexesToArchive = [-1];
 
-    archiveErrorMsg = "";
-    archiveErrorMsgDesc = "";
-    archiveError = false;
+    errorMsg = "";
+    errorMsgDismissCountDown = 0;
+   
 
-    mounted() {  
-
-        this.extractDocuments();
-       
+    mounted() {
+        this.extractDocuments();       
     }
 
     public extractDocuments () {
     //TODO: when extending to use throughout the province, the timezone should be changed accordingly    
-       
+        this.documentsList = [];
         for (const docJson of this.casesJson) {                
-            const doc = {isChecked: false, fileNumber:0, caseNumber:0, parties:'', status:'', modifiedDate:'', packageNum:'', last_efiling_submission:{package_number:'',package_url:''}};
-            console.log(docJson)
+            const doc = {
+                isChecked: false, 
+                pdf_types:'', 
+                fileNumber:0, 
+                caseNumber:'', 
+                parties:'', 
+                appNames: '', 
+                resNames: '', 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:''
+            };
+            //console.log(docJson)
             doc.fileNumber = docJson.id;
             doc.caseNumber = docJson.data.formSevenNumber;
-            doc.status = docJson.status;
+            doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
+            doc.pdf_types = docJson.pdf_types;
+            const appellants = docJson.data.appellants;
+            const respondents = docJson.data.respondents;
+            const app_names = [];
+            const res_names = [];
+            for (const app of appellants){
+                app_names.push(app.name)                
+            }
+            for (const res of respondents){
+                res_names.push(res.name)                
+            }
+            doc.appNames = app_names.join(', ')
+            doc.resNames = res_names.join(', ');
 
             this.documentsList.push(doc);
         }      
@@ -240,32 +287,77 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public downloadDocument() {
-        console.log('downloading')
+        
+        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
 
+        if(checkedFileIdsList.length>0){
+            let pdfIds = ''
+            for(const fileId of checkedFileIdsList)
+                pdfIds+= '&id='+fileId;
+
+            const pdf_type = 'FORM';
+            const url = '/form-print/0/?pdf_type='+pdf_type+pdfIds;
+            const options = {
+                responseType: "blob",
+                headers: {
+                "Content-Type": "application/json",
+                }
+            }
+            this.$http.get(url, options)
+            .then(res => {
+                const blob = res.data;
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.download = pdf_type+".zip";
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+            },err => {
+                          
+                this.errorMsg = "PDF file has not been generated for the selected documents !"
+                this.errorMsgDismissCountDown = 5;                
+            });
+        }
+    }
+
+    public navigateToEFilingHub(package_url) {
+        location.replace(package_url)
     }
 
     public archiveDocument() {
-        this.archiveErrorMsg = '';
-        this.archiveErrorMsgDesc = '';
-        this.archiveError = false;
-        //   this.applicationToArchive = application;
-        //   this.indexesToArchive = index;
-        this.confirmArchive=true;
+
+        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
+        
+        this.applicationsToArchive = checkedFileIdsList;
+        if(checkedFileIdsList.length>0){
+            this.confirmArchive=true;            
+        }
     }
 
-    public confirmArchiveApplication() {
-        // this.$http.delete('/app/'+ this.applicationsToArchive['fileNumber'] + '/')
-        // .then((response) => {
-        //     //   var indexToArchive = this.documents.findIndex((app) =>{if(app.id == this.applicationToArchive['id'])return true});
-        //     //   if(indexToArchive>=0)this.documents.splice(indexToArchive, 1);
+    public confirmArchiveApplication() { 
+        
+        let pdfIds = ''       
+        for(const fileId of this.applicationsToArchive)
+            pdfIds+= '&id='+fileId;
+        
+        const url = '/case/0/?'+pdfIds;
+        const body = {
+            archive: true
+        } 
 
-        // },err => {
-        //     const errMsg = err.response.data.error;
-        //     this.archiveErrorMsg = errMsg.slice(0,60) + (errMsg.length>60?' ...':'');
-        //     this.archiveErrorMsgDesc = errMsg;
-        //     this.archiveError = true;
-        // });
+        this.$http.put(url, body)
+        .then(response => {
+            
+            if(response?.data =="success")
+                this.$emit('reload')
+
+        }, err => {
+            this.errorMsg = "Error while archiving !"
+            this.errorMsgDismissCountDown = 2;
+        })
+        
         this.confirmArchive=false;
+
     }
 
     public checkAllDocuments(checked){
@@ -277,14 +369,19 @@ export default class MyDocumentsTable extends Vue {
     public toggleSelectedDocuments() {  
         Vue.nextTick(()=>{
 
-            this.checkedDocs = this.documentsList.filter(document=>{return document.isChecked});
+            const checkedDocs = this.documentsList.filter(document=>{return document.isChecked});
             
-            if(this.checkedDocs.length == this.documentsList.length)
+            if(checkedDocs.length == this.documentsList.length)
                 this.allDocumentsChecked = true;
             else
                 this.allDocumentsChecked = false;                       
         })        
 	}
+
+    public errorMsgCountDownChanged(dismissCountDown){
+        this.errorMsgDismissCountDown = dismissCountDown
+    }
+
 
 
 
