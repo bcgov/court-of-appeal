@@ -12,11 +12,16 @@
             </b-row> 
             
             <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 my-4" style="font-size: 14px;">
-                    Your Notice of Appearance has been submitted and accepted.
+                <b-row class="ml-5 mt-4" style="font-size: 14px;">
+                    Your Notice of Appearance has been submitted and accepted.  Please click on the 
+                    CSO Package number below to retrieve a filed copy of your Notice of Appearance.
+                </b-row>
+                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
+                    Please note that you must serve the notice of appearance on the appellant 
+                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
                 </b-row>
                 <b-row class="ml-5">
-                    <b-col cols="2">
+                    <b-col cols="3">
                         <span style="float: left; font-weight: 700">
                             Package Number:                        
                         </span>
@@ -29,7 +34,7 @@
                 </b-row>
 
                 <b-row class="ml-5">
-                    <b-col cols="2">
+                    <b-col cols="3">
                         <span style="float: left; font-weight: 700">
                             Your File #:                        
                         </span>
@@ -42,7 +47,7 @@
                 </b-row>
 
                 <b-row class="ml-5">
-                    <b-col cols="2">
+                    <b-col cols="3">
                         <span style="float: left; font-weight: 700">
                             Submitted To:                        
                         </span>
@@ -55,9 +60,9 @@
                 </b-row>
 
                 <b-row class="ml-5">
-                    <b-col cols="2">
+                    <b-col cols="3">
                         <span style="float: left; font-weight: 700">
-                            E-Filing Url:                        
+                            Go to Filed Document:                        
                         </span>
                     </b-col>
                     <b-col cols="2">

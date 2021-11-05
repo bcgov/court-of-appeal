@@ -7,6 +7,13 @@ import * as _ from 'underscore';
 import {customCss} from './bootstrapCSS'
 import { pathwayCompletedInfoType } from '@/types/Application';
 
+Vue.filter('truncate-word-after', function (text: string, stop: number) {
+	if(text){
+		return (stop < text.length) ? text.slice(0, text.indexOf(' ',stop)) + '...' : text
+	}
+	else
+		return ''
+})
 
 Vue.filter('beautify-date-', function(date){
 	enum MonthList {'Jan' = 1, 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
