@@ -1,6 +1,7 @@
 import os
 import logging
 from zeep import Client
+from zeep import helpers
 from zeep.cache import InMemoryCache
 from zeep.transports import Transport
 from requests import Session
@@ -28,13 +29,11 @@ class Form7SearchView(APIView):
 
     def get(self, request):
         caseNumber = request.query_params.get("caseNumber")
-        print("+++++++++++++++++++++++++++")
-        print(caseNumber)
         result = self.execute_search(caseNumber)
         if (result == 'NOT FOUND'):
             return HttpResponseNotFound()
-        print(result)
-        return Response("OK")
+
+        return Response(helpers.serialize_object(result))
 
     def __init__(self):
         session = Session()
@@ -69,22 +68,14 @@ class Form7SearchView(APIView):
     def _has_family_law(self, case_basics):
         return case_basics.HighLevelCategory == "Family Law"
 
-    def execute_search(self, case_number):
-        print("________________")
-        print(case_number)
-        print(self.client.service.SearchByCaseNumber(case_number))
-        print("===========")
+    def execute_search(self, case_number) -> {}:       
         search_by_case_number = self.client.service.SearchByCaseNumber(case_number)
-        print("________________")        
-        print(search_by_case_number)
-
-        return("OK")
-        # if search_by_case_number is None or search_by_case_number["CaseId"] == -1:
-        #     return self.handle_not_found(case_number)
-        # elif search_by_case_number["CaseType"] == "Civil":
-        #     return self.handle_civil_search(search_by_case_number["CaseId"])
-        # elif search_by_case_number["CaseType"] == "Criminal":
-        #     return {"SearchByCaseNumberResult": search_by_case_number}
+        if search_by_case_number is None or search_by_case_number["CaseId"] == -1:
+            return self.handle_not_found(case_number)
+        elif search_by_case_number["CaseType"] == "Civil":
+            return self.handle_civil_search(search_by_case_number["CaseId"])
+        elif search_by_case_number["CaseType"] == "Criminal":
+            return {"SearchByCaseNumberResult": search_by_case_number}
 
     def handle_not_found(self, case_number):
         logger.info("Case not found: " + case_number)
