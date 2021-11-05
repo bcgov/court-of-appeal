@@ -86,11 +86,11 @@ parameters:
   description: The tag of the source image.
   required: true
   value: latest
-# - name: WEB_BASE_HREF
-#   displayName: Web Base Href
-#   description: The application host path (Web Base Href).
-#   required: true
-#   value: /court-of-appeal/
+- name: WEB_BASE_HREF
+  displayName: Web Base Href
+  description: The application host path (Web Base Href).
+  required: true
+  value: /court-of-appeal/
 
 - name: CPU_LIMIT
   displayName: Resources CPU Limit
