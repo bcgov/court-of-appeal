@@ -423,7 +423,7 @@ parameters:
     displayName: Siteminder Logoff URL
     description: Siteminder Logoff URL
     required: false
-    value: /court-of-appeal/
+    value: 
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
