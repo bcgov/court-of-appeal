@@ -73,29 +73,33 @@
         </b-form-group>
 
         <b-button 
-            style="float: right;" 
+            style="float: right;  width: 80px; height: 50px;" 
+            :disabled="searching"
             variant="success"
             @click="findFile()"
-            >Find
-        </b-button>
-               
+            ><spinner v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
+            <span style="font-size: 20px;" v-else>Find</span>
+        </b-button>               
         
     </b-card>
 </template>
 
 <script lang="ts">
 
-import { form2SearchInfoType } from '@/types/Information';
-import { partiesDataJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
-
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import { form2SearchInfoType } from '@/types/Information';
+import { partiesDataJsonDataType } from '@/types/Information/json';
+import Spinner from "@/components/utils/Spinner.vue";
 
-
-@Component
+@Component({
+    components: {           
+        Spinner
+    }        
+}) 
 export default class Form2CaseInformation extends Vue {
 
     @informationState.Action
@@ -110,6 +114,7 @@ export default class Form2CaseInformation extends Vue {
     levelOfCourt = "Court of Appeal";
 
     dataReady = false;
+    searching = false;
 
     searchParams = {} as form2SearchInfoType;
     notFound = false;
@@ -120,6 +125,7 @@ export default class Form2CaseInformation extends Vue {
 
     mounted(){
         this.dataReady = false;
+        this.searching = false;
         //TODO
         this.searchParams.file = "CA39029"
         this.searchParams.searchBy = "ind"
@@ -129,6 +135,8 @@ export default class Form2CaseInformation extends Vue {
     }
 
     public findFile(){
+
+        this.searching = true;
         
         this.notFound = false;
         
@@ -136,9 +144,12 @@ export default class Form2CaseInformation extends Vue {
         this.$http.get(url)
         .then(res => {
 
+            this.searching = false;
+
         },err => {
             console.error(err); 
-            this.notFound = true;       
+            this.notFound = true;  
+            this.searching = false;     
         });
 
         console.log('search');
@@ -154,7 +165,7 @@ export default class Form2CaseInformation extends Vue {
         this.UpdatePartiesJson(partiesData);
         this.UpdateFileNumber(this.searchParams.file)
         this.UpdateCurrentCaseId(null);
-        this.$router.push({name: "fill"})
+        //this.$router.push({name: "fill"})
         //if doesn't exists
         
     }
