@@ -17,7 +17,7 @@
             <b-row class="ml-5">
                 <b-col cols="10">
                     <b-button 
-                        style="float: right;" 
+                        style="float: right; width: 120px; height: 50px; font-size: 20px;" 
                         variant="danger"
                         @click="cancel()"
                         >
@@ -26,11 +26,13 @@
                 </b-col>
                 <b-col cols="2">
                     <b-button
-                        style="float: left;" 
+                        style="float: left; width: 120px; height: 50px; font-size: 20px;" 
+                        :disabled="submitting"
                         variant="success"
                         @click="submit()"
-                        >Submit
-                        <span class="fa fa-paper-plane btn-icon-left"/>
+                        ><spinner v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
+                        <span v-else style="margin:0; padding: 0;">Submit
+                        <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
                     </b-button>
                 </b-col>
             </b-row>
@@ -44,22 +46,33 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
+
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
+import Spinner from "@/components/utils/Spinner.vue";
 import { form2StatusInfoType, packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
-        Form2ProcessHeader
+        Form2ProcessHeader,
+        Spinner
     }
 })
 export default class SubmitForm2 extends Vue {
 
+    @informationState.State
+    public currentCaseId: string;
+
     stepsCompleted = {} as form2StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
+    submitting = false;
 
     mounted() {
-        this.mountedData = false;        
+        this.mountedData = false;    
+        this.submitting = false;    
 
         this.stepsCompleted = {
             first: true,
@@ -70,7 +83,26 @@ export default class SubmitForm2 extends Vue {
     }  
 
     public submit() {
-        console.log('submit-efiling');
+
+        this.submitting = true;
+        //TODO: add this endpoint
+
+        const url = "/forms/"+this.currentCaseId+"/submit/";
+
+        const header = {
+            responseType: "json",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+
+        this.$http.post(url, header)
+        .then(res => {                            
+            this.submitting = false;
+        }, err => {
+            console.error(err);
+            this.submitting = false;
+        });        
     }
 
     public cancel() {
