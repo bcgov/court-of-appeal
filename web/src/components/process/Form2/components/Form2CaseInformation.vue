@@ -165,7 +165,7 @@ export default class Form2CaseInformation extends Vue {
         this.UpdatePartiesJson(partiesData);
         this.UpdateFileNumber(this.searchParams.file)
         this.UpdateCurrentCaseId(null);
-        //this.$router.push({name: "fill"})
+        this.$router.push({name: "fill"})
         //if doesn't exists
         
     }
