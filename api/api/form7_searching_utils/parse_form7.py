@@ -1,4 +1,4 @@
-import json
+import re
 
 class Struct:
     def __init__(self, **entries):
@@ -102,7 +102,26 @@ class Form7Parsing:
 
         return respondents
 
-    def parse(self, result):
+    def cleanName(self, name):
+        if name:
+            return re.sub("/\s*\(.*?\)\s*/g", "",name).replace(",", "").strip().lower()
+        else:
+            return " "
+    
+    def searchForPartyInRespondents(self, respondents, lastName, firstName, organizationName, searchBy):
+
+        if searchBy == "Individual":
+            for respondant in respondents:                
+                if self.cleanName(respondant["lastName"]) == lastName.strip().lower() and self.cleanName(respondant["firstName"]) == firstName.strip().lower() :
+                    return True
+            return False
+        else:
+            for respondant in respondents:
+                if "organization" in respondant and self.cleanName(respondant["organization"]) == organizationName.strip().lower():
+                    return True
+            return False
+
+    def parse(self, result, firstName, lastName, searchBy, organizationName):
         
         data = Struct(**result) 
 
@@ -110,16 +129,15 @@ class Form7Parsing:
         if parties is not None:       
             appellants = self.getAppellants(parties)
             respondents = self.getRespondents(parties)
-            print("______________")
-            print(appellants)
-            print("______________")
-            print("______________")
-            print(respondents)
-            return {
-                "parties":{
-                    "appellants": self.getAppellants(parties),
-                    "respondents": self.getRespondents(parties)
+            
+            if self.searchForPartyInRespondents(respondents, lastName, firstName, organizationName, searchBy):
+                return {
+                    "parties":{
+                        "appellants": appellants,
+                        "respondents": respondents
+                    }
                 }
-            }
+            else:
+                return None
         else:
             return None

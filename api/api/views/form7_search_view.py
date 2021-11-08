@@ -3,7 +3,8 @@ import logging
 from zeep import helpers
 
 from django.http import (
-    HttpResponseNotFound
+    HttpResponseNotFound,
+    HttpResponseBadRequest
 )
 
 from rest_framework import permissions
@@ -23,13 +24,20 @@ class Form7SearchView(APIView):
         self.parsing_form7 = Form7Parsing()
    
     def get(self, request):
-        caseNumber = request.query_params.get("caseNumber")
-         
+        caseNumber = request.query_params.get("caseNumber")        
+        firstName = request.query_params.get("firstName")
+        lastName = request.query_params.get("lastName")
+        searchBy = request.query_params.get("searchBy")
+        organizationName = request.query_params.get("organizationName")
+
+        if not caseNumber:
+            return HttpResponseBadRequest("Missing request parameters")
+
         result = self.form7_search.execute_search(caseNumber)
         if (result == 'NOT FOUND'):
             return HttpResponseNotFound()
 
-        parseForm7 = self.parsing_form7.parse(result)
+        parseForm7 = self.parsing_form7.parse(result,firstName,lastName,searchBy, organizationName)
         if parseForm7 is not None:
             return Response(helpers.serialize_object(parseForm7))
         else:

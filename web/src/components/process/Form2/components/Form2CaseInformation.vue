@@ -119,61 +119,45 @@ export default class Form2CaseInformation extends Vue {
     searchParams = {} as form2SearchInfoType;
     notFound = false;
     respondentOptions = [
-        {text: 'Individual', value: 'ind'},
-        {text: 'Organization', value: 'org'}
+        {text: 'Individual', value: 'Individual'},
+        {text: 'Organization', value: 'Organization'}
     ];
 
     mounted(){
         this.dataReady = false;
         this.searching = false;
-        //TODO
-        this.searchParams.file = "CA39029"
-        this.searchParams.searchBy = "ind"
-        this.searchParams.lastName = "Test"
-        this.searchParams.firstName = "Two"
         this.dataReady = true; 
     }
 
     public findFile(){
 
-        this.searching = true;
-        
+        this.searching = true;        
         this.notFound = false;
         
-        const url = '/form7s/?caseNumber='+this.searchParams.file; 
+        const url = '/form7s/?'+
+            'caseNumber='+(this.searchParams.file?this.searchParams.file:'')+
+            '&firstName='+(this.searchParams.firstName?this.searchParams.firstName:'')+
+            '&lastName='+(this.searchParams.lastName?this.searchParams.lastName:'')+
+            '&searchBy='+(this.searchParams.searchBy?this.searchParams.searchBy:'')+
+            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:''); 
+        
         this.$http.get(url)
         .then(res => {
-
             this.searching = false;
-
+            if(res.data?.parties){
+                this.UpdatePartiesJson(res.data.parties);
+                this.UpdateFileNumber(this.searchParams.file)
+                this.UpdateCurrentCaseId(null);
+                this.$router.push({name: "fill"})
+            }
+            else
+                this.notFound = true;
         },err => {
             console.error(err); 
             this.notFound = true;  
             this.searching = false;     
         });
-
-        console.log('search');
-        
-        //if data exists:
-        //TODO change here
-        const appellant = {"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931}
-        const respondent = {"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932}
-        const partiesData = {
-            appellants: [appellant,appellant,appellant],
-            respondents:[respondent,respondent,respondent]
-        }
-        this.UpdatePartiesJson(partiesData);
-        this.UpdateFileNumber(this.searchParams.file)
-        this.UpdateCurrentCaseId(null);
-        this.$router.push({name: "fill"})
-        //if doesn't exists
-        
     }
-
-
-    
-
-
 }
 </script>
 
