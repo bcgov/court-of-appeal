@@ -486,6 +486,7 @@ export default class Form2StyleOfProceeding extends Vue {
             const body = {
                 type: "form-2",
                 status:"Draft",
+                description:"form2",
                 data: this.form2Info
             }  
 

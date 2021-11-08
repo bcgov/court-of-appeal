@@ -5,7 +5,7 @@
             
 			<b-navbar-nav class="my-0 mx-5">
                 <b-nav-item @click="resetCaseId" to="/dashboard" ><div style="display: inline-block; white-space: nowrap;">HOME</div></b-nav-item>
-				<b-nav-item @click="resetCaseId" to="/my-documents" ><div style="display: inline-block; white-space: nowrap;">MY DOCUMENTS</div></b-nav-item>         
+				<b-nav-item @click="resetCaseId" to="/my-submissions" ><div style="display: inline-block; white-space: nowrap;">MY SUBMISSIONS</div></b-nav-item>         
                 
 			</b-navbar-nav>
 		

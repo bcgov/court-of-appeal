@@ -31,6 +31,15 @@ Vue.filter('beautify-date', function(date){
 		return 'unknown'
 })
 
+Vue.filter('get-submission-fullname', function(names){
+	const fullnames = []
+	for(const name of names){
+		     if(name=='form2') fullnames.push("Notice of Appearance")
+		else if(name=='form7') fullnames.push("Notice of Appeal")
+	}
+	return fullnames
+})
+
 Vue.filter('beautify-time', function(time){	
 	if(time)
 		return time.substr(11,2) + ':' +  time.substr(14,2);

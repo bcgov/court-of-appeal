@@ -37,8 +37,8 @@ const routes = [
       component: DashboardPage
     },
     {
-      path: "/my-documents",
-      name: "my-documents",
+      path: "/my-submissions",
+      name: "my-submissions",
       beforeEnter: authGuard,
       component: MyDocuments
     },

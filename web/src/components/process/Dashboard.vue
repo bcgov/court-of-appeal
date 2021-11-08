@@ -6,14 +6,14 @@
         <b-container v-else class="container">            
             <my-documents-table 
                 v-bind:enableActions="false" 
-                v-bind:title="'Document Reminders'">
+                v-bind:title="'Submissions'">
             </my-documents-table>
             <b-row no-gutters class="bg-white pt-0">
                 <b-button 
                     class="ml-5 mb-3 bg-primary outline-dark"
                 
                     @click="navigateToDocumentsPage">
-                    View All Documents
+                    View All Submissions
                 </b-button>
             </b-row>
         </b-container>
@@ -228,7 +228,7 @@ export default class DashboardPage extends Vue {
 
     public navigateToDocumentsPage() {
 
-        this.$router.push({name: "my-documents" }) 
+        this.$router.push({name: "my-submissions" }) 
     }
 
     public initSteps(){
