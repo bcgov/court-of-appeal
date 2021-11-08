@@ -47,7 +47,8 @@ class CaseView(APIView):
                     "modified": case.modified,
                     "personId": case.user_id,
                     "archive": case.archive,
-                    "pdf_types": case.pdf_types,              
+                    "pdf_types": case.pdf_types,
+                    "description": case.description,            
                     # "packageNumber": submission.package_number if submission is not None else "",
                     # "packageUrl": submission.package_url if submission is not None else "", 
                     "data": case_data,               
@@ -65,6 +66,7 @@ class CaseView(APIView):
                     "personId": case.user_id,
                     "archive": case.archive,
                     "pdf_types": case.pdf_types,
+                    "description": case.description,
                     "data": case_data,            
                     # "packageNumber": submission.package_number if submission is not None else "",
                     # "packageUrl": submission.package_url if submission is not None else "",                
@@ -82,8 +84,13 @@ class CaseView(APIView):
 
         (data_key_id, data_enc) = self.encrypt_data(body["data"])
 
+        description = ""
+        if body.get("description"):
+            description = body.get("description")
+
         db_app = Case(            
             type=body.get("type"),
+            description=description,
             status="Draft",            
             modified = timezone.now(),
             data=data_enc,
@@ -108,9 +115,14 @@ class CaseView(APIView):
 
             (data_key_id, data_enc) = self.encrypt_data(body["data"])        
 
+            description = case.description
+            if body.get("description"):
+                description = body.get("description")
+
             case.modified = timezone.now()
             case.type = body.get("type")
-            case.status = body.get("status")        
+            case.status = body.get("status")
+            case.description =  description
             case.data = data_enc
             case.key_id = data_key_id
             case.package_url = body.get("package_url")
@@ -132,8 +144,22 @@ class CaseView(APIView):
 
             return Response("success")
 
-    # def delete(self, request, pk, format=None):
-    #     uid = request.user.id
-    #     application = get_application_for_user(pk, uid)
-    #     application.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, pk, format=None):
+        uid = request.user.id
+
+        case_ids = request.query_params.getlist("id")
+        if not case_ids:
+            case = get_case_for_user(pk, uid)
+            if not case:
+                return HttpResponseNotFound("No record found")
+
+            case.delete()
+        else:
+            for caseId in case_ids:
+                case = get_case_for_user(caseId, uid)
+                if not case:
+                    continue
+            case.delete()
+
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
