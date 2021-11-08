@@ -36,7 +36,7 @@ const router = new VueRouter({
 });
 
 // Redirect to /court-of-appeal/
-if(!location.pathname.includes('/result/'))
+if(!location.pathname.includes('/submitted/') || !location.pathname.includes('/signout/'))
     history.pushState({page: "home"}, "", process.env.BASE_URL)
 
 SessionManager.redirectIfQuickExitCookie();
