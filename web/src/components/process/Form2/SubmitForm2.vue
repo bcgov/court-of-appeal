@@ -5,90 +5,7 @@
             <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
-        <b-card no-body v-if="submitted" bg-variant="light" border-variant="light" class="my-2 text-dark">
-
-            <b-row class="ml-5 mb-4 mt-2" style="font-size: 2rem;">
-                Form Submitted
-            </b-row> 
-            
-            <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Appearance has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Notice of Appearance.
-                </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the notice of appearance on the appellant 
-                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
-                </b-row>
-                <b-row class="ml-5">
-                    <b-col cols="3">
-                        <span style="float: left; font-weight: 700">
-                            Package Number:                        
-                        </span>
-                    </b-col>
-                    <b-col cols="2">
-                        <span style="float: left;">
-                            {{packageInfo.packageNumber}}                            
-                        </span>
-                    </b-col>
-                </b-row>
-
-                <b-row class="ml-5">
-                    <b-col cols="3">
-                        <span style="float: left; font-weight: 700">
-                            Your File #:                        
-                        </span>
-                    </b-col>
-                    <b-col cols="2">
-                        <span style="float: left;">
-                            {{packageInfo.fileNumber}}                            
-                        </span>
-                    </b-col>
-                </b-row>
-
-                <b-row class="ml-5">
-                    <b-col cols="3">
-                        <span style="float: left; font-weight: 700">
-                            Submitted To:                        
-                        </span>
-                    </b-col>
-                    <b-col cols="2">
-                        <span style="float: left;">
-                            BC Court of Appeal                            
-                        </span>
-                    </b-col>
-                </b-row>
-
-                <b-row class="ml-5">
-                    <b-col cols="3">
-                        <span style="float: left; font-weight: 700">
-                            Go to Filed Document:                        
-                        </span>
-                    </b-col>
-                    <b-col cols="2">
-                        <span style="float: left;">
-                            <a :href="packageInfo.eFilingUrl"
-                                target="_blank">{{packageInfo.packageNumber}}</a>                                                        
-                        </span>
-                    </b-col>
-                </b-row>
-
-                <b-row class="my-5">
-                    <b-col cols="10">
-                        <b-button 
-                            style="float: right;" 
-                            variant="success"
-                            @click="cancel()"
-                            >
-                            Done
-                        </b-button>
-                    </b-col>                
-                </b-row>
-            </b-card>           
-
-        </b-card>
-
-        <b-card v-else text-variant="dark" class="my-2 mx-5 bg-light border-light">
+        <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
 
             <b-row class="ml-2" style="font-size: 2rem;">
                 Submit through E-Filing
@@ -100,7 +17,7 @@
             <b-row class="ml-5">
                 <b-col cols="10">
                     <b-button 
-                        style="float: right;" 
+                        style="float: right; width: 120px; height: 50px; font-size: 20px;" 
                         variant="danger"
                         @click="cancel()"
                         >
@@ -109,11 +26,13 @@
                 </b-col>
                 <b-col cols="2">
                     <b-button
-                        style="float: left;" 
+                        style="float: left; width: 120px; height: 50px; font-size: 20px;" 
+                        :disabled="submitting"
                         variant="success"
                         @click="submit()"
-                        >Submit
-                        <span class="fa fa-paper-plane btn-icon-left"/>
+                        ><spinner v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
+                        <span v-else style="margin:0; padding: 0;">Submit
+                        <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
                     </b-button>
                 </b-col>
             </b-row>
@@ -127,57 +46,48 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
+
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
+import Spinner from "@/components/utils/Spinner.vue";
 import { form2StatusInfoType, packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
-        Form2ProcessHeader
+        Form2ProcessHeader,
+        Spinner
     }
 })
 export default class SubmitForm2 extends Vue {
 
+    @informationState.State
+    public currentCaseId: string;
+
     stepsCompleted = {} as form2StatusInfoType;  
     mountedData = false; 
-    submitted = false;
     packageInfo = {} as packageInfoType;
+    submitting = false;
 
     mounted() {
-        this.mountedData = false;
-        // TODO: figure out if submitting or submitted
-        if (this.submitted){
-            this.packageInfo.packageNumber = '15140';
-            this.packageInfo.fileNumber = '66';
-            this.packageInfo.eFilingUrl = 'https://dev.justice.gov.bc.ca/efilinghub/packagereview/15140?packageNo=15140';
+        this.mountedData = false;    
+        this.submitting = false;    
 
-            this.stepsCompleted = {
-                first: true,
-                second: true,
-                third: true
-            } 
-            this.saveApplication(this.packageInfo);
+        this.stepsCompleted = {
+            first: true,
+            second: true,
+            third: false
+        }
+        this.mountedData = true;         
+    }  
 
+    public submit() {
 
-        } else {
-
-            this.stepsCompleted = {
-                first: true,
-                second: true,
-                third: false
-            }
-            this.mountedData = true;  
-
-        }             
-    }
-
-    public saveApplication(newPackageInfo: packageInfoType) {
+        this.submitting = true;
         //TODO: add this endpoint
-        const data = {
-            packageNumber: newPackageInfo.packageNumber,
-            packageUrl: newPackageInfo.eFilingUrl 
-        } 
 
-        const url = "/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/forms/"+this.currentCaseId+"/submit/";
 
         const header = {
             responseType: "json",
@@ -186,17 +96,13 @@ export default class SubmitForm2 extends Vue {
             }
         }
 
-        this.$http.put(url, data, header)
+        this.$http.post(url, header)
         .then(res => {                            
-            this.mountedData = true;
+            this.submitting = false;
         }, err => {
             console.error(err);
-            this.mountedData = true;
-        });    
-    }    
-
-    public submit() {
-        console.log('submit-efiling');
+            this.submitting = false;
+        });        
     }
 
     public cancel() {
