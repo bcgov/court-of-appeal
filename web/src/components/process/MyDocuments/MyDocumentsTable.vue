@@ -20,24 +20,24 @@
                     size="lg"
                     @click="downloadDocument"
                     v-b-tooltip.hover.noninteractive
-                    title="download">
+                    title="download selected">
                     <b-icon-download variant="primary"/>
                 </b-button>
                 <b-button 
-                    class="mr-2 bg-transparent border border-primary" 
+                    class="mr-2 bg-transparent border border-danger" 
                     size="lg"
-                    @click="archiveDocument"
-                    v-b-tooltip.hover.noninteractive
-                    title="archive">
-                    <b-icon-archive-fill variant="primary"/>
+                    @click="deleteDocument"
+                    v-b-tooltip.hover.noninteractive.v-danger
+                    title="delete selected">
+                    <b-icon-trash-fill variant="danger"/>
                 </b-button>
                 <b-button 
-                    class="bg-transparent border border-primary"
+                    class="bg-transparent border border-success"
                     size="lg"
                     @click="createDocument"
-                    v-b-tooltip.hover.noninteractive
-                    title="create">
-                    <b-icon-plus variant="primary"/>
+                    v-b-tooltip.hover.noninteractive.v-success
+                    title="create new submission">
+                    <b-icon-plus scale="1.5" variant="success"/>
                 </b-button>
             </b-col>
         </b-row>
@@ -122,6 +122,17 @@
                             </span>
                            
                         </template>
+
+                        <template v-slot:cell(description)="row">                  
+                            <ul style="list-style-type: ''; padding-inline-start: 3px;">
+                                <li  v-for="(desc,inx) in row.value" 
+                                    :key="inx"
+                                    v-b-tooltip.hover.noninteractive
+                                    :title="desc">
+                                    {{desc | truncate-word-after(10)}}
+                                    </li>
+                            </ul>
+                        </template>
                         
                         <template v-slot:cell(modifiedDate)="row">                  
                             <span>{{ row.item.modifiedDate | beautify-date-weekday}}</span>
@@ -133,17 +144,17 @@
         </b-row>
 
 
-        <b-modal v-model="confirmArchive" id="bv-modal-confirm-archive" header-class="bg-warning text-light">                    
+        <b-modal v-model="confirmDelete" id="bv-modal-confirm-delete" header-class="bg-danger text-light">                    
             <template v-slot:modal-title>
-                <h3 class="mb-0 text-light">Confirm Archive Application</h3>                                  
+                <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4>Are you sure you want to archive your <b>"{{applicationsToArchive.join(', ')}}"</b> application<span v-if="applicationsToArchive.length>1" >s</span>?</h4>            
+            <h4>Are you sure you want to delete your <b>"{{applicationsToDelete.join(', ')}}"</b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <template v-slot:modal-footer>
-                <b-button variant="danger" @click="confirmArchiveApplication()">Confirm</b-button>
-                <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-archive')">Cancel</b-button>
+                <b-button variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
+                <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-delete')">Cancel</b-button>
             </template>            
             <template v-slot:modal-header-close>                 
-                <b-button variant="outline-warning" class="text-light closeButton" @click="$bvModal.hide('bv-modal-confirm-archive')"
+                <b-button variant="outline-warning" class="text-light closeButton" @click="$bvModal.hide('bv-modal-confirm-delete')"
                 >&times;</b-button>
             </template>
         </b-modal>
@@ -185,22 +196,22 @@ export default class MyDocumentsTable extends Vue {
             tdClass: 'border-top', 
             cellStyle: 'font-size: 16px;', 
             sortable:false            
-        },
-        {
-            key: "action",
-            label: "Action",
-            sortable: false,
-            tdClass: "border-top"
-        },
+        },       
         {
             key: "fileNumber",
-            label: "File #",
+            label: "Package #",
             sortable: true,
             tdClass: "border-top"
         },
         {
+            key: "description",
+            label: "Document Description",
+            sortable: false,
+            tdClass: "border-top"
+        },
+        {
             key: "caseNumber",
-            label: "Case #",
+            label: "File #",
             sortable: false,
             tdClass: "border-top"
         },
@@ -218,14 +229,20 @@ export default class MyDocumentsTable extends Vue {
         },
         {
             key: "modifiedDate",
-            label: "Recently Modified",
+            label: "Last Updated",
             sortable: true,
+            tdClass: "border-top"
+        },
+        {
+            key: "action",
+            label: "Action",
+            sortable: false,
             tdClass: "border-top"
         }
     ];
 
-    confirmArchive = false;
-    applicationsToArchive = [];
+    confirmDelete = false;
+    applicationsToDelete = [];
 
     errorMsg = "";
     errorMsgDismissCountDown = 0;
@@ -250,7 +267,8 @@ export default class MyDocumentsTable extends Vue {
                 status:'', 
                 modifiedDate:'', 
                 packageNum:'',
-                packageUrl:''
+                packageUrl:'',
+                description:[],
             };
             //console.log(docJson)
             doc.fileNumber = docJson.id;
@@ -258,6 +276,8 @@ export default class MyDocumentsTable extends Vue {
             doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
+            doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
+
             const appellants = docJson.data.appellants;
             const respondents = docJson.data.respondents;
             const app_names = [];
@@ -324,39 +344,37 @@ export default class MyDocumentsTable extends Vue {
         location.replace(package_url)
     }
 
-    public archiveDocument() {
+    public deleteDocument() {
 
         const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
         
-        this.applicationsToArchive = checkedFileIdsList;
+        this.applicationsToDelete = checkedFileIdsList;
         if(checkedFileIdsList.length>0){
-            this.confirmArchive=true;            
+            this.confirmDelete=true;            
         }
     }
 
-    public confirmArchiveApplication() { 
+    public confirmDeleteApplication() { 
         
         let pdfIds = ''       
-        for(const fileId of this.applicationsToArchive)
+        for(const fileId of this.applicationsToDelete)
             pdfIds+= '&id='+fileId;
         
         const url = '/case/0/?'+pdfIds;
-        const body = {
-            archive: true
-        } 
+    
 
-        this.$http.put(url, body)
+        this.$http.delete(url)
         .then(response => {
             
-            if(response?.data =="success")
+            if(response?.status == 204)
                 this.$emit('reload')
 
         }, err => {
-            this.errorMsg = "Error while archiving !"
+            this.errorMsg = "Error while Deleting !"
             this.errorMsgDismissCountDown = 2;
         })
         
-        this.confirmArchive=false;
+        this.confirmDelete=false;
 
     }
 

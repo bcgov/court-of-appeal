@@ -19,6 +19,7 @@ export interface caseJsonDataType {
     packageUrl?: string;
     pdf_types: string;
     data: caseDataJsonDataType;
+    description: string;
 }
 
 export interface caseDataJsonDataType {

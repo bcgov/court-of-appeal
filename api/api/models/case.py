@@ -14,6 +14,7 @@ class Case(models.Model):
     
     archive = models.BooleanField(blank=True, default=False, null=True)
     pdf_types = models.CharField(max_length=100, default="", blank=True)
+    description = models.CharField(max_length=200, default="", blank=True)
     
     # encryption key identifier
     key_id = models.CharField(max_length=32, blank=True, null=True)
