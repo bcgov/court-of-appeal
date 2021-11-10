@@ -32,6 +32,10 @@
                     <b-icon-check-circle-fill class="icon-complete mt-2" variant="success"/>
                     <span class="step-complete text-success mr-4 ml-3 mb-2">Submit</span>                
                 </div>
+                <div v-else-if="stepsCompleted.thirdError" style="float: right;">
+                    <b-icon-x-circle-fill class="icon-complete mt-2" variant="danger"/>
+                    <span class="step-complete text-danger mr-4 ml-3 mb-2">Submit</span>                
+                </div>
                 <div v-else style="float: right;">
                     <step-number class="mt-2"  v-bind:stepNumber="3" v-bind:active="stepsCompleted.first && stepsCompleted.second"/>
                     <span :class="(stepsCompleted.first && stepsCompleted.second)?'text-dark step-incomplete mr-4':'text-inactive step-incomplete mr-4'">Submit</span>

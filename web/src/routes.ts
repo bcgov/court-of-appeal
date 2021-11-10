@@ -5,8 +5,7 @@ import StartForm2 from "@/components/process/Form2/StartForm2.vue";
 import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
-import CancelSubmitForm2 from "@/components/process/Form2/CancelSubmitForm2.vue";
-import SuccessSubmitForm2 from "@/components/process/Form2/SuccessSubmitForm2.vue";
+import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
@@ -69,17 +68,10 @@ const routes = [
       props: true
     },
     {
-      path: "/submitted/cancel",
-      name: "cancel-submitted",
+      path: "/submitted/:id/:result",
+      name: "submitted",
       beforeEnter: authGuard,
-      component: CancelSubmitForm2,
-      props: true
-    },
-    {
-      path: "/submitted/success",
-      name: "success-submitted",
-      beforeEnter: authGuard,
-      component: SuccessSubmitForm2,
+      component: SubmittedResults,
       props: true
     },
     {

@@ -28,6 +28,10 @@
                 style="max-width:25%" 
                 v-model="searchParams.file">
             </b-form-input>
+            <span 
+                style="font-size: 0.75rem;" 
+                class="text-secondary ml-2">ex. CA12345
+            </span>
         </b-form-group>
 
         <b-form-group

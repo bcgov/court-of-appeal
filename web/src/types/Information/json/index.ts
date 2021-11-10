@@ -17,6 +17,7 @@ export interface caseJsonDataType {
     modified: string;
     archive: boolean;
     packageUrl?: string;
+    packageNumber?: string;
     pdf_types: string;
     data: caseDataJsonDataType;
     description: string;

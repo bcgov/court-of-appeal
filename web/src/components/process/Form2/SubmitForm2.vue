@@ -13,6 +13,15 @@
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
                 By submitting, you will be redirected to the E-Filing Hub.
             </b-row>
+            <b-row>
+                <b-alert
+                    :show="errorMsg !=''"
+                    style="margin:0 0 2rem auto;"
+                    dismissible
+                    variant="danger"
+                > {{errorMsg}}
+                </b-alert>
+            </b-row>
 
             <b-row class="ml-5">
                 <b-col cols="10">
@@ -69,11 +78,12 @@ export default class SubmitForm2 extends Vue {
     mountedData = false; 
     packageInfo = {} as packageInfoType;
     submitting = false;
+    errorMsg=""
 
     mounted() {
         this.mountedData = false;    
         this.submitting = false;    
-
+        this.errorMsg = ""
         this.stepsCompleted = {
             first: true,
             second: true,
@@ -85,9 +95,9 @@ export default class SubmitForm2 extends Vue {
     public submit() {
 
         this.submitting = true;
-        //TODO: add this endpoint
+        this.errorMsg =""
 
-        const url = "/forms/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentCaseId+"/submit/";
 
         const header = {
             responseType: "json",
@@ -99,8 +109,19 @@ export default class SubmitForm2 extends Vue {
         this.$http.post(url, header)
         .then(res => {                            
             this.submitting = false;
+            if(res.data?.message=="success" && res.data?.redirectUrl){
+                const eFilingUrl = res.data?.redirectUrl
+                location.replace(eFilingUrl);
+            }
         }, err => {
-            console.error(err);
+            console.log(err.response?.data?.message);
+            const generalError = " Error in submission. Please refresh the page and try again."
+            if(err.response?.data?.message)
+                this.errorMsg = err.response.data.message
+            else if(err.response?.data?.detail)
+                this.errorMsg = err.response.data.detail+generalError
+            else
+                this.errorMsg = generalError
             this.submitting = false;
         });        
     }
