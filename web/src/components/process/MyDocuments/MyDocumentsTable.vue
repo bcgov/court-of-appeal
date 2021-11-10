@@ -18,7 +18,7 @@
                 <b-button 
                     class="mr-2  bg-transparent border border-primary"
                     size="lg"
-                    @click="downloadDocument"
+                    @click="downloadDocument('')"
                     v-b-tooltip.hover.noninteractive
                     title="download selected">
                     <b-icon-download variant="primary"/>
@@ -55,7 +55,7 @@
                 <b-card v-else no-body border-variant="light" bg-variant="white">
                     <b-table  :items="documentsList"
                         :fields="documentsFields"
-                        class="mx-4"
+                        class="mx-4"                        
                         sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
@@ -79,35 +79,45 @@
                             <b-form-checkbox
                                 size="sm"
                                 class="m-0"
+                                v-b-tooltip.hover.noninteractive.v-warning
+                                :title="data.item.status=='Submitted'?'Cannot Delete submitted app':''"
                                 v-model="data.item.isChecked"
                                 @change="toggleSelectedDocuments"                                            					
                                 />
                         </template>
 
                         <template v-slot:cell(action)="row">
-                            <b-button v-if="row.item.status == 'Draft'" size="sm" variant="transparent" class="my-0 py-0"
+                            <b-button v-if="row.item.status == 'Draft'" size="sm" variant="transparent" class="my-0 py-0 px-1"
                                 @click="resumeApplication(row.item.fileNumber)"
                                 v-b-tooltip.hover.noninteractive
                                 title="Resume Application">
                                 <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
                             </b-button>
-                            <b-button v-else-if="row.item.status == 'Submitted'" size="sm" variant="transparent" class="my-0 py-0"
-                                @click="navigateToEFilingHub(row.item.package_url)"
-                                    v-b-tooltip.hover.noninteractive
+                            <b-button 
+                                v-else-if="row.item.status == 'Submitted'" 
+                                size="sm" 
+                                variant="transparent" 
+                                class="my-0 py-0 px-1"
+                                @click="navigateToEFilingHub(row.item.packageUrl)"
+                                    v-b-tooltip.hover.noninteractive.v-info
                                     title="Navigate To Submitted Application">
                                     <span class="fa fa-paper-plane btn-icon-left text-info"/>                    
                             </b-button>
-                            
+                            <b-button 
+                                v-if="row.item.pdf_types"
+                                variant="transparent"
+                                class="m-0 p-0"
+                                @click="downloadDocument(row.item.fileNumber)"
+                                v-b-tooltip.hover.noninteractive.v-success
+                                title="Download the generated PDF">
+                                <span style="font-size:18px; padding:0; transform:translate(2px,1px);" class="far fa-file-pdf btn-icon-left text-success ml-1"/>
+                            </b-button>                            
                         </template>
 
                         <template v-slot:cell(status)="row">                  
-                            <span>{{ row.item.status}}</span>
-                            <span 
-                                v-if="row.item.pdf_types"
-                                style="font-size:14px; padding:0; transform:translate(2px,-1px);" 
-                                class="far fa-file-pdf btn-icon-left text-success ml-1"
-                                v-b-tooltip.hover.noninteractive
-                                title="PDF generated"/> 
+                            <span v-if="row.value == 'Submitted'" class="text-white bg-success px-1">{{row.value}}</span> 
+                            <span v-if="row.value == 'Draft'" class="text-primary">{{row.value}}</span>
+
                         </template>
 
                         <template v-slot:cell(parties)="row">                  
@@ -124,12 +134,12 @@
                         </template>
 
                         <template v-slot:cell(description)="row">                  
-                            <ul style="list-style-type: ''; padding-inline-start: 3px;">
+                            <ul style="list-style-type: ''; padding-inline-start: 3px; margin:0; padding:0;">
                                 <li  v-for="(desc,inx) in row.value" 
                                     :key="inx"
                                     v-b-tooltip.hover.noninteractive
                                     :title="desc">
-                                    {{desc | truncate-word-after(10)}}
+                                    {{desc | truncate-word-after(20)}}
                                     </li>
                             </ul>
                         </template>
@@ -144,13 +154,14 @@
         </b-row>
 
 
-        <b-modal v-model="confirmDelete" id="bv-modal-confirm-delete" header-class="bg-danger text-light">                    
+        <b-modal size="lg" v-model="confirmDelete" id="bv-modal-confirm-delete" header-class="bg-danger text-light">                    
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4>Are you sure you want to delete your <b>"{{applicationsToDelete.join(', ')}}"</b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete your <b>"{{applicationsToDelete.join(', ')}}"</b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
-                <b-button variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
+                <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
                 <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-delete')">Cancel</b-button>
             </template>            
             <template v-slot:modal-header-close>                 
@@ -193,13 +204,12 @@ export default class MyDocumentsTable extends Vue {
         {
             key:'select',          
             label:'',                  
-            tdClass: 'border-top', 
-            cellStyle: 'font-size: 16px;', 
+            tdClass: 'border-top',
             sortable:false            
         },       
         {
             key: "fileNumber",
-            label: "Package #",
+            label: "App #",
             sortable: true,
             tdClass: "border-top"
         },
@@ -234,6 +244,12 @@ export default class MyDocumentsTable extends Vue {
             tdClass: "border-top"
         },
         {
+            key: "packageNum",
+            label: "eFiling #",
+            sortable: true,
+            tdClass: "border-top"
+        },
+        {
             key: "action",
             label: "Action",
             sortable: false,
@@ -243,6 +259,7 @@ export default class MyDocumentsTable extends Vue {
 
     confirmDelete = false;
     applicationsToDelete = [];
+    applicationsNotAllowedToDelete = [];
 
     errorMsg = "";
     errorMsgDismissCountDown = 0;
@@ -277,6 +294,8 @@ export default class MyDocumentsTable extends Vue {
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
             doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
 
             const appellants = docJson.data.appellants;
             const respondents = docJson.data.respondents;
@@ -306,17 +325,23 @@ export default class MyDocumentsTable extends Vue {
         this.$router.push({name: "start" })
     }
 
-    public downloadDocument() {
-        
+    public downloadDocument(fileNumber?) {
+        console.log(fileNumber)
         const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
 
-        if(checkedFileIdsList.length>0){
+        if(fileNumber || checkedFileIdsList.length>0){
+            
+            const filenum = fileNumber? fileNumber: '0';
+            const pdf_filename = fileNumber? "Form.pdf":"Form.zip";
+
             let pdfIds = ''
             for(const fileId of checkedFileIdsList)
                 pdfIds+= '&id='+fileId;
 
+            if(fileNumber) pdfIds = ''
+
             const pdf_type = 'FORM';
-            const url = '/form-print/0/?pdf_type='+pdf_type+pdfIds;
+            const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
                 headers: {
@@ -329,7 +354,7 @@ export default class MyDocumentsTable extends Vue {
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(blob);
                 document.body.appendChild(link);
-                link.download = pdf_type+".zip";
+                link.download = pdf_filename;
                 link.click();
                 setTimeout(() => URL.revokeObjectURL(link.href), 1000);
             },err => {
@@ -341,15 +366,19 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public navigateToEFilingHub(package_url) {
-        location.replace(package_url)
+        window.open(package_url)
     }
 
     public deleteDocument() {
 
-        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
+        this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
+        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.fileNumber)
         
-        this.applicationsToDelete = checkedFileIdsList;
-        if(checkedFileIdsList.length>0){
+
+        console.log(this.applicationsToDelete)
+        console.log(this.applicationsNotAllowedToDelete)
+
+        if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;            
         }
     }
@@ -399,11 +428,6 @@ export default class MyDocumentsTable extends Vue {
     public errorMsgCountDownChanged(dismissCountDown){
         this.errorMsgDismissCountDown = dismissCountDown
     }
-
-
-
-
-  
 }
 </script>
 

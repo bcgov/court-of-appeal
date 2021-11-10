@@ -92,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop} from 'vue-property-decorator';
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import { form2StatusInfoType, packageInfoType } from '@/types/Information';
@@ -104,17 +104,15 @@ import { form2StatusInfoType, packageInfoType } from '@/types/Information';
 })
 export default class SuccessSubmitForm2 extends Vue {
 
+    @Prop({required: true})
+    packageInfo!: packageInfoType;
+
     stepsCompleted = {} as form2StatusInfoType;  
     mountedData = false; 
-    packageInfo = {} as packageInfoType;
+
 
     mounted() {
         this.mountedData = false;
-       
-        this.packageInfo.packageNumber = '15140';
-        this.packageInfo.fileNumber = '66';
-        this.packageInfo.eFilingUrl = 'https://dev.justice.gov.bc.ca/efilinghub/packagereview/15140?packageNo=15140';
-
         this.stepsCompleted = {
             first: true,
             second: true,
@@ -124,7 +122,7 @@ export default class SuccessSubmitForm2 extends Vue {
     }
 
     public saveApplication(newPackageInfo: packageInfoType) {
-        //TODO: add this endpoint
+
         const data = {
             packageNumber: newPackageInfo.packageNumber,
             packageUrl: newPackageInfo.eFilingUrl 

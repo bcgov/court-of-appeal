@@ -2,8 +2,18 @@
     <b-card border-variant="white">
         <h3>Most Used Forms</h3>
         <ol>
-            <li>Notice of Appeal (Form 7) </li>
-            <li>Notice of Appearance (Form 2)</li>
+            <li>
+                <a  class="link-button"
+                    :href="form7"
+                    target="_blank">
+                    Notice of Appeal (Form 7)
+                </a>
+            </li>
+            <li class="link-button" 
+                @click="startNewDocument"
+                target="_blank">
+                Notice of Appearance (Form 2)                
+            </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
             <li>Notice of Hearing Appeal</li>
@@ -13,13 +23,37 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
+    import {getForm7Url} from './Form7_URLs'
    
     @Component
     export default class MostUsedForms extends Vue {
+
+        form7 = ''
+
+        mounted(){
+            this.form7 = getForm7Url()
+        }
+
+        public startNewDocument(){
+            this.$router.push({name: "start" })
+        }
+
     }
 
 </script>
 
-<style>
+<style scoped lang="scss">
+
+    @import "src/styles/common";
+
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
 
 </style>

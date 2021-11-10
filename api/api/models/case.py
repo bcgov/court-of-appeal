@@ -9,11 +9,16 @@ class Case(models.Model):
     status = models.CharField(max_length=100, default="", blank=True)    
     modified = models.DateTimeField(blank=True, null=True) 
 
-    package_url = models.CharField(max_length=200, null=True)
-    package_number = models.CharField(max_length=100, null=True)
     
+    last_filed = models.DateTimeField(blank=True, null=True)
+    submission_id = models.CharField(max_length=100, null=True)
+    transaction_id = models.CharField(max_length=100, null=True)
+    package_number = models.CharField(max_length=100, null=True)
+    package_url = models.CharField(max_length=200, null=True)
+
     archive = models.BooleanField(blank=True, default=False, null=True)
     pdf_types = models.CharField(max_length=100, default="", blank=True)
+    last_printed = models.DateTimeField(blank=True, null=True)
     description = models.CharField(max_length=200, default="", blank=True)
     
     # encryption key identifier

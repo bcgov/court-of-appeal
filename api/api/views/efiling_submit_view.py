@@ -15,7 +15,6 @@ from rest_framework import permissions, generics
 from rest_framework.exceptions import NotFound
 
 from api.efiling import EFilingPackaging, EFilingSubmission, EFilingParsing
-from api.models import EFilingSubmission as EFilingSubmissionModel
 from api.utils import (
     convert_document_to_multi_part,
     get_case_for_user,    
@@ -34,15 +33,7 @@ class EFilingSubmitView(generics.GenericAPIView):
     def __init__(self):
         self.efiling_parsing = EFilingParsing()
         self.efiling_submission = EFilingSubmission(EFilingPackaging())
-        self.file_byte_size_limit = 1024 * 1024 * 10  # 10 MBytes
-        self.allowed_extensions = ["pdf", "jpg", "jpeg", "gif", "png"]
-
-    # def _file_size_too_large(self, size):
-    #     return size > self.file_byte_size_limit
-
-    # def _invalid_file_extension(self, file):
-    #     extension = file.name.split(".")[-1]
-    #     return extension.lower() not in self.allowed_extensions
+    
 
     # def _get_validation_errors(self, request_files, documents):
     #     # TODO: check group of images isn't over 10MB
@@ -108,54 +99,49 @@ class EFilingSubmitView(generics.GenericAPIView):
         )
         return outgoing_documents
 
-    # def put(self, request, application_id):
-    #     body = request.data
-    #     application = get_application_for_user(application_id, request.user.id)
-    #     efiling_submission = EFilingSubmissionModel.objects.filter(
-    #         id=application.last_efiling_submission_id
-    #     ).first()
-    #     if not efiling_submission:
-    #         return HttpResponse(status=404)
-    #     efiling_submission.package_number = body.get("packageNumber")
-    #     efiling_submission.package_url = body.get("packageUrl")
-    #     efiling_submission.last_updated = timezone.now()
-    #     efiling_submission.save()
-    #     application.last_filed = timezone.now()
-    #     application.save()
-    #     return HttpResponse(status=204)
+    def put(self, request, case_id):
+        user_id = request.user.id
+        body = request.data
+        case = get_case_for_user(case_id, user_id)
+        
+        if not case:
+            return HttpResponseNotFound("no record found")
+
+        if not case.submission_id or  not case.transaction_id:
+            return HttpResponseNotFound("no record found")
+
+        case.package_number = body.get("packageNumber")
+        case.package_url = body.get("packageUrl")
+        case.status="Submitted"
+        case.last_filed = timezone.now()
+        case.save()
+        return HttpResponse(status=204)
 
     def post(self, request, case_id):
 
         user_id = request.user.id
-        case = get_case_for_user(case_id, user_id)
-        print("_________1_________")
-        print(case)
+        case = get_case_for_user(case_id, user_id)        
         if not case:
             return HttpResponseNotFound("no record found")
 
-        outgoing_documents = self._get_pdf_content(case)
-        print("________2_________")
-
-                
+        outgoing_documents = self._get_pdf_content(case)               
         data = self.efiling_parsing.convert_data_for_efiling(
             request, case, outgoing_documents
         )
 
+        if case.package_number or case.package_url: 
+            return JsonMessageResponse("This application has already been submitted.", status=500)
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())
-        efiling_submission = EFilingSubmissionModel(
-            transaction_id = transaction_id,
-            case_id = case_id,
-        )
-        efiling_submission.save()
-        print("________3_________")
+        case.transaction_id = transaction_id
+        case.save()
+
         outgoing_files = convert_document_to_multi_part(outgoing_documents)
         del outgoing_documents
         upload_result = self.efiling_submission.upload_documents(
             request.user.universal_id, transaction_id, outgoing_files
         )
-        print("________4_________")
-        print(upload_result)
+       
         if upload_result is None or "submissionId" not in upload_result:
             message = (
                 upload_result["message"]
@@ -164,8 +150,7 @@ class EFilingSubmitView(generics.GenericAPIView):
             )
             return JsonMessageResponse(message, status=500)
 
-        print("________5_________")
-
+    
         # EFiling package submission.
         submission_id = upload_result["submissionId"]
         redirect_url, message = self.efiling_submission.generate_efiling_url(
@@ -173,12 +158,10 @@ class EFilingSubmitView(generics.GenericAPIView):
         )
 
         if redirect_url is not None:
-            efiling_submission.submission_id = submission_id
-            efiling_submission.last_updated = timezone.now()
-            efiling_submission.save()
+            case.submission_id = submission_id
+            case.last_updated = timezone.now()
+            case.save()
 
-            # application.last_efiling_submission_id = efiling_submission.id
-            # application.save()
             return JsonResponse({"redirectUrl": redirect_url, "message": message})
 
         return JsonMessageResponse(message, status=500)

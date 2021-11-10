@@ -39,7 +39,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" @click="contactUs = true">Contact Us</a>
+          <a name="contact-us" class="nav-link" @click="contactUs = true">Contact Us</a>
         </li>
       </ul>
     </nav>

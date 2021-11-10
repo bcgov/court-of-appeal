@@ -18,6 +18,7 @@ export interface form2StatusInfoType {
     first?: boolean;
     second?: boolean;
     third?: boolean;
+    thirdError?: boolean;
 }
 
 export interface form2SearchInfoType {

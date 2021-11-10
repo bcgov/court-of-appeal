@@ -49,8 +49,8 @@ class CaseView(APIView):
                     "archive": case.archive,
                     "pdf_types": case.pdf_types,
                     "description": case.description,            
-                    # "packageNumber": submission.package_number if submission is not None else "",
-                    # "packageUrl": submission.package_url if submission is not None else "", 
+                    "packageNumber": case.package_number,
+                    "packageUrl": case.package_url, 
                     "data": case_data,               
                     }
         else:
@@ -67,9 +67,9 @@ class CaseView(APIView):
                     "archive": case.archive,
                     "pdf_types": case.pdf_types,
                     "description": case.description,
-                    "data": case_data,            
-                    # "packageNumber": submission.package_number if submission is not None else "",
-                    # "packageUrl": submission.package_url if submission is not None else "",                
+                    "data": case_data,
+                    "packageNumber": case.package_number,
+                    "packageUrl": case.package_url,
                     })            
         return Response(data)
 
@@ -124,9 +124,7 @@ class CaseView(APIView):
             case.status = body.get("status")
             case.description =  description
             case.data = data_enc
-            case.key_id = data_key_id
-            case.package_url = body.get("package_url")
-            case.package_number = body.get("package_number")
+            case.key_id = data_key_id           
             case.save()
             return Response("success")
         else:
@@ -150,8 +148,11 @@ class CaseView(APIView):
         case_ids = request.query_params.getlist("id")
         if not case_ids:
             case = get_case_for_user(pk, uid)
-            if not case:
+            if not case or pk==0:
                 return HttpResponseNotFound("No record found")
+
+            if case.package_number or case.package_url:
+                return HttpResponseBadRequest("Not able to delete submitted application")
 
             case.delete()
         else:
@@ -159,7 +160,11 @@ class CaseView(APIView):
                 case = get_case_for_user(caseId, uid)
                 if not case:
                     continue
-            case.delete()
+                
+                if case.package_number or case.package_url:
+                    continue
+
+                case.delete()
 
 
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -9,7 +9,7 @@ import { pathwayCompletedInfoType } from '@/types/Application';
 
 Vue.filter('truncate-word-after', function (text: string, stop: number) {
 	if(text){
-		return (stop < text.length) ? text.slice(0, text.indexOf(' ',stop)) + '...' : text
+		return (stop < text.length) ? text.slice(0, stop) + '...' : text
 	}
 	else
 		return ''
