@@ -157,8 +157,8 @@ export default class AppellantLeaveRefusedJourneyMap extends Vue {
     mounted(){
         this.dataReady = false;
 
-        this.currentStep = this.stPgNo.APP_APPLY_LEAVE._StepNo;
-        this.numOfPages = Object.keys(this.stPgNo.APP_APPLY_LEAVE).length-1;
+        this.currentStep = this.stPgNo.APP_LEAVE_REFUSED._StepNo;
+        this.numOfPages = Object.keys(this.stPgNo.APP_LEAVE_REFUSED).length-1;
 
         this.getJourneyMapCurrentState();
         

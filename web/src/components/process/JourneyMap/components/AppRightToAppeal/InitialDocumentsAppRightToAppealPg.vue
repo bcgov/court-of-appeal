@@ -117,11 +117,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
+import {getForm7Url} from '@/components/utils/Form7_URLs'
 
 @Component
 export default class InitialDocumentsAppRightToAppealPg extends Vue { 
     form7 = ''
+
+    mounted(){
+        this.form7 = getForm7Url()
+    }
 
 }
 </script>

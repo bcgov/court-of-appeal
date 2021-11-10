@@ -23,11 +23,16 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
+    import {getForm7Url} from './Form7_URLs'
    
     @Component
     export default class MostUsedForms extends Vue {
 
         form7 = ''
+
+        mounted(){
+            this.form7 = getForm7Url()
+        }
 
         public startNewDocument(){
             this.$router.push({name: "start" })
@@ -43,6 +48,7 @@
 
     .link-button {
         text-decoration: underline;
+        cursor: pointer;
         background-color: transparent;
         color: $text-color-link;
         &:hover, &:focus {
