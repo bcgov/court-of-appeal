@@ -37,7 +37,7 @@
                                 <template #button-content style="background-color: #003366">
                                     <span class="fa fa-user"></span> {{ userName }}
                                 </template>
-                                <b-dropdown-item @click="logout(false)">
+                                <b-dropdown-item @click="logout()">
                                     <b-icon-box-arrow-left class="mr-2"/>Logout
                                 </b-dropdown-item>                                
                             </b-dropdown>
@@ -63,7 +63,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { SessionManager } from "@/components/utils/utils";
-import moment from "moment-timezone";
 
 import { namespace } from "vuex-class";   
 import "@/store/modules/common";
@@ -75,54 +74,8 @@ export default class NavigationTopbar extends Vue {
     @commonState.State
     public userName!: string;
 
-    error = "";
-    contactUs = false;
-    tips = false;
-
-    mounted() {
-        this.contactUs = false;
-        this.tips = false;
-    }
-
-    public logout(isQuickExit) {
-
-        const emptyApplicationRoutes = ["/", "/status", "/serviceLocator"];
-
-        if (emptyApplicationRoutes.indexOf(this.$route.fullPath) == -1) {
-
-            // const lastUpdated = moment().format();
-            // this.$store.commit("Application/setLastUpdated", lastUpdated);
-            // const application = this.$store.state.Application;
-            // application.type = Vue.filter("translateTypes")(
-            //     this.$store.state.Application.types
-            // );
-
-            // const applicationId = application.id;
-            // const header = {
-            //     responseType: "json",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     }
-            // };
-
-            // this.$http.put("/app/" + applicationId + "/", application, header).then(
-            //     res => {
-            //         this.error = "";
-            //     },
-            //     err => {
-            //         console.error(err);
-            //         this.error = err;
-            //     }
-            // );
-        }
-        Vue.nextTick().then(() => {
-
-            if (isQuickExit) {
-                window.open("http://www.google.ca");
-                SessionManager.logoutAndRedirect(this.$store);
-            } else SessionManager.logout(this.$store);
-        });
-
+    public logout() {
+        SessionManager.logout(this.$store);
     }
 
 }

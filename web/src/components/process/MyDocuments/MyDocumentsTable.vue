@@ -123,12 +123,12 @@
                         <template v-slot:cell(parties)="row">                  
                             <span 
                                 v-b-tooltip.hover.noninteractive
-                                :title="row.item.appNames">{{ row.item.appNames | truncate-word-after(10)}}
+                                :title="row.item.appNames">{{ row.item.appNames | truncate-text(10)}}
                             </span>
                             <b class="text-info"> / </b>
                             <span 
                                 v-b-tooltip.hover.noninteractive
-                                :title="row.item.resNames">{{ row.item.resNames | truncate-word-after(10)}}
+                                :title="row.item.resNames">{{ row.item.resNames | truncate-text(10)}}
                             </span>
                            
                         </template>
@@ -139,7 +139,7 @@
                                     :key="inx"
                                     v-b-tooltip.hover.noninteractive
                                     :title="desc">
-                                    {{desc | truncate-word-after(20)}}
+                                    {{desc | truncate-text(20)}}
                                     </li>
                             </ul>
                         </template>

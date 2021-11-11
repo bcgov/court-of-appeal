@@ -1,12 +1,10 @@
 <template>
 	<header name="menu-bar" class="app-header">
 		<b-navbar toggleable="lg" class="navbar navbar-expand-lg navbar-dark" style="background-color: #38598a;">    
-			
-            
+           
 			<b-navbar-nav class="my-0 mx-5">
                 <b-nav-item @click="resetCaseId" to="/dashboard" ><div style="display: inline-block; white-space: nowrap;">HOME</div></b-nav-item>
-				<b-nav-item @click="resetCaseId" to="/my-submissions" ><div style="display: inline-block; white-space: nowrap;">MY SUBMISSIONS</div></b-nav-item>         
-                
+				<b-nav-item @click="resetCaseId" to="/my-submissions" ><div style="display: inline-block; white-space: nowrap;">MY SUBMISSIONS</div></b-nav-item>                        
 			</b-navbar-nav>
 		
 		</b-navbar>    
