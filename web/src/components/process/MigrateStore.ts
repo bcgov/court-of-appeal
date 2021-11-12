@@ -1,6 +1,5 @@
 import store from '@/store/index'
 import {stepInfoType, pageInfoType} from "@/types/Application"
-import { stepsAndPagesNumberInfoType } from "@/types/Application/StepsAndPages";
 
 export function   migrate(applicationData, currentVersion: string){
 

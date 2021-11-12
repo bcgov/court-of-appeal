@@ -1,5 +1,5 @@
 <template>
-    <b-card class="bg-white border-white">
+    <b-card no-body class="bg-white border-white">
 
         <b-row class="bg-white border-white">
             <b-col cols="4" >

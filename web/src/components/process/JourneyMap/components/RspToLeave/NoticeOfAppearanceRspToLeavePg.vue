@@ -118,7 +118,7 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class NoticeOfAppearanceRspToAppealPg extends Vue {
 
     public startNewDocument(){
-        this.$router.push({name: "start" })
+        this.$router.push({name: "start-form2" })
     }
 
 }

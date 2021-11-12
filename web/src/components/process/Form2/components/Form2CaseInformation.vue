@@ -77,11 +77,11 @@
         </b-form-group>
 
         <b-button 
-            style="float: right;  width: 80px; height: 50px;" 
+            style="float: right;  width: 80px; height: 50px; opacity:1;" 
             :disabled="searching"
             variant="success"
             @click="findFile()"
-            ><spinner v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
+            ><spinner color="#FFF" v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
             <span style="font-size: 20px;" v-else>Find</span>
         </b-button>               
         
@@ -152,7 +152,7 @@ export default class Form2CaseInformation extends Vue {
                 this.UpdatePartiesJson(res.data.parties);
                 this.UpdateFileNumber(this.searchParams.file)
                 this.UpdateCurrentCaseId(null);
-                this.$router.push({name: "fill"})
+                this.$router.push({name: "fill-form2"})
             }
             else
                 this.notFound = true;

@@ -42,27 +42,27 @@ const routes = [
       component: MyDocuments
     },
     {
-      path: "/start",
-      name: "start",
+      path: "/start-form2",
+      name: "start-form2",
       beforeEnter: authGuard,
       component: StartForm2
     },
     {
-      path: "/fill",
-      name: "fill",
+      path: "/fill-form2",
+      name: "fill-form2",
       beforeEnter: authGuard,
       component: FillForm2
     },
     {
-      path: "/preview",
-      name: "preview",
+      path: "/preview-form2",
+      name: "preview-form2",
       beforeEnter: authGuard,
       component: PreviewForm2,
       props: true
     },
     {
-      path: "/proceed",
-      name: "proceed",
+      path: "/proceed-form2",
+      name: "proceed-form2",
       beforeEnter: authGuard,
       component: SubmitForm2,
       props: true

@@ -66,7 +66,7 @@ export default class PreviewForm2 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form2", params: {applicationId: this.caseId} }); 
     }
 }
 </script>

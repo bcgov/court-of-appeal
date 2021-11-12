@@ -4,18 +4,22 @@
             <g fill="none">
                 <mask id="b" fill="#fff">
                     <path id="around" d="M 0 0 H 80 V 80 H 0 Z" />
-                </mask>
-                <circle transform="translate(40)" mask="url(#b)" stroke="#4b4b4b" stroke-width="4" cy="40" r="15" />
+                </mask>                
+                <circle transform="translate(40)" mask="url(#b)" :stroke="color" stroke-width="4" cy="40" r="15"   stroke-dasharray="0 8" stroke-linecap="round" fill="transparent"/>
             </g>
         </svg>
     </div>
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
+    import { Component, Vue, Prop } from 'vue-property-decorator';    
    
     @Component
     export default class Spinner extends Vue {
+    
+        @Prop({required: true, default:"#000"})
+        color!: string;
+
     }
 
 </script>

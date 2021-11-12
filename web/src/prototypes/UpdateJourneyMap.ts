@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import store from '@/store';
-import moment from 'moment-timezone';
 
 export default {
     install () {

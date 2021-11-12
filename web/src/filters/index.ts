@@ -5,9 +5,8 @@ import store from '@/store';
 import * as _ from 'underscore';
 
 import {customCss} from './bootstrapCSS'
-import { pathwayCompletedInfoType } from '@/types/Application';
 
-Vue.filter('truncate-word-after', function (text: string, stop: number) {
+Vue.filter('truncate-text', function (text: string, stop: number) {
 	if(text){
 		return (stop < text.length) ? text.slice(0, stop) + '...' : text
 	}
@@ -15,7 +14,7 @@ Vue.filter('truncate-word-after', function (text: string, stop: number) {
 		return ''
 })
 
-Vue.filter('beautify-date-', function(date){
+Vue.filter('beautify-date-mm-dd-yyyy', function(date){
 	enum MonthList {'Jan' = 1, 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
 	if(date)
 		return date.substr(8,2) + ' ' + MonthList[Number(date.substr(5,2))] + ' ' + date.substr(0,4);
@@ -87,11 +86,11 @@ Vue.filter('styleTitle',function(title){
 
 Vue.filter('getFullName',function(nameObject){
 	if (nameObject) {
-		return nameObject.first +
+		return nameObject.first? nameObject.first: '' +
 			" " +
-			nameObject.middle +
+			nameObject.middle? nameObject.middle: '' +
 			" " +
-			nameObject.last;
+			nameObject.last? nameObject.last: '';
 	} else{
 		return " "
 	}
@@ -138,107 +137,6 @@ Vue.filter('setProgressForPages', function(currentStep: number, pageNumbers: num
 	for (const page of pageNumbers)
 		if(store.state.Application.steps[currentStep].pages[page].progress)
 			store.commit("Application/setPageProgress", { currentStep: currentStep, currentPage:page, progress:progress });
-})
-
-Vue.filter('surveyChanged', function(type: string) {
-	
-	const steps = store.state.Application.steps
-
-	function getStepDetails(typeName){	
-		
-		const stepPO = store.state.Application.stPgNo.PO;
-		const stepFLM = store.state.Application.stPgNo.FLM;
-		const stepPPM = store.state.Application.stPgNo.PPM;
-		const stepRELOC = store.state.Application.stPgNo.RELOC;
-		const stepCM = store.state.Application.stPgNo.CM;
-		const stepENFRC = store.state.Application.stPgNo.ENFRC;
-		
-		let step = stepPO._StepNo; 
-		let reviewPage = stepPO.ReviewYourAnswers; 
-		let previewPages = [];
-		
-		if(typeName == 'protectionOrder'){
-			step = stepPO._StepNo; 
-			reviewPage = stepPO.ReviewYourAnswers; 
-			previewPages = [stepPO.PreviewForms];
-		}
-		else if(typeName == 'familyLawMatter'){
-			step = stepFLM._StepNo; 
-			reviewPage = stepFLM.ReviewYourAnswersFLM; 
-			previewPages = [stepFLM.PreviewFormsFLM];	
-		}
-		else if(typeName == 'priorityParenting'){
-			step = stepPPM._StepNo; 
-			reviewPage = stepPPM.ReviewYourAnswersPPM; 
-			previewPages = [stepPPM.PreviewFormsPPM];	
-		}
-		else if(typeName == 'childReloc'){
-			step = stepRELOC._StepNo; 
-			reviewPage = stepRELOC.ReviewYourAnswersRELOC; 
-			previewPages = [stepRELOC.PreviewFormsRELOC];	
-		}
-		else if(typeName == 'caseMgmt'){
-			step = stepCM._StepNo; 
-			reviewPage = stepCM.ReviewYourAnswersCM; 
-			previewPages = [stepCM.PreviewForm10CM, stepCM.PreviewForm11CM];
-		}
-		else if(typeName == 'agreementEnfrc'){
-			step = stepENFRC._StepNo; 
-			reviewPage = stepENFRC.ReviewYourAnswersENFRC; 
-			previewPages = [stepENFRC.PreviewForm29ENFRC, stepENFRC.PreviewForm28ENFRC, stepENFRC.PreviewForm27ENFRC, stepENFRC.PreviewForm26ENFRC];
-		}
-
-		return({step:step, reviewPage:reviewPage, previewPages:previewPages})
-	}
-
-	function setReviewPreviewPage(stepType){
-		const stepDetails = getStepDetails(stepType);
-		const step = stepDetails.step;
-		const reviewPage = stepDetails.reviewPage;
-		const previewPages = stepDetails.previewPages;
-
-		if(steps[step].pages[reviewPage].progress ==100 ){//if changes, make review page incompelete
-			store.commit("Application/setPageProgress", { currentStep: step, currentPage:reviewPage, progress:50 });			
-		
-			for(const previewPage of previewPages){
-				store.commit("Application/setPageActive", { currentStep: step, currentPage: previewPage, active: false });
-				if(steps[step].pages[previewPage].progress ==100) 
-					store.commit("Application/setPageProgress", { currentStep: step, currentPage: previewPage, progress:50 });
-			}
-		}
-	}
-	
-	const noPOstepsTypes = ['familyLawMatter','priorityParenting','childReloc','caseMgmt','agreementEnfrc']
-	
-	if(type == 'allExPO'){
-        
-		let pathwayCompleted = {} as pathwayCompletedInfoType;
-		pathwayCompleted = store.state.Application.pathwayCompleted			        
-		pathwayCompleted.familyLawMatter = false;        
-		pathwayCompleted.caseMgmt = false;       
-		pathwayCompleted.priorityParenting = false;       
-		pathwayCompleted.childReloc = false;       
-		pathwayCompleted.agreementEnfrc = false;		
-		store.commit("Application/setPathwayCompletedFull",pathwayCompleted);
-		store.commit("Application/setCommonStepResults",{data:{'pathwayCompleted':pathwayCompleted}});            
-        store.dispatch("Application/checkAllCompleted")
-
-		for(const stepType of noPOstepsTypes){
-			setReviewPreviewPage(stepType)			
-		}
-
-	}else{
-		store.dispatch("Application/UpdatePathwayCompleted", {pathway: type, isCompleted: false})		
-		setReviewPreviewPage(type)
-	}
-
-	const submitStep       = store.state.Application.stPgNo.SUBMIT._StepNo
-	const submitTotalPages = (Object.keys(store.state.Application.stPgNo.SUBMIT).length -1)
-	store.commit("Application/resetStep", submitStep);
-	for (let i=1; i<submitTotalPages; i++) {
-		store.commit("Application/setPageActive",   { currentStep: submitStep, currentPage: i, active: false });
-		store.commit("Application/setPageProgress", { currentStep: submitStep, currentPage: i, progress:0 });
-	}	
 })
 
 Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){

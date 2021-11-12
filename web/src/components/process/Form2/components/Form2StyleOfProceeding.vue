@@ -511,7 +511,7 @@ export default class Form2StyleOfProceeding extends Vue {
     }
 
     public navigateToPreviewPage(caseId) {        
-        this.$router.push({name: "preview", params: {caseId: caseId}}) 
+        this.$router.push({name: "preview-form2", params: {caseId: caseId}}) 
     }
 
 }

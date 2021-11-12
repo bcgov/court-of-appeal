@@ -1,7 +1,7 @@
 <template>
     <b-card bg-variant="light" border-variant="white">
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
-        <loading-spinner v-if="!dataLoaded" waitingText="Loading ..." />   
+        <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />   
 
         <b-container v-else class="container">            
             <my-documents-table 
