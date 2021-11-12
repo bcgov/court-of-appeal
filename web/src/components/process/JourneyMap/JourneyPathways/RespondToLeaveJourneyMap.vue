@@ -183,7 +183,7 @@ export default class RespondToLeaveJourneyMap extends Vue {
     decisionOnLeaveToAppealContent = false;
 
     mounted(){
-        console.log('RSP To Leave')
+        //console.log('RSP To Leave')
         this.dataReady = false;
 
         this.currentStep = this.stPgNo.RSP_TO_LEAVE._StepNo;

@@ -315,7 +315,6 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public resumeApplication(caseId) {
-        console.log(caseId)
         this.UpdateCurrentCaseId(caseId);
         this.$router.push({name: "preview-form2", params: {caseId: caseId}}) 
 
@@ -326,7 +325,6 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public downloadDocument(fileNumber?) {
-        console.log(fileNumber)
         const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.fileNumber)
 
         if(fileNumber || checkedFileIdsList.length>0){
@@ -373,10 +371,6 @@ export default class MyDocumentsTable extends Vue {
 
         this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
         this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.fileNumber)
-        
-
-        console.log(this.applicationsToDelete)
-        console.log(this.applicationsNotAllowedToDelete)
 
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;            

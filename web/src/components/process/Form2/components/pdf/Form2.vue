@@ -136,7 +136,7 @@ export default class Form2 extends Vue {
             }
                 
         },(err) => {
-        console.log(err)        
+            console.log(err)        
         });      
     }
 }
