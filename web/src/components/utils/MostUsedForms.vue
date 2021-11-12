@@ -35,7 +35,7 @@
         }
 
         public startNewDocument(){
-            this.$router.push({name: "start" })
+            this.$router.push({name: "start-form2" })
         }
 
     }

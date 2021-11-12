@@ -121,7 +121,7 @@ export default class NoticeOfAppearanceRspToLeaveGrantedPg extends Vue {
 
 
     public startNewDocument(){
-        this.$router.push({name: "start" })
+        this.$router.push({name: "start-form2" })
     }
 
 }

@@ -39,7 +39,7 @@
                         :disabled="submitting"
                         variant="success"
                         @click="submit()"
-                        ><spinner v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
+                        ><spinner color="#FFF" v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
                         <span v-else style="margin:0; padding: 0;">Submit
                         <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
                     </b-button>

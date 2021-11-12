@@ -317,12 +317,12 @@ export default class MyDocumentsTable extends Vue {
     public resumeApplication(caseId) {
         console.log(caseId)
         this.UpdateCurrentCaseId(caseId);
-        this.$router.push({name: "preview", params: {caseId: caseId}}) 
+        this.$router.push({name: "preview-form2", params: {caseId: caseId}}) 
 
     }
 
     public createDocument() {
-        this.$router.push({name: "start" })
+        this.$router.push({name: "start-form2" })
     }
 
     public downloadDocument(fileNumber?) {

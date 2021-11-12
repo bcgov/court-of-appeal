@@ -120,7 +120,7 @@ export default class Form2 extends Vue {
     }
 
     public navigateToEditPage() {
-        this.$router.push({name: "fill" })
+        this.$router.push({name: "fill-form2" })
     }
  
     public getForm2Data() {        

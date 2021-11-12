@@ -4,7 +4,7 @@
             <b-card  style="min-height: 100px;"/>                   
             <template v-slot:overlay>               
                 <div> 
-                    <spinner style="width:5rem; margin:0 auto;"/> 
+                    <spinner :color="color" style="width:5rem; margin:0 auto;"/> 
                     <p class="text-center" id="loading-label">{{waitingText}}</p>
                 </div>                
             </template> 
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue, Prop } from 'vue-property-decorator';
-    import Spinner from "./Spinner.vue";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import Spinner from "./Spinner.vue";
 @Component({
     components: {           
         Spinner
@@ -31,6 +31,9 @@ export default class LoadingSpinner extends Vue {
 
     @Prop({ required: false })
     inline!: boolean;
+
+    @Prop({ required: false, default:"#000" })
+    color!: string;
 }
 </script>
 
