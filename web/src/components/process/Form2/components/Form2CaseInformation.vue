@@ -77,7 +77,7 @@
         </b-form-group>
 
         <b-button 
-            style="float: right;  width: 80px; height: 50px;" 
+            style="float: right;  width: 80px; height: 50px; opacity:1;" 
             :disabled="searching"
             variant="success"
             @click="findFile()"

@@ -35,7 +35,7 @@
                 </b-col>
                 <b-col cols="2">
                     <b-button
-                        style="float: left; width: 120px; height: 50px; font-size: 20px;" 
+                        style="float: left; width: 120px; height: 50px; font-size: 20px; opacity:1;" 
                         :disabled="submitting"
                         variant="success"
                         @click="submit()"

@@ -10,7 +10,6 @@
             </template> 
         </b-overlay> 
     </b-card>
-    <!-- the card seems to create a white background effect, thus why we have inline -->
     <div v-else>
         <spinner/> 
         <p id="loading-label">{{waitingText}}</p>
