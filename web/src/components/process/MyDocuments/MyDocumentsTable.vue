@@ -170,6 +170,51 @@
             </template>
         </b-modal>
 
+        <b-modal v-model="showSelectFormToFill" id="bv-modal-select-form" header-class="bg-primary">                        
+            <template v-slot:modal-title>
+                <h2 class="mt-3 ml-1 text-white" style="font-size: 2rem;">Click on the form to fill</h2>                                  
+            </template>
+            <b-row> 
+                <b-button 
+                    size="sm" 
+                    variant="transparent" 
+                    class="py-2 my-2 ml-3" 
+                    style="font-size:24px;"
+                    @click="startForm2();">
+                    <div style="font-size:45px;" class="fa-stack fa-2x" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
+                        <span 
+                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
+                            class="far fa-file-pdf btn-icon-left text-warning"/>
+                    </div>                    
+                    Notice of Appearance
+                </b-button>
+                <b-button 
+                    size="sm" 
+                    variant="transparent" 
+                    class="py-2 my-2 ml-3" 
+                    style="font-size:24px;"
+                    @click="startForm7();"
+                    >                    
+                    <div style="font-size:45px;" class="fa-stack fa-2x" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
+                        <span 
+                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
+                            class="far fa-file-pdf btn-icon-left text-warning"/>
+                    </div>
+                    Notice of Appeal
+                </b-button>
+            </b-row>            
+            
+            <template v-slot:modal-footer>                
+                <b-button variant="primary" @click="$bvModal.hide('bv-modal-select-form')">Close</b-button>
+            </template>            
+            <template v-slot:modal-header-close>                 
+                <b-button variant="outline-warning" class="text-light closeButton" @click="$bvModal.hide('bv-modal-select-form')"
+                >&times;</b-button>
+            </template>
+        </b-modal>
+
     </b-card>
 </template>
 
@@ -197,6 +242,7 @@ export default class MyDocumentsTable extends Vue {
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     allDocumentsChecked = false;
+    showSelectFormToFill = false;
     
     documentsList = [];
   
@@ -322,7 +368,18 @@ export default class MyDocumentsTable extends Vue {
     }
 
     public createDocument() {
-        this.$router.push({name: "start-form2" })
+        this.showSelectFormToFill = true;
+        
+    }
+
+    public startForm2() {
+        this.showSelectFormToFill = false;
+        this.$router.push({name: "start-form2" });
+    }
+
+    public startForm7() {
+        this.showSelectFormToFill = false;
+        this.$router.push({name: "checklist-form7" });
     }
 
     public downloadDocument(fileNumber?) {
@@ -432,30 +489,41 @@ export default class MyDocumentsTable extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "src/styles/common";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
+    @import "src/styles/common";
+    @import "~@fortawesome/fontawesome-free/css/all.min.css";
+    
     .home-content {
-    padding-bottom: 20px;
-    padding-top: 2rem;
-    max-width: 950px;
-    color: black;
+        padding-bottom: 20px;
+        padding-top: 2rem;
+        max-width: 950px;
+        color: black;
     }
 
     .register-button {
-    color: $gov-white !important;
-    border: 2px solid rgba($gov-mid-blue, 0.3);
-    margin-top: 2.5rem;
-    width: 100%;
-    &:active {
-        border: 2px solid rgba($gov-white, 0.8);
-    }
+        color: $gov-white !important;
+        border: 2px solid rgba($gov-mid-blue, 0.3);
+        margin-top: 2.5rem;
+        width: 100%;
+        &:active {
+            border: 2px solid rgba($gov-white, 0.8);
+        }
     }
 
     .terms {
-    color: $gov-mid-blue;
+        color: $gov-mid-blue;
+    }
+
+    .closeButton {
+        background-color: transparent !important;
+        color: white;
+        border: white;
+        font-weight: 700;
+        font-size: 2rem;
+        padding-top: 0;
+        margin-top: 0;
     }
 
     button {
-    border: 0px;
+        border: 0px;
     }
 </style>

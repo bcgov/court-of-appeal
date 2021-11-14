@@ -21,3 +21,8 @@ export interface  applicationJsonInfoType {
         package_url?: string
     }
 };
+
+export interface supremeCourtLocationsInfoType {
+    key: number;
+    value: string;   
+}

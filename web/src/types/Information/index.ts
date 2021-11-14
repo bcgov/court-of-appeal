@@ -40,6 +40,19 @@ export interface form2DataInfoType {
     version?: string;
 }
 
+export interface form7StatusInfoType {
+    first?: boolean;
+    second?: boolean;
+    third?: boolean;
+    fourth?: boolean;
+    fourthError?: boolean;
+}
+
+export interface form7SearchInfoType {
+    file: string;
+    location: string;    
+}
+
 export interface packageInfoType {
     packageNumber: string;
     fileNumber: string;

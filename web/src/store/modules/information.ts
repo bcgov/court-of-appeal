@@ -1,5 +1,5 @@
 import { form2DataInfoType, pathwayTypeInfoType } from '@/types/Information';
-import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType } from '@/types/Information/json';
+import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -12,6 +12,8 @@ class Information extends VuexModule {
     public pathType = {} as pathwayTypeInfoType;
     public partiesJson = {} as partiesDataJsonDataType;
     public form2Info = {} as form2DataInfoType;
+    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
+    public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     public fileNumber = "";  
     public currentCaseId = null;  
 
@@ -58,6 +60,24 @@ class Information extends VuexModule {
     @Action
     public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
         this.context.commit('setForm2Info', newForm2Info);
+    }
+
+    @Mutation
+    public setSupremeCourtCaseJson(supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType): void {   
+        this.supremeCourtCaseJson = supremeCourtCaseJson;
+    }    
+    @Action
+    public UpdateSupremeCourtCaseJson(newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType): void {
+        this.context.commit('setSupremeCourtCaseJson', newSupremeCourtCaseJson);
+    }
+
+    @Mutation
+    public setSupremeCourtOrderJson(supremeCourtOrderJson: supremeCourtOrdersJsonInfoType): void {   
+        this.supremeCourtOrderJson = supremeCourtOrderJson;
+    }    
+    @Action
+    public UpdateSupremeCourtOrderJson(newSupremeCourtOrderJson: supremeCourtOrdersJsonInfoType): void {
+        this.context.commit('setSupremeCourtOrderJson', newSupremeCourtOrderJson);
     }
 
     @Mutation

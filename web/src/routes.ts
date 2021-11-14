@@ -5,6 +5,11 @@ import StartForm2 from "@/components/process/Form2/StartForm2.vue";
 import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
+import ChecklistForm7 from "@/components/process/Form7/ChecklistForm7.vue";
+import StartForm7 from "@/components/process/Form7/StartForm7.vue";
+import FillForm7 from "@/components/process/Form7/FillForm7.vue";
+import PreviewForm7 from "@/components/process/Form7/PreviewForm7.vue";
+import SubmitForm7 from "@/components/process/Form7/SubmitForm7.vue";
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
@@ -65,6 +70,38 @@ const routes = [
       name: "proceed-form2",
       beforeEnter: authGuard,
       component: SubmitForm2,
+      props: true
+    },
+    {
+      path: "/checklist-form7",
+      name: "checklist-form7",
+      beforeEnter: authGuard,
+      component: ChecklistForm7
+    },
+    {
+      path: "/start-form7",
+      name: "start-form7",
+      beforeEnter: authGuard,
+      component: StartForm7
+    },
+    {
+      path: "/fill-form7",
+      name: "fill-form7",
+      beforeEnter: authGuard,
+      component: FillForm7
+    },
+    {
+      path: "/preview-form7",
+      name: "preview-form7",
+      beforeEnter: authGuard,
+      component: PreviewForm7,
+      props: true
+    },
+    {
+      path: "/proceed-form7",
+      name: "proceed-form7",
+      beforeEnter: authGuard,
+      component: SubmitForm7,
       props: true
     },
     {
