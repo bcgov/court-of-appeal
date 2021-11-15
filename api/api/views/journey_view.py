@@ -43,12 +43,10 @@ class JourneyMapView(APIView):
         
         return Response(data)
 
-
-
     def put(self, request: Request):
         uid = request.user.id
         body = request.data
-        if not body:
+        if not body or not body["steps"]:
             return HttpResponseBadRequest("Missing request body")
         
         (steps_key_id, steps_enc) = self.encrypt_steps(body["steps"])
@@ -56,10 +54,10 @@ class JourneyMapView(APIView):
         journey = get_journeymap_for_user(uid)
         if not journey:
             db_journey = Journeymap(            
-                steps=steps_enc,
-                key_id=steps_key_id,
-                version=body.get("version"),
-                user_id=uid
+                steps =steps_enc,
+                key_id =steps_key_id,
+                version =body.get("version"),
+                user_id =uid
             )
 
             db_journey.save()

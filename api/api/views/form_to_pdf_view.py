@@ -68,16 +68,17 @@ class FormToPdfView(generics.GenericAPIView):
         if pdf_type is None:
             return HttpResponseBadRequest("Missing pdf_type parameters.")
 
-        case_ids = request.query_params.getlist("id")
-                                
+        case_ids = request.query_params.getlist("id")                                
 
         if not case_ids:        
             case = get_case_for_user(case_id, user_id)
             if not case:
-                return HttpResponseNotFound(no_record_found)            
+                return HttpResponseNotFound(no_record_found)
+
             prepared_pdf = self.get_pdf_by_case_id_and_type(case_id, pdf_type)
             if prepared_pdf is None:
                 return HttpResponseNotFound(no_record_found)
+                
             pdf_content = settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)
             return self.create_download_response(pdf_content)
         else :

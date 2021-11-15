@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class EFilingSubmission(EFilingHubCallerBase):
+
     def __init__(self, packaging):
         self.packaging = packaging
         self.submission_id = None
@@ -24,23 +25,22 @@ class EFilingSubmission(EFilingHubCallerBase):
         )
         return message
 
-    def _get_api(
-        self, url, bceid_guid, data, headers, transaction_id=None, files=None
-    ):
+    def _get_api(self, url, bceid_guid, data, headers, transaction_id=None, files=None):
         if not self.access_token:
             if not self._get_token():
                 raise Exception("EFH - Unable to get API Token")
-        print("________3_3_TOKEN=OK_________")
+
         for try_number in range(1):
             if (try_number > 0):
                 self._get_token()
+           
             headers = self._set_headers(headers, bceid_guid, transaction_id)
-            print("________3_3_HESDERS_________") 
-            print(headers)           
+                      
             response = requests.post(url, headers=headers, json=data, files=files)
             logger.debug("EFH - Get API %d %s", response.status_code, response.text)
             if response.status_code != 401:
                 return response
+
         return response
 
     def upload_documents(self, bceid_guid, transaction_id, files):
@@ -53,13 +53,13 @@ class EFilingSubmission(EFilingHubCallerBase):
                 transaction_id=transaction_id,
                 files=files,
             )
-            print("________3_3_________")
-            print(response)
+            
             if not (response.status_code == 200):
                 logger.error(
                     f"Error submitting documents for: {bceid_guid}, {transaction_id}"
                 )
                 return response.json()
+
             return response.json()
         except Exception as e:
             logger.error("Error: {}".format(e))
@@ -68,7 +68,7 @@ class EFilingSubmission(EFilingHubCallerBase):
     """ transaction_id and submission_id come from previous requests (ie upload_documents).
     """
     def generate_efiling_url(self, bceid_guid, transaction_id, submission_id, data):
-        print("_________5_5_________")
+       
         package_data = self.packaging.build_efiling_body(data)
         logger.debug(f"submission_id:{submission_id}")
         logger.debug("data:")
@@ -79,7 +79,7 @@ class EFilingSubmission(EFilingHubCallerBase):
             f.write(json.dumps(package_data, indent=4))
             f.write("\n")
             f.close()
-        print("_________5_6_________")
+
         response = self._get_api(
             f"{self.api_base_url}/submission/{submission_id}/generateUrl",
             bceid_guid,
@@ -87,7 +87,6 @@ class EFilingSubmission(EFilingHubCallerBase):
             transaction_id=transaction_id,
             data=package_data,
         )
-        print("_________5_7_________")
 
         if response.status_code == 200:
             response = json.loads(response.text)

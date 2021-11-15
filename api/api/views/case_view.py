@@ -38,28 +38,28 @@ class CaseView(APIView):
 
             data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
             case_data = json.loads(data_dec)
-        # # submission = EFilingSubmission.objects.filter(
-        # #     id=application.last_efiling_submission_id
-        # # ).first()
-            data = {"id": case.id,
-                    "type": case.type,  
-                    "status":case.status,              
-                    "modified": case.modified,
-                    "personId": case.user_id,
-                    "archive": case.archive,
-                    "pdf_types": case.pdf_types,
-                    "description": case.description,            
-                    "packageNumber": case.package_number,
-                    "packageUrl": case.package_url, 
-                    "data": case_data,               
-                    }
+
+            responseData = {
+                "id": case.id,
+                "type": case.type,  
+                "status":case.status,              
+                "modified": case.modified,
+                "personId": case.user_id,
+                "archive": case.archive,
+                "pdf_types": case.pdf_types,
+                "description": case.description,            
+                "packageNumber": case.package_number,
+                "packageUrl": case.package_url, 
+                "data": case_data,               
+            }
         else:
             cases = get_case_for_user(pk, uid, includeArchives)
-            data = list()
+            responseData = list()
             for case in cases:
                 data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
                 case_data = json.loads(data_dec)
-                data.append({"id": case.id,
+                responseData.append({
+                    "id": case.id,
                     "type": case.type,  
                     "status":case.status,              
                     "modified": case.modified,
@@ -70,8 +70,8 @@ class CaseView(APIView):
                     "data": case_data,
                     "packageNumber": case.package_number,
                     "packageUrl": case.package_url,
-                    })            
-        return Response(data)
+                })            
+        return Response(responseData)
 
     def post(self, request: Request):
         uid = request.user.id
@@ -89,13 +89,13 @@ class CaseView(APIView):
             description = body.get("description")
 
         db_app = Case(            
-            type=body.get("type"),
-            description=description,
-            status="Draft",            
+            type =body.get("type"),
+            description =description,
+            status ="Draft",            
             modified = timezone.now(),
-            data=data_enc,
-            key_id=data_key_id,            
-            user_id=uid)
+            data =data_enc,
+            key_id =data_key_id,            
+            user_id =uid)
 
         db_app.save()
         return Response({"case_id": db_app.pk})

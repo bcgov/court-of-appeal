@@ -33,49 +33,21 @@ class EFilingSubmitView(generics.GenericAPIView):
     def __init__(self):
         self.efiling_parsing = EFilingParsing()
         self.efiling_submission = EFilingSubmission(EFilingPackaging())
-    
-
-    # def _get_validation_errors(self, request_files, documents):
-    #     # TODO: check group of images isn't over 10MB
-    #     if not is_valid_json(documents):
-    #         return JsonMessageResponse("Invalid json data for documents.", status=400)
-    #     if len(request_files) > 30:
-    #         return JsonMessageResponse("Too many files.", status=400)
-    #     for file in request_files:
-    #         if file.size == 0:
-    #             return JsonMessageResponse("One of the files was empty.", status=400)
-    #         if self._file_size_too_large(file.size):
-    #             return JsonMessageResponse(
-    #                 "Filesize limit exceeded: 10 MB.", status=400
-    #             )
-    #         if self._invalid_file_extension(file):
-    #             return JsonMessageResponse("Wrong file format.", status=400)
-    #     return None
-
-    # def _unique_file_names(self, request_files):
-    #     file_names =  [file.name.split('.')[0] for file in request_files]
-    #     dup = dict(Counter(file_names))
-    #     l_uniq = unique(file_names)
-    #     unique_names = [key if i == 0 else key + str(i+1) for key in l_uniq for i in range(dup[key])]
-    #     for i, unique_name in enumerate(unique_names):
-    #         request_files[i].name = f"{unique_name}.{request_files[i].name.split('.')[1]}"
-    #     return request_files
 
     # """ This inserts our generated file, iterates over files and converts to PDF if necessary. """
 
     def _get_pdf_content(self, case):
-        outgoing_documents = []        
+        outgoing_documents = [] 
+        #Modify If more than one form type exist in the future       
         document_type = "APP"
-        try: 
+        current_document_type = "FORM"
+        try:                      
             prepared_pdf = PreparedPdf.objects.get(
-                case_id=case.id, pdf_type="FORM"
-            )          
-            # prepared_pdf = PreparedPdf.objects.get(
-            #     case_id=case.id, pdf_type=f"{document_type}"
-            # )
+                case_id=case.id, pdf_type=f"{current_document_type}"
+            )
         except PreparedPdf.DoesNotExist:
             raise NotFound(
-                detail=f"Missing document type {document_type} from database."
+                detail=f"Missing document type {current_document_type} from database."
             )
         pdf_content = settings.ENCRYPTOR.decrypt(
             prepared_pdf.key_id, prepared_pdf.data
@@ -124,13 +96,14 @@ class EFilingSubmitView(generics.GenericAPIView):
         if not case:
             return HttpResponseNotFound("no record found")
 
-        outgoing_documents = self._get_pdf_content(case)               
-        data = self.efiling_parsing.convert_data_for_efiling(
-            request, case, outgoing_documents
-        )
-
         if case.package_number or case.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
+
+        outgoing_documents = self._get_pdf_content(case)               
+        data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
+            request, case, outgoing_documents
+        )
+        
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())
         case.transaction_id = transaction_id
@@ -154,7 +127,7 @@ class EFilingSubmitView(generics.GenericAPIView):
         # EFiling package submission.
         submission_id = upload_result["submissionId"]
         redirect_url, message = self.efiling_submission.generate_efiling_url(
-            request.user.universal_id, transaction_id, submission_id, data
+            request.user.universal_id, transaction_id, submission_id, data_for_efiling
         )
 
         if redirect_url is not None:
