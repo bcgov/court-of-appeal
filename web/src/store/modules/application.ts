@@ -475,7 +475,7 @@ class Application extends VuexModule {
 
         this.steps.push(s);
 
-        console.log(this.steps)
+        //console.log(this.steps)
         
     }
     @Action

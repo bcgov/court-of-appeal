@@ -51,7 +51,7 @@ export default class CancelSubmitForm2 extends Vue {
     mountedData = false;     
 
     mounted() {
-        console.log('here')
+
         this.mountedData = false;        
 
         this.stepsCompleted = {

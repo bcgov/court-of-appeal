@@ -13,6 +13,7 @@
             <b-form-input 
                 id="level-of-court"
                 style="max-width:25%" 
+                :disabled="true"
                 v-model="levelOfCourt">
             </b-form-input>
         </b-form-group>
