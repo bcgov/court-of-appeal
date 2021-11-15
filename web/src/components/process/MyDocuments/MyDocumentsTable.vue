@@ -204,56 +204,56 @@ export default class MyDocumentsTable extends Vue {
         {
             key:'select',          
             label:'',                  
-            tdClass: 'border-top',
+            thClass: 'border-dark border-bottom',            
             sortable:false            
         },       
         {
             key: "fileNumber",
             label: "App #",
             sortable: true,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "description",
             label: "Document Description",
             sortable: false,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "caseNumber",
             label: "File #",
             sortable: false,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "parties",
             label: "Parties",
             sortable: false,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },        
         {
             key: "status",
             label: "Status",
             sortable: true,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "modifiedDate",
             label: "Last Updated",
             sortable: true,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "packageNum",
             label: "eFiling #",
             sortable: true,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         },
         {
             key: "action",
             label: "Action",
             sortable: false,
-            tdClass: "border-top"
+            thClass: 'border-dark border-bottom',
         }
     ];
 

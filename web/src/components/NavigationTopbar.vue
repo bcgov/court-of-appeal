@@ -23,7 +23,7 @@
                 </a>
 
                 <div class="navbar-brand navbar-text">
-                    Court of Appeal                    
+                    Court of Appeal Application                  
                 </div>
 
                 <div class="navbar-extra">
