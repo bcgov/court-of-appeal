@@ -84,14 +84,6 @@ objects:
             role: ${ROLE}
             env: ${TAG_NAME}
         spec:
-          volumes:
-            - name: ${NAME}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume
-              configMap:
-                name: ${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}
-                items:
-                  - key: ${NGINX_CONF_TEMPLATE_FILE_NAME}
-                    path: ${NGINX_CONF_TEMPLATE_FILE_NAME}
-
           containers:
             - image: ${NAME}
               imagePullPolicy: Always
@@ -114,18 +106,6 @@ objects:
                   value: ${AdditionalRealIpFromRules}
                 - name: IpFilterRules
                   value: ${IpFilterRules}
-                - name: HTTP_BASIC
-                  value: ${HTTP_BASIC}
-                - name: HTTP_BASIC_USERNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: user
-                - name: HTTP_BASIC_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: password
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -133,12 +113,6 @@ objects:
                 limits:
                   cpu: ${CPU_LIMIT}
                   memory: ${MEMORY_LIMIT}
-
-              volumeMounts:
-                - name: ${NAME}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume
-                  mountPath: ${NGINX_CONF_TEMPLATE_MOUNT_PATH}${NGINX_CONF_TEMPLATE_FILE_NAME}
-                  subPath: ${NGINX_CONF_TEMPLATE_FILE_NAME}
-
               livenessProbe:
                 httpGet:
                   path: /nginx_status
@@ -159,6 +133,12 @@ objects:
                 periodSeconds: 10
                 successThreshold: 1
                 failureThreshold: 3
+              lifecycle:
+                preStop:
+                  exec:
+                    command:
+                      - /bin/sleep
+                      - '20'
           dnsPolicy: ClusterFirst
           restartPolicy: Always
           securityContext: {}
@@ -246,8 +226,6 @@ objects:
         env: ${TAG_NAME}
     stringData:
       allow-list: ${ALLOW_LIST}
-      user: ${HTTP_BASIC_USERNAME}
-      password: ${HTTP_BASIC_PASSWORD}
     type: Opaque
 
 parameters:
@@ -267,6 +245,7 @@ parameters:
     description: Role
     required: true
     value: web
+
   - name: NAMESPACE_NAME
     displayName: Namespace Name
     description: The base namespace name for the project.
@@ -319,45 +298,10 @@ parameters:
     displayName: Ip Filter Rules
     name: IpFilterRules
     value:
-
-  - name: NGINX_CONF_TEMPLATE_FILE_NAME
-    displayName: Config File Name
-    description: The name of the configuration file.
-    required: true
-    value: nginx.conf.template
-  - name: NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME
-    displayName: Config Map Name
-    description: The name of the configuration map.
-    required: true
-    value: nginx-conf-template
-  - name: NGINX_CONF_TEMPLATE_MOUNT_PATH
-    displayName: Config Mount Path
-    description: The path to use to mount the config file.
-    required: true
-    value: /tmp/
-
-  - name: HTTP_BASIC
-    displayName: HTTP Basic Nginx Config Line
-    description:
-      For very simple HTTP Basic authentication, use %HTTP_BASIC% in your
-      nginx config and provide the value here that you want in nginx config, e.g., `auth_basic
-      'restricted';`
-    required: false
-    value:
-  - name: HTTP_BASIC_USERNAME
-    displayName: HTTP Basic Username
-    description: Username for use with Basic authentication.
-    required: false
-    value:
-  - name: HTTP_BASIC_PASSWORD
-    displayName: HTTP Basic Password
-    description: Password for use with Basic authentication.
-    required: false
-    value:
   - description: The endpoint used for routing access to the application.
     displayName: Application Domain
     name: APPLICATION_DOMAIN
-    value: court-of-appeal-dev.silver.devops.bcgov
+    value: court-of-appeal-dev.silver.devops.gov.bc.ca
   - name: ALLOW_LIST
     displayName: Allow List
     description: The allow list containing all of the trusted source IPs.
@@ -371,12 +315,12 @@ parameters:
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
     required: true
-    value: "1"
+    value: "3"
   - name: MAX_REPLICAS
     displayName: Maximum Replicas
     description: The maximum number of pods to have running.
     required: true
-    value: "1"
+    value: "6"
 
   - name: CPU_REQUEST
     displayName: Resources CPU Request

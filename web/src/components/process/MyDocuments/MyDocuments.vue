@@ -1,0 +1,80 @@
+<template>
+    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">       
+        
+        <b-container v-if="dataLoaded" class="container">
+            
+            <my-documents-table @reload="loadCases()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
+            
+        </b-container>
+    </b-card>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
+import { caseJsonDataType } from '@/types/Information/json';
+
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+const informationState = namespace("Information");
+
+@Component({
+    components:{
+        MyDocumentsTable
+    }
+})
+export default class MyDocuments extends Vue {
+
+    @informationState.Action
+    public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+    
+    windowHeight = 0;
+    footerHeight = 0;
+    headerHeight = 0;
+    menubarHeight = 0;
+
+    dataLoaded = false;
+
+    mounted()
+    {
+        this.dataLoaded = false;     
+        window.addEventListener('resize', this.getWindowHeight);
+        this.getWindowHeight()
+        this.loadCases ();
+    }
+
+    public loadCases () {
+        this.dataLoaded = false;
+        this.$http.get('/case/')
+        .then((response) => {
+            if(response?.data){            
+                this.UpdateCasesJson(response.data)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;       
+        });
+    }
+
+    public getWindowHeight() {
+        this.windowHeight = document.documentElement.clientHeight;
+        this.footerHeight = (document.getElementsByName("navigation-footer")[0] as HTMLElement)?.clientHeight;
+        this.headerHeight = (document.getElementsByName("navigation-topbar")[0] as HTMLElement)?.clientHeight;
+        this.menubarHeight = (document.getElementsByName("menu-bar")[0] as HTMLElement)?.clientHeight;
+    }
+    
+    get getHeight() {        
+        return this.windowHeight-this.footerHeight-this.headerHeight-this.menubarHeight-1 + 'px'
+    }
+}
+</script>
+
+<style scoped lang="scss">
+
+@import "src/styles/common";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+
+</style>

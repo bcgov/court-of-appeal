@@ -1,34 +1,122 @@
-version: "3.8"
+version: "3.6"
 services:
+  web:
+    image: "${COMPOSE_PROJECT_NAME}-web"
+    environment:
+      - API_URL=${API_URL}
+      - USE_SELF_SIGNED_SSL=${USE_SELF_SIGNED_SSL}
+      - WEB_BASE_HREF=${WEB_BASE_HREF}
+      - IpFilterRules=${IpFilterRules}
+      - RealIpFrom=${RealIpFrom}
+    ports:
+      - "${WEB_HTTP_PORT}:8080"
+    depends_on:
+      - api
+
+  web-dev:
+    image: "${COMPOSE_PROJECT_NAME}-web-dev"
+    environment:
+      - API_URL=${API_URL}
+      - WEB_BASE_HREF=${WEB_BASE_HREF}
+      - DEV_MODE=false
+      - NODE_ENV=development
+      - NPM_CONFIG_LOGLEVEL=notice
+      - NPM_RUN=serve
+    ports:
+      - "${WEB_HTTP_PORT}:8080"
+      - 5858:5858
+    volumes:
+      - "../web/src:/opt/app-root/src/src"
+      - "../web/package.json:/opt/app-root/src/package.json"
+    depends_on:
+      - api
+      - pdf
+
+  #
+  # api
+  #-------------------------------------------------
+  # The API performs the migrations on the database.
+  # Therefore, it needs to come up after the database
+  # has had time to fully initialize.
+  #
+  # We are using a simple sleep command to do this
+  # for the moment; refer to the `command` section
+  # of the configuration for details.  It would be
+  # nice to implement a more deterministic solution.
+  #
   api:
     image: "${COMPOSE_PROJECT_NAME}-api"
     environment:
-      - PGUSER=${POSTGRESQL_USER}
-      - PGPASSWORD=${POSTGRESQL_PASSWORD}
-      - PGDATABASE=${POSTGRESQL_DATABASE}
-      - PGHOST=db
-      - DEV_MODE=${DEV_MODE}
-      - NODE_ENV=${NODE_ENV}
-      - DEBUG_PORT=${DEBUG_PORT}
-      - HUB_URL=${HUB_URL}
-      - HUB_TIMEOUT=${HUB_TIMEOUT}
-      - KEYCLOAK_AUTH_URL=${KEYCLOAK_AUTH_URL}
-      - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
-      - KEYCLOAK_REALM=${KEYCLOAK_REALM}
-      - KEYCLOAK_SECRET=${KEYCLOAK_SECRET}
-      - COOKIE_SECRET=${COOKIE_SECRET}
-      - WEB_BASE_HREF=${WEB_BASE_HREF}
-      - DATABASE_ENCRYPTION_KEY_32_BYTES=${DATABASE_ENCRYPTION_KEY_32_BYTES}
+      - DATABASE_SERVICE_NAME=${DATABASE_SERVICE_NAME}
+      - DATABASE_ENGINE=${DATABASE_ENGINE}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - PDF_SERVICE_URL=${PDF_SERVICE_URL}
-      - SM_LOGOUT_URL_PREFIX=${SM_LOGOUT_URL_PREFIX}
+      - OVERRIDE_USER_ID=${OVERRIDE_USER_ID}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_LOG_LEVEL=${DJANGO_LOG_LEVEL}
+      - DB_SERVICE_HOST=${DATABASE_SERVICE_NAME}
+      - DB_SERVICE_PORT=5432
+      - FRONT_END=${FRONT_END}
+      - DATA_SECURITY_KEY=${DATA_SECURITY_KEY}
+      - SITEMINDER_LOGOFF_URL=${SITEMINDER_LOGOFF_URL}
+      - OIDC_RP_CLIENT_SECRET=${OIDC_RP_CLIENT_SECRET}
+      - OIDC_RP_KC_IDP_HINT=${OIDC_RP_KC_IDP_HINT}
+      - EFILING_HUB_API_BASE_URL=${EFILING_HUB_API_BASE_URL}
+      - EFILING_HUB_KEYCLOAK_CLIENT_ID=${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+      - EFILING_HUB_KEYCLOAK_SECRET=${EFILING_HUB_KEYCLOAK_SECRET}
+      - EFILING_HUB_KEYCLOAK_BASE_URL=${EFILING_HUB_KEYCLOAK_BASE_URL}
+      - EFILING_HUB_KEYCLOAK_REALM=${EFILING_HUB_KEYCLOAK_REALM}
+      - EFILING_ENABLED=${EFILING_ENABLED}
+      - COA_PASSWORD=${COA_PASSWORD}
+      - COA_USERNAME=${COA_USERNAME}
+      - COA_SEARCH_ENDPOINT=${COA_SEARCH_ENDPOINT}
+    volumes:
+      - ../api/api:/opt/app-root/src/api
     ports:
-      - 8081:8080
+      - "${API_HTTP_PORT}:8080"
+      - 8000:8000 # For testing purposes
     depends_on:
       - db
-      - service
     command: >
-      /bin/bash -c 'while !</dev/tcp/db/5432; do sleep 1; echo Waiting for database connection ...; done; /usr/libexec/s2i/run;'
+      /bin/bash -c "
+        echo Waiting for the database service to start up ...;
+        sleep 10;
+        /usr/libexec/s2i/run;"
 
+  #
+  # schema-spy
+  #-------------------------------------------------
+  # Needs to wait for the schema to be created/migrated
+  # by the API server; it's not enough to wait for the
+  # database to be available.
+  #
+  # We are using a simple sleep command to do this
+  # for the moment; refer to the `command` section
+  # of the configuration for details.  It would be
+  # nice to implement a more deterministic solution.
+  #
+  schema-spy:
+    image: schema-spy
+    environment:
+      - DATABASE_SERVICE_NAME=${DATABASE_SERVICE_NAME}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+      - POSTGRESQL_USER=${POSTGRESQL_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+    ports:
+      - 8082:8080
+    depends_on:
+      - db
+    command: >
+      /bin/sh -c "
+        echo sleeping ...;
+        sleep 20;
+        ./start.sh;"
+  #
+  # db
+  #
   db:
     image: centos/postgresql-12-centos7
     environment:
@@ -38,45 +126,14 @@ services:
       - POSTGRESQL_ADMIN_PASSWORD=${POSTGRESQL_ADMIN_PASSWORD}
     ports:
       - 5432:5432
-    volumes:
-      - ./tmp:/tmp2
-  
+    # volumes:
+    # - data:/var/lib/pgsql/data
+
+
   pdf:
     image: bcgovimages/weasyprint
     ports:
       - 8083:5001
 
-  service:
-    image: "${COMPOSE_PROJECT_NAME}-service"
-    environment:
-      - FLASK_ENV=${FLASK_ENV}
-      - COA_PASSWORD=${COA_PASSWORD}
-      - COA_SEARCH_ENDPOINT=${COA_SEARCH_ENDPOINT}
-      - COA_USERNAME=${COA_USERNAME}
-      - CHES_AUTH_URL=${CHES_AUTH_URL}
-      - CHES_EMAIL_URL=${CHES_EMAIL_URL}
-      - SENDER_EMAIL=${SENDER_EMAIL}
-      - SENDER_NAME=${SENDER_NAME}
-      - EMAIL_SERVICE_CLIENT_ID=${EMAIL_SERVICE_CLIENT_ID}
-      - EMAIL_SERVICE_CLIENT_SECRET=${EMAIL_SERVICE_CLIENT_SECRET}
-      - EFILING_APP_NAME=${EFILING_APP_NAME}
-      - EFILING_HUB_API_BASE_URL=${EFILING_HUB_API_BASE_URL}
-      - EFILING_HUB_KEYCLOAK_BASE_URL=${EFILING_HUB_KEYCLOAK_BASE_URL}
-      - EFILING_HUB_KEYCLOAK_CLIENT_ID=${EFILING_HUB_KEYCLOAK_CLIENT_ID}
-      - EFILING_HUB_KEYCLOAK_REALM=${EFILING_HUB_KEYCLOAK_REALM}
-      - EFILING_HUB_KEYCLOAK_SECRET=${EFILING_HUB_KEYCLOAK_SECRET}
-    ports:
-      - 5000:5000
-
-  web:
-    image: "${COMPOSE_PROJECT_NAME}-web"
-    environment:
-      - API_URL=${API_URL}
-      - USE_SELF_SIGNED_SSL=${USE_SELF_SIGNED_SSL}
-      - IpFilterRules=${IpFilterRules}
-      - RealIpFrom=${RealIpFrom}
-      - WEB_BASE_HREF=${WEB_BASE_HREF}
-    ports:
-      - 8080:8080
-    depends_on:
-      - api
+# volumes:
+# data:

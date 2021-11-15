@@ -10,7 +10,6 @@ metadata:
     tags: django
     iconClass: icon-python
 objects:
-
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
@@ -56,7 +55,7 @@ objects:
   #     description: |
   #       Define the network parameters for accessing remote resources.
   #     entries:
-  #       # - ${OIDC_RP_HOST}
+  #       - ${OIDC_RP_HOST}
   #     servicePorts:
   #       - tcp/443
 
@@ -70,7 +69,7 @@ objects:
   #       env: ${TAG_NAME}
   #   spec:
   #     description: |
-  #       Allow the application's API to talk to either the database, plus a defined set of external resources.
+  #       Allow the application's API to talk to either the database or pdf microservice, plus a defined set of external resources.
   #     source:
   #       - - role=${ROLE}
   #         - app=${APP_NAME}
@@ -78,6 +77,10 @@ objects:
   #         - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
   #     destination:
   #       - - role=db
+  #         - app=${APP_NAME}
+  #         - env=${TAG_NAME}
+  #         - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
+  #       - - role=pdf
   #         - app=${APP_NAME}
   #         - env=${TAG_NAME}
   #         - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
@@ -113,13 +116,16 @@ objects:
         role: ${ROLE}
         env: ${TAG_NAME}
     stringData:
-      keycloak-auth-url: ${KEYCLOAK_AUTH_URL}
-      keycloak-client-id: ${KEYCLOAK_CLIENT_ID}
-      keycloak-realm: ${KEYCLOAK_REALM}
-      keycloak-secret: ${KEYCLOAK_SECRET}
-
-      cookie-secret: ${COOKIE_SECRET}
+      oidc-rp-provider-endpoint: ${OIDC_RP_PROVIDER_ENDPOINT}
+      oidc-rp-client-secret: ${OIDC_RP_CLIENT_SECRET}
+      oidc-rp-host: ${OIDC_RP_HOST}
       encryption-key: ${DATA_SECURITY_KEY}
+      efiling-auth-url: ${EFILING_HUB_KEYCLOAK_BASE_URL}
+      efiling-auth-realm: ${EFILING_HUB_KEYCLOAK_REALM}
+      efiling-client-id: ${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+      efiling-client-secret: ${EFILING_HUB_KEYCLOAK_SECRET}
+      efiling-base-url: ${EFILING_HUB_API_BASE_URL}
+      siteminder-logoff-url: ${SITEMINDER_LOGOFF_URL}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -169,76 +175,100 @@ objects:
                 initialDelaySeconds: 3
                 timeoutSeconds: 30
                 httpGet:
-                  path: /api/health/
+                  path: /health/
                   port: 8080
               livenessProbe:
                 initialDelaySeconds: 120
                 timeoutSeconds: 30
                 httpGet:
-                  path: /api/health/
+                  path: /health/
                   port: 8080
+              lifecycle:
+                preStop:
+                  exec:
+                    command:
+                      - /bin/sleep
+                      - '20'
               env:
-                - name: PGHOST
+                - name: DATABASE_SERVICE_NAME
                   value: ${DATABASE_SERVICE_NAME}
-                - name: PGDATABASE
+                - name: DATABASE_ENGINE
+                  value: ${DATABASE_ENGINE}
+                - name: DATABASE_NAME
                   valueFrom:
                     secretKeyRef:
                       name: ${DATABASE_DEPLOYMENT_NAME}
                       key: database-name
-                - name: PGUSER
+                - name: DATABASE_USER
                   valueFrom:
                     secretKeyRef:
                       name: ${DATABASE_DEPLOYMENT_NAME}
                       key: database-user
-                - name: PGPASSWORD
+                - name: DATABASE_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: ${DATABASE_DEPLOYMENT_NAME}
                       key: database-password
-
-                - name: HUB_URL
-                  value: ${HUB_URL}
-                - name: HUB_TIMEOUT
-                  value: ${HUB_TIMEOUT}
+                - name: APP_CONFIG
+                  value: ${APP_CONFIG}
+                - name: DJANGO_SECRET_KEY
+                  value: ${DJANGO_SECRET_KEY}
+                - name: DJANGO_DEBUG
+                  value: ${DJANGO_DEBUG}
                 - name: PDF_SERVICE_URL
                   value: ${PDF_SERVICE_URL}
+                - name: EFILING_ENABLED
+                  value: ${EFILING_ENABLED}
+                - name: OIDC_RP_PROVIDER_ENDPOINT
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: oidc-rp-provider-endpoint
+                - name: OIDC_RP_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: oidc-rp-client-secret
+                - name: OIDC_RP_KC_IDP_HINT
+                  value: ${OIDC_RP_KC_IDP_HINT}
 
-                - name: KEYCLOAK_AUTH_URL
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: keycloak-auth-url
-                - name: KEYCLOAK_CLIENT_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: keycloak-client-id
-                - name: KEYCLOAK_REALM
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: keycloak-realm
-                - name: KEYCLOAK_SECRET
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: keycloak-secret
-
-                - name: COOKIE_SECRET
-                  valueFrom:
-                    secretKeyRef:
-                      name: ${NAME}
-                      key: cookie-secret
-                - name: SM_LOGOUT_URL_PREFIX
-                  value: ${SM_LOGOUT_URL_PREFIX}
-                - name: DATABASE_ENCRYPTION_KEY_32_BYTES
+                - name: DATA_SECURITY_KEY
                   valueFrom:
                     secretKeyRef:
                       name: ${NAME}
                       key: encryption-key
 
-                - name: WEB_BASE_HREF
-                  value: ${WEB_BASE_HREF}
+                - name: EFILING_HUB_KEYCLOAK_BASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-auth-url
+                - name: EFILING_HUB_KEYCLOAK_REALM
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-auth-realm
+                - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-client-id
+                - name: EFILING_HUB_KEYCLOAK_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-client-secret
+                - name: EFILING_HUB_API_BASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: efiling-base-url
+
+                - name: SITEMINDER_LOGOFF_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: siteminder-logoff-url
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -297,6 +327,29 @@ parameters:
     description: The name of the database server/service.
     required: true
     value: db
+  - name: DATABASE_ENGINE
+    displayName: Database Engine
+    required: true
+    description: "Database engine: postgresql, mysql, or sqlite (default)."
+    value: postgresql
+  - name: APP_CONFIG
+    displayName: Application Configuration File Path
+    description: Relative path to Gunicorn configuration file (optional).
+  - name: DJANGO_SECRET_KEY
+    displayName: Django Secret Key
+    description: Set this to a long random string.
+    generate: expression
+    from: "[\\w]{50}"
+  - name: DJANGO_DEBUG
+    displayName: Django Debug
+    description: If Django is in debug mode
+    required: true
+    value: "False"
+  - name: PDF_SERVICE_URL
+    displayName: PDF Service URL
+    description: Internal URL to the PDF service.
+    required: true
+    value: http://pdf:5001
   - name: TAG_NAME
     displayName: Environment TAG name
     description: The TAG name for this environment, e.g., dev, test, prod
@@ -308,63 +361,69 @@ parameters:
     required: true
     value: db
 
-  - name: HUB_URL
-    displayName: Hub Url
-    description: Hub Url
+  - name: OIDC_RP_PROVIDER_ENDPOINT
+    displayName: OIDC RP Provider Endpoint
+    description: OIDC RP Provider Endpoint.
     required: false
-    value: http://service:5000
-  - name: HUB_TIMEOUT
-    displayName: Hub Timeout
-    description: Hub Timeout
-    required: true
-    value: "10000"
-  - name: PDF_SERVICE_URL
-    displayName: PDF Service URL
-    description: Internal URL to the PDF service.
-    required: true
-    value: http://pdf:5001
+    value:
+  - name: OIDC_RP_HOST
+    displayName: OIDC RP Hostname
+    description: OIDC RP Hostname.  The api-deploy.overrides.sh will parse this from the supplied OIDC_RP_PROVIDER_ENDPOINT, and fetch it from a secret for updates.
+    required: false
+    value:
+  - name: OIDC_RP_CLIENT_SECRET
+    displayName: OIDC RP Client Secret
+    description: OIDC RP Client Secret
+    required: false
+    value:
+  - name: OIDC_RP_KC_IDP_HINT
+    displayName: OIDC RP KeyCloak IDP Hint
+    description: OIDC RP KeyCloak IDP Hint
+    required: false
+    value: bceid
 
-  - name: KEYCLOAK_AUTH_URL
-    displayName: KeyCloak Authentication Url
-    description: KeyCloak Authentication Url
-    required: false
-    value:
-  - name: KEYCLOAK_REALM
-    displayName: KeyCloak Realm
-    description: KeyCloak Realm
-    required: false
-    value:
-  - name: KEYCLOAK_CLIENT_ID
-    displayName: KeyCloak Client Id
-    description: KeyCloak Client Id
-    required: false
-    value:
-  - name: KEYCLOAK_SECRET
-    displayName: KeyCloak Client Secret
-    description: KeyCloak Client Secret
-    required: false
-    value:
-
-  - name: COOKIE_SECRET
-    displayName: Cookie Secret
-    description: Cookie Secret
-    required: false
-    value:
-  - name: SM_LOGOUT_URL_PREFIX
-    displayName: Siteminder logout url prefix
-    description: Siteminder logout url prefix
-    required: true
-    value:
   - name: DATA_SECURITY_KEY
     displayName: Data Security (Encryption) Key
     description: The Encryption Key for the environment.
     generate: expression
     from: "[a-zA-Z0-9]{32}"
-  - name: WEB_BASE_HREF
-    displayName: Web Base Href
-    description: Web Base Href
+
+  - name: EFILING_ENABLED
+    displayName: EFILING Enable
+    description: EFILING Enable
     required: false
-    value: /court-of-appeal/
+    value: "false"
+  - name: EFILING_HUB_KEYCLOAK_BASE_URL
+    displayName: EFILING authentication url
+    description: EFILING authentication url
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_REALM
+    displayName: EFILING Authentication Realm
+    description: EFILING Authentication Realm
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_CLIENT_ID
+    displayName: EFILING Service Client Id
+    description: EFILING Service Client Id
+    required: false
+    value:
+  - name: EFILING_HUB_KEYCLOAK_SECRET
+    displayName: EFILING Service Client Secret
+    description: EFILING Service Client Secret
+    required: false
+    value:
+  - name: EFILING_HUB_API_BASE_URL
+    displayName: EFILING base url
+    description: EFILING base url
+    required: false
+    value:
+
+  - name: SITEMINDER_LOGOFF_URL
+    displayName: Siteminder Logoff URL
+    description: Siteminder Logoff URL
+    required: false
+    value: 
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
@@ -380,7 +439,7 @@ parameters:
     displayName: Resources CPU Request
     description: The resources CPU request (in cores) for this build.
     required: true
-    value: 250m
+    value: 10m
   - name: CPU_LIMIT
     displayName: Resources CPU Limit
     description: The resources CPU limit (in cores) for this build.
@@ -390,9 +449,9 @@ parameters:
     displayName: Resources Memory Request
     description: The resources Memory request (in Mi, Gi, etc) for this build.
     required: true
-    value: 256Mi
+    value: 10Mi
   - name: MEMORY_LIMIT
     displayName: Resources Memory Limit
     description: The resources Memory limit (in Mi, Gi, etc) for this build.
     required: true
-    value: 512Mi
+    value: 1Gi
