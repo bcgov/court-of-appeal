@@ -27,6 +27,12 @@ if createOperation; then
   readParameter "EFILING_HUB_API_BASE_URL - Please provide base url for efiling.  The default is a blank string." EFILING_HUB_API_BASE_URL "" "false"
 
   readParameter "SITEMINDER_LOGOFF_URL - Please provide the SiteMinder Logoff URL for the application environment.  The default is a blank string." SITEMINDER_LOGOFF_URL "" "false"
+
+  #form7 search setting
+  readParameter "COA_PASSWORD Please provide the form7 search password for the application environment.  The default is a blank string." COA_PASSWORD "" "false"
+  readParameter "COA_USERNAME Please provide the form7 search username for the application environment.  The default is a blank string." COA_USERNAME "" "false"
+  readParameter "COA_SEARCH_ENDPOINT Please provide the form7 search Url for the application environment.  The default is a blank string." COA_SEARCH_ENDPOINT "" "false"=
+
 else
   # Secrets are removed from the configurations during update operations ...
   printStatusMsg "Update operation detected ...\nSkipping the prompts for DATA_SECURITY_KEY, OIDC_RP_PROVIDER_ENDPOINT, OIDC_RP_CLIENT_SECRET, EFILING_HUB_KEYCLOAK_BASE_URL, EFILING_HUB_KEYCLOAK_CLIENT_ID, EFILING_HUB_KEYCLOAK_SECRET, and SITEMINDER_LOGOFF_URL secrets ... \n"
@@ -41,6 +47,10 @@ else
   writeParameter "EFILING_HUB_API_BASE_URL" "prompt_skipped" "false"
 
   writeParameter "SITEMINDER_LOGOFF_URL" "prompt_skipped" "false"
+
+  writeParameter "COA_PASSWORD" "prompt_skipped" "false"
+  writeParameter "COA_USERNAME" "prompt_skipped" "false"
+  writeParameter "COA_SEARCH_ENDPOINT" "prompt_skipped" "false"
 
   # Get OIDC_RP_HOST from secret
   printStatusMsg "Getting OIDC_RP_HOST for the ExternalNetwork definition from secret ...\n"

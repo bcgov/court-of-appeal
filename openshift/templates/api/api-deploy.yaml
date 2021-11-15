@@ -126,6 +126,9 @@ objects:
       efiling-client-secret: ${EFILING_HUB_KEYCLOAK_SECRET}
       efiling-base-url: ${EFILING_HUB_API_BASE_URL}
       siteminder-logoff-url: ${SITEMINDER_LOGOFF_URL}
+      coa-password: ${COA_PASSWORD}
+      coa-username: ${COA_USERNAME}
+      coa-search-endpoint: ${COA_SEARCH_ENDPOINT}
     type: Opaque
 
   - kind: DeploymentConfig
@@ -269,6 +272,22 @@ objects:
                     secretKeyRef:
                       name: ${NAME}
                       key: siteminder-logoff-url
+
+                - name: COA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-password
+                - name: COA_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-username
+                - name: COA_SEARCH_ENDPOINT
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}
+                      key: coa-search-endpoint
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -424,6 +443,23 @@ parameters:
     description: Siteminder Logoff URL
     required: false
     value: 
+
+  - name: COA_PASSWORD
+    displayName: form7 search COA Password
+    description: form7 search COA Password
+    required: false
+    value: 
+  - name: COA_USERNAME
+    displayName: form7 search COA Username
+    description: form7 search COA Username
+    required: false
+    value: 
+  - name: COA_SEARCH_ENDPOINT
+    displayName: form7 search COA URL
+    description: form7 search COA URL
+    required: false
+    value:             
+
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
