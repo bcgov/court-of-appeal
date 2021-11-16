@@ -9,4 +9,3 @@ api:8080
 backup:5432
 db:5432
 pdf:5001
-schema-spy:8080
