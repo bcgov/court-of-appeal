@@ -13,7 +13,7 @@
                 label-for="level-of-court">
                 <b-form-input 
                     id="level-of-court"
-                    disabled='true'
+                    disabled
                     style="max-width:25%" 
                     v-model="levelOfCourt">
                 </b-form-input>
@@ -69,20 +69,47 @@
             <p v-if="!searching && notFound">
                 
             </p>
-            <p v-else>
-                Below are the results of your search, please ensure you select the correct case using 
-                the style of proceeding (names of the parties) and the date of the order that you are 
-                appealing. <b>Note</b> that only one order can be appealed on a Notice of Appeal form.
-            </p>
-
+            <b-card class="border-white" v-else>
+                <p>
+                    Below are the results of your search, please ensure you select the correct case using 
+                    the style of proceeding (names of the parties) and the date of the order that you are 
+                    appealing. <b>Note</b> that only one order can be appealed on a Notice of Appeal form.
+                </p>
+                <b-card no-body class="mx-3 mb-5 bg-primary" style="overflow:auto">           
+                    <b-table
+                        :items="cases"
+                        :fields="caseFields"                    
+                        :no-sort-reset="true"
+                        sort-icon-left
+                        thead-class="d-none"
+                        borderless                    
+                        small
+                        responsive="sm"
+                    >
+                        <template v-slot:cell(styleOfCause)="data" >
+                           
+                            <b-button style="transform: translate(0,7px); font-size:20px" 
+                                size="sm" 
+                                @click="OpenDetails(data);data.toggleDetails();" 
+                                class="text-white bg-transparent border-primary" 
+                                >
+                                <b-icon-caret-right-fill v-if="!data.item['_showDetails']"></b-icon-caret-right-fill>
+                                <b-icon-caret-down-fill v-if="data.item['_showDetails']"></b-icon-caret-down-fill>
+                                {{data.value}} | {{data.item.courtClass}}                                
+                            </b-button>
+                           
+                        </template>
+                        <template v-slot:row-details>
+                            <b-card>                                
+                                <form-7-search-order-details @selectOrder="selectOrder"/>
+                            </b-card>
+                        </template>
+                        
+                    </b-table>
+                </b-card>
+            </b-card>
 
         </b-card>
-
-        
-
-
-
-
         
     </b-card>
 </template>
@@ -97,11 +124,13 @@ const informationState = namespace("Information");
 import { form7SearchInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
+import Form7SearchOrderDetails from "./Form7SearchOrderDetails.vue"
 import { supremeCourtLocationsInfoType } from '@/types/Common';
 
 @Component({
     components: {           
-        Spinner
+        Spinner,
+        Form7SearchOrderDetails
     }        
 }) 
 export default class Form7CaseInformationSearch extends Vue {
@@ -110,14 +139,10 @@ export default class Form7CaseInformationSearch extends Vue {
     public UpdateSupremeCourtCaseJson!: (newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType) => void
 
     @informationState.Action
+    public UpdateCaseLocation!: (newCaseLocation: supremeCourtLocationsInfoType) => void
+
+    @informationState.Action
     public UpdateSupremeCourtOrderJson!: (newSupremeCourtOrderJson: supremeCourtOrdersJsonInfoType) => void
-
-
-    // @informationState.Action
-    // public UpdateFileNumber!: (newFileNumber: string) => void
-    
-    // @informationState.Action
-    // public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     levelOfCourt = "Supreme Court of BC";
 
@@ -128,6 +153,11 @@ export default class Form7CaseInformationSearch extends Vue {
     searchParams = {} as form7SearchInfoType;
     notFound = false;    
     cases: supremeCourtCaseJsonDataInfoType[];
+
+    caseFields =  
+    [
+        {key:'styleOfCause', label:'', cellStyle:'', cellClass:''}
+    ];
 
     mounted(){
         this.dataReady = false;
@@ -342,9 +372,17 @@ export default class Form7CaseInformationSearch extends Vue {
         });
     }
 
-    public selectOrder(selectedCase: supremeCourtCaseJsonDataInfoType, selectedOrder: supremeCourtOrdersJsonInfoType){
-        this.UpdateSupremeCourtCaseJson(selectedCase);
-        this.UpdateSupremeCourtOrderJson(selectedOrder);
+    public OpenDetails(data)
+    {
+        if(!data.detailsShowing)
+        {
+            this.UpdateSupremeCourtCaseJson(data.item)           
+            const selectedLocation: supremeCourtLocationsInfoType = this.locations.filter(location=>location.key.toString() == this.searchParams.location)[0]
+            this.UpdateCaseLocation(selectedLocation)
+        }       
+    }
+
+    public selectOrder(){
         this.$emit('fillForm', true);
     }
 }

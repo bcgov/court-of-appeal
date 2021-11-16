@@ -7,7 +7,6 @@ import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
 import ChecklistForm7 from "@/components/process/Form7/ChecklistForm7.vue";
 import StartForm7 from "@/components/process/Form7/StartForm7.vue";
-import FillForm7 from "@/components/process/Form7/FillForm7.vue";
 import PreviewForm7 from "@/components/process/Form7/PreviewForm7.vue";
 import SubmitForm7 from "@/components/process/Form7/SubmitForm7.vue";
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
@@ -83,12 +82,6 @@ const routes = [
       name: "start-form7",
       beforeEnter: authGuard,
       component: StartForm7
-    },
-    {
-      path: "/fill-form7",
-      name: "fill-form7",
-      beforeEnter: authGuard,
-      component: FillForm7
     },
     {
       path: "/preview-form7",

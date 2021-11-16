@@ -30,6 +30,14 @@ Vue.filter('beautify-date', function(date){
 		return 'unknown'
 })
 
+Vue.filter('beautify-date-month', function(date){
+	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
+	if(date)
+		return MonthList[Number(date.substr(5,2))] + ' ' +date.substr(8,2) + ', ' +  date.substr(0,4);
+	else
+		return 'unknown'
+})
+
 Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){

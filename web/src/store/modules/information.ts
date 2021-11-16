@@ -1,3 +1,4 @@
+import { supremeCourtLocationsInfoType } from '@/types/Common';
 import { form2DataInfoType, pathwayTypeInfoType } from '@/types/Information';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
@@ -15,7 +16,8 @@ class Information extends VuexModule {
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     public fileNumber = "";  
-    public currentCaseId = null;  
+    public currentCaseId = null; 
+    public caseLocation: supremeCourtLocationsInfoType; 
 
     @Mutation
     public setCasesJson(casesJson: caseJsonDataType[]): void {   
@@ -87,6 +89,15 @@ class Information extends VuexModule {
     @Action
     public UpdateFileNumber(newFileNumber: string): void {
         this.context.commit('setFileNumber', newFileNumber);
+    }
+
+    @Mutation
+    public setCaseLocation(caseLocation: supremeCourtLocationsInfoType): void {   
+        this.caseLocation = caseLocation;
+    }    
+    @Action
+    public UpdateCaseLocation(newCaseLocation: supremeCourtLocationsInfoType): void {
+        this.context.commit('setCaseLocation', newCaseLocation);
     }
 
     @Mutation
