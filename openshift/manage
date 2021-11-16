@@ -156,7 +156,7 @@ function resetDatabase() {
 
 function cleanEnv() {
   printAndAskToContinue "If you contiune all of the application resources will be perminently deleted from $(getProjectName)."
-  oc -n $(getProjectName) delete all,pvc,secret,networksecuritypolicies -l app=coa
+  oc -n $(getProjectName) delete all,pvc,secret,networksecuritypolicies -l app=court-of-appeal
 }
 
 function functionExists() {
@@ -237,7 +237,7 @@ function tag()
       exit 1
     fi
 
-    images="db schema-spy pdf api web"
+    images="db pdf api web schema-spy"
     for image in ${images}; do
       # Tag images ...
       echo -e "\nTagging ${image}:${_sourceTag} as ${image}:${_destTag} ..."
