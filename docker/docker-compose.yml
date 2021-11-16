@@ -98,22 +98,22 @@ services:
   # of the configuration for details.  It would be
   # nice to implement a more deterministic solution.
   #
-  schema-spy:
-    image: schema-spy
-    environment:
-      - DATABASE_SERVICE_NAME=${DATABASE_SERVICE_NAME}
-      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
-      - POSTGRESQL_USER=${POSTGRESQL_USER}
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-    ports:
-      - 8082:8080
-    depends_on:
-      - db
-    command: >
-      /bin/sh -c "
-        echo sleeping ...;
-        sleep 20;
-        ./start.sh;"
+  # schema-spy:
+  #   image: schema-spy
+  #   environment:
+  #     - DATABASE_SERVICE_NAME=${DATABASE_SERVICE_NAME}
+  #     - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+  #     - POSTGRESQL_USER=${POSTGRESQL_USER}
+  #     - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+  #   ports:
+  #     - 8082:8080
+  #   depends_on:
+  #     - db
+  #   command: >
+  #     /bin/sh -c "
+  #       echo sleeping ...;
+  #       sleep 20;
+  #       ./start.sh;"
   #
   # db
   #
