@@ -4,7 +4,7 @@
 # Template File: ../openshift/templates/schema-spy/schema-spy-deploy.yaml
 #=========================================================
 NAME=schema-spy
-APP_NAME=coa
+APP_NAME=court-of-appeal
 ROLE=schema-spy
 NAMESPACE_NAME=876c6c
 IMAGE_NAMESPACE=876c6c-tools

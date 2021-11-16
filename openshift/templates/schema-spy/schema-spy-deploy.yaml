@@ -195,7 +195,7 @@ parameters:
     displayName: App Name
     description: App Name
     required: true
-    value: coa
+    value: court-of-appeal
   - name: ROLE
     displayName: Role
     description: Role
