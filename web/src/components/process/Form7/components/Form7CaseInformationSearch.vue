@@ -1,7 +1,8 @@
 <template>
     <b-card no-body v-if="dataReady" class="border-white" >  
 
-        <b-card class="border-white">      
+        <b-card class="ml-2 mt-2 border-white" >
+            <p style="font-size: 1.25rem;" >Lower Court Case Information</p>      
 
             <p>Find the Supreme Court case you are appealing by entering the following information about the case.</p>
 
@@ -63,13 +64,19 @@
 
         </b-card>
 
-        <b-card v-if="cases.length || (!searching && notFound)" class="border-white">
+        <b-card v-if="cases.length || (!searching && notFound)" class="ml-2 mt-2 border-white">
             <hr class="mb-4">
             <p style="font-size: 1.25rem; ">Case Results</p>
             <p v-if="!searching && notFound">
-                
+                Please be advised that we are unable to locate the file number you have entered. Please 
+                check the case number and registry location entered, and try again. If the case cannot be 
+                located, you will need to submit your document(s) at a
+                <a
+                    href="http://www.courts.gov.bc.ca/Court_of_Appeal/court_locations_and_contacts.aspx"
+                    target="_blank">Court of Appeal Registry
+                </a>.
             </p>
-            <b-card class="border-white" v-else>
+            <b-card no-body class="border-white" v-else>
                 <p>
                     Below are the results of your search, please ensure you select the correct case using 
                     the style of proceeding (names of the parties) and the date of the order that you are 

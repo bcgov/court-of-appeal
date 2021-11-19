@@ -53,6 +53,23 @@ export interface form7SearchInfoType {
     location: string;    
 }
 
+export interface form7PartiesInfoType {
+    ceisPartyId: number;
+    isOrganization: boolean;
+    firstGivenName: string;
+    secondGivenName?: string;
+    thirdGivenName?: string;
+    surname: string;
+    organizationName?: string;
+    fullName: string;
+    counselName?: string;
+    lowerCourtRole: string;
+    aliases?: string[];
+    legalReps?: string[];
+    appealCourtRole?: string;   
+    title?: string; 
+}
+
 export interface packageInfoType {
     packageNumber: string;
     fileNumber: string;

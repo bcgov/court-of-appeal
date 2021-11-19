@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" class="bg-white border-white text-dark" >
+    <b-card v-if="dataReady" class="bg-white border-white text-dark">
 
         <b-row>
             <b-col cols="4">
@@ -37,7 +37,7 @@
                 Please ensure that you review the date of the order noted above to confirm that it is accurate. 
                 Should you find the date above is wrong, please contact the 
                 <a                
-                    href=""
+                    href="https://www2.gov.bc.ca/gov/content/justice/courthouse-services/courthouse-locations?keyword=courthouse%26keyword=locations"
                     target="_blank">court registry</a>.
             </p>
         </b-row>
@@ -71,19 +71,17 @@ export default class FillForm7SummaryInfo extends Vue {
 
     mounted() { 
         this.dataReady = false; 
+        this.judgeFullName = 
+            this.supremeCourtOrderJson.honorificTitle + ' ' + 
+            this.supremeCourtOrderJson.judgeFirstName + ' ' + 
+            this.supremeCourtOrderJson.judgeSurname;
 
-        this.judgeFullName = this.supremeCourtOrderJson.honorificTitle + ' ' + this.supremeCourtOrderJson.judgeFirstName + ' ' + this.supremeCourtOrderJson.judgeSurname
-
-        this.dataReady = true;
-            
+        this.dataReady = true;            
     }
-
 
 }
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>

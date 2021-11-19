@@ -166,14 +166,14 @@
 
                     <p>
                         Supreme Court Civil 
-                        <a  href="http://www.bclaws.ca/civix/document/LOC/complete/statreg/--%20C%20--/Court%20Rules%20Act%20[RSBC%201996]%20c.%2080/05_Regulations/17_168_2009%20-%20Supreme%20Court%20Civil%20Rules/168_2009_03.xml#subrule_d2e32458"
+                        <a  href="https://www.bclaws.ca/civix/document/id/complete/statreg/168_2009_03#subrule_d2e32458"
                             target="_blank"
                             class= "text-white">Rule 23-6 (8)</a>:
-                        <a  href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/168_2009_04#Form121"
+                        <a  href="https://www2.gov.bc.ca/assets/gov/law-crime-and-justice/courthouse-services/court-files-records/court-forms/supreme-civil/121.pdf?forcedownload=true"
                             target="_blank"
                             class= "text-white">Form 121</a><br/>
                         Supreme Court Family 
-                        <a  href="http://www.bclaws.ca/civix/document/LOC/complete/statreg/--%20C%20--/Court%20Rules%20Act%20[RSBC%201996]%20c.%2080/05_Regulations/18_169_2009%20-%20Supreme%20Court%20Family%20Rules/169_2009_03.xml#subrule_d2e28133"
+                        <a  href="https://www.bclaws.ca/civix/document/id/complete/statreg/169_2009_03#subrule_d1e29526"
                             target="_blank"
                             class= "text-white">Rule 22-7 (8)</a>:
                         <a  href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/169_2009_04#F98"

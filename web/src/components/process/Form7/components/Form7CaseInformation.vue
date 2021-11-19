@@ -1,16 +1,8 @@
 <template>
-    <b-card class="ml-4 border-white">
-        <p style="font-size: 1.25rem; ">Lower Court Case Information</p>
+    <b-card no-body bg-variant="light" border-variant="light">        
 
         <fill-form-7 v-if="orderSelected" @displayResults="orderSelected = false;"/>
-        <form-7-case-information-search
-            style="width: 100%; float: left;" 
-            v-else
-            @fillForm="orderSelected = true;"/>
-
-        
-
-        
+        <form-7-case-information-search  v-else @fillForm="orderSelected = true;"/>        
         
     </b-card>
 </template>

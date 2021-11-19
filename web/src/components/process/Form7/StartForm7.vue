@@ -1,24 +1,23 @@
 <template>
-    <b-card header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
+    <b-card header-tag="header" style="width: 80rem;" class="mx-auto border-white bg-light">
 
         <b-card-header header-bg-variant="light" header-border-variant="white">            
             <form-7-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
-        <b-card border-variant="light" bg-variant="light" class="my-2 mx-4">
+        <b-card class="my-2 ml-4 bg-light border-light">
 
-            <b-row class="ml-5" style="font-size: 2rem;">
+            <b-row style="font-size: 2rem;">
                 Notice of Appeal
             </b-row> 
-            <b-row class="ml-5" style="font-size: 14px;">
+            <b-row style="font-size: 14px;">
                 Form 7 - Rule 11 (A)
             </b-row>           
            
         </b-card>
 
-        <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
-            <form-7-case-information/>          
-            
+        <b-card no-body class="mt-3 mx-2 border-light">
+            <form-7-case-information/>
         </b-card>       
         
     </b-card>
