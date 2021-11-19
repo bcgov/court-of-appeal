@@ -236,7 +236,7 @@
                 <b-form-textarea 
                     id="respondent-solicitor"
                     rows="3"                    
-                    v-model="respondentSolicitor">
+                    v-model="respondentSolicitorNames">
                 </b-form-textarea>
             </b-form-group>
             
@@ -331,11 +331,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
+
 import { namespace } from "vuex-class";
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import "@/store/modules/information";
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
+
+import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
 import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm7/FillForm7SummaryInfo.vue";
@@ -358,6 +363,9 @@ export default class FillForm7 extends Vue {
 
     @informationState.State
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
+
+    @commonState.State
+    public userName!: string;
 
     typesOfOrders = [
         { text: 'Trial Judgement', value: 'trial' },
@@ -421,7 +429,9 @@ export default class FillForm7 extends Vue {
     partOfJudgement = '';
     orderSought = '';
     respondentNames = '';
-    respondentSolicitor = '';
+    respondents: string[] = [];
+    respondentSolicitorNames = '';
+    respondentSolicitors: string[] = [];
     appellant = '';
     appellantAddress = '';
     referenceNumber = '';    
@@ -430,11 +440,20 @@ export default class FillForm7 extends Vue {
     showAddParty = false;
     enableAddParty = false;
 
+    @Watch('respondents')
+    setRespondentNames(newRespondents: string[]) 
+    {
+        this.respondentNames = newRespondents.join('; ');
+        this.respondentSolicitorNames = this.respondentSolicitors.join('; ')
+
+    }
+
     mounted() {  
         this.extractInfo();             
     }
 
     public extractInfo(){
+        this.appellant = this.userName;
         this.partiesList = this.supremeCourtCaseJson.parties;
         for (const party in this.supremeCourtCaseJson.parties){
             this.partiesList[party].title = this.supremeCourtCaseJson.parties[party].lowerCourtRole 
@@ -455,11 +474,21 @@ export default class FillForm7 extends Vue {
 
     public resLeft(row){
         this.partiesList[row.index].appealCourtRole = '';
+        const resNameIndex =  this.respondents.indexOf(this.partiesList[row.index].fullName);
+        this.respondents.splice(resNameIndex, 1);
+        if (this.partiesList[row.index].counselName) {            
+            const solicitorNameIndex =  this.respondentSolicitors.indexOf(this.partiesList[row.index].counselName);
+            this.respondentSolicitors.splice(solicitorNameIndex, 1);
+        }
         this.updateTable ++;
     }
 
     public resRight(row){
         this.partiesList[row.index].appealCourtRole = 'Respondent';
+        this.respondents.push(this.partiesList[row.index].fullName);
+        if (this.partiesList[row.index].counselName) {
+            this.respondentSolicitors.push(this.partiesList[row.index].counselName);
+        }
         this.updateTable ++;
     }
 

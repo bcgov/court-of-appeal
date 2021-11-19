@@ -76,6 +76,20 @@ export interface packageInfoType {
     eFilingUrl: string;
 }
 
+export interface lookupsInfoType {
+    involvesFamilyList: string[];
+    involvesOtherList: string[]; 
+    involvesOtherHelp: string[];
+    appealFromOptionsList: string[];
+    appealFromOptionsHelp: string[];
+    lowerCourtRoles: string[];
+    aliasTypes: string[]; 
+    individualLegalReps: string[];
+    organizationLegalReps: string[];
+    legalRepFormatters: {};
+    holidays: {};
+}
+
 export interface journeyStepType {
 
 

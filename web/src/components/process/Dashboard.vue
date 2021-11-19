@@ -56,6 +56,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import "@/store/modules/application";
 const applicationState = namespace("Application")
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
@@ -68,7 +71,7 @@ import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
-import { pathwayTypeInfoType } from '@/types/Information';
+import { lookupsInfoType, pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 
@@ -103,7 +106,10 @@ export default class DashboardPage extends Vue {
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
 
     @applicationState.State
-    public stPgNo!: stepsAndPagesNumberInfoType;    
+    public stPgNo!: stepsAndPagesNumberInfoType;
+    
+    @commonState.Action
+    public UpdateLookups!: (newLookups: lookupsInfoType) => void
 
     dataLoaded = false;    
     journeyStarted = false;
@@ -165,8 +171,7 @@ export default class DashboardPage extends Vue {
     mounted() {  
         this.dataLoaded = false;
         this.initSteps();
-        this.loadInfo();
-        
+        this.loadInfo();        
     }
 
     public getCurrentState(){
@@ -177,6 +182,164 @@ export default class DashboardPage extends Vue {
             }
         }
         return false
+    }
+
+    public loadLookups(){
+        // this.$http.get('/lookups/')
+        // .then((response) => {
+            
+        //     //console.log(response)
+        //     if(response?.data){
+                const res = {
+                    "involvesFamilyList": [
+                        "Divorce",
+                        "Family Law Act",
+                        "Other Family",
+                        "Corollary Relief in a Divorce Proceeding"
+                    ],
+                    "involvesOtherList": [
+                        "Constitutional / Administrative",
+                        "Civil Procedure",
+                        "Commercial",
+                        "Motor Vehicle Accidents",
+                        "Municipal Law",
+                        "Real Property",
+                        "Torts",
+                        "Equity",
+                        "Wills and Estate"
+                    ],
+                    "involvesOtherHelp": [
+                        "Constitutional/Administrative law – appeal from decisions involving the relationship between the government and its citizens, including the Charter of Rights and Freedoms and tribunal decisions.",
+                        "Civil Procedure – appeal from a decision that applies the Supreme Court rules or processes to a private dispute about people, relationships or property.",
+                        "Commercial law – appeal from a decision regarding business and commercial transactions.",
+                        "Motor Vehicle accidents – appeal from a decision of someone being found at fault or for damages as a result of a motor vehicle accident.",
+                        "Municipal law – appeal from a decision of legal issues relating to municipal (towns or city) governments.",
+                        "Real Property – appeal from a decision relating to the use and rights of ownership of land or whatever grows on it or is built on it.",
+                        "Torts – appeal from a decision that provides compensation for people who have been injured or whose property has been damaged by the actions or inactions of others.",
+                        "Equity – appeal from decisions based on the application of fairness and other principles of equity.",
+                        "Wills and Estate – appeal from a decision relating to the drafting or execution of wills or distribution of real property of a deceased person."
+                    ],
+                    "appealFromOptionsList": [
+                        "Trial Judgment",
+                        "Summary Trial Judgment",
+                        "Chambers Judgment"
+                    ],
+                    "appealFromOptionsHelp": [
+                        "Trial Judgment – a final order made after a full hearing where witnesses were called and oral evidence given.",
+                        "Summary Trial Judgment – a trial conducted in a summary manner by way of affidavit or transcript rather than oral testimony.  See Supreme Court Civil Rule 9-7.",
+                        "Chambers Judgment – an application made to a Supreme Court Judge or Master where evidence is presented in the form of affidavits.  See Supreme Court Civil Rule 8-1."
+                    ],
+                    "lowerCourtRoles": [
+                        "NONE (New Party)",
+                        "Appellant",
+                        "Applicant",
+                        "Bankrupt",
+                        "Citator",
+                        "Claimant",
+                        "Claimant 1",
+                        "Claimant 2",
+                        "Client",
+                        "Creditor",
+                        "Debtor",
+                        "Deceased",
+                        "Defendant",
+                        "Defendant by Counterclaim",
+                        "Intervener",
+                        "Petitioner",
+                        "Plaintiff",
+                        "Respondent",
+                        "Respondent by Counterclaim",
+                        "Solicitor",
+                        "Third Party",
+                        "Trustee"
+                    ],
+                    "aliasTypes": [
+                        "also known as",
+                        "a subsidiary of",
+                        "and the said",
+                        "carrying on business as",
+                        "division of",
+                        "doing business as",
+                        "formerly known as",
+                        "now known as",
+                        "operating as",
+                        "otherwise known as",
+                        "previous",
+                        "previously known as",
+                        "trading as",
+                        "with assumed name of"
+                    ],
+                    "individualLegalReps": [
+                        "administrator (estate)",
+                        "administrator",
+                        "administratrix (estate)",
+                        "administratrix",
+                        "caveator",
+                        "committee (estate)",
+                        "committee",
+                        "executor",
+                        "executrix",
+                        "intervener",
+                        "litigation guardian",
+                        "litigation guardian (child)",
+                        "litigation guardian (infant)",
+                        "litigation guardian (disability)",
+                        "receiver manager",
+                        "trustee"
+                    ],
+                    "organizationLegalReps": [
+                        "administrator",
+                        "administratrix",
+                        "committee",
+                        "intervener",
+                        "receiver manager",
+                        "trustee"
+                    ],
+                    "legalRepFormatters": {
+                        "administrator (estate)": "{0}, administrator for the Estate of {1}",
+                        "administrator": "{0}, administrator for {1}",
+                        "administratrix (estate)": "{0}, administratrix for the Estate of {1}",
+                        "administratrix": "{0}, administratrix for {1}",
+                        "caveator": "{0}, caveator for the Estate of {1}",
+                        "committee (estate)": "{0}, committee for the Estate of {1}",
+                        "committee": "{0}, committee for {1}",
+                        "executor": "{0}, executor for the Estate of {1}",
+                        "executrix": "{0}, executrix for the Estate of {1}",
+                        "intervener": "{0}, intervener on behalf of {1}",
+                        "litigation guardian": "{1} by way of their litigation guardian, {0}",
+                        "litigation guardian (child)": "{1}, a child, by way of their litigation guardian, {0}",
+                        "litigation guardian (infant)": "{1}, an infant, by way of their litigation guardian, {0}",
+                        "litigation guardian (disability)": "{1}, a person under disability, by way of their litigation guardian, {0}",
+                        "receiver manager": "{0}, receiver manager on behalf of {1}",
+                        "trustee": "{0}, trustee on behalf of {1}"
+                    },
+                    "holidays": {
+                        "20210101": "New Years Day 2021",
+                        "20210215": "BC Family Day",
+                        "20210402": "Good Friday",
+                        "20210405": "Easter Monday",
+                        "20210524": "Victoria Day",
+                        "20210701": "Canada Day",
+                        "20210802": "BC Day",
+                        "20210906": "Labour Day",
+                        "20210930": "Truth and Reconciliation Day",
+                        "20211011": "Thanksgiving",
+                        "20211111": "Remembrance Day",
+                        "20211227": "Christmas Day",
+                        "20211228": "Boxing Day",
+                        "20220103": "New Years Day 2022"
+                    }
+                    }
+                //TODO: add functionality to store the lookups in the store
+                this.UpdateLookups(res);
+
+                           
+            // }
+            this.loadCases();     
+        // },(err) => {
+        //     this.dataLoaded = true;
+        //     this.error = err;        
+        // });
     }
 
     public loadInfo () {
@@ -194,7 +357,7 @@ export default class DashboardPage extends Vue {
                 migrate(applicationData, this.CURRENT_VERSION);
                 this.journeyStarted = this.getCurrentState();                
             }
-            this.loadCases();     
+            this.loadLookups();     
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
