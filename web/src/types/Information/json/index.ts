@@ -1,3 +1,4 @@
+import { aliasInfoType, representativeInfoType } from "..";
 
 export interface journeyJsonDataType {
     id: number;
@@ -119,12 +120,12 @@ export interface supremeCourtPartiesJsonInfoType {
     firstGivenName: string;
     secondGivenName?: string;
     thirdGivenName?: string;
-    surname: string;
+    surname?: string;
     organizationName?: string;
     fullName: string;
     counselName?: string;
     lowerCourtRole: string;
-    aliases?: string[];
-    legalReps?: string[];
+    aliases?: aliasInfoType[];
+    legalReps?: representativeInfoType[];
 }
 

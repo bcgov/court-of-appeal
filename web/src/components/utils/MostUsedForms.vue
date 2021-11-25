@@ -2,15 +2,13 @@
     <b-card border-variant="white">
         <h3>Most Used Forms</h3>
         <ol>
-            <li>
-                <a  class="link-button"
-                    :href="form7"
-                    target="_blank">
-                    Notice of Appeal (Form 7)
-                </a>
+            <li class="link-button" 
+                @click="startNewForm7Document"
+                target="_blank">
+                Notice of Appeal (Form 7)            
             </li>
             <li class="link-button" 
-                @click="startNewDocument"
+                @click="startNewForm2Document"
                 target="_blank">
                 Notice of Appearance (Form 2)                
             </li>
@@ -34,8 +32,12 @@
             this.form7 = getForm7Url()
         }
 
-        public startNewDocument(){
+        public startNewForm2Document(){
             this.$router.push({name: "start-form2" })
+        }
+
+        public startNewForm7Document(){
+            this.$router.push({name: "checklist-form7" })
         }
 
     }

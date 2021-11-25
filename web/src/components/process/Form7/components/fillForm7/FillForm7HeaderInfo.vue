@@ -1,5 +1,5 @@
 <template>
-    <b-card no-body class="bg-warning border-warning text-white" >
+    <b-card no-body class="bg-primary border-primary text-white" >
 
         <p style="padding-bottom:0; margin: 1rem 1rem 0 1rem; font-size: 16px;">            
             Information on this form has been pre-filled with data from the selected order 
@@ -8,7 +8,7 @@
         </p>
         <b-button 
             @click="displayResults"
-            class="bg-warning border-warning text-white"
+            class="bg-primary border-primary text-white"
             size="sm"
             style="float: left; width: 11rem; padding:0; margin: 0 0 1rem 0.5rem; text-decoration: underline; font-size: 16px;">
             Back to search results

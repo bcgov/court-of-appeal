@@ -53,21 +53,45 @@ export interface form7SearchInfoType {
     location: string;    
 }
 
+export interface form7DataInfoType {
+    appearanceDays: number;
+    orderType: string;
+    appealedInSupremeCourt: string;
+    appealNature: string;
+    partOfJudgement: string;
+    orderSought: string;
+    parties: form7PartiesInfoType[];
+    respondents: form7PartiesInfoType[];
+    appellants: form7PartiesInfoType[];
+    serviceAddress: string;
+    referenceNumber: string; 
+} 
+
 export interface form7PartiesInfoType {
     ceisPartyId: number;
     isOrganization: boolean;
     firstGivenName: string;
     secondGivenName?: string;
     thirdGivenName?: string;
-    surname: string;
+    surname?: string;
     organizationName?: string;
     fullName: string;
     counselName?: string;
     lowerCourtRole: string;
-    aliases?: string[];
-    legalReps?: string[];
+    aliases?: aliasInfoType[];
+    legalReps?: representativeInfoType[];
     appealCourtRole?: string;   
     title?: string; 
+}  
+
+export interface aliasInfoType {
+    type: string;
+    name: string;
+}
+
+export interface representativeInfoType {
+    type: string;
+    name: string;
 }
 
 export interface packageInfoType {
