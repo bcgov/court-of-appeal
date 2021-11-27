@@ -1,57 +1,56 @@
 <template>
-    
     <b-card v-if="dataReady" no-body class="mx-auto mb-4 border-light bg-light">
 
         <b-card class="mb-4 border-white bg-white">                
-                <b-form-group
-                    class="mt-2 ml-4 labels"
-                    label="Type Of Order" 
-                    label-for="order-type">
-                    <b-form-radio-group                
-                        v-model="commonInfo.orderType"
-                        @change="update"
-                        id="order-type"
-                        :options="typesOfOrders"
-                        style="font-size: 1rem; font-weight:400;"                    
-                    ></b-form-radio-group>
-                </b-form-group>
+            <b-form-group
+                class="mt-2 ml-4 labels"
+                label="Type Of Order" 
+                label-for="order-type">
+                <b-form-radio-group                
+                    v-model="commonInfo.orderType"
+                    @change="update"
+                    id="order-type"
+                    :options="typesOfOrders"
+                    style="font-size: 1rem; font-weight:400;"                    
+                ></b-form-radio-group>
+            </b-form-group>
                 
-                <b-form-group
-                    class="ml-4 labels"
-                    label="Was this matter already appealed in Supreme Court?" 
-                    label-for="appealed-in-supreme-court">
-                    <p class="content">
-                        From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
-                        <a
-                            href=""
-                            target="_blank">
-                            Supreme Court Civil Rules 18-3
-                        </a>
-                    </p>
-                    <p class="content">
-                        From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
-                        <a
-                            href=""
-                            target="_blank">
-                            Supreme Civil Court Rules 23-6(8)
-                        </a>
-                    </p>
-                    <p class="content">
-                        From a <b>Tribunal</b> to a Supreme Court Judge - 
-                        <a
-                            href=""
-                            target="_blank">
-                            Supreme Court Civil Rules 18-3
-                        </a>
-                    </p>
-                    <b-form-radio-group                
-                        v-model="commonInfo.appealedInSupremeCourt"
-                        @change="update"
-                        id="appealed-in-supreme-court"
-                        style="font-size: 1rem; font-weight:400;" 
-                        :options="appealedInSupremeCourtOptions"
-                    ></b-form-radio-group>
-                </b-form-group>
+            <b-form-group
+                class="ml-4 labels"
+                label="Was this matter already appealed in Supreme Court?" 
+                label-for="appealed-in-supreme-court">
+                <p class="content">
+                    From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
+                    <a
+                        href=""
+                        target="_blank">
+                        Supreme Court Civil Rules 18-3
+                    </a>
+                </p>
+                <p class="content">
+                    From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
+                    <a
+                        href=""
+                        target="_blank">
+                        Supreme Civil Court Rules 23-6(8)
+                    </a>
+                </p>
+                <p class="content">
+                    From a <b>Tribunal</b> to a Supreme Court Judge - 
+                    <a
+                        href=""
+                        target="_blank">
+                        Supreme Court Civil Rules 18-3
+                    </a>
+                </p>
+                <b-form-radio-group                
+                    v-model="commonInfo.appealedInSupremeCourt"
+                    @change="update"
+                    id="appealed-in-supreme-court"
+                    style="font-size: 1rem; font-weight:400;" 
+                    :options="appealedInSupremeCourtOptions"
+                ></b-form-radio-group>
+            </b-form-group>
         </b-card>
 
         <b-card class="mb-4 border-white bg-white">
@@ -97,8 +96,6 @@
                 </b-form-textarea>
             </b-form-group>
         </b-card>
-
-
         
     </b-card>
     
@@ -107,12 +104,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
+
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
 import { form7DataInfoType } from '@/types/Information';
-
 
 @Component({
     components:{        
@@ -120,15 +117,6 @@ import { form7DataInfoType } from '@/types/Information';
     }
 })
 export default class FillForm7CommonInfo extends Vue {
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
-
-    @informationState.State
-    public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
-
-    @informationState.State
-    public caseLocation: string;
 
     @informationState.State
     public form7Info: form7DataInfoType;
@@ -159,11 +147,6 @@ export default class FillForm7CommonInfo extends Vue {
         { text: 'Wills and estate', value: 'NA' }
     ]
 
-    orderType = '';
-    appealedInSupremeCourt = '';
-    appealNature = '';
-    partOfJudgement = '';
-    orderSought = '';
     dataReady = false;
     commonInfo = {} as form7DataInfoType;
 
@@ -171,15 +154,13 @@ export default class FillForm7CommonInfo extends Vue {
         this.dataReady = false;
         this.commonInfo = this.form7Info;
         this.dataReady = true;
-                   
     }
 
     public displayResults(){
         this.$emit('displayResults');
     }
 
-    public update(){        
-        
+    public update(){
         this.UpdateForm7Info(this.commonInfo);
     }
 
@@ -197,7 +178,5 @@ export default class FillForm7CommonInfo extends Vue {
     .labels {
         font-size: 1.15rem; font-weight:600;
     }
-
-
 
 </style>

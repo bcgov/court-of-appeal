@@ -138,7 +138,7 @@
                     id="appellant"
                     style="width: 45%;" 
                     @change="update"      
-                    v-model="appellant">
+                    v-model="styleOfProceedingsInfo.mainAppellant">
                 </b-form-input>
             </b-form-group>
             
@@ -156,16 +156,18 @@
             
         </b-card>        
 
-        <b-modal size="xl" v-model="showAddParty" header-class="bg-primary text-white">
+        <b-modal size="xl" v-model="showPartyWindow" header-class="bg-primary text-white">
             <template v-slot:modal-title>
-                <h1 class="my-2 ml-2">Add Party</h1>
+                <h1 v-if="isCreate" class="my-2 ml-2">Add Party</h1>
+                <h1 v-else class="my-2 ml-2">Edit Party</h1>
             </template>
 
-            <b-card v-if="partyDataReady" class="bg-white border-white text-dark">
+            <b-card class="bg-white border-white text-dark">
 
                 <b-row class="ml-1">
                     
                     <b-form-group
+                        v-if="isCreate"
                         class="mx-1" 
                         style="display: inline;"                    
                         label="THE NEW PARTY IS:" 
@@ -174,20 +176,46 @@
                             id="party-type"  
                             style="display: inline;"                     
                             @change="enableAdd"
-                            v-model="newParty.isOrganization"
+                            v-model="party.isOrganization"
                             :options="partyTypeOptions"                
                         ></b-form-radio-group>                
+                    </b-form-group>
+                    <b-form-group
+                        v-else
+                        class="mx-3" 
+                        style="display: inline;"                    
+                        label="SELECT A PARTY TO EDIT:" 
+                        label-for="party-to-edit">
+                        <b-form-select
+                            id="party-to-edit"  
+                            style="display: inline;"                     
+                            @change="enableEdit"
+                            v-model="partyToEdit">
+                            <b-form-select-option 
+                                 v-for="party in partiesList" 
+                                :key="party.ceisPartyId"
+                                :value="party">
+                                {{party.fullName}}
+                            </b-form-select-option>                
+                        </b-form-select>                
                     </b-form-group>
                 
                 </b-row>
 
                 <b-card v-if="displayWarning" class="bg-danger text-white border-danger">
-                    WARNING: The parties to an appeal are almost always the parties that appear 
-                    in the lower court. Do not add parties that were not named on the lower court 
-                    file as this may result in your appeal form being rejected.
-                </b-card>
+                    <div v-if="isCreate">
+                        WARNING: The parties to an appeal are almost always the parties that appear 
+                        in the lower court. Do not add parties that were not named on the lower court 
+                        file as this may result in your appeal form being rejected.
+                    </div>
+                    <div v-else>
+                        WARNING: The spelling and names of the parties must be the same as on the 
+                        Supreme Court order. Do not modify names. This should only be used in 
+                        exceptional circumstances.
+                    </div>
+                </b-card>                
 
-                <b-card no-body v-else-if="!displayWarning && newParty.isOrganization" class="border-white">
+                <b-card no-body v-else-if="partyDataReady && !displayWarning && party.isOrganization" class="border-white">
 
                     <b-row class="ml-1">
                         <b-col cols="6">                    
@@ -197,7 +225,7 @@
                                 label-for="organization-name">
                                 <b-form-input 
                                     id="organization-name"             
-                                    v-model="newParty.organizationName">
+                                    v-model="party.organizationName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>   
@@ -208,7 +236,7 @@
                                 label-for="court-role">
                                 <b-form-select                            
                                     id="court-role"             
-                                    v-model="newParty.lowerCourtRole"                    
+                                    v-model="party.lowerCourtRole"                    
                                     :options="lookups.lowerCourtRoles">
                                 </b-form-select>                        
                             </b-form-group>       
@@ -224,7 +252,7 @@
                                 label-for="counsel-number">
                                 <b-form-input 
                                     id="counsel-name"                 
-                                    v-model="newParty.counselName">
+                                    v-model="party.counselName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>           
@@ -232,7 +260,7 @@
 
                 </b-card>
 
-                <b-card no-body v-else-if="!displayWarning && !newParty.isOrganization" class="border-white">
+                <b-card no-body v-else-if="partyDataReady && !displayWarning && !party.isOrganization" class="border-white">
 
                     <b-row class="ml-1">
                         <b-col cols="6">                    
@@ -242,7 +270,7 @@
                                 label-for="surname">
                                 <b-form-input 
                                     id="surname"                  
-                                    v-model="newParty.surname">
+                                    v-model="party.surname">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>   
@@ -253,7 +281,7 @@
                                 label-for="court-role">
                                 <b-form-select                            
                                     id="court-role" 
-                                    v-model="newParty.lowerCourtRole"                    
+                                    v-model="party.lowerCourtRole"                    
                                     :options="lookups.lowerCourtRoles">
                                 </b-form-select>                        
                             </b-form-group>       
@@ -268,7 +296,7 @@
                                 label-for="first-name">
                                 <b-form-input 
                                     id="first-name"                                                      
-                                    v-model="newParty.firstGivenName">
+                                    v-model="party.firstGivenName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>
@@ -279,7 +307,7 @@
                                 label-for="counsel-number">
                                 <b-form-input 
                                     id="counsel-name"                                                       
-                                    v-model="newParty.counselName">
+                                    v-model="party.counselName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>           
@@ -292,7 +320,7 @@
                                 label-for="second-name">
                                 <b-form-input 
                                     id="second-name"                    
-                                    v-model="newParty.secondGivenName">
+                                    v-model="party.secondGivenName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>                     
@@ -305,14 +333,14 @@
                                 label-for="third-name">
                                 <b-form-input 
                                     id="third-name"                    
-                                    v-model="newParty.thirdGivenName">
+                                    v-model="party.thirdGivenName">
                                 </b-form-input>
                             </b-form-group>
                         </b-col>                     
                     </b-row>            
                 </b-card>
 
-                <b-card no-body v-if="!displayWarning" class="border-white">
+                <b-card no-body v-if="partyDataReady && !displayWarning" class="border-white">
 
                     <b-card no-body class="border-white">
                         <b-row class="ml-1">   
@@ -321,12 +349,12 @@
                                     class="labels"                
                                     label="OTHER NAMES:" 
                                     label-for="aliases">
-                                    <span v-if="newParty.aliases.length == 0 && !AddNewAliasForm" id="aliases" class="text-muted ml-2 my-2">No aliases have been assigned.</span>
+                                    <span v-if="party.aliases.length == 0 && !AddNewAliasForm" id="aliases" class="text-muted ml-2 my-2">No aliases have been assigned.</span>
                                     <b-table
-                                        v-else-if="newParty.aliases.length > 0"
+                                        v-else-if="party.aliases.length > 0"
                                         :key="updated"                                
                                         id="aliases"
-                                        :items="newParty.aliases"
+                                        :items="party.aliases"
                                         :fields="aliasFields"
                                         head-row-variant="primary"
                                         borderless    
@@ -352,7 +380,7 @@
 
                                         <template v-slot:row-details="data">
                                             <b-card body-class="m-0 px-0 py-1" :border-variant="addAliasFormColor" style="border:2px solid;">
-                                                <add-alias-form :formData="data.item" :index="data.index" :isCreate="false" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />
+                                                <add-alias-form :formData="data.item" :index="data.index" :isCreateAlias="false" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />
                                             </b-card>
                                         </template>
                                     </b-table> 
@@ -370,7 +398,7 @@
                     </b-card>           
 
                     <b-card v-if="AddNewAliasForm" id="addAliasForm" class="my-1 ml-4" :border-variant="addAliasFormColor" style="border:2px solid; width: 81%;" body-class="px-1 py-1">
-                        <add-alias-form :formData="{}" :index="-1" :isCreate="true" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />                
+                        <add-alias-form :formData="{}" :index="-1" :isCreateAlias="true" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />                
                     </b-card>
 
                     <b-card no-body class="border-white">
@@ -380,12 +408,12 @@
                                     class="labels"                
                                     label="LEGAL REPRESENTATIVES:" 
                                     label-for="representatives">
-                                    <span v-if="newParty.legalReps.length == 0 && !AddNewRepresentativeForm" id="representatives" class="text-muted ml-2 my-2">No representatives have been assigned.</span>
+                                    <span v-if="party.legalReps.length == 0 && !AddNewRepresentativeForm" id="representatives" class="text-muted ml-2 my-2">No representatives have been assigned.</span>
                                     <b-table
-                                        v-else-if="newParty.legalReps.length > 0"
+                                        v-else-if="party.legalReps.length > 0"
                                         :key="updated"                                
                                         id="representatives"
-                                        :items="newParty.legalReps"
+                                        :items="party.legalReps"
                                         :fields="representativeFields"
                                         head-row-variant="primary"
                                         borderless    
@@ -411,7 +439,7 @@
 
                                         <template v-slot:row-details="data">
                                             <b-card body-class="m-0 px-0 py-1" :border-variant="addRepresentativeFormColor" style="border:2px solid;">
-                                                <add-representative-form :formData="data.item" :index="data.index" :isCreate="false" :isOrganization="newParty.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />
+                                                <add-representative-form :formData="data.item" :index="data.index" :isCreateRep="false" :isOrganization="party.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />
                                             </b-card>
                                         </template>
                                     </b-table> 
@@ -429,7 +457,7 @@
                     </b-card>           
 
                     <b-card v-if="AddNewRepresentativeForm" id="addRepresentativeForm" class="my-1 ml-4" :border-variant="addRepresentativeFormColor" style="border:2px solid; width: 81%;" body-class="px-1 py-1">
-                        <add-representative-form :formData="{}" :index="-1" :isCreate="true" :isOrganization="newParty.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />                
+                        <add-representative-form :formData="{}" :index="-1" :isCreateRep="true" :isOrganization="party.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />                
                     </b-card>
 
                 </b-card>            
@@ -437,11 +465,24 @@
             </b-card>            
 
             <template v-slot:modal-footer>
-                <b-button variant="dark" @click="showAddParty = false">Cancel</b-button>
                 <b-button 
-                    v-if="enableAddParty"
+                    v-if="!isCreate && enableEditParty"
+                    variant="danger"
+                    class="mr-auto" 
+                    @click="confirmDeleteParty">
+                    <b-icon-trash-fill class="mr-1" />Delete
+                </b-button>
+                <b-button variant="dark" @click="showPartyWindow = false">Cancel</b-button>
+                <b-button 
+                    v-if="isCreate && enableAddParty"
                     variant="success" 
                     @click="saveNewParty">
+                    <i class="fas fa-save mr-1"></i>Save
+                </b-button>
+                <b-button 
+                    v-else-if="!isCreate && enableEditParty"
+                    variant="success" 
+                    @click="saveParty">
                     <i class="fas fa-save mr-1"></i>Save
                 </b-button>
             </template>
@@ -450,10 +491,29 @@
                 <b-button
                     variant="outline-dark"
                     class="closeButton"
-                    @click="showAddParty = false"
+                    @click="showPartyWindow = false"
                     >&times;</b-button
                 >
             </template>
+        </b-modal>
+
+        <b-modal v-model="showConfirmDeleteParty" id="bv-modal-confirm-delete" header-class="bg-warning text-light">
+            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Confirm Delete Party</h2>                    
+            </template>			
+
+            <h4>Are you sure you want to delete this party?</h4>
+			
+            <template v-slot:modal-footer>
+				<b-button variant="primary" @click="cancelPartyDeletion()">Cancel</b-button>
+                <b-button variant="danger" @click="deleteParty()">Confirm</b-button>                
+            </template>            
+            <template v-slot:modal-header-close>                 
+                <b-button variant="outline-warning" class="text-light closeButton" @click="cancelPartyDeletion()"
+                >&times;</b-button>
+            </template>
+
         </b-modal>
         
     </b-card>
@@ -461,20 +521,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
 
+import "@/store/modules/information";
+const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
-import { partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
-const informationState = namespace("Information");
 
 import AddAliasForm from './AddAliasForm.vue';
 import AddRepresentativeForm from './AddRepresentativeForm.vue';
-import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, lookupsInfoType, representativeInfoType } from '@/types/Information';
-import { indexOf } from 'underscore';
 
+import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, lookupsInfoType, representativeInfoType } from '@/types/Information';
+import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 @Component({
     components:{        
@@ -498,7 +557,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     @informationState.Action
     public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
-
 
     partiesFields = [
         {
@@ -583,7 +641,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             sortable:false            
         }        
     ]
-
       
     displayWarning = true;
 
@@ -597,7 +654,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     latestEditRepresentativeData;
     isEditRepresentativeOpen = false;
     updated = 0;
-
     
     partyDataReady = false;
     
@@ -605,17 +661,18 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     respondents: string[] = [];
     respondentSolicitorNames = '';
     respondentSolicitors: string[] = [];
-    appellant = '';
     
     dataReady = false;
 
     partiesList: form7PartiesInfoType[] = [];  
-    newParty = {} as form7PartiesInfoType;    
+    party = {} as form7PartiesInfoType;    
+    partyToEdit = {} as form7PartiesInfoType;
     updateTable = 0;
-    showAddParty = false;
+    showPartyWindow = false;
+    showConfirmDeleteParty = false;
     enableAddParty = false;
+    enableEditParty = false;
     isCreate = false;
-
     
     styleOfProceedingsInfo = {} as form7DataInfoType;
 
@@ -629,34 +686,48 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     mounted() { 
         this.dataReady = false;
-        this.styleOfProceedingsInfo = this.form7Info;
+        this.styleOfProceedingsInfo = this.form7Info;        
         this.extractInfo();
-        this.dataReady = true;
-                   
+        this.dataReady = true;                   
     }
 
     public extractInfo(){
-        this.appellant = this.userName;
+        this.styleOfProceedingsInfo.mainAppellant = this.userName;
         this.partiesList = this.supremeCourtCaseJson.parties;
-        this.form7Info.appellants = [];
-        this.form7Info.respondents = [];
+        this.styleOfProceedingsInfo.appellants = [];
+        this.styleOfProceedingsInfo.respondents = [];
         for (const party in this.supremeCourtCaseJson.parties){
-            if (this.partiesList[party].legalReps.length == 0){
-                //TODO: if alias: intervener two, intervener on behalf of Two Test
-                // or executor 2, executor for the Estate of Two Test
-                // formerly known as three tests
-                this.partiesList[party].title = this.supremeCourtCaseJson.parties[party].lowerCourtRole 
-                                                + "</br>" 
-                                                + this.supremeCourtCaseJson.parties[party].fullName;
-            } else {
-                //TODO: intervener two, intervener on behalf of Two Test
-                // or executor 2, executor for the Estate of Two Test
-            }
-        }
-        
+            const partyInfo = this.supremeCourtCaseJson.parties[party];
+            this.partiesList[party].title = this.getPartyTitles(partyInfo);            
+        }        
     }  
 
-     public appLeft(row){        
+    public getPartyTitles(partyInfo: supremeCourtPartiesJsonInfoType){
+        let title = '';
+        if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
+            title = partyInfo.lowerCourtRole + "</br>" + partyInfo.fullName;
+        } else {
+
+            const repTitle = [];
+            for (const legalRep of partyInfo.legalReps){                
+                const repFormat = this.lookups.legalRepFormatters[legalRep.type].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
+                repTitle.push(repFormat);
+            }
+            
+            const aliasTitle = [];
+            for (const alias of partyInfo.aliases){                    
+                aliasTitle.push(alias.type + ' ' + alias.name);
+            }
+           
+            const repText = repTitle.length?repTitle.join('</br> or'): '';
+            const aliasText = aliasTitle.length?aliasTitle.join('</br>'): '';            
+            title = partyInfo.lowerCourtRole + "</br>" + (repText?(repText + "</br>"):'') + aliasText;
+        }
+
+        return title;
+    }
+
+    public appLeft(row){        
         this.partiesList[row.index].appealCourtRole = 'Appellant';
         this.styleOfProceedingsInfo.appellants.push(this.partiesList[row.index]);
         this.UpdateForm7Info(this.styleOfProceedingsInfo);        
@@ -698,43 +769,94 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public addParties(){       
-        this.newParty = {} as supremeCourtPartiesJsonInfoType;
+        this.party = {} as supremeCourtPartiesJsonInfoType;
         this.enableAddParty = false;
         this.isCreate = true;
-        this.showAddParty = true;
+        this.showPartyWindow = true;
         this.partyDataReady = false; 
         this.displayWarning = true;        
-        this.newParty.aliases = [];
-        this.newParty.legalReps = [];
+        this.party.aliases = [];
+        this.party.legalReps = [];
         this.partyDataReady = true;
     }
 
     public saveNewParty(){
-        if (this.newParty.isOrganization){
-            this.newParty.fullName = this.newParty.organizationName;
+        if (this.party.isOrganization){
+            this.party.fullName = this.party.organizationName;
         } else {
-            this.newParty.fullName = 
-            this.newParty.surname + ', ' + 
-            this.newParty.firstGivenName + 
-            (this.newParty.secondGivenName? ' ' + this.newParty.secondGivenName:'') +
-            (this.newParty.thirdGivenName? ' ' + this.newParty.thirdGivenName:'')
+            this.party.fullName = 
+            this.party.surname + ', ' + 
+            this.party.firstGivenName + 
+            (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
+            (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
         }
         //TODO: save party and get ceisId
 
-        this.newParty.title = this.newParty.lowerCourtRole 
-                            + "</br>" 
-                            + this.newParty.fullName;        
-        this.partiesList.push(this.newParty);       
+        this.party.title = this.getPartyTitles(this.party);        
+        this.partiesList.push(this.party);       
         this.styleOfProceedingsInfo.parties = this.partiesList;
         this.UpdateForm7Info(this.styleOfProceedingsInfo);        
-        this.showAddParty = false;
+        this.showPartyWindow = false;
         this.updateTable ++;
     }
 
     public editParties(){
-        // TODO: 
-        console.log('Edit Parties')
+        this.party = {} as supremeCourtPartiesJsonInfoType;
+        this.partyToEdit = {} as supremeCourtPartiesJsonInfoType;
+        this.enableEditParty = false;
         this.isCreate = false;
+        this.showPartyWindow = true;
+        this.partyDataReady = false; 
+        this.displayWarning = true;
+    }
+
+    public saveParty(){
+        if (this.party.isOrganization){
+            this.party.fullName = this.party.organizationName;
+        } else {
+            this.party.fullName = 
+            this.party.surname + ', ' + 
+            this.party.firstGivenName + 
+            (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
+            (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
+        }
+        //TODO: save party using ceisID
+
+        this.party.title = this.getPartyTitles(this.party);
+        
+        if (this.party.appealCourtRole && this.party.appealCourtRole == 'Respondent') {
+            this.party.appealCourtRole = ''
+            const resIndex = this.styleOfProceedingsInfo.respondents.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
+            if (resIndex != -1) {
+                this.styleOfProceedingsInfo.respondents.splice(resIndex, 1);
+            }
+
+            const resNameIndex =  this.respondents.indexOf(this.party.fullName);
+            if (resNameIndex != -1) {
+                this.respondents.splice(resNameIndex, 1);
+            }
+
+            if (this.party.counselName) {            
+                const solicitorNameIndex =  this.respondentSolicitors.indexOf(this.party.counselName);
+                if (solicitorNameIndex != -1){
+                    this.respondentSolicitors.splice(solicitorNameIndex, 1);
+                }
+            }
+                  
+        } else if (this.party.appealCourtRole && this.party.appealCourtRole == 'Appellant') {
+            this.party.appealCourtRole = ''
+            const appIndex = this.styleOfProceedingsInfo.appellants.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
+            if (appIndex != -1) {
+                this.styleOfProceedingsInfo.appellants.splice(appIndex, 1);
+            }                     
+        } 
+         
+        const index = this.partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
+        this.partiesList[index] = this.party;
+        this.styleOfProceedingsInfo.parties = this.partiesList;
+        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+        this.showPartyWindow = false;
+        this.updateTable ++;
     }
 
     public editStyleOfProceeding(){
@@ -750,6 +872,14 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public enableAdd(){
         this.displayWarning = false;
         this.enableAddParty = true;
+    }
+
+    public enableEdit(){
+        this.displayWarning = false;
+        this.enableEditParty = true;
+        console.log(this.partyToEdit)
+        this.party = this.partyToEdit;
+        this.partyDataReady = true;
     }
 
     public addNewAlias(){
@@ -770,44 +900,38 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public modifyAliasList(isCreateAlias: boolean, newAlias: aliasInfoType, index: number){        
 
-        if (this.isCreate){
-
-           if (isCreateAlias){           
-                this.newParty.aliases.push(newAlias)
-                this.closeAliasForm();
-            } else {           
-                this.newParty.aliases[index].type = newAlias.type;
-                this.newParty.aliases[index].name = newAlias.name;           
-                this.closeAliasForm();
-            }
-            this.updated ++;
+        if (isCreateAlias){           
+            this.party.aliases.push(newAlias)
+            this.closeAliasForm();
+        } else {           
+            this.party.aliases[index].type = newAlias.type;
+            this.party.aliases[index].name = newAlias.name;           
+            this.closeAliasForm();
         }
+        this.updated ++;
+        
     }
 
-    public removeAlias(data){
-        if (this.isCreate){
-            this.newParty.aliases.splice(data.index,1);
-            this.updated ++;
-        }
+    public removeAlias(data){        
+        this.party.aliases.splice(data.index,1);
+        this.updated ++;        
     }
 
-    public modifyRepresentativeList(isCreateRep: boolean, newRepresentative: representativeInfoType, index: number){        
+    public modifyRepresentativeList(isCreateRep: boolean, newRepresentative: representativeInfoType, index: number){       
 
-        if (this.isCreate) {
-            if (isCreateRep){           
-            this.newParty.legalReps.push(newRepresentative)
+        if (isCreateRep){           
+            this.party.legalReps.push(newRepresentative)
             this.closeRepresentativeForm();
-            } else {           
-                this.newParty.legalReps[index].type = newRepresentative.type;
-                this.newParty.legalReps[index].name = newRepresentative.name;           
-                this.closeRepresentativeForm();
-            }
-            this.updated ++;
+        } else {           
+            this.party.legalReps[index].type = newRepresentative.type;
+            this.party.legalReps[index].name = newRepresentative.name;           
+            this.closeRepresentativeForm();
         }
+        this.updated ++;        
     }
 
     public removeRepresentative(data){
-        this.newParty.legalReps.splice(data.index,1);
+        this.party.legalReps.splice(data.index,1);
         this.updated ++;
     }
 
@@ -849,6 +973,27 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         }   
     }    
 
+    public confirmDeleteParty(){        
+        this.showConfirmDeleteParty = true;
+    }
+    
+    public cancelPartyDeletion() {
+        this.showConfirmDeleteParty = false;
+        
+    }
+
+    public deleteParty(){
+        
+        this.showConfirmDeleteParty = false;
+        // TODO: delete party using ceisId
+        const index = this.partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
+        this.partiesList.splice(index, 1);       
+        this.styleOfProceedingsInfo.parties = this.partiesList;
+        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+        this.showPartyWindow = false;
+        this.updateTable ++;
+    }
+
 }
 </script>
 
@@ -862,6 +1007,16 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     .labels {
         font-size: 1.15rem; font-weight:600;
+    }
+
+    .closeButton {
+        background-color: transparent !important;
+        color: white;
+        border: white;
+        font-weight: 700;
+        font-size: 2rem;
+        padding-top: 0;
+        margin-top: 0;
     }
 
 

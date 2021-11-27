@@ -60,7 +60,7 @@
 
         <b-modal v-model="showCancelWarning" id="bv-modal-alias-cancel-warning" header-class="bg-warning text-light">            
             <template v-slot:modal-title>
-                <h2 v-if="isCreate" class="mb-0 text-light"> Unsaved New Alias </h2>                
+                <h2 v-if="isCreateAlias" class="mb-0 text-light"> Unsaved New Alias </h2>                
                 <h2 v-else class="mb-0 text-light"> Unsaved Alias Changes </h2>                                 
             </template>
             <p>Are you sure you want to cancel without saving your changes?</p>
@@ -99,7 +99,7 @@
         index!: number;
 
         @Prop({required: true})
-        isCreate!: boolean;             
+        isCreateAlias!: boolean;             
 
         selectedAliasType = ''
         aliasTypeState = true;     
@@ -119,7 +119,7 @@
         { 
             this.dataReady = false;
             this.clearSelections();
-            if(!this.isCreate) {
+            if(!this.isCreateAlias) {
                 this.extractFormInfo();
                 this.addButtonText = 'Save';
             } else {
@@ -144,7 +144,7 @@
                 const alias = {} as aliasInfoType;
                 alias.type = this.selectedAliasType;
                 alias.name = this.aliasName;       
-                this.$emit('submit', this.isCreate, alias, this.index);
+                this.$emit('submit', this.isCreateAlias, alias, this.index);
             }
                 
         }
@@ -157,7 +157,7 @@
         }
 
         public isChanged(){
-            if(this.isCreate){
+            if(this.isCreateAlias){
                 if(this.selectedAliasType.length && this.aliasName.length ) return true;
                 return false;
             }else{

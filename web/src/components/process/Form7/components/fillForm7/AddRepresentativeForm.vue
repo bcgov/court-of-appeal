@@ -71,7 +71,7 @@
 
         <b-modal v-model="showCancelWarning" id="bv-modal-representative-cancel-warning" header-class="bg-warning text-light">            
             <template v-slot:modal-title>
-                <h2 v-if="isCreate" class="mb-0 text-light"> Unsaved New Representative </h2>                
+                <h2 v-if="isCreateRep" class="mb-0 text-light"> Unsaved New Representative </h2>                
                 <h2 v-else class="mb-0 text-light"> Unsaved Representative Changes </h2>                                 
             </template>
             <p>Are you sure you want to cancel without saving your changes?</p>
@@ -110,7 +110,7 @@
         index!: number;
 
         @Prop({required: true})
-        isCreate!: boolean; 
+        isCreateRep!: boolean; 
         
         @Prop({required: true})
         isOrganization!: boolean;
@@ -133,7 +133,7 @@
         { 
             this.dataReady = false;
             this.clearSelections();
-            if(!this.isCreate) {
+            if(!this.isCreateRep) {
                 this.extractFormInfo();
                 this.addButtonText = 'Save';
             } else {
@@ -164,7 +164,7 @@
                 const representative = {} as representativeInfoType;
                 representative.type = this.selectedRepresentativeType;
                 representative.name = this.representativeName;       
-                this.$emit('submit', this.isCreate, representative, this.index);
+                this.$emit('submit', this.isCreateRep, representative, this.index);
             }
                 
         }
@@ -177,7 +177,7 @@
         }
 
         public isChanged(){
-            if(this.isCreate){
+            if(this.isCreateRep){
                 if(this.selectedRepresentativeType.length && this.representativeName.length ) return true;
                 return false;
             }else{

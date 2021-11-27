@@ -56,12 +56,13 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
+import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { form7DataInfoType } from '@/types/Information';
 
 import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm7/FillForm7SummaryInfo.vue";
 import FillForm7CommonInfo from "@/components/process/Form7/components/fillForm7/FillForm7CommonInfo.vue";
 import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/components/fillForm7/FillForm7StyleOfProceedingsInfo.vue";
-import { form7DataInfoType, form7PartiesInfoType } from '@/types/Information';
+
 
 @Component({
     components:{        
@@ -70,10 +71,7 @@ import { form7DataInfoType, form7PartiesInfoType } from '@/types/Information';
         FillForm7StyleOfProceedingsInfo
     }
 })
-export default class FillForm7 extends Vue {
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
+export default class FillForm7 extends Vue {    
 
     @informationState.State
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
@@ -86,8 +84,9 @@ export default class FillForm7 extends Vue {
 
     referenceNumber = '';    
 
-    mounted() {  
-                     
+    mounted() { 
+        const form7Data = {} as form7DataInfoType;
+        this.UpdateForm7Info(form7Data);                     
     }   
 
     public checkValidAddress(){
