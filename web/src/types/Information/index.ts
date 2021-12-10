@@ -57,6 +57,7 @@ export interface form7DataInfoType {
     appearanceDays: number;
     orderType: string;
     appealedInSupremeCourt: string;
+    makerName?: string;
     appealNature: string;
     partOfJudgement: string;
     orderSought: string;
@@ -66,10 +67,27 @@ export interface form7DataInfoType {
     mainAppellant?: string;
     serviceAddress: string;
     referenceNumber: string; 
+    manualSop?: manualSopInfoType[];
 } 
 
+export interface form7StatesInfoType {
+    appearanceDays: null | boolean;
+    respondents: null | boolean;
+    appellants: null | boolean;
+    orderType: null | boolean;
+    appealedInSupremeCourt: null | boolean;
+    makerName: null | boolean;
+    appealNature: null | boolean;
+    partOfJudgement: null | boolean;
+    orderSought: null | boolean;
+    mainAppellant: null | boolean;
+    serviceAddress: null | boolean;
+    validServiceAddress: null | boolean;
+    referenceNumber: null | boolean;
+}
+
 export interface form7PartiesInfoType {
-    ceisPartyId: number;
+    ceisPartyId?: number;
     isOrganization: boolean;
     firstGivenName: string;
     secondGivenName?: string;
@@ -83,7 +101,23 @@ export interface form7PartiesInfoType {
     legalReps?: representativeInfoType[];
     appealCourtRole?: string;   
     title?: string; 
-}  
+} 
+
+export interface form7PartiesStatesInfoType {
+    firstGivenName: null | boolean;
+    surname: null | boolean;
+    organizationName: null | boolean;
+    counselName: null | boolean;
+    lowerCourtRole: null | boolean;
+}   
+
+export interface manualSopInfoType {
+    conjunction?: string;
+    partyName: string;
+    lowerCourtRole: string;
+    appealRole?: string;   
+    plural?: boolean;    
+} 
 
 export interface aliasInfoType {
     type: string;

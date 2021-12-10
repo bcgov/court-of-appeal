@@ -8,6 +8,7 @@
                 label-for="order-type">
                 <b-form-radio-group                
                     v-model="commonInfo.orderType"
+                    :state="form7InfoStates.orderType"
                     @change="update"
                     id="order-type"
                     :options="typesOfOrders"
@@ -46,10 +47,23 @@
                 <b-form-radio-group                
                     v-model="commonInfo.appealedInSupremeCourt"
                     @change="update"
+                    :state="form7InfoStates.appealedInSupremeCourt"
                     id="appealed-in-supreme-court"
                     style="font-size: 1rem; font-weight:400;" 
                     :options="appealedInSupremeCourtOptions"
-                ></b-form-radio-group>
+                ></b-form-radio-group>                
+            </b-form-group>
+            <b-form-group
+                v-if="commonInfo.appealedInSupremeCourt == 'yes'"
+                class="ml-4 mt-3 labels"                
+                label="What's the name of the maker of the original decision, direction or order?"
+                label-for="maker-name">
+                <b-form-input 
+                    id="maker-name"    
+                    :state="form7InfoStates.makerName"  
+                    @change="update"              
+                    v-model="commonInfo.makerName">
+                </b-form-input>
             </b-form-group>
         </b-card>
 
@@ -64,6 +78,7 @@
                     id="appeal-nature"     
                     style="font-size: 1rem; font-weight:500;"        
                     v-model="commonInfo.appealNature"
+                    :state="form7InfoStates.appealNature"
                     @change="update"
                     :options="appealNatureOptions"                
                     stacked                
@@ -75,7 +90,8 @@
                 label="If the appeal is from a part of the judgement only, please specify the part:" 
                 label-for="part-of-judgement">
                 <b-form-input 
-                    id="part-of-judgement"      
+                    id="part-of-judgement"    
+                    :state="form7InfoStates.partOfJudgement"  
                     @change="update"              
                     v-model="commonInfo.partOfJudgement">
                 </b-form-input>
@@ -91,6 +107,7 @@
                 <b-form-textarea 
                     id="order-sought"
                     rows="4" 
+                    :state="form7InfoStates.orderSought"
                     @change="update"                   
                     v-model="commonInfo.orderSought">
                 </b-form-textarea>
@@ -102,14 +119,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
-import { form7DataInfoType } from '@/types/Information';
+import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
 
 @Component({
     components:{        
@@ -121,13 +138,16 @@ export default class FillForm7CommonInfo extends Vue {
     @informationState.State
     public form7Info: form7DataInfoType;
 
+    @informationState.State
+    public form7InfoStates: form7StatesInfoType;
+
     @informationState.Action
     public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
 
     typesOfOrders = [
-        { text: 'Trial Judgement', value: 'trial' },
-        { text: 'Summary Trial Judgement', value: 'summaryTrial' },
-        { text: 'Chambers Judgement', value: 'chambers' }
+        { text: 'Trial Judgement', value: 'Trial Judgement' },
+        { text: 'Summary Trial Judgement', value: 'Summary Trial Judgement' },
+        { text: 'Chambers Judgement', value: 'Chambers Judgement' }
     ]
 
     appealedInSupremeCourtOptions = [
@@ -136,16 +156,16 @@ export default class FillForm7CommonInfo extends Vue {
     ]
 
     appealNatureOptions = [
-        { text: 'Constitutional/Administrative', value: 'admin' },
-        { text: 'Civil Procedure', value: 'civilPrcdr' },
-        { text: 'Commercial', value: 'comm' },
-        { text: 'Motor Vehicle Accidents', value: 'motorVhcl' },
-        { text: 'Municipal Law', value: 'municipal' },
-        { text: 'Real Property', value: 'realProp' },
-        { text: 'Torts', value: 'torts' },
-        { text: 'Equity', value: 'NA' },
-        { text: 'Wills and estate', value: 'NA' }
-    ]
+        { text: 'Constitutional/Administrative', value: 'Constitutional/Administrative' },
+        { text: 'Civil Procedure', value: 'Civil Procedure' },
+        { text: 'Commercial', value: 'Commercial' },
+        { text: 'Motor Vehicle Accidents', value: 'Motor Vehicle Accidents' },
+        { text: 'Municipal Law', value: 'Municipal Law' },
+        { text: 'Real Property', value: 'Real Property' },
+        { text: 'Torts', value: 'Torts' },
+        { text: 'Equity', value: 'Equity' },
+        { text: 'Wills and estate', value: 'Wills and estate' }
+    ]    
 
     dataReady = false;
     commonInfo = {} as form7DataInfoType;
@@ -160,7 +180,7 @@ export default class FillForm7CommonInfo extends Vue {
         this.$emit('displayResults');
     }
 
-    public update(){
+    public update(){        
         this.UpdateForm7Info(this.commonInfo);
     }
 

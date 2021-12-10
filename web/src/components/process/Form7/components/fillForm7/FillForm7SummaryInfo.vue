@@ -59,11 +59,18 @@
                 <b-row class="ml-0 mt-1">
                     <b-form-input                    
                         style="max-width:15%" 
+                        :state="form7InfoStates.appearanceDays"
                         @change="update"
                         v-model="appearanceDays">
                     </b-form-input>
                     <span class="ml-2 my-auto">Days</span>
                 </b-row>
+                <span
+                    v-if="(form7InfoStates.appearanceDays != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger">
+                    The duration should be at least 1 day in length.
+                </span>
                                 
             </b-col>           
         </b-row>
@@ -81,7 +88,7 @@ import "@/store/modules/information";
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
-import { form7DataInfoType } from '@/types/Information';
+import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
 
 
 @Component({
@@ -102,6 +109,9 @@ export default class FillForm7SummaryInfo extends Vue {
     public caseLocation: string;
 
     @informationState.State
+    public form7InfoStates: form7StatesInfoType;
+
+    @informationState.State
     public form7Info: form7DataInfoType;
 
     @informationState.Action
@@ -119,7 +129,7 @@ export default class FillForm7SummaryInfo extends Vue {
             this.supremeCourtOrderJson.judgeFirstName + ' ' + 
             this.supremeCourtOrderJson.judgeSurname;
         this.appearanceDays = this.supremeCourtOrderJson.appearanceDays;
-
+        this.update();
         this.dataReady = true;            
     }
 
@@ -127,9 +137,10 @@ export default class FillForm7SummaryInfo extends Vue {
         this.$emit('displayResults');
     }
 
-    public update(){        
+    public update(){ 
+              
         const form7 = this.form7Info;
-        form7.appearanceDays = this.appearanceDays;
+        form7.appearanceDays = this.appearanceDays;        
         this.UpdateForm7Info(form7);
     }
 

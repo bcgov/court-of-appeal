@@ -12,6 +12,7 @@
                 :key="updateTable"                 
                 :items="partiesList"
                 :fields="partiesFields"
+                :state="form7InfoStates.respondents || form7InfoStates.appellants"
                 class="mx-4 text-center"
                 striped
                 small 
@@ -67,6 +68,11 @@
                 </template>                
                 
             </b-table> 
+            <span
+                v-if="(form7InfoStates.respondents != null || form7InfoStates.appellants != null)" 
+                style="font-size: 0.75rem;" 
+                class="mx-4 bg-white text-danger">A minimum of one Appellant and one Respondent is required.
+            </span> 
 
             <hr class="mb-3 mx-4">
             <b-row class="mx-0">
@@ -97,6 +103,11 @@
                     </b-button>
                 </b-col>
             </b-row> 
+            <span
+                v-if="(!editStyleOfProceedingsEnabled)" 
+                style="font-size: 0.75rem;" 
+                class="mx-4 bg-white text-danger">A minimum of one Appellant and one Respondent is required to edit style of proceedings.
+            </span>
 
             <hr class="mb-4 mx-4">
             <p class="ml-4 mt-2 mb-5" style="font-weight:700;">Please ensure that the required names and address fields are completed.</p>
@@ -109,8 +120,8 @@
                 <b-form-textarea 
                     id="respondent-names"
                     rows="3"
-                    disabled
-                    @change="update"                    
+                    disabled                    
+                    @change="update"
                     v-model="respondentNames">
                 </b-form-textarea>
             </b-form-group>
@@ -125,7 +136,7 @@
                     id="respondent-solicitor"
                     disabled
                     rows="3"
-                    @change="update"                    
+                    @change="update"
                     v-model="respondentSolicitorNames">
                 </b-form-textarea>
             </b-form-group>
@@ -137,6 +148,7 @@
                 <b-form-input 
                     id="appellant"
                     style="width: 45%;" 
+                    :state="form7InfoStates.mainAppellant"
                     @change="update"      
                     v-model="styleOfProceedingsInfo.mainAppellant">
                 </b-form-input>
@@ -149,14 +161,22 @@
                 <b-form-textarea 
                     id="appellant-address"
                     rows="3"
+                    :state="form7InfoStates.serviceAddress"
                     @change="update"                    
                     v-model="styleOfProceedingsInfo.serviceAddress">
                 </b-form-textarea>
+                <span
+                    v-if="(form7InfoStates.validServiceAddress != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger">
+                    Address of service must be in British Columbia (did you forget to include the province?)
+                </span>
+                
             </b-form-group>
             
         </b-card>        
 
-        <b-modal size="xl" v-model="showPartyWindow" header-class="bg-primary text-white">
+        <b-modal size="xl" v-model="showPartyWindow" header-class="bg-primary text-white" :key="updatedPartyInfo">
             <template v-slot:modal-title>
                 <h1 v-if="isCreate" class="my-2 ml-2">Add Party</h1>
                 <h1 v-else class="my-2 ml-2">Edit Party</h1>
@@ -224,7 +244,8 @@
                                 label="ORGANIZATION NAME" 
                                 label-for="organization-name">
                                 <b-form-input 
-                                    id="organization-name"             
+                                    id="organization-name"                                    
+                                    :state="form7PartiesStates.organizationName"             
                                     v-model="party.organizationName">
                                 </b-form-input>
                             </b-form-group>
@@ -235,7 +256,8 @@
                                 label="LOWER COURT ROLE:" 
                                 label-for="court-role">
                                 <b-form-select                            
-                                    id="court-role"             
+                                    id="court-role"                                    
+                                    :state="form7PartiesStates.lowerCourtRole"             
                                     v-model="party.lowerCourtRole"                    
                                     :options="lookups.lowerCourtRoles">
                                 </b-form-select>                        
@@ -269,7 +291,8 @@
                                 label="SURNAME:" 
                                 label-for="surname">
                                 <b-form-input 
-                                    id="surname"                  
+                                    id="surname"                                    
+                                    :state="form7PartiesStates.surname"                  
                                     v-model="party.surname">
                                 </b-form-input>
                             </b-form-group>
@@ -280,7 +303,8 @@
                                 label="LOWER COURT ROLE:" 
                                 label-for="court-role">
                                 <b-form-select                            
-                                    id="court-role" 
+                                    id="court-role"
+                                    :state="form7PartiesStates.lowerCourtRole"
                                     v-model="party.lowerCourtRole"                    
                                     :options="lookups.lowerCourtRoles">
                                 </b-form-select>                        
@@ -295,7 +319,8 @@
                                 label="FIRST GIVEN NAME:" 
                                 label-for="first-name">
                                 <b-form-input 
-                                    id="first-name"                                                      
+                                    id="first-name"                                    
+                                    :state="form7PartiesStates.firstGivenName"                                                     
                                     v-model="party.firstGivenName">
                                 </b-form-input>
                             </b-form-group>
@@ -515,6 +540,112 @@
             </template>
 
         </b-modal>
+
+        <b-modal size="lg" v-model="showConfirmEditStyleOfProceeding" id="bv-modal-confirm-edit" header-class="bg-warning text-light">
+            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Confirm Edit Style of Proceedings</h2>                    
+            </template>			
+
+            <div>
+                Modifications to the style of proceeding will result in the document 
+                being submitted to the registry for processing.  Do you wish to proceed?
+            </div>
+			
+            <template v-slot:modal-footer>
+				<b-button variant="secondary" @click="cancelEditStyleOfProceedings()">Cancel</b-button>
+                <b-button variant="primary" @click="confirmEditStyleOfProceedings()">OK</b-button>                
+            </template>            
+            <template v-slot:modal-header-close>                 
+                <b-button variant="outline-warning" class="text-light closeButton" @click="cancelEditStyleOfProceedings()"
+                >&times;</b-button>
+            </template>
+
+        </b-modal>
+
+        <b-modal size="xl" v-model="showEditStyleOfProceedingWindow" header-class="bg-primary text-white">
+            <template v-slot:modal-title>
+                <h1 class="my-2 ml-2">Edit Style of Proceeding</h1>                
+            </template>
+
+            <b-card v-if="styleOfProceedingDataReady" class="bg-white border-white text-dark">               
+
+                <b-table
+                        :items="partiesList"
+                        :fields="sopFields"                    
+                        :no-sort-reset="true"
+                        sort-icon-left
+                        thead-class="d-none"
+                        borderless                    
+                        small
+                        responsive="sm"
+                    >
+                    <template v-slot:cell(partyName)="data" >
+                        <b-form-group
+                                class="labels"                
+                                :label="data.item.appealCourtRole + ' / ' + data.item.lowerCourtRole" 
+                                label-for="fullname">
+                                <b-form-input 
+                                    id="fullname"      
+                                    v-model="data.item.fullName">
+                                </b-form-input>
+                        </b-form-group>                        
+                    </template>
+
+                    <template v-slot:cell(conjunction)="data" >
+                        <b-form-group style="margin-top: 2.35rem;" >
+                            <b-form-select
+                                                    
+                                :options="styleOfProceedingOptions">
+                            </b-form-select>                        
+                        </b-form-group>                         
+                    </template>
+
+                    <template v-slot:cell(edit)="data" >
+                         <b-button                     
+                            variant="info"
+                            style="margin-top: 2.35rem; float:right;" 
+                            >
+                            <i class="fas fa-sort"></i>
+                        </b-button>                         
+                    </template>                   
+                    
+                </b-table>                         
+        
+            </b-card>            
+
+            <template v-slot:modal-footer> 
+                <b-button                     
+                    variant="dark"
+                    class="mr-auto" 
+                    @click="showEditStyleOfProceedingWindow = false">
+                    Cancel
+                </b-button>
+
+                <b-button                    
+                    variant="danger" 
+                    @click="resetStyleOfProceeding">
+                    <b-icon-arrow-counterclockwise class="mr-1"/>
+                    Reset Style of Proceeding
+                </b-button>
+
+                <b-button                    
+                    variant="success" 
+                    @click="saveNewStyleOfProceeding">
+                    <i class="fas fa-save mr-1"></i>Update Style of Proceeding
+                </b-button>
+                
+            </template>
+
+            <template v-slot:modal-header-close>
+                <b-button
+                    variant="outline-dark"
+                    class="closeButton"
+                    @click="showEditStyleOfProceedingWindow = false"
+                    >&times;</b-button
+                >
+            </template>
+        </b-modal>
         
     </b-card>
     
@@ -532,7 +663,7 @@ const commonState = namespace("Common");
 import AddAliasForm from './AddAliasForm.vue';
 import AddRepresentativeForm from './AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, lookupsInfoType, representativeInfoType } from '@/types/Information';
+import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 @Component({
@@ -548,6 +679,9 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     @informationState.State
     public form7Info: form7DataInfoType;
+
+    @informationState.State
+    public form7InfoStates: form7StatesInfoType;
 
     @commonState.State
     public userName!: string;
@@ -619,6 +753,27 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         }        
     ]
 
+    sopFields = [
+        {
+            key:'partyName',          
+            label:'',                
+                      
+            sortable:false            
+        }, 
+        {
+            key:'conjunction',          
+            label:'',   
+           
+            sortable:false            
+        }, 
+        {
+            key:'edit',          
+            label:'',   
+            thClass: 'text-white bg-court',           
+            sortable:false            
+        }        
+    ]
+
     representativeFields = [
         {
             key:'type',          
@@ -641,6 +796,14 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             sortable:false            
         }        
     ]
+
+    styleOfProceedingOptions = [
+        {text: 'And', value: 'And'},
+        {text: 'Between', value: 'Between'},
+        {text: 'Re', value: 'Re'},
+        {text: 'In The Matter Of', value: 'In The Matter Of'}
+    ];
+
       
     displayWarning = true;
 
@@ -654,6 +817,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     latestEditRepresentativeData;
     isEditRepresentativeOpen = false;
     updated = 0;
+    updatedPartyInfo = 0;
     
     partyDataReady = false;
     
@@ -670,24 +834,29 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     updateTable = 0;
     showPartyWindow = false;
     showConfirmDeleteParty = false;
+    showConfirmEditStyleOfProceeding = false;
+    showEditStyleOfProceedingWindow = false;
+    styleOfProceedingDataReady = false;
     enableAddParty = false;
     enableEditParty = false;
     isCreate = false;
     
     styleOfProceedingsInfo = {} as form7DataInfoType;
+    form7PartiesStates = {} as form7PartiesStatesInfoType; 
+    editStyleOfProceedingsEnabled = true;   
 
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
     {
         this.respondentNames = newRespondents.join('; ');
         this.respondentSolicitorNames = this.respondentSolicitors.join('; ')
-
     }
 
     mounted() { 
         this.dataReady = false;
         this.styleOfProceedingsInfo = this.form7Info;        
         this.extractInfo();
+        this.form7PartiesStates = {} as form7PartiesStatesInfoType;
         this.dataReady = true;                   
     }
 
@@ -699,10 +868,11 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         for (const party in this.supremeCourtCaseJson.parties){
             const partyInfo = this.supremeCourtCaseJson.parties[party];
             this.partiesList[party].title = this.getPartyTitles(partyInfo);            
-        }        
+        }  
+        this.UpdateForm7Info(this.styleOfProceedingsInfo)      
     }  
 
-    public getPartyTitles(partyInfo: supremeCourtPartiesJsonInfoType){
+    public getPartyTitles(partyInfo: form7PartiesInfoType){
         let title = '';
         if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
             title = partyInfo.lowerCourtRole + "</br>" + partyInfo.fullName;
@@ -781,23 +951,27 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public saveNewParty(){
-        if (this.party.isOrganization){
-            this.party.fullName = this.party.organizationName;
-        } else {
-            this.party.fullName = 
-            this.party.surname + ', ' + 
-            this.party.firstGivenName + 
-            (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
-            (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
-        }
-        //TODO: save party and get ceisId
 
-        this.party.title = this.getPartyTitles(this.party);        
-        this.partiesList.push(this.party);       
-        this.styleOfProceedingsInfo.parties = this.partiesList;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
-        this.showPartyWindow = false;
-        this.updateTable ++;
+        if (this.checkPartyStates()){
+
+            if (this.party.isOrganization){
+                this.party.fullName = this.party.organizationName;
+            } else {
+                this.party.fullName = 
+                this.party.surname + ', ' + 
+                this.party.firstGivenName + 
+                (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
+                (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
+            }           
+
+            this.party.title = this.getPartyTitles(this.party);        
+            this.partiesList.push(this.party);       
+            this.styleOfProceedingsInfo.parties = this.partiesList;
+            this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+            this.showPartyWindow = false;
+            this.updateTable ++;
+
+        }        
     }
 
     public editParties(){
@@ -819,8 +993,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             this.party.firstGivenName + 
             (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
             (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
-        }
-        //TODO: save party using ceisID
+        }        
 
         this.party.title = this.getPartyTitles(this.party);
         
@@ -859,9 +1032,44 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.updateTable ++;
     }
 
-    public editStyleOfProceeding(){
-        // TODO: 
-        console.log('Edit Style of Proceeding')
+    public checkPartyStates(){
+
+        let stateCheck = true;
+        if (this.party.isOrganization){
+
+            this.form7PartiesStates.organizationName = !(this.party.organizationName)? false : null;           
+            this.form7PartiesStates.lowerCourtRole = !(this.party.lowerCourtRole)? false : null;
+
+        } else {
+            this.form7PartiesStates.surname = !(this.party.surname)? false : null;
+            this.form7PartiesStates.firstGivenName = !(this.party.firstGivenName)? false : null;
+            this.form7PartiesStates.lowerCourtRole = !(this.party.lowerCourtRole)? false : null;
+        }
+        
+        this.updatedPartyInfo ++;
+
+        for(const field of Object.keys(this.form7PartiesStates)){
+            if(this.form7PartiesStates[field]==false)
+                stateCheck = false;
+        }
+
+        return stateCheck;            
+    }
+
+    public editStyleOfProceeding(){ 
+
+        if (this.styleOfProceedingsInfo.respondents && 
+            this.styleOfProceedingsInfo.respondents.length > 0 &&
+            this.styleOfProceedingsInfo.appellants && 
+            this.styleOfProceedingsInfo.appellants.length > 0 ){
+                this.showConfirmEditStyleOfProceeding = true;
+                this.editStyleOfProceedingsEnabled = true;
+            } else {
+                this.editStyleOfProceedingsEnabled = false;
+
+            }
+
+        
     }
 
     public update(){        
@@ -985,13 +1193,37 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public deleteParty(){
         
         this.showConfirmDeleteParty = false;
-        // TODO: delete party using ceisId
         const index = this.partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
         this.partiesList.splice(index, 1);       
         this.styleOfProceedingsInfo.parties = this.partiesList;
         this.UpdateForm7Info(this.styleOfProceedingsInfo);        
         this.showPartyWindow = false;
         this.updateTable ++;
+    }
+
+    public confirmEditStyleOfProceedings(){ 
+        this.styleOfProceedingDataReady = false;
+        this.showEditStyleOfProceedingWindow = true;       
+        this.showConfirmEditStyleOfProceeding = false;
+        console.log(this.partiesList)
+        
+        this.styleOfProceedingDataReady = true;
+        
+
+    }
+    
+    public cancelEditStyleOfProceedings() {
+        this.showConfirmEditStyleOfProceeding = false;
+        
+    }
+
+    public saveNewStyleOfProceeding(){
+        console.log('save new SOP')
+
+    }
+
+    public resetStyleOfProceeding(){
+        console.log('reset SOP')
     }
 
 }
