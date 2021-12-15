@@ -28,13 +28,13 @@
                 <template v-slot:cell(appAction)="row" >
                     <b-button
                         v-if="!row.item.appealCourtRole || row.item.appealCourtRole == ''"  
-                        @click="appLeft(row)"
+                        @click="showConfirmEditParty(row, true, true)"
                         class="text-white bg-primary my-3 moveButton"
                         ><b-icon-chevron-left/>
                     </b-button>
                     <b-button  
                         v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Appellant'"  
-                        @click="appRight(row)"        
+                        @click="showConfirmEditParty(row, true, false)"        
                         class="text-white bg-primary my-3 moveButton" 
                         ><b-icon-chevron-right/>
                     </b-button> 
@@ -49,13 +49,13 @@
                 <template v-slot:cell(resAction)="row" >
                     <b-button
                         v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Respondent'"  
-                        @click="resLeft(row)"
+                        @click="showConfirmEditParty(row, false, true)"
                         class="text-white bg-primary my-3 moveButton"
                         ><b-icon-chevron-left/>
                     </b-button>
                     <b-button  
                         v-if="!row.item.appealCourtRole || row.item.appealCourtRole == ''"  
-                        @click="resRight(row)"        
+                        @click="showConfirmEditParty(row, false, false)"        
                         class="text-white bg-primary my-3 moveButton" 
                         ><b-icon-chevron-right/>
                     </b-button>
@@ -304,6 +304,7 @@
                                 label-for="court-role">
                                 <b-form-select                            
                                     id="court-role"
+                                    :disabled="!isCreate"
                                     :state="form7PartiesStates.lowerCourtRole"
                                     v-model="party.lowerCourtRole"                    
                                     :options="lookups.lowerCourtRoles">
@@ -541,6 +542,27 @@
 
         </b-modal>
 
+        <b-modal size="lg" v-model="showConfirmEditParties" id="bv-modal-confirm-edit-party" header-class="bg-warning text-light">
+            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Confirm Edit Parties</h2>                    
+            </template>			
+
+            <div>
+                You have made edits to the style of cause and modifying the parties will reset these edits.  Do you wish to proceed?
+            </div>
+			
+            <template v-slot:modal-footer>
+				<b-button variant="secondary" @click="cancelShowConfirmEditParties()">Cancel</b-button>
+                <b-button variant="primary" @click="confirmEditPartyAppealRoles()">OK</b-button>                
+            </template>            
+            <template v-slot:modal-header-close>                 
+                <b-button variant="outline-warning" class="text-light closeButton" @click="cancelShowConfirmEditParties()"
+                >&times;</b-button>
+            </template>
+
+        </b-modal>
+
         <b-modal size="lg" v-model="showConfirmEditStyleOfProceeding" id="bv-modal-confirm-edit" header-class="bg-warning text-light">
             
 			<template v-slot:modal-title>
@@ -571,7 +593,7 @@
             <b-card v-if="styleOfProceedingDataReady" class="bg-white border-white text-dark">               
 
                 <b-table
-                        :items="partiesList"
+                        :items="styleOfProceedingsInfo.manualSop"
                         :fields="sopFields"                    
                         :no-sort-reset="true"
                         sort-icon-left
@@ -583,11 +605,13 @@
                     <template v-slot:cell(partyName)="data" >
                         <b-form-group
                                 class="labels"                
-                                :label="data.item.appealCourtRole + ' / ' + data.item.lowerCourtRole" 
+                                :label="data.item.appealRole + ' / ' + data.item.lowerCourtRole" 
                                 label-for="fullname">
+                               
                                 <b-form-input 
-                                    id="fullname"      
-                                    v-model="data.item.fullName">
+                                    id="fullname"  
+                                    disabled    
+                                    v-model="data.item.partyName.join(', ')">
                                 </b-form-input>
                         </b-form-group>                        
                     </template>
@@ -595,7 +619,7 @@
                     <template v-slot:cell(conjunction)="data" >
                         <b-form-group style="margin-top: 2.35rem;" >
                             <b-form-select
-                                                    
+                                v-model="data.item.conjunction"                   
                                 :options="styleOfProceedingOptions">
                             </b-form-select>                        
                         </b-form-group>                         
@@ -663,7 +687,7 @@ const commonState = namespace("Common");
 import AddAliasForm from './AddAliasForm.vue';
 import AddRepresentativeForm from './AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, representativeInfoType } from '@/types/Information';
+import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 @Component({
@@ -840,6 +864,10 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     enableAddParty = false;
     enableEditParty = false;
     isCreate = false;
+    showConfirmEditParties = false;
+    rowInfo;
+    moveLeft = false;
+    moveApp = false;
     
     styleOfProceedingsInfo = {} as form7DataInfoType;
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
@@ -896,6 +924,42 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         return title;
     }
+
+    public showConfirmEditParty(row, app, left){
+
+        this.rowInfo = row;
+        this.moveApp = app;
+        this.moveLeft = left;
+        this.showConfirmEditParties = true;
+    }
+
+    public cancelShowConfirmEditParties(){
+        this.showConfirmEditParties = false;
+    }
+
+    public confirmEditPartyAppealRoles(){
+        
+        this.showConfirmEditParties = false;
+        if (this.moveLeft){
+
+            if (this.moveApp){
+                this.appLeft(this.rowInfo);
+            } else {
+                this.resLeft(this.rowInfo)
+            }
+
+        } else {
+
+            if (this.moveApp){
+                this.appRight(this.rowInfo);
+            } else {
+                this.resRight(this.rowInfo)
+            }
+
+        }
+        this.styleOfProceedingsInfo.manualSop = [];
+        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+    }    
 
     public appLeft(row){        
         this.partiesList[row.index].appealCourtRole = 'Appellant';
@@ -1202,28 +1266,93 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public confirmEditStyleOfProceedings(){ 
+
         this.styleOfProceedingDataReady = false;
         this.showEditStyleOfProceedingWindow = true;       
-        this.showConfirmEditStyleOfProceeding = false;
-        console.log(this.partiesList)
+        this.showConfirmEditStyleOfProceeding = false;        
+
+        this.loadSopInfo(this.styleOfProceedingsInfo.appellants);
+        this.loadSopInfo(this.styleOfProceedingsInfo.respondents); 
         
         this.styleOfProceedingDataReady = true;
-        
+
+    }
+
+    public loadSopInfo(partiesInfo: form7PartiesInfoType[]){       
+
+        if (this.styleOfProceedingsInfo.manualSop && this.styleOfProceedingsInfo.manualSop.length > 0){
+
+            for (const party of partiesInfo){
+
+                const currentSop = this.styleOfProceedingsInfo.manualSop;
+                const identicalIndex = currentSop.findIndex(sop => sop.partyName.includes(party.fullName));
+
+                if (identicalIndex != -1){
+                    if (currentSop[identicalIndex].lowerCourtRole == party.lowerCourtRole && currentSop[identicalIndex].appealRole == party.appealCourtRole){
+                        continue;
+                    } else {
+                        const nameIndex = currentSop[identicalIndex].partyName.findIndex(name => name == party.fullName)
+                        this.styleOfProceedingsInfo.manualSop[identicalIndex].partyName.splice(nameIndex, 1);
+                        this.prePopulateSop(party);
+                    }
+                } else {
+                    const index = currentSop.findIndex(sop => sop.lowerCourtRole == party.lowerCourtRole && sop.appealRole == party.appealCourtRole);
+                    if (index != -1){
+                        this.styleOfProceedingsInfo.manualSop[index].partyName.push(party.fullName);
+                        this.styleOfProceedingsInfo.manualSop[index].plural = true;
+                    } else {                        
+                        this.prePopulateSop(party);
+                    }
+                }
+            }
+
+        } else {
+
+            this.styleOfProceedingsInfo.manualSop = [];
+            for (const party of partiesInfo){
+                this.prePopulateSop(party);
+            }
+
+        }
+
+        this.UpdateForm7Info(this.styleOfProceedingsInfo)
+
+    }
+
+    public prePopulateSop(partyInfo: form7PartiesInfoType){
+
+        let sop = {} as manualSopInfoType;            
+        sop.plural = false;
+        sop.appealRole = partyInfo.appealCourtRole;
+        sop.lowerCourtRole = partyInfo.lowerCourtRole;
+        sop.partyName = [];
+        sop.partyName.push(partyInfo.fullName)
+        if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
+            partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
+            partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
+                sop.conjunction = 'Between';
+                this.styleOfProceedingsInfo.manualSop.unshift(sop);
+        } else {
+            sop.conjunction = 'And';
+            this.styleOfProceedingsInfo.manualSop.push(sop);
+        }
 
     }
     
     public cancelEditStyleOfProceedings() {
-        this.showConfirmEditStyleOfProceeding = false;
-        
+        this.showConfirmEditStyleOfProceeding = false;        
     }
 
     public saveNewStyleOfProceeding(){
         console.log('save new SOP')
-
+        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.showEditStyleOfProceedingWindow = false;
     }
 
     public resetStyleOfProceeding(){
         console.log('reset SOP')
+        this.showEditStyleOfProceedingWindow = false;
+        this.styleOfProceedingsInfo.manualSop = [];
     }
 
 }

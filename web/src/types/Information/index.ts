@@ -113,7 +113,7 @@ export interface form7PartiesStatesInfoType {
 
 export interface manualSopInfoType {
     conjunction?: string;
-    partyName: string;
+    partyName: string[];
     lowerCourtRole: string;
     appealRole?: string;   
     plural?: boolean;    
