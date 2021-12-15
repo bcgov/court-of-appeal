@@ -27,6 +27,7 @@
             <b-form-input 
                 id="court-of-appeal-file-no"
                 style="max-width:25%" 
+                :state="fileNumberState? null:false"
                 v-model="searchParams.file">
             </b-form-input>
             <span 
@@ -44,6 +45,7 @@
             <b-form-radio-group
                 id="respondent"
                 style="max-width:25%" 
+                :state="respondentState? null:false"
                 v-model="searchParams.searchBy"
                 :options="respondentOptions"                
             ></b-form-radio-group>
@@ -51,31 +53,52 @@
         </b-form-group>
 
         <b-form-group
+            v-if="searchParams.searchBy=='Organization'"
             class="mx-1" 
             label-cols-sm="3"
             content-cols-sm="3"
-            label="First Name" 
-            label-for="first-name">
+            label="Organization Name" 
+            label-for="organization-name">
             <b-form-input 
-                id="first-name"
-                style="max-width:25%" 
-                v-model="searchParams.firstName">
+                id="organization-name"
+                style="max-width:50%" 
+                v-model="searchParams.organizationName">
             </b-form-input>
         </b-form-group>
 
-        <b-form-group
-            class="mx-1" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Last Name" 
-            label-for="last-name">
-            <b-form-input 
-                id="last-name"
-                style="max-width:25%" 
-                v-model="searchParams.lastName">
-            </b-form-input>
-            <h2 v-if="notFound" class=" mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
-        </b-form-group>
+        <div v-else>
+
+            <b-form-group
+                class="mx-1" 
+                label-cols-sm="3"
+                content-cols-sm="3"
+                label="First Name" 
+                label-for="first-name">
+                <b-form-input 
+                    id="first-name"
+                    style="max-width:25%" 
+                    v-model="searchParams.firstName">
+                </b-form-input>
+            </b-form-group>
+
+            <b-form-group
+                class="mx-1" 
+                label-cols-sm="3"
+                content-cols-sm="3"
+                label="Last Name" 
+                label-for="last-name">
+                <b-form-input 
+                    id="last-name"
+                    style="max-width:25%" 
+                    v-model="searchParams.lastName">
+                </b-form-input>
+            </b-form-group>
+        </div>
+        <div>
+            <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
+        </div>
+
+        
 
         <b-button 
             style="float: right;  width: 80px; height: 50px; opacity:1;" 
@@ -118,6 +141,9 @@ export default class Form2CaseInformation extends Vue {
     
     levelOfCourt = "Court of Appeal";
 
+    fileNumberState = true;
+    respondentState = true;
+
     dataReady = false;
     searching = false;
 
@@ -129,6 +155,8 @@ export default class Form2CaseInformation extends Vue {
     ];
 
     mounted(){
+        this.fileNumberState = true;
+        this.respondentState = true;
         this.dataReady = false;
         this.searching = false;
         this.dataReady = true; 
@@ -138,6 +166,20 @@ export default class Form2CaseInformation extends Vue {
 
         this.searching = true;        
         this.notFound = false;
+        this.fileNumberState = true;
+        this.respondentState = true;
+
+        if(!this.searchParams.file){
+            this.fileNumberState = false;
+            this.searching = false;
+            return
+        }
+
+        if(!this.searchParams.searchBy){
+            this.respondentState = false;
+            this.searching = false;
+            return
+        }
         
         const url = '/form7s/?'+
             'caseNumber='+(this.searchParams.file?this.searchParams.file:'')+

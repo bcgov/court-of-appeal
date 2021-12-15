@@ -30,15 +30,15 @@ objects:
                 matchLabels:
                   name: ${NAMESPACE_NAME}
                   environment: ${TAG_NAME}
-            - podSelector:
-                matchLabels:
-                  role: schema-spy
-                  app: ${APP_NAME}
-                  env: ${TAG_NAME}
-              namespaceSelector:
-                matchLabels:
-                  name: ${NAMESPACE_NAME}
-                  environment: ${TAG_NAME}
+            # - podSelector:
+            #     matchLabels:
+            #       role: schema-spy
+            #       app: ${APP_NAME}
+            #       env: ${TAG_NAME}
+            #   namespaceSelector:
+            #     matchLabels:
+            #       name: ${NAMESPACE_NAME}
+            #       environment: ${TAG_NAME}
             - podSelector:
                 matchLabels:
                   role: backup
@@ -277,7 +277,8 @@ parameters:
     displayName: PostgreSQL Database Name
     description: The name of the PostgreSQL database.
     required: true
-    value: COA_Database
+    generate: expression
+    from: '[a-zA-Z_][a-zA-Z0-9_]{10}'
   - name: POSTGRESQL_USER
     displayName: PostgreSQL Connection Username
     description: Username for PostgreSQL user that will be used for accessing the database.  Needs to be basee64 encoded/

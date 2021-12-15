@@ -156,7 +156,7 @@ function resetDatabase() {
 
 function cleanEnv() {
   printAndAskToContinue "If you contiune all of the application resources will be perminently deleted from $(getProjectName)."
-  oc -n $(getProjectName) delete all,pvc,secret,networksecuritypolicies -l app=coa
+  oc -n $(getProjectName) delete all,pvc,secret,networksecuritypolicies -l app=court-of-appeal
 }
 
 function functionExists() {
