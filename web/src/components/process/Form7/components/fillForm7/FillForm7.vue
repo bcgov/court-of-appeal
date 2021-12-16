@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/information";
@@ -74,8 +74,14 @@ import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/componen
 })
 export default class FillForm7 extends Vue {    
 
+    @Prop({required: true})
+    editMode!: boolean;
+
     @informationState.State
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
+
+    @informationState.State
+    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
 
     @informationState.State
     public form7Info: form7DataInfoType;
@@ -96,8 +102,14 @@ export default class FillForm7 extends Vue {
 
     mounted() { 
         this.dataReady = false;
-        const form7Data = {} as form7DataInfoType;
-        this.UpdateForm7Info(form7Data);    
+        if (!this.editMode){
+            const form7Data = {} as form7DataInfoType;
+            form7Data.fileNumber = this.supremeCourtCaseJson.fileNumber;
+            form7Data.fileId = this.supremeCourtCaseJson.fileId;
+            form7Data.courtClass = this.supremeCourtCaseJson.courtClassCd;
+            this.UpdateForm7Info(form7Data);
+        }
+            
         const form7States = {} as form7StatesInfoType;
         this.UpdateForm7InfoStates(form7States); 
         this.fieldStates = {} as form7StatesInfoType;

@@ -81,7 +81,8 @@ const routes = [
       path: "/start-form7",
       name: "start-form7",
       beforeEnter: authGuard,
-      component: StartForm7
+      component: StartForm7,
+      props: true
     },
     {
       path: "/preview-form7",

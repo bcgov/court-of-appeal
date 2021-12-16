@@ -23,7 +23,7 @@
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-            <form-2-layout v-bind:result="result"/>
+            <form-7-layout v-bind:result="result"/>
         </b-card>
 
     </b-card>
@@ -34,14 +34,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form2DataInfoType } from '@/types/Information';
+import { form7DataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
-import Form2Layout from "./Form2Layout.vue";
+import Form7Layout from "./Form7Layout.vue";
 import moment from 'moment';
 
 @Component({
     components:{        
-        Form2Layout
+        Form7Layout
     }
 })
 export default class Form7 extends Vue {
@@ -52,20 +52,23 @@ export default class Form7 extends Vue {
     @informationState.State
     public currentCaseId: string;
 
-    @informationState.Action
-    public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void
+    @informationState.State
+    public form7Info: form7DataInfoType;
 
-    result = {} as form2DataInfoType;
+    @informationState.Action
+    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+
+    result = {} as form7DataInfoType;
     dataReady = false;
    
     mounted(){
         this.dataReady = false;
-        this.getForm2Data(); 
+        this.getForm7Data(); 
     }   
            
     public onPrint() { 
         const pdf_type = "FORM"
-        const pdf_name = "form2-" + this.caseId;
+        const pdf_name = "form7-" + this.caseId;
         const el= document.getElementById("print");
 
       
@@ -96,7 +99,7 @@ export default class Form7 extends Vue {
 
     public savePdf(){        
         const pdfType = "FORM"
-        const pdfName ="FORM2"
+        const pdfName ="FORM7"
         const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
@@ -120,24 +123,27 @@ export default class Form7 extends Vue {
     }
 
     public navigateToEditPage() {
-        this.$router.push({name: "fill-form2" })
+        //TODO: add functionality to load page data and not start from search
+        this.$router.push({name: "start-form7", params: {orderSelected: 'yes'}});
     }
  
-    public getForm2Data() {        
+    public getForm7Data() {        
        
-        this.$http.get('/case/'+this.currentCaseId+'/')
-        .then((response) => {
-            if(response?.data?.data){            
+        // this.$http.get('/case/'+this.currentCaseId+'/')
+        // .then((response) => {
+        //     if(response?.data?.data){            
                             
-                this.result = response.data.data
-                this.UpdateForm2Info(this.result)                         
-                this.dataReady = true;
-                Vue.nextTick(()=> this.onPrint())
-            }
+        //         this.result = response.data.data
+        //         this.UpdateForm7Info(this.result)                         
+        //         this.dataReady = true;
+        //         Vue.nextTick(()=> this.onPrint())
+        //     }
                 
-        },(err) => {
-        console.log(err)        
-        });      
+        // },(err) => {
+        // console.log(err)        
+        // });      
+        this.result = this.form7Info;
+        this.dataReady = true;
     }
 }
 </script>

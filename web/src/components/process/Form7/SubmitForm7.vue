@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-7-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
@@ -59,13 +59,13 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
+import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form2StatusInfoType, packageInfoType } from '@/types/Information';
+import { form7StatusInfoType, packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
-        Form2ProcessHeader,
+        Form7ProcessHeader,
         Spinner
     }
 })
@@ -74,7 +74,7 @@ export default class SubmitForm7 extends Vue {
     @informationState.State
     public currentCaseId: string;
 
-    stepsCompleted = {} as form2StatusInfoType;  
+    stepsCompleted = {} as form7StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
     submitting = false;
@@ -87,7 +87,8 @@ export default class SubmitForm7 extends Vue {
         this.stepsCompleted = {
             first: true,
             second: true,
-            third: false
+            third: true,
+            fourth: false
         }
         this.mountedData = true;         
     }  

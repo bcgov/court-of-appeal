@@ -38,6 +38,31 @@ Vue.filter('beautify-date-month', function(date){
 		return 'unknown'
 })
 
+Vue.filter('beautify-date-month-year', function(date){
+	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
+	
+	if(date){
+
+		let dayText = '';
+		const dayFirstDigit = Number(date.substr(8,1));		
+		const daySecondDigit = Number(date.substr(9,1));
+		
+		if (daySecondDigit == 1){
+			dayText = 'st';
+		} else if (daySecondDigit == 3){
+			dayText = 'rd';
+		} else {
+			dayText = 'th';
+		}
+
+		const dayName = (dayFirstDigit == 0)?(daySecondDigit + dayText):(Number(date.substr(8,2)) + dayText);
+
+		return dayName + ' day of ' + MonthList[Number(date.substr(5,2))] + ', ' +  date.substr(0,4);
+	}
+	else
+		return 'unknown'
+})
+
 Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){

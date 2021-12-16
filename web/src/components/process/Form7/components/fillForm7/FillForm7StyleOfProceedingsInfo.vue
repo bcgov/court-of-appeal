@@ -891,8 +891,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public extractInfo(){
         this.styleOfProceedingsInfo.mainAppellant = this.userName;
         this.partiesList = this.supremeCourtCaseJson.parties;
-        this.styleOfProceedingsInfo.appellants = [];
-        this.styleOfProceedingsInfo.respondents = [];
+        this.styleOfProceedingsInfo.appellants = this.styleOfProceedingsInfo.appellants?this.styleOfProceedingsInfo.appellants:[];
+        this.styleOfProceedingsInfo.respondents = this.styleOfProceedingsInfo.respondents?this.styleOfProceedingsInfo.respondents:[];;
         for (const party in this.supremeCourtCaseJson.parties){
             const partyInfo = this.supremeCourtCaseJson.parties[party];
             this.partiesList[party].title = this.getPartyTitles(partyInfo);            
@@ -930,7 +930,12 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.rowInfo = row;
         this.moveApp = app;
         this.moveLeft = left;
-        this.showConfirmEditParties = true;
+        if (this.styleOfProceedingsInfo.manualSop?.length > 0){
+            this.showConfirmEditParties = true;
+        } else {
+            this.confirmEditPartyAppealRoles();
+        }
+       
     }
 
     public cancelShowConfirmEditParties(){
@@ -970,7 +975,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public appRight(row){
         this.partiesList[row.index].appealCourtRole = '';           
-        const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.ceisPartyId == this.partiesList[row.index].ceisPartyId)
+        const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.appellants.splice(index, 1);
         this.UpdateForm7Info(this.styleOfProceedingsInfo);
         this.updateTable ++;
@@ -985,7 +990,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             this.respondentSolicitors.splice(solicitorNameIndex, 1);
         }
          
-        const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.ceisPartyId == this.partiesList[row.index].ceisPartyId)
+        const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.respondents.splice(index, 1);
         this.UpdateForm7Info(this.styleOfProceedingsInfo);
         this.updateTable ++;
@@ -1379,7 +1384,5 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         padding-top: 0;
         margin-top: 0;
     }
-
-
 
 </style>

@@ -124,7 +124,6 @@
                 this.addButtonText = 'Save';
             } else {
                 this.addButtonText = 'Add';
-
             }
             this.dataReady = true;              
         }        

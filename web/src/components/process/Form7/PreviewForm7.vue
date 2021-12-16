@@ -2,7 +2,7 @@
     <b-card v-if="dataReady" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light" header-border-variant="white">            
-            <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-7-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card text-variant="dark" border-variant="light" bg-variant="light" class="my-2 mx-4">
@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-2 v-bind:caseId="caseId"/>            
+            <form-7 v-bind:caseId="caseId"/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -37,20 +37,20 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
-import Form2 from "@/components/process/Form2/components/pdf/Form2.vue"
+import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
+import Form7 from "@/components/process/Form7/components/pdf/Form7.vue"
 
-import { form2StatusInfoType } from '@/types/Information';
+import { form7StatusInfoType } from '@/types/Information';
 
 @Component({
     components:{
-        Form2ProcessHeader,
-        Form2
+        Form7ProcessHeader,
+        Form7
     }
 })
 export default class PreviewForm7 extends Vue {
 
-    stepsCompleted = {} as form2StatusInfoType; 
+    stepsCompleted = {} as form7StatusInfoType; 
     caseId = '';  
     dataReady = false;
 
@@ -59,14 +59,15 @@ export default class PreviewForm7 extends Vue {
         this.caseId = this.$route.params.caseId;
         this.stepsCompleted = {
             first: true,
-            second: false,
-            third: false
+            second: true,
+            third: false,
+            fourth: false
         }
         this.dataReady = true;       
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form2", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form7", params: {applicationId: this.caseId} }); 
     }
 }
 </script>

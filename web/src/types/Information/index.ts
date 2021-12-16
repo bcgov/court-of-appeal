@@ -54,6 +54,11 @@ export interface form7SearchInfoType {
 }
 
 export interface form7DataInfoType {
+    fileNumber: string;
+    fileId: number;
+    courtClass: string;
+    judgeFullName: string;
+    orderDate: string;
     appearanceDays: number;
     orderType: string;
     appealedInSupremeCourt: string;

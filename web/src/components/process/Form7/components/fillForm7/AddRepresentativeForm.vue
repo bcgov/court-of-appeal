@@ -197,8 +197,7 @@
             this.representativeName = '';           
             this.representativeNameState  = true;
             this.representativeTypeState   = true;                     
-        }       
-
+        } 
        
     }
 </script>

@@ -33,7 +33,7 @@
                     <span class="step-complete text-success ml-4 mb-2" >Preview</span>                
                 </div>
                 <div v-else style="text-align: center;">
-                    <step-number class="mt-2"  v-bind:stepNumber="2" v-bind:active="(stepsCompleted.first && stepsCompleted.second)"/>
+                    <step-number class="mt-2"  v-bind:stepNumber="3" v-bind:active="(stepsCompleted.first && stepsCompleted.second)"/>
                     <span :class="(stepsCompleted.first && stepsCompleted.second)?'text-dark step-incomplete':'text-inactive step-incomplete'">Preview</span>
                 </div>               
                 
@@ -49,7 +49,7 @@
                     <span class="step-complete text-danger mr-4 ml-3 mb-2">Submit</span>                
                 </div>
                 <div v-else style="float: right;">
-                    <step-number class="mt-2"  v-bind:stepNumber="3" v-bind:active="stepsCompleted.first && stepsCompleted.second && stepsCompleted.third"/>
+                    <step-number class="mt-2"  v-bind:stepNumber="4" v-bind:active="stepsCompleted.first && stepsCompleted.second && stepsCompleted.third"/>
                     <span :class="(stepsCompleted.first && stepsCompleted.second && stepsCompleted.third)?'text-dark step-incomplete mr-4':'text-inactive step-incomplete mr-4'">Submit</span>
                 </div>  
                                

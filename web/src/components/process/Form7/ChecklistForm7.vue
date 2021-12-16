@@ -39,17 +39,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
 
-import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
+
 import Form7DidYouKnow from "@/components/process/Form7/components/Form7DidYouKnow.vue";
 import Form7QualifyQuestions from "@/components/process/Form7/components/Form7QualifyQuestions.vue";
 
 @Component({
     components:{
-        Form2ProcessHeader,
         Form7DidYouKnow,
         Form7QualifyQuestions
     }
@@ -67,7 +63,7 @@ export default class ChecklistForm7 extends Vue {
     }
 
     public navigateToForm7() {        
-        this.$router.push({name: "start-form7" });
+        this.$router.push({name: "start-form7", params: {orderSelected: 'no'}});        
     }
 
 }
