@@ -877,7 +877,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     setRespondentNames(newRespondents: string[]) 
     {
         this.respondentNames = newRespondents.join('; ');
-        this.respondentSolicitorNames = this.respondentSolicitors.join('; ')
+        this.respondentSolicitorNames = this.respondentSolicitors.join('; ');        
     }
 
     mounted() { 
@@ -992,6 +992,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
          
         const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.respondents.splice(index, 1);
+        this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
         this.UpdateForm7Info(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
@@ -1003,6 +1004,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             this.respondentSolicitors.push(this.partiesList[row.index].counselName);
         }        
         this.styleOfProceedingsInfo.respondents.push(this.partiesList[row.index]);
+        this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
         this.UpdateForm7Info(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
@@ -1096,6 +1098,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         const index = this.partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
         this.partiesList[index] = this.party;
         this.styleOfProceedingsInfo.parties = this.partiesList;
+        this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
         this.UpdateForm7Info(this.styleOfProceedingsInfo);        
         this.showPartyWindow = false;
         this.updateTable ++;

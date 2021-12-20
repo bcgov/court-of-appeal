@@ -72,7 +72,7 @@ export default class Form7 extends Vue {
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = ``;
+        const bottomLeftText = `"Form 7 (2016-06-28)"`;
         const bottomRightText = `" "`;        
         const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );

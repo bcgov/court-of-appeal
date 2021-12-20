@@ -68,6 +68,7 @@ export interface form7DataInfoType {
     orderSought: string;
     parties: form7PartiesInfoType[];
     respondents: form7PartiesInfoType[];
+    respondentSolicitors?: string[];
     appellants: form7PartiesInfoType[];
     mainAppellant?: string;
     serviceAddress: string;
