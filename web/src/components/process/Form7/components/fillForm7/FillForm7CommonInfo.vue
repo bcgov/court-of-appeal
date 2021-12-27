@@ -87,13 +87,13 @@
 
             <b-form-group
                 class="ml-4 mt-3 labels"                
-                label="If the appeal is from a part of the judgement only, please specify the part:" 
-                label-for="part-of-judgement">
+                label="If the appeal is from a part of the judgment only, please specify the part:" 
+                label-for="part-of-judgment">
                 <b-form-input 
-                    id="part-of-judgement"    
-                    :state="form7InfoStates.partOfJudgement"  
+                    id="part-of-judgment"    
+                    :state="form7InfoStates.partOfJudgment"  
                     @change="update"              
-                    v-model="commonInfo.partOfJudgement">
+                    v-model="commonInfo.partOfJudgment">
                 </b-form-input>
             </b-form-group>
         </b-card>
@@ -145,9 +145,9 @@ export default class FillForm7CommonInfo extends Vue {
     public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
 
     typesOfOrders = [
-        { text: 'Trial Judgement', value: 'Trial Judgement' },
-        { text: 'Summary Trial Judgement', value: 'Summary Trial Judgement' },
-        { text: 'Chambers Judgement', value: 'Chambers Judgement' }
+        { text: 'Trial Judgment', value: 'Trial Judgment' },
+        { text: 'Summary Trial Judgment', value: 'Summary Trial Judgment' },
+        { text: 'Chambers Judgment', value: 'Chambers Judgment' }
     ]
 
     appealedInSupremeCourtOptions = [

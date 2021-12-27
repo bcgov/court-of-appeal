@@ -330,7 +330,7 @@ export default class DashboardPage extends Vue {
                         "20220103": "New Years Day 2022"
                     }
                     }
-                //TODO: add functionality to store the lookups in the store
+                
                 this.UpdateLookups(res);
 
                            

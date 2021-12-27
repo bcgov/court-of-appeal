@@ -1,5 +1,5 @@
 
-import { lookupsInfoType } from '@/types/Information';
+import { accountInfoType, lookupsInfoType } from '@/types/Information';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -12,7 +12,8 @@ class Common extends VuexModule {
     public userLocation = '';
 
     public locationsInfo = [];
-    public lookups = {} as lookupsInfoType
+    public lookups = {} as lookupsInfoType;
+    public accountInfo = {} as accountInfoType;
 
     @Mutation
     public  setUserName(userName: string): void {
@@ -57,6 +58,15 @@ class Common extends VuexModule {
     @Action
     public UpdateLookups(newLookups: lookupsInfoType): void {
         this.context.commit('setLookups', newLookups);
+    }
+
+    @Mutation
+    public setAccountInfo(accountInfo: accountInfoType): void {   
+        this.accountInfo = accountInfo;
+    }
+    @Action
+    public UpdateAccountInfo(newAccountInfo: accountInfoType): void {
+        this.context.commit('setAccountInfo', newAccountInfo);
     }
 
 }

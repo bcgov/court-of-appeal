@@ -37,11 +37,22 @@
         <div class="my-5" style="display: block; text-align: center; font-size:10pt;">COURT OF APPEAL</div>
         <div v-for="sop in caseSop" :key="sop.appealRole + '/' + sop.lowerCourtRole">
             <div class="my-3 row" style="font-weight: 700;">
-                <div class="col-md-10">
-                    {{sop.conjunction}}: <span style="font-weight: 200; margin-left: 5rem;">{{sop.partyName.join(", ")}}</span>
+                <div class="col-md-5">{{sop.conjunction}}:</div>
+                <div class="col-md-5"></div>
+                <div v-if="sop.lowerCourtRole == 'NONE (New Party)'" class="col-md-2">
+                    {{sop.appealRole}}
                 </div>
-                <div class="col-md-2">{{sop.appealRole}}/<br> {{sop.lowerCourtRole}}</div>
-            </div>            
+                <div v-else class="col-md-2">
+                    {{sop.appealRole}}/<br> {{sop.lowerCourtRole}}
+                </div>
+            </div>  
+            <div class="my-3 row" style="font-weight: 700;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="font-weight: 200; text-align: center">
+                    {{sop.partyName.join(", ")}}
+                </div>
+                <div class="col-md-2"></div>
+            </div>          
         </div>
 
         <div class="my-5" style="display: block; text-align: center; font-weight: 700; font-size:10pt;">NOTICE OF APPEAL</div>
@@ -52,6 +63,7 @@
             <underline-form 
                 style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="29rem" 
+                hint=""
                 beforetext="Take notice that" 
                 :text="applicantNames.join(', ')"/>
             <div style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0.15rem;">
@@ -59,30 +71,35 @@
             </div>
             <underline-form 
                 style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
-                textwidth="17.75rem" beforetext=" to the Court of Appeal for British Columbia from the order of" 
+                textwidth="17.75rem" 
+                hint=""
+                beforetext=" to the Court of Appeal for British Columbia from the order of" 
                 :text="result.judgeFullName"/>
             <underline-form 
                 style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="24.25rem" 
+                hint=""
                 beforetext="of the Supreme Court of BC pronounced the" 
                 :text="result.orderDate | beautify-date-month-year"/>
             <underline-form 
                 style="text-indent:1px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="15rem" 
+                hint=""
                 beforetext="at" 
                 :text="caseLocation.value"/>
             <div style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;">
                 , British Columbia.  
             </div>
-            <div v-if="result.partOfJudgement" style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;">
+            <div v-if="result.partOfJudgment" style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;">
                 [If the appeal is from a part of the judgment only, please specify the part] 
             </div>
             <underline-form 
-                v-if="result.partOfJudgement"
+                v-if="result.partOfJudgment"
                 style="text-indent:2px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="30rem" 
+                hint=""
                 beforetext="" 
-                :text="result.partOfJudgement"/>.
+                :text="result.partOfJudgment"/>.
         </div>
 
         
@@ -92,19 +109,19 @@
                 
                 <div class="col-md-6">                                          
                     <check-box                                                                                      
-                        :check="(result.orderType == 'Trial Judgement')?'yes':''" 
-                        text="Trial Judgement"/>  
+                        :check="(result.orderType == 'Trial Judgment')?'yes':''" 
+                        text="Trial Judgment"/>  
                     <check-box                                                                                      
-                    :check="(result.orderType == 'Summary Trial Judgement')?'yes':''" 
-                    text="Summary Trial Judgement"/>
+                    :check="(result.orderType == 'Summary Trial Judgment')?'yes':''" 
+                    text="Summary Trial Judgment"/>
                 </div>
                 <div class="col-md-6">
                     <check-box                                                                                      
                         :check="(result.orderType == 'Order of a Statutory Body')?'yes':''" 
                         text="Order of a Statutory Body"/>  
                     <check-box                                                                                      
-                    :check="(result.orderType == 'Chambers Judgement')?'yes':''" 
-                    text="Chambers Judgement"/>     
+                    :check="(result.orderType == 'Chambers Judgment')?'yes':''" 
+                    text="Chambers Judgment"/>     
                 </div>           
                 
             </div>                        
@@ -117,10 +134,11 @@
                     Court Civil Rules or Rule 18-3 or 22-7 (8) of the Supreme Court Family 
                     Rules, name the maker of the original decision, direction or order:
                     <underline-form 
-                        v-if="result.partOfJudgement"
+                        v-if="result.partOfJudgment"
                         style="text-indent:2px;display:inline-block;margin:0.25rem 0 0.5rem 0;" 
                         textwidth="37.75rem" 
-                        beforetext="" 
+                        beforetext=""
+                        hint="" 
                         :text="(result.appealedInSupremeCourt == 'NA')?'Not Applicable':result.makerName"/>.   
                 </div>
             </section>
@@ -231,16 +249,20 @@
 
         <underline-form 
                 style="text-indent:0px;display:inline-block;margin:1rem 0 0.5rem 0;" 
-                textwidth="33.5rem" beforetext="To the respondent(s):" 
+                textwidth="33.5rem" 
+                beforetext="To the respondent(s):" 
+                hint=""
                 :text="respondentNames.toString()"/>
         <underline-form 
             style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
             textwidth="34.5rem" 
             beforetext="And to its solicitor:" 
+            hint=""
             :text="(result.respondentSolicitors && result.respondentSolicitors.length>0)?result.respondentSolicitors.toString():''"/>
         <underline-form 
             style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
             textwidth="29rem" 
+            hint=""
             beforetext="This Notice of Appeal is given by" 
             :text="result.mainAppellant"/>
        

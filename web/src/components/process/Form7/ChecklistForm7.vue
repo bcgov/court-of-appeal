@@ -39,10 +39,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
 
 import Form7DidYouKnow from "@/components/process/Form7/components/Form7DidYouKnow.vue";
 import Form7QualifyQuestions from "@/components/process/Form7/components/Form7QualifyQuestions.vue";
+import { accountInfoType } from '@/types/Information';
 
 @Component({
     components:{
@@ -51,10 +55,92 @@ import Form7QualifyQuestions from "@/components/process/Form7/components/Form7Qu
     }
 })
 export default class ChecklistForm7 extends Vue {    
+    
+    @commonState.Action
+    public UpdateAccountInfo!: (newAccountInfo: accountInfoType) => void
    
     disableContinue = true;
+    businessAccount = true;
     inactiveButtonClass = "bg-secondary text-white"; 
-    activeButtonClass = "bg-success text-white";  
+    activeButtonClass = "bg-success text-white"; 
+    
+    mounted(){
+        
+        this.loadAccountDetails();
+
+    }
+
+    public loadAccountDetails(){
+
+        //TODO: add endpoint to get data https://test.justice.gov.bc.ca/cso/ext/coa/form7/api/lookup/account 
+
+        const data = 
+        {
+            
+        "accountId": 394,
+        "clientId": 627,
+        "firmName": "AG TEST LAW FIRM",
+        "firmAddress": "1222 Cherry Lane\r\nVictoria, BC  V8W 9J2\nCANADA",
+        "accountUsers": [
+            {
+            "clientId": 617,
+            "fullName": "Kathryn Thomson",
+            "isAdmin": true
+            },
+            {
+            "clientId": 627,
+            "fullName": "Test white",
+            "isAdmin": true
+            },
+            {
+            "clientId": 613,
+            "fullName": "Patricia White",
+            "isAdmin": true
+            },
+            {
+            "clientId": 631,
+            "fullName": "Thomas Broeren",
+            "isAdmin": false
+            },
+            {
+            "clientId": 735,
+            "fullName": "COA5 Tester",
+            "isAdmin": false
+            },
+            {
+            "clientId": 659,
+            "fullName": "Renee Edey",
+            "isAdmin": false
+            },
+            {
+            "clientId": 665,
+            "fullName": "COA1 Tester",
+            "isAdmin": false
+            },
+            {
+            "clientId": 666,
+            "fullName": "COA3 Tester",
+            "isAdmin": false
+            },
+            {
+            "clientId": 667,
+            "fullName": "COA4 Tester",
+            "isAdmin": false
+            }
+        ],
+        "extensionData": {
+            "csoProceedUrl": "https://test.justice.gov.bc.ca/cso/filing/ext/submissionInit.do?appCd=coa/form7/forms&referenceGuid=",
+            "logOutUrl": "https://test.justice.gov.bc.ca/cso/logoff.do",
+            "contactUsUrl": "https://test.justice.gov.bc.ca/cso/help/help_contactUs.do",
+            "returnToCsoUrl": "https://test.justice.gov.bc.ca/cso/"
+        }
+        }
+
+        this.UpdateAccountInfo(data);
+
+        this.businessAccount = data.accountUsers.length>1;
+
+    }
 
     public disableNavigateForm7(disable: boolean) {
         
@@ -62,8 +148,14 @@ export default class ChecklistForm7 extends Vue {
         console.log(disable);
     }
 
-    public navigateToForm7() {        
-        this.$router.push({name: "start-form7", params: {orderSelected: 'no'}});        
+    public navigateToForm7() {
+        if (this.businessAccount){
+            this.$router.push({name: "access-form7"});
+
+        } else {
+            this.$router.push({name: "start-form7", params: {orderSelected: 'no'}}); 
+        }       
+               
     }
 
 }

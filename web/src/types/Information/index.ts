@@ -64,7 +64,7 @@ export interface form7DataInfoType {
     appealedInSupremeCourt: string;
     makerName?: string;
     appealNature: string;
-    partOfJudgement: string;
+    partOfJudgment: string;
     orderSought: string;
     parties: form7PartiesInfoType[];
     respondents: form7PartiesInfoType[];
@@ -84,7 +84,7 @@ export interface form7StatesInfoType {
     appealedInSupremeCourt: null | boolean;
     makerName: null | boolean;
     appealNature: null | boolean;
-    partOfJudgement: null | boolean;
+    partOfJudgment: null | boolean;
     orderSought: null | boolean;
     mainAppellant: null | boolean;
     serviceAddress: null | boolean;
@@ -153,6 +153,36 @@ export interface lookupsInfoType {
     organizationLegalReps: string[];
     legalRepFormatters: {};
     holidays: {};
+}
+
+export interface accountInfoType {
+    accountId: number;
+    clientId: number;
+    firmName: string;
+    firmAddress: string;
+    accountUsers: accountUserInfoType[];
+    extensionData: extensionDataInfoType;
+}
+
+export interface accountUserInfoType{
+    clientId: number;
+    fullName: string;
+    isAdmin: boolean;
+    displayName?: string;
+}
+
+export interface userAccessInfoType{
+    user: accountUserInfoType;
+    readOnly: boolean;
+    update: boolean;
+    default: boolean;
+}
+
+export interface extensionDataInfoType{
+    csoProceedUrl: string;
+    logOutUrl: string;
+    contactUsUrl: string;
+    returnToCsoUrl: string;
 }
 
 export interface journeyStepType {

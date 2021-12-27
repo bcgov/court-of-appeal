@@ -925,6 +925,31 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         return title;
     }
 
+    public getPartyDisplayName(partyInfo: form7PartiesInfoType){
+        let title = '';
+        if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
+            title = partyInfo.fullName;
+        } else {
+
+            const repTitle = [];
+            for (const legalRep of partyInfo.legalReps){                
+                const repFormat = this.lookups.legalRepFormatters[legalRep.type].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
+                repTitle.push(repFormat);
+            }
+            
+            const aliasTitle = [];
+            for (const alias of partyInfo.aliases){                    
+                aliasTitle.push(alias.type + ' ' + alias.name);
+            }
+           
+            const repText = repTitle.length?repTitle.join('or'): '';
+            const aliasText = aliasTitle.length?aliasTitle.join(', '): '';            
+            title = (repText?(repText + ", "):'') + aliasText;
+        }
+
+        return title;
+    }
+
     public showConfirmEditParty(row, app, left){
 
         this.rowInfo = row;
@@ -1293,20 +1318,20 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             for (const party of partiesInfo){
 
                 const currentSop = this.styleOfProceedingsInfo.manualSop;
-                const identicalIndex = currentSop.findIndex(sop => sop.partyName.includes(party.fullName));
+                const identicalIndex = currentSop.findIndex(sop => sop.partyName.includes(this.getPartyDisplayName(party)));
 
                 if (identicalIndex != -1){
                     if (currentSop[identicalIndex].lowerCourtRole == party.lowerCourtRole && currentSop[identicalIndex].appealRole == party.appealCourtRole){
                         continue;
                     } else {
-                        const nameIndex = currentSop[identicalIndex].partyName.findIndex(name => name == party.fullName)
+                        const nameIndex = currentSop[identicalIndex].partyName.findIndex(name => name == this.getPartyDisplayName(party))
                         this.styleOfProceedingsInfo.manualSop[identicalIndex].partyName.splice(nameIndex, 1);
                         this.prePopulateSop(party);
                     }
                 } else {
                     const index = currentSop.findIndex(sop => sop.lowerCourtRole == party.lowerCourtRole && sop.appealRole == party.appealCourtRole);
                     if (index != -1){
-                        this.styleOfProceedingsInfo.manualSop[index].partyName.push(party.fullName);
+                        this.styleOfProceedingsInfo.manualSop[index].partyName.push(this.getPartyDisplayName(party));
                         this.styleOfProceedingsInfo.manualSop[index].plural = true;
                     } else {                        
                         this.prePopulateSop(party);
@@ -1323,6 +1348,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         }
 
+        //TODO: add functionality to display the new party with no role at the end
+
         this.UpdateForm7Info(this.styleOfProceedingsInfo)
 
     }
@@ -1334,7 +1361,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         sop.appealRole = partyInfo.appealCourtRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
-        sop.partyName.push(partyInfo.fullName)
+        sop.partyName.push(this.getPartyDisplayName(partyInfo))
         if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
@@ -1367,12 +1394,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-    .content {        
-        margin-bottom: 0px !important; 
-        font-size: 1rem; 
-        font-weight:400;       
-    }
 
     .labels {
         font-size: 1.15rem; font-weight:600;

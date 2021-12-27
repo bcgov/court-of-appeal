@@ -90,116 +90,115 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue, Prop } from 'vue-property-decorator';
-    import { namespace } from 'vuex-class';
-    import "@/store/modules/common";
-    const commonState = namespace("Common"); 
-    import { representativeInfoType, lookupsInfoType } from '@/types/Information';
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
+import "@/store/modules/common";
+const commonState = namespace("Common"); 
+import { representativeInfoType, lookupsInfoType } from '@/types/Information';
    
 
-    @Component
-    export default class AddRepresentativeForm extends Vue {        
+@Component
+export default class AddRepresentativeForm extends Vue {        
 
-        @commonState.State
-        public lookups!: lookupsInfoType;
+    @commonState.State
+    public lookups!: lookupsInfoType;
 
-        @Prop({required: true})
-        formData!: representativeInfoType;
+    @Prop({required: true})
+    formData!: representativeInfoType;
 
-        @Prop({required: true})
-        index!: number;
+    @Prop({required: true})
+    index!: number;
 
-        @Prop({required: true})
-        isCreateRep!: boolean; 
-        
-        @Prop({required: true})
-        isOrganization!: boolean;
+    @Prop({required: true})
+    isCreateRep!: boolean; 
+    
+    @Prop({required: true})
+    isOrganization!: boolean;
 
-        selectedRepresentativeType = ''
-        representativeTypeState = true;     
+    selectedRepresentativeType = ''
+    representativeTypeState = true;     
 
-        representativeName = '';
-        representativeNameState = true;         
+    representativeName = '';
+    representativeNameState = true;         
 
-        originalSelectedRepresentativeType = '';
-        originalRepresentativeName = '';  
-        
-        showCancelWarning = false;
+    originalSelectedRepresentativeType = '';
+    originalRepresentativeName = '';  
+    
+    showCancelWarning = false;
 
-        addButtonText = 'Add';
-        dataReady = false;
-        
-        mounted()
-        { 
-            this.dataReady = false;
-            this.clearSelections();
-            if(!this.isCreateRep) {
-                this.extractFormInfo();
-                this.addButtonText = 'Save';
-            } else {
-                this.addButtonText = 'Add';
+    addButtonText = 'Add';
+    dataReady = false;
+    
+    mounted(){ 
+        this.dataReady = false;
+        this.clearSelections();
+        if(!this.isCreateRep) {
+            this.extractFormInfo();
+            this.addButtonText = 'Save';
+        } else {
+            this.addButtonText = 'Add';
 
-            }
-            this.dataReady = true;              
-        }        
-
-        public extractFormInfo(){ 
-            if (this.isOrganization){
-                const index = this.lookups.organizationLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
-                this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.organizationLegalReps[index]: '';
-            } else {
-                const index = this.lookups.individualLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
-                this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.individualLegalReps[index]: '';
-            }           
-                        
-            this.originalRepresentativeName = this.representativeName = this.formData.name;
         }
+        this.dataReady = true;              
+    }        
 
-        public saveForm(){
-               
-            this.representativeTypeState = this.selectedRepresentativeType != "";
-            this.representativeNameState = this.representativeName != ""; 
-            
-            if (this.representativeTypeState && this.representativeNameState){        
-                const representative = {} as representativeInfoType;
-                representative.type = this.selectedRepresentativeType;
-                representative.name = this.representativeName;       
-                this.$emit('submit', this.isCreateRep, representative, this.index);
-            }
-                
-        }
-
-        public closeForm(){
-            if(this.isChanged())
-                this.showCancelWarning = true;
-            else
-                this.confirmedCloseForm();
-        }
-
-        public isChanged(){
-            if(this.isCreateRep){
-                if(this.selectedRepresentativeType.length && this.representativeName.length ) return true;
-                return false;
-            }else{
-                if( (this.originalSelectedRepresentativeType != this.selectedRepresentativeType) ||
-                    (this.originalRepresentativeName != this.representativeName)) return true;
-                return false;
-            }
-        }
-
-        public confirmedCloseForm(){           
-            this.clearSelections();
-            this.$emit('cancel');
-        }
-
-        public clearSelections(){
-            this.selectedRepresentativeType = '';
-            this.representativeName = '';           
-            this.representativeNameState  = true;
-            this.representativeTypeState   = true;                     
-        } 
-       
+    public extractFormInfo(){ 
+        if (this.isOrganization){
+            const index = this.lookups.organizationLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
+            this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.organizationLegalReps[index]: '';
+        } else {
+            const index = this.lookups.individualLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
+            this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.individualLegalReps[index]: '';
+        }           
+                    
+        this.originalRepresentativeName = this.representativeName = this.formData.name;
     }
+
+    public saveForm(){
+            
+        this.representativeTypeState = this.selectedRepresentativeType != "";
+        this.representativeNameState = this.representativeName != ""; 
+        
+        if (this.representativeTypeState && this.representativeNameState){        
+            const representative = {} as representativeInfoType;
+            representative.type = this.selectedRepresentativeType;
+            representative.name = this.representativeName;       
+            this.$emit('submit', this.isCreateRep, representative, this.index);
+        }
+            
+    }
+
+    public closeForm(){
+        if(this.isChanged())
+            this.showCancelWarning = true;
+        else
+            this.confirmedCloseForm();
+    }
+
+    public isChanged(){
+        if(this.isCreateRep){
+            if(this.selectedRepresentativeType.length && this.representativeName.length ) return true;
+            return false;
+        }else{
+            if( (this.originalSelectedRepresentativeType != this.selectedRepresentativeType) ||
+                (this.originalRepresentativeName != this.representativeName)) return true;
+            return false;
+        }
+    }
+
+    public confirmedCloseForm(){           
+        this.clearSelections();
+        this.$emit('cancel');
+    }
+
+    public clearSelections(){
+        this.selectedRepresentativeType = '';
+        this.representativeName = '';           
+        this.representativeNameState  = true;
+        this.representativeTypeState   = true;                     
+    } 
+    
+}
 </script>
 
 <style scoped>
