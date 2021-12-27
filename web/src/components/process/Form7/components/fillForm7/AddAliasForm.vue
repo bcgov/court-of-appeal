@@ -185,8 +185,7 @@
 <style scoped>
     td {
         margin: 0rem 0.5rem 0.1rem 0rem;
-        padding: 0rem 0.5rem 0.1rem 0rem;
-        
+        padding: 0rem 0.5rem 0.1rem 0rem;        
         background-color: white ;
     }
 </style>

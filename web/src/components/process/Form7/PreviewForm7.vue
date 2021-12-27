@@ -71,9 +71,3 @@ export default class PreviewForm7 extends Vue {
     }
 }
 </script>
-
-<style scoped lang="scss">
-
-
-
-</style>

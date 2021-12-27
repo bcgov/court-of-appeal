@@ -25,6 +25,3 @@ export default class FillForm7SoughtInfo extends Vue {
 
 }
 </script>
-
-<style scoped lang="scss">
-</style>

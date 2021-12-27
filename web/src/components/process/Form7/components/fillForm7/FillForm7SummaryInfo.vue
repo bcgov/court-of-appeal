@@ -149,7 +149,3 @@ export default class FillForm7SummaryInfo extends Vue {
 
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

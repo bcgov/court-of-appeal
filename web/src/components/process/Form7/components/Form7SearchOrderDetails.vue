@@ -124,7 +124,3 @@ export default class Form7SearchOrderDetails extends Vue {
     
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

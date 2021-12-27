@@ -203,7 +203,7 @@ export default class FillForm7 extends Vue {
     }
 
     public getForm7Info(){
-        //TODO: gather info from user input
+        //TODO: use form7Info and create payload body
         // const form7 = this.form7Info;
         // form7.referenceNumber = this.referenceNumber;
         // this.UpdateForm7Info(form7)

@@ -157,9 +157,12 @@ export default class AccessForm7 extends Vue {
     public UpdateForm7AccessInfo!: (newForm7AccessInfo: userAccessInfoType[]) => void;
 
     stepsCompleted = {} as form7StatusInfoType;
-    dataReady = false;  
     selectedUser = {} as accountUserInfoType;
-
+    accessInfo: userAccessInfoType[] = [];
+    nonAdminUsers: accountUserInfoType[] = [];
+    enableAddUser = false;
+    dataReady = false; 
+    updated = 0;
     
     userFields = [
         {
@@ -188,10 +191,7 @@ export default class AccessForm7 extends Vue {
         }
     ]
 
-    accessInfo: userAccessInfoType[] = [];
-    nonAdminUsers: accountUserInfoType[] = [];
-    enableAddUser = false;
-    updated = 0;
+   
 
     mounted() {  
         this.dataReady = false;

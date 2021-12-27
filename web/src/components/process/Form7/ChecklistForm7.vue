@@ -160,7 +160,3 @@ export default class ChecklistForm7 extends Vue {
 
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

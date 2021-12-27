@@ -52,9 +52,3 @@ export default class StartForm7 extends Vue {
 
 }
 </script>
-
-<style scoped lang="scss">
-
-
-
-</style>

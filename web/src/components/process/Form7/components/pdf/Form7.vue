@@ -37,7 +37,6 @@ import "@/store/modules/information";
 import { form7DataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 import Form7Layout from "./Form7Layout.vue";
-import moment from 'moment';
 
 @Component({
     components:{        
@@ -122,8 +121,7 @@ export default class Form7 extends Vue {
         });
     }
 
-    public navigateToEditPage() {
-        //TODO: add functionality to load page data and not start from search
+    public navigateToEditPage() {        
         this.$router.push({name: "start-form7", params: {orderSelected: 'yes'}});
     }
  

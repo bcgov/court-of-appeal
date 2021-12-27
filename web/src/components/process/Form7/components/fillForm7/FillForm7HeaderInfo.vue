@@ -29,6 +29,3 @@ export default class FillForm7HeaderInfo extends Vue {
     }
 }
 </script>
-
-<style scoped lang="scss">
-</style>
