@@ -14,13 +14,14 @@
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
 import { Question } from "survey-vue";
+import { TextBeforeInputNumberQuestion } from '@/types/CustomSurveyQuestions';
 
 
 @Component
 export default class TextBeforeInputNumber extends Vue {
     
     @Prop({required: true})
-    question!: Question
+    question!: TextBeforeInputNumberQuestion
  
     bodyText = ''
     inputWidth = ''

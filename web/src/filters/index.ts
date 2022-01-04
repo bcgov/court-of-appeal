@@ -4,7 +4,7 @@ import store from '@/store';
 
 import * as _ from 'underscore';
 
-import {customCss} from './bootstrapCSS'
+import bootstrapCss from "!!raw-loader!@/styles/bootstrapCSS.css";
 
 Vue.filter('truncate-text', function (text: string, stop: number) {
 	if(text){
@@ -175,7 +175,7 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 				.print-block{
 					page-break-inside: avoid;
 				}
-			}`+ customCss+
+			}`+ bootstrapCss+
 			`@page label{font-size: 9pt;}
 			.container {				
 				padding: 0 !important; 

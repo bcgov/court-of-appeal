@@ -39,21 +39,21 @@
 <script lang="ts">
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
+import { AdvancedRadioGroupQuestion } from "@/types/CustomSurveyQuestions";
 import * as SurveyVue from "survey-vue"; 
 
 @Component
 export default class AdvancedRadioGroup extends Vue {
     
     @Prop({required: true})
-    question!: Question
+    question!: AdvancedRadioGroupQuestion
  
     textBefore = [];
     inputWidths = [];    
     inputTypes = [];
     inputNames = [];
     radioOutputValues = [];
-    textClass = [];
+    textClass = '';
     radioMargins='';
     radioTextMargins='';
     hasOther = false;
