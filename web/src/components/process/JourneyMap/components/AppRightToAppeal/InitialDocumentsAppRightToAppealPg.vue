@@ -32,7 +32,7 @@
                                 
                                 <b-col cols="3" class="p-0" >
                                     <b-button
-                                        :href="form7"
+                                        @click="startNewForm7Document"
                                         target="_blank"
                                         style="border-radius: 0.5rem; font-size: 14px; font-weight: bold; float: right;"                                        
                                         class="p-1 bg-white text-primary border-primary">Online form
@@ -117,14 +117,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import {getForm7Url} from '@/components/utils/Form7_URLs'
 
 @Component
 export default class InitialDocumentsAppRightToAppealPg extends Vue { 
-    form7 = ''
-
-    mounted(){
-        this.form7 = getForm7Url()
+    
+    
+    public startNewForm7Document(){
+        this.$router.push({name: "checklist-form7" })
     }
 
 }

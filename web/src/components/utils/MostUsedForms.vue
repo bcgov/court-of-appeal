@@ -21,16 +21,9 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import {getForm7Url} from './Form7_URLs'
    
     @Component
-    export default class MostUsedForms extends Vue {
-
-        form7 = ''
-
-        mounted(){
-            this.form7 = getForm7Url()
-        }
+    export default class MostUsedForms extends Vue {        
 
         public startNewForm2Document(){
             this.$router.push({name: "start-form2" })
