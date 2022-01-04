@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Question } from "survey-vue";
 
 export default {
@@ -113,7 +113,7 @@ export default {
       const pending = { year: "", month: "", day: "" };
       if (val) {
         const m = ("" + val).match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-        const dt = m ? new Date(m[1], m[2] - 1, m[3]) : null;
+        const dt = m ? new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3])) : null;
         if (dt) {
           pending.year = "" + dt.getFullYear();
           pending.month = "" + (dt.getMonth() + 1);

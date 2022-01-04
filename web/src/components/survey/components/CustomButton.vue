@@ -9,16 +9,16 @@
 <script lang="ts">
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
+import { CustomButtonQuestion } from '@/types/CustomSurveyQuestions';
 
 @Component
 export default class CustomButton extends Vue {
     
     @Prop({required: true})
-    question!: Question
+    question!: CustomButtonQuestion
  
-    textClass = [];   
-    buttonText = [];
+    textClass = '';   
+    buttonText = '';
 
     clickedNumber = 0;
 

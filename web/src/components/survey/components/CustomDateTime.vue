@@ -99,13 +99,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
+import { CustomDateTimeQuestion } from '@/types/CustomSurveyQuestions';
 
 @Component
 export default class CustomDateTime extends Vue {
     
     @Prop({required: true})
-    question!: Question
+    question!: CustomDateTimeQuestion
 
     readOnly = false; 
     dataReady = false;
