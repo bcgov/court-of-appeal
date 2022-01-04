@@ -25,14 +25,14 @@
 <script lang="ts">
 
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { Question } from "survey-vue";
 import * as SurveyVue from "survey-vue"; 
+import { ContactInfoQuestion } from "@/types/CustomSurveyQuestions";
 
 @Component
 export default class ContactInfo extends Vue {
     
     @Prop({ required: true })
-    question!: Question;
+    question!: ContactInfoQuestion;
  
     fields = this.makeFields();
     pendingValue = Object.assign({}, this.question.value);

@@ -19,18 +19,18 @@
 <script lang="ts">
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
 import * as SurveyVue from "survey-vue"; 
+import { MultipleTextInputQuestion } from '@/types/CustomSurveyQuestions';
 
 @Component
 export default class MultipleTextInput extends Vue {
     
     @Prop({required: true})
-    question!: Question
+    question!: MultipleTextInputQuestion
  
     textBefore = [];
     inputWidths = [];
-    textClass = [];
+    textClass = '';
     inputTypes = [];
     inputNames = [];
 
