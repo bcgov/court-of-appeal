@@ -252,6 +252,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     )
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Efiling
 EFILING_APP_NAME = os.environ.get("EFILING_APP_NAME", "Court Of Appeal")

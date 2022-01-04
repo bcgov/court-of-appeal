@@ -19,7 +19,6 @@ import logging
 import sys
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls import url
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.schemas import SchemaGenerator
