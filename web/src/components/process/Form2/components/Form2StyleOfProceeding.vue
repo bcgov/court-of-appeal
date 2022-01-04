@@ -63,7 +63,7 @@
                 label-for="contact">
                 <b-form-select 
                     id="contact"
-                    style="width:150%"
+                    style="width:300%"
                     @change="toggleRepresentation"
                     v-model="respondentName"                    
                     :options="respondentNames">
