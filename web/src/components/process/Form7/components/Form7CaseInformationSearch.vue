@@ -15,7 +15,7 @@
                 <b-form-input 
                     id="level-of-court"
                     disabled
-                    style="max-width:25%" 
+                    style="max-width:75%" 
                     v-model="levelOfCourt">
                 </b-form-input>
             </b-form-group>
@@ -28,7 +28,7 @@
                 label-for="supreme-court-file-no">
                 <b-form-input 
                     id="supreme-court-file-no"
-                    style="max-width:25%" 
+                    style="max-width:75%" 
                     v-model="searchParams.file">
                 </b-form-input>            
             </b-form-group>       
@@ -40,7 +40,7 @@
                 label="Supreme Court Registry" 
                 label-for="location">
                 <b-form-select
-                    style="max-width:25%"
+                    style="max-width:75%"
                     id="location"                                                                                                           
                     v-model="searchParams.location">
                         <b-form-select-option

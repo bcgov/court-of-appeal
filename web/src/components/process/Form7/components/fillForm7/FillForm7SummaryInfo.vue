@@ -58,7 +58,7 @@
                 DURATION OF TRIAL/HEARING                
                 <b-row class="ml-0 mt-1">
                     <b-form-input                    
-                        style="max-width:15%" 
+                        style="max-width:25%" 
                         :state="form7InfoStates.appearanceDays"
                         @change="update"
                         v-model="appearanceDays">
