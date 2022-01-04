@@ -36,7 +36,6 @@
 <script lang="ts">
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
 import * as SurveyVue from "survey-vue"; 
 import Tooltip from "@/components/survey/Tooltip.vue";
 import { MultipleCommentCheckboxQuestion } from '@/types/CustomSurveyQuestions';

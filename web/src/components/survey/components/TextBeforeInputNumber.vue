@@ -13,7 +13,6 @@
 <script lang="ts">
 
 import { Component, Vue, Prop} from 'vue-property-decorator';
-import { Question } from "survey-vue";
 import { TextBeforeInputNumberQuestion } from '@/types/CustomSurveyQuestions';
 
 
