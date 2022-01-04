@@ -12,7 +12,7 @@
             label-for="level-of-court">
             <b-form-input 
                 id="level-of-court"
-                style="max-width:25%" 
+                style="max-width:75%" 
                 :disabled="true"
                 v-model="levelOfCourt">
             </b-form-input>
@@ -26,7 +26,7 @@
             label-for="court-of-appeal-file-no">
             <b-form-input 
                 id="court-of-appeal-file-no"
-                style="max-width:25%" 
+                style="max-width:75%" 
                 :state="fileNumberState? null:false"
                 v-model="searchParams.file">
             </b-form-input>
@@ -44,7 +44,7 @@
             label-for="respondent">
             <b-form-radio-group
                 id="respondent"
-                style="max-width:25%" 
+                style="max-width:75%" 
                 :state="respondentState? null:false"
                 v-model="searchParams.searchBy"
                 :options="respondentOptions"                
@@ -61,7 +61,7 @@
             label-for="organization-name">
             <b-form-input 
                 id="organization-name"
-                style="max-width:50%" 
+                style="width:150%" 
                 v-model="searchParams.organizationName">
             </b-form-input>
         </b-form-group>
@@ -76,7 +76,7 @@
                 label-for="first-name">
                 <b-form-input 
                     id="first-name"
-                    style="max-width:25%" 
+                    style="max-width:75%" 
                     v-model="searchParams.firstName">
                 </b-form-input>
             </b-form-group>
@@ -89,7 +89,7 @@
                 label-for="last-name">
                 <b-form-input 
                     id="last-name"
-                    style="max-width:25%" 
+                    style="max-width:75%" 
                     v-model="searchParams.lastName">
                 </b-form-input>
             </b-form-group>
