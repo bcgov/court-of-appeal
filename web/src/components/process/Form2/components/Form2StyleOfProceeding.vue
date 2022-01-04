@@ -35,7 +35,7 @@
                 label-for="representation">
                 <b-form-radio-group
                     id="representation"
-                    style="max-width:25%"
+                    style="max-width:75%"
                     @change="toggleRepresentation" 
                     v-model="form2Info.selfRepresented"
                     :options="representationOptions"                
@@ -63,6 +63,7 @@
                 label-for="contact">
                 <b-form-select 
                     id="contact"
+                    style="width:150%"
                     @change="toggleRepresentation"
                     v-model="respondentName"                    
                     :options="respondentNames">
