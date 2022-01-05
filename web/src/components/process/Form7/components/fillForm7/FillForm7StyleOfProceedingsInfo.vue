@@ -375,7 +375,11 @@
                                     class="labels"                
                                     label="OTHER NAMES:" 
                                     label-for="aliases">
-                                    <span v-if="party.aliases.length == 0 && !AddNewAliasForm" id="aliases" class="text-muted ml-2 my-2">No aliases have been assigned.</span>
+                                    <span 
+                                        v-if="party.aliases.length == 0 && !AddNewAliasForm" 
+                                        id="aliases" 
+                                        class="text-muted ml-2 my-2">No aliases have been assigned.
+                                    </span>
                                     <b-table
                                         v-else-if="party.aliases.length > 0"
                                         :key="updated"                                
@@ -399,14 +403,36 @@
                                         
                                         <template v-slot:cell(edit)="data" >   
                                             <div style="float: right;">                                                                     
-                                                <b-button class="mr-2" size="sm" variant="transparent" @click="removeAlias(data)"><b-icon icon="trash-fill" font-scale="1.25" variant="danger"/></b-button>
-                                                <b-button size="sm" variant="transparent" @click="editAlias(data)"><b-icon icon="pencil-square" font-scale="1.25" variant="primary"/></b-button>
+                                                <b-button 
+                                                    class="mr-2" 
+                                                    size="sm" 
+                                                    variant="transparent" 
+                                                    @click="removeAlias(data)">
+                                                    <b-icon 
+                                                        icon="trash-fill" 
+                                                        font-scale="1.25" 
+                                                        variant="danger"/>
+                                                </b-button>
+                                                <b-button 
+                                                    size="sm" 
+                                                    variant="transparent" 
+                                                    @click="editAlias(data)">
+                                                    <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
+                                                </b-button>
                                             </div>
                                         </template>
 
                                         <template v-slot:row-details="data">
-                                            <b-card body-class="m-0 px-0 py-1" :border-variant="addAliasFormColor" style="border:2px solid;">
-                                                <add-alias-form :formData="data.item" :index="data.index" :isCreateAlias="false" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />
+                                            <b-card 
+                                                body-class="m-0 px-0 py-1" 
+                                                :border-variant="addAliasFormColor" 
+                                                style="border:2px solid;">
+                                                <add-alias-form 
+                                                    :formData="data.item" 
+                                                    :index="data.index" 
+                                                    :isCreateAlias="false" 
+                                                    v-on:submit="modifyAliasList" 
+                                                    v-on:cancel="closeAliasForm" />
                                             </b-card>
                                         </template>
                                     </b-table> 
@@ -423,8 +449,19 @@
                         </b-row>
                     </b-card>           
 
-                    <b-card v-if="AddNewAliasForm" id="addAliasForm" class="my-1 ml-4" :border-variant="addAliasFormColor" style="border:2px solid; width: 81%;" body-class="px-1 py-1">
-                        <add-alias-form :formData="{}" :index="-1" :isCreateAlias="true" v-on:submit="modifyAliasList" v-on:cancel="closeAliasForm" />                
+                    <b-card 
+                        v-if="AddNewAliasForm" 
+                        id="addAliasForm" 
+                        class="my-1 ml-4" 
+                        :border-variant="addAliasFormColor" 
+                        style="border:2px solid; width: 81%;" 
+                        body-class="px-1 py-1">
+                        <add-alias-form 
+                            :formData="{}" 
+                            :index="-1" 
+                            :isCreateAlias="true" 
+                            v-on:submit="modifyAliasList" 
+                            v-on:cancel="closeAliasForm" />                
                     </b-card>
 
                     <b-card no-body class="border-white">
@@ -434,7 +471,11 @@
                                     class="labels"                
                                     label="LEGAL REPRESENTATIVES:" 
                                     label-for="representatives">
-                                    <span v-if="party.legalReps.length == 0 && !AddNewRepresentativeForm" id="representatives" class="text-muted ml-2 my-2">No representatives have been assigned.</span>
+                                    <span 
+                                        v-if="party.legalReps.length == 0 && !AddNewRepresentativeForm" 
+                                        id="representatives" 
+                                        class="text-muted ml-2 my-2">No representatives have been assigned.
+                                    </span>
                                     <b-table
                                         v-else-if="party.legalReps.length > 0"
                                         :key="updated"                                
@@ -458,14 +499,40 @@
                                         
                                         <template v-slot:cell(edit)="data" >   
                                             <div style="float: right;">                                                                     
-                                                <b-button class="mr-2" size="sm" variant="transparent" @click="removeRepresentative(data)"><b-icon icon="trash-fill" font-scale="1.25" variant="danger"/></b-button>
-                                                <b-button size="sm" variant="transparent" @click="editRepresentative(data)"><b-icon icon="pencil-square" font-scale="1.25" variant="primary"/></b-button>
+                                                <b-button 
+                                                    class="mr-2" 
+                                                    size="sm" 
+                                                    variant="transparent" 
+                                                    @click="removeRepresentative(data)">
+                                                    <b-icon 
+                                                        icon="trash-fill" 
+                                                        font-scale="1.25" 
+                                                        variant="danger"/>
+                                                </b-button>
+                                                <b-button 
+                                                    size="sm" 
+                                                    variant="transparent" 
+                                                    @click="editRepresentative(data)">
+                                                    <b-icon 
+                                                        icon="pencil-square" 
+                                                        font-scale="1.25" 
+                                                        variant="primary"/>
+                                                </b-button>
                                             </div>
                                         </template>
 
                                         <template v-slot:row-details="data">
-                                            <b-card body-class="m-0 px-0 py-1" :border-variant="addRepresentativeFormColor" style="border:2px solid;">
-                                                <add-representative-form :formData="data.item" :index="data.index" :isCreateRep="false" :isOrganization="party.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />
+                                            <b-card 
+                                                body-class="m-0 px-0 py-1" 
+                                                :border-variant="addRepresentativeFormColor" 
+                                                style="border:2px solid;">
+                                                <add-representative-form 
+                                                    :formData="data.item" 
+                                                    :index="data.index" 
+                                                    :isCreateRep="false" 
+                                                    :isOrganization="party.isOrganization" 
+                                                    v-on:submit="modifyRepresentativeList" 
+                                                    v-on:cancel="closeRepresentativeForm" />
                                             </b-card>
                                         </template>
                                     </b-table> 
@@ -477,13 +544,29 @@
                                     v-if="!AddNewRepresentativeForm" 
                                     size="sm" 
                                     variant="court" 
-                                    @click="addNewRepresentative"><b-icon icon="plus" style="padding:0; margin:0;"/>Add Representative</b-button>
+                                    @click="addNewRepresentative">
+                                    <b-icon 
+                                        icon="plus" 
+                                        style="padding:0; margin:0;"/>Add Representative
+                                </b-button>
                             </b-col>
                         </b-row>
                     </b-card>           
 
-                    <b-card v-if="AddNewRepresentativeForm" id="addRepresentativeForm" class="my-1 ml-4" :border-variant="addRepresentativeFormColor" style="border:2px solid; width: 81%;" body-class="px-1 py-1">
-                        <add-representative-form :formData="{}" :index="-1" :isCreateRep="true" :isOrganization="party.isOrganization" v-on:submit="modifyRepresentativeList" v-on:cancel="closeRepresentativeForm" />                
+                    <b-card 
+                        v-if="AddNewRepresentativeForm" 
+                        id="addRepresentativeForm" 
+                        class="my-1 ml-4" 
+                        :border-variant="addRepresentativeFormColor" 
+                        style="border:2px solid; width: 81%;" 
+                        body-class="px-1 py-1">
+                        <add-representative-form 
+                            :formData="{}" 
+                            :index="-1" 
+                            :isCreateRep="true" 
+                            :isOrganization="party.isOrganization" 
+                            v-on:submit="modifyRepresentativeList" 
+                            v-on:cancel="closeRepresentativeForm" />                
                     </b-card>
 
                 </b-card>            
@@ -883,7 +966,9 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     mounted() { 
         this.dataReady = false;
-        this.styleOfProceedingsInfo = this.form7Info;        
+        this.styleOfProceedingsInfo = this.form7Info;   
+        this.respondents = [];
+        this.respondentSolicitors = [];     
         this.extractInfo();
         this.form7PartiesStates = {} as form7PartiesStatesInfoType;
         this.dataReady = true;                   
@@ -893,7 +978,13 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.styleOfProceedingsInfo.mainAppellant = this.userName;
         this.partiesList = this.supremeCourtCaseJson.parties;
         this.styleOfProceedingsInfo.appellants = this.styleOfProceedingsInfo.appellants?this.styleOfProceedingsInfo.appellants:[];
-        this.styleOfProceedingsInfo.respondents = this.styleOfProceedingsInfo.respondents?this.styleOfProceedingsInfo.respondents:[];;
+        this.styleOfProceedingsInfo.respondents = this.styleOfProceedingsInfo.respondents?this.styleOfProceedingsInfo.respondents:[]; 
+        for (const respondent of this.styleOfProceedingsInfo.respondents){
+            this.respondents.push(respondent.fullName);
+            if (respondent.counselName) {
+                this.respondentSolicitors.push(respondent.counselName);
+            }                       
+        }       
         for (const party in this.supremeCourtCaseJson.parties){
             const partyInfo = this.supremeCourtCaseJson.parties[party];
             this.partiesList[party].title = this.getPartyTitles(partyInfo);            
@@ -1165,9 +1256,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             } else {
                 this.editStyleOfProceedingsEnabled = false;
 
-            }
-
-        
+            }        
     }
 
     public update(){        
@@ -1285,7 +1374,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     
     public cancelPartyDeletion() {
         this.showConfirmDeleteParty = false;
-        
     }
 
     public deleteParty(){
@@ -1310,9 +1398,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.loadSopInfo(this.styleOfProceedingsInfo.appellants);
         this.loadSopInfo(this.styleOfProceedingsInfo.respondents); 
 
-        this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)
-
-        //TODO: add functionality to display the new party with no role at the end
+        this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)        
 
         this.UpdateForm7Info(this.styleOfProceedingsInfo)
         
@@ -1320,9 +1406,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     }
 
-    public loadSopInfo(partiesInfo: form7PartiesInfoType[]){  
-        
-        
+    public loadSopInfo(partiesInfo: form7PartiesInfoType[]){        
 
         if (this.styleOfProceedingsInfo.manualSop && this.styleOfProceedingsInfo.manualSop.length > 0){
 
@@ -1357,9 +1441,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
                 this.prePopulateSop(party);
             }
 
-        }
-
-        
+        }       
 
     }
 

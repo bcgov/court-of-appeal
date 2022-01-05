@@ -75,9 +75,6 @@
             </b-col>           
         </b-row>
     </b-card>
-        
-                 
-        
     
 </template>
 
@@ -91,11 +88,9 @@ import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7
 import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
 import { locationsInfoType } from '@/types/Common';
 
-
 @Component({
     components:{
         FillForm7HeaderInfo
-        
     }
 })
 export default class FillForm7SummaryInfo extends Vue {

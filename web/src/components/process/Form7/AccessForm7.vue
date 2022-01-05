@@ -112,10 +112,10 @@
                         :value="user">
                             {{user.fullName}}
                     </b-form-select-option>    
-            </b-form-select>
-            
+            </b-form-select>            
 
         </b-card>    
+
         <b-button 
             class="bg-success text-white mt-4 mr-2"
             style="opacity:1; float:right;"
@@ -189,9 +189,7 @@ export default class AccessForm7 extends Vue {
             thClass: 'border-dark border-bottom text-primary bg-light', 
             sortable:false            
         }
-    ]
-
-   
+    ]   
 
     mounted() {  
         this.dataReady = false;

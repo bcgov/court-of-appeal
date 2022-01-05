@@ -279,6 +279,4 @@ export default class Form7CaseInformationSearch extends Vue {
 
 <style scoped lang="scss">
 
-
-
 </style>

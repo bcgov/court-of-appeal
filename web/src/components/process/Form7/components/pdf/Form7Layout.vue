@@ -55,9 +55,7 @@
             </div>          
         </div>
 
-        <div class="my-5" style="display: block; text-align: center; font-weight: 700; font-size:10pt;">NOTICE OF APPEAL</div>
-
-       
+        <div class="my-5" style="display: block; text-align: center; font-weight: 700; font-size:10pt;">NOTICE OF APPEAL</div>       
 
         <div class="mt-4">
             <underline-form 
@@ -139,7 +137,7 @@
                         textwidth="37.75rem" 
                         beforetext=""
                         hint="" 
-                        :text="(result.appealedInSupremeCourt == 'NA')?'Not Applicable':result.makerName"/>.   
+                        :text="(result.appealedInSupremeCourt == 'NA')?'Not Applicable':result.makerName"/>   
                 </div>
             </section>
         </div>
@@ -442,7 +440,6 @@ export default class Form7Layout extends Vue {
             sop.conjunction = 'And';
             this.caseSop.push(sop);
         }
-
     }
 }
 

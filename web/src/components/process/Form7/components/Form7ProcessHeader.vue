@@ -10,7 +10,7 @@
                 </div>
                 <div v-else>
                     <step-number class="ml-1 mt-2" v-bind:stepNumber="1" v-bind:active="true"/>
-                    <span class="text-dark step-incomplete">Access</span>
+                    <span :class="textDarkStepIncompleteClass">Access</span>
                 </div>               
 
             </b-col>
@@ -22,7 +22,9 @@
                 </div>
                 <div v-else style="text-align: center;">
                     <step-number class="mt-2"  v-bind:stepNumber="2" v-bind:active="stepsCompleted.first"/>
-                    <span :class="stepsCompleted.first?'text-dark step-incomplete':'text-inactive step-incomplete'">Form 7</span>
+                    <span 
+                        :class="stepsCompleted.first?textDarkStepIncompleteClass:textInactiveStepIncompleteClass">Form 7
+                    </span>
                 </div>               
                 
             </b-col>
@@ -34,7 +36,9 @@
                 </div>
                 <div v-else style="text-align: center;">
                     <step-number class="mt-2"  v-bind:stepNumber="3" v-bind:active="(stepsCompleted.first && stepsCompleted.second)"/>
-                    <span :class="(stepsCompleted.first && stepsCompleted.second)?'text-dark step-incomplete':'text-inactive step-incomplete'">Preview</span>
+                    <span 
+                        :class="(stepsCompleted.first && stepsCompleted.second)?textDarkStepIncompleteClass:textInactiveStepIncompleteClass">Preview
+                    </span>
                 </div>               
                 
             </b-col>
@@ -49,8 +53,13 @@
                     <span class="step-complete text-danger mr-4 ml-3 mb-2">Submit</span>                
                 </div>
                 <div v-else style="float: right;">
-                    <step-number class="mt-2"  v-bind:stepNumber="4" v-bind:active="stepsCompleted.first && stepsCompleted.second && stepsCompleted.third"/>
-                    <span :class="(stepsCompleted.first && stepsCompleted.second && stepsCompleted.third)?'text-dark step-incomplete mr-4':'text-inactive step-incomplete mr-4'">Submit</span>
+                    <step-number 
+                        class="mt-2"  
+                        v-bind:stepNumber="4" 
+                        v-bind:active="stepsCompleted.first && stepsCompleted.second && stepsCompleted.third"/>
+                    <span 
+                        :class="((stepsCompleted.first && stepsCompleted.second && stepsCompleted.third)?textDarkStepIncompleteClass:textInactiveStepIncompleteClass) + ' mr-4'">Submit
+                    </span>
                 </div>  
                                
             </b-col>
@@ -74,6 +83,9 @@ export default class Form7ProcessHeader extends Vue {
     
     @Prop({required: true})
     stepsCompleted!: form7StatusInfoType;
+
+    textInactiveStepIncompleteClass = 'text-inactive step-incomplete';
+    textDarkStepIncompleteClass = 'text-dark step-incomplete';
 
 }
 </script>

@@ -47,7 +47,6 @@
             </b-row>
 
         </b-card>
-
         
     </b-card>
 </template>

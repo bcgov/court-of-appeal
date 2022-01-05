@@ -47,8 +47,6 @@ export default class StartForm7 extends Vue {
             third: false,
             fourth: false
         }       
-    }  
-
-
+    }
 }
 </script>

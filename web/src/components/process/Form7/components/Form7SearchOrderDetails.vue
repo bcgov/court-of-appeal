@@ -38,7 +38,9 @@
             
             <template v-slot:cell(orderDate)="row" >                  
                 <span
-                    :class="row.item.isPastDeadline?'text-secondary':'text-dark'">{{ row.item.orderDate | beautify-date-weekday}}</span>
+                    :class="row.item.isPastDeadline?'text-secondary':'text-dark'">
+                    {{ row.item.orderDate | beautify-date-weekday}}
+                </span>
             </template>
 
             <template v-slot:cell(appealSubmissionDeadline)="row">                  
