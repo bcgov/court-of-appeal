@@ -35,7 +35,9 @@ from api.views import (
     FormToPdfView,
     Form7SearchView,
     EFilingSubmitView,
-    CourtLocations   
+    CourtLocations,
+    Form7LookupView,
+    Form7HolidaysListView
 )
 
 
@@ -65,7 +67,9 @@ urlpatterns = [
     #path("efiling/locations/", EFilingLocationView.as_view()),
     path("efiling/<int:case_id>/submit/", EFilingSubmitView.as_view()),
 
-    path("locations/",CourtLocations.as_view())
+    path("locations/",CourtLocations.as_view()),
+    path("lookup/",Form7LookupView.as_view()),
+    path("holidays/<int:year>/",Form7HolidaysListView.as_view()),
 ]
 
 if settings.OIDC_ENABLED:
