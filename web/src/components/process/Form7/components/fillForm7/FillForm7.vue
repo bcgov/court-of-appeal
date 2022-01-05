@@ -31,7 +31,7 @@
                 <b-button 
                     style="float: right;" 
                     variant="primary"
-                    @click="saveForm(false)"
+                    @click="saveForm(true)"
                     >
                     <i class="fas fa-save mr-1"></i>Save
                 </b-button>
@@ -40,7 +40,7 @@
                 <b-button
                     style="float: right;" 
                     variant="primary"
-                    @click="navigateToPreviewPage"
+                    @click="saveForm(false)"
                     >Preview Form
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
                 </b-button>
@@ -107,6 +107,7 @@ export default class FillForm7 extends Vue {
             form7Data.fileNumber = this.supremeCourtCaseJson.fileNumber;
             form7Data.fileId = this.supremeCourtCaseJson.fileId;
             form7Data.courtClass = this.supremeCourtCaseJson.courtClassCd;
+            form7Data.appealSubmissionDeadline = this.supremeCourtOrderJson.appealSubmissionDeadline;
             this.UpdateForm7Info(form7Data);
         }
             
@@ -167,6 +168,7 @@ export default class FillForm7 extends Vue {
         if (this.checkStates() && this.checkWithinAppealPeriod() ){
             const data = this.getForm7Info();
             console.log(data)
+            if(!draft) this.navigateToPreviewPage('3467864');
             
 
 
@@ -192,8 +194,8 @@ export default class FillForm7 extends Vue {
         //     .then(response => {
         //         if(response.data){
         //             if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-        //             this.UpdateForm2Info(this.form2Info);
-        //             if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
+        //             this.UpdateForm7Info(this.form7Info);
+                    // if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
         //         }
         //     }, err => {
         //         const errMsg = err.response.data.error;

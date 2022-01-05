@@ -1,9 +1,9 @@
 <template>
     <b-card bg-variant="light" border-variant="white">
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
-        <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />   
-
-        <b-container v-else class="container">            
+        <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
+        
+        <b-card no-body v-else class="home-content border-white p-0">          
             <my-documents-table 
                 v-bind:enableActions="false" 
                 v-bind:title="'Submissions'">
@@ -16,9 +16,9 @@
                     View All Submissions
                 </b-button>
             </b-row>
-        </b-container>
+        </b-card>
 
-        <b-container class="container mt-3">
+        <b-card no-body class="home-content mt-3 border-light bg-light p-0">
             <b-row >
                 <b-col cols="8">
 
@@ -44,7 +44,7 @@
 
                 </b-col>
             </b-row>
-        </b-container>       
+        </b-card>       
         
     </b-card>
 </template>
@@ -418,9 +418,10 @@ export default class DashboardPage extends Vue {
 
     .home-content {
         padding-bottom: 20px;
-        padding-top: 2rem;
-        max-width: 950px;
+        padding-top: 0rem;
+        width: 95%;
         color: black;
+        margin: 0 auto;
     }
 
 </style>

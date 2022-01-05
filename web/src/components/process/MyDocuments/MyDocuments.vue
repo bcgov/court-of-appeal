@@ -1,11 +1,12 @@
 <template>
-    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">       
-        
-        <b-container v-if="dataLoaded" class="container">
+    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">   
+
+        <b-card no-body v-if="dataLoaded" class="home-content border-white p-0">       
             
             <my-documents-table @reload="loadCases()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
             
-        </b-container>
+        </b-card>
+        
     </b-card>
 </template>
 
@@ -73,8 +74,16 @@ export default class MyDocuments extends Vue {
 
 <style scoped lang="scss">
 
-@import "src/styles/common";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
+    @import "src/styles/common";
+    @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+    .home-content {
+        padding-bottom: 20px;
+        padding-top: 0rem;
+        width: 95%;
+        color: black;
+        margin: 0 auto;
+    }
 
 
 </style>
