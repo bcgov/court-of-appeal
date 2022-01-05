@@ -11,7 +11,7 @@
                     :state="form7InfoStates.orderType"
                     @change="update"
                     id="order-type"
-                    :options="typesOfOrders"
+                    :options="lookups.appealFromOptionsList"
                     style="font-size: 1rem; font-weight:400;"                    
                 ></b-form-radio-group>
             </b-form-group>
@@ -80,7 +80,7 @@
                     v-model="commonInfo.appealNature"
                     :state="form7InfoStates.appealNature"
                     @change="update"
-                    :options="appealNatureOptions"                
+                    :options="lookups.involvesOtherList"                
                     stacked                
                 ></b-form-radio-group>
              </b-form-group>
@@ -125,8 +125,11 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
-import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
+import { form7DataInfoType, form7StatesInfoType, lookupsInfoType } from '@/types/Information';
 
 @Component({
     components:{        
@@ -135,6 +138,9 @@ import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
 })
 export default class FillForm7CommonInfo extends Vue {
 
+    @commonState.State
+    public lookups!: lookupsInfoType;
+    
     @informationState.State
     public form7Info: form7DataInfoType;
 
@@ -142,30 +148,12 @@ export default class FillForm7CommonInfo extends Vue {
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
-
-    typesOfOrders = [
-        { text: 'Trial Judgment', value: 'Trial Judgment' },
-        { text: 'Summary Trial Judgment', value: 'Summary Trial Judgment' },
-        { text: 'Chambers Judgment', value: 'Chambers Judgment' }
-    ]
+    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void;
 
     appealedInSupremeCourtOptions = [
         { text: 'Yes', value: 'yes' },
         { text: 'Not Applicable', value: 'NA' }
-    ]
-
-    appealNatureOptions = [
-        { text: 'Constitutional/Administrative', value: 'Constitutional/Administrative' },
-        { text: 'Civil Procedure', value: 'Civil Procedure' },
-        { text: 'Commercial', value: 'Commercial' },
-        { text: 'Motor Vehicle Accidents', value: 'Motor Vehicle Accidents' },
-        { text: 'Municipal Law', value: 'Municipal Law' },
-        { text: 'Real Property', value: 'Real Property' },
-        { text: 'Torts', value: 'Torts' },
-        { text: 'Equity', value: 'Equity' },
-        { text: 'Wills and estate', value: 'Wills and estate' }
-    ]    
+    ]     
 
     dataReady = false;
     commonInfo = {} as form7DataInfoType;

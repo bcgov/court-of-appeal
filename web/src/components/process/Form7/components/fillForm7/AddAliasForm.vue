@@ -176,8 +176,7 @@
             this.aliasName = '';           
             this.aliasNameState  = true;
             this.aliasTypeState   = true;                     
-        }       
-
+        }
        
     }
 </script>

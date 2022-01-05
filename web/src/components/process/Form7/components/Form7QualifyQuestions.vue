@@ -303,7 +303,6 @@ export default class Form7QualifyQuestions extends Vue {
     appealingProvincialCourtOrder = '';
     selfRepresenting = '';
 
-
     get qualificationResponse(){
 
         if (this.insideTimeLimit == 'no' &&
@@ -316,8 +315,7 @@ export default class Form7QualifyQuestions extends Vue {
 
         } else {
             return false;
-        }
-        
+        }        
     }
 
     @Watch('qualificationResponse')
@@ -325,8 +323,7 @@ export default class Form7QualifyQuestions extends Vue {
     {
         console.log('watching')
         this.$emit('disableContinue', !qualified);
-    }
-    
+    }    
 
 }
 </script>

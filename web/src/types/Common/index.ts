@@ -22,7 +22,13 @@ export interface  applicationJsonInfoType {
     }
 };
 
-export interface supremeCourtLocationsInfoType {
-    key: number;
-    value: string;   
+export interface locationsInfoType {
+    id: string;
+    name: string; 
+    type: string;
+    address: string;
+    email: string;
+    city: string;
+    province: string; 
+    postalCode: string;
 }
