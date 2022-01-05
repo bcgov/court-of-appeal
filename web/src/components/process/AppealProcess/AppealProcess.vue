@@ -24,7 +24,7 @@
                 href="mailto:courts.cso@gov.bc.ca">contact the registry
             </a>.
         </p>
-        <journey-map />
+        <journey-map class="mx-3" />
     </b-card>
 </template>
 
