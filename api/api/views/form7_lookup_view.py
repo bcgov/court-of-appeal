@@ -15,7 +15,7 @@ class Form7LookupView(APIView):
 
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self):        
+    def get(self, request):        
         return JsonResponse(get_form7_static_list())
 
                 
