@@ -74,6 +74,7 @@ import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json'
 import { lookupsInfoType, pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
+import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 
 
 @Component({
@@ -110,6 +111,9 @@ export default class DashboardPage extends Vue {
     
     @commonState.Action
     public UpdateLookups!: (newLookups: lookupsInfoType) => void
+
+    @commonState.Action
+    public UpdateLocationsInfo!: (newLocationsInfo: lookupsInfoType) => void
 
     dataLoaded = false;    
     journeyStarted = false;
@@ -171,7 +175,8 @@ export default class DashboardPage extends Vue {
     mounted() {  
         this.dataLoaded = false;
         this.initSteps();
-        this.loadInfo();        
+        this.loadInfo(); 
+        this.extractFilingLocations();       
     }
 
     public getCurrentState(){
@@ -362,6 +367,10 @@ export default class DashboardPage extends Vue {
             this.dataLoaded = true;
             this.error = err;        
         });
+    }
+
+    public extractFilingLocations() {
+        GetFilingLocations();       
     }
 
     public loadCases () {

@@ -44,10 +44,10 @@
                     id="location"                                                                                                           
                     v-model="searchParams.location">
                         <b-form-select-option
-                            v-for="location in locations" 
-                            :key="location.key"
-                            :value="location.key">
-                                {{location.value}}
+                            v-for="location in locationsInfo" 
+                            :key="location.id"
+                            :value="location.id">
+                                {{location.name}}
                         </b-form-select-option>    
                 </b-form-select>
                 
@@ -125,14 +125,18 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
+import "@/store/modules/common";
+const commonState = namespace("Common");
 
 import { form7SearchInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
-import Form7SearchOrderDetails from "./Form7SearchOrderDetails.vue"
-import { supremeCourtLocationsInfoType } from '@/types/Common';
+import Form7SearchOrderDetails from "./Form7SearchOrderDetails.vue";
+import { locationsInfoType } from '@/types/Common';
 
 @Component({
     components: {           
@@ -146,16 +150,18 @@ export default class Form7CaseInformationSearch extends Vue {
     public UpdateSupremeCourtCaseJson!: (newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType) => void
 
     @informationState.Action
-    public UpdateCaseLocation!: (newCaseLocation: supremeCourtLocationsInfoType) => void
+    public UpdateCaseLocation!: (newCaseLocation: locationsInfoType) => void
 
     @informationState.Action
     public UpdateSupremeCourtOrderJson!: (newSupremeCourtOrderJson: supremeCourtOrdersJsonInfoType) => void
+
+    @commonState.State
+    public locationsInfo!: locationsInfoType[];
     
     levelOfCourt = "Supreme Court of BC";
 
     dataReady = false;
-    searching = false;
-    locations: supremeCourtLocationsInfoType[] = [];
+    searching = false;    
 
     searchParams = {} as form7SearchInfoType;
     notFound = false;    
@@ -168,133 +174,9 @@ export default class Form7CaseInformationSearch extends Vue {
 
     mounted(){
         this.dataReady = false;
-        this.cases = [];
-        this.loadLocations();
+        this.cases = [];        
         this.searching = false;
         this.dataReady = true; 
-    }
-
-    public loadLocations(){
-        //TODO: use api to load locations
-        this.locations = [
-            {
-                "key": 9067.0001,
-                "value": "Campbell River Court"
-            },
-            {
-                "key": 8824.0001,
-                "value": "Chilliwack Law Courts"
-            },
-            {
-                "key": 9068.0001,
-                "value": "Courtenay Law Courts"
-            },
-            {
-                "key": 29.0001,
-                "value": "Cranbrook Law Courts"
-            },
-            {
-                "key": 110.0001,
-                "value": "Dawson Creek Law Courts"
-            },
-            {
-                "key": 10231.0001,
-                "value": "Duncan Law Courts"
-            },
-            {
-                "key": 112.0001,
-                "value": "Fort Nelson Law Courts"
-            },
-            {
-                "key": 114.0001,
-                "value": "Fort St. John Law Courts"
-            },
-            {
-                "key": 79.0001,
-                "value": "Golden Law Court"
-            },
-            {
-                "key": 82.0001,
-                "value": "Kamloops Court"
-            },
-            {
-                "key": 83.0001,
-                "value": "Kelowna Law Courts"
-            },
-            {
-                "key": 16164.0026,
-                "value": "Lytton Provincial Court"
-            },
-            {
-                "key": 89.0001,
-                "value": "Nelson Law Courts"
-            },
-            {
-                "key": 8839.0001,
-                "value": "New Westminster Law Courts"
-            },
-            {
-                "key": 91.0001,
-                "value": "Penticton Law Courts"
-            },
-            {
-                "key": 10235.0001,
-                "value": "Port Alberni Law Courts"
-            },
-            {
-                "key": 10236.0001,
-                "value": "Port Hardy Law Courts"
-            },
-            {
-                "key": 10237.0001,
-                "value": "Powell River Law Courts"
-            },
-            {
-                "key": 8844.0001,
-                "value": "Prince George Law Courts"
-            },
-            {
-                "key": 9075.0001,
-                "value": "Prince Rupert Law Courts"
-            },
-            {
-                "key": 9074.0001,
-                "value": "Quesnel Law Courts"
-            },
-            {
-                "key": 94.0001,
-                "value": "Rossland Law Courts"
-            },
-            {
-                "key": 95.0001,
-                "value": "Salmon Arm Law Courts"
-            },
-            {
-                "key": 9073.0001,
-                "value": "Smithers Law Courts"
-            },
-            {
-                "key": 9072.0001,
-                "value": "Terrace Law Courts"
-            },
-            {
-                "key": 19228.0734,
-                "value": "Vancouver Law Courts"
-            },
-            {
-                "key": 96.0001,
-                "value": "Vernon Law Courts"
-            },
-            {
-                "key": 8807.0001,
-                "value": "Victoria Law Courts"
-            },
-            {
-                "key": 9070.0001,
-                "value": "Williams Lake Law Courts"
-            }
-        ];
-
     }
 
     public findFile(){
@@ -384,7 +266,7 @@ export default class Form7CaseInformationSearch extends Vue {
         if(!data.detailsShowing)
         {
             this.UpdateSupremeCourtCaseJson(data.item)           
-            const selectedLocation: supremeCourtLocationsInfoType = this.locations.filter(location=>location.key.toString() == this.searchParams.location)[0]
+            const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == this.searchParams.location)[0]
             this.UpdateCaseLocation(selectedLocation)
         }       
     }

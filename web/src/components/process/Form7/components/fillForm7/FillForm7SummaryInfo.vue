@@ -24,7 +24,7 @@
                 </b-col>
                 <b-col cols="4">
                     SUPREME COURT REGISTRY
-                    <span style="display: block;">{{caseLocation.value}}</span>
+                    <span style="display: block;">{{caseLocation.name}}</span>
                 </b-col>
             </b-row>
 
@@ -89,7 +89,7 @@ import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from
 const informationState = namespace("Information");
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
 import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
-import { supremeCourtLocationsInfoType } from '@/types/Common';
+import { locationsInfoType } from '@/types/Common';
 
 
 @Component({
@@ -107,7 +107,7 @@ export default class FillForm7SummaryInfo extends Vue {
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
 
     @informationState.State
-    public caseLocation: supremeCourtLocationsInfoType;
+    public caseLocation: locationsInfoType;
 
     @informationState.State
     public form7InfoStates: form7StatesInfoType;

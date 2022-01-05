@@ -30,7 +30,7 @@
             <div class="col-md-4" style="margin: 0; padding:0;">
                 Supreme Court Registry
             </div>
-            <div class="col-md-2" style="margin: 0; padding:0;">{{caseLocation.value}}</div>
+            <div class="col-md-2" style="margin: 0; padding:0;">{{caseLocation.name}}</div>
         </div>
         
 
@@ -86,9 +86,9 @@
                 textwidth="15rem" 
                 hint=""
                 beforetext="at" 
-                :text="caseLocation.value"/>
+                :text="caseLocation.city"/>
             <div style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;">
-                , British Columbia.  
+                , British Columbia  
             </div>
             <div v-if="result.partOfJudgment" style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;">
                 [If the appeal is from a part of the judgment only, please specify the part] 
@@ -338,7 +338,7 @@ import moment from 'moment';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { supremeCourtLocationsInfoType } from '@/types/Common';
+import { locationsInfoType } from '@/types/Common';
 const informationState = namespace("Information");
 
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
@@ -356,7 +356,7 @@ export default class Form7Layout extends Vue {
     result!: form7DataInfoType; 
 
     @informationState.State
-    public caseLocation: supremeCourtLocationsInfoType;
+    public caseLocation: locationsInfoType;
 
     @informationState.Action
     public UpdateForm7Info!: (newForm2Info: form7DataInfoType) => void
@@ -368,6 +368,7 @@ export default class Form7Layout extends Vue {
     applicants: form7PartiesInfoType[] = [];
     respondents: form7PartiesInfoType[] = [];
     caseSop :manualSopInfoType[] = [];
+    noRolePartySop: manualSopInfoType[] = [];
     currentDate = '';
 
     mounted(){
@@ -402,12 +403,18 @@ export default class Form7Layout extends Vue {
         } else {
 
             this.caseSop = [];
+            this.noRolePartySop = [];            
+
             for (const party of this.respondents){
                 this.prePopulateSop(party);
             }
 
             for (const party of this.applicants){
                 this.prePopulateSop(party);
+            } 
+
+            if (this.noRolePartySop.length > 0){
+                this.caseSop = this.caseSop.concat(this.noRolePartySop);
             }           
 
         }
@@ -423,7 +430,10 @@ export default class Form7Layout extends Vue {
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
         sop.partyName.push(partyInfo.fullName)
-        if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
+        if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
+            sop.conjunction = 'And';
+            this.noRolePartySop.push(sop);
+        } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
                 sop.conjunction = 'Between';

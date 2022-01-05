@@ -872,6 +872,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     styleOfProceedingsInfo = {} as form7DataInfoType;
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;   
+    noRolePartyManualSop: manualSopInfoType[] = [];
 
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
@@ -1302,16 +1303,26 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         this.styleOfProceedingDataReady = false;
         this.showEditStyleOfProceedingWindow = true;       
-        this.showConfirmEditStyleOfProceeding = false;        
+        this.showConfirmEditStyleOfProceeding = false;    
+        
+        this.noRolePartyManualSop = [];
 
         this.loadSopInfo(this.styleOfProceedingsInfo.appellants);
         this.loadSopInfo(this.styleOfProceedingsInfo.respondents); 
+
+        this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)
+
+        //TODO: add functionality to display the new party with no role at the end
+
+        this.UpdateForm7Info(this.styleOfProceedingsInfo)
         
         this.styleOfProceedingDataReady = true;
 
     }
 
-    public loadSopInfo(partiesInfo: form7PartiesInfoType[]){       
+    public loadSopInfo(partiesInfo: form7PartiesInfoType[]){  
+        
+        
 
         if (this.styleOfProceedingsInfo.manualSop && this.styleOfProceedingsInfo.manualSop.length > 0){
 
@@ -1348,9 +1359,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         }
 
-        //TODO: add functionality to display the new party with no role at the end
-
-        this.UpdateForm7Info(this.styleOfProceedingsInfo)
+        
 
     }
 
@@ -1362,7 +1371,10 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
         sop.partyName.push(this.getPartyDisplayName(partyInfo))
-        if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
+        if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
+            sop.conjunction = 'And';
+            this.noRolePartyManualSop.push(sop);
+        } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
                 sop.conjunction = 'Between';
