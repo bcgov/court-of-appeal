@@ -5,3 +5,5 @@ from .journey_view import JourneyMapView
 from .form7_search_view import Form7SearchView
 from .efiling_submit_view import EFilingSubmitView
 from .court_locations import CourtLocations
+from .form7_lookup_view import Form7LookupView
+from .form7_holidays_list_view import Form7HolidaysListView
