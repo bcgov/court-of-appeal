@@ -10,21 +10,21 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.form7_cso_web_service import Form7Csows
+from api.form7_cso_web_service import Form7CourtLocations
 
 logger = logging.getLogger(__name__)
 
-class CourtLocations(APIView):
+class CourtLocationsView(APIView):
 
     permission_classes = (permissions.IsAuthenticated,)
 
     def __init__(self):
-        self.form7_csows = Form7Csows()
+        self.form7_csows = Form7CourtLocations()
    
     def get(self, request):
         
-        addSupreme = bool(request.query_params.get("supreme"))
-        addProvincial = bool(request.query_params.get("provincial"))
+        addSupreme = (request.query_params.get("supreme")=="true")
+        addProvincial = (request.query_params.get("provincial")=="true")
         
         locations = self.form7_csows.get_court_locations(addSupreme, addProvincial)
         

@@ -23,3 +23,4 @@ from api.models.user import User
 from api.models.case import Case
 from api.models.journeymap import Journeymap
 from api.models.prepared_pdf import PreparedPdf
+from api.models.location import Location

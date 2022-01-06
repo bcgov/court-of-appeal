@@ -1,2 +1,2 @@
-from .form7_csows import Form7Csows
+from .form7_csows_court_location import Form7CourtLocations
 
