@@ -7,12 +7,12 @@
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger" style="font-weight: bold;">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
+                You have <span class="text-danger font-weight-bold">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
             </b-col>           
         </b-row>
 
@@ -36,16 +36,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2034.doc"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form34.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>

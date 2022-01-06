@@ -7,15 +7,13 @@
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
             </b-col>
-            <b-col cols="11" style="padding-left: 0;">
+            <b-col cols="11" class="warning-message-column pl-0">
                 File the document below 
-                <span 
-                    class="text-danger" 
-                    style="font-weight: bold;">within 30 days
+                <span class="text-danger font-weight-bold">within 30 days
                 </span> 
                 of the decision you want to appeal.
             </b-col>           
@@ -40,17 +38,15 @@
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%201.docx"
-                                        target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        target="_blank"                                                                                
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form1.pdf"
-                                        target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary form-download-button">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
@@ -66,12 +62,12 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
             </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 2rem;">
-                File Affidavit of Service <span class="text-danger" style="font-weight: bold;">within 10 days</span> 
+            <b-col cols="11" class="warning-message-column pl-0">
+                File Affidavit of Service <span class="text-danger font-weight-bold">within 10 days</span> 
                 of serving all respondents.
             </b-col>           
         </b-row>
@@ -100,16 +96,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>

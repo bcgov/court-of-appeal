@@ -20,12 +20,12 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoaInfo" class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row v-if="showNoaInfo" class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                You have <span class="text-danger" style="font-weight: bold;">15 days</span> 
+                You have <span class="text-danger font-weight-bold">15 days</span> 
                 to file and serve your documents, after receiving the Notice of Appeal or 
                 the order granting leave to appeal.
             </b-col>           
@@ -51,16 +51,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.docx"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form8.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
