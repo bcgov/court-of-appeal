@@ -59,6 +59,7 @@ export interface form7DataInfoType {
     courtClass: string;
     judgeFullName: string;
     orderDate: string;
+    appealSubmissionDeadline: string;
     appearanceDays: number;
     orderType: string;
     appealedInSupremeCourt: string;
@@ -143,16 +144,55 @@ export interface packageInfoType {
 
 export interface lookupsInfoType {
     involvesFamilyList: string[];
-    involvesOtherList: string[]; 
-    involvesOtherHelp: string[];
-    appealFromOptionsList: string[];
-    appealFromOptionsHelp: string[];
+    involvesOtherList: lookupsGuideInfoType[];
+    appealFromOptionsList: lookupsGuideInfoType[];
     lowerCourtRoles: string[];
-    aliasTypes: string[]; 
+    aliasTypes: string[];
     individualLegalReps: string[];
     organizationLegalReps: string[];
-    legalRepFormatters: {};
-    holidays: {};
+    legalRepFormatters: legalRepFormattersInfoType;
+    holidays: holidayInfoType;
+}
+
+export interface lookupsGuideInfoType {
+    help: string;
+    name: string;
+}
+
+export interface legalRepFormattersInfoType {
+    administrator: string;
+    'administrator (estate)': string;
+    administratrix: string;
+    'administratrix (estate)': string;
+    caveator: string;
+    committee: string;
+    'committee (estate)': string;
+    executor: string;
+    executrix: string;
+    intervener: string;
+    'litigation guardian': string;
+    'litigation guardian (child)': string;
+    'litigation guardian (disability)': string;
+    'litigation guardian (infant)': string;
+    'receiver manager': string;
+    trustee: string;
+}
+
+export interface holidayInfoType {
+    'BC Day': string;
+    'BC Family Day': string;
+    'Boxing Day': string;
+    'Canada Day': string;
+    'Christmas Day': string;
+    'Easter Monday': string;
+    'Good Friday': string;
+    'Labour Day': string;
+    'New Years Day 2022': string;
+    'New Years Day 2023': string;
+    'Remembrance Day': string;
+    'Thanksgiving': string;
+    'Truth and Reconciliation Day': string;
+    'Victoria Day': string;
 }
 
 export interface accountInfoType {

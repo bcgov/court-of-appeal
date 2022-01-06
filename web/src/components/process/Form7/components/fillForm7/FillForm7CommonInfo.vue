@@ -11,7 +11,7 @@
                     :state="form7InfoStates.orderType"
                     @change="update"
                     id="order-type"
-                    :options="lookups.appealFromOptionsList"
+                    :options="appealFromOptionsListNames"
                     style="font-size: 1rem; font-weight:400;"                    
                 ></b-form-radio-group>
             </b-form-group>
@@ -80,7 +80,7 @@
                     v-model="commonInfo.appealNature"
                     :state="form7InfoStates.appealNature"
                     @change="update"
-                    :options="lookups.involvesOtherList"                
+                    :options="involvesOtherListNames"                
                     stacked                
                 ></b-form-radio-group>
              </b-form-group>
@@ -153,7 +153,10 @@ export default class FillForm7CommonInfo extends Vue {
     appealedInSupremeCourtOptions = [
         { text: 'Yes', value: 'yes' },
         { text: 'Not Applicable', value: 'NA' }
-    ]     
+    ]
+    
+    appealFromOptionsListNames = [];
+    involvesOtherListNames = [];
 
     dataReady = false;
     commonInfo = {} as form7DataInfoType;
@@ -161,7 +164,21 @@ export default class FillForm7CommonInfo extends Vue {
     mounted() { 
         this.dataReady = false;
         this.commonInfo = this.form7Info;
+        this.extractFields();
         this.dataReady = true;
+    }
+
+    public extractFields(){
+        this.involvesOtherListNames = [];
+        this.appealFromOptionsListNames = [];
+
+        for (const option of this.lookups.appealFromOptionsList){            
+            this.appealFromOptionsListNames.push(option.name)
+        }
+
+        for (const option of this.lookups.involvesOtherList){            
+            this.involvesOtherListNames.push(option.name)
+        }
     }
 
     public displayResults(){

@@ -2,21 +2,18 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 The Factum and Appeal Book
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showFactum(!showFactumInfo)"
-                    style="border-radius: 0.5rem; float: right; border: none;"                                        
-                    class="p-1 bg-white">
-                    <img v-if="showFactumInfo" class="bg-white"
+                    @click="showFactum(!showFactumInfo)"                                                            
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showFactumInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -149,21 +146,18 @@
         </b-row> 
 
         <b-row :class="showFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 The Transcript Extract Book
             </b-col> 
             <b-col cols="1">
                 <b-button
                     @click="showTranscript(!showTranscriptInfo)"
-                    style="float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showTranscriptInfo" class="bg-white"
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showTranscriptInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -177,21 +171,18 @@
         </b-row> 
 
         <b-row class="mt-4 ml-0" style="padding-top: 0.85rem;">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 The Certificate of Readiness
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showCertificate(!showCertificateInfo)"
-                    style="border-radius: 0.5rem; float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showCertificateInfo" class="bg-white"
+                    @click="showCertificate(!showCertificateInfo)"                                      
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showCertificateInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -253,21 +244,18 @@
         </b-row>  
 
         <b-row :class="showCertificateInfo?'mt-0 ml-0': 'mt-4 ml-0'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 A Reply to your Factum
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showReply(!showReplyInfo)"
-                    style="border-radius: 0.5rem; float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showReplyInfo" class="bg-white"
+                    @click="showReply(!showReplyInfo)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showReplyInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -281,21 +269,18 @@
         </b-row> 
 
         <b-row class="mt-4 ml-0" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding:0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 A Notice of Hearing
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showNotice(!showNoticeInfo)"
-                    style="border-radius: 0.5rem; float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showNoticeInfo" class="bg-white"
+                    @click="showNotice(!showNoticeInfo)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showNoticeInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 

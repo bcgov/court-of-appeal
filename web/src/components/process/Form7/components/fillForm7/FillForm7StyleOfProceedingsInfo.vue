@@ -1034,7 +1034,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
                 aliasTitle.push(alias.type + ' ' + alias.name);
             }
            
-            const repText = repTitle.length?repTitle.join('or'): '';
+            const repText = repTitle.length?repTitle.join('or '): '';
             const aliasText = aliasTitle.length?aliasTitle.join(', '): '';            
             title = (repText?(repText + ", "):'') + aliasText;
         }

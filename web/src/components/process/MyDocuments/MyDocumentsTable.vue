@@ -46,16 +46,18 @@
                 <h3>{{title}}</h3>
             </b-col>            
         </b-row>          
-        <b-row>
+        <b-row style="p-0">
             <b-col> 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
                     <span class="text-muted ml-4 mb-5">No documents.</span>
                 </b-card>
 
                 <b-card v-else no-body border-variant="light" bg-variant="white">
-                    <b-table  :items="documentsList"
+                    <b-table  
+                        :items="documentsList"
                         :fields="documentsFields"
-                        class="mx-4"                        
+                        style="font-size: 0.85rem;"
+                        class="mx-2"                        
                         sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
@@ -276,7 +278,19 @@ export default class MyDocumentsTable extends Vue {
             label: "Parties",
             sortable: false,
             thClass: 'border-dark border-bottom',
-        },        
+        }, 
+        {
+            key: "referenceNumber",
+            label: "Reference #",
+            sortable: false,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "appealSubmissionDeadline",
+            label: "Deadline to File and Serve",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        },       
         {
             key: "status",
             label: "Status",
