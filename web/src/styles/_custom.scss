@@ -21,3 +21,20 @@
     word-wrap: break-word;
     opacity: 0.98 !important;
   }
+
+.expand-steps-button {
+    border-radius: 0.5rem; 
+    float: right;
+}
+
+.step-title-column {
+  text-align: left; 
+  font-weight: bold;
+  padding: 0;
+}
+
+.expand-step-icon {
+  width: 2rem; 
+  height: 2rem; 
+  padding: 0;
+}

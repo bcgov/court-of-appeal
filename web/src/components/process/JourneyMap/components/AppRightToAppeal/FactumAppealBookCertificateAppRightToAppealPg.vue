@@ -2,21 +2,18 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 Complete the Factum, Appeal Book and Certificate of Readiness
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showFactum(!showFactumInfo)"
-                    style="border-radius: 0.5rem; float: right; border: none;"                                        
-                    class="p-1 bg-white">
-                    <img v-if="showFactumInfo" class="bg-white"
+                    @click="showFactum(!showFactumInfo)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showFactumInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -173,21 +170,18 @@
 
 
         <b-row :class="showFactumInfo?'mt-2 ml-0':'mt-4 ml-0'" style="padding-top: 0.85rem;">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Factum?
             </b-col> 
             <b-col cols="1">
                 <b-button
                     @click="showRespondentFactum(!showRespondentFactumInfo)"
-                    style="border-radius: 0.5rem; float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showRespondentFactumInfo" class="bg-white"
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showRespondentFactumInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -251,21 +245,18 @@
         </b-row> 
 
         <b-row :class="showRespondentFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding: 0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Transcript Extract Book or Appeal Book?
             </b-col> 
             <b-col cols="1">
                 <b-button
                     @click="showRespondentTranscript(!showRespondentTranscriptInfo)"
-                    style="float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showRespondentTranscriptInfo" class="bg-white"
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showRespondentTranscriptInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 

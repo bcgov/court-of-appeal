@@ -2,21 +2,18 @@
     <b-card style="width: 90%;" class="bg-white border-white">
 
         <b-row class="mt-3 ml-0">            
-            <b-col cols="11" style="text-align: left; font-weight: bold; padding-left: 0;">
+            <b-col cols="11" class="step-title-column pl-0">
                 Complete the Appeal Record and Transcript
             </b-col> 
             <b-col cols="1">
                 <b-button
                     @click="showAppealRecordTranscript(!showAppealRecordTranscriptInfo)"
-                    style="border-radius: 0.5rem; float: right; border: none;"                                        
-                    class="p-1 bg-white">
-                    <img v-if="showAppealRecordTranscriptInfo" class="bg-white"
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showAppealRecordTranscriptInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 
@@ -119,16 +116,13 @@
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showNoaCa(!showNoaCaInfo)"
-                    style="border-radius: 0.5rem; float: right;"                                        
-                    class="p-1 bg-white border-white">
-                    <img v-if="showNoaCaInfo" class="bg-white"
+                    @click="showNoaCa(!showNoaCaInfo)"   
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <img v-if="showNoaCaInfo" class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-minus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
-                    <img v-else class="bg-white"
+                    <img v-else class="bg-white expand-step-icon"
                         src="../../../../../../public/icons/icon-plus.svg"
-                        style="width: 2rem; height: 2rem; padding: 0;"
                     />
                 </b-button>
                 

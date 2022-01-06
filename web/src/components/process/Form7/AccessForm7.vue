@@ -83,11 +83,9 @@
                         <b-icon-trash-fill variant="danger"/>
                     </b-button>  
                     <b-button 
-                        class="bg-transparent ml-2 access-buttons"                        
-                        v-else
-                        
-                        >
-                        
+                        class="bg-transparent ml-2 access-buttons"
+                        disabled                        
+                        v-else>
                     </b-button>         
                 </template>
                         
