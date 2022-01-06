@@ -1,7 +1,7 @@
 [![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/bcgov/court-of-appeal/)
 # Court of Appeal - E-filing (Form2)
 ## Dev environment
-Currently it requires Npm 6.14.14, Node 12 installed. Running on Docker is recommended.
+Currently it requires Npm 6.14.14, Node 12 installed, Python 3.8/3.9/3.10. Running on Docker is recommended.
 
 ### Client Application (web)
 This uses a Vue based web client.
