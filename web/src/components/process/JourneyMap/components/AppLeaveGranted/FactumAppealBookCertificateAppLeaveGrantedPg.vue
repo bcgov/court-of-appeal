@@ -67,9 +67,7 @@
                                     <b-icon-question-circle-fill 
                                         class="text-primary"
                                         v-b-tooltip.hover.noninteractive
-                                        title="If a witness spoke at your original trial or hearing, 
-                                                and you mentioned this oral testimony in your Factum, 
-                                                you will need to complete a Transcript Extract Book."/>                                    
+                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                    
                                 </b-col>
                                 <b-col cols="2">
                                     4 copies
@@ -261,6 +259,8 @@ export default class FactumAppealBookCertificateAppLeaveGrantedPg extends Vue {
     showFactumInfo = true;
     showRespondentFactumInfo = false;    
     showRespondentTranscriptInfo = false;
+    transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial or hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
+
 
     public showFactum(show: boolean){
         if (show) {

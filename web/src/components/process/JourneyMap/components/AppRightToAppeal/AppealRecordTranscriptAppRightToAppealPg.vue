@@ -67,9 +67,7 @@
                                     <b-icon-question-circle-fill 
                                         class="text-primary"
                                         v-b-tooltip.hover.noninteractive
-                                        title="If a witness spoke at your original trial, and you mentioned 
-                                        this oral testimony in your Factum, you will need to complete 
-                                        a Transcript Extract Book."/>                                    
+                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                    
                                 </b-col>
                                 <b-col cols="2">
                                     4 copies
@@ -141,6 +139,7 @@ export default class AppealRecordTranscriptAppRightToAppealPg extends Vue {
     
     showAppealRecordTranscriptInfo = true;
     showNoaCaInfo = false;
+    transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
 
     public showAppealRecordTranscript(show: boolean){
         if (show) {

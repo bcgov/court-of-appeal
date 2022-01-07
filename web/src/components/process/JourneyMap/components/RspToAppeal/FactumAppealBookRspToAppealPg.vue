@@ -67,9 +67,7 @@
                                     <b-icon-question-circle-fill 
                                         class="text-primary"
                                         v-b-tooltip.hover.noninteractive
-                                        title="If a witness spoke at your original trial or hearing, 
-                                                and you mentioned this oral testimony in your Factum, 
-                                                you will need to complete a Transcript Extract Book."/>                                    
+                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                    
                                 </b-col>
                                 <b-col cols="2">
                                     4 copies
@@ -100,9 +98,7 @@
                                     <b-icon-question-circle-fill 
                                         class="text-primary"
                                         v-b-tooltip.hover.noninteractive
-                                        title="If you would like to provide information that is not 
-                                        included in the appellant’s Appeal Book, please complete 
-                                        your own Appeal Book.</p>"/>                                    
+                                        v-b-tooltip.hover.html="appealBookHelpText"/>                                    
                                 </b-col>
                                 <b-col cols="2">
                                     4 copies
@@ -288,6 +284,8 @@ export default class FactumAppealBookRspToAppealPg extends Vue {
     showCertificateInfo = false;
     showReplyInfo = false;
     showNoticeInfo = false;    
+    transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial or hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
+    appealBookHelpText = '<div>If you would like to provide information that is not included in the appellant’s Appeal Book, please complete your own Appeal Book.</div>';
 
     public showFactum(show: boolean){
         if (show) {
