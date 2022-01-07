@@ -19,14 +19,14 @@ class CourtLocationsView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def __init__(self):
-        self.form7_csows = Form7CourtLocations()
+        self.form7_csows_locations = Form7CourtLocations()
    
     def get(self, request):
         
         addSupreme = (request.query_params.get("supreme")=="true")
         addProvincial = (request.query_params.get("provincial")=="true")
         
-        locations = self.form7_csows.get_court_locations(addSupreme, addProvincial)
+        locations = self.form7_csows_locations.get_court_locations(addSupreme, addProvincial)
         
         if locations is not None:
             return Response(helpers.serialize_object(locations))

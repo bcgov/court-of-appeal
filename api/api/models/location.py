@@ -14,7 +14,7 @@ class Location(models.Model):
     email = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=5, null=True)
     
-    address = models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=300, null=True)
     city = models.CharField(max_length=50, null=True)
     province = models.CharField(max_length=30, null=True)
     postcode = models.CharField(max_length=10, null=True)
