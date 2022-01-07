@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
@@ -7,12 +7,12 @@
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger" style="font-weight: bold;">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
+                You have <span class="text-danger font-weight-bold">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
             </b-col>           
         </b-row>
 
@@ -22,7 +22,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"
@@ -36,16 +36,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2034.doc"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form34.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
@@ -71,13 +69,9 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {  
     
-
-
 }
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>

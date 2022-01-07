@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
@@ -12,9 +12,9 @@
             </div>            
         </b-row>  
 
-        <b-row class="mt-3 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-3 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 File the document below 
@@ -32,7 +32,7 @@
                     Complete either the .DOCs or .PDFs below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">                                    
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
@@ -46,28 +46,22 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2015.doc"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form15.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
-                                    Affidavit
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank">Affidavit
-                                    </a>                                     -->
+                                    Affidavit                                                                        
                                 </b-col>
                                 <b-col cols="2" >
                                     6 copies
@@ -76,16 +70,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
@@ -107,9 +99,9 @@
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 You have 
@@ -142,16 +134,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2016.doc"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2016.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>

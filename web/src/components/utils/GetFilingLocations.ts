@@ -1,5 +1,6 @@
 import store from '@/store/index';
 import Axios from "axios";
+import * as _ from 'underscore';
 
 export async function GetFilingLocations() {
 
@@ -9,7 +10,9 @@ export async function GetFilingLocations() {
 
         const locationsInfo = response.data;
 
-        store.dispatch('Common/UpdateLocationsInfo',locationsInfo); 
+        const sortedLocationsInfo = _.sortBy(locationsInfo, 'name');
+
+        store.dispatch('Common/UpdateLocationsInfo',sortedLocationsInfo); 
         return true;
     }
     else 
