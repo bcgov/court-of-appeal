@@ -17,7 +17,7 @@
 
         <b-row v-if="showNoaInfo" class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
                 You have <span class="text-danger font-weight-bold">15 days</span> 

@@ -9,7 +9,7 @@
 
         <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" class="warning-message-column pl-0">
                 File the document below 
@@ -64,7 +64,7 @@
 
         <b-row class="mt-4 ml-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" class="warning-message-column pl-0">
                 File Affidavit of Service <span class="text-danger font-weight-bold">within 10 days</span> 

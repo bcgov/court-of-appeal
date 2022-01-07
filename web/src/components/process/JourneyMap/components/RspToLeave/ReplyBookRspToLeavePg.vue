@@ -9,7 +9,7 @@
 
         <b-row class="mt-4 ml-0 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 File and then serve a Reply Book 
