@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
@@ -32,7 +32,7 @@
                     Complete either the .DOCs or .PDFs below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">                                    
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
@@ -59,13 +59,9 @@
                             </b-row>
                         </li>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
-                                    Affidavit
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank">Affidavit
-                                    </a>                                     -->
+                                    Affidavit                                                                        
                                 </b-col>
                                 <b-col cols="2" >
                                     6 copies

@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-1">            
             <div style="text-align: left; font-weight: bold;">
@@ -33,9 +33,8 @@
                                 <b-col cols="3" class="p-0" >
                                     <b-button
                                         @click="startNewForm7Document"
-                                        target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold; float: right;"                                        
-                                        class="p-1 bg-white text-primary border-primary">Online form
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
                                 </b-col>
                                 
@@ -69,7 +68,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 125%;" class="my-1">
+                            <b-row class="my-1 w-125">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)"

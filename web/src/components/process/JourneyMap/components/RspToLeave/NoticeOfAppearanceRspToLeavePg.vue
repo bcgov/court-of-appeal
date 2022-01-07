@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-0">            
             <div style="text-align: left; font-weight: bold;">
@@ -33,9 +33,8 @@
                                 <b-col cols="3" class="p-0" >
                                     <b-button
                                         @click="startNewDocument"
-                                        target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold; float: right;"                                        
-                                        class="p-1 bg-white text-primary border-primary">Online form
+                                        target="_blank"                                       
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
                                 </b-col>
                                 

@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-0">            
             <div style="text-align: left; font-weight: bold;">
@@ -13,10 +13,7 @@
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 File and then serve a Reply Book 
-                    <span 
-                        class="text-danger" 
-                        style="font-weight: bold;">at least 5 days 
-                    </span> 
+                    <span class="text-danger font-weight-bold">at least 5 days</span> 
                 before the hearing.
             </b-col>           
         </b-row>
@@ -27,7 +24,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>                    
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)"

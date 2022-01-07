@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-0">            
             <b-col cols="11" class="step-title-column pl-0">
@@ -8,13 +8,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showFactum(!showFactumInfo)"                                                            
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showFactumInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showFactumInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -36,7 +31,7 @@
                     Complete either the .DOC or .PDF below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)"
@@ -63,7 +58,7 @@
                             </b-row>
                         </li>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)"
@@ -96,7 +91,7 @@
                             </b-row>
                         </li>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)"
@@ -147,12 +142,7 @@
                 <b-button
                     @click="showTranscript(!showTranscriptInfo)"
                     class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showTranscriptInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    <expand-icon v-bind:showExpanded="showTranscriptInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -171,13 +161,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showCertificate(!showCertificateInfo)"                                      
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showCertificateInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showCertificateInfo"></expand-icon>                    
                 </b-button>
                 
             </b-col>           
@@ -242,13 +227,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showReply(!showReplyInfo)"                                       
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showReplyInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showReplyInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -267,13 +247,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showNotice(!showNoticeInfo)"                                       
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showNoticeInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showNoticeInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -299,9 +274,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 
-
-@Component
+@Component({
+    components:{
+        ExpandIcon
+    }
+})
 export default class FactumAppealBookRspToAppealPg extends Vue {
 
     showFactumInfo = true;

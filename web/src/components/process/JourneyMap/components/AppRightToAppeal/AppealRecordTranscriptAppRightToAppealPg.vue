@@ -1,5 +1,5 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3 ml-0">            
             <b-col cols="11" class="step-title-column pl-0">
@@ -8,13 +8,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showAppealRecordTranscript(!showAppealRecordTranscriptInfo)"
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showAppealRecordTranscriptInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showAppealRecordTranscriptInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -36,7 +31,7 @@
                     Complete either the .DOCs or .PDFs below. Click on the document names for more information.
                     <ul>
                         <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(sidebar-link)"
@@ -63,7 +58,7 @@
                             </b-row>
                         </li>
                          <li>
-                            <b-row style="width: 110%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="8">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.5-obtain-and-file-a-transcript-if-necessary?ct=t(sidebar-link)"
@@ -113,13 +108,8 @@
             <b-col cols="1">
                 <b-button
                     @click="showNoaCa(!showNoaCaInfo)"   
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <img v-if="showNoaCaInfo" class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-minus.svg"
-                    />
-                    <img v-else class="bg-white expand-step-icon"
-                        src="../../../../../../public/icons/icon-plus.svg"
-                    />
+                    class="p-1 bg-white border-white expand-steps-button">                   
+                    <expand-icon v-bind:showExpanded="showNoaCaInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
@@ -139,9 +129,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 
-
-@Component
+@Component({
+    components:{
+        ExpandIcon
+    }
+})
 export default class AppealRecordTranscriptAppRightToAppealPg extends Vue {
 
     
