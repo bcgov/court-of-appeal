@@ -1,17 +1,17 @@
 import logging
 
-from zeep import Client
-from zeep.cache import InMemoryCache
-from zeep.transports import Transport
 from django.utils import timezone
 from datetime import timedelta
 
+from zeep import Client
+from zeep.cache import InMemoryCache
+from zeep.transports import Transport
 from django.conf import settings
-
 from requests import Session
 from requests.auth import HTTPBasicAuth
 
-
+from api.utils import convert_full_address
+from .form7_csows_caller_base import Form7CsowsCallerBase
 from api.efiling.efiling_courts_address import EfilingCourtsAddress
 
 from api.models import Location
@@ -22,15 +22,8 @@ logger = logging.getLogger(__name__)
 
 class Form7CourtLocations:    
 
-    def __init__(self):
-        session = Session()
-        session.auth = HTTPBasicAuth(settings.COA_USERNAME, settings.COA_PASSWORD) 
-     
-        self.client = Client(
-            settings.CSOWS_ENDPOINT,
-            transport=Transport(cache=InMemoryCache(), session=session),
-        )
-
+    def __init__(self):        
+        Form7CsowsCallerBase.__init__(self)
         self.efiling_interface = EfilingCourtsAddress()
 
         
@@ -63,16 +56,12 @@ class Form7CourtLocations:
             matched_efiling_location = [loc for loc in efiling_locations if (loc["short_description"]==court_location['agenAgencyIdentifierCd'])]
             if(len(matched_efiling_location) ==1):
                 efiling_location= matched_efiling_location[0]                
- 
-                if efiling_location["address_line1"] is not None and efiling_location["address_line1"].lower()!="unknown":
-                    court_address = court_address + efiling_location["address_line1"] + ", "
-                if efiling_location["address_line2"] is not None and efiling_location["address_line2"].lower()!="unknown":
-                    court_address = court_address + efiling_location["address_line2"] + ", "
-                if efiling_location["address_line3"] is not None and efiling_location["address_line3"].lower()!="unknown":
-                    court_address = court_address + efiling_location["address_line3"] + ", "
-                if len(court_address)>2:                
-                    court_address = court_address[:-2]                
-
+                 
+                court_address = convert_full_address(
+                    efiling_location["address_line1"],
+                    efiling_location["address_line2"],
+                    efiling_location["address_line3"]
+                )
                 court_city = efiling_location["city"]
                 court_province = efiling_location["province"]
                 court_postcode = efiling_location["postal_code"]

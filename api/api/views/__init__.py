@@ -7,3 +7,4 @@ from .efiling_submit_view import EFilingSubmitView
 from .court_locations_view import CourtLocationsView
 from .form7_lookup_view import Form7LookupView
 from .form7_holidays_list_view import Form7HolidaysListView
+from .form7_account_info_view import Form7AccountInfoView
