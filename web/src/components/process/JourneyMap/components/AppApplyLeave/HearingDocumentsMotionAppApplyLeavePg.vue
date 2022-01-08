@@ -110,6 +110,4 @@ export default class HearingDocumentsMotionAppApplyLeavePg extends Vue {
 
 <style scoped lang="scss">
 
-
-
 </style>
