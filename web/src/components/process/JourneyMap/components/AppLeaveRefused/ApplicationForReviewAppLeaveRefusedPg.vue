@@ -1,18 +1,18 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-1">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Notice of Application to Vary and Affidavit
             </div>            
         </b-row>
-        <b-row class="mt-1 ml-1">            
+        <b-row class="mt-1">            
             <div style="text-align: left; ">
                 If your application for leave to appeal is denied, you may want to bring an application to vary that decision.
             </div>            
         </b-row>  
 
-        <b-row class="mt-3 ml-1 bg-warning warning-message-row">
+        <b-row class="mt-3 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -93,13 +93,13 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-3 ml-1">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Prepare a Motion Book
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -157,7 +157,7 @@
             </ol>
         </b-row>  
 
-        <b-row class="mt-3 ml-1">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Next, Ask the court registrar to set a date for hearing your application and advise 
                 the respondent(s) of the scheduled date.

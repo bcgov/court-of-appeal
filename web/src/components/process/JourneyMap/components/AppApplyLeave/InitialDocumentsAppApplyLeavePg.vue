@@ -1,13 +1,13 @@
 <template>
     <b-card class="bg-white border-white w-90">        
 
-        <b-row class="mt-3 ml-1">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Notice of Application for Leave to Appeal
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
@@ -62,7 +62,7 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>

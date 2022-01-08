@@ -1,15 +1,15 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appeal?
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-0 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 You have <span class="text-danger font-weight-bold">10 days</span> to file and serve your Notice of Appearance.
@@ -51,9 +51,9 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" class="warning-message-column pl-0">
                 You have <span class="text-danger font-weight-bold">10 days</span> 
@@ -61,7 +61,7 @@
             </b-col>           
         </b-row>
 
-        <b-row class="mt-4" >
+        <b-row class="mt-4">
             <ol>
                 <li>
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
