@@ -6,7 +6,8 @@
 
                 <div v-if="stepsCompleted.first">
                     <b-icon-check-circle-fill class="icon-complete ml-1 mt-2" variant="success" />
-                    <span class="step-complete text-success ml-4 mb-2">Access</span>                
+                    <span v-if="this.accountInfo.accountUsers.length > 1" @click="navigateToAccessPage" class="step-complete text-success ml-4 mb-2">Access</span> 
+                    <span v-else class="step-complete text-success ml-4 mb-2">Access</span>               
                 </div>
                 <div v-else>
                     <step-number class="ml-1 mt-2" v-bind:stepNumber="1" v-bind:active="true"/>
@@ -69,10 +70,15 @@
 </template>
 
 <script lang="ts">
-import { form7StatusInfoType } from '@/types/Information';
+
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/common";
+const commonState = namespace("Common");
 
 import StepNumber from "@/components/utils/StepNumber.vue";
+import { accountInfoType, form7StatusInfoType } from '@/types/Information';
 
 @Component({
     components:{
@@ -84,8 +90,18 @@ export default class Form7ProcessHeader extends Vue {
     @Prop({required: true})
     stepsCompleted!: form7StatusInfoType;
 
+    @commonState.State
+    public accountInfo!: accountInfoType;
+
     textInactiveStepIncompleteClass = 'text-inactive step-incomplete';
     textDarkStepIncompleteClass = 'text-dark step-incomplete';
+
+    public navigateToAccessPage(){
+        if (this.accountInfo.accountUsers.length > 1){
+            this.$router.push({name: "access-form7"});
+
+        }
+    }
 
 }
 </script>
