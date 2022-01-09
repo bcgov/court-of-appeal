@@ -69,7 +69,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showNoaInfo?'mt-4': 'mt-5'">            
+        <b-row :class="showNoaInfo?'mt-3': 'mt-4'" :style="!showNoaInfo?'padding-top: 0.85rem;': ''">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Appeal Record and Transcript
             </b-col> 

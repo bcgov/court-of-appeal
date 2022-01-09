@@ -162,8 +162,7 @@
                 Next, Ask the court registrar to set a date for hearing your application and advise 
                 the respondent(s) of the scheduled date.
             </div>            
-        </b-row>
-  
+        </b-row>  
         
     </b-card>
 </template>
@@ -179,6 +178,5 @@ export default class ApplicationForReviewAppLeaveRefusedPg extends Vue {
 </script>
 
 <style scoped lang="scss">
-
 
 </style>

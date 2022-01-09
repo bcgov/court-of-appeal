@@ -9,7 +9,7 @@
 
         <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 You have <span class="text-danger font-weight-bold">2 months</span> to file and serve your document after submitting the Certificate of Readiness.

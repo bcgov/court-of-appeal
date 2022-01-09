@@ -217,7 +217,7 @@
             </ol>       
         </b-row>  
 
-        <b-row :class="showCertificateInfo?'mt-0': 'mt-4'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showCertificateInfo?'': 'mt-4'" :style="showCertificateInfo?'padding-top: 0;':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Reply to your Factum
             </b-col> 
@@ -237,7 +237,7 @@
             </p>       
         </b-row> 
 
-        <b-row class="mt-4" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
+        <b-row class="mt-3" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Notice of Hearing
             </b-col> 

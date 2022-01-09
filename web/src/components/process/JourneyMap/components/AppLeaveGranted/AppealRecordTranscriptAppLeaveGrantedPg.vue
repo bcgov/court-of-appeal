@@ -17,7 +17,7 @@
 
         <b-row v-if="showAppealRecordTranscriptInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
                 You have <span class="text-danger font-weight-bold">60 days</span> 
@@ -101,7 +101,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showAppealRecordTranscriptInfo?'mt-2': 'mt-5'" >            
+        <b-row :class="showAppealRecordTranscriptInfo?'mt-1': 'mt-4'" :style="!showAppealRecordTranscriptInfo?'padding-top: 0.85rem;':''">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a Notice of Appearance or Cross Appeal?
             </b-col> 

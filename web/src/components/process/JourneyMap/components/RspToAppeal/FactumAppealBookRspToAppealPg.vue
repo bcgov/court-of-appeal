@@ -130,7 +130,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showFactumInfo?'mt-2': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showFactumInfo?'mt-1': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Transcript Extract Book
             </b-col> 
@@ -216,7 +216,7 @@
             </ol>       
         </b-row>  
 
-        <b-row :class="showCertificateInfo?'mt-0 pt-3': 'mt-4 pt-3'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showCertificateInfo?'mt-3 pt-3': 'mt-4 pt-3'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Reply to your Factum
             </b-col> 
@@ -236,7 +236,7 @@
             </p>       
         </b-row> 
 
-        <b-row class="mt-4" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
+        <b-row class="mt-3" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Notice of Hearing
             </b-col> 

@@ -154,7 +154,7 @@
         </b-row> 
 
 
-        <b-row :class="showFactumInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showFactumInfo?'mt-1':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Factum?
             </b-col>
@@ -222,7 +222,7 @@
             </ol>       
         </b-row> 
 
-        <b-row :class="showRespondentFactumInfo?'mt-2': 'mt-4'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showRespondentFactumInfo?'mt-1': 'mt-4'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Transcript Extract Book or Appeal Book?
             </b-col> 
