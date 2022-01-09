@@ -171,14 +171,14 @@ export default class AccessForm7 extends Vue {
         },
         {
             key:'readOnly',          
-            label:'Read Only',                  
+            label:'Read Only Access',                  
             thClass: 'border-dark border-bottom text-primary bg-light',            
             sortable:false            
         },
         {
             key:'update',          
-            label:'Update',                  
-            thClass: 'border-dark border-bottom text-primary bg-light',            
+            label:'Read/Write Access',                  
+            thClass: 'border-dark border-bottom text-primary bg-light',
             sortable:false            
         },
         {
