@@ -1,13 +1,13 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Motion for Leave to Appeal and a Motion Book?
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-0 bg-warning warning-message-row">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>

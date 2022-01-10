@@ -1,7 +1,7 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Factum, Appeal Book and Certificate of Readiness
             </b-col> 
@@ -15,7 +15,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showFactumInfo" class="mt-4 ml-1 mr-5 bg-warning warning-message-row">
+        <b-row v-if="showFactumInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -154,7 +154,7 @@
         </b-row> 
 
 
-        <b-row :class="showFactumInfo?'mt-2 ml-0':'mt-4 ml-0'" style="padding-top: 0.85rem;">            
+        <b-row :class="showFactumInfo?'mt-1':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Factum?
             </b-col>
@@ -168,7 +168,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespondentFactumInfo" class="mt-4 ml-1 mr-5 bg-warning warning-message-row">
+        <b-row v-if="showRespondentFactumInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -178,7 +178,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespondentFactumInfo" class="mt-2 ml-3" >            
+        <b-row v-if="showRespondentFactumInfo" class="mt-2 ml-2" >            
 
             <ol class="mt-1 ml-0 p-3">
                 <li>
@@ -222,7 +222,7 @@
             </ol>       
         </b-row> 
 
-        <b-row :class="showRespondentFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showRespondentFactumInfo?'mt-1': 'mt-4'" :style="showRespondentFactumInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with a respondent's Transcript Extract Book or Appeal Book?
             </b-col> 
@@ -236,7 +236,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespondentTranscriptInfo" class="mt-2 ml-0" >
+        <b-row v-if="showRespondentTranscriptInfo" class="mt-2" >
             <p style="padding: 0;">
                 If you are served with a copy of the respondent's Transcript Extract Book or Appeal Book, you do not have to respond.
             </p>       

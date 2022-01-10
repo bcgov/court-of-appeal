@@ -72,80 +72,22 @@ export default class ChecklistForm7 extends Vue {
 
     public loadAccountDetails(){
 
-        //TODO: add endpoint to get data https://test.justice.gov.bc.ca/cso/ext/coa/form7/api/lookup/account 
-
-        const data = 
-        {
+        this.$http.get('/account-info/')
+        .then((response) => {
             
-        "accountId": 394,
-        "clientId": 627,
-        "firmName": "AG TEST LAW FIRM",
-        "firmAddress": "1222 Cherry Lane\r\nVictoria, BC  V8W 9J2\nCANADA",
-        "accountUsers": [
-            {
-            "clientId": 617,
-            "fullName": "Kathryn Thomson",
-            "isAdmin": true
-            },
-            {
-            "clientId": 627,
-            "fullName": "Test white",
-            "isAdmin": true
-            },
-            {
-            "clientId": 613,
-            "fullName": "Patricia White",
-            "isAdmin": true
-            },
-            {
-            "clientId": 631,
-            "fullName": "Thomas Broeren",
-            "isAdmin": false
-            },
-            {
-            "clientId": 735,
-            "fullName": "COA5 Tester",
-            "isAdmin": false
-            },
-            {
-            "clientId": 659,
-            "fullName": "Renee Edey",
-            "isAdmin": false
-            },
-            {
-            "clientId": 665,
-            "fullName": "COA1 Tester",
-            "isAdmin": false
-            },
-            {
-            "clientId": 666,
-            "fullName": "COA3 Tester",
-            "isAdmin": false
-            },
-            {
-            "clientId": 667,
-            "fullName": "COA4 Tester",
-            "isAdmin": false
+            if(response?.data){
+                const accountInfo = response.data
+                this.UpdateAccountInfo(accountInfo);
+                this.businessAccount = accountInfo.accountUsers.length>1;
             }
-        ],
-        "extensionData": {
-            "csoProceedUrl": "https://test.justice.gov.bc.ca/cso/filing/ext/submissionInit.do?appCd=coa/form7/forms&referenceGuid=",
-            "logOutUrl": "https://test.justice.gov.bc.ca/cso/logoff.do",
-            "contactUsUrl": "https://test.justice.gov.bc.ca/cso/help/help_contactUs.do",
-            "returnToCsoUrl": "https://test.justice.gov.bc.ca/cso/"
-        }
-        }
-
-        this.UpdateAccountInfo(data);
-
-        this.businessAccount = data.accountUsers.length>1;
-
+                
+        },(err) => {
+            console.log(err)        
+        });
     }
 
-    public disableNavigateForm7(disable: boolean) {
-        
-        this.disableContinue = disable;
-        console.log(disable);
+    public disableNavigateForm7(disable: boolean) {        
+        this.disableContinue = disable;       
     }
 
     public navigateToForm7() {

@@ -1,7 +1,7 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Notice of Appeal or the order granting leave to appeal
             </b-col> 
@@ -15,7 +15,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoaInfo" class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row v-if="showNoaInfo" class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -69,7 +69,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showNoaInfo?'mt-4 ml-0': 'mt-5 ml-0'">            
+        <b-row :class="showNoaInfo?'mt-3': 'mt-4'" :style="!showNoaInfo?'padding-top: 0.85rem;': ''">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Appeal Record and Transcript
             </b-col> 
@@ -83,7 +83,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showAppealRecordInfo" class="mt-3 ml-0" >
+        <b-row v-if="showAppealRecordInfo" class="mt-3" >
 
             <p style="padding: 0;">
                 If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.

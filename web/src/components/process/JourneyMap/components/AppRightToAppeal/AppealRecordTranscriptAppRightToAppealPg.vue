@@ -1,7 +1,7 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Appeal Record and Transcript
             </b-col> 
@@ -15,7 +15,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showAppealRecordTranscriptInfo" class="mt-4 ml-0 mr-5 bg-warning warning-message-row">
+        <b-row v-if="showAppealRecordTranscriptInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
@@ -99,8 +99,8 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showAppealRecordTranscriptInfo?'mt-2 ml-0': 'mt-5 ml-0'" >            
-            <b-col cols="11" style="text-align: left; font-weight: bold;">
+        <b-row :class="showAppealRecordTranscriptInfo?'mt-2': 'mt-5'" >            
+            <b-col cols="11" class="pl-0" style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appearance or Cross Appeal?
             </b-col> 
             <b-col cols="1">
@@ -113,7 +113,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoaCaInfo" class="mt-3 ml-3" >
+        <b-row v-if="showNoaCaInfo" class="mt-3 ml-1" >
 
             <p style="padding: 0;">
                 If you are served with a copy of the respondent's Notice of Appearance or 

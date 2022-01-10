@@ -1,7 +1,7 @@
 <template>
     <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Factum and Appeal Book
             </b-col> 
@@ -15,7 +15,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showFactumInfo" class="mt-4 ml-1 bg-warning warning-message-row">
+        <b-row v-if="showFactumInfo" class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -130,7 +130,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showFactumInfo?'mt-2 ml-0': 'mt-4 ml-0'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showFactumInfo?'mt-1': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Transcript Extract Book
             </b-col> 
@@ -144,13 +144,13 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showTranscriptInfo" class="mt-2 ml-1" >
+        <b-row v-if="showTranscriptInfo" class="mt-2" >
             <p style="padding: 0;">
                 If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document.
             </p>       
         </b-row> 
 
-        <b-row class="mt-4 ml-0" style="padding-top: 0.85rem;">            
+        <b-row class="mt-4" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Certificate of Readiness
             </b-col> 
@@ -164,7 +164,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showCertificateInfo" class="mt-2 ml-1" >
+        <b-row v-if="showCertificateInfo" class="mt-2" >
 
             <p style="padding: 0;">
                 You should have received the appellant's Certificate of Readiness immediately after receiving the Factum. 
@@ -174,7 +174,7 @@
                 after your Factum.
             </p>
 
-            <ol class="mt-1 ml-0 p-3">
+            <ol class="mt-1">
                 <li>
                     Complete either the .DOC or .PDF below. Click on the document names for more information.
                     <ul>
@@ -216,7 +216,7 @@
             </ol>       
         </b-row>  
 
-        <b-row :class="showCertificateInfo?'mt-0 ml-0': 'mt-4 ml-0'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showCertificateInfo?'mt-3 pt-3': 'mt-4 pt-3'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Reply to your Factum
             </b-col> 
@@ -230,13 +230,13 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showReplyInfo" class="mt-2 ml-1" >
+        <b-row v-if="showReplyInfo" class="mt-2" >
             <p style="padding: 0;">
                 If you are served with the appellant's Reply to your Factum, you do not have to respond to this document.
             </p>       
         </b-row> 
 
-        <b-row class="mt-4 ml-0" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
+        <b-row class="mt-3" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 A Notice of Hearing
             </b-col> 
@@ -250,7 +250,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoticeInfo" class="mt-3 ml-1" >
+        <b-row v-if="showNoticeInfo" class="mt-3">
             <p style="padding: 0;">
                 You should be served a Notice of Hearing from the appellant, 
                 which will tell you the date and length of your hearing. However, 

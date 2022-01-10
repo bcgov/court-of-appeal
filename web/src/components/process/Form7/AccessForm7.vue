@@ -171,14 +171,14 @@ export default class AccessForm7 extends Vue {
         },
         {
             key:'readOnly',          
-            label:'Read Only',                  
+            label:'Read Only Access',                  
             thClass: 'border-dark border-bottom text-primary bg-light',            
             sortable:false            
         },
         {
             key:'update',          
-            label:'Update',                  
-            thClass: 'border-dark border-bottom text-primary bg-light',            
+            label:'Read/Write Access',                  
+            thClass: 'border-dark border-bottom text-primary bg-light',
             sortable:false            
         },
         {
@@ -230,8 +230,7 @@ export default class AccessForm7 extends Vue {
         const userIndex = this.accessInfo.findIndex(info => info.user.clientId == this.selectedUser.clientId);        
         if (userIndex == -1){
             const addedUser = this.accountInfo.accountUsers.filter(user => user.clientId == this.selectedUser.clientId)[0]
-            addedUser.displayName = addedUser.fullName;
-            console.log(addedUser)
+            addedUser.displayName = addedUser.fullName;            
             this.accessInfo.push({user: addedUser, readOnly: false, update: true, default: false});              
         }
         
@@ -244,8 +243,7 @@ export default class AccessForm7 extends Vue {
     }
 
     public makeUserReadOnly(userInfo){
-        const userIndex = this.accessInfo.findIndex(info => info.user.clientId == userInfo.clientId)
-        console.log(userIndex)
+        const userIndex = this.accessInfo.findIndex(info => info.user.clientId == userInfo.clientId)        
         this.accessInfo[userIndex].readOnly = true;
         this.accessInfo[userIndex].update = false;
         this.updated++;
