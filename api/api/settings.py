@@ -271,6 +271,8 @@ COA_PASSWORD = os.environ.get("COA_PASSWORD", "")
 COA_SEARCH_ENDPOINT = os.environ.get("COA_SEARCH_ENDPOINT", "")
 COA_USERNAME = os.environ.get("COA_USERNAME", "")
 
+CSOWS_USERNAME = os.environ.get("CSOWS_USERNAME", "")
+CSOWS_PASSWORD = os.environ.get("CSOWS_PASSWORD", "")
 CSOWS_ENDPOINT = os.environ.get("CSOWS_ENDPOINT", "")
 CSOWS_EXT_ENDPOINT = os.environ.get("CSOWS_EXT_ENDPOINT","")
 

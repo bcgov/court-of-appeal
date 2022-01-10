@@ -39,6 +39,8 @@ from api.views import (
     Form7LookupView,
     Form7HolidaysListView,
     Form7AccountInfoView,
+    Form7FileDetailView,
+    Form7FileOrdersView,
 )
 
 
@@ -72,6 +74,11 @@ urlpatterns = [
     path("lookup/",Form7LookupView.as_view()),
     path("holidays/<int:year>/",Form7HolidaysListView.as_view()),
     path("account-info/",Form7AccountInfoView.as_view()),
+
+    path("file-detail/",Form7FileDetailView.as_view()),
+    path("file-detail/orders/<int:fileId>",Form7FileOrdersView.as_view()),
+
+
 ]
 
 if settings.OIDC_ENABLED:

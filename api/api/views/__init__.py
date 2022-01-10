@@ -8,3 +8,5 @@ from .court_locations_view import CourtLocationsView
 from .form7_lookup_view import Form7LookupView
 from .form7_holidays_list_view import Form7HolidaysListView
 from .form7_account_info_view import Form7AccountInfoView
+from .form7_file_detail_view import Form7FileDetailView
+from .form7_file_orders_view import Form7FileOrdersView

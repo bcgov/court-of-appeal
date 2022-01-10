@@ -3,13 +3,6 @@ import logging
 from django.utils import timezone
 from datetime import timedelta
 
-from zeep import Client
-from zeep.cache import InMemoryCache
-from zeep.transports import Transport
-from django.conf import settings
-from requests import Session
-from requests.auth import HTTPBasicAuth
-
 from api.utils import convert_full_address
 from .form7_csows_caller_base import Form7CsowsCallerBase
 from api.efiling.efiling_courts_address import EfilingCourtsAddress

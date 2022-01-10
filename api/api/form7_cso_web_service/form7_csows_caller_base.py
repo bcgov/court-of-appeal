@@ -12,7 +12,7 @@ class Form7CsowsCallerBase:
 
     def __init__(self):
         session = Session()
-        session.auth = HTTPBasicAuth(settings.COA_USERNAME, settings.COA_PASSWORD) 
+        session.auth = HTTPBasicAuth(settings.CSOWS_USERNAME, settings.CSOWS_PASSWORD) 
      
         self.client = Client(
             settings.CSOWS_ENDPOINT,
