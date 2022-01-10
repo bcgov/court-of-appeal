@@ -107,8 +107,9 @@
                            
                         </template>
                         <template v-slot:row-details>
-                            <b-card>                                
-                                <form-7-search-order-details @selectOrder="selectOrder"/>
+                            <b-card>  
+                                <loading-spinner color="#000" v-if="loadingOrders" waitingText="Loading ..." />                              
+                                <form-7-search-order-details v-else @selectOrder="selectOrder"/>
                             </b-card>
                         </template>
                         
@@ -161,7 +162,9 @@ export default class Form7CaseInformationSearch extends Vue {
     levelOfCourt = "Supreme Court of BC";
 
     dataReady = false;
-    searching = false;    
+    searching = false;
+    loadingOrders = false;
+    noOrdersFound = false;    
 
     searchParams = {} as form7SearchInfoType;
     notFound = false;    
@@ -184,91 +187,65 @@ export default class Form7CaseInformationSearch extends Vue {
         this.searching = true;        
         this.notFound = false;
         
-        const url = '/search/?'+
+        const url = '/file-detail/?'+
             'courtLevel=S'+
-            '&location='+ this.searchParams.location +
+            '&locationId='+ this.searchParams.location +
             '&fileNumber='+ this.searchParams.file; 
         
         this.$http.get(url)
         .then(res => {
             this.searching = false;
             if(res.data){
-                this.cases = res.data;                
-            }
-            else
+                this.cases = res.data;
+            } else {
                 this.notFound = true;
+            }
+                
         },err => {
             console.error(err); 
-            // this.notFound = true;  
-            this.searching = false;  
-             //TODO change here
-            this.cases = [
-                    {
-                        "fileId": 5187,
-                        "fileNumber": "20191119",
-                        "styleOfCause": "TEST, One v TEST, Two",
-                        "courtClassCd": "S",
-                        "courtClass": "Supreme civil (General)",
-                        "accessType": "GEN",
-                        "orders": [
-                            {
-                                "documentId": 14614,
-                                "documentTypeCode": "ORD",
-                                "documentType": "Order",
-                                "orderDate": "2021-11-06T00:00:00-07:00",
-                                "honorificTitle": "The Honourable Justice",
-                                "judgeFirstName": "M L",
-                                "judgeSurname": "Drake",
-                                "appearanceDays": 1,
-                                "canAccess": false,
-                                "appealSubmissionDeadline": "2021-12-06T16:00:00-08:00",
-                                "isPastDeadline": false
-                            }
-                        ],
-                        "parties": [
-                            {
-                                "ceisPartyId": 9590,
-                                "isOrganization": false,
-                                "firstGivenName": "One",
-                                "secondGivenName": null,
-                                "thirdGivenName": null,
-                                "surname": "Test",
-                                "organizationName": null,
-                                "fullName": "TEST, One",
-                                "counselName": null,
-                                "lowerCourtRole": "Plaintiff",
-                                "aliases": [],
-                                "legalReps": []
-                            },
-                            {
-                                "ceisPartyId": 9591,
-                                "isOrganization": false,
-                                "firstGivenName": "Two",
-                                "secondGivenName": null,
-                                "thirdGivenName": null,
-                                "surname": "Test",
-                                "organizationName": null,
-                                "fullName": "TEST, Two",
-                                "counselName": "Smith, J",
-                                "lowerCourtRole": "Defendant",
-                                "aliases": [],
-                                "legalReps": []
-                            }
-                        ]
-                    }
-                ]
-
+            this.notFound = true;  
+            this.searching = false;
         });
     }
 
     public OpenDetails(data)
     {
+        console.log(data.item)
         if(!data.detailsShowing)
         {
-            this.UpdateSupremeCourtCaseJson(data.item)           
-            const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == this.searchParams.location)[0]
-            this.UpdateCaseLocation(selectedLocation)
+            this.getOrders(data.item)
+            
         }       
+    }
+
+    public getOrders(caseInfo: supremeCourtCaseJsonDataInfoType){
+
+        this.loadingOrders = true;        
+        this.noOrdersFound = false;
+        
+        const url = '/file-detail/orders/'+ caseInfo.fileId; 
+        
+        this.$http.get(url)
+        .then(res => {
+            
+            if(res.data){                
+                const orders = res.data;
+                caseInfo.orders = orders
+                this.UpdateSupremeCourtCaseJson(caseInfo)           
+                const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == this.searchParams.location)[0]
+                this.UpdateCaseLocation(selectedLocation);
+                this.loadingOrders = false;
+
+            } else {
+                this.noOrdersFound = true;
+            }
+                
+        },err => {
+            console.error(err); 
+            this.noOrdersFound = true;  
+            this.loadingOrders = false;
+           
+        });
     }
 
     public selectOrder(){

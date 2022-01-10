@@ -1,12 +1,12 @@
 <template>
     <b-card no-body class="bg-white border-white">
 
-        <b-row class="bg-white border-white">
+        <b-row v-if="dataReady" class="bg-white border-white">
             <b-col cols="3" >
 
                 <div v-if="stepsCompleted.first">
                     <b-icon-check-circle-fill class="icon-complete ml-1 mt-2" variant="success" />
-                    <span v-if="this.accountInfo.accountUsers.length > 1" @click="navigateToAccessPage" class="step-complete text-success ml-4 mb-2">Access</span> 
+                    <span v-if="enableAccessPage" @click="navigateToAccessPage" class="step-complete text-success ml-4 mb-2">Access</span> 
                     <span v-else class="step-complete text-success ml-4 mb-2">Access</span>               
                 </div>
                 <div v-else>
@@ -15,7 +15,7 @@
                 </div>               
 
             </b-col>
-             <b-col cols="3" >
+             <b-col cols="3">
 
                 <div v-if="stepsCompleted.second" style="text-align: center;">
                     <b-icon-check-circle-fill class="icon-complete mt-2" variant="success" />
@@ -96,10 +96,18 @@ export default class Form7ProcessHeader extends Vue {
     textInactiveStepIncompleteClass = 'text-inactive step-incomplete';
     textDarkStepIncompleteClass = 'text-dark step-incomplete';
 
-    public navigateToAccessPage(){
-        if (this.accountInfo.accountUsers.length > 1){
-            this.$router.push({name: "access-form7"});
+    dataReady = false;
+    enableAccessPage = false;
 
+    mounted(){
+        this.dataReady = false;
+        this.enableAccessPage = this.accountInfo?.accountUsers?.length > 1;
+        this.dataReady = true;
+    }
+
+    public navigateToAccessPage(){
+        if (this.enableAccessPage){
+            this.$router.push({name: "access-form7"});
         }
     }
 

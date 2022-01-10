@@ -108,6 +108,7 @@ export interface supremeCourtOrdersJsonInfoType {
     honorificTitle: string;
     judgeFirstName: string;
     judgeSurname: string;
+    judgeDisplayName?: string;
     appearanceDays: number;
     canAccess: boolean;
     appealSubmissionDeadline: string;

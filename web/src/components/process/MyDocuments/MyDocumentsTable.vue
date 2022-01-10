@@ -90,7 +90,7 @@
 
                         <template v-slot:cell(action)="row">
                             <b-button v-if="row.item.status == 'Draft'" size="sm" variant="transparent" class="my-0 py-0 px-1"
-                                @click="resumeApplication(row.item.fileNumber)"
+                                @click="resumeApplication(row.item)"
                                 v-b-tooltip.hover.noninteractive
                                 title="Resume Application">
                                 <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
@@ -226,6 +226,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 import { caseJsonDataType } from "@/types/Information/json";
+import { documentInfoType } from "@/types/Information";
 const informationState = namespace("Information");
 
 @Component
@@ -246,7 +247,7 @@ export default class MyDocumentsTable extends Vue {
     allDocumentsChecked = false;
     showSelectFormToFill = false;
     
-    documentsList = [];
+    documentsList: documentInfoType[] = [];
   
     documentsFields = [
         {
@@ -345,7 +346,7 @@ export default class MyDocumentsTable extends Vue {
                 modifiedDate:'', 
                 packageNum:'',
                 packageUrl:'',
-                description:[],
+                description:[]
             };
             //console.log(docJson)
             doc.fileNumber = docJson.id;
@@ -374,10 +375,15 @@ export default class MyDocumentsTable extends Vue {
         }      
     }
 
-    public resumeApplication(caseId) {
-        this.UpdateCurrentCaseId(caseId);
-        this.$router.push({name: "preview-form2", params: {caseId: caseId}}) 
-
+    public resumeApplication(fileInfo: documentInfoType) {
+        const caseId = fileInfo.fileNumber.toString()
+        this.UpdateCurrentCaseId(caseId);  
+        console.log(fileInfo)      
+        if (fileInfo.description.includes("Notice of Appearance")){
+            this.$router.push({name: "preview-form2", params: {caseId: caseId}});
+        } else if (fileInfo.description.includes("Notice of Appeal")){
+            this.$router.push({name: "preview-form7", params: {caseId: caseId}});
+        }
     }
 
     public createDocument() {

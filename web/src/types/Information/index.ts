@@ -14,6 +14,21 @@ export interface pathwayTypeInfoType {
     rspToLeaveRefused?: boolean;
 }
 
+export interface documentInfoType {
+    isChecked: boolean; 
+    pdf_types: string;
+    fileNumber: number; 
+    caseNumber: string;
+    parties: string; 
+    appNames: string; 
+    resNames: string; 
+    status: string;
+    modifiedDate: string;
+    packageNum: string;
+    packageUrl: string;
+    description: string[];
+}
+
 export interface form2StatusInfoType {
     first?: boolean;
     second?: boolean;

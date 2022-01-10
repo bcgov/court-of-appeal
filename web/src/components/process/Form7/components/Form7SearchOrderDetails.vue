@@ -82,7 +82,7 @@ export default class Form7SearchOrderDetails extends Vue {
     orderFields = [
               
         {
-            key: "honorificTitle",
+            key: "judgeDisplayName",
             label: "Name of Judge",
             sortable: false
         },
@@ -111,7 +111,13 @@ export default class Form7SearchOrderDetails extends Vue {
     }
 
     public extractCaseOrders(){
-        this.orderList = this.supremeCourtCaseJson.orders;
+        
+        this.orderList = [];
+        for (const order of this.supremeCourtCaseJson.orders){            
+            order.judgeDisplayName = order.honorificTitle + ' ' + order.judgeSurname;            
+            this.orderList.push(order)
+        }
+       
         this.dataReady = true;
     }
 

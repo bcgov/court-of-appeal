@@ -106,7 +106,7 @@ const routes = [
       props: true
     },
     {
-      path: "/submitted/:id/:result",
+      path: "/submitted/:id/:result/:formType",
       name: "submitted",
       beforeEnter: authGuard,
       component: SubmittedResults,
