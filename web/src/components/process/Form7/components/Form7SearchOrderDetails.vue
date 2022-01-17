@@ -39,7 +39,7 @@
             <template v-slot:cell(orderDate)="row" >                  
                 <span
                     :class="row.item.isPastDeadline?'text-secondary':'text-dark'">
-                    {{ row.item.orderDate | beautify-date-weekday}}
+                    {{ row.item.orderDate | beautify-date}}
                 </span>
             </template>
 
