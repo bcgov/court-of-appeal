@@ -13,12 +13,12 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Appeal has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Notice of Appeal.
+                    Your Notice of Appeal form has been submitted.  Please click on the CSO package number 
+                    below to retrieve a filed copy of your Notice of Appearance.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the notice of appeal on the appellant 
-                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
+                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic;">
+                    Please note that <span style="font-weight: 700;">you must file and serve the Notice of Appeal form</span> 
+                    on each Respondent within 30 days after the initial court order is declared.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
