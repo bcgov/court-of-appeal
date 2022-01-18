@@ -129,7 +129,7 @@ import "@/store/modules/common";
 const commonState = namespace("Common");
 
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
-import { form7DataInfoType, form7StatesInfoType, lookupsInfoType } from '@/types/Information';
+import { form7DataInfoType, form7StatesInfoType, lookupsInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        

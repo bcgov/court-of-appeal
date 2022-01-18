@@ -94,7 +94,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import "@/store/modules/common";
 const commonState = namespace("Common"); 
-import { representativeInfoType, lookupsInfoType } from '@/types/Information';
+import { representativeInfoType, lookupsInfoType } from '@/types/Information/Form7';
    
 
 @Component

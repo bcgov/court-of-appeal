@@ -85,7 +85,7 @@ import "@/store/modules/information";
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
-import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
+import { form7DataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 import { locationsInfoType } from '@/types/Common';
 
 @Component({

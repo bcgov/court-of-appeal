@@ -40,14 +40,14 @@
             class="mx-1" 
             label-cols-sm="3"
             content-cols-sm="3"
-            label="Respondent" 
-            label-for="respondent">
+            label="Party" 
+            label-for="party">
             <b-form-radio-group
-                id="respondent"
+                id="party"
                 style="max-width:75%" 
-                :state="respondentState? null:false"
+                :state="partyState? null:false"
                 v-model="searchParams.searchBy"
-                :options="respondentOptions"                
+                :options="partyOptions"                
             ></b-form-radio-group>
            
         </b-form-group>
@@ -92,7 +92,7 @@
                     style="max-width:75%" 
                     v-model="searchParams.lastName">
                 </b-form-input>
-            </b-form-group>
+            </b-form-group>            
         </div>
         <div>
             <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
@@ -119,16 +119,16 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import { form5SearchInfoType } from '@/types/Information/Form5';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
-import { form2SearchInfoType } from '@/types/Information/Form2';
 
 @Component({
     components: {           
         Spinner
     }        
 }) 
-export default class Form2CaseInformation extends Vue {
+export default class Form5CaseInformation extends Vue {
 
     @informationState.Action
     public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void
@@ -142,21 +142,21 @@ export default class Form2CaseInformation extends Vue {
     levelOfCourt = "Court of Appeal";
 
     fileNumberState = true;
-    respondentState = true;
+    partyState = true;
 
     dataReady = false;
     searching = false;
 
-    searchParams = {} as form2SearchInfoType;
+    searchParams = {} as form5SearchInfoType;
     notFound = false;
-    respondentOptions = [
+    partyOptions = [
         {text: 'Individual', value: 'Individual'},
         {text: 'Organization', value: 'Organization'}
     ];
 
     mounted(){
         this.fileNumberState = true;
-        this.respondentState = true;
+        this.partyState = true;
         this.dataReady = false;
         this.searching = false;
         this.dataReady = true; 
@@ -167,7 +167,7 @@ export default class Form2CaseInformation extends Vue {
         this.searching = true;        
         this.notFound = false;
         this.fileNumberState = true;
-        this.respondentState = true;
+        this.partyState = true;
 
         if(!this.searchParams.file){
             this.fileNumberState = false;
@@ -176,7 +176,7 @@ export default class Form2CaseInformation extends Vue {
         }
 
         if(!this.searchParams.searchBy){
-            this.respondentState = false;
+            this.partyState = false;
             this.searching = false;
             return
         }
@@ -195,7 +195,7 @@ export default class Form2CaseInformation extends Vue {
                 this.UpdatePartiesJson(res.data.parties);
                 this.UpdateFileNumber(this.searchParams.file)
                 this.UpdateCurrentCaseId(null);
-                this.$router.push({name: "fill-form2"})
+                this.$router.push({name: "fill-form5"})
             }
             else
                 this.notFound = true;

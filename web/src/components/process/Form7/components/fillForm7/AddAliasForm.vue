@@ -83,7 +83,7 @@
     import { namespace } from 'vuex-class';
     import "@/store/modules/common";
     const commonState = namespace("Common"); 
-    import { aliasInfoType, lookupsInfoType } from '@/types/Information';
+    import { aliasInfoType, lookupsInfoType } from '@/types/Information/Form7';
    
 
     @Component

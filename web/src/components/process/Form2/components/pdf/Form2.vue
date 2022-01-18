@@ -34,7 +34,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form2DataInfoType } from '@/types/Information';
+import { form2DataInfoType } from '@/types/Information/Form2';
 const informationState = namespace("Information");
 import Form2Layout from "./Form2Layout.vue";
 import moment from 'moment';

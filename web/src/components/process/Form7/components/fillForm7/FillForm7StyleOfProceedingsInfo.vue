@@ -770,7 +770,7 @@ const commonState = namespace("Common");
 import AddAliasForm from './AddAliasForm.vue';
 import AddRepresentativeForm from './AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
+import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information/Form7';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 @Component({

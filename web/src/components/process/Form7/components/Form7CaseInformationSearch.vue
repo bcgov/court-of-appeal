@@ -133,7 +133,7 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import { form7SearchInfoType } from '@/types/Information';
+import { form7SearchInfoType } from '@/types/Information/Form7';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 import Form7SearchOrderDetails from "./Form7SearchOrderDetails.vue";

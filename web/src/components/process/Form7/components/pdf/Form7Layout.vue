@@ -330,7 +330,7 @@
 </template>
 
 <script lang="ts">
-import { form7DataInfoType, form7PartiesInfoType, manualSopInfoType } from '@/types/Information';
+import { form7DataInfoType, form7PartiesInfoType, manualSopInfoType } from '@/types/Information/Form7';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment';
 

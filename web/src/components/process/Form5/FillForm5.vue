@@ -2,16 +2,16 @@
     <b-card header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light" header-border-variant="white">            
-            <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-5-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card border-variant="light" bg-variant="light" class="my-2">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Appearance
+                Notice of Hearing of Appeal
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
-                Form 2 (RULES 5 (A), 13(A) AND 17(A))
+                Form 5 (RULE 33(2), 34(2))
             </b-row>           
            
         </b-card>
@@ -35,7 +35,7 @@
         </b-card>
 
         <b-card border-variant="white" bg-variant="white" class="mt-3 mx-4">
-            <form-2-style-of-proceeding/>
+            <form-5-style-of-proceeding/>
         </b-card>       
         
     </b-card>
@@ -44,19 +44,19 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
-import Form2StyleOfProceeding from "@/components/process/Form2/components/Form2StyleOfProceeding.vue";
-import { form2StatusInfoType } from '@/types/Information/Form2';
+import Form5ProcessHeader from "@/components/process/Form5/components/Form5ProcessHeader.vue";
+import Form5StyleOfProceeding from "@/components/process/Form5/components/Form5StyleOfProceeding.vue";
+import { form5StatusInfoType } from '@/types/Information/Form5';
 
 @Component({
     components:{
-        Form2ProcessHeader,        
-        Form2StyleOfProceeding
+        Form5ProcessHeader,        
+        Form5StyleOfProceeding
     }
 })
-export default class FillForm2 extends Vue {
+export default class FillForm5 extends Vue {
 
-    stepsCompleted = {} as form2StatusInfoType;   
+    stepsCompleted = {} as form5StatusInfoType;   
 
     mounted() {  
         this.stepsCompleted = {

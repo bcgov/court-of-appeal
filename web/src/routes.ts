@@ -5,6 +5,10 @@ import StartForm2 from "@/components/process/Form2/StartForm2.vue";
 import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
+import StartForm5 from "@/components/process/Form5/StartForm5.vue";
+import FillForm5 from "@/components/process/Form5/FillForm5.vue";
+import PreviewForm5 from "@/components/process/Form5/PreviewForm5.vue";
+import SubmitForm5 from "@/components/process/Form5/SubmitForm5.vue";
 import ChecklistForm7 from "@/components/process/Form7/ChecklistForm7.vue";
 import AccessForm7 from "@/components/process/Form7/AccessForm7.vue";
 import StartForm7 from "@/components/process/Form7/StartForm7.vue";
@@ -70,6 +74,32 @@ const routes = [
       name: "proceed-form2",
       beforeEnter: authGuard,
       component: SubmitForm2,
+      props: true
+    },
+    {
+      path: "/start-form5",
+      name: "start-form5",
+      beforeEnter: authGuard,
+      component: StartForm5
+    },
+    {
+      path: "/fill-form5",
+      name: "fill-form5",
+      beforeEnter: authGuard,
+      component: FillForm5
+    },
+    {
+      path: "/preview-form5",
+      name: "preview-form5",
+      beforeEnter: authGuard,
+      component: PreviewForm5,
+      props: true
+    },
+    {
+      path: "/proceed-form5",
+      name: "proceed-form5",
+      beforeEnter: authGuard,
+      component: SubmitForm5,
       props: true
     },
     {

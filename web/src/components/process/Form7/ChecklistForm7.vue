@@ -46,7 +46,7 @@ const commonState = namespace("Common");
 
 import Form7DidYouKnow from "@/components/process/Form7/components/Form7DidYouKnow.vue";
 import Form7QualifyQuestions from "@/components/process/Form7/components/Form7QualifyQuestions.vue";
-import { accountInfoType } from '@/types/Information';
+import { accountInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{

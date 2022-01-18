@@ -206,6 +206,21 @@
                     </div>
                     Notice of Appeal
                 </b-button>
+                <b-button 
+                    size="sm" 
+                    variant="transparent" 
+                    class="py-2 my-2 ml-3" 
+                    style="font-size:24px;"
+                    @click="startForm5();"
+                    >                    
+                    <div style="font-size:45px;" class="fa-stack fa-2x" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
+                        <span 
+                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
+                            class="far fa-file-pdf btn-icon-left text-warning"/>
+                    </div>
+                    Notice of Hearing of Appeal
+                </b-button>
             </b-row>            
             
             <template v-slot:modal-footer>                
@@ -381,7 +396,9 @@ export default class MyDocumentsTable extends Vue {
         console.log(fileInfo)      
         if (fileInfo.description.includes("Notice of Appearance")){
             this.$router.push({name: "preview-form2", params: {caseId: caseId}});
-        } else if (fileInfo.description.includes("Notice of Appeal")){
+        } else if (fileInfo.description.includes("Notice of Hearing of Appeal")){
+            this.$router.push({name: "preview-form5", params: {caseId: caseId}});
+        }else if (fileInfo.description.includes("Notice of Appeal")){
             this.$router.push({name: "preview-form7", params: {caseId: caseId}});
         }
     }
@@ -394,6 +411,11 @@ export default class MyDocumentsTable extends Vue {
     public startForm2() {
         this.showSelectFormToFill = false;
         this.$router.push({name: "start-form2" });
+    }
+
+    public startForm5() {
+        this.showSelectFormToFill = false;
+        this.$router.push({name: "start-form5" });
     }
 
     public startForm7() {
@@ -504,28 +526,7 @@ export default class MyDocumentsTable extends Vue {
 
 <style scoped lang="scss">
     @import "src/styles/common";
-    @import "~@fortawesome/fontawesome-free/css/all.min.css";
-    
-    .home-content {
-        padding-bottom: 20px;
-        padding-top: 2rem;
-        max-width: 950px;
-        color: black;
-    }
-
-    .register-button {
-        color: $gov-white !important;
-        border: 2px solid rgba($gov-mid-blue, 0.3);
-        margin-top: 2.5rem;
-        width: 100%;
-        &:active {
-            border: 2px solid rgba($gov-white, 0.8);
-        }
-    }
-
-    .terms {
-        color: $gov-mid-blue;
-    }
+    @import "~@fortawesome/fontawesome-free/css/all.min.css";  
 
     .closeButton {
         background-color: transparent !important;

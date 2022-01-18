@@ -1,4 +1,4 @@
-import { aliasInfoType, representativeInfoType } from "..";
+import { aliasInfoType, representativeInfoType } from "../Form7";
 
 export interface journeyJsonDataType {
     id: number;

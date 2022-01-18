@@ -12,6 +12,11 @@
                 target="_blank">
                 Notice of Appearance (Form 2)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm5Document"
+                target="_blank">
+                Notice of Hearing of Appeal (Form 5)                
+            </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
             <li>Notice of Hearing Appeal</li>
@@ -27,6 +32,10 @@
 
         public startNewForm2Document(){
             this.$router.push({name: "start-form2" })
+        }
+
+        public startNewForm5Document(){
+            this.$router.push({name: "start-form5" })
         }
 
         public startNewForm7Document(){

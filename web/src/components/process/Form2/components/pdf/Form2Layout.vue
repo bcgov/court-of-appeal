@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { form2DataInfoType } from '@/types/Information';
+import { form2DataInfoType } from '@/types/Information/Form2';
 import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 

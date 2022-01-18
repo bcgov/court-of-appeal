@@ -23,7 +23,7 @@
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-            <form-7-layout v-bind:result="result"/>
+            <form-5-layout v-bind:result="result"/>
         </b-card>
 
     </b-card>
@@ -34,16 +34,16 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form7DataInfoType } from '@/types/Information/Form7';
+import { form5DataInfoType } from '@/types/Information/Form5';
 const informationState = namespace("Information");
-import Form7Layout from "./Form7Layout.vue";
+import Form5Layout from "./Form5Layout.vue";
 
 @Component({
     components:{        
-        Form7Layout
+        Form5Layout
     }
 })
-export default class Form7 extends Vue {
+export default class Form5 extends Vue {
 
     @Prop({required: true})
     caseId!: string;
@@ -51,27 +51,24 @@ export default class Form7 extends Vue {
     @informationState.State
     public currentCaseId: string;
 
-    @informationState.State
-    public form7Info: form7DataInfoType;
-
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateForm5Info!: (newForm5Info: form5DataInfoType) => void
 
-    result = {} as form7DataInfoType;
+    result = {} as form5DataInfoType;
     dataReady = false;
    
     mounted(){
         this.dataReady = false;
-        this.getForm7Data(); 
+        this.getForm5Data(); 
     }   
            
     public onPrint() { 
         const pdf_type = "FORM"
-        const pdf_name = "form7-" + this.caseId;
+        const pdf_name = "form5-" + this.caseId;
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = `"Form 7 (2016-06-28)"`;
+        const bottomLeftText = ``;
         const bottomRightText = `" "`;        
         const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
@@ -98,7 +95,7 @@ export default class Form7 extends Vue {
 
     public savePdf(){        
         const pdfType = "FORM"
-        const pdfName ="FORM7"
+        const pdfName ="FORM2"
         const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
@@ -121,27 +118,27 @@ export default class Form7 extends Vue {
         });
     }
 
-    public navigateToEditPage() {        
-        this.$router.push({name: "start-form7", params: {orderSelected: 'yes'}});
+    public navigateToEditPage() {
+        this.$router.push({name: "fill-form5" })
     }
  
-    public getForm7Data() {        
+    public getForm5Data() {        
        
-        // this.$http.get('/case/'+this.currentCaseId+'/')
-        // .then((response) => {
-        //     if(response?.data?.data){            
+        this.$http.get('/case/'+this.currentCaseId+'/')
+        .then((response) => {
+            if(response?.data?.data){            
                             
-        //         this.result = response.data.data
-        //         this.UpdateForm7Info(this.result)                         
-        //         this.dataReady = true;
-        //         Vue.nextTick(()=> this.onPrint())
-        //     }
+                this.result = response.data.data
+                this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
+               
+                this.UpdateForm5Info(this.result)                         
+                this.dataReady = true;
+                Vue.nextTick(()=> this.onPrint())
+            }
                 
-        // },(err) => {
-        // console.log(err)        
-        // });      
-        this.result = this.form7Info;
-        this.dataReady = true;
+        },(err) => {
+            console.log(err)        
+        });      
     }
 }
 </script>
