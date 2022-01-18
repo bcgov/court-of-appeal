@@ -172,56 +172,54 @@
             </template>
         </b-modal>
 
-        <b-modal v-model="showSelectFormToFill" id="bv-modal-select-form" header-class="bg-primary">                        
+        <b-modal size="lg" v-model="showSelectFormToFill" id="bv-modal-select-form" header-class="bg-primary">                        
             <template v-slot:modal-title>
-                <h2 class="mt-3 ml-1 text-white" style="font-size: 2rem;">Click on the form to fill</h2>                                  
+                <h2 class="mt-3 ml-1 text-white" style="font-size: 1.5rem;">Click on the form to fill</h2>                                  
             </template>
-            <b-row> 
-                <b-button 
-                    size="sm" 
-                    variant="transparent" 
-                    class="py-2 my-2 ml-3" 
-                    style="font-size:24px;"
+             
+                <b-button
+                    variant="transparent"                    
+                    class="ml-3 p-0" 
+                    style="font-size:14px; display: block;"
                     @click="startForm2();">
-                    <div style="font-size:45px;" class="fa-stack fa-2x" >
-                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
+                    <div style="font-size:35px;" class="fa-stack" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-lg" ></i>
                         <span 
-                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
+                            style="font-size:16px; transform:translate(-20px,-7px);" 
                             class="far fa-file-pdf btn-icon-left text-warning"/>
                     </div>                    
-                    Notice of Appearance
+                    <div style="display: inline; margin-left: -1rem;">Notice of Appearance</div>
                 </b-button>
-                <b-button 
-                    size="sm" 
-                    variant="transparent" 
-                    class="py-2 my-2 ml-3" 
-                    style="font-size:24px;"
-                    @click="startForm7();"
-                    >                    
-                    <div style="font-size:45px;" class="fa-stack fa-2x" >
-                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
+                <b-button
+                    variant="transparent"                    
+                    class="ml-3 p-0 mt-0" 
+                    style="font-size:14px; display: block;"
+                    @click="startForm7();">
+                    <div style="font-size:35px;" class="fa-stack" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-lg" ></i>
                         <span 
-                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
+                            style="font-size:16px; transform:translate(-20px,-7px);" 
+                            class="far fa-file-pdf btn-icon-left text-warning"/>
+                    </div>                    
+                    <div style="display: inline; margin-left: -1rem;">Notice of Appeal</div>
+                </b-button>
+
+                <b-button
+                    variant="transparent"                    
+                    class="ml-3 p-0" 
+                    style="font-size:14px; display: block;"
+                    @click="startForm5();">
+                    <div style="font-size:35px;" class="fa-stack" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-lg" ></i>
+                        <span 
+                            style="font-size:16px; padding:0; transform:translate(-20px,-7px);" 
                             class="far fa-file-pdf btn-icon-left text-warning"/>
                     </div>
-                    Notice of Appeal
+                    <div style="display: inline; margin-left: -1rem;">Notice of Hearing of Appeal</div>
                 </b-button>
-                <b-button 
-                    size="sm" 
-                    variant="transparent" 
-                    class="py-2 my-2 ml-3" 
-                    style="font-size:24px;"
-                    @click="startForm5();"
-                    >                    
-                    <div style="font-size:45px;" class="fa-stack fa-2x" >
-                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
-                        <span 
-                            style="font-size:40px; padding:0; transform:translate(6px,-1px);" 
-                            class="far fa-file-pdf btn-icon-left text-warning"/>
-                    </div>
-                    Notice of Hearing of Appeal
-                </b-button>
-            </b-row>            
+              
+                
+                       
             
             <template v-slot:modal-footer>                
                 <b-button variant="primary" @click="$bvModal.hide('bv-modal-select-form')">Close</b-button>

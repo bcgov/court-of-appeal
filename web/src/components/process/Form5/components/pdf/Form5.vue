@@ -63,13 +63,13 @@ export default class Form5 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "FORM"
+        const pdf_type = "NHA"
         const pdf_name = "form5-" + this.caseId;
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = ``;
-        const bottomRightText = `" "`;        
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
+        const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
         const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
@@ -94,8 +94,8 @@ export default class Form5 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "FORM"
-        const pdfName ="FORM2"
+        const pdfType = "NHA"
+        const pdfName ="FORM5"
         const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",

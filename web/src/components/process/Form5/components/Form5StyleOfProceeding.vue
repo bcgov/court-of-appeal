@@ -181,6 +181,22 @@
                 </b-form-group>
             </b-row>
 
+            <b-row class="my-3" style="padding: 0;">
+                <b-col 
+                    cols="3" 
+                    style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
+                                
+                </b-col>
+                <b-col>
+                    <b-form-input                    
+                        v-model="form5Info.authorizedName"                        
+                        :state ="state.authorizedName">
+                    </b-form-input>
+                    <span class="ml-2" style="font-weight: 700;">Electronically filed</span>
+
+                </b-col>
+            </b-row>
+
             <hr/>    
 
             <b-row >
@@ -211,7 +227,7 @@
 <script lang="ts">
 
 import { form5DataInfoType } from '@/types/Information/Form5';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
+import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -307,8 +323,6 @@ export default class Form5StyleOfProceeding extends Vue {
 
     }
 
-
-
     public checkStates(){        
 
         this.state.courtHouse = !this.form5Info.courtHouse? false : null;
@@ -321,7 +335,8 @@ export default class Form5StyleOfProceeding extends Vue {
         const numberOfDaysRes = this.form5Info.numberOfDaysResp?.trim();
         this.state.numberOfDaysRes = this.checkDay(numberOfDaysRes)==false? false : null;
 
-        this.state.acknowledge = !this.form5Info.acknowledge? false : null;        
+        this.state.acknowledge = !this.form5Info.acknowledge? false : null; 
+        this.state.authorizedName = !this.form5Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
