@@ -2,6 +2,7 @@ import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
 import { form2DataInfoType } from '@/types/Information/Form2';
 import { form5DataInfoType } from '@/types/Information/Form5';
+import { form6DataInfoType } from '@/types/Information/Form6';
 import { form7DataInfoType, userAccessInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
@@ -17,6 +18,7 @@ class Information extends VuexModule {
     public partiesJson = {} as partiesDataJsonDataType;
     public form2Info = {} as form2DataInfoType;
     public form5Info = {} as form5DataInfoType;
+    public form6Info = {} as form6DataInfoType;
     public form7Info = {} as form7DataInfoType;
     public form7AccessInfo: userAccessInfoType[] = [];
     public form7InfoStates = {} as form7StatesInfoType;
@@ -79,6 +81,15 @@ class Information extends VuexModule {
     @Action
     public UpdateForm5Info(newForm5Info: form5DataInfoType): void {
         this.context.commit('setForm5Info', newForm5Info);
+    }
+
+    @Mutation
+    public setForm6Info(form6Info: form6DataInfoType): void {   
+        this.form6Info = form6Info;
+    }    
+    @Action
+    public UpdateForm6Info(newForm6Info: form6DataInfoType): void {
+        this.context.commit('setForm6Info', newForm6Info);
     }
 
     @Mutation

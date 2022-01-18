@@ -17,6 +17,11 @@
                 target="_blank">
                 Notice of Hearing of Appeal (Form 5)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm6Document"
+                target="_blank">
+                Notice of Settlement or Abandonment (Form 6)                
+            </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
             <li>Notice of Hearing Appeal</li>
@@ -36,6 +41,10 @@
 
         public startNewForm5Document(){
             this.$router.push({name: "start-form5" })
+        }
+
+        public startNewForm6Document(){
+            this.$router.push({name: "start-form6" })
         }
 
         public startNewForm7Document(){

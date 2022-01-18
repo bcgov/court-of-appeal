@@ -1,19 +1,28 @@
 import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
+
 import StartForm2 from "@/components/process/Form2/StartForm2.vue";
 import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
+
 import StartForm5 from "@/components/process/Form5/StartForm5.vue";
 import FillForm5 from "@/components/process/Form5/FillForm5.vue";
 import PreviewForm5 from "@/components/process/Form5/PreviewForm5.vue";
 import SubmitForm5 from "@/components/process/Form5/SubmitForm5.vue";
+
+import StartForm6 from "@/components/process/Form6/StartForm6.vue";
+import FillForm6 from "@/components/process/Form6/FillForm6.vue";
+import PreviewForm6 from "@/components/process/Form6/PreviewForm6.vue";
+import SubmitForm6 from "@/components/process/Form6/SubmitForm6.vue";
+
 import ChecklistForm7 from "@/components/process/Form7/ChecklistForm7.vue";
 import AccessForm7 from "@/components/process/Form7/AccessForm7.vue";
 import StartForm7 from "@/components/process/Form7/StartForm7.vue";
 import PreviewForm7 from "@/components/process/Form7/PreviewForm7.vue";
 import SubmitForm7 from "@/components/process/Form7/SubmitForm7.vue";
+
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
@@ -100,6 +109,32 @@ const routes = [
       name: "proceed-form5",
       beforeEnter: authGuard,
       component: SubmitForm5,
+      props: true
+    },
+    {
+      path: "/start-form6",
+      name: "start-form6",
+      beforeEnter: authGuard,
+      component: StartForm6
+    },
+    {
+      path: "/fill-form6",
+      name: "fill-form6",
+      beforeEnter: authGuard,
+      component: FillForm6
+    },
+    {
+      path: "/preview-form6",
+      name: "preview-form6",
+      beforeEnter: authGuard,
+      component: PreviewForm6,
+      props: true
+    },
+    {
+      path: "/proceed-form6",
+      name: "proceed-form6",
+      beforeEnter: authGuard,
+      component: SubmitForm6,
       props: true
     },
     {
