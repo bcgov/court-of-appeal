@@ -48,8 +48,9 @@
 </template>
 
 <script lang="ts">
-import { form6StatusInfoType } from '@/types/Information/Form6';
+
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { form6StatusInfoType } from '@/types/Information/Form6';
 
 import StepNumber from "@/components/utils/StepNumber.vue";
 

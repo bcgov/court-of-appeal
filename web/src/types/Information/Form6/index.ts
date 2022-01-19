@@ -16,7 +16,7 @@ export interface form6SearchInfoType {
     organizationName?: string;
     searchBy: string;
 }
-//TODO: determine exact info
+
 export interface form6DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];

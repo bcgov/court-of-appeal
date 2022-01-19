@@ -215,17 +215,15 @@
                 
             </div>
         </div>
-
-
-
        
     </div>
 </template>
 
 <script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
 import { form6DataInfoType } from '@/types/Information/Form6';
 import { applicantJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
-import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
 
@@ -244,9 +242,7 @@ export default class Form6Layout extends Vue {
     respondentNames: string[] = [];
 
     applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
-    courtHouse = '';
-  
+    respondents: respondentsJsonDataType[] = [];  
 
     mounted(){
         this.dataReady = false;

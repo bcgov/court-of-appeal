@@ -300,9 +300,7 @@ export default class Form6StyleOfProceeding extends Vue {
                 return false
         }
         return true            
-    }
-
-    
+    }    
 
     public saveForm(draft: boolean) {        
         console.log('saving')
