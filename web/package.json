@@ -34,7 +34,7 @@
     "survey-creator": "^1.5.5",
     "survey-vue": "^1.5.5",
     "surveyjs-widgets": "^1.5.5",
-    "ts-loader": "^6.2.1",
+    "ts-loader": "^8.0.10",
     "underscore": "^1.10.2",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.5",
