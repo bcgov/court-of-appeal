@@ -21,14 +21,14 @@ export interface form6DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
-    numberOfDaysApp?: string;
-    numberOfDaysResp?: string;
-    dateOfAppealHearing: string;
-    timeOfAppealHearing: string;    
+    judgeName: string;
+    orderDate: string;
+    initiatingDocumentDate: string;        
     authorizedName: string;
-    courtHouse: string;
-    selfRepresented?: boolean;
-    acknowledge: boolean;
+    abandoningParties: string[];
+    abandoningAgainstParties: string[];
+    abandonType: string;
+    selfRepresented?: boolean;    
     completionDate?: string;
     version?: string;
 }

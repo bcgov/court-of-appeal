@@ -8,10 +8,10 @@
         <b-card border-variant="light" bg-variant="light" class="my-2 mx-4">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Hearing of Appeal
+                Notice of Settlement or Abandonment
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
-                Form 5 - Rule 33(2), 34(2)
+                Form 6 - Rule 46
             </b-row>           
            
         </b-card>

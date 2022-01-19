@@ -44,142 +44,102 @@
         </div>
 
         <div v-if="form6Info.selfRepresented !=null">
-            <p  
-                style="font-weight: 700;"
-                >Court House Location: 
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="The address of the courthouse where the appeal will be heard."/>            
-            </p>           
-
-            <b-form-group 
-                class="mx-3" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Select the registry location." 
-                label-for="registry">
-                <b-form-select 
-                    id="registry"
-                    style="width:300%" 
-                    :state="state.courtHouse"                   
-                    v-model="form6Info.courtHouse"                    
-                    :options="courtHouseNames">
-                </b-form-select>
-            </b-form-group>
 
             <b-row>
-                <b-col cols="3" style="font-weight: 700;">Time of Hearing: 
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="The default value is 10:00AM."/>            
+                <b-col cols="3" style="font-weight: 700;">
+                    Name of party(ies) who wishes to abandon an appeal or cross appeal:                                
                 </b-col>
-                <b-col class="ml-1">            
-                    
-                    <b-form-input    
-                        style="width: 6rem;"                    
-                        v-model="form6Info.timeOfAppealHearing"                            
-                        size="md"
-                        type="text"
-                        autocomplete="off"
-                        @paste.prevent
-                        :formatter="timeFormat"
-                        placeholder="HH:MM*"
-                        :state="state.timeOfAppealHearing"
-                    ></b-form-input>
+                <b-col class="ml-1 mt-2">   
+
+                    <b-form-checkbox-group                
+                        style="width:100%" 
+                        :state="state.abandoningParties"
+                        @change="updateOtherParties"                   
+                        v-model="form6Info.abandoningParties"                    
+                        :options="partyNames">
+                    </b-form-checkbox-group>
+
+                    <b-row class="ml-1 text-danger" v-if="invalidAbandoningParties">You cannot select all parties.</b-row>
                     
                 </b-col>
             </b-row>
+            
+
+        </div>
+
+        <div v-if="!invalidAbandoningParties && form6Info.abandoningParties && form6Info.abandoningParties.length > 0">
+
+            <b-row class="mt-4">
+                <b-col cols="3" style="font-weight: 700;">
+                    This party is abandoning a:                                
+                </b-col>
+                <b-col class="ml-1">   
+
+                    <b-form-radio-group                
+                        style="width:100%" 
+                        :state="state.abandonType"                   
+                        v-model="form6Info.abandonType"                    
+                        :options="abandonTypeOptions">
+                    </b-form-radio-group>
+                    
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4">
+                <b-col cols="3" style="font-weight: 700;">
+                    Which party(ies) are you abandonign against?                                
+                </b-col>
+                <b-col class="ml-1 mt-2">   
+
+                    <b-form-checkbox-group 
+                        :key="updated"               
+                        style="width:100%" 
+                        :state="state.abandoningAgainstParties"                   
+                        v-model="form6Info.abandoningAgainstParties"                    
+                        :options="otherPartyNames">
+                    </b-form-checkbox-group>
+                    
+                </b-col>
+            </b-row> 
 
             <b-row class="my-3" style="padding: 0;">
-                <b-col cols="3" style="font-weight: 700;">Date the Appeal will be Heard: 
-                                
+                <b-col 
+                    cols="3" 
+                    style="font-weight: 700;">Who made the Order?
                 </b-col>
-                <b-col class="ml-3" style="padding: 0;">                     
-
-                    <b-form-datepicker
-                        style="width: 20rem;" 
-                        size="md"
-                        v-model="form6Info.dateOfAppealHearing"
-                        placeholder="Hearing Date*"
-                        :state ="state.dateOfAppealHearing"                                    
-                        :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit' }"
-                        locale="en-US">
-                    </b-form-datepicker>
-
+                <b-col>
+                    <b-form-input                    
+                        v-model="form6Info.judgeName"                        
+                        disabled>
+                    </b-form-input>
                 </b-col>
-            </b-row>
+            </b-row>  
 
-            <p  
-                style="font-weight: 700;"
-                >Estimated length of appeal in days
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="If days are unknown to enter 0, however both estimates cannot be 0 one of them must have a 'real' number."/> 
-                    <br>
-                    <span style="font-size: 8pt; padding: 0; font-weight: 400;">
-                        Can enter intergers of half or full days (ie: 1.5 days, 2 days, 2.5 days BUT NOT 2.75 days, etc)
-                    </span> 
-            </p>
-             
+            <b-row class="my-3" style="padding: 0;">
+                <b-col 
+                    cols="3" 
+                    style="font-weight: 700;">Date the order under appeal was pronounced:
+                </b-col>
+                <b-col>
+                    <b-form-input                    
+                        v-model="form6Info.orderDate"                        
+                        disabled>
+                    </b-form-input>
+                </b-col>
+            </b-row>  
 
-            <b-row class="ml-2">
-                <b-col cols="3" >Appellant's estimate:<span class="text-danger">*</span> 
-                                
+            <b-row class="my-3" style="padding: 0;">
+                <b-col 
+                    cols="3" 
+                    style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
                 </b-col>
-                <b-col class="p-0">            
-                    
-                    <b-form-input    
-                        style="width: 6rem;"                    
-                        v-model="form6Info.numberOfDaysApp"                            
-                        size="md"
-                        type="text"
-                        autocomplete="off"
-                        @paste.prevent
-                        :state = "state.numberOfDaysApp"
-                    ></b-form-input>
-                    
-                    
+                <b-col>
+                    <b-form-input                    
+                        v-model="form6Info.initiatingDocumentDate"                        
+                        disabled>
+                    </b-form-input>
                 </b-col>
-            </b-row>      
-
-            <b-row class="ml-2 mt-2">
-                <b-col cols="3" >Respondent's estimate:<span class="text-danger">*</span> 
-                                
-                </b-col>
-                <b-col class="p-0">            
-                    
-                    <b-form-input    
-                        style="width: 6rem;"                    
-                        v-model="form6Info.numberOfDaysResp"                            
-                        size="md"
-                        type="text"
-                        autocomplete="off"
-                        @paste.prevent
-                        :state="state.numberOfDaysRes"
-                    ></b-form-input>
-                    
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-3">
-                <b-form-group>
-                    <span class="ml-3">I agree to pay all hearing fees payable under Item 4 of Division 1 of Schedule 2-Court Fees.</span>	
-                    <b-form-checkbox
-                        class="ml-5"
-                        style="display: inline;"
-                        size="sm"									
-                        v-model="form6Info.acknowledge"
-                        :state="state.acknowledge"
-                        >  
-                    </b-form-checkbox>						
-                </b-form-group>
-            </b-row>
+            </b-row>       
 
             <b-row class="my-3" style="padding: 0;">
                 <b-col 
@@ -196,6 +156,7 @@
 
                 </b-col>
             </b-row>
+            
 
             <hr/>    
 
@@ -258,32 +219,29 @@ export default class Form6StyleOfProceeding extends Vue {
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
+    partyNames: string[] = [];
+    otherPartyNames: string[] = [];
 
     applicants: applicantJsonDataType[] = [];
     respondents: respondentsJsonDataType[] = [];
-    notFound = false;
+    
     representationOptions = [
         {text: 'Yes', value: true},
         {text: 'No', value: false}
     ];
 
-    courtHouseNames = [
-        {text: 'Vancouver Registry', value: 'Vancouver Registry, BC Court of Appeal, The Law Courts, 400-800 Hornby Street, Vancouver, BC, V6Z 2C5'},
-        {text: 'Victoria Registry', value: 'Victoria Registry, 2nd Flr, 850 Burdett Ave., Victoria, BC, V8W 9J2'}
-    ];
+    abandonTypeOptions = [ 'Appeal', 'Cross Appeal' ];
 
     state = {
-        courtHouse:null,
-        timeOfAppealHearing: null,
-        dateOfAppealHearing: null,
-        numberOfDaysApp: null,
-        numberOfDaysRes: null,
-        acknowledge: null,
+        abandoningParties:null,
+        abandonType: null,
+        abandoningAgainstParties: null,        
         authorizedName:null
     }
 
     respondentName = ""; 
-    updated=0;
+    updated=0;  
+    invalidAbandoningParties = false;
 
     mounted() {
         this.dataReady = false;
@@ -292,6 +250,8 @@ export default class Form6StyleOfProceeding extends Vue {
     }
 
     public extractInfo(){
+
+        this.invalidAbandoningParties = false;
 
         if(this.currentCaseId){
             this.applicants = this.form6Info.appellants;
@@ -305,37 +265,34 @@ export default class Form6StyleOfProceeding extends Vue {
             this.form6Info.formSevenNumber = this.fileNumber;
             
             this.form6Info.version = this.$store.state.Application.version;
-            this.form6Info.timeOfAppealHearing = '10:00';
-            this.form6Info.acknowledge = false;           
+            //TODO: populate following with real data from webcats
+            this.form6Info.judgeName = 'Drake';
+            this.form6Info.orderDate = '11/11/2021';
+            this.form6Info.initiatingDocumentDate = '11/11/2020';          
             
         }
 
         this.applicantNames = [];
         this.respondentNames = [];
+        this.partyNames = [];
 
         for (const respondent of this.respondents){
-            this.respondentNames.push(respondent.name);  
+            this.respondentNames.push(respondent.name); 
+            this.partyNames.push(respondent.name) 
         }
 
         for (const applicant of this.applicants){
-            this.applicantNames.push(applicant.name);  
+            this.applicantNames.push(applicant.name);
+            this.partyNames.push(applicant.name);  
         }
 
     }
 
     public checkStates(){        
 
-        this.state.courtHouse = !this.form6Info.courtHouse? false : null;
-        this.state.timeOfAppealHearing = !this.form6Info.timeOfAppealHearing? false : null;
-        this.state.dateOfAppealHearing = !this.form6Info.dateOfAppealHearing? false : null;
-        
-        const numberOfDaysApp = this.form6Info.numberOfDaysApp?.trim();
-        this.state.numberOfDaysApp = this.checkDay(numberOfDaysApp)==false? false : null;
-
-        const numberOfDaysRes = this.form6Info.numberOfDaysResp?.trim();
-        this.state.numberOfDaysRes = this.checkDay(numberOfDaysRes)==false? false : null;
-
-        this.state.acknowledge = !this.form6Info.acknowledge? false : null; 
+        this.state.abandoningParties = !this.form6Info.abandoningParties? false : null;
+        this.state.abandonType = !this.form6Info.abandonType? false : null;
+        this.state.abandoningAgainstParties = !this.form6Info.abandoningAgainstParties? false : null;
         this.state.authorizedName = !this.form6Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
@@ -345,25 +302,18 @@ export default class Form6StyleOfProceeding extends Vue {
         return true            
     }
 
-    public checkDay(day: string){
-
-        let valid = false;
-        if (Number(day) % 1 == 0 || Number(day) % 1 == 0.5){
-            valid = true;
-        }       
-
-        return valid;
-    }
+    
 
     public saveForm(draft: boolean) {        
-        
+        console.log('saving')
         
         if(this.checkStates())
         {
+            console.log('valid')
             const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
             const method = this.currentCaseId? "put" : "post"
             const body = {
-                type: "form-5",
+                type: "form-6",
                 status:"Draft",
                 description:"form6",
                 data: this.form6Info
@@ -387,28 +337,29 @@ export default class Form6StyleOfProceeding extends Vue {
                 
             })
         }
-    }
+    }   
+    
+    public updateOtherParties(){
 
-    public timeFormat(value , event){        
-        if(isNaN(Number(value.slice(-1))) && value.slice(-1) != ':') return value.slice(0,-1) 
-        if(value.length!=3 && value.slice(-1) == ':') return value.slice(0,-1);
-        if(value.length==2 && event.data && value.slice(0,1)>=6 && value.slice(-1)>=6) return value.slice(0,-1);
-        if(value.length==2 && event.data && value.slice(-1)<6) return '0'+value.slice(0,1)+':'+value.slice(1,2);
-        if(value.length==2 && event.data && value.slice(0,1)>=2 && value.slice(0,1)<6 && value.slice(-1)>=6) return '00:'+value.slice(0,2);            
-        if(value.length==2 && event.data && value.slice(0,1)<2 && value.slice(-1)>=6) return value.slice(0,2)+':';
-        if(value.length==4 && value.slice(-1)>=6) return value.slice(0,-1);
-        if(value.length==3 && value.slice(0,1)!=':' && value.slice(1,2)!=':' && value.slice(-1)<6) return value.slice(0,2)+':'+value.slice(2,3);
-        if(value.length==3 && value.slice(-1)>=6 ) return value.slice(0,-1);
-        if(value.length==6 && value.slice(0,1)==0 && value.slice(4,6)<60 && (value.slice(1,2)+value.slice(3,4))<24) return value.slice(1,2)+value.slice(3,4)+':'+value.slice(4,5)+value.slice(5,6);           
-        if(value.length>5) return value.slice(0,5);
-        if(value.length==5 && (value.slice(0,2)>=24 || value.slice(3,5)>=60)) return '';
-        if(value.length==5 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,5)) || value.slice(2,3)!=':') )return '';
-        if(value.length==4 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,4)) || value.slice(2,3)!=':') )return '';
-        return value
-    }
+        const otherParties = [];
 
-    public dayFormat(value , event){
-        return value;
+        if (this.partyNames.length == this.form6Info.abandoningParties.length){
+
+            this.invalidAbandoningParties = true;
+
+        } else {
+
+            this.invalidAbandoningParties = false;
+
+            for (const partyName of this.partyNames){
+                const index = this.form6Info.abandoningParties.indexOf(partyName)
+                if (index == -1){
+                    otherParties.push(partyName);
+                }
+            }
+            this.otherPartyNames = otherParties;
+            this.updated ++;
+        }        
     }
 
     public navigateToPreviewPage(caseId) {        
