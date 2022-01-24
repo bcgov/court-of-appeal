@@ -217,6 +217,20 @@
                     </div>
                     <div style="display: inline; margin-left: -1rem;">Notice of Hearing of Appeal</div>
                 </b-button>
+
+                <b-button
+                    variant="transparent"                    
+                    class="ml-3 p-0" 
+                    style="font-size:14px; display: block;"
+                    @click="startForm6();">
+                    <div style="font-size:35px;" class="fa-stack" >
+                        <i class="fa fa-circle-thin text-warning fa-stack-lg" ></i>
+                        <span 
+                            style="font-size:16px; padding:0; transform:translate(-20px,-7px);" 
+                            class="far fa-file-pdf btn-icon-left text-warning"/>
+                    </div>
+                    <div style="display: inline; margin-left: -1rem;">Notice of Settlement or Abandonment</div>
+                </b-button>
               
                 
                        
@@ -414,6 +428,11 @@ export default class MyDocumentsTable extends Vue {
     public startForm5() {
         this.showSelectFormToFill = false;
         this.$router.push({name: "start-form5" });
+    }
+
+    public startForm6() {
+        this.showSelectFormToFill = false;
+        this.$router.push({name: "start-form6" });
     }
 
     public startForm7() {
