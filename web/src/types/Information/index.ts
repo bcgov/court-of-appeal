@@ -75,22 +75,56 @@ export interface form7DataInfoType {
     judgeFullName: string;
     orderDate: string;
     appealSubmissionDeadline: string;
-    appearanceDays: number;
-    orderType: string;
-    appealedInSupremeCourt: string;
-    makerName?: string;
-    appealNature: string;
+    trialDurationDays: number;
+    appealFrom: string;
+    wasSupremeAppeal: boolean;
+    decisionMaker?: string;
+    involves: string;
     partOfJudgment: string;
     orderSought: string;
     parties: form7PartiesInfoType[];
     respondents: form7PartiesInfoType[];
     respondentSolicitors?: string[];
     appellants: form7PartiesInfoType[];
-    mainAppellant?: string;
-    serviceAddress: string;
-    referenceNumber: string; 
+    appealingFirm?: string;
+    appealingFirmAddress: string;
+    refOptional?: string; 
     manualSop?: manualSopInfoType[];
 } 
+
+export interface form7SubmissionDataInfoType {
+    readOnlyUsers: number[];
+    readWriteUsers: number[];
+    lowerCourtLevelCd: string;
+    lowerCourtLevelName: string;
+    ElectronicallyFiled: string;
+    id?: string;
+    lowerCourtFileNo: string;
+    lowerCourtRegistryId: string;
+    lowerCourtRegistryName: string;
+    ceisFileId: number;
+    nameOfJudge: string;
+    honorificTitle: string;
+    dateOfJudgment: string;
+    trialDurationDays: string;    
+    lowerCourtStyleOfCause: string;
+    lowerCourtClassName: string;
+    lowerCourtClassCd: string;
+    protectionOrder: boolean;
+    handTypedNoSearch: boolean;
+    appealingFirm: string;
+    appealingFirmAddress: string;
+    toRespondents: string;
+    respondentSolicitor: string;
+    wasSupremeAppeal: boolean; 
+    appealFrom: string;
+    decisionMaker?: string;    
+    refOptional?: string;    
+    lowerCourtInitiatingDocument: string;
+    involves: string;
+    electronicallyFiled: string;   
+    selfRepresenting: boolean;
+}
 
 export interface form7StatesInfoType {
     appearanceDays: null | boolean;

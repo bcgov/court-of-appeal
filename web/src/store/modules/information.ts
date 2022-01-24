@@ -1,5 +1,5 @@
 import { locationsInfoType } from '@/types/Common';
-import { form2DataInfoType, form7DataInfoType, form7StatesInfoType, pathwayTypeInfoType, userAccessInfoType } from '@/types/Information';
+import { form2DataInfoType, form7DataInfoType, form7StatesInfoType, form7SubmissionDataInfoType, pathwayTypeInfoType, userAccessInfoType } from '@/types/Information';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -13,7 +13,9 @@ class Information extends VuexModule {
     public pathType = {} as pathwayTypeInfoType;
     public partiesJson = {} as partiesDataJsonDataType;
     public form2Info = {} as form2DataInfoType;
+    public form7FormsJson: form7SubmissionDataInfoType[] = [];
     public form7Info = {} as form7DataInfoType;
+    public form7SubmissionInfo = {} as form7SubmissionDataInfoType;
     public form7AccessInfo: userAccessInfoType[] = [];
     public form7InfoStates = {} as form7StatesInfoType;
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
@@ -75,6 +77,24 @@ class Information extends VuexModule {
     @Action
     public UpdateForm7Info(newForm7Info: form7DataInfoType): void {
         this.context.commit('setForm7Info', newForm7Info);
+    }
+
+    @Mutation
+    public setForm7FormsJson(form7FormsJson: form7SubmissionDataInfoType[]): void {   
+        this.form7FormsJson = form7FormsJson;
+    }    
+    @Action
+    public UpdateForm7FormsJson(newForm7FormsJson: form7SubmissionDataInfoType[]): void {
+        this.context.commit('setForm7FormsJson', newForm7FormsJson);
+    }    
+
+    @Mutation
+    public setForm7SubmissionInfo(form7SubmissionInfo: form7SubmissionDataInfoType): void {   
+        this.form7SubmissionInfo = form7SubmissionInfo;
+    }    
+    @Action
+    public UpdateForm7SubmissionInfo(newForm7SubmissionInfo: form7SubmissionDataInfoType): void {
+        this.context.commit('setForm7SubmissionInfo', newForm7SubmissionInfo);
     }
 
     @Mutation
