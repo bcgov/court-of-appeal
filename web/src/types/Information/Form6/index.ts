@@ -21,6 +21,8 @@ export interface form6DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
+    firstAppellant: string;
+    firstRespondent: string;
     judgeName: string;
     orderDate: string;
     initiatingDocumentDate: string;        

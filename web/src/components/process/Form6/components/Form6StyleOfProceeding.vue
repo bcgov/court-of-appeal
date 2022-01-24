@@ -14,15 +14,37 @@
             </b-row>
 
             <b-row class="mt-3">
-
-                <b-col cols="2" style="font-weight: 700;">Responding: 
+                <b-col cols="6" style="font-weight: 700;">First Appellant:
+                   
                     <b-icon-question-circle-fill 
                         class="text-primary"
                         v-b-tooltip.hover.noninteractive
                         scale="1.1"
-                        title="The name of the party responding to the appeal."/>            
+                        title="Name of the first appellant named on Form 1: Notice of Appeal."/>
+                    <b-form-select                            
+                        class="mt-2"                        
+                        :state="state.firstAppellant"                   
+                        v-model="form6Info.firstAppellant"                    
+                        :options="applicantNames">
+                    </b-form-select>
+                    
                 </b-col>
-                <b-col cols="10" style="font-weight: 200;">{{respondentNames.join(', ')}}</b-col>
+
+                <b-col cols="6" style="font-weight: 700;">First Respondent:
+                   
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        scale="1.1"
+                        title="Name of the first respondent named on Form 1: Notice of Appeal."/>
+                    <b-form-select 
+                        class="mt-2"             
+                        :state="state.firstRespondent"                   
+                        v-model="form6Info.firstRespondent"                    
+                        :options="respondentNames">
+                    </b-form-select>
+                    
+                </b-col>
             </b-row>
 
             <p class="mt-3 mb-0" style="font-weight: 700;">Representation</p>
@@ -233,6 +255,8 @@ export default class Form6StyleOfProceeding extends Vue {
     abandonTypeOptions = [ 'Appeal', 'Cross Appeal' ];
 
     state = {
+        firstAppellant: null,
+        firstRespondent: null,
         abandoningParties:null,
         abandonType: null,
         abandoningAgainstParties: null,        
@@ -288,8 +312,10 @@ export default class Form6StyleOfProceeding extends Vue {
 
     }
 
-    public checkStates(){        
-
+    public checkStates(){   
+        
+        this.state.firstAppellant = !this.form6Info.firstAppellant? false : null;
+        this.state.firstRespondent = !this.form6Info.firstRespondent? false : null; 
         this.state.abandoningParties = !this.form6Info.abandoningParties? false : null;
         this.state.abandonType = !this.form6Info.abandonType? false : null;
         this.state.abandoningAgainstParties = !this.form6Info.abandoningAgainstParties? false : null;
@@ -302,12 +328,10 @@ export default class Form6StyleOfProceeding extends Vue {
         return true            
     }    
 
-    public saveForm(draft: boolean) {        
-        console.log('saving')
+    public saveForm(draft: boolean) {
         
         if(this.checkStates())
-        {
-            console.log('valid')
+        {            
             const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
             const method = this.currentCaseId? "put" : "post"
             const body = {
