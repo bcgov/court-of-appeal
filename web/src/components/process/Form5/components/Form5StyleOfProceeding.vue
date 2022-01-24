@@ -14,15 +14,37 @@
             </b-row>
 
             <b-row class="mt-3">
-
-                <b-col cols="2" style="font-weight: 700;">Responding: 
+                <b-col cols="6" style="font-weight: 700;">First Appellant:
+                   
                     <b-icon-question-circle-fill 
                         class="text-primary"
                         v-b-tooltip.hover.noninteractive
                         scale="1.1"
-                        title="The name of the party responding to the appeal."/>            
+                        title="Name of the first appellant named on Form 1: Notice of Appeal."/>
+                    <b-form-select                            
+                        class="mt-2"                        
+                        :state="state.firstAppellant"                   
+                        v-model="form5Info.firstAppellant"                    
+                        :options="applicantNames">
+                    </b-form-select>
+                    
                 </b-col>
-                <b-col cols="10" style="font-weight: 200;">{{respondentNames.join(', ')}}</b-col>
+
+                <b-col cols="6" style="font-weight: 700;">First Respondent:
+                   
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        scale="1.1"
+                        title="Name of the first respondent named on Form 1: Notice of Appeal."/>
+                    <b-form-select 
+                        class="mt-2"             
+                        :state="state.firstRespondent"                   
+                        v-model="form5Info.firstRespondent"                    
+                        :options="respondentNames">
+                    </b-form-select>
+                    
+                </b-col>
             </b-row>
 
             <p class="mt-3 mb-0" style="font-weight: 700;">Representation</p>
@@ -105,8 +127,7 @@
                         size="md"
                         v-model="form5Info.dateOfAppealHearing"
                         placeholder="Hearing Date*"
-                        :state ="state.dateOfAppealHearing"                                    
-                        :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit' }"
+                        :state ="state.dateOfAppealHearing"
                         locale="en-US">
                     </b-form-datepicker>
 
@@ -273,6 +294,8 @@ export default class Form5StyleOfProceeding extends Vue {
     ];
 
     state = {
+        firstAppellant:null,
+        firstRespondent:null,
         courtHouse:null,
         timeOfAppealHearing: null,
         dateOfAppealHearing: null,
@@ -326,6 +349,8 @@ export default class Form5StyleOfProceeding extends Vue {
     public checkStates(){        
 
         this.state.courtHouse = !this.form5Info.courtHouse? false : null;
+        this.state.firstAppellant = !this.form5Info.firstAppellant? false : null;
+        this.state.firstRespondent = !this.form5Info.firstRespondent? false : null;
         this.state.timeOfAppealHearing = !this.form5Info.timeOfAppealHearing? false : null;
         this.state.dateOfAppealHearing = !this.form5Info.dateOfAppealHearing? false : null;
         
