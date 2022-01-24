@@ -1,5 +1,5 @@
 <template>
-    <div v-if="dataReady">
+    <div>
 
         <div>
             <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b>
@@ -24,7 +24,7 @@
                 <div class="col-md-5" >
                     <div class="row" style="float:right; margin-right: 0.5rem;">Court of Appeal File No.</div>
                     <div class="row" style="margin-top: 7.75rem; max-width: 100%;">
-                        <div class="col-md-11" style="border: 1px solid black;">{{result.appellants[0].name}}</div> 
+                        <div class="col-md-11" style="border: 1px solid black;">{{result.firstAppellant}}</div> 
                         <div class="col-md-1" style="padding: 0; margin-right: 0;">v.</div>
                     </div>
                     <div style="margin: 0 0 -15px -45px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
@@ -43,7 +43,7 @@
                         The file number can be found on the upper right corner of the Notice of Appeal.
                     </div>
 
-                    <div class="row" style="margin-top: 0.5rem; border: 1px solid black; max-width: 100%;">{{result.respondents[0].name}}</div>
+                    <div class="row" style="margin-top: 0.5rem; border: 1px solid black; max-width: 100%;">{{result.firstRespondent}}</div>
                     <div style="margin: 0 0 -15px -15px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
                     <div style="margin: 0 -15px 0 -15px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 100%; font-style: italic;">
                         Name of the first respondent named
@@ -180,63 +180,21 @@
                 </div>
                 
             </div>
-        </div>
-
-
-
-       
+        </div>       
     </div>
 </template>
 
 <script lang="ts">
 import { form5DataInfoType } from '@/types/Information/Form5';
-import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
 
 @Component
 export default class Form5Layout extends Vue {
 
     @Prop({required:true})
-    result!: form5DataInfoType; 
-
-    @informationState.Action
-    public UpdateForm5Info!: (newForm5Info: form5DataInfoType) => void
-    
-    dataReady = false;
-    applicantNames: string[] = [];
-    respondentNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
-    courtHouse = '';
-  
-
-    mounted(){
-        this.dataReady = false;
-        this.extractInfo();       
-        this.dataReady = true;
-    }
+    result!: form5DataInfoType;    
    
-    public extractInfo(){
-        
-        this.applicants = this.result.appellants;
-        this.respondents = this.result.respondents;
-        this.applicantNames = [];
-        this.respondentNames = [];
-
-        for (const respondent of this.respondents){
-            this.respondentNames.push(respondent.name);  
-        }
-
-        for (const applicant of this.applicants){
-            this.applicantNames.push(applicant.name);  
-        }        
-       
-    } 
 }
 
 </script>

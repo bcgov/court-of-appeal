@@ -24,7 +24,6 @@
             </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
-            <li>Notice of Hearing Appeal</li>
         </ol>
     </b-card>
 </template>

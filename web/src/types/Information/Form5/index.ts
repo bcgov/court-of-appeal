@@ -16,11 +16,13 @@ export interface form5SearchInfoType {
     organizationName?: string;
     searchBy: string;
 }
-//TODO: determine exact info
+
 export interface form5DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
+    firstAppellant: string;
+    firstRespondent: string;
     numberOfDaysApp?: string;
     numberOfDaysResp?: string;
     dateOfAppealHearing: string;
