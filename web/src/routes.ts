@@ -23,6 +23,11 @@ import StartForm7 from "@/components/process/Form7/StartForm7.vue";
 import PreviewForm7 from "@/components/process/Form7/PreviewForm7.vue";
 import SubmitForm7 from "@/components/process/Form7/SubmitForm7.vue";
 
+import StartForm9 from "@/components/process/Form9/StartForm9.vue";
+import FillForm9 from "@/components/process/Form9/FillForm9.vue";
+import PreviewForm9 from "@/components/process/Form9/PreviewForm9.vue";
+import SubmitForm9 from "@/components/process/Form9/SubmitForm9.vue";
+
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
@@ -168,6 +173,32 @@ const routes = [
       name: "proceed-form7",
       beforeEnter: authGuard,
       component: SubmitForm7,
+      props: true
+    },
+    {
+      path: "/start-form9",
+      name: "start-form9",
+      beforeEnter: authGuard,
+      component: StartForm9
+    },
+    {
+      path: "/fill-form9",
+      name: "fill-form9",
+      beforeEnter: authGuard,
+      component: FillForm9
+    },
+    {
+      path: "/preview-form9",
+      name: "preview-form9",
+      beforeEnter: authGuard,
+      component: PreviewForm9,
+      props: true
+    },
+    {
+      path: "/proceed-form9",
+      name: "proceed-form9",
+      beforeEnter: authGuard,
+      component: SubmitForm9,
       props: true
     },
     {

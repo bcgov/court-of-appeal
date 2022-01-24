@@ -4,6 +4,7 @@ import { form2DataInfoType } from '@/types/Information/Form2';
 import { form5DataInfoType } from '@/types/Information/Form5';
 import { form6DataInfoType } from '@/types/Information/Form6';
 import { form7DataInfoType, userAccessInfoType, form7StatesInfoType } from '@/types/Information/Form7';
+import { form9DataInfoType } from '@/types/Information/Form9';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -20,6 +21,7 @@ class Information extends VuexModule {
     public form5Info = {} as form5DataInfoType;
     public form6Info = {} as form6DataInfoType;
     public form7Info = {} as form7DataInfoType;
+    public form9Info = {} as form9DataInfoType;
     public form7AccessInfo: userAccessInfoType[] = [];
     public form7InfoStates = {} as form7StatesInfoType;
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
@@ -99,6 +101,15 @@ class Information extends VuexModule {
     @Action
     public UpdateForm7Info(newForm7Info: form7DataInfoType): void {
         this.context.commit('setForm7Info', newForm7Info);
+    }
+
+    @Mutation
+    public setForm9Info(form9Info: form9DataInfoType): void {   
+        this.form9Info = form9Info;
+    }    
+    @Action
+    public UpdateForm9Info(newForm9Info: form9DataInfoType): void {
+        this.context.commit('setForm9Info', newForm9Info);
     }
 
     @Mutation
