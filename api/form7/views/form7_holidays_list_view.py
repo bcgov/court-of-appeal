@@ -7,7 +7,7 @@ from django.http import (
 from rest_framework import permissions
 from rest_framework.views import APIView
 
-from api.form7_cso_web_service.form7_static_list import get_form7_holidays_list
+from form7.form7_cso_web_service.form7_static_list import get_form7_holidays_list
 
 logger = logging.getLogger(__name__)
 

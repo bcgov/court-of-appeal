@@ -10,7 +10,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.form7_cso_web_service.form7_csows_account_info import Form7AccountInfo
+from form7.form7_cso_web_service.form7_csows_account_info import Form7AccountInfo
 
 logger = logging.getLogger(__name__)
 

@@ -11,7 +11,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.form7_cso_web_service.form7_csows_file_detail import Form7FileDetail
+from form7.form7_cso_web_service.form7_csows_file_detail import Form7FileDetail
 
 logger = logging.getLogger(__name__)
 

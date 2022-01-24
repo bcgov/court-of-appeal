@@ -7,7 +7,7 @@ from django.urls.exceptions import NoReverseMatch
 
 from rest_framework.reverse import reverse
 
-from api.form7_cso_web_service.form7_csows_authorized_user_info import Form7AuthorizedUserInfo
+from form7.form7_cso_web_service.form7_csows_authorized_user_info import Form7AuthorizedUserInfo
 
 from oidc_rp.models import OIDCUser
 
