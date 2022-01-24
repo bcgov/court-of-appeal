@@ -681,39 +681,38 @@
                         :no-sort-reset="true"
                         sort-icon-left
                         thead-class="d-none"
-                        borderless                    
+                        borderless                  
                         small
+                        v-sortStyleOfProceeding
                         responsive="sm"
                     >
                     <template v-slot:cell(partyName)="data" >
-                        <b-form-group
-                                class="labels"                
-                                :label="data.item.appealRole + ' / ' + data.item.lowerCourtRole" 
-                                label-for="fullname">
-                               
-                                <b-form-input 
-                                    id="fullname"  
-                                    disabled    
-                                    v-model="data.item.partyName.join(', ')">
-                                </b-form-input>
-                        </b-form-group>                        
+                        <b-form-select
+                            v-model="data.item.conjunction" 
+                            style="width:20%; border:1px solid #F1F1F1; display:block"                  
+                            :options="styleOfProceedingOptions">
+                        </b-form-select> 
+                        <div>
+                        <b-form-input 
+                            id="fullname"
+                            style="text-align:center; width:80%; border:1px solid #F0F0F0; background-color:#FAFAFA; margin:0 0 0 auto;" 
+                            disabled    
+                            v-model="data.item.partyName.join(', ')">
+                        </b-form-input>
+                        </div>
+                        <div style="float:right;" class="labels">
+                            <div>{{data.item.appealRole}}/</div>
+                            <div>{{data.item.lowerCourtRole}}</div>
+                        </div>                        
                     </template>
 
-                    <template v-slot:cell(conjunction)="data" >
-                        <b-form-group style="margin-top: 2.35rem;" >
-                            <b-form-select
-                                v-model="data.item.conjunction"                   
-                                :options="styleOfProceedingOptions">
-                            </b-form-select>                        
-                        </b-form-group>                         
-                    </template>
-
-                    <template v-slot:cell(edit)="data" >
+                    <template v-slot:cell(edit)>
                          <b-button                     
-                            variant="info"
-                            style="margin-top: 2.35rem; float:right;" 
+                            variant="light"
+                            class="handle"
+                            style="margin-top: 2.75rem; float:right;" 
                             >
-                            <i class="fas fa-sort"></i>
+                            <i style="margin-top:.3rem; font-size:16pt;" class="fas fa-arrows-alt"></i>
                         </b-button>                         
                     </template>                   
                     
@@ -725,7 +724,7 @@
                 <b-button                     
                     variant="dark"
                     class="mr-auto" 
-                    @click="showEditStyleOfProceedingWindow = false">
+                    @click="cancelStyleOfProceeding">
                     Cancel
                 </b-button>
 
@@ -773,10 +772,15 @@ import AddRepresentativeForm from './AddRepresentativeForm.vue';
 import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
+import sortStyleOfProceeding from './StyleOfProceedingComponents/util/sortStyleOfProceeding'
+
 @Component({
     components:{        
         AddAliasForm,
         AddRepresentativeForm        
+    },
+    directives:{
+        sortStyleOfProceeding
     }
 })
 export default class FillForm7StyleOfProceedingsInfo extends Vue {
@@ -866,13 +870,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             label:'',                
                       
             sortable:false            
-        }, 
-        {
-            key:'conjunction',          
-            label:'',   
-           
-            sortable:false            
-        }, 
+        },
         {
             key:'edit',          
             label:'',   
@@ -956,6 +954,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;   
     noRolePartyManualSop: manualSopInfoType[] = [];
+
+    tmpManualSop=[]
 
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
@@ -1390,6 +1390,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public confirmEditStyleOfProceedings(){ 
 
         this.styleOfProceedingDataReady = false;
+        this.tmpManualSop=this.styleOfProceedingsInfo.manualSop
         this.showEditStyleOfProceedingWindow = true;       
         this.showConfirmEditStyleOfProceeding = false;    
         
@@ -1482,6 +1483,13 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         console.log('reset SOP')
         this.showEditStyleOfProceedingWindow = false;
         this.styleOfProceedingsInfo.manualSop = [];
+    }
+
+    public cancelStyleOfProceeding(){
+        console.log('cancel SOP')
+        this.styleOfProceedingsInfo.manualSop = this.tmpManualSop;
+        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.showEditStyleOfProceedingWindow = false;
     }
 
 }
