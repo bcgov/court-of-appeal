@@ -10,6 +10,7 @@ from form7.views import (
     Form7FileOrdersView,
     Form7FilePartiesView,
     Form7FormsView,
+    Form7ToPdfView,
 )
 
 
@@ -26,6 +27,8 @@ urlpatterns = [
 
     path("form7/forms", Form7FormsView.as_view()),
     path("form7/forms/<str:pk>", Form7FormsView.as_view()),
+
+    path("form7/form-print/<str:notice_id>/", Form7ToPdfView.as_view()),
    
 ]
 
