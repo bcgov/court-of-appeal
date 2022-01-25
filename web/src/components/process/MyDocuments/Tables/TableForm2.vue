@@ -340,12 +340,9 @@ export default class TableForm2 extends Vue {
     public resumeApplication(fileInfo: documentInfoType) {
         const caseId = fileInfo.fileNumber.toString()
         this.UpdateCurrentCaseId(caseId);  
-        console.log(fileInfo)      
-        if (fileInfo.description.includes("Notice of Appearance")){
-            this.$router.push({name: "preview-form2", params: {caseId: caseId}});
-        } else if (fileInfo.description.includes("Notice of Appeal")){
-            this.$router.push({name: "preview-form7", params: {caseId: caseId}});
-        }
+        // console.log(fileInfo)      
+        this.$router.push({name: "preview-form2", params: {caseId: caseId}});
+       
     }
 
     public createDocument() {

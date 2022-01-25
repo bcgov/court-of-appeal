@@ -171,13 +171,13 @@ export default class TableForm7 extends Vue {
     @informationState.State
     public form7FormsJson!: form7SubmissionDataInfoType[];
     
-    // @informationState.Action
-    // public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    @informationState.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
     
     allDocumentsChecked = false;
 
     
-    documentsList: form7SubmissionDataInfoType[] = [];
+    documentsList = [];
   
     documentsFields = [
         {
@@ -290,19 +290,6 @@ export default class TableForm7 extends Vue {
             // doc.packageUrl = docJson.packageUrl;
             // doc.packageNum = docJson.packageNumber;
 
-            // const appellants = docJson.data.appellants;
-            // const respondents = docJson.data.respondents;
-            // const app_names = [];
-            // const res_names = [];
-            // for (const app of appellants){
-            //     app_names.push(app.name)                
-            // }
-            // for (const res of respondents){
-            //     res_names.push(res.name)                
-            // }
-            // doc.appNames = app_names.join(', ')
-            // doc.resNames = res_names.join(', ');
-
             this.documentsList.push(doc);
         }      
     }
@@ -310,13 +297,9 @@ export default class TableForm7 extends Vue {
     public resumeApplication(fileInfo: form7SubmissionDataInfoType) {
         const noticeId = fileInfo.id.toString()
         console.log(noticeId)
-        // this.UpdateCurrentCaseId(noticeId);  
-        // // console.log(fileInfo)      
-        // if (fileInfo.description.includes("Notice of Appearance")){
-        //     this.$router.push({name: "preview-form2", params: {caseId: caseId}});
-        // } else if (fileInfo.description.includes("Notice of Appeal")){
-        //     this.$router.push({name: "preview-form7", params: {caseId: caseId}});
-        // }
+        this.UpdateCurrentNoticeOfAppealId(noticeId)       
+        this.$router.push({name: "start-form7", params: {caseId: noticeId}});
+        
     }
 
 
@@ -363,7 +346,8 @@ export default class TableForm7 extends Vue {
         window.open(package_url)
     }
 
-    public createDocument() {                
+    public createDocument() { 
+        this.UpdateCurrentNoticeOfAppealId(null)
         this.$router.push({name: "checklist-form7" });
     }
 
