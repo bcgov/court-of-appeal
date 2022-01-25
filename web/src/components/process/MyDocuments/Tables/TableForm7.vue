@@ -1,0 +1,477 @@
+<template>
+    <div>
+        <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
+            <b-col cols="10">
+                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Form 7</div>
+            </b-col>
+            <b-col  cols="2">
+                <b-button 
+                    class="mr-2  bg-transparent border border-primary"
+                    size="sm"
+                    @click="downloadDocument('')"
+                    v-b-tooltip.hover.noninteractive
+                    title="download selected">
+                    <b-icon-download variant="primary"/>
+                </b-button>
+                <b-button 
+                    class="mr-2 bg-transparent border border-danger" 
+                    size="sm"
+                    @click="deleteDocument"
+                    v-b-tooltip.hover.noninteractive.v-danger
+                    title="delete selected">
+                    <b-icon-trash-fill variant="danger"/>
+                </b-button>
+                <b-button 
+                    class="bg-transparent border border-success"
+                    size="sm"
+                    @click="createDocument"
+                    v-b-tooltip.hover.noninteractive.v-success
+                    title="create new submission">
+                    <b-icon-plus scale="1.5" variant="success"/>
+                </b-button>
+            </b-col>
+        </b-row>
+
+        <b-row v-else class="bg-select mb-2 py-1 mx-0">
+            <b-col cols="9">
+                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 24rem;" class="p-0 text-center text-primary">Form 7</div>
+            </b-col>
+        </b-row>
+
+        <b-row style="p-0">
+            <b-col>
+
+                <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
+                    <span class="text-muted ml-4 mb-5">No documents.</span>
+                </b-card>
+
+                <b-card v-else no-body border-variant="light" bg-variant="white">
+                    <b-table  
+                        :items="documentsList"
+                        :fields="documentsFields"
+                        style="font-size: 0.85rem;"
+                        class="mx-2"                        
+                        sort-by="modifiedDate"
+                        :sort-desc="true"
+                        borderless
+                        head-row-variant="primary"
+                        sort-icon-left
+                        striped
+                        small 
+                        responsive="sm"
+                        >
+
+                        <template v-if="enableActions" v-slot:head(select) >                                  
+                            <b-form-checkbox                            
+                                class="m-0"
+                                v-b-tooltip.hover.left
+                                title="Select All"
+                                v-model="allDocumentsChecked"
+                                @change="checkAllDocuments"                                                                       					
+                                size="sm"/>
+                        </template>
+
+                        <template v-if="enableActions" v-slot:cell(select)="data" >                                  
+                            <b-form-checkbox
+                                size="sm"
+                                class="m-0"
+                                v-b-tooltip.hover.noninteractive.v-warning
+                                :title="data.item.status=='Submitted'?'Cannot Delete submitted app':''"
+                                v-model="data.item.isChecked"
+                                @change="toggleSelectedDocuments"                                            					
+                                />
+                        </template>
+
+                        <template v-slot:cell(action)="row">
+                            <b-button v-if="row.item.status == 'Draft'" size="sm" variant="transparent" class="my-0 py-0 px-1"
+                                @click="resumeApplication(row.item)"
+                                v-b-tooltip.hover.noninteractive
+                                title="Resume Application">
+                                <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
+                            </b-button>
+                            <b-button 
+                                v-else-if="row.item.status == 'Submitted'" 
+                                size="sm" 
+                                variant="transparent" 
+                                class="my-0 py-0 px-1"
+                                @click="navigateToEFilingHub(row.item.packageUrl)"
+                                    v-b-tooltip.hover.noninteractive.v-info
+                                    title="Navigate To Submitted Application">
+                                    <span class="fa fa-paper-plane btn-icon-left text-info"/>                    
+                            </b-button>
+                            <b-button 
+                                v-if="row.item.pdf_types"
+                                variant="transparent"
+                                class="m-0 p-0"
+                                @click="downloadDocument(row.item.fileNumber)"
+                                v-b-tooltip.hover.noninteractive.v-success
+                                title="Download the generated PDF">
+                                <span style="font-size:18px; padding:0; transform:translate(2px,1px);" class="far fa-file-pdf btn-icon-left text-success ml-1"/>
+                            </b-button>                            
+                        </template>
+
+                        <template v-slot:cell(status)="row">                  
+                            <span v-if="row.value == 'Submitted'" class="text-white bg-success px-1">{{row.value}}</span> 
+                            <span v-if="row.value == 'Draft'" class="text-primary">{{row.value}}</span>
+
+                        </template>
+
+
+                        
+                        <template v-slot:cell(modifiedDate)="row">                  
+                            <span>{{ row.value | beautify-date-weekday}}</span>
+                        </template>
+
+                        <template v-slot:cell(appealSubmissionDeadline)="row">                  
+                            <span>{{ row.value | beautify-date-weekday-nohr}}</span>
+                        </template>
+                        
+                    </b-table>
+                </b-card> 
+            </b-col>
+        </b-row> 
+
+        <div>
+        <b-modal size="lg" v-model="confirmDelete" id="bv-modal-confirm-delete" header-class="bg-danger text-light">                    
+            <template v-slot:modal-title>
+                <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
+            </template>
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Appeal </b> Application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
+            <template v-slot:modal-footer>
+                <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
+                <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-delete')">Cancel</b-button>
+            </template>            
+            <template v-slot:modal-header-close>                 
+                <b-button style="height:1rem" variant="outline-warning" class="m-0 p-0 text-light closeButton" @click="$bvModal.hide('bv-modal-confirm-delete')"
+                ><div style="transform: translate(0px, -20px); ">&times;</div></b-button>
+            </template>
+        </b-modal>
+        </div>
+
+    </div>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+import { namespace } from "vuex-class";
+import "@/store/modules/information";
+
+import {form7SubmissionDataInfoType } from "@/types/Information";
+const informationState = namespace("Information");
+
+@Component
+export default class TableForm7 extends Vue {
+
+
+    @Prop({required: true})
+    enableActions!: boolean;
+    
+    @informationState.State
+    public form7FormsJson!: form7SubmissionDataInfoType[];
+    
+    // @informationState.Action
+    // public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    
+    allDocumentsChecked = false;
+
+    
+    documentsList: form7SubmissionDataInfoType[] = [];
+  
+    documentsFields = [
+        {
+            key:'select',          
+            label:'',                  
+            thClass: 'border-dark border-bottom',            
+            sortable:false            
+        },       
+        {
+            key: "fileNumber",
+            label: "App #",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "description",
+            label: "Document Description",
+            sortable: false,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "lowerCourtFileNo",
+            label: "Lower Court File No.",
+            sortable: false,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "referenceNumber",
+            label: "Reference #",
+            sortable: false,
+            thClass: 'border-dark border-bottom',
+        }, 
+        {
+            key: "modifiedDate",
+            label: "Save On",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        }, 
+        {
+            key: "status",
+            label: "Status",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "appealSubmissionDeadline",
+            label: "Deadline to File and Serve",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        }, 
+       
+        {
+            key: "packageNum",
+            label: "eFiling #",
+            sortable: true,
+            thClass: 'border-dark border-bottom',
+        },
+        {
+            key: "action",
+            label: "Action",
+            sortable: false,
+            thClass: 'border-dark border-bottom',
+        }
+    ];
+
+    confirmDelete = false;
+    applicationsToDelete = [];
+    applicationsToDeleteIds = [];
+    applicationsNotAllowedToDelete = [];
+
+    errorMsg = "";
+    errorMsgDismissCountDown = 0;
+   
+
+    mounted() {
+        this.extractDocuments();       
+    }
+
+    public extractDocuments () {
+        
+        this.documentsList = [];
+        let count=0;
+        for (const docJson of this.form7FormsJson) {                
+            const doc = {
+                isChecked: false, 
+                id:'',
+                pdf_types:'', 
+                fileNumber:'', 
+                lowerCourtFileNo:'', 
+                parties:'', 
+                appNames: '', 
+                resNames: '', 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',
+                description:'',
+                appealSubmissionDeadline:''
+            };
+            
+            doc.fileNumber = String(++count);
+            doc.id= docJson['noticeOfAppealId']
+            doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
+            doc.status = docJson['submittedByClientId']? "Submitted":"Draft";
+            doc.modifiedDate = docJson['dateModified'];
+            doc.description = "Notice of Appeal"
+            doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
+            // doc.pdf_types = docJson.pdf_types;
+            // doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
+            // doc.packageUrl = docJson.packageUrl;
+            // doc.packageNum = docJson.packageNumber;
+
+            // const appellants = docJson.data.appellants;
+            // const respondents = docJson.data.respondents;
+            // const app_names = [];
+            // const res_names = [];
+            // for (const app of appellants){
+            //     app_names.push(app.name)                
+            // }
+            // for (const res of respondents){
+            //     res_names.push(res.name)                
+            // }
+            // doc.appNames = app_names.join(', ')
+            // doc.resNames = res_names.join(', ');
+
+            this.documentsList.push(doc);
+        }      
+    }
+
+    public resumeApplication(fileInfo: form7SubmissionDataInfoType) {
+        const noticeId = fileInfo.id.toString()
+        console.log(noticeId)
+        // this.UpdateCurrentCaseId(noticeId);  
+        // // console.log(fileInfo)      
+        // if (fileInfo.description.includes("Notice of Appearance")){
+        //     this.$router.push({name: "preview-form2", params: {caseId: caseId}});
+        // } else if (fileInfo.description.includes("Notice of Appeal")){
+        //     this.$router.push({name: "preview-form7", params: {caseId: caseId}});
+        // }
+    }
+
+
+    public downloadDocument(fileNumber?) {
+        const checkedFileIdsList = this.documentsList.filter(doc => {return doc.isChecked}).map(doc => doc.id)
+
+        if(fileNumber || checkedFileIdsList.length>0){
+            
+            // const filenum = fileNumber? fileNumber: '0';
+            // const pdf_filename = fileNumber? "Form.pdf":"Form.zip";
+
+            // let pdfIds = ''
+            // for(const fileId of checkedFileIdsList)
+            //     pdfIds+= '&id='+fileId;
+
+            // if(fileNumber) pdfIds = ''
+
+            // const pdf_type = 'FORM';
+            // const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            // const options = {
+            //     responseType: "blob",
+            //     headers: {
+            //     "Content-Type": "application/json",
+            //     }
+            // }
+            // this.$http.get(url, options)
+            // .then(res => {
+            //     const blob = res.data;
+            //     const link = document.createElement("a");
+            //     link.href = URL.createObjectURL(blob);
+            //     document.body.appendChild(link);
+            //     link.download = pdf_filename;
+            //     link.click();
+            //     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+            // },err => {
+                          
+            //     this.errorMsg = "PDF file has not been generated for the selected documents !"
+            //     this.errorMsgDismissCountDown = 5;                
+            // });
+        }
+    }
+
+    public navigateToEFilingHub(package_url) {
+        window.open(package_url)
+    }
+
+    public createDocument() {                
+        this.$router.push({name: "checklist-form7" });
+    }
+
+
+    public deleteDocument() {
+
+        this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
+        this.applicationsToDeleteIds = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.id)
+        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.id)
+
+        if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
+            this.confirmDelete=true;      
+        }
+    }
+
+
+    public confirmDeleteApplication() { 
+        
+        // let pdfIds = ''       
+        // for(const fileId of this.applicationsToDelete)
+        //     pdfIds+= '&id='+fileId;
+        
+        const data ={
+            data:{
+                noticeOfAppealIds:this.applicationsToDelete
+            }
+        }
+
+        const url = '/form7/forms';
+
+        this.$http.delete(url, data)
+        .then(response => {
+            
+            if(response?.status == 204)
+                this.$emit('reload')
+
+        }, err => {
+            this.errorMsg = "Error while Deleting !"
+            this.errorMsgDismissCountDown = 2;
+        })
+        
+        this.confirmDelete=false;
+
+    }
+
+
+    public checkAllDocuments(checked){
+        for(const docInx in this.documentsList) {       
+            this.documentsList[docInx].isChecked = checked;              
+        }        
+    }
+
+
+    public toggleSelectedDocuments() {  
+        Vue.nextTick(()=>{
+
+            const checkedDocs = this.documentsList.filter(document=>{return document.isChecked});
+            
+            if(checkedDocs.length == this.documentsList.length)
+                this.allDocumentsChecked = true;
+            else
+                this.allDocumentsChecked = false;                       
+        })        
+	}
+
+
+    public errorMsgCountDownChanged(dismissCountDown){
+        this.errorMsgDismissCountDown = dismissCountDown
+    }
+}
+</script>
+
+<style scoped lang="scss">
+    @import "src/styles/common";
+    @import "~@fortawesome/fontawesome-free/css/all.min.css";
+    
+    .home-content {
+        padding-bottom: 20px;
+        padding-top: 2rem;
+        max-width: 950px;
+        color: black;
+    }
+
+    .register-button {
+        color: $gov-white !important;
+        border: 2px solid rgba($gov-mid-blue, 0.3);
+        margin-top: 2.5rem;
+        width: 100%;
+        &:active {
+            border: 2px solid rgba($gov-white, 0.8);
+        }
+    }
+
+    .terms {
+        color: $gov-mid-blue;
+    }
+
+    .closeButton {
+        background-color: transparent !important;
+        color: white;
+        border: white;
+        font-weight: 700;
+        font-size: 2rem;
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    button {
+        border: 0px;
+    }
+</style>
