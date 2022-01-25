@@ -1125,7 +1125,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.UpdateForm7Info(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
-
+///
     public addParties(){       
         this.party = {} as supremeCourtPartiesJsonInfoType;
         this.enableAddParty = false;
@@ -1137,7 +1137,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.party.legalReps = [];
         this.partyDataReady = true;
     }
-
+//
     public saveNewParty(){
 
         if (this.checkPartyStates()){
@@ -1258,6 +1258,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
             }        
     }
+
+    ////
 
     public update(){        
         
@@ -1406,6 +1408,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.styleOfProceedingDataReady = true;
 
     }
+
+    //
 
     public loadSopInfo(partiesInfo: form7PartiesInfoType[]){        
 
