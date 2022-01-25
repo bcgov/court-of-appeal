@@ -74,6 +74,7 @@ export default class Form7CaseInformation extends Vue {
         form7Data.lowerCourtLevelCd = this.supremeCourtCaseJson.courtClassCd;
         form7Data.lowerCourtLevelName = levelOfCourt;
         form7Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
+
         this.UpdateForm7SubmissionInfo(form7Data); 
         this.UpdateCurrentNoticeOfAppealId(null);
 

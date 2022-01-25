@@ -22,7 +22,7 @@
             <div class="col-md-4" style="margin: 0; padding:0;">
                 Supreme Court File No.
             </div>
-            <div class="col-md-2" style="margin: 0; padding:0;">{{result.courtClass}}{{result.fileNumber}}</div>
+            <div class="col-md-2" style="margin: 0; padding:0;">{{result.lowerCourtClassCd}}{{result.lowerCourtFileNo}}</div>
         </div>
 
         <div class="my-3 row" style="padding:0; font-size:10pt;">
@@ -78,7 +78,7 @@
                 textwidth="24.25rem" 
                 hint=""
                 beforetext="of the Supreme Court of BC pronounced the" 
-                :text="result.dateOfJudgment | beautify-date-month-year"/>
+                :text="result.dateOfJudgement | beautify-date-month-year"/>
             <underline-form 
                 style="text-indent:1px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="15rem" 
@@ -330,7 +330,7 @@
 </template>
 
 <script lang="ts">
-import { form7DataInfoType, form7PartiesInfoType, manualSopInfoType } from '@/types/Information';
+import { form7PartiesInfoType, form7SubmissionDataInfoType, manualSopInfoType } from '@/types/Information';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment';
 
@@ -351,13 +351,13 @@ import UnderlineForm from "@/components/utils/PopulateForms/components/Underline
 export default class Form7Layout extends Vue {
 
     @Prop({required:true})
-    result!: form7DataInfoType; 
+    result!: form7SubmissionDataInfoType; 
 
     @informationState.State
     public caseLocation: locationsInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm2Info: form7DataInfoType) => void
+    public UpdateForm7SubmissionInfo!: (newForm2SubmissionInfo: form7SubmissionDataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];
