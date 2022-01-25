@@ -78,7 +78,7 @@
                 textwidth="24.25rem" 
                 hint=""
                 beforetext="of the Supreme Court of BC pronounced the" 
-                :text="result.orderDate | beautify-date-month-year"/>
+                :text="result.dateOfJudgment | beautify-date-month-year"/>
             <underline-form 
                 style="text-indent:1px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="15rem" 
@@ -107,18 +107,18 @@
                 
                 <div class="col-md-6">                                          
                     <check-box                                                                                      
-                        :check="(result.orderType == 'Trial Judgment')?'yes':''" 
+                        :check="(result.appealFrom == 'Trial Judgment')?'yes':''" 
                         text="Trial Judgment"/>  
                     <check-box                                                                                      
-                    :check="(result.orderType == 'Summary Trial Judgment')?'yes':''" 
+                    :check="(result.appealFrom == 'Summary Trial Judgment')?'yes':''" 
                     text="Summary Trial Judgment"/>
                 </div>
                 <div class="col-md-6">
                     <check-box                                                                                      
-                        :check="(result.orderType == 'Order of a Statutory Body')?'yes':''" 
+                        :check="(result.appealFrom == 'Order of a Statutory Body')?'yes':''" 
                         text="Order of a Statutory Body"/>  
                     <check-box                                                                                      
-                    :check="(result.orderType == 'Chambers Judgment')?'yes':''" 
+                    :check="(result.appealFrom == 'Chambers Judgment')?'yes':''" 
                     text="Chambers Judgment"/>     
                 </div>           
                 
@@ -137,7 +137,7 @@
                         textwidth="37.75rem" 
                         beforetext=""
                         hint="" 
-                        :text="(result.appealedInSupremeCourt == 'NA')?'Not Applicable':result.makerName"/>   
+                        :text="(!result.wasSupremeAppeal)?'Not Applicable':result.decisionMaker"/>   
                 </div>
             </section>
         </div>
@@ -150,35 +150,35 @@
                     
                     <div class="col-md-4">                                          
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Civil Procedure')?'yes':''" 
+                            :check="(result.involves == 'Civil Procedure')?'yes':''" 
                             text="Civil Procedure"/>  
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Municipal Law')?'yes':''" 
+                            :check="(result.involves == 'Municipal Law')?'yes':''" 
                             text="Municipal Law"/>
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Equity')?'yes':''" 
+                            :check="(result.involves == 'Equity')?'yes':''" 
                             text="Equity"/>
                     </div>
                     <div class="col-md-4">
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Constitutional/Administrative')?'yes':''" 
+                            :check="(result.involves == 'Constitutional/Administrative')?'yes':''" 
                             text="Constitutional/Administrative"/>  
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Torts')?'yes':''" 
+                            :check="(result.involves == 'Torts')?'yes':''" 
                             text="Torts"/>
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Motor Vehicle Accidents')?'yes':''" 
+                            :check="(result.involves == 'Motor Vehicle Accidents')?'yes':''" 
                             text="Motor Vehicle Accidents"/>    
                     </div>
                     <div class="col-md-4" style="padding-left: 2rem;">
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Commercial')?'yes':''" 
+                            :check="(result.involves == 'Commercial')?'yes':''" 
                             text="Commercial"/>  
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Real Property')?'yes':''" 
+                            :check="(result.involves == 'Real Property')?'yes':''" 
                             text="Real Property"/>
                         <check-box                                                                                      
-                            :check="(result.appealNature == 'Wills and Estates')?'yes':''" 
+                            :check="(result.involves == 'Wills and Estates')?'yes':''" 
                             text="Wills and Estates"/>     
                     </div>                    
                     
@@ -188,18 +188,18 @@
                     
                     <div class="col-md-4">                                          
                         <check-box                                                                                      
-                            :check="(result.orderType == 'Divorce')?'yes':''" 
+                            :check="(result.involves == 'Divorce')?'yes':''" 
                             text="Divorce"/>  
                         <check-box                                                                                      
-                            :check="(result.orderType == 'Family Law Act')?'yes':''" 
+                            :check="(result.involves == 'Family Law Act')?'yes':''" 
                             text="Family Law Act"/>
                     </div>
                     <div class="col-md-8">
                         <check-box                                                                                      
-                            :check="(result.orderType == 'Corollary Relief in a Divorce Proceeding')?'yes':''" 
+                            :check="(result.involves == 'Corollary Relief in a Divorce Proceeding')?'yes':''" 
                             text="Corollary Relief in a Divorce Proceeding"/>  
                         <check-box                                                                                      
-                            :check="(result.orderType == 'Other Family')?'yes':''" 
+                            :check="(result.involves == 'Other Family')?'yes':''" 
                             text="Other Family"/>     
                     </div>                                    
                     
@@ -223,7 +223,7 @@
         </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
-            The trial/hearing of this proceeding occupied {{result.appearanceDays}} days.
+            The trial/hearing of this proceeding occupied {{result.trialDurationDays}} days.
         </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
@@ -236,7 +236,7 @@
             <div class="col-md-4" style="padding:0; margin:0;">
                 <div style="height:3rem; border:1px solid; margin:0;"></div>
                 <div style="text-align: center; margin:0;">
-                    {{result.mainAppellant}}
+                    {{result.appealingFirm}}
                 </div>
                 <div style="margin:0; padding:0; text-align: center;">
                     Appellant(s)/Solicitor for the Appellant(s)
@@ -262,12 +262,12 @@
             textwidth="29rem" 
             hint=""
             beforetext="This Notice of Appeal is given by" 
-            :text="result.mainAppellant"/>
+            :text="result.appealingFirm"/>
        
         <div class="print-block" style="margin:0 0 0 0.25rem;">
             whose address for service is
-        <div v-if="result.serviceAddress" 
-            class="answerbox">{{result.serviceAddress}}</div>
+        <div v-if="result.appealingFirmAddress" 
+            class="answerbox">{{result.appealingFirmAddress}}</div>
         <div v-else style="margin-bottom:3rem;"></div>  
         </div> 
 
@@ -383,21 +383,15 @@ export default class Form7Layout extends Vue {
         this.respondentNames = [];
 
         for (const respondent of this.respondents){
-
-            this.respondentNames.push(respondent.fullName);  
-
+            this.respondentNames.push(respondent.fullName);
         }
 
         for (const applicant of this.applicants){
-
-            this.applicantNames.push(applicant.fullName);  
-
+            this.applicantNames.push(applicant.fullName);
         }
 
         if (this.result.manualSop?.length > 1){
-
             this.caseSop = this.result.manualSop;
-
         } else {
 
             this.caseSop = [];

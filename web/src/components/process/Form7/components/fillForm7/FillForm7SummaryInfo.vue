@@ -136,9 +136,9 @@ export default class FillForm7SummaryInfo extends Vue {
     public update(){ 
               
         const form7 = this.form7Info;
-        form7.appearanceDays = this.appearanceDays;     
+        form7.trialDurationDays = this.appearanceDays;     
         form7.judgeFullName = this.judgeFullName;   
-        form7.orderDate = this.supremeCourtOrderJson.orderDate;
+        form7.dateOfJudgment = this.supremeCourtOrderJson.orderDate;
         this.UpdateForm7Info(form7);
     }
 

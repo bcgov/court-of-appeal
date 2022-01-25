@@ -150,7 +150,7 @@
                     style="width: 45%;" 
                     :state="form7InfoStates.mainAppellant"
                     @change="update"      
-                    v-model="styleOfProceedingsInfo.mainAppellant">
+                    v-model="styleOfProceedingsInfo.appealingFirm">
                 </b-form-input>
             </b-form-group>
             
@@ -163,7 +163,7 @@
                     rows="3"
                     :state="form7InfoStates.serviceAddress"
                     @change="update"                    
-                    v-model="styleOfProceedingsInfo.serviceAddress">
+                    v-model="styleOfProceedingsInfo.appealingFirmAddress">
                 </b-form-textarea>
                 <span
                     v-if="(form7InfoStates.validServiceAddress != null)" 
@@ -975,7 +975,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public extractInfo(){
-        this.styleOfProceedingsInfo.mainAppellant = this.userName;
+        this.styleOfProceedingsInfo.appealingFirm = this.userName;
         this.partiesList = this.supremeCourtCaseJson.parties;
         this.styleOfProceedingsInfo.appellants = this.styleOfProceedingsInfo.appellants?this.styleOfProceedingsInfo.appellants:[];
         this.styleOfProceedingsInfo.respondents = this.styleOfProceedingsInfo.respondents?this.styleOfProceedingsInfo.respondents:[]; 

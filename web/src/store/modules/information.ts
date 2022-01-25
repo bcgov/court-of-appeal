@@ -22,7 +22,8 @@ class Information extends VuexModule {
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     
     public fileNumber = "";  
-    public currentCaseId = null; 
+    public currentCaseId = null;
+    public currentNoticeOfAppealId = null;  
     public caseLocation: locationsInfoType; 
 
     @Mutation
@@ -158,6 +159,15 @@ class Information extends VuexModule {
     @Action
     public UpdateCurrentCaseId(newCurrentCaseId: string): void {
         this.context.commit('setCurrentCaseId', newCurrentCaseId);
+    }
+
+    @Mutation
+    public setCurrentNoticeOfAppealId(currentNoticeOfAppealId: string): void {   
+        this.currentNoticeOfAppealId = currentNoticeOfAppealId;
+    }    
+    @Action
+    public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
+        this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
     }
     
 }
