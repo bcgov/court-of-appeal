@@ -7,7 +7,7 @@
                 label="Type Of Order" 
                 label-for="order-type">
                 <b-form-radio-group                
-                    v-model="commonInfo.orderType"
+                    v-model="commonInfo.appealFrom"
                     :state="form7InfoStates.orderType"
                     @change="update"
                     id="order-type"
@@ -45,7 +45,7 @@
                     </a>
                 </p>
                 <b-form-radio-group                
-                    v-model="commonInfo.appealedInSupremeCourt"
+                    v-model="commonInfo.wasSupremeAppeal"
                     @change="update"
                     :state="form7InfoStates.appealedInSupremeCourt"
                     id="appealed-in-supreme-court"
@@ -54,7 +54,7 @@
                 ></b-form-radio-group>                
             </b-form-group>
             <b-form-group
-                v-if="commonInfo.appealedInSupremeCourt == 'yes'"
+                v-if="commonInfo.wasSupremeAppeal"
                 class="ml-4 mt-3 labels"                
                 label="What's the name of the maker of the original decision, direction or order?"
                 label-for="maker-name">
@@ -62,7 +62,7 @@
                     id="maker-name"    
                     :state="form7InfoStates.makerName"  
                     @change="update"              
-                    v-model="commonInfo.makerName">
+                    v-model="commonInfo.decisionMaker">
                 </b-form-input>
             </b-form-group>
         </b-card>
@@ -77,7 +77,7 @@
                 <b-form-radio-group  
                     id="appeal-nature"     
                     style="font-size: 1rem; font-weight:500;"        
-                    v-model="commonInfo.appealNature"
+                    v-model="commonInfo.involves"
                     :state="form7InfoStates.appealNature"
                     @change="update"
                     :options="involvesOtherListNames"                
@@ -151,8 +151,8 @@ export default class FillForm7CommonInfo extends Vue {
     public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void;
 
     appealedInSupremeCourtOptions = [
-        { text: 'Yes', value: 'yes' },
-        { text: 'Not Applicable', value: 'NA' }
+        { text: 'Yes', value: true },
+        { text: 'Not Applicable', value: false }
     ]
     
     appealFromOptionsListNames = [];

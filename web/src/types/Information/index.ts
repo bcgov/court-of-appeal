@@ -73,14 +73,14 @@ export interface form7DataInfoType {
     fileId: number;
     courtClass: string;
     judgeFullName: string;
-    orderDate: string;
+    dateOfJudgment: string;
     appealSubmissionDeadline: string;
     trialDurationDays: number;
     appealFrom: string;
     wasSupremeAppeal: boolean;
     decisionMaker?: string;
     involves: string;
-    partOfJudgment: string;
+    partOfJudgment?: string;
     orderSought: string;
     parties: form7PartiesInfoType[];
     respondents: form7PartiesInfoType[];
@@ -93,37 +93,41 @@ export interface form7DataInfoType {
 } 
 
 export interface form7SubmissionDataInfoType {
+    selfRepresenting: boolean;//
+    parties: form7PartiesInfoType[];
+    manualSop?: manualSopInfoType[];  //
     readOnlyUsers: number[];
     readWriteUsers: number[];
-    lowerCourtLevelCd: string;
-    lowerCourtLevelName: string;
-    ElectronicallyFiled: string;
-    id?: string;
-    lowerCourtFileNo: string;
-    lowerCourtRegistryId: string;
-    lowerCourtRegistryName: string;
-    ceisFileId: number;
-    nameOfJudge: string;
-    honorificTitle: string;
-    dateOfJudgment: string;
-    trialDurationDays: string;    
-    lowerCourtStyleOfCause: string;
-    lowerCourtClassName: string;
-    lowerCourtClassCd: string;
+    lowerCourtLevelCd: string;//
+    lowerCourtLevelName: string;//
+    lowerCourtClassCd: string;//
+    lowerCourtClassName: string;//
+    lowerCourtFileNo: string;//
+    lowerCourtRegistryId: string;//
+    lowerCourtRegistryName: string;//
+    lowerCourtStyleOfCause: string;//  
+    lowerCourtInitiatingDocument: string;//    
+    appealSubmissionDeadline: string;//
+    id?: string;    
+    ceisFileId: number;//
+    nameOfJudge: string; //
+    honorificTitle: string;//
+    dateOfJudgement: string;//
+    trialDurationDays: string; // 
     protectionOrder: boolean;
     handTypedNoSearch: boolean;
-    appealingFirm: string;
-    appealingFirmAddress: string;
-    toRespondents: string;
-    respondentSolicitor: string;
-    wasSupremeAppeal: boolean; 
-    appealFrom: string;
-    decisionMaker?: string;    
-    refOptional?: string;    
-    lowerCourtInitiatingDocument: string;
-    involves: string;
-    electronicallyFiled: string;   
-    selfRepresenting: boolean;
+    appealingFirm: string;//
+    appealingFirmAddress: string;//
+    toRespondents: string; //
+    respondentSolicitor: string;//
+    wasSupremeAppeal: boolean; //
+    appealFrom: string; //
+    decisionMaker?: string;//    
+    refOptional?: string; // 
+    involves: string; //
+    partOfJudgment?: string;//
+    electronicallyFiled: string; //    
+    orderSought: string; //
 }
 
 export interface form7StatesInfoType {

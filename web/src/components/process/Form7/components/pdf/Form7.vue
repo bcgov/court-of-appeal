@@ -122,7 +122,7 @@ export default class Form7 extends Vue {
     }
 
     public navigateToEditPage() {        
-        this.$router.push({name: "start-form7", params: {orderSelected: 'yes'}});
+        this.$router.push({name: "start-form7"});
     }
  
     public getForm7Data() {        
