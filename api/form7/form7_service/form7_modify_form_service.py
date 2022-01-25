@@ -4,14 +4,14 @@ from form7.form7_cso_web_service.library.due_dates import DueDates
 from .form7_create_form_service import SetSurrogateClassCode, FixNameCapitalization
 
 
+
 def modify_form(notice_id, body, account_id, client_id):
 
     parties = body.get('parties')
     manualSops = body.get('manualSop')
+
+    body = clean_fields(NoticeOfAppeal, body, ['noticeOfAppealId', 'parties', 'manualSop'])
     
-    body.pop('id', None)
-    body.pop('parties', None)
-    body.pop('manualSop', None)
     # readOnlyUsers: "[]",  ->depends on data fromat from db migration
     # readWriteUsers: "[753]",->depends on data format from db migration
     body = SetSurrogateClassCode(body)
@@ -32,8 +32,8 @@ def modify_form(notice_id, body, account_id, client_id):
     notice_id = notice.noticeOfAppealId
     
     delete_manual_sop(notice_id)
-    for manualSop in manualSops:                
-        manualSop.pop('mSopPartyId', None)
+    for manualSop in manualSops:
+        manualSop = clean_fields(MSopParty, manualSop, ['mSopPartyId'])        
         manualSop['noticeOfAppeal'] = notice           
         db_manual_sop = MSopParty(**manualSop)
         db_manual_sop.save()
@@ -44,9 +44,7 @@ def modify_form(notice_id, body, account_id, client_id):
         partyId = party.get('partyId')
         aliases = party.get('aliases')
         legalReps = party.get('legalReps')
-        party.pop('partyId', None)
-        party.pop('aliases', None)
-        party.pop('legalReps', None)
+        party = clean_fields(Party, party, ['partyId','aliases','legalReps'])
         party = FixNameCapitalization(party)
         party['noticeOfAppeal'] = notice
 
@@ -62,25 +60,21 @@ def modify_form(notice_id, body, account_id, client_id):
         alias_ids=list()
         for alias in aliases:
             aliasId = alias.get('partyAliasId')
-            alias.pop('partyAliasId', None)
+            alias = clean_fields(PartyAlias, alias, ['partyAliasId'])
             alias['party']=db_party
-            # print(aliasId)
-            # print(partyId)
-            # print(alias)
+            
             db_party_alias = PartyAlias.objects.update_or_create( 
                 defaults=alias,
                 partyAliasId=aliasId,
                 party_id=partyId
             )[0]
-            # print(db_party_alias)
             alias_ids.append(db_party_alias.partyAliasId)
         delete_aliases(alias_ids, partyId)
 
         legal_rep_ids=list()
         for legalRep in legalReps:
             legalRepId = legalRep.get('partyLegalRepId')
-            legalRep.pop('partyLegalRepId', None)
-            legalRep.pop('repTypeCd', None)
+            legalRep = clean_fields(PartyLegalRep, legalRep, ['partyLegalRepId'])
             legalRep['party']=db_party
             db_party_legal = PartyLegalRep.objects.update_or_create(
                 defaults=legalRep,
@@ -132,3 +126,21 @@ def delete_manual_sop(notice_id):
     msops_query = MSopParty.objects.filter(noticeOfAppeal_id=notice_id)
     for msop in msops_query:
         msop.delete()
+
+
+
+def clean_fields(db, body, extra_fields_to_remove):
+
+    fields = [f.name for f in db._meta.get_fields()]
+    
+    body_keys_to_remove = extra_fields_to_remove
+    
+    for key in body.keys():
+        if key not in fields:
+            body_keys_to_remove.append(key)
+
+    for key in body_keys_to_remove:
+        body.pop(key, None)
+
+    return body
+

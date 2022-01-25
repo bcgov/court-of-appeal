@@ -769,7 +769,7 @@ const commonState = namespace("Common");
 import AddAliasForm from './AddAliasForm.vue';
 import AddRepresentativeForm from './AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7DataInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
+import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import sortStyleOfProceeding from './StyleOfProceedingComponents/util/sortStyleOfProceeding'
@@ -789,7 +789,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;    
 
     @informationState.State
-    public form7Info: form7DataInfoType;
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.State
     public form7InfoStates: form7StatesInfoType;
@@ -801,7 +801,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public lookups!: lookupsInfoType;    
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
+
 
     partiesFields = [
         {
@@ -950,7 +951,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     moveLeft = false;
     moveApp = false;
     
-    styleOfProceedingsInfo = {} as form7DataInfoType;
+    styleOfProceedingsInfo = {} as form7SubmissionDataInfoType;
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;   
     noRolePartyManualSop: manualSopInfoType[] = [];
@@ -966,7 +967,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     mounted() { 
         this.dataReady = false;
-        this.styleOfProceedingsInfo = this.form7Info;   
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;   
         this.respondents = [];
         this.respondentSolicitors = [];     
         this.extractInfo();
@@ -989,7 +990,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             const partyInfo = this.supremeCourtCaseJson.parties[party];
             this.partiesList[party].title = this.getPartyTitles(partyInfo);            
         }  
-        this.UpdateForm7Info(this.styleOfProceedingsInfo)      
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo)      
     }  
 
     public getPartyTitles(partyInfo: form7PartiesInfoType){
@@ -1080,13 +1081,13 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         }
         this.styleOfProceedingsInfo.manualSop = [];
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }    
 
     public appLeft(row){        
         this.partiesList[row.index].appealCourtRole = 'Appellant';
         this.styleOfProceedingsInfo.appellants.push(this.partiesList[row.index]);
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
         this.updateTable ++;
     }
 
@@ -1094,7 +1095,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.partiesList[row.index].appealCourtRole = '';           
         const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.appellants.splice(index, 1);
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
 
@@ -1110,7 +1111,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.respondents.splice(index, 1);
         this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
 
@@ -1122,7 +1123,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         }        
         this.styleOfProceedingsInfo.respondents.push(this.partiesList[row.index]);
         this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
 ///
@@ -1155,7 +1156,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             this.party.title = this.getPartyTitles(this.party);        
             this.partiesList.push(this.party);       
             this.styleOfProceedingsInfo.parties = this.partiesList;
-            this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+            this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
             this.showPartyWindow = false;
             this.updateTable ++;
 
@@ -1216,7 +1217,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.partiesList[index] = this.party;
         this.styleOfProceedingsInfo.parties = this.partiesList;
         this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
         this.showPartyWindow = false;
         this.updateTable ++;
     }
@@ -1263,7 +1264,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public update(){        
         
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }
 
     public enableAdd(){
@@ -1384,7 +1385,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         const index = this.partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
         this.partiesList.splice(index, 1);       
         this.styleOfProceedingsInfo.parties = this.partiesList;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);        
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
         this.showPartyWindow = false;
         this.updateTable ++;
     }
@@ -1403,7 +1404,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
         this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)        
 
-        this.UpdateForm7Info(this.styleOfProceedingsInfo)
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo)
         
         this.styleOfProceedingDataReady = true;
 
@@ -1479,7 +1480,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public saveNewStyleOfProceeding(){
         console.log('save new SOP')
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.showEditStyleOfProceedingWindow = false;
     }
 
@@ -1492,7 +1493,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     public cancelStyleOfProceeding(){
         console.log('cancel SOP')
         this.styleOfProceedingsInfo.manualSop = this.tmpManualSop;
-        this.UpdateForm7Info(this.styleOfProceedingsInfo);
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.showEditStyleOfProceedingWindow = false;
     }
 

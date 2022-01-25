@@ -45,8 +45,13 @@
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
                 </b-button>
             </b-col>
+            
         </b-row> 
-
+        <b-row 
+            v-if="expiredDeadline" 
+            style="font-size: 0.75rem;" 
+            class="text-danger ml-auto mr-0 mt-1">The deadline for submission has expired.
+        </b-row>
     </b-card>
 </template>
 
@@ -61,7 +66,7 @@ import "@/store/modules/common";
 const commonState = namespace("Common");
 
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
-import { accountInfoType, form7DataInfoType, form7StatesInfoType, form7SubmissionDataInfoType, userAccessInfoType } from '@/types/Information';
+import { accountInfoType, form7StatesInfoType, form7SubmissionDataInfoType, userAccessInfoType } from '@/types/Information';
 
 import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm7/FillForm7SummaryInfo.vue";
 import FillForm7CommonInfo from "@/components/process/Form7/components/fillForm7/FillForm7CommonInfo.vue";
@@ -96,9 +101,6 @@ export default class FillForm7 extends Vue {
     public currentNoticeOfAppealId: string;
 
     @informationState.State
-    public form7Info: form7DataInfoType;
-
-    @informationState.State
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.Action
@@ -108,26 +110,41 @@ export default class FillForm7 extends Vue {
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
-
-    @informationState.Action
     public UpdateForm7InfoStates!: (newForm7StatesInfo: form7StatesInfoType) => void
 
-    referenceNumber = '';    
+    referenceNumber = '';   
+    expiredDeadline = false; 
     updatedInfo = 0;
     dataReady = false;
     fieldStates = {} as form7StatesInfoType;
 
     mounted() { 
 
+        this.expiredDeadline = false;
         this.dataReady = false;
         if (!this.currentNoticeOfAppealId){         
             this.loadOrderDetails();            
         } else {
-            this.clearStates()
+            this.getForm7Data()
         }           
                        
-    }    
+    }  
+    
+    public getForm7Data() {        
+       
+        this.$http.get('/form7/forms/'+this.currentNoticeOfAppealId)
+        .then((response) => {
+            if(response?.data){            
+                            
+                const form7Data = response.data
+                this.UpdateForm7SubmissionInfo(form7Data) 
+                this.clearStates();                
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
 
     public loadOrderDetails(){
 
@@ -139,14 +156,6 @@ export default class FillForm7 extends Vue {
         form7SubmissionData.dateOfJudgement = moment(this.supremeCourtOrderJson.orderDate).format();
         form7SubmissionData.nameOfJudge = this.supremeCourtOrderJson.judgeFirstName + ' ' + this.supremeCourtOrderJson.judgeSurname;   
         this.UpdateForm7SubmissionInfo(form7SubmissionData);
-        
-        const form7Data = {} as form7DataInfoType;
-        form7Data.fileNumber = this.supremeCourtCaseJson.fileNumber;
-        form7Data.fileId = this.supremeCourtCaseJson.fileId;
-        form7Data.courtClass = this.supremeCourtCaseJson.courtClassCd;
-        form7Data.appealSubmissionDeadline = this.supremeCourtOrderJson.appealSubmissionDeadline;
-        this.UpdateForm7Info(form7Data);   
-        
         this.saveForm7(true);        
 
     }
@@ -168,21 +177,21 @@ export default class FillForm7 extends Vue {
         
         this.fieldStates = this.form7InfoStates;
 
-        this.fieldStates.appearanceDays = !(this.form7Info.trialDurationDays && this.form7Info.trialDurationDays>0)? false : null;
-        this.fieldStates.respondents = !(this.form7Info.respondents && this.form7Info.respondents.length > 0 )? false : null;
-        this.fieldStates.appellants = !(this.form7Info.appellants && this.form7Info.appellants.length > 0 )? false : null;
-        this.fieldStates.orderType = !this.form7Info.appealFrom? false : null;
-        this.fieldStates.appealedInSupremeCourt = !this.form7Info.wasSupremeAppeal? false : null;
-        this.fieldStates.makerName = (this.form7Info.wasSupremeAppeal && !this.form7Info.decisionMaker)? false : null;        
-        this.fieldStates.appealNature = !this.form7Info.involves? false : null;
-        this.fieldStates.orderSought = !this.form7Info.orderSought? false : null;
-        this.fieldStates.mainAppellant = !this.form7Info.appealingFirm? false : null;
-        this.fieldStates.serviceAddress = !this.form7Info.appealingFirmAddress? false : null;
+        this.fieldStates.appearanceDays = !(this.form7SubmissionInfo.trialDurationDays && Number(this.form7SubmissionInfo.trialDurationDays)>0)? false : null;
+        this.fieldStates.respondents = !(this.form7SubmissionInfo.respondents && this.form7SubmissionInfo.respondents.length > 0 )? false : null;
+        this.fieldStates.appellants = !(this.form7SubmissionInfo.appellants && this.form7SubmissionInfo.appellants.length > 0 )? false : null;
+        this.fieldStates.orderType = !this.form7SubmissionInfo.appealFrom? false : null;
+        this.fieldStates.appealedInSupremeCourt = !this.form7SubmissionInfo.wasSupremeAppeal? false : null;
+        this.fieldStates.makerName = (this.form7SubmissionInfo.wasSupremeAppeal && !this.form7SubmissionInfo.decisionMaker)? false : null;        
+        this.fieldStates.appealNature = !this.form7SubmissionInfo.involves? false : null;
+        this.fieldStates.orderSought = !this.form7SubmissionInfo.orderSought? false : null;
+        this.fieldStates.mainAppellant = !this.form7SubmissionInfo.appealingFirm? false : null;
+        this.fieldStates.serviceAddress = !this.form7SubmissionInfo.appealingFirmAddress? false : null;
 
         const requiredContent = ['BC', 'B.C.', 'BRITISH COLUMBIA']               
-        if (this.form7Info.appealingFirmAddress && requiredContent.some(v => this.form7Info.appealingFirmAddress.toUpperCase().includes(v))) {
+        if (this.form7SubmissionInfo.appealingFirmAddress && requiredContent.some(v => this.form7SubmissionInfo.appealingFirmAddress.toUpperCase().includes(v))) {
             this.fieldStates.validServiceAddress = null;            
-        } else if (this.form7Info.appealingFirmAddress && !requiredContent.some(v => this.form7Info.appealingFirmAddress.toUpperCase().includes(v))) {
+        } else if (this.form7SubmissionInfo.appealingFirmAddress && !requiredContent.some(v => this.form7SubmissionInfo.appealingFirmAddress.toUpperCase().includes(v))) {
             this.fieldStates.validServiceAddress = false;            
         }
 
@@ -204,21 +213,30 @@ export default class FillForm7 extends Vue {
 
         if (this.currentNoticeOfAppealId){
             method = 'put';
-            url = '/form7/forms/'+this.currentNoticeOfAppealId+'/';
-            const form7 = this.form7Info;
+            url = '/form7/forms/'+this.currentNoticeOfAppealId;
+            const form7 = this.form7SubmissionInfo;
             form7.refOptional = this.referenceNumber;
-            this.UpdateForm7Info(form7);
+            this.UpdateForm7SubmissionInfo(form7);
 
-            if (this.checkStates() && this.checkWithinAppealPeriod() ){ 
-            
+            if (this.checkWithinAppealPeriod() ){ 
+                this.expiredDeadline = false;
+
+                if (!draft){
+                    if (!this.checkStates()){
+                        return
+                    }
+                }                    
+
                 const form7SubmissionData = this.getForm7Info();
                 const options = {
                     method: method,
                     url: url,
                     data: form7SubmissionData
                 }
-                this.saveInfo(options, draft);
+                this.saveInfo(options, draft); 
 
+            } else {
+                this.expiredDeadline = true;               
             }
 
         } else {           
@@ -247,7 +265,7 @@ export default class FillForm7 extends Vue {
                     this.clearStates(); 
                     
                     this.UpdateForm7SubmissionInfo(this.form7SubmissionInfo);
-                    if(!draft) this.navigateToPreviewPage(this.currentNoticeOfAppealId);                           
+                    if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
                 const errMsg = err.response.data.error;
@@ -259,20 +277,20 @@ export default class FillForm7 extends Vue {
 
         const data = this.form7SubmissionInfo;
         data.electronicallyFiled = 'N';
-        data.trialDurationDays = this.form7Info.trialDurationDays.toString();
-        data.appealingFirm = this.form7Info.appealingFirm;
-        data.appealingFirmAddress = this.form7Info.appealingFirmAddress;
-        data.toRespondents = this.form7Info.respondents.map(respondent => {return respondent.fullName}).join(', ')
-        data.respondentSolicitor = this.form7Info.respondentSolicitors.join(', ');
-        data.wasSupremeAppeal = this.form7Info.wasSupremeAppeal;
-        data.appealFrom = this.form7Info.appealFrom;
-        data.decisionMaker = this.form7Info.decisionMaker?this.form7Info.decisionMaker:null;
-        data.refOptional = this.form7Info.refOptional?this.form7Info.refOptional: null;
-        data.involves = this.form7Info.involves;
-        data.manualSop = this.form7Info.manualSop;
-        data.parties = this.form7Info.parties;
-        data.partOfJudgment = this.form7Info.partOfJudgment?this.form7Info.partOfJudgment:null;
-        data.orderSought = this.form7Info.orderSought;
+        data.trialDurationDays = this.form7SubmissionInfo.trialDurationDays.toString();
+        data.appealingFirm = this.form7SubmissionInfo.appealingFirm;
+        data.appealingFirmAddress = this.form7SubmissionInfo.appealingFirmAddress;
+        data.toRespondents = this.form7SubmissionInfo.respondents?this.form7SubmissionInfo.respondents.map(respondent => {return respondent.fullName}).join(', '):'';
+        data.respondentSolicitor = this.form7SubmissionInfo.respondentSolicitors?this.form7SubmissionInfo.respondentSolicitors.join(', '):'';
+        data.wasSupremeAppeal = this.form7SubmissionInfo.wasSupremeAppeal;
+        data.appealFrom = this.form7SubmissionInfo.appealFrom;
+        data.decisionMaker = this.form7SubmissionInfo.decisionMaker?this.form7SubmissionInfo.decisionMaker:null;
+        data.refOptional = this.form7SubmissionInfo.refOptional?this.form7SubmissionInfo.refOptional: null;
+        data.involves = this.form7SubmissionInfo.involves;
+        data.manualSop = this.form7SubmissionInfo.manualSop;
+        data.parties = this.form7SubmissionInfo.parties;
+        data.partOfJudgment = this.form7SubmissionInfo.partOfJudgment?this.form7SubmissionInfo.partOfJudgment:null;
+        data.orderSought = this.form7SubmissionInfo.orderSought;
 
         data.readOnlyUsers = [];
         data.readWriteUsers = [];
@@ -296,10 +314,10 @@ export default class FillForm7 extends Vue {
         return data;
     }
 
-    public navigateToPreviewPage(currentNoticeOfAppealId) {  
+    public navigateToPreviewPage() {  
         
         if (this.checkStates()){
-            this.$router.push({name: "preview-form7", params: {caseId: currentNoticeOfAppealId}});
+            this.$router.push({name: "preview-form7"});
         }
         
     }

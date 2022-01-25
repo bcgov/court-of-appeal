@@ -68,30 +68,6 @@ export interface form7SearchInfoType {
     location: string;    
 }
 
-export interface form7DataInfoType {
-    fileNumber: string;
-    fileId: number;
-    courtClass: string;
-    judgeFullName: string;
-    dateOfJudgment: string;
-    appealSubmissionDeadline: string;
-    trialDurationDays: number;
-    appealFrom: string;
-    wasSupremeAppeal: boolean;
-    decisionMaker?: string;
-    involves: string;
-    partOfJudgment?: string;
-    orderSought: string;
-    parties: form7PartiesInfoType[];
-    respondents: form7PartiesInfoType[];
-    respondentSolicitors?: string[];
-    appellants: form7PartiesInfoType[];
-    appealingFirm?: string;
-    appealingFirmAddress: string;
-    refOptional?: string; 
-    manualSop?: manualSopInfoType[];
-} 
-
 export interface form7SubmissionDataInfoType {
     selfRepresenting: boolean;//
     parties: form7PartiesInfoType[];
@@ -128,6 +104,12 @@ export interface form7SubmissionDataInfoType {
     partOfJudgment?: string;//
     electronicallyFiled: string; //    
     orderSought: string; //
+    
+    judgeFullName: string;
+    respondents: form7PartiesInfoType[];
+    respondentSolicitors?: string[];
+    appellants: form7PartiesInfoType[];
+    
 }
 
 export interface form7StatesInfoType {

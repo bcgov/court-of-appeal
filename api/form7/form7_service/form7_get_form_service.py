@@ -46,11 +46,14 @@ def add_notice_relations(notice_query):
 
         msop_party_query = MSopParty.objects.filter(noticeOfAppeal_id=notice['noticeOfAppealId']).values()
         notice['manualSop']=msop_party_query
-
-        readOnlyUsers = list(notice['readOnlyUsers'][1:-1].split(","))
-        notice['readOnlyUsers']= [int(x) for x in readOnlyUsers if len(x)>0] 
-        readWriteUsers = list(notice['readWriteUsers'][1:-1].split(","))
-        notice['readWriteUsers']= [int(x) for x in readWriteUsers if len(x)>0]
+        
+        if notice['readOnlyUsers'] is not None:
+            readOnlyUsers = list(notice['readOnlyUsers'][1:-1].split(","))
+            notice['readOnlyUsers']= [int(x) for x in readOnlyUsers if len(x)>0] 
+        
+        if notice['readWriteUsers'] is not None:
+            readWriteUsers = list(notice['readWriteUsers'][1:-1].split(","))
+            notice['readWriteUsers']= [int(x) for x in readWriteUsers if len(x)>0]
     
     return notice_query
         

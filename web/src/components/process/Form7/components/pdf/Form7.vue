@@ -30,11 +30,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form7DataInfoType } from '@/types/Information';
+import { form7SubmissionDataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 import Form7Layout from "./Form7Layout.vue";
 
@@ -43,21 +43,15 @@ import Form7Layout from "./Form7Layout.vue";
         Form7Layout
     }
 })
-export default class Form7 extends Vue {
-
-    @Prop({required: true})
-    caseId!: string;
+export default class Form7 extends Vue {    
     
     @informationState.State
-    public currentCaseId: string;
-
-    @informationState.State
-    public form7Info: form7DataInfoType;
+    public currentNoticeOfAppealId: string;  
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
-    result = {} as form7DataInfoType;
+    result = {} as form7SubmissionDataInfoType;
     dataReady = false;
    
     mounted(){
@@ -67,13 +61,13 @@ export default class Form7 extends Vue {
            
     public onPrint() { 
         const pdf_type = "FORM"
-        const pdf_name = "form7-" + this.caseId;
+        const pdf_name = "form7-" + this.currentNoticeOfAppealId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"Form 7 (2016-06-28)"`;
         const bottomRightText = `" "`;        
-        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -99,7 +93,7 @@ export default class Form7 extends Vue {
     public savePdf(){        
         const pdfType = "FORM"
         const pdfName ="FORM7"
-        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const url = '/form-print/'+this.currentNoticeOfAppealId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -127,21 +121,20 @@ export default class Form7 extends Vue {
  
     public getForm7Data() {        
        
-        // this.$http.get('/case/'+this.currentCaseId+'/')
-        // .then((response) => {
-        //     if(response?.data?.data){            
+        this.$http.get('/form7/forms'+this.currentNoticeOfAppealId+'/')
+        .then((response) => {
+            if(response?.data){            
                             
-        //         this.result = response.data.data
-        //         this.UpdateForm7Info(this.result)                         
-        //         this.dataReady = true;
-        //         Vue.nextTick(()=> this.onPrint())
-        //     }
+                this.result = response.data
+                this.UpdateForm7SubmissionInfo(this.result)                         
+                this.dataReady = true;
+                Vue.nextTick(()=> this.onPrint())
+            }
                 
-        // },(err) => {
-        // console.log(err)        
-        // });      
-        this.result = this.form7Info;
-        this.dataReady = true;
+        },(err) => {
+        console.log(err)        
+        });      
+       
     }
 }
 </script>

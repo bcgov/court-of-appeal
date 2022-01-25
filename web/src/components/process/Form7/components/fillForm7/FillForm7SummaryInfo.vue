@@ -85,7 +85,7 @@ import "@/store/modules/information";
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
-import { form7DataInfoType, form7StatesInfoType } from '@/types/Information';
+import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information';
 import { locationsInfoType } from '@/types/Common';
 
 @Component({
@@ -108,10 +108,10 @@ export default class FillForm7SummaryInfo extends Vue {
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.State
-    public form7Info: form7DataInfoType;
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     levelOfCourt = "Supreme Court of BC";  
     judgeFullName = "";
@@ -135,11 +135,11 @@ export default class FillForm7SummaryInfo extends Vue {
 
     public update(){ 
               
-        const form7 = this.form7Info;
-        form7.trialDurationDays = this.appearanceDays;     
+        const form7 = this.form7SubmissionInfo;
+        form7.trialDurationDays = this.appearanceDays.toString();     
         form7.judgeFullName = this.judgeFullName;   
-        form7.dateOfJudgment = this.supremeCourtOrderJson.orderDate;
-        this.UpdateForm7Info(form7);
+        form7.dateOfJudgement = this.supremeCourtOrderJson.orderDate;
+        this.UpdateForm7SubmissionInfo(form7);
     }
 
 }

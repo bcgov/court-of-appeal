@@ -70,17 +70,19 @@ class Form7FormsView(APIView):
         return Response(form_id)
        
 
-    def delete(self, request: Request, pk=None):
+    def delete(self, request: Request):
 
         uid = request.user.id
         if not uid:
             return HttpResponseForbidden("Missing user ID")
-        if not pk:
-             return HttpResponseBadRequest("Missing record ID")
+        if not request.data:
+            return HttpResponseBadRequest("Missing request body")
 
-        notice_query = NoticeOfAppeal.objects.filter(noticeOfAppealId = pk)
-        notice_query.delete()
+        body = request.data
+        for id in body['noticeOfAppealIds']:
+            notice_query = NoticeOfAppeal.objects.filter(noticeOfAppealId = id)
+            notice_query.delete()
         
-        return Response('success')
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 #__________________________________________________
