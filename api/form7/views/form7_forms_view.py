@@ -83,6 +83,6 @@ class Form7FormsView(APIView):
             notice_query = NoticeOfAppeal.objects.filter(noticeOfAppealId = id)
             notice_query.delete()
         
-        return Response('success')
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 #__________________________________________________

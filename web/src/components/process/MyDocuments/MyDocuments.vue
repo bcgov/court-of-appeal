@@ -57,14 +57,13 @@ export default class MyDocuments extends Vue {
                 this.UpdateCasesJson(response.data)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm7Forms()
         },(err) => {
             this.dataLoaded = true;       
         });
     }
 
     public loadForm7Forms () {
-   
         this.$http.get('/form7/forms')
         .then((response) => {
 

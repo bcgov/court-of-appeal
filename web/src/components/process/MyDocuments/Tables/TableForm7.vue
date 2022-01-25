@@ -388,7 +388,7 @@ export default class TableForm7 extends Vue {
         
         const data ={
             data:{
-                noticeOfAppealIds:this.applicationsToDelete
+                noticeOfAppealIds:this.applicationsToDeleteIds
             }
         }
 
