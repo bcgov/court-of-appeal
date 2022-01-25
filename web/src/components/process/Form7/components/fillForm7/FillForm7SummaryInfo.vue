@@ -19,12 +19,12 @@
                 </b-col>
                 <b-col cols="4">
                     SUPREME COURT FILE NO.
-                    <span style="display: block;">{{supremeCourtCaseJson.courtClassCd}}{{supremeCourtCaseJson.fileNumber}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.lowerCourtFileNo}}</span>
 
                 </b-col>
                 <b-col cols="4">
                     SUPREME COURT REGISTRY
-                    <span style="display: block;">{{caseLocation.name}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.lowerCourtRegistryName}}</span>
                 </b-col>
             </b-row>
 
@@ -38,7 +38,7 @@
             <b-row class="mt-4">
                 <b-col cols="4">
                     DATE OF ORDER
-                    <span style="display: block;">{{supremeCourtOrderJson.orderDate | beautify-date-month}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.dateOfJudgement | beautify-date-month}}</span>
                 </b-col>           
             </b-row>
 
@@ -121,10 +121,9 @@ export default class FillForm7SummaryInfo extends Vue {
     mounted() { 
         this.dataReady = false; 
         this.judgeFullName = 
-            this.supremeCourtOrderJson.honorificTitle + ' ' + 
-            this.supremeCourtOrderJson.judgeFirstName + ' ' + 
-            this.supremeCourtOrderJson.judgeSurname;
-        this.appearanceDays = this.supremeCourtOrderJson.appearanceDays;
+            this.form7SubmissionInfo.honorificTitle + ' ' + 
+            this.form7SubmissionInfo.nameOfJudge;
+        this.appearanceDays = Number(this.form7SubmissionInfo.trialDurationDays);
         this.update();
         this.dataReady = true;            
     }
@@ -137,8 +136,7 @@ export default class FillForm7SummaryInfo extends Vue {
               
         const form7 = this.form7SubmissionInfo;
         form7.trialDurationDays = this.appearanceDays.toString();     
-        form7.judgeFullName = this.judgeFullName;   
-        form7.dateOfJudgement = this.supremeCourtOrderJson.orderDate;
+        form7.judgeFullName = this.judgeFullName;
         this.UpdateForm7SubmissionInfo(form7);
     }
 
