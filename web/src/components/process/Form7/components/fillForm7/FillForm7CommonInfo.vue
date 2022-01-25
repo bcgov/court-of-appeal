@@ -129,7 +129,7 @@ import "@/store/modules/common";
 const commonState = namespace("Common");
 
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
-import { form7DataInfoType, form7StatesInfoType, lookupsInfoType } from '@/types/Information';
+import { form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information';
 
 @Component({
     components:{        
@@ -142,13 +142,15 @@ export default class FillForm7CommonInfo extends Vue {
     public lookups!: lookupsInfoType;
     
     @informationState.State
-    public form7Info: form7DataInfoType;
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
+
 
     @informationState.State
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void;
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
+
 
     appealedInSupremeCourtOptions = [
         { text: 'Yes', value: true },
@@ -159,11 +161,11 @@ export default class FillForm7CommonInfo extends Vue {
     involvesOtherListNames = [];
 
     dataReady = false;
-    commonInfo = {} as form7DataInfoType;
+    commonInfo = {} as form7SubmissionDataInfoType;
 
     mounted() { 
         this.dataReady = false;
-        this.commonInfo = this.form7Info;
+        this.commonInfo = this.form7SubmissionInfo;
         this.extractFields();
         this.dataReady = true;
     }
@@ -186,7 +188,7 @@ export default class FillForm7CommonInfo extends Vue {
     }
 
     public update(){        
-        this.UpdateForm7Info(this.commonInfo);
+        this.UpdateForm7SubmissionInfo(this.commonInfo);
     }
 
 }
