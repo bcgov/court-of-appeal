@@ -509,7 +509,7 @@
                                 id="fullname"
                                 style="text-align:center; width:80%; border:1px solid #F0F0F0; background-color:#FAFAFA; margin:0 0 0 auto;" 
                                 disabled    
-                                v-model="data.item.partyName.join(', ')">
+                                v-model="data.item.partyName">
                             </b-form-input>
                             </div>
                             <div style="float:right;" class="labels">
@@ -1095,20 +1095,23 @@ export default class styleOfProceedingsActions extends Vue {
             for (const party of partiesInfo){
 
                 const currentSop = this.styleOfProceedingsInfo.manualSop;
-                const identicalIndex = currentSop.findIndex(sop => sop.partyName.includes(this.getPartyDisplayName(party)));
+                const identicalIndex = currentSop.findIndex(sop => sop.partyName.split('; ').includes(this.getPartyDisplayName(party)));
 
                 if (identicalIndex != -1){
                     if (currentSop[identicalIndex].lowerCourtRole == party.lowerCourtRole && currentSop[identicalIndex].appealRole == party.appealRole){
                         continue;
                     } else {
-                        const nameIndex = currentSop[identicalIndex].partyName.findIndex(name => name == this.getPartyDisplayName(party))
-                        this.styleOfProceedingsInfo.manualSop[identicalIndex].partyName.splice(nameIndex, 1);
+                        const partyNames = currentSop[identicalIndex].partyName.split('; ')
+                        const nameIndex = partyNames.findIndex(name => name == this.getPartyDisplayName(party))
+                        this.styleOfProceedingsInfo.manualSop[identicalIndex].partyName = partyNames.splice(nameIndex, 1).join('; ');
                         this.prePopulateSop(party);
                     }
                 } else {
                     const index = currentSop.findIndex(sop => sop.lowerCourtRole == party.lowerCourtRole && sop.appealRole == party.appealRole);
                     if (index != -1){
-                        this.styleOfProceedingsInfo.manualSop[index].partyName.push(this.getPartyDisplayName(party));
+                        const partyNames = this.styleOfProceedingsInfo.manualSop[index].partyName.split('; ')
+                        partyNames.push(this.getPartyDisplayName(party))
+                        this.styleOfProceedingsInfo.manualSop[index].partyName = partyNames.join('; ')
                         this.styleOfProceedingsInfo.manualSop[index].plural = true;
                     } else {                        
                         this.prePopulateSop(party);
@@ -1160,8 +1163,9 @@ export default class styleOfProceedingsActions extends Vue {
         sop.plural = false;
         sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
-        sop.partyName = [];
-        sop.partyName.push(this.getPartyDisplayName(partyInfo))
+        const partyNames = []
+        partyNames.push(this.getPartyDisplayName(partyInfo))
+        sop.partyName = partyNames.join('; ');       
         if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
             sop.conjunction = 'And';
             this.noRolePartyManualSop.push(sop);
