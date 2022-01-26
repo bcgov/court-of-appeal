@@ -137,6 +137,11 @@ export default class FillForm7 extends Vue {
             if(response?.data){            
                             
                 const form7Data = response.data
+                console.log(form7Data)
+                console.log(moment(form7Data['dateOfJudgement']).local().format())
+                form7Data['appealSubmissionDeadline']=moment(form7Data['appealSubmissionDeadline']).local().format()
+                form7Data['dateOfJudgement']=moment(form7Data['dateOfJudgement']).local().format()
+                // moment(form7Data['dateOfJudgement']).local().format()
                 this.UpdateForm7SubmissionInfo(form7Data) 
                 this.clearStates();                
             }
@@ -168,7 +173,7 @@ export default class FillForm7 extends Vue {
     }
 
     public checkWithinAppealPeriod(){
-        return !this.supremeCourtOrderJson.isPastDeadline;
+        return !this.form7SubmissionInfo.isPastDeadline;
     }     
 
     public checkStates(){

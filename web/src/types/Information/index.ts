@@ -84,6 +84,7 @@ export interface form7SubmissionDataInfoType {
     lowerCourtStyleOfCause: string;//  
     lowerCourtInitiatingDocument: string;//    
     appealSubmissionDeadline: string;//
+    isPastDeadline?: boolean;
     id?: string;    
     ceisFileId: number;//
     nameOfJudge: string; //
@@ -162,12 +163,12 @@ export interface manualSopInfoType {
 } 
 
 export interface aliasInfoType {
-    type: string;
+    nameType: string;
     name: string;
 }
 
 export interface representativeInfoType {
-    type: string;
+    repType: string;
     name: string;
 }
 

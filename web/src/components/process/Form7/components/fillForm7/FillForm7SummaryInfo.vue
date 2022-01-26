@@ -123,7 +123,7 @@ export default class FillForm7SummaryInfo extends Vue {
         this.judgeFullName = 
             this.form7SubmissionInfo.honorificTitle + ' ' + 
             this.form7SubmissionInfo.nameOfJudge;
-        this.appearanceDays = Number(this.form7SubmissionInfo.trialDurationDays);
+        this.appearanceDays = this.form7SubmissionInfo.trialDurationDays?Number(this.form7SubmissionInfo.trialDurationDays):0;
         this.update();
         this.dataReady = true;            
     }

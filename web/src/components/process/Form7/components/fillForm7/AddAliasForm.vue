@@ -129,7 +129,7 @@
         }        
 
         public extractFormInfo(){            
-            const index = this.lookups.aliasTypes.findIndex(alias=>{if(alias == this.formData.type)return true})
+            const index = this.lookups.aliasTypes.findIndex(alias=>{if(alias == this.formData.nameType)return true})
             this.originalSelectedAliasType = this.selectedAliasType = (index>=0)? this.lookups.aliasTypes[index]: '';            
             this.originalAliasName = this.aliasName = this.formData.name;
         }
@@ -141,7 +141,7 @@
             
             if (this.aliasTypeState && this.aliasNameState){        
                 const alias = {} as aliasInfoType;
-                alias.type = this.selectedAliasType;
+                alias.nameType = this.selectedAliasType;
                 alias.name = this.aliasName;       
                 this.$emit('submit', this.isCreateAlias, alias, this.index);
             }

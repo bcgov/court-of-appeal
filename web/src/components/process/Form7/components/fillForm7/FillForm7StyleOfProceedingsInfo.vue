@@ -322,13 +322,13 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
             const repTitle = [];
             for (const legalRep of partyInfo.legalReps){                
-                const repFormat = this.lookups.legalRepFormatters[legalRep.type].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
+                const repFormat = this.lookups.legalRepFormatters[legalRep.repType].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
                 repTitle.push(repFormat);
             }
             
             const aliasTitle = [];
             for (const alias of partyInfo.aliases){                    
-                aliasTitle.push(alias.type + ' ' + alias.name);
+                aliasTitle.push(alias.nameType + ' ' + alias.name);
             }
            
             const repText = repTitle.length?repTitle.join('</br> or'): '';
@@ -347,13 +347,13 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
             const repTitle = [];
             for (const legalRep of partyInfo.legalReps){                
-                const repFormat = this.lookups.legalRepFormatters[legalRep.type].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
+                const repFormat = this.lookups.legalRepFormatters[legalRep.repType].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
                 repTitle.push(repFormat);
             }
             
             const aliasTitle = [];
             for (const alias of partyInfo.aliases){                    
-                aliasTitle.push(alias.type + ' ' + alias.name);
+                aliasTitle.push(alias.nameType + ' ' + alias.name);
             }
            
             const repText = repTitle.length?repTitle.join('or '): '';

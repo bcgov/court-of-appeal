@@ -3,6 +3,7 @@ from form7.models import NoticeOfAppeal, MSopParty, Party, PartyAlias, PartyLega
 
 import datetime
 from zeep import helpers
+from django.utils import timezone
 import logging
 LOGGER = logging.getLogger(__name__)
 no_record_found = "No record found."
@@ -50,11 +51,11 @@ def add_notice_relations(notice_query):
         
         if notice['readOnlyUsers'] is not None:
             readOnlyUsers = list(notice['readOnlyUsers'][1:-1].split(","))
-            notice['readOnlyUsers']= [int(x) for x in readOnlyUsers if len(x)>0] 
+            notice['readOnlyUsers']= [int(x) for x in readOnlyUsers if (len(x)>0 and x.isnumeric())] 
         
         if notice['readWriteUsers'] is not None:
             readWriteUsers = list(notice['readWriteUsers'][1:-1].split(","))
-            notice['readWriteUsers']= [int(x) for x in readWriteUsers if len(x)>0]
+            notice['readWriteUsers']= [int(x) for x in readWriteUsers if (len(x)>0 and x.isnumeric())]
 
         try:
             pdf_query = FormPdf.objects.get(noticeOfAppeal_id=notice['noticeOfAppealId'])
@@ -62,9 +63,17 @@ def add_notice_relations(notice_query):
         except (FormPdf.DoesNotExist, NoticeOfAppeal.DoesNotExist):
             LOGGER.debug(no_record_found)
             notice['pdf_types'] = None
+
+        notice['isPastDeadline'] = is_inthe_past(notice['appealSubmissionDeadline'])
         
 
         
     
     return notice_query
+
+def is_inthe_past(date):    
+    if date is not None and timezone.now()>date:
+        return True
+    else:
+        return False
         
