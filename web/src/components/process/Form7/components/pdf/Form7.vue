@@ -38,6 +38,8 @@ import { form7SubmissionDataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 import Form7Layout from "./Form7Layout.vue";
 
+import moment from 'moment';
+
 @Component({
     components:{        
         Form7Layout
@@ -65,7 +67,7 @@ export default class Form7 extends Vue {
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = `"Form 7 (2016-06-28)"`;
+        const bottomLeftText = `"Form 7 (`+moment().format("MMM DD, YYYY")+`)"`;
         const bottomRightText = `" "`;        
         const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
