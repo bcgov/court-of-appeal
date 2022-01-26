@@ -49,7 +49,7 @@
             <div class="my-3 row" style="font-weight: 700;">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="font-weight: 200; text-align: center">
-                    {{sop.partyName.join(", ")}}
+                    {{sop.partyName}}
                 </div>
                 <div class="col-md-2"></div>
             </div>          
@@ -426,8 +426,8 @@ export default class Form7Layout extends Vue {
         sop.plural = false;
         sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
-        sop.partyName = [];
-        sop.partyName.push(this.getFullName(partyInfo))
+        
+        sop.partyName=this.getFullName(partyInfo)
         if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
             sop.conjunction = 'And';
             this.noRolePartySop.push(sop);

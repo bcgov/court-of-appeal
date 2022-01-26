@@ -1163,9 +1163,7 @@ export default class styleOfProceedingsActions extends Vue {
         sop.plural = false;
         sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
-        const partyNames = []
-        partyNames.push(this.getPartyDisplayName(partyInfo))
-        sop.partyName = partyNames.join('; ');       
+        sop.partyName = this.getPartyDisplayName(partyInfo)       
         if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
             sop.conjunction = 'And';
             this.noRolePartyManualSop.push(sop);
