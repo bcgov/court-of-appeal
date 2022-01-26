@@ -22,7 +22,7 @@ export default sortStyleOfProceeding;
 
 function changeOrder(oldIndex, newIndex){
 
-    const form7Info = store.state.Information.form7Info
+    const form7Info = store.state.Information.form7SubmissionInfo
     const msops = form7Info.manualSop
       
     const movingSop = msops[oldIndex]
@@ -30,5 +30,5 @@ function changeOrder(oldIndex, newIndex){
     msops.splice(newIndex,0, movingSop);
     
     form7Info.manualSop = msops
-    store.commit('Information/setForm7Info',form7Info)   
+    store.commit('Information/setForm7SubmissionInfo',form7Info)   
 }
