@@ -81,9 +81,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
+
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
 import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information';
 import { locationsInfoType } from '@/types/Common';
@@ -93,13 +94,7 @@ import { locationsInfoType } from '@/types/Common';
         FillForm7HeaderInfo
     }
 })
-export default class FillForm7SummaryInfo extends Vue {
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
-
-    @informationState.State
-    public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
+export default class FillForm7SummaryInfo extends Vue {    
 
     @informationState.State
     public caseLocation: locationsInfoType;

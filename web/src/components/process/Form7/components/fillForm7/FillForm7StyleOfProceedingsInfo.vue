@@ -20,20 +20,20 @@
                 >
 
                 <template v-slot:cell(app)="row">
-                    <span v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Appellant'" v-html="row.item.title">
+                    <span v-if="row.item.appealRole && row.item.appealRole == 'Appellant'" v-html="row.item.title">
                         {{row.item.title}}
                     </span>                                        
                 </template> 
 
                 <template v-slot:cell(appAction)="row" >
                     <b-button
-                        v-if="!row.item.appealCourtRole || row.item.appealCourtRole == ''"  
+                        v-if="!row.item.appealRole || row.item.appealRole == ''"  
                         @click="showConfirmEditParty(row, true, true)"
                         class="text-white bg-primary my-3 moveButton"
                         ><b-icon-chevron-left/>
                     </b-button>
                     <b-button  
-                        v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Appellant'"  
+                        v-if="row.item.appealRole && row.item.appealRole == 'Appellant'"  
                         @click="showConfirmEditParty(row, true, false)"        
                         class="text-white bg-primary my-3 moveButton" 
                         ><b-icon-chevron-right/>
@@ -41,20 +41,20 @@
                 </template>          
 
                 <template v-slot:cell(title)="row">
-                    <span v-if="!row.item.appealCourtRole || row.item.appealCourtRole == ''" v-html="row.item.title">
+                    <span v-if="!row.item.appealRole || row.item.appealRole == ''" v-html="row.item.title">
                         {{row.item.title}}
                     </span>                                        
                 </template>
                 
                 <template v-slot:cell(resAction)="row" >
                     <b-button
-                        v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Respondent'"  
+                        v-if="row.item.appealRole && row.item.appealRole == 'Respondent'"  
                         @click="showConfirmEditParty(row, false, true)"
                         class="text-white bg-primary my-3 moveButton"
                         ><b-icon-chevron-left/>
                     </b-button>
                     <b-button  
-                        v-if="!row.item.appealCourtRole || row.item.appealCourtRole == ''"  
+                        v-if="!row.item.appealRole || row.item.appealRole == ''"  
                         @click="showConfirmEditParty(row, false, false)"        
                         class="text-white bg-primary my-3 moveButton" 
                         ><b-icon-chevron-right/>
@@ -62,7 +62,7 @@
                 </template>
 
                 <template v-slot:cell(res)="row">
-                    <span v-if="row.item.appealCourtRole && row.item.appealCourtRole == 'Respondent' " v-html="row.item.title">
+                    <span v-if="row.item.appealRole && row.item.appealRole == 'Respondent' " v-html="row.item.title">
                         {{row.item.title}}
                     </span>                                        
                 </template>                
@@ -112,7 +112,7 @@
                     disabled
                     rows="3"
                     @change="update"
-                    v-model="respondentSolicitorNames">
+                    v-model="styleOfProceedingsInfo.respondentSolicitor">
                 </b-form-textarea>
             </b-form-group>
             
@@ -182,32 +182,20 @@ import { namespace } from "vuex-class";
 
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import AddAliasForm from './AddAliasForm.vue';
-import AddRepresentativeForm from './AddRepresentativeForm.vue';
+import { form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information';
 
-import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
-import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
-
-import sortStyleOfProceeding from './StyleOfProceedingComponents/util/sortStyleOfProceeding'
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
 
 @Component({
-    components:{        
-        AddAliasForm,
-        AddRepresentativeForm,
+    components:{ 
         styleOfProceedingActions        
-    },
-    directives:{
-        sortStyleOfProceeding
     }
 })
-export default class FillForm7StyleOfProceedingsInfo extends Vue {
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;    
+export default class FillForm7StyleOfProceedingsInfo extends Vue {    
 
     @informationState.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
@@ -223,7 +211,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     @informationState.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
-
 
     partiesFields = [
         {
@@ -264,7 +251,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     partiesList: form7PartiesInfoType[] = []; 
     respondentNames = '';
     respondents: string[] = [];
-    respondentSolicitorNames = '';
+   
     respondentSolicitors: string[] = [];     
 
     updateTable = 0;
@@ -283,7 +270,10 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     setRespondentNames(newRespondents: string[]) 
     {
         this.respondentNames = newRespondents.join('; ');
-        this.respondentSolicitorNames = this.respondentSolicitors.join('; ');        
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+        this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join('; ');
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
+
     }
 
     mounted() { 
@@ -298,19 +288,48 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public extractInfo(){
         this.styleOfProceedingsInfo.appealingFirm = this.userName;
-        this.partiesList = this.form7SubmissionInfo.parties;
-        this.styleOfProceedingsInfo.appellants = this.styleOfProceedingsInfo.appellants?this.styleOfProceedingsInfo.appellants:[];
-        this.styleOfProceedingsInfo.respondents = this.styleOfProceedingsInfo.respondents?this.styleOfProceedingsInfo.respondents:[]; 
+        
+        this.styleOfProceedingsInfo.appellants = [];
+        this.styleOfProceedingsInfo.respondents = [];         
+
+        this.partiesList = this.styleOfProceedingsInfo.parties;
+
+        for (const party in this.partiesList){
+
+            const partyInfo = this.form7SubmissionInfo.parties[party];
+             
+            if (partyInfo.isOrganization){                
+                partyInfo.fullName = partyInfo.organizationName;
+            } else {                
+                partyInfo.fullName = 
+                partyInfo.surname + ', ' + 
+                partyInfo.firstGivenName + 
+                (partyInfo.secondGivenName? ' ' + partyInfo.secondGivenName:'') +
+                (partyInfo.thirdGivenName? ' ' + partyInfo.thirdGivenName:'')
+            }  
+            this.partiesList[party].title = this.getPartyTitles(partyInfo);
+
+            if (partyInfo.appealRole && partyInfo.appealRole == "Respondent"){
+
+                this.styleOfProceedingsInfo.respondents.push(partyInfo);
+
+            } else if (partyInfo.appealRole && partyInfo.appealRole == "Appellant"){
+
+                this.styleOfProceedingsInfo.respondents.push(partyInfo);
+
+            }                                 
+        }
+        
         for (const respondent of this.styleOfProceedingsInfo.respondents){
             this.respondents.push(respondent.fullName);
             if (respondent.counselName) {
                 this.respondentSolicitors.push(respondent.counselName);
-            }                       
-        }       
-        for (const party in this.form7SubmissionInfo.parties){
-            const partyInfo = this.form7SubmissionInfo.parties[party];
-            this.partiesList[party].title = this.getPartyTitles(partyInfo);            
-        }  
+            }
+        }
+        this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
+
+        this.styleOfProceedingsInfo.parties = this.partiesList;
+
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo)      
     }  
 
@@ -337,35 +356,10 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         }
 
         return title;
-    }
-
-    public getPartyDisplayName(partyInfo: form7PartiesInfoType){
-        let title = '';
-        if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
-            title = partyInfo.fullName;
-        } else {
-
-            const repTitle = [];
-            for (const legalRep of partyInfo.legalReps){                
-                const repFormat = this.lookups.legalRepFormatters[legalRep.repType].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
-                repTitle.push(repFormat);
-            }
-            
-            const aliasTitle = [];
-            for (const alias of partyInfo.aliases){                    
-                aliasTitle.push(alias.nameType + ' ' + alias.name);
-            }
-           
-            const repText = repTitle.length?repTitle.join('or '): '';
-            const aliasText = aliasTitle.length?aliasTitle.join(', '): '';            
-            title = (repText?(repText + ", "):'') + aliasText;
-        }
-
-        return title;
-    }
+    }    
 
     public updateTableResults(){
-        console.log('updating')
+        //console.log('updating')
         this.partiesList = this.form7SubmissionInfo.parties;
         this.updateTable++;
     }
@@ -406,19 +400,22 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
             }
 
         }
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
         this.styleOfProceedingsInfo.manualSop = [];
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }    
 
     public appLeft(row){        
-        this.partiesList[row.index].appealCourtRole = 'Appellant';
+        this.partiesList[row.index].appealRole = 'Appellant';
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
         this.styleOfProceedingsInfo.appellants.push(this.partiesList[row.index]);
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
         this.updateTable ++;
     }
 
     public appRight(row){
-        this.partiesList[row.index].appealCourtRole = '';           
+        this.partiesList[row.index].appealRole = '';  
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;         
         const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.appellants.splice(index, 1);
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
@@ -426,7 +423,8 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public resLeft(row){
-        this.partiesList[row.index].appealCourtRole = '';
+        this.partiesList[row.index].appealRole = '';
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
         const resNameIndex =  this.respondents.indexOf(this.partiesList[row.index].fullName);
         this.respondents.splice(resNameIndex, 1);
         if (this.partiesList[row.index].counselName) {            
@@ -436,19 +434,20 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
          
         const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.partiesList[row.index].fullName)
         this.styleOfProceedingsInfo.respondents.splice(index, 1);
-        this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
+        this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
 
     public resRight(row){
-        this.partiesList[row.index].appealCourtRole = 'Respondent';
+        this.partiesList[row.index].appealRole = 'Respondent';
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
         this.respondents.push(this.partiesList[row.index].fullName);
         if (this.partiesList[row.index].counselName) {
             this.respondentSolicitors.push(this.partiesList[row.index].counselName);
         }        
         this.styleOfProceedingsInfo.respondents.push(this.partiesList[row.index]);
-        this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
+        this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
@@ -461,11 +460,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
-
-    .labels {
-        font-size: 1.15rem; font-weight:600;
-    }
+<style scoped lang="scss">  
 
     .closeButton {
         background-color: transparent !important;

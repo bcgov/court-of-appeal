@@ -600,10 +600,9 @@ import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
 
 import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
-import { supremeCourtCaseJsonDataInfoType, supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
+import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
-import sortStyleOfProceeding from './util/sortStyleOfProceeding'
-
+import sortStyleOfProceeding from './util/sortStyleOfProceeding';
 
 @Component({
     components:{        
@@ -614,10 +613,7 @@ import sortStyleOfProceeding from './util/sortStyleOfProceeding'
         sortStyleOfProceeding
     }
 })
-export default class styleOfProceedingsActions extends Vue {    
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;    
+export default class styleOfProceedingsActions extends Vue {     
 
     @informationState.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
@@ -641,7 +637,7 @@ export default class styleOfProceedingsActions extends Vue {
 
     aliasFields = [
         {
-            key:'type',          
+            key:'nameType',          
             label:'Alias Type',                  
             thClass: 'text-white bg-court',
             thStyle: 'font-size: 1rem;',            
@@ -679,7 +675,7 @@ export default class styleOfProceedingsActions extends Vue {
 
     representativeFields = [
         {
-            key:'type',          
+            key:'repType',          
             label:'Representative Type',                  
             thClass: 'text-white bg-court',
             thStyle: 'font-size: 1rem;',            
@@ -864,8 +860,8 @@ export default class styleOfProceedingsActions extends Vue {
 
             this.party.title = this.getPartyTitles(this.party);
             
-            if (this.party.appealCourtRole && this.party.appealCourtRole == 'Respondent') {
-                this.party.appealCourtRole = ''
+            if (this.party.appealRole && this.party.appealRole == 'Respondent') {
+                this.party.appealRole = ''
                 const resIndex = this.styleOfProceedingsInfo.respondents.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
                 if (resIndex != -1) {
                     this.styleOfProceedingsInfo.respondents.splice(resIndex, 1);
@@ -883,8 +879,8 @@ export default class styleOfProceedingsActions extends Vue {
                     }
                 }
                     
-            } else if (this.party.appealCourtRole && this.party.appealCourtRole == 'Appellant') {
-                this.party.appealCourtRole = ''
+            } else if (this.party.appealRole && this.party.appealRole == 'Appellant') {
+                this.party.appealRole = ''
                 const appIndex = this.styleOfProceedingsInfo.appellants.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
                 if (appIndex != -1) {
                     this.styleOfProceedingsInfo.appellants.splice(appIndex, 1);
@@ -896,7 +892,7 @@ export default class styleOfProceedingsActions extends Vue {
             const index = partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
             partiesList[index] = this.party;
             this.styleOfProceedingsInfo.parties = partiesList;
-            this.styleOfProceedingsInfo.respondentSolicitors = this.respondentSolicitors;
+            this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
             this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
             this.showPartyWindow = false;
             Vue.nextTick(()=> {
@@ -1102,7 +1098,7 @@ export default class styleOfProceedingsActions extends Vue {
                 const identicalIndex = currentSop.findIndex(sop => sop.partyName.includes(this.getPartyDisplayName(party)));
 
                 if (identicalIndex != -1){
-                    if (currentSop[identicalIndex].lowerCourtRole == party.lowerCourtRole && currentSop[identicalIndex].appealRole == party.appealCourtRole){
+                    if (currentSop[identicalIndex].lowerCourtRole == party.lowerCourtRole && currentSop[identicalIndex].appealRole == party.appealRole){
                         continue;
                     } else {
                         const nameIndex = currentSop[identicalIndex].partyName.findIndex(name => name == this.getPartyDisplayName(party))
@@ -1110,7 +1106,7 @@ export default class styleOfProceedingsActions extends Vue {
                         this.prePopulateSop(party);
                     }
                 } else {
-                    const index = currentSop.findIndex(sop => sop.lowerCourtRole == party.lowerCourtRole && sop.appealRole == party.appealCourtRole);
+                    const index = currentSop.findIndex(sop => sop.lowerCourtRole == party.lowerCourtRole && sop.appealRole == party.appealRole);
                     if (index != -1){
                         this.styleOfProceedingsInfo.manualSop[index].partyName.push(this.getPartyDisplayName(party));
                         this.styleOfProceedingsInfo.manualSop[index].plural = true;
@@ -1162,7 +1158,7 @@ export default class styleOfProceedingsActions extends Vue {
 
         let sop = {} as manualSopInfoType;            
         sop.plural = false;
-        sop.appealRole = partyInfo.appealCourtRole;
+        sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
         sop.partyName.push(this.getPartyDisplayName(partyInfo))

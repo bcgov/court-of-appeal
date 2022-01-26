@@ -107,8 +107,7 @@ export interface form7SubmissionDataInfoType {
     orderSought: string; //
     
     judgeFullName: string;
-    respondents: form7PartiesInfoType[];
-    respondentSolicitors?: string[];
+    respondents: form7PartiesInfoType[];    
     appellants: form7PartiesInfoType[];
     
 }
@@ -142,7 +141,7 @@ export interface form7PartiesInfoType {
     lowerCourtRole: string;
     aliases?: aliasInfoType[];
     legalReps?: representativeInfoType[];
-    appealCourtRole?: string;   
+    appealRole?: string;   
     title?: string; 
 } 
 

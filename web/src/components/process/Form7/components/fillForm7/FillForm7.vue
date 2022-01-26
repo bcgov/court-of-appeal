@@ -137,8 +137,8 @@ export default class FillForm7 extends Vue {
             if(response?.data){            
                             
                 const form7Data = response.data
-                console.log(form7Data)
-                console.log(moment(form7Data['dateOfJudgement']).local().format())
+                // console.log(form7Data)
+                // console.log(moment(form7Data['dateOfJudgement']).local().format())
                 form7Data['appealSubmissionDeadline']=moment(form7Data['appealSubmissionDeadline']).local().format()
                 form7Data['dateOfJudgement']=moment(form7Data['dateOfJudgement']).local().format()
                 // moment(form7Data['dateOfJudgement']).local().format()
@@ -286,7 +286,7 @@ export default class FillForm7 extends Vue {
         data.appealingFirm = this.form7SubmissionInfo.appealingFirm;
         data.appealingFirmAddress = this.form7SubmissionInfo.appealingFirmAddress;
         data.toRespondents = this.form7SubmissionInfo.respondents?this.form7SubmissionInfo.respondents.map(respondent => {return respondent.fullName}).join(', '):'';
-        data.respondentSolicitor = this.form7SubmissionInfo.respondentSolicitors?this.form7SubmissionInfo.respondentSolicitors.join(', '):'';
+        data.respondentSolicitor = this.form7SubmissionInfo.respondentSolicitor?this.form7SubmissionInfo.respondentSolicitor:'';
         data.wasSupremeAppeal = this.form7SubmissionInfo.wasSupremeAppeal;
         data.appealFrom = this.form7SubmissionInfo.appealFrom;
         data.decisionMaker = this.form7SubmissionInfo.decisionMaker?this.form7SubmissionInfo.decisionMaker:null;

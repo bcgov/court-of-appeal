@@ -256,7 +256,7 @@
             textwidth="34.5rem" 
             beforetext="And to its solicitor:" 
             hint=""
-            :text="(result.respondentSolicitors && result.respondentSolicitors.length>0)?result.respondentSolicitors.toString():''"/>
+            :text="(result.respondentSolicitor)?result.respondentSolicitor:''"/>
         <underline-form 
             style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
             textwidth="29rem" 
@@ -418,7 +418,7 @@ export default class Form7Layout extends Vue {
 
         let sop = {} as manualSopInfoType;            
         sop.plural = false;
-        sop.appealRole = partyInfo.appealCourtRole;
+        sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
         sop.partyName.push(partyInfo.fullName)
