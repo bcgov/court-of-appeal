@@ -67,7 +67,7 @@ export default class Form7 extends Vue {
       
         const bottomLeftText = `"Form 7 (2016-06-28)"`;
         const bottomRightText = `" "`;        
-        const url = '/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -93,7 +93,7 @@ export default class Form7 extends Vue {
     public savePdf(){        
         const pdfType = "FORM"
         const pdfName ="FORM7"
-        const url = '/form-print/'+this.currentNoticeOfAppealId+'/?pdf_type='+pdfType
+        const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -121,7 +121,7 @@ export default class Form7 extends Vue {
  
     public getForm7Data() {        
        
-        this.$http.get('/form7/forms'+this.currentNoticeOfAppealId+'/')
+        this.$http.get('/form7/forms/'+this.currentNoticeOfAppealId)
         .then((response) => {
             if(response?.data){            
                             

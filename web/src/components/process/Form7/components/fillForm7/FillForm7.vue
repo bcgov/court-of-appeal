@@ -72,6 +72,7 @@ import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm
 import FillForm7CommonInfo from "@/components/process/Form7/components/fillForm7/FillForm7CommonInfo.vue";
 import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/components/fillForm7/FillForm7StyleOfProceedingsInfo.vue";
 import moment from 'moment-timezone';
+import { locationsInfoType } from '@/types/Common';
 
 @Component({
     components:{        
@@ -84,6 +85,12 @@ export default class FillForm7 extends Vue {
 
     @commonState.State
     public accountInfo!: accountInfoType;
+
+    @commonState.State
+    public locationsInfo!: locationsInfoType[];
+
+    @informationState.Action
+    public UpdateCaseLocation!: (newCaseLocation: locationsInfoType) => void
 
     @informationState.State
     public form7AccessInfo!: userAccessInfoType[];
@@ -143,12 +150,18 @@ export default class FillForm7 extends Vue {
                 form7Data['dateOfJudgement']=moment(form7Data['dateOfJudgement']).local().format()
                 // moment(form7Data['dateOfJudgement']).local().format()
                 this.UpdateForm7SubmissionInfo(form7Data) 
+                this.setCurrentCourtLocation(form7Data['lowerCourtRegistryId'])
                 this.clearStates();                
             }
                 
         },(err) => {
             console.log(err)        
         });      
+    }
+
+    public setCurrentCourtLocation(locationId){
+        const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == locationId)[0]
+        this.UpdateCaseLocation(selectedLocation);
     }
 
     public loadOrderDetails(){

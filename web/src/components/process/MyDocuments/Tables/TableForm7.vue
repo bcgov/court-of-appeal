@@ -2,7 +2,7 @@
     <div>
         <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
             <b-col cols="10">
-                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Form 7</div>
+                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
             <b-col  cols="2">
                 <b-button 
@@ -33,8 +33,8 @@
         </b-row>
 
         <b-row v-else class="bg-select mb-2 py-1 mx-0">
-            <b-col cols="9">
-                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 24rem;" class="p-0 text-center text-primary">Form 7</div>
+            <b-col cols="12">
+                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
         </b-row>
 
@@ -154,6 +154,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+
+import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
@@ -291,7 +293,11 @@ export default class TableForm7 extends Vue {
             // doc.packageNum = docJson.packageNumber;
 
             this.documentsList.push(doc);
-        }      
+        }
+        
+        if(!this.enableActions && this.documentsList.length>2){            
+            this.documentsList = _.sortBy(this.documentsList, 'modifiedDate').reverse().splice(0,2)
+        }     
     }
 
     public resumeApplication(fileInfo: form7SubmissionDataInfoType) {

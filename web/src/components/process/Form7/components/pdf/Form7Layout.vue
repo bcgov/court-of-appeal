@@ -363,8 +363,6 @@ export default class Form7Layout extends Vue {
     applicantNames: string[] = [];
     respondentNames: string[] = [];
 
-    applicants: form7PartiesInfoType[] = [];
-    respondents: form7PartiesInfoType[] = [];
     caseSop :manualSopInfoType[] = [];
     noRolePartySop: manualSopInfoType[] = [];
     currentDate = '';
@@ -374,20 +372,33 @@ export default class Form7Layout extends Vue {
         this.extractInfo();       
         this.dataReady = true;
     }
+
+    public getFullName(party){
+
+        if(party.isOrganization || !party.surname){
+            return (party.organizationName?party.organizationName:'')
+        } else{
+            return  (party.firstGivenName? party.firstGivenName+' ':'')+
+                    (party.secondGivenName? party.secondGivenName+' ':'')+
+                    (party.thirdGivenName? party.thirdGivenName+' ':'')+
+                    (party.surname? party.surname+' ':'')
+        }        
+    }
    
     public extractInfo(){
+
+        console.log(this.result)
+        console.log(this.caseLocation)
         
-        this.applicants = this.result.appellants;
-        this.respondents = this.result.respondents;
+        const parties = this.result.parties
         this.applicantNames = [];
         this.respondentNames = [];
-
-        for (const respondent of this.respondents){
-            this.respondentNames.push(respondent.fullName);
-        }
-
-        for (const applicant of this.applicants){
-            this.applicantNames.push(applicant.fullName);
+        
+        for(const party of parties){
+            if(party.appealRole=="Appellant")
+                this.applicantNames.push(this.getFullName(party));
+            else if(party.appealRole=="Respondent")
+                this.respondentNames.push(this.getFullName(party));
         }
 
         if (this.result.manualSop?.length > 1){
@@ -395,15 +406,10 @@ export default class Form7Layout extends Vue {
         } else {
 
             this.caseSop = [];
-            this.noRolePartySop = [];            
+            this.noRolePartySop = [];  
+            for(const party of parties)
+                this.prePopulateSop(party);          
 
-            for (const party of this.respondents){
-                this.prePopulateSop(party);
-            }
-
-            for (const party of this.applicants){
-                this.prePopulateSop(party);
-            } 
 
             if (this.noRolePartySop.length > 0){
                 this.caseSop = this.caseSop.concat(this.noRolePartySop);
@@ -421,7 +427,7 @@ export default class Form7Layout extends Vue {
         sop.appealRole = partyInfo.appealRole;
         sop.lowerCourtRole = partyInfo.lowerCourtRole;
         sop.partyName = [];
-        sop.partyName.push(partyInfo.fullName)
+        sop.partyName.push(this.getFullName(partyInfo))
         if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
             sop.conjunction = 'And';
             this.noRolePartySop.push(sop);
