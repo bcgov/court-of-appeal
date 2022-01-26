@@ -17,7 +17,7 @@ const informationState = namespace("Information");
 import { supremeCourtCaseJsonDataInfoType } from '@/types/Information/json';
 import Form7CaseInformationSearch from './Form7CaseInformationSearch.vue';
 import FillForm7 from './fillForm7/FillForm7.vue';
-import { form7SubmissionDataInfoType } from '@/types/Information';
+import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
 @Component({
     components: {           

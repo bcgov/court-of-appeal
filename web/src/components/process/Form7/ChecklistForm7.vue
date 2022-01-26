@@ -49,8 +49,7 @@ const informationState = namespace("Information");
 
 import Form7DidYouKnow from "@/components/process/Form7/components/Form7DidYouKnow.vue";
 import Form7QualifyQuestions from "@/components/process/Form7/components/Form7QualifyQuestions.vue";
-import { form7SubmissionDataInfoType } from '@/types/Information';
-import { accountInfoType } from '@/types/Information/Form7';
+import { accountInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{

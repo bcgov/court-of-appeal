@@ -186,10 +186,8 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import { form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information';
-
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
-import { lookupsInfoType } from '@/types/Information/Form7';
+import { form7SubmissionDataInfoType, form7StatesInfoType, lookupsInfoType, form7PartiesStatesInfoType, form7PartiesInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{ 

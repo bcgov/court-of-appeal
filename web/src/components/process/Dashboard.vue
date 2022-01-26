@@ -77,12 +77,12 @@ import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
+import { pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
-import { form7SubmissionDataInfoType, pathwayTypeInfoType } from '@/types/Information';
-import { lookupsInfoType} from '@/types/Information/Form7';
+import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
 
 
 @Component({

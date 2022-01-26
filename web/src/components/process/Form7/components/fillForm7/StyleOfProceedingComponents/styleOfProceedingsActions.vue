@@ -599,10 +599,10 @@ const commonState = namespace("Common");
 import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import sortStyleOfProceeding from './util/sortStyleOfProceeding';
+import { form7SubmissionDataInfoType, lookupsInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, manualSopInfoType, aliasInfoType, representativeInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        

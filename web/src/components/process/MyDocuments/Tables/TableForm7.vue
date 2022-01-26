@@ -159,13 +159,12 @@ import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
 
-import {form7SubmissionDataInfoType } from "@/types/Information";
 const informationState = namespace("Information");
 
 @Component
 export default class TableForm7 extends Vue {
-
 
     @Prop({required: true})
     enableActions!: boolean;

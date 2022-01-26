@@ -18,7 +18,7 @@ import { caseJsonDataType } from '@/types/Information/json';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form7SubmissionDataInfoType } from '@/types/Information';
+import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 const informationState = namespace("Information");
 
 @Component({

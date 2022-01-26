@@ -41,22 +41,3 @@ export default class MyDocumentsTable extends Vue {
 
 }
 </script>
-
-<style scoped lang="scss">
-    @import "src/styles/common";
-    @import "~@fortawesome/fontawesome-free/css/all.min.css";  
-
-    .closeButton {
-        background-color: transparent !important;
-        color: white;
-        border: white;
-        font-weight: 700;
-        font-size: 2rem;
-        padding-top: 0;
-        margin-top: 0;
-    }
-
-    button {
-        border: 0px;
-    }
-</style>

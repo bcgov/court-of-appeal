@@ -330,7 +330,6 @@
 </template>
 
 <script lang="ts">
-import { form7PartiesInfoType, form7SubmissionDataInfoType, manualSopInfoType } from '@/types/Information';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment';
 
@@ -341,6 +340,7 @@ const informationState = namespace("Information");
 
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
 import UnderlineForm from "@/components/utils/PopulateForms/components/UnderlineForm.vue";
+import { form7SubmissionDataInfoType, manualSopInfoType, form7PartiesInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{       

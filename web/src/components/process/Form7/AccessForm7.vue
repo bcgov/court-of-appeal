@@ -136,7 +136,7 @@ import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
-import { accountInfoType, accountUserInfoType, form7StatusInfoType, userAccessInfoType } from '@/types/Information/Form7';
+import { accountInfoType, userAccessInfoType, form7StatusInfoType, accountUserInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{

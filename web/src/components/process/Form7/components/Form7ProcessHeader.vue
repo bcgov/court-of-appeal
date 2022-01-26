@@ -78,7 +78,7 @@ import "@/store/modules/common";
 const commonState = namespace("Common");
 
 import StepNumber from "@/components/utils/StepNumber.vue";
-import { accountInfoType, form7StatusInfoType } from '@/types/Information/Form7';
+import { form7StatusInfoType, accountInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{

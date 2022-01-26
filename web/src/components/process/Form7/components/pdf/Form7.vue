@@ -34,9 +34,9 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form7SubmissionDataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 import Form7Layout from "./Form7Layout.vue";
+import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        

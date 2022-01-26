@@ -86,8 +86,8 @@ import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
-import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information';
 import { locationsInfoType } from '@/types/Common';
+import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{
