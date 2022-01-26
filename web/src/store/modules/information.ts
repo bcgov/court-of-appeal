@@ -1,7 +1,7 @@
 import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
 import { form2DataInfoType } from '@/types/Information/Form2';
-import { form5DataInfoType } from '@/types/Information/Form5';
+import { form5DataInfoType, form5FormsJsonDataType } from '@/types/Information/Form5';
 import { userAccessInfoType, form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
@@ -16,7 +16,10 @@ class Information extends VuexModule {
     public pathType = {} as pathwayTypeInfoType;
     public partiesJson = {} as partiesDataJsonDataType;
     public form2Info = {} as form2DataInfoType;
+
+    public form5FormsJson: form5FormsJsonDataType[] = [];
     public form5Info = {} as form5DataInfoType;
+
     public form7FormsJson: form7SubmissionDataInfoType[] = [];
     public form7SubmissionInfo = {} as form7SubmissionDataInfoType;
     public form7AccessInfo: userAccessInfoType[] = [];
@@ -27,6 +30,7 @@ class Information extends VuexModule {
     public fileNumber = "";  
     public currentCaseId = null;
     public currentNoticeOfAppealId = null;  
+    public currentNoticeOfHearingOfAppealId = null; 
     public caseLocation: locationsInfoType; 
 
     @Mutation
@@ -73,6 +77,15 @@ class Information extends VuexModule {
     public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
         this.context.commit('setForm2Info', newForm2Info);
     }  
+
+    @Mutation
+    public setForm5FormsJson(form5FormsJson: form5FormsJsonDataType[]): void {   
+        this.form5FormsJson = form5FormsJson;
+    }    
+    @Action
+    public UpdateForm5FormsJson(newForm5FormsJson: form5FormsJsonDataType[]): void {
+        this.context.commit('setForm5FormsJson', newForm5FormsJson);
+    }    
 
     @Mutation
     public setForm7FormsJson(form7FormsJson: form7SubmissionDataInfoType[]): void {   
@@ -165,6 +178,15 @@ class Information extends VuexModule {
     }
 
     @Mutation
+    public setCurrentNoticeOfHearingOfAppealId(currentNoticeOfHearingOfAppealId: string): void {   
+        this.currentNoticeOfHearingOfAppealId = currentNoticeOfHearingOfAppealId;
+    }    
+    @Action
+    public UpdateCurrentNoticeOfHearingOfAppealId(newCurrentNoticeOfHearingOfAppealId: string): void {
+        this.context.commit('setCurrentNoticeOfHearingOfAppealId', newCurrentNoticeOfHearingOfAppealId);
+    }
+
+    @Mutation
     public setCurrentNoticeOfAppealId(currentNoticeOfAppealId: string): void {   
         this.currentNoticeOfAppealId = currentNoticeOfAppealId;
     }    
@@ -172,6 +194,7 @@ class Information extends VuexModule {
     public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
         this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
     }
+    
     
 }
 

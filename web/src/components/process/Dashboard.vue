@@ -83,6 +83,7 @@ import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunction
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
 import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
+import { form5FormsJsonDataType } from '@/types/Information/Form5';
 
 
 @Component({
@@ -110,6 +111,9 @@ export default class DashboardPage extends Vue {
     
     @informationState.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @informationState.Action
+    public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
 
     @informationState.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
@@ -267,6 +271,7 @@ export default class DashboardPage extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm7FormsJson(forms)
+                //this.loadForm5Forms();
             }
 
             this.dataLoaded = true;       
@@ -275,7 +280,23 @@ export default class DashboardPage extends Vue {
             this.error = err;        
         });
     }
+    //TODO: placeholder
+    public loadForm5Forms () {
+   
+        this.$http.get('/form5/forms')
+        .then((response) => {
 
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm5FormsJson(forms)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
 
     public restartJourney() {
         this.journeyStarted = false;
