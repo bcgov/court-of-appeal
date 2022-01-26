@@ -143,12 +143,9 @@ export default class FillForm7 extends Vue {
         .then((response) => {
             if(response?.data){            
                             
-                const form7Data = response.data
-                // console.log(form7Data)
-                // console.log(moment(form7Data['dateOfJudgement']).local().format())
+                const form7Data = response.data                
                 form7Data['appealSubmissionDeadline']=moment(form7Data['appealSubmissionDeadline']).local().format()
                 form7Data['dateOfJudgement']=moment(form7Data['dateOfJudgement']).local().format()
-                // moment(form7Data['dateOfJudgement']).local().format()
                 this.UpdateForm7SubmissionInfo(form7Data) 
                 this.setCurrentCourtLocation(form7Data['lowerCourtRegistryId'])
                 this.clearStates();                
@@ -198,10 +195,10 @@ export default class FillForm7 extends Vue {
         this.fieldStates.appearanceDays = !(this.form7SubmissionInfo.trialDurationDays && Number(this.form7SubmissionInfo.trialDurationDays)>0)? false : null;
         this.fieldStates.respondents = !(this.form7SubmissionInfo.respondents && this.form7SubmissionInfo.respondents.length > 0 )? false : null;
         this.fieldStates.appellants = !(this.form7SubmissionInfo.appellants && this.form7SubmissionInfo.appellants.length > 0 )? false : null;
-        this.fieldStates.orderType = !this.form7SubmissionInfo.appealFrom? false : null;
-        this.fieldStates.appealedInSupremeCourt = !this.form7SubmissionInfo.wasSupremeAppeal? false : null;
-        this.fieldStates.makerName = (this.form7SubmissionInfo.wasSupremeAppeal && !this.form7SubmissionInfo.decisionMaker)? false : null;        
-        this.fieldStates.appealNature = !this.form7SubmissionInfo.involves? false : null;
+        this.fieldStates.appealFrom = !this.form7SubmissionInfo.appealFrom? false : null;
+        this.fieldStates.wasSupremeAppeal = !(this.form7SubmissionInfo.wasSupremeAppeal != null)? false : null;
+        this.fieldStates.decisionMaker = (this.form7SubmissionInfo.wasSupremeAppeal && !this.form7SubmissionInfo.decisionMaker)? false : null;        
+        this.fieldStates.involves = !this.form7SubmissionInfo.involves? false : null;
         this.fieldStates.orderSought = !this.form7SubmissionInfo.orderSought? false : null;
         this.fieldStates.mainAppellant = !this.form7SubmissionInfo.appealingFirm? false : null;
         this.fieldStates.serviceAddress = !this.form7SubmissionInfo.appealingFirmAddress? false : null;

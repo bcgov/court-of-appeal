@@ -599,7 +599,7 @@ const commonState = namespace("Common");
 import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
+import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import sortStyleOfProceeding from './util/sortStyleOfProceeding';
@@ -616,10 +616,7 @@ import sortStyleOfProceeding from './util/sortStyleOfProceeding';
 export default class styleOfProceedingsActions extends Vue {     
 
     @informationState.State
-    public form7SubmissionInfo: form7SubmissionDataInfoType;
-
-    @informationState.State
-    public form7InfoStates: form7StatesInfoType;
+    public form7SubmissionInfo: form7SubmissionDataInfoType;    
 
     @commonState.State
     public userName!: string;
