@@ -46,11 +46,11 @@ class Form7ToPdfView(generics.GenericAPIView):
 
         account_id = request.user.account_id
 
-        pdf_type = request.query_params.get("pdf_type") #NAA
+        pdf_type = request.query_params.get("pdf_type")
         if pdf_type is None:
             return HttpResponseBadRequest("Missing pdf_type parameters.")
 
-        notice_ids = request.query_params.getlist("id")                                
+        notice_ids = request.query_params.getlist("id")                            
 
         if not notice_ids:        
             notice = self.get_notice_for_user(notice_id, account_id)
@@ -66,7 +66,7 @@ class Form7ToPdfView(generics.GenericAPIView):
         else :
             pdf_contents = list()
             for noticeId in notice_ids:
-                notice = self.get_notice_for_user(notice_id, account_id)
+                notice = self.get_notice_for_user(noticeId, account_id)
                 if not notice:
                     continue
 

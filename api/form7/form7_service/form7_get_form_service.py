@@ -1,10 +1,11 @@
 
-from form7.models import NoticeOfAppeal, MSopParty, Party, PartyAlias, PartyLegalRep
+from form7.models import NoticeOfAppeal, MSopParty, Party, PartyAlias, PartyLegalRep, FormPdf
 
 import datetime
 from zeep import helpers
-
-
+import logging
+LOGGER = logging.getLogger(__name__)
+no_record_found = "No record found."
 
 
 def get_form(notice_id, account_id):
@@ -15,7 +16,7 @@ def get_form(notice_id, account_id):
         notice_query = NoticeOfAppeal.objects.filter(noticeOfAppealId=notice_id, accountId=account_id).values(*fields)           
         
         if len(notice_query)>0: 
-            notice_query = add_notice_relations(notice_query).first()
+            notice_query = add_notice_relations(notice_query)[0]
     else:
         notice_query = NoticeOfAppeal.objects.filter(accountId=account_id).values(*fields)
         notice_query = add_notice_relations(notice_query)
@@ -54,6 +55,16 @@ def add_notice_relations(notice_query):
         if notice['readWriteUsers'] is not None:
             readWriteUsers = list(notice['readWriteUsers'][1:-1].split(","))
             notice['readWriteUsers']= [int(x) for x in readWriteUsers if len(x)>0]
+
+        try:
+            pdf_query = FormPdf.objects.get(noticeOfAppeal_id=notice['noticeOfAppealId'])
+            notice['pdf_types'] = pdf_query.pdf_type
+        except (FormPdf.DoesNotExist, NoticeOfAppeal.DoesNotExist):
+            LOGGER.debug(no_record_found)
+            notice['pdf_types'] = None
+        
+
+        
     
     return notice_query
         
