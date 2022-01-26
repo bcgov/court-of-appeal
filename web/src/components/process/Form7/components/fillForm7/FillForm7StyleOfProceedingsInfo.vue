@@ -10,7 +10,7 @@
             </p>
             <b-table
                 :key="updateTable"                 
-                :items="partiesList"
+                :items="styleOfProceedingsInfo.parties"
                 :fields="partiesFields"
                 :state="form7InfoStates.respondents || form7InfoStates.appellants"
                 class="mx-4 text-center"
@@ -292,9 +292,9 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.styleOfProceedingsInfo.appellants = [];
         this.styleOfProceedingsInfo.respondents = [];         
 
-        this.partiesList = this.styleOfProceedingsInfo.parties;
+        //this.partiesList = this.styleOfProceedingsInfo.parties;
 
-        for (const party in this.partiesList){
+        for (const party in this.styleOfProceedingsInfo.parties){
 
             const partyInfo = this.form7SubmissionInfo.parties[party];
              
@@ -307,7 +307,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
                 (partyInfo.secondGivenName? ' ' + partyInfo.secondGivenName:'') +
                 (partyInfo.thirdGivenName? ' ' + partyInfo.thirdGivenName:'')
             }  
-            this.partiesList[party].title = this.getPartyTitles(partyInfo);
+            this.styleOfProceedingsInfo.parties[party].title = this.getPartyTitles(partyInfo);
 
             if (partyInfo.appealRole && partyInfo.appealRole == "Respondent"){
 
@@ -315,7 +315,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
             } else if (partyInfo.appealRole && partyInfo.appealRole == "Appellant"){
 
-                this.styleOfProceedingsInfo.respondents.push(partyInfo);
+                this.styleOfProceedingsInfo.appellants.push(partyInfo);
 
             }                                 
         }
@@ -328,7 +328,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         }
         this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
 
-        this.styleOfProceedingsInfo.parties = this.partiesList;
+        //this.styleOfProceedingsInfo.parties = this.partiesList;
 
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo)      
     }  
@@ -360,7 +360,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
 
     public updateTableResults(){
         //console.log('updating')
-        this.partiesList = this.form7SubmissionInfo.parties;
+        this.styleOfProceedingsInfo.parties = this.form7SubmissionInfo.parties;
         this.updateTable++;
     }
 
@@ -405,34 +405,36 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }    
 
-    public appLeft(row){        
-        this.partiesList[row.index].appealRole = 'Appellant';
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
-        this.styleOfProceedingsInfo.appellants.push(this.partiesList[row.index]);
+    public appLeft(row){ 
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo;  
+        //this.partiesList = this.styleOfProceedingsInfo.parties     
+        this.styleOfProceedingsInfo.parties[row.index].appealRole = 'Appellant';        
+        this.styleOfProceedingsInfo.appellants.push(this.styleOfProceedingsInfo.parties[row.index]);
+        //this.styleOfProceedingsInfo.parties = this.partiesList;
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
         this.updateTable ++;
     }
 
-    public appRight(row){
-        this.partiesList[row.index].appealRole = '';  
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;         
-        const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.fullName == this.partiesList[row.index].fullName)
+    public appRight(row){          
+        this.styleOfProceedingsInfo = this.form7SubmissionInfo; 
+        this.styleOfProceedingsInfo.parties[row.index].appealRole = '';
+        const index = this.styleOfProceedingsInfo.appellants.findIndex(app => app.fullName == this.styleOfProceedingsInfo.parties[row.index].fullName)
         this.styleOfProceedingsInfo.appellants.splice(index, 1);
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
     }
 
     public resLeft(row){
-        this.partiesList[row.index].appealRole = '';
         this.styleOfProceedingsInfo = this.form7SubmissionInfo;
-        const resNameIndex =  this.respondents.indexOf(this.partiesList[row.index].fullName);
+        this.styleOfProceedingsInfo.parties[row.index].appealRole = '';        
+        const resNameIndex =  this.respondents.indexOf(this.styleOfProceedingsInfo.parties[row.index].fullName);
         this.respondents.splice(resNameIndex, 1);
-        if (this.partiesList[row.index].counselName) {            
-            const solicitorNameIndex =  this.respondentSolicitors.indexOf(this.partiesList[row.index].counselName);
+        if (this.styleOfProceedingsInfo.parties[row.index].counselName) {            
+            const solicitorNameIndex =  this.respondentSolicitors.indexOf(this.styleOfProceedingsInfo.parties[row.index].counselName);
             this.respondentSolicitors.splice(solicitorNameIndex, 1);
         }
          
-        const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.partiesList[row.index].fullName)
+        const index = this.styleOfProceedingsInfo.respondents.findIndex(res => res.fullName == this.styleOfProceedingsInfo.parties[row.index].fullName)
         this.styleOfProceedingsInfo.respondents.splice(index, 1);
         this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
@@ -440,13 +442,14 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public resRight(row){
-        this.partiesList[row.index].appealRole = 'Respondent';
         this.styleOfProceedingsInfo = this.form7SubmissionInfo;
-        this.respondents.push(this.partiesList[row.index].fullName);
-        if (this.partiesList[row.index].counselName) {
-            this.respondentSolicitors.push(this.partiesList[row.index].counselName);
+        this.styleOfProceedingsInfo.parties[row.index].appealRole = 'Respondent';
+        
+        this.respondents.push(this.styleOfProceedingsInfo.parties[row.index].fullName);
+        if (this.styleOfProceedingsInfo.parties[row.index].counselName) {
+            this.respondentSolicitors.push(this.styleOfProceedingsInfo.parties[row.index].counselName);
         }        
-        this.styleOfProceedingsInfo.respondents.push(this.partiesList[row.index]);
+        this.styleOfProceedingsInfo.respondents.push(this.styleOfProceedingsInfo.parties[row.index]);
         this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.updateTable ++;
