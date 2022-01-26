@@ -1,8 +1,8 @@
 <template>
     <b-card no-body bg-variant="light" border-variant="light">        
 
-        <fill-form-7 v-if="orderSelected" v-bind:editMode="editMode" @displayResults="orderSelected = false;"/>
-        <form-7-case-information-search  v-else @fillForm="orderSelected = true;"/>        
+        <fill-form-7 v-if="orderSelected" @displayResults="orderSelected = false;"/>
+        <form-7-case-information-search  v-else @fillForm="startFillingForm7"/>        
         
     </b-card>
 </template>
@@ -17,6 +17,7 @@ const informationState = namespace("Information");
 import { supremeCourtCaseJsonDataInfoType } from '@/types/Information/json';
 import Form7CaseInformationSearch from './Form7CaseInformationSearch.vue';
 import FillForm7 from './fillForm7/FillForm7.vue';
+import { form7SubmissionDataInfoType } from '@/types/Information';
 
 @Component({
     components: {           
@@ -26,24 +27,59 @@ import FillForm7 from './fillForm7/FillForm7.vue';
 }) 
 export default class Form7CaseInformation extends Vue {
 
+    @informationState.State
+    public currentNoticeOfAppealId: string;
+    
+    @informationState.State
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
+
+    @informationState.State
+    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
+
     @informationState.Action
     public UpdateSupremeCourtCaseJson!: (newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType) => void 
   
-    orderSelected = false;
-    editMode = false;
+    @informationState.Action
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
+
+    @informationState.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+    orderSelected = false;   
 
     mounted(){   
          
-        if (this.$route.params.orderSelected == 'no') {
-            this.UpdateSupremeCourtCaseJson({} as supremeCourtCaseJsonDataInfoType);
-            this.orderSelected = false;
-            this.editMode = false;
+        if (this.currentNoticeOfAppealId) {
+            this.orderSelected = true;          
+            
         } else {
-            this.orderSelected = true;
-            this.editMode = true;
+            this.UpdateSupremeCourtCaseJson({} as supremeCourtCaseJsonDataInfoType);
+            this.orderSelected = false;           
+            
         }  
         
         
+    }
+
+    public startFillingForm7(levelOfCourt, locationId, locationName){
+
+        const form7Data = this.form7SubmissionInfo;
+        form7Data.lowerCourtStyleOfCause = this.supremeCourtCaseJson.styleOfCause;
+        form7Data.lowerCourtClassName = this.supremeCourtCaseJson.courtClass;
+        form7Data.lowerCourtClassCd = this.supremeCourtCaseJson.courtClassCd;
+        form7Data.ceisFileId = this.supremeCourtCaseJson.fileId;
+        form7Data.lowerCourtFileNo = this.supremeCourtCaseJson.courtClassCd + this.supremeCourtCaseJson.fileNumber;
+        form7Data.lowerCourtRegistryId = locationId;
+        form7Data.lowerCourtRegistryName = locationName;
+        form7Data.lowerCourtLevelCd = this.supremeCourtCaseJson.courtClassCd;
+        form7Data.lowerCourtLevelName = levelOfCourt;
+        form7Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
+
+        this.UpdateForm7SubmissionInfo(form7Data); 
+        this.UpdateCurrentNoticeOfAppealId(null);
+
+
+        this.orderSelected = true;
     }
 }
 </script>

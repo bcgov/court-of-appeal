@@ -31,7 +31,7 @@
                 <b-button 
                     style="float: right;" 
                     variant="primary"
-                    @click="saveForm(true)"
+                    @click="saveForm7(true)"
                     >
                     <i class="fas fa-save mr-1"></i>Save
                 </b-button>
@@ -40,30 +40,39 @@
                 <b-button
                     style="float: right;" 
                     variant="primary"
-                    @click="saveForm(false)"
+                    @click="saveForm7(false)"
                     >Preview Form
                     <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
                 </b-button>
             </b-col>
+            
         </b-row> 
-
+        <b-row 
+            v-if="expiredDeadline" 
+            style="font-size: 0.75rem;" 
+            class="text-danger ml-auto mr-0 mt-1">The deadline for submission has expired.
+        </b-row>
     </b-card>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
-import { form7DataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 
 import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm7/FillForm7SummaryInfo.vue";
 import FillForm7CommonInfo from "@/components/process/Form7/components/fillForm7/FillForm7CommonInfo.vue";
 import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/components/fillForm7/FillForm7StyleOfProceedingsInfo.vue";
-
+import moment from 'moment-timezone';
+import { locationsInfoType } from '@/types/Common';
+import { accountInfoType, userAccessInfoType, form7SubmissionDataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        
@@ -74,8 +83,20 @@ import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/componen
 })
 export default class FillForm7 extends Vue {    
 
-    @Prop({required: true})
-    editMode!: boolean;
+    @commonState.State
+    public accountInfo!: accountInfoType;
+
+    @commonState.State
+    public locationsInfo!: locationsInfoType[];
+
+    @informationState.Action
+    public UpdateCaseLocation!: (newCaseLocation: locationsInfoType) => void
+
+    @informationState.State
+    public form7AccessInfo!: userAccessInfoType[];
+
+    @informationState.State
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.State
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
@@ -84,41 +105,85 @@ export default class FillForm7 extends Vue {
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
 
     @informationState.State
-    public form7Info: form7DataInfoType;
+    public currentNoticeOfAppealId: string;
 
     @informationState.State
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+    @informationState.Action
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     @informationState.Action
     public UpdateForm7InfoStates!: (newForm7StatesInfo: form7StatesInfoType) => void
 
-    referenceNumber = '';    
+    referenceNumber = '';   
+    expiredDeadline = false; 
     updatedInfo = 0;
     dataReady = false;
     fieldStates = {} as form7StatesInfoType;
 
     mounted() { 
+
+        this.expiredDeadline = false;
         this.dataReady = false;
-        if (!this.editMode){
-            const form7Data = {} as form7DataInfoType;
-            form7Data.fileNumber = this.supremeCourtCaseJson.fileNumber;
-            form7Data.fileId = this.supremeCourtCaseJson.fileId;
-            form7Data.courtClass = this.supremeCourtCaseJson.courtClassCd;
-            form7Data.appealSubmissionDeadline = this.supremeCourtOrderJson.appealSubmissionDeadline;
-            this.UpdateForm7Info(form7Data);
-        }
-            
+        if (!this.currentNoticeOfAppealId){         
+            this.loadOrderDetails();            
+        } else {
+            this.getForm7Data()
+        }           
+                       
+    }  
+    
+    public getForm7Data() {        
+       
+        this.$http.get('/form7/forms/'+this.currentNoticeOfAppealId)
+        .then((response) => {
+            if(response?.data){            
+                            
+                const form7Data = response.data                
+                form7Data['appealSubmissionDeadline']=moment(form7Data['appealSubmissionDeadline']).local().format()
+                form7Data['dateOfJudgement']=moment(form7Data['dateOfJudgement']).local().format()
+                this.UpdateForm7SubmissionInfo(form7Data) 
+                this.setCurrentCourtLocation(form7Data['lowerCourtRegistryId'])
+                this.clearStates();                
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+    public setCurrentCourtLocation(locationId){
+        const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == locationId)[0]
+        this.UpdateCaseLocation(selectedLocation);
+    }
+
+    public loadOrderDetails(){
+
+        const form7SubmissionData = this.form7SubmissionInfo;
+        form7SubmissionData.parties = this.supremeCourtCaseJson.parties;
+        form7SubmissionData.manualSop = [];
+        form7SubmissionData.appealSubmissionDeadline = moment(this.supremeCourtOrderJson.appealSubmissionDeadline).format();
+        form7SubmissionData.honorificTitle = this.supremeCourtOrderJson.honorificTitle;
+        form7SubmissionData.dateOfJudgement = moment(this.supremeCourtOrderJson.orderDate).format();
+        form7SubmissionData.nameOfJudge = this.supremeCourtOrderJson.judgeFirstName + ' ' + this.supremeCourtOrderJson.judgeSurname;   
+        this.UpdateForm7SubmissionInfo(form7SubmissionData);
+        this.saveForm7(true);        
+
+    }
+
+    public clearStates(){
         const form7States = {} as form7StatesInfoType;
         this.UpdateForm7InfoStates(form7States); 
         this.fieldStates = {} as form7StatesInfoType;
-        this.dataReady = true;                
-    }    
+        this.dataReady = true; 
+    }
 
     public checkWithinAppealPeriod(){
-        return !this.supremeCourtOrderJson.isPastDeadline;
+        return !this.form7SubmissionInfo.isPastDeadline;
     }     
 
     public checkStates(){
@@ -127,95 +192,147 @@ export default class FillForm7 extends Vue {
         
         this.fieldStates = this.form7InfoStates;
 
-        this.fieldStates.appearanceDays = !(this.form7Info.appearanceDays && this.form7Info.appearanceDays>0)? false : null;
-        this.fieldStates.respondents = !(this.form7Info.respondents && this.form7Info.respondents.length > 0 )? false : null;
-        this.fieldStates.appellants = !(this.form7Info.appellants && this.form7Info.appellants.length > 0 )? false : null;
-        this.fieldStates.orderType = !this.form7Info.orderType? false : null;
-        this.fieldStates.appealedInSupremeCourt = !this.form7Info.appealedInSupremeCourt? false : null;
-        this.fieldStates.makerName = (this.form7Info.appealedInSupremeCourt == 'yes' && !this.form7Info.makerName)? false : null;        
-        this.fieldStates.appealNature = !this.form7Info.appealNature? false : null;
-        this.fieldStates.orderSought = !this.form7Info.orderSought? false : null;
-        this.fieldStates.mainAppellant = !this.form7Info.mainAppellant? false : null;
-        this.fieldStates.serviceAddress = !this.form7Info.serviceAddress? false : null;
+        this.fieldStates.appearanceDays = !(this.form7SubmissionInfo.trialDurationDays && Number(this.form7SubmissionInfo.trialDurationDays)>0)? false : null;
+        this.fieldStates.respondents = !(this.form7SubmissionInfo.respondents && this.form7SubmissionInfo.respondents.length > 0 )? false : null;
+        this.fieldStates.appellants = !(this.form7SubmissionInfo.appellants && this.form7SubmissionInfo.appellants.length > 0 )? false : null;
+        this.fieldStates.appealFrom = !this.form7SubmissionInfo.appealFrom? false : null;
+        this.fieldStates.wasSupremeAppeal = !(this.form7SubmissionInfo.wasSupremeAppeal != null)? false : null;
+        this.fieldStates.decisionMaker = (this.form7SubmissionInfo.wasSupremeAppeal && !this.form7SubmissionInfo.decisionMaker)? false : null;        
+        this.fieldStates.involves = !this.form7SubmissionInfo.involves? false : null;
+        this.fieldStates.orderSought = !this.form7SubmissionInfo.orderSought? false : null;
+        this.fieldStates.mainAppellant = !this.form7SubmissionInfo.appealingFirm? false : null;
+        this.fieldStates.serviceAddress = !this.form7SubmissionInfo.appealingFirmAddress? false : null;
 
         const requiredContent = ['BC', 'B.C.', 'BRITISH COLUMBIA']               
-        if (this.form7Info.serviceAddress && requiredContent.some(v => this.form7Info.serviceAddress.toUpperCase().includes(v))) {
+        if (this.form7SubmissionInfo.appealingFirmAddress && requiredContent.some(v => this.form7SubmissionInfo.appealingFirmAddress.toUpperCase().includes(v))) {
             this.fieldStates.validServiceAddress = null;            
-        } else if (this.form7Info.serviceAddress && !requiredContent.some(v => this.form7Info.serviceAddress.toUpperCase().includes(v))) {
+        } else if (this.form7SubmissionInfo.appealingFirmAddress && !requiredContent.some(v => this.form7SubmissionInfo.appealingFirmAddress.toUpperCase().includes(v))) {
             this.fieldStates.validServiceAddress = false;            
         }
 
-
-        this.UpdateForm7InfoStates(this.fieldStates)
+        this.UpdateForm7InfoStates(this.fieldStates);
         this.updatedInfo ++;
 
         for(const field of Object.keys(this.fieldStates)){
             if(this.fieldStates[field]==false)
                 stateCheck = false;
-        }
-        console.log(stateCheck)
+        }       
 
         return stateCheck;            
     }
 
-    public saveForm(draft: boolean) {
+    public saveForm7(draft: boolean) {
 
-        const form7 = this.form7Info;
-        form7.referenceNumber = this.referenceNumber;
-        this.UpdateForm7Info(form7)
+        let method = 'post';
+        let url = '/form7/forms';
+
+        if (this.currentNoticeOfAppealId){
+            method = 'put';
+            url = '/form7/forms/'+this.currentNoticeOfAppealId;
+            const form7 = this.form7SubmissionInfo;
+            form7.refOptional = this.referenceNumber;
+            this.UpdateForm7SubmissionInfo(form7);
+
+            if (this.checkWithinAppealPeriod() ){ 
+                this.expiredDeadline = false;
+
+                if (!draft){
+                    if (!this.checkStates()){
+                        return
+                    }
+                }                    
+
+                const form7SubmissionData = this.getForm7Info();
+                const options = {
+                    method: method,
+                    url: url,
+                    data: form7SubmissionData
+                }
+                this.saveInfo(options, draft); 
+
+            } else {
+                this.expiredDeadline = true;               
+            }
+
+        } else {           
+
+            const options = {
+                method: method,
+                url: url,
+                data: this.form7SubmissionInfo
+            }
+            this.saveInfo(options, draft);
+
+        }      
         
+    }
 
-        if (this.checkStates() && this.checkWithinAppealPeriod() ){
-            const data = this.getForm7Info();
-            console.log(data)
-            if(!draft) this.navigateToPreviewPage('3467864');
-            
+    public saveInfo(options, draft){
 
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfAppealId(response.data.file_id);
+                        this.form7SubmissionInfo.id = response.data.file_id;
+                    }
 
-        }        
-       
-        //     const url = this.currentCaseId? ('/myforms/'+this.currentCaseId+'/') : '/myforms/';
-        //     const method = this.currentCaseId? "put" : "post"
-        //     const body = {
-        //         type: "form-2",
-        //         status:"Draft",
-        //         description:"form2",
-        //         data: this.form2Info
-        //     }  
-
-        //     const options = {
-        //         method: method,
-        //         url: url,
-        //         data: body
-        //     }
-        // {"parties":[{"aliases":[],"legalReps":[],"partyId":1777,"ceisPartyId":9590,"isOrganization":false,"prefix":null,"firstGivenName":"One","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":null,"appealRole":"Respondent","lowerCourtRole":"Plaintiff"},{"aliases":[],"legalReps":[],"partyId":1778,"ceisPartyId":9591,"isOrganization":false,"prefix":null,"firstGivenName":"Two","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":"Smith, J","appealRole":"Appellant","lowerCourtRole":"Defendant"}],"readOnlyUsers":"[]","readWriteUsers":"[753]","lowerCourtLevelCd":"S","lowerCourtLevelName":"Supreme Court of BC","ElectronicallyFiled":"N","id":"c23725e0-fd25-42b7-9daa-54b1007580df","lowerCourtFileNo":"S20191119","lowerCourtRegistryId":8807.0007,"lowerCourtRegistryName":"Victoria Law Courts","ceisFileId":5187,"nameOfJudge":"M.L. Drake","honorificTitle":"The Honourable Justice","dateOfJudgment":"2021-12-06T00:00:00","trialDurationDays":"1","appealSubmissionDeadline":"2022-01-05T16:00:00","lowerCourtStyleOfCause":"TEST, One v TEST, Two","lowerCourtClassName":"Supreme civil (General)","lowerCourtClassCd":"S","protectionOrder":false,"handTypedNoSearch":false,"appealingFirm":"Han Solo","appealingFirmAddress":"\nBC","manualSop":[],"toRespondents":"One Test","respondentSolicitor":"","wasSupremeAppeal":false,"savedFromPage":"form","webCatsCaseNumber":null,"accountId":438,"appealFrom":"Trial Judgment","decisionMaker":null,"partOfJudgment":null,"refOptional":null,"orderSought":"hjgjnfghj","lowerCourtInitiatingDocument":"Notice of Civil Claim","involves":"Civil Procedure","dateCreated":"2021-12-07T15:35:08.767","createdByClientId":753,"dateModified":"2021-12-07T15:35:08.767","lastModifiedByClientId":753,"dateSubmitted":null,"submittedByClientId":null,"submittedByFullName":null,"electronicallyFiled":"N","dateProcessed":null,"webCatsResultCode":null,"selfRepresenting":null,"styleOfCause":[{"aliases":[],"legalReps":[],"partyId":1777,"ceisPartyId":9590,"isOrganization":false,"prefix":null,"firstGivenName":"One","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":null,"appealRole":"Respondent","lowerCourtRole":"Plaintiff"},{"aliases":[],"legalReps":[],"partyId":1778,"ceisPartyId":9591,"isOrganization":false,"prefix":null,"firstGivenName":"Two","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":"Smith, J","appealRole":"Appellant","lowerCourtRole":"Defendant"}]}
-
-        //     this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-        //             this.UpdateForm7Info(this.form7Info);
-                    // if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
-        //         }
-        //     }, err => {
-        //         const errMsg = err.response.data.error;
+                    this.clearStates(); 
+                    
+                    this.UpdateForm7SubmissionInfo(this.form7SubmissionInfo);
+                    if(!draft) this.navigateToPreviewPage();                           
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-        //     })
-        
+            })
     }
 
     public getForm7Info(){
-        //TODO: use form7Info and create payload body
-        // const form7 = this.form7Info;
-        // form7.referenceNumber = this.referenceNumber;
-        // this.UpdateForm7Info(form7)
-        return {"parties":[{"partyId":null,"ceisPartyId":9590,"isOrganization":false,"firstGivenName":"One","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":null,"aliases":[],"legalReps":[],"lowerCourtRole":"Plaintiff","appealRole":"Respondent"},{"partyId":null,"ceisPartyId":9591,"isOrganization":false,"firstGivenName":"Two","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":"Smith, J","aliases":[],"legalReps":[],"lowerCourtRole":"Defendant","appealRole":"Appellant"}],"readOnlyUsers":"[]","readWriteUsers":"[]","lowerCourtLevelCd":"S","lowerCourtLevelName":"Supreme Court of BC","ElectronicallyFiled":"N","id":"00000000-0000-0000-0000-000000000000","lowerCourtFileNo":"S20191119","lowerCourtRegistryId":8807.0007,"lowerCourtRegistryName":"Victoria Law Courts","ceisFileId":5187,"nameOfJudge":"M.L. Drake","honorificTitle":"The Honourable Justice","dateOfJudgment":"2021-11-06T00:00:00-07:00","trialDurationDays":1,"appealSubmissionDeadline":"2021-12-06T16:00:00-08:00","lowerCourtStyleOfCause":"TEST, One v TEST, Two","lowerCourtClassName":"Supreme civil (General)","lowerCourtClassCd":"S","protectionOrder":false,"handTypedNoSearch":false,"appealingFirm":"Han Solo","appealingFirmAddress":"4 - 5 st, BC","manualSop":[],"toRespondents":"One Test","respondentSolicitor":"jhgjg","appealFrom":"Trial Judgment","wasSupremeAppeal":false,"involves":"Civil Procedure","orderSought":"juyhgjgf","styleOfCause":[{"partyId":null,"ceisPartyId":9590,"isOrganization":false,"firstGivenName":"One","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":null,"aliases":[],"legalReps":[],"lowerCourtRole":"Plaintiff","appealRole":"Respondent"},{"partyId":null,"ceisPartyId":9591,"isOrganization":false,"firstGivenName":"Two","secondGivenName":null,"thirdGivenName":null,"surname":"Test","organizationName":null,"counselName":"Smith, J","aliases":[],"legalReps":[],"lowerCourtRole":"Defendant","appealRole":"Appellant"}],"savedFromPage":"form"}
+
+        const data = this.form7SubmissionInfo;
+        data.electronicallyFiled = 'N';
+        data.trialDurationDays = this.form7SubmissionInfo.trialDurationDays.toString();
+        data.appealingFirm = this.form7SubmissionInfo.appealingFirm;
+        data.appealingFirmAddress = this.form7SubmissionInfo.appealingFirmAddress;
+        data.toRespondents = this.form7SubmissionInfo.respondents?this.form7SubmissionInfo.respondents.map(respondent => {return respondent.fullName}).join(', '):'';
+        data.respondentSolicitor = this.form7SubmissionInfo.respondentSolicitor?this.form7SubmissionInfo.respondentSolicitor:'';
+        data.wasSupremeAppeal = this.form7SubmissionInfo.wasSupremeAppeal;
+        data.appealFrom = this.form7SubmissionInfo.appealFrom;
+        data.decisionMaker = this.form7SubmissionInfo.decisionMaker?this.form7SubmissionInfo.decisionMaker:null;
+        data.refOptional = this.form7SubmissionInfo.refOptional?this.form7SubmissionInfo.refOptional: null;
+        data.involves = this.form7SubmissionInfo.involves;
+        data.manualSop = this.form7SubmissionInfo.manualSop;
+        data.parties = this.form7SubmissionInfo.parties;
+        data.partOfJudgment = this.form7SubmissionInfo.partOfJudgment?this.form7SubmissionInfo.partOfJudgment:null;
+        data.orderSought = this.form7SubmissionInfo.orderSought;
+
+        data.readOnlyUsers = [];
+        data.readWriteUsers = [];
+        
+        if (this.accountInfo?.accountUsers?.length > 1 && this.form7AccessInfo.length > 0){
+            for (const accessInfo of this.form7AccessInfo){
+
+                console.log(accessInfo);
+                if (accessInfo.readOnly){
+                    data.readOnlyUsers.push(accessInfo.user.clientId);
+                } else if (accessInfo.update){
+                    data.readWriteUsers.push(accessInfo.user.clientId);
+                }
+
+            }
+
+        } else {            
+            data.readWriteUsers.push(this.accountInfo.clientId);
+        }
+        
+        return data;
     }
 
-    public navigateToPreviewPage(caseId) {  
+    public navigateToPreviewPage() {  
         
         if (this.checkStates()){
-            this.$router.push({name: "preview-form7", params: {caseId: caseId}});
+            this.$router.push({name: "preview-form7"});
         }
         
     }

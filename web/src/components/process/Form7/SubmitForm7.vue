@@ -72,7 +72,7 @@ import { packageInfoType } from '@/types/Information';
 export default class SubmitForm7 extends Vue {
 
     @informationState.State
-    public currentCaseId: string;
+    public currentNoticeOfAppealId: string;
 
     stepsCompleted = {} as form7StatusInfoType;  
     mountedData = false; 
@@ -98,7 +98,7 @@ export default class SubmitForm7 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentNoticeOfAppealId+"/submit/";
 
         const header = {
             responseType: "json",

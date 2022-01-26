@@ -249,7 +249,8 @@ export default class Form7CaseInformationSearch extends Vue {
     }
 
     public selectOrder(){
-        this.$emit('fillForm', true);
+        const locationName = this.locationsInfo.filter(location => {return location.id == this.searchParams.location})[0].name;
+        this.$emit('fillForm', this.levelOfCourt, this.searchParams.location, locationName);
     }
 }
 </script>

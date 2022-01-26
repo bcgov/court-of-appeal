@@ -151,6 +151,9 @@ export default class AccessForm7 extends Vue {
     @informationState.State
     public form7AccessInfo!: userAccessInfoType[];
 
+    @informationState.State
+    public currentNoticeOfAppealId: string;
+
     @informationState.Action
     public UpdateForm7AccessInfo!: (newForm7AccessInfo: userAccessInfoType[]) => void;
 
@@ -192,7 +195,7 @@ export default class AccessForm7 extends Vue {
     mounted() {  
         this.dataReady = false;
 
-        if (this.form7AccessInfo && this.form7AccessInfo.length > 0){
+        if (this.currentNoticeOfAppealId && this.form7AccessInfo && this.form7AccessInfo.length > 0){
             this.accessInfo = this.form7AccessInfo;
         } else {
             this.extractAccessInfo();
@@ -258,7 +261,7 @@ export default class AccessForm7 extends Vue {
 
     public navigateToForm7() {
         this.UpdateForm7AccessInfo(this.accessInfo);
-        this.$router.push({name: "start-form7", params: {orderSelected: 'no'}});
+        this.$router.push({name: "start-form7"});
     } 
 
 }

@@ -1,17 +1,23 @@
 <template>
-    <b-card bg-variant="light" border-variant="white">
+    <b-card bg-variant="light" border-variant="white" no-body>
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
         <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
         
-        <b-card no-body v-else class="home-content border-white p-0">          
-            <my-documents-table 
+        <b-card  no-body v-else class="home-content border-white p-0">          
+            <b-row>
+                <b-col>
+                    <h3 class="mt-2 mb-1 ml-4">Submissions</h3>
+                </b-col>            
+            </b-row> 
+            <my-documents-table style="max-height:25rem; overflow-y:auto;"
                 v-bind:enableActions="false" 
-                v-bind:title="'Submissions'">
+                v-bind:title="''">
             </my-documents-table>
-            <b-row no-gutters class="bg-white pt-0">
+            
+            <b-row no-gutters class="bg-white pt-1">
                 <b-button 
-                    class="ml-5 mb-3 bg-primary outline-dark"
-                
+                    class="ml-5 mb-1 bg-primary outline-dark"
+                    size="sm"
                     @click="navigateToDocumentsPage">
                     View All Submissions
                 </b-button>
@@ -72,11 +78,10 @@ import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
 
-
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
-import { pathwayTypeInfoType } from '@/types/Information';
+import { form7SubmissionDataInfoType, pathwayTypeInfoType } from '@/types/Information';
 import { lookupsInfoType} from '@/types/Information/Form7';
 
 
@@ -105,6 +110,9 @@ export default class DashboardPage extends Vue {
     
     @informationState.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @informationState.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -243,12 +251,31 @@ export default class DashboardPage extends Vue {
                 this.UpdateCasesJson(this.casesJson)
             }
 
+            this.loadForm7Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+
+    public loadForm7Forms () {
+   
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm7FormsJson(forms)
+            }
+
             this.dataLoaded = true;       
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
         });
     }
+
 
     public restartJourney() {
         this.journeyStarted = false;

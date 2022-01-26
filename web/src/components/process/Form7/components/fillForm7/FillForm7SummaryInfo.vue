@@ -19,12 +19,12 @@
                 </b-col>
                 <b-col cols="4">
                     SUPREME COURT FILE NO.
-                    <span style="display: block;">{{supremeCourtCaseJson.courtClassCd}}{{supremeCourtCaseJson.fileNumber}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.lowerCourtFileNo}}</span>
 
                 </b-col>
                 <b-col cols="4">
                     SUPREME COURT REGISTRY
-                    <span style="display: block;">{{caseLocation.name}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.lowerCourtRegistryName}}</span>
                 </b-col>
             </b-row>
 
@@ -38,7 +38,7 @@
             <b-row class="mt-4">
                 <b-col cols="4">
                     DATE OF ORDER
-                    <span style="display: block;">{{supremeCourtOrderJson.orderDate | beautify-date-month}}</span>
+                    <span style="display: block;">{{form7SubmissionInfo.dateOfJudgement | beautify-date-month}}</span>
                 </b-col>           
             </b-row>
 
@@ -81,11 +81,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 const informationState = namespace("Information");
+
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
-import { form7DataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
+import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information';
 import { locationsInfoType } from '@/types/Common';
 
 @Component({
@@ -93,13 +94,7 @@ import { locationsInfoType } from '@/types/Common';
         FillForm7HeaderInfo
     }
 })
-export default class FillForm7SummaryInfo extends Vue {
-
-    @informationState.State
-    public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
-
-    @informationState.State
-    public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
+export default class FillForm7SummaryInfo extends Vue {    
 
     @informationState.State
     public caseLocation: locationsInfoType;
@@ -108,10 +103,10 @@ export default class FillForm7SummaryInfo extends Vue {
     public form7InfoStates: form7StatesInfoType;
 
     @informationState.State
-    public form7Info: form7DataInfoType;
+    public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     levelOfCourt = "Supreme Court of BC";  
     judgeFullName = "";
@@ -121,10 +116,9 @@ export default class FillForm7SummaryInfo extends Vue {
     mounted() { 
         this.dataReady = false; 
         this.judgeFullName = 
-            this.supremeCourtOrderJson.honorificTitle + ' ' + 
-            this.supremeCourtOrderJson.judgeFirstName + ' ' + 
-            this.supremeCourtOrderJson.judgeSurname;
-        this.appearanceDays = this.supremeCourtOrderJson.appearanceDays;
+            this.form7SubmissionInfo.honorificTitle + ' ' + 
+            this.form7SubmissionInfo.nameOfJudge;
+        this.appearanceDays = this.form7SubmissionInfo.trialDurationDays?Number(this.form7SubmissionInfo.trialDurationDays):0;
         this.update();
         this.dataReady = true;            
     }
@@ -135,11 +129,10 @@ export default class FillForm7SummaryInfo extends Vue {
 
     public update(){ 
               
-        const form7 = this.form7Info;
-        form7.appearanceDays = this.appearanceDays;     
-        form7.judgeFullName = this.judgeFullName;   
-        form7.orderDate = this.supremeCourtOrderJson.orderDate;
-        this.UpdateForm7Info(form7);
+        const form7 = this.form7SubmissionInfo;
+        form7.trialDurationDays = this.appearanceDays.toString();     
+        form7.judgeFullName = this.judgeFullName;
+        this.UpdateForm7SubmissionInfo(form7);
     }
 
 }

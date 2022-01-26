@@ -18,6 +18,7 @@ import { caseJsonDataType } from '@/types/Information/json';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+import { form7SubmissionDataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 
 @Component({
@@ -29,6 +30,9 @@ export default class MyDocuments extends Vue {
 
     @informationState.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @informationState.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -53,9 +57,23 @@ export default class MyDocuments extends Vue {
                 this.UpdateCasesJson(response.data)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm7Forms()
         },(err) => {
             this.dataLoaded = true;       
+        });
+    }
+
+    public loadForm7Forms () {
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                this.UpdateForm7FormsJson(response.data)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;   
         });
     }
 

@@ -112,6 +112,13 @@ Vue.filter('beautify-date-weekday', function(date){
 		return ''
 })
 
+Vue.filter('beautify-date-weekday-nohr', function(date){
+	if(date)
+		return	moment(date).format('ddd MMM DD, YYYY');
+	else
+		return ''
+})
+
 Vue.filter('scrollToLocation', function(locationName){
 	if(locationName){
 		Vue.nextTick(()=>{

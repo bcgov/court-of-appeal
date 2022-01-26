@@ -3,6 +3,7 @@ import { pathwayTypeInfoType } from '@/types/Information';
 import { form2DataInfoType } from '@/types/Information/Form2';
 import { form5DataInfoType } from '@/types/Information/Form5';
 import { form7DataInfoType, userAccessInfoType, form7StatesInfoType } from '@/types/Information/Form7';
+import { form7SubmissionDataInfoType } from '@/types/Information';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -18,13 +19,16 @@ class Information extends VuexModule {
     public form2Info = {} as form2DataInfoType;
     public form5Info = {} as form5DataInfoType;
     public form7Info = {} as form7DataInfoType;
+    public form7FormsJson: form7SubmissionDataInfoType[] = [];
+    public form7SubmissionInfo = {} as form7SubmissionDataInfoType;
     public form7AccessInfo: userAccessInfoType[] = [];
     public form7InfoStates = {} as form7StatesInfoType;
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     
     public fileNumber = "";  
-    public currentCaseId = null; 
+    public currentCaseId = null;
+    public currentNoticeOfAppealId = null;  
     public caseLocation: locationsInfoType; 
 
     @Mutation
@@ -70,7 +74,16 @@ class Information extends VuexModule {
     @Action
     public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
         this.context.commit('setForm2Info', newForm2Info);
-    }
+    }  
+
+    @Mutation
+    public setForm7FormsJson(form7FormsJson: form7SubmissionDataInfoType[]): void {   
+        this.form7FormsJson = form7FormsJson;
+    }    
+    @Action
+    public UpdateForm7FormsJson(newForm7FormsJson: form7SubmissionDataInfoType[]): void {
+        this.context.commit('setForm7FormsJson', newForm7FormsJson);
+    }    
 
     @Mutation
     public setForm5Info(form5Info: form5DataInfoType): void {   
@@ -82,12 +95,12 @@ class Information extends VuexModule {
     }
 
     @Mutation
-    public setForm7Info(form7Info: form7DataInfoType): void {   
-        this.form7Info = form7Info;
+    public setForm7SubmissionInfo(form7SubmissionInfo: form7SubmissionDataInfoType): void {   
+        this.form7SubmissionInfo = form7SubmissionInfo;
     }    
     @Action
-    public UpdateForm7Info(newForm7Info: form7DataInfoType): void {
-        this.context.commit('setForm7Info', newForm7Info);
+    public UpdateForm7SubmissionInfo(newForm7SubmissionInfo: form7SubmissionDataInfoType): void {
+        this.context.commit('setForm7SubmissionInfo', newForm7SubmissionInfo);
     }
 
     @Mutation
@@ -151,6 +164,15 @@ class Information extends VuexModule {
     @Action
     public UpdateCurrentCaseId(newCurrentCaseId: string): void {
         this.context.commit('setCurrentCaseId', newCurrentCaseId);
+    }
+
+    @Mutation
+    public setCurrentNoticeOfAppealId(currentNoticeOfAppealId: string): void {   
+        this.currentNoticeOfAppealId = currentNoticeOfAppealId;
+    }    
+    @Action
+    public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
+        this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
     }
     
 }
