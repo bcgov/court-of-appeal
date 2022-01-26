@@ -103,7 +103,7 @@
                                 v-if="row.item.pdf_types"
                                 variant="transparent"
                                 class="m-0 p-0"
-                                @click="downloadDocument(row.item.fileNumber)"
+                                @click="downloadDocument(row.item.id)"
                                 v-b-tooltip.hover.noninteractive.v-success
                                 title="Download the generated PDF">
                                 <span style="font-size:18px; padding:0; transform:translate(2px,1px);" class="far fa-file-pdf btn-icon-left text-success ml-1"/>
@@ -285,7 +285,7 @@ export default class TableForm7 extends Vue {
             doc.modifiedDate = docJson['dateModified'];
             doc.description = "Notice of Appeal"
             doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
-            // doc.pdf_types = docJson.pdf_types;
+            doc.pdf_types = docJson['pdf_types']
             // doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
             // doc.packageUrl = docJson.packageUrl;
             // doc.packageNum = docJson.packageNumber;
@@ -308,37 +308,37 @@ export default class TableForm7 extends Vue {
 
         if(fileNumber || checkedFileIdsList.length>0){
             
-            // const filenum = fileNumber? fileNumber: '0';
-            // const pdf_filename = fileNumber? "Form.pdf":"Form.zip";
+            const filenum = fileNumber? fileNumber: '0';
+            const pdf_filename = fileNumber? "Form.pdf":"Form.zip";
 
-            // let pdfIds = ''
-            // for(const fileId of checkedFileIdsList)
-            //     pdfIds+= '&id='+fileId;
+            let pdfIds = ''
+            for(const fileId of checkedFileIdsList)
+                pdfIds+= '&id='+fileId;
 
-            // if(fileNumber) pdfIds = ''
+            if(fileNumber) pdfIds = ''
 
-            // const pdf_type = 'FORM';
-            // const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
-            // const options = {
-            //     responseType: "blob",
-            //     headers: {
-            //     "Content-Type": "application/json",
-            //     }
-            // }
-            // this.$http.get(url, options)
-            // .then(res => {
-            //     const blob = res.data;
-            //     const link = document.createElement("a");
-            //     link.href = URL.createObjectURL(blob);
-            //     document.body.appendChild(link);
-            //     link.download = pdf_filename;
-            //     link.click();
-            //     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-            // },err => {
+            const pdf_type = 'FORM';
+            const url = '/form7/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            const options = {
+                responseType: "blob",
+                headers: {
+                "Content-Type": "application/json",
+                }
+            }
+            this.$http.get(url, options)
+            .then(res => {
+                const blob = res.data;
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.download = pdf_filename;
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+            },err => {
                           
-            //     this.errorMsg = "PDF file has not been generated for the selected documents !"
-            //     this.errorMsgDismissCountDown = 5;                
-            // });
+                this.errorMsg = "PDF file has not been generated for the selected documents !"
+                this.errorMsgDismissCountDown = 5;                
+            });
         }
     }
 
