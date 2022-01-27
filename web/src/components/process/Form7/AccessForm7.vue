@@ -132,11 +132,11 @@ import { namespace } from "vuex-class";
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
-import { accountInfoType, accountUserInfoType, form7StatusInfoType, userAccessInfoType } from '@/types/Information/Form7';
+import { accountInfoType, userAccessInfoType, form7StatusInfoType, accountUserInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{
@@ -148,10 +148,13 @@ export default class AccessForm7 extends Vue {
     @commonState.State
     public accountInfo!: accountInfoType;
 
-    @informationState.State
+    @form7State.State
     public form7AccessInfo!: userAccessInfoType[];
 
-    @informationState.Action
+    @form7State.State
+    public currentNoticeOfAppealId: string;
+
+    @form7State.Action
     public UpdateForm7AccessInfo!: (newForm7AccessInfo: userAccessInfoType[]) => void;
 
     stepsCompleted = {} as form7StatusInfoType;
@@ -192,7 +195,7 @@ export default class AccessForm7 extends Vue {
     mounted() {  
         this.dataReady = false;
 
-        if (this.form7AccessInfo && this.form7AccessInfo.length > 0){
+        if (this.currentNoticeOfAppealId && this.form7AccessInfo && this.form7AccessInfo.length > 0){
             this.accessInfo = this.form7AccessInfo;
         } else {
             this.extractAccessInfo();
@@ -258,7 +261,7 @@ export default class AccessForm7 extends Vue {
 
     public navigateToForm7() {
         this.UpdateForm7AccessInfo(this.accessInfo);
-        this.$router.push({name: "start-form7", params: {orderSelected: 'no'}});
+        this.$router.push({name: "start-form7"});
     } 
 
 }

@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-7 v-bind:caseId="caseId"/>            
+            <form-7/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -39,7 +39,6 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
 import Form7 from "@/components/process/Form7/components/pdf/Form7.vue"
-
 import { form7StatusInfoType } from '@/types/Information/Form7';
 
 @Component({
@@ -51,12 +50,11 @@ import { form7StatusInfoType } from '@/types/Information/Form7';
 export default class PreviewForm7 extends Vue {
 
     stepsCompleted = {} as form7StatusInfoType; 
-    caseId = '';  
+    
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;  
-        this.caseId = this.$route.params.caseId;
+        this.dataReady = false;
         this.stepsCompleted = {
             first: true,
             second: true,
@@ -67,7 +65,7 @@ export default class PreviewForm7 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form7", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form7"}); 
     }
 }
 </script>

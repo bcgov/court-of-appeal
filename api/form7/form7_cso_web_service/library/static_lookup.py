@@ -29,11 +29,11 @@ class StaticLookup:
 
         def PrimaryLowerCourtRoles(self):                  
             return [
-                self.ApplicantRole,
-                self.DefendantRole,
-                self.PetitionerRole,
-                self.PlaintiffRole,
-                self.RespondentRole                            
+                self.ApplicantRole.lower(),
+                self.DefendantRole.lower(),
+                self.PetitionerRole.lower(),
+                self.PlaintiffRole.lower(),
+                self.RespondentRole.lower()                           
             ]
 
         def LowerCourtRoles(self):        

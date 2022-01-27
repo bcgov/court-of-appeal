@@ -309,7 +309,8 @@ export default class Form7QualifyQuestions extends Vue {
             this.appealingBankruptcy == 'no' &&
             this.appealingFeesWaived == 'no' &&
             this.appealingSupremeCourtMaster == 'no' &&
-            this.appealingProvincialCourtOrder == 'no' ){
+            this.appealingProvincialCourtOrder == 'no' &&
+            this.selfRepresenting.length>0){
 
             return true;
 
@@ -322,7 +323,7 @@ export default class Form7QualifyQuestions extends Vue {
     setQualification(qualified: boolean) 
     {
         console.log('watching')
-        this.$emit('disableContinue', !qualified);
+        this.$emit('disableContinue', !qualified, this.selfRepresenting == 'yes');
     }    
 
 }

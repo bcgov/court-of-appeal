@@ -55,13 +55,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form7StatusInfoType } from '@/types/Information/Form7';
 import { packageInfoType } from '@/types/Information';
+import { form7StatusInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{
@@ -71,8 +71,8 @@ import { packageInfoType } from '@/types/Information';
 })
 export default class SubmitForm7 extends Vue {
 
-    @informationState.State
-    public currentCaseId: string;
+    @form7State.State
+    public currentNoticeOfAppealId: string;
 
     stepsCompleted = {} as form7StatusInfoType;  
     mountedData = false; 
@@ -98,7 +98,7 @@ export default class SubmitForm7 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentNoticeOfAppealId+"/submit/";
 
         const header = {
             responseType: "json",

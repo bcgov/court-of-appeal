@@ -93,9 +93,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import "@/store/modules/common";
-const commonState = namespace("Common"); 
-import { representativeInfoType, lookupsInfoType } from '@/types/Information/Form7';
-   
+import { lookupsInfoType, representativeInfoType } from '@/types/Information/Form7';
+const commonState = namespace("Common");    
 
 @Component
 export default class AddRepresentativeForm extends Vue {        
@@ -144,10 +143,10 @@ export default class AddRepresentativeForm extends Vue {
 
     public extractFormInfo(){ 
         if (this.isOrganization){
-            const index = this.lookups.organizationLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
+            const index = this.lookups.organizationLegalReps.findIndex(representative=>{if(representative == this.formData.repType)return true})
             this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.organizationLegalReps[index]: '';
         } else {
-            const index = this.lookups.individualLegalReps.findIndex(representative=>{if(representative == this.formData.type)return true})
+            const index = this.lookups.individualLegalReps.findIndex(representative=>{if(representative == this.formData.repType)return true})
             this.originalSelectedRepresentativeType = this.selectedRepresentativeType = (index>=0)? this.lookups.individualLegalReps[index]: '';
         }           
                     
@@ -161,7 +160,7 @@ export default class AddRepresentativeForm extends Vue {
         
         if (this.representativeTypeState && this.representativeNameState){        
             const representative = {} as representativeInfoType;
-            representative.type = this.selectedRepresentativeType;
+            representative.repType = this.selectedRepresentativeType;
             representative.name = this.representativeName;       
             this.$emit('submit', this.isCreateRep, representative, this.index);
         }

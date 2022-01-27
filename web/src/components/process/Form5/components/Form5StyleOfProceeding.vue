@@ -248,12 +248,15 @@
 <script lang="ts">
 
 import { form5DataInfoType } from '@/types/Information/Form5';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
 
 @Component
 export default class Form5StyleOfProceeding extends Vue {
@@ -264,25 +267,22 @@ export default class Form5StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @informationState.State
+    @form5State.State
     public form5Info: form5DataInfoType;
-
-    @informationState.Action
-    public UpdateForm5Info!: (newForm5Info: form5DataInfoType) => void  
     
-    @informationState.State
-    public currentCaseId: string;
+    @form5State.State
+    public currentNoticeOfHearingOfAppealId: string;
 
-    @informationState.Action
-    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+     @form5State.Action
+    public UpdateForm5Info!: (newForm5Info: form5DataInfoType) => void 
+
+    @form5State.Action
+    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
     
     dataReady = false;
     applicantNames: string[] = [];
-    respondentNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
-    notFound = false;
+    respondentNames: string[] = [];   
+ 
     representationOptions = [
         {text: 'Yes', value: true},
         {text: 'No', value: false}
@@ -310,40 +310,73 @@ export default class Form5StyleOfProceeding extends Vue {
 
     mounted() {
         this.dataReady = false;
-        this.extractInfo();
-        this.dataReady = true;        
-    }
+        if(this.currentNoticeOfHearingOfAppealId){
 
-    public extractInfo(){
+            this.getForm5Data();  
 
-        if(this.currentCaseId){
-            this.applicants = this.form5Info.appellants;
-            this.respondents = this.form5Info.respondents;
-        }else{
-            this.applicants = this.partiesJson.appellants;
-            this.respondents = this.partiesJson.respondents;            
+        } else {  
 
-            this.form5Info.appellants = this.applicants;
-            this.form5Info.respondents = this.respondents;
+            this.form5Info.appellants = this.partiesJson.appellants;
+            this.form5Info.respondents = this.partiesJson.respondents;
             this.form5Info.formSevenNumber = this.fileNumber;
             
             this.form5Info.version = this.$store.state.Application.version;
             this.form5Info.timeOfAppealHearing = '10:00';
-            this.form5Info.acknowledge = false;           
-            
-        }
+            this.form5Info.acknowledge = false; 
+            const form5Data = this.form5Info
+            this.UpdateForm5Info(form5Data);
+            //TODO: remove extract and uncomment save after api is in place
+            this.extractInfo();   
+            // this.saveForm(true);
+        }      
+    }
+
+    public extractInfo(){    
 
         this.applicantNames = [];
         this.respondentNames = [];
 
-        for (const respondent of this.respondents){
+        for (const respondent of this.form5Info.respondents){
             this.respondentNames.push(respondent.name);  
         }
 
-        for (const applicant of this.applicants){
+        for (const applicant of this.form5Info.appellants){
             this.applicantNames.push(applicant.name);  
         }
+        this.dataReady = true;       
 
+    }
+
+    public getForm5Data() {        
+       
+        this.$http.get('/form5/forms/'+this.currentNoticeOfHearingOfAppealId)
+        .then((response) => {
+            if(response?.data){            
+                            
+                const form5Data = response.data                
+                this.UpdateForm5Info(form5Data) 
+                this.extractInfo();
+                this.clearStates();                
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+    public clearStates(){
+        this.state = {
+            firstAppellant:null,
+            firstRespondent:null,
+            courtHouse:null,
+            timeOfAppealHearing: null,
+            dateOfAppealHearing: null,
+            numberOfDaysApp: null,
+            numberOfDaysRes: null,
+            acknowledge: null,
+            authorizedName:null
+        }
+        this.dataReady = true; 
     }
 
     public checkStates(){        
@@ -380,38 +413,57 @@ export default class Form5StyleOfProceeding extends Vue {
         return valid;
     }
 
-    public saveForm(draft: boolean) {        
+    public saveForm(draft: boolean) { 
         
-        
-        if(this.checkStates())
-        {
-            const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
-            const method = this.currentCaseId? "put" : "post"
-            const body = {
-                type: "form-5",
-                status:"Draft",
-                description:"form5",
+        let method = 'post';
+        let url = '/form5/forms';
+
+        if (this.currentNoticeOfHearingOfAppealId){
+            method = 'put';
+            url = '/form5/forms/'+this.currentNoticeOfHearingOfAppealId;               
+
+            if (!draft && !this.checkStates()){
+               
+                return
+                
+            } 
+            
+            const options = {
+                method: method,
+                url: url,
                 data: this.form5Info
-            }  
+            }
+            this.saveInfo(options, draft);
+
+        } else {           
 
             const options = {
                 method: method,
                 url: url,
-                data: body
+                data: this.form5Info
             }
+            this.saveInfo(options, draft);
+        }        
+       
+    }
 
-            this.$http(options)
+    public saveInfo(options, draft){
+
+        this.$http(options)
             .then(response => {
                 if(response.data){
-                    if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-                    this.UpdateForm5Info(this.form5Info);
-                    if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfHearingOfAppealId(response.data.file_id);
+                        this.extractInfo();                        
+                    }
+
+                    this.clearStates();                    
+                    if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
                 const errMsg = err.response.data.error;
                 
             })
-        }
     }
 
     public timeFormat(value , event){        
@@ -436,8 +488,8 @@ export default class Form5StyleOfProceeding extends Vue {
         return value;
     }
 
-    public navigateToPreviewPage(caseId) {        
-        this.$router.push({name: "preview-form5", params: {caseId: caseId}}) 
+    public navigateToPreviewPage() {        
+        this.$router.push({name: "preview-form5"}) 
     }
 
 }

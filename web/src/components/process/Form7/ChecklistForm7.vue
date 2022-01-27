@@ -44,9 +44,12 @@ import { namespace } from "vuex-class";
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import Form7DidYouKnow from "@/components/process/Form7/components/Form7DidYouKnow.vue";
 import Form7QualifyQuestions from "@/components/process/Form7/components/Form7QualifyQuestions.vue";
-import { accountInfoType } from '@/types/Information/Form7';
+import { accountInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{
@@ -59,10 +62,14 @@ export default class ChecklistForm7 extends Vue {
     @commonState.Action
     public UpdateAccountInfo!: (newAccountInfo: accountInfoType) => void
    
+    @form7State.Action
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
+
     disableContinue = true;
     businessAccount = true;
     inactiveButtonClass = "bg-secondary text-white"; 
     activeButtonClass = "bg-success text-white"; 
+    selfRepresenting = false;
     
     mounted(){
         
@@ -86,16 +93,23 @@ export default class ChecklistForm7 extends Vue {
         });
     }
 
-    public disableNavigateForm7(disable: boolean) {        
-        this.disableContinue = disable;       
+    public disableNavigateForm7(disable: boolean, selfRepresenting: boolean) {        
+        this.disableContinue = disable; 
+        this.selfRepresenting = selfRepresenting;      
     }
 
     public navigateToForm7() {
+
+        const form7SubmissionData = {} as form7SubmissionDataInfoType;
+        form7SubmissionData.selfRepresenting = this.selfRepresenting;
+       
+        this.UpdateForm7SubmissionInfo(form7SubmissionData);
+
         if (this.businessAccount){
             this.$router.push({name: "access-form7"});
 
         } else {
-            this.$router.push({name: "start-form7", params: {orderSelected: 'no'}}); 
+            this.$router.push({name: "start-form7"}); 
         }       
                
     }

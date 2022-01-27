@@ -123,11 +123,29 @@ export default class Form7SearchOrderDetails extends Vue {
 
 
     public selectOrder(selectedOrder: supremeCourtOrdersJsonInfoType){
+        const caseInfo = this.supremeCourtCaseJson
+        const url = '/file-detail/parties/'+ caseInfo.fileId; 
         
-        this.UpdateSupremeCourtCaseJson(this.supremeCourtCaseJson);
-        this.UpdateSupremeCourtOrderJson(selectedOrder);
+        this.$http.get(url)
+        .then(res => {            
+            if(res.data){ 
+                caseInfo.parties = res.data
+            }
 
-        this.$emit('selectOrder');
+            this.UpdateSupremeCourtCaseJson(caseInfo);
+            this.UpdateSupremeCourtOrderJson(selectedOrder);
+
+            this.$emit('selectOrder');
+            
+        }, error =>{
+            caseInfo.parties =[]
+            this.UpdateSupremeCourtCaseJson(caseInfo);
+            this.UpdateSupremeCourtOrderJson(selectedOrder);
+
+            this.$emit('selectOrder');
+        })
+
+        
     }
     
 }
