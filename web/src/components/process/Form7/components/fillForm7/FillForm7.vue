@@ -58,6 +58,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
+import moment from 'moment-timezone';
 
 import "@/store/modules/information";
 const informationState = namespace("Information");
@@ -65,14 +66,16 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { locationsInfoType } from '@/types/Common';
+import { accountInfoType, userAccessInfoType, form7SubmissionDataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 
 import FillForm7SummaryInfo from "@/components/process/Form7/components/fillForm7/FillForm7SummaryInfo.vue";
 import FillForm7CommonInfo from "@/components/process/Form7/components/fillForm7/FillForm7CommonInfo.vue";
 import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/components/fillForm7/FillForm7StyleOfProceedingsInfo.vue";
-import moment from 'moment-timezone';
-import { locationsInfoType } from '@/types/Common';
-import { accountInfoType, userAccessInfoType, form7SubmissionDataInfoType, form7StatesInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        
@@ -92,10 +95,10 @@ export default class FillForm7 extends Vue {
     @informationState.Action
     public UpdateCaseLocation!: (newCaseLocation: locationsInfoType) => void
 
-    @informationState.State
+    @form7State.State
     public form7AccessInfo!: userAccessInfoType[];
 
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.State
@@ -104,19 +107,19 @@ export default class FillForm7 extends Vue {
     @informationState.State
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
 
-    @informationState.State
+    @form7State.State
     public currentNoticeOfAppealId: string;
 
-    @informationState.State
+    @form7State.State
     public form7InfoStates: form7StatesInfoType;
 
-    @informationState.Action
+    @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7InfoStates!: (newForm7StatesInfo: form7StatesInfoType) => void
 
     referenceNumber = '';   

@@ -185,10 +185,11 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
 import { documentInfoType } from "@/types/Information";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
-const informationState = namespace("Information");
 
 @Component
 export default class TableForm5 extends Vue {
@@ -196,10 +197,10 @@ export default class TableForm5 extends Vue {
     @Prop({required: true})
     enableActions!: boolean;
     
-    @informationState.State
+    @form5State.State
     public form5FormsJson!: form5FormsJsonDataType[];
     
-    @informationState.Action
+    @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
     
     allDocumentsChecked = false;

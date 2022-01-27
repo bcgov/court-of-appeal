@@ -14,6 +14,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import { supremeCourtCaseJsonDataInfoType } from '@/types/Information/json';
 import Form7CaseInformationSearch from './Form7CaseInformationSearch.vue';
 import FillForm7 from './fillForm7/FillForm7.vue';
@@ -27,10 +30,10 @@ import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 }) 
 export default class Form7CaseInformation extends Vue {
 
-    @informationState.State
+    @form7State.State
     public currentNoticeOfAppealId: string;
     
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
 
     @informationState.State
@@ -39,10 +42,10 @@ export default class Form7CaseInformation extends Vue {
     @informationState.Action
     public UpdateSupremeCourtCaseJson!: (newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType) => void 
   
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
-    @informationState.Action
+    @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
     orderSelected = false;   
@@ -50,15 +53,11 @@ export default class Form7CaseInformation extends Vue {
     mounted(){   
          
         if (this.currentNoticeOfAppealId) {
-            this.orderSelected = true;          
-            
+            this.orderSelected = true;
         } else {
             this.UpdateSupremeCourtCaseJson({} as supremeCourtCaseJsonDataInfoType);
-            this.orderSelected = false;           
-            
-        }  
-        
-        
+            this.orderSelected = false;
+        }        
     }
 
     public startFillingForm7(levelOfCourt, locationId, locationName){
@@ -77,8 +76,6 @@ export default class Form7CaseInformation extends Vue {
 
         this.UpdateForm7SubmissionInfo(form7Data); 
         this.UpdateCurrentNoticeOfAppealId(null);
-
-
         this.orderSelected = true;
     }
 }

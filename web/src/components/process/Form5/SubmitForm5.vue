@@ -59,6 +59,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
 import Form5ProcessHeader from "@/components/process/Form5/components/Form5ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 import { form5StatusInfoType } from '@/types/Information/Form5';
@@ -72,8 +75,8 @@ import { packageInfoType } from '@/types/Information';
 })
 export default class SubmitForm5 extends Vue {
 
-    @informationState.State
-    public currentCaseId: string;
+    @form5State.State
+    public currentNoticeOfHearingOfAppealId: string;
 
     stepsCompleted = {} as form5StatusInfoType;  
     mountedData = false; 
@@ -98,7 +101,7 @@ export default class SubmitForm5 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentNoticeOfHearingOfAppealId+"/submit/";
 
         const header = {
             responseType: "json",

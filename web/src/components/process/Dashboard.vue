@@ -67,6 +67,16 @@ const commonState = namespace("Common");
 
 import "@/store/modules/application";
 const applicationState = namespace("Application")
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
@@ -109,13 +119,13 @@ export default class DashboardPage extends Vue {
     @informationState.State
     public pathType: pathwayTypeInfoType;
     
-    @informationState.Action
+    @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
 
-    @informationState.Action
+    @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
 
     @informationState.Action

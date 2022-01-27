@@ -147,6 +147,9 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import FillForm7SoughtInfo from "@/components/process/Form7/components/fillForm7/FillForm7SoughtInfo.vue";
 import { form7StatesInfoType, form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
 
@@ -160,16 +163,14 @@ export default class FillForm7CommonInfo extends Vue {
     @commonState.State
     public lookups!: lookupsInfoType;
     
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
 
-
-    @informationState.State
+    @form7State.State
     public form7InfoStates: form7StatesInfoType;
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
-
 
     appealedInSupremeCourtOptions = [
         { text: 'Yes', value: true },

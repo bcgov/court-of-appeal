@@ -1,46 +1,21 @@
 import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
-import { form2DataInfoType } from '@/types/Information/Form2';
-import { form5DataInfoType, form5FormsJsonDataType } from '@/types/Information/Form5';
-import { userAccessInfoType, form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
-import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
   namespaced: true
 })
-class Information extends VuexModule {
-    
-    public casesJson: caseJsonDataType[] = [];
+class Information extends VuexModule {    
+  
     public journeyJson = {} as journeyJsonDataType;
     public pathType = {} as pathwayTypeInfoType;
-    public partiesJson = {} as partiesDataJsonDataType;
-    public form2Info = {} as form2DataInfoType;
-
-    public form5FormsJson: form5FormsJsonDataType[] = [];
-    public form5Info = {} as form5DataInfoType;
-
-    public form7FormsJson: form7SubmissionDataInfoType[] = [];
-    public form7SubmissionInfo = {} as form7SubmissionDataInfoType;
-    public form7AccessInfo: userAccessInfoType[] = [];
-    public form7InfoStates = {} as form7StatesInfoType;
+    public partiesJson = {} as partiesDataJsonDataType;     
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     
-    public fileNumber = "";  
-    public currentCaseId = null;
-    public currentNoticeOfAppealId = null;  
-    public currentNoticeOfHearingOfAppealId = null; 
-    public caseLocation: locationsInfoType; 
-
-    @Mutation
-    public setCasesJson(casesJson: caseJsonDataType[]): void {   
-        this.casesJson = casesJson;
-    }    
-    @Action
-    public UpdateCasesJson(newCasesJson: caseJsonDataType[]): void {
-        this.context.commit('setCasesJson', newCasesJson);
-    }
+    public fileNumber = "";
+    public caseLocation: locationsInfoType;   
 
     @Mutation
     public setJourneyJson(journeyJson: journeyJsonDataType): void {   
@@ -67,70 +42,7 @@ class Information extends VuexModule {
     @Action
     public UpdatePartiesJson(newPartiesJson: partiesDataJsonDataType): void {
         this.context.commit('setPartiesJson', newPartiesJson);
-    }
-
-    @Mutation
-    public setForm2Info(form2Info: form2DataInfoType): void {   
-        this.form2Info = form2Info;
-    }    
-    @Action
-    public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
-        this.context.commit('setForm2Info', newForm2Info);
-    }  
-
-    @Mutation
-    public setForm5FormsJson(form5FormsJson: form5FormsJsonDataType[]): void {   
-        this.form5FormsJson = form5FormsJson;
-    }    
-    @Action
-    public UpdateForm5FormsJson(newForm5FormsJson: form5FormsJsonDataType[]): void {
-        this.context.commit('setForm5FormsJson', newForm5FormsJson);
-    }    
-
-    @Mutation
-    public setForm7FormsJson(form7FormsJson: form7SubmissionDataInfoType[]): void {   
-        this.form7FormsJson = form7FormsJson;
-    }    
-    @Action
-    public UpdateForm7FormsJson(newForm7FormsJson: form7SubmissionDataInfoType[]): void {
-        this.context.commit('setForm7FormsJson', newForm7FormsJson);
-    }    
-
-    @Mutation
-    public setForm5Info(form5Info: form5DataInfoType): void {   
-        this.form5Info = form5Info;
-    }    
-    @Action
-    public UpdateForm5Info(newForm5Info: form5DataInfoType): void {
-        this.context.commit('setForm5Info', newForm5Info);
-    }
-
-    @Mutation
-    public setForm7SubmissionInfo(form7SubmissionInfo: form7SubmissionDataInfoType): void {   
-        this.form7SubmissionInfo = form7SubmissionInfo;
-    }    
-    @Action
-    public UpdateForm7SubmissionInfo(newForm7SubmissionInfo: form7SubmissionDataInfoType): void {
-        this.context.commit('setForm7SubmissionInfo', newForm7SubmissionInfo);
-    }
-
-    @Mutation
-    public setForm7AccessInfo(form7AccessInfo: userAccessInfoType[]): void {   
-        this.form7AccessInfo = form7AccessInfo;
-    }    
-    @Action
-    public UpdateForm7AccessInfo(newForm7AccessInfo: userAccessInfoType[]): void {
-        this.context.commit('setForm7AccessInfo', newForm7AccessInfo);
     }   
-
-    @Mutation
-    public setForm7InfoStates(form7InfoStates: form7StatesInfoType): void {   
-        this.form7InfoStates = form7InfoStates;
-    }    
-    @Action
-    public UpdateForm7InfoStates(newForm7InfoStates: form7StatesInfoType): void {
-        this.context.commit('setForm7InfoStates', newForm7InfoStates);
-    }
 
     @Mutation
     public setSupremeCourtCaseJson(supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType): void {   
@@ -166,35 +78,7 @@ class Information extends VuexModule {
     @Action
     public UpdateCaseLocation(newCaseLocation: locationsInfoType): void {
         this.context.commit('setCaseLocation', newCaseLocation);
-    }
-
-    @Mutation
-    public setCurrentCaseId(currentCaseId: string): void {   
-        this.currentCaseId = currentCaseId;
-    }    
-    @Action
-    public UpdateCurrentCaseId(newCurrentCaseId: string): void {
-        this.context.commit('setCurrentCaseId', newCurrentCaseId);
-    }
-
-    @Mutation
-    public setCurrentNoticeOfHearingOfAppealId(currentNoticeOfHearingOfAppealId: string): void {   
-        this.currentNoticeOfHearingOfAppealId = currentNoticeOfHearingOfAppealId;
-    }    
-    @Action
-    public UpdateCurrentNoticeOfHearingOfAppealId(newCurrentNoticeOfHearingOfAppealId: string): void {
-        this.context.commit('setCurrentNoticeOfHearingOfAppealId', newCurrentNoticeOfHearingOfAppealId);
-    }
-
-    @Mutation
-    public setCurrentNoticeOfAppealId(currentNoticeOfAppealId: string): void {   
-        this.currentNoticeOfAppealId = currentNoticeOfAppealId;
-    }    
-    @Action
-    public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
-        this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
-    }
-    
+    }   
     
 }
 

@@ -12,15 +12,24 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
-import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
-import { caseJsonDataType } from '@/types/Information/json';
-
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+const informationState = namespace("Information");
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
+import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
+
+import { caseJsonDataType } from '@/types/Information/json';
 import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
-const informationState = namespace("Information");
 
 @Component({
     components:{
@@ -29,13 +38,13 @@ const informationState = namespace("Information");
 })
 export default class MyDocuments extends Vue {
 
-    @informationState.Action
+    @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
 
-    @informationState.Action
+    @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
     
     windowHeight = 0;

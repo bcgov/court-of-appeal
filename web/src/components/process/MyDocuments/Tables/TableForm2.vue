@@ -186,9 +186,13 @@ import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+const informationState = namespace("Information");
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
 import { caseJsonDataType } from "@/types/Information/json";
 import { documentInfoType } from "@/types/Information";
-const informationState = namespace("Information");
 
 @Component({
     components:{
@@ -201,10 +205,10 @@ export default class TableForm2 extends Vue {
     @Prop({required: true})
     enableActions!: boolean;
     
-    @informationState.State
+    @form2State.State
     public casesJson!: caseJsonDataType[];
     
-    @informationState.Action
+    @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     allDocumentsChecked = false;

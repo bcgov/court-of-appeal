@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-5 v-bind:caseId="caseId"/>            
+            <form-5/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -51,12 +51,11 @@ import { form5StatusInfoType } from '@/types/Information/Form5';
 export default class PreviewForm5 extends Vue {
 
     stepsCompleted = {} as form5StatusInfoType; 
-    caseId = '';  
+    
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;  
-        this.caseId = this.$route.params.caseId;
+        this.dataReady = false;
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -66,7 +65,7 @@ export default class PreviewForm5 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form5", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form5"}); 
     }
 }
 </script>

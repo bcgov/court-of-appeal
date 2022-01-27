@@ -180,11 +180,11 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/information";
-const informationState = namespace("Information");
-
 import "@/store/modules/common";
 const commonState = namespace("Common");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
 import { form7SubmissionDataInfoType, form7StatesInfoType, lookupsInfoType, form7PartiesStatesInfoType, form7PartiesInfoType } from '@/types/Information/Form7';
@@ -196,10 +196,10 @@ import { form7SubmissionDataInfoType, form7StatesInfoType, lookupsInfoType, form
 })
 export default class FillForm7StyleOfProceedingsInfo extends Vue {    
 
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
 
-    @informationState.State
+    @form7State.State
     public form7InfoStates: form7StatesInfoType;
 
     @commonState.State
@@ -208,7 +208,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     @commonState.State
     public lookups!: lookupsInfoType;    
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     partiesFields = [
@@ -245,15 +245,12 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     ]      
     
    
-    dataReady = false;
-  
+    dataReady = false;  
     respondentNames = '';
-    respondents: string[] = [];
-   
+    respondents: string[] = [];   
     respondentSolicitors: string[] = [];     
 
     updateTable = 0;
-
     showConfirmEditParties = false;
     rowInfo;
     moveLeft = false;
@@ -261,8 +258,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     
     styleOfProceedingsInfo = {} as form7SubmissionDataInfoType;
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
-    editStyleOfProceedingsEnabled = true;   
-
+    editStyleOfProceedingsEnabled = true;
 
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
@@ -271,7 +267,6 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
         this.styleOfProceedingsInfo = this.form7SubmissionInfo;
         this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join('; ');
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
-
     }
 
     mounted() { 
@@ -285,8 +280,7 @@ export default class FillForm7StyleOfProceedingsInfo extends Vue {
     }
 
     public extractInfo(){
-        this.styleOfProceedingsInfo.appealingFirm = this.userName;
-        
+        this.styleOfProceedingsInfo.appealingFirm = this.userName;        
         this.styleOfProceedingsInfo.appellants = [];
         this.styleOfProceedingsInfo.respondents = [];         
 

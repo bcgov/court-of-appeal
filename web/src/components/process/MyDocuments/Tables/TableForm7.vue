@@ -158,10 +158,10 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
-const informationState = namespace("Information");
+import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
 
 @Component
 export default class TableForm7 extends Vue {
@@ -169,14 +169,13 @@ export default class TableForm7 extends Vue {
     @Prop({required: true})
     enableActions!: boolean;
     
-    @informationState.State
+    @form7State.State
     public form7FormsJson!: form7SubmissionDataInfoType[];
     
-    @informationState.Action
+    @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
     
     allDocumentsChecked = false;
-
     
     documentsList = [];
   

@@ -33,8 +33,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import Form7Layout from "./Form7Layout.vue";
 import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 
@@ -45,10 +50,10 @@ import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 })
 export default class Form7 extends Vue {    
     
-    @informationState.State
+    @form7State.State
     public currentNoticeOfAppealId: string;  
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     result = {} as form7SubmissionDataInfoType;

@@ -85,6 +85,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import FillForm7HeaderInfo from "@/components/process/Form7/components/fillForm7/FillForm7HeaderInfo.vue";
 import { locationsInfoType } from '@/types/Common';
 import { form7StatesInfoType, form7SubmissionDataInfoType } from '@/types/Information/Form7';
@@ -99,13 +102,13 @@ export default class FillForm7SummaryInfo extends Vue {
     @informationState.State
     public caseLocation: locationsInfoType;
 
-    @informationState.State
+    @form7State.State
     public form7InfoStates: form7StatesInfoType;
 
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     levelOfCourt = "Supreme Court of BC";  

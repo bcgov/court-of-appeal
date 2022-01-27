@@ -588,13 +588,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/information";
-const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
@@ -615,7 +615,7 @@ import { form7SubmissionDataInfoType, lookupsInfoType, form7PartiesInfoType, for
 })
 export default class styleOfProceedingsActions extends Vue {     
 
-    @informationState.State
+    @form7State.State
     public form7SubmissionInfo: form7SubmissionDataInfoType;    
 
     @commonState.State
@@ -624,7 +624,7 @@ export default class styleOfProceedingsActions extends Vue {
     @commonState.State
     public lookups!: lookupsInfoType;    
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
     partyTypeOptions = [
