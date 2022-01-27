@@ -116,10 +116,10 @@ export interface form7StatesInfoType {
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;
-    orderType: null | boolean;
-    appealedInSupremeCourt: null | boolean;
-    makerName: null | boolean;
-    appealNature: null | boolean;
+    appealFrom: null | boolean;
+    wasSupremeAppeal: null | boolean;
+    decisionMaker: null | boolean;
+    involves: null | boolean;
     partOfJudgment: null | boolean;
     orderSought: null | boolean;
     mainAppellant: null | boolean;

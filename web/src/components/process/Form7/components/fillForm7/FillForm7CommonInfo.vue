@@ -8,12 +8,18 @@
                 label-for="order-type">
                 <b-form-radio-group                
                     v-model="commonInfo.appealFrom"
-                    :state="form7InfoStates.orderType"
+                    :state="form7InfoStates.appealFrom"
                     @change="update"
                     id="order-type"
                     :options="appealFromOptionsListNames"
                     style="font-size: 1rem; font-weight:400;"                    
                 ></b-form-radio-group>
+                <span
+                    v-if="(form7InfoStates.appealFrom != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify Type of Order.
+                </span>
             </b-form-group>
                 
             <b-form-group
@@ -47,12 +53,19 @@
                 <b-form-radio-group                
                     v-model="commonInfo.wasSupremeAppeal"
                     @change="update"
-                    :state="form7InfoStates.appealedInSupremeCourt"
+                    :state="form7InfoStates.wasSupremeAppeal"
                     id="appealed-in-supreme-court"
                     style="font-size: 1rem; font-weight:400;" 
                     :options="appealedInSupremeCourtOptions"
-                ></b-form-radio-group>                
+                ></b-form-radio-group> 
+                <span
+                    v-if="(form7InfoStates.wasSupremeAppeal != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify whether this matter was already appealed in Supreme Court.
+                </span>               
             </b-form-group>
+            
             <b-form-group
                 v-if="commonInfo.wasSupremeAppeal"
                 class="ml-4 mt-3 labels"                
@@ -60,7 +73,7 @@
                 label-for="maker-name">
                 <b-form-input 
                     id="maker-name"    
-                    :state="form7InfoStates.makerName"  
+                    :state="form7InfoStates.decisionMaker"  
                     @change="update"              
                     v-model="commonInfo.decisionMaker">
                 </b-form-input>
@@ -70,7 +83,7 @@
         <b-card class="mb-4 border-white bg-white">
             <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Nature of the Appeal</p>            
             <b-form-group
-                class="ml-4 mt-3 labels"
+                class="ml-4 mt-3 labels"               
                 label="Which of the following best describes what this appeal involves?" 
                 label-for="appeal-nature">
                 <span style="font-size: 1rem; font-weight:400;">CIVIL</span>
@@ -78,11 +91,17 @@
                     id="appeal-nature"     
                     style="font-size: 1rem; font-weight:500;"        
                     v-model="commonInfo.involves"
-                    :state="form7InfoStates.appealNature"
+                    :state="form7InfoStates.involves"
                     @change="update"
                     :options="involvesOtherListNames"                
                     stacked                
                 ></b-form-radio-group>
+                <span
+                    v-if="(form7InfoStates.involves != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify Nature of the Appeal.
+                </span>
              </b-form-group>
 
             <b-form-group
