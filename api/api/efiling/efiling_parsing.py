@@ -18,7 +18,7 @@ class EFilingParsing:
         
         converted_data = {
             "formId": case.id,
-            "fileNumber": data["formSevenNumber"].replace("CA", ""),
+            "fileNumber": "CA"+ data["formSevenNumber"].replace("CA", ""),
             "locationCode": "COA",
             "parties":[],
             # "parties": flatten(
@@ -55,6 +55,53 @@ class EFilingParsing:
             ),
             "cancelUrl": self.url_from_headers(
                 request, f"submitted/{case.id}/cancel/APP"
+            ),
+        }
+
+        return converted_data
+
+
+    def convert_form7_data_for_efiling(self, request, notice, documents):
+        
+        id = str(notice.noticeOfAppealId)
+        converted_data = {
+            "formId": id,
+            "fileNumber": 20191119, #"S"+notice.lowerCourtFileNo.replace("S", ""),
+            "locationCode":"COA", #  notice.lowerCourtRegistryId,
+            "parties":[],
+            # "parties": flatten(
+            #     [
+                    
+            #         {
+            #             "partyType": "IND",
+            #             "roleType": "Appellant",
+            #             "firstName": "firstName",
+            #             "middleName": "",
+            #             "lastName": "lastName",
+            #         }                        
+                   
+            #         # [
+            #         #     {
+            #         #         "partyType": "IND",
+            #         #         "roleType": "Respondent",
+            #         #         "firstName": respondent["firstName"],
+            #         #         "middleName": "",
+            #         #         "lastName": respondent["lastName"],
+            #         #     }
+            #         #     for respondent in data["respondents"]
+            #         # ],
+            #     ]
+            # ),  
+            "organizationParties": [],
+            "documents": documents,            
+            "successUrl": self.url_from_headers(
+                request, f"submitted/{id}/success/NAA"
+            ),
+            "errorUrl": self.url_from_headers(
+                request, f"submitted/{id}/error/NAA"
+            ),
+            "cancelUrl": self.url_from_headers(
+                request, f"submitted/{id}/cancel/NAA"
             ),
         }
 
