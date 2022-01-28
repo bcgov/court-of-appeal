@@ -1071,21 +1071,22 @@ export default class styleOfProceedingsActions extends Vue {
 
     public confirmEditStyleOfProceedings(){ 
 
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+        const styleOfProceedings = this.form7SubmissionInfo;
 
         this.styleOfProceedingDataReady = false;
         this.showEditStyleOfProceedingWindow = true;       
         this.showConfirmEditStyleOfProceeding = false;    
         
         this.noRolePartyManualSop = [];
-        this.loadSopInfo(this.styleOfProceedingsInfo.appellants);
-        this.loadSopInfo(this.styleOfProceedingsInfo.respondents); 
+        this.loadSopInfo(styleOfProceedings.appellants);
+        this.loadSopInfo(styleOfProceedings.respondents); 
 
-        this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)        
+        styleOfProceedings.manualSop = styleOfProceedings.manualSop.concat(this.noRolePartyManualSop)        
 
-        this.UpdateForm7ManualSopOrder([...Array(this.styleOfProceedingsInfo.manualSop.length).keys()])
+        this.UpdateForm7ManualSopOrder([...Array(styleOfProceedings.manualSop.length).keys()])
 
-        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+        this.UpdateForm7SubmissionInfo(styleOfProceedings);
+
         this.styleOfProceedingsInfo = JSON.parse(JSON.stringify(this.form7SubmissionInfo));
         this.styleOfProceedingDataReady = true;
     }
