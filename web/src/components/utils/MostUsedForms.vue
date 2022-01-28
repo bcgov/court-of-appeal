@@ -27,16 +27,26 @@
     import { Component, Vue } from 'vue-property-decorator';
     
     import { namespace } from "vuex-class";
-    import "@/store/modules/information";
-    const informationState = namespace("Information");
+
+    import "@/store/modules/forms/form2";
+    const form2State = namespace("Form2");
+
+    import "@/store/modules/forms/form5";
+    const form5State = namespace("Form5");
+
+    import "@/store/modules/forms/form7";
+    const form7State = namespace("Form7");
 
     @Component
     export default class MostUsedForms extends Vue {        
         
-        @informationState.Action
+        @form2State.Action
         public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
-        @informationState.Action
+        @form5State.Action
+	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+
+        @form7State.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
                 
         public startNewForm2Document(){
@@ -45,6 +55,7 @@
         }
 
         public startNewForm5Document(){
+            this.UpdateCurrentNoticeOfHearingOfAppealId(null);
             this.$router.push({name: "start-form5" })
         }
 

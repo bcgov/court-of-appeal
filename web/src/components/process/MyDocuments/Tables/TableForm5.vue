@@ -343,7 +343,7 @@ export default class TableForm5 extends Vue {
         const caseId = fileInfo.fileNumber.toString()
         this.UpdateCurrentNoticeOfHearingOfAppealId(caseId);  
         // console.log(fileInfo)      
-        this.$router.push({name: "preview-form5", params: {caseId: caseId}});
+        this.$router.push({name: "fill-form5"});
        
     }
 

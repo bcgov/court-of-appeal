@@ -70,8 +70,8 @@ import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonD
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
 
 @Component
 export default class Form2Layout extends Vue {
@@ -79,7 +79,7 @@ export default class Form2Layout extends Vue {
     @Prop({required:true})
     result!: form2DataInfoType; 
 
-    @informationState.Action
+    @form2State.Action
     public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void
     
     dataReady = false;
