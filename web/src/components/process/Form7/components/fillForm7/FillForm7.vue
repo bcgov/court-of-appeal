@@ -272,7 +272,7 @@ export default class FillForm7 extends Vue {
 
     public getForm7Info(){
 
-        const data = this.form7SubmissionInfo;
+        const data = JSON.parse(JSON.stringify(this.form7SubmissionInfo));
         data.electronicallyFiled = 'N';
         data.trialDurationDays = this.form7SubmissionInfo.trialDurationDays.toString();
         data.appealingFirm = this.form7SubmissionInfo.appealingFirm;
