@@ -2,23 +2,30 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
-                </b-button>
-            </b-col>
-            <b-col cols="3">
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
             </b-col>
         </b-row>  
     
@@ -42,6 +49,8 @@ const form7State = namespace("Form7");
 
 import Form7Layout from "./Form7Layout.vue";
 import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
+
+import moment from 'moment';
 
 @Component({
     components:{        
@@ -70,7 +79,7 @@ export default class Form7 extends Vue {
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = `"Form 7 (2016-06-28)"`;
+        const bottomLeftText = `"Form 7 (`+moment().format("MMM DD, YYYY")+`)"`;
         const bottomRightText = `" "`;        
         const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
@@ -122,6 +131,10 @@ export default class Form7 extends Vue {
 
     public navigateToEditPage() {        
         this.$router.push({name: "start-form7"});
+    }
+
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
     }
  
     public getForm7Data() {        

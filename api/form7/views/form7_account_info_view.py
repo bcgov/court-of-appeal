@@ -25,7 +25,7 @@ class Form7AccountInfoView(APIView):
    
     def get(self, request):
                
-        account_info = self.form7_csows_account_info.get_account_info(request.user.account_id, request.user.client_id)
+        account_info = self.form7_csows_account_info.get_account_info(request.user.account_id, request.user.client_id, request.user)
         
         if account_info is not None:
             return Response(helpers.serialize_object(account_info))

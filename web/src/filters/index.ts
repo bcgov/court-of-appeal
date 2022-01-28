@@ -201,8 +201,8 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 				margin: .7in 0.7in 0.9in 0.7in !important;
 				font-size: 10pt !important;			
 				@bottom-left {
-					content:`+ pageFooterLeft +
-					`white-space: pre;
+					content: `+pageFooterLeft+`;
+					white-space: pre;
 					font-size: 7pt;
 					color: #606060;
 				}

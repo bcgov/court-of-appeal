@@ -1,6 +1,5 @@
 <template>
     <b-card no-body class="bg-white border-white">
-
         <b-card bg-variant="light" v-if= "!dataReady">
             <b-overlay :show= "true"> 
                 <b-card  style="min-height: 100px;"/>                   
@@ -125,7 +124,7 @@ export default class Form7SearchOrderDetails extends Vue {
     public selectOrder(selectedOrder: supremeCourtOrdersJsonInfoType){
         const caseInfo = this.supremeCourtCaseJson
         const url = '/file-detail/parties/'+ caseInfo.fileId; 
-        
+        this.dataReady = false;
         this.$http.get(url)
         .then(res => {            
             if(res.data){ 
@@ -134,14 +133,14 @@ export default class Form7SearchOrderDetails extends Vue {
 
             this.UpdateSupremeCourtCaseJson(caseInfo);
             this.UpdateSupremeCourtOrderJson(selectedOrder);
-
+            this.dataReady = true;
             this.$emit('selectOrder');
             
         }, error =>{
             caseInfo.parties =[]
             this.UpdateSupremeCourtCaseJson(caseInfo);
             this.UpdateSupremeCourtOrderJson(selectedOrder);
-
+            this.dataReady = true;
             this.$emit('selectOrder');
         })
 

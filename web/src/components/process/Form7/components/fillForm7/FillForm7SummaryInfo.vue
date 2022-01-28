@@ -4,7 +4,7 @@
 
         <p class="ml-4 mt-2" style="font-size: 1.25rem;">Lower Court Case Information</p>
         <b-card-header 
-            class="mx-4 " 
+            class="mx-4 rounded" 
             header-bg-variant="primary" 
             header-border-variant="white">                
             <fill-form-7-header-info @displayResults="displayResults"/>
