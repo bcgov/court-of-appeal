@@ -295,9 +295,9 @@ export default class Form9StyleOfProceeding extends Vue {
         let method = 'post';
         let url = '/form9/forms';
 
-        if (this.currentRequisitionId){
-            method = 'put';
-            url = '/form9/forms/'+this.currentRequisitionId;               
+        // if (this.currentRequisitionId){
+        //     method = 'put';
+        //     url = '/form9/forms/'+this.currentRequisitionId;               
 
             if (!draft && !this.checkStates()){
                
@@ -312,35 +312,35 @@ export default class Form9StyleOfProceeding extends Vue {
             }
             this.saveInfo(options, draft);
 
-        } else {           
+        // } else {           
 
-            const options = {
-                method: method,
-                url: url,
-                data: this.form9Info
-            }
-            this.saveInfo(options, draft);
-        }        
+        //     const options = {
+        //         method: method,
+        //         url: url,
+        //         data: this.form9Info
+        //     }
+        //     this.saveInfo(options, draft);
+        // }        
        
     }
 
     public saveInfo(options, draft){
 
-        this.$http(options)
-            .then(response => {
-                if(response.data){
-                    if(options.method == "post"){
-                        this.UpdateCurrentRequisitionId(response.data.file_id);
-                        this.extractPartiesData();                        
-                    }
+        // this.$http(options)
+        //     .then(response => {
+        //         if(response.data){
+        //             if(options.method == "post"){
+        //                 this.UpdateCurrentRequisitionId(response.data.file_id);
+        //                 this.extractPartiesData();                        
+        //             }
 
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-                }
-            }, err => {
-                const errMsg = err.response.data.error;
+            //     }
+            // }, err => {
+            //     const errMsg = err.response.data.error;
                 
-            })
+            // })
     }   
 
     public navigateToPreviewPage() {        

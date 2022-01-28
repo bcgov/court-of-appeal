@@ -22,6 +22,11 @@
                 target="_blank">
                 Notice of Settlement or Abandonment (Form 6)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm9Document"
+                target="_blank">
+                Requisition (Form 9)                
+            </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
         </ol>
@@ -35,6 +40,9 @@
     import "@/store/modules/information";
     const informationState = namespace("Information");
 
+    import "@/store/modules/forms/form9";
+    const form9State = namespace("Form9");
+
     @Component
     export default class MostUsedForms extends Vue {        
         
@@ -43,6 +51,9 @@
 
         @informationState.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+        @form9State.Action
+        public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
@@ -60,6 +71,11 @@
         public startNewForm7Document(){
             this.UpdateCurrentNoticeOfAppealId(null);
             this.$router.push({name: "checklist-form7" })
+        }
+
+        public startNewForm9Document(){
+            this.UpdateCurrentRequisitionId(null);
+            this.$router.push({name: "start-form9" })
         }
 
     }

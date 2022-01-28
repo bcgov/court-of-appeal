@@ -49,6 +49,9 @@ export default class Form9 extends Vue {
     @form9State.State
     public currentRequisitionId: string;
 
+    @form9State.State
+    public form9Info: form9DataInfoType;
+
     @form9State.Action
     public UpdateForm9Info!: (newForm9Info: form9DataInfoType) => void
 
@@ -57,7 +60,10 @@ export default class Form9 extends Vue {
    
     mounted(){
         this.dataReady = false;
-        this.getForm9Data(); 
+        this.result = this.form9Info;
+        //TODO: remove above line and uncomment getForm9Data
+        this.dataReady = true;
+        // this.getForm9Data(); 
     }   
            
     public onPrint() { 

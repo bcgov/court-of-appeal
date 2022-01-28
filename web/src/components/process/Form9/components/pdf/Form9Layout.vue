@@ -54,11 +54,10 @@
             </div>
 
             <div style="border: 1px solid #D8D8D8; background: #D8D8D8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
-                <div style="font-weight: 700; margin-bottom: 0.75rem;">
-                    To the appellant(s):
-                </div>
-                <div>
-                    A person or party who abandons an appeal may be liable for the costs associated with the appeal.
+                <div>                    
+                    This form may be used for general requests, including but not limited to: setting a new application 
+                    hearing date for matters adjourned generally, adjourning matters by consent, and requests to appear 
+                    by phone (which must include a phone number and reason for the request).
                 </div>
             </div>
 
@@ -69,116 +68,27 @@
                 <div class="row">
                     <div 
                         style="margin-left: 0; border: 1px solid #D8D8D8; background: #D8D8D8; font-weight: 700; max-width: 90%; padding: 0.5rem;">
-                            Name of the party(ies) who wish to abandon an appeal or cross appeal
+                            Name of the party(ies) filing the requisition
                     </div>
                     <div style="margin: 7px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
                 </div>                   
             </div>
-            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.abandoningParties.join(', ')}}</div>
-        </div>
-
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.25rem; font-weight: 700;">                        
-                        The party is abandoning an ...
-                    </div>
-                    <div style="margin: -5px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-4"> 
-                <div class="row">              
-                    <check-box 
-                        style="margin: 5px 0 0 20px; width: 70%;" 
-                        :check="(result.abandonType == 'Appeal')?'yes':''" 
-                        shiftmark="1" 
-                        marginLeft="0.5rem"
-                        text="Appeal"/> 
-                    <div style="margin: 5px 0 0 0;">or</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                    
-                <check-box 
-                    style="padding: 0; margin: 5px 0 0 0; width: 80%;" 
-                    :check="(result.abandonType == 'Cross Appeal')?'yes':''"
-                    shiftmark="1" 
-                    marginLeft="0.5rem"
-                    text="Cross Appeal"/>
-                
-            </div>
-        </div>
-
-        <div class="my-3 row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div 
-                        style="margin-left: 0; border: 1px solid #D8D8D8; background: #D8D8D8; font-weight: 700; max-width: 90%; padding: 0.5rem;">
-                            Which party(ies) are you abandoning against?
-                    </div>
-                    <div style="margin: 7px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.abandoningAgainstParties.join(', ')}}</div>
-        </div>
+            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.filingRequisitionParties.join(', ')}}</div>
+        </div>    
 
         <div class="my-3 row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
             <div class="col-md-4">
                 <div class="row">
                     <div 
                         style="margin-left: 0; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 90%; padding: 0.5rem;">
-                            <b>Who made the order?</b><br>
-                            <i>Name the justice or other decision maker who pronounced the order you are abandoning.</i>
+                            <b>Relief sought</b><br>
+                            <i>Describe your request and indicate whether it is by consent.</i>
                     </div>
                     <div style="margin: 25px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
                 </div>                   
             </div>
-            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.judgeName}}</div>
-        </div>
-
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div 
-                        style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.5rem;">
-                            <b>Date the order under appeal was pronounced</b><br>
-                            <i>Not the date the order was entered.</i>
-                    </div>
-                    <div style="margin: 15px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-4">
-                <div style="margin: 17px -15px 0 -15px; border: 1px solid black; max-width: 100%; padding: 0.5rem; text-align: center;">{{result.orderDate}}</div>
-                <div style="margin: 0 0 -15px 75px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                <div style="margin: 0 -15px 0 5px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 80%; font-style: italic; padding: 0.5rem; text-align: center;">
-                    DD/MM/YYYY
-                </div>
-                
-            </div>
-           
-        </div>
-
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div 
-                        style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.5rem;">
-                            <b>Date initiating document in the appeal or cross appeal you are abandoning was filed</b><br>
-                            <i>Notice of Appeal/Form 1 or Notice of Cross Appeal/Form 3.</i>
-                    </div>
-                    <div style="margin: 35px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-4">
-                <div style="margin: 35px -15px 0 -15px; border: 1px solid black; max-width: 100%; padding: 0.5rem; text-align: center;">{{result.initiatingDocumentDate}}</div>
-                <div style="margin: 0 0 -15px 75px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                <div style="margin: 0 -15px 0 5px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 80%; font-style: italic; padding: 0.5rem; text-align: center;">
-                    DD/MM/YYYY
-                </div>
-                
-            </div>
-           
-        </div>        
+            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.reliefSought}}</div>
+        </div>         
 
         <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
             <div class="col-md-4" >
