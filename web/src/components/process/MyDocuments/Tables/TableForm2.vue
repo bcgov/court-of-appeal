@@ -351,6 +351,7 @@ export default class TableForm2 extends Vue {
     }
 
     public createDocument() {
+        this.UpdateCurrentCaseId(null);
         this.$router.push({name: "start-form2" });
     }
 

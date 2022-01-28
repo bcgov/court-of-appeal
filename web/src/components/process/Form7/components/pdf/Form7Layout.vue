@@ -22,7 +22,7 @@
             <div style="width:23%; margin: 0; padding:0;">
                 Supreme Court File No.
             </div>
-            <div style="width:20%; margin: 0; padding:0;">{{result.lowerCourtFileNo}}</div>
+            <div style="width:20%; margin: 0; padding:0; color:#000;">{{result.lowerCourtFileNo}}</div>
         </div>
 
         <div class="my-2 row" style="line-height:1rem; padding:0; font-size:10pt;">
@@ -30,7 +30,7 @@
             <div style="width:23%; margin: 0; padding:0;">
                 Supreme Court Registry
             </div>
-            <div style="width:20%; margin: 0; padding:0;"> {{caseLocation.name}}</div>
+            <div style="width:20%; margin: 0; padding:0; color:#000;"> {{caseLocation.name}}</div>
         </div>
         
 <!-- <Parties> -->
@@ -64,7 +64,7 @@
 <!-- <Hereby> -->
         <div class="mt-3 mb-4" style="display: block; text-align: center; font-weight: 700; font-size:11pt;">NOTICE OF APPEAL</div>       
 
-        <div class="mt-4">
+        <div class="mt-4" style="line-height:1.15rem;" >
             <underline-form 
                 style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="29rem" 
@@ -232,19 +232,19 @@
         </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
-            The trial/hearing of this proceeding occupied {{result.trialDurationDays}} days.
+            The trial/hearing of this proceeding occupied <b style="color:#000">{{result.trialDurationDays}}</b> days.
         </div>
 
-        <div style="margin:1rem 0 0 0.25rem;">
-            Dated electronically in British Columbia, this {{currentDate}}.
+        <div style="margin:0.25rem 0 0 0.25rem;">
+            Dated electronically in British Columbia, this <span style="color:#000">{{currentDate}}</span>.
         </div>
 
         <div class="row" style="margin:0; padding:0;">
 
-            <div style="width:67%"></div>
-            <div style="width:33%; padding:0; margin:0;">
+            <div style="width:62%"></div>
+            <div style="width:38%; padding:0; margin:0;">
                 <div style="height:3rem; border:1px solid; margin:0;"></div>
-                <div style="text-align: center; margin:0;">
+                <div style="text-align: center; margin:0; color:#000;">
                     {{result.appealingFirm}}
                 </div>
                 <div style="margin:0; padding:0; text-align: center;">
@@ -253,36 +253,37 @@
             </div>
 
         </div>
-
-        <underline-form 
-                style="text-indent:0px;display:inline-block;margin:1rem 0 0.5rem 0;" 
-                textwidth="33.5rem" 
-                beforetext="To the respondent(s):" 
+        <div style="line-height:1.15rem;">
+            <underline-form 
+                    style="text-indent:0px;display:inline-block;margin:1rem 0 0.5rem 0;" 
+                    textwidth="33.5rem" 
+                    beforetext="To the respondent(s):" 
+                    hint=""
+                    :text="respondentNames.toString()"/>
+            <underline-form 
+                style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
+                textwidth="34.5rem" 
+                beforetext="And to its solicitor:" 
                 hint=""
-                :text="respondentNames.toString()"/>
-        <underline-form 
-            style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
-            textwidth="34.5rem" 
-            beforetext="And to its solicitor:" 
-            hint=""
-            :text="(result.respondentSolicitor)?result.respondentSolicitor:''"/>
-        <underline-form 
-            style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
-            textwidth="29rem" 
-            hint=""
-            beforetext="This Notice of Appeal is given by" 
-            :text="result.appealingFirm"/>
-       
-        <div class="print-block" style="margin:0 0 0 0.25rem;">
-            whose address for service is
-        <div v-if="result.appealingFirmAddress" 
-            class="answerbox">{{result.appealingFirmAddress}}</div>
-        <div v-else style="margin-bottom:3rem;"></div>  
-        </div> 
+                :text="(result.respondentSolicitor)?result.respondentSolicitor:''"/>
+            <underline-form 
+                style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
+                textwidth="29rem" 
+                hint=""
+                beforetext="This Notice of Appeal is given by" 
+                :text="result.appealingFirm"/>
+        
+            <div class="print-block" style="margin:0 0 0 0.25rem;">
+                whose address for service is
+                <div v-if="result.appealingFirmAddress" 
+                    class="answerbox">{{result.appealingFirmAddress}}</div>
+                <div v-else style="margin-bottom:3rem;"></div>  
+            </div> 
+        </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
             To the respondent(s): 
-            <p style="margin-top:0.75rem;">
+            <p style="margin-top:0.45rem;">
                 IF YOU INTEND TO PARTICIPATE in this appeal, YOU MUST GIVE NOTICE of your intention by filing a form entitled "Notice of
                 Appearance" (Form 2 of the Court of Appeal Rules) in a Court of Appeal registry and serve the notice of appearance on the
                 appellant WITHIN 10 DAYS of receiving this Notice of Appeal.
@@ -299,16 +300,16 @@
                     (b) the parties are not obliged to serve any further documents on you.
                 </p>
             
-            <p style="margin-top:1.25rem;">
+            <p style="margin-top:0.75rem;">
                 The filing registries for the British Columbia Court of Appeal are as follows:
             </p>
 
             <div class="row" style="margin:0.25rem 0 0 0; padding:0" >
                 <div style="padding:0">
                     <div style="display:block;">Central Registry:</div>
-                    <div style="display:block;">B.C. Court of Appeal</div>
-                    <div style="display:block;">Suite 400, 800 Hornby Street</div>
-                    <div style="display:block;">Vancouver BC V6Z 2C5</div>
+                    <div style="text-indent:0.5rem;display:block;">B.C. Court of Appeal</div>
+                    <div style="text-indent:0.5rem;display:block;">Suite 400, 800 Hornby Street</div>
+                    <div style="text-indent:0.5rem;display:block;">Vancouver BC V6Z 2C5</div>
                 </div>
             </div>
 
@@ -316,11 +317,11 @@
                     
                 <div style="width:50%; padding:0">            
                     <div style="display:block;">Other Registries:</div>
-                    <div style="display:block;">B.C. Court of Appeal</div>
-                    <div style="display:block;">The Law Courts</div>
-                    <div style="display:block;">P.O. Box 9248 STN PROV GOVT</div>
-                    <div style="display:block;">850 Burdett Ave</div>
-                    <div style="display:block;">Victoria BC V8W 1B4</div>
+                    <div style="text-indent:0.5rem;display:block;">B.C. Court of Appeal</div>
+                    <div style="text-indent:0.5rem;display:block;">The Law Courts</div>
+                    <div style="text-indent:0.5rem;display:block;">P.O. Box 9248 STN PROV GOVT</div>
+                    <div style="text-indent:0.5rem;display:block;">850 Burdett Ave</div>
+                    <div style="text-indent:0.5rem;display:block;">Victoria BC V8W 1B4</div>
                 </div>
 
                 <div style="width:50%;">   

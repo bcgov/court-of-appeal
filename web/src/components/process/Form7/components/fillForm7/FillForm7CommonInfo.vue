@@ -23,7 +23,7 @@
             </b-form-group>
                 
             <b-form-group
-                class="ml-4 labels"
+                class="ml-4 mt-5 labels"
                 label="Was this matter already appealed in Supreme Court?" 
                 label-for="appealed-in-supreme-court">
                 <p class="content">
@@ -34,7 +34,7 @@
                         Supreme Court Civil Rules 18-3
                     </a>
                 </p>
-                <p class="content">
+                <p class="content mt-1">
                     From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
                     <a
                         href=""
@@ -42,7 +42,7 @@
                         Supreme Civil Court Rules 23-6(8)
                     </a>
                 </p>
-                <p class="content">
+                <p class="content mt-1">
                     From a <b>Tribunal</b> to a Supreme Court Judge - 
                     <a
                         href=""
@@ -50,7 +50,8 @@
                         Supreme Court Civil Rules 18-3
                     </a>
                 </p>
-                <b-form-radio-group                
+                <b-form-radio-group 
+                    class="mt-4"               
                     v-model="commonInfo.wasSupremeAppeal"
                     @change="update"
                     :state="form7InfoStates.wasSupremeAppeal"
@@ -68,7 +69,7 @@
             
             <b-form-group
                 v-if="commonInfo.wasSupremeAppeal"
-                class="ml-4 mt-3 labels"                
+                class="ml-4 mt-5 labels"                
                 label="What's the name of the maker of the original decision, direction or order?"
                 label-for="maker-name">
                 <b-form-input 
@@ -86,7 +87,7 @@
                 class="ml-4 mt-3 labels"               
                 label="Which of the following best describes what this appeal involves?" 
                 label-for="appeal-nature">
-                <span style="font-size: 1rem; font-weight:400;">CIVIL</span>
+                <div style="margin:0 0 0.25rem 0; font-size: 1rem; font-weight:400;">CIVIL</div>
                 <b-form-radio-group  
                     id="appeal-nature"     
                     style="font-size: 1rem; font-weight:500;"        

@@ -23,11 +23,15 @@
         @informationState.Action
     	public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
+		@informationState.Action
+    	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
         mounted() {
         
         }
 		public resetCaseId(){
 			this.UpdateCurrentCaseId(null);
+			this.UpdateCurrentNoticeOfAppealId(null);
 		}
 	}
 </script>

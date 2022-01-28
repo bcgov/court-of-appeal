@@ -1,6 +1,9 @@
 <template>
     <b-card v-if="dataReady" no-body border-variant="light" bg-variant="light" :key="updatedInfo">
-       
+        
+              
+        <save-or-preview-buttons :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm7="saveForm7" />    
+
         <fill-form-7-summary-info class="mx-2" @displayResults="displayResults"/>
 
         <b-card class="mb-4 border-light bg-light">
@@ -26,32 +29,8 @@
             </b-form-group>
         </b-card>
 
-        <b-row>
-            <b-col cols="9" style="padding-right: 0;">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="saveForm7(true)"
-                    >
-                    <i class="fas fa-save mr-1"></i>Save
-                </b-button>
-            </b-col>
-            <b-col cols="3">
-                <b-button
-                    style="float: right;" 
-                    variant="primary"
-                    @click="saveForm7(false)"
-                    >Preview Form
-                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
-                </b-button>
-            </b-col>
-            
-        </b-row> 
-        <b-row 
-            v-if="expiredDeadline" 
-            style="font-size: 0.75rem;" 
-            class="text-danger ml-auto mr-0 mt-1">The deadline for submission has expired.
-        </b-row>
+        <save-or-preview-buttons :expiredDeadline="expiredDeadline" @saveForm7="saveForm7" />
+        
     </b-card>
 </template>
 
@@ -74,11 +53,14 @@ import FillForm7StyleOfProceedingsInfo from "@/components/process/Form7/componen
 import moment from 'moment-timezone';
 import { locationsInfoType } from '@/types/Common';
 
+import SaveOrPreviewButtons from './components/SaveOrPreviewButtons.vue'
+
 @Component({
     components:{        
         FillForm7SummaryInfo,
         FillForm7CommonInfo,
-        FillForm7StyleOfProceedingsInfo
+        FillForm7StyleOfProceedingsInfo,
+        SaveOrPreviewButtons
     }
 })
 export default class FillForm7 extends Vue {    

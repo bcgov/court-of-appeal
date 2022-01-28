@@ -2,6 +2,7 @@ import logging
 
 from form7.utils import (convert_full_address , convert_full_name) 
 from .form7_csows_extention_caller_base import Form7CsowsExtentionCallerBase
+from form7.form7_cso_web_service.form7_csows_authorized_user_info import Form7AuthorizedUserInfo
 
 logger = logging.getLogger(__name__)
 
@@ -13,9 +14,16 @@ class Form7AccountInfo:
         Form7CsowsExtentionCallerBase.__init__(self)
 
         
-    def get_account_info(self, account_id, client_id) -> {}: 
+    def get_account_info(self, account_id, client_id, user) -> {}: 
 
         account_info = self.client.service.getCsoClientProfiles(accountId=account_id)
+        
+        if 'account' not in  account_info or account_info['account'] is None:
+            auth_user = Form7AuthorizedUserInfo()
+            auth_user.get_authorized_user_info(user.universal_id, user.authorization_id)
+            account_info = self.client.service.getCsoClientProfiles(accountId=auth_user.account_id)
+            print(account_info)
+
         return self.create_response(account_info, account_id, client_id)
 
 
@@ -31,21 +39,34 @@ class Form7AccountInfo:
                 "fullName": convert_full_name(client['givenName'],client['middleName'],client['surname']),
                 "isAdmin": client['isAdmin']
             })
-        
-        province = account['province']
-        if province is None:  province="BC"
 
-        data = {         
-            "accountId": account_id,
-            "clientId": client_id,
-            "name": account['accountName'],
-            "address": convert_full_address(account['addressLine1'],account['addressLine2'],account['addressLine3']),
-            "city":account['city'],
-            "postcode":account['postalCode'],
-            "province": province,
-            "isFirm":len(clients)>1,
-            "accountUsers": accountUsers        
-        }
+        if account:
+            province = account['province']
+            if province is None:  province="BC"
+
+            data = {         
+                "accountId": account_id,
+                "clientId": client_id,
+                "name": account['accountName'],
+                "address": convert_full_address(account['addressLine1'],account['addressLine2'],account['addressLine3']),
+                "city":account['city'],
+                "postcode":account['postalCode'],
+                "province": province,
+                "isFirm":len(clients)>1,
+                "accountUsers": accountUsers        
+            }
+        else:
+            data = {         
+                "accountId": account_id,
+                "clientId": client_id,
+                "name": None,
+                "address": None,
+                "city":None,
+                "postcode":None,
+                "province": None,
+                "isFirm":len(clients)>1,
+                "accountUsers": accountUsers
+            }
 
         return data
 
