@@ -616,7 +616,7 @@ import sortStyleOfProceeding from './util/sortStyleOfProceeding';
 export default class styleOfProceedingsActions extends Vue {     
 
     @informationState.State
-    public form7SubmissionInfo: form7SubmissionDataInfoType;    
+    public form7SubmissionInfo!: form7SubmissionDataInfoType;    
 
     @commonState.State
     public userName!: string;
@@ -626,6 +626,12 @@ export default class styleOfProceedingsActions extends Vue {
 
     @informationState.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
+
+    @informationState.State
+    public form7ManualSopOrder!: number[];
+
+    @informationState.Action
+    public UpdateForm7ManualSopOrder!: (newform7ManualSopOrder: number[]) => void
 
     partyTypeOptions = [
         {text: 'an individual', value: false},
@@ -737,8 +743,6 @@ export default class styleOfProceedingsActions extends Vue {
     form7PartiesStates = {} as form7PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;   
     noRolePartyManualSop: manualSopInfoType[] = [];
-
-    tmpManualSop=[]
 
     referenceNumber = '';    
     updatedInfo = 0;
@@ -1070,7 +1074,6 @@ export default class styleOfProceedingsActions extends Vue {
         this.styleOfProceedingsInfo = this.form7SubmissionInfo;
 
         this.styleOfProceedingDataReady = false;
-        this.tmpManualSop=this.styleOfProceedingsInfo.manualSop
         this.showEditStyleOfProceedingWindow = true;       
         this.showConfirmEditStyleOfProceeding = false;    
         
@@ -1080,7 +1083,10 @@ export default class styleOfProceedingsActions extends Vue {
 
         this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)        
 
+        this.UpdateForm7ManualSopOrder([...Array(this.styleOfProceedingsInfo.manualSop.length).keys()])
+
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+        this.styleOfProceedingsInfo = JSON.parse(JSON.stringify(this.form7SubmissionInfo));
         this.styleOfProceedingDataReady = true;
     }
 
@@ -1182,6 +1188,13 @@ export default class styleOfProceedingsActions extends Vue {
 
     public saveNewStyleOfProceeding(){
         console.log('save new SOP')
+        
+        const msops = []
+        for(const orderInx of this.form7ManualSopOrder){
+            msops.push(this.styleOfProceedingsInfo.manualSop[orderInx])
+        }
+        this.styleOfProceedingsInfo.manualSop = msops;
+
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.showEditStyleOfProceedingWindow = false;
     }
@@ -1190,12 +1203,11 @@ export default class styleOfProceedingsActions extends Vue {
         console.log('reset SOP')
         this.showEditStyleOfProceedingWindow = false;
         this.styleOfProceedingsInfo.manualSop = [];
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }
 
     public cancelStyleOfProceeding(){
-        console.log('cancel SOP')
-        this.styleOfProceedingsInfo.manualSop = this.tmpManualSop;
-        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
+        console.log('cancel SOP')        
         this.showEditStyleOfProceedingWindow = false;
     }
 

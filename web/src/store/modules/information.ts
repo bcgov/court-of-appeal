@@ -1,5 +1,5 @@
 import { locationsInfoType } from '@/types/Common';
-import { form2DataInfoType, form7StatesInfoType, form7SubmissionDataInfoType, pathwayTypeInfoType, userAccessInfoType } from '@/types/Information';
+import { form2DataInfoType, form7StatesInfoType, form7SubmissionDataInfoType, manualSopInfoType, pathwayTypeInfoType, userAccessInfoType } from '@/types/Information';
 import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -19,6 +19,8 @@ class Information extends VuexModule {
     public form7InfoStates = {} as form7StatesInfoType;
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
+
+    public form7ManualSopOrder: number[] = []
     
     public fileNumber = "";  
     public currentCaseId = null;
@@ -158,6 +160,16 @@ class Information extends VuexModule {
     @Action
     public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
         this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
+    }
+
+
+    @Mutation
+    public setForm7ManualSopOrder(form7ManualSopOrder: number[]): void {   
+        this.form7ManualSopOrder = form7ManualSopOrder;
+    }    
+    @Action
+    public UpdateForm7ManualSopOrder(newForm7ManualSopOrder: number[]): void {
+        this.context.commit('setForm7ManualSopOrder', newForm7ManualSopOrder);
     }
     
 }
