@@ -56,8 +56,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
 
 import Form9ProcessHeader from "@/components/process/Form9/components/Form9ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
@@ -72,8 +72,8 @@ import { packageInfoType } from '@/types/Information';
 })
 export default class SubmitForm9 extends Vue {
 
-    @informationState.State
-    public currentCaseId: string;
+    @form9State.State
+    public currentRequisitionId: string;
 
     stepsCompleted = {} as form9StatusInfoType;  
     mountedData = false; 
@@ -98,7 +98,7 @@ export default class SubmitForm9 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentRequisitionId+"/submit/";
 
         const header = {
             responseType: "json",

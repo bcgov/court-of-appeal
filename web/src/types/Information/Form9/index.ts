@@ -1,5 +1,19 @@
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
+export interface form9FormsJsonDataType {
+    id: number;
+    personId: number;
+    type: string;
+    status: string;
+    modified: string;
+    archive: boolean;
+    packageUrl?: string;
+    packageNumber?: string;
+    pdf_types: string;
+    data: form9DataInfoType;
+    description: string;
+}
+
 export interface form9StatusInfoType {
     first?: boolean;
     second?: boolean;
@@ -21,13 +35,9 @@ export interface form9DataInfoType {
     respondents: respondentsJsonDataType[];
     firstAppellant: string;
     firstRespondent: string;
-    judgeName: string;
-    orderDate: string;
-    initiatingDocumentDate: string;        
-    authorizedName: string;
-    abandoningParties: string[];
-    abandoningAgainstParties: string[];
-    abandonType: string;
+    filingRequisitionParties: string[];
+    reliefSought: string;     
+    authorizedName: string;    
     selfRepresented?: boolean;    
     completionDate?: string;
     version?: string;

@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-9 v-bind:caseId="caseId"/>            
+            <form-9/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -36,6 +36,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
 
 import Form9ProcessHeader from "@/components/process/Form9/components/Form9ProcessHeader.vue";
 import Form9 from "@/components/process/Form9/components/pdf/Form9.vue"
@@ -50,13 +53,15 @@ import { form9StatusInfoType } from '@/types/Information/Form9';
 })
 export default class PreviewForm9 extends Vue {
 
+    @form9State.State
+    public currentRequisitionId: string;
+
     stepsCompleted = {} as form9StatusInfoType; 
-    caseId = '';  
+    
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;  
-        this.caseId = this.$route.params.caseId;
+        this.dataReady = false;         
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -66,7 +71,7 @@ export default class PreviewForm9 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form9", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form9"}); 
     }
 }
 </script>

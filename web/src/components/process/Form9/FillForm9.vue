@@ -8,10 +8,10 @@
         <b-card border-variant="light" bg-variant="light" class="my-2">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Settlement or Abandonment
+                Requisition
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
-                Form 9 (RULE 46)
+                Form 9 (RULE 65(2) and (5))
             </b-row>           
            
         </b-card>

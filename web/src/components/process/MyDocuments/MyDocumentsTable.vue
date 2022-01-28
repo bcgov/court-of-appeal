@@ -10,6 +10,7 @@
         <table-form-5 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-6 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-7 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-9 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
 
     </b-card>
 </template>
@@ -21,13 +22,15 @@ import TableForm2 from './Tables/TableForm2.vue'
 import TableForm5 from './Tables/TableForm5.vue'
 import TableForm6 from './Tables/TableForm6.vue'
 import TableForm7 from './Tables/TableForm7.vue'
+import TableForm9 from './Tables/TableForm9.vue'
 
 @Component({
     components:{
         TableForm2,
         TableForm5,
         TableForm6,
-        TableForm7
+        TableForm7,
+        TableForm9
     }
 })
 export default class MyDocumentsTable extends Vue {

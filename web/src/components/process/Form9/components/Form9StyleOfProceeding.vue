@@ -69,99 +69,35 @@
 
             <b-row>
                 <b-col cols="3" style="font-weight: 700;">
-                    Name of party(ies) who wishes to abandon an appeal or cross appeal:                                
+                    Name of party(ies) filing the requisition:                                
                 </b-col>
                 <b-col class="ml-1 mt-2">   
 
                     <b-form-checkbox-group                
                         style="width:100%" 
-                        :state="state.abandoningParties"
-                        @change="updateOtherParties"                   
-                        v-model="form9Info.abandoningParties"                    
+                        :state="state.filingRequisitionParties"                                    
+                        v-model="form9Info.filingRequisitionParties"                    
                         :options="partyNames">
                     </b-form-checkbox-group>
-
-                    <b-row class="ml-1 text-danger" v-if="invalidAbandoningParties">You cannot select all parties.</b-row>
+                    
                     
                 </b-col>
             </b-row>
-            
-
-        </div>
-
-        <div v-if="!invalidAbandoningParties && form9Info.abandoningParties && form9Info.abandoningParties.length > 0">
 
             <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
-                    This party is abandoning a:                                
+                    Relief sought:                                
                 </b-col>
                 <b-col class="ml-1">   
 
-                    <b-form-radio-group                
+                    <b-form-textarea                
                         style="width:100%" 
-                        :state="state.abandonType"                   
-                        v-model="form9Info.abandonType"                    
-                        :options="abandonTypeOptions">
-                    </b-form-radio-group>
+                        :state="state.reliefSought"                   
+                        v-model="form9Info.reliefSought">
+                    </b-form-textarea>
                     
                 </b-col>
             </b-row>
-
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
-                    Which party(ies) are you abandonign against?                                
-                </b-col>
-                <b-col class="ml-1 mt-2">   
-
-                    <b-form-checkbox-group 
-                        :key="updated"               
-                        style="width:100%" 
-                        :state="state.abandoningAgainstParties"                   
-                        v-model="form9Info.abandoningAgainstParties"                    
-                        :options="otherPartyNames">
-                    </b-form-checkbox-group>
-                    
-                </b-col>
-            </b-row> 
-
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Who made the Order?
-                </b-col>
-                <b-col>
-                    <b-form-input                    
-                        v-model="form9Info.judgeName"                        
-                        disabled>
-                    </b-form-input>
-                </b-col>
-            </b-row>  
-
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the order under appeal was pronounced:
-                </b-col>
-                <b-col>
-                    <b-form-input                    
-                        v-model="form9Info.orderDate"                        
-                        disabled>
-                    </b-form-input>
-                </b-col>
-            </b-row>  
-
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
-                </b-col>
-                <b-col>
-                    <b-form-input                    
-                        v-model="form9Info.initiatingDocumentDate"                        
-                        disabled>
-                    </b-form-input>
-                </b-col>
-            </b-row>       
 
             <b-row class="my-3" style="padding: 0;">
                 <b-col 
@@ -178,7 +114,6 @@
 
                 </b-col>
             </b-row>
-            
 
             <hr/>    
 
@@ -202,7 +137,7 @@
                 </b-col>
             </b-row>
 
-        </div>
+        </div>    
         
     </b-card>
 </template>
@@ -217,6 +152,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
 @Component
 export default class Form9StyleOfProceeding extends Vue {
 
@@ -226,26 +164,23 @@ export default class Form9StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @informationState.State
+    @form9State.State
     public form9Info: form9DataInfoType;
 
-    @informationState.Action
+    @form9State.Action
     public UpdateForm9Info!: (newForm9Info: form9DataInfoType) => void  
     
-    @informationState.State
-    public currentCaseId: string;
+    @form9State.State
+    public currentRequisitionId: string;
 
-    @informationState.Action
-    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    @form9State.Action
+    public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
     
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     partyNames: string[] = [];
     otherPartyNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
     
     representationOptions = [
         {text: 'Yes', value: true},
@@ -257,68 +192,95 @@ export default class Form9StyleOfProceeding extends Vue {
     state = {
         firstAppellant: null,
         firstRespondent: null,
-        abandoningParties:null,
-        abandonType: null,
-        abandoningAgainstParties: null,        
+        filingRequisitionParties:null,
+        reliefSought: null,              
         authorizedName:null
     }
 
     respondentName = ""; 
     updated=0;  
-    invalidAbandoningParties = false;
+  
 
     mounted() {
         this.dataReady = false;
         this.extractInfo();
-        this.dataReady = true;        
+              
     }
 
-    public extractInfo(){
+    public extractInfo(){     
 
-        this.invalidAbandoningParties = false;
+        if(this.currentRequisitionId){
+            this.getForm9Data();
+           
+        } else {  
+            const form9Data = {} as form9DataInfoType;                  
 
-        if(this.currentCaseId){
-            this.applicants = this.form9Info.appellants;
-            this.respondents = this.form9Info.respondents;
-        }else{
-            this.applicants = this.partiesJson.appellants;
-            this.respondents = this.partiesJson.respondents;            
-
-            this.form9Info.appellants = this.applicants;
-            this.form9Info.respondents = this.respondents;
-            this.form9Info.formSevenNumber = this.fileNumber;
+            form9Data.appellants = this.partiesJson.appellants
+            form9Data.respondents = this.partiesJson.respondents;
+            form9Data.formSevenNumber = this.fileNumber;            
+            form9Data.version = this.$store.state.Application.version;            
+            this.UpdateForm9Info(form9Data);
+            //TODO: remove extract and uncomment save after api is in place
+            this.extractPartiesData();  
+            // this.saveForm(true);                  
             
-            this.form9Info.version = this.$store.state.Application.version;
-            //TODO: populate following with real data from webcats
-            this.form9Info.judgeName = 'Drake';
-            this.form9Info.orderDate = '11/11/2021';
-            this.form9Info.initiatingDocumentDate = '11/11/2020';          
-            
-        }
+        }       
+
+    }
+
+    public extractPartiesData(){
 
         this.applicantNames = [];
         this.respondentNames = [];
         this.partyNames = [];
 
-        for (const respondent of this.respondents){
+        for (const respondent of this.form9Info.respondents){
             this.respondentNames.push(respondent.name); 
             this.partyNames.push(respondent.name) 
         }
 
-        for (const applicant of this.applicants){
+        for (const applicant of this.form9Info.appellants){
             this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name);  
         }
+        this.dataReady = true;
 
+    }
+
+    public getForm9Data() {        
+       
+        this.$http.get('/form9/forms/'+this.currentRequisitionId)
+        .then((response) => {
+            if(response?.data){            
+                            
+                const form9Data = response.data                
+                this.UpdateForm9Info(form9Data) 
+                this.extractPartiesData();
+                this.clearStates();                
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+     public clearStates(){
+        this.state = {
+            firstAppellant: null,
+            firstRespondent: null,
+            filingRequisitionParties:null, 
+            reliefSought:null,                 
+            authorizedName:null
+        }
+        this.dataReady = true; 
     }
 
     public checkStates(){   
         
         this.state.firstAppellant = !this.form9Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form9Info.firstRespondent? false : null; 
-        this.state.abandoningParties = !this.form9Info.abandoningParties? false : null;
-        this.state.abandonType = !this.form9Info.abandonType? false : null;
-        this.state.abandoningAgainstParties = !this.form9Info.abandoningAgainstParties? false : null;
+        this.state.filingRequisitionParties = !this.form9Info.filingRequisitionParties? false : null;  
+        this.state.reliefSought = !this.form9Info.reliefSought? false : null;     
         this.state.authorizedName = !this.form9Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
@@ -328,64 +290,61 @@ export default class Form9StyleOfProceeding extends Vue {
         return true            
     }    
 
-    public saveForm(draft: boolean) {
+    public saveForm(draft: boolean) { 
         
-        if(this.checkStates())
-        {            
-            const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
-            const method = this.currentCaseId? "put" : "post"
-            const body = {
-                type: "form-9",
-                status:"Draft",
-                description:"form9",
+        let method = 'post';
+        let url = '/form9/forms';
+
+        if (this.currentRequisitionId){
+            method = 'put';
+            url = '/form9/forms/'+this.currentRequisitionId;               
+
+            if (!draft && !this.checkStates()){
+               
+                return
+                
+            } 
+            
+            const options = {
+                method: method,
+                url: url,
                 data: this.form9Info
-            }  
+            }
+            this.saveInfo(options, draft);
+
+        } else {           
 
             const options = {
                 method: method,
                 url: url,
-                data: body
+                data: this.form9Info
             }
+            this.saveInfo(options, draft);
+        }        
+       
+    }
 
-            this.$http(options)
+    public saveInfo(options, draft){
+
+        this.$http(options)
             .then(response => {
                 if(response.data){
-                    if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-                    this.UpdateForm9Info(this.form9Info);
-                    if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
+                    if(options.method == "post"){
+                        this.UpdateCurrentRequisitionId(response.data.file_id);
+                        this.extractPartiesData();                        
+                    }
+
+                    this.clearStates();                    
+                    if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
                 const errMsg = err.response.data.error;
                 
             })
-        }
     }   
-    
-    public updateOtherParties(){
 
-        const otherParties = [];
-
-        if (this.partyNames.length == this.form9Info.abandoningParties.length){
-
-            this.invalidAbandoningParties = true;
-
-        } else {
-
-            this.invalidAbandoningParties = false;
-
-            for (const partyName of this.partyNames){
-                const index = this.form9Info.abandoningParties.indexOf(partyName)
-                if (index == -1){
-                    otherParties.push(partyName);
-                }
-            }
-            this.otherPartyNames = otherParties;
-            this.updated ++;
-        }        
-    }
-
-    public navigateToPreviewPage(caseId) {        
-        this.$router.push({name: "preview-form9", params: {caseId: caseId}}) 
+    public navigateToPreviewPage() {        
+        this.$router.push({name: "preview-form9"}) 
     }
 
 }

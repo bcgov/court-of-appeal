@@ -26,12 +26,16 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { caseJsonDataType } from '@/types/Information/json';
 import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
+import { form9FormsJsonDataType } from '@/types/Information/Form9';
 
 @Component({
     components:{
@@ -51,6 +55,9 @@ export default class MyDocuments extends Vue {
 
     @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
+
+    @form9State.Action
+    public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -123,6 +130,24 @@ export default class MyDocuments extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm6FormsJson(forms)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+             
+        });
+    }
+
+     //TODO: placeholder
+    public loadForm9Forms () {
+   
+        this.$http.get('/form9/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm9FormsJson(forms)
             }
 
             this.dataLoaded = true;       

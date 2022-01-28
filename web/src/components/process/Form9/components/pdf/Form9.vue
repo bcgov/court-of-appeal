@@ -30,12 +30,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
+
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
 import { form9DataInfoType } from '@/types/Information/Form9';
-const informationState = namespace("Information");
 import Form9Layout from "./Form9Layout.vue";
 
 @Component({
@@ -44,14 +45,11 @@ import Form9Layout from "./Form9Layout.vue";
     }
 })
 export default class Form9 extends Vue {
-
-    @Prop({required: true})
-    caseId!: string;
     
-    @informationState.State
-    public currentCaseId: string;
+    @form9State.State
+    public currentRequisitionId: string;
 
-    @informationState.Action
+    @form9State.Action
     public UpdateForm9Info!: (newForm9Info: form9DataInfoType) => void
 
     result = {} as form9DataInfoType;
@@ -64,13 +62,13 @@ export default class Form9 extends Vue {
            
     public onPrint() { 
         const pdf_type = "NHA"
-        const pdf_name = "form9-" + this.caseId;
+        const pdf_name = "form9-" + this.currentRequisitionId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form-print/'+this.currentRequisitionId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -96,7 +94,7 @@ export default class Form9 extends Vue {
     public savePdf(){        
         const pdfType = "NHA"
         const pdfName ="FORM9"
-        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const url = '/form-print/'+this.currentRequisitionId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -124,7 +122,7 @@ export default class Form9 extends Vue {
  
     public getForm9Data() {        
        
-        this.$http.get('/case/'+this.currentCaseId+'/')
+        this.$http.get('/case/'+this.currentRequisitionId+'/')
         .then((response) => {
             if(response?.data?.data){            
                             

@@ -8,7 +8,7 @@
             </div>   
             <div class="row" style="margin-top: 1rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div class="col-md-3" style="font-size:20pt; background: black; color: white;"><b>FORM 9</b></div>
-                <div class="col-md-9" style="font-size:12pt;"><b>NOTICE OF SETTLEMENT OR ABANDONMENT: RULE 49</b></div>
+                <div class="col-md-9" style="font-size:12pt;"><b>REQUISITION: RULE 65(2) and (5)</b></div>
             </div>         
         </div> 
 
