@@ -98,7 +98,7 @@ export default class SubmitForm7 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentNoticeOfAppealId+"/submit/";
+        const url = "/form7/efiling/"+this.currentNoticeOfAppealId+"/submit/";
 
         const header = {
             responseType: "json",

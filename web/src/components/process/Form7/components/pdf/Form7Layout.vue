@@ -1,63 +1,70 @@
 <template>
     <div v-if="dataReady">
-
-        <div>
-            <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b>
-            <div style="display: block; text-align: center;">
-                <div style="font-size:12pt;"><b>FORM 7 (RULES 11 (A))</b></div>               
+        <div style="font-weight: 800; color:#FFF; line-height:0.1rem; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
+        <div>            
+            <div style="text-align: center;">
+                <div style="line-height:0.75rem; font-size:12pt;"><b>FORM 7 (RULES 11 (A))</b></div>               
             </div>            
         </div> 
 
-        <div class="my-3 row" style="padding:0; font-size:10pt;">
-            <div class="col-md-6"></div>
-            <div class="col-md-4" style="margin: 0; padding:0;">
+<!-- <Reg Info> -->
+        <div class="row mt-3 mb-2 p-0 mx-0 " style="line-height:1rem; padding:0; font-size:10pt;">
+            <div style="width:57%"></div>
+            <div style="width:23%; margin: 0; padding:0;">
                 Court of Appeal File No.<br>
-                <span style="font-size:9pt; font-weight: 700;">(For Registry Use Only)</span>
+                <span style="line-height:0rem; font-size:8pt; font-weight: 700;">(For Registry Use Only)</span>
             </div>
-            <div class="col-md-2" style="margin: 0;"></div>
+            <div style="width:20%; margin: 0;"></div>
         </div>
 
-        <div class="my-3 row" style="padding:0; font-size:10pt;">
-            <div class="col-md-6"></div>
-            <div class="col-md-4" style="margin: 0; padding:0;">
+        <div class="my-2 row" style="line-height:1rem; padding:0; font-size:10pt;">
+            <div style="width:57%"></div>
+            <div style="width:23%; margin: 0; padding:0;">
                 Supreme Court File No.
             </div>
-            <div class="col-md-2" style="margin: 0; padding:0;">{{result.lowerCourtClassCd}}{{result.lowerCourtFileNo}}</div>
+            <div style="width:20%; margin: 0; padding:0; color:#000;">{{result.lowerCourtFileNo}}</div>
         </div>
 
-        <div class="my-3 row" style="padding:0; font-size:10pt;">
-            <div class="col-md-6"></div>
-            <div class="col-md-4" style="margin: 0; padding:0;">
+        <div class="my-2 row" style="line-height:1rem; padding:0; font-size:10pt;">
+            <div style="width:57%"></div>
+            <div style="width:23%; margin: 0; padding:0;">
                 Supreme Court Registry
             </div>
-            <div class="col-md-2" style="margin: 0; padding:0;">{{caseLocation.name}}</div>
+            <div style="width:20%; margin: 0; padding:0; color:#000;"> {{caseLocation.name}}</div>
         </div>
         
+<!-- <Parties> -->
+        <div class="mt-3 mb-2" style="display: block; text-align: center; font-size:11pt; font-weight: 800;">COURT OF APPEAL</div>
+        <div v-for="sop,inx in caseSop" :key="inx">
+            <div class="my-0 row" style="line-height:1rem; padding:0;margin:0;font-weight: 700;">
+                <div>{{sop.conjunction}}:</div>
+            </div>
 
-        <div class="my-5" style="display: block; text-align: center; font-size:10pt;">COURT OF APPEAL</div>
-        <div v-for="sop in caseSop" :key="sop.appealRole + '/' + sop.lowerCourtRole">
-            <div class="my-3 row" style="font-weight: 700;">
-                <div class="col-md-5">{{sop.conjunction}}:</div>
-                <div class="col-md-5"></div>
-                <div v-if="sop.lowerCourtRole == 'NONE (New Party)'" class="col-md-2">
-                    {{sop.appealRole}}
-                </div>
-                <div v-else class="col-md-2">
-                    {{sop.appealRole}}/<br> {{sop.lowerCourtRole}}
-                </div>
-            </div>  
-            <div class="my-3 row" style="font-weight: 700;">
-                <div class="col-md-2"></div>
-                <div class="col-md-8" style="font-weight: 200; text-align: center">
+            <div class="my-0 row" style="line-height:1rem; padding:0;margin:0"> 
+                <div style="width:17%"></div>
+                <div style="width:66%; text-align: center">
                     {{sop.partyName}}
                 </div>
-                <div class="col-md-2"></div>
+                <div style="width:17%"></div>
+            </div>
+
+            <div class="my-0 row" style="font-weight: 700;"> 
+                <div style="width:66%;"></div>
+                <div style="width:34%; line-height:1rem; padding:0;margin:0">
+                    <div v-if="sop.lowerCourtRole == 'NONE (New Party)'">
+                        {{sop.appealRole}}
+                    </div>            
+                    <div v-else>                        
+                        {{sop.appealRole}}/<br> {{sop.lowerCourtRole}}
+                    </div>
+                </div>
             </div>          
         </div>
 
-        <div class="my-5" style="display: block; text-align: center; font-weight: 700; font-size:10pt;">NOTICE OF APPEAL</div>       
+<!-- <Hereby> -->
+        <div class="mt-3 mb-4" style="display: block; text-align: center; font-weight: 700; font-size:11pt;">NOTICE OF APPEAL</div>       
 
-        <div class="mt-4">
+        <div class="mt-4" style="line-height:1.15rem;" >
             <underline-form 
                 style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
                 textwidth="29rem" 
@@ -100,12 +107,12 @@
                 :text="result.partOfJudgment"/>.
         </div>
 
-        
+<!-- <1> -->
         <section>
             <div style="margin:0 0 0 0.25rem;display:inline;  ">The appeal is from a:</div>   
             <div class="row" style="margin:0.25rem 0 0 1rem; " >
                 
-                <div class="col-md-6">                                          
+                <div style="width:50%">                                          
                     <check-box                                                                                      
                         :check="(result.appealFrom == 'Trial Judgment')?'yes':''" 
                         text="Trial Judgment"/>  
@@ -113,7 +120,7 @@
                     :check="(result.appealFrom == 'Summary Trial Judgment')?'yes':''" 
                     text="Summary Trial Judgment"/>
                 </div>
-                <div class="col-md-6">
+                <div style="width:50%">
                     <check-box                                                                                      
                         :check="(result.appealFrom == 'Order of a Statutory Body')?'yes':''" 
                         text="Order of a Statutory Body"/>  
@@ -125,6 +132,7 @@
             </div>                        
         </section>
 
+<!-- <2> -->
         <div class="print-block">
             <section>
                 <div style="margin:0 0 0 0.25rem;display:inline;">                   
@@ -142,13 +150,14 @@
             </section>
         </div>
 
+<!-- <3> -->
         <div class="print-block">
 
             <section>
                 <div style="margin:0 0 0 0.25rem;display:inline;  ">Please identify which of the following is involved in the appeal:</div>   
                 <div class="row" style="margin:0.25rem 0 0 1rem; " >
                     
-                    <div class="col-md-4">                                          
+                    <div style="width:33%">                                          
                         <check-box                                                                                      
                             :check="(result.involves == 'Civil Procedure')?'yes':''" 
                             text="Civil Procedure"/>  
@@ -159,7 +168,7 @@
                             :check="(result.involves == 'Equity')?'yes':''" 
                             text="Equity"/>
                     </div>
-                    <div class="col-md-4">
+                    <div style="width:33%">
                         <check-box                                                                                      
                             :check="(result.involves == 'Constitutional/Administrative')?'yes':''" 
                             text="Constitutional/Administrative"/>  
@@ -170,7 +179,7 @@
                             :check="(result.involves == 'Motor Vehicle Accidents')?'yes':''" 
                             text="Motor Vehicle Accidents"/>    
                     </div>
-                    <div class="col-md-4" style="padding-left: 2rem;">
+                    <div style="width:33%; padding-left: 2rem;">
                         <check-box                                                                                      
                             :check="(result.involves == 'Commercial')?'yes':''" 
                             text="Commercial"/>  
@@ -183,10 +192,10 @@
                     </div>                    
                     
                 </div>   
-                <div style="margin:1.25rem 0 0 2rem;">Family</div>  
+                <div style="margin:1.25rem 0 0 1rem;">Family</div>  
                 <div class="row" style="margin:0.25rem 0 0 1rem; " >
                     
-                    <div class="col-md-4">                                          
+                    <div style="width:33%">                                          
                         <check-box                                                                                      
                             :check="(result.involves == 'Divorce')?'yes':''" 
                             text="Divorce"/>  
@@ -194,7 +203,7 @@
                             :check="(result.involves == 'Family Law Act')?'yes':''" 
                             text="Family Law Act"/>
                     </div>
-                    <div class="col-md-8">
+                    <div style="width:67%">
                         <check-box                                                                                      
                             :check="(result.involves == 'Corollary Relief in a Divorce Proceeding')?'yes':''" 
                             text="Corollary Relief in a Divorce Proceeding"/>  
@@ -223,19 +232,19 @@
         </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
-            The trial/hearing of this proceeding occupied {{result.trialDurationDays}} days.
+            The trial/hearing of this proceeding occupied <b style="color:#000">{{result.trialDurationDays}}</b> days.
         </div>
 
-        <div style="margin:1rem 0 0 0.25rem;">
-            Dated electronically in British Columbia, this {{currentDate}}.
+        <div style="margin:0.25rem 0 0 0.25rem;">
+            Dated electronically in British Columbia, this <span style="color:#000">{{currentDate}}</span>.
         </div>
 
         <div class="row" style="margin:0; padding:0;">
 
-            <div class="col-md-8"></div>
-            <div class="col-md-4" style="padding:0; margin:0;">
+            <div style="width:62%"></div>
+            <div style="width:38%; padding:0; margin:0;">
                 <div style="height:3rem; border:1px solid; margin:0;"></div>
-                <div style="text-align: center; margin:0;">
+                <div style="text-align: center; margin:0; color:#000;">
                     {{result.appealingFirm}}
                 </div>
                 <div style="margin:0; padding:0; text-align: center;">
@@ -244,36 +253,37 @@
             </div>
 
         </div>
-
-        <underline-form 
-                style="text-indent:0px;display:inline-block;margin:1rem 0 0.5rem 0;" 
-                textwidth="33.5rem" 
-                beforetext="To the respondent(s):" 
+        <div style="line-height:1.15rem;">
+            <underline-form 
+                    style="text-indent:0px;display:inline-block;margin:1rem 0 0.5rem 0;" 
+                    textwidth="33.5rem" 
+                    beforetext="To the respondent(s):" 
+                    hint=""
+                    :text="respondentNames.toString()"/>
+            <underline-form 
+                style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
+                textwidth="34.5rem" 
+                beforetext="And to its solicitor:" 
                 hint=""
-                :text="respondentNames.toString()"/>
-        <underline-form 
-            style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
-            textwidth="34.5rem" 
-            beforetext="And to its solicitor:" 
-            hint=""
-            :text="(result.respondentSolicitor)?result.respondentSolicitor:''"/>
-        <underline-form 
-            style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
-            textwidth="29rem" 
-            hint=""
-            beforetext="This Notice of Appeal is given by" 
-            :text="result.appealingFirm"/>
-       
-        <div class="print-block" style="margin:0 0 0 0.25rem;">
-            whose address for service is
-        <div v-if="result.appealingFirmAddress" 
-            class="answerbox">{{result.appealingFirmAddress}}</div>
-        <div v-else style="margin-bottom:3rem;"></div>  
-        </div> 
+                :text="(result.respondentSolicitor)?result.respondentSolicitor:''"/>
+            <underline-form 
+                style="text-indent:0px;display:inline-block;margin:0 0 0.5rem 0;" 
+                textwidth="29rem" 
+                hint=""
+                beforetext="This Notice of Appeal is given by" 
+                :text="result.appealingFirm"/>
+        
+            <div class="print-block" style="margin:0 0 0 0.25rem;">
+                whose address for service is
+                <div v-if="result.appealingFirmAddress" 
+                    class="answerbox">{{result.appealingFirmAddress}}</div>
+                <div v-else style="margin-bottom:3rem;"></div>  
+            </div> 
+        </div>
 
         <div style="margin:1rem 0 0 0.25rem;">
             To the respondent(s): 
-            <p style="margin-top:0.75rem;">
+            <p style="margin-top:0.45rem;">
                 IF YOU INTEND TO PARTICIPATE in this appeal, YOU MUST GIVE NOTICE of your intention by filing a form entitled "Notice of
                 Appearance" (Form 2 of the Court of Appeal Rules) in a Court of Appeal registry and serve the notice of appearance on the
                 appellant WITHIN 10 DAYS of receiving this Notice of Appeal.
@@ -283,38 +293,38 @@
         <div style="margin:1rem 0 0 0.25rem;">
             IF YOU FAIL TO FILE A NOTICE OF APPEARANCE
            
-                <p style="text-indent:4rem; margin-top:0.75rem;">
+                <p style="text-indent:4rem; margin:0.5rem 0 0 0;">
                     (a) you are deemed to take no position on the appeal, and
                 </p>
-                <p style="text-indent:4rem;">
+                <p style="text-indent:4rem; margin:0.5rem 0 0 0;">
                     (b) the parties are not obliged to serve any further documents on you.
                 </p>
             
-            <p style="margin-top:1.25rem;">
+            <p style="margin-top:0.75rem;">
                 The filing registries for the British Columbia Court of Appeal are as follows:
             </p>
 
             <div class="row" style="margin:0.25rem 0 0 0; padding:0" >
-                <div class="col-md-4" style="padding:0">
+                <div style="padding:0">
                     <div style="display:block;">Central Registry:</div>
-                    <div style="display:block;">B.C. Court of Appeal</div>
-                    <div style="display:block;">Suite 400, 800 Hornby Street</div>
-                    <div style="display:block;">Vancouver BC V6Z 2C5</div>
+                    <div style="text-indent:0.5rem;display:block;">B.C. Court of Appeal</div>
+                    <div style="text-indent:0.5rem;display:block;">Suite 400, 800 Hornby Street</div>
+                    <div style="text-indent:0.5rem;display:block;">Vancouver BC V6Z 2C5</div>
                 </div>
             </div>
 
             <div class="row" style="margin:1rem 0 0 0; " >
                     
-                <div class="col-md-6" style="padding:0">            
+                <div style="width:50%; padding:0">            
                     <div style="display:block;">Other Registries:</div>
-                    <div style="display:block;">B.C. Court of Appeal</div>
-                    <div style="display:block;">The Law Courts</div>
-                    <div style="display:block;">P.O. Box 9248 STN PROV GOVT</div>
-                    <div style="display:block;">850 Burdett Ave</div>
-                    <div style="display:block;">Victoria BC V8W 1B4</div>
+                    <div style="text-indent:0.5rem;display:block;">B.C. Court of Appeal</div>
+                    <div style="text-indent:0.5rem;display:block;">The Law Courts</div>
+                    <div style="text-indent:0.5rem;display:block;">P.O. Box 9248 STN PROV GOVT</div>
+                    <div style="text-indent:0.5rem;display:block;">850 Burdett Ave</div>
+                    <div style="text-indent:0.5rem;display:block;">Victoria BC V8W 1B4</div>
                 </div>
 
-                <div class="col-md-6">   
+                <div style="width:50%;">   
                            
                     <div style="display:block; margin-top:1.35rem;">B.C. Court of Appeal</div>
                     <div style="display:block;">223 - 455 Columbia Street</div>

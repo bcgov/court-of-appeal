@@ -25,11 +25,22 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-   
+    
+    import { namespace } from "vuex-class";
+    import "@/store/modules/information";
+    const informationState = namespace("Information");
+
     @Component
     export default class MostUsedForms extends Vue {        
+        
+        @informationState.Action
+        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
+        @informationState.Action
+        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+                
         public startNewForm2Document(){
+            this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" })
         }
 
@@ -38,6 +49,7 @@
         }
 
         public startNewForm7Document(){
+            this.UpdateCurrentNoticeOfAppealId(null);
             this.$router.push({name: "checklist-form7" })
         }
 
