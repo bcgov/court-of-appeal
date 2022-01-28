@@ -30,6 +30,39 @@ Vue.filter('beautify-date', function(date){
 		return 'unknown'
 })
 
+Vue.filter('beautify-date-month', function(date){
+	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
+	if(date)
+		return MonthList[Number(date.substr(5,2))] + ' ' +date.substr(8,2) + ', ' +  date.substr(0,4);
+	else
+		return 'unknown'
+})
+
+Vue.filter('beautify-date-month-year', function(date){
+	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
+	
+	if(date){
+
+		let dayText = '';
+		const dayFirstDigit = Number(date.substr(8,1));		
+		const daySecondDigit = Number(date.substr(9,1));
+		
+		if (daySecondDigit == 1){
+			dayText = 'st';
+		} else if (daySecondDigit == 3){
+			dayText = 'rd';
+		} else {
+			dayText = 'th';
+		}
+
+		const dayName = (dayFirstDigit == 0)?(daySecondDigit + dayText):(Number(date.substr(8,2)) + dayText);
+
+		return dayName + ' day of ' + MonthList[Number(date.substr(5,2))] + ', ' +  date.substr(0,4);
+	}
+	else
+		return 'unknown'
+})
+
 Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){
@@ -67,6 +100,13 @@ Vue.filter('beautify-date-blank', function(date){
 Vue.filter('beautify-date-weekday', function(date){
 	if(date)
 		return	moment(date).format('ddd MMM DD, YYYY HH:mm');
+	else
+		return ''
+})
+
+Vue.filter('beautify-date-weekday-nohr', function(date){
+	if(date)
+		return	moment(date).format('ddd MMM DD, YYYY');
 	else
 		return ''
 })
@@ -153,8 +193,8 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 				margin: .7in 0.7in 0.9in 0.7in !important;
 				font-size: 10pt !important;			
 				@bottom-left {
-					content:`+ pageFooterLeft +
-					`white-space: pre;
+					content: `+pageFooterLeft+`;
+					white-space: pre;
 					font-size: 7pt;
 					color: #606060;
 				}

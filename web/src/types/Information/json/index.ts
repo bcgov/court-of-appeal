@@ -1,3 +1,4 @@
+import { aliasInfoType, representativeInfoType } from "..";
 
 export interface journeyJsonDataType {
     id: number;
@@ -87,3 +88,45 @@ export interface partiesDataJsonDataType {
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
 }
+
+export interface supremeCourtCaseJsonDataInfoType {    
+    fileId: number;
+    fileNumber: string;
+    styleOfCause: string;
+    courtClassCd: string;
+    courtClass: string;
+    accessType: string;
+    orders?: supremeCourtOrdersJsonInfoType[];
+    parties: supremeCourtPartiesJsonInfoType[];    
+}
+
+export interface supremeCourtOrdersJsonInfoType {
+    documentId: number;
+    documentTypeCode: string;
+    documentType: string;
+    orderDate: string;
+    honorificTitle: string;
+    judgeFirstName: string;
+    judgeSurname: string;
+    judgeDisplayName?: string;
+    appearanceDays: number;
+    canAccess: boolean;
+    appealSubmissionDeadline: string;
+    isPastDeadline: boolean;
+}
+
+export interface supremeCourtPartiesJsonInfoType {
+    ceisPartyId: number;
+    isOrganization: boolean;
+    firstGivenName: string;
+    secondGivenName?: string;
+    thirdGivenName?: string;
+    surname?: string;
+    organizationName?: string;
+    fullName: string;
+    counselName?: string;
+    lowerCourtRole: string;
+    aliases?: aliasInfoType[];
+    legalReps?: representativeInfoType[];
+}
+

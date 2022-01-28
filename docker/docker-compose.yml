@@ -73,6 +73,10 @@ services:
       - COA_PASSWORD=${COA_PASSWORD}
       - COA_USERNAME=${COA_USERNAME}
       - COA_SEARCH_ENDPOINT=${COA_SEARCH_ENDPOINT}
+      - CSOWS_USERNAME=${CSOWS_USERNAME}
+      - CSOWS_PASSWORD=${CSOWS_PASSWORD}
+      - CSOWS_ENDPOINT=${CSOWS_ENDPOINT}
+      - CSOWS_EXT_ENDPOINT=${CSOWS_EXT_ENDPOINT}
     volumes:
       - ../api/api:/opt/app-root/src/api
     ports:

@@ -1,13 +1,13 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-1">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 The appeal process is complete.
             </div>            
         </b-row>        
 
-        <b-row class="mt-4 ml-2" > 
+        <b-row class="mt-4"> 
             <p>The Court of Appeal decision is final, unless the Supreme Court of Canada agrees 
             to hear the appellant's case. For more information, please see the
             <a 

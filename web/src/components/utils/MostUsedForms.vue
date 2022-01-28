@@ -2,15 +2,13 @@
     <b-card border-variant="white">
         <h3>Most Used Forms</h3>
         <ol>
-            <li>
-                <a  class="link-button"
-                    :href="form7"
-                    target="_blank">
-                    Notice of Appeal (Form 7)
-                </a>
+            <li class="link-button" 
+                @click="startNewForm7Document"
+                target="_blank">
+                Notice of Appeal (Form 7)            
             </li>
             <li class="link-button" 
-                @click="startNewDocument"
+                @click="startNewForm2Document"
                 target="_blank">
                 Notice of Appearance (Form 2)                
             </li>
@@ -23,19 +21,28 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import {getForm7Url} from './Form7_URLs'
-   
+    
+    import { namespace } from "vuex-class";
+    import "@/store/modules/information";
+    const informationState = namespace("Information");
+
     @Component
-    export default class MostUsedForms extends Vue {
+    export default class MostUsedForms extends Vue {        
+        
+        @informationState.Action
+        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
-        form7 = ''
-
-        mounted(){
-            this.form7 = getForm7Url()
+        @informationState.Action
+        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+                
+        public startNewForm2Document(){
+            this.UpdateCurrentCaseId(null);
+            this.$router.push({name: "start-form2" })
         }
 
-        public startNewDocument(){
-            this.$router.push({name: "start-form2" })
+        public startNewForm7Document(){
+            this.UpdateCurrentNoticeOfAppealId(null);
+            this.$router.push({name: "checklist-form7" })
         }
 
     }

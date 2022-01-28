@@ -1,18 +1,18 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">
+    <b-card class="bg-white border-white w-90">
 
-        <b-row class="mt-3 ml-0">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appeal?
             </div>            
         </b-row>
 
-        <b-row class="mt-4 ml-0 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger" style="font-weight: bold;">10 days</span> to file and serve your Notice of Appearance.
+                You have <span class="text-danger font-weight-bold">10 days</span> to file and serve your Notice of Appearance.
             </b-col>           
         </b-row>
 
@@ -33,9 +33,8 @@
                                 <b-col cols="3" class="p-0" >
                                     <b-button
                                         @click="startNewDocument"
-                                        target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold; float: right;"                                        
-                                        class="p-1 bg-white text-primary border-primary">Online form
+                                        target="_blank"                                       
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
                                 </b-col>
                                 
@@ -52,12 +51,12 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 ml-0 bg-warning" style="border-radius: 0.5rem; padding: 1rem 0rem 1rem 0.5rem;">
+        <b-row class="mt-4 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 2rem;">
-                You have <span class="text-danger" style="font-weight: bold;">10 days</span> 
+            <b-col cols="11" class="warning-message-column pl-0">
+                You have <span class="text-danger font-weight-bold">10 days</span> 
                 to file and serve your Affidavit of Service, after you served the Notice of Appearance.
             </b-col>           
         </b-row>
@@ -82,16 +81,14 @@
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">DOC
+                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
                                     </b-button>
                                 </b-col>
                                 <b-col cols="1">
                                     <b-button
                                         href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
                                         target="_blank"
-                                        style="border-radius: 0.5rem; font-size: 14px; font-weight: bold;"                                        
-                                        class="p-1 bg-white text-primary border-primary">PDF
+                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
                                     </b-button>                                    
                                 </b-col>
                             </b-row>

@@ -48,13 +48,13 @@ class EFilingParsing:
             "organizationParties": [],
             "documents": documents,            
             "successUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/success"
+                request, f"submitted/{case.id}/success/APP"
             ),
             "errorUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/error"
+                request, f"submitted/{case.id}/error/APP"
             ),
             "cancelUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/cancel"
+                request, f"submitted/{case.id}/cancel/APP"
             ),
         }
 

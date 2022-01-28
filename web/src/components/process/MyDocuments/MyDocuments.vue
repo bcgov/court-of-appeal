@@ -1,11 +1,12 @@
 <template>
-    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">       
-        
-        <b-container v-if="dataLoaded" class="container">
+    <b-card :style="{height:getHeight}" bg-variant="light" border-variant="white">   
+
+        <b-card no-body v-if="dataLoaded" class="home-content border-white p-0">       
             
             <my-documents-table @reload="loadCases()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
             
-        </b-container>
+        </b-card>
+        
     </b-card>
 </template>
 
@@ -17,6 +18,7 @@ import { caseJsonDataType } from '@/types/Information/json';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
+import { form7SubmissionDataInfoType } from '@/types/Information';
 const informationState = namespace("Information");
 
 @Component({
@@ -28,6 +30,9 @@ export default class MyDocuments extends Vue {
 
     @informationState.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @informationState.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -52,9 +57,23 @@ export default class MyDocuments extends Vue {
                 this.UpdateCasesJson(response.data)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm7Forms()
         },(err) => {
             this.dataLoaded = true;       
+        });
+    }
+
+    public loadForm7Forms () {
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                this.UpdateForm7FormsJson(response.data)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;   
         });
     }
 
@@ -73,8 +92,16 @@ export default class MyDocuments extends Vue {
 
 <style scoped lang="scss">
 
-@import "src/styles/common";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
+    @import "src/styles/common";
+    @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+    .home-content {
+        padding-bottom: 20px;
+        padding-top: 0rem;
+        width: 95%;
+        color: black;
+        margin: 0 auto;
+    }
 
 
 </style>

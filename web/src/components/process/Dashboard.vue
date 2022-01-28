@@ -1,24 +1,30 @@
 <template>
-    <b-card bg-variant="light" border-variant="white">
+    <b-card bg-variant="light" border-variant="white" no-body>
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
-        <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />   
-
-        <b-container v-else class="container">            
-            <my-documents-table 
+        <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
+        
+        <b-card  no-body v-else class="home-content border-white p-0">          
+            <b-row>
+                <b-col>
+                    <h3 class="mt-2 mb-1 ml-4">Submissions</h3>
+                </b-col>            
+            </b-row> 
+            <my-documents-table style="max-height:25rem; overflow-y:auto;"
                 v-bind:enableActions="false" 
-                v-bind:title="'Submissions'">
+                v-bind:title="''">
             </my-documents-table>
-            <b-row no-gutters class="bg-white pt-0">
+            
+            <b-row no-gutters class="bg-white pt-1">
                 <b-button 
-                    class="ml-5 mb-3 bg-primary outline-dark"
-                
+                    class="ml-5 mb-1 bg-primary outline-dark"
+                    size="sm"
                     @click="navigateToDocumentsPage">
                     View All Submissions
                 </b-button>
             </b-row>
-        </b-container>
+        </b-card>
 
-        <b-container class="container mt-3">
+        <b-card no-body class="home-content mt-3 border-light bg-light p-0">
             <b-row >
                 <b-col cols="8">
 
@@ -44,7 +50,7 @@
 
                 </b-col>
             </b-row>
-        </b-container>       
+        </b-card>       
         
     </b-card>
 </template>
@@ -55,6 +61,9 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
+import "@/store/modules/common";
+const commonState = namespace("Common");
 
 import "@/store/modules/application";
 const applicationState = namespace("Application")
@@ -68,9 +77,11 @@ import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
-import { pathwayTypeInfoType } from '@/types/Information';
+import { form7SubmissionDataInfoType, lookupsInfoType, pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
+import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
+import { locationsInfoType } from '@/types/Common';
 
 
 @Component({
@@ -100,10 +111,19 @@ export default class DashboardPage extends Vue {
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
 
     @informationState.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
+
+    @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
 
     @applicationState.State
-    public stPgNo!: stepsAndPagesNumberInfoType;    
+    public stPgNo!: stepsAndPagesNumberInfoType;
+    
+    @commonState.Action
+    public UpdateLookups!: (newLookups: lookupsInfoType) => void
+
+    @commonState.Action
+    public UpdateLocationsInfo!: (newLocationsInfo: locationsInfoType) => void
 
     dataLoaded = false;    
     journeyStarted = false;
@@ -165,8 +185,8 @@ export default class DashboardPage extends Vue {
     mounted() {  
         this.dataLoaded = false;
         this.initSteps();
-        this.loadInfo();
-        
+        this.loadInfo(); 
+        this.extractFilingLocations();       
     }
 
     public getCurrentState(){
@@ -177,6 +197,19 @@ export default class DashboardPage extends Vue {
             }
         }
         return false
+    }
+
+    public loadLookups(){
+        this.$http.get('/lookup/')
+        .then((response) => {            
+            if(response?.data){                
+                this.UpdateLookups(response.data);                           
+            }
+            this.loadCases();     
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
     }
 
     public loadInfo () {
@@ -194,11 +227,15 @@ export default class DashboardPage extends Vue {
                 migrate(applicationData, this.CURRENT_VERSION);
                 this.journeyStarted = this.getCurrentState();                
             }
-            this.loadCases();     
+            this.loadLookups();     
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
         });
+    }
+
+    public extractFilingLocations() {
+        GetFilingLocations();       
     }
 
     public loadCases () {
@@ -213,12 +250,31 @@ export default class DashboardPage extends Vue {
                 this.UpdateCasesJson(this.casesJson)
             }
 
+            this.loadForm7Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+
+    public loadForm7Forms () {
+   
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm7FormsJson(forms)
+            }
+
             this.dataLoaded = true;       
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
         });
     }
+
 
     public restartJourney() {
         this.journeyStarted = false;
@@ -246,9 +302,10 @@ export default class DashboardPage extends Vue {
 
     .home-content {
         padding-bottom: 20px;
-        padding-top: 2rem;
-        max-width: 950px;
+        padding-top: 0rem;
+        width: 95%;
         color: black;
+        margin: 0 auto;
     }
 
 </style>

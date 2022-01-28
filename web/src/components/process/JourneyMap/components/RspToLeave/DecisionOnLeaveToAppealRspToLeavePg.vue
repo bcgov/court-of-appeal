@@ -1,13 +1,13 @@
 <template>
-    <b-card style="width: 90%;" class="bg-white border-white">        
+    <b-card class="bg-white border-white w-90">        
 
-        <b-row class="mt-3 ml-4">            
+        <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
                 Was the appellant's leave to appeal granted or refused?
             </div>            
         </b-row>   
 
-        <b-row class="mt-5 ml-2" >            
+        <b-row class="mt-5" >            
             <b-col>              
                 <b-button 
                     block
@@ -43,9 +43,6 @@ const applicationState = namespace("Application");
 
 import { pathwayTypeInfoType } from '@/types/Information';
 import { stepsAndPagesNumberInfoType } from '@/types/Application/StepsAndPages';
-
-import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
-
 
 @Component
 export default class DecisionOnLeaveToAppealAppApplyLeavePg extends Vue {  
