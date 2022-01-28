@@ -8,6 +8,7 @@
         
         <table-form-2 class="mt-0 mx-0" :enableActions="enableActions" @reload="reload"/>
         <table-form-5 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-6 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-7 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
 
     </b-card>
@@ -16,15 +17,16 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-
 import TableForm2 from './Tables/TableForm2.vue'
 import TableForm5 from './Tables/TableForm5.vue'
+import TableForm6 from './Tables/TableForm6.vue'
 import TableForm7 from './Tables/TableForm7.vue'
 
 @Component({
     components:{
         TableForm2,
         TableForm5,
+        TableForm6,
         TableForm7
     }
 })

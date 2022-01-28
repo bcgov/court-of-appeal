@@ -13,14 +13,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
 
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
 
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
@@ -30,6 +31,7 @@ import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.
 import { caseJsonDataType } from '@/types/Information/json';
 import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
+import { form6FormsJsonDataType } from '@/types/Information/Form6';
 
 @Component({
     components:{
@@ -43,6 +45,9 @@ export default class MyDocuments extends Vue {
 
     @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
+
+    @form6State.Action
+    public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
     @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
@@ -100,6 +105,24 @@ export default class MyDocuments extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm5FormsJson(forms)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+             
+        });
+    }
+
+     //TODO: placeholder
+    public loadForm6Forms () {
+   
+        this.$http.get('/form6/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm6FormsJson(forms)
             }
 
             this.dataLoaded = true;       

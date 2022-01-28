@@ -119,6 +119,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import { form6SearchInfoType } from '@/types/Information/Form6';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
@@ -136,8 +139,8 @@ export default class Form6CaseInformation extends Vue {
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
     
-    @informationState.Action
-    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    @form6State.Action
+    public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
     
     levelOfCourt = "Court of Appeal";
 
@@ -194,7 +197,7 @@ export default class Form6CaseInformation extends Vue {
             if(res.data?.parties){
                 this.UpdatePartiesJson(res.data.parties);
                 this.UpdateFileNumber(this.searchParams.file)
-                this.UpdateCurrentCaseId(null);
+                this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
                 this.$router.push({name: "fill-form6"})
             }
             else

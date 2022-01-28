@@ -1,6 +1,18 @@
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
-
+export interface form6FormsJsonDataType {
+    id: number;
+    personId: number;
+    type: string;
+    status: string;
+    modified: string;
+    archive: boolean;
+    packageUrl?: string;
+    packageNumber?: string;
+    pdf_types: string;
+    data: form6DataInfoType;
+    description: string;
+}
 
 export interface form6StatusInfoType {
     first?: boolean;

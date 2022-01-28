@@ -217,6 +217,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 @Component
 export default class Form6StyleOfProceeding extends Vue {
 
@@ -226,26 +229,23 @@ export default class Form6StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @informationState.State
+    @form6State.State
     public form6Info: form6DataInfoType;
 
-    @informationState.Action
+    @form6State.Action
     public UpdateForm6Info!: (newForm6Info: form6DataInfoType) => void  
     
-    @informationState.State
-    public currentCaseId: string;
+    @form6State.State
+    public currentNoticeOfSettlementOrAbandonmentId: string;
 
-    @informationState.Action
-    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    @form6State.Action
+    public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
     
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     partyNames: string[] = [];
     otherPartyNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
     
     representationOptions = [
         {text: 'Yes', value: true},
@@ -270,46 +270,83 @@ export default class Form6StyleOfProceeding extends Vue {
     mounted() {
         this.dataReady = false;
         this.extractInfo();
-        this.dataReady = true;        
+              
     }
 
     public extractInfo(){
 
         this.invalidAbandoningParties = false;
 
-        if(this.currentCaseId){
-            this.applicants = this.form6Info.appellants;
-            this.respondents = this.form6Info.respondents;
-        }else{
-            this.applicants = this.partiesJson.appellants;
-            this.respondents = this.partiesJson.respondents;            
+        if(this.currentNoticeOfSettlementOrAbandonmentId){
+            this.getForm6Data();
+           
+        } else {                     
 
-            this.form6Info.appellants = this.applicants;
-            this.form6Info.respondents = this.respondents;
+            this.form6Info.appellants = this.partiesJson.appellants
+            this.form6Info.respondents = this.partiesJson.respondents;
             this.form6Info.formSevenNumber = this.fileNumber;
             
             this.form6Info.version = this.$store.state.Application.version;
             //TODO: populate following with real data from webcats
             this.form6Info.judgeName = 'Drake';
             this.form6Info.orderDate = '11/11/2021';
-            this.form6Info.initiatingDocumentDate = '11/11/2020';          
+            this.form6Info.initiatingDocumentDate = '11/11/2020';  
+            const form6Data = this.form6Info
+            this.UpdateForm6Info(form6Data);
+            //TODO: remove extract and uncomment save after api is in place
+            this.extractPartiesData();  
+            // this.saveForm(true);                  
             
-        }
+        }       
+
+    }
+
+    public extractPartiesData(){
 
         this.applicantNames = [];
         this.respondentNames = [];
         this.partyNames = [];
 
-        for (const respondent of this.respondents){
+        for (const respondent of this.form6Info.respondents){
             this.respondentNames.push(respondent.name); 
             this.partyNames.push(respondent.name) 
         }
 
-        for (const applicant of this.applicants){
+        for (const applicant of this.form6Info.appellants){
             this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name);  
         }
+        this.dataReady = true;
 
+    }
+
+    public getForm6Data() {        
+       
+        this.$http.get('/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId)
+        .then((response) => {
+            if(response?.data){            
+                            
+                const form6Data = response.data                
+                this.UpdateForm6Info(form6Data) 
+                this.extractPartiesData();
+                this.clearStates();                
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+     public clearStates(){
+        this.state = {
+            firstAppellant: null,
+            firstRespondent: null,
+            abandoningParties:null,
+            abandonType: null,
+            abandoningAgainstParties: null,        
+            authorizedName:null
+        }
+        this.dataReady = true; 
     }
 
     public checkStates(){   
@@ -328,38 +365,58 @@ export default class Form6StyleOfProceeding extends Vue {
         return true            
     }    
 
-    public saveForm(draft: boolean) {
+    public saveForm(draft: boolean) { 
         
-        if(this.checkStates())
-        {            
-            const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
-            const method = this.currentCaseId? "put" : "post"
-            const body = {
-                type: "form-6",
-                status:"Draft",
-                description:"form6",
+        let method = 'post';
+        let url = '/form6/forms';
+
+        if (this.currentNoticeOfSettlementOrAbandonmentId){
+            method = 'put';
+            url = '/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId;               
+
+            if (!draft && !this.checkStates()){
+               
+                return
+                
+            } 
+            
+            const options = {
+                method: method,
+                url: url,
                 data: this.form6Info
-            }  
+            }
+            this.saveInfo(options, draft);
+
+        } else {           
 
             const options = {
                 method: method,
                 url: url,
-                data: body
+                data: this.form6Info
             }
+            this.saveInfo(options, draft);
+        }        
+       
+    }
 
-            this.$http(options)
+    public saveInfo(options, draft){
+
+        this.$http(options)
             .then(response => {
                 if(response.data){
-                    if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-                    this.UpdateForm6Info(this.form6Info);
-                    if(!draft) this.navigateToPreviewPage(this.currentCaseId);                           
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(response.data.file_id);
+                        this.extractPartiesData();                        
+                    }
+
+                    this.clearStates();                    
+                    if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
                 const errMsg = err.response.data.error;
                 
             })
-        }
-    }   
+    }
     
     public updateOtherParties(){
 
@@ -384,8 +441,8 @@ export default class Form6StyleOfProceeding extends Vue {
         }        
     }
 
-    public navigateToPreviewPage(caseId) {        
-        this.$router.push({name: "preview-form6", params: {caseId: caseId}}) 
+    public navigateToPreviewPage() {        
+        this.$router.push({name: "preview-form6"}) 
     }
 
 }

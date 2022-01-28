@@ -1,6 +1,5 @@
 import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
-import { form6DataInfoType } from '@/types/Information/Form6';
 import { journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -11,9 +10,7 @@ class Information extends VuexModule {
   
     public journeyJson = {} as journeyJsonDataType;
     public pathType = {} as pathwayTypeInfoType;
-    public partiesJson = {} as partiesDataJsonDataType;
-
-    public form6Info = {} as form6DataInfoType;
+    public partiesJson = {} as partiesDataJsonDataType;   
 
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
@@ -46,16 +43,7 @@ class Information extends VuexModule {
     @Action
     public UpdatePartiesJson(newPartiesJson: partiesDataJsonDataType): void {
         this.context.commit('setPartiesJson', newPartiesJson);
-    }
-
-    @Mutation
-    public setForm6Info(form6Info: form6DataInfoType): void {   
-        this.form6Info = form6Info;
-    }    
-    @Action
-    public UpdateForm6Info(newForm6Info: form6DataInfoType): void {
-        this.context.commit('setForm6Info', newForm6Info);
-    }
+    }   
 
     @Mutation
     public setSupremeCourtCaseJson(supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType): void {   
