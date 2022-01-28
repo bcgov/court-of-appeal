@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     
     "core",
     "api",
+    "form7",
     "corsheaders",
     "oidc_rp"
 ]

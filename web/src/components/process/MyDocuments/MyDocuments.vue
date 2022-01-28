@@ -12,13 +12,26 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
-import { caseJsonDataType } from '@/types/Information/json';
 
-import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import { caseJsonDataType } from '@/types/Information/json';
+import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
+import { form5FormsJsonDataType } from '@/types/Information/Form5';
+import { form6FormsJsonDataType } from '@/types/Information/Form6';
 
 @Component({
     components:{
@@ -27,8 +40,17 @@ const informationState = namespace("Information");
 })
 export default class MyDocuments extends Vue {
 
-    @informationState.Action
+    @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @form5State.Action
+    public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
+
+    @form6State.Action
+    public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
+
+    @form7State.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -53,9 +75,60 @@ export default class MyDocuments extends Vue {
                 this.UpdateCasesJson(response.data)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm7Forms()
         },(err) => {
             this.dataLoaded = true;       
+        });
+    }
+
+    public loadForm7Forms () {
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                this.UpdateForm7FormsJson(response.data)
+                //TODO: call load form5
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;   
+        });
+    }
+
+     //TODO: placeholder
+    public loadForm5Forms () {
+   
+        this.$http.get('/form5/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm5FormsJson(forms)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+             
+        });
+    }
+
+     //TODO: placeholder
+    public loadForm6Forms () {
+   
+        this.$http.get('/form6/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm6FormsJson(forms)
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+             
         });
     }
 

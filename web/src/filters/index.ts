@@ -112,6 +112,13 @@ Vue.filter('beautify-date-weekday', function(date){
 		return ''
 })
 
+Vue.filter('beautify-date-weekday-nohr', function(date){
+	if(date)
+		return	moment(date).format('ddd MMM DD, YYYY');
+	else
+		return ''
+})
+
 Vue.filter('scrollToLocation', function(locationName){
 	if(locationName){
 		Vue.nextTick(()=>{
@@ -194,8 +201,8 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 				margin: .7in 0.7in 0.9in 0.7in !important;
 				font-size: 10pt !important;			
 				@bottom-left {
-					content:`+ pageFooterLeft +
-					`white-space: pre;
+					content: `+pageFooterLeft+`;
+					white-space: pre;
 					font-size: 7pt;
 					color: #606060;
 				}

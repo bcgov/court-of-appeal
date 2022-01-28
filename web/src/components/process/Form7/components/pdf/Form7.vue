@@ -2,23 +2,30 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
-                </b-button>
-            </b-col>
-            <b-col cols="3">
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
             </b-col>
         </b-row>  
     
@@ -30,34 +37,35 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
-import { form7DataInfoType } from '@/types/Information/Form7';
 const informationState = namespace("Information");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import Form7Layout from "./Form7Layout.vue";
+import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
+
+import moment from 'moment';
 
 @Component({
     components:{        
         Form7Layout
     }
 })
-export default class Form7 extends Vue {
-
-    @Prop({required: true})
-    caseId!: string;
+export default class Form7 extends Vue {    
     
-    @informationState.State
-    public currentCaseId: string;
+    @form7State.State
+    public currentNoticeOfAppealId: string;  
 
-    @informationState.State
-    public form7Info: form7DataInfoType;
+    @form7State.Action
+    public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
-    @informationState.Action
-    public UpdateForm7Info!: (newForm7Info: form7DataInfoType) => void
-
-    result = {} as form7DataInfoType;
+    result = {} as form7SubmissionDataInfoType;
     dataReady = false;
    
     mounted(){
@@ -67,13 +75,13 @@ export default class Form7 extends Vue {
            
     public onPrint() { 
         const pdf_type = "FORM"
-        const pdf_name = "form7-" + this.caseId;
+        const pdf_name = "form7-" + this.currentNoticeOfAppealId;
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = `"Form 7 (2016-06-28)"`;
+        const bottomLeftText = `"Form 7 (`+moment().format("MMM DD, YYYY")+`)"`;
         const bottomRightText = `" "`;        
-        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -99,7 +107,7 @@ export default class Form7 extends Vue {
     public savePdf(){        
         const pdfType = "FORM"
         const pdfName ="FORM7"
-        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const url = '/form7/form-print/'+this.currentNoticeOfAppealId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -122,26 +130,29 @@ export default class Form7 extends Vue {
     }
 
     public navigateToEditPage() {        
-        this.$router.push({name: "start-form7", params: {orderSelected: 'yes'}});
+        this.$router.push({name: "start-form7"});
+    }
+
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
     }
  
     public getForm7Data() {        
        
-        // this.$http.get('/case/'+this.currentCaseId+'/')
-        // .then((response) => {
-        //     if(response?.data?.data){            
+        this.$http.get('/form7/forms/'+this.currentNoticeOfAppealId)
+        .then((response) => {
+            if(response?.data){            
                             
-        //         this.result = response.data.data
-        //         this.UpdateForm7Info(this.result)                         
-        //         this.dataReady = true;
-        //         Vue.nextTick(()=> this.onPrint())
-        //     }
+                this.result = response.data
+                this.UpdateForm7SubmissionInfo(this.result)                         
+                this.dataReady = true;
+                Vue.nextTick(()=> this.onPrint())
+            }
                 
-        // },(err) => {
-        // console.log(err)        
-        // });      
-        this.result = this.form7Info;
-        this.dataReady = true;
+        },(err) => {
+        console.log(err)        
+        });      
+       
     }
 }
 </script>

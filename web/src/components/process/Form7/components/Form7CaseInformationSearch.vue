@@ -133,11 +133,11 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import { form7SearchInfoType } from '@/types/Information/Form7';
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 import Form7SearchOrderDetails from "./Form7SearchOrderDetails.vue";
 import { locationsInfoType } from '@/types/Common';
+import { form7SearchInfoType } from '@/types/Information/Form7';
 
 @Component({
     components: {           
@@ -249,7 +249,8 @@ export default class Form7CaseInformationSearch extends Vue {
     }
 
     public selectOrder(){
-        this.$emit('fillForm', true);
+        const locationName = this.locationsInfo.filter(location => {return location.id == this.searchParams.location})[0].name;
+        this.$emit('fillForm', this.levelOfCourt, this.searchParams.location, locationName);
     }
 }
 </script>

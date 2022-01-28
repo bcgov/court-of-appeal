@@ -1,17 +1,23 @@
 <template>
-    <b-card bg-variant="light" border-variant="white">
+    <b-card bg-variant="light" border-variant="white" no-body>
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
         <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
         
-        <b-card no-body v-else class="home-content border-white p-0">          
-            <my-documents-table 
+        <b-card  no-body v-else class="home-content border-white p-0">          
+            <b-row>
+                <b-col>
+                    <h3 class="mt-2 mb-1 ml-4">Submissions</h3>
+                </b-col>            
+            </b-row> 
+            <my-documents-table style="max-height:25rem; overflow-y:auto;"
                 v-bind:enableActions="false" 
-                v-bind:title="'Submissions'">
+                v-bind:title="''">
             </my-documents-table>
-            <b-row no-gutters class="bg-white pt-0">
+            
+            <b-row no-gutters class="bg-white pt-1">
                 <b-button 
-                    class="ml-5 mb-3 bg-primary outline-dark"
-                
+                    class="ml-5 mb-1 bg-primary outline-dark"
+                    size="sm"
                     @click="navigateToDocumentsPage">
                     View All Submissions
                 </b-button>
@@ -61,6 +67,16 @@ const commonState = namespace("Common");
 
 import "@/store/modules/application";
 const applicationState = namespace("Application")
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
@@ -71,13 +87,13 @@ import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
-
+import { pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
-import { pathwayTypeInfoType } from '@/types/Information';
-import { lookupsInfoType} from '@/types/Information/Form7';
+import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
+import { form5FormsJsonDataType } from '@/types/Information/Form5';
 
 
 @Component({
@@ -103,8 +119,14 @@ export default class DashboardPage extends Vue {
     @informationState.State
     public pathType: pathwayTypeInfoType;
     
-    @informationState.Action
+    @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
+
+    @form5State.Action
+    public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
+
+    @form7State.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -241,6 +263,42 @@ export default class DashboardPage extends Vue {
             //const response = {"cases":[{"id":22,"personId":12,"type":"form-2","status":"Draft","modified":"2021-09-10T15:49:35Z","packageUrl":null,"data":{"formSevenNumber":"CA39029","appellants":[{"name":"One TEST","firstName":"One","lastName":"TEST","solicitor":{"name":"William T. H. Lovatt null","counselFirstName":"William T. H. Lovatt","counselLastName":null,"firmName":"Axis Law","firmPhone":"604 601-8501","addressLine1":"1500 - 701 West Georgia Street","addressLine2":null,"city":"Vancouver","postalCode":"V7Y 1C6","province":"BC"},"partyId":118931,"id":0}],"respondents":[{"name":"Two TEST","firstName":"Two","lastName":"TEST","solicitor":{"name":"Jane Doe","counselFirstName":"Jane","counselLastName":"Doe","firmName":"Edward F. Macaulay Law Corporation","firmPhone":"604 684-0112","addressLine1":"#1400 - 1125 Howe Street","addressLine2":null,"city":"Vancouver","postalCode":"V6Z 2K8","province":"British Columbia"},"partyId":118932,"id":0,"responding":true}],"useServiceEmail":true,"sendNotifications":true,"serviceInformation":{"province":"British Columbia","country":"Canada","selectedContactId":0,"name":"Two TEST","addressLine1":"4 - 5 st","addressLine2":null,"city":"Coquitlam","postalCode":"V3K1C9","phone":"9876543654","email":"email@yahoo.com"},"selfRepresented":true,"version":"0.1"}}]};            
                 this.casesJson = response.data;
                 this.UpdateCasesJson(this.casesJson)
+            }
+
+            this.loadForm7Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+
+    public loadForm7Forms () {
+   
+        this.$http.get('/form7/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm7FormsJson(forms)
+                //this.loadForm5Forms();
+            }
+
+            this.dataLoaded = true;       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+    //TODO: placeholder
+    public loadForm5Forms () {
+   
+        this.$http.get('/form5/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm5FormsJson(forms)
             }
 
             this.dataLoaded = true;       

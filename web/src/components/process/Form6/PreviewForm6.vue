@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-6 v-bind:caseId="caseId"/>            
+            <form-6/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -36,6 +36,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
 
 import Form6ProcessHeader from "@/components/process/Form6/components/Form6ProcessHeader.vue";
 import Form6 from "@/components/process/Form6/components/pdf/Form6.vue"
@@ -50,13 +53,15 @@ import { form6StatusInfoType } from '@/types/Information/Form6';
 })
 export default class PreviewForm6 extends Vue {
 
+    @form6State.State
+    public currentNoticeOfSettlementOrAbandonmentId: string;
+
     stepsCompleted = {} as form6StatusInfoType; 
-    caseId = '';  
+    
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;  
-        this.caseId = this.$route.params.caseId;
+        this.dataReady = false;         
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -66,7 +71,7 @@ export default class PreviewForm6 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form6", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form6"}); 
     }
 }
 </script>

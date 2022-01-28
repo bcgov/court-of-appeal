@@ -324,6 +324,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
 @Component
 export default class Form2StyleOfProceeding extends Vue {
 
@@ -333,16 +336,16 @@ export default class Form2StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @informationState.State
+    @form2State.State
     public form2Info: form2DataInfoType;
 
-    @informationState.Action
+    @form2State.Action
     public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void  
     
-    @informationState.State
+    @form2State.State
     public currentCaseId: string;
 
-    @informationState.Action
+    @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     dataReady = false;

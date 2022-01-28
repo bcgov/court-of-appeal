@@ -56,8 +56,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
 
 import Form6ProcessHeader from "@/components/process/Form6/components/Form6ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
@@ -72,8 +72,8 @@ import { packageInfoType } from '@/types/Information';
 })
 export default class SubmitForm6 extends Vue {
 
-    @informationState.State
-    public currentCaseId: string;
+    @form6State.State
+    public currentNoticeOfSettlementOrAbandonmentId: string;
 
     stepsCompleted = {} as form6StatusInfoType;  
     mountedData = false; 
@@ -98,7 +98,7 @@ export default class SubmitForm6 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentCaseId+"/submit/";
+        const url = "/efiling/"+this.currentNoticeOfSettlementOrAbandonmentId+"/submit/";
 
         const header = {
             responseType: "json",

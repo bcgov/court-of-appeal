@@ -30,12 +30,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
-import { form5DataInfoType } from '@/types/Information/Form5';
 const informationState = namespace("Information");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import { form5DataInfoType } from '@/types/Information/Form5';
 import Form5Layout from "./Form5Layout.vue";
 
 @Component({
@@ -43,15 +47,12 @@ import Form5Layout from "./Form5Layout.vue";
         Form5Layout
     }
 })
-export default class Form5 extends Vue {
-
-    @Prop({required: true})
-    caseId!: string;
+export default class Form5 extends Vue {   
     
-    @informationState.State
-    public currentCaseId: string;
+    @form5State.State
+    public currentNoticeOfHearingOfAppealId: string;
 
-    @informationState.Action
+    @form5State.Action
     public UpdateForm5Info!: (newForm5Info: form5DataInfoType) => void
 
     result = {} as form5DataInfoType;
@@ -64,13 +65,12 @@ export default class Form5 extends Vue {
            
     public onPrint() { 
         const pdf_type = "NHA"
-        const pdf_name = "form5-" + this.caseId;
+        const pdf_name = "form5-" + this.currentNoticeOfHearingOfAppealId;
         const el= document.getElementById("print");
-
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -96,7 +96,7 @@ export default class Form5 extends Vue {
     public savePdf(){        
         const pdfType = "NHA"
         const pdfName ="FORM5"
-        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const url = '/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -124,7 +124,7 @@ export default class Form5 extends Vue {
  
     public getForm5Data() {        
        
-        this.$http.get('/case/'+this.currentCaseId+'/')
+        this.$http.get('/case/'+this.currentNoticeOfHearingOfAppealId+'/')
         .then((response) => {
             if(response?.data?.data){            
                             

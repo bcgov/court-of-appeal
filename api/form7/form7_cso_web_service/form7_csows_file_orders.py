@@ -3,7 +3,7 @@ import logging
 from datetime import timedelta
 from django.utils import timezone
 
-from api.form7_cso_web_service.library.due_dates import DueDates
+from form7.form7_cso_web_service.library.due_dates import DueDates
 
 from .form7_csows_caller_base import Form7CsowsCallerBase
 

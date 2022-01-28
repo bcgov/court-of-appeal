@@ -82,9 +82,8 @@
     import { Component, Vue, Prop } from 'vue-property-decorator';
     import { namespace } from 'vuex-class';
     import "@/store/modules/common";
-    const commonState = namespace("Common"); 
-    import { aliasInfoType, lookupsInfoType } from '@/types/Information/Form7';
-   
+import { lookupsInfoType, aliasInfoType } from '@/types/Information/Form7';
+    const commonState = namespace("Common");    
 
     @Component
     export default class AddAliasForm extends Vue {        
@@ -129,7 +128,7 @@
         }        
 
         public extractFormInfo(){            
-            const index = this.lookups.aliasTypes.findIndex(alias=>{if(alias == this.formData.type)return true})
+            const index = this.lookups.aliasTypes.findIndex(alias=>{if(alias == this.formData.nameType)return true})
             this.originalSelectedAliasType = this.selectedAliasType = (index>=0)? this.lookups.aliasTypes[index]: '';            
             this.originalAliasName = this.aliasName = this.formData.name;
         }
@@ -141,7 +140,7 @@
             
             if (this.aliasTypeState && this.aliasNameState){        
                 const alias = {} as aliasInfoType;
-                alias.type = this.selectedAliasType;
+                alias.nameType = this.selectedAliasType;
                 alias.name = this.aliasName;       
                 this.$emit('submit', this.isCreateAlias, alias, this.index);
             }

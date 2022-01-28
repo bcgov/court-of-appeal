@@ -30,12 +30,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
+
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import { form6DataInfoType } from '@/types/Information/Form6';
-const informationState = namespace("Information");
 import Form6Layout from "./Form6Layout.vue";
 
 @Component({
@@ -44,14 +45,11 @@ import Form6Layout from "./Form6Layout.vue";
     }
 })
 export default class Form6 extends Vue {
-
-    @Prop({required: true})
-    caseId!: string;
     
-    @informationState.State
-    public currentCaseId: string;
+    @form6State.State
+    public currentNoticeOfSettlementOrAbandonmentId: string;
 
-    @informationState.Action
+    @form6State.Action
     public UpdateForm6Info!: (newForm6Info: form6DataInfoType) => void
 
     result = {} as form6DataInfoType;
@@ -64,13 +62,13 @@ export default class Form6 extends Vue {
            
     public onPrint() { 
         const pdf_type = "NHA"
-        const pdf_name = "form6-" + this.caseId;
+        const pdf_name = "form6-" + this.currentNoticeOfSettlementOrAbandonmentId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -96,7 +94,7 @@ export default class Form6 extends Vue {
     public savePdf(){        
         const pdfType = "NHA"
         const pdfName ="FORM6"
-        const url = '/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const url = '/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -124,7 +122,7 @@ export default class Form6 extends Vue {
  
     public getForm6Data() {        
        
-        this.$http.get('/case/'+this.currentCaseId+'/')
+        this.$http.get('/case/'+this.currentNoticeOfSettlementOrAbandonmentId+'/')
         .then((response) => {
             if(response?.data?.data){            
                             

@@ -1,44 +1,22 @@
 import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
-import { form2DataInfoType } from '@/types/Information/Form2';
-import { form5DataInfoType } from '@/types/Information/Form5';
-import { form6DataInfoType } from '@/types/Information/Form6';
-import { form7DataInfoType, userAccessInfoType, form7StatesInfoType } from '@/types/Information/Form7';
-import { form9DataInfoType } from '@/types/Information/Form9';
-import { caseJsonDataType, journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
   namespaced: true
 })
-class Information extends VuexModule {
-    
-    public casesJson: caseJsonDataType[] = [];
+class Information extends VuexModule {    
+  
     public journeyJson = {} as journeyJsonDataType;
     public pathType = {} as pathwayTypeInfoType;
-    public partiesJson = {} as partiesDataJsonDataType;
-    public form2Info = {} as form2DataInfoType;
-    public form5Info = {} as form5DataInfoType;
-    public form6Info = {} as form6DataInfoType;
-    public form7Info = {} as form7DataInfoType;
-    public form9Info = {} as form9DataInfoType;
-    public form7AccessInfo: userAccessInfoType[] = [];
-    public form7InfoStates = {} as form7StatesInfoType;
+    public partiesJson = {} as partiesDataJsonDataType;   
+
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     
-    public fileNumber = "";  
-    public currentCaseId = null; 
-    public caseLocation: locationsInfoType; 
-
-    @Mutation
-    public setCasesJson(casesJson: caseJsonDataType[]): void {   
-        this.casesJson = casesJson;
-    }    
-    @Action
-    public UpdateCasesJson(newCasesJson: caseJsonDataType[]): void {
-        this.context.commit('setCasesJson', newCasesJson);
-    }
+    public fileNumber = "";
+    public caseLocation: locationsInfoType;   
 
     @Mutation
     public setJourneyJson(journeyJson: journeyJsonDataType): void {   
@@ -65,70 +43,7 @@ class Information extends VuexModule {
     @Action
     public UpdatePartiesJson(newPartiesJson: partiesDataJsonDataType): void {
         this.context.commit('setPartiesJson', newPartiesJson);
-    }
-
-    @Mutation
-    public setForm2Info(form2Info: form2DataInfoType): void {   
-        this.form2Info = form2Info;
-    }    
-    @Action
-    public UpdateForm2Info(newForm2Info: form2DataInfoType): void {
-        this.context.commit('setForm2Info', newForm2Info);
-    }
-
-    @Mutation
-    public setForm5Info(form5Info: form5DataInfoType): void {   
-        this.form5Info = form5Info;
-    }    
-    @Action
-    public UpdateForm5Info(newForm5Info: form5DataInfoType): void {
-        this.context.commit('setForm5Info', newForm5Info);
-    }
-
-    @Mutation
-    public setForm6Info(form6Info: form6DataInfoType): void {   
-        this.form6Info = form6Info;
-    }    
-    @Action
-    public UpdateForm6Info(newForm6Info: form6DataInfoType): void {
-        this.context.commit('setForm6Info', newForm6Info);
-    }
-
-    @Mutation
-    public setForm7Info(form7Info: form7DataInfoType): void {   
-        this.form7Info = form7Info;
-    }    
-    @Action
-    public UpdateForm7Info(newForm7Info: form7DataInfoType): void {
-        this.context.commit('setForm7Info', newForm7Info);
-    }
-
-    @Mutation
-    public setForm9Info(form9Info: form9DataInfoType): void {   
-        this.form9Info = form9Info;
-    }    
-    @Action
-    public UpdateForm9Info(newForm9Info: form9DataInfoType): void {
-        this.context.commit('setForm9Info', newForm9Info);
-    }
-
-    @Mutation
-    public setForm7AccessInfo(form7AccessInfo: userAccessInfoType[]): void {   
-        this.form7AccessInfo = form7AccessInfo;
-    }    
-    @Action
-    public UpdateForm7AccessInfo(newForm7AccessInfo: userAccessInfoType[]): void {
-        this.context.commit('setForm7AccessInfo', newForm7AccessInfo);
     }   
-
-    @Mutation
-    public setForm7InfoStates(form7InfoStates: form7StatesInfoType): void {   
-        this.form7InfoStates = form7InfoStates;
-    }    
-    @Action
-    public UpdateForm7InfoStates(newForm7InfoStates: form7StatesInfoType): void {
-        this.context.commit('setForm7InfoStates', newForm7InfoStates);
-    }
 
     @Mutation
     public setSupremeCourtCaseJson(supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType): void {   
@@ -164,16 +79,7 @@ class Information extends VuexModule {
     @Action
     public UpdateCaseLocation(newCaseLocation: locationsInfoType): void {
         this.context.commit('setCaseLocation', newCaseLocation);
-    }
-
-    @Mutation
-    public setCurrentCaseId(currentCaseId: string): void {   
-        this.currentCaseId = currentCaseId;
-    }    
-    @Action
-    public UpdateCurrentCaseId(newCurrentCaseId: string): void {
-        this.context.commit('setCurrentCaseId', newCurrentCaseId);
-    }
+    }   
     
 }
 
