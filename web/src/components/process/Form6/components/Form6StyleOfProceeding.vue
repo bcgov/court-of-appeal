@@ -210,7 +210,7 @@
 <script lang="ts">
 
 import { form6DataInfoType } from '@/types/Information/Form6';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -280,18 +280,20 @@ export default class Form6StyleOfProceeding extends Vue {
         if(this.currentNoticeOfSettlementOrAbandonmentId){
             this.getForm6Data();
            
-        } else {                     
-
-            this.form6Info.appellants = this.partiesJson.appellants
-            this.form6Info.respondents = this.partiesJson.respondents;
-            this.form6Info.formSevenNumber = this.fileNumber;
+        } else {   
             
-            this.form6Info.version = this.$store.state.Application.version;
+            const form6Data = {} as form6DataInfoType;
+
+            form6Data.appellants = this.partiesJson.appellants
+            form6Data.respondents = this.partiesJson.respondents;
+            form6Data.formSevenNumber = this.fileNumber;
+            
+            form6Data.version = this.$store.state.Application.version;
             //TODO: populate following with real data from webcats
-            this.form6Info.judgeName = 'Drake';
-            this.form6Info.orderDate = '11/11/2021';
-            this.form6Info.initiatingDocumentDate = '11/11/2020';  
-            const form6Data = this.form6Info
+            form6Data.judgeName = 'Drake';
+            form6Data.orderDate = '11/11/2021';
+            form6Data.initiatingDocumentDate = '11/11/2020';  
+           
             this.UpdateForm6Info(form6Data);
             //TODO: remove extract and uncomment save after api is in place
             this.extractPartiesData();  

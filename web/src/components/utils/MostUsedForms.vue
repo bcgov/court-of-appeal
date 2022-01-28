@@ -35,11 +35,17 @@
     import "@/store/modules/information";
     const informationState = namespace("Information");
 
+    import "@/store/modules/forms/form6";
+    const form6State = namespace("Form6");
+
     @Component
     export default class MostUsedForms extends Vue {        
         
         @informationState.Action
         public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+
+        @form6State.Action
+        public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
         @informationState.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
@@ -54,6 +60,7 @@
         }
 
         public startNewForm6Document(){
+            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
             this.$router.push({name: "start-form6" })
         }
 
