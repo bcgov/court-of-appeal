@@ -78,8 +78,7 @@ class Information extends VuexModule {
     @Action
     public UpdateCaseLocation(newCaseLocation: locationsInfoType): void {
         this.context.commit('setCaseLocation', newCaseLocation);
-    }   
-    
+    }
 }
 
 export default Information
