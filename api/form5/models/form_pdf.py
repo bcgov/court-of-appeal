@@ -15,13 +15,13 @@ class FormPdf(models.Model):
     pdf_type = models.CharField(max_length=32, blank=True, null=True)
     version = models.CharField(max_length=32, blank=True, null=True)
 
-    noticeOfAppeal = models.ForeignKey(
-        "NoticeOfAppeal",
-        related_name="appeal_form_pdf",
+    notice_of_hearing = models.ForeignKey(
+        "NoticeOfHearing",
+        related_name="hearing_form_pdf",
         on_delete=models.CASCADE
     )
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['noticeOfAppeal_id', 'pdf_type'], name='unique_pdf_type_noticeOfAppeal_id'),
+            models.UniqueConstraint(fields=['notice_of_hearing_id', 'pdf_type'], name='unique_pdf_type_notice_of_hearing_id'),
         ]

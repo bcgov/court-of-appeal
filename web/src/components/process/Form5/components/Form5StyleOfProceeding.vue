@@ -327,9 +327,9 @@ export default class Form5StyleOfProceeding extends Vue {
             form5Data.acknowledge = false; 
             
             this.UpdateForm5Info(form5Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractInfo();   
-            // this.saveForm(true);
+            
+               
+            this.saveForm(true);
         }      
     }
 
@@ -353,9 +353,9 @@ export default class Form5StyleOfProceeding extends Vue {
        
         this.$http.get('/form5/forms/'+this.currentNoticeOfHearingOfAppealId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form5Data = response.data                
+                const form5Data = response.data.data                
                 this.UpdateForm5Info(form5Data) 
                 this.extractInfo();
                 this.clearStates();                
@@ -425,15 +425,17 @@ export default class Form5StyleOfProceeding extends Vue {
             url = '/form5/forms/'+this.currentNoticeOfHearingOfAppealId;               
 
             if (!draft && !this.checkStates()){
-               
                 return
-                
             } 
             
             const options = {
                 method: method,
                 url: url,
-                data: this.form5Info
+                data: {
+                    data:this.form5Info,
+                    type:'Form5',
+                    description:'Notice of Hearing of Appeal'
+                }
             }
             this.saveInfo(options, draft);
 
@@ -442,7 +444,11 @@ export default class Form5StyleOfProceeding extends Vue {
             const options = {
                 method: method,
                 url: url,
-                data: this.form5Info
+                data: {
+                    data:this.form5Info,
+                    type:'Form5',
+                    description:'Notice of Hearing of Appeal'
+                }
             }
             this.saveInfo(options, draft);
         }        

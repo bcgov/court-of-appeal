@@ -85,7 +85,7 @@ export default class MyDocuments extends Vue {
                 //TODO: call load form5
             }
 
-            this.dataLoaded = true;       
+            this.loadForm5Forms();       
         },(err) => {
             this.dataLoaded = true;   
         });
