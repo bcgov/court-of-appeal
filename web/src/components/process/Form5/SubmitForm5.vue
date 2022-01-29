@@ -101,7 +101,7 @@ export default class SubmitForm5 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/efiling/"+this.currentNoticeOfHearingOfAppealId+"/submit/";
+        const url = "/form5/efiling/"+this.currentNoticeOfHearingOfAppealId+"/submit/";
 
         const header = {
             responseType: "json",
