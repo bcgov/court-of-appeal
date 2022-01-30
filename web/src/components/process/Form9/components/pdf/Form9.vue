@@ -74,7 +74,7 @@ export default class Form9 extends Vue {
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.currentRequisitionId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form9/form-print/'+this.currentRequisitionId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -100,7 +100,7 @@ export default class Form9 extends Vue {
     public savePdf(){        
         const pdfType = "NHA"
         const pdfName ="FORM9"
-        const url = '/form-print/'+this.currentRequisitionId+'/?pdf_type='+pdfType
+        const url = '/form9/form-print/'+this.currentRequisitionId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -128,7 +128,7 @@ export default class Form9 extends Vue {
  
     public getForm9Data() {        
        
-        this.$http.get('/case/'+this.currentRequisitionId+'/')
+        this.$http.get('/form9/forms/'+this.currentRequisitionId+'/')
         .then((response) => {
             if(response?.data?.data){            
                             

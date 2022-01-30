@@ -145,7 +145,7 @@
 <script lang="ts">
 
 import { form9DataInfoType } from '@/types/Information/Form9';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
