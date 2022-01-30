@@ -129,7 +129,7 @@ export default class SuccessSubmitForm5 extends Vue {
             packageUrl: newPackageInfo.eFilingUrl 
         } 
 
-        const url = "/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/form5/efiling/"+newPackageInfo.fileNumber+"/submit/";
 
         const header = {
             responseType: "json",
