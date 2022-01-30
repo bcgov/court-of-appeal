@@ -61,14 +61,14 @@ export default class Form6 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "NHA"
+        const pdf_type = "ABA"
         const pdf_name = "form6-" + this.currentNoticeOfSettlementOrAbandonmentId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form6/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -92,9 +92,9 @@ export default class Form6 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "NHA"
+        const pdfType = "ABA"
         const pdfName ="FORM6"
-        const url = '/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?pdf_type='+pdfType
+        const url = '/form6/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -122,7 +122,7 @@ export default class Form6 extends Vue {
  
     public getForm6Data() {        
        
-        this.$http.get('/case/'+this.currentNoticeOfSettlementOrAbandonmentId+'/')
+        this.$http.get('/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId+'/')
         .then((response) => {
             if(response?.data?.data){            
                             
