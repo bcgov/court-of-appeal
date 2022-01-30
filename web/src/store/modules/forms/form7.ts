@@ -11,6 +11,7 @@ class Information extends VuexModule {
     public form7AccessInfo: userAccessInfoType[] = [];
     public form7InfoStates = {} as form7StatesInfoType;   
     public currentNoticeOfAppealId = null;    
+    public form7ManualSopOrder: number[] = []
 
     @Mutation
     public setForm7FormsJson(form7FormsJson: form7SubmissionDataInfoType[]): void {   
@@ -55,7 +56,16 @@ class Information extends VuexModule {
     @Action
     public UpdateCurrentNoticeOfAppealId(newCurrentNoticeOfAppealId: string): void {
         this.context.commit('setCurrentNoticeOfAppealId', newCurrentNoticeOfAppealId);
+    }  
+    
+    @Mutation
+    public setForm7ManualSopOrder(form7ManualSopOrder: number[]): void {   
+        this.form7ManualSopOrder = form7ManualSopOrder;
     }    
+    @Action
+    public UpdateForm7ManualSopOrder(newForm7ManualSopOrder: number[]): void {
+        this.context.commit('setForm7ManualSopOrder', newForm7ManualSopOrder);
+    }
     
 }
 

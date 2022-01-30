@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-7-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-6-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -13,12 +13,12 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Appeal form has been submitted.  Please click on the CSO package number 
-                    below to retrieve a filed copy of your Notice of Appearance.
+                    Your Notice of Settlement or Abandonment has been submitted and accepted.  Please click on the 
+                    CSO Package number below to retrieve a filed copy of your Notice of Settlement or Abandonment.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic;">
-                    Please note that <span style="font-weight: 700;">you must file and serve the Notice of Appeal form</span> 
-                    on each Respondent within 30 days after the initial court order is declared.
+                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
+                    Please note that you must serve the notice of Settlement or Abandonment on the appellant 
+                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
@@ -94,21 +94,21 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
+import Form6ProcessHeader from "@/components/process/Form6/components/Form6ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form7StatusInfoType } from '@/types/Information/Form7';
+import { form6StatusInfoType } from '@/types/Information/Form6';
 
 @Component({
     components:{
-        Form7ProcessHeader
+        Form6ProcessHeader
     }
 })
-export default class SuccessSubmitForm7 extends Vue {
+export default class SuccessSubmitForm6 extends Vue {
 
     @Prop({required: true})
     packageInfo!: packageInfoType;
 
-    stepsCompleted = {} as form7StatusInfoType;  
+    stepsCompleted = {} as form6StatusInfoType;  
     mountedData = false; 
 
 
@@ -129,7 +129,7 @@ export default class SuccessSubmitForm7 extends Vue {
             packageUrl: newPackageInfo.eFilingUrl 
         } 
 
-        const url = "/form7/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/form6/efiling/"+newPackageInfo.fileNumber+"/submit/";
 
         const header = {
             responseType: "json",

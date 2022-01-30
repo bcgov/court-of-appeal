@@ -316,18 +316,20 @@ export default class Form5StyleOfProceeding extends Vue {
 
         } else {  
 
-            this.form5Info.appellants = this.partiesJson.appellants;
-            this.form5Info.respondents = this.partiesJson.respondents;
-            this.form5Info.formSevenNumber = this.fileNumber;
+            const form5Data = {} as form5DataInfoType;
+
+            form5Data.appellants = this.partiesJson.appellants;
+            form5Data.respondents = this.partiesJson.respondents;
+            form5Data.formSevenNumber = this.fileNumber;
             
-            this.form5Info.version = this.$store.state.Application.version;
-            this.form5Info.timeOfAppealHearing = '10:00';
-            this.form5Info.acknowledge = false; 
-            const form5Data = this.form5Info
+            form5Data.version = this.$store.state.Application.version;
+            form5Data.timeOfAppealHearing = '10:00';
+            form5Data.acknowledge = false; 
+            
             this.UpdateForm5Info(form5Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractInfo();   
-            // this.saveForm(true);
+            
+               
+            this.saveForm(true);
         }      
     }
 
@@ -351,9 +353,9 @@ export default class Form5StyleOfProceeding extends Vue {
        
         this.$http.get('/form5/forms/'+this.currentNoticeOfHearingOfAppealId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form5Data = response.data                
+                const form5Data = response.data.data                
                 this.UpdateForm5Info(form5Data) 
                 this.extractInfo();
                 this.clearStates();                
@@ -423,15 +425,17 @@ export default class Form5StyleOfProceeding extends Vue {
             url = '/form5/forms/'+this.currentNoticeOfHearingOfAppealId;               
 
             if (!draft && !this.checkStates()){
-               
                 return
-                
             } 
             
             const options = {
                 method: method,
                 url: url,
-                data: this.form5Info
+                data: {
+                    data:this.form5Info,
+                    type:'Form5',
+                    description:'Notice of Hearing of Appeal'
+                }
             }
             this.saveInfo(options, draft);
 
@@ -440,7 +444,11 @@ export default class Form5StyleOfProceeding extends Vue {
             const options = {
                 method: method,
                 url: url,
-                data: this.form5Info
+                data: {
+                    data:this.form5Info,
+                    type:'Form5',
+                    description:'Notice of Hearing of Appeal'
+                }
             }
             this.saveInfo(options, draft);
         }        

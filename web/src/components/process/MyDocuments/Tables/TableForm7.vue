@@ -32,13 +32,13 @@
             </b-col>
         </b-row>
 
-        <b-row v-else class="bg-select mb-2 py-1 mx-0">
+        <b-row v-else-if="documentsList.length" class="bg-select mb-0 py-1 mx-0">
             <b-col cols="12">
-                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
+                <div style="font-weight:600; line-height:0.5rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
         </b-row>
 
-        <b-row style="p-0">
+        <b-row v-if="enableActions || documentsList.length" style="p-0">
             <b-col>
 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
@@ -50,11 +50,12 @@
                         :items="documentsList"
                         :fields="documentsFields"
                         style="font-size: 0.85rem;"
-                        class="mx-2"                        
+                        class="mx-2 my-0"                        
                         sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
-                        head-row-variant="primary"
+                        :thead-class="enableActions?'':'m-0 p-0 h6'"
+                        head-row-variant="primary"                        
                         sort-icon-left
                         striped
                         small 

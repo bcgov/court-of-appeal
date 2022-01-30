@@ -627,6 +627,12 @@ export default class styleOfProceedingsActions extends Vue {
     @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
+    @form7State.State
+    public form7ManualSopOrder!: number[];
+
+    @form7State.Action
+    public UpdateForm7ManualSopOrder!: (newform7ManualSopOrder: number[]) => void
+
     partyTypeOptions = [
         {text: 'an individual', value: false},
         {text: 'an organization', value: true}
@@ -738,8 +744,6 @@ export default class styleOfProceedingsActions extends Vue {
     editStyleOfProceedingsEnabled = true;   
     noRolePartyManualSop: manualSopInfoType[] = [];
 
-    tmpManualSop=[]
-
     referenceNumber = '';    
     updatedInfo = 0;
     dataReady = false;
@@ -771,7 +775,7 @@ export default class styleOfProceedingsActions extends Vue {
     public saveNewParty(){
 
         if (this.checkPartyStates()){
-
+            const styleOfProceedings = this.form7SubmissionInfo;
             const partiesList = this.form7SubmissionInfo.parties;
 
             if (this.party.isOrganization){
@@ -794,13 +798,12 @@ export default class styleOfProceedingsActions extends Vue {
 
             this.party.title = this.getPartyTitles(this.party);        
             partiesList.push(this.party);       
-            this.styleOfProceedingsInfo.parties = partiesList;
-            this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+            styleOfProceedings.parties = partiesList;
+            this.UpdateForm7SubmissionInfo(styleOfProceedings);        
             this.showPartyWindow = false;
             Vue.nextTick(()=> {
                 this.updateResults();
-            });
-           
+            });           
 
         }        
     }
@@ -844,7 +847,7 @@ export default class styleOfProceedingsActions extends Vue {
 
         if (this.checkPartyStates()){
 
-            this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+            const styleOfProceedings = this.form7SubmissionInfo;
             if (this.party.isOrganization){
                 this.party.fullName = this.party.organizationName;
             } else {
@@ -859,9 +862,9 @@ export default class styleOfProceedingsActions extends Vue {
             
             if (this.party.appealRole && this.party.appealRole == 'Respondent') {
                 this.party.appealRole = ''
-                const resIndex = this.styleOfProceedingsInfo.respondents.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
+                const resIndex = styleOfProceedings.respondents.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
                 if (resIndex != -1) {
-                    this.styleOfProceedingsInfo.respondents.splice(resIndex, 1);
+                    styleOfProceedings.respondents.splice(resIndex, 1);
                 }
 
                 const resNameIndex =  this.respondents.indexOf(this.party.fullName);
@@ -878,9 +881,9 @@ export default class styleOfProceedingsActions extends Vue {
                     
             } else if (this.party.appealRole && this.party.appealRole == 'Appellant') {
                 this.party.appealRole = ''
-                const appIndex = this.styleOfProceedingsInfo.appellants.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
+                const appIndex = styleOfProceedings.appellants.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
                 if (appIndex != -1) {
-                    this.styleOfProceedingsInfo.appellants.splice(appIndex, 1);
+                    styleOfProceedings.appellants.splice(appIndex, 1);
                 }                     
             } 
 
@@ -888,9 +891,9 @@ export default class styleOfProceedingsActions extends Vue {
             
             const index = partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
             partiesList[index] = this.party;
-            this.styleOfProceedingsInfo.parties = partiesList;
-            this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join(', ');
-            this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+            styleOfProceedings.parties = partiesList;
+            styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');
+            this.UpdateForm7SubmissionInfo(styleOfProceedings);        
             this.showPartyWindow = false;
             Vue.nextTick(()=> {
                 this.updateResults();
@@ -926,17 +929,16 @@ export default class styleOfProceedingsActions extends Vue {
 
     public editStyleOfProceeding(){ 
 
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+        const styleOfProceedings = this.form7SubmissionInfo;
 
-        if (this.styleOfProceedingsInfo.respondents && 
-            this.styleOfProceedingsInfo.respondents.length > 0 &&
-            this.styleOfProceedingsInfo.appellants && 
-            this.styleOfProceedingsInfo.appellants.length > 0 ){
+        if (styleOfProceedings.respondents && 
+            styleOfProceedings.respondents.length > 0 &&
+            styleOfProceedings.appellants && 
+            styleOfProceedings.appellants.length > 0 ){
                 this.showConfirmEditStyleOfProceeding = true;
                 this.editStyleOfProceedingsEnabled = true;
             } else {
                 this.editStyleOfProceedingsEnabled = false;
-
             }        
     }
 
@@ -1053,12 +1055,13 @@ export default class styleOfProceedingsActions extends Vue {
     }
 
     public deleteParty(){
+        const styleOfProceedings = this.form7SubmissionInfo
         const partiesList = this.form7SubmissionInfo.parties;
         this.showConfirmDeleteParty = false;
         const index = partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
         partiesList.splice(index, 1);       
-        this.styleOfProceedingsInfo.parties = partiesList;
-        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+        styleOfProceedings.parties = partiesList;
+        this.UpdateForm7SubmissionInfo(styleOfProceedings);        
         this.showPartyWindow = false;
         Vue.nextTick(()=> {
             this.updateResults();
@@ -1067,20 +1070,23 @@ export default class styleOfProceedingsActions extends Vue {
 
     public confirmEditStyleOfProceedings(){ 
 
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+        const styleOfProceedings = this.form7SubmissionInfo;
 
         this.styleOfProceedingDataReady = false;
-        this.tmpManualSop=this.styleOfProceedingsInfo.manualSop
         this.showEditStyleOfProceedingWindow = true;       
         this.showConfirmEditStyleOfProceeding = false;    
         
         this.noRolePartyManualSop = [];
-        this.loadSopInfo(this.styleOfProceedingsInfo.appellants);
-        this.loadSopInfo(this.styleOfProceedingsInfo.respondents); 
+        this.loadSopInfo(styleOfProceedings.appellants);
+        this.loadSopInfo(styleOfProceedings.respondents); 
 
-        this.styleOfProceedingsInfo.manualSop = this.styleOfProceedingsInfo.manualSop.concat(this.noRolePartyManualSop)        
+        styleOfProceedings.manualSop = styleOfProceedings.manualSop.concat(this.noRolePartyManualSop)        
 
-        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);        
+        this.UpdateForm7ManualSopOrder([...Array(styleOfProceedings.manualSop.length).keys()])
+
+        this.UpdateForm7SubmissionInfo(styleOfProceedings);
+
+        this.styleOfProceedingsInfo = JSON.parse(JSON.stringify(this.form7SubmissionInfo));
         this.styleOfProceedingDataReady = true;
     }
 
@@ -1154,7 +1160,7 @@ export default class styleOfProceedingsActions extends Vue {
 
     public prePopulateSop(partyInfo: form7PartiesInfoType){
 
-        this.styleOfProceedingsInfo = this.form7SubmissionInfo;
+        const styleOfProceedings = this.form7SubmissionInfo;
 
         let sop = {} as manualSopInfoType;            
         sop.plural = false;
@@ -1168,11 +1174,13 @@ export default class styleOfProceedingsActions extends Vue {
             partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
             partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
                 sop.conjunction = 'Between';
-                this.styleOfProceedingsInfo.manualSop.unshift(sop);
+                styleOfProceedings.manualSop.unshift(sop);
         } else {
             sop.conjunction = 'And';
-            this.styleOfProceedingsInfo.manualSop.push(sop);
+            styleOfProceedings.manualSop.push(sop);
         }
+
+        this.UpdateForm7SubmissionInfo(styleOfProceedings);
 
     }
     
@@ -1182,6 +1190,15 @@ export default class styleOfProceedingsActions extends Vue {
 
     public saveNewStyleOfProceeding(){
         console.log('save new SOP')
+        
+        const msops = []
+        for(const orderInx of this.form7ManualSopOrder){
+            msops.push(this.styleOfProceedingsInfo.manualSop[orderInx])
+        }
+        this.styleOfProceedingsInfo.manualSop = msops;
+        console.log(this.styleOfProceedingsInfo)
+
+
         this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
         this.showEditStyleOfProceedingWindow = false;
     }
@@ -1190,12 +1207,11 @@ export default class styleOfProceedingsActions extends Vue {
         console.log('reset SOP')
         this.showEditStyleOfProceedingWindow = false;
         this.styleOfProceedingsInfo.manualSop = [];
+        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
     }
 
     public cancelStyleOfProceeding(){
-        console.log('cancel SOP')
-        this.styleOfProceedingsInfo.manualSop = this.tmpManualSop;
-        this.UpdateForm7SubmissionInfo(this.styleOfProceedingsInfo);
+        console.log('cancel SOP')        
         this.showEditStyleOfProceedingWindow = false;
     }
 

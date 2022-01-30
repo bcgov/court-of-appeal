@@ -341,10 +341,8 @@ export default class TableForm6 extends Vue {
 
     public resumeApplication(fileInfo: documentInfoType) {
         const caseId = fileInfo.fileNumber.toString()
-        this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(caseId);  
-        // console.log(fileInfo)      
-        this.$router.push({name: "preview-form6", params: {caseId: caseId}});
-       
+        this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(caseId);             
+        this.$router.push({name: "fill-form6"});       
     }
 
     public createDocument() {

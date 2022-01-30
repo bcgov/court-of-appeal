@@ -70,7 +70,7 @@ export default class Form5 extends Vue {
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
         const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
-        const url = '/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form5/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -96,7 +96,7 @@ export default class Form5 extends Vue {
     public savePdf(){        
         const pdfType = "NHA"
         const pdfName ="FORM5"
-        const url = '/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?pdf_type='+pdfType
+        const url = '/form5/form-print/'+this.currentNoticeOfHearingOfAppealId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -124,7 +124,7 @@ export default class Form5 extends Vue {
  
     public getForm5Data() {        
        
-        this.$http.get('/case/'+this.currentNoticeOfHearingOfAppealId+'/')
+        this.$http.get('/form5/forms/'+this.currentNoticeOfHearingOfAppealId)
         .then((response) => {
             if(response?.data?.data){            
                             
