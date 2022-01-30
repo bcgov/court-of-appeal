@@ -6,8 +6,8 @@
         <b-card  no-body v-else class="home-content border-white p-0">          
             <b-row>
                 <b-col>
-                    <h3 class="mt-2 mb-1 ml-4">Submissions</h3>
-                </b-col>            
+                    <div style="margin:0 0 0 1rem; font-size:12pt; font-weight:600; ">Submissions</div>
+                </b-col>                       
             </b-row> 
             <my-documents-table style="max-height:25rem; overflow-y:auto;"
                 v-bind:enableActions="false" 
@@ -284,7 +284,7 @@ export default class DashboardPage extends Vue {
                 //this.loadForm5Forms();
             }
 
-            this.dataLoaded = true;       
+            this.loadForm5Forms();
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        

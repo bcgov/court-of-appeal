@@ -43,14 +43,14 @@
             </b-col>
         </b-row>
 
-        <b-row v-else class="bg-select mb-2 py-1 mx-0">
+        <b-row v-else-if="documentsList.length" class="bg-select mb-0 py-1 mx-0">
             <b-col cols="12">
-                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Hearing of Appeal (Form 5) </div>
+                <div style="font-weight:600; line-height:0.6rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Hearing of Appeal (Form 5) </div>
             </b-col>
         </b-row>
        
 
-        <b-row style="p-0">
+        <b-row v-if="enableActions || documentsList.length" style="p-0">
             <b-col> 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
                     <span class="text-muted ml-4 mb-5">No documents.</span>
@@ -61,11 +61,12 @@
                         :items="documentsList"
                         :fields="documentsFields"
                         style="font-size: 0.85rem;"
-                        class="mx-2"  
+                        class="mx-2 my-0"  
                         head-row-variant="primary"                      
                         sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
+                        :thead-class="enableActions?'':'m-0 p-0 h6'"
                         sort-icon-left
                         striped
                         small 
@@ -238,19 +239,7 @@ export default class TableForm5 extends Vue {
             label: "Parties",
             sortable: false,
             thClass: 'border-dark border-bottom',
-        }, 
-        {
-            key: "referenceNumber",
-            label: "Reference #",
-            sortable: false,
-            thClass: 'border-dark border-bottom',
-        },
-        {
-            key: "appealSubmissionDeadline",
-            label: "Deadline to File and Serve",
-            sortable: true,
-            thClass: 'border-dark border-bottom',
-        },       
+        },           
         {
             key: "status",
             label: "Status",
@@ -311,15 +300,17 @@ export default class TableForm5 extends Vue {
             //console.log(docJson)
             doc.fileNumber = docJson.id;
             doc.caseNumber = docJson.data.formSevenNumber;
-            doc.status = docJson.archive? "Archived":docJson.status;
+            doc.status = docJson.status;
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
-            doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
+            doc.description = [docJson.description];
             doc.packageUrl = docJson.packageUrl;
             doc.packageNum = docJson.packageNumber;
 
             const appellants = docJson.data.appellants;
             const respondents = docJson.data.respondents;
+
+            console.log(appellants)
             const app_names = [];
             const res_names = [];
             for (const app of appellants){
@@ -343,7 +334,7 @@ export default class TableForm5 extends Vue {
         const caseId = fileInfo.fileNumber.toString()
         this.UpdateCurrentNoticeOfHearingOfAppealId(caseId);  
         // console.log(fileInfo)      
-        this.$router.push({name: "preview-form5", params: {caseId: caseId}});
+        this.$router.push({name: "fill-form5"});
        
     }
 
@@ -365,8 +356,8 @@ export default class TableForm5 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'FORM';
-            const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            const pdf_type = 'NHA';
+            const url = '/form5/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
                 headers: {
@@ -405,15 +396,15 @@ export default class TableForm5 extends Vue {
     }
 
     public confirmDeleteApplication() { 
-        
-        let pdfIds = ''       
-        for(const fileId of this.applicationsToDelete)
-            pdfIds+= '&id='+fileId;
-        
-        const url = '/case/0/?'+pdfIds;
-    
+        const data ={
+            data:{
+                ids:this.applicationsToDelete
+            }
+        }
 
-        this.$http.delete(url)
+        const url = '/form5/forms';
+
+        this.$http.delete(url, data)
         .then(response => {
             
             if(response?.status == 204)

@@ -59,3 +59,53 @@ class EFilingParsing:
         }
 
         return converted_data
+
+
+    def convert_form5_data_for_efiling(self, request, notice, documents):
+        
+        data_dec = settings.ENCRYPTOR.decrypt(notice.key_id, notice.data)
+        data = json.loads(data_dec)
+
+        id = notice.id
+        converted_data = {
+            "formId": id,
+            "fileNumber": data["formSevenNumber"].replace("CA", ""),
+            "locationCode":"COA", #  notice.lowerCourtRegistryId,
+            "parties":[],
+            # "parties": flatten(
+            #     [
+                    
+            #         {
+            #             "partyType": "IND",
+            #             "roleType": "Appellant",
+            #             "firstName": "firstName",
+            #             "middleName": "",
+            #             "lastName": "lastName",
+            #         }                        
+                   
+            #         # [
+            #         #     {
+            #         #         "partyType": "IND",
+            #         #         "roleType": "Respondent",
+            #         #         "firstName": respondent["firstName"],
+            #         #         "middleName": "",
+            #         #         "lastName": respondent["lastName"],
+            #         #     }
+            #         #     for respondent in data["respondents"]
+            #         # ],
+            #     ]
+            # ),  
+            "organizationParties": [],
+            "documents": documents,            
+            "successUrl": self.url_from_headers(
+                request, f"submitted/{id}/success/NHA"
+            ),
+            "errorUrl": self.url_from_headers(
+                request, f"submitted/{id}/error/NHA"
+            ),
+            "cancelUrl": self.url_from_headers(
+                request, f"submitted/{id}/cancel/NHA"
+            ),
+        }
+
+        return converted_data
