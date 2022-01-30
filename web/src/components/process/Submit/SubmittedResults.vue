@@ -4,6 +4,11 @@
         <cancel-submit-form-2 v-else-if="result=='cancel'"/>
         <error-submit-form-2 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'NHA'">
+        <success-submit-form-5 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-5 v-else-if="result=='cancel'"/>
+        <error-submit-form-5 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else>
         <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-7 v-else-if="result=='cancel'"/>
@@ -18,6 +23,10 @@ import CancelSubmitForm2 from "./Form2/CancelSubmitForm2.vue";
 import SuccessSubmitForm2 from "./Form2/SuccessSubmitForm2.vue";
 import ErrorSubmitForm2 from "./Form2/ErrorSubmitForm2.vue";
 
+import CancelSubmitForm5 from "./Form5/CancelSubmitForm5.vue";
+import SuccessSubmitForm5 from "./Form5/SuccessSubmitForm5.vue";
+import ErrorSubmitForm5 from "./Form5/ErrorSubmitForm5.vue";
+
 import CancelSubmitForm7 from "./Form7/CancelSubmitForm7.vue";
 import SuccessSubmitForm7 from "./Form7/SuccessSubmitForm7.vue";
 import ErrorSubmitForm7 from "./Form7/ErrorSubmitForm7.vue";
@@ -28,6 +37,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm2,
         SuccessSubmitForm2,
         ErrorSubmitForm2,
+        CancelSubmitForm5,
+        SuccessSubmitForm5,
+        ErrorSubmitForm5,
         CancelSubmitForm7,
         SuccessSubmitForm7,
         ErrorSubmitForm7
