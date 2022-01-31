@@ -588,21 +588,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/information";
-const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
 
-import { aliasInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, form7SubmissionDataInfoType, lookupsInfoType, manualSopInfoType, representativeInfoType } from '@/types/Information';
 import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import sortStyleOfProceeding from './util/sortStyleOfProceeding';
+import { form7SubmissionDataInfoType, lookupsInfoType, form7PartiesInfoType, form7PartiesStatesInfoType, manualSopInfoType, aliasInfoType, representativeInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{        
@@ -615,8 +615,8 @@ import sortStyleOfProceeding from './util/sortStyleOfProceeding';
 })
 export default class styleOfProceedingsActions extends Vue {     
 
-    @informationState.State
-    public form7SubmissionInfo!: form7SubmissionDataInfoType;    
+    @form7State.State
+    public form7SubmissionInfo: form7SubmissionDataInfoType;    
 
     @commonState.State
     public userName!: string;
@@ -624,13 +624,13 @@ export default class styleOfProceedingsActions extends Vue {
     @commonState.State
     public lookups!: lookupsInfoType;    
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm7SubmissionInfo: form7SubmissionDataInfoType) => void
 
-    @informationState.State
+    @form7State.State
     public form7ManualSopOrder!: number[];
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7ManualSopOrder!: (newform7ManualSopOrder: number[]) => void
 
     partyTypeOptions = [

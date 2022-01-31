@@ -46,7 +46,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import Form2StyleOfProceeding from "@/components/process/Form2/components/Form2StyleOfProceeding.vue";
-import { form2StatusInfoType } from '@/types/Information';
+import { form2StatusInfoType } from '@/types/Information/Form2';
 
 @Component({
     components:{

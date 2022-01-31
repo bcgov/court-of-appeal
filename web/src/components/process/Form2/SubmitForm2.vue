@@ -56,12 +56,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form2StatusInfoType, packageInfoType } from '@/types/Information';
+import { packageInfoType } from '@/types/Information';
+import { form2StatusInfoType } from '@/types/Information/Form2';
 
 @Component({
     components:{
@@ -71,7 +72,7 @@ import { form2StatusInfoType, packageInfoType } from '@/types/Information';
 })
 export default class SubmitForm2 extends Vue {
 
-    @informationState.State
+    @form2State.State
     public currentCaseId: string;
 
     stepsCompleted = {} as form2StatusInfoType;  

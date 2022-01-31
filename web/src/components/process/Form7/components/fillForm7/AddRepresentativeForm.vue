@@ -93,9 +93,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import "@/store/modules/common";
-const commonState = namespace("Common"); 
-import { representativeInfoType, lookupsInfoType } from '@/types/Information';
-   
+import { lookupsInfoType, representativeInfoType } from '@/types/Information/Form7';
+const commonState = namespace("Common");    
 
 @Component
 export default class AddRepresentativeForm extends Vue {        

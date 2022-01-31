@@ -82,9 +82,8 @@
     import { Component, Vue, Prop } from 'vue-property-decorator';
     import { namespace } from 'vuex-class';
     import "@/store/modules/common";
-    const commonState = namespace("Common"); 
-    import { aliasInfoType, lookupsInfoType } from '@/types/Information';
-   
+import { lookupsInfoType, aliasInfoType } from '@/types/Information/Form7';
+    const commonState = namespace("Common");    
 
     @Component
     export default class AddAliasForm extends Vue {        

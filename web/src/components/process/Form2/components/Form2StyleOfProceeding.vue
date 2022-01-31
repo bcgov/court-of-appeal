@@ -316,13 +316,16 @@
 
 <script lang="ts">
 
-import { form2DataInfoType } from '@/types/Information';
+import { form2DataInfoType } from '@/types/Information/Form2';
 import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
 
 @Component
 export default class Form2StyleOfProceeding extends Vue {
@@ -333,16 +336,16 @@ export default class Form2StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @informationState.State
+    @form2State.State
     public form2Info: form2DataInfoType;
 
-    @informationState.Action
+    @form2State.Action
     public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void  
     
-    @informationState.State
+    @form2State.State
     public currentCaseId: string;
 
-    @informationState.Action
+    @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     dataReady = false;
@@ -379,11 +382,25 @@ export default class Form2StyleOfProceeding extends Vue {
         this.dataReady = true;        
     }
 
-    public extractInfo(){
+    async getForm2Data() {
+        
+        this.$http.get('/case/'+this.currentCaseId+'/')
+        .then((response) => {
+            if(response?.data?.data){ 
+                const result = response.data.data
+                this.UpdateForm2Info(result)
+            }                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+    async extractInfo(){
 
         if(this.currentCaseId){
-            this.applicants = this.form2Info.appellants;
-            this.respondents = this.form2Info.respondents;
+            await this.getForm2Data();
+            this.applicants = this.form2Info.appellants? this.form2Info.appellants:[];
+            this.respondents = this.form2Info.respondents? this.form2Info.respondents:[];
         }else{
             this.applicants = this.partiesJson.appellants;
             this.respondents = this.partiesJson.respondents;            

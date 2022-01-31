@@ -119,9 +119,12 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import { form2SearchInfoType } from '@/types/Information';
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
+import { form2SearchInfoType } from '@/types/Information/Form2';
 
 @Component({
     components: {           
@@ -136,7 +139,7 @@ export default class Form2CaseInformation extends Vue {
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
     
-    @informationState.Action
+    @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     levelOfCourt = "Court of Appeal";

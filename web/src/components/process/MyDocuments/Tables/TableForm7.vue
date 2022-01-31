@@ -1,6 +1,17 @@
 <template>
     <div>
-        <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
+        
+        <b-alert
+            :show="errorMsgDismissCountDown"
+            dismissible
+            variant="danger"
+            @dismissed="errorMsgDismissCountDown=0"
+            @dismiss-count-down="errorMsgCountDownChanged"
+        > 
+            {{errorMsg}}
+        </b-alert>
+
+        <b-row v-if="enableActions && documentsList.length" class="bg-form7 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
@@ -32,13 +43,13 @@
             </b-col>
         </b-row>
 
-        <b-row v-else class="bg-select mb-2 py-1 mx-0">
+        <b-row v-else-if="documentsList.length" class="bg-form7 mb-0 py-1 mx-0">
             <b-col cols="12">
-                <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
+                <div style="font-weight:600; line-height:0.5rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
         </b-row>
 
-        <b-row style="p-0">
+        <b-row v-if="documentsList.length" style="p-0">
             <b-col>
 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
@@ -50,11 +61,12 @@
                         :items="documentsList"
                         :fields="documentsFields"
                         style="font-size: 0.85rem;"
-                        class="mx-2"                        
+                        class="mx-2 my-0"                        
                         sort-by="modifiedDate"
                         :sort-desc="true"
                         borderless
-                        head-row-variant="primary"
+                        :thead-class="enableActions?'':'m-0 p-0 h6'"
+                        head-row-variant="primary"                        
                         sort-icon-left
                         striped
                         small 
@@ -158,26 +170,24 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
-import {form7SubmissionDataInfoType } from "@/types/Information";
-const informationState = namespace("Information");
+import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
 
 @Component
 export default class TableForm7 extends Vue {
 
-
     @Prop({required: true})
     enableActions!: boolean;
     
-    @informationState.State
+    @form7State.State
     public form7FormsJson!: form7SubmissionDataInfoType[];
     
-    @informationState.Action
+    @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
     
     allDocumentsChecked = false;
-
     
     documentsList = [];
   
@@ -283,7 +293,7 @@ export default class TableForm7 extends Vue {
             doc.fileNumber = String(++count);
             doc.id= docJson['noticeOfAppealId']
             doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
-            doc.status = docJson['submittedByClientId']? "Submitted":"Draft";
+            doc.status = docJson['electronicallyFiled']=='Submitted'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
             doc.description = "Notice of Appeal"
             doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
@@ -362,7 +372,7 @@ export default class TableForm7 extends Vue {
 
         this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
         this.applicationsToDeleteIds = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.id)
-        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.id)
+        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.fileNumber)
 
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;      

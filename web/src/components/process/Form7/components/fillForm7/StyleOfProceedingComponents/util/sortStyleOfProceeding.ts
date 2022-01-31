@@ -22,11 +22,11 @@ export default sortStyleOfProceeding;
 
 function changeOrder(oldIndex, newIndex){
 
-    const msops = store.state.Information.form7ManualSopOrder
+    const msops = store.state.Form7.form7ManualSopOrder
       
     const movingSop = msops[oldIndex]
     msops.splice(oldIndex, 1);
     msops.splice(newIndex,0, movingSop);    
 
-    store.commit('Information/setForm7ManualSopOrder',msops)   
+    store.commit('Form7/setForm7ManualSopOrder',msops)   
 }

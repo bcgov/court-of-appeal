@@ -14,10 +14,28 @@ Vue.filter('truncate-text', function (text: string, stop: number) {
 		return ''
 })
 
+Vue.filter('beautify-time-am-pm', function(time){
+	if(time){
+		const hh = Number(time.substr(0,2))
+		const ampm = hh>12?' PM':' AM'
+		const HH = hh>12? hh-12 : hh 
+		return HH+time.substr(2,3) +ampm	
+	}else
+		return ''
+})
+
 Vue.filter('beautify-date-mm-dd-yyyy', function(date){
 	enum MonthList {'Jan' = 1, 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
 	if(date)
 		return date.substr(8,2) + ' ' + MonthList[Number(date.substr(5,2))] + ' ' + date.substr(0,4);
+	else
+		return ''
+})
+
+Vue.filter('beautify-date-dd/mm/yyyy', function(date){
+	
+	if(date)
+		return date.substr(8,2) + '/' + date.substr(5,2) + '/' + date.substr(0,4);
 	else
 		return ''
 })
@@ -257,7 +275,15 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 			`.marginleftminus{margin:0 0 0 -1rem;}`+
 			`.marginleftplus{margin:0 0 0 1rem !important;}`+
 			`.margintopminus{margin-top:-0.5rem !important;}`+
+			`.arrow-up-flash{ margin: 0.25rem auto 0 auto;width: 0;height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent;border-bottom: 16px solid #E8E8E8;}`+
+			`.arrow-up-box{margin: 0 auto;width: 16px;height:4px;background-color:#E8E8E8;border: 0px solid #E8E8E8;}`+
+			`.coa-text-box{padding:0.5rem; border: 1px solid black; word-wrap: break-word;}`+
+			`.coa-help-box{padding:0.5rem; border: 1px solid #E8E8E8; background: #E8E8E8;}`+			
+			`.arrow-right-flash-36{ margin-right:1.25rem;  width:0;height:0; border-top: 36px solid transparent; border-bottom: 36px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-20{ margin-right:1.25rem;  width:0;height:0; border-top: 20px solid transparent; border-bottom: 20px solid transparent;border-left: 20px solid #E8E8E8;}`+
+			`.arrow-right-flash-25{ margin-right:1.25rem;  width:0;height:0; border-top: 25px solid transparent; border-bottom: 25px solid transparent;border-left: 25px solid #E8E8E8;}`+
 
+			
 			`section{ counter-increment: question-counter; text-indent: -17px; text-align: justify; text-justify: inter-word; margin: 0.5rem 0.5rem 0.5rem 1rem;}`+ 
 			`section:before {font-weight: bolder; content:counter(question-counter) ".";}`+
 			`section.resetquestion{counter-reset: question-counter;}`+

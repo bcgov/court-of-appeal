@@ -4,15 +4,9 @@
         <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
         
         <b-card  no-body v-else class="home-content border-white p-0">          
-            <b-row>
-                <b-col>
-                    <h3 class="mt-2 mb-1 ml-4">Submissions</h3>
-                </b-col>            
-            </b-row> 
-            <my-documents-table style="max-height:25rem; overflow-y:auto;"
-                v-bind:enableActions="false" 
-                v-bind:title="''">
-            </my-documents-table>
+             
+
+            <my-documents-table-brief style="max-height:25rem; overflow-y:auto;" />
             
             <b-row no-gutters class="bg-white pt-1">
                 <b-button 
@@ -67,26 +61,38 @@ const commonState = namespace("Common");
 
 import "@/store/modules/application";
 const applicationState = namespace("Application")
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
 
-import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
+import MyDocumentsTableBrief from "@/components/process/MyDocuments/MyDocumentsTableBrief.vue";
 import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue";
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
-import { form7SubmissionDataInfoType, lookupsInfoType, pathwayTypeInfoType } from '@/types/Information';
+import { pathwayTypeInfoType } from '@/types/Information';
 
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
+import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
+import { form5FormsJsonDataType } from '@/types/Information/Form5';
 
 
 @Component({
     components:{
-        MyDocumentsTable,
+        MyDocumentsTableBrief,
         AppealProcess,
         StartEfiling,
         NeedHelp,
@@ -107,10 +113,13 @@ export default class DashboardPage extends Vue {
     @informationState.State
     public pathType: pathwayTypeInfoType;
     
-    @informationState.Action
+    @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
 
-    @informationState.Action
+    @form5State.Action
+    public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
+
+    @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
 
     @informationState.Action
@@ -267,6 +276,23 @@ export default class DashboardPage extends Vue {
                 const forms = response.data;
                 this.UpdateForm7FormsJson(forms)
             }
+            
+            this.loadForm5Forms();
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+    public loadForm5Forms () {
+   
+        this.$http.get('/form5/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm5FormsJson(forms)
+            }
 
             this.dataLoaded = true;       
         },(err) => {
@@ -274,7 +300,6 @@ export default class DashboardPage extends Vue {
             this.error = err;        
         });
     }
-
 
     public restartJourney() {
         this.journeyStarted = false;

@@ -28,7 +28,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import Form7ProcessHeader from "@/components/process/Form7/components/Form7ProcessHeader.vue";
 import Form7CaseInformation from "@/components/process/Form7/components/Form7CaseInformation.vue";
-import { form7StatusInfoType } from '@/types/Information';
+import { form7StatusInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{

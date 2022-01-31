@@ -340,7 +340,6 @@
 </template>
 
 <script lang="ts">
-import { form7PartiesInfoType, form7SubmissionDataInfoType, manualSopInfoType } from '@/types/Information';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment';
 
@@ -349,8 +348,12 @@ import "@/store/modules/information";
 import { locationsInfoType } from '@/types/Common';
 const informationState = namespace("Information");
 
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
+
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
 import UnderlineForm from "@/components/utils/PopulateForms/components/UnderlineForm.vue";
+import { form7SubmissionDataInfoType, manualSopInfoType, form7PartiesInfoType } from '@/types/Information/Form7';
 
 @Component({
     components:{       
@@ -366,7 +369,7 @@ export default class Form7Layout extends Vue {
     @informationState.State
     public caseLocation: locationsInfoType;
 
-    @informationState.Action
+    @form7State.Action
     public UpdateForm7SubmissionInfo!: (newForm2SubmissionInfo: form7SubmissionDataInfoType) => void
     
     dataReady = false;

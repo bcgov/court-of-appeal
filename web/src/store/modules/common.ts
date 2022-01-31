@@ -1,6 +1,6 @@
 
 import { locationsInfoType } from '@/types/Common';
-import { accountInfoType, lookupsInfoType } from '@/types/Information';
+import { accountInfoType, lookupsInfoType } from '@/types/Information/Form7';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({

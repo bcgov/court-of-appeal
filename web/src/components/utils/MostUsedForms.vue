@@ -12,9 +12,13 @@
                 target="_blank">
                 Notice of Appearance (Form 2)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm5Document"
+                target="_blank">
+                Notice of Hearing of Appeal (Form 5)                
+            </li>
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
-            <li>Notice of Hearing Appeal</li>
         </ol>
     </b-card>
 </template>
@@ -23,21 +27,36 @@
     import { Component, Vue } from 'vue-property-decorator';
     
     import { namespace } from "vuex-class";
-    import "@/store/modules/information";
-    const informationState = namespace("Information");
+
+    import "@/store/modules/forms/form2";
+    const form2State = namespace("Form2");
+
+    import "@/store/modules/forms/form5";
+    const form5State = namespace("Form5");
+
+    import "@/store/modules/forms/form7";
+    const form7State = namespace("Form7");
 
     @Component
     export default class MostUsedForms extends Vue {        
         
-        @informationState.Action
+        @form2State.Action
         public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
-        @informationState.Action
+        @form5State.Action
+	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+
+        @form7State.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" })
+        }
+
+        public startNewForm5Document(){
+            this.UpdateCurrentNoticeOfHearingOfAppealId(null);
+            this.$router.push({name: "start-form5" })
         }
 
         public startNewForm7Document(){

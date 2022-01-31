@@ -12,25 +12,38 @@
 </template>
 
 <script lang="ts">
-	import { Component, Vue} from 'vue-property-decorator';	
+import { Component, Vue} from 'vue-property-decorator';	
 
-	import { namespace } from "vuex-class";
-	import "@/store/modules/information";
-	const informationState = namespace("Information");
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
+
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 	@Component
 	export default class MenuBar extends Vue {
-        @informationState.Action
+		
+        @form2State.Action
     	public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
-		@informationState.Action
+		@form5State.Action
+    	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
+
+		@form7State.Action
     	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
         mounted() {
         
         }
+		
 		public resetCaseId(){
 			this.UpdateCurrentCaseId(null);
+			this.UpdateCurrentNoticeOfHearingOfAppealId(null);
 			this.UpdateCurrentNoticeOfAppealId(null);
 		}
 	}
