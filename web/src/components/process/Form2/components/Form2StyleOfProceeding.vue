@@ -382,11 +382,25 @@ export default class Form2StyleOfProceeding extends Vue {
         this.dataReady = true;        
     }
 
-    public extractInfo(){
+    async getForm2Data() {
+        
+        this.$http.get('/case/'+this.currentCaseId+'/')
+        .then((response) => {
+            if(response?.data?.data){ 
+                const result = response.data.data
+                this.UpdateForm2Info(result)
+            }                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
+
+    async extractInfo(){
 
         if(this.currentCaseId){
-            this.applicants = this.form2Info.appellants;
-            this.respondents = this.form2Info.respondents;
+            await this.getForm2Data();
+            this.applicants = this.form2Info.appellants? this.form2Info.appellants:[];
+            this.respondents = this.form2Info.respondents? this.form2Info.respondents:[];
         }else{
             this.applicants = this.partiesJson.appellants;
             this.respondents = this.partiesJson.respondents;            

@@ -1,6 +1,17 @@
 <template>
     <div>
-        <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
+        
+        <b-alert
+            :show="errorMsgDismissCountDown"
+            dismissible
+            variant="danger"
+            @dismissed="errorMsgDismissCountDown=0"
+            @dismiss-count-down="errorMsgCountDownChanged"
+        > 
+            {{errorMsg}}
+        </b-alert>
+
+        <b-row v-if="enableActions && documentsList.length" class="bg-form7 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
@@ -32,13 +43,13 @@
             </b-col>
         </b-row>
 
-        <b-row v-else-if="documentsList.length" class="bg-select mb-0 py-1 mx-0">
+        <b-row v-else-if="documentsList.length" class="bg-form7 mb-0 py-1 mx-0">
             <b-col cols="12">
                 <div style="font-weight:600; line-height:0.5rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Appeal (Form 7)</div>
             </b-col>
         </b-row>
 
-        <b-row v-if="enableActions || documentsList.length" style="p-0">
+        <b-row v-if="documentsList.length" style="p-0">
             <b-col>
 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
@@ -282,7 +293,7 @@ export default class TableForm7 extends Vue {
             doc.fileNumber = String(++count);
             doc.id= docJson['noticeOfAppealId']
             doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
-            doc.status = docJson['submittedByClientId']? "Submitted":"Draft";
+            doc.status = docJson['electronicallyFiled']=='Submitted'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
             doc.description = "Notice of Appeal"
             doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
@@ -361,7 +372,7 @@ export default class TableForm7 extends Vue {
 
         this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
         this.applicationsToDeleteIds = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.id)
-        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.id)
+        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.fileNumber)
 
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;      
