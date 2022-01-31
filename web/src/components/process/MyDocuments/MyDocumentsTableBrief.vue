@@ -40,7 +40,7 @@
                         v-else-if="row.item.status == 'Submitted'" 
                         size="sm" 
                         variant="transparent" 
-                        class="my-0 py-0 px-1"
+                        class="my-0 py-0 px-1 border-0"
                         @click="navigateToEFilingHub(row.item.packageUrl)"
                             v-b-tooltip.hover.noninteractive.v-info
                             title="Navigate To Submitted Application">
@@ -124,12 +124,13 @@ export default class MyDocumentsTable extends Vue {
 
     documentsList = []
     documentsFields =[
-        { key: "formName",    label: "Form",          sortable: true,  thClass: 'border-dark border-bottom'},
-        { key: "description", label: "Description",   sortable: false,  thClass: 'border-dark border-bottom'},
-        { key: "fileNumber",  label: "File #",        sortable: false, thClass: 'border-dark border-bottom' },
-        { key: "status",      label: "Status",        sortable: true,  thClass: 'border-dark border-bottom',},
-        { key: "modifiedDate",label: "Last Updated",  sortable: true,  thClass: 'border-dark border-bottom',},
-        { key: "action",      label: "Action",        sortable: false, thClass: 'border-dark border-bottom',}
+        { key: "formName",    label: "Form",          sortable: true,  thClass: 'border-dark border-bottom',},
+        { key: "description", label: "Description",   sortable: false, thClass: 'border-dark border-bottom', tdClass:'align-middle',},
+        { key: "fileNumber",  label: "File #",        sortable: false, thClass: 'border-dark border-bottom', tdClass:'align-middle',},
+        { key: "status",      label: "Status",        sortable: true,  thClass: 'border-dark border-bottom', tdClass:'align-middle',},
+        { key: "modifiedDate",label: "Last Updated",  sortable: true,  thClass: 'border-dark border-bottom', tdClass:'align-middle',},
+        { key: "packageNum",  label: "eFiling #",     sortable: true,  thClass: 'border-dark border-bottom', tdClass:'align-middle',},
+        { key: "action",      label: "Action",        sortable: false, thClass: 'border-dark border-bottom', tdClass:'align-middle',}
     ]
     mounted() {
         this.extractDocuments()       
