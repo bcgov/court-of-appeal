@@ -45,7 +45,7 @@ Temporary Items
 
 # Output files
 pdf/*.pdf
-/__pycache__
+**/*/__pycache__
 
 
 #web/package-lock.json
