@@ -283,14 +283,14 @@ export default class TableForm7 extends Vue {
             doc.fileNumber = String(++count);
             doc.id= docJson['noticeOfAppealId']
             doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
-            doc.status = docJson['submittedByClientId']? "Submitted":"Draft";
+            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
             doc.description = "Notice of Appeal"
             doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
             doc.pdf_types = docJson['pdf_types']
             // doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
-            // doc.packageUrl = docJson.packageUrl;
-            // doc.packageNum = docJson.packageNumber;
+            doc.packageUrl = docJson['package_url'];
+            doc.packageNum = docJson['package_number'];
 
             this.documentsList.push(doc);
         }
@@ -362,7 +362,7 @@ export default class TableForm7 extends Vue {
 
         this.applicationsToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.fileNumber)
         this.applicationsToDeleteIds = this.documentsList.filter(doc => {return (doc.isChecked && doc.status !='Submitted')}).map(doc => doc.id)
-        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.id)
+        this.applicationsNotAllowedToDelete = this.documentsList.filter(doc => {return (doc.isChecked && doc.status =='Submitted')}).map(doc => doc.fileNumber)
 
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;      

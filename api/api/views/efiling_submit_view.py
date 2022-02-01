@@ -63,7 +63,7 @@ class EFilingSubmitView(generics.GenericAPIView):
         outgoing_documents.append(
             {
                 "type": f"{document_type}",
-                "name": "form2.pdf",
+                "name": "Form2.pdf",
                 "file_data": pdf_content,
                 "data": document_json,
                 "md5": hashlib.md5(pdf_content).hexdigest(),

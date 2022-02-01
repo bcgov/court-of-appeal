@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseNotFound, HttpRe
 from django.http.response import Http404
 from django.utils import timezone
 
-from form7.models import NoticeOfAppeal, FormPdf
+from form7.models import NoticeOfAppeal, FormPdf, Party
 
 from rest_framework import permissions, generics
 from rest_framework.exceptions import NotFound
@@ -68,7 +68,7 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
         outgoing_documents.append(
             {
                 "type": f"{document_type}",
-                "name": "form7.pdf",
+                "name": "Form7.pdf",
                 "file_data": pdf_content,
                 "data": document_json,
                 "md5": hashlib.md5(pdf_content).hexdigest(),
@@ -90,7 +90,7 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
 
         notice.package_number = body.get("packageNumber")
         notice.package_url = body.get("packageUrl")
-        notice.electronicallyFiled="Submitted"
+        notice.electronicallyFiled="Y"
         
         notice.save()
         return HttpResponse(status=204)
@@ -107,9 +107,11 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
         if notice.package_number or notice.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
+        parties = Party.objects.filter(noticeOfAppeal_id=notice.noticeOfAppealId).all()
+
         outgoing_documents = self._get_pdf_content(notice)               
         data_for_efiling = self.efiling_parsing.convert_form7_data_for_efiling(
-            request, notice, outgoing_documents
+            request, notice, parties, outgoing_documents
         )
         
         # EFiling upload document.
