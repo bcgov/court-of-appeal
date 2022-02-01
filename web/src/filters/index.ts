@@ -14,6 +14,24 @@ Vue.filter('truncate-text', function (text: string, stop: number) {
 		return ''
 })
 
+Vue.filter('capitalize', function(str: string){
+	
+	if(str)
+		return str.charAt(0).toUpperCase() + (str.slice(1)).toLowerCase();
+	else
+		return ''
+	
+})
+
+Vue.filter('capitalizefirst', function(str: string){
+	
+	if(str)
+		return str.charAt(0).toUpperCase() + (str.slice(1));
+	else
+		return ''
+	
+})
+
 Vue.filter('beautify-date-mm-dd-yyyy', function(date){
 	enum MonthList {'Jan' = 1, 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
 	if(date)
