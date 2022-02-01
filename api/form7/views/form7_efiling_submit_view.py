@@ -2,32 +2,28 @@ import hashlib
 import logging
 import json
 import uuid
-# from collections import Counter
+
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.http.response import Http404
 from django.utils import timezone
 
-# from numpy import unique
-from api.models import PreparedPdf
+from form7.models import NoticeOfAppeal, FormPdf, Party
 
 from rest_framework import permissions, generics
 from rest_framework.exceptions import NotFound
 
 from api.efiling import EFilingPackaging, EFilingSubmission, EFilingParsing
-from api.utils import (
-    convert_document_to_multi_part,
-    get_case_for_user,    
-    # is_valid_json,
-)
-# from core.pdf import rotate_images_and_convert_pdf
+from api.utils import convert_document_to_multi_part
+
 from core.utils.json_message_response import JsonMessageResponse
 
-
 logger = logging.getLogger(__name__)
+no_record_found = "No record found."
 
 
-class EFilingSubmitView(generics.GenericAPIView):
+
+class Form7EFilingSubmitView(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def __init__(self):
@@ -36,16 +32,25 @@ class EFilingSubmitView(generics.GenericAPIView):
 
     # """ This inserts our generated file, iterates over files and converts to PDF if necessary. """
 
-    def _get_pdf_content(self, case):
+    def get_notice_for_user(self, notice_id, account_id):
+        try:
+            notice_query = NoticeOfAppeal.objects.get(noticeOfAppealId=notice_id, accountId=account_id)
+            return notice_query
+        except (NoticeOfAppeal.DoesNotExist):
+            logger.debug(no_record_found)
+            return
+
+
+    def _get_pdf_content(self, notice):
         outgoing_documents = [] 
         #Modify If more than one form type exist in the future       
-        document_type = "APP"
+        document_type = "NAA"
         current_document_type = "FORM"
         try:                      
-            prepared_pdf = PreparedPdf.objects.get(
-                case_id=case.id, pdf_type=f"{current_document_type}"
+            prepared_pdf = FormPdf.objects.get(
+                noticeOfAppeal_id=notice.noticeOfAppealId, pdf_type=f"{current_document_type}"
             )
-        except PreparedPdf.DoesNotExist:
+        except FormPdf.DoesNotExist:
             raise NotFound(
                 detail=f"Missing document type {current_document_type} from database."
             )
@@ -57,13 +62,13 @@ class EFilingSubmitView(generics.GenericAPIView):
                 prepared_pdf.key_id, prepared_pdf.json_data
             ).decode("utf-8")
         )
-        document_json.update({"applicationId": case.id})
+        document_json.update({"applicationId": str(notice.noticeOfAppealId)})
 
         
         outgoing_documents.append(
             {
                 "type": f"{document_type}",
-                "name": "Form2.pdf",
+                "name": "Form7.pdf",
                 "file_data": pdf_content,
                 "data": document_json,
                 "md5": hashlib.md5(pdf_content).hexdigest(),
@@ -71,43 +76,48 @@ class EFilingSubmitView(generics.GenericAPIView):
         )
         return outgoing_documents
 
-    def put(self, request, case_id):
-        user_id = request.user.id
+
+    def put(self, request, notice_id):
+        account_id = request.user.account_id
         body = request.data
-        case = get_case_for_user(case_id, user_id)
+
+        notice = self.get_notice_for_user(notice_id, account_id)
+        if not notice:        
+            return HttpResponseNotFound("no record found")
+
+        if not notice.submission_id or  not notice.transaction_id:
+            return HttpResponseNotFound("no record found")
+
+        notice.package_number = body.get("packageNumber")
+        notice.package_url = body.get("packageUrl")
+        notice.electronicallyFiled="Y"
         
-        if not case:
-            return HttpResponseNotFound("no record found")
-
-        if not case.submission_id or  not case.transaction_id:
-            return HttpResponseNotFound("no record found")
-
-        case.package_number = body.get("packageNumber")
-        case.package_url = body.get("packageUrl")
-        case.status="Submitted"
-        case.last_filed = timezone.now()
-        case.save()
+        notice.save()
         return HttpResponse(status=204)
 
-    def post(self, request, case_id):
 
-        user_id = request.user.id
-        case = get_case_for_user(case_id, user_id)        
-        if not case:
+    def post(self, request, notice_id):
+
+        account_id = request.user.account_id
+
+        notice = self.get_notice_for_user(notice_id, account_id)        
+        if not notice:
             return HttpResponseNotFound("no record found")
 
-        if case.package_number or case.package_url: 
+        if notice.package_number or notice.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(case)               
-        data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
-            request, case, outgoing_documents
+        parties = Party.objects.filter(noticeOfAppeal_id=notice.noticeOfAppealId).all()
+
+        outgoing_documents = self._get_pdf_content(notice)               
+        data_for_efiling = self.efiling_parsing.convert_form7_data_for_efiling(
+            request, notice, parties, outgoing_documents
         )
         
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())
-        case.transaction_id = transaction_id
-        case.save()
+        notice.transaction_id = transaction_id
+        notice.save()
 
         outgoing_files = convert_document_to_multi_part(outgoing_documents)
         del outgoing_documents
@@ -131,11 +141,18 @@ class EFilingSubmitView(generics.GenericAPIView):
         )
 
         if redirect_url is not None:
-            case.submission_id = submission_id
-            case.last_updated = timezone.now()
-            case.save()
+            notice.submission_id = submission_id 
+            notice.dateSubmitted = timezone.now()
+            notice.submittedByFullName = request.user.first_name +" "+ request.user.last_name
+            notice.submittedByClientId = request.user.client_id
+            notice.save()
 
             return JsonResponse({"redirectUrl": redirect_url, "message": message})
 
         return JsonMessageResponse(message, status=500)
+
+
+    
+    
+
 

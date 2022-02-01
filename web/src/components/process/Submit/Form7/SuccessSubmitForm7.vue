@@ -17,7 +17,7 @@
                     below to retrieve a filed copy of your Notice of Appearance.
                 </b-row>
                 <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic;">
-                    Please note that <span style="font-weight: 700;">you must file and serve the Notice of Appeal form</span> 
+                    Please note that <span style="font-weight: 700; margin:0 0.25rem;"> you must file and serve the Notice of Appeal form </span> 
                     on each Respondent within 30 days after the initial court order is declared.
                 </b-row>
                 <b-row class="ml-5">
@@ -33,7 +33,7 @@
                     </b-col>
                 </b-row>
 
-                <b-row class="ml-5">
+                <!-- <b-row class="ml-5">
                     <b-col cols="3">
                         <span style="float: left; font-weight: 700">
                             Your File #:                        
@@ -44,7 +44,7 @@
                             {{packageInfo.fileNumber}}                            
                         </span>
                     </b-col>
-                </b-row>
+                </b-row> -->
 
                 <b-row class="ml-5">
                     <b-col cols="3">

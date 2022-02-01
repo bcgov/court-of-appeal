@@ -70,9 +70,10 @@ class EFilingSubmission(EFilingHubCallerBase):
     def generate_efiling_url(self, bceid_guid, transaction_id, submission_id, data):
        
         package_data = self.packaging.build_efiling_body(data)
+        print(package_data)
         logger.debug(f"submission_id:{submission_id}")
         logger.debug("data:")
-        logger.debug(json.dumps(package_data, indent=4))
+        # logger.debug(json.dumps(package_data, indent=4))
         if self.log_traces:
             formSeven = package_data["filingPackage"]["documents"][0]["data"]["formSevenNumber"]
             f = open(f"traces/{formSeven}-{submission_id}.txt", "a")
