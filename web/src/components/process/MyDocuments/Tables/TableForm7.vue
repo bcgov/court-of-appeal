@@ -293,14 +293,14 @@ export default class TableForm7 extends Vue {
             doc.fileNumber = String(++count);
             doc.id= docJson['noticeOfAppealId']
             doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
-            doc.status = docJson['electronicallyFiled']=='Submitted'? "Submitted":"Draft";
+            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
             doc.description = "Notice of Appeal"
             doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
             doc.pdf_types = docJson['pdf_types']
             // doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
-            // doc.packageUrl = docJson.packageUrl;
-            // doc.packageNum = docJson.packageNumber;
+            doc.packageUrl = docJson['package_url'];
+            doc.packageNum = docJson['package_number'];
 
             this.documentsList.push(doc);
         }

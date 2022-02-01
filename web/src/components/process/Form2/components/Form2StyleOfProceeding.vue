@@ -2,7 +2,6 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-
             
             <b-row class="ml-2" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
@@ -315,9 +314,6 @@
 </template>
 
 <script lang="ts">
-
-import { form2DataInfoType } from '@/types/Information/Form2';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -326,6 +322,9 @@ const informationState = namespace("Information");
 
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
+
+import { form2DataInfoType } from '@/types/Information/Form2';
+import { partiesDataJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
 
 @Component
 export default class Form2StyleOfProceeding extends Vue {
@@ -351,9 +350,7 @@ export default class Form2StyleOfProceeding extends Vue {
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
+   
     notFound = false;
     representationOptions = [
         {text: 'Yes', value: true},
@@ -399,33 +396,42 @@ export default class Form2StyleOfProceeding extends Vue {
 
         if(this.currentCaseId){
             await this.getForm2Data();
-            this.applicants = this.form2Info.appellants? this.form2Info.appellants:[];
-            this.respondents = this.form2Info.respondents? this.form2Info.respondents:[];
-        }else{
-            this.applicants = this.partiesJson.appellants;
-            this.respondents = this.partiesJson.respondents;            
+        } else {
+            
+            const applicants = this.partiesJson.appellants;
+            const respondents = this.partiesJson.respondents;    
+            const form2Data = {} as form2DataInfoType;        
 
-            this.form2Info.appellants = this.applicants;
-            this.form2Info.respondents = this.respondents;
-            this.form2Info.formSevenNumber = this.fileNumber;
-            this.form2Info.serviceInformation = {} as serviceInformationJsonDataType;
-            this.form2Info.serviceInformation.province = "British Columbia";
-            this.form2Info.serviceInformation.country = "Canada";
-            this.form2Info.version = this.$store.state.Application.version;
+            form2Data.appellants = applicants;
+            form2Data.respondents = respondents;
+            form2Data.formSevenNumber = this.fileNumber;
+            form2Data.serviceInformation = {} as serviceInformationJsonDataType;
+            form2Data.serviceInformation.province = "British Columbia";
+            form2Data.serviceInformation.country = "Canada";
+            form2Data.version = this.$store.state.Application.version;
 
-            this.form2Info.useServiceEmail = false
-            this.form2Info.sendNotifications = false
+            form2Data.useServiceEmail = false
+            form2Data.sendNotifications = false
+            this.UpdateForm2Info(form2Data);
         }
 
         this.applicantNames = [];
         this.respondentNames = [];
 
-        for (const respondent of this.respondents){
-            this.respondentNames.push(respondent.name);  
+        for (const respondent of this.form2Info.respondents){
+            if (respondent.organization){
+                this.respondentNames.push(respondent.organization);
+            } else {                
+                this.respondentNames.push(respondent.name); 
+            }             
         }
 
-        for (const applicant of this.applicants){
-            this.applicantNames.push(applicant.name);  
+        for (const applicant of this.form2Info.appellants){
+            if (applicant.organization){
+                this.applicantNames.push(applicant.organization);
+            } else {                
+                this.applicantNames.push(applicant.name); 
+            }
         }
 
     }
@@ -435,8 +441,8 @@ export default class Form2StyleOfProceeding extends Vue {
         Vue.nextTick(()=>
         {
             if (!this.form2Info.selfRepresented){
-                const contactInfo = this.respondents.filter(resp => {
-                    if (resp.name = this.respondentName) {
+                const contactInfo = this.form2Info.respondents.filter(resp => {
+                    if (resp.name  == this.respondentName) {
                         return true;
                     }
                 })[0];
