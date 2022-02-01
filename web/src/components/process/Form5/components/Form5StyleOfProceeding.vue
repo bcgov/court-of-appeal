@@ -99,20 +99,25 @@
                         scale="1.1"
                         title="The default value is 10:00AM."/>            
                 </b-col>
-                <b-col class="ml-1">            
-                    
-                    <b-form-input    
-                        style="width: 6rem;"                    
+                <b-col class="ml-1">
+                    <b-form-timepicker 
+                        style="width: 12rem;"  
+                        v-model="form5Info.timeOfAppealHearing"
+                        :state="state.timeOfAppealHearing"
+                        locale="en">
+                    </b-form-timepicker>
+                    <!-- <b-form-input    
+                        style="width: 8rem;"                    
                         v-model="form5Info.timeOfAppealHearing"                            
                         size="md"
-                        type="text"
+                        type="time"
                         autocomplete="off"
                         @paste.prevent
                         :formatter="timeFormat"
                         placeholder="HH:MM*"
                         :state="state.timeOfAppealHearing"
-                    ></b-form-input>
-                    
+                    ></b-form-input> -->
+
                 </b-col>
             </b-row>
 
@@ -386,7 +391,13 @@ export default class Form5StyleOfProceeding extends Vue {
         this.state.courtHouse = !this.form5Info.courtHouse? false : null;
         this.state.firstAppellant = !this.form5Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form5Info.firstRespondent? false : null;
-        this.state.timeOfAppealHearing = !this.form5Info.timeOfAppealHearing? false : null;
+        //console.log(this.form5Info.timeOfAppealHearing)
+        if(this.form5Info.timeOfAppealHearing?.match("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:?[0-5]?[0-9]?$")){
+            this.state.timeOfAppealHearing = null;            
+        }
+        else
+            this.state.timeOfAppealHearing =false;
+        
         this.state.dateOfAppealHearing = !this.form5Info.dateOfAppealHearing? false : null;
         
         const numberOfDaysApp = this.form5Info.numberOfDaysApp?.trim();
@@ -475,20 +486,20 @@ export default class Form5StyleOfProceeding extends Vue {
     }
 
     public timeFormat(value , event){        
-        if(isNaN(Number(value.slice(-1))) && value.slice(-1) != ':') return value.slice(0,-1) 
-        if(value.length!=3 && value.slice(-1) == ':') return value.slice(0,-1);
-        if(value.length==2 && event.data && value.slice(0,1)>=6 && value.slice(-1)>=6) return value.slice(0,-1);
-        if(value.length==2 && event.data && value.slice(-1)<6) return '0'+value.slice(0,1)+':'+value.slice(1,2);
-        if(value.length==2 && event.data && value.slice(0,1)>=2 && value.slice(0,1)<6 && value.slice(-1)>=6) return '00:'+value.slice(0,2);            
-        if(value.length==2 && event.data && value.slice(0,1)<2 && value.slice(-1)>=6) return value.slice(0,2)+':';
-        if(value.length==4 && value.slice(-1)>=6) return value.slice(0,-1);
-        if(value.length==3 && value.slice(0,1)!=':' && value.slice(1,2)!=':' && value.slice(-1)<6) return value.slice(0,2)+':'+value.slice(2,3);
-        if(value.length==3 && value.slice(-1)>=6 ) return value.slice(0,-1);
-        if(value.length==6 && value.slice(0,1)==0 && value.slice(4,6)<60 && (value.slice(1,2)+value.slice(3,4))<24) return value.slice(1,2)+value.slice(3,4)+':'+value.slice(4,5)+value.slice(5,6);           
-        if(value.length>5) return value.slice(0,5);
-        if(value.length==5 && (value.slice(0,2)>=24 || value.slice(3,5)>=60)) return '';
-        if(value.length==5 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,5)) || value.slice(2,3)!=':') )return '';
-        if(value.length==4 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,4)) || value.slice(2,3)!=':') )return '';
+        // if(isNaN(Number(value.slice(-1))) && value.slice(-1) != ':') return value.slice(0,-1) 
+        // if(value.length!=3 && value.slice(-1) == ':') return value.slice(0,-1);
+        // if(value.length==2 && event.data && value.slice(0,1)>=6 && value.slice(-1)>=6) return value.slice(0,-1);
+        // if(value.length==2 && event.data && value.slice(-1)<6) return '0'+value.slice(0,1)+':'+value.slice(1,2);
+        // if(value.length==2 && event.data && value.slice(0,1)>=2 && value.slice(0,1)<6 && value.slice(-1)>=6) return '00:'+value.slice(0,2);            
+        // if(value.length==2 && event.data && value.slice(0,1)<2 && value.slice(-1)>=6) return value.slice(0,2)+':';
+        // if(value.length==4 && value.slice(-1)>=6) return value.slice(0,-1);
+        // if(value.length==3 && value.slice(0,1)!=':' && value.slice(1,2)!=':' && value.slice(-1)<6) return value.slice(0,2)+':'+value.slice(2,3);
+        // if(value.length==3 && value.slice(-1)>=6 ) return value.slice(0,-1);
+        // if(value.length==6 && value.slice(0,1)==0 && value.slice(4,6)<60 && (value.slice(1,2)+value.slice(3,4))<24) return value.slice(1,2)+value.slice(3,4)+':'+value.slice(4,5)+value.slice(5,6);           
+        // if(value.length>5) return value.slice(0,5);
+        // if(value.length==5 && (value.slice(0,2)>=24 || value.slice(3,5)>=60)) return '';
+        // if(value.length==5 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,5)) || value.slice(2,3)!=':') )return '';
+        // if(value.length==4 && ( isNaN(value.slice(0,2)) || isNaN(value.slice(3,4)) || value.slice(2,3)!=':') )return '';
         return value
     }
 

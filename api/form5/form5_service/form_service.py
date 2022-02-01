@@ -31,11 +31,11 @@ def create_response(notice):
 
 
 
-def get_form(notice_id):
+def get_form(notice_id, uid):
 
     if notice_id:
         try:
-            notice = NoticeOfHearing.objects.get(id=notice_id)
+            notice = NoticeOfHearing.objects.get(id=notice_id, user_id=uid)
             
             response_data = create_response(notice)
 
@@ -43,7 +43,7 @@ def get_form(notice_id):
             raise Exception("Couldn't find person or form.")
        
     else:
-        notices = NoticeOfHearing.objects.all()
+        notices = NoticeOfHearing.objects.filter(user_id=uid)
         response_data = list()
         for notice in notices:
             response_data.append(create_response(notice))
