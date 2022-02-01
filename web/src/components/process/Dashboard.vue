@@ -68,6 +68,9 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
@@ -88,6 +91,7 @@ import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
 import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
+import { form6FormsJsonDataType } from '@/types/Information/Form6';
 
 
 @Component({
@@ -118,6 +122,9 @@ export default class DashboardPage extends Vue {
 
     @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
+
+    @form6State.Action
+    public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
     @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
@@ -292,6 +299,25 @@ export default class DashboardPage extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm5FormsJson(forms)
+            }
+
+            this.loadForm6Forms();
+
+           
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+    public loadForm6Forms () {
+   
+        this.$http.get('/form6/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm6FormsJson(forms)
             }
 
             this.dataLoaded = true;       
