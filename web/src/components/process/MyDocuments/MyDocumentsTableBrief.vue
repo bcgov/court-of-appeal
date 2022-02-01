@@ -205,8 +205,8 @@ export default class MyDocumentsTable extends Vue {
             doc.fileNumber = docJson.lowerCourtFileNo;
             doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
-            doc.packageUrl = docJson['packageUrl'];
-            doc.packageNum = docJson['packageNumber'];
+            doc.packageUrl = docJson['package_url'];
+            doc.packageNum = docJson['package_number'];
             doc.pdfType = docJson['pdf_types'];
             this.documentsList.push(doc);
         }
