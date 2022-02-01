@@ -49,7 +49,6 @@ export default class MenuBar extends Vue {
 	@form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
     
-
 	mounted() {
 	
 	}

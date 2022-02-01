@@ -98,10 +98,14 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
+import { form9FormsJsonDataType } from "@/types/Information/Form9";
 
 @Component({
     components:{
@@ -133,6 +137,12 @@ export default class MyDocumentsTableBrief extends Vue {
 
     @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+    @form9State.State
+    public form9FormsJson!: form9FormsJsonDataType[];
+
+    @form9State.Action
+    public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
 
     documentsList = []
@@ -247,6 +257,30 @@ export default class MyDocumentsTableBrief extends Vue {
             doc.pdfType = docJson['pdf_types'];
             this.documentsList.push(doc);
         }
+
+        //___Form 9___
+        for (const docJson of this.form9FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'',
+                form:'form9',
+                formName:'Form 9',
+                description:'Requisition',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
     }
 
     public navigateToEFilingHub(package_url) {
@@ -280,7 +314,6 @@ export default class MyDocumentsTableBrief extends Vue {
         });
         
     }
-
    
     public resumeApplication(item){
 
@@ -299,6 +332,11 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 7'){
             this.UpdateCurrentNoticeOfAppealId(item.id)
             this.$router.push({name: "start-form7" });
+
+        }else if(item.formName=='Form 9'){
+            this.UpdateCurrentRequisitionId(item.id);
+            this.$router.push({name: "fill-form9" });
+
         }
     }
 

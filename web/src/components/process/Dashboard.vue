@@ -74,6 +74,9 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
@@ -83,16 +86,17 @@ import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue"
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
+import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
+import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
+
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
 import { pathwayTypeInfoType } from '@/types/Information';
 
-import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
-import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import { locationsInfoType } from '@/types/Common';
 import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
-
+import { form9FormsJsonDataType } from '@/types/Information/Form9';
 
 @Component({
     components:{
@@ -128,6 +132,9 @@ export default class DashboardPage extends Vue {
 
     @form7State.Action
     public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
+
+    @form9State.Action
+    public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -318,6 +325,23 @@ export default class DashboardPage extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm6FormsJson(forms)
+            }
+
+            this.loadForm9Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+    public loadForm9Forms () {
+   
+        this.$http.get('/form9/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm9FormsJson(forms)
             }
 
             this.dataLoaded = true;       
