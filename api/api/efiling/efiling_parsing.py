@@ -16,36 +16,59 @@ class EFilingParsing:
         data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
         data = json.loads(data_dec)
         
+
+
         converted_data = {
             "formId": case.id,
-            "fileNumber": data["formSevenNumber"].replace("CA", ""),
+            "fileNumber": "CA"+ data["formSevenNumber"].replace("CA", ""),
             "locationCode": "COA",
-            "parties":[],
-            # "parties": flatten(
-            #     [
-            #         [
-            #             {
-            #                 "partyType": "IND",
-            #                 "roleType": "Appellant",
-            #                 "firstName": applicant["firstName"],
-            #                 "middleName": "",
-            #                 "lastName": applicant["lastName"],
-            #             }
-            #             for applicant in data["appellants"]
-            #         ],
-            #         [
-            #             {
-            #                 "partyType": "IND",
-            #                 "roleType": "Respondent",
-            #                 "firstName": respondent["firstName"],
-            #                 "middleName": "",
-            #                 "lastName": respondent["lastName"],
-            #             }
-            #             for respondent in data["respondents"]
-            #         ],
-            #     ]
-            # ),
-            "organizationParties": [],
+
+            "parties": flatten(
+                [
+                    [
+                        {
+                            "partyType": "IND",
+                            "roleType": "APL",
+                            "firstName": applicant["firstName"],
+                            "middleName": "",
+                            "lastName": applicant["lastName"],
+                        }
+                        for applicant in data["appellants"] if ("firstName" in applicant and "lastName" in applicant)
+                    ],
+                    [
+                        {
+                            "partyType": "IND",
+                            "roleType": "RES",
+                            "firstName": respondent["firstName"],
+                            "middleName": "",
+                            "lastName": respondent["lastName"],
+                        }
+                        for respondent in data["respondents"] if ("firstName" in respondent and "lastName" in respondent)
+                    ],
+                ]
+            ),
+
+            "organizationParties": flatten(
+                [
+                    [
+                        {
+                            "partyType": "ORG",
+                            "roleType": "APL",
+                            "name": applicant["name"],                            
+                        }
+                        for applicant in data["appellants"] if ("organization" in applicant)
+                    ],
+                    [
+                        {
+                            "partyType": "ORG",
+                            "roleType": "RES",
+                            "name": respondent["organization"],                            
+                        }
+                        for respondent in data["respondents"] if ("organization" in respondent)
+                    ],                                     
+                ]
+            ),
+
             "documents": documents,            
             "successUrl": self.url_from_headers(
                 request, f"submitted/{case.id}/success/APP"
@@ -59,3 +82,65 @@ class EFilingParsing:
         }
 
         return converted_data
+
+
+    def convert_form7_data_for_efiling(self, request, notice, parties, documents):
+
+        id = str(notice.noticeOfAppealId)
+        converted_data = {
+            "formId": id,
+            "fileNumber": '',
+            "locationCode":"COA", 
+
+            "parties": flatten(
+                [
+                    [
+                        {
+                            "partyType": "IND",
+                            "roleType": self.get_party_type_code(party.appealRole),
+                            "firstName": party.firstGivenName,
+                            "middleName": self.get_party_middle_name(party.secondGivenName, party.thirdGivenName),
+                            "lastName": party.surname,
+                        }
+                        for party in parties if (party.isOrganization==False)
+                    ],                                      
+                ]
+            ),
+           
+            "organizationParties": flatten(
+                [
+                    [
+                        {
+                            "partyType": "ORG",
+                            "roleType": self.get_party_type_code(party.appealRole),
+                            "name": party.organizationName,                            
+                        }
+                        for party in parties if (party.isOrganization==True or party.surname is None)
+                    ],                                      
+                ]
+            ),
+            "documents": documents,            
+            "successUrl": self.url_from_headers(
+                request, f"submitted/{id}/success/NAA"
+            ),
+            "errorUrl": self.url_from_headers(
+                request, f"submitted/{id}/error/NAA"
+            ),
+            "cancelUrl": self.url_from_headers(
+                request, f"submitted/{id}/cancel/NAA"
+            ),
+        }
+
+        return converted_data
+
+    def get_party_type_code(self, party_type):
+        if party_type=='Appellant': return 'APL'	
+        elif party_type=='Respondent': return 'RES'       
+        else: return ''
+    
+    def get_party_middle_name(self, second, third):
+        name = ''
+        if second: name = second + ' '
+        if third: name = name + third + ' '
+        if len(name)>1: return name[:-1]
+        else: return ''
