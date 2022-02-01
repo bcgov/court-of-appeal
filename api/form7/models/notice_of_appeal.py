@@ -79,15 +79,7 @@ class NoticeOfAppeal(models.Model):
 
     dateModified = models.DateTimeField()
 
-    lastModifiedByClientId = models.IntegerField(null=True)
-
-    dateSubmitted  = models.DateTimeField(blank=True, null=True)
-
-    submittedByClientId = models.IntegerField(blank=True, null=True)
-
-    submittedByFullName = models.CharField(max_length=100, null=True)
-
-    electronicallyFiled = models.CharField(max_length=1, null=True)
+    lastModifiedByClientId = models.IntegerField(null=True)    
 
     dateProcessed  = models.DateTimeField(blank=True, null=True)
 
@@ -97,6 +89,16 @@ class NoticeOfAppeal(models.Model):
 
     #public virtual ICollection<Party> Parties { get; set; }
     #public virtual ICollection<MSopParty> ManualSop { get; set; }
+
+    submittedByFullName = models.CharField(max_length=100, null=True)
+    submittedByClientId = models.IntegerField(blank=True, null=True)
+    dateSubmitted  = models.DateTimeField(blank=True, null=True)
+    electronicallyFiled = models.CharField(max_length=1, null=True)
+
+    submission_id = models.CharField(max_length=100, null=True)
+    transaction_id = models.CharField(max_length=100, null=True)
+    package_number = models.CharField(max_length=100, null=True)
+    package_url = models.CharField(max_length=200, null=True)
 
     def save(self, *args, **kwargs):
         

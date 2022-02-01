@@ -37,8 +37,9 @@ export interface caseDataJsonDataType {
 
 export interface applicantJsonDataType {
     name: string;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
+    organization?: string;
     solicitor: solicitorJsonDataType;
     partyId: number;
     id?: number;
@@ -59,8 +60,9 @@ export interface solicitorJsonDataType {
 
 export interface respondentsJsonDataType {
     name: string;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
+    organization?: string;
     solicitor: solicitorJsonDataType;
     partyId: number;
     id?: number;

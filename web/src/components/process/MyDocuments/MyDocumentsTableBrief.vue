@@ -203,7 +203,7 @@ export default class MyDocumentsTable extends Vue {
             };
             doc.id = docJson['noticeOfAppealId']
             doc.fileNumber = docJson.lowerCourtFileNo;
-            doc.status = docJson['electronicallyFiled']=='Submitted'? "Submitted":"Draft";
+            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
             doc.packageUrl = docJson['packageUrl'];
             doc.packageNum = docJson['packageNumber'];
