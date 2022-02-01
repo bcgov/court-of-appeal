@@ -51,6 +51,7 @@ $inactive:  #cccccc !default;
 
 $form2: #6ce2fa;
 $form5: #f8a15b;
+$form6: #5e640baf;
 $form7: #92ee5e;
 
 $colors: () !default;
@@ -103,6 +104,7 @@ $theme-colors: map-merge(
     "select":     $select,
     "form2":      $form2,
     "form5":      $form5,
+    "form6":      $form6,
     "form7":      $form7,
 
   ),

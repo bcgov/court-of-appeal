@@ -11,7 +11,7 @@
             {{errorMsg}}
         </b-alert>
 
-        <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
+        <b-row v-if="enableActions" class="bg-form6 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Settlement or Abandonment (Form 6)</div>
             </b-col>
