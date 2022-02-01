@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
@@ -92,32 +92,45 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
+import { form6FormsJsonDataType } from "@/types/Information/Form6";
 
 @Component({
     components:{
        
     }
 })
-export default class MyDocumentsTable extends Vue {
+export default class MyDocumentsTableBrief extends Vue {
 
     @form2State.State
     public casesJson!: caseJsonDataType[];
+
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     @form5State.State
     public form5FormsJson!: form5FormsJsonDataType[];
+
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
+    @form6State.State
+    public form6FormsJson!: form6FormsJsonDataType[];
+
+    @form6State.Action
+	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+
     @form7State.State
     public form7FormsJson!: form7SubmissionDataInfoType[];
+
     @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
@@ -187,6 +200,30 @@ export default class MyDocumentsTable extends Vue {
             this.documentsList.push(doc);
         }
 
+        //___Form 6___
+        for (const docJson of this.form6FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'ABA',
+                form:'form6',
+                formName:'Form 6',
+                description:'Notice Of Settlement Or Abandonment',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
         //___Form 7___
         for (const docJson of this.form7FormsJson) {                
             const doc = { 
@@ -205,8 +242,8 @@ export default class MyDocumentsTable extends Vue {
             doc.fileNumber = docJson.lowerCourtFileNo;
             doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
             doc.modifiedDate = docJson['dateModified'];
-            doc.packageUrl = docJson['packageUrl'];
-            doc.packageNum = docJson['packageNumber'];
+            doc.packageUrl = docJson['package_url'];
+            doc.packageNum = docJson['package_number'];
             doc.pdfType = docJson['pdf_types'];
             this.documentsList.push(doc);
         }
@@ -254,6 +291,10 @@ export default class MyDocumentsTable extends Vue {
         }else if(item.formName=='Form 5'){
             this.UpdateCurrentNoticeOfHearingOfAppealId(item.id);
             this.$router.push({name: "fill-form5" });
+        
+        }else if(item.formName=='Form 6'){
+            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(item.id);
+            this.$router.push({name: "fill-form6" });
         
         }else if(item.formName=='Form 7'){
             this.UpdateCurrentNoticeOfAppealId(item.id)
