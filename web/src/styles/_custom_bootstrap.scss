@@ -49,6 +49,10 @@ $other:   #7a4528 !default;
 $select:  #e6d9e2 !default;
 $inactive:  #cccccc !default;
 
+$form2: #6ce2fa;
+$form5: #f8a15b;
+$form6: #5e640baf;
+$form7: #92ee5e;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -97,7 +101,12 @@ $theme-colors: map-merge(
     "inactive":   $inactive,
     "escort":     $escort,
     "other":      $other,
-    "select":     $select
+    "select":     $select,
+    "form2":      $form2,
+    "form5":      $form5,
+    "form6":      $form6,
+    "form7":      $form7,
+
   ),
   $theme-colors
 );

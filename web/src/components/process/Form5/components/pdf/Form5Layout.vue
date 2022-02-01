@@ -1,59 +1,78 @@
 <template>
     <div>
 
-        <div>
-            <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b>
+<!-- <header> -->
+        <div style="margin-top:-1.25rem;">
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
             <div class="row" style="display: block; text-align: center; border: 1px solid black; background: black; color: white;">
                 <div style="font-size:18pt; font-weight: 700;">COURT OF APPEAL FOR BRITISH COLUMBIA</div>                
             </div>   
-            <div class="row" style="margin-top: 1rem; text-align: center; border: 1px solid black; line-height: 3rem;">
-                <div class="col-md-3" style="font-size:20pt; background: black; color: white;"><b>FORM 5</b></div>
-                <div class="col-md-9" style="font-size:12pt;"><b>NOTICE OF HEARING OF APPEAL: RULE 33(2), 34(2)</b></div>
+            <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
+                <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 5</b></div>
+                <div style="width:75%; font-size:14pt;"><b>NOTICE OF HEARING OF APPEAL: RULE 33(2), 34(2)</b></div>
             </div>         
         </div> 
 
-        <div style="margin: 1rem -15px 0 -15px; text-align: center; border: 1px solid black; font-size: 10pt;">
+<!-- <stamp-info-box> -->
+        <div style="margin: 0.75rem -15px 0 -15px; text-align: center; border: 1px solid black; font-size: 10pt;">
 
-            <div class="my-3 row" > 
-                <div class="col-md-3">
-                    <div style="border: 1px solid #D8D8D8; width: 7rem; height: 10rem; margin: 2rem 2rem; padding-top: 4rem;">
+            <div class="my-2 row" > 
+                <div style="width:30%;">
+                    <div style="border: 1px solid #E8E8E8; width: 9rem; height: 9rem; margin: 2rem 2rem; text-align:center; line-height:8.5rem;">
                         [STAMP]
                     </div>
                 </div>
 
-                <div class="col-md-5" >
-                    <div class="row" style="float:right; margin-right: 0.5rem;">Court of Appeal File No.</div>
-                    <div class="row" style="margin-top: 7.75rem; max-width: 100%;">
-                        <div class="col-md-11" style="border: 1px solid black;">{{result.firstAppellant}}</div> 
-                        <div class="col-md-1" style="padding: 0; margin-right: 0;">v.</div>
+                <div style="width:70%;">
+                    <div class="row" >
+                        <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
+                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
                     </div>
-                    <div style="margin: 0 0 -15px -45px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                    <div style="max-width: 100%; font-style: italic;">
-                        <div class="col-md-11" style="margin: 0 -15px 0 -15px; border: 1px solid #D8D8D8; background: #D8D8D8;">
-                            Name of the first appellant named on Form 1: Notice of Appeal.
-                        </div> 
-                        <div class="col-md-1"></div>                        
+
+                    <div class="row" >
+                        <div style="width:45.5%; padding:0.5rem;"></div>
+                        <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
+                            <div class="arrow-up-flash"></div>
+                            <div class="arrow-up-box"></div>
+                        </div>
                     </div>
+
+                    <div class="row" >
+                        <div style="width:45.5%; padding:0.5rem;"></div>
+                        <div class="coa-help-box" style="width:40%;">
+                            <i>The file number can be found on the upper right corner of the Notice of Appeal.</i>
+                        </div>                        
+                    </div>
+                   
+                    <div class="row" style="margin-top: 0.5rem;">
+                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div style="width:5.5%; margin-top:0.5rem">v.</div>
+                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
+                    </div>
+
+                    
+                    <div class="row" >
+                        <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
+                            <div class="arrow-up-flash"></div>
+                            <div class="arrow-up-box"></div>
+                        </div>
+                        <div style="width:5.5%; margin-top:0.5rem"></div>
+                        <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
+                            <div class="arrow-up-flash"></div>
+                            <div class="arrow-up-box"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="coa-help-box" style="width:40%;"><i>Name of the first appellant named on Form 1: Notice of Appeal.</i></div> 
+                        <div style="width:5.5%; padding: 0; margin:0.5rem 0 0 0;"></div>
+                        <div class="coa-help-box" style="width:40%;"><i>Name of the first respondent named on Form 1: Notice of Appeal.</i></div>
+                    </div>
+                    
                 </div>
-
-                <div class="col-md-4">
-                    <div class="row" style="border: 1px solid black; max-width: 100%;">{{result.formSevenNumber}}</div>
-                    <div style="margin: 0 0 -15px -15px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                    <div style="margin: 0 -15px 0 -15px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 100%; font-style: italic;">
-                        The file number can be found on the upper right corner of the Notice of Appeal.
-                    </div>
-
-                    <div class="row" style="margin-top: 0.5rem; border: 1px solid black; max-width: 100%;">{{result.firstRespondent}}</div>
-                    <div style="margin: 0 0 -15px -15px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                    <div style="margin: 0 -15px 0 -15px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 100%; font-style: italic;">
-                        Name of the first respondent named
-                        on Form 1: Notice of Appeal.
-                    </div>
-                </div>
-
             </div>
 
-            <div style="border: 1px solid #D8D8D8; background: #D8D8D8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
+            <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="font-weight: 700; margin-bottom: 0.75rem;">
                     To the party(ies) filing the Notice of Hearing of Appeal:
                 </div>
@@ -66,121 +85,103 @@
 
         </div>        
 
-        <div class="my-3 row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div 
-                        style="margin-left: 0; border: 1px solid #D8D8D8; background: #D8D8D8; font-weight: 700; max-width: 90%; padding: 0.5rem;">
-                            Address of the courthouse where the appeal will be heard
-                    </div>
-                    <div style="margin: 7px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-8" style="border: 1px solid black; padding: 0.5rem;">{{result.courtHouse}}</div>
-        </div>
+<!-- <address> -->
+        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
 
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div 
-                        style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; font-weight: 700; width: 90%; padding: 0.5rem;">
-                            Date the appeal will be heard
-                    </div>
-                    <div style="margin: -3px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
+            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
+                <b>Address of the courthouse where the appeal will be heard</b>
             </div>
-            <div class="col-md-4">
-                <div style="margin: 0 -15px 0 -15px; border: 1px solid black; max-width: 100%; padding: 0.5rem; text-align: center;">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>
-                <div style="margin: 0 0 -15px 75px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                <div style="margin: 0 -15px 0 5px; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 80%; font-style: italic; padding: 0.5rem; text-align: center;">
-                    DD/MM/YYYY
-                </div>
-                
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-3" style="margin-top: 0.5rem;">at</div>
-                    <div class="col-md-9" style="margin: 0; border: 1px solid black; max-width: 80%; padding: 0.5rem; text-align: center;">{{result.timeOfAppealHearing}}</div>
-                </div>
-                
-            </div>
-        </div>
 
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4">
-                <div class="row">
-                    <div style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.25rem;">
-                        <b>Estimated length of appeal in days</b> <br>
-                        The default length for an appeal is half a day.
-                    </div>
-                    <div style="margin: 23px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
-            </div>
-            <div class="col-md-3">
-
-                <div 
-                    class="row" 
-                    style="margin-top: 1.5rem; border: 1px solid black; max-width: 100%; padding: 0.5rem; text-align: center;">
-                    {{result.numberOfDaysApp}}
-                </div>
-                
-                <div class="row" style="margin-left: -5px;">Appellant’s estimate</div>
-                
-            </div>
-            <div class="col-md-3">
+            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
                     
-                <div 
-                    class="row" 
-                    style="margin-top: 1.5rem; border: 1px solid black; max-width: 100%; padding: 0.5rem; text-align: center;">
-                    {{result.numberOfDaysResp}}
-                </div>
+            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{result.courtHouse}}</div>                       
 
-                <div class="row" style="margin-left: -5px;">Respondent’s estimate</div>
-                
-            </div>
         </div>
 
+<!-- <date> -->
+        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+            
+            <div class="coa-help-box pd-est-sm" style="margin:0.45rem 0 0rem -0.5rem; line-height:0.25rem; width:27%; height:1.5rem;">
+                <b>Date the appeal will be heard</b>
+            </div>
+            <div class="arrow-right-flash-20 mg-rg-2-5" style="width:3.5%;"></div>       
+
+            <div class="coa-text-box" style="width:25%; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
+            <div style="width:5%; margin:0.5rem 1rem;"> at </div>
+            <div class="coa-text-box" style="width:25%; text-align:center; margin-left:-1.5rem;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
+                
+        </div>
+
+<!-- <date-help>-->
+        <div class="row" style="font-size: 9pt; margin: 0;"> 
+            <div class="mg-lf-17" style="margin-left:18rem; padding:0rem 0rem; border: 0px solid white;">
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+            </div>
+        </div>
+                
+
+<!-- <estimated-length> -->
+        <div class="row" style="font-size: 9pt; margin: .1rem -1rem 0rem 0;">
+            
+            <div class="coa-help-box pd-est" style="padding:0.1rem 0.5rem; margin:0.45rem 0 0rem -0.5rem; line-height:1.1rem; width:28%; height:3.5rem;">
+                <b style="font-size:8.15pt; margin:0; padding:0;">Estimated length of appeal in days</b> <br>
+                <i>The default length for an appeal is half a day.</i>
+            </div>
+            <div class="arrow-right-flash-36 " style="width:0.5%;"></div>       
+
+            <div style="width:27.5%; text-align:center; margin-top:1rem;">
+                <div class="coa-text-box" >{{result.numberOfDaysApp}}</div> 
+                <div style="">Appellant’s estimate</div> 
+            </div> 
+
+            <div style="width:1.5%; margin:0.5rem 1rem;"> </div>
+
+            <div style="width:27.5%; text-align:center; margin-top:1rem;">
+                <div class="coa-text-box" >{{result.numberOfDaysResp}}</div>
+                <div>Respondent’s estimate</div>
+            </div>
+        </div>
+      
+
+<!-- <ACK> -->
         <div 
-            class="row" 
-            style="border: 1px solid #D8D8D8; background: #D8D8D8; font-size: 10pt; margin: 15px -15px 15px -15px; text-align: left; padding: 0.5rem;">
+            class="row coa-help-box" 
+            style="margin:0.5rem -9px 0 -9px; line-height:0.5rem; font-size: 10pt; text-align: left;">
             I agree to pay all hearing fees payable under Item 4 of Division 1 of Schedule 2-Court Fees.
         </div>
 
-        <div class="row" style="font-size: 9pt; margin: 15px -15px 0 -15px;">
-            <div class="col-md-4" >
-                <div class="row">
-                    <div 
-                        style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.75rem;">
-                            Date form completed
-                    </div>
-                    <div style="margin: 0 0 -5px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                </div>                   
+
+<!-- <Sign-Date> -->
+        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+            
+            <div class="coa-help-box pd-est-sm w-18-5" style="width:17.5%; margin:0.55rem 0 0rem -0.5rem; line-height:0.75rem;  height:2rem;">
+                Date form completed
             </div>
-            <div class="col-md-3">
-                
-                <div style="margin: 0 -15px 0 -15px; border: 1px solid black; max-width: 100%; padding: 0.75rem; text-align: center;">{{result.completionDate}}</div>
-                <div style="margin: 0 0 -15px 45px; color: #D8D8D8; font-weight: 1000; font-size: 20pt;">&#8613;</div>
-                <div style="margin: 0; border: 1px solid #D8D8D8; background: #D8D8D8; max-width: 80%; font-style: italic; padding: 0.5rem; text-align: center;">
-                    DD/MM/YYYY
-                </div>
-                
+            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
+
+            <div class="coa-text-box w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
+
+            
+            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.1rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.85rem;  height:2.15rem;">
+                Name of lawyer or party authorizing filing of this form.
             </div>
-            <div class="col-md-5">
-                <div class="row">
-                    <div class="col-md-6" style="padding: 0;">
-                        <div class="row">
-                            <div 
-                                style="margin: 0 0 0 -10px; border: 1px solid #D8D8D8; background: #D8D8D8; width: 90%; padding: 0.25rem; font-size: 8pt;">
-                                    Name of lawyer or party authorizing filing of this form.
-                            </div>
-                            <div style="margin: -3px 0 -15px -5px; color: #D8D8D8; font-weight: 1000; font-size: 18pt;">&#10145;</div>
-                        </div> 
-                    </div>
-                    <div class="col-md-6" style="margin: 0; border: 1px solid black; max-width: 80%; padding: 0.5rem; text-align: center;">{{result.authorizedName}}</div>
-                </div>
+            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
+
+            <div class="coa-text-box" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
                 
+        </div>
+
+<!-- <date-help>-->
+        <div class="row" style="font-size: 9pt; margin:0rem 0 0 0;"> 
+            <div class="mg-lf-9" style="margin-left:9.25rem; padding:0rem 0rem; border: 0px solid white;">
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
-        </div>       
+        </div>
+
     </div>
 </template>
 

@@ -4,15 +4,9 @@
         <loading-spinner color="#000" v-if="!dataLoaded" waitingText="Loading ..." />
         
         <b-card  no-body v-else class="home-content border-white p-0">          
-            <b-row>
-                <b-col>
-                    <div style="margin:0 0 0 1rem; font-size:12pt; font-weight:600; ">Submissions</div>
-                </b-col>                       
-            </b-row> 
-            <my-documents-table style="max-height:25rem; overflow-y:auto;"
-                v-bind:enableActions="false" 
-                v-bind:title="''">
-            </my-documents-table>
+             
+
+            <my-documents-table-brief style="max-height:25rem; overflow-y:auto;" />
             
             <b-row no-gutters class="bg-white pt-1">
                 <b-button 
@@ -81,7 +75,7 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
 
-import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
+import MyDocumentsTableBrief from "@/components/process/MyDocuments/MyDocumentsTableBrief.vue";
 import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue";
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
@@ -98,7 +92,7 @@ import { form5FormsJsonDataType } from '@/types/Information/Form5';
 
 @Component({
     components:{
-        MyDocumentsTable,
+        MyDocumentsTableBrief,
         AppealProcess,
         StartEfiling,
         NeedHelp,
@@ -281,16 +275,15 @@ export default class DashboardPage extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm7FormsJson(forms)
-                //this.loadForm5Forms();
             }
-
+            
             this.loadForm5Forms();
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
         });
     }
-    //TODO: placeholder
+
     public loadForm5Forms () {
    
         this.$http.get('/form5/forms')

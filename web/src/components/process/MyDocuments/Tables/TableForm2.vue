@@ -11,7 +11,7 @@
             {{errorMsg}}
         </b-alert>
 
-        <b-row v-if="enableActions" class="bg-select mb-2 py-1 mx-0">
+        <b-row v-if="enableActions && documentsList.length" class="bg-form2 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Appearance (Form 2)</div>
             </b-col>
@@ -50,7 +50,7 @@
         </b-row>
        
 
-        <b-row v-if="enableActions || documentsList.length" style="p-0">
+        <b-row v-if="documentsList.length" style="p-0">
             <b-col> 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
                     <span class="text-muted ml-4 mb-5">No documents.</span>
@@ -337,9 +337,8 @@ export default class TableForm2 extends Vue {
 
     public resumeApplication(fileInfo: documentInfoType) {
         const caseId = fileInfo.fileNumber.toString()
-        this.UpdateCurrentCaseId(caseId);  
-        // console.log(fileInfo)      
-        this.$router.push({name: "preview-form2", params: {caseId: caseId}});
+        this.UpdateCurrentCaseId(caseId);    
+        this.$router.push({name: "fill-form2", params: {caseId: caseId}});
        
     }
 

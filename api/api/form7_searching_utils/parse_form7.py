@@ -112,12 +112,24 @@ class Form7Parsing:
 
         if searchBy == "Individual":
             for respondant in respondents:                
-                if self.cleanName(respondant["lastName"]) == lastName.strip().lower() and self.cleanName(respondant["firstName"]) == firstName.strip().lower() :
+                if ('firstName' in respondant and 'lastName' in respondant and
+                    self.cleanName(respondant["lastName"]) == lastName.strip().lower() and                     
+                    self.cleanName(respondant["firstName"]) == firstName.strip().lower() 
+                ):
                     return True
             return False
         else:
+            orgName = organizationName.strip().lower()
             for respondant in respondents:
-                if "organization" in respondant and self.cleanName(respondant["organization"]) == organizationName.strip().lower():
+                if "organization" in respondant:
+                    cleanOrg = self.cleanName(respondant["organization"])
+                else:
+                    cleanOrg = ''
+
+                if( 
+                    (cleanOrg==orgName and len(orgName)>0) or
+                    (orgName in cleanOrg and len(orgName)>10)                
+                ):
                     return True
             return False
 
@@ -130,6 +142,8 @@ class Form7Parsing:
             appellants = self.getAppellants(parties)
             respondents = self.getRespondents(parties)
             
+            # print(respondents)
+
             if self.searchForPartyInRespondents(respondents, lastName, firstName, organizationName, searchBy):
                 return {
                     "parties":{

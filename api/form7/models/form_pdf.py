@@ -17,7 +17,7 @@ class FormPdf(models.Model):
 
     noticeOfAppeal = models.ForeignKey(
         "NoticeOfAppeal",
-        related_name="appeal_form_pdf",
+        # related_name="appeal_form_pdf",
         on_delete=models.CASCADE
     )
 

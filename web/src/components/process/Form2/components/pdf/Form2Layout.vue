@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { form2DataInfoType } from '@/types/Information/Form2';
-import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from '@/types/Information/json';
+import { serviceInformationJsonDataType } from '@/types/Information/json';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -84,11 +84,7 @@ export default class Form2Layout extends Vue {
     
     dataReady = false;
     applicantNames: string[] = [];
-    respondentNames: string[] = [];
-
-    applicants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[] = [];
-  
+    respondentNames: string[] = [];  
 
     mounted(){
         this.dataReady = false;
@@ -96,19 +92,25 @@ export default class Form2Layout extends Vue {
         this.dataReady = true;
     }
    
-    public extractInfo(){
-        
-        this.applicants = this.result.appellants;
-        this.respondents = this.result.respondents;
+    public extractInfo(){        
+       
         this.applicantNames = [];
         this.respondentNames = [];
 
-        for (const respondent of this.respondents){
-            this.respondentNames.push(respondent.name);  
+        for (const respondent of this.result.respondents){
+            if (respondent.organization){
+                this.respondentNames.push(respondent.organization);
+            } else {                
+                this.respondentNames.push(respondent.name); 
+            }   
         }
 
-        for (const applicant of this.applicants){
-            this.applicantNames.push(applicant.name);  
+        for (const applicant of this.result.appellants){
+            if (applicant.organization){
+                this.applicantNames.push(applicant.organization);
+            } else {                
+                this.applicantNames.push(applicant.name); 
+            }  
         }
         
         if(!this.result.serviceInformation){
