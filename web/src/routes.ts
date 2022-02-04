@@ -28,6 +28,11 @@ import FillForm9 from "@/components/process/Form9/FillForm9.vue";
 import PreviewForm9 from "@/components/process/Form9/PreviewForm9.vue";
 import SubmitForm9 from "@/components/process/Form9/SubmitForm9.vue";
 
+import StartForm18 from "@/components/process/Form18/StartForm18.vue";
+import FillForm18 from "@/components/process/Form18/FillForm18.vue";
+import PreviewForm18 from "@/components/process/Form18/PreviewForm18.vue";
+import SubmitForm18 from "@/components/process/Form18/SubmitForm18.vue";
+
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
@@ -80,15 +85,13 @@ const routes = [
       path: "/preview-form2",
       name: "preview-form2",
       beforeEnter: authGuard,
-      component: PreviewForm2,
-      props: true
+      component: PreviewForm2
     },
     {
       path: "/proceed-form2",
       name: "proceed-form2",
       beforeEnter: authGuard,
-      component: SubmitForm2,
-      props: true
+      component: SubmitForm2
     },
     {
       path: "/start-form5",
@@ -106,15 +109,13 @@ const routes = [
       path: "/preview-form5",
       name: "preview-form5",
       beforeEnter: authGuard,
-      component: PreviewForm5,
-      props: true
+      component: PreviewForm5
     },
     {
       path: "/proceed-form5",
       name: "proceed-form5",
       beforeEnter: authGuard,
-      component: SubmitForm5,
-      props: true
+      component: SubmitForm5
     },
     {
       path: "/start-form6",
@@ -132,15 +133,13 @@ const routes = [
       path: "/preview-form6",
       name: "preview-form6",
       beforeEnter: authGuard,
-      component: PreviewForm6,
-      props: true
+      component: PreviewForm6
     },
     {
       path: "/proceed-form6",
       name: "proceed-form6",
       beforeEnter: authGuard,
-      component: SubmitForm6,
-      props: true
+      component: SubmitForm6
     },
     {
       path: "/checklist-form7",
@@ -158,22 +157,19 @@ const routes = [
       path: "/start-form7",
       name: "start-form7",
       beforeEnter: authGuard,
-      component: StartForm7,
-      props: true
+      component: StartForm7
     },
     {
       path: "/preview-form7",
       name: "preview-form7",
       beforeEnter: authGuard,
-      component: PreviewForm7,
-      props: true
+      component: PreviewForm7
     },
     {
       path: "/proceed-form7",
       name: "proceed-form7",
       beforeEnter: authGuard,
-      component: SubmitForm7,
-      props: true
+      component: SubmitForm7
     },
     {
       path: "/start-form9",
@@ -191,15 +187,37 @@ const routes = [
       path: "/preview-form9",
       name: "preview-form9",
       beforeEnter: authGuard,
-      component: PreviewForm9,
-      props: true
+      component: PreviewForm9
     },
     {
       path: "/proceed-form9",
       name: "proceed-form9",
       beforeEnter: authGuard,
-      component: SubmitForm9,
-      props: true
+      component: SubmitForm9
+    },
+    {
+      path: "/start-form18",
+      name: "start-form18",
+      beforeEnter: authGuard,
+      component: StartForm18
+    },
+    {
+      path: "/fill-form18",
+      name: "fill-form18",
+      beforeEnter: authGuard,
+      component: FillForm18
+    },
+    {
+      path: "/preview-form18",
+      name: "preview-form18",
+      beforeEnter: authGuard,
+      component: PreviewForm18
+    },
+    {
+      path: "/proceed-form18",
+      name: "proceed-form18",
+      beforeEnter: authGuard,
+      component: SubmitForm18
     },
     {
       path: "/submitted/:id/:result/:formType",

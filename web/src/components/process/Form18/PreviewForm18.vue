@@ -2,7 +2,7 @@
     <b-card v-if="dataReady" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light" header-border-variant="white">            
-            <form-2-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-18-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card text-variant="dark" border-variant="light" bg-variant="light" class="my-2 mx-4">
@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-2 v-bind:caseId="currentCaseId" @navigateToSubmitPage="navigateToSubmitPage()" />            
+            <form-18/>            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -37,31 +37,31 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
-import "@/store/modules/forms/form2";
-const form2State = namespace("Form2");
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
 
-import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
-import Form2 from "@/components/process/Form2/components/pdf/Form2.vue"
+import Form18ProcessHeader from "@/components/process/Form18/components/Form18ProcessHeader.vue";
+import Form18 from "@/components/process/Form18/components/pdf/Form18.vue"
 
-import { form2StatusInfoType } from '@/types/Information/Form2';
+import { form18StatusInfoType } from '@/types/Information/Form18';
 
 @Component({
     components:{
-        Form2ProcessHeader,
-        Form2
+        Form18ProcessHeader,
+        Form18
     }
 })
-export default class PreviewForm2 extends Vue {
+export default class PreviewForm18 extends Vue {
 
-    @form2State.State
-    public currentCaseId: string;
+    @form18State.State
+    public currentNoticeOfRepChangeAddressId: string;
 
-    stepsCompleted = {} as form2StatusInfoType;
+    stepsCompleted = {} as form18StatusInfoType; 
     
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;
+        this.dataReady = false;         
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -71,7 +71,7 @@ export default class PreviewForm2 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form2" }); 
+        this.$router.push({name: "proceed-form18"}); 
     }
 }
 </script>

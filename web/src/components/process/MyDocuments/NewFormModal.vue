@@ -51,6 +51,9 @@ const form7State = namespace("Form7");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
+
 @Component
 export default class NewFormModal extends Vue {
 
@@ -72,12 +75,16 @@ export default class NewFormModal extends Vue {
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
+    @form18State.Action
+    public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
+
     forms = [
         {name:'form2', title:'Notice of Appearance (Form 2)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
         {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},
         {name:'form7', title:'Notice of Appeal (Form 7)'},
-        {name:'form9', title:'Requisition (Form 9)'}
+        {name:'form9', title:'Requisition (Form 9)'},
+        {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'}
         // {name:'form7', title:''},
     ]
 
@@ -110,6 +117,9 @@ export default class NewFormModal extends Vue {
         }else if(form=='form9'){
             this.UpdateCurrentRequisitionId(null)
             this.$router.push({name: "start-form9" });
+        }else if(form=='form18'){
+            this.UpdateCurrentNoticeOfRepChangeAddressId(null)
+            this.$router.push({name: "start-form18" });
         }
         
     }

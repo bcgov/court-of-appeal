@@ -27,6 +27,11 @@
                 target="_blank">
                 Requisition (Form 9)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm18Document"
+                target="_blank">
+                Notice of Change of Representation/Change of Address for Service (Form 18)                
+            </li>        
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
         </ol>
@@ -52,6 +57,9 @@
     import "@/store/modules/forms/form9";
     const form9State = namespace("Form9");
 
+    import "@/store/modules/forms/form18";
+    const form18State = namespace("Form18");
+
     @Component
     export default class MostUsedForms extends Vue {        
         
@@ -69,6 +77,9 @@
 
         @form9State.Action
         public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
+
+        @form18State.Action
+        public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
@@ -93,6 +104,11 @@
         public startNewForm9Document(){
             this.UpdateCurrentRequisitionId(null);
             this.$router.push({name: "start-form9" })
+        }
+
+        public startNewForm18Document(){
+            this.UpdateCurrentNoticeOfRepChangeAddressId(null);
+            this.$router.push({name: "start-form18" })
         }
 
     }

@@ -19,6 +19,11 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'yy'">
+        <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-18 v-else-if="result=='cancel'"/>
+        <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else>
         <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-7 v-else-if="result=='cancel'"/>
@@ -48,6 +53,10 @@ import ErrorSubmitForm7 from "./Form7/ErrorSubmitForm7.vue";
 import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
 import ErrorSubmitForm9 from "./Form9/ErrorSubmitForm9.vue";
+
+import CancelSubmitForm18 from "./Form18/CancelSubmitForm18.vue";
+import SuccessSubmitForm18 from "./Form18/SuccessSubmitForm18.vue";
+import ErrorSubmitForm18 from "./Form18/ErrorSubmitForm18.vue";
 import { packageInfoType } from '@/types/Information';
 
 @Component({
@@ -66,7 +75,10 @@ import { packageInfoType } from '@/types/Information';
         ErrorSubmitForm7,
         CancelSubmitForm9,
         SuccessSubmitForm9,
-        ErrorSubmitForm9
+        ErrorSubmitForm9,
+        CancelSubmitForm18,
+        SuccessSubmitForm18,
+        ErrorSubmitForm18
     }
 })
 export default class SubmittedResults extends Vue {

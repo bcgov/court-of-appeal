@@ -29,6 +29,9 @@ const form7State = namespace("Form7");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
+
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { caseJsonDataType } from '@/types/Information/json';
@@ -36,6 +39,7 @@ import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
+import { form18FormsJsonDataType } from '@/types/Information/Form18';
 
 @Component({
     components:{
@@ -58,6 +62,9 @@ export default class MyDocuments extends Vue {
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
+
+    @form18State.Action
+    public UpdateForm18FormsJson!: (newForm18FormsJson: form18FormsJsonDataType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -94,7 +101,7 @@ export default class MyDocuments extends Vue {
 
             if(response?.data){
                 this.UpdateForm7FormsJson(response.data)
-                //TODO: call load form5
+                
             }
 
             this.loadForm5Forms();       
@@ -103,7 +110,7 @@ export default class MyDocuments extends Vue {
         });
     }
 
-     //TODO: placeholder
+   
     public loadForm5Forms () {
    
         this.$http.get('/form5/forms')
@@ -121,7 +128,7 @@ export default class MyDocuments extends Vue {
         });
     }
 
-     //TODO: placeholder
+    
     public loadForm6Forms () {
    
         this.$http.get('/form6/forms')
@@ -148,6 +155,23 @@ export default class MyDocuments extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm9FormsJson(forms)
+            }
+            this.loadForm18Forms();
+  
+        },(err) => {
+            this.dataLoaded = true;
+             
+        });
+    }
+        
+    public loadForm18Forms () {
+   
+        this.$http.get('/form18/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm18FormsJson(forms)
             }
 
             this.dataLoaded = true;       
