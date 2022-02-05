@@ -31,7 +31,12 @@
                 @click="startNewForm18Document"
                 target="_blank">
                 Notice of Change of Representation/Change of Address for Service (Form 18)                
-            </li>        
+            </li>  
+            <li class="link-button" 
+                @click="startNewForm19Document"
+                target="_blank">
+                Notice of Withdrawal of Lawyer (Form 19)                
+            </li>       
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
         </ol>
@@ -60,6 +65,9 @@
     import "@/store/modules/forms/form18";
     const form18State = namespace("Form18");
 
+    import "@/store/modules/forms/form19";
+    const form19State = namespace("Form19");
+
     @Component
     export default class MostUsedForms extends Vue {        
         
@@ -80,6 +88,9 @@
 
         @form18State.Action
         public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
+
+        @form19State.Action
+        public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
@@ -109,6 +120,11 @@
         public startNewForm18Document(){
             this.UpdateCurrentNoticeOfRepChangeAddressId(null);
             this.$router.push({name: "start-form18" })
+        }
+
+        public startNewForm19Document(){
+            this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null);
+            this.$router.push({name: "start-form19" })
         }
 
     }

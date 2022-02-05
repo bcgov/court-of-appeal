@@ -33,12 +33,16 @@ import FillForm18 from "@/components/process/Form18/FillForm18.vue";
 import PreviewForm18 from "@/components/process/Form18/PreviewForm18.vue";
 import SubmitForm18 from "@/components/process/Form18/SubmitForm18.vue";
 
+import StartForm19 from "@/components/process/Form19/StartForm19.vue";
+import FillForm19 from "@/components/process/Form19/FillForm19.vue";
+import PreviewForm19 from "@/components/process/Form19/PreviewForm19.vue";
+import SubmitForm19 from "@/components/process/Form19/SubmitForm19.vue";
+
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
 import VueResource from 'vue-resource';
 import store from "@/store";
-
 
 async function authGuard(to: any, from: any, next: any) {
   var result = await SessionManager.getUserInfo(store);
@@ -218,6 +222,30 @@ const routes = [
       name: "proceed-form18",
       beforeEnter: authGuard,
       component: SubmitForm18
+    },
+    {
+      path: "/start-form19",
+      name: "start-form19",
+      beforeEnter: authGuard,
+      component: StartForm19
+    },
+    {
+      path: "/fill-form19",
+      name: "fill-form19",
+      beforeEnter: authGuard,
+      component: FillForm19
+    },
+    {
+      path: "/preview-form19",
+      name: "preview-form19",
+      beforeEnter: authGuard,
+      component: PreviewForm19
+    },
+    {
+      path: "/proceed-form19",
+      name: "proceed-form19",
+      beforeEnter: authGuard,
+      component: SubmitForm19
     },
     {
       path: "/submitted/:id/:result/:formType",
