@@ -36,6 +36,11 @@
                 @click="startNewForm19Document"
                 target="_blank">
                 Notice of Withdrawal of Lawyer (Form 19)                
+            </li> 
+            <li class="link-button" 
+                @click="startNewForm20Document"
+                target="_blank">
+                Notice of Objection to Withdrawal (Form 20)                
             </li>       
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
@@ -68,6 +73,9 @@
     import "@/store/modules/forms/form19";
     const form19State = namespace("Form19");
 
+    import "@/store/modules/forms/form20";
+    const form20State = namespace("Form20");
+
     @Component
     export default class MostUsedForms extends Vue {        
         
@@ -91,6 +99,9 @@
 
         @form19State.Action
         public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
+
+        @form20State.Action
+        public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
@@ -125,6 +136,11 @@
         public startNewForm19Document(){
             this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null);
             this.$router.push({name: "start-form19" })
+        }
+
+        public startNewForm20Document(){
+            this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null);
+            this.$router.push({name: "start-form20" })
         }
 
     }

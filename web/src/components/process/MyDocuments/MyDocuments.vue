@@ -35,6 +35,9 @@ const form18State = namespace("Form18");
 import "@/store/modules/forms/form19";
 const form19State = namespace("Form19");
 
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { caseJsonDataType } from '@/types/Information/json';
@@ -44,6 +47,7 @@ import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
+import { form20FormsJsonDataType } from '@/types/Information/Form20';
 
 @Component({
     components:{
@@ -72,6 +76,9 @@ export default class MyDocuments extends Vue {
 
     @form19State.Action
     public UpdateForm19FormsJson!: (newForm19FormsJson: form19FormsJsonDataType[])=> void
+
+    @form20State.Action
+    public UpdateForm20FormsJson!: (newForm20FormsJson: form20FormsJsonDataType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -196,6 +203,23 @@ export default class MyDocuments extends Vue {
             if(response?.data){
                 const forms = response.data;
                 this.UpdateForm19FormsJson(forms)
+            }
+
+            this.loadForm20Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+             
+        });
+    }
+
+    public loadForm20Forms () {
+   
+        this.$http.get('/form20/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm20FormsJson(forms)
             }
 
             this.dataLoaded = true;       

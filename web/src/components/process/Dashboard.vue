@@ -80,6 +80,9 @@ const form9State = namespace("Form9");
 import "@/store/modules/forms/form19";
 const form19State = namespace("Form19");
 
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
@@ -102,6 +105,7 @@ import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
 
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
+import { form20FormsJsonDataType } from '@/types/Information/Form20';
 
 @Component({
     components:{
@@ -143,6 +147,9 @@ export default class DashboardPage extends Vue {
 
     @form19State.Action
     public UpdateForm19FormsJson!: (newForm19FormsJson: form19FormsJsonDataType[])=> void
+
+    @form20State.Action
+    public UpdateForm20FormsJson!: (newForm20FormsJson: form20FormsJsonDataType[])=> void
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -370,12 +377,30 @@ export default class DashboardPage extends Vue {
                 this.UpdateForm19FormsJson(forms)
             }
 
+            this.loadForm20Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+    public loadForm20Forms () {
+   
+        this.$http.get('/form20/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm20FormsJson(forms)
+            }
+
             this.dataLoaded = true;       
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
         });
     }
+
 
     public restartJourney() {
         this.journeyStarted = false;

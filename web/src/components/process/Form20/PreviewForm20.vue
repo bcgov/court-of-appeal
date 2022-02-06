@@ -1,0 +1,83 @@
+<template>
+    <b-card v-if="dataReady" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
+
+        <b-card-header header-bg-variant="light" header-border-variant="white">            
+            <form-20-process-header v-bind:stepsCompleted="stepsCompleted"/>
+        </b-card-header>
+
+        <b-card text-variant="dark" border-variant="light" bg-variant="light" class="my-2 mx-4">
+
+            <b-row class="ml-5" style="font-size: 2rem;">
+                Preview Your Form
+            </b-row> 
+            <b-row class="ml-5" style="font-size: 14px;">
+                Your can review your form here to ensure everything to correct before submitting. 
+                If edits are required, you may still go back and make the necessary changes.
+            </b-row>           
+           
+        </b-card>
+
+        <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
+            <form-20/>            
+        </b-card> 
+
+        <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
+            <b-button
+                style="float: right;" 
+                variant="success"
+                @click="navigateToSubmitPage()"
+                >Proceed
+                <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+            </b-button>
+        </b-card>   
+        
+    </b-card>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
+import Form20ProcessHeader from "@/components/process/Form20/components/Form20ProcessHeader.vue";
+import Form20 from "@/components/process/Form20/components/pdf/Form20.vue"
+
+import { form20StatusInfoType } from '@/types/Information/Form20';
+
+@Component({
+    components:{
+        Form20ProcessHeader,
+        Form20
+    }
+})
+export default class PreviewForm20 extends Vue {
+
+    @form20State.State
+    public currentNoticeOfObjectionToWithdrawalId: string;
+
+    stepsCompleted = {} as form20StatusInfoType; 
+    
+    dataReady = false;
+
+    mounted() {
+        this.dataReady = false;         
+        this.stepsCompleted = {
+            first: true,
+            second: false,
+            third: false
+        }
+        this.dataReady = true;       
+    }
+
+    public navigateToSubmitPage() {
+        this.$router.push({name: "proceed-form20"}); 
+    }
+}
+</script>
+
+<style scoped lang="scss">
+
+
+
+</style>

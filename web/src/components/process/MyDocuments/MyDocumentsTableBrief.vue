@@ -107,6 +107,9 @@ const form18State = namespace("Form18");
 import "@/store/modules/forms/form19";
 const form19State = namespace("Form19");
 
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
@@ -114,6 +117,7 @@ import { form6FormsJsonDataType } from "@/types/Information/Form6";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
 import { form19FormsJsonDataType } from "@/types/Information/Form19";
+import { form20FormsJsonDataType } from "@/types/Information/Form20";
 
 @Component
 export default class MyDocumentsTableBrief extends Vue {
@@ -159,6 +163,12 @@ export default class MyDocumentsTableBrief extends Vue {
 
     @form19State.Action
     public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
+
+    @form20State.State
+    public form20FormsJson!: form20FormsJsonDataType[];
+
+    @form20State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
 
     documentsList = []
@@ -345,6 +355,30 @@ export default class MyDocumentsTableBrief extends Vue {
             doc.pdfType = docJson.pdf_types;
             this.documentsList.push(doc);
         }
+
+        //___Form 20___
+        for (const docJson of this.form20FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'',
+                form:'form20',
+                formName:'Form 20',
+                description:'Notice of Objection to Withdrawal',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
     }
 
     public navigateToEFilingHub(package_url) {
@@ -408,6 +442,10 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 19'){
             this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(item.id);
             this.$router.push({name: "fill-form19" });
+
+        }else if(item.formName=='Form 20'){
+            this.UpdateCurrentNoticeOfObjectionToWithdrawalId(item.id);
+            this.$router.push({name: "fill-form20" });
 
         }
     }

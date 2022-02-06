@@ -57,6 +57,9 @@ const form18State = namespace("Form18");
 import "@/store/modules/forms/form19";
 const form19State = namespace("Form19");
 
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
 @Component
 export default class NewFormModal extends Vue {
 
@@ -84,6 +87,9 @@ export default class NewFormModal extends Vue {
     @form19State.Action
     public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
 
+    @form20State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
+
     forms = [
         {name:'form2', title:'Notice of Appearance (Form 2)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
@@ -91,7 +97,8 @@ export default class NewFormModal extends Vue {
         {name:'form7', title:'Notice of Appeal (Form 7)'},
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
-        {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'}
+        {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
+        {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'}
         // {name:'form7', title:''},
     ]
 
@@ -130,6 +137,9 @@ export default class NewFormModal extends Vue {
         }else if(form=='form19'){
             this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null)
             this.$router.push({name: "start-form19" });
+        }else if(form=='form20'){
+            this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null)
+            this.$router.push({name: "start-form20" });
         }
         
     }
