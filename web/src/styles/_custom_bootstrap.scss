@@ -54,6 +54,7 @@ $form5: #f8a15b;
 $form6: #5e640baf;
 $form7: #92ee5e;
 $form9: #5ec0ee;
+$form18: #869faa;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -108,6 +109,7 @@ $theme-colors: map-merge(
     "form6":      $form6,
     "form7":      $form7,
     "form9":      $form9,
+    "form18":     $form18,
 
   ),
   $theme-colors
