@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-18-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-19-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -15,7 +15,7 @@
                 <b-row class="ml-5 my-3" style="font-size: 14px;">
                     <b-col cols="10">
                         <div class="h3 text-white bg-dark p-3 text-center" style="margin: 0.5rem 0; width:60rem; border-radius:10px; "> 
-                            <div class="my-3">There has been an error while attempting to E-File your Notice of Change of Representation/Change of Address for Service.</div>
+                            <div class="my-3">There has been an error while attempting to E-File your Notice of Withdrawal of Lawyer.</div>
                             <div class="text-warning my-5">Error Message: {{errMsg}}</div>                                                
                             <div class="my-3">
                                 Please try again. If this error persists contact 
@@ -44,20 +44,20 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form18ProcessHeader from "@/components/process/Form18/components/Form18ProcessHeader.vue";
-import { form18StatusInfoType } from '@/types/Information/Form18';
+import Form19ProcessHeader from "@/components/process/Form19/components/Form19ProcessHeader.vue";
+import { form19StatusInfoType } from '@/types/Information/Form19';
 
 @Component({
     components:{
-        Form18ProcessHeader
+        Form19ProcessHeader
     }
 })
-export default class ErrorSubmitForm18 extends Vue {
+export default class ErrorSubmitForm19 extends Vue {
     
     @Prop({required: true, default:" "})
     errMsg!: string;
 
-    stepsCompleted = {} as form18StatusInfoType;  
+    stepsCompleted = {} as form19StatusInfoType;  
     mountedData = false;     
 
     mounted() {

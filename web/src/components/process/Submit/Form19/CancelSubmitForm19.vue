@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-18-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-19-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -37,17 +37,17 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form18ProcessHeader from "@/components/process/Form18/components/Form18ProcessHeader.vue";
-import { form18StatusInfoType } from '@/types/Information/Form18';
+import Form19ProcessHeader from "@/components/process/Form19/components/Form19ProcessHeader.vue";
+import { form19StatusInfoType } from '@/types/Information/Form19';
 
 @Component({
     components:{
-        Form18ProcessHeader
+        Form19ProcessHeader
     }
 })
-export default class CancelSubmitForm18 extends Vue {
+export default class CancelSubmitForm19 extends Vue {
 
-    stepsCompleted = {} as form18StatusInfoType;  
+    stepsCompleted = {} as form19StatusInfoType;  
     mountedData = false;     
 
     mounted() {
