@@ -77,6 +77,9 @@ const form7State = namespace("Form7");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
+
 import "@/store/modules/forms/form19";
 const form19State = namespace("Form19");
 
@@ -100,6 +103,7 @@ import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Informatio
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
+import { form18FormsJsonDataType } from '@/types/Information/Form18';
 
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
 
@@ -141,8 +145,11 @@ export default class DashboardPage extends Vue {
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
 
+    @form18State.Action
+    public UpdateForm18FormsJson!: (newForm18FormsJson: form18FormsJsonDataType[])=> void
+
     @form19State.Action
-    public UpdateForm19FormsJson!: (newForm19FormsJson: form19FormsJsonDataType[])=> void
+    public UpdateForm19FormsJson!: (newForm19FormsJson: form19FormsJsonDataType[])=> void    
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -352,7 +359,24 @@ export default class DashboardPage extends Vue {
                 this.UpdateForm9FormsJson(forms)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm18Forms();       
+        },(err) => {
+            this.dataLoaded = true;
+            this.error = err;        
+        });
+    }
+
+     public loadForm18Forms () {
+   
+        this.$http.get('/form18/forms')
+        .then((response) => {
+
+            if(response?.data){
+                const forms = response.data;
+                this.UpdateForm18FormsJson(forms)
+            }
+
+            this.loadForm19Forms();       
         },(err) => {
             this.dataLoaded = true;
             this.error = err;        
