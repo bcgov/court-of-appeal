@@ -8,7 +8,7 @@
         <b-card border-variant="light" bg-variant="light" class="my-2">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Change of Representation/Change of Address for Service
+                Notice of Withdrawal of Lawyer
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
                 Form 19 (RULE 86)

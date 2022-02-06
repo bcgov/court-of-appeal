@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-18-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-19-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -13,11 +13,11 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Change of Representation/Change of Address for Service has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Notice of Change of Representation/Change of Address for Service.
+                    Your Notice of Withdrawal of Lawyer has been submitted and accepted.  Please click on the 
+                    CSO Package number below to retrieve a filed copy of your Notice of Withdrawal of Lawyer.
                 </b-row>
                 <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the Notice of Change of Representation/Change of Address for Service on the appellant 
+                    Please note that you must serve the Notice of Withdrawal of Lawyer on the appellant 
                     within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
                 </b-row>
                 <b-row class="ml-5">
@@ -94,21 +94,21 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form18ProcessHeader from "@/components/process/Form18/components/Form18ProcessHeader.vue";
+import Form19ProcessHeader from "@/components/process/Form19/components/Form19ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form18StatusInfoType } from '@/types/Information/Form18';
+import { form19StatusInfoType } from '@/types/Information/Form19';
 
 @Component({
     components:{
-        Form18ProcessHeader
+        Form19ProcessHeader
     }
 })
-export default class SuccessSubmitForm18 extends Vue {
+export default class SuccessSubmitForm19 extends Vue {
 
     @Prop({required: true})
     packageInfo!: packageInfoType;
 
-    stepsCompleted = {} as form18StatusInfoType;  
+    stepsCompleted = {} as form19StatusInfoType;  
     mountedData = false; 
 
 
@@ -129,7 +129,7 @@ export default class SuccessSubmitForm18 extends Vue {
             packageUrl: newPackageInfo.eFilingUrl 
         } 
 
-        const url = "/form18/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/form19/efiling/"+newPackageInfo.fileNumber+"/submit/";
 
         const header = {
             responseType: "json",

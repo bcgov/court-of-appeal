@@ -10,7 +10,7 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 19</b></div>
                 <div style="width:75%; font-size:14pt;"><b>
-                    NOTICE OF CHANGE OF REPRESENTATION/CHANGE OF ADDRESS FOR SERVICE: RULE 86
+                    NOTICE OF WITHDRAWAL OF LAWYER: RULE 87(1)
                 </b></div>
             </div>         
         </div> 
