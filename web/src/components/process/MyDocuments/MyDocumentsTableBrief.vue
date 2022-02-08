@@ -207,7 +207,7 @@ export default class MyDocumentsTableBrief extends Vue {
                 pdfType:'ABA',
                 form:'form6',
                 formName:'Form 6',
-                description:'Notice Of Settlement Or Abandonment',
+                description:'Notice of Settlement or Abandonment',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 

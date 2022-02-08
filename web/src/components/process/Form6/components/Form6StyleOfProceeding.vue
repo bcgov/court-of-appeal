@@ -291,13 +291,11 @@ export default class Form6StyleOfProceeding extends Vue {
             form6Data.version = this.$store.state.Application.version;
             //TODO: populate following with real data from webcats
             form6Data.judgeName = 'Drake';
-            form6Data.orderDate = '11/11/2021';
-            form6Data.initiatingDocumentDate = '11/11/2020';  
+            form6Data.orderDate = '2021-11-11';
+            form6Data.initiatingDocumentDate = '2020-11-12';  
            
-            this.UpdateForm6Info(form6Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractPartiesData();  
-            // this.saveForm(true);                  
+            this.UpdateForm6Info(form6Data);                       
+            this.saveForm(true);                  
             
         }       
 
@@ -326,9 +324,9 @@ export default class Form6StyleOfProceeding extends Vue {
        
         this.$http.get('/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form6Data = response.data                
+                const form6Data = response.data.data                
                 this.UpdateForm6Info(form6Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -376,16 +374,18 @@ export default class Form6StyleOfProceeding extends Vue {
             method = 'put';
             url = '/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId;               
 
-            if (!draft && !this.checkStates()){
-               
-                return
-                
+            if (!draft && !this.checkStates()){               
+                return                
             } 
             
             const options = {
                 method: method,
                 url: url,
-                data: this.form6Info
+                data: {
+                    data:this.form6Info,
+                    type:'Form6',
+                    description:'Notice of Settlement or Abandonment'
+                }
             }
             this.saveInfo(options, draft);
 
@@ -394,7 +394,11 @@ export default class Form6StyleOfProceeding extends Vue {
             const options = {
                 method: method,
                 url: url,
-                data: this.form6Info
+                data: {
+                    data:this.form6Info,
+                    type:'Form6',
+                    description:'Notice of Settlement or Abandonment'
+                }
             }
             this.saveInfo(options, draft);
         }        

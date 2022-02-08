@@ -107,7 +107,7 @@ export default class MyDocuments extends Vue {
                 this.UpdateForm5FormsJson(forms)
             }
 
-            this.dataLoaded = true;       
+            this.loadForm6Forms();
         },(err) => {
             this.dataLoaded = true;
              

@@ -363,8 +363,8 @@ export default class TableForm6 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'FORM';
-            const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            const pdf_type = 'ABA';
+            const url = '/form6/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
                 headers: {
@@ -400,18 +400,19 @@ export default class TableForm6 extends Vue {
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;            
         }
-    }
-
-    public confirmDeleteApplication() { 
-        
-        let pdfIds = ''       
-        for(const fileId of this.applicationsToDelete)
-            pdfIds+= '&id='+fileId;
-        
-        const url = '/case/0/?'+pdfIds;
+    } 
     
+    
+    public confirmDeleteApplication() { 
+        const data ={
+            data:{
+                ids:this.applicationsToDelete
+            }
+        }
 
-        this.$http.delete(url)
+        const url = '/form6/forms';
+
+        this.$http.delete(url, data)
         .then(response => {
             
             if(response?.status == 204)
