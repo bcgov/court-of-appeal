@@ -2,6 +2,7 @@ import json
 from django.conf import settings
 from django.contrib.admin.utils import flatten
 
+
 class EFilingParsing:
     def url_from_headers(self, request, extra):
         if "HTTP_X_FORWARDED_HOST" in request.META:
@@ -12,11 +13,13 @@ class EFilingParsing:
             proto = "http"
         return f"{proto}://{host}{settings.FORCE_SCRIPT_NAME}{extra}"
 
-    def convert_data_for_efiling(self, request, case, documents):
+      
+        
+    def convert_data_for_efiling(self, request, case, documents, doc_type):
+
         data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
         data = json.loads(data_dec)
         
-
 
         converted_data = {
             "formId": case.id,
@@ -71,70 +74,20 @@ class EFilingParsing:
 
             "documents": documents,            
             "successUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/success/APP"
+                request, f"submitted/{case.id}/success/{doc_type}"
             ),
             "errorUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/error/APP"
+                request, f"submitted/{case.id}/error/{doc_type}"
             ),
             "cancelUrl": self.url_from_headers(
-                request, f"submitted/{case.id}/cancel/APP"
+                request, f"submitted/{case.id}/cancel/{doc_type}"
             ),
         }
-
-        return converted_data
-
-
-    def convert_form5_data_for_efiling(self, request, notice, documents):
-        
-        data_dec = settings.ENCRYPTOR.decrypt(notice.key_id, notice.data)
-        data = json.loads(data_dec)
-
-        id = notice.id
-        converted_data = {
-            "formId": id,
-            "fileNumber": data["formSevenNumber"].replace("CA", ""),
-            "locationCode":"COA", #  notice.lowerCourtRegistryId,
-            "parties":[],
-            # "parties": flatten(
-            #     [
-                    
-            #         {
-            #             "partyType": "IND",
-            #             "roleType": "Appellant",
-            #             "firstName": "firstName",
-            #             "middleName": "",
-            #             "lastName": "lastName",
-            #         }                        
-                   
-            #         # [
-            #         #     {
-            #         #         "partyType": "IND",
-            #         #         "roleType": "Respondent",
-            #         #         "firstName": respondent["firstName"],
-            #         #         "middleName": "",
-            #         #         "lastName": respondent["lastName"],
-            #         #     }
-            #         #     for respondent in data["respondents"]
-            #         # ],
-            #     ]
-            # ),  
-            "organizationParties": [],
-            "documents": documents,            
-            "successUrl": self.url_from_headers(
-                request, f"submitted/{id}/success/NHA"
-            ),
-            "errorUrl": self.url_from_headers(
-                request, f"submitted/{id}/error/NHA"
-            ),
-            "cancelUrl": self.url_from_headers(
-                request, f"submitted/{id}/cancel/NHA"
-            ),
-        }
-
+        #form2 APP , form5 NHA
         return converted_data
 
         
-    def convert_form7_data_for_efiling(self, request, notice, parties, documents):
+    def convert_form7_data_for_efiling(self, request, notice, parties, documents, doc_type):
 
         id = str(notice.noticeOfAppealId)
         converted_data = {
@@ -171,13 +124,13 @@ class EFilingParsing:
             ),
             "documents": documents,            
             "successUrl": self.url_from_headers(
-                request, f"submitted/{id}/success/NAA"
+                request, f"submitted/{id}/success/{doc_type}"
             ),
             "errorUrl": self.url_from_headers(
-                request, f"submitted/{id}/error/NAA"
+                request, f"submitted/{id}/error/{doc_type}"
             ),
             "cancelUrl": self.url_from_headers(
-                request, f"submitted/{id}/cancel/NAA"
+                request, f"submitted/{id}/cancel/{doc_type}"
             ),
         }
 
