@@ -160,16 +160,11 @@ Vue.filter('styleTitle',function(title){
 	return "<div style='display:inline; color:#29877c'>" + title + "</div>"
 })
 
-Vue.filter('getFullName',function(nameObject){
-	if (nameObject) {
-		return nameObject.first? nameObject.first: '' +
-			" " +
-			nameObject.middle? nameObject.middle: '' +
-			" " +
-			nameObject.last? nameObject.last: '';
-	} else{
-		return " "
-	}
+Vue.filter('getFullName',function(first, last){	
+
+	const firstName = first? first+' ': '' 
+	const lastName = last? last+' ': '' 		
+	return firstName+lastName	
 })
 
 Vue.filter('getFullAddress',function(nameObject){

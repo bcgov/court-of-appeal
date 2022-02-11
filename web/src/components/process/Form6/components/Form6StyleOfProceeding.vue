@@ -95,7 +95,7 @@
                 <b-col cols="3" style="font-weight: 700;">
                     This party is abandoning a:                                
                 </b-col>
-                <b-col class="ml-1">   
+                <b-col :class="state.abandonType==false?'border border-danger ml-1': 'ml-1'">   
 
                     <b-form-radio-group                
                         style="width:100%" 
@@ -130,10 +130,9 @@
                     style="font-weight: 700;">Who made the Order?
                 </b-col>
                 <b-col>
-                    <b-form-input                    
-                        v-model="form6Info.judgeName"                        
-                        disabled>
-                    </b-form-input>
+                    <b-card body-class="py-2 bg-select" >                   
+                        {{form6Info.judgeName}}
+                    </b-card>
                 </b-col>
             </b-row>  
 
@@ -143,10 +142,9 @@
                     style="font-weight: 700;">Date the order under appeal was pronounced:
                 </b-col>
                 <b-col>
-                    <b-form-input                    
-                        v-model="form6Info.orderDate"                        
-                        disabled>
-                    </b-form-input>
+                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
+                        {{form6Info.orderDate | beautify-date-blank}}
+                    </b-card>
                 </b-col>
             </b-row>  
 
@@ -156,10 +154,9 @@
                     style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
                 </b-col>
                 <b-col>
-                    <b-form-input                    
-                        v-model="form6Info.initiatingDocumentDate"                        
-                        disabled>
-                    </b-form-input>
+                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
+                        {{form6Info.initiatingDocumentDate | beautify-date-blank}}
+                    </b-card>
                 </b-col>
             </b-row>       
 
@@ -210,7 +207,7 @@
 <script lang="ts">
 
 import { form6DataInfoType } from '@/types/Information/Form6';
-import { partiesDataJsonDataType } from '@/types/Information/json';
+import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -225,6 +222,12 @@ export default class Form6StyleOfProceeding extends Vue {
 
     @informationState.State
     public partiesJson: partiesDataJsonDataType;
+
+    @informationState.State
+    public previousCourts: previousCourtJsonInfoType[]
+
+    @informationState.State
+    public initiatingDocuments: initiatingDocumentJsonInfoType[]
 
     @informationState.State
     public fileNumber: string;
@@ -269,8 +272,7 @@ export default class Form6StyleOfProceeding extends Vue {
 
     mounted() {
         this.dataReady = false;
-        this.extractInfo();
-              
+        this.extractInfo();              
     }
 
     public extractInfo(){
@@ -288,16 +290,16 @@ export default class Form6StyleOfProceeding extends Vue {
             form6Data.respondents = this.partiesJson.respondents;
             form6Data.formSevenNumber = this.fileNumber;
             
-            form6Data.version = this.$store.state.Application.version;
-            //TODO: populate following with real data from webcats
-            form6Data.judgeName = 'Drake';
-            form6Data.orderDate = '2021-11-11';
-            form6Data.initiatingDocumentDate = '2020-11-12';  
+            form6Data.version = this.$store.state.Application.version;            
+
+            form6Data.judgeName = Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
+            form6Data.orderDate = this.previousCourts[0]?.JudgmentDate;
+            form6Data.initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled;  
            
             this.UpdateForm6Info(form6Data);                       
-            this.saveForm(true);                  
-            
-        }       
+            this.saveForm(true);
+        }  
+          
 
     }
 
@@ -316,6 +318,7 @@ export default class Form6StyleOfProceeding extends Vue {
             this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name);  
         }
+        this.updateOtherParties()
         this.dataReady = true;
 
     }
@@ -353,9 +356,9 @@ export default class Form6StyleOfProceeding extends Vue {
         
         this.state.firstAppellant = !this.form6Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form6Info.firstRespondent? false : null; 
-        this.state.abandoningParties = !this.form6Info.abandoningParties? false : null;
+        this.state.abandoningParties = this.form6Info.abandoningParties?.length>0? null :false;
         this.state.abandonType = !this.form6Info.abandonType? false : null;
-        this.state.abandoningAgainstParties = !this.form6Info.abandoningAgainstParties? false : null;
+        this.state.abandoningAgainstParties = this.form6Info.abandoningAgainstParties?.length>0? null :false;
         this.state.authorizedName = !this.form6Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
@@ -428,7 +431,7 @@ export default class Form6StyleOfProceeding extends Vue {
 
         const otherParties = [];
 
-        if (this.partyNames.length == this.form6Info.abandoningParties.length){
+        if (this.partyNames.length == this.form6Info.abandoningParties?.length){
 
             this.invalidAbandoningParties = true;
 
@@ -437,7 +440,7 @@ export default class Form6StyleOfProceeding extends Vue {
             this.invalidAbandoningParties = false;
 
             for (const partyName of this.partyNames){
-                const index = this.form6Info.abandoningParties.indexOf(partyName)
+                const index = this.form6Info.abandoningParties?.indexOf(partyName)
                 if (index == -1){
                     otherParties.push(partyName);
                 }
