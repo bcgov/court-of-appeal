@@ -11,7 +11,7 @@
             {{errorMsg}}
         </b-alert>
 
-        <b-row v-if="enableActions" class="bg-form6 mb-2 py-1 mx-0">
+        <b-row v-if="enableActions && documentsList.length" class="bg-form6 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Settlement or Abandonment (Form 6)</div>
             </b-col>
@@ -43,14 +43,14 @@
             </b-col>
         </b-row>
 
-        <b-row v-else class="bg-select mb-2 py-1 mx-0">
+        <b-row v-else-if="documentsList.length" class="bg-select mb-2 py-1 mx-0">
             <b-col cols="12">
                 <div style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Settlement or Abandonment (Form 6) </div>
             </b-col>
         </b-row>
        
 
-        <b-row style="p-0">
+        <b-row v-if="documentsList.length" style="p-0">
             <b-col> 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
                     <span class="text-muted ml-4 mb-5">No documents.</span>
@@ -238,19 +238,7 @@ export default class TableForm6 extends Vue {
             label: "Parties",
             sortable: false,
             thClass: 'border-dark border-bottom',
-        }, 
-        {
-            key: "referenceNumber",
-            label: "Reference #",
-            sortable: false,
-            thClass: 'border-dark border-bottom',
-        },
-        {
-            key: "appealSubmissionDeadline",
-            label: "Deadline to File and Serve",
-            sortable: true,
-            thClass: 'border-dark border-bottom',
-        },       
+        },            
         {
             key: "status",
             label: "Status",
@@ -285,8 +273,7 @@ export default class TableForm6 extends Vue {
     errorMsgDismissCountDown = 0;
    
 
-    mounted() {
-        console.log('form 6s')
+    mounted() {        
         this.extractDocuments();       
     }
 
@@ -314,7 +301,7 @@ export default class TableForm6 extends Vue {
             doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
-            doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
+            doc.description = [docJson.description];
             doc.packageUrl = docJson.packageUrl;
             doc.packageNum = docJson.packageNumber;
 
@@ -363,8 +350,8 @@ export default class TableForm6 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'FORM';
-            const url = '/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            const pdf_type = 'ABA';
+            const url = '/form6/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
                 headers: {
@@ -400,18 +387,19 @@ export default class TableForm6 extends Vue {
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;            
         }
-    }
-
-    public confirmDeleteApplication() { 
-        
-        let pdfIds = ''       
-        for(const fileId of this.applicationsToDelete)
-            pdfIds+= '&id='+fileId;
-        
-        const url = '/case/0/?'+pdfIds;
+    } 
     
+    
+    public confirmDeleteApplication() { 
+        const data ={
+            data:{
+                ids:this.applicationsToDelete
+            }
+        }
 
-        this.$http.delete(url)
+        const url = '/form6/forms';
+
+        this.$http.delete(url, data)
         .then(response => {
             
             if(response?.status == 204)

@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-6/>            
+            <form-6 @navigateToSubmitPage="navigateToSubmitPage()" />            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                

@@ -123,7 +123,7 @@ import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
 import { form6SearchInfoType } from '@/types/Information/Form6';
-import { partiesDataJsonDataType } from '@/types/Information/json';
+import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -135,6 +135,12 @@ export default class Form6CaseInformation extends Vue {
 
     @informationState.Action
     public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void
+
+    @informationState.Action
+    public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
+
+    @informationState.Action
+    public UpdateInitiatingDocuments!: (newInitiatingDocuments: initiatingDocumentJsonInfoType[]) => void
 
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
@@ -200,6 +206,15 @@ export default class Form6CaseInformation extends Vue {
                 this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
                 this.$router.push({name: "fill-form6"})
             }
+
+            if(res.data?.previousCourts){
+                this.UpdatePreviousCourts(res.data?.previousCourts)
+            }
+
+            if(res.data?.initiatingDocuments?.InitiatingDocument){
+                this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
+            }
+
             else
                 this.notFound = true;
         },err => {

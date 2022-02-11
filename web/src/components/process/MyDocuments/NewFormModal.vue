@@ -12,8 +12,8 @@
                     class="py-1 my-1 ml-3 border-0" 
                     style="font-size:14px;"
                     @click="createDocument(form.name);">
-                    <b-icon-file-text class="text-warning"/>                   
-                    {{form.title}}
+                    <b-icon-file-text class="text-primary mr-1"/>                   
+                    <b>{{form.title}}</b>
                 </b-button>                
             </b-row>            
             
