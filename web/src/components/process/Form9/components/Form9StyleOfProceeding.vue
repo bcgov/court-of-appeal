@@ -105,7 +105,7 @@
                     style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
                                 
                 </b-col>
-                <b-col>
+                <b-col class="ml-1">
                     <b-form-input                    
                         v-model="form9Info.authorizedName"                        
                         :state ="state.authorizedName">
@@ -220,9 +220,8 @@ export default class Form9StyleOfProceeding extends Vue {
             form9Data.formSevenNumber = this.fileNumber;            
             form9Data.version = this.$store.state.Application.version;            
             this.UpdateForm9Info(form9Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractPartiesData();  
-            // this.saveForm(true);                  
+            
+            this.saveForm(true);                  
             
         }       
 
@@ -251,9 +250,9 @@ export default class Form9StyleOfProceeding extends Vue {
        
         this.$http.get('/form9/forms/'+this.currentRequisitionId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form9Data = response.data                
+                const form9Data = response.data.data                
                 this.UpdateForm9Info(form9Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -295,9 +294,9 @@ export default class Form9StyleOfProceeding extends Vue {
         let method = 'post';
         let url = '/form9/forms';
 
-        // if (this.currentRequisitionId){
-        //     method = 'put';
-        //     url = '/form9/forms/'+this.currentRequisitionId;               
+        if (this.currentRequisitionId){
+            method = 'put';
+            url = '/form9/forms/'+this.currentRequisitionId;               
 
             if (!draft && !this.checkStates()){
                
@@ -308,39 +307,47 @@ export default class Form9StyleOfProceeding extends Vue {
             const options = {
                 method: method,
                 url: url,
-                data: this.form9Info
+                data: {
+                    data:this.form9Info,
+                    type:'Form9',
+                    description:'Requisition'
+                }
             }
             this.saveInfo(options, draft);
 
-        // } else {           
+        } else {           
 
-        //     const options = {
-        //         method: method,
-        //         url: url,
-        //         data: this.form9Info
-        //     }
-        //     this.saveInfo(options, draft);
-        // }        
+            const options = {
+                method: method,
+                url: url,
+                data: {
+                    data:this.form9Info,
+                    type:'Form9',
+                    description:'Requisition'
+                }
+            }
+            this.saveInfo(options, draft);
+        }        
        
     }
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentRequisitionId(response.data.file_id);
-        //                 this.extractPartiesData();                        
-        //             }
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentRequisitionId(response.data.file_id);
+                        this.extractPartiesData();                        
+                    }
 
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }   
 
     public navigateToPreviewPage() {        

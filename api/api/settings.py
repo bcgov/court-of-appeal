@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "form7",
     "form5",
     "form6",
+    "form9",
     "corsheaders",
     "oidc_rp"
 ]
