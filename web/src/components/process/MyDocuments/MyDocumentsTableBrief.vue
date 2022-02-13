@@ -223,7 +223,7 @@ export default class MyDocumentsTableBrief extends Vue {
                 pdfType:'ABA',
                 form:'form6',
                 formName:'Form 6',
-                description:'Notice Of Settlement Or Abandonment',
+                description:'Notice of Settlement or Abandonment',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 
@@ -268,7 +268,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form9FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form9',
                 formName:'Form 9',
                 description:'Requisition',

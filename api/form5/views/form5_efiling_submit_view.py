@@ -41,10 +41,10 @@ class Form5EFilingSubmitView(generics.GenericAPIView):
             return
 
 
-    def _get_pdf_content(self, notice):
+    def _get_pdf_content(self, notice, document_type):
         outgoing_documents = [] 
         #Modify If more than one form type exist in the future       
-        document_type = "NHA"
+        
         current_document_type = "NHA"
         try:                      
             prepared_pdf = FormPdf.objects.get(
@@ -97,7 +97,8 @@ class Form5EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, notice_id):
-
+        
+        document_type = "NHA" # type Form5 for Efiling
         uid = request.user.id
 
         notice = self.get_notice_for_user(notice_id, uid)        
@@ -107,9 +108,9 @@ class Form5EFilingSubmitView(generics.GenericAPIView):
         if notice.package_number or notice.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(notice)               
-        data_for_efiling = self.efiling_parsing.convert_form5_data_for_efiling(
-            request, notice, outgoing_documents
+        outgoing_documents = self._get_pdf_content(notice, document_type)               
+        data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
+            request, notice, outgoing_documents, document_type
         )
         
         # EFiling upload document.

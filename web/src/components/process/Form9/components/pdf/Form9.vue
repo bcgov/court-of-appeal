@@ -2,24 +2,31 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
-                </b-button>
-            </b-col>
-            <b-col cols="3">
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
-            </b-col>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
+            </b-col>           
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
@@ -60,14 +67,11 @@ export default class Form9 extends Vue {
    
     mounted(){
         this.dataReady = false;
-        this.result = this.form9Info;
-        //TODO: remove above line and uncomment getForm9Data
-        this.dataReady = true;
-        // this.getForm9Data(); 
+        this.getForm9Data(); 
     }   
            
     public onPrint() { 
-        const pdf_type = "NHA"
+        const pdf_type = "FORM"
         const pdf_name = "form9-" + this.currentRequisitionId;
         const el= document.getElementById("print");
 
@@ -98,7 +102,7 @@ export default class Form9 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "NHA"
+        const pdfType = "FORM"
         const pdfName ="FORM9"
         const url = '/form9/form-print/'+this.currentRequisitionId+'/?pdf_type='+pdfType
         const options = {
@@ -125,10 +129,14 @@ export default class Form9 extends Vue {
     public navigateToEditPage() {
         this.$router.push({name: "fill-form9" })
     }
+
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
+    }
  
     public getForm9Data() {        
        
-        this.$http.get('/form9/forms/'+this.currentRequisitionId+'/')
+        this.$http.get('/form9/forms/'+this.currentRequisitionId)
         .then((response) => {
             if(response?.data?.data){            
                             

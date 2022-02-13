@@ -41,10 +41,10 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
             return
 
 
-    def _get_pdf_content(self, notice):
+    def _get_pdf_content(self, notice, document_type):
         outgoing_documents = [] 
         #Modify If more than one form type exist in the future       
-        document_type = "NAA"
+        
         current_document_type = "FORM"
         try:                      
             prepared_pdf = FormPdf.objects.get(
@@ -97,6 +97,8 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, notice_id):
+        
+        document_type = "NAA" # type Form7 for Efiling
 
         account_id = request.user.account_id
 
@@ -109,9 +111,9 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
 
         parties = Party.objects.filter(noticeOfAppeal_id=notice.noticeOfAppealId).all()
 
-        outgoing_documents = self._get_pdf_content(notice)               
+        outgoing_documents = self._get_pdf_content(notice, document_type)               
         data_for_efiling = self.efiling_parsing.convert_form7_data_for_efiling(
-            request, notice, parties, outgoing_documents
+            request, notice, parties, outgoing_documents, document_type
         )
         
         # EFiling upload document.
