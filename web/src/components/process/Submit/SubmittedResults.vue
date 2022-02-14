@@ -24,7 +24,7 @@
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
         <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'xx'">
+    <div v-else-if="formType == 'CNWD'">
         <success-submit-form-19 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-19 v-else-if="result=='cancel'"/>
         <error-submit-form-19 :errMsg="errorMsg" v-else-if="result=='error'"/>        
