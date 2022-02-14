@@ -2,23 +2,40 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
+            <!-- <b-col cols="2" class="ml-3">
                 <b-button 
                     style="float: right;" 
                     variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
+                    @click="onPrintSave()"
+                    >
+                    Print-Save
                 </b-button>
-            </b-col>
-            <b-col cols="3">
+            </b-col> -->
+
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
             </b-col>
         </b-row>  
     
@@ -59,15 +76,16 @@ export default class Form18 extends Vue {
     dataReady = false;
    
     mounted(){
-        this.dataReady = false;
-        this.result = this.form18Info;
-        //TODO: remove above line and uncomment getForm18Data
-        this.dataReady = true;
-        // this.getForm18Data(); 
-    }   
+        this.dataReady = false;        
+        this.getForm18Data(); 
+    }  
+    
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
+    }
            
     public onPrint() { 
-        const pdf_type = "NHA"
+        const pdf_type = "FORM"
         const pdf_name = "form18-" + this.currentNoticeOfRepChangeAddressId;
         const el= document.getElementById("print");
 
@@ -98,7 +116,7 @@ export default class Form18 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "NHA"
+        const pdfType = "FORM"
         const pdfName ="FORM18"
         const url = '/form18/form-print/'+this.currentNoticeOfRepChangeAddressId+'/?pdf_type='+pdfType
         const options = {
@@ -128,7 +146,7 @@ export default class Form18 extends Vue {
  
     public getForm18Data() {        
        
-        this.$http.get('/form18/forms/'+this.currentNoticeOfRepChangeAddressId+'/')
+        this.$http.get('/form18/forms/'+this.currentNoticeOfRepChangeAddressId)
         .then((response) => {
             if(response?.data?.data){            
                             
@@ -143,6 +161,42 @@ export default class Form18 extends Vue {
         },(err) => {
             console.log(err)        
         });      
+    }
+
+    public onPrintSave() { 
+        const pdf_type = "FORM"
+        const pdf_name = "form18-" + this.currentNoticeOfRepChangeAddressId;
+        const el= document.getElementById("print");
+      
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+        const bottomRightText = `" "`;        
+        const url = '/form18/form-print/'+this.currentNoticeOfRepChangeAddressId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+
+        const body = {
+            'html':pdfhtml,
+            'json_data':this.result
+        }       
+        
+        const options = {
+            responseType: "blob",
+            headers: {
+            "Content-Type": "application/json",
+            }
+        }  
+
+        this.$http.post(url,body, options)
+        .then(res => {                       
+            const blob = res.data;
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.download = "FORM18.pdf";
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
+        },err => {
+            console.error(err);        
+        });
     }
 }
 </script>

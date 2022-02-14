@@ -19,7 +19,7 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'yy'">
+    <div v-else-if="formType == 'CNAC'">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
         <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        

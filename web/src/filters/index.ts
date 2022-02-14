@@ -292,6 +292,7 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 			`.arrow-up-box{margin: 0 auto;width: 16px;height:4px;background-color:#E8E8E8;border: 0px solid #E8E8E8;}`+
 			`.coa-text-box{padding:0.5rem; border: 1px solid black; word-wrap: break-word;}`+
 			`.coa-help-box{padding:0.5rem; border: 1px solid #E8E8E8; background: #E8E8E8;}`+			
+			`.arrow-right-flash-62{ margin-right:1.25rem;  width:0;height:0; border-top: 62px solid transparent; border-bottom: 62px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-54{ margin-right:1.25rem;  width:0;height:0; border-top: 54px solid transparent; border-bottom: 54px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-36{ margin-right:1.25rem;  width:0;height:0; border-top: 36px solid transparent; border-bottom: 36px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-20{ margin-right:1.25rem;  width:0;height:0; border-top: 20px solid transparent; border-bottom: 20px solid transparent;border-left: 20px solid #E8E8E8;}`+
