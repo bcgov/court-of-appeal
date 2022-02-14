@@ -197,13 +197,14 @@
                 <b-form-group>
                     <span class="ml-3">I agree to pay all hearing fees payable under Item 4 of Division 1 of Schedule 2-Court Fees.</span>	
                     <b-form-checkbox
-                        class="ml-5"
+                        class="ml-4"
                         style="display: inline;"
-                        size="sm"									
+                        size="lg"									
                         v-model="form5Info.acknowledge"
                         :state="state.acknowledge"
                         >  
-                    </b-form-checkbox>						
+                    </b-form-checkbox>
+                    <span v-if="state.acknowledge==false" class="text-danger"> acknowledgment required !</span>						
                 </b-form-group>
             </b-row>
 

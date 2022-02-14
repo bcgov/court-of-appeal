@@ -3,7 +3,7 @@
 
         <b-card no-body v-if="dataLoaded" class="home-content border-white p-0">       
             
-            <my-documents-table @reload="loadCases()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
+            <my-documents-table @reload="loadForms()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
             
         </b-card>
         
@@ -92,142 +92,36 @@ export default class MyDocuments extends Vue {
         this.dataLoaded = false;     
         window.addEventListener('resize', this.getWindowHeight);
         this.getWindowHeight()
-        this.loadCases ();
+        this.loadForms ()
     }
 
-    public loadCases () {
+    public loadForms () {
         this.dataLoaded = false;
-        this.$http.get('/case/')
-        .then((response) => {
-            if(response?.data){            
-                this.UpdateCasesJson(response.data)
-            }
+        const calls =[]
+        calls.push(this.$http.get('/case/'));
+        calls.push(this.$http.get('/form5/forms'));
+        calls.push(this.$http.get('/form6/forms')); 
+        calls.push(this.$http.get('/form7/forms')); 
+        calls.push(this.$http.get('/form9/forms'));
+        calls.push(this.$http.get('/form18/forms'));
+        calls.push(this.$http.get('/form19/forms'));
+        calls.push(this.$http.get('/form20/forms'));
 
-            this.loadForm7Forms()
-        },(err) => {
-            this.dataLoaded = true;       
-        });
-    }
+        Promise.all(calls).then(values => { 
 
-    public loadForm7Forms () {
-        this.$http.get('/form7/forms')
-        .then((response) => {
+            if(values[0]?.data) this.UpdateCasesJson(values[0]?.data)
+            if(values[1]?.data) this.UpdateForm5FormsJson(values[1]?.data)
+            if(values[2]?.data) this.UpdateForm6FormsJson(values[2]?.data)
+            if(values[3]?.data) this.UpdateForm7FormsJson(values[3]?.data)
+            if(values[4]?.data) this.UpdateForm9FormsJson(values[4]?.data)
+            if(values[5]?.data) this.UpdateForm18FormsJson(values[5]?.data)
+            if(values[6]?.data) this.UpdateForm19FormsJson(values[6]?.data)
+            if(values[7]?.data) this.UpdateForm19FormsJson(values[7]?.data)
 
-            if(response?.data){
-                this.UpdateForm7FormsJson(response.data)
-                
-            }
-
-            this.loadForm5Forms();       
-        },(err) => {
-            this.dataLoaded = true;   
-        });
-    }
-
-   
-    public loadForm5Forms () {
-   
-        this.$http.get('/form5/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm5FormsJson(forms)
-            }
-
-            this.dataLoaded = true;       
-        },(err) => {
             this.dataLoaded = true;
-             
-        });
+        })
     }
 
-    
-    public loadForm6Forms () {
-   
-        this.$http.get('/form6/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm6FormsJson(forms)
-            }
-
-            this.loadForm9Forms();       
-        },(err) => {
-            this.dataLoaded = true;
-             
-        });
-    }
-
-     //TODO: placeholder
-    public loadForm9Forms () {
-   
-        this.$http.get('/form9/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm9FormsJson(forms)
-            }
-            this.loadForm18Forms();
-  
-        },(err) => {
-            this.dataLoaded = true;
-             
-        });
-    }
-        
-    public loadForm18Forms () {
-   
-        this.$http.get('/form18/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm18FormsJson(forms)
-            }
-
-            this.loadForm19Forms();       
-        },(err) => {
-            this.dataLoaded = true;
-             
-        });
-    }
-
-    public loadForm19Forms () {
-   
-        this.$http.get('/form19/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm19FormsJson(forms)
-            }
-
-            this.loadForm20Forms();       
-        },(err) => {
-            this.dataLoaded = true;
-             
-        });
-    }
-
-    public loadForm20Forms () {
-   
-        this.$http.get('/form20/forms')
-        .then((response) => {
-
-            if(response?.data){
-                const forms = response.data;
-                this.UpdateForm20FormsJson(forms)
-            }
-
-            this.dataLoaded = true;       
-        },(err) => {
-            this.dataLoaded = true;
-             
-        });
-    }
 
     public getWindowHeight() {
         this.windowHeight = document.documentElement.clientHeight;

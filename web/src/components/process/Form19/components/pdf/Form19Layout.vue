@@ -78,7 +78,7 @@
 
 
 <!-- <lawyer-name> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+        <div class="row" style="font-size: 9pt; margin:1.5rem -1rem 1rem 0">
 
             <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
                 <div style="font-weight: 700;">
@@ -110,8 +110,8 @@
 <!-- <address> -->
         <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.75rem;">
-                <div style="font-weight: 700;">
+            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
+                <div style="font-weight: 600; line-height:1.1rem;">
                     Last known address(es) for the party(ies) the lawyer represents
                 </div>                
             </div>
@@ -122,11 +122,13 @@
 
         </div> 
 
+        
+
 <!-- <phone> -->
         <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.75rem;">
-                <div style="font-weight: 700;">
+            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
+                <div style="font-weight: 600; line-height:1.1rem;">
                     Last known phone number(s) of party(ies) the lawyer represents
                 </div>                
             </div>
@@ -137,11 +139,13 @@
 
         </div> 
 
+        <div class="new-page" />
+
 <!-- <email> -->
         <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.75rem;">
-                <div style="font-weight: 700;">
+            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
+                <div style="font-weight: 600; line-height:1.1rem;">
                     Last known email(s) for the party(ies) the lawyer represents
                 </div>                
             </div>
@@ -154,7 +158,7 @@
 
 
 <!-- <Sign-Date> -->
-        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+        <div class="row" style="font-size: 9pt; margin: 2rem -1rem 0rem 0;">
             
             <div class="coa-help-box pd-est-sm w-18-5" style="width:17.5%; margin:0.55rem 0 0rem -0.5rem; line-height:0.75rem;  height:2rem;">
                 Date form completed
@@ -164,12 +168,12 @@
             <div class="coa-text-box w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
 
             
-            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.1rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.85rem;  height:2.15rem;">
+            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
                 Name of lawyer or party authorizing filing of this form.
             </div>
             <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
 
-            <div class="coa-text-box" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;"> {{result.authorizedName}}</div>
                 
         </div>
 
@@ -182,7 +186,7 @@
             </div>
         </div>
 
-        <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0rem; text-align: left; padding: 0.5rem;">
+        <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem 0rem; text-align: left; padding: 0.5rem;">
             <div style="margin-bottom: 0.75rem;">
                 <b>To the party(ies) receiving this notice of withdrawal</b><br>
                 If you object to the lawyer withdrawing from this proceeding, you may file and serve an objection 

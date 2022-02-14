@@ -2,24 +2,31 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
-                </b-button>
-            </b-col>
-            <b-col cols="3">
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
-            </b-col>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
+            </b-col>           
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
@@ -59,15 +66,17 @@ export default class Form19 extends Vue {
     dataReady = false;
    
     mounted(){
-        this.dataReady = false;
-        this.result = this.form19Info;
-        //TODO: remove above line and uncomment getForm19Data
-        this.dataReady = true;
-        // this.getForm19Data(); 
-    }   
+        this.dataReady = false;        
+        this.getForm19Data(); 
+    }  
+    
+    
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
+    }
            
     public onPrint() { 
-        const pdf_type = "NHA"
+        const pdf_type = "FORM"
         const pdf_name = "form19-" + this.currentNoticeOfWithdrawalOfLawyerId;
         const el= document.getElementById("print");
 
@@ -98,7 +107,7 @@ export default class Form19 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "NHA"
+        const pdfType = "FORM"
         const pdfName ="FORM19"
         const url = '/form19/form-print/'+this.currentNoticeOfWithdrawalOfLawyerId+'/?pdf_type='+pdfType
         const options = {
@@ -128,7 +137,7 @@ export default class Form19 extends Vue {
  
     public getForm19Data() {        
        
-        this.$http.get('/form19/forms/'+this.currentNoticeOfWithdrawalOfLawyerId+'/')
+        this.$http.get('/form19/forms/'+this.currentNoticeOfWithdrawalOfLawyerId)
         .then((response) => {
             if(response?.data?.data){            
                             
