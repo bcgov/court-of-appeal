@@ -145,8 +145,9 @@
             <b-col cols="6" style="font-weight: 700;">
                 Are you self-represented?                                
             </b-col>
-            <b-col>
-                <b-form-radio-group                    
+            <b-col >
+                <b-form-radio-group 
+                    :class="this.state.selfRepresented==false?'border w-25 border-danger':'' "               
                     @change="toggleRepresentation" 
                     v-model="form18Info.selfRepresented"
                     :options="changeRepresentationOptions"                
@@ -501,7 +502,8 @@ export default class Form18StyleOfProceeding extends Vue {
         firmName:null,
         firmPhone:null,
                      
-        authorizedName:null
+        authorizedName:null,
+        selfRepresented:null
     }
 
     respondentName = ""; 
@@ -533,10 +535,8 @@ export default class Form18StyleOfProceeding extends Vue {
             form18Data.version = this.$store.state.Application.version; 
             form18Data.useServiceEmail = false
             form18Data.sendNotifications = false           
-            this.UpdateForm18Info(form18Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractPartiesData();  
-            // this.saveForm(true);                  
+            this.UpdateForm18Info(form18Data);            
+            this.saveForm(true);                  
             
         }       
 
@@ -562,9 +562,9 @@ export default class Form18StyleOfProceeding extends Vue {
        
         this.$http.get('/form18/forms/'+this.currentNoticeOfRepChangeAddressId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form18Data = response.data                
+                const form18Data = response.data.data                
                 this.UpdateForm18Info(form18Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -626,7 +626,8 @@ export default class Form18StyleOfProceeding extends Vue {
             firmName:null,
             firmPhone:null,
                         
-            authorizedName:null
+            authorizedName:null,
+            selfRepresented: null
         }
         this.dataReady = true; 
     }
@@ -673,7 +674,8 @@ export default class Form18StyleOfProceeding extends Vue {
         const postalCode = this.form18Info.serviceInformation.postalCode?.trim()
         this.state.postalCode = !postcodeFormat.test(postalCode)? false : null;        
            
-        this.state.authorizedName = !this.form18Info.authorizedName? false : null;       
+        this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
+        this.state.selfRepresented = selfRep==null && !changeRep? false :null
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -687,52 +689,58 @@ export default class Form18StyleOfProceeding extends Vue {
         let method = 'post';
         let url = '/form18/forms';
 
-        // if (this.currentNoticeOfRepChangeAddressId){
-        //     method = 'put';
-        //     url = '/form18/forms/'+this.currentNoticeOfRepChangeAddressId;               
+        if (this.currentNoticeOfRepChangeAddressId){
+            method = 'put';
+            url = '/form18/forms/'+this.currentNoticeOfRepChangeAddressId;               
 
-            if (!draft && !this.checkStates()){
-               
-                return
-                
+            if (!draft && !this.checkStates()){               
+                return                
             } 
             
             const options = {
                 method: method,
                 url: url,
-                data: this.form18Info
+                data: {
+                    data:this.form18Info,
+                    type:'Form18',
+                    description:'Notice of Change of Representation/Change of Address for Service'
+                }
             }
             this.saveInfo(options, draft);
 
-        // } else {           
+        } else {           
 
-        //     const options = {
-        //         method: method,
-        //         url: url,
-        //         data: this.form18Info
-        //     }
-        //     this.saveInfo(options, draft);
-        // }        
+            const options = {
+                method: method,
+                url: url,
+                data: {
+                    data:this.form18Info,
+                    type:'Form18',
+                    description:'Notice of Change of Representation/Change of Address for Service'
+                }
+            }
+            this.saveInfo(options, draft);
+        }        
        
     }
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfRepChangeAddressId(response.data.file_id);
-        //                 this.extractPartiesData();                        
-        //             }
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfRepChangeAddressId(response.data.file_id);
+                        this.extractPartiesData();                        
+                    }
 
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }   
 
     public navigateToPreviewPage() {        

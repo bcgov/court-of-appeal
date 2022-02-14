@@ -132,3 +132,26 @@ export interface supremeCourtPartiesJsonInfoType {
     legalReps?: representativeInfoType[];
 }
 
+export interface initiatingDocumentJsonInfoType {
+    DateFiled?: string;
+    Name?: string;
+}
+
+export interface previousCourtJsonInfoType {
+    AppealFrom?: string;
+    BoardTribunalName?: string;
+    Charge?: string;
+    ConvictionAcquittalDate?: string;
+    FileNumber?: string;
+    JudgeFirstName?: string;
+    JudgeLastName?: string;
+    JudgeSalutation?: string;
+    JudgmentDate?: string;
+    Jury?: boolean;
+    Level?: string;
+    Location?: string;
+    LocationID?: number;
+    Sentence?: string;
+    SentenceDate?: string;
+}
+

@@ -2,23 +2,30 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <b-col cols="8" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="navigateToEditPage()"
-                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
-                    Go Back and Edit
-                </b-button>
-            </b-col>
-            <b-col cols="3">
+            <b-col cols="10">
                 <b-button
-                    style="float: left;" 
+                    style="float: right;" 
+                    variant="success"
+                    @click="navigateToSubmitPage()"
+                    >Proceed
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                </b-button>
+
+                <b-button
+                    style="float: right; margin-right:1rem;" 
                     variant="success"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                 </b-button>
+
+                <b-button 
+                    style="float: right; margin-right:1rem;" 
+                    variant="primary"
+                    @click="navigateToEditPage()"
+                    ><b-icon-pencil-square class="mx-0" variant="white" scale="1" ></b-icon-pencil-square>
+                    Go Back and Edit
+                </b-button>                
             </b-col>
         </b-row>  
     
@@ -119,10 +126,14 @@ export default class Form6 extends Vue {
     public navigateToEditPage() {
         this.$router.push({name: "fill-form6" })
     }
+
+    public navigateToSubmitPage(){
+        this.$emit('navigateToSubmitPage')
+    }
  
     public getForm6Data() {        
        
-        this.$http.get('/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId+'/')
+        this.$http.get('/form6/forms/'+this.currentNoticeOfSettlementOrAbandonmentId)
         .then((response) => {
             if(response?.data?.data){            
                             

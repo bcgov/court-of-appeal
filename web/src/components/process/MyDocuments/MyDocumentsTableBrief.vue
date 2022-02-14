@@ -64,7 +64,7 @@
                 </template>                
 
                 <template v-slot:cell(formName)="row"> 
-                    <b-badge :class="'p-2 bg-'+row.item.form" style="fontSize:10pt">
+                    <b-badge :class="'p-2 bg-'+row.item.form" style="fontSize:10pt; width:5rem;">
                         {{row.value}}
                     </b-badge>                 
                     
@@ -233,7 +233,7 @@ export default class MyDocumentsTableBrief extends Vue {
                 pdfType:'ABA',
                 form:'form6',
                 formName:'Form 6',
-                description:'Notice Of Settlement Or Abandonment',
+                description:'Notice of Settlement or Abandonment',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 
@@ -278,7 +278,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form9FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form9',
                 formName:'Form 9',
                 description:'Requisition',
@@ -302,7 +302,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form18FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form18',
                 formName:'Form 18',
                 description:'Notice of Change of Representation/Change of Address for Service',
