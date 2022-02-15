@@ -360,7 +360,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form20FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form20',
                 formName:'Form 20',
                 description:'Notice of Objection to Withdrawal',

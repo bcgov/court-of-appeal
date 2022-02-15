@@ -28,7 +28,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box-center" style="width:40%;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -47,9 +47,9 @@
                     </div>
                    
                     <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div class="coa-text-box-center" style="width:40%;">{{result.firstAppellant}}</div> 
                         <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
+                        <div class="coa-text-box-center" style="width:40%;">{{result.firstRespondent}}</div>
                     </div>
 
                     
@@ -110,7 +110,7 @@
                     text="Lawyer"/>
             </div>   
             
-            <div class="coa-text-box text-box w-28-5" style="width:24.6%; display:inline;">{{result.currentLawyerName}}</div>            
+            <div class="coa-text-box-center w-28-5" style="width:24.6%; display:inline;">{{result.currentLawyerName}}</div>            
         </div>
         <div class="row" style="font-size: 9pt; margin-top:-0.5rem;"> 
             <div class="mg-lf-32" style="margin-left:31.5rem; padding:0rem 0rem; border: 0px solid white;">
@@ -146,7 +146,7 @@
                     text="Lawyer"/>
              </div> 
             
-            <div class="coa-text-box text-box w-28-5" style="width:24.5%; display:inline;">{{result.newLawyerName}}</div>
+            <div class="coa-text-box-center w-28-5" style="width:24.5%; display:inline;">{{result.newLawyerName}}</div>
         </div>
         <div class="row" style="font-size: 9pt; margin-top:-0.5rem;"> 
             <div class="mg-lf-32" style="margin-left:31.5rem; padding:0rem 0rem; border: 0px solid white;">
@@ -170,7 +170,7 @@
 
             <div class="arrow-right-flash-62" style="width:0.05%;"></div>
                     
-            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{address}}</div>                       
+            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{address}}</div>                       
 
         </div> 
 
@@ -185,7 +185,7 @@
 
             <div class="arrow-right-flash-36" style="width:0.05%;"></div>
                     
-            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{phone}}</div>                       
+            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{phone}}</div>                       
 
         </div> 
 
@@ -203,7 +203,7 @@
 
             <div class="arrow-right-flash-62" style="width:0.05%;"></div>
                     
-            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{result.serviceInformation.email}}</div>                       
+            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{result.serviceInformation.email}}</div>                       
 
         </div> 
 
@@ -216,7 +216,7 @@
             </div>
             <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
 
-            <div class="coa-text-box w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center w-18-5" style="width:15%; margin-left:-2.5rem;">{{result.completionDate}}</div> 
 
             
             <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
@@ -224,7 +224,7 @@
             </div>
             <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
 
-            <div class="coa-text-box" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:24%; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
                 
         </div>
 

@@ -91,7 +91,7 @@
 
             <div class="arrow-right-flash-36" style="width:0.05%;"></div>
                     
-            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{result.filingRequisitionParties.join(', ')}}</div>                       
+            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{result.filingRequisitionParties.join(', ')}}</div>                       
 
         </div>
 
@@ -109,7 +109,7 @@
 
             <div class="arrow-right-flash-36" style="width:0.05%;"></div>
                     
-            <div class="coa-text-box text-box-65-5" style="width:59.5%;">{{result.filingRequisitionParties.join(', ')}}</div>                       
+            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{result.filingRequisitionParties.join(', ')}}</div>                       
 
         </div> 
 
@@ -122,15 +122,15 @@
             </div>
             <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
 
-            <div class="coa-text-box w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
 
             
-            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.1rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
+            <div class="coa-help-box w-25-5" style="width:24.5%; padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
                 Name of lawyer or party authorizing filing of this form.
             </div>
             <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
 
-            <div class="coa-text-box" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
                 
         </div>
 
@@ -139,7 +139,7 @@
             <div class="mg-lf-9" style="margin-left:9.25rem; padding:0rem 0rem; border: 0px solid white;">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
         </div>
 

@@ -362,7 +362,7 @@ export default class Form19StyleOfProceeding extends Vue {
                 url: url,                
                 data: {
                     data:this.form19Info,
-                    type:'Form9',
+                    type:'Form19',
                     description:'Notice of Withdrawal of Lawyer'
                 }
             }
@@ -375,7 +375,7 @@ export default class Form19StyleOfProceeding extends Vue {
                 url: url,
                 data: {
                     data:this.form19Info,
-                    type:'Form9',
+                    type:'Form19',
                     description:'Notice of Withdrawal of Lawyer'
                 }
             }

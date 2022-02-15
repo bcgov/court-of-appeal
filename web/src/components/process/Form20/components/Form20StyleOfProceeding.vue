@@ -207,10 +207,8 @@ export default class Form20StyleOfProceeding extends Vue {
             form20Data.version = this.$store.state.Application.version; 
             form20Data.objectingParties = [];
                   
-            this.UpdateForm20Info(form20Data);
-            //TODO: remove extract and uncomment save after api is in place
-            this.extractPartiesData();  
-            // this.saveForm(true);                  
+            this.UpdateForm20Info(form20Data);            
+            this.saveForm(true);                  
             
         }       
 
@@ -227,7 +225,11 @@ export default class Form20StyleOfProceeding extends Vue {
             this.respondentNames.push(respondent.name);
             this.partyNames.push(respondent.name);
             if (respondent.solicitor){
-                const lawyerName = respondent.solicitor.counselFirstName + ' ' + respondent.solicitor.counselLastName;
+
+                const lawyerName = 
+                    Vue.filter('getFullName')(respondent.solicitor.counselFirstName, respondent.solicitor.counselLastName)+
+                    (respondent.solicitor.firmName? " ("+respondent.solicitor.firmName+")":"");
+
                 if (!this.lawyerNameOptions.includes(lawyerName)){
                     this.lawyerNameOptions.push(lawyerName);
                 }
@@ -239,7 +241,11 @@ export default class Form20StyleOfProceeding extends Vue {
             this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name)  
             if (applicant.solicitor){
-                const lawyerName = applicant.solicitor.counselFirstName + ' ' + applicant.solicitor.counselLastName;
+
+                const lawyerName = 
+                    Vue.filter('getFullName')(applicant.solicitor.counselFirstName, applicant.solicitor.counselLastName)+
+                    (applicant.solicitor.firmName? " ("+applicant.solicitor.firmName+")":"");
+                
                 if (!this.lawyerNameOptions.includes(lawyerName)){
                     this.lawyerNameOptions.push(lawyerName);
                 }
@@ -255,9 +261,9 @@ export default class Form20StyleOfProceeding extends Vue {
        
         this.$http.get('/form20/forms/'+this.currentNoticeOfObjectionToWithdrawalId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form20Data = response.data                
+                const form20Data = response.data.data                
                 this.UpdateForm20Info(form20Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -314,9 +320,9 @@ export default class Form20StyleOfProceeding extends Vue {
         let method = 'post';
         let url = '/form20/forms';
 
-        // if (this.currentNoticeOfObjectionToWithdrawalId){
-        //     method = 'put';
-        //     url = '/form20/forms/'+this.currentNoticeOfObjectionToWithdrawalId;               
+        if (this.currentNoticeOfObjectionToWithdrawalId){
+            method = 'put';
+            url = '/form20/forms/'+this.currentNoticeOfObjectionToWithdrawalId;               
 
             if (!draft && !this.checkStates()){
                
@@ -327,39 +333,47 @@ export default class Form20StyleOfProceeding extends Vue {
             const options = {
                 method: method,
                 url: url,
-                data: this.form20Info
+                data: {
+                    data:this.form20Info,
+                    type:'Form20',
+                    description:'Notice of Objection to Withdrawal'
+                }
             }
             this.saveInfo(options, draft);
 
-        // } else {           
+        } else {           
 
-        //     const options = {
-        //         method: method,
-        //         url: url,
-        //         data: this.form20Info
-        //     }
-        //     this.saveInfo(options, draft);
-        // }        
+            const options = {
+                method: method,
+                url: url,
+                data: {
+                    data:this.form20Info,
+                    type:'Form20',
+                    description:'Notice of Objection to Withdrawal'
+                }
+            }
+            this.saveInfo(options, draft);
+        }        
        
     }
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfObjectionToWithdrawalId(response.data.file_id);
-        //                 this.extractPartiesData();                        
-        //             }
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfObjectionToWithdrawalId(response.data.file_id);
+                        this.extractPartiesData();                        
+                    }
 
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }   
 
     public navigateToPreviewPage() {        

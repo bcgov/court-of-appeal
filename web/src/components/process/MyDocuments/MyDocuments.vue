@@ -116,7 +116,7 @@ export default class MyDocuments extends Vue {
             if(values[4]?.data) this.UpdateForm9FormsJson(values[4]?.data)
             if(values[5]?.data) this.UpdateForm18FormsJson(values[5]?.data)
             if(values[6]?.data) this.UpdateForm19FormsJson(values[6]?.data)
-            if(values[7]?.data) this.UpdateForm19FormsJson(values[7]?.data)
+            if(values[7]?.data) this.UpdateForm20FormsJson(values[7]?.data)
 
             this.dataLoaded = true;
         })
