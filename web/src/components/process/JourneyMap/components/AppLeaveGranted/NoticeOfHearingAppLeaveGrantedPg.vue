@@ -23,28 +23,18 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">
+                                <b-col cols="9">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"
                                         target="_blank">Notice of Hearing
                                     </a>
                                 </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
+                                <b-col cols="3" class="p-0" >
                                     <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2034.doc"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
+                                        @click="startNewForm5Document"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form34.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
@@ -68,6 +58,12 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {  
+
+    public startNewForm5Document(){
+        this.$router.push({name: "start-form5" })
+    }
+
+
     
 }
 </script>

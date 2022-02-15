@@ -149,7 +149,7 @@
         <div 
             class="row coa-help-box" 
             style="margin:0.5rem -9px 0 -9px; line-height:0.5rem; font-size: 10pt; text-align: left;">
-            I agree to pay all hearing fees payable under Item 4 of Division 1 of Schedule 2-Court Fees.
+            I agree to pay all hearing fees payable under Item 5 of Division 1 of Schedule 2-Court Fees.
         </div>
 
 
