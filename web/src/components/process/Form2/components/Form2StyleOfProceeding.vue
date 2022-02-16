@@ -3,17 +3,17 @@
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
             
-            <b-row class="ml-2" style="font-weight: 700;">
+            <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
-            <b-row class="mt-3 ml-2" style="font-weight: 700;">
+            <b-row class="mt-3" style="font-weight: 700;">
                 <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
 
             <p 
-                class="mt-3" 
+                class="mt-5" 
                 style="font-weight: 700;"
                 >Responding: 
                 <b-icon-question-circle-fill 
@@ -24,7 +24,7 @@
             </p>
             <p class="ml-5" style="font-weight: 200;">{{respondentNames.join(', ')}}</p>
 
-            <p class="ml-3 mb-0" style="font-weight: 700;">Representation</p>
+            <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
 
             <b-form-group
                 class="mx-3" 
@@ -43,7 +43,7 @@
             </b-form-group>
         </div>
 
-        <div :key="updated" v-if="form2Info.selfRepresented !=null">
+        <div class="mt-5" :key="updated" v-if="form2Info.selfRepresented !=null">
             <p  
                 style="font-weight: 700;"
                 >Mailing address for service: 
@@ -55,6 +55,7 @@
             </p>           
 
             <b-form-group 
+                v-if="form2Info.selfRepresented == false"
                 class="mx-3" 
                 label-cols-sm="3"
                 content-cols-sm="3"

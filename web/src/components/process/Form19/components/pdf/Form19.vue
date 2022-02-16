@@ -81,8 +81,8 @@ export default class Form19 extends Vue {
         const el= document.getElementById("print");
 
       
-        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA"`;
-        const bottomRightText = `"www.bccourts.ca/Court_of_Appeal/"`;        
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+        const bottomRightText = `" "`;        
         const url = '/form19/form-print/'+this.currentNoticeOfWithdrawalOfLawyerId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 

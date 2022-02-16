@@ -3,7 +3,7 @@
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
             
-            <b-row style="font-weight: 700;">
+            <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
@@ -12,7 +12,7 @@
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
 
-            <b-row class="mt-3">
+            <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
                    
                     <b-icon-question-circle-fill 
@@ -46,7 +46,7 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
+            <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Name of lawyer seeking to withdraw:                                
                 </b-col>
@@ -123,7 +123,7 @@
             </b-row>
         </div> 
 
-        <b-row class="my-3" style="padding: 0;">
+        <b-row class="my-5" style="padding: 0;">
             <b-col 
                 cols="3" 
                 style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
@@ -134,7 +134,7 @@
                     v-model="form19Info.authorizedName"                        
                     :state ="state.authorizedName">
                 </b-form-input>
-                <span class="ml-2" style="font-weight: 700;">Electronically filed</span>
+                <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
             </b-col>
         </b-row>    

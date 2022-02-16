@@ -86,59 +86,74 @@
         </div>        
 
 <!-- <address> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+        <div class="row mt-2" style="font-size: 9pt;">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <b>Address of the courthouse where the appeal will be heard</b>
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
+                <b class="ml-2">Address of the courthouse where the appeal will be heard</b>
             </div>
 
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
+            <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{result.courtHouse}}</div>                       
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2">{{result.courtHouse}}</div>                       
+            </div>
 
         </div>
 
 <!-- <date> -->
-        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+        <div class="row mt-2" style="font-size: 9pt;">
             
-            <div class="coa-help-box pd-est-sm" style="margin:0.45rem 0 0rem -0.5rem; line-height:0.25rem; width:27%; height:1.5rem;">
-                <b>Date the appeal will be heard</b>
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:0.25rem; height:1.5rem;">
+                <b class="ml-2">Date the appeal will be heard</b>
             </div>
-            <div class="arrow-right-flash-20 mg-rg-2-5" style="width:3.5%;"></div>       
 
-            <div class="coa-text-box" style="width:25%; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
-            <div style="width:5%; margin:0.5rem 1rem;"> at </div>
-            <div class="coa-text-box" style="width:25%; text-align:center; margin-left:-1.5rem;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
-                
+            <div class="arrow-right-flash-20"></div>
+
+            <div style="width:2.35%;"></div>
+
+            <div class="coa-text-box-center" style="width:20%; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
+            
+            <div style="width:10%;"> 
+                <div class="mt-2"  style="text-align:center" >at</div> 
+            </div>
+            
+            <div class="coa-text-box-center" style="width:20%; text-align:center;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
+            
+            <div style="width:14.25%;"></div>  
+
         </div>
 
 <!-- <date-help>-->
-        <div class="row" style="font-size: 9pt; margin: 0;"> 
-            <div class="mg-lf-17" style="margin-left:18rem; padding:0rem 0rem; border: 0px solid white;">
+        <div class="row" style="font-size: 9pt;">
+            <div style="width:36%;"></div>
+            <div style="width:20%">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
         </div>
                 
 
 <!-- <estimated-length> -->
-        <div class="row" style="font-size: 9pt; margin: .1rem -1rem 0rem 0;">
+        <div class="row" style="font-size: 9pt;">
             
-            <div class="coa-help-box pd-est" style="padding:0.1rem 0.5rem; margin:0.45rem 0 0rem -0.5rem; line-height:1.1rem; width:28%; height:3.5rem;">
-                <b style="font-size:8.15pt; margin:0; padding:0;">Estimated length of appeal in days</b> <br>
-                <i>The default length for an appeal is half a day.</i>
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.1rem; height:3.5rem;">
+                <div class="ml-2">
+                    <b style="font-size:8.15pt; margin:0; padding:0;">Estimated length of appeal in days</b> <br>
+                    <i>The default length for an appeal is half a day.</i>
+                </div>
             </div>
-            <div class="arrow-right-flash-36 " style="width:0.5%;"></div>       
 
-            <div style="width:27.5%; text-align:center; margin-top:1rem;">
+            <div class="arrow-right-flash-36 "></div> <!-- < width ~ 8% > -->
+
+            <div style="width:30%; text-align:center; margin-top:1rem;">
                 <div class="coa-text-box" >{{result.numberOfDaysApp}}</div> 
                 <div style="">Appellant’s estimate</div> 
             </div> 
 
-            <div style="width:1.5%; margin:0.5rem 1rem;"> </div>
+            <div style="width:4%;"> </div>
 
-            <div style="width:27.5%; text-align:center; margin-top:1rem;">
+            <div style="width:30%; text-align:center; margin-top:1rem;">
                 <div class="coa-text-box" >{{result.numberOfDaysResp}}</div>
                 <div>Respondent’s estimate</div>
             </div>
@@ -154,33 +169,36 @@
 
 
 <!-- <Sign-Date> -->
-        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+        <div class="row mt-4" style="font-size: 9pt;">
             
-            <div class="coa-help-box pd-est-sm w-18-5" style="width:17.5%; margin:0.55rem 0 0rem -0.5rem; line-height:0.75rem;  height:2rem;">
-                Date form completed
+            <div class="coa-arrow-box-left" style="width:19%; margin:0.5rem 0; line-height:0.75rem;  height:2rem;">
+                <div class="ml-2"> Date form completed</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box w-18-5" style="width:15%; margin-left:-2.5rem; padding:0rem 0.5rem; display:flex; align-items:center; justify-content:center; text-align:center;">{{result.completionDate}}</div> 
-
+            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
             
-            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
-                Name of lawyer or party authorizing filing of this form.
+            <div style="width:3.28%;"></div>
+            
+            <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:24%; text-align:center; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
                 
         </div>
 
 <!-- <date-help>-->
-        <div class="row" style="font-size: 9pt; margin:0rem 0 0 0;"> 
-            <div class="mg-lf-9" style="margin-left:9.25rem; padding:0rem 0rem; border: 0px solid white;">
+        <div class="row" style="font-size: 9pt;">
+            <div style="width:25.25%;"></div>
+            <div style="width:15%">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
         </div>
+
 
     </div>
 </template>

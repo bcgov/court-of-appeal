@@ -3,16 +3,16 @@
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
             
-            <b-row style="font-weight: 700;">
+            <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
+            <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
 
-            <b-row class="mt-3">
+            <b-row style="margin-top:4rem;">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
                    
                     <b-icon-question-circle-fill 
@@ -46,7 +46,7 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
+            <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Are you changing your representation?
                     <div class="text-info"
@@ -141,7 +141,7 @@
 
         </div> 
 
-        <b-row class="mt-4" v-if="form18Info.changeRepresentation != null && !form18Info.changeRepresentation">
+        <b-row class="mt-5" v-if="form18Info.changeRepresentation != null && !form18Info.changeRepresentation">
             <b-col cols="6" style="font-weight: 700;">
                 Are you self-represented?                                
             </b-col>
@@ -157,20 +157,22 @@
 
         <div :key="updated" v-if="form18Info.selfRepresented !=null || form18Info.changeRepresentation">
 
-            <b-row class="mt-4">
+            <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Mailing address for service:
                     <b-icon-question-circle-fill 
                         class="text-primary"
-                        v-b-tooltip.hover.noninteractive
+                        v-b-tooltip.hover
                         scale="1.1"
                         title="The address where you would like to receive documents."/>
-                    <span style="display: block; font-weight: 400;" >
+                    <div v-if="getServiceInfoAutoFillCondition" style="font-weight: 400;" >
                         Select a contact name to auto-fill the address.
-                    </span>            
+                    </div>            
                 </b-col>
                 <b-col>             
-                    <b-form-select                        
+                    <b-form-select 
+                        v-if="getServiceInfoAutoFillCondition" 
+                        class="mt-3"                     
                         @change="toggleRepresentation"
                         v-model="respondentName"                    
                         :options="respondentNames">
@@ -180,7 +182,7 @@
 
             <p class="mt-4" style="font-weight: 700;">Service Information</p>
 
-            <b-row  v-if="form18Info.selfRepresented">
+            <b-row  v-if="getServiceInfoCondition">
                 <b-col cols="3">
                     Phone <span class="text-danger">* </span>
                     <b-icon-question-circle-fill 
@@ -407,7 +409,7 @@
                         v-model="form18Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
-                    <span class="ml-2" style="font-weight: 700;">Electronically filed</span>
+                    <span class="ml-2" style="font-weight: 700; font-size:11pt">Electronically filed</span>
 
                 </b-col>
             </b-row>
@@ -747,6 +749,15 @@ export default class Form18StyleOfProceeding extends Vue {
         this.$router.push({name: "preview-form18"}) 
     }
 
+    get getServiceInfoCondition(){
+        return ((this.form18Info.selfRepresented && !this.form18Info.changeRepresentation) ||
+                (this.form18Info.newRepresentation == 'Self-represented' && this.form18Info.changeRepresentation))
+    }
+
+    get  getServiceInfoAutoFillCondition(){
+        return ((this.form18Info.selfRepresented==false && this.form18Info.changeRepresentation ==false) 
+                ||(this.form18Info.newRepresentation == 'Lawyer' && this.form18Info.changeRepresentation==true))
+    }
 }
 </script>
 

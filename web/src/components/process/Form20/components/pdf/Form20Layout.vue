@@ -28,7 +28,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box-center" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -77,64 +77,69 @@
         </div>     
 
 <!-- <parties> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+        <div class="row mt-5" style="font-size: 9pt;">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <div style="height:1rem; margin:0.5rem 0 0 0rem; font-weight: 600;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
+                <div class="ml-2" style="height:1rem; font-weight: 600;">
                     Name(s) of party(ies) objecting
                 </div>               
             </div>
 
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
+            <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{parties}}</div>                       
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2">{{parties}}</div>                       
+            </div>
 
         </div> 
 
 
 <!-- <lawyer-name> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+        <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <div style="font-weight: 700;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
+                <div class="ml-2" style="font-weight: 600;">
                     Name of lawyer attempting to withdraw as lawyer of record                    
                 </div>                
             </div>
 
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
+            <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{lawyerName}}</div>                       
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2">{{lawyerName}}</div>
+            </div>                       
 
         </div> 
 
 
-
 <!-- <Sign-Date> -->
-        <div class="row" style="font-size: 9pt; margin: 2rem -1rem 0rem 0;">
+        <div class="row mt-5" style="font-size: 9pt;">
             
-            <div class="coa-help-box pd-est-sm w-18-5" style="width:17.5%; margin:0.55rem 0 0rem -0.5rem; line-height:0.75rem;  height:2rem;">
-                Date form completed
+            <div class="coa-arrow-box-left" style="width:19%; margin:0.5rem 0; line-height:0.75rem;  height:2rem;">
+                <div class="ml-2"> Date form completed</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box-center w-18-5" style="width:15%; margin-left:-2.5rem;">{{result.completionDate}}</div> 
-
+            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
             
-            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
-                Name of lawyer or party authorizing filing of this form.
+            <div style="width:3.28%;"></div>
+            
+            <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:24%; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
                 
         </div>
 
 <!-- <date-help>-->
-        <div class="row" style="font-size: 9pt; margin:0rem 0 0 0;"> 
-            <div class="mg-lf-9" style="margin-left:9.25rem; padding:0rem 0rem; border: 0px solid white;">
+        <div class="row" style="font-size: 9pt;">
+            <div style="width:25.25%;"></div>
+            <div style="width:15%">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
         </div>
 

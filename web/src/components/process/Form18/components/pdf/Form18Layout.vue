@@ -28,7 +28,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box-center" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -47,9 +47,9 @@
                     </div>
                    
                     <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box-center" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
                         <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box-center" style="width:40%;">{{result.firstRespondent}}</div>
+                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
                     </div>
 
                     
@@ -76,164 +76,206 @@
 
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.75rem 0.5rem 0rem 0.5rem;">
                 <div style="margin-bottom: 0.75rem;">
-                    If you are changing representation, complete Part A and Part B. If you are only changing 
-                    your address for service, complete Part B only. If you are a lawyer seeking to withdraw 
+                    If you are changing representation, complete <b>Part A</b> and <b>Part B</b>. If you are only changing 
+                    your address for service, complete <b>Part B</b> only. If you are a lawyer seeking to withdraw 
                     from the record without your client's permission, use Form 19.
                 </div>                
             </div>
 
-        </div>        
+        </div>
 
-<!-- <current-status> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 0.5rem 0">
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <div style="height:1rem; margin:0.5rem 0 0 6rem;"><b>Current status:</b></div>
+<!--  < Part A >   ____________________________________________________________         -->           
+
+        <div class="row mt-4">
+            <div style="width:6%; background:#CCC;"> <!-- <col 6%> -->
+                <div style="transform: rotate(-90deg); font-weight:600; font-size:14pt; margin:0 -8.5rem;"> PART A </div>
             </div>
-
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
-
-            <div style="margin-top: 1rem; width:17%;">              
-                <check-box 
-                    style="margin: .5rem 0 0 1rem;" 
-                    :check="(result.currentRepresentation == 'Self-represented')?'yes':''" 
-                    shiftmark="1" 
-                    marginLeft="0.5rem"
-                    text="Self-represented"/>  
-            </div>
-            <div style="margin-top: 1rem; width:18%;">              
-                <check-box                    
-                    style="padding: 0; margin: .5rem .5rem 0 4rem;" 
-                    :check="(result.currentRepresentation == 'Lawyer')?'yes':''"
-                    shiftmark="1" 
-                    marginLeft="0.5rem"
-                    text="Lawyer"/>
-            </div>   
             
-            <div class="coa-text-box-center w-28-5" style="width:24.6%; display:inline;">{{result.currentLawyerName}}</div>            
-        </div>
-        <div class="row" style="font-size: 9pt; margin-top:-0.5rem;"> 
-            <div class="mg-lf-32" style="margin-left:31.5rem; padding:0rem 0rem; border: 0px solid white;">
-                <div class="arrow-up-flash"></div>
-                <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="padding-top:0.3rem; margin-left:1rem; width:11.75rem;height:1.75rem;text-align:center; line-height:1rem"><i>Name of lawyer and firm name</i></div>                 
+            <div style="width:1%;"><!-- <col 1%> -->
             </div>
-        </div>
+            <div style="width:93%;" >  <!-- <col 93%> -->
+    <!-- ROW <current-status> -->                
+                <div style="display:flex; font-size: 9pt;">                      
+                    <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">
+                        <div style="margin-left:4.5rem" ><b>Current status:</b></div>
+                    </div>       
 
-<!-- <new-status> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 0.5rem 0">
+                    <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <div style="height:1rem; margin:0.5rem 0 0 9.5rem;"><b>New:</b></div>
-            </div>
+                    <div style="margin-top: 1rem; width:24%;">              
+                        <check-box 
+                            style="margin: .5rem 0 0 1rem;" 
+                            :check="currentSelfRepresented?'yes':''" 
+                            shiftmark="1" 
+                            marginLeft="0.5rem"
+                            text="Self-represented"/>  
+                    </div>
+                    <div style="margin-top: 1rem; width:12%;">              
+                        <check-box                    
+                            style="padding: 0; margin: .5rem .5rem 0 1rem;" 
+                            :check="currentLawyer?'yes':''"
+                            shiftmark="1" 
+                            marginLeft="0.5rem"
+                            text="Lawyer"/>
+                    </div>   
 
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
+                    <div class="coa-text-box-center" style="width:31%;">{{currentLawyerName}}</div>                               
+                </div>
 
-           <div style="margin-top: 1rem; width:17%;">              
-                <check-box 
-                    style="margin: .5rem 0 0 1rem;" 
-                    :check="(result.newRepresentation == 'Self-represented')?'yes':''" 
-                    shiftmark="1" 
-                    marginLeft="0.5rem"
-                    text="Self-represented"/>
-           </div>                
-            <div style="margin-top: 1rem; width:18%;">              
-                <check-box                    
-                    style="padding: 0; margin: .5rem .5rem 0 4rem;"
-                    :check="(result.newRepresentation == 'Lawyer')?'yes':''"
-                    shiftmark="1" 
-                    marginLeft="0.5rem"
-                    text="Lawyer"/>
-             </div> 
+     <!-- ROW <current-status-help-text> -->    
+                <div style="display:flex; font-size: 9pt;">
+                    <div style="width:69%;">
+                    </div>    
+                    <div style="width:31%;">
+                        <div class="arrow-up-flash"></div>
+                        <div class="arrow-up-box"></div>               
+                        <div class="coa-help-box" style="text-align:center; line-height:1rem"><i>Name of lawyer and firm name</i></div>                 
+                    </div>
+                </div>
+
+    <!-- ROW <new-status> -->        
+                <div class="mt-3" style="display:flex; font-size: 9pt;">                      
+                    <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">            
+                        <div style="margin-left:8.35rem;"><b>New:</b></div>
+                    </div>
+
+                    <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
+
+                    <div style="margin-top: 1rem; width:24%;">              
+                            <check-box 
+                                style="margin: .5rem 0 0 1rem;" 
+                                :check="newSelfRepresented?'yes':''" 
+                                shiftmark="1" 
+                                marginLeft="0.5rem"
+                                text="Self-represented"/>
+                    </div>                
+                    <div style="margin-top: 1rem; width:12%;">              
+                        <check-box                    
+                            style="padding: 0; margin: .5rem .5rem 0 1rem;"
+                            :check="newLawyer?'yes':''"
+                            shiftmark="1" 
+                            marginLeft="0.5rem"
+                            text="Lawyer"/>
+                    </div> 
             
-            <div class="coa-text-box-center w-28-5" style="width:24.5%; display:inline;">{{result.newLawyerName}}</div>
-        </div>
-        <div class="row" style="font-size: 9pt; margin-top:-0.5rem;"> 
-            <div class="mg-lf-32" style="margin-left:31.5rem; padding:0rem 0rem; border: 0px solid white;">
-                <div class="arrow-up-flash"></div>
-                <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="padding-top:0.3rem; margin-left:1rem; width:11.75rem;height:1.75rem;text-align:center; line-height:1rem"><i>Name of lawyer and firm name</i></div>                 
-            </div>
-        </div>
-
-<!-- <service-address> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
-
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:6.5rem;">
-                <div style="font-weight: 600;">
-                    Name(s) and residential or business address(es) within B.C. for service of party(ies) completing this form
+                    <div class="coa-text-box-center" style="width:31%;">{{newLawyerName}}</div>
                 </div>
-                <div style="font-style: italic;">
-                    Include law firm if represented.
+
+    <!-- ROW <current-status-help-text> -->    
+                <div style="display:flex; font-size: 9pt;">
+                    <div style="width:69%;">
+                    </div>                         
+                    <div style="width:31%;">
+                        <div class="arrow-up-flash"></div>
+                        <div class="arrow-up-box"></div>               
+                        <div class="coa-help-box" style="text-align:center; line-height:1rem"><i>Name of lawyer and firm name</i></div>                 
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="arrow-right-flash-62" style="width:0.05%;"></div>
-                    
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{address}}</div>                       
 
-        </div> 
 
-<!-- <phone-number> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+<!--  < Part B >   ____________________________________________________________         -->
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:3.5rem;">
-                <div style="font-weight: 700;">
-                    Phone number(s) of the party(ies) completing this form
-                </div>               
+        <div class="row mt-4">
+            <div style="width:6%; background:#CCC;"> <!-- <col 6%> -->
+                <div style="transform: rotate(-90deg); font-weight:600; font-size:14pt; margin:0 -11.2rem;"> PART B </div>
             </div>
+            
+            <div style="width:1%;"><!-- <col 1%> -->
+            </div>
+            <div style="width:93%;" >  <!-- <col 93%> -->
+<!-- ROW <service-address> -->            
+                <div style="display:flex; font-size: 9pt;">
 
-            <div class="arrow-right-flash-36" style="width:0.05%;"></div>
+                    <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:6.5rem;">
+                        <div class="ml-2">
+                            <b>
+                                Name(s) and residential or business address(es) within B.C. for service of party(ies) completing this form
+                            </b>    
+                            <i><br>Include law firm if represented.</i> 
+                        </div>                       
+                    </div>
+
+                    <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{phone}}</div>                       
+                    <div class="coa-text-box-left" style="width:60%;">
+                        <div class="mx-2">{{address}}</div> 
+                    </div>                      
 
-        </div> 
+                </div> 
+           
+
+<!-- ROW <phone-number> -->
+                <div class="mt-4" style="display:flex; font-size: 9pt;">
+
+                    <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0; height:3.5rem;">
+                        <div class="ml-2" style="font-weight: 700;">
+                            Phone number(s) of the party(ies) completing this form
+                        </div>               
+                    </div>
+
+                    <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
+                    
+                    <div class="coa-text-box-left" style="width:60%;">
+                        <div class="mx-2">{{phone}}</div>
+                    </div>                       
+
+                </div> 
+
 
 <!-- <email> -->
-        <div class="row" style="font-size: 9pt; margin:0.5rem -1rem 1rem 0">
+                <div class="mt-4" style="display:flex; font-size: 9pt;">       
 
-            <div class="coa-help-box pd-est" style="margin:.5rem 0 0.5rem -0.5rem; width:28%; height:6.5rem;">
-                <div style="font-weight: 600; font-size:8pt;">
-                    <b style="font-weight: 600; font-size:9pt;">Email address(es)</b> for service of the party(ies) completing this form
-                </div>
-                <div style="font-style: italic;">
-                    If you provide an email address you consent to have documents served on you by email.      
-                </div>
+                    <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0;  height:6.5rem;">
+                        <div class="ml-2">
+                            <b>Email address(es)</b><b style="font-size:8pt;"> for service of the party(ies) completing this form</b>
+                            <i><br>If you provide an email address you consent to have documents served on you by email.</i>      
+                        </div>
+                    </div>
+
+                    <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+                            
+                    <div class="coa-text-box-left" style="width:60%;">
+                        <div class="mx-2">{{result.serviceInformation.email}}</div> 
+                    </div>                      
+
+                </div> 
+
             </div>
-
-            <div class="arrow-right-flash-62" style="width:0.05%;"></div>
-                    
-            <div class="coa-text-box-left text-box-65-5" style="width:59.5%;">{{result.serviceInformation.email}}</div>                       
-
-        </div> 
-
+        </div>
+<!-- <____________________________________________________________________________________> -->
 
 <!-- <Sign-Date> -->
-        <div class="row" style="font-size: 9pt; margin: 1rem -1rem 0rem 0;">
+        <div class="row mt-5" style="font-size: 9pt;">
             
-            <div class="coa-help-box pd-est-sm w-18-5" style="width:17.5%; margin:0.55rem 0 0rem -0.5rem; line-height:0.75rem;  height:2rem;">
-                Date form completed
+            <div class="coa-arrow-box-left" style="width:19%; margin:0.5rem 0; line-height:0.75rem;  height:2rem;">
+                <div class="ml-2"> Date form completed</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div>       
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box-center w-18-5" style="width:15%; margin-left:-2.5rem;">{{result.completionDate}}</div> 
-
+            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
             
-            <div class="coa-help-box w-25-5" style="width:24.5%;padding:0.01rem 0.2rem; margin:0.42rem 0 0rem 0.5rem; line-height:0.95rem;  height:2.15rem;">
-                Name of lawyer or party authorizing filing of this form.
+            <div style="width:3.28%;"></div>
+            
+            <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
             </div>
-            <div class="arrow-right-flash-25 mg-rg-3" style="width:3.5%;"></div> 
+            <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:24%; margin:0 -1.1rem 0 -2.5rem;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
                 
         </div>
 
 <!-- <date-help>-->
-        <div class="row" style="font-size: 9pt; margin:0rem 0 0 0;"> 
-            <div class="mg-lf-9" style="margin-left:9.25rem; padding:0rem 0rem; border: 0px solid white;">
+        <div class="row" style="font-size: 9pt;">
+            <div style="width:25.25%;"></div>
+            <div style="width:15%">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
-                <div class="coa-help-box mg-lf-0" style="margin-left:1rem; width:7rem;height:1.25rem;text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
         </div>
 
@@ -261,6 +303,14 @@ export default class Form18Layout extends Vue {
     phone = '';
     address = '';
 
+    currentSelfRepresented = false
+    currentLawyer = false
+    currentLawyerName = ''
+
+    newSelfRepresented = false
+    newLawyer = false
+    newLawyerName = ''
+
     mounted(){
         this.dataReady = false;
         this.extractInfo();
@@ -270,20 +320,32 @@ export default class Form18Layout extends Vue {
     public extractInfo(){
 
         const serviceInfo = this.result.serviceInformation;
-        const address = serviceInfo.addressLine1 + ', ' 
+        const address =   (serviceInfo.addressLine1? (serviceInfo.addressLine1 + ', '):'')
                         + (serviceInfo.addressLine2? (serviceInfo.addressLine2 + ', '):'') 
-                        + serviceInfo.city + ', '
-                        + serviceInfo.province + ', '
-                        + serviceInfo.country + ', '
-                        + serviceInfo.postalCode;
+                        + (serviceInfo.city? (serviceInfo.city + ', '):'')
+                        + (serviceInfo.province? (serviceInfo.province + ', '):'') 
+                        + (serviceInfo.country? ( serviceInfo.country + ', '):'')
+                        + (serviceInfo.postalCode? serviceInfo.postalCode:'');
+
 
         if (!this.result.selfRepresented){
-            this.address = serviceInfo.firmName + ', ' + address;
+            const counselName = Vue.filter('getFullName')(serviceInfo.counselFirstName, serviceInfo.counselLastName)
+            this.address =    (counselName? (counselName + ', '):'')  
+                            + (serviceInfo.firmName? (serviceInfo.firmName+ ', '):'') 
+                            + address;
             this.phone = serviceInfo.firmPhone;
         } else {
             this.address = address;
             this.phone = serviceInfo.phone;
         }
+
+        this.currentSelfRepresented = (this.result.currentRepresentation == 'Self-represented') && this.result.changeRepresentation
+        this.currentLawyer = (this.result.currentRepresentation == 'Lawyer') && this.result.changeRepresentation
+        this.currentLawyerName = this.result.changeRepresentation? this.result.currentLawyerName :''
+
+        this.newSelfRepresented = (this.result.newRepresentation == 'Self-represented') && this.result.changeRepresentation
+        this.newLawyer = (this.result.newRepresentation == 'Lawyer') && this.result.changeRepresentation
+        this.newLawyerName = this.result.changeRepresentation? this.result.newLawyerName :''
            
     }
 
