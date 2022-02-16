@@ -1,6 +1,6 @@
 import { locationsInfoType } from '@/types/Common';
 import { pathwayTypeInfoType } from '@/types/Information';
-import { journeyJsonDataType, partiesDataJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { initiatingDocumentJsonInfoType, journeyJsonDataType, partiesDataJsonDataType, previousCourtJsonInfoType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -10,7 +10,11 @@ class Information extends VuexModule {
   
     public journeyJson = {} as journeyJsonDataType;
     public pathType = {} as pathwayTypeInfoType;
-    public partiesJson = {} as partiesDataJsonDataType;     
+    public partiesJson = {} as partiesDataJsonDataType;
+    
+    public previousCourts: previousCourtJsonInfoType[] = []
+    public initiatingDocuments: initiatingDocumentJsonInfoType[] = []
+
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
     
@@ -79,6 +83,25 @@ class Information extends VuexModule {
     public UpdateCaseLocation(newCaseLocation: locationsInfoType): void {
         this.context.commit('setCaseLocation', newCaseLocation);
     }
+
+    @Mutation
+    public setPreviousCourts(previousCourts: previousCourtJsonInfoType[]): void {   
+        this.previousCourts = previousCourts;
+    }    
+    @Action
+    public UpdatePreviousCourts(newPreviousCourts: previousCourtJsonInfoType[]): void {
+        this.context.commit('setPreviousCourts', newPreviousCourts);
+    }
+
+    @Mutation
+    public setInitiatingDocuments(initiatingDocuments: initiatingDocumentJsonInfoType[]): void {   
+        this.initiatingDocuments = initiatingDocuments;
+    }    
+    @Action
+    public UpdateInitiatingDocuments(newInitiatingDocuments: initiatingDocumentJsonInfoType[]): void {
+        this.context.commit('setInitiatingDocuments', newInitiatingDocuments);
+    }
+
 }
 
 export default Information

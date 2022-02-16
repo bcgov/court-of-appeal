@@ -4,7 +4,7 @@
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
 
             
-            <b-row style="font-weight: 700;">
+            <b-row  class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
@@ -13,7 +13,7 @@
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
 
-            <b-row class="mt-3">
+            <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
                    
                     <b-icon-question-circle-fill 
@@ -47,7 +47,7 @@
                 </b-col>
             </b-row>
 
-            <p class="mt-3 mb-0" style="font-weight: 700;">Representation</p>
+            <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
 
             <b-form-group
                 class="mx-3" 
@@ -67,6 +67,7 @@
 
         <div v-if="form5Info.selfRepresented !=null">
             <p  
+                class="mt-5"
                 style="font-weight: 700;"
                 >Court House Location: 
                 <b-icon-question-circle-fill 
@@ -91,7 +92,7 @@
                 </b-form-select>
             </b-form-group>
 
-            <b-row>
+            <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">Time of Hearing: 
                     <b-icon-question-circle-fill 
                         class="text-primary"
@@ -121,7 +122,7 @@
                 </b-col>
             </b-row>
 
-            <b-row class="my-3" style="padding: 0;">
+            <b-row class="my-4" style="padding: 0;">
                 <b-col cols="3" style="font-weight: 700;">Date the Appeal will be Heard: 
                                 
                 </b-col>
@@ -141,6 +142,7 @@
 
             <p  
                 style="font-weight: 700;"
+                class="mt-5"
                 >Estimated length of appeal in days
                 <b-icon-question-circle-fill 
                     class="text-primary"
@@ -148,7 +150,7 @@
                     scale="1.1"
                     title="If days are unknown to enter 0, however both estimates cannot be 0 one of them must have a 'real' number."/> 
                     <br>
-                    <span style="font-size: 8pt; padding: 0; font-weight: 400;">
+                    <span style="font-size: 9pt; padding: 0; font-weight: 400;">
                         Can enter intergers of half or full days (ie: 1.5 days, 2 days, 2.5 days BUT NOT 2.75 days, etc)
                     </span> 
             </p>
@@ -193,17 +195,18 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-3">
+            <b-row class="mt-5">
                 <b-form-group>
                     <span class="ml-3">I agree to pay all hearing fees payable under Item 4 of Division 1 of Schedule 2-Court Fees.</span>	
                     <b-form-checkbox
-                        class="ml-5"
+                        class="ml-4"
                         style="display: inline;"
-                        size="sm"									
+                        size="lg"									
                         v-model="form5Info.acknowledge"
                         :state="state.acknowledge"
                         >  
-                    </b-form-checkbox>						
+                    </b-form-checkbox>
+                    <span v-if="state.acknowledge==false" class="text-danger"> acknowledgment required !</span>						
                 </b-form-group>
             </b-row>
 
@@ -218,7 +221,7 @@
                         v-model="form5Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
-                    <span class="ml-2" style="font-weight: 700;">Electronically filed</span>
+                    <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
                 </b-col>
             </b-row>

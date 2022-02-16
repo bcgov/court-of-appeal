@@ -64,7 +64,7 @@
                 </template>                
 
                 <template v-slot:cell(formName)="row"> 
-                    <b-badge :class="'p-2 bg-'+row.item.form" style="fontSize:10pt">
+                    <b-badge :class="'p-2 bg-'+row.item.form" style="fontSize:10pt; width:5rem;">
                         {{row.value}}
                     </b-badge>                 
                     
@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
@@ -92,34 +92,83 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
+
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
+
+import "@/store/modules/forms/form19";
+const form19State = namespace("Form19");
+
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
 
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
+import { form6FormsJsonDataType } from "@/types/Information/Form6";
+import { form9FormsJsonDataType } from "@/types/Information/Form9";
+import { form18FormsJsonDataType } from "@/types/Information/Form18";
+import { form19FormsJsonDataType } from "@/types/Information/Form19";
+import { form20FormsJsonDataType } from "@/types/Information/Form20";
 
-@Component({
-    components:{
-       
-    }
-})
-export default class MyDocumentsTable extends Vue {
+@Component
+export default class MyDocumentsTableBrief extends Vue {
 
     @form2State.State
     public casesJson!: caseJsonDataType[];
+
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
     
     @form5State.State
     public form5FormsJson!: form5FormsJsonDataType[];
+
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
+    @form6State.State
+    public form6FormsJson!: form6FormsJsonDataType[];
+
+    @form6State.Action
+	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+
     @form7State.State
     public form7FormsJson!: form7SubmissionDataInfoType[];
+
     @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+    @form9State.State
+    public form9FormsJson!: form9FormsJsonDataType[];
+
+    @form9State.Action
+    public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
+
+    @form18State.State
+    public form18FormsJson!: form18FormsJsonDataType[];
+
+    @form18State.Action
+    public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
+
+    @form19State.State
+    public form19FormsJson!: form19FormsJsonDataType[];
+
+    @form19State.Action
+    public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
+
+    @form20State.State
+    public form20FormsJson!: form20FormsJsonDataType[];
+
+    @form20State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
 
     documentsList = []
@@ -187,6 +236,30 @@ export default class MyDocumentsTable extends Vue {
             this.documentsList.push(doc);
         }
 
+        //___Form 6___
+        for (const docJson of this.form6FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'ABA',
+                form:'form6',
+                formName:'Form 6',
+                description:'Notice of Settlement or Abandonment',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
         //___Form 7___
         for (const docJson of this.form7FormsJson) {                
             const doc = { 
@@ -208,6 +281,102 @@ export default class MyDocumentsTable extends Vue {
             doc.packageUrl = docJson['package_url'];
             doc.packageNum = docJson['package_number'];
             doc.pdfType = docJson['pdf_types'];
+            this.documentsList.push(doc);
+        }
+
+        //___Form 9___
+        for (const docJson of this.form9FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form9',
+                formName:'Form 9',
+                description:'Requisition',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 18___
+        for (const docJson of this.form18FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form18',
+                formName:'Form 18',
+                description:'Notice of Change of Representation/Change of Address for Service',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 19___
+        for (const docJson of this.form19FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form19',
+                formName:'Form 19',
+                description:'Notice of Withdrawal of Lawyer',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 20___
+        for (const docJson of this.form20FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form20',
+                formName:'Form 20',
+                description:'Notice of Objection to Withdrawal',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
             this.documentsList.push(doc);
         }
     }
@@ -243,7 +412,6 @@ export default class MyDocumentsTable extends Vue {
         });
         
     }
-
    
     public resumeApplication(item){
 
@@ -255,9 +423,30 @@ export default class MyDocumentsTable extends Vue {
             this.UpdateCurrentNoticeOfHearingOfAppealId(item.id);
             this.$router.push({name: "fill-form5" });
         
+        }else if(item.formName=='Form 6'){
+            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(item.id);
+            this.$router.push({name: "fill-form6" });
+        
         }else if(item.formName=='Form 7'){
             this.UpdateCurrentNoticeOfAppealId(item.id)
             this.$router.push({name: "start-form7" });
+
+        }else if(item.formName=='Form 9'){
+            this.UpdateCurrentRequisitionId(item.id);
+            this.$router.push({name: "fill-form9" });
+
+        }else if(item.formName=='Form 18'){
+            this.UpdateCurrentNoticeOfRepChangeAddressId(item.id);
+            this.$router.push({name: "fill-form18" });
+
+        }else if(item.formName=='Form 19'){
+            this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(item.id);
+            this.$router.push({name: "fill-form19" });
+
+        }else if(item.formName=='Form 20'){
+            this.UpdateCurrentNoticeOfObjectionToWithdrawalId(item.id);
+            this.$router.push({name: "fill-form20" });
+
         }
     }
 

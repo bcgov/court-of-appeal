@@ -18,7 +18,7 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-2 v-bind:caseId="caseId" @navigateToSubmitPage="navigateToSubmitPage()" />            
+            <form-2 v-bind:caseId="currentCaseId" @navigateToSubmitPage="navigateToSubmitPage()" />            
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
@@ -36,6 +36,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import Form2 from "@/components/process/Form2/components/pdf/Form2.vue"
@@ -50,13 +53,15 @@ import { form2StatusInfoType } from '@/types/Information/Form2';
 })
 export default class PreviewForm2 extends Vue {
 
-    stepsCompleted = {} as form2StatusInfoType; 
-    caseId = '';  
+    @form2State.State
+    public currentCaseId: string;
+
+    stepsCompleted = {} as form2StatusInfoType;
+    
     dataReady = false;
 
     mounted() {
-        this.dataReady = false;  
-        this.caseId = this.$route.params.caseId;
+        this.dataReady = false;
         this.stepsCompleted = {
             first: true,
             second: false,
@@ -66,7 +71,7 @@ export default class PreviewForm2 extends Vue {
     }
 
     public navigateToSubmitPage() {
-        this.$router.push({name: "proceed-form2", params: {applicationId: this.caseId} }); 
+        this.$router.push({name: "proceed-form2" }); 
     }
 }
 </script>

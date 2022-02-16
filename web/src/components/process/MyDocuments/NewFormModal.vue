@@ -10,15 +10,10 @@
                     size="sm" 
                     variant="transparent" 
                     class="py-1 my-1 ml-3 border-0" 
-                    style="font-size:24px;"
+                    style="font-size:14px;"
                     @click="createDocument(form.name);">
-                    <div style="font-size:28px;" class="fa-stack fa-2x" >
-                        <i class="fa fa-circle-thin text-warning fa-stack-2x" ></i>
-                        <span 
-                            style="font-size:30px; padding:0; transform:translate(5px,-1px);" 
-                            class="far fa-file-pdf btn-icon-left text-warning"/>
-                    </div>                    
-                    {{form.title}}
+                    <b-icon-file-text class="text-primary mr-1"/>                   
+                    <b>{{form.title}}</b>
                 </b-button>                
             </b-row>            
             
@@ -47,8 +42,23 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
+
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
+
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
+
+import "@/store/modules/forms/form19";
+const form19State = namespace("Form19");
+
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
 
 @Component
 export default class NewFormModal extends Vue {
@@ -62,14 +72,33 @@ export default class NewFormModal extends Vue {
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
+    @form6State.Action
+    public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+
     @form7State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
+    @form9State.Action
+    public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
+
+    @form18State.Action
+    public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
+
+    @form19State.Action
+    public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
+
+    @form20State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
     forms = [
         {name:'form2', title:'Notice of Appearance (Form 2)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
+        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},
         {name:'form7', title:'Notice of Appeal (Form 7)'},
+        {name:'form9', title:'Requisition (Form 9)'},
+        {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
+        {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
+        {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'}
         // {name:'form7', title:''},
     ]
 
@@ -91,9 +120,26 @@ export default class NewFormModal extends Vue {
             this.UpdateCurrentNoticeOfHearingOfAppealId(null);
             this.$router.push({name: "start-form5" });
         
+        }else if(form=='form6'){
+            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+            this.$router.push({name: "start-form6" });
+
         }else if(form=='form7'){
             this.UpdateCurrentNoticeOfAppealId(null)
             this.$router.push({name: "checklist-form7" });
+            
+        }else if(form=='form9'){
+            this.UpdateCurrentRequisitionId(null)
+            this.$router.push({name: "start-form9" });
+        }else if(form=='form18'){
+            this.UpdateCurrentNoticeOfRepChangeAddressId(null)
+            this.$router.push({name: "start-form18" });
+        }else if(form=='form19'){
+            this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null)
+            this.$router.push({name: "start-form19" });
+        }else if(form=='form20'){
+            this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null)
+            this.$router.push({name: "start-form20" });
         }
         
     }

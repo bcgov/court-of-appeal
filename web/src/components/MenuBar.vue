@@ -22,31 +22,66 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/forms/form6";
+const form6State = namespace("Form6");
+
 import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
-	@Component
-	export default class MenuBar extends Vue {
-		
-        @form2State.Action
-    	public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+import "@/store/modules/forms/form9";
+const form9State = namespace("Form9");
 
-		@form5State.Action
-    	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
+import "@/store/modules/forms/form18";
+const form18State = namespace("Form18");
 
-		@form7State.Action
-    	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+import "@/store/modules/forms/form19";
+const form19State = namespace("Form19");
 
-        mounted() {
-        
-        }
-		
-		public resetCaseId(){
-			this.UpdateCurrentCaseId(null);
-			this.UpdateCurrentNoticeOfHearingOfAppealId(null);
-			this.UpdateCurrentNoticeOfAppealId(null);
-		}
+import "@/store/modules/forms/form20";
+const form20State = namespace("Form20");
+
+@Component
+export default class MenuBar extends Vue {
+	
+	@form2State.Action
+	public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+
+	@form5State.Action
+	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
+
+	@form6State.Action
+	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+
+	@form7State.Action
+	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
+	@form9State.Action
+    public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
+
+	@form18State.Action
+    public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
+
+	@form19State.Action
+    public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
+
+	@form20State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
+    
+	mounted() {
+	
 	}
+	
+	public resetCaseId(){
+		this.UpdateCurrentCaseId(null);
+		this.UpdateCurrentNoticeOfHearingOfAppealId(null);
+		this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+		this.UpdateCurrentNoticeOfAppealId(null);
+		this.UpdateCurrentRequisitionId(null);
+		this.UpdateCurrentNoticeOfRepChangeAddressId(null);
+		this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null);
+		this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null);
+	}
+}
 </script>
 
 <style scoped>   

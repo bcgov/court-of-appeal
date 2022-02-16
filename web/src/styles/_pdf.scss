@@ -35,8 +35,18 @@ table.compactfullsize >>> td{padding:0 0 0 .5rem; color: #313132;}
 .arrow-up-flash{ margin: 0.25rem auto 0 auto;width: 0;height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent;border-bottom: 16px solid #E8E8E8;}
 .arrow-up-box{margin: 0 auto;width: 16px;height:4px;background-color:#E8E8E8;border: 0px solid #E8E8E8;}
 .coa-text-box{padding:0.5rem; border: 1px solid black; word-wrap: break-word;}
+.coa-text-box-center{outline: 1px solid black; word-wrap: break-word; display:flex; align-items:center; justify-content:center; text-align:center;}
+.coa-text-box-left  {outline: 1px solid black; word-wrap: break-word; display:flex; align-items:center; justify-content:left; text-align:left;}
 .coa-help-box{padding:0.5rem; border: 1px solid #E8E8E8; background: #E8E8E8;}
 
+.coa-arrow-box{background: #E8E8E8;word-wrap: break-word;}
+.coa-arrow-box-center{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:center; text-align:center;}
+.coa-arrow-box-left{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:left; text-align:left;}
+.coa-arrow-box-right{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:right; text-align:right;}
+
+
+.arrow-right-flash-62{ margin-right:1.25rem;  width:0;height:0; border-top: 62px solid transparent; border-bottom: 62px solid transparent;border-left: 36px solid #E8E8E8;}
+.arrow-right-flash-54{ margin-right:1.25rem;  width:0;height:0; border-top: 54px solid transparent; border-bottom: 54px solid transparent;border-left: 36px solid #E8E8E8;}
 .arrow-right-flash-36{ margin-right:1.25rem;  width:0;height:0; border-top: 36px solid transparent; border-bottom: 36px solid transparent;border-left: 36px solid #E8E8E8;}
 .arrow-right-flash-20{ margin-right:1.25rem;  width:0;height:0; border-top: 20px solid transparent; border-bottom: 20px solid transparent;border-left: 20px solid #E8E8E8;}
 .arrow-right-flash-25{ margin-right:1.25rem;  width:0;height:0; border-top: 25px solid transparent; border-bottom: 25px solid transparent;border-left: 25px solid #E8E8E8;}
@@ -45,11 +55,13 @@ table.compactfullsize >>> td{padding:0 0 0 .5rem; color: #313132;}
 .mg-rg-2-5{margin-right:2.5rem;}
 .mg-rg-3{margin-right:3rem;}
 .mg-lf-0{margin-left:0rem !important;}
+.mg-lf-2{margin-left:2rem !important;}
 .mg-lf-17{margin-left:17rem !important;}
 .pd-est{padding:0.1rem 0 0 0.25rem !important;}
 .pd-est-sm{padding:0.5rem 0 0 0.25rem !important;}
 .w-18-5{width: 18.5% !important;}
 .w-25-5{width: 25.5% !important;}
+.w-28-5{width: 28.5% !important;}
 .mg-lf-9{margin-left:10rem !important;}
 section{
     counter-increment: question-counter;         
