@@ -39,6 +39,9 @@ import "@/store/modules/information";
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
+import "@/store/modules/forms/form3";
+const form3State = namespace("Form3");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -69,6 +72,9 @@ export default class NewFormModal extends Vue {
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
+    @form3State.Action
+    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
+
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
@@ -92,6 +98,7 @@ export default class NewFormModal extends Vue {
 
     forms = [
         {name:'form2', title:'Notice of Appearance (Form 2)'},
+        {name:'form3', title:'Notice of Cross Appeal (Form 3)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
         {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},
         {name:'form7', title:'Notice of Appeal (Form 7)'},
@@ -115,6 +122,10 @@ export default class NewFormModal extends Vue {
         if(form=='form2'){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" });
+        
+        }else if(form=='form3'){
+            this.UpdateCurrentNoticeOfCrossAppealId(null);
+            this.$router.push({name: "start-form3" });
         
         }else if(form=='form5'){
             this.UpdateCurrentNoticeOfHearingOfAppealId(null);
