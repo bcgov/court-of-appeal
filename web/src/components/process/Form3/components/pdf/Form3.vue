@@ -56,6 +56,9 @@ export default class Form3 extends Vue {
     @form3State.State
     public currentNoticeOfCrossAppealId: string;
 
+    @form3State.State
+    public form3Info: form3DataInfoType;
+
     @form3State.Action
     public UpdateForm3Info!: (newForm3Info: form3DataInfoType) => void
 
@@ -68,7 +71,7 @@ export default class Form3 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "ABA"
+        const pdf_type = "NCA"
         const pdf_name = "form3-" + this.currentNoticeOfCrossAppealId;
         const el= document.getElementById("print");
 
@@ -99,7 +102,7 @@ export default class Form3 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "ABA"
+        const pdfType = "NCA"
         const pdfName ="FORM3"
         const url = '/form3/form-print/'+this.currentNoticeOfCrossAppealId+'/?pdf_type='+pdfType
         const options = {

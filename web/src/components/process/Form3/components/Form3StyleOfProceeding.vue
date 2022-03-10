@@ -2,38 +2,35 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-
             
             <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                <b-col cols="10">Between: <span style="font-weight: 200;">{{form3Info.appellantNames}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
             <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                <b-col cols="10">And: <span style="font-weight: 200;">{{form3Info.respondentNames}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>  
 
             <b-row class="mt-4">
-                <b-col cols="10" >
+                <b-col>
                     <p style="font-weight: 700;">Is Leave to Cross Appeal Required?</p>
-                    (Court of Appeal Rule 12 explains when you need to cross appeal, if unsure check "yes")
+                    <p style="font-size: 0.75rem;">
+                        (Court of Appeal Rule 12 explains when you need leave to cross appeal, if unsure check "yes")
+                    </p>
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
-                    <b-form-checkbox-group                
+                <b-col class="ml-1">
+                    <b-form-radio-group                
                         style="width:100%" 
                         :state="state.crossAppealRequired"                                         
                         v-model="form3Info.crossAppealRequired"
                         :options="yesNoOptions">
-                    </b-form-checkbox-group>
-
-                    
+                    </b-form-radio-group>
                 </b-col>
             </b-row>    
 
             <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
+                <b-col
                     style="font-weight: 700;">Who made the Order?
                 </b-col>
                 <b-col>
@@ -44,8 +41,7 @@
             </b-row>  
 
             <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
+                <b-col
                     style="font-weight: 700;">Date the order under appeal was pronounced:
                 </b-col>
                 <b-col>
@@ -53,98 +49,149 @@
                         {{form3Info.orderDate | beautify-date-blank}}
                     </b-card>
                 </b-col>
-            </b-row>               
+            </b-row>    
 
-            <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
+            <div v-if="form3Info.crossAppealRequired">
 
-            <b-form-group
-                class="mx-3" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Are you self-represented?" 
-                label-for="representation">
-                <b-form-radio-group
-                    id="representation"
-                    style="max-width:75%"                   
-                    v-model="form3Info.selfRepresented"
-                    :options="yesNoOptions"                
-                ></b-form-radio-group>
-            
-            </b-form-group>
-        </div>
+                <b-row class="mt-5">
+                    <b-col cols="6" style="font-weight: 700;">
+                        Part of the Order being cross appealed 
+                        <p style="font-size: 0.75rem; font-weight: 400;">
+                            NOTE: If you are only seeking leave to cross appeal one part of an order, 
+                            enter the part that you are seeking leave to cross appeal.
+                        </p>                               
+                    </b-col>
+                    <b-col>                    
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"  
+                            :state="state.partOfOrderLeaveCrossAppealed"                                                          
+                            v-model="form3Info.partOfOrderLeaveCrossAppealed">
+                        </b-form-textarea>                    
+                    </b-col>                
+                </b-row>
+                <b-row class="mt-4">
+                    <b-col cols="6" style="font-weight: 700;">
+                        Enter the grounds for leave to cross appeal                                                    
+                    </b-col>
+                    <b-col>                   
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6" 
+                            :state="state.groundsLeaveCrossAppeal"                                                           
+                            v-model="form3Info.groundsLeaveCrossAppeal">
+                        </b-form-textarea>                    
+                    </b-col>                
+                </b-row>
 
-        <div v-if="form3Info.selfRepresented !=null">
+            </div> 
+            <div v-else>
 
-            <b-row>
-                <b-col cols="3" style="font-weight: 700;">
-                    Name of party(ies) who wishes to abandon an appeal or cross appeal:                                
+                <b-row class="mt-5">
+                    <b-col style="font-weight: 700;">
+                        Part of the Order being cross appealed                                
+                    </b-col>
+                    <b-col>                    
+                        <b-form-textarea                
+                            style="width:100%"  
+                            rows="6" 
+                            :state="state.partOfOrderCrossAppealed"                                                          
+                            v-model="form3Info.partOfOrderCrossAppealed">
+                        </b-form-textarea>                    
+                    </b-col>                
+                </b-row>
+                <b-row class="mt-4">
+                    <b-col style="font-weight: 700;">
+                        Order you are seeking on cross appeal                                                    
+                    </b-col>
+                    <b-col>                   
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6" 
+                            :state="state.seekingOrder"                                                           
+                            v-model="form3Info.seekingOrder">
+                        </b-form-textarea>                    
+                    </b-col>                
+                </b-row>
+
+            </div> 
+
+            <b-row class="mt-5">
+                <b-col style="font-weight: 700;">
+                    Name of the Party(ies) who wish to cross appeal the order under appeal:                                
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
+                <b-col class="ml-1">   
                     <b-form-checkbox-group                
                         style="width:100%" 
-                        :state="state.abandoningParties"
-                        @change="updateOtherParties"                   
-                        v-model="form3Info.abandoningParties"                    
+                        :state="state.crossAppealingParties"                                      
+                        v-model="form3Info.crossAppealingParties"                    
                         :options="partyNames">
-                    </b-form-checkbox-group>
-
-                    <b-row class="ml-1 text-danger" v-if="invalidAbandoningParties">You cannot select all parties.</b-row>
-                    
+                    </b-form-checkbox-group> 
                 </b-col>
-            </b-row>
-            
-
-        </div>
-
-        <div v-if="!invalidAbandoningParties && form3Info.abandoningParties && form3Info.abandoningParties.length > 0">
-
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
-                    This party is abandoning a:                                
+            </b-row> 
+         
+            <b-row class="mt-5">
+                <b-col style="font-weight: 700;">
+                    Are you self-represented?                                
                 </b-col>
-                <b-col :class="state.abandonType==false?'border border-danger ml-1': 'ml-1'">   
+                <b-col class="ml-1">   
 
-                    <b-form-radio-group                
-                        style="width:100%" 
-                        :state="state.abandonType"                   
-                        v-model="form3Info.abandonType"                    
-                        :options="abandonTypeOptions">
-                    </b-form-radio-group>
-                    
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
-                    Which party(ies) are you abandonign against?                                
-                </b-col>
-                <b-col class="ml-1 mt-2">   
-
-                    <b-form-checkbox-group 
-                        :key="updated"               
-                        style="width:100%" 
-                        :state="state.abandoningAgainstParties"                   
-                        v-model="form3Info.abandoningAgainstParties"                    
-                        :options="otherPartyNames">
-                    </b-form-checkbox-group>
+                    <b-form-radio-group
+                        id="representation"
+                        style="max-width:75%"                   
+                        v-model="form3Info.selfRepresented"
+                        :options="yesNoOptions"                
+                    ></b-form-radio-group>                    
                     
                 </b-col>
             </b-row> 
+           
+        </div>
 
-             
+        <div v-if="form3Info.selfRepresented !=null">    
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
+            <b-row class="mt-4">
+                <b-col style="font-weight: 700;">
+                    Name(s) and address(es) within BC for service of the party(ies) filing cross appeal    
+                    <p style="font-size: 0.75rem; font-weight: 400;">
+                        NOTE: If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
+                    </p>                                                
                 </b-col>
-                <b-col>
-                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
-                        {{form3Info.initiatingDocumentDate | beautify-date-blank}}
-                    </b-card>
+                <b-col>                   
+                    <b-form-textarea                
+                        style="width:100%" 
+                        rows="6" 
+                        :state="state.addresses"                                                           
+                        v-model="form3Info.addresses">
+                    </b-form-textarea>                    
+                </b-col>                
+            </b-row>
+          
+            <b-row class="mt-5">
+                <b-col style="font-weight: 700;">
+                    Phone number(s) of party(ies) filing cross appeal                                
                 </b-col>
-            </b-row>       
+                <b-col>                    
+                    <b-form-textarea                
+                        style="width:100%"  
+                        :state="state.phoneNumbers"                                                          
+                        v-model="form3Info.phoneNumbers">
+                    </b-form-textarea>                    
+                </b-col>                
+            </b-row>
+            
+            <b-row class="mt-4">
+                <b-col style="font-weight: 700;">
+                    Email address(es) for party(ies) providing service for cross appeal                                
+                </b-col>
+                <b-col>                   
+                    <b-form-textarea                
+                        style="width:100%"                                                            
+                        v-model="form3Info.emailAdresses"
+                        :state ="state.emailAdresses">
+                    </b-form-textarea>                    
+                </b-col>                
+            </b-row>              
 
             <b-row class="my-3" style="padding: 0;">
                 <b-col 
@@ -160,8 +207,7 @@
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
                 </b-col>
-            </b-row>
-            
+            </b-row>            
 
             <hr/>    
 
@@ -193,7 +239,7 @@
 <script lang="ts">
 
 import { form3DataInfoType } from '@/types/Information/Form3';
-import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
@@ -213,9 +259,6 @@ export default class Form3StyleOfProceeding extends Vue {
     public previousCourts: previousCourtJsonInfoType[]
 
     @informationState.State
-    public initiatingDocuments: initiatingDocumentJsonInfoType[]
-
-    @informationState.State
     public fileNumber: string;
 
     @form3State.State
@@ -230,82 +273,85 @@ export default class Form3StyleOfProceeding extends Vue {
     @form3State.Action
     public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
     
-    dataReady = false;
-    applicantNames: string[] = [];
-    respondentNames: string[] = [];
+    dataReady = false;    
     partyNames: string[] = [];
-    otherPartyNames: string[] = [];
     
     yesNoOptions = [
         {text: 'Yes', value: true},
         {text: 'No', value: false}
     ];
 
-    abandonTypeOptions = [ 'Appeal', 'Cross Appeal' ];
-
-    state = {
-        firstAppellant: null,
-        firstRespondent: null,
-        crossAppealRequired: null,
-        abandoningParties:null,
-        abandonType: null,
-        abandoningAgainstParties: null,        
+    state = {        
+        crossAppealRequired:null,
+        crossAppealingParties:null,
+        partOfOrderCrossAppealed:null,
+        seekingOrder:null,
+        partOfOrderLeaveCrossAppealed:null,
+        groundsLeaveCrossAppeal:null,       
+        phoneNumbers:null,
+        emailAdresses:null,
+        addresses:null,               
         authorizedName:null
     }
 
-    respondentName = ""; 
-    updated=0;  
-    invalidAbandoningParties = false;
+    updated=0; 
 
     mounted() {
         this.dataReady = false;
         this.extractInfo();              
     }
 
-    public extractInfo(){
-
-        this.invalidAbandoningParties = false;
+    public extractInfo(){       
 
         if(this.currentNoticeOfCrossAppealId){
             this.getForm3Data();
            
-        } else {   
+        } else { 
+            
+            let applicantNames = [];
+            let respondentNames = [];
             
             const form3Data = {} as form3DataInfoType;
 
             form3Data.appellants = this.partiesJson.appellants
             form3Data.respondents = this.partiesJson.respondents;
+
+            for (const respondent of form3Data.respondents){
+                respondentNames.push(respondent.name);                
+            }
+
+            for (const applicant of form3Data.appellants){
+                applicantNames.push(applicant.name);                
+            }
+
+            form3Data.appellantNames = applicantNames.join(', ');
+            form3Data.respondentNames = respondentNames.join(', ');      
+            form3Data.crossAppealRequired = true;      
             form3Data.formSevenNumber = this.fileNumber;
             
             form3Data.version = this.$store.state.Application.version;            
 
             form3Data.judgeName = Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
             form3Data.orderDate = this.previousCourts[0]?.JudgmentDate;
-            form3Data.initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled;  
            
             this.UpdateForm3Info(form3Data);                       
             this.saveForm(true);
-        }  
-          
+        }            
 
     }
 
     public extractPartiesData(){
 
-        this.applicantNames = [];
-        this.respondentNames = [];
+        
         this.partyNames = [];
 
         for (const respondent of this.form3Info.respondents){
-            this.respondentNames.push(respondent.name); 
             this.partyNames.push(respondent.name) 
         }
 
         for (const applicant of this.form3Info.appellants){
-            this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name);  
-        }
-        this.updateOtherParties()
+        }       
         this.dataReady = true;
 
     }
@@ -329,12 +375,15 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public clearStates(){
         this.state = {
-            firstAppellant: null,
-            firstRespondent: null,
-            crossAppealRequired: null,
-            abandoningParties:null,
-            abandonType: null,
-            abandoningAgainstParties: null,        
+            crossAppealRequired:null,
+            crossAppealingParties:null,
+            partOfOrderCrossAppealed:null,
+            seekingOrder:null,
+            partOfOrderLeaveCrossAppealed:null,
+            groundsLeaveCrossAppeal:null,       
+            phoneNumbers:null,
+            emailAdresses:null,
+            addresses:null,               
             authorizedName:null
         }
         this.dataReady = true; 
@@ -342,11 +391,15 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public checkStates(){   
         
-        this.state.firstAppellant = !this.form3Info.firstAppellant? false : null;
-        this.state.firstRespondent = !this.form3Info.firstRespondent? false : null; 
-        this.state.abandoningParties = this.form3Info.abandoningParties?.length>0? null :false;
-        this.state.abandonType = !this.form3Info.abandonType? false : null;
-        this.state.abandoningAgainstParties = this.form3Info.abandoningAgainstParties?.length>0? null :false;
+        this.state.crossAppealRequired = this.form3Info.crossAppealRequired != null? null:false;
+        this.state.crossAppealingParties = this.form3Info.crossAppealingParties?.length>0? null :false;
+        this.state.partOfOrderLeaveCrossAppealed = (this.form3Info.crossAppealRequired && this.form3Info.partOfOrderLeaveCrossAppealed)? null :false;
+        this.state.groundsLeaveCrossAppeal = (this.form3Info.crossAppealRequired && this.form3Info.groundsLeaveCrossAppeal)? null :false;
+        this.state.partOfOrderCrossAppealed = (!this.form3Info.crossAppealRequired && this.form3Info.partOfOrderCrossAppealed)? null :false;
+        this.state.seekingOrder = (!this.form3Info.crossAppealRequired && this.form3Info.seekingOrder)? null :false;
+        this.state.phoneNumbers = this.form3Info.phoneNumbers? null :false;
+        this.state.emailAdresses = this.form3Info.emailAdresses? null :false;
+        this.state.addresses = this.form3Info.addresses? null :false;       
         this.state.authorizedName = !this.form3Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
@@ -375,7 +428,7 @@ export default class Form3StyleOfProceeding extends Vue {
                 data: {
                     data:this.form3Info,
                     type:'Form3',
-                    description:'Notice of Settlement or Abandonment'
+                    description:'Notice of Cross Appeal'
                 }
             }
             this.saveInfo(options, draft);
@@ -388,7 +441,7 @@ export default class Form3StyleOfProceeding extends Vue {
                 data: {
                     data:this.form3Info,
                     type:'Form3',
-                    description:'Notice of Settlement or Abandonment'
+                    description:'Notice of Cross Appeal'
                 }
             }
             this.saveInfo(options, draft);
@@ -398,44 +451,21 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfCrossAppealId(response.data.file_id);
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfCrossAppealId(response.data.file_id);
                         this.extractPartiesData();                        
-            //         }
+                    }
 
-            //         this.clearStates();                    
-            //         if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
-                
-            // })
-    }
-    
-    public updateOtherParties(){
-
-        const otherParties = [];
-
-        if (this.partyNames.length == this.form3Info.abandoningParties?.length){
-
-            this.invalidAbandoningParties = true;
-
-        } else {
-
-            this.invalidAbandoningParties = false;
-
-            for (const partyName of this.partyNames){
-                const index = this.form3Info.abandoningParties?.indexOf(partyName)
-                if (index == -1){
-                    otherParties.push(partyName);
+                    this.clearStates();                                     
+                    if(!draft) this.navigateToPreviewPage();                           
                 }
-            }
-            this.otherPartyNames = otherParties;
-            this.updated ++;
-        }        
+            }, err => {
+                const errMsg = err.response.data.error;
+                
+            })
     }
 
     public navigateToPreviewPage() {        

@@ -96,9 +96,7 @@
         </div>
         <div>
             <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
-        </div>
-
-        
+        </div>        
 
         <b-button 
             style="float: right;  width: 80px; height: 50px; opacity:1;" 
