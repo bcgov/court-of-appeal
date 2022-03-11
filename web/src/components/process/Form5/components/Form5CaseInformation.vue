@@ -2,7 +2,9 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
 
-        <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
+        <p class="mt-3">
+            Find the Court of Appeal case that you are wanting to create a Notice of Hearing for by entered the following case information:
+        </p>
 
         <b-form-group
             class="mx-1" 

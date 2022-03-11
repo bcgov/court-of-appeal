@@ -195,7 +195,7 @@
                     <factum-appeal-book-certificate-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/>              
 
                     <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
-                    <notice-of-hearing-app-right-to-appeal-pg v-else-if="noticeOfHearingContent"/>                
+                    <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
                     <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
                     <court-order-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
@@ -365,8 +365,8 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         } else if (contentType == "Notice of Hearing"){
 
             this.windowTitle = "Notice of Hearing";
-            this.pathTypes = ["share"];
-            this.pathHeights = ['12rem'];
+            this.pathTypes = ["question", "share"];
+            this.pathHeights = ['34rem', '0'];
             this.noticeOfHearingContent = true;
 
         }  else if (contentType == "The Hearing"){

@@ -19,17 +19,14 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Notice of Appearance (Form 2)?
+                When Do you Use the Notice of Settlement or Abandonment (Form 6)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 7), and you want to respond, 
-                fill out the Notice of Appearance (Form 2). If you do not respond, you will 
-                not be included in future court proceedings related to this case, and will 
-                not have access to the case documents filed.
+                If you do not wish to proceed with your appeal or application for 
+                leave to appeal because the matter has settled or for any other reason.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You have 10 days to serve a filed copy of the Notice of Appearance to the 
-                appellant, after receiving a Notice of Appeal.    
+                You must immediately file and serve a Notice of Settlement or Abandonment.    
             </b-row>        
            
         </b-card>

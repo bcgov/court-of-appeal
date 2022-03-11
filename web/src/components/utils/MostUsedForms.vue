@@ -16,12 +16,7 @@
                 @click="startNewForm5Document"
                 target="_blank">
                 Notice of Hearing of Appeal (Form 5)                
-            </li>
-            <li class="link-button" 
-                @click="startNewForm6Document"
-                target="_blank">
-                Notice of Settlement or Abandonment (Form 6)                
-            </li>
+            </li>            
             <li class="link-button" 
                 @click="startNewForm9Document"
                 target="_blank">
@@ -61,9 +56,6 @@
     import "@/store/modules/forms/form7";
     const form7State = namespace("Form7");
 
-    import "@/store/modules/forms/form6";
-    const form6State = namespace("Form6");
-
     import "@/store/modules/forms/form9";
     const form9State = namespace("Form9");
 
@@ -80,10 +72,7 @@
     export default class MostUsedForms extends Vue {        
         
         @form2State.Action
-        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
-
-        @form6State.Action
-        public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
       
         @form5State.Action
 	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
@@ -111,11 +100,6 @@
         public startNewForm5Document(){
             this.UpdateCurrentNoticeOfHearingOfAppealId(null);
             this.$router.push({name: "start-form5" })
-        }
-
-        public startNewForm6Document(){
-            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
-            this.$router.push({name: "start-form6" })
         }
 
         public startNewForm7Document(){
