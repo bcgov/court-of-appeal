@@ -40,6 +40,7 @@
                 <b-col cols="4">
 
                     <most-used-forms></most-used-forms>
+                    <additional-forms></additional-forms>
                     <need-help class="mt-3"></need-help>
 
                 </b-col>
@@ -95,6 +96,7 @@ import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue"
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
+import AdditionalForms from "@/components/utils/AdditionalForms.vue";
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 
@@ -117,7 +119,8 @@ import { form20FormsJsonDataType } from '@/types/Information/Form20';
         AppealProcess,
         StartEfiling,
         NeedHelp,
-        MostUsedForms
+        MostUsedForms,
+        AdditionalForms
     }
 })
 export default class DashboardPage extends Vue {

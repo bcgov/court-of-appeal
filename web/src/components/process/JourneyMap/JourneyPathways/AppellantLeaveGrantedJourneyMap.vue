@@ -167,7 +167,7 @@
                     <appeal-record-transcript-app-leave-granted-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
                     <factum-appeal-book-certificate-app-leave-granted-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/> 
                     <book-appeal-date-app-leave-granted-pg v-if="bookAppealDateContent"/>
-                    <notice-of-hearing-app-leave-granted-pg v-else-if="noticeOfHearingContent"/>
+                    <notice-of-hearing-app-leave-granted-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>
                     <the-hearing-app-leave-granted-pg v-else-if="theHearingContent"/>
                     <court-order-app-leave-granted-pg v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-leave-granted-pg v-else-if="appealProcessCompleteContent"/>
@@ -324,8 +324,8 @@ export default class AppellantLeaveGrantedJourneyMap extends Vue {
         } else if (contentType == "Notice of Hearing"){
 
             this.windowTitle = "Notice of Hearing";
-            this.pathTypes = ["share"];
-            this.pathHeights = ['12rem'];
+            this.pathTypes = ["question", "share"];
+            this.pathHeights = ['34rem', '0'];
             this.noticeOfHearingContent = true;
 
         } else if (contentType == "The Hearing"){
