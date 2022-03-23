@@ -3,7 +3,7 @@
 
         <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
-                Once the Appeal is ready for hearing?
+                When is the Appeal ready for hearing?
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -17,15 +17,21 @@
 
         <b-row v-if="showReadyInfo" class="mt-4">
             Appeal is ready for hearing when:
-            <ol class="mt-2" type="a">
+            <ol>
                 <li>
-                    Appellant has filed their factum, and
+                    <ol class="mt-2" type="a">
+                        <li>
+                            Appellant has filed their factum, <b>and</b>
+                        </li>
+                        <li>
+                            A copy of each order being appealed was entered in the court appealed from
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                    A copy of each order being appealed was entered in the court appealed from
+                    Or a date specified by a justice or the registrar as the date when the hearing ready.
                 </li>
             </ol>
-            Or a date specified by a justice or the registrar as the date when the hearing ready.
         </b-row>
 
         <b-row v-if="showReadyInfo" class="mt-4 mr-5 bg-warning warning-message-row">
@@ -68,7 +74,7 @@
             within 5 days of obtaining the hearing date.
         </b-row>        
         
-        <b-row :class="showReadyInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showReadyInfo?'mt-5':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Notice of Hearing
             </b-col>   
@@ -146,7 +152,7 @@ export default class NoticeOfHearingAppRightToAppealPg extends Vue {
     public showReady(show: boolean){
         if (show) {
             this.showReadyInfo = true;
-            this.$emit('adjustHeights', 0, "34rem");
+            this.$emit('adjustHeights', 0, "38rem");
         } else {
             this.showReadyInfo = false;
             this.$emit('adjustHeights', 0, "0");

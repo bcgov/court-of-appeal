@@ -34,7 +34,7 @@
             </b-row>
         </b-card>
 
-        <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
+        <!-- <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
             <p>Do you have the <tooltip title="right to appeal" :index="0"/> your case?</p>
 
             <b-row>
@@ -52,6 +52,32 @@
                     <b-button 
                         block
                         @click="appApplyLeavePath" 
+                        variant="outline-primary bg-success text-white" 
+                    >No
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+            </b-row>
+        </b-card> -->
+
+        <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
+            <p>Are you representing yourself?</p>
+
+            <b-row>
+                <b-col>              
+                    <b-button 
+                        block
+                        @click="appRightToAppealPath(true)" 
+                        variant="outline-primary bg-success text-white" 
+                        >
+                        Yes
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+                <b-col>
+                    <b-button 
+                        block
+                        @click="appRightToAppealPath(false)" 
                         variant="outline-primary bg-success text-white" 
                     >No
                         <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -133,7 +159,10 @@ export default class StartEfiling extends Vue {
         this.switchDisableRow(false);
     }
 
-    public appRightToAppealPath() {
+    public appRightToAppealPath(selfRep: boolean) {
+
+        //TODO: update self represented for user profile
+        console.log('setting self rep to: ' + selfRep )
 
         const pathType = {} as pathwayTypeInfoType;
         pathType.appRightToAppeal = true;

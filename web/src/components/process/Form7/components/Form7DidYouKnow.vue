@@ -22,7 +22,7 @@
                     Always consult 
                     <a  target="_blank"
                         href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/297_2001a#part2">
-                    Rule 2.1</a> 
+                    Rule 12</a> 
                     of the Court of Appeal Rules to determine whether you need the Court’s permission. 
                     If you do, you cannot use this process and must, instead, file 
                     <a  target="_blank"
