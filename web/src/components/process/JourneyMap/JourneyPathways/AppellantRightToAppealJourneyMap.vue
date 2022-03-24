@@ -402,8 +402,8 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         } else if (contentType == "Applications") {
 
             this.windowTitle = "Applications";
-            this.pathTypes = ["share"];
-            this.pathHeights = ['15rem'];
+            this.pathTypes = ["share", "share"];
+            this.pathHeights = ['14rem', '0'];
             this.applicationsContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){

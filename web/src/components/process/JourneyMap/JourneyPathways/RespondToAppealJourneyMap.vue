@@ -163,8 +163,7 @@
                 <notice-of-appearance-rsp-to-appeal-pg v-if="noticeOfAppearanceContent"/>
                 <the-hearing-rsp-to-appeal-pg v-if="theHearingContent"/>
                 <court-order-rsp-to-appeal-pg v-if="courtOrderContent"/>
-                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>
-                <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfHearingContent"/>
+                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>                
 
             </b-col>
 
@@ -177,11 +176,11 @@
                 <b-col cols="1">
                     <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
-                <b-col cols="11" style="padding: 0 0 0 2rem;">                
+                <b-col cols="11" style="padding: 0 0 0 2rem;">               
                     
                     <notice-of-cross-appeal-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfCrossAppealContent"/>
                     <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
-
+                    <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfHearingContent"/>
                 </b-col>
             </b-row>
 
@@ -338,9 +337,10 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Notice of Hearing"){
+            this.singlePath = false;
             this.windowTitle = "Notice of Hearing";
             this.pathTypes = ["question", "share"];
-            this.pathHeights = ['38rem', '0'];
+            this.pathHeights = ['17rem', '0'];
             this.noticeOfHearingContent = true; 
 
         } else if (contentType == "The Hearing"){

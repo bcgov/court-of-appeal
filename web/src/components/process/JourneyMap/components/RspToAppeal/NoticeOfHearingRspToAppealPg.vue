@@ -32,36 +32,12 @@
                     Or a date specified by a justice or the registrar as the date when the hearing ready.
                 </li>
             </ol>
-        </b-row>
+        </b-row>        
 
-        <b-row v-if="showReadyInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill style="margin: 2.25rem 0;" class="ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                Within <span class="text-danger font-weight-bold">10 days</span> 
-                after an appeal is ready for hearing, an Appellant must:
-                <ol type="a">
-                    <li>Obtain a hearing date for the appeal from the registrar, and</li>
-                    <li>Inform the registrar if the parties disagree on the length of time for the hearing.</li>
-                </ol>
-            </b-col>           
-        </b-row> 
-
-         <b-row v-if="showReadyInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                Within <span class="text-danger font-weight-bold">5 days</span> 
-                of obtaining a hearing date from the registrar, the appellant 
-                must file a notice of hearing in Form 34 that has attached a copy order being appealed.
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showReadyInfo" class="mt-4">
-            NOTE: The Court of Appeal Rules allow for the Respondent to obtain a hearing 
-            date from the registrar if:
+        <b-row v-if="showReadyInfo" class="mt-2">
+            Under the Court of Appeal Rules, the Appellant would normally be responsible for 
+            booking and completing the Notice of Hearing of Appeal form; however, the 
+            Respondent may obtain a hearing date from the registrar if:
             <ol class="mt-2" type="a">
                 <li>
                     The respondent has filed their factum or their cross-appeal factum, and
@@ -69,12 +45,10 @@
                 <li>
                     The appellant has not complied with Rule 30 (1) or (2) in obtaining a hearing date.
                 </li>
-            </ol>
-            If the Respondent obtains a hearing date, they must file and serve a notice of hearing 
-            within 5 days of obtaining the hearing date.
-        </b-row>        
+            </ol>            
+        </b-row>            
         
-        <b-row :class="showReadyInfo?'mt-5':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showReadyInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Notice of Hearing
             </b-col>   
@@ -92,7 +66,9 @@
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger font-weight-bold">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
+                The Respondent must file and serve a notice of hearing 
+                within <span class="text-danger font-weight-bold">5 days</span> 
+                of obtaining the hearing date.
             </b-col>           
         </b-row>
 
@@ -137,7 +113,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
 
 @Component({
     components:{
@@ -146,13 +126,17 @@ import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 })
 export default class NoticeOfHearingRspToAppealPg extends Vue {
 
+    @form5State.Action
+	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+
+
     showReadyInfo = true;
     showHearingInfo = false;
 
     public showReady(show: boolean){
         if (show) {
             this.showReadyInfo = true;
-            this.$emit('adjustHeights', 0, "38rem");
+            this.$emit('adjustHeights', 0, "17rem");
         } else {
             this.showReadyInfo = false;
             this.$emit('adjustHeights', 0, "0");
@@ -162,7 +146,7 @@ export default class NoticeOfHearingRspToAppealPg extends Vue {
     public showHearing(show: boolean){
         if (show) {
             this.showHearingInfo = true;
-            this.$emit('adjustHeights', 1, "14rem");
+            this.$emit('adjustHeights', 1, "17rem");
         } else {
             this.showHearingInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -170,6 +154,7 @@ export default class NoticeOfHearingRspToAppealPg extends Vue {
     }
 
     public startNewForm5Document(){
+        this.UpdateCurrentNoticeOfHearingOfAppealId(null);            
         this.$router.push({name: "start-form5" })
     }
 
