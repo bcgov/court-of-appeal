@@ -97,8 +97,14 @@ class Form6EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, notice_id):
+
         
-        document_type = "ABA" # type Form6 for Efiling
+        
+        if 'document_type' in request.data:
+            document_type = request.data['document_type']
+        else: 
+            document_type ="ABA" # type Form6 for Efiling
+        
         uid = request.user.id
 
         notice = self.get_notice_for_user(notice_id, uid)        
