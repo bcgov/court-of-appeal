@@ -137,7 +137,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+
+import "@/store/modules/forms/form5";
+const form5State = namespace("Form5");
 
 @Component({
     components:{
@@ -145,6 +149,10 @@ import ExpandIcon from "@/components/utils/ExpandIcon.vue";
     }
 })
 export default class NoticeOfHearingAppRightToAppealPg extends Vue {
+
+    @form5State.Action
+	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+
 
     showReadyInfo = true;
     showHearingInfo = false;
@@ -170,6 +178,7 @@ export default class NoticeOfHearingAppRightToAppealPg extends Vue {
     }
 
     public startNewForm5Document(){
+        this.UpdateCurrentNoticeOfHearingOfAppealId(null);            
         this.$router.push({name: "start-form5" })
     }
 
