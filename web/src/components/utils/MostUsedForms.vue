@@ -16,11 +16,6 @@
                 @click="startNewForm5Document"
                 target="_blank">
                 Notice of Hearing of Appeal (Form 5)                
-            </li>            
-            <li class="link-button" 
-                @click="startNewForm9Document"
-                target="_blank">
-                Requisition (Form 9)                
             </li>
             <li class="link-button" 
                 @click="startNewForm18Document"
@@ -56,9 +51,6 @@
     import "@/store/modules/forms/form7";
     const form7State = namespace("Form7");
 
-    import "@/store/modules/forms/form9";
-    const form9State = namespace("Form9");
-
     import "@/store/modules/forms/form18";
     const form18State = namespace("Form18");
 
@@ -79,9 +71,6 @@
 
         @form7State.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
-
-        @form9State.Action
-        public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
         @form18State.Action
         public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
@@ -105,11 +94,6 @@
         public startNewForm7Document(){
             this.UpdateCurrentNoticeOfAppealId(null);
             this.$router.push({name: "checklist-form7" })
-        }
-
-        public startNewForm9Document(){
-            this.UpdateCurrentRequisitionId(null);
-            this.$router.push({name: "start-form9" })
         }
 
         public startNewForm18Document(){

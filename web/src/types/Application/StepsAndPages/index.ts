@@ -16,6 +16,8 @@ export interface APP_RIGHT_TO_APPEAL_stPgTypes {
     _StepNo: number;   
     
     InitialDocuments: number;
+    ApplyForLeaveToAppeal: number;
+    Applications: number;
     AppealRecordAndTranscript: number;
     FactumAppealBookAndCertificateOfReadiness: number;
     BookAppealDateWithRegistry: number;
@@ -67,6 +69,7 @@ export interface RSP_TO_APPEAL_stPgTypes {
     NoticeOfAppearance: number;
     NoticeOfCrossAppeal: number;
     FactumAndAppealBook: number;
+    NoticeOfHearing: number;
     TheHearing: number;
     CourtOrder: number;
     AppealProcessComplete: number;

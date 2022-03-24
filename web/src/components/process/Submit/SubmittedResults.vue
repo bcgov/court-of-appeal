@@ -9,7 +9,7 @@
         <cancel-submit-form-5 v-else-if="result=='cancel'"/>
         <error-submit-form-5 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'ABA'">
+    <div v-else-if="(formType == 'ABA')||(formType == 'ABCA')||(formType == 'ABP')||(formType == 'ABRV')">
         <success-submit-form-6 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        

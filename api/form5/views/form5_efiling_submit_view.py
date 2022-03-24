@@ -17,6 +17,7 @@ from api.efiling import EFilingPackaging, EFilingSubmission, EFilingParsing
 from api.utils import convert_document_to_multi_part
 
 from core.utils.json_message_response import JsonMessageResponse
+from core.attachment_files_util import (_get_validation_errors, _unique_file_names, _process_incoming_files_and_documents)
 
 logger = logging.getLogger(__name__)
 no_record_found = "No record found."
@@ -101,6 +102,9 @@ class Form5EFilingSubmitView(generics.GenericAPIView):
         document_type = "NHA" # type Form5 for Efiling
         uid = request.user.id
 
+        documents_string = request.POST.get("documents")
+        attachment_files = request.FILES.getlist("files")
+
         notice = self.get_notice_for_user(notice_id, uid)        
         if not notice:
             return HttpResponseNotFound("no record found")
@@ -108,7 +112,29 @@ class Form5EFilingSubmitView(generics.GenericAPIView):
         if notice.package_number or notice.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
+
+        # Validations.
+        validations_errors = _get_validation_errors(
+            attachment_files, documents_string
+        )
+        if validations_errors:
+            return validations_errors
+
+        # Unique names.
+        attachment_files = _unique_file_names(attachment_files)
+
+        # Data conversion.
+        incoming_documents = json.loads(documents_string)
+
         outgoing_documents = self._get_pdf_content(notice, document_type)               
+        
+        outgoing_documents = _process_incoming_files_and_documents(
+            incoming_documents, attachment_files, outgoing_documents
+        )
+        del attachment_files 
+
+
+
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
             request, notice, outgoing_documents, document_type
         )

@@ -1,9 +1,9 @@
 <template>
-    <b-card class="bg-white border-white w-90">
+    <b-card class="bg-white border-white w-90">   
 
         <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
-                Once the Appeal is ready for hearing?
+                When is the Appeal ready for hearing?
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -17,45 +17,27 @@
 
         <b-row v-if="showReadyInfo" class="mt-4">
             Appeal is ready for hearing when:
-            <ol class="mt-2" type="a">
+            <ol>
                 <li>
-                    Appellant has filed their factum, and
+                    <ol class="mt-2" type="a">
+                        <li>
+                            Appellant has filed their factum, <b>and</b>
+                        </li>
+                        <li>
+                            A copy of each order being appealed was entered in the court appealed from
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                    A copy of each order being appealed was entered in the court appealed from
+                    Or a date specified by a justice or the registrar as the date when the hearing ready.
                 </li>
             </ol>
-            Or a date specified by a justice or the registrar as the date when the hearing ready.
-        </b-row>
+        </b-row>        
 
-        <b-row v-if="showReadyInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill style="margin: 2.25rem 0;" class="ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                Within <span class="text-danger font-weight-bold">10 days</span> 
-                after an appeal is ready for hearing, an Appellant must:
-                <ol type="a">
-                    <li>Obtain a hearing date for the appeal from the registrar, and</li>
-                    <li>Inform the registrar if the parties disagree on the length of time for the hearing.</li>
-                </ol>
-            </b-col>           
-        </b-row> 
-
-         <b-row v-if="showReadyInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                Within <span class="text-danger font-weight-bold">5 days</span> 
-                of obtaining a hearing date from the registrar, the appellant 
-                must file a notice of hearing in Form 34 that has attached a copy order being appealed.
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showReadyInfo" class="mt-4">
-            NOTE: The Court of Appeal Rules allow for the Respondent to obtain a hearing 
-            date from the registrar if:
+        <b-row v-if="showReadyInfo" class="mt-2">
+            Under the Court of Appeal Rules, the Appellant would normally be responsible for 
+            booking and completing the Notice of Hearing of Appeal form; however, the 
+            Respondent may obtain a hearing date from the registrar if:
             <ol class="mt-2" type="a">
                 <li>
                     The respondent has filed their factum or their cross-appeal factum, and
@@ -63,10 +45,8 @@
                 <li>
                     The appellant has not complied with Rule 30 (1) or (2) in obtaining a hearing date.
                 </li>
-            </ol>
-            If the Respondent obtains a hearing date, they must file and serve a notice of hearing 
-            within 5 days of obtaining the hearing date.
-        </b-row>        
+            </ol>            
+        </b-row>            
         
         <b-row :class="showReadyInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
@@ -86,7 +66,9 @@
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger font-weight-bold">2 months</span> to file and serve your document after submitting the Certificate of Readiness.
+                The Respondent must file and serve a notice of hearing 
+                within <span class="text-danger font-weight-bold">5 days</span> 
+                of obtaining the hearing date.
             </b-col>           
         </b-row>
 
@@ -124,7 +106,7 @@
                     Serve one copy of the notice hearing and each attached order to each respondent.
                 </li>
             </ol>
-        </b-row>    
+        </b-row>        
         
     </b-card>
 </template>
@@ -142,10 +124,11 @@ const form5State = namespace("Form5");
         ExpandIcon
     }
 })
-export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {  
+export default class NoticeOfHearingRspToAppealPg extends Vue {
 
     @form5State.Action
 	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+
 
     showReadyInfo = true;
     showHearingInfo = false;
@@ -153,7 +136,7 @@ export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {
     public showReady(show: boolean){
         if (show) {
             this.showReadyInfo = true;
-            this.$emit('adjustHeights', 0, "34rem");
+            this.$emit('adjustHeights', 0, "17rem");
         } else {
             this.showReadyInfo = false;
             this.$emit('adjustHeights', 0, "0");
@@ -163,7 +146,7 @@ export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {
     public showHearing(show: boolean){
         if (show) {
             this.showHearingInfo = true;
-            this.$emit('adjustHeights', 1, "14rem");
+            this.$emit('adjustHeights', 1, "17rem");
         } else {
             this.showHearingInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -174,10 +157,12 @@ export default class NoticeOfHearingAppLeaveGrantedPg extends Vue {
         this.UpdateCurrentNoticeOfHearingOfAppealId(null);            
         this.$router.push({name: "start-form5" })
     }
-    
+
 }
 </script>
 
 <style scoped lang="scss">
+
+
 
 </style>

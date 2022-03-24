@@ -128,7 +128,7 @@ export default class DashboardPage extends Vue {
     //___________________________
     //___________________________
     //___________________________NEW VERSION goes here _________________
-    CURRENT_VERSION: string = "1.0";
+    CURRENT_VERSION: string = "1.2";
     //__________________________
     //___________________________
     //___________________________
@@ -263,7 +263,7 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form20/forms'));
 
         Promise.all(calls).then(values => { 
-            console.log(values)
+            // console.log(values)
             
             if(values[0]?.data?.steps){
 

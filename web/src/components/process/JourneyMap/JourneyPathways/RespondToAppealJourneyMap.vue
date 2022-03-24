@@ -73,18 +73,19 @@
         <div
             :style="{marginLeft: '141px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '65%',
+                width: '67%',
                 position: 'absolute',
                 top: '374px',
                 zIndex: '1',
                 marginBottom: '81px'}"
         />
 
-        <gavel-icon 
-            :style="{left: '25%', top: '65%'}"
-            class="journey-box" 
-            stepTitle="The Hearing" 
-            @action="displayWindow('The Hearing')"
+        <form-icon 
+            :style="{left: '20%', top: '69.75%'}"
+            :twoPages="false"
+            stepTitle="Notice of Hearing"
+            stepTitleOptional="(if required)"
+            @action="displayWindow('Notice of Hearing')"
             @completed="completed"            
             order=4
             v-bind="pageState[3]"            
@@ -93,28 +94,46 @@
         <trail
             className="journey-trail-l1-moveable"
             :completed="completedTrail[3]"
-            :style="{position: 'absolute', marginLeft:'30%', top:'70.3%',width: '30%'}"
-            width='30%'
+            :style="{position: 'absolute', marginLeft:'20%', top:'70.3%',width: '22%'}"
+            width='22%'
+            level=2
+        />
+
+        <gavel-icon 
+            :style="{left: '42%', top: '65%'}"
+            class="journey-box" 
+            stepTitle="The Hearing" 
+            @action="displayWindow('The Hearing')"
+            @completed="completed"            
+            order=5
+            v-bind="pageState[4]"            
+        />
+
+        <trail
+            className="journey-trail-l1-moveable"
+            :completed="completedTrail[4]"
+            :style="{position: 'absolute', marginLeft:'41%', top:'70.3%',width: '25%'}"
+            width='25%'
             level=2
         />
 
         <form-icon 
-            :style="{top: '69%', left: '54%'}"
+            :style="{left: '64%', top: '69%'}"
             :twoPages="false"
             stepTitle="Court Order"
             stepTitleOptional="(if required)"            
             stepTitleClass="step-title-wide"
             @action="displayWindow('Court Order')"
             @completed="completed"            
-            order=5
-            v-bind="pageState[4]"
+            order=6
+            v-bind="pageState[5]"
         />
 
         <trail
             className="journey-trail-l1-moveable"
-            :completed="completedTrail[4]"
-            width='30%'
-            :style="{position: 'absolute', width: '30%', left: '60%', top: '70.3%'}"
+            :completed="completedTrail[5]"
+            width='20%'
+            :style="{position: 'absolute', width: '20%', left: '64%', top: '70.3%'}"
             level=2
         />
 
@@ -123,9 +142,9 @@
             :style="{top: '70%', left: '80%'}"
             titleStyle="margin-top: 1.5rem;"
             @action="displayWindow('Appeal Process Complete')" 
-            :completed="completedTrail[4]"
+            :completed="completedTrail[5]"
             order=6
-            v-bind="pageState[5]"           
+            v-bind="pageState[6]"           
         />
     </div>
 
@@ -144,7 +163,7 @@
                 <notice-of-appearance-rsp-to-appeal-pg v-if="noticeOfAppearanceContent"/>
                 <the-hearing-rsp-to-appeal-pg v-if="theHearingContent"/>
                 <court-order-rsp-to-appeal-pg v-if="courtOrderContent"/>
-                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>
+                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>                
 
             </b-col>
 
@@ -157,11 +176,11 @@
                 <b-col cols="1">
                     <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
-                <b-col cols="11" style="padding: 0 0 0 2rem;">                
+                <b-col cols="11" style="padding: 0 0 0 2rem;">               
                     
                     <notice-of-cross-appeal-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfCrossAppealContent"/>
                     <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
-
+                    <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfHearingContent"/>
                 </b-col>
             </b-row>
 
@@ -203,7 +222,8 @@ import FactumAppealBookRspToAppealPg from '../components/RspToAppeal/FactumAppea
 import TheHearingRspToAppealPg from '../components/RspToAppeal/TheHearingRspToAppealPg.vue';
 import CourtOrderRspToAppealPg from '../components/RspToAppeal/CourtOrderRspToAppealPg.vue';
 import AppealProcessCompleteRspToAppealPg from '../components/RspToAppeal/AppealProcessCompleteRspToAppealPg.vue';
-5
+import NoticeOfHearingRspToAppealPg from '../components/RspToAppeal/NoticeOfHearingRspToAppealPg.vue'
+
 import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations';
 
 import { namespace } from "vuex-class";
@@ -226,7 +246,8 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         FactumAppealBookRspToAppealPg,
         TheHearingRspToAppealPg,
         CourtOrderRspToAppealPg,
-        AppealProcessCompleteRspToAppealPg
+        AppealProcessCompleteRspToAppealPg,
+        NoticeOfHearingRspToAppealPg
     }
 })
 export default class RespondToAppealJourneyMap extends Vue {
@@ -249,6 +270,7 @@ export default class RespondToAppealJourneyMap extends Vue {
     noticeOfAppearanceContent = false; 
     noticeOfCrossAppealContent = false;
     factumAppealBookContent = false;
+    noticeOfHearingContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false;
@@ -286,7 +308,8 @@ export default class RespondToAppealJourneyMap extends Vue {
         this.noticeOfAppearanceContent = false; 
         this.noticeOfCrossAppealContent = false;
         this.factumAppealBookContent = false;
-        this.theHearingContent = false;28
+        this.noticeOfHearingContent = false;
+        this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false;
 
@@ -296,6 +319,7 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathTypes = ["share"];
             this.pathHeights = ['28rem'];
             this.noticeOfAppearanceContent = true;
+
         } else if (contentType == "Notice of Cross Appeal"){
             this.singlePath = false;
             this.windowTitle = "Cross Appeal (Optional)";
@@ -303,6 +327,7 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathTypes = ["share", "info"];
             this.pathHeights = ['15rem', '0'];
             this.noticeOfCrossAppealContent = true;
+
         } else if (contentType == "Factum and Appeal Book"){
             this.singlePath = false;
             this.windowTitle = "The Factum and Appeal Book";
@@ -310,18 +335,28 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathTypes = ["share", "info", "info", "info", "calendar"];
             this.pathHeights = ['17rem', '0', '0', '0', '0'];
             this.factumAppealBookContent = true;
+
+        } else if (contentType == "Notice of Hearing"){
+            this.singlePath = false;
+            this.windowTitle = "Notice of Hearing";
+            this.pathTypes = ["question", "share"];
+            this.pathHeights = ['17rem', '0'];
+            this.noticeOfHearingContent = true; 
+
         } else if (contentType == "The Hearing"){
             this.singlePath = true;
             this.windowTitle = "The Hearing";
             this.pathTypes = ["gavel"];
             this.pathHeights = ['6rem'];
             this.theHearingContent = true;
+
         } else if (contentType == "Court Order"){
             this.singlePath = true;
             this.windowTitle = "Court Order";
             this.pathTypes = ["info"];
             this.pathHeights = ['6rem'];
             this.courtOrderContent = true;
+
         } else if (contentType == "Appeal Process Complete"){
             this.singlePath = true;
             this.windowTitle = "Appeal Process Complete";
