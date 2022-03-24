@@ -12,6 +12,8 @@ class Common extends VuexModule {
     public userId = ""
     public userLocation = '';
 
+    public userSelfRepresented = false;
+
     public locationsInfo: locationsInfoType[] = [];
     public lookups = {} as lookupsInfoType;
     public accountInfo = {} as accountInfoType;
@@ -68,6 +70,15 @@ class Common extends VuexModule {
     @Action
     public UpdateAccountInfo(newAccountInfo: accountInfoType): void {
         this.context.commit('setAccountInfo', newAccountInfo);
+    }
+
+    @Mutation
+    public setUserSelfRepresented(userSelfRepresented: boolean): void {   
+        this.userSelfRepresented = userSelfRepresented;
+    }
+    @Action
+    public UpdateUserSelfRepresented(newUserSelfRepresented: boolean): void {
+        this.context.commit('setUserSelfRepresented', newUserSelfRepresented);
     }
 
 }

@@ -24,6 +24,7 @@ export const SessionManager = {
             const userId = response.data.user_id;
             const loginUrl = response.data.login_uri;
             const userLocation = response.data.location;
+            const userSelfRepresented = response.data.represented? false: true;
 
             if (userId) {
                 const universalId = response.data.universal_id;
@@ -33,7 +34,8 @@ export const SessionManager = {
                 const userName = response.data.display_name || response.data.first_name + " " + response.data.last_name;
                 store.commit("Common/setUserName", userName);
                 store.commit("Common/setUserId", userId);
-                store.commit("Common/setUserLocation",userLocation);             
+                store.commit("Common/setUserLocation", userLocation); 
+                store.commit("Common/setUserSelfRepresented", userSelfRepresented);
             }
             return { userId, loginUrl };
         }

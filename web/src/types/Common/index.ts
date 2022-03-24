@@ -32,3 +32,9 @@ export interface locationsInfoType {
     province: string; 
     postalCode: string;
 }
+
+export interface supportingDocumentInfoType {
+    fileName: string;
+    file: File;
+    documentType: string;
+}

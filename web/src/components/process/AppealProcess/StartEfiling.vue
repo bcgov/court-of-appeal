@@ -122,6 +122,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import Tooltip from "@/components/survey/Tooltip.vue";
 import { pathwayTypeInfoType } from '@/types/Information';
 
@@ -134,6 +137,9 @@ export default class StartEfiling extends Vue {
 
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
+
+    @commonState.Action
+    public UpdateUserSelfRepresented!: (newUserSelfRepresented: boolean) => void
    
 
     startAppeal = false;
@@ -161,13 +167,23 @@ export default class StartEfiling extends Vue {
 
     public appRightToAppealPath(selfRep: boolean) {
 
-        //TODO: update self represented for user profile
-        console.log('setting self rep to: ' + selfRep )
-
+        this.updateSelfRepresented(selfRep)
         const pathType = {} as pathwayTypeInfoType;
         pathType.appRightToAppeal = true;
         this.UpdatePathType(pathType);
 
+    }
+
+    public updateSelfRepresented(selfRep){
+        this.UpdateUserSelfRepresented(selfRep)
+        const body = {                            
+            represented: !selfRep,
+        }
+        
+        this.$http.put('/user-info/', body)
+        .then((response) => {                  
+        },(err) => {                   
+        });    
     }
 
     public appApplyLeavePath() {
