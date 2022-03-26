@@ -218,7 +218,8 @@ export default class Form9StyleOfProceeding extends Vue {
             form9Data.appellants = this.partiesJson.appellants
             form9Data.respondents = this.partiesJson.respondents;
             form9Data.formSevenNumber = this.fileNumber;            
-            form9Data.version = this.$store.state.Application.version;            
+            form9Data.version = this.$store.state.Application.version;  
+            form9Data.selfRepresented = this.$store.state.Common.userSelfRepresented;          
             this.UpdateForm9Info(form9Data);
             
             this.saveForm(true);                  
