@@ -331,12 +331,10 @@ export default class Form5StyleOfProceeding extends Vue {
             form5Data.formSevenNumber = this.fileNumber;
             
             form5Data.version = this.$store.state.Application.version;
+            form5Data.selfRepresented = this.$store.state.Common.userSelfRepresented;
             form5Data.timeOfAppealHearing = '10:00';
             form5Data.acknowledge = false; 
-            
-            this.UpdateForm5Info(form5Data);
-            
-               
+            this.UpdateForm5Info(form5Data); 
             this.saveForm(true);
         }      
     }

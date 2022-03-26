@@ -534,7 +534,7 @@ export default class Form18StyleOfProceeding extends Vue {
             form18Data.serviceInformation.province = "British Columbia";
             form18Data.serviceInformation.country = "Canada";
                         
-            form18Data.version = this.$store.state.Application.version; 
+            form18Data.version = this.$store.state.Application.version;
             form18Data.useServiceEmail = false
             form18Data.sendNotifications = false           
             this.UpdateForm18Info(form18Data);            
