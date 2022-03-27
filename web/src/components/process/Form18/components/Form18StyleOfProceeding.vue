@@ -538,10 +538,8 @@ export default class Form18StyleOfProceeding extends Vue {
             form18Data.useServiceEmail = false
             form18Data.sendNotifications = false           
             this.UpdateForm18Info(form18Data);            
-            this.saveForm(true);                  
-            
-        }       
-
+            this.saveForm(true); 
+        } 
     }
 
     public extractPartiesData(){
