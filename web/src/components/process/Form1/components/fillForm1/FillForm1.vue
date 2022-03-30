@@ -4,7 +4,9 @@
               
         <save-or-preview-buttons :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
-        <fill-form-1-summary-info class="mx-2" @displayResults="displayResults"/>
+        <fill-form-1-tribunal-summary-info v-if="form1Info.appealTribunal" class="mt-2 mx-2" @displayResults="displayResults"/>
+
+        <fill-form-1-summary-info v-else class="mx-2" @displayResults="displayResults"/>
 
         <b-card class="mb-4 border-light bg-light">
             <b-row class="ml-4 mt-0 font-weight-bold">Please complete the following fields:</b-row>
@@ -53,6 +55,7 @@ import { locationsInfoType } from '@/types/Common';
 import { accountInfoType, userAccessInfoType, form1SubmissionDataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
 import FillForm1SummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1SummaryInfo.vue";
+import FillForm1TribunalSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1TribunalSummaryInfo.vue";
 import FillForm1CommonInfo from "@/components/process/Form1/components/fillForm1/FillForm1CommonInfo.vue";
 import FillForm1StyleOfProceedingsInfo from "@/components/process/Form1/components/fillForm1/FillForm1StyleOfProceedingsInfo.vue";
 
@@ -61,6 +64,7 @@ import SaveOrPreviewButtons from './components/SaveOrPreviewButtons.vue'
 @Component({
     components:{        
         FillForm1SummaryInfo,
+        FillForm1TribunalSummaryInfo,
         FillForm1CommonInfo,
         FillForm1StyleOfProceedingsInfo,
         SaveOrPreviewButtons
@@ -109,11 +113,12 @@ export default class FillForm1 extends Vue {
     updatedInfo = 0;
     dataReady = false;
     fieldStates = {} as form1StatesInfoType;
+    showTribunalDetailsForm = false;
 
     mounted() { 
 
         this.expiredDeadline = false;
-        this.dataReady = false;
+        this.dataReady = true; //false;TODO: remove this once api is updated
         if (!this.currentNoticeOfAppealId){         
             this.loadOrderDetails();            
         } else {
@@ -149,14 +154,20 @@ export default class FillForm1 extends Vue {
     public loadOrderDetails(){
 
         const form1SubmissionData = this.form1Info;
-        form1SubmissionData.parties = this.supremeCourtCaseJson.parties;
         form1SubmissionData.manualSop = [];
-        form1SubmissionData.appealSubmissionDeadline = moment(this.supremeCourtOrderJson.appealSubmissionDeadline).format();
-        form1SubmissionData.honorificTitle = this.supremeCourtOrderJson.honorificTitle;
-        form1SubmissionData.dateOfJudgement = moment(this.supremeCourtOrderJson.orderDate).format();
-        form1SubmissionData.nameOfJudge = this.supremeCourtOrderJson.judgeFirstName + ' ' + this.supremeCourtOrderJson.judgeSurname;   
+        if (form1SubmissionData.appealTribunal){
+
+            this.showTribunalDetailsForm = true;
+
+        } else {
+            form1SubmissionData.parties = this.supremeCourtCaseJson.parties;            
+            form1SubmissionData.appealSubmissionDeadline = moment(this.supremeCourtOrderJson.appealSubmissionDeadline).format();
+            form1SubmissionData.honorificTitle = this.supremeCourtOrderJson.honorificTitle;
+            form1SubmissionData.dateOfJudgement = moment(this.supremeCourtOrderJson.orderDate).format();
+            form1SubmissionData.nameOfJudge = this.supremeCourtOrderJson.judgeFirstName + ' ' + this.supremeCourtOrderJson.judgeSurname;               
+        }
         this.UpdateForm1Info(form1SubmissionData);
-        this.saveForm1(true);        
+        this.saveForm1(true);
 
     }
 

@@ -52,7 +52,7 @@ export default class Form1CaseInformation extends Vue {
 
     mounted(){   
          
-        if (this.currentNoticeOfAppealId) {
+        if (this.form1Info.appealTribunal || this.currentNoticeOfAppealId) {
             this.orderSelected = true;
         } else {
             this.UpdateSupremeCourtCaseJson({} as supremeCourtCaseJsonDataInfoType);

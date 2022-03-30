@@ -110,7 +110,7 @@ export default class ChecklistForm1 extends Vue {
         form1SubmissionData.appealingSupremeCourtOrder = this.qualificationInfo.appealingSupremeCourtOrder;
         form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;
         form1SubmissionData.appealInvolvesChild = this.qualificationInfo.appealInvolvesChild;
-       
+        form1SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
         this.UpdateForm1Info(form1SubmissionData);
 
         if (this.businessAccount){

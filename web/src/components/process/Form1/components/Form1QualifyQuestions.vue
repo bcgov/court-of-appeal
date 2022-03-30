@@ -356,9 +356,9 @@
                 
             </b-col> 
             
-        </b-row>   
+        </b-row >   
 
-        <b-row>
+        <b-row class="mb-4">
             <b-col cols="1" >               
                 <div>
                     <step-number v-bind:stepNumber="9" v-bind:active="true" v-bind:stepStyle="stepStyle"/>                    
@@ -378,7 +378,29 @@
                 
             </b-col> 
             
-        </b-row>             
+        </b-row>   
+
+        <b-row>
+            <b-col cols="1" >               
+                <div>
+                    <step-number v-bind:stepNumber="10" v-bind:active="true" v-bind:stepStyle="stepStyle"/>                    
+                </div>
+            </b-col>
+            <b-col cols="11">
+
+                <p class="content pb-0">
+                    Was the order pronounced by a tribunal court?
+                </p>               
+
+                <b-form-radio-group 
+                    :class="state.appealTribunal=false?'border w-25 border-danger':'' "
+                    v-model="qualificationInfo.appealTribunal"
+                    :options="responseOptions">               
+                </b-form-radio-group>
+                
+            </b-col> 
+            
+        </b-row>          
         
     </b-card>
 </template>
@@ -410,7 +432,8 @@ export default class Form1QualifyQuestions extends Vue {
         appealingSupremeCourtMaster: null,
         appealingSupremeCourtOrder:null,
         appealingScFlaDivorce:null,
-        appealInvolvesChild: null
+        appealInvolvesChild: null,
+        appealTribunal: null
     }   
 
     responseOptions = [
@@ -455,7 +478,8 @@ export default class Form1QualifyQuestions extends Vue {
             appealingSupremeCourtMaster: null,
             appealingSupremeCourtOrder:null,
             appealingScFlaDivorce:null,
-            appealInvolvesChild: null
+            appealInvolvesChild: null,
+            appealTribunal: null
         }
         this.dataReady = true; 
     }
@@ -471,7 +495,8 @@ export default class Form1QualifyQuestions extends Vue {
         this.state.appealingSupremeCourtMaster = (this.qualificationInfo.appealingSupremeCourtMaster == null)? false : null; 
         this.state.appealingSupremeCourtOrder = (this.qualificationInfo.appealingSupremeCourtOrder == null)? false : null; 
         this.state.appealingScFlaDivorce = (this.qualificationInfo.appealingScFlaDivorce == null)? false : null;            
-        this.state.appealInvolvesChild = (this.qualificationInfo.appealInvolvesChild == null)? false : null;       
+        this.state.appealInvolvesChild = (this.qualificationInfo.appealInvolvesChild == null)? false : null;  
+        this.state.appealTribunal = (this.qualificationInfo.appealTribunal == null)? false : null;     
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)

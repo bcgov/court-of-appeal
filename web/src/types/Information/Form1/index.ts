@@ -9,6 +9,7 @@ export interface form1QualificationInfoType {
     appealingSupremeCourtOrder: boolean;  
     appealingScFlaDivorce: boolean;
     appealInvolvesChild: boolean;
+    appealTribunal: boolean;
 }
 
 export interface form1StatusInfoType {
@@ -34,6 +35,11 @@ export interface form1SubmissionDataInfoType {
     appealingSupremeCourtOrder: boolean;  
     appealingScFlaDivorce: boolean;
     appealInvolvesChild: boolean;
+    appealTribunal: boolean;
+    tribunalType: string;//
+    tribunalLocationOfOrder: string;//
+    tribunalDateOfOrder: string;//
+    tribunalOriginalDecisionMaker: string;//
     parties: form1PartiesInfoType[];
     manualSop?: manualSopInfoType[];  //
     readOnlyUsers: number[];
@@ -77,6 +83,10 @@ export interface form1SubmissionDataInfoType {
 }
 
 export interface form1StatesInfoType {
+    tribunalType: null | boolean;
+    tribunalLocationOfOrder: null | boolean;
+    tribunalDateOfOrder: null | boolean;
+    tribunalOriginalDecisionMaker: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;
