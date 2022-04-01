@@ -167,6 +167,13 @@ Vue.filter('getFullName',function(first, last){
 	return firstName+lastName	
 })
 
+Vue.filter('getFullJudgeName',function(first, last){	
+
+	const firstName = first? first[0].toUpperCase()+' ': '' 
+	const lastName = last? last.toUpperCase()+' ': '' 		
+	return 'The Honourable Justice '+firstName+lastName;	
+})
+
 Vue.filter('getFullAddress',function(nameObject){
 
 	if (nameObject && Object.keys(nameObject).length) {
