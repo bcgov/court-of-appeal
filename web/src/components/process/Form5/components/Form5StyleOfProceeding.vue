@@ -126,17 +126,17 @@
                 <b-col cols="3" style="font-weight: 700;">Date the Appeal will be Heard: 
                                 
                 </b-col>
-                <b-col class="ml-3" style="padding: 0;">                     
-
-                    <b-form-datepicker
-                        style="width: 20rem;" 
-                        size="md"
-                        v-model="form5Info.dateOfAppealHearing"
-                        placeholder="Hearing Date*"
-                        :state ="state.dateOfAppealHearing"
-                        locale="en-US">
-                    </b-form-datepicker>
-
+                <b-col class="ml-3" style="padding: 0;">  
+                    <b-card class="mt-2" style="padding: 0; float: left;" :border-variant="state.dateOfAppealHearing == false?'danger': 'dark'">
+                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                            <v-date-picker
+                                v-model="form5Info.dateOfAppealHearing"                           
+                                color="warning"             
+                                :allowed-dates="allowedDates"                            
+                                header-color="red"
+                            ></v-date-picker>                            
+                        </v-app>    
+                    </b-card>
                 </b-col>
             </b-row>
 
@@ -255,11 +255,12 @@
 
 <script lang="ts">
 
+import { Component, Vue } from 'vue-property-decorator';
+import moment from 'moment-timezone';
+import { namespace } from "vuex-class";
+
 import { form5DataInfoType } from '@/types/Information/Form5';
 import { partiesDataJsonDataType } from '@/types/Information/json';
-import { Component, Vue } from 'vue-property-decorator';
-
-import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
@@ -385,6 +386,12 @@ export default class Form5StyleOfProceeding extends Vue {
             authorizedName:null
         }
         this.dataReady = true; 
+    }
+
+    public allowedDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+           
+        return (date >= day);           
     }
 
     public checkStates(){        
@@ -515,5 +522,10 @@ export default class Form5StyleOfProceeding extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" src="@/styles/_custom_vuetify.scss" scoped>
+
+
 </style>
+
+
+
