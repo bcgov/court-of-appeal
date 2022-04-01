@@ -12,12 +12,12 @@
             </b-row> 
             
             <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 mt-4" style="font-size: 14px;">
+                <b-row class="mx-5 mt-4" style="font-size: 14px;">
                     Your Notice of Settlement or Abandonment form has been submitted.  Please click on 
                     the CSO Package number below to retrieve a filed copy of your document.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px;">
-                    <b>NOTE:</b>  In accordance with the Court of Appeal Rule 44, you must serve 
+                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
+                    <b class="mr-2">NOTE:</b>  In accordance with the Court of Appeal Rule 44, you must serve 
                     each party with a filed copy of the Notice of Settlement or Abandonment.
                 </b-row>
                 <b-row class="ml-5">

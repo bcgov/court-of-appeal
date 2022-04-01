@@ -164,19 +164,7 @@
                         class="text-primary"
                         v-b-tooltip.hover
                         scale="1.1"
-                        title="The address where you would like to receive documents."/>
-                    <div v-if="getServiceInfoAutoFillCondition" style="font-weight: 400;" >
-                        Select a contact name to auto-fill the address.
-                    </div>            
-                </b-col>
-                <b-col>             
-                    <b-form-select 
-                        v-if="getServiceInfoAutoFillCondition" 
-                        class="mt-3"                     
-                        @change="toggleRepresentation"
-                        v-model="respondentName"                    
-                        :options="respondentNames">
-                    </b-form-select>
+                        title="The address where you would like to receive documents."/>                  
                 </b-col>
             </b-row>
 
@@ -678,6 +666,8 @@ export default class Form18StyleOfProceeding extends Vue {
            
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
         this.state.selfRepresented = selfRep==null && !changeRep? false :null
+
+        console.log(this.state)
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -752,12 +742,7 @@ export default class Form18StyleOfProceeding extends Vue {
     get getServiceInfoCondition(){
         return ((this.form18Info.selfRepresented && !this.form18Info.changeRepresentation) ||
                 (this.form18Info.newRepresentation == 'Self-represented' && this.form18Info.changeRepresentation))
-    }
-
-    get  getServiceInfoAutoFillCondition(){
-        return ((this.form18Info.selfRepresented==false && this.form18Info.changeRepresentation ==false) 
-                ||(this.form18Info.newRepresentation == 'Lawyer' && this.form18Info.changeRepresentation==true))
-    }
+    }   
 }
 </script>
 

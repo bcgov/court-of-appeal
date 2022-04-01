@@ -41,6 +41,7 @@
             style="left: 35%"
             :twoPages="false"
             stepTitle="Apply for Leave to Appeal"
+            stepTitleOptional="(Optional)"
             @action="displayWindow('Apply for Leave to Appeal')"
             @completed="completed"            
             order=2
