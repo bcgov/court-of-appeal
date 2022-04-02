@@ -20,7 +20,7 @@ const form1State = namespace("Form1");
 import { supremeCourtCaseJsonDataInfoType } from '@/types/Information/json';
 import Form1CaseInformationSearch from './Form1CaseInformationSearch.vue';
 import FillForm1 from './fillForm1/FillForm1.vue';
-import { form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType } from '@/types/Information/Form1';
 
 @Component({
     components: {           
@@ -34,7 +34,7 @@ export default class Form1CaseInformation extends Vue {
     public currentNoticeOfAppealId: string;
     
     @form1State.State
-    public form1Info: form1SubmissionDataInfoType;
+    public form1Info: form1DataInfoType;
 
     @informationState.State
     public supremeCourtCaseJson: supremeCourtCaseJsonDataInfoType;
@@ -43,7 +43,7 @@ export default class Form1CaseInformation extends Vue {
     public UpdateSupremeCourtCaseJson!: (newSupremeCourtCaseJson: supremeCourtCaseJsonDataInfoType) => void 
   
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void

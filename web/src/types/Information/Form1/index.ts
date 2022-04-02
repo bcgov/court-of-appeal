@@ -25,7 +25,7 @@ export interface form1SearchInfoType {
     location: string;    
 }
 
-export interface form1SubmissionDataInfoType {
+export interface form1DataInfoType {
     selfRepresenting: boolean;
     appealingProvincialCourtOrder: boolean;
     insideTimeLimit: boolean;
@@ -36,46 +36,50 @@ export interface form1SubmissionDataInfoType {
     appealingScFlaDivorce: boolean;
     appealInvolvesChild: boolean;
     appealTribunal: boolean;
-    tribunalType: string;//
-    tribunalLocationOfOrder: string;//
-    tribunalDateOfOrder: string;//
-    tribunalOriginalDecisionMaker: string;//
+    tribunalType: string;
+    tribunalLocationOfOrder: string;
+    tribunalDateOfOrder: string;
+    tribunalOriginalDecisionMaker?: string;
+    applyLeave: boolean;
     parties: form1PartiesInfoType[];
-    manualSop?: manualSopInfoType[];  //
+    manualSop?: manualSopInfoType[];
     readOnlyUsers: number[];
     readWriteUsers: number[];
-    lowerCourtLevelCd: string;//
-    lowerCourtLevelName: string;//
-    lowerCourtClassCd: string;//
-    lowerCourtClassName: string;//
-    lowerCourtFileNo: string;//
-    lowerCourtRegistryId: string;//
-    lowerCourtRegistryName: string;//
-    lowerCourtStyleOfCause: string;//  
-    lowerCourtInitiatingDocument: string;//    
-    appealSubmissionDeadline: string;//
+    lowerCourtLevelCd: string;
+    lowerCourtLevelName: string;
+    lowerCourtClassCd: string;
+    lowerCourtClassName: string;
+    lowerCourtFileNo: string;
+    lowerCourtRegistryId: string;
+    lowerCourtRegistryName: string;
+    lowerCourtStyleOfCause: string; 
+    lowerCourtInitiatingDocument: string;  
+    appealSubmissionDeadline: string;
     isPastDeadline?: boolean;
     id?: string;    
-    ceisFileId: number;//
-    nameOfJudge: string; //
-    honorificTitle: string;//
-    dateOfJudgement: string;//
-    trialDurationDays: string; // 
+    ceisFileId?: number;
+    nameOfJudge: string; 
+    honorificTitle: string;
+    dateOfJudgement: string;
+    trialDurationDays: string;
     protectionOrder: boolean;
     handTypedNoSearch: boolean;
-    appealingFirm: string;//
-    appealingFirmAddress: string;//
-    toRespondents: string; //
-    respondentSolicitor: string;//
-    wasSupremeAppeal: boolean; //
-    appealFrom: string; //
-    decisionMaker?: string;//    
-    refOptional?: string; // 
-    involves: string; //
-    partOfJudgment?: string;//
-    electronicallyFiled: string; //    
-    orderSought: string; //
-    
+    appealingFirm: string;
+    appealingFirmAddress: string;
+    toRespondents: string; 
+    respondentSolicitor: string;
+    wasSupremeAppeal: boolean;
+    appealFrom: string;
+    decisionMaker?: string;  
+    refOptional?: string;
+    involves: string[];
+    partOfJudgment?: string;
+    electronicallyFiled: string;        
+    orderSought: string;  
+    orderSealed: boolean;
+    dateSealed?: string;
+    orderBan: boolean;
+    dateBan?: string;  
     judgeFullName: string;
     respondents: form1PartiesInfoType[];    
     appellants: form1PartiesInfoType[];
@@ -87,6 +91,7 @@ export interface form1StatesInfoType {
     tribunalLocationOfOrder: null | boolean;
     tribunalDateOfOrder: null | boolean;
     tribunalOriginalDecisionMaker: null | boolean;
+    applyLeave: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;
@@ -96,6 +101,10 @@ export interface form1StatesInfoType {
     involves: null | boolean;
     partOfJudgment: null | boolean;
     orderSought: null | boolean;
+    orderSealed: null | boolean;
+    dateSealed: null | boolean;
+    orderBan: null | boolean;
+    dateBan: null | boolean;
     mainAppellant: null | boolean;
     serviceAddress: null | boolean;
     validServiceAddress: null | boolean;

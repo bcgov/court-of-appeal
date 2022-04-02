@@ -1,7 +1,7 @@
 <template>
     <b-card no-body class="border-white" >
 
-        <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Order Sought</p>    
+        <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Relief Sought</p>    
 
         <p class="ml-4">
             This is where you set out the order that you are asking the Court of Appeal to make. 

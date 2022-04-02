@@ -1,4 +1,4 @@
-import { userAccessInfoType, form1StatesInfoType, form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { userAccessInfoType, form1StatesInfoType, form1DataInfoType } from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -6,28 +6,28 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 })
 class Information extends VuexModule {    
 
-    public form1FormsJson: form1SubmissionDataInfoType[] = [];
-    public form1Info = {} as form1SubmissionDataInfoType;
+    public form1FormsJson: form1DataInfoType[] = [];
+    public form1Info = {} as form1DataInfoType;
     public form1AccessInfo: userAccessInfoType[] = [];
     public form1InfoStates = {} as form1StatesInfoType;   
     public currentNoticeOfAppealId = null;    
     public form1ManualSopOrder: number[] = []
 
     @Mutation
-    public setForm1FormsJson(form1FormsJson: form1SubmissionDataInfoType[]): void {   
+    public setForm1FormsJson(form1FormsJson: form1DataInfoType[]): void {   
         this.form1FormsJson = form1FormsJson;
     }    
     @Action
-    public UpdateForm1FormsJson(newForm1FormsJson: form1SubmissionDataInfoType[]): void {
+    public UpdateForm1FormsJson(newForm1FormsJson: form1DataInfoType[]): void {
         this.context.commit('setForm1FormsJson', newForm1FormsJson);
     } 
 
     @Mutation
-    public setForm1Info(form1Info: form1SubmissionDataInfoType): void {   
+    public setForm1Info(form1Info: form1DataInfoType): void {   
         this.form1Info = form1Info;
     }    
     @Action
-    public UpdateForm1Info(newForm1Info: form1SubmissionDataInfoType): void {
+    public UpdateForm1Info(newForm1Info: form1DataInfoType): void {
         this.context.commit('setForm1Info', newForm1Info);
     }
 

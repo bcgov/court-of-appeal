@@ -52,7 +52,7 @@ const form1State = namespace("Form1");
 
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { locationsInfoType } from '@/types/Common';
-import { accountInfoType, userAccessInfoType, form1SubmissionDataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
+import { accountInfoType, userAccessInfoType, form1DataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
 import FillForm1SummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1SummaryInfo.vue";
 import FillForm1TribunalSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1TribunalSummaryInfo.vue";
@@ -85,7 +85,7 @@ export default class FillForm1 extends Vue {
     public form1AccessInfo!: userAccessInfoType[];
 
     @form1State.State
-    public form1Info: form1SubmissionDataInfoType;
+    public form1Info: form1DataInfoType;
 
     @informationState.State
     public supremeCourtOrderJson: supremeCourtOrdersJsonInfoType;
@@ -103,7 +103,7 @@ export default class FillForm1 extends Vue {
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     @form1State.Action
     public UpdateForm1InfoStates!: (newForm1StatesInfo: form1StatesInfoType) => void
@@ -180,7 +180,17 @@ export default class FillForm1 extends Vue {
 
     public checkWithinAppealPeriod(){
         return !this.form1Info.isPastDeadline;
-    }     
+    }  
+    
+    public checkDay(day: string){
+
+        let valid = false;
+        if ((Number(day)>0) && (Number(day) % 1 == 0 || Number(day) % 1 == 0.5)){
+            valid = true;
+        }       
+
+        return valid;
+    }
 
     public checkStates(){
 
@@ -188,14 +198,34 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates = this.form1InfoStates;
 
-        this.fieldStates.appearanceDays = !(this.form1Info.trialDurationDays && Number(this.form1Info.trialDurationDays)>0)? false : null;
+        if (this.form1Info.appealTribunal){
+            this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;
+            this.fieldStates.tribunalLocationOfOrder = !this.form1Info.tribunalLocationOfOrder? false : null;
+            this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
+            this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
+        } else {
+            this.fieldStates.tribunalType = null;
+            this.fieldStates.tribunalLocationOfOrder = null;
+            this.fieldStates.tribunalDateOfOrder = null;
+            this.fieldStates.tribunalOriginalDecisionMaker = null;
+        }      
+
+        const numberOfDays = this.form1Info.trialDurationDays?.trim();
+        this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
+        this.fieldStates.applyLeave = !(this.form1Info.applyLeave != null)? false : null;
         this.fieldStates.respondents = !(this.form1Info.respondents && this.form1Info.respondents.length > 0 )? false : null;
         this.fieldStates.appellants = !(this.form1Info.appellants && this.form1Info.appellants.length > 0 )? false : null;
         this.fieldStates.appealFrom = !this.form1Info.appealFrom? false : null;
         this.fieldStates.wasSupremeAppeal = !(this.form1Info.wasSupremeAppeal != null)? false : null;
         this.fieldStates.decisionMaker = (this.form1Info.wasSupremeAppeal && !this.form1Info.decisionMaker)? false : null;        
-        this.fieldStates.involves = !this.form1Info.involves? false : null;
+        this.fieldStates.involves = !(this.form1Info.involves && this.form1Info.involves.length > 0)? false : null;
         this.fieldStates.orderSought = !this.form1Info.orderSought? false : null;
+
+        this.fieldStates.orderSealed = !(this.form1Info.orderSealed != null)? false : null;
+        this.fieldStates.dateSealed = (this.form1Info.orderSealed && !this.form1Info.dateSealed)? false : null;
+        this.fieldStates.orderBan = !(this.form1Info.orderBan != null)? false : null;
+        this.fieldStates.dateBan = (this.form1Info.orderBan && !this.form1Info.dateBan)? false : null;
+      
         this.fieldStates.mainAppellant = !this.form1Info.appealingFirm? false : null;
         this.fieldStates.serviceAddress = !this.form1Info.appealingFirmAddress? false : null;
 

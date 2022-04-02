@@ -112,7 +112,7 @@ const form20State = namespace("Form20");
 
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
-import { form1SubmissionDataInfoType } from "@/types/Information/Form1";
+import { form1DataInfoType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
@@ -141,7 +141,7 @@ export default class MyDocumentsTableBrief extends Vue {
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
     @form1State.State
-    public form1FormsJson!: form1SubmissionDataInfoType[];
+    public form1FormsJson!: form1DataInfoType[];
 
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void

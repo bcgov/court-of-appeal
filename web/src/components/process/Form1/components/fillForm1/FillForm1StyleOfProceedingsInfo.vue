@@ -9,6 +9,7 @@
                 The order of the names will be handled for you.
             </p>
             <b-table
+                v-if="styleOfProceedingsInfo.parties.length>0"
                 :key="updateTable"                 
                 :items="styleOfProceedingsInfo.parties"
                 :fields="partiesFields"
@@ -187,7 +188,7 @@ import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
-import { form1SubmissionDataInfoType, form1StatesInfoType, lookupsInfoType, form1PartiesStatesInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, form1StatesInfoType, lookupsInfoType, form1PartiesStatesInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{ 
@@ -197,7 +198,7 @@ import { form1SubmissionDataInfoType, form1StatesInfoType, lookupsInfoType, form
 export default class FillForm1StyleOfProceedingsInfo extends Vue {    
 
     @form1State.State
-    public form1Info: form1SubmissionDataInfoType;
+    public form1Info: form1DataInfoType;
 
     @form1State.State
     public form1InfoStates: form1StatesInfoType;
@@ -209,7 +210,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     public lookups!: lookupsInfoType;    
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     partiesFields = [
         {
@@ -256,7 +257,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     moveLeft = false;
     moveApp = false;
     
-    styleOfProceedingsInfo = {} as form1SubmissionDataInfoType;
+    styleOfProceedingsInfo = {} as form1DataInfoType;
     form1PartiesStates = {} as form1PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;
 
@@ -287,7 +288,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.appealingFirm = this.userName;
         
         styleOfProceedings.appellants = [];
-        styleOfProceedings.respondents = [];         
+        styleOfProceedings.respondents = [];                 
 
         for (const partyInfo of styleOfProceedings.parties){
              

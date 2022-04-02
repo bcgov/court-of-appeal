@@ -173,7 +173,7 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
-import { form1SubmissionDataInfoType } from "@/types/Information/Form1";
+import { form1DataInfoType } from "@/types/Information/Form1";
 
 @Component
 export default class TableForm1 extends Vue {
@@ -182,7 +182,7 @@ export default class TableForm1 extends Vue {
     enableActions!: boolean;
     
     @form1State.State
-    public form1FormsJson!: form1SubmissionDataInfoType[];
+    public form1FormsJson!: form1DataInfoType[];
     
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
@@ -310,7 +310,7 @@ export default class TableForm1 extends Vue {
         }     
     }
 
-    public resumeApplication(fileInfo: form1SubmissionDataInfoType) {
+    public resumeApplication(fileInfo: form1DataInfoType) {
         const noticeId = fileInfo.id.toString()
         console.log(noticeId)
         this.UpdateCurrentNoticeOfAppealId(noticeId)       

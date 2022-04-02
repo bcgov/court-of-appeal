@@ -41,7 +41,7 @@ const form20State = namespace("Form20");
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { caseJsonDataType } from '@/types/Information/json';
-import { form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
@@ -66,7 +66,7 @@ export default class MyDocuments extends Vue {
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
     @form1State.Action
-    public UpdateForm1FormsJson!: (newForm1FormsJson: form1SubmissionDataInfoType[])=> void
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void

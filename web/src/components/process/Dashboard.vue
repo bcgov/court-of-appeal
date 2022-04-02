@@ -106,7 +106,7 @@ import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json'
 import { pathwayTypeInfoType } from '@/types/Information';
 
 import { locationsInfoType } from '@/types/Common';
-import { form1SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, lookupsInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
@@ -150,7 +150,7 @@ export default class DashboardPage extends Vue {
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
     @form1State.Action
-    public UpdateForm1FormsJson!: (newForm1FormsJson: form1SubmissionDataInfoType[])=> void
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
@@ -265,8 +265,7 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form19/forms'));
         calls.push(this.$http.get('/form20/forms'));
 
-        Promise.all(calls).then(values => { 
-            // console.log(values)
+        Promise.all(calls).then(values => {
             
             if(values[0]?.data?.steps){
 

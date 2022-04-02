@@ -90,7 +90,7 @@ const form1State = namespace("Form1");
 
 import FillForm1HeaderInfo from "@/components/process/Form1/components/fillForm1/FillForm1HeaderInfo.vue";
 import { locationsInfoType } from '@/types/Common';
-import { form1StatesInfoType, form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { form1StatesInfoType, form1DataInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
@@ -106,10 +106,10 @@ export default class FillForm1SummaryInfo extends Vue {
     public form1InfoStates: form1StatesInfoType;
 
     @form1State.State
-    public form1Info: form1SubmissionDataInfoType;
+    public form1Info: form1DataInfoType;
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     levelOfCourt = "Supreme Court of BC";  
     judgeFullName = "";

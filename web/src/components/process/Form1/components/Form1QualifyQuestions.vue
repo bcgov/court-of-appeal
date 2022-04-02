@@ -371,7 +371,7 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealInvolvesChild==false?'border w-25 border-danger':'' "
+                    :class="state.appealInvolvesChild == false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealInvolvesChild"
                     :options="responseOptions">               
                 </b-form-radio-group>
@@ -393,7 +393,7 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealTribunal=false?'border w-25 border-danger':'' "
+                    :class="state.appealTribunal == false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealTribunal"
                     :options="responseOptions">               
                 </b-form-radio-group>
@@ -443,21 +443,23 @@ export default class Form1QualifyQuestions extends Vue {
 
     mounted(){
         this.dataReady = false;
+        //TODO: add functionality to load data if id exists
         this.qualificationInfo = {} as form1QualificationInfoType;
         this.qualificationInfo.selfRepresenting = this.$store.state.Common.userSelfRepresented
         this.clearStates();
+        Vue.nextTick(()=> {
+                this.dataReady = true;
+            });
+        
     }
 
-    get qualificationResponse(){
-
-        if (!this.qualificationInfo.appealingSupremeCourtMaster &&           
+    get qualificationResponse(){       
+        if (this.qualificationInfo.appealingSupremeCourtMaster == false &&           
             this.checkStates()){
-
             return true;
-
         } else {
             return false;
-        }        
+        }             
     }
 
     @Watch('qualificationResponse')
@@ -468,25 +470,22 @@ export default class Form1QualifyQuestions extends Vue {
             this.qualificationInfo);
     }  
 
-    public clearStates(){
+    public clearStates(){       
         this.state = {
-            selfRepresenting: null,
-            appealingProvincialCourtOrder: null,        
-            insideTimeLimit: null, 
-            appealingBankruptcy: null, 
-            appealingFeesWaived: null,
-            appealingSupremeCourtMaster: null,
+            selfRepresenting:null,
+            appealingProvincialCourtOrder:null,        
+            insideTimeLimit:null, 
+            appealingBankruptcy:null, 
+            appealingFeesWaived:null,
+            appealingSupremeCourtMaster:null,
             appealingSupremeCourtOrder:null,
             appealingScFlaDivorce:null,
-            appealInvolvesChild: null,
-            appealTribunal: null
-        }
-        this.dataReady = true; 
+            appealInvolvesChild:null,
+            appealTribunal:null
+        }         
     }
     
-    public checkStates(){  
-        console.log(this.qualificationInfo)      
-        
+    public checkStates(){       
         this.state.selfRepresenting = (this.qualificationInfo.selfRepresenting == null)? false : null;
         this.state.appealingProvincialCourtOrder = (this.qualificationInfo.appealingProvincialCourtOrder == null)? false : null;
         this.state.insideTimeLimit = (this.qualificationInfo.insideTimeLimit == null)? false : null; 

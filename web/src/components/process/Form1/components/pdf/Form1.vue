@@ -48,7 +48,7 @@ import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
 import Form1Layout from "./Form1Layout.vue";
-import { form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType } from '@/types/Information/Form1';
 
 import moment from 'moment';
 
@@ -63,9 +63,9 @@ export default class Form1 extends Vue {
     public currentNoticeOfAppealId: string;  
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
-    result = {} as form1SubmissionDataInfoType;
+    result = {} as form1DataInfoType;
     dataReady = false;
    
     mounted(){

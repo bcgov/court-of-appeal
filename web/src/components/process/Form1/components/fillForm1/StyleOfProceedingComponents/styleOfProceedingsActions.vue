@@ -7,7 +7,7 @@
                     style="padding-right: 0;" 
                     class="bg-transparent border-light text-primary mr-2"
                     @click="addParties"
-                    >Add another Party
+                    >Add Party
                     <b-icon-plus class="ml-1 mr-0" variant="primary" scale="1.5" />
                 </b-button>
            
@@ -602,7 +602,7 @@ import AddRepresentativeForm from '../AddRepresentativeForm.vue';
 import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
 import sortStyleOfProceeding from './util/sortStyleOfProceeding';
-import { form1SubmissionDataInfoType, lookupsInfoType, form1PartiesInfoType, form1PartiesStatesInfoType, manualSopInfoType, aliasInfoType, representativeInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, lookupsInfoType, form1PartiesInfoType, form1PartiesStatesInfoType, manualSopInfoType, aliasInfoType, representativeInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{        
@@ -616,7 +616,7 @@ import { form1SubmissionDataInfoType, lookupsInfoType, form1PartiesInfoType, for
 export default class styleOfProceedingsActions extends Vue {     
 
     @form1State.State
-    public form1Info: form1SubmissionDataInfoType;    
+    public form1Info: form1DataInfoType;    
 
     @commonState.State
     public userName!: string;
@@ -625,7 +625,7 @@ export default class styleOfProceedingsActions extends Vue {
     public lookups!: lookupsInfoType;    
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     @form1State.State
     public form1ManualSopOrder!: number[];
@@ -739,7 +739,7 @@ export default class styleOfProceedingsActions extends Vue {
 
     respondentSolicitors: string[] = [];
     respondents: string[] = [];
-    styleOfProceedingsInfo = {} as form1SubmissionDataInfoType;
+    styleOfProceedingsInfo = {} as form1DataInfoType;
     form1PartiesStates = {} as form1PartiesStatesInfoType; 
     editStyleOfProceedingsEnabled = true;   
     noRolePartyManualSop: manualSopInfoType[] = [];

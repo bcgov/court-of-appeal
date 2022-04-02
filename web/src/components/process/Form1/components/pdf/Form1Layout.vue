@@ -353,7 +353,7 @@ const form1State = namespace("Form1");
 
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
 import UnderlineForm from "@/components/utils/PopulateForms/components/UnderlineForm.vue";
-import { form1SubmissionDataInfoType, manualSopInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, manualSopInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{       
@@ -364,13 +364,13 @@ import { form1SubmissionDataInfoType, manualSopInfoType, form1PartiesInfoType } 
 export default class Form1Layout extends Vue {
 
     @Prop({required:true})
-    result!: form1SubmissionDataInfoType; 
+    result!: form1DataInfoType; 
 
     @informationState.State
     public caseLocation: locationsInfoType;
 
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];

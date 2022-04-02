@@ -49,7 +49,7 @@ const form1State = namespace("Form1");
 
 import Form1DidYouKnow from "@/components/process/Form1/components/Form1DidYouKnow.vue";
 import Form1QualifyQuestions from "@/components/process/Form1/components/Form1QualifyQuestions.vue";
-import { accountInfoType, form1QualificationInfoType, form1SubmissionDataInfoType } from '@/types/Information/Form1';
+import { accountInfoType, form1QualificationInfoType, form1DataInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
@@ -63,7 +63,7 @@ export default class ChecklistForm1 extends Vue {
     public UpdateAccountInfo!: (newAccountInfo: accountInfoType) => void
    
     @form1State.Action
-    public UpdateForm1Info!: (newForm1Info: form1SubmissionDataInfoType) => void
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     disableContinue = true;
     businessAccount = true;
@@ -100,7 +100,7 @@ export default class ChecklistForm1 extends Vue {
 
     public navigateToForm1() {
 
-        const form1SubmissionData = {} as form1SubmissionDataInfoType;
+        const form1SubmissionData = {} as form1DataInfoType;
         form1SubmissionData.selfRepresenting = this.qualificationInfo.selfRepresenting;
         form1SubmissionData.appealingProvincialCourtOrder = this.qualificationInfo.appealingProvincialCourtOrder;
         form1SubmissionData.insideTimeLimit = this.qualificationInfo.insideTimeLimit;
@@ -111,6 +111,9 @@ export default class ChecklistForm1 extends Vue {
         form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;
         form1SubmissionData.appealInvolvesChild = this.qualificationInfo.appealInvolvesChild;
         form1SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
+        if (form1SubmissionData.appealTribunal){
+            form1SubmissionData.parties = [];
+        }
         this.UpdateForm1Info(form1SubmissionData);
 
         if (this.businessAccount){
