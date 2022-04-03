@@ -181,6 +181,7 @@ export default class MyDocumentsTableBrief extends Vue {
     public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
 
+
     documentsList = []
     documentsFields =[
         { key: "formName",    label: "Form",          sortable: true,  thClass: 'border-dark border-bottom',},
@@ -480,8 +481,13 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 20'){
             this.UpdateCurrentNoticeOfObjectionToWithdrawalId(item.id);
             this.$router.push({name: "fill-form20" });
+        
+        }else if(item.formName=='Form 3'){
+            this.UpdateCurrentNoticeOfCrossAppealId(item.id);
+            this.$router.push({name: "fill-form3" });
 
         }
+
     }
 
    

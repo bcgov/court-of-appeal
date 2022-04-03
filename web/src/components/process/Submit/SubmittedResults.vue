@@ -4,7 +4,7 @@
         <cancel-submit-form-2 v-else-if="result=='cancel'"/>
         <error-submit-form-2 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'NCA'">
+    <div v-else-if="(formType == 'NCA')||(formType == 'NCAA')||(formType == 'NCAL')">
         <success-submit-form-3 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-3 v-else-if="result=='cancel'"/>
         <error-submit-form-3 :errMsg="errorMsg" v-else-if="result=='error'"/>        

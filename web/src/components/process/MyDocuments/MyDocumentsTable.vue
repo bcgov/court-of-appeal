@@ -16,11 +16,11 @@
             </b-col> 
         </b-row>
         
-        <table-form-2 class="mt-0 mx-0" :enableActions="enableActions" @reload="reload"/>        
+        <table-form-1 :class="enableActions?'mt-1 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-2 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>        
         <table-form-3 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-5 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
-        <table-form-6 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
-        <table-form-1 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-6 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>        
         <table-form-9 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-18 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-19 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>

@@ -97,11 +97,11 @@ export default class NewFormModal extends Vue {
     public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
     forms = [
+        {name:'form1', title:'Notice of Appeal (Form 1)'},
         {name:'form2', title:'Notice of Appearance (Form 2)'},
         {name:'form3', title:'Notice of Cross Appeal (Form 3)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
-        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},
-        {name:'form1', title:'Notice of Appeal (Form 1)'},
+        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},        
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},

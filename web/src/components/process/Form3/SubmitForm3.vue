@@ -55,13 +55,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import { GetForm3PdfType } from "./components/Form3PdfType"
+
 import { namespace } from "vuex-class";
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
 import Form3ProcessHeader from "@/components/process/Form3/components/Form3ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form3StatusInfoType } from '@/types/Information/Form3';
+import { form3DataInfoType, form3StatusInfoType } from '@/types/Information/Form3';
 import { packageInfoType } from '@/types/Information';
 
 @Component({
@@ -74,6 +76,9 @@ export default class SubmitForm3 extends Vue {
 
     @form3State.State
     public currentNoticeOfCrossAppealId: string;
+
+    @form3State.State
+    public form3Info: form3DataInfoType;
 
     stepsCompleted = {} as form3StatusInfoType;  
     mountedData = false; 
@@ -107,7 +112,11 @@ export default class SubmitForm3 extends Vue {
             }
         }
 
-        this.$http.post(url, header)
+        const body = {
+            document_type: GetForm3PdfType(this.form3Info) //"NCA"
+        }
+
+        this.$http.post(url, body, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

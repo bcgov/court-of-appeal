@@ -13,7 +13,7 @@
 
         <b-row v-if="enableActions && documentsList.length" class="bg-form3 mb-2 py-1 mx-0">
             <b-col cols="10">
-                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Hearing of Appeal (Form 3)</div>
+                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Cross Appeal (Form 3)</div>
             </b-col>
             <b-col  cols="2">
                 <b-button 
@@ -45,7 +45,7 @@
 
         <b-row v-else-if="documentsList.length" class="bg-select mb-0 py-1 mx-0">
             <b-col cols="12">
-                <div style="font-weight:600; line-height:0.6rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Hearing of Appeal (Form 3) </div>
+                <div style="font-weight:600; line-height:0.6rem; font-size:10pt; margin:0 0 0 0rem;" class="p-0 text-center text-primary">Notice of Cross Appeal (Form 3) </div>
             </b-col>
         </b-row>
        
@@ -166,7 +166,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Hearing of Appeal </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Cross Appeal </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
