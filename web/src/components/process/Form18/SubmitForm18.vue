@@ -55,13 +55,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import {GetForm18PdfType} from "./components/Form18PdfType"
+
 import { namespace } from "vuex-class";
 import "@/store/modules/forms/form18";
 const form18State = namespace("Form18");
 
 import Form18ProcessHeader from "@/components/process/Form18/components/Form18ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form18StatusInfoType } from '@/types/Information/Form18';
+import { form18DataInfoType, form18StatusInfoType } from '@/types/Information/Form18';
 import { packageInfoType } from '@/types/Information';
 
 @Component({
@@ -74,6 +76,9 @@ export default class SubmitForm18 extends Vue {
 
     @form18State.State
     public currentNoticeOfRepChangeAddressId: string;
+
+    @form18State.State
+    public form18Info: form18DataInfoType;
 
     stepsCompleted = {} as form18StatusInfoType;  
     mountedData = false; 
@@ -107,7 +112,11 @@ export default class SubmitForm18 extends Vue {
             }
         }
 
-        this.$http.post(url, header)
+        const body = {
+            document_type: GetForm18PdfType(this.form18Info) //"CNAC"
+        }
+
+        this.$http.post(url, body, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

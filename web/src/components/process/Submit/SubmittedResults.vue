@@ -19,7 +19,7 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'CNAC'">
+    <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
         <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -34,7 +34,7 @@
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else>
+    <div v-else-if="formType == 'NAA'">
         <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-1 v-else-if="result=='cancel'"/>
         <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
