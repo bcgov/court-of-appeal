@@ -141,9 +141,9 @@ export default class Form1 extends Vue {
        
         this.$http.get('/form1/forms/'+this.currentNoticeOfAppealId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                this.result = response.data
+                this.result = response.data.data
                 this.UpdateForm1Info(this.result)                         
                 this.dataReady = true;
                 Vue.nextTick(()=> this.onPrint())

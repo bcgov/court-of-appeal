@@ -112,7 +112,7 @@ const form20State = namespace("Form20");
 
 import { caseJsonDataType } from "@/types/Information/json";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
-import { form1DataInfoType } from "@/types/Information/Form1";
+import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
@@ -141,7 +141,7 @@ export default class MyDocumentsTableBrief extends Vue {
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
     @form1State.State
-    public form1FormsJson!: form1DataInfoType[];
+    public form1FormsJson!: form1FormsJsonDataType[];
 
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
@@ -274,13 +274,13 @@ export default class MyDocumentsTableBrief extends Vue {
                 packageNum:'',
                 packageUrl:'',                
             };
-            doc.id = docJson['noticeOfAppealId']
-            doc.fileNumber = docJson.lowerCourtFileNo;
-            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
-            doc.modifiedDate = docJson['dateModified'];
-            doc.packageUrl = docJson['package_url'];
-            doc.packageNum = docJson['package_number'];
-            doc.pdfType = docJson['pdf_types'];
+            doc.id = String(docJson.id);
+            doc.fileNumber = docJson.data.lowerCourtFileNo;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified;
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
             this.documentsList.push(doc);
         }
 

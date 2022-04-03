@@ -106,7 +106,7 @@ import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json'
 import { pathwayTypeInfoType } from '@/types/Information';
 
 import { locationsInfoType } from '@/types/Common';
-import { form1DataInfoType, lookupsInfoType } from '@/types/Information/Form1';
+import { form1FormsJsonDataType, lookupsInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
@@ -150,7 +150,7 @@ export default class DashboardPage extends Vue {
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
     @form1State.Action
-    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1FormsJsonDataType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
@@ -258,12 +258,12 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/lookup/'));
         calls.push(this.$http.get('/case/'));
         calls.push(this.$http.get('/form5/forms'));
-        calls.push(this.$http.get('/form6/forms'));
-        calls.push(this.$http.get('/form1/forms'));
+        calls.push(this.$http.get('/form6/forms'));        
         calls.push(this.$http.get('/form9/forms'));
         calls.push(this.$http.get('/form18/forms'));
         calls.push(this.$http.get('/form19/forms'));
         calls.push(this.$http.get('/form20/forms'));
+        calls.push(this.$http.get('/form1/forms'));
 
         Promise.all(calls).then(values => {
             
@@ -281,12 +281,12 @@ export default class DashboardPage extends Vue {
             
             if(values[2]?.data) this.UpdateCasesJson(values[2]?.data)
             if(values[3]?.data) this.UpdateForm5FormsJson(values[3]?.data)
-            if(values[4]?.data) this.UpdateForm6FormsJson(values[4]?.data)
-            if(values[5]?.data) this.UpdateForm1FormsJson(values[5]?.data)
-            if(values[6]?.data) this.UpdateForm9FormsJson(values[6]?.data)
-            if(values[7]?.data) this.UpdateForm18FormsJson(values[7]?.data)
-            if(values[8]?.data) this.UpdateForm19FormsJson(values[8]?.data)
-            if(values[9]?.data) this.UpdateForm20FormsJson(values[9]?.data)
+            if(values[4]?.data) this.UpdateForm6FormsJson(values[4]?.data)            
+            if(values[5]?.data) this.UpdateForm9FormsJson(values[5]?.data)
+            if(values[6]?.data) this.UpdateForm18FormsJson(values[6]?.data)
+            if(values[7]?.data) this.UpdateForm19FormsJson(values[7]?.data)
+            if(values[8]?.data) this.UpdateForm20FormsJson(values[8]?.data)
+            if(values[9]?.data) this.UpdateForm1FormsJson(values[9]?.data)
 
             this.dataLoaded = true;
 

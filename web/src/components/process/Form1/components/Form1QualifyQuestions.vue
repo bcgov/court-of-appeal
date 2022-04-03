@@ -17,8 +17,7 @@
                     Are you representing yourself?
                 </p>               
 
-                <b-form-radio-group 
-                    :class="state.selfRepresenting==false?'border w-25 border-danger':''"
+                <b-form-radio-group                     
                     v-model="qualificationInfo.selfRepresenting"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -57,7 +56,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingProvincialCourtOrder==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingProvincialCourtOrder"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -115,7 +113,6 @@
                 </p>
 
                 <b-form-radio-group 
-                    :class="state.insideTimeLimit==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.insideTimeLimit"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -148,7 +145,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingBankruptcy==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingBankruptcy"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -200,7 +196,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingFeesWaived==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingFeesWaived"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -243,7 +238,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingSupremeCourtMaster==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingSupremeCourtMaster"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
@@ -297,7 +291,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingSupremeCourtOrder==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingSupremeCourtOrder"
                     :options="responseOptions">        
                 </b-form-radio-group> 
@@ -349,7 +342,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealingScFlaDivorce==false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealingScFlaDivorce"
                     :options="responseOptions">            
                 </b-form-radio-group>                                      
@@ -371,7 +363,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealInvolvesChild == false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealInvolvesChild"
                     :options="responseOptions">               
                 </b-form-radio-group>
@@ -393,7 +384,6 @@
                 </p>               
 
                 <b-form-radio-group 
-                    :class="state.appealTribunal == false?'border w-25 border-danger':'' "
                     v-model="qualificationInfo.appealTribunal"
                     :options="responseOptions">               
                 </b-form-radio-group>

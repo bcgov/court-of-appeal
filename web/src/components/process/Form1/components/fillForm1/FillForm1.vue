@@ -8,8 +8,8 @@
 
         <fill-form-1-summary-info v-else class="mx-2" @displayResults="displayResults"/>
 
-        <b-card class="mb-4 border-light bg-light">
-            <b-row class="ml-4 mt-0 font-weight-bold">Please complete the following fields:</b-row>
+        <b-card class="mb-2 border-light bg-light">
+            <b-row class="ml-0 mt-0 font-weight-bold">Please complete the following fields:</b-row>
         </b-card>
 
         <fill-form-1-common-info class="mx-2"/>
@@ -131,9 +131,9 @@ export default class FillForm1 extends Vue {
        
         this.$http.get('/form1/forms/'+this.currentNoticeOfAppealId)
         .then((response) => {
-            if(response?.data){            
+            if(response?.data?.data){            
                             
-                const form1Data = response.data                
+                const form1Data = response.data.data                
                 form1Data['appealSubmissionDeadline']=moment(form1Data['appealSubmissionDeadline']).local().format()
                 form1Data['dateOfJudgement']=moment(form1Data['dateOfJudgement']).local().format()
                 this.UpdateForm1Info(form1Data) 
@@ -262,33 +262,39 @@ export default class FillForm1 extends Vue {
             if (this.checkWithinAppealPeriod() ){ 
                 this.expiredDeadline = false;
 
-                if (!draft){
-                    if (!this.checkStates()){
-                        return
-                    }
-                }                    
-
-                const form1SubmissionData = this.getForm1Info();
+                if (!draft && !this.checkStates()){               
+                    return                    
+                }
+                
                 const options = {
                     method: method,
                     url: url,
-                    data: form1SubmissionData
+                    data: {
+                        data:this.form1Info,
+                        type:'Form1',
+                        description:'Notice of Appeal'
+                    }
                 }
+
                 this.saveInfo(options, draft); 
 
             } else {
                 this.expiredDeadline = true;               
             }
 
-        } else {           
+        } else { 
 
             const options = {
                 method: method,
                 url: url,
-                data: this.form1Info
+                data: {
+                    data:this.form1Info,
+                    type:'Form1',
+                    description:'Notice of Appeal'
+                }
             }
+            
             this.saveInfo(options, draft);
-
         }      
         
     }

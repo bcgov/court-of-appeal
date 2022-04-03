@@ -25,6 +25,20 @@ export interface form1SearchInfoType {
     location: string;    
 }
 
+export interface form1FormsJsonDataType {
+    id: number;
+    personId: number;
+    type: string;
+    status: string;
+    modified: string;
+    archive: boolean;
+    packageUrl?: string;
+    packageNumber?: string;
+    pdf_types: string;
+    data: form1DataInfoType;
+    description: string;
+}
+
 export interface form1DataInfoType {
     selfRepresenting: boolean;
     appealingProvincialCourtOrder: boolean;

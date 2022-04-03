@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" no-body class="mx-auto mb-4 border-light bg-light">
+    <b-card v-if="dataReady" no-body class="mb-4 border-light bg-light">
 
         <b-card class="mb-4 border-white bg-white">  
 

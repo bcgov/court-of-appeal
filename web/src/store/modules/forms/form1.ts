@@ -1,4 +1,4 @@
-import { userAccessInfoType, form1StatesInfoType, form1DataInfoType } from '@/types/Information/Form1';
+import { userAccessInfoType, form1StatesInfoType, form1DataInfoType, form1FormsJsonDataType} from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -6,7 +6,7 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 })
 class Information extends VuexModule {    
 
-    public form1FormsJson: form1DataInfoType[] = [];
+    public form1FormsJson: form1FormsJsonDataType[] = [];
     public form1Info = {} as form1DataInfoType;
     public form1AccessInfo: userAccessInfoType[] = [];
     public form1InfoStates = {} as form1StatesInfoType;   
@@ -14,11 +14,11 @@ class Information extends VuexModule {
     public form1ManualSopOrder: number[] = []
 
     @Mutation
-    public setForm1FormsJson(form1FormsJson: form1DataInfoType[]): void {   
+    public setForm1FormsJson(form1FormsJson: form1FormsJsonDataType[]): void {   
         this.form1FormsJson = form1FormsJson;
     }    
     @Action
-    public UpdateForm1FormsJson(newForm1FormsJson: form1DataInfoType[]): void {
+    public UpdateForm1FormsJson(newForm1FormsJson: form1FormsJsonDataType[]): void {
         this.context.commit('setForm1FormsJson', newForm1FormsJson);
     } 
 

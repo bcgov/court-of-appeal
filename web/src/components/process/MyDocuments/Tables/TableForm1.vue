@@ -173,7 +173,7 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
-import { form1DataInfoType } from "@/types/Information/Form1";
+import { form1DataInfoType, form1FormsJsonDataType } from "@/types/Information/Form1";
 
 @Component
 export default class TableForm1 extends Vue {
@@ -182,7 +182,7 @@ export default class TableForm1 extends Vue {
     enableActions!: boolean;
     
     @form1State.State
-    public form1FormsJson!: form1DataInfoType[];
+    public form1FormsJson!: form1FormsJsonDataType[];
     
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
@@ -291,16 +291,16 @@ export default class TableForm1 extends Vue {
             };
             
             doc.fileNumber = String(++count);
-            doc.id= docJson['noticeOfAppealId']
-            doc.lowerCourtFileNo = docJson.lowerCourtFileNo;
-            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
-            doc.modifiedDate = docJson['dateModified'];
+            doc.id= String(docJson.id)
+            doc.lowerCourtFileNo = docJson.data.lowerCourtFileNo;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified;
             doc.description = "Notice of Appeal"
-            doc.appealSubmissionDeadline = docJson['appealSubmissionDeadline']
-            doc.pdf_types = docJson['pdf_types']
+            doc.appealSubmissionDeadline = docJson.data.appealSubmissionDeadline;
+            doc.pdf_types = docJson.pdf_types
             // doc.description = Vue.filter('get-submission-fullname')(docJson.description.split(','));
-            doc.packageUrl = docJson['package_url'];
-            doc.packageNum = docJson['package_number'];
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
 
             this.documentsList.push(doc);
         }
@@ -382,13 +382,9 @@ export default class TableForm1 extends Vue {
 
     public confirmDeleteApplication() { 
         
-        // let pdfIds = ''       
-        // for(const fileId of this.applicationsToDelete)
-        //     pdfIds+= '&id='+fileId;
-        
         const data ={
             data:{
-                noticeOfAppealIds:this.applicationsToDeleteIds
+                ids:this.applicationsToDeleteIds
             }
         }
 
