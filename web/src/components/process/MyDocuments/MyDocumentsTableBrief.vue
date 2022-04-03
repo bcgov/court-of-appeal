@@ -98,8 +98,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form7";
-const form7State = namespace("Form7");
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
@@ -116,7 +116,7 @@ const form20State = namespace("Form20");
 import { caseJsonDataType } from "@/types/Information/json";
 import { form3FormsJsonDataType } from "@/types/Information/Form3";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
-import { form7SubmissionDataInfoType } from "@/types/Information/Form7";
+import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
@@ -150,10 +150,10 @@ export default class MyDocumentsTableBrief extends Vue {
     @form6State.Action
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
-    @form7State.State
-    public form7FormsJson!: form7SubmissionDataInfoType[];
+    @form1State.State
+    public form1FormsJson!: form1FormsJsonDataType[];
 
-    @form7State.Action
+    @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
     @form9State.State
@@ -294,13 +294,13 @@ export default class MyDocumentsTableBrief extends Vue {
             this.documentsList.push(doc);
         }
 
-        //___Form 7___
-        for (const docJson of this.form7FormsJson) {                
+        //___Form 1___
+        for (const docJson of this.form1FormsJson) {                
             const doc = { 
                 id:'',
                 pdfType:'FORM',
-                form:'form7',
-                formName:'Form 7',
+                form:'form1',
+                formName:'Form 1',
                 description:'Notice of Appeal',
                 fileNumber:'',                 
                 status:'', 
@@ -308,13 +308,13 @@ export default class MyDocumentsTableBrief extends Vue {
                 packageNum:'',
                 packageUrl:'',                
             };
-            doc.id = docJson['noticeOfAppealId']
-            doc.fileNumber = docJson.lowerCourtFileNo;
-            doc.status = docJson['electronicallyFiled']=='Y'? "Submitted":"Draft";
-            doc.modifiedDate = docJson['dateModified'];
-            doc.packageUrl = docJson['package_url'];
-            doc.packageNum = docJson['package_number'];
-            doc.pdfType = docJson['pdf_types'];
+            doc.id = String(docJson.id);
+            doc.fileNumber = docJson.data.lowerCourtFileNo;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified;
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
             this.documentsList.push(doc);
         }
 
@@ -461,9 +461,9 @@ export default class MyDocumentsTableBrief extends Vue {
             this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(item.id);
             this.$router.push({name: "fill-form6" });
         
-        }else if(item.formName=='Form 7'){
+        }else if(item.formName=='Form 1'){
             this.UpdateCurrentNoticeOfAppealId(item.id)
-            this.$router.push({name: "start-form7" });
+            this.$router.push({name: "start-form1" });
 
         }else if(item.formName=='Form 9'){
             this.UpdateCurrentRequisitionId(item.id);

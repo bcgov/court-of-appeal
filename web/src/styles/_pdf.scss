@@ -158,10 +158,15 @@ ol li.listnumber:before {
 }
     
 #app-prints {
-padding: 8px 15px;
-position: absolute;
-position: fixed;
-right: 55rem;
-top: 1rem;
-z-index: 100; 
+    padding: 8px 15px;
+    position: absolute;
+    position: fixed;
+    right: 55rem;
+    top: 1rem;
+    z-index: 100; 
+}
+
+div.row{
+    margin-top:0rem; 
+    margin-bottom: 0rem;
 }

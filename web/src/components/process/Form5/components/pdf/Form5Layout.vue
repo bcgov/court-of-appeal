@@ -26,7 +26,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -45,11 +45,10 @@
                     </div>
                    
                     <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstAppellant}}</div> 
                         <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstRespondent}}</div>
                     </div>
-
                     
                     <div class="row" >
                         <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
@@ -94,7 +93,7 @@
 
             <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.courtHouse}}</div>                       
             </div>
 
@@ -111,13 +110,13 @@
 
             <div style="width:2.35%;"></div>
 
-            <div class="coa-text-box-center" style="width:20%; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
+            <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
             
             <div style="width:10%;"> 
                 <div class="mt-2"  style="text-align:center" >at</div> 
             </div>
             
-            <div class="coa-text-box-center" style="width:20%; text-align:center;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
+            <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
             
             <div style="width:14.25%;"></div>  
 
@@ -147,14 +146,14 @@
             <div class="arrow-right-flash-36 "></div> <!-- < width ~ 8% > -->
 
             <div style="width:30%; text-align:center; margin-top:1rem;">
-                <div class="coa-text-box" >{{result.numberOfDaysApp}}</div> 
+                <div class="coa-text-box" style="font-weight: 700;" >{{result.numberOfDaysApp}}</div> 
                 <div style="">Appellant’s estimate</div> 
             </div> 
 
             <div style="width:4%;"> </div>
 
             <div style="width:30%; text-align:center; margin-top:1rem;">
-                <div class="coa-text-box" >{{result.numberOfDaysResp}}</div>
+                <div class="coa-text-box" style="font-weight: 700;">{{result.numberOfDaysResp}}</div>
                 <div>Respondent’s estimate</div>
             </div>
         </div>
@@ -176,7 +175,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.completionDate}}</div> 
             
             <div style="width:3.28%;"></div>
             
@@ -185,7 +184,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;"> {{result.authorizedName}}</div>
                 
         </div>
 

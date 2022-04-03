@@ -9,6 +9,9 @@ class AppealFromOptions:
         
         OrderOfAStatutoryBody = "Order of a Statutory Body";
         OrderOfAStatutoryBodyHelp = "";
+
+        OrderOfTribunal = "Order of a Tribunal";
+        OrderOfTribunalHelp = "";
         
         ChambersJudgment = "Chambers Judgment";
         ChambersJudgmentHelp = "An application made to a Supreme Court Judge or Master where evidence is presented in the form of affidavits.  See Supreme Court Civil Rule 8-1.";
@@ -18,7 +21,9 @@ class AppealFromOptions:
             return [
                 self.TrialJudgment,
                 self.SummaryTrialJudgment,
-                self.ChambersJudgment
+                self.ChambersJudgment,
+                self.OrderOfTribunal
+
                 #  self.OrderOfAStatutoryBody, /* Temporarily disabled.  Beta is supreme court only */                                
             ]
 
@@ -27,7 +32,8 @@ class AppealFromOptions:
             return [
                 self.TrialJudgmentHelp,
                 self.SummaryTrialJudgmentHelp,
-                self.ChambersJudgmentHelp
+                self.ChambersJudgmentHelp,
+                self.OrderOfTribunalHelp
             ]
 
           

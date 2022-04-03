@@ -40,6 +40,8 @@
                 <b-col cols="4">
 
                     <most-used-forms></most-used-forms>
+                    <additional-forms></additional-forms>
+                    <representation-address-forms></representation-address-forms>
                     <need-help class="mt-3"></need-help>
 
                 </b-col>
@@ -74,8 +76,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form7";
-const form7State = namespace("Form7");
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
@@ -98,6 +100,8 @@ import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue"
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
+import AdditionalForms from "@/components/utils/AdditionalForms.vue";
+import RepresentationAddressForms from "@/components/utils/RepresentationAddressForms.vue";
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 
@@ -105,8 +109,8 @@ import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json'
 import { pathwayTypeInfoType } from '@/types/Information';
 
 import { locationsInfoType } from '@/types/Common';
-import { form7SubmissionDataInfoType, lookupsInfoType } from '@/types/Information/Form7';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
+import { form1FormsJsonDataType, lookupsInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
@@ -121,7 +125,9 @@ import { form20FormsJsonDataType } from '@/types/Information/Form20';
         AppealProcess,
         StartEfiling,
         NeedHelp,
-        MostUsedForms
+        MostUsedForms,
+        AdditionalForms,
+        RepresentationAddressForms
     }
 })
 export default class DashboardPage extends Vue {
@@ -129,7 +135,7 @@ export default class DashboardPage extends Vue {
     //___________________________
     //___________________________
     //___________________________NEW VERSION goes here _________________
-    CURRENT_VERSION: string = "1.0";
+    CURRENT_VERSION: string = "1.2";
     //__________________________
     //___________________________
     //___________________________
@@ -150,8 +156,8 @@ export default class DashboardPage extends Vue {
     @form6State.Action
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
-    @form7State.Action
-    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
+    @form1State.Action
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1FormsJsonDataType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
@@ -258,17 +264,17 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/journey/'));
         calls.push(this.$http.get('/lookup/'));
         calls.push(this.$http.get('/case/'));
-        calls.push(this.$http.get('/form3/forms'));
+        
         calls.push(this.$http.get('/form5/forms'));
-        calls.push(this.$http.get('/form6/forms'));
-        calls.push(this.$http.get('/form7/forms'));
+        calls.push(this.$http.get('/form6/forms'));        
         calls.push(this.$http.get('/form9/forms'));
         calls.push(this.$http.get('/form18/forms'));
         calls.push(this.$http.get('/form19/forms'));
         calls.push(this.$http.get('/form20/forms'));
+        calls.push(this.$http.get('/form1/forms'));
+        calls.push(this.$http.get('/form3/forms'));
 
-        Promise.all(calls).then(values => { 
-            console.log(values)
+        Promise.all(calls).then(values => {
             
             if(values[0]?.data?.steps){
 
@@ -283,15 +289,15 @@ export default class DashboardPage extends Vue {
             if(values[1]?.data) this.UpdateLookups(values[1].data);
             
             if(values[2]?.data) this.UpdateCasesJson(values[2]?.data)
-            if(values[3]?.data) this.UpdateForm3FormsJson(values[3]?.data)
-            if(values[4]?.data) this.UpdateForm5FormsJson(values[4]?.data)
-            if(values[5]?.data) this.UpdateForm6FormsJson(values[5]?.data)
-            if(values[6]?.data) this.UpdateForm7FormsJson(values[6]?.data)
-            if(values[7]?.data) this.UpdateForm9FormsJson(values[7]?.data)
-            if(values[8]?.data) this.UpdateForm18FormsJson(values[8]?.data)
-            if(values[9]?.data) this.UpdateForm19FormsJson(values[9]?.data)
-            if(values[10]?.data) this.UpdateForm20FormsJson(values[10]?.data)
-
+            if(values[3]?.data) this.UpdateForm5FormsJson(values[3]?.data)
+            if(values[4]?.data) this.UpdateForm6FormsJson(values[4]?.data)            
+            if(values[5]?.data) this.UpdateForm9FormsJson(values[5]?.data)
+            if(values[6]?.data) this.UpdateForm18FormsJson(values[6]?.data)
+            if(values[7]?.data) this.UpdateForm19FormsJson(values[7]?.data)
+            if(values[8]?.data) this.UpdateForm20FormsJson(values[8]?.data)
+            if(values[9]?.data) this.UpdateForm1FormsJson(values[9]?.data)
+            if(values[10]?.data) this.UpdateForm3FormsJson(values[10]?.data)
+            
             this.dataLoaded = true;
 
         }, err =>{this.error = err +' ' +(err.response.detail? err.response.detail:'');})

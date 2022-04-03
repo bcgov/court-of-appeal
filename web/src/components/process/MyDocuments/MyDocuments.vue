@@ -26,8 +26,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form7";
-const form7State = namespace("Form7");
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
@@ -44,8 +44,8 @@ const form20State = namespace("Form20");
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { caseJsonDataType } from '@/types/Information/json';
-import { form7SubmissionDataInfoType } from '@/types/Information/Form7';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
+import { form1DataInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
@@ -72,8 +72,8 @@ export default class MyDocuments extends Vue {
     @form6State.Action
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
-    @form7State.Action
-    public UpdateForm7FormsJson!: (newForm7FormsJson: form7SubmissionDataInfoType[])=> void
+    @form1State.Action
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
@@ -106,26 +106,29 @@ export default class MyDocuments extends Vue {
         this.dataLoaded = false;
         const calls =[]
         calls.push(this.$http.get('/case/'));
-        calls.push(this.$http.get('/form3/forms'));
+        
         calls.push(this.$http.get('/form5/forms'));
-        calls.push(this.$http.get('/form6/forms')); 
-        calls.push(this.$http.get('/form7/forms')); 
+        calls.push(this.$http.get('/form6/forms'));          
         calls.push(this.$http.get('/form9/forms'));
         calls.push(this.$http.get('/form18/forms'));
         calls.push(this.$http.get('/form19/forms'));
-        calls.push(this.$http.get('/form20/forms'));        
+        calls.push(this.$http.get('/form20/forms')); 
+        calls.push(this.$http.get('/form1/forms'));       
+        calls.push(this.$http.get('/form3/forms'));
 
         Promise.all(calls).then(values => { 
 
             if(values[0]?.data) this.UpdateCasesJson(values[0]?.data)
-            if(values[1]?.data) this.UpdateForm3FormsJson(values[1]?.data)
-            if(values[2]?.data) this.UpdateForm5FormsJson(values[2]?.data)
-            if(values[3]?.data) this.UpdateForm6FormsJson(values[3]?.data)
-            if(values[4]?.data) this.UpdateForm7FormsJson(values[4]?.data)
-            if(values[5]?.data) this.UpdateForm9FormsJson(values[5]?.data)
-            if(values[6]?.data) this.UpdateForm18FormsJson(values[6]?.data)
-            if(values[7]?.data) this.UpdateForm19FormsJson(values[7]?.data)
-            if(values[8]?.data) this.UpdateForm20FormsJson(values[8]?.data)
+            
+           
+            if(values[1]?.data) this.UpdateForm5FormsJson(values[1]?.data)
+            if(values[2]?.data) this.UpdateForm6FormsJson(values[2]?.data)            
+            if(values[3]?.data) this.UpdateForm9FormsJson(values[3]?.data)
+            if(values[4]?.data) this.UpdateForm18FormsJson(values[4]?.data)
+            if(values[5]?.data) this.UpdateForm19FormsJson(values[5]?.data)
+            if(values[6]?.data) this.UpdateForm20FormsJson(values[6]?.data)
+            if(values[7]?.data) this.UpdateForm1FormsJson(values[7]?.data)
+            if(values[8]?.data) this.UpdateForm3FormsJson(values[8]?.data)
 
             this.dataLoaded = true;
         })

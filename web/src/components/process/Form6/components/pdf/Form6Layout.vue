@@ -26,7 +26,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -45,9 +45,9 @@
                     </div>
                    
                     <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstAppellant}}</div> 
                         <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstRespondent}}</div>
                     </div>
 
                     
@@ -93,7 +93,7 @@
             <div class="arrow-right-flash-36"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2">{{result.abandoningParties.join(', ')}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{result.abandoningParties.join(', ')}}</div>                       
             </div> 
         </div>
 
@@ -140,7 +140,7 @@
             <div class="arrow-right-flash-36"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2">{{result.abandoningAgainstParties.join(', ')}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{result.abandoningAgainstParties.join(', ')}}</div>                       
             </div>
         </div>
 
@@ -158,7 +158,7 @@
             <div class="arrow-right-flash-54"></div> 
 
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2">{{result.judgeName}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{result.judgeName}}</div>                       
             </div>
 
         </div>  
@@ -175,7 +175,7 @@
             </div>
             <div class="arrow-right-flash-36"></div>       
 
-            <div class="coa-text-box-center" style="width:25%;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
                 
         </div>
 
@@ -202,7 +202,7 @@
             </div>
             <div class="arrow-right-flash-54"></div>       
 
-            <div class="coa-text-box-center" style="width:25%;">{{result.initiatingDocumentDate | beautify-date-dd/mm/yyyy}}</div>           
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;">{{result.initiatingDocumentDate | beautify-date-dd/mm/yyyy}}</div>           
                 
         </div>
 
@@ -224,7 +224,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.completionDate}}</div> 
             
             <div style="width:3.28%;"></div>
             
@@ -233,7 +233,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;"> {{result.authorizedName}}</div>
                 
         </div>
 

@@ -103,7 +103,7 @@ Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){
 		     if(name=='form2') fullnames.push("Notice of Appearance")
-		else if(name=='form7') fullnames.push("Notice of Appeal")
+		else if(name=='form1') fullnames.push("Notice of Appeal")
 	}
 	return fullnames
 })
@@ -165,6 +165,13 @@ Vue.filter('getFullName',function(first, last){
 	const firstName = first? first+' ': '' 
 	const lastName = last? last+' ': '' 		
 	return firstName+lastName	
+})
+
+Vue.filter('getFullJudgeName',function(first, last){	
+
+	const firstName = first? first[0].toUpperCase()+' ': '' 
+	const lastName = last? last.toUpperCase()+' ': '' 		
+	return 'The Honourable Justice '+firstName+lastName;	
 })
 
 Vue.filter('getFullAddress',function(nameObject){

@@ -19,17 +19,17 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Notice of Appearance (Form 2)?
+                When Do You Use the Notice of Hearing (Form 5)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 7), and you want to respond, 
-                fill out the Notice of Appearance (Form 2). If you do not respond, you will 
-                not be included in future court proceedings related to this case, and will 
-                not have access to the case documents filed.
+                If you appeal is ready for hearing, and you have booked a 
+                hearing date for the appeal with the registrar, you will 
+                need to fill out the Notice of Hearing form. 
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You have 10 days to serve a filed copy of the Notice of Appearance to the 
-                appellant, after receiving a Notice of Appeal.    
+                You have 5 days after obtaining a date for the hearing of 
+                the appeal from the registrar to file and serve on each party 
+                the Notice of Hearing of Appeal and each attached order.    
             </b-row>        
            
         </b-card>

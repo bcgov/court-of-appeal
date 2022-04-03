@@ -28,8 +28,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form7";
-const form7State = namespace("Form7");
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
@@ -58,7 +58,7 @@ export default class MenuBar extends Vue {
 	@form6State.Action
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
-	@form7State.Action
+	@form1State.Action
 	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
 	@form9State.Action

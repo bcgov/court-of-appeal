@@ -34,7 +34,7 @@
             </b-row>
         </b-card>
 
-        <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
+        <!-- <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
             <p>Do you have the <tooltip title="right to appeal" :index="0"/> your case?</p>
 
             <b-row>
@@ -52,6 +52,32 @@
                     <b-button 
                         block
                         @click="appApplyLeavePath" 
+                        variant="outline-primary bg-success text-white" 
+                    >No
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+            </b-row>
+        </b-card> -->
+
+        <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
+            <p>Are you representing yourself?</p>
+
+            <b-row>
+                <b-col>              
+                    <b-button 
+                        block
+                        @click="appRightToAppealPath(true)" 
+                        variant="outline-primary bg-success text-white" 
+                        >
+                        Yes
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+                <b-col>
+                    <b-button 
+                        block
+                        @click="appRightToAppealPath(false)" 
                         variant="outline-primary bg-success text-white" 
                     >No
                         <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
@@ -96,6 +122,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import Tooltip from "@/components/survey/Tooltip.vue";
 import { pathwayTypeInfoType } from '@/types/Information';
 
@@ -108,6 +137,9 @@ export default class StartEfiling extends Vue {
 
     @informationState.Action
     public UpdatePathType!:(newPathType: pathwayTypeInfoType) => void
+
+    @commonState.Action
+    public UpdateUserSelfRepresented!: (newUserSelfRepresented: boolean) => void
    
 
     startAppeal = false;
@@ -133,12 +165,25 @@ export default class StartEfiling extends Vue {
         this.switchDisableRow(false);
     }
 
-    public appRightToAppealPath() {
+    public appRightToAppealPath(selfRep: boolean) {
 
+        this.updateSelfRepresented(selfRep)
         const pathType = {} as pathwayTypeInfoType;
         pathType.appRightToAppeal = true;
         this.UpdatePathType(pathType);
 
+    }
+
+    public updateSelfRepresented(selfRep){
+        this.UpdateUserSelfRepresented(selfRep)
+        const body = {                            
+            represented: !selfRep,
+        }
+        
+        this.$http.put('/user-info/', body)
+        .then((response) => {                  
+        },(err) => {                   
+        });    
     }
 
     public appApplyLeavePath() {

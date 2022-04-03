@@ -61,8 +61,10 @@ const form6State = namespace("Form6");
 
 import Form6ProcessHeader from "@/components/process/Form6/components/Form6ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form6StatusInfoType } from '@/types/Information/Form6';
+import { form6DataInfoType, form6StatusInfoType } from '@/types/Information/Form6';
 import { packageInfoType } from '@/types/Information';
+
+import { GetForm6PdfType } from "./components/Form6PdfType"
 
 @Component({
     components:{
@@ -74,6 +76,9 @@ export default class SubmitForm6 extends Vue {
 
     @form6State.State
     public currentNoticeOfSettlementOrAbandonmentId: string;
+
+    @form6State.State
+    public form6Info: form6DataInfoType;
 
     stepsCompleted = {} as form6StatusInfoType;  
     mountedData = false; 
@@ -107,7 +112,11 @@ export default class SubmitForm6 extends Vue {
             }
         }
 
-        this.$http.post(url, header)
+        const body = {
+            document_type: GetForm6PdfType(this.form6Info) //"ABA"
+        }
+
+        this.$http.post(url, body, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

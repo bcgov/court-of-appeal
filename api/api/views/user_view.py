@@ -15,7 +15,11 @@ class UserView(APIView):
         if (not isinstance(request.user, User)):
             return HttpResponseForbidden()
         location = request.data.get("location")
-        request.user.location = location
+        represented = request.data.get("represented")
+        if("location" in request.data):
+            request.user.location = location
+        if("represented" in request.data):        
+            request.user.represented = represented 
         request.user.save()
         return Response(status=204)
 

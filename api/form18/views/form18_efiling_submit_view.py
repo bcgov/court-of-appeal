@@ -97,8 +97,13 @@ class Form18EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, change_of_address_id):
+
+        if 'document_type' in request.data:
+            document_type = request.data['document_type']
+        else: 
+            document_type = "CNAC" # type Form18 for Efiling
+
         
-        document_type = "CNAC" # type Form18 for Efiling
         uid = request.user.id
 
         change_of_address = self.get_change_of_address_for_user(change_of_address_id, uid)        

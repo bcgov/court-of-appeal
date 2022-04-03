@@ -14,7 +14,7 @@
         <cancel-submit-form-5 v-else-if="result=='cancel'"/>
         <error-submit-form-5 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'ABA'">
+    <div v-else-if="(formType == 'ABA')||(formType == 'ABCA')||(formType == 'ABP')||(formType == 'ABRV')">
         <success-submit-form-6 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -24,7 +24,7 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'CNAC'">
+    <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
         <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -39,10 +39,10 @@
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else>
-        <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
-        <cancel-submit-form-7 v-else-if="result=='cancel'"/>
-        <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    <div v-else-if="formType == 'NAA'">
+        <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-1 v-else-if="result=='cancel'"/>
+        <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
 </template>
 
@@ -65,9 +65,9 @@ import CancelSubmitForm6 from "./Form6/CancelSubmitForm6.vue";
 import SuccessSubmitForm6 from "./Form6/SuccessSubmitForm6.vue";
 import ErrorSubmitForm6 from "./Form6/ErrorSubmitForm6.vue";
 
-import CancelSubmitForm7 from "./Form7/CancelSubmitForm7.vue";
-import SuccessSubmitForm7 from "./Form7/SuccessSubmitForm7.vue";
-import ErrorSubmitForm7 from "./Form7/ErrorSubmitForm7.vue";
+import CancelSubmitForm1 from "./Form1/CancelSubmitForm1.vue";
+import SuccessSubmitForm1 from "./Form1/SuccessSubmitForm1.vue";
+import ErrorSubmitForm1 from "./Form1/ErrorSubmitForm1.vue";
 
 import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
@@ -100,9 +100,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm6,
         SuccessSubmitForm6,
         ErrorSubmitForm6,
-        CancelSubmitForm7,
-        SuccessSubmitForm7,
-        ErrorSubmitForm7,
+        CancelSubmitForm1,
+        SuccessSubmitForm1,
+        ErrorSubmitForm1,
         CancelSubmitForm9,
         SuccessSubmitForm9,
         ErrorSubmitForm9,

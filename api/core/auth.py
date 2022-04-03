@@ -72,5 +72,6 @@ def build_get_user_object(logged_in, request):
         "universal_id": logged_in and request.user.universal_id,
         "login_uri": get_login_uri(request),
         "logout_uri": get_logout_uri(request),
-        "efiling_streams": get_efiling_streams(logged_in, request)
+        "efiling_streams": get_efiling_streams(logged_in, request),
+        "represented": logged_in and request.user.represented or None
     }

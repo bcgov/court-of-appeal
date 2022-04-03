@@ -109,7 +109,7 @@
 
             <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
-                    Which party(ies) are you abandonign against?                                
+                    Which party(ies) are you abandoning against?                                
                 </b-col>
                 <b-col class="ml-1 mt-2">   
 
@@ -290,9 +290,9 @@ export default class Form6StyleOfProceeding extends Vue {
             form6Data.respondents = this.partiesJson.respondents;
             form6Data.formSevenNumber = this.fileNumber;
             
-            form6Data.version = this.$store.state.Application.version;            
-
-            form6Data.judgeName = Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
+            form6Data.version = this.$store.state.Application.version;  
+            form6Data.selfRepresented = this.$store.state.Common.userSelfRepresented;
+            form6Data.judgeName = Vue.filter('getFullJudgeName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
             form6Data.orderDate = this.previousCourts[0]?.JudgmentDate;
             form6Data.initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled;  
            
