@@ -32,7 +32,7 @@
                                 
                                 <b-col cols="3" class="p-0" >
                                     <b-button
-                                        @click="startNewForm7Document"
+                                        @click="startNewForm1Document"
                                         target="_blank"                                                                                
                                         class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
@@ -119,8 +119,8 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class InitialDocumentsAppRightToAppealPg extends Vue { 
     
     
-    public startNewForm7Document(){
-        this.$router.push({name: "checklist-form7" })
+    public startNewForm1Document(){
+        this.$router.push({name: "checklist-form1" })
     }
 
 }

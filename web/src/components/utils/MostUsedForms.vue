@@ -3,9 +3,9 @@
         <h3>Most Used Forms</h3>
         <ol>
             <li class="link-button" 
-                @click="startNewForm7Document"
+                @click="startNewForm1Document"
                 target="_blank">
-                Notice of Appeal (Form 7)            
+                Notice of Appeal (Form 1)            
             </li>
             <li class="link-button" 
                 @click="startNewForm2Document"
@@ -33,8 +33,8 @@
     import "@/store/modules/forms/form5";
     const form5State = namespace("Form5");
 
-    import "@/store/modules/forms/form7";
-    const form7State = namespace("Form7");   
+    import "@/store/modules/forms/form1";
+    const form1State = namespace("Form1");   
 
     @Component
     export default class MostUsedForms extends Vue {        
@@ -45,7 +45,7 @@
         @form5State.Action
 	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
 
-        @form7State.Action
+        @form1State.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void      
                 
         public startNewForm2Document(){
@@ -58,9 +58,9 @@
             this.$router.push({name: "start-form5" })
         }
 
-        public startNewForm7Document(){
+        public startNewForm1Document(){
             this.UpdateCurrentNoticeOfAppealId(null);
-            this.$router.push({name: "checklist-form7" })
+            this.$router.push({name: "checklist-form1" })
         }       
 
     }

@@ -103,7 +103,7 @@ Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){
 		     if(name=='form2') fullnames.push("Notice of Appearance")
-		else if(name=='form7') fullnames.push("Notice of Appeal")
+		else if(name=='form1') fullnames.push("Notice of Appeal")
 	}
 	return fullnames
 })
