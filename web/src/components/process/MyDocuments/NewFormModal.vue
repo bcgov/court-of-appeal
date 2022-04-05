@@ -39,6 +39,9 @@ import "@/store/modules/information";
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
+import "@/store/modules/forms/form3";
+const form3State = namespace("Form3");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -69,6 +72,9 @@ export default class NewFormModal extends Vue {
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
+    @form3State.Action
+    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
+
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
@@ -91,10 +97,11 @@ export default class NewFormModal extends Vue {
     public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
     forms = [
-        {name:'form2', title:'Notice of Appearance (Form 2)'},
-        {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
-        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},
         {name:'form1', title:'Notice of Appeal (Form 1)'},
+        {name:'form2', title:'Notice of Appearance (Form 2)'},
+        {name:'form3', title:'Notice of Cross Appeal (Form 3)'},
+        {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
+        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},        
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
@@ -115,6 +122,10 @@ export default class NewFormModal extends Vue {
         if(form=='form2'){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" });
+        
+        }else if(form=='form3'){
+            this.UpdateCurrentNoticeOfCrossAppealId(null);
+            this.$router.push({name: "start-form3" });
         
         }else if(form=='form5'){
             this.UpdateCurrentNoticeOfHearingOfAppealId(null);

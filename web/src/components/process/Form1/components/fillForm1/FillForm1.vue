@@ -118,7 +118,7 @@ export default class FillForm1 extends Vue {
     mounted() { 
 
         this.expiredDeadline = false;
-        this.dataReady = true; //false;TODO: remove this once api is updated
+        this.dataReady = false;
         if (!this.currentNoticeOfAppealId){         
             this.loadOrderDetails();            
         } else {
@@ -133,9 +133,16 @@ export default class FillForm1 extends Vue {
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form1Data = response.data.data                
-                form1Data['appealSubmissionDeadline']=moment(form1Data['appealSubmissionDeadline']).local().format()
-                form1Data['dateOfJudgement']=moment(form1Data['dateOfJudgement']).local().format()
+                const form1Data: form1DataInfoType = response.data.data   
+                if (form1Data.appealTribunal){
+                    this.showTribunalDetailsForm = true;
+                } else {
+                    this.showTribunalDetailsForm = false;
+                    form1Data['appealSubmissionDeadline']=moment(form1Data['appealSubmissionDeadline']).local().format()
+                    form1Data['dateOfJudgement']=moment(form1Data['dateOfJudgement']).local().format();
+                }           
+                
+                //TODO: handle tribunal case
                 this.UpdateForm1Info(form1Data) 
                 this.setCurrentCourtLocation(form1Data['lowerCourtRegistryId'])
                 this.clearStates();                
@@ -160,6 +167,7 @@ export default class FillForm1 extends Vue {
             this.showTribunalDetailsForm = true;
 
         } else {
+            this.showTribunalDetailsForm = false;
             form1SubmissionData.parties = this.supremeCourtCaseJson.parties;            
             form1SubmissionData.appealSubmissionDeadline = moment(this.supremeCourtOrderJson.appealSubmissionDeadline).format();
             form1SubmissionData.honorificTitle = this.supremeCourtOrderJson.honorificTitle;

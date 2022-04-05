@@ -128,14 +128,16 @@
                 </b-col>
                 <b-col class="ml-3" style="padding: 0;">  
                     <b-card class="mt-2" style="padding: 0; float: left;" :border-variant="state.dateOfAppealHearing == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="form5Info.dateOfAppealHearing"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">                            
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form5Info.dateOfAppealHearing"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app> 
+                        </div>   
                     </b-card>
                 </b-col>
             </b-row>
@@ -362,7 +364,11 @@ export default class Form5StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form5Data = response.data.data                
+                const form5Data = response.data.data 
+                const today = moment().format("YYYY-MM-DD")
+                if(form5Data.dateOfAppealHearing<today){
+                    form5Data.dateOfAppealHearing=null;
+                }
                 this.UpdateForm5Info(form5Data) 
                 this.extractInfo();
                 this.clearStates();                
@@ -522,10 +528,10 @@ export default class Form5StyleOfProceeding extends Vue {
 }
 </script>
 
-<style lang="scss" src="@/styles/_custom_vuetify.scss" scoped>
-
-
+<style lang="scss" scoped>
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+    }
 </style>
-
-
 

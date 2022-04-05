@@ -3,105 +3,108 @@
 
         <b-card class="mb-4 border-white bg-white">  
 
-            <b-form-group
-                class="mt-2 ml-4 labels"
-                label="Are you seeking leave to appeal? " 
-                label-for="apply-leave">
-                <b-form-radio-group                
-                    v-model="commonInfo.applyLeave"
-                    :state="form1InfoStates.applyLeave"
-                    @change="update"
-                    id="apply-leave"
-                    :options="responseOptions"
-                    style="font-size: 1rem; font-weight:400;"                    
-                ></b-form-radio-group>
-                <span
-                    v-if="(form1InfoStates.applyLeave != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger"><b-icon-exclamation-circle/>
-                    Specify whether you are seeking leave to appeal.
-                </span>
-            </b-form-group>            
+            <b-row class="mt-0">
+                <b-col cols="6" style="font-weight: 700;">
+                    Are you seeking leave to appeal?                                
+                </b-col>
+                <b-col>
+                    <b-form-radio-group                
+                        v-model="commonInfo.applyLeave"
+                        :state="form1InfoStates.applyLeave"
+                        @change="update"
+                        :options="responseOptions"
+                        style="font-size: 1rem; font-weight:400;"                    
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(form1InfoStates.applyLeave != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether you are seeking leave to appeal.
+                    </span>                   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4">
+                <b-col cols="6" style="font-weight: 700;">
+                    What type of proceeding are you appealing from?                                
+                </b-col>
+                <b-col>
+                    <b-form-radio-group                
+                        v-model="commonInfo.appealFrom"
+                        :state="form1InfoStates.appealFrom"
+                        :disabled="commonInfo.appealTribunal"
+                        @change="update"
+                        :options="appealFromOptionsListNames"
+                        style="font-size: 1rem; font-weight:400;"                    
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(form1InfoStates.appealFrom != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify Type of Order.
+                    </span>                   
+                </b-col>
+            </b-row>      
+
+            <b-row class="mt-4">
+                <b-col cols="6" style="font-weight: 700;">
+                    Was this matter already appealed in Supreme Court?   
+                    <p class="content">
+                        From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
+                        <a
+                            href=""
+                            target="_blank">
+                            Supreme Court Civil Rules 18-3
+                        </a>
+                    </p>
+                    <p class="content mt-1">
+                        From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
+                        <a
+                            href=""
+                            target="_blank">
+                            Supreme Civil Court Rules 23-6(8)
+                        </a>
+                    </p>
+                    <p class="content mt-1">
+                        From a <b>Tribunal</b> to a Supreme Court Judge - 
+                        <a
+                            href=""
+                            target="_blank">
+                            Supreme Court Civil Rules 18-3
+                        </a>
+                    </p>                             
+                </b-col>
+                <b-col>
+                    <b-form-radio-group 
+                        class="mt-0"               
+                        v-model="commonInfo.wasSupremeAppeal"
+                        @change="update"
+                        :state="form1InfoStates.wasSupremeAppeal"
+                        style="font-size: 1rem; font-weight:400;" 
+                        :options="appealedInSupremeCourtOptions"
+                    ></b-form-radio-group> 
+                    <span
+                        v-if="(form1InfoStates.wasSupremeAppeal != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether this matter was already appealed in Supreme Court.
+                    </span>                       
+                </b-col>
+            </b-row>      
+
+            <b-row v-if="commonInfo.wasSupremeAppeal" class="mt-4">
+                <b-col cols="6" style="font-weight: 700;">
+                    What's the name of the maker of the original decision, direction or order?                                
+                </b-col>
+                <b-col class="mt-0">
+                    <b-form-input
+                        :state="form1InfoStates.decisionMaker"  
+                        @change="update"              
+                        v-model="commonInfo.decisionMaker">
+                    </b-form-input> 
+                </b-col>
+            </b-row>            
             
-            
-            <b-form-group                
-                class="mt-2 ml-4 labels"
-                label="What type of proceeding are you appealing from?" 
-                label-for="order-type">
-                <b-form-radio-group                
-                    v-model="commonInfo.appealFrom"
-                    :state="form1InfoStates.appealFrom"
-                    :disabled="commonInfo.appealTribunal"
-                    @change="update"
-                    id="order-type"
-                    :options="appealFromOptionsListNames"
-                    style="font-size: 1rem; font-weight:400;"                    
-                ></b-form-radio-group>
-                <span
-                    v-if="(form1InfoStates.appealFrom != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger"><b-icon-exclamation-circle/>
-                    Specify Type of Order.
-                </span>
-            </b-form-group>
-                
-            <b-form-group
-                class="ml-4 mt-4 labels"
-                label="Was this matter already appealed in Supreme Court?" 
-                label-for="appealed-in-supreme-court">
-                <p class="content">
-                    From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
-                    <a
-                        href=""
-                        target="_blank">
-                        Supreme Court Civil Rules 18-3
-                    </a>
-                </p>
-                <p class="content mt-1">
-                    From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
-                    <a
-                        href=""
-                        target="_blank">
-                        Supreme Civil Court Rules 23-6(8)
-                    </a>
-                </p>
-                <p class="content mt-1">
-                    From a <b>Tribunal</b> to a Supreme Court Judge - 
-                    <a
-                        href=""
-                        target="_blank">
-                        Supreme Court Civil Rules 18-3
-                    </a>
-                </p>
-                <b-form-radio-group 
-                    class="mt-4"               
-                    v-model="commonInfo.wasSupremeAppeal"
-                    @change="update"
-                    :state="form1InfoStates.wasSupremeAppeal"
-                    id="appealed-in-supreme-court"
-                    style="font-size: 1rem; font-weight:400;" 
-                    :options="appealedInSupremeCourtOptions"
-                ></b-form-radio-group> 
-                <span
-                    v-if="(form1InfoStates.wasSupremeAppeal != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger"><b-icon-exclamation-circle/>
-                    Specify whether this matter was already appealed in Supreme Court.
-                </span>               
-            </b-form-group>
-            
-            <b-form-group
-                v-if="commonInfo.wasSupremeAppeal"
-                class="ml-4 mt-5 labels"                
-                label="What's the name of the maker of the original decision, direction or order?"
-                label-for="maker-name">
-                <b-form-input 
-                    id="maker-name"    
-                    :state="form1InfoStates.decisionMaker"  
-                    @change="update"              
-                    v-model="commonInfo.decisionMaker">
-                </b-form-input>
-            </b-form-group>
         </b-card>
 
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
@@ -139,13 +142,11 @@
                     </b-form-textarea>
                    
                 </b-col>
-            </b-row>
-
-          
+            </b-row>          
         </b-card>
 
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
-            <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Additional Information</p>            
+            <p class="mt-2" style="font-size: 1.35rem; font-weight:700;">Additional Information</p>            
 
             <b-row class="my-4" style="padding: 0;">
                 <b-col cols="6" style="font-weight: 700;">
@@ -177,15 +178,17 @@
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="form1InfoStates.dateSealed == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="commonInfo.dateSealed"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="update"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="commonInfo.dateSealed"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                    @change="update"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
                     </b-card>
                 </b-col>
             </b-row>
@@ -220,15 +223,17 @@
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="form1InfoStates.dateBan == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="commonInfo.dateBan"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="update"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="commonInfo.dateBan"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                    @change="update"
+                                ></v-date-picker>                            
+                            </v-app>  
+                        </div>  
                     </b-card>
                 </b-col>
             </b-row>
@@ -357,12 +362,17 @@ export default class FillForm1CommonInfo extends Vue {
 
     .content {        
         margin-bottom: 0px !important; 
-        font-size: 1rem; 
+        font-size: 0.75rem; 
         font-weight:400;       
     }
 
     .labels {
         font-size: 1.15rem; font-weight:600;
+    }
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
     }
 
 </style>

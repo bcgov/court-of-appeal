@@ -89,6 +89,9 @@ import "@/store/modules/information";
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
+import "@/store/modules/forms/form3";
+const form3State = namespace("Form3");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -111,6 +114,7 @@ import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
 import { caseJsonDataType } from "@/types/Information/json";
+import { form3FormsJsonDataType } from "@/types/Information/Form3";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
@@ -126,7 +130,13 @@ export default class MyDocumentsTableBrief extends Vue {
     public casesJson!: caseJsonDataType[];
 
     @form2State.Action
-    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void    
+
+    @form3State.State
+    public form3FormsJson!: form3FormsJsonDataType[];
+
+    @form3State.Action
+    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
     
     @form5State.State
     public form5FormsJson!: form5FormsJsonDataType[];
@@ -171,6 +181,7 @@ export default class MyDocumentsTableBrief extends Vue {
     public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
 
 
+
     documentsList = []
     documentsFields =[
         { key: "formName",    label: "Form",          sortable: true,  thClass: 'border-dark border-bottom',},
@@ -206,6 +217,30 @@ export default class MyDocumentsTableBrief extends Vue {
             doc.fileNumber = docJson.data.formSevenNumber;
             doc.status = docJson.status;
             doc.modifiedDate = docJson.modified;
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 3___
+        for (const docJson of this.form3FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'NCA',
+                form:'form3',
+                formName:'Form 3',
+                description:'Notice of Cross Appeal',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
             doc.packageUrl = docJson.packageUrl;
             doc.packageNum = docJson.packageNumber;
             doc.pdfType = docJson.pdf_types;
@@ -446,8 +481,13 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 20'){
             this.UpdateCurrentNoticeOfObjectionToWithdrawalId(item.id);
             this.$router.push({name: "fill-form20" });
+        
+        }else if(item.formName=='Form 3'){
+            this.UpdateCurrentNoticeOfCrossAppealId(item.id);
+            this.$router.push({name: "fill-form3" });
 
         }
+
     }
 
    

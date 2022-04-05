@@ -13,6 +13,11 @@
                 Notice of Appearance (Form 2)                
             </li>
             <li class="link-button" 
+                @click="startNewForm3Document"
+                target="_blank">
+                Notice of Cross Appeal (Form 3)                
+            </li>
+            <li class="link-button" 
                 @click="startNewForm5Document"
                 target="_blank">
                 Notice of Hearing of Appeal (Form 5)                
@@ -30,6 +35,9 @@
     import "@/store/modules/forms/form2";
     const form2State = namespace("Form2");
 
+    import "@/store/modules/forms/form3";
+    const form3State = namespace("Form3");
+
     import "@/store/modules/forms/form5";
     const form5State = namespace("Form5");
 
@@ -43,7 +51,10 @@
         public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
       
         @form5State.Action
-	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void        
+	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void 
+        
+        @form3State.Action
+	    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void 
 
         @form1State.Action
         public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void      
@@ -51,6 +62,11 @@
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" })
+        }
+
+        public startNewForm3Document(){
+            this.UpdateCurrentNoticeOfCrossAppealId(null);
+            this.$router.push({name: "start-form3" })
         }
 
         public startNewForm5Document(){

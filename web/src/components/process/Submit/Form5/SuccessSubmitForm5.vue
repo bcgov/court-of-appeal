@@ -16,9 +16,9 @@
                     Your Notice of Hearing of Appeal has been submitted and accepted.  Please click on the 
                     CSO Package number below to retrieve a filed copy of your Notice of Hearing of Appeal.
                 </b-row>
-                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
+                <b-row class="mx-5 my-4" style="font-size: 14px;">
                     <b class="mr-2">NOTE:</b> The Notice of Hearing of Appeal must be filed and 
-                    <i style="font-weight: 700;" class="mr-2"> served within 5 days of obtaining a hearing date.</i> 
+                    <i style="font-weight: 700;" class="mx-2"> served within 5 days of obtaining a hearing date.</i> 
                         Please ensure that <b class="mr-1" style="text-decoration: underline">you serve each party a filed copy of the Notice of 
                             Hearing of Appeal and each attached order </b>
                             as set out in Rule 30(2)(b) of the Court of Appeal Rules.

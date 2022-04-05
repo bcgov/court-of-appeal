@@ -97,6 +97,8 @@ export interface form1DataInfoType {
     judgeFullName: string;
     respondents: form1PartiesInfoType[];    
     appellants: form1PartiesInfoType[];
+    completionDate: string;
+    authorizedName: string;
     
 }
 

@@ -249,7 +249,22 @@ export default class Form19StyleOfProceeding extends Vue {
         this.applicantNames = [];
         this.respondentNames = [];
         this.partyNames = [];
-        this.lawyerNameOptions = [];
+        this.lawyerNameOptions = [];        
+
+        for (const applicant of this.form19Info.appellants){
+            this.applicantNames.push(applicant.name);
+            this.partyNames.push(applicant.name)  
+            if (applicant.solicitor){
+                
+                const lawyerName = 
+                    Vue.filter('getFullName')(applicant.solicitor.counselFirstName, applicant.solicitor.counselLastName)+
+                    (applicant.solicitor.firmName? " ("+applicant.solicitor.firmName+")":"");
+
+                if (!this.lawyerNameOptions.includes(lawyerName)){
+                    this.lawyerNameOptions.push(lawyerName);
+                }
+            }         
+        }
 
         for (const respondent of this.form19Info.respondents){
             this.respondentNames.push(respondent.name);
@@ -266,21 +281,7 @@ export default class Form19StyleOfProceeding extends Vue {
                 
             }
         }
-
-        for (const applicant of this.form19Info.appellants){
-            this.applicantNames.push(applicant.name);
-            this.partyNames.push(applicant.name)  
-            if (applicant.solicitor){
-                
-                const lawyerName = 
-                    Vue.filter('getFullName')(applicant.solicitor.counselFirstName, applicant.solicitor.counselLastName)+
-                    (applicant.solicitor.firmName? " ("+applicant.solicitor.firmName+")":"");
-
-                if (!this.lawyerNameOptions.includes(lawyerName)){
-                    this.lawyerNameOptions.push(lawyerName);
-                }
-            }         
-        }
+        
         this.lawyerNameOptions.push('Other')
         this.dataReady = true;
 

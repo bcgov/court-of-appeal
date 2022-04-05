@@ -27,151 +27,23 @@
                     href="mailto:courts.cso@gov.bc.ca">contact the registry
                 </a>.
             </p>           
-        </b-row>
-      
-
-        <b-row class="mt-4" style="padding-top: 0.85rem;">            
-            <b-col cols="11" class="step-title-column pl-0">
-                Notice of Application for Leave to Appeal
-            </b-col> 
-            <b-col cols="1">
-                <b-button
-                    @click="showInitialDocuments(!showInitialDocumentsInfo)"                                       
-                    class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showInitialDocumentsInfo"></expand-icon>
-                </b-button>
-                
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showInitialDocumentsInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" class="warning-message-column pl-0">
-                File the document below 
-                <span class="text-danger font-weight-bold">within 30 days
-                </span> 
-                of the decision you want to appeal.
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showInitialDocumentsInfo" class="mt-4" >
-            <ol>
-                <li>
-                    Complete the online form below. Click on the document name for more information.
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-125">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
-                                        target="_blank">Notice of Application for Leave to Appeal
-                                    </a>                                    
-                                </b-col>
-                                <b-col cols="2" >
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%201.docx"
-                                        target="_blank"                                                                                
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form1.pdf"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary form-download-button">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    File the indicated number of copies with the registry.
-                </li>
-                <li>
-                    Serve one copy to each respondent.
-                </li>
-            </ol>
         </b-row> 
 
-         <b-row v-if="showInitialDocumentsInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" class="warning-message-column pl-0">
-                File Affidavit of Service <span class="text-danger font-weight-bold">within 10 days</span> 
-                of serving all respondents.
-            </b-col>            
-        </b-row>
-
-        <b-row v-if="showInitialDocumentsInfo" class="mt-4" >
-             <ol>
-                <li>
-                    Complete either the .DOC or .PDF below. Click on the document name for more information.
-                    <ul>
-                        <li>
-                            <b-row style="width: 113%;" class="my-1">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)"
-                                        target="_blank">Affidavit of Service
-                                    </a>
-                                    <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        title="To prove that you served the Notice of Application for Leave to Appeal, file an affidavit of service."/>
-                                </b-col>
-                                <b-col cols="2">
-                                    1 copy
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit%20of%20Service.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    File the document with the registry.
-                </li>
-                <li>
-                    Serve one copy to each respondent.
-                </li>
-            </ol>
-        </b-row>
-
-
-        <b-row :class="showInitialDocumentsInfo?'mt-0':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showIntroInfo?'mt-4':'mt-4'" style="padding-top: 0.65rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Motion and Motion Book
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showHearingDocuments(!showHearingDocumentsInfo)"
+                    @click="showMotion(!showMotionBookInfo)"
                     class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showHearingDocumentsInfo"></expand-icon>
+                    <expand-icon v-bind:showExpanded="showMotionBookInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
         </b-row>
 
-        <b-row v-if="showHearingDocumentsInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="showMotionBookInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -189,7 +61,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showHearingDocumentsInfo" class="mt-4" >            
+        <b-row v-if="showMotionBookInfo" class="mt-4" >            
 
            <ol>
                 <li>
@@ -260,7 +132,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showHearingDocumentsInfo?'mt-3': 'mt-4'" :style="showHearingDocumentsInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showMotionBookInfo?'mt-3': 'mt-4'" :style="showMotionBookInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Was your leave to appeal granted or refused?
             </b-col> 
@@ -458,9 +330,8 @@ import appLeaveRefusedFinalInstructions from "@/components/process/AppealProcess
 })
 export default class ApplyLeaveAppRightToAppealPg extends Vue {
 
-    showIntroInfo = true;
-    showInitialDocumentsInfo = false;
-    showHearingDocumentsInfo = false;    
+    showIntroInfo = true;  
+    showMotionBookInfo = false;    
     showDecisionOnLeaveInfo = false;
     transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial or hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
 
@@ -474,33 +345,23 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
         }
     }
 
-    public showInitialDocuments(show: boolean){
+    public showMotion(show: boolean){
         if (show) {
-            this.showInitialDocumentsInfo = true;
-            this.$emit('adjustHeights', 1, "28rem");
+            this.showMotionBookInfo = true;
+            this.$emit('adjustHeights', 1, "17rem");
         } else {
-            this.showInitialDocumentsInfo = false;
+            this.showMotionBookInfo = false;
             this.$emit('adjustHeights', 1, "0");
-        }
-    }
-
-    public showHearingDocuments(show: boolean){
-        if (show) {
-            this.showHearingDocumentsInfo = true;
-            this.$emit('adjustHeights', 2, "17rem");
-        } else {
-            this.showHearingDocumentsInfo = false;
-            this.$emit('adjustHeights', 2, "0");
         }
     }
 
      public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', 3, "50rem");
+            this.$emit('adjustHeights', 2, "52rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
-            this.$emit('adjustHeights', 3, "0");
+            this.$emit('adjustHeights', 2, "0");
         }
     }
 

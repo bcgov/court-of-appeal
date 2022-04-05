@@ -4,6 +4,11 @@
         <cancel-submit-form-2 v-else-if="result=='cancel'"/>
         <error-submit-form-2 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="(formType == 'NCA')||(formType == 'NCAA')||(formType == 'NCAL')">
+        <success-submit-form-3 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-3 v-else-if="result=='cancel'"/>
+        <error-submit-form-3 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else-if="formType == 'NHA'">
         <success-submit-form-5 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-5 v-else-if="result=='cancel'"/>
@@ -48,6 +53,10 @@ import CancelSubmitForm2 from "./Form2/CancelSubmitForm2.vue";
 import SuccessSubmitForm2 from "./Form2/SuccessSubmitForm2.vue";
 import ErrorSubmitForm2 from "./Form2/ErrorSubmitForm2.vue";
 
+import CancelSubmitForm3 from "./Form3/CancelSubmitForm3.vue";
+import SuccessSubmitForm3 from "./Form3/SuccessSubmitForm3.vue";
+import ErrorSubmitForm3 from "./Form3/ErrorSubmitForm3.vue";
+
 import CancelSubmitForm5 from "./Form5/CancelSubmitForm5.vue";
 import SuccessSubmitForm5 from "./Form5/SuccessSubmitForm5.vue";
 import ErrorSubmitForm5 from "./Form5/ErrorSubmitForm5.vue";
@@ -82,6 +91,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm2,
         SuccessSubmitForm2,
         ErrorSubmitForm2,
+        CancelSubmitForm3,
+        SuccessSubmitForm3,
+        ErrorSubmitForm3,
         CancelSubmitForm5,
         SuccessSubmitForm5,
         ErrorSubmitForm5,

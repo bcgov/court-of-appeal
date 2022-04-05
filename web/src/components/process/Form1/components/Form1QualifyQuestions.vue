@@ -396,11 +396,14 @@
 </template>
 
 <script lang="ts">
-
 import { Component, Vue, Watch } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 import StepNumber from "@/components/utils/StepNumber.vue";
-import { form1QualificationInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, form1QualificationInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
@@ -408,6 +411,12 @@ import { form1QualificationInfoType } from '@/types/Information/Form1';
     }
 })
 export default class Form1QualifyQuestions extends Vue {
+
+    @form1State.State
+    public currentNoticeOfAppealId: string;
+
+    @form1State.State
+    public form1Info: form1DataInfoType;
 
     dataReady = false;
     stepStyle = "font-size: 2rem;";
@@ -433,14 +442,36 @@ export default class Form1QualifyQuestions extends Vue {
 
     mounted(){
         this.dataReady = false;
-        //TODO: add functionality to load data if id exists
         this.qualificationInfo = {} as form1QualificationInfoType;
-        this.qualificationInfo.selfRepresenting = this.$store.state.Common.userSelfRepresented
-        this.clearStates();
-        Vue.nextTick(()=> {
+        if (this.currentNoticeOfAppealId && this.form1Info){         
+            this.extractData();            
+        } else {            
+            this.qualificationInfo.selfRepresenting = this.$store.state.Common.userSelfRepresented;
+            this.clearStates();
+            Vue.nextTick(()=> {
                 this.dataReady = true;
             });
-        
+        }
+    }
+    
+    public extractData(){
+        this.qualificationInfo.selfRepresenting = this.form1Info.selfRepresenting;
+        this.qualificationInfo.appealingProvincialCourtOrder = this.form1Info.appealingProvincialCourtOrder;
+        this.qualificationInfo.insideTimeLimit = this.form1Info.insideTimeLimit;
+        this.qualificationInfo.appealingBankruptcy = this.form1Info.appealingBankruptcy;
+        this.qualificationInfo.appealingFeesWaived = this.form1Info.appealingFeesWaived;
+        this.qualificationInfo.appealingSupremeCourtMaster = this.form1Info.appealingSupremeCourtMaster;
+        this.qualificationInfo.appealingSupremeCourtOrder = this.form1Info.appealingSupremeCourtOrder;
+        this.qualificationInfo.appealingScFlaDivorce = this.form1Info.appealingScFlaDivorce;
+        this.qualificationInfo.appealInvolvesChild = this.form1Info.appealInvolvesChild;
+        this.qualificationInfo.appealTribunal = this.form1Info.appealTribunal;
+
+        const qualified = this.qualificationResponse;
+        this.$emit('disableContinue', !qualified, 
+            this.qualificationInfo);
+        Vue.nextTick(()=> {
+            this.dataReady = true;
+        });
     }
 
     get qualificationResponse(){       
