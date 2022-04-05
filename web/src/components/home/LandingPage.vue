@@ -202,7 +202,7 @@ export default class LandingPage extends Vue {
     font-size: 20px;
     line-height: 30px;
     color: white;
-    margin: 0.5rem 0 0 1rem;        
+    margin: 0 0 0 1rem;        
     padding: 0.15rem 0.65rem;
     border: #ffffff 2px solid;
     border-radius: 20px;
