@@ -108,11 +108,20 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
 
 @Component
 export default class NoticeOfAppearanceRspToLeaveGrantedPg extends Vue {
 
+    @form2State.Action
+    public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
+      
+    
     public startNewDocument(){
+        this.UpdateCurrentCaseId(null);
         this.$router.push({name: "start-form2" })
     }
 
