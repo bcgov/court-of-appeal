@@ -1,12 +1,11 @@
 <template>
-    <b-card v-if="dataReady" no-body border-variant="light" bg-variant="light" :key="updatedInfo">
-        
+    <b-card v-if="dataReady" no-body border-variant="light" bg-variant="light" :key="updatedInfo">        
               
-        <save-or-preview-buttons :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
+        <save-or-preview-buttons class="mx-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
         <fill-form-1-tribunal-summary-info v-if="form1Info.appealTribunal" class="mt-2 mx-2" @displayResults="displayResults"/>
 
-        <fill-form-1-summary-info v-else class="mx-2" @displayResults="displayResults"/>
+        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>
 
         <b-card class="mb-2 border-light bg-light">
             <b-row class="ml-0 mt-0 font-weight-bold">Please complete the following fields:</b-row>
@@ -218,8 +217,9 @@ export default class FillForm1 extends Vue {
             this.fieldStates.tribunalOriginalDecisionMaker = null;
         }      
 
-        const numberOfDays = this.form1Info.trialDurationDays?.trim();
-        this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
+        // const numberOfDays = this.form1Info.trialDurationDays?.trim();
+      //  this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
+        this.fieldStates.appearanceDays = !this.form1Info.trialDurationDays? false : null;
         this.fieldStates.applyLeave = !(this.form1Info.applyLeave != null)? false : null;
         this.fieldStates.respondents = !(this.form1Info.respondents && this.form1Info.respondents.length > 0 )? false : null;
         this.fieldStates.appellants = !(this.form1Info.appellants && this.form1Info.appellants.length > 0 )? false : null;
