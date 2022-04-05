@@ -13,31 +13,31 @@
         <b-card v-if="dataReady" class="bg-white border-white text-dark">
             <b-row>
                 <b-col cols="4">
-                    LEVEL OF COURT
+                    Level Of Court
                     <span style="display: block;">{{levelOfCourt}}</span>
 
                 </b-col>
                 <b-col cols="4">
-                    SUPREME COURT FILE NO.
+                    Supreme Court File No.
                     <span style="display: block;">{{form1Info.lowerCourtFileNo}}</span>
 
                 </b-col>
                 <b-col cols="4">
-                    SUPREME COURT REGISTRY
+                    Supreme Court Registry
                     <span style="display: block;">{{form1Info.lowerCourtRegistryName}}</span>
                 </b-col>
             </b-row>
 
             <b-row class="mt-4">
                 <b-col cols="4">
-                    NAME OF JUDGE
+                    Name Of Judge
                     <span style="display: block;">{{judgeFullName}}</span>
                 </b-col>           
             </b-row>
 
             <b-row class="mt-4">
                 <b-col cols="4">
-                    DATE OF ORDER
+                    Date Of Order
                     <span style="display: block;">{{form1Info.dateOfJudgement | beautify-date-month}}</span>
                 </b-col>           
             </b-row>
@@ -53,27 +53,30 @@
             </b-row>
         </b-card>
 
-        <b-row class="ml-2">
-            <b-col cols="4">
-                DURATION OF TRIAL/HEARING                
-                <b-row class="ml-0 mt-1">
-                    <b-form-input                    
-                        style="max-width:25%" 
-                        :state="form1InfoStates.appearanceDays"
-                        @change="update"
-                        v-model="appearanceDays">
-                    </b-form-input>
-                    <span class="ml-2 my-auto">Days</span>
-                </b-row>
-                <span
-                    v-if="(form1InfoStates.appearanceDays != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger">
-                    The duration should be at least 1 day in length.
-                </span>
-                                
-            </b-col>           
-        </b-row>
+        <b-row class="mt-4 ml-2">
+            <b-col cols="6" style="font-weight: 700;">
+                Length of the Lower Court hearing: 
+                <p class="content text-primary">
+                    Indicate in days or hours the length of the hearing 
+                    that led to the order you are appealing from. For 
+                    example, if you are appealing a judgment from a 
+                    trial that took two hours, enter “two hours.”
+                </p>                               
+            </b-col>
+            <b-col class="mt-1">
+                <b-form-input    
+                    style="width: 10rem; display: inline-block;"                    
+                    :state="form1InfoStates.appearanceDays"
+                    @change="update"
+                    v-model="trialDurationDays"                            
+                    size="md"
+                    type="text"                        
+                ></b-form-input>
+                                    
+            </b-col>
+        </b-row>        
+
+        
     </b-card>
     
 </template>
@@ -113,7 +116,7 @@ export default class FillForm1SummaryInfo extends Vue {
 
     levelOfCourt = "Supreme Court of BC";  
     judgeFullName = "";
-    appearanceDays = 0;
+    trialDurationDays = "";
     dataReady = false;
 
     mounted() { 
@@ -121,7 +124,7 @@ export default class FillForm1SummaryInfo extends Vue {
         this.judgeFullName = 
             this.form1Info.honorificTitle + ' ' + 
             this.form1Info.nameOfJudge;
-        this.appearanceDays = this.form1Info.trialDurationDays?Number(this.form1Info.trialDurationDays):0;
+        this.trialDurationDays = this.form1Info.trialDurationDays?this.form1Info.trialDurationDays:'';
         this.update();
         this.dataReady = true;            
     }
@@ -133,10 +136,20 @@ export default class FillForm1SummaryInfo extends Vue {
     public update(){ 
               
         const form1 = this.form1Info;
-        form1.trialDurationDays = this.appearanceDays.toString();     
+        form1.trialDurationDays = this.trialDurationDays;     
         form1.judgeFullName = this.judgeFullName;
         this.UpdateForm1Info(form1);
     }
 
 }
 </script>
+
+<style lang="scss" scoped>  
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;     
+        width: 60%;  
+    }
+</style>

@@ -88,26 +88,24 @@
 
             <b-row class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    Length of the Lower Court hearing:                                
+                    Length of the Lower Court hearing: 
+                    <p class="content text-primary">
+                        Indicate in days or hours the length of the hearing 
+                        that led to the order you are appealing from. For 
+                        example, if you are appealing a judgment from a 
+                        trial that took two hours, enter “two hours.”
+                    </p>                               
                 </b-col>
                 <b-col class="mt-1">
                     <b-form-input    
-                        style="width: 6rem; display: inline-block;"                    
+                        style="width: 10rem; display: inline-block;"                    
                         :state="form1InfoStates.appearanceDays"
                         @change="update"
                         v-model="trialDurationDays"                            
                         size="md"
-                        type="text"
-                        autocomplete="off"
-                        @paste.prevent
+                        type="text"                        
                     ></b-form-input>
-                    <span class="ml-2 my-auto" style="display: inline-block;">Days</span>
-                    <span
-                        v-if="(form1InfoStates.appearanceDays != null)" 
-                        style="font-size: 0.75rem; display: block;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        The duration should be at least 1 day in length.
-                    </span>                    
+                                       
                 </b-col>
             </b-row>         
           
@@ -151,7 +149,7 @@ export default class FillForm1SummaryInfo extends Vue {
     tribunalTypes = ["type 1", "type 2", "Other"];
     otherTribunalType = "";
     tribunalType = "";
-    trialDurationDays = 0;
+    trialDurationDays = "";
 
     mounted() { 
         this.dataReady = false; 
@@ -162,7 +160,7 @@ export default class FillForm1SummaryInfo extends Vue {
 
     public extractInfo(){
 
-        this.trialDurationDays = this.form1Info.trialDurationDays?Number(this.form1Info.trialDurationDays):0;
+        this.trialDurationDays = this.form1Info.trialDurationDays?this.form1Info.trialDurationDays:"";
 
         if (this.tribunalSummaryInfo.tribunalType?.trim().length>0){
 
@@ -186,7 +184,7 @@ export default class FillForm1SummaryInfo extends Vue {
     public update(){ 
               
         const form1 = this.tribunalSummaryInfo;
-        form1.trialDurationDays = this.trialDurationDays.toString(); 
+        form1.trialDurationDays = this.trialDurationDays; 
         if (this.tribunalType == 'other'){
             form1.tribunalType = this.otherTribunalType;
         } else {
@@ -209,5 +207,12 @@ export default class FillForm1SummaryInfo extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+    }
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;     
+        width: 60%;  
     }
 </style>

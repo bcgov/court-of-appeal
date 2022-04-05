@@ -2,6 +2,15 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
+            <!-- <b-col cols="2" class="ml-3">
+                <b-button 
+                    style="float: right;" 
+                    variant="primary"
+                    @click="onPrintSave()"
+                    >
+                    Print-Save
+                </b-button>
+            </b-col> -->
             <b-col cols="10">
                 <b-button
                     style="float: right;" 
@@ -152,6 +161,42 @@ export default class Form3 extends Vue {
             console.log(err)        
         });      
     }
+
+    // public onPrintSave() { 
+    //     const pdf_type = "NCA"
+    //     const pdf_name = "form3-" + this.currentNoticeOfCrossAppealId
+    //     const el= document.getElementById("print");
+      
+    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+    //     const bottomRightText = `" "`;        
+    //     const url = '/form3/form-print/'+this.currentNoticeOfCrossAppealId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+    //     const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+
+    //     const body = {
+    //         'html':pdfhtml,
+    //         'json_data':this.result
+    //     }       
+        
+    //     const options = {
+    //         responseType: "blob",
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         }
+    //     }  
+
+    //     this.$http.post(url,body, options)
+    //     .then(res => {                       
+    //         const blob = res.data;
+    //         const link = document.createElement("a");
+    //         link.href = URL.createObjectURL(blob);
+    //         document.body.appendChild(link);
+    //         link.download = "FORM3.pdf";
+    //         link.click();
+    //         setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
+    //     },err => {
+    //         console.error(err);        
+    //     });
+    // }
 }
 </script>
 <style scoped lang="scss" src="@/styles/_pdf.scss">

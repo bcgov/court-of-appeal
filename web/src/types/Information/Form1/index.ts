@@ -94,6 +94,8 @@ export interface form1DataInfoType {
     dateSealed?: string;
     orderBan: boolean;
     dateBan?: string;  
+    emails?: string;
+    phoneNumbers?: string;
     judgeFullName: string;
     respondents: form1PartiesInfoType[];    
     appellants: form1PartiesInfoType[];
