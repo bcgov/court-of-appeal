@@ -393,15 +393,14 @@ export default class Form3StyleOfProceeding extends Vue {
         
         this.state.crossAppealRequired = this.form3Info.crossAppealRequired != null? null:false;
         this.state.crossAppealingParties = this.form3Info.crossAppealingParties?.length>0? null :false;
-        this.state.partOfOrderLeaveCrossAppealed = (this.form3Info.crossAppealRequired && this.form3Info.partOfOrderLeaveCrossAppealed)? null :false;
-        this.state.groundsLeaveCrossAppeal = (this.form3Info.crossAppealRequired && this.form3Info.groundsLeaveCrossAppeal)? null :false;
-        this.state.partOfOrderCrossAppealed = (!this.form3Info.crossAppealRequired && this.form3Info.partOfOrderCrossAppealed)? null :false;
-        this.state.seekingOrder = (!this.form3Info.crossAppealRequired && this.form3Info.seekingOrder)? null :false;
+        this.state.partOfOrderLeaveCrossAppealed = (this.form3Info.crossAppealRequired && !this.form3Info.partOfOrderLeaveCrossAppealed)? false: null;
+        this.state.groundsLeaveCrossAppeal = (this.form3Info.crossAppealRequired && !this.form3Info.groundsLeaveCrossAppeal)? false: null;
+        this.state.partOfOrderCrossAppealed = (!this.form3Info.crossAppealRequired && !this.form3Info.partOfOrderCrossAppealed)? false: null;
+        this.state.seekingOrder = (!this.form3Info.crossAppealRequired && !this.form3Info.seekingOrder)? false: null;
         this.state.phoneNumbers = this.form3Info.phoneNumbers? null :false;
         this.state.emailAdresses = this.form3Info.emailAdresses? null :false;
         this.state.addresses = this.form3Info.addresses? null :false;       
         this.state.authorizedName = !this.form3Info.authorizedName? false : null;       
-        
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
                 return false
