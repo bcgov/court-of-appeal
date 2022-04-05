@@ -6,7 +6,7 @@
 
         <b-card class="mb-4 bg-white border-white text-dark">
 
-            <b-row class="mt-5">
+            <b-row class="mt-0">
                 <b-col cols="6" style="font-weight: 700;">
                     Type of Tribunal:                                
                 </b-col>
@@ -18,7 +18,7 @@
                         :options="tribunalTypes">
                     </b-form-select>
                     <b-form-input
-                        v-if="tribunalType == 'Other' || !tribunalTypes.includes(tribunalSummaryInfo.tribunalType)"
+                        v-if="tribunalType == 'Other'"
                         style="width:100%" 
                         placeholder="Tribunal Type"
                         class="mt-2"
@@ -82,27 +82,13 @@
                         v-model="tribunalSummaryInfo.tribunalLocationOfOrder">
                     </b-form-input> 
                 </b-col>
-            </b-row>
-
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
-                    City where the Order was Pronounced                                
-                </b-col>
-                <b-col class="mt-2">
-                    <b-form-input
-                        :state="form1InfoStates.tribunalLocationOfOrder"
-                        @change="update"
-                        style="max-width:100%" 
-                        v-model="tribunalSummaryInfo.tribunalLocationOfOrder">
-                    </b-form-input> 
-                </b-col>
-            </b-row>
+            </b-row>            
 
             <b-row class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Length of the Lower Court hearing:                                
                 </b-col>
-                <b-col class="mt-2">
+                <b-col class="mt-1">
                     <b-form-input    
                         style="width: 6rem; display: inline-block;"                    
                         :state="form1InfoStates.appearanceDays"
@@ -116,7 +102,7 @@
                     <span class="ml-2 my-auto" style="display: inline-block;">Days</span>
                     <span
                         v-if="(form1InfoStates.appearanceDays != null)" 
-                        style="font-size: 0.75rem;" 
+                        style="font-size: 0.75rem; display: block;" 
                         class="bg-white text-danger"><b-icon-exclamation-circle/>
                         The duration should be at least 1 day in length.
                     </span>                    
@@ -159,6 +145,7 @@ export default class FillForm1SummaryInfo extends Vue {
     tribunalSummaryInfo = {} as form1DataInfoType;
     
     dataReady = false;
+    //TODO: add tribunal types
     tribunalTypes = ["type 1", "type 2", "Other"];
     otherTribunalType = "";
     tribunalType = "";
@@ -175,12 +162,17 @@ export default class FillForm1SummaryInfo extends Vue {
 
         this.trialDurationDays = this.form1Info.trialDurationDays?Number(this.form1Info.trialDurationDays):0;
 
-        if (this.tribunalTypes.includes(this.tribunalSummaryInfo.tribunalType)){
-            this.tribunalType = 'other';
-            this.otherTribunalType = this.tribunalSummaryInfo.tribunalType;
+        if (this.tribunalSummaryInfo.tribunalType?.trim().length>0){
+
+            if (this.tribunalTypes.includes(this.tribunalSummaryInfo.tribunalType)){
+                this.tribunalType = this.tribunalSummaryInfo.tribunalType;
+                this.otherTribunalType = '';            
+            } else {
+                this.tribunalType = 'Other';
+                this.otherTribunalType = this.tribunalSummaryInfo.tribunalType;            
+            }
         } else {
-            this.tribunalType = this.tribunalSummaryInfo.tribunalType;
-            this.otherTribunalType = '';
+            this.tribunalType = '';
         }
 
     }

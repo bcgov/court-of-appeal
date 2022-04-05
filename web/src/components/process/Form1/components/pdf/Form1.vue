@@ -38,11 +38,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
 import { namespace } from "vuex-class";
-
-import "@/store/modules/information";
-const informationState = namespace("Information");
+import moment from 'moment';
 
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
@@ -50,7 +47,6 @@ const form1State = namespace("Form1");
 import Form1Layout from "./Form1Layout.vue";
 import { form1DataInfoType } from '@/types/Information/Form1';
 
-import moment from 'moment';
 
 @Component({
     components:{        

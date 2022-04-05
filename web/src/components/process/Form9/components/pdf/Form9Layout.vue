@@ -75,8 +75,7 @@
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="margin-bottom: 0.75rem;">
                     This form may be used for general requests, including but not limited to: setting a new application 
-                    hearing date for matters adjourned generally, adjourning matters by consent, and requests to appear 
-                    by phone (which must include a phone number and reason for the request).
+                    hearing date for matters adjourned generally and adjourning matters by consent.
                 </div>                
             </div>
 
