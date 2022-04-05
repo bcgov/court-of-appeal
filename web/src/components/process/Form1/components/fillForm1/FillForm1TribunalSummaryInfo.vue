@@ -57,15 +57,17 @@
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="form1InfoStates.tribunalDateOfOrder == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="tribunalSummaryInfo.tribunalDateOfOrder"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="update"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="tribunalSummaryInfo.tribunalDateOfOrder"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                    @change="update"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
                     </b-card>
                 </b-col>
             </b-row>
@@ -202,3 +204,10 @@ export default class FillForm1SummaryInfo extends Vue {
 
 }
 </script>
+
+<style lang="scss" scoped>
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+    }
+</style>

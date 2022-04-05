@@ -178,15 +178,17 @@
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="form1InfoStates.dateSealed == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="commonInfo.dateSealed"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="update"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="commonInfo.dateSealed"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                    @change="update"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
                     </b-card>
                 </b-col>
             </b-row>
@@ -221,15 +223,17 @@
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="form1InfoStates.dateBan == false?'danger': 'dark'">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="commonInfo.dateBan"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="update"
-                            ></v-date-picker>                            
-                        </v-app>    
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="commonInfo.dateBan"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                    @change="update"
+                                ></v-date-picker>                            
+                            </v-app>  
+                        </div>  
                     </b-card>
                 </b-col>
             </b-row>
@@ -364,6 +368,11 @@ export default class FillForm1CommonInfo extends Vue {
 
     .labels {
         font-size: 1.15rem; font-weight:600;
+    }
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
     }
 
 </style>
