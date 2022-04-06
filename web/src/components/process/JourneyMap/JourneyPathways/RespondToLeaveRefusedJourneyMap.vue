@@ -57,7 +57,7 @@
             <clock-end-circle 
                 :style="{position: 'absolute', left: '80%', top: '22%'}"
                 stepTitle="Final Decision on Leave to Appeal"
-                :titleStyle="{position: 'absolute', top: '97px', width: '150px', left: '-22px'}"
+                :titleStyle="{position: 'absolute', top: '27px', width: '150px', left: '0px'}"
                 @action="displayWindow('Final Decision on Leave to Appeal')"
                 :completed="completedTrail[1]"
                 order=3
