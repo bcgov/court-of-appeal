@@ -11,64 +11,65 @@
                 <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
-
-            <b-row style="margin-top:4rem;">
-                <b-col cols="6" style="font-weight: 700;">First Appellant:
-                   
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="Name of the first appellant named on Form 1: Notice of Appeal."/>
-                    <b-form-select                            
-                        class="mt-2"                        
-                        :state="state.firstAppellant"                   
-                        v-model="form18Info.firstAppellant"                    
-                        :options="applicantNames">
-                    </b-form-select>
-                    
-                </b-col>
-
-                <b-col cols="6" style="font-weight: 700;">First Respondent:
-                   
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="Name of the first respondent named on Form 1: Notice of Appeal."/>
-                    <b-form-select 
-                        class="mt-2"             
-                        :state="state.firstRespondent"                   
-                        v-model="form18Info.firstRespondent"                    
-                        :options="respondentNames">
-                    </b-form-select>
-                    
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-5">
-                <b-col cols="6" style="font-weight: 700;">
-                    Are you changing your representation?
-                    <div class="text-info"
-                        style="display: block; font-size: 0.75rem;"><b>Note:</b> Changing Representation means a change from one lawyer to another; 
-                        or from being self-represented to having a lawyer; or from having a lawyer 
-                        to being self-represented</div>                                
-                </b-col>
-                <b-col >
-                    <b-form-radio-group                
-                        style="width:100%"            
-                        v-model="form18Info.changeRepresentation"
-                        :options="changeRepresentationOptions">
-                    </b-form-radio-group>
-                    <span
-                        v-if="(state.changeRepresentation != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify whether you are changing representation.
-                    </span>                     
-                </b-col>
-            </b-row>            
         </div>
+        
+        <b-row style="margin-top:4rem;">
+            <b-col cols="6" style="font-weight: 700;">First Appellant:
+                
+                <b-icon-question-circle-fill 
+                    class="text-primary"
+                    v-b-tooltip.hover.noninteractive
+                    scale="1.1"
+                    title="Name of the first appellant named on Form 1: Notice of Appeal."/>
+                <b-form-select                            
+                    class="mt-2"                        
+                    :state="state.firstAppellant"                   
+                    v-model="form18Info.firstAppellant"                    
+                    :options="applicantNames">
+                </b-form-select>
+                
+            </b-col>
+
+            <b-col cols="6" style="font-weight: 700;">First Respondent:
+                
+                <b-icon-question-circle-fill 
+                    class="text-primary"
+                    v-b-tooltip.hover.noninteractive
+                    scale="1.1"
+                    title="Name of the first respondent named on Form 1: Notice of Appeal."/>
+                <b-form-select 
+                    class="mt-2"             
+                    :state="state.firstRespondent"                   
+                    v-model="form18Info.firstRespondent"                    
+                    :options="respondentNames">
+                </b-form-select>
+                
+            </b-col>
+        </b-row>
+
+        <b-row class="mt-5">
+            <b-col cols="6" style="font-weight: 700;">
+                Are you changing your representation?
+                <div class="text-info"
+                    style="display: block; font-size: 0.75rem;"><b>Note:</b> Changing Representation means a change from one lawyer to another; 
+                    or from being self-represented to having a lawyer; or from having a lawyer 
+                    to being self-represented</div>                                
+            </b-col>
+            <b-col >
+                <b-form-radio-group                
+                    style="width:100%"            
+                    v-model="form18Info.changeRepresentation"
+                    :options="changeRepresentationOptions">
+                </b-form-radio-group>
+                <span
+                    v-if="(state.changeRepresentation != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify whether you are changing representation.
+                </span>                     
+            </b-col>
+        </b-row>            
+        
 
         <div v-if="form18Info.changeRepresentation">
 
@@ -112,9 +113,10 @@
                 <b-col>
                     <b-form-radio-group                
                         style="width:100%" 
-                        :state="state.newRepresentation"                                    
+                        :state="state.newRepresentation"
+                        @change="updated++;"                                    
                         v-model="form18Info.newRepresentation"                    
-                        :options="representationOptions">
+                        :options="form18Info.currentRepresentation == 'Lawyer' ? representationOptions: lawyerRepresentationOptions ">
                     </b-form-radio-group>
                     <span
                         v-if="(state.newRepresentation != null)" 
@@ -473,6 +475,7 @@ export default class Form18StyleOfProceeding extends Vue {
     ];
 
     representationOptions = [ 'Self-represented', 'Lawyer' ];
+    lawyerRepresentationOptions = [ 'Lawyer' ];
 
     state = {
         firstAppellant: null,
@@ -626,7 +629,9 @@ export default class Form18StyleOfProceeding extends Vue {
         const emailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
         const postcodeFormat = /^(([A-Z][0-9][A-Z] [0-9][A-Z][0-9])|([a-z][0-9][a-z] [0-9][a-z][0-9]))?$/;
 
-        
+        if(this.form18Info.currentRepresentation!='Lawyer' && this.form18Info.newRepresentation!='Lawyer')
+            this.form18Info.newRepresentation=''
+
         this.state.firstAppellant = !this.form18Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form18Info.firstRespondent? false : null;
 
@@ -641,7 +646,7 @@ export default class Form18StyleOfProceeding extends Vue {
         this.state.newLawyerName = (changeRep && this.form18Info.newRepresentation=='Lawyer' && !this.form18Info.newLawyerName)? false : null;
 
 
-        const selfRep = this.form18Info.selfRepresented
+        const selfRep = this.form18Info.selfRepresented || this.form18Info.newRepresentation!='Lawyer';
 
         const phone = this.form18Info.serviceInformation.phone?.trim()
         this.state.phone = (selfRep && phoneFormat.test(phone)==false)? false : null;
@@ -665,7 +670,7 @@ export default class Form18StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
         this.state.selfRepresented = selfRep==null && !changeRep? false :null
 
-        console.log(this.state)
+        //console.log(this.state)
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
