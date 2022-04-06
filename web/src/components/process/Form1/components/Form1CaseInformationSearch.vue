@@ -197,6 +197,9 @@ export default class Form1CaseInformationSearch extends Vue {
             this.searching = false;
             if(res.data){
                 this.cases = res.data;
+                if(this.cases.length==1){
+                    this.cases[0]['_showDetails'] = true;
+                }
             } else {
                 this.notFound = true;
             }

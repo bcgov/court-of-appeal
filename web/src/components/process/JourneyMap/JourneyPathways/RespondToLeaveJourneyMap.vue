@@ -75,7 +75,7 @@
                 :style="{position: 'absolute', left: '84%', top: '22%'}"
                 stepTitle="Decision on Leave to Appeal"
                 @action="displayWindow('Decision on Leave to Appeal')"
-                :titleStyle="{position: 'absolute', top: '97px', width: '150px', left: '-22px'}"
+                :titleStyle="{position: 'absolute', top: '27px', width: '150px', left: '0px'}"
                 :completed="completedTrail[2]"
                 order=4
                 v-bind="pageState[3]"

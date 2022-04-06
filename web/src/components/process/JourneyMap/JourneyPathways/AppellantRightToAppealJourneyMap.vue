@@ -59,8 +59,7 @@
             style="left: 53%"
             :twoPages="true"
             stepTitle="Applications"
-            stepTitleOptional="(Optional)"
-            stepTitleClass="step-title"
+            stepTitleOptional="(Optional)"            
             @action="displayWindow('Applications')"
             @completed="completed"            
             order=3
@@ -70,8 +69,7 @@
         <form-icon 
             style="left: 72%"
             :twoPages="true"
-            stepTitle="Appeal Record and Transcript"
-            stepTitleClass="step-title"
+            stepTitle="Appeal Record and Transcript"           
             @action="displayWindow('Appeal Record and Transcript')"
             @completed="completed"            
             order=4

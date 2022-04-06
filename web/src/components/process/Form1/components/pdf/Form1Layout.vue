@@ -9,8 +9,8 @@
             <div style="font-size:18pt; font-weight: 700;">COURT OF APPEAL FOR BRITISH COLUMBIA</div>                
         </div>   
         <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
-            <div style="width:25%; font-size:20pt; background: black; color: white; display:flex; align-items:center; justify-content:center;"><b>FORM 1</b></div>
-            <div style="width:75%; font-size:14pt; line-height:2rem;"><b>
+            <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 1</b></div>
+            <div style="width:75%; font-size:14pt;"><b>
                 NOTICE OF APPEAL: RULE 6(1)
             </b></div>
         </div>         
@@ -32,10 +32,10 @@
                     <div style="width:45.5%; padding:0.5rem;">
                         <div style="text-align:right; margin-right:0.5rem;">
                             <div>Court of Appeal File No.</div>
-                        <div style="display:block; font-size: 8pt; font-weight: 700; margin-right: 1rem;">(For Registry Use Only)</div>
+                            <div style="display:block; font-size: 8pt; font-weight: 600; margin:-0.25rem 1rem;">(For Registry Use Only)</div>
                         </div>
                     </div>
-                    <div class="coa-text-box" style="width:40%;background: #E8E8E8;" ></div>
+                    <div class="coa-text-box" style="width:40%; background: #E8E8E8;" ></div>
                 </div>
 
                 <div class="row" style="margin-top: 0.5rem;">
@@ -70,7 +70,7 @@
         </div>
 
         <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem 0.5rem; text-align: left; padding: 0.5rem;">
-            <div style="margin-bottom: 0.75rem;">
+            <div style="margin-bottom: 0rem;">
                 <b>To the respondent(s)</b><br>
                 A court proceeding has been commenced against you in the Court of Appeal. See the final page 
                 of this form for details on how to respond.
@@ -79,25 +79,27 @@
 
     </div>
 
-    <div class="row my-4" style="font-weight: 700;">1. PARTIES TO THE APPEAL</div>
+<!-- <1> -->
+    <div class="row my-4" style="font-size: 12pt; font-weight: 600; margin: 0;"><b class="mr-3">1.</b> PARTIES TO THE APPEAL</div>
 
-    <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+<!-- <Appellant(s)> -->
+    <div style="display:flex; font-size: 9pt; margin:1rem 0rem;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.75rem 0px; height:8rem;">
             <div class="ml-2">
                 <b>
                     Appellant(s)
                 </b>    
                 <i><br>
                     List the party(ies) appealing the Supreme Court or tribunal order. 
-                    Identify their roles in the proceeding below in brackets. E.g.: 
+                    Identify their roles in the proceeding below in brackets. E.g., 
                     Jane Doe (plaintiff, petitioner, etc.)
 
                 </i> 
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-76"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
            <div class="mx-2">{{applicantNames.toString()}}</div>
@@ -105,9 +107,10 @@
 
     </div> 
 
+<!-- <Respondent(s)> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:8.75rem;">
             <div class="ml-2">
                 <b>
                     Respondent(s)
@@ -120,7 +123,7 @@
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-80"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2">{{respondentNames.toString()}}</div> 
@@ -128,11 +131,13 @@
 
     </div> 
 
-    <div class="row my-4" style="font-weight: 700;">2. THE ORDER YOU ARE APPEALING</div>
+<!-- <2> -->
+    <div class="row my-4" style="font-size: 12pt; font-weight: 600; margin: 0;"><b class="mr-3">2.</b> THE ORDER YOU ARE APPEALING</div>
 
+<!-- <leave required> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
                         
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.6rem 0px; height:5.5rem;">
             <div class="ml-2">
                 <b>
                     Is leave to appeal required?
@@ -144,19 +149,19 @@
             </div> 
         </div>       
 
-        <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->                
 
-        <div style="margin-top: 1rem; width:24%;">              
+        <div style="margin-top: 1rem; width:10%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: 1.75rem 0 0 1rem;" 
                 :check="true?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Yes"/>  
         </div>
-        <div style="margin-top: 1rem; width:12%;">              
+        <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1rem;" 
+                style="padding: 0; margin: 1.75rem .5rem 0 1rem;" 
                 :check="true?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
@@ -165,9 +170,10 @@
 
     </div> 
 
+<!-- <Who made the order> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0; height:5.5rem;">
             <div class="ml-2">
                 <b>
                     Who made the order?
@@ -178,7 +184,7 @@
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalOriginalDecisionMaker}}</div> 
@@ -187,80 +193,82 @@
 
     </div> 
 
-    <div style="display:flex; font-size: 9pt;">                      
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">
-            <div style="margin-left:4.5rem" ><b>What court and/or tribunal pronounced the order(s)?</b></div>
+<!-- <What court tribunal pronounced> -->
+    <div style="display:flex; font-size: 9pt;">  
+
+        <div class="coa-arrow-box-left" style="width:35%; margin:.75rem 0px; height:3rem;">
+            <div class="ml-2" ><b>What court and/or tribunal pronounced the order(s)?</b></div>
         </div>       
 
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
 
         <div style="margin-top: 1rem; width:24%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: .75rem 0 0 1.25rem;" 
                 :check="!result.appealTribunal?'yes':''" 
                 shiftmark="1" 
-                marginLeft="0.5rem"
+                marginLeft="0.25rem"
                 text="Supreme Court"/>  
         </div>
         <div style="margin-top: 1rem; width:12%;">              
             <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1rem;" 
+                style="padding: 0; margin: .75rem .5rem 0 0rem;" 
                 :check="result.appealTribunal?'yes':''"
                 shiftmark="1" 
-                marginLeft="0.5rem"
+                marginLeft="0.25rem"
                 text="Tribunal"/>
         </div>   
 
-        <div class="coa-text-box-center" style="width:31%;" v-if="result.appealTribunal">{{result.tribunalType}}</div>   
-        <div class="coa-text-box-center" style="width:31%;" v-else></div>       
+        <div style="width:31%;">
+            <div style="height:3.5rem; margin:0.5rem 0;" class="coa-text-box-center" v-if="result.appealTribunal">{{result.tribunalType}}</div>   
+            <div class="coa-text-box-center" v-else></div>
+        </div>       
                             
     </div>
 
-    <div style="display:flex; font-size: 9pt;">
-        <div style="width:69%;">
+    <div style="display:flex; font-size: 9pt; margin:-0.25rem 0 -1rem 0;">
+        <div style="width:70%;">
         </div>    
-        <div style="width:31%; text-align:center;">
+        <div style="width:30%; text-align:center;">
              <div>Name of tribunal</div>                      
         </div>
     </div>    
 
+<!-- <Date of order> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:5.5rem;">
             <div class="ml-2">
                 <b>
                     Date the order was pronounced
                 </b>    
-                <i><br>
+                <i style="font-size:8.5pt;"><br>
                     Include the day, month and year that the order being appealed
                     was pronounced (not the date the order was entered).
                 </i> 
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
-        
-        <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
-            <div class="mx-2">{{result.dateOfJudgement | beautify-date-dd/mm/yyyy}}</div> 
-        </div>                      
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
+        <div style="width:20%">
+            <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">
+                <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
+                <div class="mx-2" v-else>{{result.dateOfJudgement | beautify-date-dd/mm/yyyy}}</div> 
+            </div> 
+            <div >
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+            </div>
+        </div>                    
 
     </div> 
 
-<!-- <date-help>-->
-    <div class="row" style="font-size: 9pt;">
-        <div style="width:40%;"></div>
-        <div style="width:15%">
-            <div class="arrow-up-flash"></div>
-            <div class="arrow-up-box"></div>               
-            <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
-        </div>
-    </div>
-
+<!-- <City of Order> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">
-            <div style="margin-left:4.5rem" >
+        <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:3.5rem;">
+            <div class="ml-2" >
                 <b>
                     City where the order was pronounced
                 </b>
@@ -276,9 +284,10 @@
 
     </div> 
 
+<!-- <Length of hearing> -->
     <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:8.5rem;">
             <div class="ml-2">
                 <b>
                     Length of lower court hearing
@@ -292,7 +301,7 @@
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-76"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2">{{result.trialDurationDays}}</div>             
@@ -300,9 +309,10 @@
 
     </div> 
 
-    <div style="display:flex; font-size: 9pt;">                      
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">
-            <div style="margin-left:4.5rem" >
+<!-- <Type of proceeding> -->
+    <div style="display:flex; font-size: 9pt; margin-top: 2rem;">                      
+        <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:3.5rem;">
+            <div class="ml-2" >
                 <b>What type of proceeding are you appealing from?</b>
                 <i><br>
                     Check one only.    
@@ -312,62 +322,58 @@
 
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
 
-        <div style="margin-top: 0; width:24%;">              
+        <div style="margin-top: 0; width:34%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: 0.75rem 0 0 1rem;" 
                 :check="!result.appealTribunal?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
-                text="Trial Judgment"/>  
-        </div>
-        <div style="margin-top: 0; width:24%;">              
-            <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1rem;" 
-                :check="result.appealTribunal?'yes':''"
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Order of a Tribunal"/>
-        </div>
-                            
-    </div>
-
-    <div class="row" style="font-size: 9pt;">
-        <div style="width:33%;"></div>
-        <div style="margin-top: -1rem; width:24%;">              
+                text="Trial Judgment"/> 
             <check-box 
-                style="margin: 0 0 0 1rem;" 
+                style="margin: 0.5rem 0 0 1rem;" 
                 :check="!result.appealTribunal?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Summary Trial Judgment"/>  
+             
         </div>
-        <div style="margin-top: -1rem; width:24%;">              
+        <div style="margin-top: 0; width:24%;">              
             <check-box                    
-                style="padding: 0; margin: 0 .5rem 0 1rem;" 
+                style="padding: 0; margin: 0.75rem .5rem 0 1rem;" 
+                :check="result.appealTribunal?'yes':''"
+                shiftmark="1" 
+                marginLeft="0.5rem"
+                text="Order of a Tribunal"/>
+            <check-box                    
+                style="padding: 0; margin: 0.5rem .5rem 0 1rem;" 
                 :check="result.appealTribunal?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Chambers Judgment"/>
         </div>
+                            
     </div>
-<!-- <relief sought>-->
-    <div class="row my-4" style="font-weight: 700;">3. RELIEF SOUGHT</div>
+    <div class="mt-5">
+    </div>
 
-    <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem 0; text-align: left; padding: 0.5rem;">
-        <div style="margin-bottom: 0.75rem;">           
+<!-- <3>  -->
+<!-- <relief sought>-->
+    <div class="row my-0" style="font-size: 12pt; font-weight: 600; margin: 0;"><b class="mr-3">3.</b> RELIEF SOUGHT</div>
+
+    <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding: 0.5rem;">
+        <div style="margin-bottom: rem;">           
             If leave to appeal is not required, fill out Part A. If you are seeking leave to appeal, fill out Part B.
         </div>                
     </div>
 
-<!--  < Part A >   ____________________________________________________________         -->           
+<!-- <Part A> -->           
 
-    <div class="mt-4" style="border: 1px solid #BABABA; background: #BABABA; font-size: 10pt; margin: 1.5rem 0; text-align: left; padding: 0.5rem;">
-        
-        <div class="row my-4" style="font-weight: 700;">PART A: LEAVE NOT REQUIRED</div>
+    <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
+        <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 600;"><b class="mr-3">PART A:</b> LEAVE NOT REQUIRED</div>     
                
-        <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+        <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
 
-            <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+            <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
                 <div class="ml-2">
                     <b>
                         Part of the order being appealed
@@ -379,7 +385,7 @@
                 </div>                       
             </div>
 
-            <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+            <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
                 <div v-if="!result.applyLeave" class="mx-2">{{result.partOfJudgment}}</div>             
@@ -387,9 +393,9 @@
 
         </div>
 
-        <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+        <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
-            <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+            <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
                 <div class="ml-2">
                     <b>
                         Order you are seeking on appeal
@@ -402,7 +408,7 @@
                 </div>                       
             </div>
 
-            <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+            <div class="arrow-right-flash-76" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
                 <div v-if="!result.applyLeave" class="mx-2">{{result.orderSought}}</div>             
@@ -412,15 +418,14 @@
        
     </div>
 
-<!--  < Part B >   ____________________________________________________________         -->
-    
-    <div class="mt-4" style="border: 1px solid #BABABA; background: #BABABA; font-size: 10pt; margin: 1.5rem 0; text-align: left; padding: 0.5rem;">
-        
-        <div class="row my-4" style="font-weight: 700;">PART B: SEEKING LEAVE TO APPEAL</div>
-               
-        <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
 
-            <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+<!-- <PART B> -->
+    <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
+        <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">PART B:</b> SEEKING LEAVE TO APPEAL</div>
+               
+        <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
+
+            <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
                 <div class="ml-2">
                     <b>
                         Part of the order being appealed
@@ -432,7 +437,7 @@
                 </div>                       
             </div>
 
-            <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+            <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
                 <div v-if="result.applyLeave" class="mx-2">{{result.partOfJudgment}}</div>             
@@ -440,9 +445,9 @@
 
         </div>
 
-        <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+        <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
-            <div class="coa-arrow-box-left" style="width:32%; margin:0.5rem 0px; height:6.5rem;">
+            <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
                 <div class="ml-2">
                     <b>
                         Grounds for leave to appeal
@@ -455,7 +460,7 @@
                 </div>                       
             </div>
 
-            <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+            <div class="arrow-right-flash-76" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
                 <div v-if="result.applyLeave" class="mx-2">{{result.orderSought}}</div>             
@@ -465,129 +470,128 @@
        
     </div>
 
-    <div class="row my-4" style="font-weight: 700;">4. ADDITIONAL INFORMATION</div>
-    <!--  < Sealing order >   ____________________________________________________________         -->
-    <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+<!-- <4> -->
+    <div class="row mt-4" style="font-size: 12pt; font-weight: 600; margin: 0;"><b class="mr-3">4.</b> ADDITIONAL INFORMATION</div>
+
+<!-- <Sealing order> -->
+    <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
                         
-        <div class="coa-arrow-box-right" style="width:32%; margin:.5rem 0px; height:2.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.6rem 0px; height:5.5rem;">
             <div class="ml-2">
                 <b>
                     Sealing order
                 </b>  
                 <i><br>
                     Is there an order sealing any part of the trial court or tribunal file?
-                    If yes, add date(s).
+                    <br>If yes, add date(s).
                 </i>  
                
             </div> 
         </div>       
 
-        <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->                
 
         <div style="margin-top: 1rem; width:10%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: 1.25rem 0 0 1rem;" 
                 :check="result.orderSealed?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Yes"/>  
         </div>
-        <div style="margin-top: 1rem; width:10%;">              
+        <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1rem;" 
+                style="padding: 0; margin: 1.25rem .5rem 0 1rem;" 
                 :check="!result.orderSealed?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="No"/>
         </div>
 
-        <div style="margin-top: 0.5rem; width:40%;">
-            <div class="row">
-                <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Date</div></div>
-                <div class="coa-text-box" style="width:48%;" v-if="result.orderSealed">{{result.dateSealed}}</div>
-                <div class="coa-text-box" style="width:48%;" v-else></div>
-            </div>
+        
+        <div style="margin-top: 2.15rem; width:10%">
+            <div style="text-align:right; margin-right:0.5rem;">Date</div>
+        </div>     
 
-            <div class="row" >
-                <div style="width:45.5%; padding:0.5rem;"></div>
-                <div style="width:48%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
-                    <div class="arrow-up-flash"></div>
-                    <div class="arrow-up-box"></div>
-                </div>
+        <div style="width:20%;">           
+                
+            <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-if="result.orderSealed">{{result.dateSealed}}</div>
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-else></div>
             </div>
+            <div >
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+            </div> 
 
-            <div class="row" >
-                <div style="width:45.5%; padding:0.5rem;"></div>
-                <div class="coa-help-box" style="width:48%;">
-                    <i>DD/MM/YYYY</i>
-                </div>                        
-            </div>
         </div>
     </div>
-    <!--  < Ban order >   ____________________________________________________________         -->
-    <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+
+    <div style="display:flex; font-size: 9pt; margin:0rem 0px;">
+    </div>
+
+<!-- <Ban order> -->
+    <div style="display:flex; font-size: 9pt; margin:0;">
                         
-        <div class="coa-arrow-box-right" style="width:32%; margin:.5rem 0px; height:4.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.6rem 0px; height:5.5rem;">
             <div class="ml-2">
                 <b>
                     Anonymity order/publication bans
                 </b>  
-                <i><br>
+                <i>
                     Are there orders that protect the identity of a party or parties?
-                    If yes, add date(s).
+                    <br>If yes, add date(s).
                 </i>  
                
             </div> 
         </div>       
 
-        <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->                
 
         <div style="margin-top: 1rem; width:10%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: 1.25rem 0 0 1rem;" 
                 :check="result.orderBan?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Yes"/>  
         </div>
-        <div style="margin-top: 1rem; width:10%;">              
+        <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1rem;" 
+                style="padding: 0; margin: 1.25rem .5rem 0 1rem;" 
                 :check="!result.orderBan?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="No"/>
         </div>
 
-        <div style="margin-top: 0.5rem; width:40%;">
-            <div class="row">
-                <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Date</div></div>
-                <div class="coa-text-box" style="width:48%;" v-if="result.orderBan">{{result.dateBan}}</div>
-                <div class="coa-text-box" style="width:48%;" v-else></div>
-            </div>
+        <div style="margin-top: 2.15rem; width:10%">
+            <div style="text-align:right; margin-right:0.5rem;">Date</div>
+        </div>     
 
-            <div class="row" >
-                <div style="width:45.5%; padding:0.5rem;"></div>
-                <div style="width:48%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
-                    <div class="arrow-up-flash"></div>
-                    <div class="arrow-up-box"></div>
-                </div>
+        <div style="width:20%;">           
+                
+            <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">                
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-if="result.orderBan">{{result.dateBan}}</div>
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-else></div>
             </div>
-
-            <div class="row" >
-                <div style="width:45.5%; padding:0.5rem;"></div>
-                <div class="coa-help-box" style="width:48%;">
-                    <i>DD/MM/YYYY</i>
-                </div>                        
-            </div>
+            <div >
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+            </div>             
+              
         </div>
     </div>
-<!-- <areas of law involved>-->
+
+
+<!-- <Areas of law>-->
     <div style="display:flex; font-size: 9pt;">                      
-        <div class="coa-arrow-box-right" style="width:32%; margin:.5rem 0px; height:8.5rem;">
+        <div class="coa-arrow-box-left" style="width:37%; margin:.35rem 0px; height:7.5rem;">
             <div class="ml-2" >
-                <b>Areas of law raised in the appeal</b>
-                <i><br>
+                <b style="font-size:8.95pt;">Areas of law raised in the appeal</b>
+                <i style="font-size:8.5pt;"><br>
                     You may check more than one box if appropriate. For example,
                     you should check “motor vehicle accidents” and “torts” for a
                     personal injury claim involving a motor vehicle accident.    
@@ -595,131 +599,100 @@
             </div>
         </div>       
 
-        <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
+        <div class="arrow-right-flash-66"></div> <!-- < width ~ 8% > -->                
 
-        <div style="margin-top: 1rem; width:30%;">              
+        <div style="font-size:8.75pt; margin-top: 1rem; width:35%;">              
             <check-box 
-                style="margin: .5rem 0 0 1rem;" 
+                style="margin: 0rem 0 0 1rem;" 
                 :check="result.involves.includes('Constitutional / Administrative')?'yes':''"  
                 shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Constitutional/Administrative"/>  
-        </div>
-        <div style="margin-top: 1rem; width:20%;">              
-            <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1.25rem;" 
-                :check="result.involves.includes('Civil Procedure')?'yes':''" 
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Civil Procedure"/>
-        </div>
-
-        <div style="margin-top: 1rem; width:20%;">              
-            <check-box                    
-                style="padding: 0; margin: .5rem .5rem 0 1.25rem;" 
-                :check="result.involves.includes('Commercial')?'yes':''" 
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Commercial"/>
-        </div>
-                            
-    </div>
-
-    <div class="row" style="font-size: 9pt;">
-        <div style="width:40%;"></div>
-        <div style="margin-top: -6rem; width:30%;">              
+                marginLeft="0rem"
+                text="Constitutional/Administrative"/> 
             <check-box 
-                style="margin: 0 0 0 -0.25rem;" 
+                style="margin: .5rem 0 0 1rem;" 
                 :check="result.involves.includes('Motor Vehicle Accidents')?'yes':''" 
                 shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Motor Vehicle Accidents"/>  
-        </div>
-        <div style="margin-top: -6rem; width:20%;">              
-            <check-box                    
-                style="padding: 0; margin: 0 0 0 -1.5rem;" 
-                :check="result.involves.includes('Municipal Law')?'yes':''" 
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Municipal Law"/>
-        </div>
+                marginLeft="0rem"
+                text="Motor Vehicle Accidents"/> 
 
-        <div style="margin-top: -6rem; width:10%;">              
-            <check-box                    
-                style="padding: 0; margin: 0 0 0 -2.75rem;" 
-                :check="result.involves.includes('Real Property')?'yes':''" 
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Real Property"/>
-        </div>
-    </div>
-
-    <div class="row" style="font-size: 9pt;">
-        <div style="width:40%;"></div>
-        <div style="margin-top: -4rem; width:30%;">              
             <check-box 
-                style="margin: 0 0 0 -0.25rem;" 
+                style="margin: .5rem 0 0 1rem;" 
                 :check="result.involves.includes('Torts')?'yes':''" 
                 shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Torts"/>  
-        </div>
-        <div style="margin-top: -4rem; width:20%;">              
-            <check-box                    
-                style="padding: 0; margin: 0 0 0 -1.5rem;" 
-                :check="result.involves.includes('Equity')?'yes':''"
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Equity"/>
-        </div>
-
-        <div style="margin-top: -4rem; width:10%;">              
-            <check-box                    
-                style="padding: 0; margin: 0 0 0 -2.75rem;" 
-                :check="result.involves.includes('Wills and Estate')?'yes':''"
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Wills and Estates"/>
-        </div>
-    </div>
-
-    <div class="row" style="font-size: 9pt;">
-        <div style="width:40%;"></div>
-        <div style="margin-top: -2rem; width:30%;">              
+                marginLeft="0rem"
+                text="Torts"/>
             <check-box 
-                style="margin: 0 0 0 -0.25rem;" 
+                style="margin: .5rem 0 0 1rem;" 
                 :check="result.involves.includes('Divorce Act')?'yes':''" 
                 shiftmark="1" 
-                marginLeft="0.5rem"
+                marginLeft="0rem"
                 text="Divorce Act"/>  
         </div>
-        <div style="margin-top: -2rem; width:20%;">              
+
+        <div style="font-size:8.75pt; margin-top: 1rem; width:19.5%;">              
             <check-box                    
-                style="padding: 0; margin: 0 0 0 -1.5rem;" 
+                style="padding: 0; margin: 0rem .5rem 0 0rem;" 
+                :check="result.involves.includes('Civil Procedure')?'yes':''" 
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Civil Procedure"/>
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
+                :check="result.involves.includes('Municipal Law')?'yes':''" 
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Municipal Law"/>
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
+                :check="result.involves.includes('Equity')?'yes':''"
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Equity"/>
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
                 :check="result.involves.includes('Family Law Act')?'yes':''"
                 shiftmark="1" 
-                marginLeft="0.5rem"
+                marginLeft="0rem"
                 text="Family Law Act"/>
         </div>
 
-        <div style="margin-top: -2rem; width:10%;">              
+        <div style="font-size:8.75pt; margin-top: 1rem; width:17%;">              
             <check-box                    
-                style="padding: 0; margin: 0 0 0 -2.75rem;" 
+                style="padding: 0; margin: 0rem .5rem 0 0rem;" 
+                :check="result.involves.includes('Commercial')?'yes':''" 
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Commercial"/>                     
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
+                :check="result.involves.includes('Real Property')?'yes':''" 
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Real Property"/>           
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
+                :check="result.involves.includes('Wills and Estate')?'yes':''"
+                shiftmark="1" 
+                marginLeft="0rem"
+                text="Wills and Estates"/>             
+            <check-box                    
+                style="padding: 0; margin: .5rem 0 0 0rem;" 
                 :check="result.involves.includes('Other')?'yes':''"
                 shiftmark="1" 
-                marginLeft="0.5rem"
+                marginLeft="0rem"
                 text="Other"/>
         </div>
     </div>
-<!-- <involves-children>-->
-    <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+
+<!-- <Involves-children>-->
+    <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
                         
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:2.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.35rem 0px; height:3.75rem;">
             <div class="ml-2">
                 <b>
                     Appeals involving children
                 </b>  
-                <i><br>
+                <i style="font-size:8.65pt;"><br>
                     Does this appeal involve the rights or interests of a child?
                     E.g., parenting order
                 </i>  
@@ -729,7 +702,7 @@
 
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
 
-        <div style="margin-top: 1rem; width:24%;">              
+        <div style="margin-top: 1rem; width:10%;">              
             <check-box 
                 style="margin: .5rem 0 0 1rem;" 
                 :check="result.appealInvolvesChild?'yes':''" 
@@ -737,7 +710,7 @@
                 marginLeft="0.5rem"
                 text="Yes"/>  
         </div>
-        <div style="margin-top: 1rem; width:12%;">              
+        <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
                 style="padding: 0; margin: .5rem .5rem 0 1rem;" 
                 :check="!result.appealInvolvesChild?'yes':''"
@@ -746,12 +719,15 @@
                 text="No"/>
         </div>
     </div>
+
+<!-- <5> -->
 <!-- <service>-->
-    <div class="row my-4" style="font-weight: 700;">5. SERVICE</div>
+    <div class="row mt-4" style="font-size: 12pt; font-weight: 600; margin: 0;"><b class="mr-3">5.</b> SERVICE</div>
+
 <!-- <representation>-->
-    <div style="display:flex; font-size: 9pt; margin:1rem 0px;">
+    <div style="display:flex; font-size: 9pt; margin:0 0 0.25rem 0;">
                         
-        <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:2.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.7rem 0px; height:3rem;">
             <div class="ml-2">
                 <b>
                     Are you representing yourself?
@@ -762,7 +738,7 @@
 
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->                
 
-        <div style="margin-top: 1rem; width:24%;">              
+        <div style="margin-top: 1rem; width:10%;">              
             <check-box 
                 style="margin: .5rem 0 0 1rem;" 
                 :check="result.selfRepresenting?'yes':''" 
@@ -770,7 +746,7 @@
                 marginLeft="0.5rem"
                 text="Yes"/>  
         </div>
-        <div style="margin-top: 1rem; width:12%;">              
+        <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
                 style="padding: 0; margin: .5rem .5rem 0 1rem;" 
                 :check="!result.selfRepresenting?'yes':''"
@@ -779,10 +755,11 @@
                 text="No"/>
         </div>
     </div>
- <!-- ROW <service-addresses> -->
+
+ <!-- <Service-Addresses> -->
     <div style="display:flex; font-size: 9pt;">
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.35rem 0px; height:6rem;">
             <div class="ml-2">
                 <b>
                     Name(s) and address(es) within BC for service of the appellant(s).
@@ -794,7 +771,7 @@
             </div>                       
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2">{{result.appealingFirmAddress}}</div> 
@@ -803,8 +780,8 @@
     </div> 
         
 
-<!-- ROW <phone-number> -->
-    <div class="mt-4" style="display:flex; font-size: 9pt;">
+<!-- <Phone-number> -->
+    <div class="mt-2" style="display:flex; font-size: 9pt;">
 
         <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0; height:3.5rem;">
             <div class="ml-2" style="font-weight: 700;">
@@ -821,20 +798,20 @@
     </div> 
 
 
-<!-- <email> -->
-    <div class="mt-4" style="display:flex; font-size: 9pt;">       
+<!-- <Email> -->
+    <div class="mt-2" style="display:flex; font-size: 9pt;">       
 
-        <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0;  height:6.5rem;">
+        <div class="coa-arrow-box-left" style="width:32%; margin:.35rem 0;  height:6rem;">
             <div class="ml-2">
-                <b>Email address(es)</b><b style="font-size:8pt;"> for service of appellant(s)</b>
-                <i><br>
+                <b >Email address(es)</b><b style="font-size:8pt;"> for service of appellant(s)</b>
+                <i ><br>
                     If you provide an email address, you consent to have documents
                     served on you by email.
                 </i>      
             </div>
         </div>
 
-        <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+        <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
                 
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2">{{result.emails}}</div> 
@@ -876,9 +853,12 @@
         </div>
     </div>
 
+<!-- <INS> -->
+
+<!-- <To the appellant> -->
     <div style="margin:1rem 0 0 0;">
         <b>To the appellant(s):</b> 
-        <p style="margin-top:0.45rem;">
+        <p style="margin-top:0.45rem; text-align: justify;">
             You must file and serve this form on each respondent named in this document within 
             the timelines required by the <i>Court of Appeal Act</i> and <i>Court of Appeal Rules</i>. 
             You must file a Notice of Hearing <b>not more than one year</b> after filing this Form 
@@ -886,23 +866,24 @@
         </p>
     </div>
 
-    <div style="margin:1rem 0 0 0rem;">
+<!-- <To the respondent> -->
+    <div style="margin:1.25rem 0 0 0rem;">
         <b>To the respondent(s):</b> 
-        <p style="margin-top:0.45rem;">
+        <p style="margin-top:0.45rem; text-align: justify;">
             <b>If you intend to participate</b> in this proceeding, <b>you must give notice</b> 
             of your intention by doing the following <b>not more than 10 days</b> after receiving
             this Notice of Appeal: (1) file a “Notice of Appearance” (Form 2 of the <i>Court of 
             Appeal Rules</i>) in a Court of Appeal registry and; (2) serve the Notice of 
             Appearance on the appellant.
         </p>
-        <p>If you fail to file and serve a Notice of Appearance:</p>
+        <p class="mb-n1">If you fail to file and serve a Notice of Appearance:</p>
         
-        <p style="text-indent:1rem; margin:0.5rem 0 0 0;">
-            (a) You are presumed to take no position on the appeal, or the 
+        <p style="text-indent:-1.5rem; margin:0.5rem 0 0 2.5rem;">
+            <span class="mr-1">(a)</span> You are presumed to take no position on the appeal, or the 
             application for leave to appeal (if leave is required).
         </p>
-        <p style="text-indent:1rem; margin:0.5rem 0 0 0;">
-            (b) The parties are not obliged to serve you with any further 
+        <p style="text-indent:-1.5rem; margin:0.5rem 0 0 2.5rem;">
+            <span class="mr-1">(b)</span> The parties are not obliged to serve you with any further 
             documents related to the appeal, including an order granting 
             leave to appeal (if leave is required).
         </p>
@@ -913,7 +894,7 @@
             registries for the British Columbia Court of Appeal are as follows.
         </p>    
 
-        <div class="row" style="margin:0.25rem 0 0 0; padding:0" >
+        <div class="row" style="margin:2.25rem 0 0 0; padding:0" >
             <div style="width:40%; padding:0;">
                 <div style="display:block; margin: 0 0 0.75rem 0;">Central Registry:</div>
                 <div style="display:block;">B.C. Court of Appeal</div>

@@ -99,7 +99,8 @@ export interface supremeCourtCaseJsonDataInfoType {
     courtClass: string;
     accessType: string;
     orders?: supremeCourtOrdersJsonInfoType[];
-    parties: supremeCourtPartiesJsonInfoType[];    
+    parties: supremeCourtPartiesJsonInfoType[];
+    _showDetails?: boolean;    
 }
 
 export interface supremeCourtOrdersJsonInfoType {
