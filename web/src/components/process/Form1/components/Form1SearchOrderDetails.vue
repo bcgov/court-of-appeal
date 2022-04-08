@@ -112,9 +112,11 @@ export default class Form1SearchOrderDetails extends Vue {
     public extractCaseOrders(){
         
         this.orderList = [];
-        for (const order of this.supremeCourtCaseJson.orders){            
-            order.judgeDisplayName = order.honorificTitle + ' ' + order.judgeSurname;            
-            this.orderList.push(order)
+        if (this.supremeCourtCaseJson?.orders){
+            for (const order of this.supremeCourtCaseJson?.orders){            
+                order.judgeDisplayName = order.honorificTitle + ' ' + order.judgeSurname;            
+                this.orderList.push(order)
+            }
         }
        
         this.dataReady = true;

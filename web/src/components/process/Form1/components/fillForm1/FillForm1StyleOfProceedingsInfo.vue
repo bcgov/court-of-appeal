@@ -2,9 +2,15 @@
     
     <b-card v-if="dataReady" no-body class="mb-4 border-light bg-light">
 
-        <b-card class="mb-4 border-white bg-white">
-            <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Style of Proceeding</p> 
-            <p class="ml-4">
+        <b-card class="mb-4 border-white bg-white">            
+            <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding</h2>
+
+            <p class="ml-4" v-if="styleOfProceedingsInfo.appealTribunal">
+                As this is an appeal from a Tribunal, you will need to add the parties involved in the tribunal, 
+                Once you've added the parties, you will then need to indicate who is the appellant and who is 
+                the respondent on the appeal. 
+            </p>
+            <p class="ml-4" v-else>
                 Include only those parties whose interests are affected by the order sought by the appellant(s). 
                 The order of the names will be handled for you.
             </p>
@@ -86,69 +92,184 @@
             </span>
 
             <hr class="mb-4 mx-4">
-            <p class="ml-4 mt-2 mb-5" style="font-weight:700;">Please ensure that the required names and address fields are completed.</p>
+            <!-- <p class="ml-4 mt-2 mb-5" style="font-weight:700;">Please ensure that the required names and address fields are completed.</p> -->
+           
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Respondent(s): 
+                    <p class="content text-primary">
+                        The names of the parties in the Respondent Column 
+                        above should populate below and you will need to 
+                        add in the address for service.                
+                    </p>                               
+                </b-col>
+                <b-col class="mt-1">
+                    <b-form-textarea
+                        rows="3"
+                        disabled                    
+                        @change="update"
+                        v-model="respondentNames">
+                    </b-form-textarea>   
+                </b-col>
+            </b-row>            
 
-            <p class="ml-4 mt-4">TO THE RESPONDENT(S)</p>
-            <b-form-group
-                class="ml-4"                
-                label="The names of the parties in the Respondent Column above should populate below and you will need to add in the address for service." 
-                label-for="respondent-names">
-                <b-form-textarea 
-                    id="respondent-names"
-                    rows="3"
-                    disabled                    
-                    @change="update"
-                    v-model="respondentNames">
-                </b-form-textarea>
-            </b-form-group>
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                   And to the respondent(s) solicitor   
+                    <p class="content text-primary">
+                        If counsel represented the Respondent include their name and address in the box below.
+                    </p>
+                    <p class="content mt-1 text-primary">
+                        <b>Note</b>: You may serve a Notice of Appeal to the Respondent(s) solicitor in the lower court.
+                    </p>    
+                </b-col>
+                <b-col>                   
+                    <b-form-textarea 
+                        style="width: 100%"
+                        disabled
+                        rows="3"
+                        @change="update"
+                        v-model="styleOfProceedingsInfo.respondentSolicitor">
+                    </b-form-textarea>                    
+                </b-col>
+            </b-row>
 
-            <p class="ml-4 mt-4">AND TO THE RESPONDENT(S) SOLICITOR</p>
-            <b-form-group
-                class="ml-4"                
-                label="If counsel represented the Respondent include their name and address in the box below." 
-                label-for="respondent-solicitor">
-                <span><b>Note</b>: You may serve a Notice of Appeal to the Respondent(s) solicitor in the lower court.</span>
-                <b-form-textarea 
-                    id="respondent-solicitor"
-                    disabled
-                    rows="3"
-                    @change="update"
-                    v-model="styleOfProceedingsInfo.respondentSolicitor">
-                </b-form-textarea>
-            </b-form-group>
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Name of lawyer or party authorizing filing of this Form:                   
+                </b-col>
+                <b-col>
+                    <b-form-input 
+                        style="width: 100%"
+                        :state="form1InfoStates.mainAppellant"                         
+                        @change="update"      
+                        v-model="styleOfProceedingsInfo.appealingFirm">
+                    </b-form-input>
+                    <span class="ml-2" style="font-weight: 700; font-size:11pt">Electronically filed</span>
+
+                </b-col>
+            </b-row>
+
+            <h3 class="ml-4 mt-3 text-primary">Service Address</h3>
+            <b-row class="content ml-4 text-primary">
+                Name(s) and address(es) within BC for service of the appellant(s).
+            </b-row>
+
             
-            <b-form-group
-                class="ml-4 mt-4"                
-                label="THIS NOTICE OF APPEAL IS GIVEN BY (enter name of lawyer or party)" 
-                label-for="appellant">                
-                <b-form-input 
-                    id="appellant"
-                    style="width: 45%;" 
-                    :state="form1InfoStates.mainAppellant"
-                    @change="update"      
-                    v-model="styleOfProceedingsInfo.appealingFirm">
-                </b-form-input>
-            </b-form-group>
-            
-            <b-form-group
-                class="ml-4 mt-4"                
-                label="WHOSE ADDRESS OF SERVICE IS" 
-                label-for="appellant-address">
-                <b-form-textarea 
-                    id="appellant-address"
-                    rows="3"
-                    :state="form1InfoStates.serviceAddress"
-                    @change="update"                    
-                    v-model="styleOfProceedingsInfo.appealingFirmAddress">
-                </b-form-textarea>
-                <span
-                    v-if="(form1InfoStates.validServiceAddress != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger">
-                    Address of service must be in British Columbia (did you forget to include the province?)
-                </span>
-                
-            </b-form-group>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Address Line 1                   
+                </b-col>
+                <b-col>
+                    <b-form-input
+                        :state="form1InfoStates.addressLine1"                         
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.addressLine1">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">Street address
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Address Line 2                   
+                </b-col>
+                <b-col>
+                    <b-form-input              
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.addressLine2">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">Apartment, suite, unit, building, floor, etc.
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    City                    
+                </b-col>
+                <b-col>
+                    <b-form-input 
+                        :state="form1InfoStates.city"                         
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.city">                        
+                    </b-form-input>  
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">Province</b-col>
+                <b-col>British Columbia</b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">Country</b-col>
+                <b-col>Canada</b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Postal Code                   
+                </b-col>
+                <b-col>
+                    <b-form-input
+                        :state="form1InfoStates.postalCode"                         
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.postalCode">                        
+                    </b-form-input> 
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        :class="form1InfoStates.postalCode==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. A1A 1A1
+                    </span> 
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Phone 
+                    <b-icon-question-circle-fill
+                        style="color: #38598a;"
+                        v-b-tooltip:hover.v-info.html="helpText('The registry may contact you by phone to schedule your appeal.').title"/>                    
+                </b-col>
+                <b-col>
+                    <b-form-input
+                        :state="form1InfoStates.phone"                        
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.phone">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        :class="form1InfoStates.phone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. 604-567-8901 x1234 or 250-123-4567
+                    </span>   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Email address
+                    <b-icon-question-circle-fill
+                        style="color: #38598a;"
+                        v-b-tooltip:hover.v-info.html="helpText('Receive electronic document status change notifications or be served electonically by another party.').title"                                    
+                        />   
+
+                    <p class="content">
+                        If you provide an email address, you consent to have documents served on you by email.
+                    </p>                 
+                </b-col>
+                <b-col>
+                    <b-form-input 
+                        style="width: 100%"
+                        :state="form1InfoStates.email"                         
+                        v-model="styleOfProceedingsInfo.appealingFirmAddress.email">
+                    </b-form-input>
+                    <span
+                        v-if="form1InfoStates.email==false" 
+                        style="font-size: 0.75rem;" 
+                        class="px-2 bg-danger text-white">Invalid Email Format!
+                    </span>
+                </b-col>
+            </b-row>
             
         </b-card>
       
@@ -444,6 +565,10 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         this.updateTable ++;
     }
 
+    public helpText(content: string){
+        return {title: "<div style='margin: 0;'>" +content+ "</div>"};
+    }
+
     public update(){        
         
         this.UpdateForm1Info(this.styleOfProceedingsInfo);
@@ -462,6 +587,20 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         font-size: 2rem;
         padding-top: 0;
         margin-top: 0;
+    }
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
     }
 
 </style>

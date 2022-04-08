@@ -2,12 +2,12 @@
     
     <b-card v-if="dataReady" no-body class="mb-4 border-white bg-white">
 
-        <p class="ml-4 mt-2" style="font-size: 1.25rem;">Lower Court Case Information</p>             
+        <h2 class="ml-4 mt-3 text-primary" >Lower Court Case Information</h2>             
 
         <b-card class="mb-4 bg-white border-white text-dark">
 
-            <b-row class="mt-0">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-0 question">
+                <b-col cols="7" class="labels">
                     Type of Tribunal:                                
                 </b-col>
                 <b-col>
@@ -34,8 +34,8 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Name of Decision Maker                                
                 </b-col>
                 <b-col class="mt-2">
@@ -48,8 +48,8 @@
                 </b-col>
             </b-row>
 
-            <b-row class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="my-4 question" style="padding: 0;">
+                <b-col cols="7" class="labels">
                     Date the Order was Pronounced:                                
                 </b-col>
                 <b-col class="ml-3" style="padding: 0;">  
@@ -72,24 +72,24 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     City where the Order was Pronounced                                
                 </b-col>
                 <b-col class="mt-2">
                     <b-form-input
-                        :state="form1InfoStates.tribunalLocationOfOrder"
+                        :state="form1InfoStates.cityOfOrder"
                         @change="update"
                         style="max-width:100%" 
-                        v-model="tribunalSummaryInfo.tribunalLocationOfOrder">
+                        v-model="tribunalSummaryInfo.cityOfOrder">
                     </b-form-input> 
                 </b-col>
             </b-row>            
 
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Length of the Lower Court hearing: 
-                    <p class="content text-primary">
+                    <p :class="form1InfoStates.appearanceDays == false?'content text-danger':'content text-primary'">
                         Indicate in days or hours the length of the hearing 
                         that led to the order you are appealing from. For 
                         example, if you are appealing a judgment from a 
@@ -98,14 +98,13 @@
                 </b-col>
                 <b-col class="mt-1">
                     <b-form-input    
-                        style="width: 10rem; display: inline-block;"                    
+                        style="width: 15rem; display: inline-block;"                    
                         :state="form1InfoStates.appearanceDays"
                         @change="update"
                         v-model="trialDurationDays"                            
                         size="md"
                         type="text"                        
-                    ></b-form-input>
-                                       
+                    ></b-form-input>   
                 </b-col>
             </b-row>         
           
@@ -212,7 +211,14 @@ export default class FillForm1SummaryInfo extends Vue {
     .content {        
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
-        font-weight:400;     
-        width: 60%;  
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
     }
 </style>

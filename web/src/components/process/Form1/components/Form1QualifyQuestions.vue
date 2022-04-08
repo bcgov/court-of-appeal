@@ -208,14 +208,7 @@
                             target="_blank"
                             class= "text-white">(Form 19 - Affidavit: No Fees Payable (Indigent Status))
                         </a>.
-                    </p>
-
-                    <p>
-                        You cannot do that using this process. At this time, this system does not support 
-                        the submission of these documents together; but you can use the application to 
-                        complete your Notice of Appeal form and print it off to file with the Court of 
-                        Appeal Registry in person along with the other forms noted above.
-                    </p>
+                    </p>                    
 
                 </b-card>                           
                 

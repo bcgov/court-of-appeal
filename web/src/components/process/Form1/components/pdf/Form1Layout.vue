@@ -102,7 +102,34 @@
         <div class="arrow-right-flash-76"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-           <div class="mx-2">{{applicantNames.toString()}}</div>
+
+
+            <div v-for="sop,inx in caseSop" :key="inx">
+                <div v-if="sop.appealRole.toLowerCase() == 'appellant'" style="display: block; margin:0.5rem;">
+                    <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
+                        <div>{{sop.conjunction}}:</div>
+                    </div>
+
+                    <div class="my-0 row" style="line-height:1rem; padding:0 0 0 1rem;margin:0">
+                        <div style="text-align: center">
+                            {{sop.partyName}}
+                        </div>
+                    </div>
+
+                    <div class="my-0 row" style="font-weight: 700;">
+                        <div style="line-height:1rem; padding:0 0 0 2rem;margin:0">
+                            <div v-if="sop.lowerCourtRole == 'NONE (New Party)'">
+                                {{sop.appealRole}}
+                            </div>            
+                            <div v-else>                        
+                                {{sop.appealRole}}/<br> {{sop.lowerCourtRole}}
+                            </div>
+                        </div>
+                    </div>    
+                </div>  
+            </div> 
+
+           <!-- <div class="mx-2">{{applicantNames.toString()}}</div> -->
         </div>                      
 
     </div> 
@@ -126,7 +153,32 @@
         <div class="arrow-right-flash-80"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{respondentNames.toString()}}</div> 
+
+            <div v-for="sop,inx in caseSop" :key="inx">
+                <div v-if="sop.appealRole.toLowerCase() == 'respondent'" style="display: block; margin:0.5rem;">
+                    <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
+                        <div>{{sop.conjunction}}:</div>
+                    </div>
+
+                    <div class="my-0 row" style="line-height:1rem; padding:0 0 0 1rem;margin:0">
+                        <div style="text-align: center">
+                            {{sop.partyName}}
+                        </div>
+                    </div>
+
+                    <div class="my-0 row" style="font-weight: 700;">
+                        <div style="line-height:1rem; padding:0 0 0 2rem;margin:0">
+                            <div v-if="sop.lowerCourtRole == 'NONE (New Party)'">
+                                {{sop.appealRole}}
+                            </div>            
+                            <div v-else>                        
+                                {{sop.appealRole}}/<br> {{sop.lowerCourtRole}}
+                            </div>
+                        </div>
+                    </div>    
+                </div>  
+            </div> 
+            <!-- <div class="mx-2">{{respondentNames.toString()}}</div>  -->
         </div>                      
 
     </div> 
@@ -154,7 +206,7 @@
         <div style="margin-top: 1rem; width:10%;">              
             <check-box 
                 style="margin: 1.75rem 0 0 1rem;" 
-                :check="true?'yes':''" 
+                :check="result.applyLeave?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Yes"/>  
@@ -162,7 +214,7 @@
         <div style="margin-top: 1rem; width:20%;">              
             <check-box                    
                 style="padding: 0; margin: 1.75rem .5rem 0 1rem;" 
-                :check="true?'yes':''"
+                :check="!result.applyLeave?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="No"/>
@@ -221,7 +273,7 @@
 
         <div style="width:31%;">
             <div style="height:3.5rem; margin:0.5rem 0;" class="coa-text-box-center" v-if="result.appealTribunal">{{result.tribunalType}}</div>   
-            <div class="coa-text-box-center" v-else></div>
+            <div style="height:3.5rem; margin:0.5rem 0;" class="coa-text-box-center" v-else></div>
         </div>       
                             
     </div>
@@ -278,8 +330,8 @@
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalLocationOfOrder}}</div> 
-            <div class="mx-2">{{result.lowerCourtRegistryName}}</div> 
+            <div class="mx-2">{{result.cityOfOrder}}</div> 
+          
         </div>                      
 
     </div> 
@@ -774,7 +826,7 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.appealingFirmAddress}}</div> 
+            <div class="mx-2">{{address}}</div> 
         </div>                      
 
     </div> 
@@ -792,7 +844,7 @@
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.phoneNumbers}}</div>
+            <div class="mx-2">{{result.appealingFirmAddress.phone}}</div>
         </div>                       
 
     </div> 
@@ -814,7 +866,7 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
                 
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.emails}}</div> 
+            <div class="mx-2">{{result.appealingFirmAddress.email}}</div> 
         </div>                      
 
     </div> 
@@ -962,11 +1014,12 @@ export default class Form1Layout extends Vue {
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
     
     dataReady = false;
-    applicantNames: string[] = [];
-    respondentNames: string[] = [];
+    address = '';
+    // applicantNames: string[] = [];
+    // respondentNames: string[] = [];
 
-    // caseSop :manualSopInfoType[] = [];
-    // noRolePartySop: manualSopInfoType[] = [];    
+    caseSop :manualSopInfoType[] = [];
+    noRolePartySop: manualSopInfoType[] = [];    
 
     mounted(){
         this.dataReady = false;
@@ -988,59 +1041,67 @@ export default class Form1Layout extends Vue {
    
     public extractInfo(){
 
-        console.log(this.result)
-        console.log(this.caseLocation)
+        // console.log(this.result)
+        // console.log(this.caseLocation)
+
+        const serviceInfo = this.result.appealingFirmAddress;
+        this.address =   (serviceInfo.addressLine1? (serviceInfo.addressLine1 + ', '):'')
+                        + (serviceInfo.addressLine2? (serviceInfo.addressLine2 + ', '):'') 
+                        + (serviceInfo.city? (serviceInfo.city + ', '):'')
+                        + (serviceInfo.province? (serviceInfo.province + ', '):'') 
+                        + (serviceInfo.country? ( serviceInfo.country + ', '):'')
+                        + (serviceInfo.postalCode? serviceInfo.postalCode:'');
         
         const parties = this.result.parties
-        this.applicantNames = [];
-        this.respondentNames = [];
+        // this.applicantNames = [];
+        // this.respondentNames = [];
         
-        for(const party of parties){
-            if(party.appealRole=="Appellant")
-                this.applicantNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
-            else if(party.appealRole=="Respondent")
-                this.respondentNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
-        }
-
-        // if (this.result.manualSop?.length > 1){
-        //     this.caseSop = this.result.manualSop;
-        // } else {
-
-        //     this.caseSop = [];
-        //     this.noRolePartySop = [];  
-        //     for(const party of parties)
-        //         this.prePopulateSop(party);          
-
-
-        //     if (this.noRolePartySop.length > 0){
-        //         this.caseSop = this.caseSop.concat(this.noRolePartySop);
-        //     }           
-
+        // for(const party of parties){
+        //     if(party.appealRole=="Appellant")
+        //         this.applicantNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
+        //     else if(party.appealRole=="Respondent")
+        //         this.respondentNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
         // }
+
+        if (this.result.manualSop?.length > 1){
+            this.caseSop = this.result.manualSop;
+        } else {
+
+            this.caseSop = [];
+            this.noRolePartySop = [];  
+            for(const party of parties)
+                this.prePopulateSop(party);          
+
+
+            if (this.noRolePartySop.length > 0){
+                this.caseSop = this.caseSop.concat(this.noRolePartySop);
+            }           
+
+        }
 
     }
     
-    // public prePopulateSop(partyInfo: form1PartiesInfoType){
+    public prePopulateSop(partyInfo: form1PartiesInfoType){
 
-    //     let sop = {} as manualSopInfoType;            
-    //     sop.plural = false;
-    //     sop.appealRole = partyInfo.appealRole;
-    //     sop.lowerCourtRole = partyInfo.lowerCourtRole;
+        let sop = {} as manualSopInfoType;            
+        sop.plural = false;
+        sop.appealRole = partyInfo.appealRole;
+        sop.lowerCourtRole = partyInfo.lowerCourtRole;
         
-    //     sop.partyName=this.getFullName(partyInfo)
-    //     if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
-    //         sop.conjunction = 'And';
-    //         this.noRolePartySop.push(sop);
-    //     } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
-    //         partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
-    //         partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
-    //             sop.conjunction = 'Between';
-    //             this.caseSop.unshift(sop);
-    //     } else {
-    //         sop.conjunction = 'And';
-    //         this.caseSop.push(sop);
-    //     }
-    // }
+        sop.partyName=this.getFullName(partyInfo)
+        if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
+            sop.conjunction = 'And';
+            this.noRolePartySop.push(sop);
+        } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
+            partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
+            partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
+                sop.conjunction = 'Between';
+                this.caseSop.unshift(sop);
+        } else {
+            sop.conjunction = 'And';
+            this.caseSop.push(sop);
+        }
+    }
 }
 
 </script>

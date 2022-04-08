@@ -2,7 +2,7 @@
     
     <b-card header-tag="header" class="mx-auto mb-4 border-white bg-white">
 
-        <p class="ml-4 mt-2" style="font-size: 1.25rem;">Lower Court Case Information</p>
+        <h2 class="ml-4 mt-3 text-primary" >Lower Court Case Information</h2>
         <b-card-header 
             class="mx-4 rounded" 
             header-bg-variant="primary" 
@@ -13,69 +13,85 @@
         <b-card v-if="dataReady" class="bg-white border-white text-dark">
             <b-row>
                 <b-col cols="4">
-                    Level Of Court
+                    <span class="labels">Level Of Court</span>
                     <span style="display: block;">{{levelOfCourt}}</span>
 
                 </b-col>
                 <b-col cols="4">
-                    Supreme Court File No.
+                    <span class="labels">Supreme Court File No.</span>
                     <span style="display: block;">{{form1Info.lowerCourtFileNo}}</span>
 
                 </b-col>
                 <b-col cols="4">
-                    Supreme Court Registry
+                    <span class="labels">Supreme Court Registry</span>
                     <span style="display: block;">{{form1Info.lowerCourtRegistryName}}</span>
                 </b-col>
             </b-row>
 
             <b-row class="mt-4">
                 <b-col cols="4">
-                    Name Of Judge
+                    <span class="labels">Name Of Judge</span>
                     <span style="display: block;">{{judgeFullName}}</span>
                 </b-col>           
             </b-row>
 
             <b-row class="mt-4">
                 <b-col cols="4">
-                    Date Of Order
+                    <span class="labels">Date Of Order</span>
                     <span style="display: block;">{{form1Info.dateOfJudgement | beautify-date-month}}</span>
                 </b-col>           
             </b-row>
 
-            <b-row class="mt-4 mx-1">
-                <p>
+            <b-row class="mt-4 mx-5 bg-info p-3" style="border-radius: 1rem;">
+                <b-col cols="1">
+                    <b-icon-question-circle-fill class="mt-3 ml-3" scale="4" variant="primary"/>
+                </b-col>
+                <b-col>
                     Please ensure that you review the date of the order noted above to confirm that it is accurate. 
                     Should you find the date above is wrong, please contact the 
                     <a                
                         href="https://www2.gov.bc.ca/gov/content/justice/courthouse-services/courthouse-locations?keyword=courthouse%26keyword=locations"
                         target="_blank">court registry</a>.
-                </p>
+                
+                </b-col>
             </b-row>
         </b-card>
 
-        <b-row class="mt-4 ml-2">
-            <b-col cols="6" style="font-weight: 700;">
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
                 Length of the Lower Court hearing: 
-                <p class="content text-primary">
+                <p :class="form1InfoStates.appearanceDays == false?'content text-danger':'content text-primary'">
                     Indicate in days or hours the length of the hearing 
                     that led to the order you are appealing from. For 
                     example, if you are appealing a judgment from a 
                     trial that took two hours, enter “two hours.”
                 </p>                               
             </b-col>
-            <b-col class="mt-1">
+            <b-col>
                 <b-form-input    
-                    style="width: 10rem; display: inline-block;"                    
+                    style="width: 15rem; display: inline-block;"                    
                     :state="form1InfoStates.appearanceDays"
                     @change="update"
                     v-model="trialDurationDays"                            
                     size="md"
                     type="text"                        
-                ></b-form-input>
-                                    
+                ></b-form-input>   
             </b-col>
-        </b-row>        
+        </b-row>  
 
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                City where the Order was Pronounced                                
+            </b-col>
+            <b-col>
+                <b-form-input
+                    :state="form1InfoStates.cityOfOrder"
+                    @change="update"
+                    style="max-width:100%" 
+                    v-model="cityOfOrder">
+                </b-form-input> 
+            </b-col>
+        </b-row>
         
     </b-card>
     
@@ -117,6 +133,7 @@ export default class FillForm1SummaryInfo extends Vue {
     levelOfCourt = "Supreme Court of BC";  
     judgeFullName = "";
     trialDurationDays = "";
+    cityOfOrder = "";
     dataReady = false;
 
     mounted() { 
@@ -125,6 +142,7 @@ export default class FillForm1SummaryInfo extends Vue {
             this.form1Info.honorificTitle + ' ' + 
             this.form1Info.nameOfJudge;
         this.trialDurationDays = this.form1Info.trialDurationDays?this.form1Info.trialDurationDays:'';
+        this.cityOfOrder = this.form1Info.cityOfOrder?this.form1Info.cityOfOrder:'';
         this.update();
         this.dataReady = true;            
     }
@@ -137,6 +155,7 @@ export default class FillForm1SummaryInfo extends Vue {
               
         const form1 = this.form1Info;
         form1.trialDurationDays = this.trialDurationDays;     
+        form1.cityOfOrder = this.cityOfOrder;
         form1.judgeFullName = this.judgeFullName;
         this.UpdateForm1Info(form1);
     }
@@ -149,7 +168,14 @@ export default class FillForm1SummaryInfo extends Vue {
     .content {        
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
-        font-weight:400;     
-        width: 60%;  
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
     }
 </style>

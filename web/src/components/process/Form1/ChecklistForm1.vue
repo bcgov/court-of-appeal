@@ -23,15 +23,14 @@
             v-b-tooltip.hover.top.v-warning
             :title="disableContinue?'In order to proceed, you must respond to all questions and answer No to question 6 above.':''">
 
-        <b-button 
-            :class="(disableContinue?inactiveButtonClass:activeButtonClass) + ' ml-4 '"
-            style="opacity:1;"
-             
-            :disabled="disableContinue"            
-            @click="navigateToForm1()"
-            >
-            <span style="font-size: 20px;">Continue to Notice of Appeal</span>
-        </b-button> 
+            <b-button 
+                :class="(disableContinue?inactiveButtonClass:activeButtonClass) + ' ml-4 '"
+                style="opacity:1;"                
+                :disabled="disableContinue"            
+                @click="navigateToForm1()"
+                >
+                <span style="font-size: 20px;">Continue to Notice of Appeal</span>
+            </b-button> 
         </div>     
         
     </b-card>

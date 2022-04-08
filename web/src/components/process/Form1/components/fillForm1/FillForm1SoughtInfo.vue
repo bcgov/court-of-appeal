@@ -1,14 +1,14 @@
 <template>
     <b-card no-body class="border-white" >
 
-        <p class="mt-2" style="font-size: 1.35rem; font-weight:700;">Relief Sought</p>    
+        <h2 class="ml-4 mt-3 text-primary">Relief Sought</h2>    
 
-        <p>
+        <p class="ml-4">
             This is where you set out the order that you are asking the Court of Appeal to make. 
             Ensure that you include any orders with respect to the costs you wish to recover if 
             you are successful on your appeal.                
         </p>
-        <p>
+        <p class="ml-4">
             <b>Note</b>: A Stay of Proceedings of the Supreme Court should not be placed in the order sought section.              
         </p>         
         
