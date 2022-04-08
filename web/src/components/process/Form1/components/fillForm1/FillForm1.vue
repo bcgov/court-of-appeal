@@ -7,27 +7,29 @@
 
         <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>
 
-        <b-card class="mb-2 border-light bg-light">
+        <!-- <b-card class="mb-2 border-light bg-light">
             <b-row class="ml-0 mt-0 font-weight-bold">Please complete the following fields:</b-row>
-        </b-card>
+        </b-card> -->
 
         <fill-form-1-common-info class="mx-2"/>
 
         <fill-form-1-style-of-proceedings-info />
 
         <b-card class="mb-4 border-white bg-white">
-            <p class="ml-4 mt-2" style="font-size: 1.35rem; font-weight:700;">Reference Number (optional)</p>           
-            
-            <b-form-group
-                class="ml-4 mt-3 labels"                
-                label="If you have a reference number you would like to use for your records, please enter it below:" 
-                label-for="reference-number">
-                <b-form-input 
-                    id="reference-number" 
-                    :state="form1InfoStates.referenceNumber"                   
-                    v-model="referenceNumber">
-                </b-form-input>
-            </b-form-group>
+
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Reference Number (optional) 
+                    <p class="content text-primary">
+                        If you have a reference number you would like to 
+                        use for your records, please enter it here.
+                    </p>                               
+                </b-col>
+                <b-col class="mt-1">
+                    <b-form-input v-model="referenceNumber" ></b-form-input>   
+                </b-col>
+            </b-row>
+
         </b-card>
 
         <save-or-preview-buttons :expiredDeadline="expiredDeadline" @saveForm1="saveForm1" />
@@ -49,7 +51,7 @@ const commonState = namespace("Common");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
-import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { serviceInformationJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { locationsInfoType } from '@/types/Common';
 import { accountInfoType, userAccessInfoType, form1DataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
@@ -115,14 +117,13 @@ export default class FillForm1 extends Vue {
     showTribunalDetailsForm = false;
 
     mounted() { 
-
         this.expiredDeadline = false;
         this.dataReady = false;
         if (!this.currentNoticeOfAppealId){         
             this.loadOrderDetails();            
         } else {
-            this.getForm1Data()
-        }           
+            this.getForm1Data();
+        }          
                        
     }  
     
@@ -161,6 +162,10 @@ export default class FillForm1 extends Vue {
 
         const form1SubmissionData = this.form1Info;
         form1SubmissionData.manualSop = [];
+        form1SubmissionData.appealingFirmAddress = {} as serviceInformationJsonDataType;
+        form1SubmissionData.appealingFirmAddress.province = "British Columbia";
+        form1SubmissionData.appealingFirmAddress.country = "Canada";
+            
         if (form1SubmissionData.appealTribunal){
 
             this.showTribunalDetailsForm = true;
@@ -206,20 +211,21 @@ export default class FillForm1 extends Vue {
         this.fieldStates = this.form1InfoStates;
 
         if (this.form1Info.appealTribunal){
-            this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;
-            this.fieldStates.tribunalLocationOfOrder = !this.form1Info.tribunalLocationOfOrder? false : null;
+            this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
         } else {
-            this.fieldStates.tribunalType = null;
-            this.fieldStates.tribunalLocationOfOrder = null;
+            this.fieldStates.tribunalType = null;           
             this.fieldStates.tribunalDateOfOrder = null;
             this.fieldStates.tribunalOriginalDecisionMaker = null;
-        }      
+        }   
+        
+        this.fieldStates.cityOfOrder = !this.form1Info.cityOfOrder? false : null;
 
-        // const numberOfDays = this.form1Info.trialDurationDays?.trim();
+        const durationValue = this.form1Info.trialDurationDays?.trim().toLowerCase();
       //  this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
-        this.fieldStates.appearanceDays = !this.form1Info.trialDurationDays? false : null;
+        const includesIdentifier = durationValue?.includes('day') || durationValue?.includes('hour')
+        this.fieldStates.appearanceDays = !(this.form1Info.trialDurationDays && includesIdentifier)? false : null;
         this.fieldStates.applyLeave = !(this.form1Info.applyLeave != null)? false : null;
         this.fieldStates.respondents = !(this.form1Info.respondents && this.form1Info.respondents.length > 0 )? false : null;
         this.fieldStates.appellants = !(this.form1Info.appellants && this.form1Info.appellants.length > 0 )? false : null;
@@ -235,15 +241,24 @@ export default class FillForm1 extends Vue {
         this.fieldStates.dateBan = (this.form1Info.orderBan && !this.form1Info.dateBan)? false : null;
       
         this.fieldStates.mainAppellant = !this.form1Info.appealingFirm? false : null;
-        this.fieldStates.serviceAddress = !this.form1Info.appealingFirmAddress? false : null;
+        
+        const phoneFormat = /^[0-9]{3}-[0-9]{3}\-[0-9]{4}((\s\x[0-9]{4})|)$/;
+        const emailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
+        const postcodeFormat = /^(([A-Z][0-9][A-Z] [0-9][A-Z][0-9])|([a-z][0-9][a-z] [0-9][a-z][0-9]))?$/;
 
-        const requiredContent = ['BC', 'B.C.', 'BRITISH COLUMBIA']               
-        if (this.form1Info.appealingFirmAddress && requiredContent.some(v => this.form1Info.appealingFirmAddress.toUpperCase().includes(v))) {
-            this.fieldStates.validServiceAddress = null;            
-        } else if (this.form1Info.appealingFirmAddress && !requiredContent.some(v => this.form1Info.appealingFirmAddress.toUpperCase().includes(v))) {
-            this.fieldStates.validServiceAddress = false;            
-        }
+        this.fieldStates.addressLine1 = !this.form1Info.appealingFirmAddress.addressLine1? false : null;
+        this.fieldStates.city = !this.form1Info.appealingFirmAddress.city? false : null;
 
+        const postalCode = this.form1Info.appealingFirmAddress.postalCode?.trim()
+        this.fieldStates.postalCode = !postcodeFormat.test(postalCode)? false : null;   
+        
+        const phone = this.form1Info.appealingFirmAddress.phone?.trim()
+        this.fieldStates.phone = (!phone || (phone && phoneFormat.test(phone)==false))? false : null;
+
+        const email = this.form1Info.appealingFirmAddress.email?.trim();
+        this.fieldStates.email =(email && !emailFormat.test(email))? false : null;        
+
+        
         this.UpdateForm1InfoStates(this.fieldStates);
         this.updatedInfo ++;
 
@@ -385,8 +400,18 @@ export default class FillForm1 extends Vue {
 
 <style scoped lang="scss">
 
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
+
     .labels {
         font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
     }
 
 </style>

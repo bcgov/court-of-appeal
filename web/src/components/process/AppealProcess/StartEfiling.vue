@@ -125,14 +125,9 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-// import Tooltip from "@/components/survey/Tooltip.vue";
 import { pathwayTypeInfoType } from '@/types/Information';
 
-@Component({
-    components:{        
-        // Tooltip
-    }
-})
+@Component
 export default class StartEfiling extends Vue {
 
     @informationState.Action

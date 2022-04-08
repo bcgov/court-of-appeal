@@ -3,8 +3,8 @@
 
         <b-card class="mb-4 border-white bg-white">  
 
-            <b-row class="mt-0">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
                     Are you seeking leave to appeal?                                
                 </b-col>
                 <b-col>
@@ -24,19 +24,31 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     What type of proceeding are you appealing from?                                
                 </b-col>
                 <b-col>
-                    <b-form-radio-group                
+                    <b-form-radio-group
                         v-model="commonInfo.appealFrom"
                         :state="form1InfoStates.appealFrom"
                         :disabled="commonInfo.appealTribunal"
-                        @change="update"
-                        :options="appealFromOptionsListNames"
-                        style="font-size: 1rem; font-weight:400;"                    
-                    ></b-form-radio-group>
+                        @change="update" 
+                        style="font-size: 1rem;"  
+                        stacked                                                                                                     
+                        >
+                        <b-form-radio
+                            v-for="appealFrom in lookups.appealFromOptionsList" 
+                            :style="(commonInfo.appealFrom == appealFrom.name)?'font-weight:700;':'font-weight:400;'"
+                            :key="appealFrom.name"
+                            :value="appealFrom.name">
+                                {{appealFrom.name}}
+                                <b-icon-question-circle-fill
+                                    style="color: #38598a;"
+                                    v-b-tooltip:hover.v-info.html="helpText(appealFrom.help).title"                                    
+                                    />
+                        </b-form-radio>    
+                    </b-form-radio-group> 
                     <span
                         v-if="(form1InfoStates.appealFrom != null)" 
                         style="font-size: 0.75rem;" 
@@ -46,8 +58,8 @@
                 </b-col>
             </b-row>      
 
-            <b-row class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Was this matter already appealed in Supreme Court?   
                     <p class="content">
                         From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
@@ -92,8 +104,8 @@
                 </b-col>
             </b-row>      
 
-            <b-row v-if="commonInfo.wasSupremeAppeal" class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row v-if="commonInfo.wasSupremeAppeal" class="mt-4 question">
+                <b-col cols="7" class="labels">
                     What's the name of the maker of the original decision, direction or order?                                
                 </b-col>
                 <b-col class="mt-0">
@@ -110,13 +122,13 @@
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
             <fill-form-1-sought-info/>           
 
-            <b-row class="my-4" style="padding: 0;">
+            <b-row class="my-4 question">
                 <b-col 
-                    cols="6" 
-                    style="font-weight: 700;" 
+                    cols="7" 
+                    class="labels" 
                     v-text="commonInfo.applyLeave?'Enter the grounds for leave to appeal:':'Enter the order you are seeking on appeal:'">                                              
                 </b-col>
-                <b-col class="ml-3 mt-3" style="padding: 0;">  
+                <b-col>  
                     <b-form-textarea
                         rows="4" 
                         :state="form1InfoStates.orderSought"
@@ -127,15 +139,16 @@
                 </b-col>
             </b-row>
 
-            <b-row class="my-4" style="padding: 0;">
+            <b-row class="my-4 question">
                 <b-col 
-                    cols="6" 
-                    style="font-weight: 700;" 
+                    cols="7" 
+                    class="labels" 
                     v-text="commonInfo.applyLeave?'If you are only seeking leave to appeal one part of the judgment, enter the part that you are seeking leave to appeal:':'If you only want to appeal one part of a judgment, enter the part that is being appealed:'">
                                               
                 </b-col>
-                <b-col class="ml-3 mt-3" style="padding: 0;">  
+                <b-col>  
                     <b-form-textarea
+                        rows="4"
                         :state="form1InfoStates.partOfJudgment"  
                         @change="update"              
                         v-model="commonInfo.partOfJudgment">
@@ -146,13 +159,13 @@
         </b-card>
 
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
-            <p class="mt-2" style="font-size: 1.35rem; font-weight:700;">Additional Information</p>            
+            <h2 class="ml-4 mt-3 text-primary">Additional Information</h2>            
 
-            <b-row class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="my-4 question">
+                <b-col cols="7" class="labels">
                    Is there an order sealing any part of the trial court or tribunal file?                                
                 </b-col>
-                <b-col class="ml-3 mt-3" style="padding: 0;">  
+                <b-col>  
                     <b-form-radio-group                
                         v-model="commonInfo.orderSealed"
                         :state="form1InfoStates.orderSealed"
@@ -169,11 +182,11 @@
                 </b-col>
             </b-row>
 
-            <b-row v-if="commonInfo.orderSealed" class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row v-if="commonInfo.orderSealed" class="my-4 question">
+                <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
-                <b-col class="ml-3" style="padding: 0;">  
+                <b-col>  
                     <b-card 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
@@ -193,11 +206,11 @@
                 </b-col>
             </b-row>
 
-            <b-row class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mb-4 mt-5 question">
+                <b-col cols="7" class="labels">
                    Are there orders that protect the identity of a party or parties?                                
                 </b-col>
-                <b-col class="ml-3 mt-3" style="padding: 0;">  
+                <b-col>  
                     <b-form-radio-group                
                         v-model="commonInfo.orderBan"
                         :state="form1InfoStates.orderBan"
@@ -214,8 +227,8 @@
                 </b-col>
             </b-row>
 
-            <b-row v-if="commonInfo.orderBan" class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row v-if="commonInfo.orderBan" class="my-4 question">
+                <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
                 <b-col class="ml-3" style="padding: 0;">  
@@ -238,19 +251,29 @@
                 </b-col>
             </b-row>
 
-            <b-row class="my-4" style="padding: 0;">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="my-5 question">
+                <b-col cols="7" class="labels">
                    Which of the following best describes what this appeal involves?                                
                 </b-col>
-                <b-col class="ml-3 mt-3" style="padding: 0;">  
+                <b-col>
                     <b-form-checkbox-group
                         style="font-size: 1rem; font-weight:500;"        
                         v-model="commonInfo.involves"
                         :state="form1InfoStates.involves"
-                        @change="update"
-                        :options="involvesOtherListNames"                
+                        @change="update"                                     
                         stacked                
-                    ></b-form-checkbox-group>
+                    >                        
+                        <b-form-checkbox
+                            v-for="involves in lookups.involvesOtherList" 
+                            :key="involves.name"
+                            :value="involves.name">
+                                {{involves.name}}
+                                <b-icon-question-circle-fill
+                                    style="color: #38598a;"
+                                    v-b-tooltip:hover.v-info.html="helpText(involves.help).title"                                    
+                                    />
+                        </b-form-checkbox> 
+                    </b-form-checkbox-group>
                     <span
                         v-if="(form1InfoStates.involves != null)" 
                         style="font-size: 0.75rem;" 
@@ -260,9 +283,7 @@
                 </b-col>
             </b-row>            
             
-        </b-card>       
-
-        
+        </b-card>          
         
     </b-card>
     
@@ -332,14 +353,17 @@ export default class FillForm1CommonInfo extends Vue {
             this.appealFromOptionsListNames.push(option.name)
         }
 
-        if (this.commonInfo.appealTribunal){
-            //TODO
+        if (this.commonInfo.appealTribunal){           
             this.commonInfo.appealFrom = 'Order of a Tribunal';
         }
 
         for (const option of this.lookups.involvesOtherList){            
             this.involvesOtherListNames.push(option.name)
         }
+    }
+
+    public helpText(content: string){
+        return {title: "<div style='margin: 0;'>" +content+ "</div>"};
     }
 
     public displayResults(){
@@ -364,10 +388,14 @@ export default class FillForm1CommonInfo extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;       
-    }
+    }    
 
     .labels {
         font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
     }
 
     ::v-deep .vuetify{

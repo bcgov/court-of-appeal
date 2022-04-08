@@ -42,7 +42,7 @@
                             v-if="isCreate"
                             class="mx-1" 
                             style="display: inline;"                    
-                            label="THE NEW PARTY IS:" 
+                            label="The new party is:" 
                             label-for="party-type">
                             <b-form-radio-group
                                 id="party-type"  
@@ -56,7 +56,7 @@
                             v-else
                             class="mx-3" 
                             style="display: inline;"                    
-                            label="SELECT A PARTY TO EDIT:" 
+                            label="Select a party to edit:" 
                             label-for="party-to-edit">
                             <b-form-select
                                 id="party-to-edit"  
@@ -74,7 +74,7 @@
                     
                     </b-row>
 
-                    <b-card v-if="displayWarning" class="bg-danger text-white border-danger">
+                    <b-card v-if="displayWarning && !styleOfProceedingsInfo.appealTribunal" class="bg-danger text-white border-danger">
                         <div v-if="isCreate">
                             WARNING: The parties to an appeal are almost always the parties that appear 
                             in the lower court. Do not add parties that were not named on the lower court 
@@ -93,7 +93,7 @@
                             <b-col cols="6">                    
                                 <b-form-group
                                     class="labels"                
-                                    label="ORGANIZATION NAME" 
+                                    label="Organization Name" 
                                     label-for="organization-name">
                                     <b-form-input 
                                         id="organization-name"                                    
@@ -104,8 +104,21 @@
                             </b-col>   
                             <b-col cols="6">
                                 <b-form-group
+                                    v-if="styleOfProceedingsInfo.appealTribunal"
                                     class="labels"                        
-                                    label="LOWER COURT ROLE:" 
+                                    label="Role in Tribunal:" 
+                                    label-for="court-role">
+                                    <b-form-select                            
+                                        id="court-role"                                    
+                                        :state="form1PartiesStates.lowerCourtRole"             
+                                        v-model="party.lowerCourtRole"                    
+                                        :options="lookups.lowerCourtRoles">
+                                    </b-form-select>                        
+                                </b-form-group>
+                                <b-form-group
+                                    v-else
+                                    class="labels"                        
+                                    label="Lower Court Role:" 
                                     label-for="court-role">
                                     <b-form-select                            
                                         id="court-role"                                    
@@ -122,8 +135,8 @@
                             <b-col cols="6">
                                 <b-form-group
                                     class="labels"                
-                                    label="COUNSEL NAME:" 
-                                    label-for="counsel-number">
+                                    label="Counsel Name:" 
+                                    label-for="counsel-name">
                                     <b-form-input 
                                         id="counsel-name"                 
                                         v-model="party.counselName">
@@ -140,7 +153,7 @@
                             <b-col cols="6">                    
                                 <b-form-group
                                     class="labels"                
-                                    label="SURNAME:" 
+                                    label="Surname:" 
                                     label-for="surname">
                                     <b-form-input 
                                         id="surname"                                    
@@ -151,8 +164,9 @@
                             </b-col>   
                             <b-col cols="6">
                                 <b-form-group
+                                    v-if="styleOfProceedingsInfo.appealTribunal"
                                     class="labels"                        
-                                    label="LOWER COURT ROLE:" 
+                                    label="Role in Tribunal:" 
                                     label-for="court-role">
                                     <b-form-select                            
                                         id="court-role"
@@ -161,7 +175,20 @@
                                         v-model="party.lowerCourtRole"                    
                                         :options="lookups.lowerCourtRoles">
                                     </b-form-select>                        
-                                </b-form-group>       
+                                </b-form-group>    
+                                <b-form-group
+                                    v-else
+                                    class="labels"                        
+                                    label="Lower Court Role:" 
+                                    label-for="court-role">
+                                    <b-form-select                            
+                                        id="court-role"
+                                        :disabled="!isCreate"
+                                        :state="form1PartiesStates.lowerCourtRole"
+                                        v-model="party.lowerCourtRole"                    
+                                        :options="lookups.lowerCourtRoles">
+                                    </b-form-select>                        
+                                </b-form-group>    
                             </b-col>         
                         </b-row>
 
@@ -169,7 +196,7 @@
                             <b-col cols="6">
                                 <b-form-group
                                     class="labels"                
-                                    label="FIRST GIVEN NAME:" 
+                                    label="First Given Name:" 
                                     label-for="first-name">
                                     <b-form-input 
                                         id="first-name"                                    
@@ -181,8 +208,8 @@
                             <b-col cols="6">
                                 <b-form-group
                                     class="labels"                
-                                    label="COUNSEL NAME:" 
-                                    label-for="counsel-number">
+                                    label="Counsel Name:" 
+                                    label-for="counsel-name">
                                     <b-form-input 
                                         id="counsel-name"                                                       
                                         v-model="party.counselName">
@@ -194,7 +221,7 @@
                             <b-col cols="6">
                                 <b-form-group
                                     class="labels"                
-                                    label="SECOND GIVEN NAME:" 
+                                    label="Second Given Name:" 
                                     label-for="second-name">
                                     <b-form-input 
                                         id="second-name"                    
@@ -207,7 +234,7 @@
                             <b-col cols="6">
                                 <b-form-group
                                     class="labels"                
-                                    label="THIRD GIVEN NAME:" 
+                                    label="Third Given Name:" 
                                     label-for="third-name">
                                     <b-form-input 
                                         id="third-name"                    
@@ -225,7 +252,7 @@
                                 <b-col cols="10">
                                     <b-form-group
                                         class="labels"                
-                                        label="OTHER NAMES:" 
+                                        label="Other Names:" 
                                         label-for="aliases">
                                         <span 
                                             v-if="party.aliases.length == 0 && !AddNewAliasForm" 
@@ -321,7 +348,7 @@
                                 <b-col cols="10">
                                     <b-form-group
                                         class="labels"                
-                                        label="LEGAL REPRESENTATIVES:" 
+                                        label="Legal Representatives:" 
                                         label-for="representatives">
                                         <span 
                                             v-if="party.legalReps.length == 0 && !AddNewRepresentativeForm" 
@@ -752,8 +779,7 @@ export default class styleOfProceedingsActions extends Vue {
     mounted() { 
 
         this.dataReady = false;
-        this.styleOfProceedingsInfo = this.form1Info; 
-        //  this.extractInfo();
+        this.styleOfProceedingsInfo = this.form1Info;
         this.form1PartiesStates = {} as form1PartiesStatesInfoType;
         this.dataReady = true;
           

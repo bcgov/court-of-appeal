@@ -1,3 +1,4 @@
+import { serviceInformationJsonDataType } from "../json";
 
 export interface form1QualificationInfoType {
     selfRepresenting: boolean;
@@ -51,7 +52,7 @@ export interface form1DataInfoType {
     appealInvolvesChild: boolean;
     appealTribunal: boolean;
     tribunalType: string;
-    tribunalLocationOfOrder: string;
+    cityOfOrder: string;
     tribunalDateOfOrder: string;
     tribunalOriginalDecisionMaker?: string;
     applyLeave: boolean;
@@ -79,7 +80,7 @@ export interface form1DataInfoType {
     protectionOrder: boolean;
     handTypedNoSearch: boolean;
     appealingFirm: string;
-    appealingFirmAddress: string;
+    appealingFirmAddress: serviceInformationJsonDataType;
     toRespondents: string; 
     respondentSolicitor: string;
     wasSupremeAppeal: boolean;
@@ -105,10 +106,10 @@ export interface form1DataInfoType {
 }
 
 export interface form1StatesInfoType {
-    tribunalType: null | boolean;
-    tribunalLocationOfOrder: null | boolean;
+    tribunalType: null | boolean;    
     tribunalDateOfOrder: null | boolean;
     tribunalOriginalDecisionMaker: null | boolean;
+    cityOfOrder: null | boolean;
     applyLeave: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
@@ -125,7 +126,12 @@ export interface form1StatesInfoType {
     dateBan: null | boolean;
     mainAppellant: null | boolean;
     serviceAddress: null | boolean;
-    validServiceAddress: null | boolean;
+    validServiceAddress: null | boolean;    
+    addressLine1: null | boolean;
+    city: null | boolean;
+    postalCode: null | boolean;
+    phone: null | boolean;
+    email: null | boolean;
     referenceNumber: null | boolean;
 }
 
