@@ -7,6 +7,7 @@ import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
 import SubmitForm2 from "@/components/process/Form2/SubmitForm2.vue";
 
+import ChecklistForm3 from "@/components/process/Form3/ChecklistForm3.vue";
 import StartForm3 from "@/components/process/Form3/StartForm3.vue";
 import FillForm3 from "@/components/process/Form3/FillForm3.vue";
 import PreviewForm3 from "@/components/process/Form3/PreviewForm3.vue";
@@ -106,6 +107,12 @@ const routes = [
       name: "proceed-form2",
       beforeEnter: authGuard,
       component: SubmitForm2
+    },
+    {
+      path: "/checklist-form3",
+      name: "checklist-form3",
+      beforeEnter: authGuard,
+      component: ChecklistForm3
     },
     {
       path: "/start-form3",

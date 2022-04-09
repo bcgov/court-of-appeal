@@ -66,7 +66,7 @@
 
         public startNewForm3Document(){
             this.UpdateCurrentNoticeOfCrossAppealId(null);
-            this.$router.push({name: "start-form3" })
+            this.$router.push({name: "checklist-form3" })
         }
 
         public startNewForm5Document(){

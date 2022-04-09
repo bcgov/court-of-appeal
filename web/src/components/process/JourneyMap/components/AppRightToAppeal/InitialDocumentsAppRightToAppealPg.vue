@@ -114,12 +114,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 @Component
 export default class InitialDocumentsAppRightToAppealPg extends Vue { 
     
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
     
     public startNewForm1Document(){
+        this.UpdateCurrentNoticeOfAppealId(null)
         this.$router.push({name: "checklist-form1" })
     }
 

@@ -321,7 +321,7 @@
             <div style="width:30%; margin:1.5rem 0;">                  
                 <check-box 
                     style="margin-left:1rem;"
-                    :check="(result.selfRepresented)?'yes':''" 
+                    :check="(result.selfRepresenting)?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="Yes"/> 
@@ -330,7 +330,7 @@
             <div style="width:30%;margin:1.5rem 0;">
             <check-box 
                 style="margin: 0 ;" 
-                :check="(!result.selfRepresented)?'yes':''"
+                :check="(!result.selfRepresenting)?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="No"/> 

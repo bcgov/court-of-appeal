@@ -340,7 +340,7 @@ export default class TableForm3 extends Vue {
 
     public createDocument() {
         this.UpdateCurrentNoticeOfCrossAppealId(null);
-        this.$router.push({name: "start-form3" });
+        this.$router.push({name: "checklist-form3" });
     }
 
     public downloadDocument(fileNumber?) {

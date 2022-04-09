@@ -109,7 +109,7 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
 
     public startNoticeOfCrossAppeal(){
         this.UpdateCurrentNoticeOfCrossAppealId(null);
-        this.$router.push({name: "start-form3" })
+        this.$router.push({name: "checklist-form3" })
     }
 
     public showNoa(show: boolean){
