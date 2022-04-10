@@ -13,6 +13,11 @@ import FillForm3 from "@/components/process/Form3/FillForm3.vue";
 import PreviewForm3 from "@/components/process/Form3/PreviewForm3.vue";
 import SubmitForm3 from "@/components/process/Form3/SubmitForm3.vue";
 
+import StartForm4 from "@/components/process/Form4/StartForm4.vue";
+import FillForm4 from "@/components/process/Form4/FillForm4.vue";
+import PreviewForm4 from "@/components/process/Form4/PreviewForm4.vue";
+import SubmitForm4 from "@/components/process/Form4/SubmitForm4.vue";
+
 import StartForm5 from "@/components/process/Form5/StartForm5.vue";
 import FillForm5 from "@/components/process/Form5/FillForm5.vue";
 import PreviewForm5 from "@/components/process/Form5/PreviewForm5.vue";
@@ -137,6 +142,30 @@ const routes = [
       name: "proceed-form3",
       beforeEnter: authGuard,
       component: SubmitForm3
+    },
+    {
+      path: "/start-form4",
+      name: "start-form4",
+      beforeEnter: authGuard,
+      component: StartForm4
+    },
+    {
+      path: "/fill-form4",
+      name: "fill-form4",
+      beforeEnter: authGuard,
+      component: FillForm4
+    },
+    {
+      path: "/preview-form4",
+      name: "preview-form4",
+      beforeEnter: authGuard,
+      component: PreviewForm4
+    },
+    {
+      path: "/proceed-form4",
+      name: "proceed-form4",
+      beforeEnter: authGuard,
+      component: SubmitForm4
     },
     {
       path: "/start-form5",

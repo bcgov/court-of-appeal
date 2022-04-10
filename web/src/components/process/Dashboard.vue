@@ -70,6 +70,9 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -110,6 +113,7 @@ import { pathwayTypeInfoType } from '@/types/Information';
 
 import { locationsInfoType } from '@/types/Common';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
+import { form4FormsJsonDataType } from '@/types/Information/Form4';
 import { form1FormsJsonDataType, lookupsInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
@@ -149,6 +153,9 @@ export default class DashboardPage extends Vue {
 
     @form3State.Action
     public UpdateForm3FormsJson!: (newForm3FormsJson: form3FormsJsonDataType[])=> void
+
+    @form4State.Action
+    public UpdateForm4FormsJson!: (newForm4FormsJson: form4FormsJsonDataType[])=> void
 
     @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
@@ -273,6 +280,7 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form20/forms'));
         calls.push(this.$http.get('/form1/forms'));
         calls.push(this.$http.get('/form3/forms'));
+        //calls.push(this.$http.get('/form4/forms'));
 
         Promise.all(calls).then(values => {
             
@@ -297,6 +305,7 @@ export default class DashboardPage extends Vue {
             if(values[8]?.data) this.UpdateForm20FormsJson(values[8]?.data)
             if(values[9]?.data) this.UpdateForm1FormsJson(values[9]?.data)
             if(values[10]?.data) this.UpdateForm3FormsJson(values[10]?.data)
+            //if(values[11]?.data) this.UpdateForm4FormsJson(values[11]?.data)
             
             this.dataLoaded = true;
 
