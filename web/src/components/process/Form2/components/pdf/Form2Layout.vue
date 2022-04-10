@@ -71,8 +71,7 @@
                     
                 </div>
             </div>
-        </div>
-      
+        </div>      
 
 <!-- <name-of-parties-filing-notice-of-appearance> -->
         <div class="row mt-4" style="font-size: 9pt;">
@@ -87,8 +86,6 @@
                 <div class="ml-2" style="font-weight: 700;">{{result.filingParties.join(', ')}}</div>                       
             </div>
         </div>
-
-
 
 <!-- <address> -->
         <div class="row mt-3" style="font-size: 9pt;">
@@ -106,13 +103,11 @@
 
             <div class="arrow-right-flash-62"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.addresses}}</div>
             </div>                       
 
-        </div> 
-
-        
+        </div>         
 
 <!-- <phone> -->
         <div class="row mt-3" style="font-size: 9pt;">
@@ -127,12 +122,10 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.phoneNumbers}}</div>
-            </div>                       
-
+            </div> 
         </div> 
-
 
 <!-- <email> -->
         <div class="row mt-3" style="font-size: 9pt;">
@@ -150,12 +143,11 @@
 
             <div class="arrow-right-flash-62"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.emailAdresses}}</div>
-            </div>                       
+            </div>                      
 
         </div> 
-
 
 <!-- <Sign-Date> -->
         <div class="row mt-5" style="font-size: 9pt;">

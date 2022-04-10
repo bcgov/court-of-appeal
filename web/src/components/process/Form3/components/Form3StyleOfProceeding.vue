@@ -204,7 +204,7 @@
         </b-card>
 
         <div 
-            key="updated" 
+            :key="updated" 
             v-if="partyDataExists">
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
             
@@ -507,7 +507,7 @@ export default class Form3StyleOfProceeding extends Vue {
     public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
     
     dataReady = false;
-    
+    updated=0; 
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
     latestEditRespondentData;
@@ -517,8 +517,6 @@ export default class Form3StyleOfProceeding extends Vue {
     AddNewAppellantForm = false;
     latestEditAppellantData;
     isEditAppellantOpen = false;
-
-    // partyNames: string[] = [];
     
     yesNoOptions = [
         {text: 'Yes', value: true},
@@ -565,8 +563,6 @@ export default class Form3StyleOfProceeding extends Vue {
         authorizedName:null
     }
 
-    updated=0; 
-
     mounted() {
         this.dataReady = false;
         this.extractInfo();              
@@ -596,16 +592,13 @@ export default class Form3StyleOfProceeding extends Vue {
             const form3Data = this.form3Info;
             form3Data.crossAppealRequired = true;
             form3Data.version = this.$store.state.Application.version;
-
             form3Data.tribunalRespondents = [];
             form3Data.tribunalAppellants = [];
-
 
             if (this.form3Info?.appealTribunal){
                 
                 form3Data.appellants = [];
                 form3Data.respondents = [];
-
                 form3Data.appellantNames = '';
                 form3Data.respondentNames = '';
                 form3Data.formSevenNumber = ''; 
@@ -631,8 +624,7 @@ export default class Form3StyleOfProceeding extends Vue {
                 form3Data.appellantNames = applicantNames.join(', ');
                 form3Data.respondentNames = respondentNames.join(', ');      
                       
-                form3Data.formSevenNumber = this.fileNumber;                
-                            
+                form3Data.formSevenNumber = this.fileNumber;
 
                 form3Data.judgeName = Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
                 form3Data.orderDate = this.previousCourts[0]?.JudgmentDate;
@@ -668,57 +660,17 @@ export default class Form3StyleOfProceeding extends Vue {
             for (const applicant of this.form3Info.appellants){
                 partyNames.push(applicant.name);  
             }
-
-        }
-
-               
+        }      
         return partyNames;
-
-    }
-
-
-
-
-    public extractPartiesData(){
-        
-        // this.partyNames = [];
-
-        // if (this.form3Info.appealTribunal){
-
-        //     for (const respondent of this.form3Info.respondents){
-        //         this.partyNames.push(respondent.name) 
-        //     }
-
-        //     for (const applicant of this.form3Info.appellants){
-        //         this.partyNames.push(applicant.name);  
-        //     }
-
-        // } else {
-
-        //     for (const respondent of this.form3Info.respondents){
-        //         this.partyNames.push(respondent.name) 
-        //     }
-
-        //     for (const applicant of this.form3Info.appellants){
-        //         this.partyNames.push(applicant.name);  
-        //     }
-
-        // }
-
-               
-        this.dataReady = true;
-
-    }
+    }  
 
     public getForm3Data() {        
        
         this.$http.get('/form3/forms/'+this.currentNoticeOfCrossAppealId)
         .then((response) => {
-            if(response?.data?.data){            
-                            
+            if(response?.data?.data){
                 const form3Data = response.data.data                
-                this.UpdateForm3Info(form3Data) 
-                this.extractPartiesData();
+                this.UpdateForm3Info(form3Data);
                 this.clearStates();                
             }
                 
@@ -784,8 +736,7 @@ export default class Form3StyleOfProceeding extends Vue {
 
         if (this.currentNoticeOfCrossAppealId){
             method = 'put';
-            url = '/form3/forms/'+this.currentNoticeOfCrossAppealId;               
-            console.log(this.checkStates())
+            url = '/form3/forms/'+this.currentNoticeOfCrossAppealId;
             if (!draft && !this.checkStates()){               
                 return                
             } 
@@ -801,8 +752,7 @@ export default class Form3StyleOfProceeding extends Vue {
             }
             this.saveInfo(options, draft);
 
-        } else {           
-
+        } else {
             const options = {
                 method: method,
                 url: url,
@@ -823,8 +773,7 @@ export default class Form3StyleOfProceeding extends Vue {
             .then(response => {
                 if(response.data){
                     if(options.method == "post"){
-                        this.UpdateCurrentNoticeOfCrossAppealId(response.data.file_id);                        
-                        this.extractPartiesData();                        
+                        this.UpdateCurrentNoticeOfCrossAppealId(response.data.file_id); 
                     }
 
                     this.clearStates();                                     
@@ -896,11 +845,17 @@ export default class Form3StyleOfProceeding extends Vue {
             this.closeRespondentForm();
         }
         this.updated ++;
-        
     }
 
-    public removeRespondent(data){        
-        this.form3Info.tribunalRespondents.splice(data.index,1);
+    public removeRespondent(data){ 
+        const form3Data = this.form3Info;       
+        form3Data.tribunalRespondents.splice(data.index,1);
+        const respondentNames = [];
+        for (const respondent of form3Data.tribunalRespondents){
+            respondentNames.push(respondent.name);                
+        }
+        form3Data.respondentNames = respondentNames.join(', '); 
+        this.UpdateForm3Info(form3Data);
         this.updated ++;        
     }
 
@@ -974,8 +929,15 @@ export default class Form3StyleOfProceeding extends Vue {
         
     }
 
-    public removeAppellant(data){        
-        this.form3Info.tribunalAppellants.splice(data.index,1);
+    public removeAppellant(data){   
+        const form3Data = this.form3Info;       
+        form3Data.tribunalAppellants.splice(data.index,1);
+        const appellantNames = [];
+        for (const appellant of form3Data.tribunalAppellants){
+            appellantNames.push(appellant.name);                
+        }
+        form3Data.appellantNames = appellantNames.join(', '); 
+        this.UpdateForm3Info(form3Data);
         this.updated ++;        
     }
 
@@ -990,7 +952,6 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public allowedDates(date){
         const day = moment().startOf('day').format('YYYY-MM-DD');
-           
         return (date <= day);           
     }
 

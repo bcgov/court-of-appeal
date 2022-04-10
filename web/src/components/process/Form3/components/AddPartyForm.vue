@@ -101,147 +101,147 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue, Prop } from 'vue-property-decorator'; 
-    import { partyInfoType } from '@/types/Information/Form3';
+import { Component, Vue, Prop } from 'vue-property-decorator'; 
+import { partyInfoType } from '@/types/Information/Form3';
 
-    @Component
-    export default class AddPartyForm extends Vue {        
+@Component
+export default class AddPartyForm extends Vue {        
 
-        @Prop({required: true})
-        formData!: partyInfoType;
+    @Prop({required: true})
+    formData!: partyInfoType;
 
-        @Prop({required: true})
-        index!: number;
+    @Prop({required: true})
+    index!: number;
 
-        @Prop({required: true})
-        isCreateParty!: boolean;   
+    @Prop({required: true})
+    isCreateParty!: boolean;   
+    
+    partyTypeOptions = [
+        {text: 'an individual', value: false},
+        {text: 'an organization', value: true}
+    ];
+
+    updated = 0;
+
+    selectedPartyType;
+    partyTypeState = true; 
+    
+    firmName = '';
+    firmNameState = true;
+
+    firstName = '';
+    firstNameState = true;  
+    
+    lastName = '';
+    lastNameState = true;
+
+    originalPartyType;
+    originalFirmName = ''; 
+    originalFirstName = '';  
+    originalLastName = '';   
+    
+    showCancelWarning = false;
+
+    addButtonText = 'Add';
+    dataReady = false;
+    
+    mounted()
+    { 
+        this.dataReady = false;
+        this.clearSelections();
+        if(!this.isCreateParty) {
+            this.extractFormInfo();
+            this.addButtonText = 'Save';
+        } else {
+            this.addButtonText = 'Add';
+        }
         
-        partyTypeOptions = [
-            {text: 'an individual', value: false},
-            {text: 'an organization', value: true}
-        ];
-
-        updated = 0;
-
-        selectedPartyType;
-        partyTypeState = true; 
-        
-        firmName = '';
-        firmNameState = true;
-
-        firstName = '';
-        firstNameState = true;  
-        
-        lastName = '';
-        lastNameState = true;
-
-        originalPartyType;
-        originalFirmName = ''; 
-        originalFirstName = '';  
-        originalLastName = '';   
-        
-        showCancelWarning = false;
-
-        addButtonText = 'Add';
-        dataReady = false;
-        
-        mounted()
-        { 
-            this.dataReady = false;
-            this.clearSelections();
-            if(!this.isCreateParty) {
-                this.extractFormInfo();
-                this.addButtonText = 'Save';
-            } else {
-                this.addButtonText = 'Add';
-            }
-            
-            this.dataReady = true;              
-        }    
-        
-        public changed(){
-            this.updated++;
-        }
-
-        public extractFormInfo(){            
-            const index = this.partyTypeOptions.findIndex(partyType=>{if(partyType.value == this.formData.organization)return true})
-            this.originalPartyType = this.selectedPartyType = (index>=0)? this.partyTypeOptions[index].text: '';            
-            this.originalFirmName = this.firmName = this.formData.name;
-            this.originalFirstName = this.firstName = this.formData.firstName;
-            this.originalLastName = this.lastName = this.formData.lastName;
-        }
-
-        public saveForm(){
-               
-            this.partyTypeState = this.selectedPartyType != null;
-
-            if (this.selectedPartyType){
-                this.firmNameState = this.firmName != ""; 
-                this.firstNameState = true;
-                this.lastNameState = true; 
-            } else {
-                this.firmNameState = true; 
-                this.firstNameState = this.firstName != "";
-                this.lastNameState = this.lastName != ""; 
-            }
-            
-            if (this.partyTypeState && this.firmNameState && this.firstNameState && this.lastNameState){        
-                const party = {} as partyInfoType;
-                party.organization = this.selectedPartyType;
-                party.name = this.firmName;    
-                party.firstName = this.firstName;
-                party.lastName = this.lastName;   
-                this.$emit('submit', this.isCreateParty, party, this.index);
-            }
-                
-        }
-
-        public closeForm(){
-            if(this.isChanged())
-                this.showCancelWarning = true;
-            else
-                this.confirmedCloseForm();
-        }
-
-        public isChanged(){
-            if(this.isCreateParty){
-                if(this.selectedPartyType != null && this.firmName.length && this.firstName.length && this.lastName.length ) return true;
-                return false;
-            } else {
-
-                if ( this.originalPartyType != this.selectedPartyType || 
-                    this.originalFirmName != this.firmName || 
-                    this.originalFirmName != this.firstName || 
-                    this.originalFirmName != this.lastName ) {
-                        return true;
-                    } else {
-                        return false;
-                    }                
-            }
-        }
-
-        public confirmedCloseForm(){           
-            this.clearSelections();
-            this.$emit('cancel');
-        }
-
-        public clearSelections(){
-
-            this.selectedPartyType = null;
-            this.partyTypeState = true; 
-            
-            this.firmName = '';
-            this.firmNameState = true;
-
-            this.firstName = '';
-            this.firstNameState = true;  
-            
-            this.lastName = '';
-            this.lastNameState = true;    
-
-        }
-       
+        this.dataReady = true;              
+    }    
+    
+    public changed(){
+        this.updated++;
     }
+
+    public extractFormInfo(){
+        const index = this.partyTypeOptions.findIndex(partyType=>{if(partyType.value == this.formData.organization)return true})            
+        this.originalPartyType = this.selectedPartyType = (index>=0)? this.partyTypeOptions[index].value: null;            
+        this.originalFirmName = this.firmName = this.formData.name;
+        this.originalFirstName = this.firstName = this.formData.firstName;
+        this.originalLastName = this.lastName = this.formData.lastName;            
+    }
+
+    public saveForm(){
+            
+        this.partyTypeState = this.selectedPartyType != null;
+
+        if (this.selectedPartyType){
+            this.firmNameState = this.firmName != ""; 
+            this.firstNameState = true;
+            this.lastNameState = true; 
+        } else {
+            this.firmNameState = true; 
+            this.firstNameState = this.firstName != "";
+            this.lastNameState = this.lastName != ""; 
+        }
+        
+        if (this.partyTypeState && this.firmNameState && this.firstNameState && this.lastNameState){        
+            const party = {} as partyInfoType;
+            party.organization = this.selectedPartyType;
+            party.name = this.firmName;    
+            party.firstName = this.firstName;
+            party.lastName = this.lastName;   
+            this.$emit('submit', this.isCreateParty, party, this.index);
+        }
+            
+    }
+
+    public closeForm(){
+        if(this.isChanged())
+            this.showCancelWarning = true;
+        else
+            this.confirmedCloseForm();
+    }
+
+    public isChanged(){
+        if(this.isCreateParty){
+            if(this.selectedPartyType != null && (this.firmName.length || this.firstName.length && this.lastName.length) ) return true;
+            return false;
+        } else {
+
+            if ( this.originalPartyType != this.selectedPartyType || 
+                this.originalFirmName != this.firmName || 
+                this.originalFirstName != this.firstName || 
+                this.originalLastName != this.lastName ) {
+                    return true;
+                } else {
+                    return false;
+                }                
+        }
+    }
+
+    public confirmedCloseForm(){           
+        this.clearSelections();
+        this.$emit('cancel');
+    }
+
+    public clearSelections(){
+
+        this.selectedPartyType = null;
+        this.partyTypeState = true; 
+        
+        this.firmName = '';
+        this.firmNameState = true;
+
+        this.firstName = '';
+        this.firstNameState = true;  
+        
+        this.lastName = '';
+        this.lastNameState = true;    
+
+    }
+    
+}
 </script>
 
 <style scoped>

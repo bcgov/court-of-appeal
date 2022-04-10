@@ -202,8 +202,6 @@ export default class Form19StyleOfProceeding extends Vue {
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     partyNames: string[] = [];
-       
-
     lawyerNameOptions: string[] = [];
 
     state = {
@@ -219,8 +217,7 @@ export default class Form19StyleOfProceeding extends Vue {
 
     mounted() {
         this.dataReady = false;
-        this.extractInfo();
-        this.dataReady = true;              
+        this.extractInfo();             
     }
 
     public extractInfo(){     

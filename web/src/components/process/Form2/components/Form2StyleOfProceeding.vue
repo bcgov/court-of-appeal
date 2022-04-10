@@ -198,8 +198,7 @@ export default class Form2StyleOfProceeding extends Vue {
 
     mounted() {
         this.dataReady = false;
-        this.extractInfo();
-        this.dataReady = true;        
+        this.extractInfo();                
     }
 
     async getForm2Data() {
@@ -208,7 +207,7 @@ export default class Form2StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){ 
                 const form2Data = response.data.data                
-                this.UpdateForm2Info(form2Data) 
+                this.UpdateForm2Info(form2Data); 
                 this.extractPartiesData();
                 this.clearStates(); 
             }                
@@ -240,9 +239,10 @@ export default class Form2StyleOfProceeding extends Vue {
             form2Data.respondents = this.partiesJson.respondents;
             form2Data.formSevenNumber = this.fileNumber;            
             form2Data.version = this.$store.state.Application.version;
-            form2Data.filingParties = [];           
-            this.extractPartiesData();
-            this.UpdateForm2Info(form2Data);
+            form2Data.filingParties = [];
+            this.UpdateForm2Info(form2Data);           
+            this.saveForm(true);
+            
         } 
     }
 
@@ -264,8 +264,7 @@ export default class Form2StyleOfProceeding extends Vue {
         this.dataReady = true;
     }  
 
-    public checkStates(){        
-
+    public checkStates(){ 
         this.state.firstAppellant = !this.form2Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form2Info.firstRespondent? false : null;
          this.state.filingParties = (this.form2Info.filingParties.length == 0)? false : null; 
@@ -280,38 +279,47 @@ export default class Form2StyleOfProceeding extends Vue {
         return true            
     }    
 
-    public saveForm(draft: boolean) {
+    public saveForm(draft: boolean) { 
         
-        if(this.checkStates())
-        {
-            const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
-            const method = this.currentCaseId? "put" : "post"
-            const body = {
-                type: "form-2",
-                status:"Draft",
-                description:"form2",
-                data: this.form2Info
-            }  
+        const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
+        const method = this.currentCaseId? "put" : "post"
+        const body = {
+            type: "form-2",
+            status:"Draft",
+            description:"form2",
+            data: this.form2Info
+        }  
 
-            const options = {
-                method: method,
-                url: url,
-                data: body
-            }
+        const options = {
+            method: method,
+            url: url,
+            data: body
+        }       
+            
+        if (this.currentCaseId && !draft && !this.checkStates()){               
+            return                
+        }             
+        
+        this.saveInfo(options, draft);              
+       
+    }
 
-            this.$http(options)
+    public saveInfo(options, draft){
+
+        this.$http(options)
             .then(response => {
                 if(response.data){
-                    if(method == "post") this.UpdateCurrentCaseId(response.data.case_id);
-                    this.UpdateForm2Info(this.form2Info);
+                    if(options.method == "post"){
+                        this.UpdateCurrentCaseId(response.data.case_id);
+                        this.extractPartiesData();                       
+                    }
+                    this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
-                const errMsg = err.response.data.error;
-                
+                const errMsg = err.response.data.error;                
             })
-        }
-    }
+    }   
 
     public navigateToPreviewPage() {        
         this.$router.push({name: "preview-form2"}) 
