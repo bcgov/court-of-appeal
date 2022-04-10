@@ -28,7 +28,7 @@
                 <div style="width:70%;">
                     <div class="row" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -47,9 +47,9 @@
                     </div>
                    
                     <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box" style="width:40%;">{{result.firstAppellant}}</div> 
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstAppellant}}</div> 
                         <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box" style="width:40%;">{{result.firstRespondent}}</div>
+                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstRespondent}}</div>
                     </div>
 
                     
@@ -88,7 +88,7 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{lawyerName}}</div>
             </div>                       
 
@@ -105,7 +105,7 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{parties}}</div> 
             </div>                      
 
@@ -123,7 +123,7 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.addresses}}</div>
             </div>                       
 
@@ -142,7 +142,7 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.phoneNumbers}}</div>
             </div>                       
 
@@ -161,7 +161,7 @@
 
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.emailAdresses}}</div>
             </div>                       
 
@@ -177,7 +177,7 @@
 
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->       
 
-            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.completionDate}}</div> 
 
             <div style="width:3.28%;"></div>
 
@@ -186,7 +186,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;"> {{result.authorizedName}}</div>
                 
         </div>
 

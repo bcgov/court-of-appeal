@@ -125,7 +125,7 @@ export default class NewFormModal extends Vue {
         
         }else if(form=='form3'){
             this.UpdateCurrentNoticeOfCrossAppealId(null);
-            this.$router.push({name: "start-form3" });
+            this.$router.push({name: "checklist-form3" });
         
         }else if(form=='form5'){
             this.UpdateCurrentNoticeOfHearingOfAppealId(null);

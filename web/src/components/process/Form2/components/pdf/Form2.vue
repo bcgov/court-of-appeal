@@ -142,6 +142,8 @@ export default class Form2 extends Vue {
             if(response?.data?.data){            
                             
                 this.result = response.data.data
+                this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
+               
                 this.UpdateForm2Info(this.result)                         
                 this.dataReady = true;
                 Vue.nextTick(()=> this.onPrint())

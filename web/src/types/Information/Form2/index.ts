@@ -20,9 +20,13 @@ export interface form2DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
-    useServiceEmail: boolean;
-    sendNotifications: boolean;
-    serviceInformation: serviceInformationJsonDataType;
-    selfRepresented?: boolean;
+    firstAppellant: string;
+    firstRespondent: string;
+    filingParties: string[];
+    phoneNumbers: string;
+    emailAdresses: string;
+    addresses: string; 
+    authorizedName: string;
+    completionDate?: string;   
     version?: string;
 }

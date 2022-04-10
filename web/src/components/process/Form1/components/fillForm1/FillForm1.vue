@@ -256,8 +256,7 @@ export default class FillForm1 extends Vue {
         this.fieldStates.phone = (!phone || (phone && phoneFormat.test(phone)==false))? false : null;
 
         const email = this.form1Info.appealingFirmAddress.email?.trim();
-        this.fieldStates.email =(email && !emailFormat.test(email))? false : null;        
-
+        this.fieldStates.email =(email && !emailFormat.test(email))? false : null; 
         
         this.UpdateForm1InfoStates(this.fieldStates);
         this.updatedInfo ++;

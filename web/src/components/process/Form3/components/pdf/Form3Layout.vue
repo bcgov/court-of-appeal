@@ -26,7 +26,7 @@
                 <div style="width:70%;">
                     <div class="row mt-2" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
-                        <div class="coa-text-box" style="width:40%;" >{{result.formSevenNumber}}</div>
+                        <div class="coa-text-box" style="width:40%;  font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
 
                     <div class="row" >
@@ -63,7 +63,7 @@
 
                 <div class="arrow-right-flash-54"></div>
                         
-                <div class="coa-text-box-left" style="width:63.7%;">
+                <div class="coa-text-box-left" style="width:63.7%; font-weight: 700;">
                     <div class="ml-2">{{result.appellantNames}}</div>                       
                 </div> 
             </div>
@@ -82,7 +82,7 @@
 
                 <div class="arrow-right-flash-54"></div>
                         
-                <div class="coa-text-box-left" style="width:63.7%;">
+                <div class="coa-text-box-left" style="width:63.7%; font-weight: 700;">
                     <div class="ml-2">{{result.respondentNames}}</div>                       
                 </div> 
             </div>
@@ -110,7 +110,7 @@
 
             <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.crossAppealingParties.join(', ')}}</div>                       
             </div> 
         </div>
@@ -170,7 +170,7 @@
             </div>
             <div class="arrow-right-flash-54"></div> 
 
-            <div class="coa-text-box-left" style="width:64%;">
+            <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.judgeName}}</div>                       
             </div>
 
@@ -188,7 +188,7 @@
             </div>
             <div class="arrow-right-flash-45"></div>       
 
-            <div class="coa-text-box-center" style="width:25%;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
                 
         </div>
 
@@ -230,7 +230,7 @@
 
                 <div class="arrow-right-flash-54" style="border-left-color: #FFF;"></div>
                         
-                <div class="coa-text-box-left" style="background:#FFF; width:63.25%;">
+                <div class="coa-text-box-left" style="background:#FFF; width:63.25%; font-weight: 700;">
                     <div v-if="!result.crossAppealRequired" class="ml-2">{{result.partOfOrderCrossAppealed}}</div>                       
                 </div> 
             </div>
@@ -252,7 +252,7 @@
 
                 <div class="arrow-right-flash-66" style="border-left-color: #FFF;"></div>
                         
-                <div class="coa-text-box-left" style="background:#FFF; width:63.25%;">
+                <div class="coa-text-box-left" style="background:#FFF; width:63.25%; font-weight: 700;">
                     <div v-if="!result.crossAppealRequired" class="ml-2">{{result.seekingOrder}}</div>                       
                 </div> 
             </div>            
@@ -276,7 +276,7 @@
 
                 <div class="arrow-right-flash-54" style="border-left-color: #FFF;"></div>
                         
-                <div class="coa-text-box-left" style="width:63.25%; background:#FFF;">
+                <div class="coa-text-box-left" style="width:63.25%; background:#FFF; font-weight: 700;">
                     <div v-if="result.crossAppealRequired" class="ml-2">{{result.partOfOrderLeaveCrossAppealed}}</div>                       
                 </div> 
             </div>
@@ -296,7 +296,7 @@
 
                 <div class="arrow-right-flash-66" style="border-left-color: #FFF;"></div>
                         
-                <div class="coa-text-box-left" style="width:63.25%; background:#FFF;">
+                <div class="coa-text-box-left" style="width:63.25%; background:#FFF; font-weight: 700;">
                     <div v-if="result.crossAppealRequired" class="ml-2">{{result.groundsLeaveCrossAppeal}}</div>                       
                 </div> 
             </div>            
@@ -321,7 +321,7 @@
             <div style="width:30%; margin:1.5rem 0;">                  
                 <check-box 
                     style="margin-left:1rem;"
-                    :check="(result.selfRepresented)?'yes':''" 
+                    :check="(result.selfRepresenting)?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="Yes"/> 
@@ -330,7 +330,7 @@
             <div style="width:30%;margin:1.5rem 0;">
             <check-box 
                 style="margin: 0 ;" 
-                :check="(!result.selfRepresented)?'yes':''"
+                :check="(!result.selfRepresenting)?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="No"/> 
@@ -353,7 +353,7 @@
 
             <div class="arrow-right-flash-66"></div>
                     
-            <div class="coa-text-box-left" style="width:63.5%;">
+            <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
                 <div class="ml-2">{{result.addresses}}</div>                       
             </div> 
         </div>
@@ -367,7 +367,7 @@
 
             <div class="arrow-right-flash-36"></div>
                     
-            <div class="coa-text-box-left" style="width:63.5%;">
+            <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
                 <div class="ml-2">{{result.phoneNumbers}}</div>                       
             </div> 
         </div>
@@ -386,7 +386,7 @@
 
             <div class="arrow-right-flash-54"></div>
                     
-            <div class="coa-text-box-left" style="width:63.5%;">
+            <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
                 <div class="ml-2">{{result.emailAdresses}}</div>                       
             </div> 
         </div>               
@@ -400,7 +400,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-            <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
+            <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.completionDate}}</div> 
             
             <div style="width:3.28%;"></div>
             
@@ -409,7 +409,7 @@
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-            <div class="coa-text-box-center" style="width:25%;"> {{result.authorizedName}}</div>
+            <div class="coa-text-box-center" style="width:25%; font-weight: 700;"> {{result.authorizedName}}</div>
                 
         </div>
 
