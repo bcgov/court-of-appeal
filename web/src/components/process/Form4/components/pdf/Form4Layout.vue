@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="dataReady">
 
 <!-- <header> -->
         <div style="margin-top:-1.25rem;">
@@ -9,7 +9,9 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 4</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF SETTLEMENT OR ABANDONMENT: RULE 44</b></div>
+                <div style="width:75%; font-size:14pt; text-align: left; padding-left: 0.25rem;">
+                    <b>NOTICE OF APPLICATION: RULES 13(a), 20(3) and (4), 54(a), 58(1), 59(1), 60(2), 61(2), 63(2)</b>
+                </div>
             </div>         
         </div>
        
@@ -43,65 +45,245 @@
                             <i>The file number can be found on the upper right corner of the Notice of Appeal.</i>
                         </div>                        
                     </div>
-                   
-                    <div class="row" style="margin-top: 0.5rem;">
-                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstAppellant}}</div> 
-                        <div style="width:5.5%; margin-top:0.5rem">v.</div>
-                        <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.firstRespondent}}</div>
-                    </div>
-
                     
-                    <div class="row" >
-                        <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
-                            <div class="arrow-up-flash"></div>
-                            <div class="arrow-up-box"></div>
-                        </div>
-                        <div style="width:5.5%; margin-top:0.5rem"></div>
-                        <div style="width:40%; margin:0; padding:0rem 0.5rem; border: 0px solid white;">
-                            <div class="arrow-up-flash"></div>
-                            <div class="arrow-up-box"></div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="coa-help-box" style="width:40%;"><i>Name of the first appellant named on Form 1: Notice of Appeal.</i></div> 
-                        <div style="width:5.5%; padding: 0; margin:0.5rem 0 0 0;"></div>
-                        <div class="coa-help-box" style="width:40%;"><i>Name of the first respondent named on Form 1: Notice of Appeal.</i></div>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
-                <div style="font-weight: 700; margin-bottom: 0.75rem;">
-                    To the appellant(s):
-                </div>
-                <div>
-                    A person or party who abandons an appeal may be liable for the costs associated with the appeal.
                 </div>
             </div>
 
         </div>
 
-<!-- <name-of-parties> -->
+<!-- <name-of-appellants> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name of the party(ies) who wish to abandon an appeal or cross appeal</b>
+                <b class="ml-2">Appellant(s)</b>
+                List the name(s) of the appellant(s) named on Form 1: Notice of Appeal
             </div>
 
             <div class="arrow-right-flash-36"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2" style="font-weight: 700;">{{result.abandoningParties.join(', ')}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{result.appellantNames}}</div>                       
             </div> 
         </div>
 
-<!-- <abandoning-type> -->
+<!-- <name-of-respondents> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+                <b class="ml-2">Respondent(s)</b>
+                List the name(s) of the respondent(s) named on Form 1: Notice of Appeal
+            </div>
+
+            <div class="arrow-right-flash-36"></div>
+                    
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2" style="font-weight: 700;">{{result.respondentNames}}</div>                       
+            </div> 
+        </div>
+
+<!-- <jurisdiction-type> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:0.25rem; height:1.5rem;">
-                <b class="ml-2">The party is abandoning an ...</b>
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1rem; height:2.5rem;">
+                <b class="ml-2">The application is in the jurisdiction of:</b>
+            </div>
+
+            <div class="arrow-right-flash-20"></div>           
+            
+            <div style="width:2%;"></div>
+
+            <div style="width:25%; margin:0.5rem 0;">                  
+                <check-box 
+                    style="margin-left:1rem;"
+                    :check="(result.jurisdictionType == 'The Court (3 Judges)')?'yes':''" 
+                    shiftmark="1" 
+                    marginLeft="0.5rem"
+                    text="The Court (3 Judges)"/> 
+            </div>
+
+            <div style="width:20%;margin:0.5rem 0;">
+                <check-box 
+                    style="margin: 0 ;" 
+                    :check="(result.jurisdictionType == 'A Chambers Judge')?'yes':''"
+                    shiftmark="1" 
+                    marginLeft="0.5rem"
+                    text="A Chambers Judge"/> 
+            </div>
+            
+            <div style="width:18%;margin:0.5rem 0;">
+                <check-box 
+                    style="margin: 0 ;" 
+                    :check="(result.jurisdictionType == 'The Registrar')?'yes':''"
+                    shiftmark="1" 
+                    marginLeft="0.5rem"
+                    text="The Registrar"/> 
+            </div>           
+            
+        </div>
+
+        <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding: 0.5rem;">
+            <div style="font-weight: 700; margin-bottom: 0.75rem;">
+                To the party(ies) filing the application
+            </div>
+            <div style="margin-bottom: 0.75rem;">
+                If your application is before a chambers judge check the 
+                <a 
+                    target='_blank' 
+                    href="https://www.bccourts.ca/court_of_appeal/hearing_list/lists/available%20chambers%20dates/Available%20Chambers%20Dates.pdf">
+                    available chambers dates
+                </a>
+                 on the court website and the timelines for bringing your application under the rules.
+            </div>
+            <div style="margin-bottom: 0.75rem;">
+                If your application is before the court or the registrar contact the appropriate 
+                scheduler before completing this form.
+            </div>
+            <div style="margin-bottom: 0.75rem;">
+                Communicate with the other party or parties to ensure they are available on the 
+                requested date. Chambers applications are to be no more than 30 minutes.
+
+            </div>
+        </div>
+
+<!-- <name-of-applying-parties> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+                <b class="ml-2">Name(s) of the party(ies) bringing the application</b>
+            </div>
+
+            <div class="arrow-right-flash-36"></div>
+                    
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2" style="font-weight: 700;">{{result.applicantParties.join(', ')}}</div>                       
+            </div> 
+        </div>
+
+<!-- <name-of-responding-parties> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+                <b class="ml-2">Name(s) of responding party(ies) to be served with the application</b>
+            </div>
+
+            <div class="arrow-right-flash-36"></div>
+                    
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2" style="font-weight: 700;">{{result.respondentParties.join(', ')}}</div>                       
+            </div> 
+        </div>
+
+<!-- <hearing-location-address> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+                <b class="ml-2">Location where the application will be heard</b>
+                Enter the address of the courthouse.
+            </div>
+
+            <div class="arrow-right-flash-36"></div>
+                    
+            <div class="coa-text-box-left" style="width:64%;">
+                <div class="ml-2" style="font-weight: 700;">
+                    {{result.hearingLocation.name}}<br> 
+                    {{result.hearingLocation.address}}<br>
+                    {{result.hearingLocation.postalCode}}
+                </div>                       
+            </div> 
+        </div>
+
+<!-- <date-of-hearing> -->
+        <div class="row mt-2" style="font-size: 9pt;">
+            
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:2.5rem;">
+                <b class="ml-2">Date the application will be heard</b>
+            </div>
+
+            <div class="arrow-right-flash-20"></div>
+
+            <div style="width:2.35%;"></div>
+
+            <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center">
+                {{result.hearingDate | beautify-date-dd/mm/yyyy}}
+            </div>           
+            
+            <div style="width:5%;"></div>
+            
+            <div class="coa-text-box-center" style="width:20%; text-align:center; background: #E8E8E8; border: 1px solid #E8E8E8;">
+                Chambers applications begin at 9:30 am.
+            </div>
+            
+            <div style="width:14.25%;"></div>  
+
+        </div>
+<!-- <date-help>-->
+        <div class="row" style="font-size: 9pt;">
+            <div style="width:36%;"></div>
+            <div style="width:20%">
+                <div class="arrow-up-flash"></div>
+                <div class="arrow-up-box"></div>               
+                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+            </div>
+        </div>
+
+<!-- <rule-sections> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+                <div class="ml-2">
+                    <b> Enter the section(s) or rule(s) that you are relying on for your application</b>
+                    <i>
+                        <br>E.g., If you are applying for leave to appeal, enter 
+                        “Section 31 of the Court of Appeal Act”. If you are applying 
+                        for a stay of proceedings, enter “Section 33 of the Court 
+                        of Appeal Act”. 
+                    </i>
+                </div>
+            </div>
+            <div class="arrow-right-flash-54"></div> 
+
+            <div class="coa-text-box-left" style="width:64%;">                
+                <div class="ml-2" style="font-weight: 700;">
+                    {{rules}}
+                </div>
+            </div>
+
+        </div>  
+
+<!-- <seeking-order> -->
+        <div class="row mt-3" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+                <div class="ml-2">
+                    <b> Enter the order that you are seeking</b>
+                    <i>
+                        <br>E.g., “stay of proceedings” or “extension of time to file an appeal book” 
+                        and any request with respect to costs. If you are seeking leave to appeal, 
+                        enter “leave to appeal the order of_________.” 
+                    </i>
+                </div>
+            </div>
+            <div class="arrow-right-flash-54"></div> 
+
+            <div class="coa-text-box-left" style="width:64%;">                
+                <div class="ml-2" style="font-weight: 700;">
+                    {{result.seekingOrder}}
+                </div>
+            </div>
+
+        </div>
+
+<!-- <book-required> -->
+        <div class="row mt-4" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:6.5rem;">
+                <div class="ml-2">
+                    <b>Is an application book required?</b>
+                    <i>
+                        <br>See Rule 13 for leave applications and Division 2 of 
+                        Part 9 of the Rules for other applications. 
+                    </i>
+                </div>
             </div>
 
             <div class="arrow-right-flash-20"></div>           
@@ -111,110 +293,108 @@
             <div style="width:20%; margin:0.5rem 0;">                  
                 <check-box 
                     style="margin-left:1rem;"
-                    :check="(result.abandonType == 'Appeal')?'yes':''" 
+                    :check="(result.bookRequired)?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
-                    text="Appeal"/> 
+                    text="Yes"/> 
             </div>
                 
-            <div style="width:15%;margin:0.5rem 0;"> or </div>       
+            <div style="width:15%;margin:0.5rem 0;"></div>       
             
             <div style="width:25%;margin:0.5rem 0;">
             <check-box 
                 style="margin: 0 ;" 
-                :check="(result.abandonType == 'Cross Appeal')?'yes':''"
+                :check="(!result.bookRequired)?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
-                text="Cross Appeal"/> 
+                text="No"/> 
             </div>           
             
         </div>
 
-<!-- <name-of-parties-abandoning-against> -->
-        <div class="row mt-4" style="font-size: 9pt;">
+<!-- <affidavits> -->
+        <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Which party(ies) are you abandoning against?</b>
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+                <div class="ml-2">
+                    <b>
+                        If you are not required to file an application book, list 
+                        the affidavit(s) in support of this application
+                    </b>
+                    <i>
+                        <br>Enter the name of each person whose affidavit is being filed 
+                        and the date each affidavit was sworn. 
+                    </i>
+                </div>
+            </div>
+            <div class="arrow-right-flash-54"></div> 
+
+            <div class="coa-text-box-left" style="width:64%;"> 
+                <div v-if="result.bookRequired" class="ml-2" style="font-weight: 700;"></div>               
+                <div v-else class="ml-2" style="font-weight: 700;">
+                    <div v-for="affidavit,inx in result.affidavitList" :key="inx" style="text-indent:10px;display:inline;">
+                        <div style="display:inline-block;"> Affidavit by {{affidavit.name}} sworn on {{affidavit.date | beautify-date}} </div>
+                    </div>
+                </div>                
             </div>
 
-            <div class="arrow-right-flash-36"></div>
-                    
-            <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2" style="font-weight: 700;">{{result.abandoningAgainstParties.join(', ')}}</div>                       
-            </div>
         </div>
 
-<!-- <name-of-judge> -->
+<!-- <contested> -->
+        <div class="row mt-4" style="font-size: 9pt;">
+
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:6.5rem;">
+                <div class="ml-2">
+                    <b>The applicant anticipates that this application will be…</b>
+                    <i><br>Check only one.</i>
+                </div>
+            </div>
+
+            <div class="arrow-right-flash-20"></div>           
+            
+            <div style="width:2%;"></div>
+
+            <div style="width:20%; margin:0.5rem 0;">                  
+                <check-box 
+                    style="margin-left:1rem;"
+                    :check="(result.applicationContested)?'yes':''" 
+                    shiftmark="1" 
+                    marginLeft="0.5rem"
+                    text="Contested"/> 
+            </div>
+                
+            <div style="width:15%;margin:0.5rem 0;"></div>       
+            
+            <div style="width:25%;margin:0.5rem 0;">
+            <check-box 
+                style="margin: 0 ;" 
+                :check="(!result.applicationContested)?'yes':''"
+                shiftmark="1" 
+                marginLeft="0.5rem"
+                text="Uncontested"/> 
+            </div>           
+            
+        </div>
+
+<!-- <email-addresses> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
                 <div class="ml-2">
-                    <b> Who made the order?</b>
+                    <b> Email address(es) for service of applicant(s)</b>
                     <i>
-                        <br>Name the justice or other decision maker who pronounced the order you are abandoning.
+                        <br>If you provide an email address, you consent 
+                        to have documents served on you by email.
                     </i>
                 </div>
             </div>
             <div class="arrow-right-flash-54"></div> 
 
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2" style="font-weight: 700;">{{result.judgeName}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{result.emailAddresses}}</div>                       
             </div>
 
-        </div>  
-
-
-<!-- <date-pronounced> -->
-        <div class="row mt-3" style="font-size: 9pt;">
-            
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; line-height:1rem; height:3.5rem;">
-                <div class="ml-2">
-                    <b>Date the order under appeal was pronounced</b>
-                    <i style="font-size:8.5pt;"><br>Not the date the order was entered.</i>
-                </div>                
-            </div>
-            <div class="arrow-right-flash-36"></div>       
-
-            <div class="coa-text-box-center" style="width:25%; font-weight: 700;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
-                
-        </div>
-
-<!-- <date-help>-->
-        <div class="row" style="font-size: 9pt;">
-            <div style="width:36%;"></div>
-            <div style="width:25%">
-                <div class="arrow-up-flash"></div>
-                <div class="arrow-up-box"></div>               
-                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
-            </div>
-        </div>
-
-
-<!-- <date-initiating> -->
-        <div class="row mt-3" style="font-size: 9pt;">
-            
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; line-height:1.1rem; height:5.75rem;">
-                <div class="ml-2">
-                    <b>Date initiating document in the appeal or cross appeal you are abandoning was filed </b>
-                    <i><br>Notice of Appeal/Form 1 or Notice of Cross Appeal/Form 3.</i>
-                </div>
-                
-            </div>
-            <div class="arrow-right-flash-54"></div>       
-
-            <div class="coa-text-box-center" style="width:25%; font-weight: 700;">{{result.initiatingDocumentDate | beautify-date-dd/mm/yyyy}}</div>           
-                
-        </div>
-
-<!-- <date-help>-->
-        <div class="row" style="font-size: 9pt;">
-            <div style="width:36%;"></div>
-            <div style="width:25%">
-                <div class="arrow-up-flash"></div>
-                <div class="arrow-up-box"></div>               
-                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
-            </div>
-        </div>
+        </div> 
 
 <!-- <Sign-Date> -->
         <div class="row mt-5" style="font-size: 9pt;">
@@ -265,6 +445,29 @@ export default class Form4Layout extends Vue {
 
     @Prop({required:true})
     result!: form4DataInfoType;
+
+    dataReady = false;
+    rules = '';
+
+    mounted(){
+        this.dataReady = false;
+        if (this.result.selfRepresented){
+
+            const ruleList = [];
+            for (const rule of this.result.relyingSectionRule){                
+                if (rule == 'Other' && this.result.otherRelyingSectionRule){
+                    ruleList.push(this.result.otherRelyingSectionRule);
+                } else {
+                    ruleList.push(rule);
+                }
+            }
+            this.rules = ruleList.join(', ');
+
+        } else {
+            this.rules = this.result.lawyerRelyingSectionRule;
+        }
+        this.dataReady = true;
+    }
 }
 
 </script>

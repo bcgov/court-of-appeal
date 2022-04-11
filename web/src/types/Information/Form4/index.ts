@@ -1,3 +1,4 @@
+import { locationsInfoType } from "@/types/Common";
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
 export interface form4FormsJsonDataType {
@@ -33,16 +34,30 @@ export interface form4DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
-    jurisdiction: string;
-    firstRespondent: string;
-    judgeName: string;
-    orderDate: string;
-    initiatingDocumentDate: string;        
-    authorizedName: string;
-    abandoningParties: string[];
-    abandoningAgainstParties: string[];
-    abandonType: string;
+    appellantNames: string;
+    respondentNames: string;
+    jurisdictionType: string;
+    applicantParties: string[];
+    respondentParties: string[];
+    hearingLocation: locationsInfoType;
+    hearingDate: string;
+    estimatedDuration: string;
+    relyingSectionRule: string[];
+    otherRelyingSectionRule: string;
+    lawyerRelyingSectionRule: string;
+    seekingOrder: string;    
+    bookRequired: boolean;
+    affidavitList: affidavitInfoType[];
+    applicationContested: boolean;
+    acknowledgeEmailService: boolean;
+    emailAddresses?: string;    
     selfRepresented?: boolean;    
+    authorizedName: string;
     completionDate?: string;
     version?: string;
+}
+
+export interface affidavitInfoType {
+    name: string;
+    date: string;
 }

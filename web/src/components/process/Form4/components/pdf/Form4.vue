@@ -59,6 +59,9 @@ export default class Form4 extends Vue {
     @form4State.Action
     public UpdateForm4Info!: (newForm4Info: form4DataInfoType) => void
 
+    @form4State.State
+    public form4Info: form4DataInfoType;
+
     result = {} as form4DataInfoType;
     dataReady = false;
    
@@ -140,7 +143,8 @@ export default class Form4 extends Vue {
                 this.result = response.data.data
                 this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
                
-                this.UpdateForm4Info(this.result)                         
+                this.UpdateForm4Info(this.result) 
+                                    
                 this.dataReady = true;
                 Vue.nextTick(()=> this.onPrint())
             }

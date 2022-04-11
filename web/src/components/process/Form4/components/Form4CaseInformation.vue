@@ -208,14 +208,6 @@ export default class Form4CaseInformation extends Vue {
                 this.$router.push({name: "fill-form4"})
             }
 
-            // if(res.data?.previousCourts){
-            //     this.UpdatePreviousCourts(res.data?.previousCourts)
-            // }
-
-            // if(res.data?.initiatingDocuments?.InitiatingDocument){
-            //     this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
-            // }
-
             else
                 this.notFound = true;
         },err => {
