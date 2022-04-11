@@ -9,6 +9,11 @@
         <cancel-submit-form-3 v-else-if="result=='cancel'"/>
         <error-submit-form-3 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="(formType == 'MCH')||(formType == 'MCT')">
+        <success-submit-form-4 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-4 v-else-if="result=='cancel'"/>
+        <error-submit-form-4 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else-if="formType == 'NHA'">
         <success-submit-form-5 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-5 v-else-if="result=='cancel'"/>
@@ -19,10 +24,20 @@
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'MBAV'">
+        <success-submit-form-8 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-8 v-else-if="result=='cancel'"/>
+        <error-submit-form-8 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else-if="formType == 'REQ'">
         <success-submit-form-9 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
+    <div v-else-if="formType == 'xzz'">
+        <success-submit-form-16 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-16 v-else-if="result=='cancel'"/>
+        <error-submit-form-16 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
     <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
@@ -57,6 +72,10 @@ import CancelSubmitForm3 from "./Form3/CancelSubmitForm3.vue";
 import SuccessSubmitForm3 from "./Form3/SuccessSubmitForm3.vue";
 import ErrorSubmitForm3 from "./Form3/ErrorSubmitForm3.vue";
 
+import CancelSubmitForm4 from "./Form4/CancelSubmitForm4.vue";
+import SuccessSubmitForm4 from "./Form4/SuccessSubmitForm4.vue";
+import ErrorSubmitForm4 from "./Form4/ErrorSubmitForm4.vue";
+
 import CancelSubmitForm5 from "./Form5/CancelSubmitForm5.vue";
 import SuccessSubmitForm5 from "./Form5/SuccessSubmitForm5.vue";
 import ErrorSubmitForm5 from "./Form5/ErrorSubmitForm5.vue";
@@ -69,9 +88,17 @@ import CancelSubmitForm1 from "./Form1/CancelSubmitForm1.vue";
 import SuccessSubmitForm1 from "./Form1/SuccessSubmitForm1.vue";
 import ErrorSubmitForm1 from "./Form1/ErrorSubmitForm1.vue";
 
+import CancelSubmitForm8 from "./Form8/CancelSubmitForm8.vue";
+import SuccessSubmitForm8 from "./Form8/SuccessSubmitForm8.vue";
+import ErrorSubmitForm8 from "./Form8/ErrorSubmitForm8.vue";
+
 import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
 import ErrorSubmitForm9 from "./Form9/ErrorSubmitForm9.vue";
+
+import CancelSubmitForm16 from "./Form16/CancelSubmitForm16.vue";
+import SuccessSubmitForm16 from "./Form16/SuccessSubmitForm16.vue";
+import ErrorSubmitForm16 from "./Form16/ErrorSubmitForm16.vue";
 
 import CancelSubmitForm18 from "./Form18/CancelSubmitForm18.vue";
 import SuccessSubmitForm18 from "./Form18/SuccessSubmitForm18.vue";
@@ -94,6 +121,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm3,
         SuccessSubmitForm3,
         ErrorSubmitForm3,
+        CancelSubmitForm4,
+        SuccessSubmitForm4,
+        ErrorSubmitForm4,
         CancelSubmitForm5,
         SuccessSubmitForm5,
         ErrorSubmitForm5,
@@ -103,9 +133,15 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm1,
         SuccessSubmitForm1,
         ErrorSubmitForm1,
+        CancelSubmitForm8,
+        SuccessSubmitForm8,
+        ErrorSubmitForm8,
         CancelSubmitForm9,
         SuccessSubmitForm9,
         ErrorSubmitForm9,
+        CancelSubmitForm16,
+        SuccessSubmitForm16,
+        ErrorSubmitForm16,
         CancelSubmitForm18,
         SuccessSubmitForm18,
         ErrorSubmitForm18,

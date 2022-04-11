@@ -44,6 +44,11 @@ import FillForm9 from "@/components/process/Form9/FillForm9.vue";
 import PreviewForm9 from "@/components/process/Form9/PreviewForm9.vue";
 import SubmitForm9 from "@/components/process/Form9/SubmitForm9.vue";
 
+import StartForm16 from "@/components/process/Form16/StartForm16.vue";
+import FillForm16 from "@/components/process/Form16/FillForm16.vue";
+import PreviewForm16 from "@/components/process/Form16/PreviewForm16.vue";
+import SubmitForm16 from "@/components/process/Form16/SubmitForm16.vue";
+
 import StartForm18 from "@/components/process/Form18/StartForm18.vue";
 import FillForm18 from "@/components/process/Form18/FillForm18.vue";
 import PreviewForm18 from "@/components/process/Form18/PreviewForm18.vue";
@@ -297,6 +302,30 @@ const routes = [
       name: "proceed-form9",
       beforeEnter: authGuard,
       component: SubmitForm9
+    },
+    {
+      path: "/start-form16",
+      name: "start-form16",
+      beforeEnter: authGuard,
+      component: StartForm16
+    },
+    {
+      path: "/fill-form16",
+      name: "fill-form16",
+      beforeEnter: authGuard,
+      component: FillForm16
+    },
+    {
+      path: "/preview-form16",
+      name: "preview-form16",
+      beforeEnter: authGuard,
+      component: PreviewForm16
+    },
+    {
+      path: "/proceed-form16",
+      name: "proceed-form16",
+      beforeEnter: authGuard,
+      component: SubmitForm16
     },
     {
       path: "/start-form18",
