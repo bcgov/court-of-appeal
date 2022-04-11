@@ -82,6 +82,9 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/forms/form8";
+const form8State = namespace("Form8");
+
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
@@ -117,6 +120,7 @@ import { form4FormsJsonDataType } from '@/types/Information/Form4';
 import { form1FormsJsonDataType, lookupsInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
+import { form8FormsJsonDataType } from '@/types/Information/Form8';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
 
@@ -165,6 +169,9 @@ export default class DashboardPage extends Vue {
 
     @form1State.Action
     public UpdateForm1FormsJson!: (newForm1FormsJson: form1FormsJsonDataType[])=> void
+
+    @form8State.Action
+    public UpdateForm8FormsJson!: (newForm8FormsJson: form8FormsJsonDataType[])=> void
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
@@ -281,6 +288,7 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form1/forms'));
         calls.push(this.$http.get('/form3/forms'));
         //calls.push(this.$http.get('/form4/forms'));
+        //calls.push(this.$http.get('/form8/forms'));
 
         Promise.all(calls).then(values => {
             
@@ -306,6 +314,7 @@ export default class DashboardPage extends Vue {
             if(values[9]?.data) this.UpdateForm1FormsJson(values[9]?.data)
             if(values[10]?.data) this.UpdateForm3FormsJson(values[10]?.data)
             //if(values[11]?.data) this.UpdateForm4FormsJson(values[11]?.data)
+            //if(values[12]?.data) this.UpdateForm8FormsJson(values[12]?.data)
             
             this.dataLoaded = true;
 

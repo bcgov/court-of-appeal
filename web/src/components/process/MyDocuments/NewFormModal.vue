@@ -54,6 +54,9 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/forms/form8";
+const form8State = namespace("Form8");
+
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
@@ -90,6 +93,9 @@ export default class NewFormModal extends Vue {
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
+    @form8State.Action
+    public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
+
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
@@ -108,7 +114,8 @@ export default class NewFormModal extends Vue {
         {name:'form3', title:'Notice of Cross Appeal (Form 3)'},
         {name:'form4', title:'Notice of Application (Form 4)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
-        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},        
+        {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},   
+        {name:'form8', title:'Notice of Application to Vary an Order of a Justice (Form 8)'},     
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
@@ -150,6 +157,10 @@ export default class NewFormModal extends Vue {
             this.UpdateCurrentNoticeOfAppealId(null)
             this.$router.push({name: "checklist-form1" });
             
+        }else if(form=='form8'){
+            this.UpdateCurrentNoticeOfApplicationToVaryId(null);
+            this.$router.push({name: "start-form8" });
+
         }else if(form=='form9'){
             this.UpdateCurrentRequisitionId(null)
             this.$router.push({name: "start-form9" });

@@ -30,7 +30,7 @@
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-            <form-4-layout v-bind:result="result"/>
+            <form-8-layout v-bind:result="result"/>
         </b-card>
 
     </b-card>
@@ -40,42 +40,45 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/forms/form4";
-const form4State = namespace("Form4");
+import "@/store/modules/forms/form8";
+const form8State = namespace("Form8");
 
-import { form4DataInfoType } from '@/types/Information/Form4';
-import Form4Layout from "./Form4Layout.vue";
+import { form8DataInfoType } from '@/types/Information/Form8';
+import Form8Layout from "./Form8Layout.vue";
 
 @Component({
     components:{        
-        Form4Layout
+        Form8Layout
     }
 })
-export default class Form4 extends Vue {
+export default class Form8 extends Vue {
     
-    @form4State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    @form8State.State
+    public currentNoticeOfApplicationToVaryId: string;
 
-    @form4State.Action
-    public UpdateForm4Info!: (newForm4Info: form4DataInfoType) => void
+    @form8State.Action
+    public UpdateForm8Info!: (newForm8Info: form8DataInfoType) => void
 
-    result = {} as form4DataInfoType;
+    @form8State.State
+    public form8Info: form8DataInfoType;
+
+    result = {} as form8DataInfoType;
     dataReady = false;
    
     mounted(){
         this.dataReady = false;
-        this.getForm4Data(); 
+        this.getForm8Data(); 
     }   
            
     public onPrint() { 
-        const pdf_type = "ABA"
-        const pdf_name = "form4-" + this.currentNoticeOfSettlementOrAbandonmentId;
+        const pdf_type = "MBAV"
+        const pdf_name = "form8-" + this.currentNoticeOfApplicationToVaryId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;        
-        const url = '/form4/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form8/form-print/'+this.currentNoticeOfApplicationToVaryId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -99,9 +102,9 @@ export default class Form4 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "ABA"
-        const pdfName ="FORM4"
-        const url = '/form4/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?pdf_type='+pdfType
+        const pdfType = "MBAV"
+        const pdfName ="FORM8"
+        const url = '/form8/form-print/'+this.currentNoticeOfApplicationToVaryId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -124,31 +127,30 @@ export default class Form4 extends Vue {
     }
 
     public navigateToEditPage() {
-        this.$router.push({name: "fill-form4" })
+        this.$router.push({name: "fill-form8" })
     }
 
     public navigateToSubmitPage(){
         this.$emit('navigateToSubmitPage')
     }
  
-    public getForm4Data() {        
+    public getForm8Data() {        
        
-        this.$http.get('/form4/forms/'+this.currentNoticeOfSettlementOrAbandonmentId)
-        .then((response) => {
-            if(response?.data?.data){            
+        // this.$http.get('/form8/forms/'+this.currentNoticeOfApplicationToVaryId)
+        // .then((response) => {
+        //     if(response?.data?.data){            
                             
-                this.result = response.data.data
-                this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
-               
-                this.UpdateForm4Info(this.result) 
-                                    
+        //         this.result = response.data.data
+        //         this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
+                this.result = this.form8Info;
+                this.UpdateForm8Info(this.result)                         
                 this.dataReady = true;
-                Vue.nextTick(()=> this.onPrint())
-            }
+        //         Vue.nextTick(()=> this.onPrint())
+        //     }
                 
-        },(err) => {
-            console.log(err)        
-        });      
+        // },(err) => {
+        //     console.log(err)        
+        // });      
     }
 }
 </script>
