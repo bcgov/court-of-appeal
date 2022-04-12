@@ -36,6 +36,9 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
@@ -51,8 +54,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form1";
-const form1State = namespace("Form1");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
@@ -78,6 +81,9 @@ export default class NewFormModal extends Vue {
     @Prop({required: true})
     showSelectFormToFill!: boolean;
 
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
@@ -93,8 +99,8 @@ export default class NewFormModal extends Vue {
     @form6State.Action
     public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
-    @form1State.Action
-    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+    @form7State.Action
+    public UpdateCurrentNoticeOfUrgentApplicationId!: (newCurrentNoticeOfUrgentApplicationId: string) => void
 
     @form8State.Action
     public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
@@ -121,6 +127,7 @@ export default class NewFormModal extends Vue {
         {name:'form4', title:'Notice of Application (Form 4)'},
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
         {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},   
+        {name:'form7', title:'Notice of Urgent Application (Form 7)'},  
         {name:'form8', title:'Notice of Application to Vary an Order of a Justice (Form 8)'},     
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
@@ -140,7 +147,11 @@ export default class NewFormModal extends Vue {
 
     public createDocument(form) {
         
-        if(form=='form2'){
+        if(form=='form1'){
+            this.UpdateCurrentNoticeOfAppealId(null)
+            this.$router.push({name: "checklist-form1" });
+            
+        } else if(form=='form2'){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" });
         
@@ -160,9 +171,9 @@ export default class NewFormModal extends Vue {
             this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
             this.$router.push({name: "start-form6" });
 
-        }else if(form=='form1'){
-            this.UpdateCurrentNoticeOfAppealId(null)
-            this.$router.push({name: "checklist-form1" });
+        }else if(form=='form7'){
+            this.UpdateCurrentNoticeOfUrgentApplicationId(null);
+            this.$router.push({name: "start-form7" });
             
         }else if(form=='form8'){
             this.UpdateCurrentNoticeOfApplicationToVaryId(null);

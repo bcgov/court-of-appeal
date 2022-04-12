@@ -86,6 +86,9 @@ import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
@@ -101,8 +104,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form1";
-const form1State = namespace("Form1");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
@@ -122,12 +125,13 @@ const form19State = namespace("Form19");
 import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
+import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { caseJsonDataType } from "@/types/Information/json";
 import { form3FormsJsonDataType } from "@/types/Information/Form3";
 import { form4FormsJsonDataType } from "@/types/Information/Form4";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
-import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
+import { form7FormsJsonDataType } from "@/types/Information/Form7";
 import { form8FormsJsonDataType } from "@/types/Information/Form8";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form16FormsJsonDataType } from "@/types/Information/Form16";
@@ -137,6 +141,12 @@ import { form20FormsJsonDataType } from "@/types/Information/Form20";
 
 @Component
 export default class MyDocumentsTableBrief extends Vue {
+
+    @form1State.State
+    public form1FormsJson!: form1FormsJsonDataType[];
+
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
     @form2State.State
     public casesJson!: caseJsonDataType[];
@@ -168,11 +178,11 @@ export default class MyDocumentsTableBrief extends Vue {
     @form6State.Action
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
-    @form1State.State
-    public form1FormsJson!: form1FormsJsonDataType[];
+    @form7State.State
+    public form7FormsJson!: form7FormsJsonDataType[];
 
-    @form1State.Action
-    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+    @form7State.Action
+    public UpdateCurrentNoticeOfUrgentApplicationId!: (newCurrentNoticeOfUrgentApplicationId: string) => void
 
     @form8State.State
     public form8FormsJson!: form8FormsJsonDataType[];
@@ -229,6 +239,30 @@ export default class MyDocumentsTableBrief extends Vue {
 
     public extractDocuments(){
         this.documentsList = [];
+
+        //___Form 1___
+        for (const docJson of this.form1FormsJson) {                
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form1',
+                formName:'Form 1',
+                description:'Notice of Appeal',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id);
+            doc.fileNumber = docJson.data.lowerCourtFileNo;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified;
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
 
         //___Form 2___
         for (const docJson of this.casesJson) {                
@@ -350,24 +384,24 @@ export default class MyDocumentsTableBrief extends Vue {
             this.documentsList.push(doc);
         }
 
-        //___Form 1___
-        for (const docJson of this.form1FormsJson) {                
+        //___Form 7___
+        for (const docJson of this.form7FormsJson) {                
             const doc = { 
                 id:'',
                 pdfType:'FORM',
-                form:'form1',
-                formName:'Form 1',
-                description:'Notice of Appeal',
+                form:'form7',
+                formName:'Form 7',
+                description:'Notice of Urgent Application',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 
                 packageNum:'',
                 packageUrl:'',                
             };
-            doc.id = String(docJson.id);
-            doc.fileNumber = docJson.data.lowerCourtFileNo;
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
             doc.status = docJson.status;
-            doc.modifiedDate = docJson.modified;
+            doc.modifiedDate = docJson.modified
             doc.packageUrl = docJson.packageUrl;
             doc.packageNum = docJson.packageNumber;
             doc.pdfType = docJson.pdf_types;

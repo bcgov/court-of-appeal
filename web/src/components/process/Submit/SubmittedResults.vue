@@ -59,10 +59,19 @@
         <cancel-submit-form-1 v-else-if="result=='cancel'"/>
         <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'yyy'">
+        <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-7 v-else-if="result=='cancel'"/>
+        <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
+import CancelSubmitForm1 from "./Form1/CancelSubmitForm1.vue";
+import SuccessSubmitForm1 from "./Form1/SuccessSubmitForm1.vue";
+import ErrorSubmitForm1 from "./Form1/ErrorSubmitForm1.vue";
 
 import CancelSubmitForm2 from "./Form2/CancelSubmitForm2.vue";
 import SuccessSubmitForm2 from "./Form2/SuccessSubmitForm2.vue";
@@ -84,9 +93,9 @@ import CancelSubmitForm6 from "./Form6/CancelSubmitForm6.vue";
 import SuccessSubmitForm6 from "./Form6/SuccessSubmitForm6.vue";
 import ErrorSubmitForm6 from "./Form6/ErrorSubmitForm6.vue";
 
-import CancelSubmitForm1 from "./Form1/CancelSubmitForm1.vue";
-import SuccessSubmitForm1 from "./Form1/SuccessSubmitForm1.vue";
-import ErrorSubmitForm1 from "./Form1/ErrorSubmitForm1.vue";
+import CancelSubmitForm7 from "./Form7/CancelSubmitForm7.vue";
+import SuccessSubmitForm7 from "./Form7/SuccessSubmitForm7.vue";
+import ErrorSubmitForm7 from "./Form7/ErrorSubmitForm7.vue";
 
 import CancelSubmitForm8 from "./Form8/CancelSubmitForm8.vue";
 import SuccessSubmitForm8 from "./Form8/SuccessSubmitForm8.vue";
@@ -115,6 +124,9 @@ import { packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
+        CancelSubmitForm1,
+        SuccessSubmitForm1,
+        ErrorSubmitForm1,
         CancelSubmitForm2,
         SuccessSubmitForm2,
         ErrorSubmitForm2,
@@ -130,9 +142,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm6,
         SuccessSubmitForm6,
         ErrorSubmitForm6,
-        CancelSubmitForm1,
-        SuccessSubmitForm1,
-        ErrorSubmitForm1,
+        CancelSubmitForm7,
+        SuccessSubmitForm7,
+        ErrorSubmitForm7,
         CancelSubmitForm8,
         SuccessSubmitForm8,
         ErrorSubmitForm8,
