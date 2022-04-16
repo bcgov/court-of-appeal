@@ -45,6 +45,7 @@ export interface form18DataInfoType {
     sendNotifications: boolean;
     serviceInformation: serviceInformationJsonDataType;
     selfRepresented?: boolean;    
+    filingParties: string[];
     completionDate?: string;
     version?: string;
 }

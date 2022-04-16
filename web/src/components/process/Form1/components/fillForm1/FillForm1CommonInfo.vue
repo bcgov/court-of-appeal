@@ -26,6 +26,27 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
+                    Are you amending a Notice of Appeal that has been filed?                                
+                </b-col>
+                <b-col>
+                    <b-form-radio-group                
+                        v-model="commonInfo.amending"
+                        :state="form1InfoStates.amending"
+                        @change="update"
+                        :options="responseOptions"
+                        style="font-size: 1rem; font-weight:400;"                    
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(form1InfoStates.amending != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether you are amending a Notice of Appeal that has been filed.
+                    </span>                   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     What type of proceeding are you appealing from?                                
                 </b-col>
                 <b-col>
