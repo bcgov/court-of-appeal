@@ -1,3 +1,4 @@
+import { partiesContact } from "..";
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
 export interface form3FormsJsonDataType {
@@ -61,6 +62,7 @@ export interface form3DataInfoType {
     appellantNames: string;
     respondentNames: string;
     crossAppealRequired: boolean;
+    amending: boolean;
     judgeName: string;
     orderDate: string;        
     authorizedName: string;
@@ -69,9 +71,12 @@ export interface form3DataInfoType {
     seekingOrder?:string;
     partOfOrderLeaveCrossAppealed?: string;
     groundsLeaveCrossAppeal?: string;    
-    phoneNumbers: string;
-    emailAdresses: string;
-    addresses: string;   
+    phoneNumbers: partiesContact[];
+    emailAdresses: partiesContact[];
+    addresses: partiesContact[]; 
+    phones: string;
+    emails: string;
+    contactAddress: string;   
     completionDate?: string;
     version?: string;
 }
