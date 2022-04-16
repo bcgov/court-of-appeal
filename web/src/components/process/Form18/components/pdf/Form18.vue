@@ -1,16 +1,7 @@
 <template>
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
-        <b-row>
-            <!-- <b-col cols="2" class="ml-3">
-                <b-button 
-                    style="float: right;" 
-                    variant="primary"
-                    @click="onPrintSave()"
-                    >
-                    Print-Save
-                </b-button>
-            </b-col> -->
+        <b-row>           
 
             <b-col cols="10">
                 <b-button
