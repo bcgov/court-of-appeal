@@ -104,7 +104,7 @@
             <div class="arrow-right-flash-62"></div><!-- < width ~ 8% > -->
                     
             <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
-                <div class="ml-2">{{result.addresses}}</div>
+                <div class="ml-2" v-html="result.contactAddress"></div>
             </div>                       
 
         </div>         
@@ -123,7 +123,7 @@
             <div class="arrow-right-flash-36"></div><!-- < width ~ 8% > -->
                     
             <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
-                <div class="ml-2">{{result.phoneNumbers}}</div>
+                <div class="ml-2" v-html="result.phones"></div>
             </div> 
         </div> 
 
@@ -144,7 +144,7 @@
             <div class="arrow-right-flash-62"></div><!-- < width ~ 8% > -->
                     
             <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
-                <div class="ml-2">{{result.emailAdresses}}</div>
+                <div class="ml-2" v-html="result.emails"></div>
             </div>                      
 
         </div> 

@@ -55,7 +55,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { GetForm3PdfType } from "./components/Form3PdfType"
+import { GetForm3PdfType } from "./components/Form3PdfType";
 
 import { namespace } from "vuex-class";
 import "@/store/modules/forms/form3";

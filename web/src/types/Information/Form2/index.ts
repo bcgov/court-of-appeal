@@ -1,3 +1,4 @@
+import { partiesContact } from "..";
 import { applicantJsonDataType, respondentsJsonDataType, serviceInformationJsonDataType } from "../json"
 
 
@@ -23,9 +24,12 @@ export interface form2DataInfoType {
     firstAppellant: string;
     firstRespondent: string;
     filingParties: string[];
-    phoneNumbers: string;
-    emailAdresses: string;
-    addresses: string; 
+    phoneNumbers: partiesContact[];
+    emailAdresses: partiesContact[];
+    addresses: partiesContact[]; 
+    phones: string;
+    emails: string;
+    contactAddress: string;
     authorizedName: string;
     completionDate?: string;   
     version?: string;

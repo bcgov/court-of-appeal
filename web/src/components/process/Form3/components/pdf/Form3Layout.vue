@@ -354,7 +354,7 @@
             <div class="arrow-right-flash-66"></div>
                     
             <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
-                <div class="ml-2">{{result.addresses}}</div>                       
+                <div class="ml-2" v-html="result.contactAddress"></div>                       
             </div> 
         </div>
 
@@ -368,7 +368,7 @@
             <div class="arrow-right-flash-36"></div>
                     
             <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
-                <div class="ml-2">{{result.phoneNumbers}}</div>                       
+                <div class="ml-2" v-html="result.phones"></div>                       
             </div> 
         </div>
 
@@ -387,7 +387,7 @@
             <div class="arrow-right-flash-54"></div>
                     
             <div class="coa-text-box-left" style="width:63.5%; font-weight: 700;">
-                <div class="ml-2">{{result.emailAdresses}}</div>                       
+                <div class="ml-2" v-html="result.emails"></div>                       
             </div> 
         </div>               
         
