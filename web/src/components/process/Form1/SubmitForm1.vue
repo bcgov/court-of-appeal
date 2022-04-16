@@ -58,10 +58,11 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import { GetForm1PdfType } from "./components/Form1PdfType";
 import Form1ProcessHeader from "@/components/process/Form1/components/Form1ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 import { packageInfoType } from '@/types/Information';
-import { form1StatusInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, form1StatusInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
@@ -73,6 +74,9 @@ export default class SubmitForm1 extends Vue {
 
     @form1State.State
     public currentNoticeOfAppealId: string;
+
+    @form1State.State
+    public form1Info: form1DataInfoType;
 
     stepsCompleted = {} as form1StatusInfoType;  
     mountedData = false; 
@@ -107,7 +111,11 @@ export default class SubmitForm1 extends Vue {
             }
         }
 
-        this.$http.post(url, header)
+        const body = {
+            document_type: GetForm1PdfType(this.form1Info) 
+        }
+
+        this.$http.post(url, body, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

@@ -61,3 +61,8 @@ export interface journeyStepType {
     crossAppeal?: boolean;
     factumAndAppealBook?: boolean;    
 }
+
+export interface partiesContact {
+    name: string;
+    contactInfo: string;
+}

@@ -274,7 +274,6 @@ export default class TableForm9 extends Vue {
    
 
     mounted() {
-        console.log('form 9s')
         this.extractDocuments();       
     }
 

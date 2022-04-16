@@ -57,59 +57,88 @@
                 </b-col>
                 <b-col >   
 
-                    <b-form-checkbox-group                
+                    <b-form-checkbox-group
                         style="width:100%" 
-                        :state="state.filingParties"                                        
+                        :state="state.filingParties"   
+                        @change="updateAddressFields"                                     
                         v-model="form2Info.filingParties"                    
                         :options="partyNames">
                     </b-form-checkbox-group>
-
                                      
                 </b-col>
             </b-row>
 
-            <b-row class="mt-5">
+            <b-row v-if="form2Info.filingParties.length > 0" :key="updated" class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Phone number(s) of the party(ies) filing the Notice of Appearance                                
                 </b-col>
-                <b-col>                    
-                    <b-form-textarea                
-                        style="width:100%"  
-                        :state="state.phoneNumbers"                                                          
-                        v-model="form2Info.phoneNumbers">
-                    </b-form-textarea>                    
+                <b-col>
+                    <div 
+                        v-for="(phone,index) in form2Info.phoneNumbers" 
+                        :key="'phone' + index"                        
+                        :value="phone"> {{form2Info.phoneNumbers[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form2Info.phoneNumbers[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>
+                    <span
+                        v-if="(state.phoneNumbers != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
+                    </span>
                 </b-col>                
             </b-row>
-            <b-row class="mt-4">
+
+            <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Name(s) and address(es) within BC for the service of the respondent(s)                                                    
                 </b-col>
-                <b-col>                   
-                    <b-form-textarea                
-                        style="width:100%" 
-                        rows="6" 
-                        :state="state.addresses"                                                           
-                        v-model="form2Info.addresses">
-                    </b-form-textarea>                    
+                <b-col>
+                    <div 
+                        v-for="(address,index) in form2Info.addresses" 
+                        :key="'address' +index"                       
+                        :value="address"> {{form2Info.addresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form2Info.addresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div> 
+                    <span
+                        v-if="(state.addresses != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the addresses of the party(ies) filing the Notice of Appearance.
+                    </span>             
                 </b-col>                
             </b-row>
-            <b-row class="mt-4">
+
+            <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 2" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Email(s) address(es) for service of respondent(s)                                
                 </b-col>
-                <b-col>                   
-                    <b-form-textarea                
-                        style="width:100%"                                                            
-                        v-model="form2Info.emailAdresses">
-                    </b-form-textarea>                    
+                <b-col>
+                    <div 
+                        v-for="(email,index) in form2Info.emailAdresses" 
+                        :key="'email' + index"                       
+                        :value="email"> {{form2Info.emailAdresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form2Info.emailAdresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>                                    
                 </b-col>                
             </b-row>
 
             <b-row class="my-3" style="padding: 0;">
                 <b-col 
                     cols="6" 
-                    style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
-                                
+                    style="font-weight: 700;">
+                    Name of lawyer or party authorizing filing of this Form:
                 </b-col>
                 <b-col>
                     <b-form-input                    
@@ -160,6 +189,7 @@ const form2State = namespace("Form2");
 
 import { form2DataInfoType } from '@/types/Information/Form2';
 import { partiesDataJsonDataType } from '@/types/Information/json';
+import { partiesContact } from '@/types/Information';
 
 @Component
 export default class Form2StyleOfProceeding extends Vue {
@@ -186,6 +216,7 @@ export default class Form2StyleOfProceeding extends Vue {
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     partyNames: string[] = [];
+    updated=0;
 
     state = {
         firstAppellant: null,
@@ -240,6 +271,9 @@ export default class Form2StyleOfProceeding extends Vue {
             form2Data.formSevenNumber = this.fileNumber;            
             form2Data.version = this.$store.state.Application.version;
             form2Data.filingParties = [];
+            form2Data.addresses = [];
+            form2Data.emailAdresses = [];
+            form2Data.phoneNumbers = [];
             this.UpdateForm2Info(form2Data);           
             this.saveForm(true);
             
@@ -264,25 +298,127 @@ export default class Form2StyleOfProceeding extends Vue {
         this.dataReady = true;
     }  
 
+    public updateAddressFields(){
+
+        const formData = this.form2Info;
+        const addressData = formData.addresses;
+        const addresses: partiesContact[] = []; 
+        const emailData = formData.emailAdresses;
+        const emails: partiesContact[] = []; 
+        const phoneData = formData.phoneNumbers;
+        const phoneNumbers: partiesContact[] = []; 
+
+        for (const partyName of this.form2Info.filingParties){
+           
+            const matchingAddressRecords = addressData.filter(address => address.name == partyName);
+
+            if (matchingAddressRecords.length == 0){
+                addresses.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = addressData.findIndex(address => address.name == matchingAddressRecords[0].name);               
+                addresses.push(addressData[index]);
+            }
+
+            const matchingPhoneRecords = phoneData.filter(phone => phone.name == partyName); 
+            
+            if (matchingPhoneRecords.length == 0){
+                phoneNumbers.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = phoneData.findIndex(phone => phone.name == matchingPhoneRecords[0].name);               
+                phoneNumbers.push(phoneData[index]);
+            }
+
+            const matchingEmailRecords = emailData.filter(email => email.name == partyName); 
+            
+            if (matchingEmailRecords.length == 0){
+                emails.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = emailData.findIndex(email => email.name == matchingEmailRecords[0].name);               
+                emails.push(emailData[index]);
+            }
+        }
+
+        formData.addresses = addresses;
+        formData.emailAdresses = emails;
+        formData.phoneNumbers = phoneNumbers;
+        this.UpdateForm2Info(formData)
+
+        this.updated ++;               
+    }
+
     public checkStates(){ 
         this.state.firstAppellant = !this.form2Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form2Info.firstRespondent? false : null;
-         this.state.filingParties = (this.form2Info.filingParties.length == 0)? false : null; 
-        this.state.phoneNumbers = !this.form2Info.phoneNumbers? false : null;
-        this.state.addresses = !this.form2Info.addresses? false : null;           
+        this.state.filingParties = (this.form2Info.filingParties.length == 0)? false : null; 
+        this.state.phoneNumbers = !(this.form2Info.phoneNumbers && this.verifyPhoneNumbers()
+                                    && this.form2Info.phoneNumbers.length == this.form2Info.filingParties.length)? false : null;
+        this.state.addresses = !(this.form2Info.addresses && this.verifyAddresses()
+                                    && this.form2Info.addresses.length == this.form2Info.filingParties.length)? false : null;       
+                                    
         this.state.authorizedName = !this.form2Info.authorizedName? false : null; 
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
-                return false
+                return false;
         }
-        return true            
-    }    
+        return true;            
+    } 
+    
+    public verifyPhoneNumbers(){
+        for(const phoneNumber of this.form2Info.phoneNumbers){            
+            if(phoneNumber.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public verifyAddresses(){
+        for(const address of this.form2Info.addresses){            
+            if(address.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public extractAddresses(){
+        const addresses = [];
+        for(const contactAddress of this.form2Info.addresses){            
+            if(contactAddress.contactInfo.trim().length != 0){
+                addresses.push(contactAddress.name + ': ' + contactAddress.contactInfo.trim());
+            }  
+        }
+        return addresses.join('<br>');        
+    }
+
+    public extractPhoneNumbers(){
+        const phoneNumbers = [];
+        for(const phone of this.form2Info.phoneNumbers){            
+            if(phone.contactInfo.trim().length != 0){
+                phoneNumbers.push(phone.name + ': ' + phone.contactInfo.trim());
+            }  
+        }
+        return phoneNumbers.join('<br>');        
+    }
+
+    public extractEmails(){
+        const emails = [];
+        for(const email of this.form2Info.emailAdresses){            
+            if(email.contactInfo.trim().length != 0){
+                emails.push(email.name + ': ' + email.contactInfo.trim());
+            }  
+        }
+        return emails.join('<br>');        
+    }
 
     public saveForm(draft: boolean) { 
         
         const url = this.currentCaseId? ('/case/'+this.currentCaseId+'/') : '/case/';
-        const method = this.currentCaseId? "put" : "post"
+        const method = this.currentCaseId? "put" : "post";
+        const form2Data = this.form2Info;
+        form2Data.contactAddress = this.extractAddresses();
+        form2Data.emails = this.extractEmails();
+        form2Data.phones = this.extractPhoneNumbers();
+        this.UpdateForm2Info(form2Data);
         const body = {
             type: "form-2",
             status:"Draft",
