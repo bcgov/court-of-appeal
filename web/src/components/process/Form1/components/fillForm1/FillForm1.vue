@@ -227,6 +227,7 @@ export default class FillForm1 extends Vue {
         const includesIdentifier = durationValue?.includes('day') || durationValue?.includes('hour')
         this.fieldStates.appearanceDays = !(this.form1Info.trialDurationDays && includesIdentifier)? false : null;
         this.fieldStates.applyLeave = !(this.form1Info.applyLeave != null)? false : null;
+        this.fieldStates.amending = !(this.form1Info.amending != null)? false : null;        
         this.fieldStates.respondents = !(this.form1Info.respondents && this.form1Info.respondents.length > 0 )? false : null;
         this.fieldStates.appellants = !(this.form1Info.appellants && this.form1Info.appellants.length > 0 )? false : null;
         this.fieldStates.appealFrom = !this.form1Info.appealFrom? false : null;

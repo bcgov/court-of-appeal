@@ -200,7 +200,20 @@
                     :isCreateParty="true" 
                     v-on:submit="modifyRespondentList" 
                     v-on:cancel="closeRespondentForm" />                
-            </b-card>           
+            </b-card>  
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    What is the court of appeal Number?
+                </b-col>
+                <b-col>
+                    <b-form-input                
+                        style="width:100%"                        
+                        :state="state.formSevenNumber"                                                           
+                        v-model="form3Info.formSevenNumber">
+                    </b-form-input>
+                </b-col>
+            </b-row>         
         </b-card>
 
         <div 
@@ -217,9 +230,9 @@
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>  
 
-            <b-row class="mt-4">
-                <b-col>
-                    <p style="font-weight: 700;">Is Leave to Cross Appeal Required?</p>
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    <p>Is Leave to Cross Appeal Required?</p>
                     <p style="font-size: 0.75rem;">
                         (Court of Appeal Rule 12 explains when you need leave to cross appeal, if unsure check "yes")
                     </p>
@@ -234,9 +247,23 @@
                 </b-col>
             </b-row>    
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col
-                    style="font-weight: 700;">Who made the Order?
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Are you amending a Notice of Cross Appeal that has been filed?
+                </b-col>
+                <b-col class="ml-1">
+                    <b-form-radio-group                
+                        style="width:100%" 
+                        :state="state.amending"                                         
+                        v-model="form3Info.amending"
+                        :options="yesNoOptions">
+                    </b-form-radio-group>
+                </b-col>
+            </b-row>  
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Who made the Order?
                 </b-col>
                 <b-col>
                     <b-form-input                
@@ -250,9 +277,9 @@
                 </b-col>
             </b-row>  
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col
-                    style="font-weight: 700;">Date the order under appeal was pronounced:
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Date the order under appeal was pronounced:
                 </b-col>
                 <b-col>                   
                     <b-card 
@@ -279,10 +306,10 @@
 
             <div v-if="form3Info.crossAppealRequired">
 
-                <b-row class="mt-5">
-                    <b-col cols="6" style="font-weight: 700;">
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
                         Part of the Order being cross appealed 
-                        <p style="font-size: 0.75rem; font-weight: 400;">
+                        <p class="content text-primary">
                             NOTE: If you are only seeking leave to cross appeal one part of an order, 
                             enter the part that you are seeking leave to cross appeal.
                         </p>                               
@@ -296,8 +323,8 @@
                         </b-form-textarea>                    
                     </b-col>                
                 </b-row>
-                <b-row class="mt-4">
-                    <b-col cols="6" style="font-weight: 700;">
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
                         Enter the grounds for leave to cross appeal                                                    
                     </b-col>
                     <b-col>                   
@@ -313,8 +340,8 @@
             </div> 
             <div v-else>
 
-                <b-row class="mt-5">
-                    <b-col style="font-weight: 700;">
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
                         Part of the Order being cross appealed                                
                     </b-col>
                     <b-col>                    
@@ -326,8 +353,8 @@
                         </b-form-textarea>                    
                     </b-col>                
                 </b-row>
-                <b-row class="mt-4">
-                    <b-col style="font-weight: 700;">
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
                         Order you are seeking on cross appeal                                                    
                     </b-col>
                     <b-col>                   
@@ -342,13 +369,14 @@
 
             </div> 
 
-            <b-row class="mt-5">
-                <b-col style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Name of the Party(ies) who wish to cross appeal the order under appeal:                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group                
                         style="width:100%" 
+                        @change="updateAddressFields"
                         :state="state.crossAppealingParties"                                      
                         v-model="form3Info.crossAppealingParties"                    
                         :options="partyNames">
@@ -356,8 +384,8 @@
                 </b-col>
             </b-row> 
          
-            <b-row class="mt-5" v-if="!form3Info.appealTribunal">
-                <b-col style="font-weight: 700;">
+            <b-row class="mt-5 question" v-if="!form3Info.appealTribunal">
+                <b-col cols="7" class="labels">
                     Are you self-represented?                                
                 </b-col>
                 <b-col class="ml-1">   
@@ -376,54 +404,78 @@
 
         <div v-if="partyDataExists">    
 
-            <b-row class="mt-4">
-                <b-col style="font-weight: 700;">
-                    Name(s) and address(es) within BC for service of the party(ies) filing cross appeal    
-                    <p style="font-size: 0.75rem; font-weight: 400;">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated + 1" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.    
+                    <p class="content text-primary">
                         NOTE: If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
                     </p>                                                
                 </b-col>
-                <b-col>                   
-                    <b-form-textarea                
-                        style="width:100%" 
-                        rows="6" 
-                        :state="state.addresses"                                                           
-                        v-model="form3Info.addresses">
-                    </b-form-textarea>                    
+                <b-col>  
+                    <div 
+                        v-for="(address,index) in form3Info.addresses" 
+                        :key="'address' +index"                       
+                        :value="address"> {{form3Info.addresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form3Info.addresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div> 
+                    <span
+                        v-if="(state.addresses != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the addresses of the party(ies) filing cross appeal.
+                    </span>                  
                 </b-col>                
             </b-row>
           
-            <b-row class="mt-5">
-                <b-col style="font-weight: 700;">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated" class="mt-5 question">
+                <b-col cols="7" class="labels">
                     Phone number(s) of party(ies) filing cross appeal                                
                 </b-col>
                 <b-col>                    
-                    <b-form-textarea                
-                        style="width:100%"  
-                        :state="state.phoneNumbers"                                                          
-                        v-model="form3Info.phoneNumbers">
-                    </b-form-textarea>                    
+                    <div 
+                        v-for="(phone,index) in form3Info.phoneNumbers" 
+                        :key="'phone' + index"                        
+                        :value="phone"> {{form3Info.phoneNumbers[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form3Info.phoneNumbers[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>
+                    <span
+                        v-if="(state.phoneNumbers != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the phone numbers of the party(ies) filing the Cross Appeal.
+                    </span>                    
                 </b-col>                
             </b-row>
             
-            <b-row class="mt-4">
-                <b-col style="font-weight: 700;">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated + 2" class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Email address(es) for party(ies) providing service for cross appeal                                
                 </b-col>
                 <b-col>                   
-                    <b-form-textarea                
-                        style="width:100%"                                                            
-                        v-model="form3Info.emailAdresses"
-                        :state ="state.emailAdresses">
-                    </b-form-textarea>                    
+                    <div 
+                        v-for="(email,index) in form3Info.emailAdresses" 
+                        :key="'email' + index"                       
+                        :value="email"> {{form3Info.emailAdresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form3Info.emailAdresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>                  
                 </b-col>                
             </b-row>              
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
-                                
+            <b-row class="my-3 question" style="padding: 0;">
+                <b-col cols="7" class="labels">
+                    Name of lawyer or party authorizing filing of this Form:                                
                 </b-col>
                 <b-col>
                     <b-form-input                    
@@ -477,6 +529,7 @@ const form3State = namespace("Form3");
 import { form3DataInfoType, partyInfoType } from '@/types/Information/Form3';
 import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import AddPartyForm from './AddPartyForm.vue';
+import { partiesContact } from '@/types/Information';
 
 @Component({
     components:{        
@@ -508,6 +561,7 @@ export default class Form3StyleOfProceeding extends Vue {
     
     dataReady = false;
     updated=0; 
+  
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
     latestEditRespondentData;
@@ -549,22 +603,23 @@ export default class Form3StyleOfProceeding extends Vue {
     state = { 
         appellants: null,
         respondents: null,
+        formSevenNumber: null,
         orderDate: null,
         judgeName: null,
         crossAppealRequired:null,
+        amending: null,
         crossAppealingParties:null,
         partOfOrderCrossAppealed:null,
         seekingOrder:null,
         partOfOrderLeaveCrossAppealed:null,
         groundsLeaveCrossAppeal:null,       
-        phoneNumbers:null,
-        emailAdresses:null,
+        phoneNumbers:null,        
         addresses:null,               
         authorizedName:null
     }
 
     mounted() {
-        this.dataReady = false;
+        this.dataReady = false;        
         this.extractInfo();              
     }
 
@@ -594,6 +649,10 @@ export default class Form3StyleOfProceeding extends Vue {
             form3Data.version = this.$store.state.Application.version;
             form3Data.tribunalRespondents = [];
             form3Data.tribunalAppellants = [];
+            form3Data.crossAppealingParties = [];
+            form3Data.addresses = [];
+            form3Data.emailAdresses = [];
+            form3Data.phoneNumbers = [];
 
             if (this.form3Info?.appealTribunal){
                 
@@ -664,6 +723,54 @@ export default class Form3StyleOfProceeding extends Vue {
         return partyNames;
     }  
 
+    public updateAddressFields(){
+
+        const formData = this.form3Info;
+        const addressData = formData.addresses;
+        const addresses: partiesContact[] = []; 
+        const emailData = formData.emailAdresses;
+        const emails: partiesContact[] = []; 
+        const phoneData = formData.phoneNumbers;
+        const phoneNumbers: partiesContact[] = []; 
+
+        for (const partyName of this.form3Info.crossAppealingParties){
+           
+            const matchingAddressRecords = addressData.filter(address => address.name == partyName);
+
+            if (matchingAddressRecords.length == 0){
+                addresses.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = addressData.findIndex(address => address.name == matchingAddressRecords[0].name);               
+                addresses.push(addressData[index]);
+            }
+
+            const matchingPhoneRecords = phoneData.filter(phone => phone.name == partyName); 
+            
+            if (matchingPhoneRecords.length == 0){
+                phoneNumbers.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = phoneData.findIndex(phone => phone.name == matchingPhoneRecords[0].name);               
+                phoneNumbers.push(phoneData[index]);
+            }
+
+            const matchingEmailRecords = emailData.filter(email => email.name == partyName); 
+            
+            if (matchingEmailRecords.length == 0){
+                emails.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = emailData.findIndex(email => email.name == matchingEmailRecords[0].name);               
+                emails.push(emailData[index]);
+            }
+        }
+
+        formData.addresses = addresses;
+        formData.emailAdresses = emails;
+        formData.phoneNumbers = phoneNumbers;
+        this.UpdateForm3Info(formData)
+
+        this.updated ++;               
+    }
+
     public getForm3Data() {        
        
         this.$http.get('/form3/forms/'+this.currentNoticeOfCrossAppealId)
@@ -683,16 +790,17 @@ export default class Form3StyleOfProceeding extends Vue {
         this.state = {
             appellants: null,
             respondents: null,
+            formSevenNumber: null,
             orderDate: null,
             judgeName: null,
             crossAppealRequired:null,
+            amending: null,
             crossAppealingParties:null,
             partOfOrderCrossAppealed:null,
             seekingOrder:null,
             partOfOrderLeaveCrossAppealed:null,
             groundsLeaveCrossAppeal:null,       
             phoneNumbers:null,
-            emailAdresses:null,
             addresses:null,               
             authorizedName:null
         }
@@ -709,17 +817,21 @@ export default class Form3StyleOfProceeding extends Vue {
             this.state.respondents = null;
         }
 
+        this.state.formSevenNumber = this.form3Info.formSevenNumber?.trim().length>0? null:false;
         this.state.orderDate = this.form3Info.orderDate != null? null:false;
         this.state.judgeName = this.form3Info.judgeName != null? null:false;        
         this.state.crossAppealRequired = this.form3Info.crossAppealRequired != null? null:false;
+        this.state.amending = this.form3Info.amending != null? null:false;
         this.state.crossAppealingParties = this.form3Info.crossAppealingParties?.length>0? null :false;
         this.state.partOfOrderLeaveCrossAppealed = (this.form3Info.crossAppealRequired && !this.form3Info.partOfOrderLeaveCrossAppealed)? false: null;
         this.state.groundsLeaveCrossAppeal = (this.form3Info.crossAppealRequired && !this.form3Info.groundsLeaveCrossAppeal)? false: null;
         this.state.partOfOrderCrossAppealed = (!this.form3Info.crossAppealRequired && !this.form3Info.partOfOrderCrossAppealed)? false: null;
         this.state.seekingOrder = (!this.form3Info.crossAppealRequired && !this.form3Info.seekingOrder)? false: null;
-        this.state.phoneNumbers = this.form3Info.phoneNumbers? null :false;
-        this.state.emailAdresses = this.form3Info.emailAdresses? null :false;
-        this.state.addresses = this.form3Info.addresses? null :false;       
+        this.state.phoneNumbers = !(this.form3Info.phoneNumbers && this.verifyPhoneNumbers()
+                                    && this.form3Info.phoneNumbers.length == this.form3Info.crossAppealingParties.length)? false : null;
+        this.state.addresses = !(this.form3Info.addresses && this.verifyAddresses()
+                                    && this.form3Info.addresses.length == this.form3Info.crossAppealingParties.length)? false : null;       
+                
         this.state.authorizedName = !this.form3Info.authorizedName? false : null;       
 
         for(const field of Object.keys(this.state)){
@@ -727,7 +839,54 @@ export default class Form3StyleOfProceeding extends Vue {
                 return false
         }
         return true            
-    }    
+    }   
+    
+    public verifyPhoneNumbers(){
+        for(const phoneNumber of this.form3Info.phoneNumbers){            
+            if(phoneNumber.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public verifyAddresses(){
+        for(const address of this.form3Info.addresses){            
+            if(address.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public extractAddresses(){
+        const addresses = [];
+        for(const contactAddress of this.form3Info.addresses){            
+            if(contactAddress.contactInfo.trim().length != 0){
+                addresses.push(contactAddress.name + ': ' + contactAddress.contactInfo.trim());
+            }  
+        }
+        return addresses.join('<br>');        
+    }
+
+    public extractPhoneNumbers(){
+        const phoneNumbers = [];
+        for(const phone of this.form3Info.phoneNumbers){            
+            if(phone.contactInfo.trim().length != 0){
+                phoneNumbers.push(phone.name + ': ' + phone.contactInfo.trim());
+            }  
+        }
+        return phoneNumbers.join('<br>');        
+    }
+
+    public extractEmails(){
+        const emails = [];
+        for(const email of this.form3Info.emailAdresses){            
+            if(email.contactInfo.trim().length != 0){
+                emails.push(email.name + ': ' + email.contactInfo.trim());
+            }  
+        }
+        return emails.join('<br>');        
+    }
+
 
     public saveForm(draft: boolean) { 
         
@@ -737,6 +896,12 @@ export default class Form3StyleOfProceeding extends Vue {
         if (this.currentNoticeOfCrossAppealId){
             method = 'put';
             url = '/form3/forms/'+this.currentNoticeOfCrossAppealId;
+            const form3Data = this.form3Info;
+            form3Data.contactAddress = this.extractAddresses();
+            form3Data.emails = this.extractEmails();
+            form3Data.phones = this.extractPhoneNumbers();
+            this.UpdateForm3Info(form3Data);
+
             if (!draft && !this.checkStates()){               
                 return                
             } 
@@ -967,6 +1132,20 @@ export default class Form3StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+    }
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 0.75rem !important;
     }
 
 </style>

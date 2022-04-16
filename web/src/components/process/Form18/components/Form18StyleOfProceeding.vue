@@ -68,8 +68,7 @@
                     Specify whether you are changing representation.
                 </span>                     
             </b-col>
-        </b-row>            
-        
+        </b-row> 
 
         <div v-if="form18Info.changeRepresentation">
 
@@ -142,6 +141,23 @@
             </b-row>
 
         </div> 
+
+        <b-row class="mt-4">
+            <b-col cols="6" style="font-weight: 700;">
+                Name of party(ies) filing this form:                                
+            </b-col>
+            <b-col >   
+
+                <b-form-checkbox-group                
+                    style="width:100%" 
+                    :state="state.filingParties"                                        
+                    v-model="form18Info.filingParties"                    
+                    :options="partyNames">
+                </b-form-checkbox-group>
+
+                                    
+            </b-col>
+        </b-row> 
 
         <b-row class="mt-5" v-if="form18Info.changeRepresentation != null && !form18Info.changeRepresentation">
             <b-col cols="6" style="font-weight: 700;">
@@ -468,6 +484,7 @@ export default class Form18StyleOfProceeding extends Vue {
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
+    partyNames: string[] = [];
     
     changeRepresentationOptions = [
         {text: 'Yes', value: true},
@@ -494,7 +511,7 @@ export default class Form18StyleOfProceeding extends Vue {
         counselLastName:null,
         firmName:null,
         firmPhone:null,
-                     
+        filingParties:null,            
         authorizedName:null,
         selfRepresented:null
     }
@@ -524,7 +541,7 @@ export default class Form18StyleOfProceeding extends Vue {
             form18Data.serviceInformation = {} as serviceInformationJsonDataType;
             form18Data.serviceInformation.province = "British Columbia";
             form18Data.serviceInformation.country = "Canada";
-                        
+            form18Data.filingParties = [];           
             form18Data.version = this.$store.state.Application.version;
             form18Data.useServiceEmail = false
             form18Data.sendNotifications = false           
@@ -540,10 +557,12 @@ export default class Form18StyleOfProceeding extends Vue {
 
         for (const respondent of this.form18Info.respondents){
             this.respondentNames.push(respondent.name);
+            this.partyNames.push(respondent.name)
         }
 
         for (const applicant of this.form18Info.appellants){
-            this.applicantNames.push(applicant.name);           
+            this.applicantNames.push(applicant.name); 
+            this.partyNames.push(applicant.name);          
         }
         this.dataReady = true;
 
@@ -616,7 +635,7 @@ export default class Form18StyleOfProceeding extends Vue {
             counselLastName:null,
             firmName:null,
             firmPhone:null,
-                        
+            filingParties:null,           
             authorizedName:null,
             selfRepresented: null
         }
@@ -666,6 +685,7 @@ export default class Form18StyleOfProceeding extends Vue {
 
         const postalCode = this.form18Info.serviceInformation.postalCode?.trim()
         this.state.postalCode = !postcodeFormat.test(postalCode)? false : null;        
+        this.state.filingParties = (this.form18Info.filingParties.length == 0)? false : null; 
            
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
         this.state.selfRepresented = selfRep==null && !changeRep? false :null

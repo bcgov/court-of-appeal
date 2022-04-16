@@ -56,6 +56,7 @@ export interface form1DataInfoType {
     tribunalDateOfOrder: string;
     tribunalOriginalDecisionMaker?: string;
     applyLeave: boolean;
+    amending: boolean;
     parties: form1PartiesInfoType[];
     manualSop?: manualSopInfoType[];
     readOnlyUsers: number[];
@@ -111,6 +112,7 @@ export interface form1StatesInfoType {
     tribunalOriginalDecisionMaker: null | boolean;
     cityOfOrder: null | boolean;
     applyLeave: null | boolean;
+    amending: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;
