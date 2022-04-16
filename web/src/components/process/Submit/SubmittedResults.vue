@@ -39,7 +39,7 @@
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'NAA'">
+    <div v-else-if="(formType == 'NAA')||(formType == 'NAAM')">
         <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-1 v-else-if="result=='cancel'"/>
         <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
