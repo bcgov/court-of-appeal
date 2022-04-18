@@ -16,7 +16,7 @@
             <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
                    
-                    <b-icon-question-circle-fill 
+                    <!-- <b-icon-question-circle-fill 
                         class="text-primary"
                         v-b-tooltip.hover.noninteractive
                         scale="1.1"
@@ -26,13 +26,13 @@
                         :state="state.firstAppellant"                   
                         v-model="form12Info.firstAppellant"                    
                         :options="applicantNames">
-                    </b-form-select>
+                    </b-form-select> -->
                     
                 </b-col>
 
                 <b-col cols="6" style="font-weight: 700;">First Respondent:
                    
-                    <b-icon-question-circle-fill 
+                    <!-- <b-icon-question-circle-fill 
                         class="text-primary"
                         v-b-tooltip.hover.noninteractive
                         scale="1.1"
@@ -42,14 +42,14 @@
                         :state="state.firstRespondent"                   
                         v-model="form12Info.firstRespondent"                    
                         :options="respondentNames">
-                    </b-form-select>
+                    </b-form-select> -->
                     
                 </b-col>
             </b-row>
 
             <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
 
-            <b-form-group
+            <!-- <b-form-group
                 class="mx-3" 
                 label-cols-sm="3"
                 content-cols-sm="3"
@@ -62,10 +62,10 @@
                     :options="representationOptions"                
                 ></b-form-radio-group>
             
-            </b-form-group>
+            </b-form-group> -->
         </div>
 
-        <div v-if="form12Info.selfRepresented !=null">
+        <div v-if="form12Info !=null">
 
             <b-row>
                 <b-col cols="3" style="font-weight: 700;">
@@ -90,7 +90,7 @@
 
         <div v-if="form12Info.filingParties && form12Info.filingParties.length > 0">
 
-            <b-row class="mt-4">
+            <!-- <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
                     This party is abandoning a:                                
                 </b-col>
@@ -104,7 +104,7 @@
                     </b-form-radio-group>
                     
                 </b-col>
-            </b-row>
+            </b-row> -->
 
             <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
@@ -135,7 +135,7 @@
                 </b-col>
             </b-row>  
 
-            <b-row class="my-3" style="padding: 0;">
+            <!-- <b-row class="my-3" style="padding: 0;">
                 <b-col 
                     cols="3" 
                     style="font-weight: 700;">Date the order under appeal was pronounced:
@@ -145,9 +145,9 @@
                         {{form12Info.orderDate | beautify-date-blank}}
                     </b-card>
                 </b-col>
-            </b-row>  
+            </b-row>   -->
 
-            <b-row class="my-3" style="padding: 0;">
+            <!-- <b-row class="my-3" style="padding: 0;">
                 <b-col 
                     cols="3" 
                     style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
@@ -157,9 +157,9 @@
                         {{form12Info.initiatingDocumentDate | beautify-date-blank}}
                     </b-card>
                 </b-col>
-            </b-row>       
+            </b-row>        -->
 
-            <b-row class="my-3" style="padding: 0;">
+            <!-- <b-row class="my-3" style="padding: 0;">
                 <b-col 
                     cols="3" 
                     style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
@@ -173,7 +173,7 @@
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
                 </b-col>
-            </b-row>
+            </b-row> -->
             
 
             <hr/>    
@@ -357,9 +357,9 @@ export default class Form12StyleOfProceeding extends Vue {
             data: body
         }       
             
-        if (this.currentOrderToVarySingleJusticeId && !draft && !this.checkStates()){               
-            return                
-        }             
+        // if (this.currentOrderToVarySingleJusticeId && !draft && !this.checkStates()){               
+        //     return                
+        // }             
         
         this.saveInfo(options, draft);              
        
@@ -367,19 +367,19 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public saveInfo(options, draft){
 
-        this.$http(options)
-            .then(response => {
-                if(response.data){
-                    if(options.method == "post"){
-                        this.UpdateCurrentOrderToVarySingleJusticeId(response.data.case_id);
+        // this.$http(options)
+        //     .then(response => {
+        //         if(response.data){
+        //             if(options.method == "post"){
+        //                 this.UpdateCurrentOrderToVarySingleJusticeId(response.data.case_id);
                         this.extractPartiesData();                       
-                    }
+        //             }
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-                }
-            }, err => {
-                const errMsg = err.response.data.error;                
-            })
+            //     }
+            // }, err => {
+            //     const errMsg = err.response.data.error;                
+            // })
     }   
 
     public updateOtherParties(){

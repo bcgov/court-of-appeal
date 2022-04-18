@@ -61,6 +61,9 @@ export default class Form12 extends Vue {
     @form12State.State
     public currentOrderToVarySingleJusticeId: string;
 
+    @form12State.State
+    public form12Info!: form12DataInfoType;
+
     @form12State.Action
     public UpdateForm12Info!: (newForm12Info: form12DataInfoType) => void
 
@@ -76,10 +79,9 @@ export default class Form12 extends Vue {
         const pdf_type = "FORM"
         const pdf_name = "form12-" + this.caseId;
         const el= document.getElementById("print");
-
       
-        const bottomLeftText = ``;
-        const bottomRightText = `" "`;        
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 66(3)(c)"`;
+        const bottomRightText = `"Form 12: Order from an application to vary the order of a justice"`;        
         const url = '/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
@@ -137,20 +139,22 @@ export default class Form12 extends Vue {
     }
  
     public getForm12Data() {        
+
+        this.result = this.form12Info;
        
-        this.$http.get('/form12/forms/'+this.currentOrderToVarySingleJusticeId+'/')
-        .then((response) => {
-            if(response?.data?.data){            
+        // this.$http.get('/form12/forms/'+this.currentOrderToVarySingleJusticeId+'/')
+        // .then((response) => {
+        //     if(response?.data?.data){            
                             
-                this.result = response.data.data
-                this.UpdateForm12Info(this.result)                         
+        //         this.result = response.data.data
+        //         this.UpdateForm12Info(this.result)                         
                 this.dataReady = true;
-                Vue.nextTick(()=> this.onPrint())
-            }
+        //         Vue.nextTick(()=> this.onPrint())
+        //     }
                 
-        },(err) => {
-            console.log(err)        
-        });      
+        // },(err) => {
+        //     console.log(err)        
+        // });      
     }
 }
 </script>

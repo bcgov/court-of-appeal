@@ -1,4 +1,5 @@
 import { form12DataInfoType, form12FormsJsonDataType } from '@/types/Information/Form12';
+import { previousCourtJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -9,6 +10,7 @@ class Form12 extends VuexModule {
     public form12FormsJson: form12FormsJsonDataType[] = [];
     public form12Info = {} as form12DataInfoType; 
     public currentOrderToVarySingleJusticeId = null; 
+    public currentOrder = {} as previousCourtJsonInfoType;
 
     @Mutation
     public setForm12FormsJson(form12FormsJson: form12FormsJsonDataType[]): void {   
@@ -36,6 +38,15 @@ class Form12 extends VuexModule {
     public UpdateCurrentOrderToVarySingleJusticeId(newCurrentOrderToVarySingleJusticeId: string): void {
         this.context.commit('setCurrentOrderToVarySingleJusticeId', newCurrentOrderToVarySingleJusticeId);
     }  
+
+    @Mutation
+    public setCurrentOrder(currentOrder: previousCourtJsonInfoType): void {   
+        this.currentOrder = currentOrder;
+    }    
+    @Action
+    public UpdateCurrentOrder(newCurrentOrder: previousCourtJsonInfoType): void {
+        this.context.commit('setCurrentOrder', newCurrentOrder);
+    }
     
 }
 
