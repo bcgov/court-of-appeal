@@ -20,6 +20,9 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -45,6 +48,7 @@ import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.
 
 import { caseJsonDataType } from '@/types/Information/json';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
+import { form4FormsJsonDataType } from '@/types/Information/Form4';
 import { form1DataInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
@@ -65,6 +69,9 @@ export default class MyDocuments extends Vue {
 
     @form3State.Action
     public UpdateForm3FormsJson!: (newForm3FormsJson: form3FormsJsonDataType[])=> void
+
+    @form4State.Action
+    public UpdateForm4FormsJson!: (newForm4FormsJson: form4FormsJsonDataType[])=> void
 
     @form5State.Action
     public UpdateForm5FormsJson!: (newForm5FormsJson: form5FormsJsonDataType[])=> void
@@ -106,7 +113,6 @@ export default class MyDocuments extends Vue {
         this.dataLoaded = false;
         const calls =[]
         calls.push(this.$http.get('/case/'));
-        
         calls.push(this.$http.get('/form5/forms'));
         calls.push(this.$http.get('/form6/forms'));          
         calls.push(this.$http.get('/form9/forms'));
@@ -115,6 +121,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form20/forms')); 
         calls.push(this.$http.get('/form1/forms'));       
         calls.push(this.$http.get('/form3/forms'));
+        calls.push(this.$http.get('/form4/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -129,6 +136,7 @@ export default class MyDocuments extends Vue {
             if(values[6]?.data) this.UpdateForm20FormsJson(values[6]?.data)
             if(values[7]?.data) this.UpdateForm1FormsJson(values[7]?.data)
             if(values[8]?.data) this.UpdateForm3FormsJson(values[8]?.data)
+            if(values[9]?.data) this.UpdateForm4FormsJson(values[9]?.data)
 
             this.dataLoaded = true;
         })

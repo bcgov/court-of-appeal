@@ -83,8 +83,8 @@ export default class AdditionalForms extends Vue {
         if (contentType == "Managing the Appeal Process"){
 
             this.windowTitle = "Managing the Appeal Process";
-            this.pathTypes = ["share", "share"];
-            this.pathHeights = ['14rem', '0'];
+            this.pathTypes = ["share", "share", "share"];
+            this.pathHeights = ['14rem', '0', '0'];
             this.managingAppealProcessContent = true;
         }
 

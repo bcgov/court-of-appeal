@@ -22,6 +22,9 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -52,6 +55,9 @@ export default class MenuBar extends Vue {
 	@form3State.Action
 	public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
 
+	@form4State.Action
+	public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
+
 	@form5State.Action
 	public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
 
@@ -81,6 +87,7 @@ export default class MenuBar extends Vue {
 		this.UpdateCurrentCaseId(null);
 		this.UpdateCurrentNoticeOfHearingOfAppealId(null);
 		this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+		this.UpdateCurrentNoticeOfApplicationId(null);
 		this.UpdateCurrentNoticeOfCrossAppealId(null);
 		this.UpdateCurrentNoticeOfAppealId(null);
 		this.UpdateCurrentRequisitionId(null);

@@ -97,6 +97,54 @@
             </ol>
         </b-row> 
 
+        <b-row :class="showForm9Info?'mt-5':'mt-3'" :style="showForm9Info?'padding-top: 0.8rem;':'padding-top: 1.3rem;'">            
+            <b-col cols="11" class="step-title-column pl-0">
+                I would like to submit a Notice of Application
+            </b-col>   
+            <b-col cols="1">
+                <b-button
+                    @click="showForm4(!showForm4Info)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showForm4Info"></expand-icon>
+                </b-button>
+            </b-col>         
+        </b-row>
+
+        <b-row v-if="showForm4Info" class="mt-4" >
+            If you wish to submit a notice of application:
+            <ol class="mt-3">
+                <li>
+                    Complete either the .DOC or .PDF below. Click on the document name for more information.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    Notice of Application
+                                    <!-- <a 
+                                        href=""
+                                        target="_blank">Requisition
+                                    </a> -->
+                                </b-col>                                
+                                <b-col cols="3" class="p-0" >
+                                    <b-button
+                                        @click="startNewForm4Document"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                    </b-button>
+                                </b-col>
+                            </b-row>
+                        </li>
+                    </ul>
+                </li>                
+                <li>
+                    File the document with the registry.
+                </li>
+                <li>
+                    Serve one copy of the notice hearing and each attached order to each respondent.
+                </li>
+            </ol>
+        </b-row> 
+
     </b-card>
 </template>
 
@@ -104,6 +152,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
 
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
@@ -118,15 +169,18 @@ const form9State = namespace("Form9");
 })
 export default class ManagingAppealProcessPg extends Vue {  
 
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
+
     @form6State.Action
     public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
-
     showForm6Info = true;  
-    showForm9Info = false;  
+    showForm9Info = false; 
+    showForm4Info = false; 
 
     public showForm6(show: boolean){
         if (show) {
@@ -148,6 +202,16 @@ export default class ManagingAppealProcessPg extends Vue {
         }
     }
 
+    public showForm4(show: boolean){
+        if (show) {
+            this.showForm4Info = true;
+            this.$emit('adjustHeights', 2, "14rem");
+        } else {
+            this.showForm4Info = false;
+            this.$emit('adjustHeights', 2, "0");
+        }
+    }
+
     public startNewForm6Document(){
         this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
         this.$router.push({name: "start-form6" })
@@ -156,6 +220,11 @@ export default class ManagingAppealProcessPg extends Vue {
     public startNewForm9Document(){
         this.UpdateCurrentRequisitionId(null);
         this.$router.push({name: "start-form9" })
+    }
+
+    public startNewForm4Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form4" })
     }
     
 }

@@ -92,6 +92,9 @@ const form2State = namespace("Form2");
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
@@ -115,6 +118,7 @@ const form20State = namespace("Form20");
 
 import { caseJsonDataType } from "@/types/Information/json";
 import { form3FormsJsonDataType } from "@/types/Information/Form3";
+import { form4FormsJsonDataType } from "@/types/Information/Form4";
 import { form5FormsJsonDataType } from "@/types/Information/Form5";
 import { form1FormsJsonDataType } from "@/types/Information/Form1";
 import { form6FormsJsonDataType } from "@/types/Information/Form6";
@@ -137,6 +141,12 @@ export default class MyDocumentsTableBrief extends Vue {
 
     @form3State.Action
     public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
+
+    @form4State.State
+    public form4FormsJson!: form4FormsJsonDataType[];
+
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
     
     @form5State.State
     public form5FormsJson!: form5FormsJsonDataType[];
@@ -231,6 +241,30 @@ export default class MyDocumentsTableBrief extends Vue {
                 form:'form3',
                 formName:'Form 3',
                 description:'Notice of Cross Appeal',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 4___
+        for (const docJson of this.form4FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form4',
+                formName:'Form 4',
+                description:'Notice of Application',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 
@@ -485,6 +519,10 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 3'){
             this.UpdateCurrentNoticeOfCrossAppealId(item.id);
             this.$router.push({name: "fill-form3" });
+
+        }else if(item.formName=='Form 4'){
+            this.UpdateCurrentNoticeOfApplicationId(item.id);
+            this.$router.push({name: "fill-form4" });
 
         }
 
