@@ -84,6 +84,26 @@
 
         </div>
 
+        <!-- <filing-parties> -->
+        <div class="mt-4" style="display:flex; font-size: 9pt;">       
+
+            <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0;  height:6.5rem;">
+                <div class="ml-2">
+                    <b>
+                        Enter the name(s) of the party(ies) filing the 
+                        notice of change of representation/change of 
+                        address for service
+                    </b>                          
+                </div>
+            </div>
+
+            <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
+                    
+            <div class="coa-text-box-left" style="width:60%;">
+                <div class="mx-2">{{result.filingParties.join(', ')}}</div> 
+            </div>                      
+
+        </div> 
 
 <!--  < Part A >   ____________________________________________________________         -->           
 
@@ -277,8 +297,8 @@
                 <div class="arrow-up-box"></div>               
                 <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
             </div>
-            <div style="width:34.25%;"></div>
-            <div style="width:25.25%; float: right;">On Behalf of {{result.filingParties.join(', ')}}</div>
+            <!-- <div style="width:34.25%;"></div>
+            <div style="width:25.25%; float: right;">On Behalf of {{result.filingParties.join(', ')}}</div> -->
 
         </div>
 

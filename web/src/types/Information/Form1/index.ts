@@ -8,8 +8,7 @@ export interface form1QualificationInfoType {
     appealingFeesWaived: boolean;
     appealingSupremeCourtMaster: boolean;    
     appealingSupremeCourtOrder: boolean;  
-    appealingScFlaDivorce: boolean;
-    appealInvolvesChild: boolean;
+    appealingScFlaDivorce: boolean;    
     appealTribunal: boolean;
 }
 
@@ -54,7 +53,7 @@ export interface form1DataInfoType {
     tribunalType: string;
     cityOfOrder: string;
     tribunalDateOfOrder: string;
-    tribunalOriginalDecisionMaker?: string;
+    tribunalOriginalDecisionMaker?: string;    
     applyLeave: boolean;
     amending: boolean;
     parties: form1PartiesInfoType[];
@@ -113,6 +112,7 @@ export interface form1StatesInfoType {
     cityOfOrder: null | boolean;
     applyLeave: null | boolean;
     amending: null | boolean;
+    appealInvolvesChild: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;

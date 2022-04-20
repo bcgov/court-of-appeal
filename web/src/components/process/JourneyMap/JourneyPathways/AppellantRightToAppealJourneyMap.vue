@@ -221,7 +221,11 @@
 
         <b-card no-body class="bg-white border-white">
 
-            <b-row v-if="initialDocumentsContent" style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" class="mb-1 ml-2">Would you like to start your appeal?</b-row>            
+            <b-row 
+                v-if="initialDocumentsContent" 
+                style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" 
+                class="mb-1 ml-2">Would you like to start your appeal?
+            </b-row>            
 
             <b-row no-gutters>
                 <b-col cols="1">

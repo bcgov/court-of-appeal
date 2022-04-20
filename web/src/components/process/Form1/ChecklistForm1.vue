@@ -6,7 +6,11 @@
             header-border-variant="white" 
             class="my-2 mx-4" 
             style="font-size: 42px; font-weight: 700;">            
-            Notice of Appeal Checklist
+            NOTICE OF APPEAL FORM (Form 1)
+            <p style="font-size: 18px; font-weight: 300;">
+                To assist you in the completing the Notice of Appeal 
+                form, you will need to answer the questions in the section below.
+            </p>
         </b-card-header>
 
         <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
@@ -21,7 +25,7 @@
             style="width: 30%; height: 3rem; padding:0;"
             class="mt-4 p-0"
             v-b-tooltip.hover.top.v-warning
-            :title="disableContinue?'In order to proceed, you must respond to all questions and answer No to question 6 above.':''">
+            :title="disableContinue?'In order to proceed, you must respond to all questions above.':''">
 
             <b-button 
                 :class="(disableContinue?inactiveButtonClass:activeButtonClass) + ' ml-4 '"
@@ -107,8 +111,7 @@ export default class ChecklistForm1 extends Vue {
         form1SubmissionData.appealingFeesWaived = this.qualificationInfo.appealingFeesWaived;
         form1SubmissionData.appealingSupremeCourtMaster = this.qualificationInfo.appealingSupremeCourtMaster;
         form1SubmissionData.appealingSupremeCourtOrder = this.qualificationInfo.appealingSupremeCourtOrder;
-        form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;
-        form1SubmissionData.appealInvolvesChild = this.qualificationInfo.appealInvolvesChild;
+        form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;        
         form1SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
         if (form1SubmissionData.appealTribunal){
             form1SubmissionData.parties = [];

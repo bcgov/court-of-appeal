@@ -240,7 +240,7 @@
         
         <div class="coa-text-box-left" style="width:60%;">
             <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalOriginalDecisionMaker}}</div> 
-            <div class="mx-2">{{result.judgeFullName}}</div> 
+            <div class="mx-2" v-else>{{result.judgeFullName}}</div> 
         </div>                      
 
     </div> 
@@ -377,13 +377,13 @@
         <div style="margin-top: 0; width:34%;">              
             <check-box 
                 style="margin: 0.75rem 0 0 1rem;" 
-                :check="!result.appealTribunal?'yes':''" 
+                :check="result.appealFrom == 'Trial Judgment'?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Trial Judgment"/> 
             <check-box 
                 style="margin: 0.5rem 0 0 1rem;" 
-                :check="!result.appealTribunal?'yes':''" 
+                :check="result.appealFrom == 'Summary Trial Judgment'?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Summary Trial Judgment"/>  
@@ -392,13 +392,13 @@
         <div style="margin-top: 0; width:24%;">              
             <check-box                    
                 style="padding: 0; margin: 0.75rem .5rem 0 1rem;" 
-                :check="result.appealTribunal?'yes':''"
+                :check="result.appealFrom == 'Order of a Tribunal'?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Order of a Tribunal"/>
             <check-box                    
                 style="padding: 0; margin: 0.5rem .5rem 0 1rem;" 
-                :check="result.appealTribunal?'yes':''"
+                :check="result.appealFrom == 'Chambers Judgment'?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Chambers Judgment"/>
@@ -422,7 +422,7 @@
 
     <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
         <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 600;"><b class="mr-3">PART A:</b> LEAVE NOT REQUIRED</div>     
-               
+<!-- <part-of-judgment>-->               
         <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
@@ -444,7 +444,7 @@
             </div>                      
 
         </div>
-
+<!-- <order-sought>-->  
         <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
@@ -474,7 +474,7 @@
 <!-- <PART B> -->
     <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
         <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">PART B:</b> SEEKING LEAVE TO APPEAL</div>
-               
+<!-- <part-of-judgment>-->                 
         <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
@@ -496,7 +496,7 @@
             </div>                      
 
         </div>
-
+<!-- <order-sought>-->  
         <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
