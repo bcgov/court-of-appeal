@@ -47,6 +47,21 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
+                    Does this appeal involve the rights or interests of a child?                                
+                </b-col>
+                <b-col>
+                    <b-form-radio-group                
+                        v-model="commonInfo.appealInvolvesChild"
+                        :state="form1InfoStates.appealInvolvesChild"
+                        @change="update"
+                        :options="responseOptions"
+                        style="font-size: 1rem; font-weight:400;"                    
+                    ></b-form-radio-group>                                   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     What type of proceeding are you appealing from?                                
                 </b-col>
                 <b-col>
