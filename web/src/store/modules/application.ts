@@ -188,6 +188,22 @@ class Application extends VuexModule {
 
         p = {} as pageInfoType;
         p.key = "1";
+        p.name = "ApplyForLeaveToAppeal";
+        p.label = "Apply For Leave To Appeal";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "2";
+        p.name = "Applications";
+        p.label = "Applications";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "3";
         p.name = "AppealRecordAndTranscript";
         p.label = "Appeal Record and Transcript";
         p.active = false;
@@ -195,7 +211,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "2";
+        p.key = "4";
         p.name = "FactumAppealBookAndCertificateOfReadiness";
         p.label = "Factum, Appeal Book, and Certificate of Readiness";
         p.active = false;
@@ -203,7 +219,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "3";
+        p.key = "5";
         p.name = "BookAppealDateWithRegistry";
         p.label = "Book Appeal Date with Registry";
         p.active = false;
@@ -211,7 +227,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "4";
+        p.key = "6";
         p.name = "NoticeOfHearing";
         p.label = "Notice of Hearing";
         p.active = false;
@@ -219,7 +235,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "5";
+        p.key = "7";
         p.name = "TheHearing";
         p.label = "The Hearing";
         p.active = false;
@@ -227,7 +243,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "6";
+        p.key = "8";
         p.name = "CourtOrder";
         p.label = "Court Order";
         p.active = false;
@@ -235,7 +251,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "7";
+        p.key = "9";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
         p.active = false;
@@ -280,6 +296,14 @@ class Application extends VuexModule {
 
         p = {} as pageInfoType;
         p.key = "3";
+        p.name = "NoticeOfHearing";
+        p.label = "Notice of Hearing";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "4";
         p.name = "TheHearing";
         p.label = "The Hearing";
         p.active = false;
@@ -287,7 +311,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "4";
+        p.key = "5";
         p.name = "CourtOrder";
         p.label = "Court Order";
         p.active = false;
@@ -295,7 +319,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "5";
+        p.key = "6";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
         p.active = false;

@@ -40,11 +40,12 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/information";
-import { form2DataInfoType } from '@/types/Information';
-const informationState = namespace("Information");
+import "@/store/modules/forms/form2";
+const form2State = namespace("Form2");
+
+import { form2DataInfoType } from '@/types/Information/Form2';
+
 import Form2Layout from "./Form2Layout.vue";
-import moment from 'moment';
 
 @Component({
     components:{        
@@ -56,10 +57,10 @@ export default class Form2 extends Vue {
     @Prop({required: true})
     caseId!: string;
     
-    @informationState.State
+    @form2State.State
     public currentCaseId: string;
 
-    @informationState.Action
+    @form2State.Action
     public UpdateForm2Info!: (newForm2Info: form2DataInfoType) => void
 
     result = {} as form2DataInfoType;
@@ -141,6 +142,8 @@ export default class Form2 extends Vue {
             if(response?.data?.data){            
                             
                 this.result = response.data.data
+                this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
+               
                 this.UpdateForm2Info(this.result)                         
                 this.dataReady = true;
                 Vue.nextTick(()=> this.onPrint())

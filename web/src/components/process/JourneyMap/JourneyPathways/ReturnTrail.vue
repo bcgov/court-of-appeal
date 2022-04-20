@@ -4,15 +4,15 @@
             :style="{
                 position: 'absolute',
                 top: '56px',
-                left: '27px',
+                left: '6.25%',
                 zIndex: '10'
             }"
             :circling="status == 'completed'"
         />
         <Trail
             :style="{
-                width: '52%',
-                left: '21%',
+                width: '62%',
+                left: '15%',
                 position: 'absolute',
                 top: '13.5px',
                 zIndex: '11'
@@ -24,8 +24,8 @@
         />
         <Trail
             :style="{
-                width: '52%',
-                left: '21%',
+                width: '62%',
+                left: '15%',
                 position: 'absolute',
                 top: '13.5px',
                 zIndex: '10'

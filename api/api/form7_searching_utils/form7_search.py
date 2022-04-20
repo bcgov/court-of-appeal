@@ -1,25 +1,14 @@
 import logging
 
-from zeep import Client
-from zeep.cache import InMemoryCache
-from zeep.transports import Transport
-
-from django.conf import settings
-
-from requests import Session
-from requests.auth import HTTPBasicAuth
+from .form7_search_caller_base import Form7SearchCallerBase
 
 logger = logging.getLogger(__name__)
 
 class Form7Search:    
 
     def __init__(self):
-        session = Session()
-        session.auth = HTTPBasicAuth(settings.COA_USERNAME, settings.COA_PASSWORD)
-        self.client = Client(
-            settings.COA_SEARCH_ENDPOINT,
-            transport=Transport(cache=InMemoryCache(), session=session),
-        )
+        Form7SearchCallerBase.__init__(self)
+    
 
     def _has_publication_ban(self, case_basics):
         return (
@@ -43,8 +32,10 @@ class Form7Search:
             )
         )
 
+
     def _has_family_law(self, case_basics):
         return case_basics.HighLevelCategory == "Family Law"
+
 
     def execute_search(self, case_number) -> {}:       
         search_by_case_number = self.client.service.SearchByCaseNumber(case_number)
@@ -56,9 +47,11 @@ class Form7Search:
         elif search_by_case_number["CaseType"] == "Criminal":
             return {"SearchByCaseNumberResult": search_by_case_number}
 
+
     def handle_not_found(self, case_number):
         logger.info("Case not found: " + case_number)
         return "NOT FOUND"
+
 
     def handle_civil_search(self, case_id) -> {}:
         case_basics = self.client.service.ViewCaseBasics(case_id)

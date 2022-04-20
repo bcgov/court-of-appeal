@@ -4,13 +4,23 @@ import store from '@/store';
 
 import * as _ from 'underscore';
 
-import bootstrapCss from "!!raw-loader!@/styles/bootstrapCSS.css";
+import bootstrapCss from "!!raw-loader!@/styles/bootstrapMIN.css";
 
 Vue.filter('truncate-text', function (text: string, stop: number) {
 	if(text){
 		return (stop < text.length) ? text.slice(0, stop) + '...' : text
 	}
 	else
+		return ''
+})
+
+Vue.filter('beautify-time-am-pm', function(time){
+	if(time){
+		const hh = Number(time.substr(0,2))
+		const ampm = hh>12?' PM':' AM'
+		const HH = hh>12? hh-12 : hh 
+		return HH+time.substr(2,3) +ampm	
+	}else
 		return ''
 })
 
@@ -36,6 +46,14 @@ Vue.filter('beautify-date-mm-dd-yyyy', function(date){
 	enum MonthList {'Jan' = 1, 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
 	if(date)
 		return date.substr(8,2) + ' ' + MonthList[Number(date.substr(5,2))] + ' ' + date.substr(0,4);
+	else
+		return ''
+})
+
+Vue.filter('beautify-date-dd/mm/yyyy', function(date){
+	
+	if(date)
+		return date.substr(8,2) + '/' + date.substr(5,2) + '/' + date.substr(0,4);
 	else
 		return ''
 })
@@ -85,7 +103,7 @@ Vue.filter('get-submission-fullname', function(names){
 	const fullnames = []
 	for(const name of names){
 		     if(name=='form2') fullnames.push("Notice of Appearance")
-		else if(name=='form7') fullnames.push("Notice of Appeal")
+		else if(name=='form1') fullnames.push("Notice of Appeal")
 	}
 	return fullnames
 })
@@ -142,16 +160,18 @@ Vue.filter('styleTitle',function(title){
 	return "<div style='display:inline; color:#29877c'>" + title + "</div>"
 })
 
-Vue.filter('getFullName',function(nameObject){
-	if (nameObject) {
-		return nameObject.first? nameObject.first: '' +
-			" " +
-			nameObject.middle? nameObject.middle: '' +
-			" " +
-			nameObject.last? nameObject.last: '';
-	} else{
-		return " "
-	}
+Vue.filter('getFullName',function(first, last){	
+
+	const firstName = first? first+' ': '' 
+	const lastName = last? last+' ': '' 		
+	return firstName+lastName	
+})
+
+Vue.filter('getFullJudgeName',function(first, last){	
+
+	const firstName = first? first[0].toUpperCase()+' ': '' 
+	const lastName = last? last.toUpperCase()+' ': '' 		
+	return 'The Honourable Justice '+firstName+lastName;	
 })
 
 Vue.filter('getFullAddress',function(nameObject){
@@ -275,7 +295,29 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 			`.marginleftminus{margin:0 0 0 -1rem;}`+
 			`.marginleftplus{margin:0 0 0 1rem !important;}`+
 			`.margintopminus{margin-top:-0.5rem !important;}`+
+			`.arrow-up-flash{ margin: 0.25rem auto 0 auto;width: 0;height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent;border-bottom: 16px solid #E8E8E8;}`+
+			`.arrow-up-box{margin: 0 auto;width: 16px;height:4px;background-color:#E8E8E8;border: 0px solid #E8E8E8;}`+
+			`.coa-text-box{padding:0.5rem; border: 1px solid black; word-wrap: break-word;}`+
+			`.coa-text-box-center{outline: 1px solid black; word-wrap: break-word; display:flex; align-items:center; justify-content:center; text-align:center;}`+
+			`.coa-text-box-left{outline: 1px solid black; word-wrap: break-word; display:flex; align-items:center; justify-content:left; text-align:left;}`+			
+			`.coa-help-box{padding:0.5rem; border: 1px solid #E8E8E8; background: #E8E8E8;}`+			
+			
+			`.coa-arrow-box{background: #E8E8E8;word-wrap: break-word;}`+
+			`.coa-arrow-box-center{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:center; text-align:center;}`+
+			`.coa-arrow-box-left{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:left; text-align:left;}`+
+			`.coa-arrow-box-right{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:right; text-align:right;}`+
 
+			`.arrow-right-flash-80{ margin-right:1.25rem;  width:0;height:0; border-top: 80px solid transparent; border-bottom: 80px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-76{ margin-right:1.25rem;  width:0;height:0; border-top: 76px solid transparent; border-bottom: 76px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-66{ margin-right:1.25rem;  width:0;height:0; border-top: 66px solid transparent; border-bottom: 66px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-62{ margin-right:1.25rem;  width:0;height:0; border-top: 62px solid transparent; border-bottom: 62px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-54{ margin-right:1.25rem;  width:0;height:0; border-top: 54px solid transparent; border-bottom: 54px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-45{ margin-right:1.25rem;  width:0;height:0; border-top: 45px solid transparent; border-bottom: 45px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-36{ margin-right:1.25rem;  width:0;height:0; border-top: 36px solid transparent; border-bottom: 36px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-20{ margin-right:1.25rem;  width:0;height:0; border-top: 20px solid transparent; border-bottom: 20px solid transparent;border-left: 20px solid #E8E8E8;}`+
+			`.arrow-right-flash-25{ margin-right:1.25rem;  width:0;height:0; border-top: 25px solid transparent; border-bottom: 25px solid transparent;border-left: 25px solid #E8E8E8;}`+
+
+			
 			`section{ counter-increment: question-counter; text-indent: -17px; text-align: justify; text-justify: inter-word; margin: 0.5rem 0.5rem 0.5rem 1rem;}`+ 
 			`section:before {font-weight: bolder; content:counter(question-counter) ".";}`+
 			`section.resetquestion{counter-reset: question-counter;}`+

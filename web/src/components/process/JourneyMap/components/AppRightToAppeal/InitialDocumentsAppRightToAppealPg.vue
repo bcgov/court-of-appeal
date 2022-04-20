@@ -9,10 +9,16 @@
 
         <b-row class="mt-4 mr-1 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill class="mt-5 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You have <span class="text-danger font-weight-bold">30 days</span> to file and serve your document after the initial court order is declared.
+                The time limit to file and serve a notice of appeal is 
+                <span class="text-danger font-weight-bold">30 days</span> 
+                starting on the day after the order is declared.
+                <p class="mt-1">
+                    <b style="text-decoration: underline;">NOTE:</b> 
+                    If another enactment specifies a time limit within which the appeal must be commenced, that time limit would apply.
+                </p>
             </b-col>           
         </b-row>
 
@@ -32,7 +38,7 @@
                                 
                                 <b-col cols="3" class="p-0" >
                                     <b-button
-                                        @click="startNewForm7Document"
+                                        @click="startNewForm1Document"
                                         target="_blank"                                                                                
                                         class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
@@ -114,13 +120,20 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
 
 @Component
 export default class InitialDocumentsAppRightToAppealPg extends Vue { 
     
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
     
-    public startNewForm7Document(){
-        this.$router.push({name: "checklist-form7" })
+    public startNewForm1Document(){
+        this.UpdateCurrentNoticeOfAppealId(null)
+        this.$router.push({name: "checklist-form1" })
     }
 
 }

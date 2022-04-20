@@ -29,32 +29,22 @@
         <b-row v-if="showNoaInfo" class="mt-4" >
             <ol>
                 <li>
-                    Complete either the .DOC or .PDF below. Click on the document name for more information.
+                    Complete the online form below. Click on the document name for more information.
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">
+                                <b-col cols="9">
                                     <a 
                                         href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/297_2001a#part4"
                                         target="_blank">Notice of Cross Appeal
                                     </a>                                    
                                 </b-col>
-                                <b-col cols="2">
-                                    1 copy
-                                </b-col>
-                                <b-col cols="1" >
+                                <b-col cols="3" class="p-0" >
                                     <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%208.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
+                                        @click="startNoticeOfCrossAppeal"
+                                        target="_blank"                                        
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form8.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
@@ -96,7 +86,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+
+import "@/store/modules/forms/form3";
+const form3State = namespace("Form3");
 
 @Component({
     components:{
@@ -105,8 +100,17 @@ import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 })
 export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
 
+    @form3State.Action
+    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
+
+    
     showNoaInfo = true;
     showAppealRecordInfo = false;
+
+    public startNoticeOfCrossAppeal(){
+        this.UpdateCurrentNoticeOfCrossAppealId(null);
+        this.$router.push({name: "checklist-form3" })
+    }
 
     public showNoa(show: boolean){
         if (show) {

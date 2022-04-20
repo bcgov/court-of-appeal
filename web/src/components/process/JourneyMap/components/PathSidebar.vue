@@ -24,6 +24,9 @@
                     src="../../../../../public/icons/icon-calendar.svg"
                     style="width: 4rem; height: 4rem; border-radius: 2rem; padding: 0.75rem 0.5rem 0.75rem 0.25rem;"
                     />
+                <b-icon-question v-else-if="pathType == 'question'" class="text-white bg-success" scale="1.75"
+                    style="width: 4rem; height: 4rem; border-radius: 2rem; padding: 0.75rem 0.5rem 0.75rem 0.5rem;"
+                    />
             </b-row>       
 
             <b-row class="ml-4 mt-2 bg-light mb-1" :style="'width: 0.65rem; height: ' + pathHeights[index] + ';'">

@@ -1,4 +1,4 @@
-import { aliasInfoType, representativeInfoType } from "..";
+import { aliasInfoType, representativeInfoType } from "../Form1";
 
 export interface journeyJsonDataType {
     id: number;
@@ -99,7 +99,8 @@ export interface supremeCourtCaseJsonDataInfoType {
     courtClass: string;
     accessType: string;
     orders?: supremeCourtOrdersJsonInfoType[];
-    parties: supremeCourtPartiesJsonInfoType[];    
+    parties: supremeCourtPartiesJsonInfoType[];
+    _showDetails?: boolean;    
 }
 
 export interface supremeCourtOrdersJsonInfoType {
@@ -130,5 +131,28 @@ export interface supremeCourtPartiesJsonInfoType {
     lowerCourtRole: string;
     aliases?: aliasInfoType[];
     legalReps?: representativeInfoType[];
+}
+
+export interface initiatingDocumentJsonInfoType {
+    DateFiled?: string;
+    Name?: string;
+}
+
+export interface previousCourtJsonInfoType {
+    AppealFrom?: string;
+    BoardTribunalName?: string;
+    Charge?: string;
+    ConvictionAcquittalDate?: string;
+    FileNumber?: string;
+    JudgeFirstName?: string;
+    JudgeLastName?: string;
+    JudgeSalutation?: string;
+    JudgmentDate?: string;
+    Jury?: boolean;
+    Level?: string;
+    Location?: string;
+    LocationID?: number;
+    Sentence?: string;
+    SentenceDate?: string;
 }
 

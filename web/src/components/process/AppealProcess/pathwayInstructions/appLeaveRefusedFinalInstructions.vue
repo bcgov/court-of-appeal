@@ -2,7 +2,7 @@
     <b-card no-body border-variant="white">
        
         <p>
-            Your leave to appeal was refused, and your application for review was refused. 
+            If your leave to appeal was refused, and your application for review was refused. 
             The Court of Appeal decision is final unless the Supreme Court of Canada agrees 
             to hear your case.  
         </p>

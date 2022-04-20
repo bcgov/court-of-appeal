@@ -14,7 +14,7 @@ class InvolvesOptions:
         CorollaryReliefInADivorceProceeding = "Corollary Relief in a Divorce Proceeding"
         CorollaryReliefInADivorceProceedingHelp = ""
         
-        Divorce = "Divorce"
+        Divorce = "Divorce Act"
         DivorceHelp = ""
         
         Equity = "Equity"
@@ -66,6 +66,9 @@ class InvolvesOptions:
                 self.Equity,
                 self.WillsAndEstate,
                 #self.Other
+                self.FamilyLawAct,
+                self.Divorce,
+                self.Other
             ]
 
           
@@ -81,6 +84,9 @@ class InvolvesOptions:
                 self.EquityHelp,
                 self.WillsAndEstateHelp,
                 # self.OtherHelp
+                self.FamilyLawActHelp,
+                self.DivorceHelp,
+                self.OtherHelp
             ]
 
         def OtherOptionsDictionary(self):

@@ -1,9 +1,10 @@
 <template>
-    <div :class="{'action-end-point': true, 'journey-end-circle': true, 'any-icon': true, 'completed-step': completed}" @click="action">
+    <div :class="{'action-end-point': completed, 'journey-end-circle': true, 'any-icon': completed, 'completed-step': completed}" @click="action">
         <!-- <div class="oi oi-check journey-final-check"/> -->
         <img style="margin-top:-1.2rem;" src='../../../../../../public/icons/icon_approved.svg' class="leave-hearing" alt=""/>
         <div class="end-step-title end-step-title-l2">
-            <div class="end-step-title" :style="titleStyle">{{stepTitle}}</div>
+            <!-- <div class="end-step-title" :style="titleStyle">{{stepTitle}}</div> -->
+            <div :class="{'end-step-title': completed , 'step-title-optional' : !completed}"  :style="titleStyle">{{stepTitle}}</div>
         </div>
     </div>
 </template>

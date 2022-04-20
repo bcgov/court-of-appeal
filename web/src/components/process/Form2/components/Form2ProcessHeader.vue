@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { form2StatusInfoType } from '@/types/Information';
+import { form2StatusInfoType } from '@/types/Information/Form2';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import StepNumber from "@/components/utils/StepNumber.vue";

@@ -22,7 +22,7 @@
                 When Do You Use the Notice of Appearance (Form 2)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 7), and you want to respond, 
+                If you have been served a Notice of Appeal (Form 1), and you want to respond, 
                 fill out the Notice of Appearance (Form 2). If you do not respond, you will 
                 not be included in future court proceedings related to this case, and will 
                 not have access to the case documents filed.
@@ -46,7 +46,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import Form2StyleOfProceeding from "@/components/process/Form2/components/Form2StyleOfProceeding.vue";
-import { form2StatusInfoType } from '@/types/Information';
+import { form2StatusInfoType } from '@/types/Information/Form2';
 
 @Component({
     components:{

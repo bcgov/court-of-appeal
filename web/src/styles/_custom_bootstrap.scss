@@ -49,6 +49,15 @@ $other:   #7a4528 !default;
 $select:  #e6d9e2 !default;
 $inactive:  #cccccc !default;
 
+$form2: #6ce2fa;
+$form5: #fc9b4c;
+$form6: #a3af02c5;
+$form1: #f6ad7d;
+$form9: #5ec0ee;
+$form18: #abc7d3;
+$form19: #cfee5e;
+$form20: #c5a873;
+$form3:  #5eeea1;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -97,7 +106,17 @@ $theme-colors: map-merge(
     "inactive":   $inactive,
     "escort":     $escort,
     "other":      $other,
-    "select":     $select
+    "select":     $select,
+    "form2":      $form2,
+    "form5":      $form5,
+    "form6":      $form6,
+    "form1":      $form1,
+    "form9":      $form9,
+    "form18":     $form18,
+    "form19":     $form19,
+    "form20":     $form20,
+    "form3":      $form3,
+
   ),
   $theme-colors
 );

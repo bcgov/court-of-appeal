@@ -1,6 +1,6 @@
 
 import { locationsInfoType } from '@/types/Common';
-import { accountInfoType, lookupsInfoType } from '@/types/Information';
+import { accountInfoType, lookupsInfoType } from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -11,6 +11,8 @@ class Common extends VuexModule {
     public userName = ""
     public userId = ""
     public userLocation = '';
+
+    public userSelfRepresented = false;
 
     public locationsInfo: locationsInfoType[] = [];
     public lookups = {} as lookupsInfoType;
@@ -68,6 +70,15 @@ class Common extends VuexModule {
     @Action
     public UpdateAccountInfo(newAccountInfo: accountInfoType): void {
         this.context.commit('setAccountInfo', newAccountInfo);
+    }
+
+    @Mutation
+    public setUserSelfRepresented(userSelfRepresented: boolean): void {   
+        this.userSelfRepresented = userSelfRepresented;
+    }
+    @Action
+    public UpdateUserSelfRepresented(newUserSelfRepresented: boolean): void {
+        this.context.commit('setUserSelfRepresented', newUserSelfRepresented);
     }
 
 }

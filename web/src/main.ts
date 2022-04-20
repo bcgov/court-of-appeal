@@ -9,15 +9,19 @@ import http from "./plugins/http";
 import "./filters";
 import LoadingSpinner from "./components/utils/LoadingSpinner.vue";
 
+import Vuetify from 'vuetify';
+import '@mdi/font/css/materialdesignicons.css'
+
 import "@/styles/index.scss";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import "font-awesome/css/font-awesome.min.css";
 import { SessionManager } from "@/components/utils/utils";
 
-import UpdateJourneyMap from "./prototypes/UpdateJourneyMap"
+import UpdateJourneyMap from "./prototypes/UpdateJourneyMap";
 
 Vue.config.productionTip = false;
+Vue.use(Vuetify);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(VueRouter);
@@ -42,6 +46,7 @@ if(!location.pathname.includes('/submitted/') && !location.pathname.includes('/s
 SessionManager.redirectIfQuickExitCookie();
 
 new Vue({
+    vuetify: new Vuetify({}),
     router: router,
     render: (h) => h(App),
     store: store,

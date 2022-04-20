@@ -3,47 +3,81 @@
         <h3>Most Used Forms</h3>
         <ol>
             <li class="link-button" 
-                @click="startNewForm7Document"
+                @click="startNewForm1Document"
                 target="_blank">
-                Notice of Appeal (Form 7)            
+                Notice of Appeal (Form 1)            
             </li>
             <li class="link-button" 
                 @click="startNewForm2Document"
                 target="_blank">
                 Notice of Appearance (Form 2)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm3Document"
+                target="_blank">
+                Notice of Cross Appeal (Form 3)                
+            </li>
+            <li class="link-button" 
+                @click="startNewForm5Document"
+                target="_blank">
+                Notice of Hearing of Appeal (Form 5)                
+            </li>           
             <li>Certificate of Readiness</li>
             <li>Affidavit</li>
-            <li>Notice of Hearing Appeal</li>
         </ol>
     </b-card>
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
-    
+    import { Component, Vue } from 'vue-property-decorator';    
     import { namespace } from "vuex-class";
-    import "@/store/modules/information";
-    const informationState = namespace("Information");
+
+    import "@/store/modules/forms/form2";
+    const form2State = namespace("Form2");
+
+    import "@/store/modules/forms/form3";
+    const form3State = namespace("Form3");
+
+    import "@/store/modules/forms/form5";
+    const form5State = namespace("Form5");
+
+    import "@/store/modules/forms/form1";
+    const form1State = namespace("Form1");   
 
     @Component
     export default class MostUsedForms extends Vue {        
         
-        @informationState.Action
-        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
+        @form2State.Action
+        public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
+      
+        @form5State.Action
+	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void 
+        
+        @form3State.Action
+	    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void 
 
-        @informationState.Action
-        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+        @form1State.Action
+        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void      
                 
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" })
         }
 
-        public startNewForm7Document(){
-            this.UpdateCurrentNoticeOfAppealId(null);
-            this.$router.push({name: "checklist-form7" })
+        public startNewForm3Document(){
+            this.UpdateCurrentNoticeOfCrossAppealId(null);
+            this.$router.push({name: "checklist-form3" })
         }
+
+        public startNewForm5Document(){
+            this.UpdateCurrentNoticeOfHearingOfAppealId(null);
+            this.$router.push({name: "start-form5" })
+        }
+
+        public startNewForm1Document(){
+            this.UpdateCurrentNoticeOfAppealId(null);
+            this.$router.push({name: "checklist-form1" })
+        }       
 
     }
 

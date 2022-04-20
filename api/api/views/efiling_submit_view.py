@@ -36,10 +36,10 @@ class EFilingSubmitView(generics.GenericAPIView):
 
     # """ This inserts our generated file, iterates over files and converts to PDF if necessary. """
 
-    def _get_pdf_content(self, case):
+    def _get_pdf_content(self, case, document_type):
         outgoing_documents = [] 
         #Modify If more than one form type exist in the future       
-        document_type = "APP"
+        
         current_document_type = "FORM"
         try:                      
             prepared_pdf = PreparedPdf.objects.get(
@@ -90,6 +90,8 @@ class EFilingSubmitView(generics.GenericAPIView):
         return HttpResponse(status=204)
 
     def post(self, request, case_id):
+        
+        document_type = "APP" #type Form2 for Efiling
 
         user_id = request.user.id
         case = get_case_for_user(case_id, user_id)        
@@ -99,9 +101,9 @@ class EFilingSubmitView(generics.GenericAPIView):
         if case.package_number or case.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(case)               
+        outgoing_documents = self._get_pdf_content(case, document_type)               
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
-            request, case, outgoing_documents
+            request, case, outgoing_documents, document_type
         )
         
         # EFiling upload document.

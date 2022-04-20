@@ -33,7 +33,7 @@ const informationState = namespace("Information");
 
 import Form2ProcessHeader from "@/components/process/Form2/components/Form2ProcessHeader.vue";
 import Form2CaseInformation from "@/components/process/Form2/components/Form2CaseInformation.vue";
-import { form2StatusInfoType } from '@/types/Information';
+import { form2StatusInfoType } from '@/types/Information/Form2';
 
 @Component({
     components:{

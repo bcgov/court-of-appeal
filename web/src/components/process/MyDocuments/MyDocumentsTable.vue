@@ -1,27 +1,62 @@
 <template>
     <b-card border-variant="white" body-class="mx-0 px-3 py-0">
-        <b-row>
-            <b-col>
+        <b-row v-if="enableActions">
+            <b-col cols="6">
                 <h3 :class="enableActions? 'pt-2' :'mt-1 mb-0'">{{title}}</h3>
-            </b-col>            
+            </b-col>
+            <b-col cols="6">    
+                <b-button 
+                    style="float:right;"
+                    size="sm" 
+                    variant="success" 
+                    @click="showSelectFormToFill=true">
+                    New Form
+                    <b-icon-plus scale="1.5" variant="white"/>
+                </b-button>            
+            </b-col> 
         </b-row>
         
-        <table-form-2 class="mt-0 mx-0" :enableActions="enableActions" @reload="reload"/>
-        <table-form-7 :class="enableActions?'mt-4 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-1 :class="enableActions?'mt-1 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-2 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>        
+        <table-form-3 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-5 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-6 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>        
+        <table-form-9 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-18 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-19 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-20 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+
+        <new-form-modal :showSelectFormToFill="showSelectFormToFill" @closeModal="CloseModal" />
     </b-card>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-
 import TableForm2 from './Tables/TableForm2.vue'
-import TableForm7 from './Tables/TableForm7.vue'
+import TableForm3 from './Tables/TableForm3.vue'
+import TableForm5 from './Tables/TableForm5.vue'
+import TableForm6 from './Tables/TableForm6.vue'
+import TableForm1 from './Tables/TableForm1.vue'
+import TableForm9 from './Tables/TableForm9.vue'
+import TableForm18 from './Tables/TableForm18.vue'
+import TableForm19 from './Tables/TableForm19.vue'
+import TableForm20 from './Tables/TableForm20.vue'
+
+import NewFormModal from './NewFormModal.vue'
 
 @Component({
     components:{
         TableForm2,
-        TableForm7
+        TableForm3,
+        TableForm5,
+        TableForm6,
+        TableForm1,
+        TableForm9,  
+        TableForm18, 
+        TableForm19,
+        TableForm20,      
+        NewFormModal
     }
 })
 export default class MyDocumentsTable extends Vue {
@@ -31,12 +66,18 @@ export default class MyDocumentsTable extends Vue {
 
     @Prop({required: true})
     enableActions!: boolean;
+
+    showSelectFormToFill=false
    
     mounted() {        
     }
 
     public reload(){
         this.$emit('reload')
+    }
+
+    public CloseModal(){
+        this.showSelectFormToFill=false
     }
 
 }
