@@ -75,7 +75,7 @@ import { GetForm4PdfType } from "./components/Form4PdfType"
 export default class SubmitForm4 extends Vue {
 
     @form4State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentNoticeOfApplicationId: string;
 
     @form4State.State
     public form4Info: form4DataInfoType;
@@ -103,7 +103,7 @@ export default class SubmitForm4 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/form4/efiling/"+this.currentNoticeOfSettlementOrAbandonmentId+"/submit/";
+        const url = "/form4/efiling/"+this.currentNoticeOfApplicationId+"/submit/";
 
         const header = {
             responseType: "json",
@@ -113,7 +113,7 @@ export default class SubmitForm4 extends Vue {
         }
 
         const body = {
-            document_type: GetForm4PdfType(this.form4Info) //"ABA"
+            document_type: GetForm4PdfType(this.form4Info) //"MCH"
         }
 
         this.$http.post(url, body, header)

@@ -4,10 +4,10 @@
             <b-tbody >
                 <b-tr class="my-4 mx-2">
                     <b-td style="width: 45%;">
-                        <label class="m-0 p-0 labels"> Name of person whose affidavit is being filed: </label>                        
+                        <div class="m-0 p-0 labels"> Name of person whose affidavit is being filed: </div>                        
                         <b-form-input
                             tabindex="0"
-                            class="my-4"
+                            class="my-2"
                             style="padding 0; margin:0; width: 90%;"
                             size="sm"
                             v-model="name"                                
@@ -17,7 +17,7 @@
                     <b-td style="width: 30%">
                         <label class="ml-1 m-0 p-0 labels"> Date affidavit was sworn: </label>
                         <b-card                             
-                            class="mt-4" 
+                            class="mt-2" 
                             style="padding: 0; float: left; display: inline-block;" 
                             :border-variant="dateState == false?'danger': 'dark'">
                             <div class="vuetify">
@@ -195,6 +195,7 @@ export default class AddAffidavitForm extends Vue {
     }
 
     .labels {
-        font-size: 0.85rem; font-weight:300;
+        font-size: 0.85rem; 
+        font-weight:300;
     }
 </style>

@@ -274,7 +274,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form4FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form4',
                 formName:'Form 4',
                 description:'Notice of Application',
