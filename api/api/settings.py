@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "form20",
     "form1",
     "form3",
+    "form4",
     "corsheaders",
     "oidc_rp"
 ]
@@ -288,4 +289,4 @@ CSOWS_EXT_ENDPOINT = os.environ.get("CSOWS_EXT_ENDPOINT","")
 ENCRYPTOR = Encryptor("DATA_SECURITY_KEY")
 FORCE_SCRIPT_NAME = os.getenv("WEB_BASE_HREF", DEFAULT_BASE_URL)
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", DEFAULT_BASE_URL)
-SITEMINDER_LOGOFF_URL = os.getenv("SITEMINDER_LOGOFF_URL", "https://logontest.gov.bc.ca/clp-cgi/logoff.cgi")
+SITEMINDER_LOGOFF_URL = os.getenv("SITEMINDER_LOGOFF_URL", "https://logontest7.gov.bc.ca/clp-cgi/logoff.cgi")

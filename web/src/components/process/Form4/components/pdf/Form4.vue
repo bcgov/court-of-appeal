@@ -2,6 +2,15 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
+            <!-- <b-col cols="2" class="ml-3">
+                <b-button 
+                    style="float: right;" 
+                    variant="primary"
+                    @click="onPrintSave()"
+                    >
+                    Print-Save
+                </b-button>
+            </b-col> -->
             <b-col cols="10">
                 <b-button
                     style="float: right;" 
@@ -54,7 +63,7 @@ import Form4Layout from "./Form4Layout.vue";
 export default class Form4 extends Vue {
     
     @form4State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentNoticeOfApplicationId: string;
 
     @form4State.Action
     public UpdateForm4Info!: (newForm4Info: form4DataInfoType) => void
@@ -71,14 +80,14 @@ export default class Form4 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "ABA"
-        const pdf_name = "form4-" + this.currentNoticeOfSettlementOrAbandonmentId;
+        const pdf_type = "FORM"
+        const pdf_name = "form4-" + this.currentNoticeOfApplicationId;
         const el= document.getElementById("print");
 
       
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;        
-        const url = '/form4/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        const url = '/form4/form-print/'+this.currentNoticeOfApplicationId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -102,9 +111,9 @@ export default class Form4 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "ABA"
+        const pdfType = "FORM"
         const pdfName ="FORM4"
-        const url = '/form4/form-print/'+this.currentNoticeOfSettlementOrAbandonmentId+'/?pdf_type='+pdfType
+        const url = '/form4/form-print/'+this.currentNoticeOfApplicationId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -136,7 +145,7 @@ export default class Form4 extends Vue {
  
     public getForm4Data() {        
        
-        this.$http.get('/form4/forms/'+this.currentNoticeOfSettlementOrAbandonmentId)
+        this.$http.get('/form4/forms/'+this.currentNoticeOfApplicationId)
         .then((response) => {
             if(response?.data?.data){            
                             
@@ -153,6 +162,42 @@ export default class Form4 extends Vue {
             console.log(err)        
         });      
     }
+
+    // public onPrintSave() { 
+    //     const pdf_type = "FORM"
+    //     const pdf_name = "form4-" + this.currentNoticeOfApplicationId
+    //     const el= document.getElementById("print");
+      
+    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+    //     const bottomRightText = `" "`;        
+    //     const url = '/form4/form-print/'+this.currentNoticeOfApplicationId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+    //     const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+
+    //     const body = {
+    //         'html':pdfhtml,
+    //         'json_data':this.result
+    //     }       
+        
+    //     const options = {
+    //         responseType: "blob",
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         }
+    //     }  
+
+    //     this.$http.post(url,body, options)
+    //     .then(res => {                       
+    //         const blob = res.data;
+    //         const link = document.createElement("a");
+    //         link.href = URL.createObjectURL(blob);
+    //         document.body.appendChild(link);
+    //         link.download = "FORM4.pdf";
+    //         link.click();
+    //         setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
+    //     },err => {
+    //         console.error(err);        
+    //     });
+    // }
 }
 </script>
 <style scoped lang="scss" src="@/styles/_pdf.scss">

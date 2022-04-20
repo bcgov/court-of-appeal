@@ -44,6 +44,11 @@
         <cancel-submit-form-1 v-else-if="result=='cancel'"/>
         <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="(formType == 'MCH')||(formType == 'MCT')">
+        <success-submit-form-4 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-4 v-else-if="result=='cancel'"/>
+        <error-submit-form-4 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
 </template>
 
 <script lang="ts">
@@ -56,6 +61,10 @@ import ErrorSubmitForm2 from "./Form2/ErrorSubmitForm2.vue";
 import CancelSubmitForm3 from "./Form3/CancelSubmitForm3.vue";
 import SuccessSubmitForm3 from "./Form3/SuccessSubmitForm3.vue";
 import ErrorSubmitForm3 from "./Form3/ErrorSubmitForm3.vue";
+
+import CancelSubmitForm4 from "./Form4/CancelSubmitForm4.vue";
+import SuccessSubmitForm4 from "./Form4/SuccessSubmitForm4.vue";
+import ErrorSubmitForm4 from "./Form4/ErrorSubmitForm4.vue";
 
 import CancelSubmitForm5 from "./Form5/CancelSubmitForm5.vue";
 import SuccessSubmitForm5 from "./Form5/SuccessSubmitForm5.vue";
@@ -94,6 +103,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm3,
         SuccessSubmitForm3,
         ErrorSubmitForm3,
+        CancelSubmitForm4,
+        SuccessSubmitForm4,
+        ErrorSubmitForm4,
         CancelSubmitForm5,
         SuccessSubmitForm5,
         ErrorSubmitForm5,
