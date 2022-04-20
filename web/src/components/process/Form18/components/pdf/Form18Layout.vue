@@ -1,7 +1,7 @@
 <template>
     <div v-if="dataReady">
 
-        <!-- <header> -->
+<!-- <header> -->
         <div style="margin-top:-1.25rem;">
             <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
             <div class="row" style="display: block; text-align: center; border: 1px solid black; background: black; color: white;">
@@ -195,8 +195,6 @@
             </div>
         </div>
 
-
-
 <!--  < Part B >   ____________________________________________________________         -->
 
         <div class="row mt-4">
@@ -301,7 +299,6 @@
             <div style="width:25.25%; float: right;">On Behalf of {{result.filingParties.join(', ')}}</div> -->
 
         </div>
-
 
     </div>
 </template>
