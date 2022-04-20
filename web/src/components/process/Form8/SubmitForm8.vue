@@ -73,7 +73,7 @@ import { packageInfoType } from '@/types/Information';
 export default class SubmitForm8 extends Vue {
 
     @form8State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentNoticeOfApplicationToVaryId: string;
 
     @form8State.State
     public form8Info: form8DataInfoType;
@@ -101,7 +101,7 @@ export default class SubmitForm8 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/form8/efiling/"+this.currentNoticeOfSettlementOrAbandonmentId+"/submit/";
+        const url = "/form8/efiling/"+this.currentNoticeOfApplicationToVaryId+"/submit/";
 
         const header = {
             responseType: "json",

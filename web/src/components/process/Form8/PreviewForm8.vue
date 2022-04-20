@@ -54,7 +54,7 @@ import { form8StatusInfoType } from '@/types/Information/Form8';
 export default class PreviewForm8 extends Vue {
 
     @form8State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentNoticeOfApplicationToVaryId: string;
 
     stepsCompleted = {} as form8StatusInfoType; 
     
