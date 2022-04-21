@@ -171,68 +171,34 @@
         </b-row>
 
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
-             <ol>
+            <ol class="mt-3">
                 <li>
-                    Complete either the .DOCs or .PDFs below. Click on the document names for more information.
+                    Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">                                    
+                                <b-col cols="9">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Notice of Application to Vary
-                                    </a>                                    
-                                </b-col>
-                                <b-col cols="2" >
-                                    6 copies
-                                </b-col>
-                                <b-col cols="1">
+                                    </a>
+                                </b-col>                                
+                                <b-col cols="3" class="p-0" >
                                     <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2015.doc"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
+                                        @click="startNewForm8Document"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form15.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    Affidavit                                                                        
-                                </b-col>
-                                <b-col cols="2" >
-                                    6 copies
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Affidavit.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
                     </ul>
+                </li>                
+                <li>
+                    File the document with the registry.
                 </li>
                 <li>
-                    File the indicated number of copies with the registry.
-                </li>
-                <li>
-                    Serve one copy to each respondent.
+                    Serve one copy of the notice hearing and each attached order to each respondent.
                 </li>
             </ol>
         </b-row>
@@ -317,9 +283,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import appApplyLeaveInstructions from "@/components/process/AppealProcess/pathwayInstructions/appApplyLeaveInstructions.vue";
 import appLeaveRefusedFinalInstructions from "@/components/process/AppealProcess/pathwayInstructions/appLeaveRefusedFinalInstructions.vue";
+
+import "@/store/modules/forms/form8";
+const form8State = namespace("Form8");
 
 @Component({
     components:{
@@ -329,6 +300,9 @@ import appLeaveRefusedFinalInstructions from "@/components/process/AppealProcess
     }
 })
 export default class ApplyLeaveAppRightToAppealPg extends Vue {
+
+    @form8State.Action
+    public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
 
     showIntroInfo = true;  
     showMotionBookInfo = false;    
@@ -355,7 +329,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
         }
     }
 
-     public showDecisionOnLeave(show: boolean){
+    public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
             this.$emit('adjustHeights', 2, "52rem");
@@ -363,6 +337,11 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
             this.showDecisionOnLeaveInfo = false;
             this.$emit('adjustHeights', 2, "0");
         }
+    }
+
+    public startNewForm8Document(){
+        this.UpdateCurrentNoticeOfApplicationToVaryId(null);
+        this.$router.push({name: "start-form8" })
     }
 
 }
