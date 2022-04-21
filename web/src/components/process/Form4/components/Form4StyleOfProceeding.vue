@@ -83,6 +83,7 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group                
+                        stacked
                         style="width:100%" 
                         :state="state.applicantParties"
                         @change="updateOtherParties"                   
@@ -103,6 +104,7 @@
                     <b-col class="ml-1 mt-2">   
 
                         <b-form-checkbox-group 
+                            stacked
                             :key="updated"               
                             style="width:100%" 
                             :state="state.respondentParties"                   

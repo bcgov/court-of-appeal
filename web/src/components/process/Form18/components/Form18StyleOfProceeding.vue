@@ -149,6 +149,7 @@
             <b-col >   
 
                 <b-form-checkbox-group                
+                    stacked
                     style="width:100%" 
                     :state="state.filingParties"                                        
                     v-model="form18Info.filingParties"                    
