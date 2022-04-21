@@ -5,7 +5,15 @@
             <template v-slot:modal-title>
                 <h2 class="m-0 ml-1 text-white" style="font-size: 2rem;">Click on the form to fill</h2>                                  
             </template>
-            <b-row v-for="form,inx in forms" :key="inx"> 
+            <b-row style="border-bottom:1px solid #DDD; background:#EEE; padding: 1rem 0;">
+                <b-col cols="4">
+                    <b class="text-primary float-right">Search Forms by a key:</b>
+                </b-col>
+                <b-col cols="8">
+                    <b-form-input v-model="searchingKey" style="margin:-0.45rem 0 -0.5rem 0; width:27rem;"/>
+                </b-col>
+            </b-row>
+            <b-row v-for="form,inx in filteredForms" :key="inx"> 
                 <b-button 
                     size="sm" 
                     variant="transparent" 
@@ -60,6 +68,9 @@ const form8State = namespace("Form8");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form16";
+const form16State = namespace("Form16");
+
 import "@/store/modules/forms/form18";
 const form18State = namespace("Form18");
 
@@ -99,6 +110,9 @@ export default class NewFormModal extends Vue {
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
+    @form16State.Action
+    public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
+
     @form18State.Action
     public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
 
@@ -117,14 +131,23 @@ export default class NewFormModal extends Vue {
         {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},   
         {name:'form8', title:'Notice of Application to Vary an Order of a Justice (Form 8)'},     
         {name:'form9', title:'Requisition (Form 9)'},
+        {name:'form16', title:'Offer To Settle Costs (Form 16)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
         {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'}
         // {name:'form7', title:''},
     ]
 
+    searchingKey=''
 
     mounted() {        
+    }
+
+    get filteredForms(){
+        if(this.searchingKey.trim().length>0)
+            return this.forms.filter(form => form.title.toLowerCase().includes(this.searchingKey.toLowerCase()))
+        else
+            return this.forms
     }
 
     CloseModal(){
@@ -164,6 +187,9 @@ export default class NewFormModal extends Vue {
         }else if(form=='form9'){
             this.UpdateCurrentRequisitionId(null)
             this.$router.push({name: "start-form9" });
+        }else if(form=='form16'){
+            this.UpdateCurrentOfferToSettleCostsId(null);
+            this.$router.push({name: "start-form16" });
         }else if(form=='form18'){
             this.UpdateCurrentNoticeOfRepChangeAddressId(null)
             this.$router.push({name: "start-form18" });
