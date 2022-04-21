@@ -34,6 +34,9 @@ const form6State = namespace("Form6");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/forms/form8";
+const form8State = namespace("Form8");
+
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
@@ -67,6 +70,9 @@ export default class MenuBar extends Vue {
 	@form1State.Action
 	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
+	@form8State.Action
+    public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
+
 	@form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
@@ -90,6 +96,7 @@ export default class MenuBar extends Vue {
 		this.UpdateCurrentNoticeOfApplicationId(null);
 		this.UpdateCurrentNoticeOfCrossAppealId(null);
 		this.UpdateCurrentNoticeOfAppealId(null);
+		this.UpdateCurrentNoticeOfApplicationToVaryId(null);
 		this.UpdateCurrentRequisitionId(null);
 		this.UpdateCurrentNoticeOfRepChangeAddressId(null);
 		this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null);
