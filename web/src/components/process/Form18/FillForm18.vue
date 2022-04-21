@@ -19,17 +19,15 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Notice of Appearance (Form 2)?
+                When Do You Use the Notice of Change of Representation/Change 
+                of Address for Service (Form 18)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 1), and you want to respond, 
-                fill out the Notice of Appearance (Form 2). If you do not respond, you will 
-                not be included in future court proceedings related to this case, and will 
-                not have access to the case documents filed.
+                If you want to change to a different lawyer or now want to represent 
+                yourself.  This also can be used if your address for service has changed.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You have 10 days to serve a filed copy of the Notice of Appearance to the 
-                appellant, after receiving a Notice of Appeal.    
+                <i>You will need to file and serve a copy of the document on each party.</i>   
             </b-row>        
            
         </b-card>

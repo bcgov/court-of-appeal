@@ -29,7 +29,7 @@
             </p>           
         </b-row> 
 
-        <b-row :class="showIntroInfo?'mt-4':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showIntroInfo?'mt-2':'mt-4'" style="padding-top: 0.65rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Motion and Motion Book
             </b-col> 
@@ -312,7 +312,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showIntro(show: boolean){
         if (show) {
             this.showIntroInfo = true;
-            this.$emit('adjustHeights', 0, "10rem");
+            this.$emit('adjustHeights', 0, "7rem");
         } else {
             this.showIntroInfo = false;
             this.$emit('adjustHeights', 0, "0");
