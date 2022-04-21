@@ -316,7 +316,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form4FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form4',
                 formName:'Form 4',
                 description:'Notice of Application',
@@ -412,7 +412,7 @@ export default class MyDocumentsTableBrief extends Vue {
         for (const docJson of this.form8FormsJson) {
             const doc = { 
                 id:'',
-                pdfType:'',
+                pdfType:'FORM',
                 form:'form8',
                 formName:'Form 8',
                 description:'Notice of Application to Vary',

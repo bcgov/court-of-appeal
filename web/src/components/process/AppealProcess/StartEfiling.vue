@@ -1,13 +1,15 @@
 <template>
     <b-card border-variant="white">
         
-        <h3>Start E-Filing</h3>
+        <h3>Start or Respond to an appeal in the Court of Appeal</h3>
         <p>
-            To start e-filing, answer the questions below.
+            This application will assist in completing the Court of 
+            Appeal forms to start or respond to an appeal in and 
+            information about the Court of Appeal process.
         </p>
 
         <b-card no-body border-variant="white">
-            <p>Are you starting or responding to an appeal?</p>
+            <h4>Are you starting or responding to an appeal?</h4>
 
             <b-row>
                 <b-col>              
@@ -61,7 +63,7 @@
         </b-card> -->
 
         <b-card class="mt-3" v-if="startAppeal" no-body border-variant="white">
-            <p>Are you representing yourself?</p>
+            <h4>Are you representing yourself?</h4>
 
             <b-row>
                 <b-col>              

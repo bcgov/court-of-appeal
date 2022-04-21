@@ -2,6 +2,17 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
+
+            <!-- <b-col cols="2" class="ml-3">
+                <b-button 
+                    style="float: right;" 
+                    variant="primary"
+                    @click="onPrintSave()"
+                    >
+                    Print-Save
+                </b-button>
+            </b-col> -->
+
             <b-col cols="10">
                 <b-button
                     style="float: right;" 
@@ -71,7 +82,7 @@ export default class Form16 extends Vue {
     }   
            
     public onPrint() { 
-        const pdf_type = "ABA"
+        const pdf_type = "FORM"
         const pdf_name = "form16-" + this.currentOfferToSettleCostsId;
         const el= document.getElementById("print");
 
@@ -102,7 +113,7 @@ export default class Form16 extends Vue {
     }
 
     public savePdf(){        
-        const pdfType = "ABA"
+        const pdfType = "FORM"
         const pdfName ="Form16"
         const url = '/form16/form-print/'+this.currentOfferToSettleCostsId+'/?pdf_type='+pdfType
         const options = {
@@ -136,22 +147,58 @@ export default class Form16 extends Vue {
  
     public getForm16Data() {        
        
-        // this.$http.get('/form16/forms/'+this.currentOfferToSettleCostsId)
-        // .then((response) => {
-        //     if(response?.data?.data){            
+        this.$http.get('/form16/forms/'+this.currentOfferToSettleCostsId)
+        .then((response) => {
+            if(response?.data?.data){            
                             
-        //         this.result = response.data.data
-        //         this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
-                this.result = this.form16Info;
+                this.result = response.data.data
+                this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
+                // this.result = this.form16Info;
                 this.UpdateForm16Info(this.result)                         
                 this.dataReady = true;
-        //         Vue.nextTick(()=> this.onPrint())
-        //     }
+                Vue.nextTick(()=> this.onPrint())
+            }
                 
-        // },(err) => {
-        //     console.log(err)        
-        // });      
+        },(err) => {
+            console.log(err)        
+        });      
     }
+
+    // public onPrintSave() { 
+    //     const pdf_type = "FORM"
+    //     const pdf_name = "form16-" + this.currentOfferToSettleCostsId
+    //     const el= document.getElementById("print");
+      
+    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+    //     const bottomRightText = `" "`;        
+    //     const url = '/form16/form-print/'+this.currentOfferToSettleCostsId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+    //     const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+
+    //     const body = {
+    //         'html':pdfhtml,
+    //         'json_data':this.result
+    //     }       
+        
+    //     const options = {
+    //         responseType: "blob",
+    //         headers: {
+    //         "Content-Type": "application/json",
+    //         }
+    //     }  
+
+    //     this.$http.post(url,body, options)
+    //     .then(res => {                       
+    //         const blob = res.data;
+    //         const link = document.createElement("a");
+    //         link.href = URL.createObjectURL(blob);
+    //         document.body.appendChild(link);
+    //         link.download = "FORM16.pdf";
+    //         link.click();
+    //         setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
+    //     },err => {
+    //         console.error(err);        
+    //     });
+    // }
 }
 </script>
 <style scoped lang="scss" src="@/styles/_pdf.scss">

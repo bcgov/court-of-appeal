@@ -5,7 +5,15 @@
             <template v-slot:modal-title>
                 <h2 class="m-0 ml-1 text-white" style="font-size: 2rem;">Click on the form to fill</h2>                                  
             </template>
-            <b-row v-for="form,inx in forms" :key="inx"> 
+            <b-row style="border-bottom:1px solid #DDD; background:#EEE; padding: 1rem 0;">
+                <b-col cols="4">
+                    <b class="text-primary float-right">Search Forms by a key:</b>
+                </b-col>
+                <b-col cols="8">
+                    <b-form-input v-model="searchingKey" style="margin:-0.45rem 0 -0.5rem 0; width:27rem;"/>
+                </b-col>
+            </b-row>
+            <b-row v-for="form,inx in filteredForms" :key="inx"> 
                 <b-button 
                     size="sm" 
                     variant="transparent" 
@@ -137,8 +145,16 @@ export default class NewFormModal extends Vue {
         // {name:'form7', title:''},
     ]
 
+    searchingKey=''
 
     mounted() {        
+    }
+
+    get filteredForms(){
+        if(this.searchingKey.trim().length>0)
+            return this.forms.filter(form => form.title.toLowerCase().includes(this.searchingKey.toLowerCase()))
+        else
+            return this.forms
     }
 
     CloseModal(){
