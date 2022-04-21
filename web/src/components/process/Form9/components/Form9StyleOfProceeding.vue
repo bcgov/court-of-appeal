@@ -71,16 +71,14 @@
                 <b-col cols="3" style="font-weight: 700;">
                     Name of party(ies) filing the requisition:                                
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
+                <b-col class="ml-1 mt-2"> 
                     <b-form-checkbox-group                
+                        stacked
                         style="width:100%" 
                         :state="state.filingRequisitionParties"                                    
                         v-model="form9Info.filingRequisitionParties"                    
                         :options="partyNames">
                     </b-form-checkbox-group>
-                    
-                    
                 </b-col>
             </b-row>
 

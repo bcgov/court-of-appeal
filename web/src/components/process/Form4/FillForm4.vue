@@ -19,14 +19,16 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do you Use the Notice of Settlement or Abandonment (Form 6)?
+                When Do You Use the Notice of Application (Form 4)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you do not wish to proceed with your appeal or application for 
-                leave to appeal because the matter has settled or for any other reason.
+                If you need to make certain applications to court 
+                before your appeal comes up for hearing.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You must immediately file and serve a Notice of Settlement or Abandonment.    
+                Please be advised that the materials required for 
+                applications and timelines for filing and service may 
+                vary depending on the type of application.    
             </b-row>        
            
         </b-card>

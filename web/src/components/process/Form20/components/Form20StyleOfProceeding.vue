@@ -52,6 +52,7 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group                
+                        stacked
                         style="width:100%" 
                         :state="state.objectingParties"                                        
                         v-model="form20Info.objectingParties"                    
