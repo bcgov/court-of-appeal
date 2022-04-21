@@ -1,55 +1,236 @@
 <template>
-    <b-card class="bg-white border-white w-90">               
-        
+    <b-card class="bg-white border-white w-90"> 
+
         <b-row class="mt-1" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
-                I do not want to proceed with the appeal, or we have settled the matter.
+                I am applying for:
             </b-col>   
             <b-col cols="1">
                 <b-button
-                    @click="showForm6(!showForm6Info)"                                       
+                    @click="showIntro(!showIntroInfo)"                                       
                     class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showForm6Info"></expand-icon>
+                    <expand-icon v-bind:showExpanded="showIntroInfo"></expand-icon>
                 </b-button>
             </b-col>         
         </b-row>       
 
-        <b-row v-if="showForm6Info" class="mt-4" >
-            If you wish to abandon an appeal or an application for leave to appeal, 
-            the appellant must immediately file a Notice of Abandonment in Form 22 and serve it on each party.
+        <b-row v-if="showIntroInfo" class="mt-4" >
+            <b-form-checkbox-group
+                style="font-size: 1rem; font-weight:500;"        
+                v-model="applications"                
+                @change="update"                                     
+                stacked                
+            >                        
+                <b-form-checkbox
+                    v-for="application in applicationsList" 
+                    @change="update"
+                    :key="application.value"
+                    :value="application.value">
+                        {{application.text}}
+                </b-form-checkbox> 
+            </b-form-checkbox-group>
+        </b-row>              
+        
+        <b-row :class="showIntroInfo?'mt-3':'mt-4'" style="padding-top: 1rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Stay Applications
+            </b-col>   
+            <b-col cols="1">
+                <b-button
+                    @click="showStayApplications(!showStayApplicationsInfo)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showStayApplicationsInfo"></expand-icon>
+                </b-button>
+            </b-col>         
+        </b-row>       
+
+        <b-row v-if="showStayApplicationsInfo" class="mt-4" >
+            <p>
+                If you are seeking leave to appeal, you may bring an application to 
+                stay the enforcement of the order being appealed from with the 
+                application for leave.  
+            </p>
+            <p>
+                If you are joining a stay application with an application for 
+                leave, you must do the following instead of bringing an application 
+                for leave to appeal under rule 9.
+            </p>
             <ol class="mt-3">
                 <li>
-                    Complete either the .DOC or .PDF below. Click on the document name for more information.
-                    <ul>
+                    File an application book for leave to appeal and stay in Form X
+                   
+                </li>                
+                <li>
+                    Serve each party a copy of the application book for leave to 
+                    appeal and stay by earlier of the following dates:
+                   <ul>
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"
-                                        target="_blank">Notice of Settlement or Abandonment
-                                    </a>
-                                </b-col>                                
-                                <b-col cols="3" class="p-0" >
-                                    <b-button
-                                        @click="startNewForm6Document"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                    </b-button>
-                                </b-col>
-                            </b-row>
+                            Date that is 30 days after the related notice of appeal 
+                            or notice of cross appeal was filed and
+                        </li>
+                        <li>
+                            The date that is 10 business days before the application hearing date.
                         </li>
                     </ul>
                 </li>                
-                <li>
-                    File the document with the registry.
-                </li>
-                <li>
-                    Serve one copy of the notice hearing and each attached order to each respondent.
-                </li>
             </ol>
+
+            If you are not applying for leave to appeal but still want to make an 
+            application for a stay, you will need to complete the steps outlined in the
+
+            <ol class="mt-3">
+                <li>
+                    Obtain an application hearing date from the registrar
+                   
+                </li>                
+                <li>
+                    You must do the following at least 5 business days before 
+                    the application hearing date file and serve the following 
+                    materials:
+                   <ul>
+                        <li>
+                             Notice of application in Form 6;
+                        </li>
+                        <li>
+                            Application book in Form 4;
+                        </li>
+                    </ul>
+                </li>                
+            </ol>
+ 
         </b-row>   
 
-        <b-row :class="showForm6Info?'mt-3':'mt-4'" style="padding-top: 1rem;">            
+        <b-row :class="showStayApplicationsInfo?'mt-3':'mt-4'" style="padding-top: 1rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Applications Requirements or Steps
+            </b-col>   
+           
+            <b-col cols="1">
+                <b-button
+                    @click="showSteps(!showStepsInfo)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showStepsInfo"></expand-icon>
+                </b-button>
+            </b-col>         
+            
+        </b-row>       
+             
+
+        <b-row v-if="showStepsInfo" class="mt-4" >
+
+            <p>
+                Before filing a notice of application or any other document for 
+                commencing an application, you must first obtain an application 
+                hearing date from the registrar.  
+            </p>
+            <p>
+                If you wish to bring an application, you must at least 5 business 
+                days before the application hearing date file and serve on each 
+                party, the application materials listed below.
+            </p>
+            <ul class="mt-3">
+                <li>
+                    Notice of Application in Form 6                                
+                </li> 
+                <li>
+                    Affidavits (if any),
+                </li>
+                <li>
+                    Written argument (if any)
+                </li>
+            </ul>
+
+            <div v-if="applications.includes('urgent')">
+                <b>Urgent application:</b>
+                <p>
+                    In case of urgency, you may apply for permission to bring an 
+                    application on shorter notice than otherwise required under the rules.
+                </p>
+                <ol>
+                    <li>
+                        Obtain an application hearing date from the registrar (need link for this).
+                    </li>
+                    <li>
+                        Complete and file a short notice application in Form 7
+                    </li>
+                    <li>
+                        A justice or registrar may at the hearing do the following:
+                        <ul>
+                            <li>
+                                Order that an application be heard on shorter notice than otherwise required
+                            </li>
+                            <li>
+                                Impose conditions or give directions
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div v-if="applications.includes('securityPayment')">
+                <b>Payment of security:</b>
+                <p>
+                    Obtain an application hearing date from the registrar
+                </p>
+                <p>
+                    If you wish to bring an application, you must at 
+                    least 5 business days before the application hearing 
+                    date file and serve on each party, the application 
+                    materials listed below.
+                </p>
+                <ol>
+                    <li>
+                        Notice of Application in Form 6
+                    </li>
+                    <li>
+                        Application Book
+                    </li>
+                    <li>
+                        Affidavits (if any), 
+                    </li>
+                    <li>
+                        Written argument (if any)
+                    </li>
+                </ol>
+            </div>
+
+            <div v-if="applications.includes('newEvidence')">
+                <b>Adducing fresh or new evidence:</b>
+                <p>
+                    If you wish to apply for leave to adduce evidence that was 
+                    not before the lower court, you must do the following:
+                </p>
+                <p>
+                    At least 30 days before the appeal hearing date, the 
+                    following must be completed, filed and served:
+                </p>
+                <p>
+                    If application is to be heard before the time of 
+                    the hearing of the appeal:
+                </p>
+                <ol>
+                    <li>
+                        Obtain an application hearing date from the registrar
+                    </li>
+                    <li>
+                        Notice of Application in Form 6
+                    </li>
+                    <li>
+                        Supporting Affidavit in Form X, that includes the evidence 
+                        that the party is seeking to adduce
+                    </li>
+                    <li>
+                        Affidavits (if any), 
+                    </li>
+                    <li>
+                        Written argument (if any)
+                    </li>
+                </ol>
+            </div>
+
+        </b-row>
+
+        <b-row :class="showStepsInfo?'mt-3':'mt-4'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 I would like to submit a request
             </b-col>   
@@ -97,20 +278,9 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showForm9Info?'mt-5':'mt-3'" :style="showForm9Info?'padding-top: 0.8rem;':'padding-top: 1.3rem;'">            
-            <b-col cols="11" class="step-title-column pl-0">
-                I would like to submit a Notice of Application
-            </b-col>   
-            <b-col cols="1">
-                <b-button
-                    @click="showForm4(!showForm4Info)"                                       
-                    class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showForm4Info"></expand-icon>
-                </b-button>
-            </b-col>         
-        </b-row>
+        
 
-        <b-row v-if="showForm4Info" class="mt-4" >
+        <b-row  class="mt-4" >
             If you wish to submit a notice of application:
             <ol class="mt-3">
                 <li>
@@ -178,39 +348,79 @@ export default class ManagingAppealProcessPg extends Vue {
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
-    showForm6Info = true;  
-    showForm9Info = false; 
-    showForm4Info = false; 
+    applicationsList = [
+        {text: 'an application for leave to appeal', value:'leaveToAppeal'},
+        {text: 'an application for a stay of proceedings or stay of execution', value:'stay'},
+        {text: 'reinstate appeal that is dismissed as abandoned', value:'dismissed'},
+        {text: 'an urgent application', value:'urgent'},
+        {text: 'payment of security', value:'securityPayment'},
+        {text: 'adducing fresh or new evidence', value:'newEvidence'},
+        {text: 'quashing an appeal or raising a preliminary objection', value:'objection'},
+        {text: 'intervener status', value:'intervener'},
+        {text: 'varying an order of a justice', value:'varyingJusticeOrder'},
+        {text: 'varying or cancelling an order of the registrar', value:'varyingRegistrarOrder'},
+        {text: 'other', value:'other'}
+    ]
+    showIntroInfo = true;
+    // showForm6Info = false; 
+    showStayApplicationsInfo = false;
+    showStepsInfo = false; 
+    showForm9Info = false;     
+    applications = [];
+    updated = 0;
+    stepsLength = 16;
 
-    public showForm6(show: boolean){
+    mounted(){
+        this.stepsLength = 16;
+    }
+
+    public update(){  
+        console.log(this.applications)
+        //TODO: calcuklate length based on selected application
+        this.updated ++; 
+    }
+    
+    public showIntro(show: boolean){
         if (show) {
-            this.showForm6Info = true;
-            this.$emit('adjustHeights', 0, "14rem");
+            this.showIntroInfo = true;
+            this.$emit('adjustHeights', 0, "19rem");
         } else {
-            this.showForm6Info = false;
+            this.showIntroInfo = false;
             this.$emit('adjustHeights', 0, "0");
+        }
+    }  
+
+    public showStayApplications(show: boolean){
+        if (show) {
+            this.showStayApplicationsInfo = true;
+            this.$emit('adjustHeights', 1, "30rem");
+        } else {
+            this.showStayApplicationsInfo = false;
+            this.$emit('adjustHeights', 1, "0");
+        }
+    } 
+    
+    public showSteps(show: boolean){
+        if (show) {
+            this.showStepsInfo = true;
+            this.$emit('adjustHeights', 2, this.stepsLength + "rem");
+        } else {
+            this.showStepsInfo = false;
+            this.$emit('adjustHeights', 2, "0");
         }
     }   
 
     public showForm9(show: boolean){
         if (show) {
             this.showForm9Info = true;
-            this.$emit('adjustHeights', 1, "14rem");
+            this.$emit('adjustHeights', 3, "14rem");
         } else {
             this.showForm9Info = false;
-            this.$emit('adjustHeights', 1, "0");
+            this.$emit('adjustHeights', 3, "0");
         }
     }
 
-    public showForm4(show: boolean){
-        if (show) {
-            this.showForm4Info = true;
-            this.$emit('adjustHeights', 2, "14rem");
-        } else {
-            this.showForm4Info = false;
-            this.$emit('adjustHeights', 2, "0");
-        }
-    }
+    
 
     public startNewForm6Document(){
         this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
