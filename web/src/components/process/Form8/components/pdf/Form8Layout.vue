@@ -9,14 +9,14 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 8</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF APPLICATION TO VARY AN ORDER OF A JUSTICE: RULE 62(2)</b></div>
+                <div style="width:72%; font-size:14pt; text-align:left; padding-left:1rem; line-height:1.65rem;"><b>NOTICE OF APPLICATION TO VARY AN ORDER OF A JUSTICE: RULE 62(2)</b></div>
             </div>         
         </div>
        
 <!-- <stamp-info-box> -->
         <div style="margin: 0.75rem -15px 0 -15px; text-align: center; border: 1px solid black; font-size: 10pt;">
 
-            <div class="my-2 row" > 
+            <div class="my-0 row" > 
                 <div style="width:30%;">
                     <div style="border: 1px solid #E8E8E8; width: 9rem; height: 9rem; margin: 2rem 2rem; text-align:center; line-height:8.5rem;">
                         [STAMP]
@@ -24,7 +24,7 @@
                 </div>
 
                 <div style="width:70%;">
-                    <div class="row" >
+                    <div class="row mt-4" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
                         <div class="coa-text-box" style="width:40%; font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
@@ -53,7 +53,7 @@
     <!-- <name-of-appellants> -->
             <div class="row mt-3" style="font-size: 9pt; margin-left: 1rem;">
 
-                <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">                    
+                <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:4.5rem;">                    
                     <div class="ml-2">
                         <b> Appellant(s)</b>
                         <i>
@@ -62,7 +62,7 @@
                     </div> 
                 </div>
 
-                <div class="arrow-right-flash-36"></div>
+                <div class="arrow-right-flash-45"></div>
                         
                 <div class="coa-text-box-left" style="width:60%;">
                     <div class="ml-2" style="font-weight: 700;">{{result.appellantNames}}</div>                       
@@ -72,7 +72,7 @@
     <!-- <name-of-respondents> -->
             <div class="row mt-3" style="font-size: 9pt; margin-left: 1rem;">
 
-                <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+                <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:4.5rem;">
                     <div class="ml-2">
                         <b> Respondent(s)</b>
                         <i>
@@ -81,14 +81,14 @@
                     </div>  
                 </div>
 
-                <div class="arrow-right-flash-36"></div>
+                <div class="arrow-right-flash-45"></div>
                         
                 <div class="coa-text-box-left" style="width:60%;">
                     <div class="ml-2" style="font-weight: 700;">{{result.respondentNames}}</div>                       
                 </div> 
             </div> 
 
-            <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
+            <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin:1rem 0.5rem 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="font-weight: 700; margin-bottom: 0.75rem;">
                     To the party(ies) filing the application
                 </div>
@@ -107,9 +107,9 @@
         </div>
 
 <!-- <name-of-parties> -->
-        <div class="row mt-3" style="font-size: 9pt;">          
+        <div class="row mt-4" style="font-size: 9pt;">          
 
-            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.6rem 0; height:5.5rem;">
                 <div class="ml-2">
                     <b> Name of the party(ies) bringing the application.</b>
                     <i>
@@ -118,7 +118,7 @@
                 </div>  
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-54"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.filingParties.join(', ')}}</div>                       
@@ -128,7 +128,7 @@
 <!-- <date-pronounced> -->
         <div class="row mt-3" style="font-size: 9pt;">
             
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; line-height:1rem; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.45rem 0; line-height:1rem; height:3.5rem;">
                 <div class="ml-2">
                     <b>Date the order you are seeking to vary was pronounced</b>
                     <i style="font-size:8.5pt;"><br>Not the date the order was entered.</i>
@@ -136,7 +136,7 @@
             </div>
             <div class="arrow-right-flash-36"></div>       
 
-            <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
+            <div class="coa-text-box-center" style="width:15%; font-weight: 700; margin:0 0.25rem 0 -0.5rem;">{{result.orderDate | beautify-date-dd/mm/yyyy}}</div>           
                 
             <div class="coa-arrow-box-left" style="width:20%; margin:.5rem 0 0 0.5rem; height:3.5rem;">
                 <div class="ml-2">
@@ -145,7 +145,7 @@
             </div>
             <div class="arrow-right-flash-36"></div> 
 
-            <div class="coa-text-box-left" style="width:20%;">
+            <div class="coa-text-box-left" style="width:21.5%; margin:0 0 0 -0.5rem;">
                 <div class="ml-2" style="font-weight: 700;">{{result.judgeName}}</div>                       
             </div>      
        
@@ -153,7 +153,7 @@
 
 <!-- <date-help>-->
         <div class="row" style="font-size: 9pt;">
-            <div style="width:36%;"></div>
+            <div style="width:34.7%;"></div>
             <div style="width:15%">
                 <div class="arrow-up-flash"></div>
                 <div class="arrow-up-box"></div>               
@@ -161,7 +161,7 @@
             </div>
         </div>
 
-        <div class="row" style="display: block; text-align: left;">
+        <div class="row mt-5" style="display: block; text-align: left;">
             <div style="font-size:10pt; font-weight: 700;">
                  Application hearing date and time to be set by the Associate Registrar
             </div>                

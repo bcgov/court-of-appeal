@@ -9,8 +9,8 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 4</b></div>
-                <div style="width:75%; font-size:14pt; text-align: left; padding-left: 0.25rem;">
-                    <b>NOTICE OF APPLICATION: RULES 13(a), 20(3) and (4), 54(a), 58(1), 59(1), 60(2), 61(2), 63(2)</b>
+                <div style="width:70%; font-size:14pt; text-align: left; padding-left: 0.75rem; line-height:1.75rem;">
+                    <b style="font-size:16pt;">NOTICE OF APPLICATION:</b><b class="ml-2" > RULES 13(a), 20(3) and (4), 54(a), 58(1), 59(1), 60(2), 61(2), 63(2)</b>
                 </div>
             </div>         
         </div>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div style="width:70%;">
-                    <div class="row" >
+                    <div class="row mt-4" >
                         <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Court of Appeal File No.</div></div>
                         <div class="coa-text-box" style="width:40%; font-weight: 700;" >{{result.formSevenNumber}}</div>
                     </div>
@@ -51,15 +51,21 @@
 
         </div>
 
+        <div class="row mt-3" style="font-size: 12pt;">
+            <b>PARTIES TO THE APPEAL</b>
+        </div>
+
 <!-- <name-of-appellants> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Appellant(s)</b>
-                List the name(s) of the appellant(s) named on Form 1: Notice of Appeal
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.55rem 0; height:4.5rem;">
+                <div class="ml-2" style="line-height:1.1rem;">
+                    <b>Appellant(s)</b><br/>
+                    <i>List the name(s) of the appellant(s) named on Form 1: Notice of Appeal</i>
+                </div>
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-45"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.appellantNames}}</div>                       
@@ -69,12 +75,14 @@
 <!-- <name-of-respondents> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Respondent(s)</b>
-                List the name(s) of the respondent(s) named on Form 1: Notice of Appeal
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.55rem 0; height:4.5rem;">
+                <div class="ml-2" style="line-height:1.1rem;">
+                    <b>Respondent(s)</b><br/>
+                    <i style="font-size:8.8pt;" >List the name(s) of the respondent(s) named on Form 1: Notice of Appeal</i>
+                </div>
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-45"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.respondentNames}}</div>                       
@@ -84,35 +92,34 @@
 <!-- <jurisdiction-type> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1rem; height:2.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.32rem 0; line-height:1rem; height:2.5rem;">
                 <b class="ml-2">The application is in the jurisdiction of:</b>
             </div>
 
-            <div class="arrow-right-flash-20"></div>           
-            
-            <div style="width:2%;"></div>
+            <div class="arrow-right-flash-25"></div>           
+                       
 
-            <div style="width:25%; margin:0.5rem 0;">                  
+            <div style="width:24%; margin-top:1rem;">                  
                 <check-box 
-                    style="margin-left:1rem;"
+                    style="margin: 0 0 0 1.75rem;"
                     :check="(result.jurisdictionType == 'The Court (3 Judges)')?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="The Court (3 Judges)"/> 
             </div>
 
-            <div style="width:20%;margin:0.5rem 0;">
+            <div style="width:22%; margin-top:1rem;">
                 <check-box 
-                    style="margin: 0 ;" 
+                    style="margin: 0rem 0rem 0 1.75rem;" 
                     :check="(result.jurisdictionType == 'A Chambers Judge')?'yes':''"
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="A Chambers Judge"/> 
             </div>
             
-            <div style="width:18%;margin:0.5rem 0;">
+            <div style="width:18%;  margin-top:1rem;">
                 <check-box 
-                    style="margin: 0 ;" 
+                    style="margin: 0rem 0rem 0 1.75rem;" 
                     :check="(result.jurisdictionType == 'The Registrar')?'yes':''"
                     shiftmark="1" 
                     marginLeft="0.5rem"
@@ -121,7 +128,8 @@
             
         </div>
 
-        <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding: 0.5rem;">
+<!-- <Comment To the Party(ies)> -->
+        <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem -15px 0.5rem -15px; text-align: left; padding: 0.5rem;">
             <div style="font-weight: 700; margin-bottom: 0.75rem;">
                 To the party(ies) filing the application
             </div>
@@ -148,7 +156,7 @@
 <!-- <name-of-applying-parties> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1.2rem; margin:.5rem 0; height:3.5rem;">
                 <b class="ml-2">Name(s) of the party(ies) bringing the application</b>
             </div>
 
@@ -163,7 +171,7 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name(s) of responding party(ies) to be served with the application</b>
+                <b class="ml-2">Name(s) of responding party(ies) to be served <br/>with the application</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -177,8 +185,10 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Location where the application will be heard</b>
-                Enter the address of the courthouse.
+                <div class="ml-2" style="line-height:1.1rem;">
+                    <b>Location where the application will be heard</b><br/>
+                    <i style="font-size:8.7pt;">Enter the address of the courthouse.</i>
+                </div>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -193,46 +203,44 @@
         </div>
 
 <!-- <date-of-hearing> -->
-        <div class="row mt-2" style="font-size: 9pt;">
+        <div class="row mt-3" style="font-size: 9pt;">
             
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:2.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.29rem 0; line-height:1.25rem; height:2.5rem;">
                 <b class="ml-2">Date the application will be heard</b>
             </div>
 
-            <div class="arrow-right-flash-20"></div>
+            <div class="arrow-right-flash-25"></div>
 
-            <div style="width:2.35%;"></div>
+            <div style="width:1.65%;"></div>
 
-            <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center">
-                {{result.hearingDate | beautify-date-dd/mm/yyyy}}
-            </div>           
+            <div style="width:20%;">           
+                
+                <div class="coa-text-box-center" style="font-weight: 700; height:3rem; margin:0.1rem 0 0 0; ">
+                    <div class="mx-2" style="height:3rem; margin:1.75rem 0 0 0;">{{result.hearingDate | beautify-date-dd/mm/yyyy}}</div>                    
+                </div>
+                <div >
+                    <div class="arrow-up-flash"></div>
+                    <div class="arrow-up-box"></div>               
+                    <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
+                </div> 
+
+            </div>         
             
             <div style="width:5%;"></div>
             
-            <div class="coa-text-box-center" style="width:20%; text-align:center; background: #E8E8E8; border: 1px solid #E8E8E8;">
+            <div class="coa-text-box-center" style="width:20%; height:3rem; margin:0.1rem 0 0 0; text-align:center; background: #E8E8E8; border: 1px solid #E8E8E8;">
                 Chambers applications begin at 9:30 am.
-            </div>
-            
-            <div style="width:14.25%;"></div>  
+            </div>            
 
-        </div>
-<!-- <date-help>-->
-        <div class="row" style="font-size: 9pt;">
-            <div style="width:36%;"></div>
-            <div style="width:20%">
-                <div class="arrow-up-flash"></div>
-                <div class="arrow-up-box"></div>               
-                <div class="coa-help-box" style="text-align:center; line-height:0.25rem"><i>DD/MM/YYYY</i></div>                 
-            </div>
         </div>
 
 <!-- <rule-sections> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+            <div class="coa-arrow-box-left" style="line-height: 1rem; width:28%; margin:.4rem 0; height:9.15rem;">
                 <div class="ml-2">
                     <b> Enter the section(s) or rule(s) that you are relying on for your application</b>
-                    <i>
+                    <i style="line-height: 0.1rem;">
                         <br>E.g., If you are applying for leave to appeal, enter 
                         “Section 31 of the Court of Appeal Act”. If you are applying 
                         for a stay of proceedings, enter “Section 33 of the Court 
@@ -240,7 +248,7 @@
                     </i>
                 </div>
             </div>
-            <div class="arrow-right-flash-54"></div> 
+            <div class="arrow-right-flash-80"></div> 
 
             <div class="coa-text-box-left" style="width:64%;">                
                 <div class="ml-2" style="font-weight: 700;">
@@ -253,17 +261,17 @@
 <!-- <seeking-order> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+            <div class="coa-arrow-box-left" style="line-height: 1rem; width:28%; margin:.5rem 0; height:9.0rem;">
                 <div class="ml-2">
                     <b> Enter the order that you are seeking</b>
                     <i>
                         <br>E.g., “stay of proceedings” or “extension of time to file an appeal book” 
                         and any request with respect to costs. If you are seeking leave to appeal, 
-                        enter “leave to appeal the order of_________.” 
+                        enter “leave to appeal the order of _________.” 
                     </i>
                 </div>
             </div>
-            <div class="arrow-right-flash-54"></div> 
+            <div class="arrow-right-flash-80"></div> 
 
             <div class="coa-text-box-left" style="width:64%;">                
                 <div class="ml-2" style="font-weight: 700;">
@@ -276,7 +284,7 @@
 <!-- <book-required> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:6.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.35rem 0; line-height:1.05rem; height:6rem;">
                 <div class="ml-2">
                     <b>Is an application book required?</b>
                     <i>
@@ -286,24 +294,24 @@
                 </div>
             </div>
 
-            <div class="arrow-right-flash-20"></div>           
+            <div class="arrow-right-flash-54"></div>           
             
             <div style="width:2%;"></div>
 
-            <div style="width:20%; margin:0.5rem 0;">                  
+            <div style="width:20%; margin-top: 2.65rem;">                  
                 <check-box 
-                    style="margin-left:1rem;"
+                    style="margin-left:0.2rem;"
                     :check="(result.bookRequired)?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="Yes"/> 
             </div>
                 
-            <div style="width:15%;margin:0.5rem 0;"></div>       
+            <div style="width:5%;"></div>       
             
-            <div style="width:25%;margin:0.5rem 0;">
+            <div style="width:25%; margin-top: 2.65rem;">
             <check-box 
-                style="margin: 0 ;" 
+                style="margin:0;" 
                 :check="(!result.bookRequired)?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
@@ -315,7 +323,7 @@
 <!-- <affidavits> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:11.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:9rem;">
                 <div class="ml-2">
                     <b>
                         If you are not required to file an application book, list 
@@ -327,7 +335,7 @@
                     </i>
                 </div>
             </div>
-            <div class="arrow-right-flash-54"></div> 
+            <div class="arrow-right-flash-80"></div> 
 
             <div class="coa-text-box-left" style="width:64%;"> 
                 <div v-if="result.bookRequired" class="ml-2" style="font-weight: 700;"></div>               
@@ -343,35 +351,35 @@
 <!-- <contested> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:6.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:4.5rem;">
                 <div class="ml-2">
                     <b>The applicant anticipates that this application will be…</b>
                     <i><br>Check only one.</i>
                 </div>
             </div>
 
-            <div class="arrow-right-flash-20"></div>           
+            <div class="arrow-right-flash-45"></div>           
             
             <div style="width:2%;"></div>
 
-            <div style="width:20%; margin:0.5rem 0;">                  
+            <div style="width:20%; margin-top: 2rem;">                  
                 <check-box 
-                    style="margin-left:1rem;"
+                    style="margin-left:0.2rem;"
                     :check="(result.applicationContested)?'yes':''" 
                     shiftmark="1" 
                     marginLeft="0.5rem"
                     text="Contested"/> 
             </div>
                 
-            <div style="width:15%;margin:0.5rem 0;"></div>       
+            <div style="width:5%;"></div>       
             
-            <div style="width:25%;margin:0.5rem 0;">
-            <check-box 
-                style="margin: 0 ;" 
-                :check="(!result.applicationContested)?'yes':''"
-                shiftmark="1" 
-                marginLeft="0.5rem"
-                text="Uncontested"/> 
+            <div style="width:25%;margin-top: 2rem;">
+                <check-box 
+                    style="margin:0;" 
+                    :check="(!result.applicationContested)?'yes':''"
+                    shiftmark="1" 
+                    marginLeft="0.5rem"
+                    text="Uncontested"/> 
             </div>           
             
         </div>
@@ -379,7 +387,7 @@
 <!-- <email-addresses> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.35rem 0; height:6rem;">
                 <div class="ml-2">
                     <b> Email address(es) for service of applicant(s)</b>
                     <i>

@@ -149,7 +149,7 @@ export default class Form8CaseInformation extends Vue {
     public UpdateFileNumber!: (newFileNumber: string) => void
     
     @form8State.Action
-    public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
+    public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
     
     levelOfCourt = "Court of Appeal";
 
@@ -206,7 +206,7 @@ export default class Form8CaseInformation extends Vue {
             if(res.data?.parties){
                 this.UpdatePartiesJson(res.data.parties);
                 this.UpdateFileNumber(this.searchParams.file)
-                this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+                this.UpdateCurrentNoticeOfApplicationToVaryId(null);
                 this.$router.push({name: "fill-form8"})
             }
 

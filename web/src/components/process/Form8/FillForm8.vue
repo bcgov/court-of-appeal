@@ -19,14 +19,14 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do you Use the Notice of Settlement or Abandonment (Form 8)?
+                When Do you Use the Notice of Application To Vary an Order of a Justice (Form 8)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
                 If you do not wish to proceed with your appeal or application for 
                 leave to appeal because the matter has settled or for any other reason.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You must immediately file and serve a Notice of Settlement or Abandonment.    
+                You must immediately file and serve a Notice of Application To Vary an Order of a Justice.    
             </b-row>        
            
         </b-card>

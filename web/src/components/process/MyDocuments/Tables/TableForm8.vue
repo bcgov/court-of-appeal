@@ -357,7 +357,7 @@ export default class TableForm8 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'MBAV';
+            const pdf_type = 'FORM';
             const url = '/form8/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
