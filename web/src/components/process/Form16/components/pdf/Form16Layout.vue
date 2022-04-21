@@ -64,9 +64,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="coa-help-box" style="width:40%;"><i>Name of the first appellant named on Form 1: Notice of Appeal.</i></div> 
+                        <div class="coa-help-box" style="width:40%;"><i>Name of the first appellant named on FORM 1: Notice of Appeal.</i></div> 
                         <div style="width:5.5%; padding: 0; margin:0.5rem 0 0 0;"></div>
-                        <div class="coa-help-box" style="width:40%;"><i>Name of the first respondent named on Form 1: Notice of Appeal.</i></div>
+                        <div class="coa-help-box" style="width:40%;"><i>Name of the first respondent named on FORM 1: Notice of Appeal.</i></div>
                     </div>
                     
                 </div>
@@ -74,17 +74,60 @@
 
         </div>
 
-        <div style="margin: 0.75rem -15px 0 -15px; text-align: center; border: 1px solid black; font-size: 10pt;">
-            To: {{result.offeringParties.join(', ')}}<br>
+        <div style="margin: 0.75rem -15px 0 -15px; border: 1px solid black; font-size: 10pt;">
+            <div class="mx-3 mt-4">
+                <underline-form 
+                    style="display:inline-block;" 
+                    textwidth="26rem" 
+                    beforetext="To: " 
+                    hint="party the offer to settle costs is addressed to" 
+                    :italicHint="false" 
+                    :text="result.offeringParties.join(', ')"/>
+            </div>
+            
+            <div class="mx-3 mt-4">
+                <underline-form 
+                    style="display:inline-block;line-height:1rem;" 
+                    textwidth="32rem" 
+                    beforetext="The " 
+                    hint="appellant/respondent, name of the party offering to settle costs" 
+                    :italicHint="false" 
+                    :text="result.receivingParties.join(', ')"
+                />
 
-            The {{result.receivingParties.join(', ')}}. offers to settle costs in accordance 
-            with Schedule 1 of the Court of Appeal Rules in the amount of ${{result.amount}}<br>
-            Date: 
-
-            <div class="row" style="margin-top: 0.5rem;">
-                <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.completionDate}}</div> 
-                <div style="width:5.5%; margin-top:0.5rem"></div>
-                <div class="coa-text-box" style="width:40%; font-weight: 700;">{{result.authorizedName}}</div>
+                <div style="margin-left:0.25rem;;display:inline;line-height:2rem;" >
+                    offers to settle costs in accordance 
+                    with Schedule 1 of the Court of Appeal Rules in the amount of 
+                </div>
+                <underline-form 
+                    style="display:inline-block;line-height:1rem;" 
+                    textwidth="7rem" 
+                    beforetext="$ " 
+                    hint="" 
+                    :italicHint="false" 
+                    :text="result.amount"
+                />
+                .
+            </div>
+            
+            <div class="mx-3 my-5">
+                <underline-form 
+                    style="display:inline-block;line-height:1rem;" 
+                    textwidth="10rem" 
+                    beforetext="" 
+                    hint="Date  (day / month / year) " 
+                    :italicHint="false" 
+                    :text="result.completionDate"
+                />
+            
+                <underline-form 
+                    style="margin-left:12rem; display:inline-block;line-height:1rem;" 
+                    textwidth="20rem" 
+                    beforetext="" 
+                    hint="Party / Party’s Lawyer" 
+                    :italicHint="false" 
+                    :text="result.authorizedName"
+                />
             </div>
 
         </div>       
@@ -94,12 +137,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { form16DataInfoType } from '@/types/Information/Form16';
-
+import UnderlineForm from "@/components/utils/PopulateForms/components/UnderlineForm.vue";
 import CheckBox from "@/components/utils/PopulateForms/components/CheckBox.vue";
 
 @Component({
     components:{       
-        CheckBox           
+        CheckBox,
+        UnderlineForm,          
     }
 })
 export default class Form16Layout extends Vue {

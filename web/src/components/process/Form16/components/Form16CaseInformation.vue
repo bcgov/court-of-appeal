@@ -3,8 +3,8 @@
         <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
 
         <p class="mt-3">
-            Find the Court of Appeal case that you are wanting to create a Notice of 
-            Settlement or Abandonment form for by entered the following case information:
+            Find the Court of Appeal case that you are wanting to create a Offer To Settle Costs
+            form for by entered the following case information:
         </p>
 
         <b-form-group

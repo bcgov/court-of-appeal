@@ -55,7 +55,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">   
 
-                <b-form-checkbox-group                
+                <b-form-checkbox-group 
+                    stacked               
                     style="width:100%" 
                     :state="state.offeringParties"
                     @change="updateOtherParties"                   
@@ -77,6 +78,7 @@
                 <b-col class="ml-1 mt-2">   
 
                     <b-form-checkbox-group 
+                        stacked
                         :key="updated"               
                         style="width:100%" 
                         :state="state.receivingParties"                   
@@ -328,21 +330,21 @@ export default class Form16StyleOfProceeding extends Vue {
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentOfferToSettleCostsId(response.data.file_id);
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentOfferToSettleCostsId(response.data.file_id);
                         this.extractPartiesData();                        
-                    // }
+                    }
 
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }
     
     public updateOtherParties(){

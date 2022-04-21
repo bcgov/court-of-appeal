@@ -9,7 +9,7 @@
         </p>
 
         <b-card no-body border-variant="white">
-            <h4>Are you staring or responding to an appeal?</h4>
+            <h4>Are you starting or responding to an appeal?</h4>
 
             <b-row>
                 <b-col>              
