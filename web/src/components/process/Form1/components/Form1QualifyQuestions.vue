@@ -152,15 +152,18 @@
                         Bankruptcy and Insolvency Act - 
                         <a  href="http://laws.justice.gc.ca/eng/regulations/C.R.C.,_c._368/page-2.html#h-10"
                             target="_blank"
-                            class= "text-white">Section 31(1) and (2) Bankruptcy and Insolvency General Rules 
-                            prescribes a 10 day appeal period</a>.
+                            class= "text-white">Section 31(1) and (2) Bankruptcy and Insolvency General Rules
+                        </a> 
+                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger">10 day appeal period</b>.
                     </p>
 
                     <p>
                         Companies’ Creditors Arrangement Act – 
                         <a  href="http://laws.justice.gc.ca/eng/acts/C-36/page-7.html#docCont"
                             target="_blank"
-                            class= "text-white">Section 14(2) prescribes a 21 day appeal period</a>.
+                            class= "text-white">Section 14(2) 
+                        </a>
+                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger">21 day appeal period</b>.
                     </p>
                 </b-card>                           
                 
@@ -261,8 +264,8 @@
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtOrder">
                     <p>
-                        You may apply for an order for a stay or proceedings (? – put the proceedings on hold) or execution 
-                        (? – stop enforcement) of the order pending the outcome of the appeal.                        
+                        You may apply for an order for a stay or proceedings (put the proceedings on hold) or execution 
+                        (stop enforcement) of the order pending the outcome of the appeal.                        
                     </p> 
                     <p>
                         To complete a stay application, please proceed to applications for details on how to apply.                        

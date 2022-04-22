@@ -6,7 +6,7 @@
 
         <b-card class="mb-4 bg-white border-white text-dark">
 
-            <b-row class="mt-0 question">
+            <b-row v-if="manualSummaryInfo.appealTribunal" class="mt-0 question">
                 <b-col cols="7" class="labels">
                     Type of Tribunal:                                
                 </b-col>
@@ -33,6 +33,52 @@
                     </span>                   
                 </b-col>
             </b-row>
+            <b-row v-else class="mt-0 question">
+                <b-col cols="7" class="labels">
+                    Supreme Court File No.                                
+                </b-col>
+                <b-col>                    
+                    <b-form-input                        
+                        style="width:100%" 
+                        placeholder="Supreme Court File No."
+                        class="mt-2"
+                        @change="update"                                    
+                        v-model="manualSummaryInfo.lowerCourtFileNo">
+                    </b-form-input>
+                    <span
+                        v-if="(form1InfoStates.lowerCourtFileNo != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify Supreme Court File No.
+                    </span>                   
+                </b-col>
+            </b-row>
+
+            <b-row v-if="manualSummaryInfo.appealingScFlaDivorce" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Registry Location:                                
+                </b-col>
+                <b-col>
+                    <b-form-select                
+                        style="width:100%"              
+                        v-model="manualSummaryInfo.lowerCourtRegistryId" 
+                        @change="update">
+                        <b-form-select-option
+                            v-for="location in locationsInfo" 
+                            :key="location.id"
+                            :value="location.id">
+                                {{location.name}}
+                        </b-form-select-option>
+                    </b-form-select>
+                    
+                    <span
+                        v-if="(form1InfoStates.lowerCourtRegistryId != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify registry location.
+                    </span>                   
+                </b-col>
+            </b-row>
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -43,7 +89,7 @@
                         :state="form1InfoStates.tribunalOriginalDecisionMaker"
                         @change="update"
                         style="max-width:100%" 
-                        v-model="tribunalSummaryInfo.tribunalOriginalDecisionMaker">
+                        v-model="manualSummaryInfo.tribunalOriginalDecisionMaker">
                     </b-form-input> 
                 </b-col>
             </b-row>
@@ -60,7 +106,7 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="tribunalSummaryInfo.tribunalDateOfOrder"                           
+                                    v-model="manualSummaryInfo.tribunalDateOfOrder"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -81,7 +127,7 @@
                         :state="form1InfoStates.cityOfOrder"
                         @change="update"
                         style="max-width:100%" 
-                        v-model="tribunalSummaryInfo.cityOfOrder">
+                        v-model="manualSummaryInfo.cityOfOrder">
                     </b-form-input> 
                 </b-col>
             </b-row>            
@@ -122,15 +168,22 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import FillForm1HeaderInfo from "@/components/process/Form1/components/fillForm1/FillForm1HeaderInfo.vue";
 import { form1StatesInfoType, form1DataInfoType } from '@/types/Information/Form1';
+import { locationsInfoType } from '@/types/Common';
 
 @Component({
     components:{
         FillForm1HeaderInfo
     }
 })
-export default class FillForm1SummaryInfo extends Vue {    
+export default class FillForm1ManualSummaryInfo extends Vue {    
+
+    @commonState.State
+    public locationsInfo!: locationsInfoType[];
 
     @form1State.State
     public form1InfoStates: form1StatesInfoType;
@@ -141,7 +194,7 @@ export default class FillForm1SummaryInfo extends Vue {
     @form1State.Action
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
-    tribunalSummaryInfo = {} as form1DataInfoType;
+    manualSummaryInfo = {} as form1DataInfoType;
     
     dataReady = false;
     //TODO: add tribunal types
@@ -152,7 +205,7 @@ export default class FillForm1SummaryInfo extends Vue {
 
     mounted() { 
         this.dataReady = false; 
-        this.tribunalSummaryInfo = this.form1Info;
+        this.manualSummaryInfo = this.form1Info;
         this.extractInfo();
         this.dataReady = true;            
     }
@@ -161,14 +214,14 @@ export default class FillForm1SummaryInfo extends Vue {
 
         this.trialDurationDays = this.form1Info.trialDurationDays?this.form1Info.trialDurationDays:"";
 
-        if (this.tribunalSummaryInfo.tribunalType?.trim().length>0){
+        if (this.manualSummaryInfo.tribunalType?.trim().length>0){
 
-            if (this.tribunalTypes.includes(this.tribunalSummaryInfo.tribunalType)){
-                this.tribunalType = this.tribunalSummaryInfo.tribunalType;
+            if (this.tribunalTypes.includes(this.manualSummaryInfo.tribunalType)){
+                this.tribunalType = this.manualSummaryInfo.tribunalType;
                 this.otherTribunalType = '';            
             } else {
                 this.tribunalType = 'Other';
-                this.otherTribunalType = this.tribunalSummaryInfo.tribunalType;            
+                this.otherTribunalType = this.manualSummaryInfo.tribunalType;            
             }
         } else {
             this.tribunalType = '';
@@ -182,12 +235,17 @@ export default class FillForm1SummaryInfo extends Vue {
 
     public update(){ 
               
-        const form1 = this.tribunalSummaryInfo;
+        const form1 = this.manualSummaryInfo;
         form1.trialDurationDays = this.trialDurationDays; 
         if (this.tribunalType == 'other'){
             form1.tribunalType = this.otherTribunalType;
         } else {
             form1.tribunalType = this.tribunalType;
+        }
+
+        if (form1.appealingScFlaDivorce && form1.lowerCourtRegistryId){
+            const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == form1.lowerCourtRegistryId)[0]
+            form1.lowerCourtRegistryName = selectedLocation.name;
         }
           
         this.UpdateForm1Info(form1);

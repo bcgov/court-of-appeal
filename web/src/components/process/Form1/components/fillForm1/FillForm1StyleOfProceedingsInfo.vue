@@ -94,7 +94,7 @@
             <hr class="mb-4 mx-4">
             <!-- <p class="ml-4 mt-2 mb-5" style="font-weight:700;">Please ensure that the required names and address fields are completed.</p> -->
            
-            <b-row class="mt-4 question">
+            <!-- <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Respondent(s): 
                     <p class="content text-primary">
@@ -132,7 +132,7 @@
                         v-model="styleOfProceedingsInfo.respondentSolicitor">
                     </b-form-textarea>                    
                 </b-col>
-            </b-row>
+            </b-row> -->
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -151,7 +151,85 @@
             </b-row>
 
             <h3 class="ml-4 mt-3 text-primary">Service Address</h3>
-            <b-row class="content ml-4 text-primary">
+
+            <b-row v-if="form1Info.appellants.length > 0" :key="updated + 1" class="mt-4">
+                <b-col cols="6" style="font-weight: 700;">
+                    Name(s) and address(es) within BC for the service of the respondent(s)                                                    
+                </b-col>
+                <b-col>
+                    <div 
+                        v-for="(address,index) in form1Info.addresses" 
+                        :key="'address' +index"                       
+                        :value="address"> {{form1Info.addresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form1Info.addresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div> 
+                    <span
+                        v-if="(form1InfoStates.addresses != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the addresses of the party(ies) filing the Notice of Appearance.
+                    </span>             
+                </b-col>                
+            </b-row>
+
+            <b-row v-if="form1Info.appellants.length > 0" :key="updated" class="mt-5">
+                <b-col cols="6" style="font-weight: 700;">
+                    Phone number(s) of the party(ies) filing the Notice of Appearance
+                    <b-icon-question-circle-fill
+                        style="color: #38598a;"
+                        v-b-tooltip:hover.v-info.html="helpText('The registry may contact you by phone to schedule your appeal.').title"/>                                                    
+                </b-col>
+                <b-col>
+                    <div 
+                        v-for="(phone,index) in form1Info.phoneNumbers" 
+                        :key="'phone' + index"                        
+                        :value="phone"> {{form1Info.phoneNumbers[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form1Info.phoneNumbers[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>
+                    <span
+                        v-if="(form1InfoStates.phoneNumbers != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
+                    </span>
+                </b-col>                
+            </b-row>
+
+
+
+
+            <b-row v-if="form1Info.appellants.length > 0" :key="updated + 2" class="mt-4">
+                <b-col cols="6" style="font-weight: 700;">
+                    Email(s) address(es) for service of respondent(s) 
+                    <b-icon-question-circle-fill
+                        style="color: #38598a;"
+                        v-b-tooltip:hover.v-info.html="helpText('Receive electronic document status change notifications or be served electonically by another party.').title"                                    
+                        />                               
+                </b-col>
+                <b-col>
+                    <div 
+                        v-for="(email,index) in form1Info.emailAdresses" 
+                        :key="'email' + index"                       
+                        :value="email"> {{form1Info.emailAdresses[index].name}}                  
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form1Info.emailAdresses[index].contactInfo">
+                        </b-form-textarea>      
+                    </div>                                    
+                </b-col>                
+            </b-row>
+
+
+            <!-- <b-row class="content ml-4 text-primary">
                 Name(s) and address(es) within BC for service of the appellant(s).
             </b-row>
 
@@ -269,7 +347,7 @@
                         class="px-2 bg-danger text-white">Invalid Email Format!
                     </span>
                 </b-col>
-            </b-row>
+            </b-row> -->
             
         </b-card>
       
@@ -310,6 +388,7 @@ const form1State = namespace("Form1");
 
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
 import { form1DataInfoType, form1StatesInfoType, lookupsInfoType, form1PartiesStatesInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
+import { partiesContact } from '@/types/Information';
 
 @Component({
     components:{ 
@@ -370,9 +449,13 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     dataReady = false;  
     respondentNames = '';
     respondents: string[] = [];   
-    respondentSolicitors: string[] = [];     
+    respondentSolicitors: string[] = []; 
+    
+    applicantNameList: string[] = [];
+    respondentNameList: string[] = [];
 
     updateTable = 0;
+    updated = 0;
     showConfirmEditParties = false;
     rowInfo;
     moveLeft = false;
@@ -409,7 +492,9 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.appealingFirm = this.userName;
         
         styleOfProceedings.appellants = [];
-        styleOfProceedings.respondents = [];                 
+        styleOfProceedings.respondents = [];   
+        this.applicantNameList = [];
+        this.respondentNameList = [];              
 
         for (const partyInfo of styleOfProceedings.parties){
              
@@ -427,10 +512,12 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
             if (partyInfo.appealRole && partyInfo.appealRole == "Respondent"){
 
                 styleOfProceedings.respondents.push(partyInfo);
+                this.respondentNameList.push(partyInfo.fullName);
 
             } else if (partyInfo.appealRole && partyInfo.appealRole == "Appellant"){
 
                 styleOfProceedings.appellants.push(partyInfo);
+                this.applicantNameList.push(partyInfo.fullName);
             }                                 
         }
         
@@ -475,6 +562,102 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         this.styleOfProceedingsInfo = this.form1Info;
         this.updateTable++;
     }
+
+    public updateAddressFields(){
+
+        const formData = this.form1Info;
+        const addressData = formData.addresses;
+        const addresses: partiesContact[] = []; 
+        const emailData = formData.emailAdresses;
+        const emails: partiesContact[] = []; 
+        const phoneData = formData.phoneNumbers;
+        const phoneNumbers: partiesContact[] = []; 
+
+        for (const partyName of this.applicantNameList){
+           
+            const matchingAddressRecords = addressData.filter(address => address.name == partyName);
+
+            if (matchingAddressRecords.length == 0){
+                addresses.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = addressData.findIndex(address => address.name == matchingAddressRecords[0].name);               
+                addresses.push(addressData[index]);
+            }
+
+            const matchingPhoneRecords = phoneData.filter(phone => phone.name == partyName); 
+            
+            if (matchingPhoneRecords.length == 0){
+                phoneNumbers.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = phoneData.findIndex(phone => phone.name == matchingPhoneRecords[0].name);               
+                phoneNumbers.push(phoneData[index]);
+            }
+
+            const matchingEmailRecords = emailData.filter(email => email.name == partyName); 
+            
+            if (matchingEmailRecords.length == 0){
+                emails.push({name: partyName, contactInfo: ''});
+            } else {                
+                const index = emailData.findIndex(email => email.name == matchingEmailRecords[0].name);               
+                emails.push(emailData[index]);
+            }
+        }
+
+        formData.addresses = addresses;
+        formData.emailAdresses = emails;
+        formData.phoneNumbers = phoneNumbers;
+        this.UpdateForm1Info(formData)
+
+        this.updated ++;               
+    }
+
+    public verifyPhoneNumbers(){
+        for(const phoneNumber of this.form1Info.phoneNumbers){            
+            if(phoneNumber.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public verifyAddresses(){
+        for(const address of this.form1Info.addresses){            
+            if(address.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public extractAddresses(){
+        const addresses = [];
+        for(const contactAddress of this.form1Info.addresses){            
+            if(contactAddress.contactInfo.trim().length != 0){
+                addresses.push(contactAddress.name + ': ' + contactAddress.contactInfo.trim());
+            }  
+        }
+        return addresses.join('<br>');        
+    }
+
+    public extractPhoneNumbers(){
+        const phoneNumbers = [];
+        for(const phone of this.form1Info.phoneNumbers){            
+            if(phone.contactInfo.trim().length != 0){
+                phoneNumbers.push(phone.name + ': ' + phone.contactInfo.trim());
+            }  
+        }
+        return phoneNumbers.join('<br>');        
+    }
+
+    public extractEmails(){
+        const emails = [];
+        for(const email of this.form1Info.emailAdresses){            
+            if(email.contactInfo.trim().length != 0){
+                emails.push(email.name + ': ' + email.contactInfo.trim());
+            }  
+        }
+        return emails.join('<br>');        
+    }
+
+
 
     public showConfirmEditParty(row, app, left){
 

@@ -3,13 +3,12 @@
               
         <save-or-preview-buttons class="mx-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
-        <fill-form-1-tribunal-summary-info v-if="form1Info.appealTribunal" class="mt-2 mx-2" @displayResults="displayResults"/>
+        <fill-form-1-manual-summary-info 
+            v-if="form1Info.appealTribunal || form1Info.appealingScFlaDivorce" 
+            class="mt-2 mx-2" 
+            @displayResults="displayResults"/>
 
-        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>
-
-        <!-- <b-card class="mb-2 border-light bg-light">
-            <b-row class="ml-0 mt-0 font-weight-bold">Please complete the following fields:</b-row>
-        </b-card> -->
+        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>      
 
         <fill-form-1-common-info class="mx-2"/>
 
@@ -56,7 +55,7 @@ import { locationsInfoType } from '@/types/Common';
 import { accountInfoType, userAccessInfoType, form1DataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
 import FillForm1SummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1SummaryInfo.vue";
-import FillForm1TribunalSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1TribunalSummaryInfo.vue";
+import FillForm1ManualSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1ManualSummaryInfo.vue";
 import FillForm1CommonInfo from "@/components/process/Form1/components/fillForm1/FillForm1CommonInfo.vue";
 import FillForm1StyleOfProceedingsInfo from "@/components/process/Form1/components/fillForm1/FillForm1StyleOfProceedingsInfo.vue";
 
@@ -65,7 +64,7 @@ import SaveOrPreviewButtons from './components/SaveOrPreviewButtons.vue'
 @Component({
     components:{        
         FillForm1SummaryInfo,
-        FillForm1TribunalSummaryInfo,
+        FillForm1ManualSummaryInfo,
         FillForm1CommonInfo,
         FillForm1StyleOfProceedingsInfo,
         SaveOrPreviewButtons
@@ -134,7 +133,7 @@ export default class FillForm1 extends Vue {
             if(response?.data?.data){            
                             
                 const form1Data: form1DataInfoType = response.data.data   
-                if (form1Data.appealTribunal){
+                if (form1Data.appealTribunal || form1Data.appealingScFlaDivorce){
                     this.showTribunalDetailsForm = true;
                 } else {
                     this.showTribunalDetailsForm = false;
@@ -166,7 +165,7 @@ export default class FillForm1 extends Vue {
         form1SubmissionData.appealingFirmAddress.province = "British Columbia";
         form1SubmissionData.appealingFirmAddress.country = "Canada";
             
-        if (form1SubmissionData.appealTribunal){
+        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce){
 
             this.showTribunalDetailsForm = true;
 
@@ -210,7 +209,7 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates = this.form1InfoStates;
 
-        if (this.form1Info.appealTribunal){
+        if (this.form1Info.appealTribunal || this.form1Info.appealingScFlaDivorce){
             this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
@@ -221,6 +220,7 @@ export default class FillForm1 extends Vue {
         }   
         
         this.fieldStates.cityOfOrder = !this.form1Info.cityOfOrder? false : null;
+        this.fieldStates.lowerCourtFileNo = !this.form1Info.lowerCourtFileNo? false : null;
 
         const durationValue = this.form1Info.trialDurationDays?.trim().toLowerCase();
       //  this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;

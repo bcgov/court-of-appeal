@@ -216,8 +216,7 @@ export default class Form1CaseInformationSearch extends Vue {
         console.log(data.item)
         if(!data.detailsShowing)
         {
-            this.getOrders(data.item)
-            
+            this.getOrders(data.item)            
         }       
     }
 

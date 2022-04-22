@@ -40,8 +40,6 @@
                 </b-col>
             </b-row>
 
-
-
         </b-card>
 
         <b-card class="border-white bg-white">

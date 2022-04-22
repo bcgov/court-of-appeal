@@ -11,11 +11,7 @@
                 To assist you in the completing the Notice of Appeal 
                 form, you will need to answer the questions in the section below.
             </p>
-        </b-card-header>
-
-        <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
-            <form-1-did-you-know/>            
-        </b-card>  
+        </b-card-header>      
 
         <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
             <form-1-qualify-questions @disableContinue="disableNavigateForm1"/>
@@ -50,13 +46,11 @@ const commonState = namespace("Common");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
-import Form1DidYouKnow from "@/components/process/Form1/components/Form1DidYouKnow.vue";
 import Form1QualifyQuestions from "@/components/process/Form1/components/Form1QualifyQuestions.vue";
 import { accountInfoType, form1QualificationInfoType, form1DataInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
-        Form1DidYouKnow,
         Form1QualifyQuestions
     }
 })
@@ -113,7 +107,7 @@ export default class ChecklistForm1 extends Vue {
         form1SubmissionData.appealingSupremeCourtOrder = this.qualificationInfo.appealingSupremeCourtOrder;
         form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;        
         form1SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
-        if (form1SubmissionData.appealTribunal){
+        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce){
             form1SubmissionData.parties = [];
         }
         this.UpdateForm1Info(form1SubmissionData);
