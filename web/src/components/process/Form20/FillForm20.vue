@@ -16,21 +16,18 @@
            
         </b-card>
 
-        <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
+        <b-card class="my-2 mx-4 px-4 bg-white border-white">
 
-            <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Notice of Appearance (Form 2)?
-            </b-row> 
-            <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 1), and you want to respond, 
-                fill out the Notice of Appearance (Form 2). If you do not respond, you will 
-                not be included in future court proceedings related to this case, and will 
-                not have access to the case documents filed.
-            </b-row>   
-            <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You have 10 days to serve a filed copy of the Notice of Appearance to the 
-                appellant, after receiving a Notice of Appeal.    
-            </b-row>        
+            <b-card-header class="bg-white border-white" style="font-size: 1.25rem;">
+                When Do You Use the Notice of Objection to Withdrawal (Form 20)?
+            </b-card-header> 
+            <b-card class="bg-white border-white" style="font-size: 14px; display: inline;">
+                If you are served with a notice of intention to withdraw by 
+                your lawyer, you may object to the withdrawal by filing an 
+                objection form and serving it on the lawyer who filed the 
+                notice of withdrawal <b>within 7 days of being served</b> with the 
+                Notice of Withdrawal.
+            </b-card>
            
         </b-card>
 

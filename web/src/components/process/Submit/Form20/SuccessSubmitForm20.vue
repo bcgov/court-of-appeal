@@ -11,14 +11,15 @@
                 Form Submitted
             </b-row> 
             
-            <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Objection to Withdrawal has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Notice of Objection to Withdrawal.
+            <b-card no-body class="border-white bg-white mx-5">
+                <b-row class="mx-5 mt-4" style="font-size: 14px;">
+                    Your Notice of Objection to Withdrawal has been submitted and 
+                    accepted. Please click on the CSO Package number below to 
+                    retrieve a filed copy of your Notice of Objection to Withdrawal.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the Notice of Objection to Withdrawal on the appellant 
-                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
+                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
+                    Please note that you must serve the Notice of Objection to Withdrawal on 
+                    the lawyer who filed the Notice of Withdrawal of Lawyer.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">

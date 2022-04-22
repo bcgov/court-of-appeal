@@ -11,14 +11,15 @@
                 Form Submitted
             </b-row> 
             
-            <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Cross Appeal has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Notice of Cross Appeal.
+            <b-card no-body class="border-white bg-white mx-5">
+                <b-row class="mx-5 mt-4" style="font-size: 14px;">
+                    Your Notice of Cross Appeal has been submitted and accepted. Please 
+                    click on the CSO Package number below to retrieve a filed copy of your 
+                    Requisition.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the notice of Hearing of Appeal on the appellant 
-                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
+                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
+                    Please note that you must serve the notice of cross appeal on each 
+                    party and on any other respondent named in the notice of cross appeal.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">

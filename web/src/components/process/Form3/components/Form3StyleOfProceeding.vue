@@ -374,7 +374,8 @@
                     Name of the Party(ies) who wish to cross appeal the order under appeal:                                
                 </b-col>
                 <b-col class="ml-1">   
-                    <b-form-checkbox-group                
+                    <b-form-checkbox-group 
+                        stacked               
                         style="width:100%" 
                         @change="updateAddressFields"
                         :state="state.crossAppealingParties"                                      
