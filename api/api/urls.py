@@ -32,7 +32,6 @@ from api.views import (
     UserView,
     JourneyMapView,
     FormToPdfView,
-    Form7SearchView,
     EFilingSubmitView,    
 )
 
@@ -58,7 +57,6 @@ urlpatterns = [
     path("case/", CaseView.as_view()),
     path("form-print/<int:case_id>/", FormToPdfView.as_view()),
     path("user-info/", UserView.as_view()),
-    path("form7s/", Form7SearchView.as_view()),
     #path("efiling/document-types/", EFilingDocumentTypesView.as_view()),
     #path("efiling/locations/", EFilingLocationView.as_view()),
     path("efiling/<int:case_id>/submit/", EFilingSubmitView.as_view()),

@@ -104,7 +104,7 @@
 <!-- <hearing-location-address> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.6rem 0; height:5.5rem;">
                 <div class="ml-2">
                     <b>Location where the application will be heard</b>
                     <i>
@@ -113,7 +113,7 @@
                 </div>
             </div>           
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-54"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">
@@ -127,23 +127,25 @@
 <!-- <date-of-hearing> -->
         <div class="row mt-3" style="font-size: 9pt;">
             
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.25rem; height:2.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.3rem 0; line-height:1.25rem; height:2.5rem;">
                 <b class="ml-2">Date the application will be heard</b>
             </div>
 
-            <div class="arrow-right-flash-20"></div>
+            <div class="arrow-right-flash-25"></div>
 
-            <div style="width:2.35%;"></div>
+            <div style="width:1.6%;"></div>
 
             <div class="coa-text-box-center" style="width:15%; font-weight: 700; text-align:center">{{result.hearingDate | beautify-date-dd/mm/yyyy}}</div>           
             
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0 0.5rem 0.5rem; line-height:1.25rem; height:2.5rem;">
+            <div style="width:2.3%;"></div>
+
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.3rem 0 0.25rem 0.5rem; line-height:1.25rem; height:2.5rem;">
                 <b class="ml-2">Time the application will be heard</b>
             </div>
 
-            <div class="arrow-right-flash-20"></div>
+            <div class="arrow-right-flash-25"></div>
 
-            <div style="width:2%;"></div>
+            
             
             <div class="coa-text-box-center" style="width:11%; font-weight: 700; text-align:center;">{{result.hearingTime | beautify-time-am-pm}}</div>
             
@@ -163,7 +165,7 @@
 <!-- <affidavits> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.65rem 0; height:5.5rem;">
                 <div class="ml-2">
                     <b>List any affidavits being filed.</b>
                     <i>
@@ -173,7 +175,7 @@
                 </div>
             </div>  
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-54"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.affidavits}}</div>                       
@@ -183,7 +185,7 @@
 <!-- <filed-material> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.4rem 0; height:6rem;">
                 <div class="ml-2">
                     <b>Have you filed materials in support of the main application?</b>
                     <i>
@@ -192,11 +194,11 @@
                 </div>
             </div> 
 
-            <div class="arrow-right-flash-36"></div>           
+            <div class="arrow-right-flash-54"></div>           
             
-            <div style="width:2%;"></div>
+            
 
-            <div style="width:15%; margin:0.5rem 0;">                  
+            <div style="width:14%; margin-top:2.75rem;">                  
                 <check-box 
                     style="margin-left:1rem;"
                     :check="(result.filedMaterial)?'yes':''" 
@@ -205,9 +207,9 @@
                     text="Yes"/> 
             </div>
             
-            <div style="width:15%;margin:0.5rem 0;">
+            <div style="width:14%;margin-top:2.75rem;">
                 <check-box 
-                    style="margin: 0 ;" 
+                    style="margin:0;" 
                     :check="(!result.filedMaterial)?'yes':''"
                     shiftmark="1" 
                     marginLeft="0.5rem"
@@ -216,7 +218,7 @@
 
             <div 
                 class="coa-text-box-center" 
-                style="width:32%; font-weight: 700; text-align:center;">
+                style="width:36%; font-weight: 700; text-align:center;">
                 <div v-if="result.filedMaterial">{{result.materialList}}</div>
             </div>
                       

@@ -167,7 +167,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-radio-group
-                    :state="state.filedMaterial"                 
+                    :class="state.filedMaterial==false? 'border border-danger' :''"
+                    @change="state.filedMaterial=null"                 
                     v-model="form7Info.filedMaterial"
                     :options="yesNoOptions"                
                 ></b-form-radio-group>
@@ -381,9 +382,9 @@ export default class Form7StyleOfProceeding extends Vue {
         this.state.hearingTime = this.form7Info.hearingTime? null :false;
         this.state.affidavits = this.form7Info.affidavits? null :false;
         this.state.filedMaterial = this.form7Info.filedMaterial != null? null :false;
-        this.state.materialList = this.form7Info.materialList? null :false;
+        this.state.materialList = this.form7Info.filedMaterial && !this.form7Info.materialList? false: null;
         this.state.authorizedName = !this.form7Info.authorizedName? false : null;       
-        
+        //console.log(this.state)
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
                 return false
@@ -396,9 +397,9 @@ export default class Form7StyleOfProceeding extends Vue {
         let method = 'post';
         let url = '/form7/forms';
 
-        // if (this.currentNoticeOfUrgentApplicationId){
-        //     method = 'put';
-        //     url = '/form7/forms/'+this.currentNoticeOfUrgentApplicationId;               
+        if (this.currentNoticeOfUrgentApplicationId){
+            method = 'put';
+            url = '/form7/forms/'+this.currentNoticeOfUrgentApplicationId;               
 
             if (!draft && !this.checkStates()){               
                 return                
@@ -415,41 +416,41 @@ export default class Form7StyleOfProceeding extends Vue {
             }
             this.saveInfo(options, draft);
 
-        // } else {           
+        } else {           
 
-        //     const options = {
-        //         method: method,
-        //         url: url,
-        //         data: {
-        //             data:this.form7Info,
-        //             type:'Form7',
-        //             description:'Notice of Urgent Application'
-        //         }
-        //     }
-        //     this.saveInfo(options, draft);
-        // }        
+            const options = {
+                method: method,
+                url: url,
+                data: {
+                    data:this.form7Info,
+                    type:'Form7',
+                    description:'Notice of Urgent Application'
+                }
+            }
+            this.saveInfo(options, draft);
+        }        
        
     }
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfUrgentApplicationId(response.data.file_id);
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfUrgentApplicationId(response.data.file_id);
                         this.extractPartiesData();    
                         const data = this.form7Info;  
                         this.UpdateForm7Info(data)                  
-            //         }
+                    }
 
-            //         this.clearStates();                    
+                    this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }
 
     public allowedDates(date){
@@ -470,6 +471,7 @@ export default class Form7StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        
