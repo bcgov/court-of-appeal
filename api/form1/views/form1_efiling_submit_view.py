@@ -98,7 +98,7 @@ class Form1EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, notice_of_appeal_id):
         
-        document_type = "NAA" # type Form7 for Efiling "UNKOWN" # type Form1 for Efiling
+        document_type = "APP" # type Form1 for Efiling "UNKOWN" # type Form1 for Efiling
         uid = request.user.id
 
         notice_of_appeal = self.get_notice_of_appeal_for_user(notice_of_appeal_id, uid)        

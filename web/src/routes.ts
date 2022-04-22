@@ -2,6 +2,12 @@ import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
 
+import ChecklistForm1 from "@/components/process/Form1/ChecklistForm1.vue";
+import AccessForm1 from "@/components/process/Form1/AccessForm1.vue";
+import StartForm1 from "@/components/process/Form1/StartForm1.vue";
+import PreviewForm1 from "@/components/process/Form1/PreviewForm1.vue";
+import SubmitForm1 from "@/components/process/Form1/SubmitForm1.vue";
+
 import StartForm2 from "@/components/process/Form2/StartForm2.vue";
 import FillForm2 from "@/components/process/Form2/FillForm2.vue";
 import PreviewForm2 from "@/components/process/Form2/PreviewForm2.vue";
@@ -28,11 +34,10 @@ import FillForm6 from "@/components/process/Form6/FillForm6.vue";
 import PreviewForm6 from "@/components/process/Form6/PreviewForm6.vue";
 import SubmitForm6 from "@/components/process/Form6/SubmitForm6.vue";
 
-import ChecklistForm1 from "@/components/process/Form1/ChecklistForm1.vue";
-import AccessForm1 from "@/components/process/Form1/AccessForm1.vue";
-import StartForm1 from "@/components/process/Form1/StartForm1.vue";
-import PreviewForm1 from "@/components/process/Form1/PreviewForm1.vue";
-import SubmitForm1 from "@/components/process/Form1/SubmitForm1.vue";
+import StartForm7 from "@/components/process/Form7/StartForm7.vue";
+import FillForm7 from "@/components/process/Form7/FillForm7.vue";
+import PreviewForm7 from "@/components/process/Form7/PreviewForm7.vue";
+import SubmitForm7 from "@/components/process/Form7/SubmitForm7.vue";
 
 import StartForm8 from "@/components/process/Form8/StartForm8.vue";
 import FillForm8 from "@/components/process/Form8/FillForm8.vue";
@@ -98,6 +103,36 @@ const routes = [
       name: "my-submissions",
       beforeEnter: authGuard,
       component: MyDocuments
+    },
+    {
+      path: "/checklist-form1",
+      name: "checklist-form1",
+      beforeEnter: authGuard,
+      component: ChecklistForm1
+    },
+    {
+      path: "/access-form1",
+      name: "access-form1",
+      beforeEnter: authGuard,
+      component: AccessForm1
+    },
+    {
+      path: "/start-form1",
+      name: "start-form1",
+      beforeEnter: authGuard,
+      component: StartForm1
+    },
+    {
+      path: "/preview-form1",
+      name: "preview-form1",
+      beforeEnter: authGuard,
+      component: PreviewForm1
+    },
+    {
+      path: "/proceed-form1",
+      name: "proceed-form1",
+      beforeEnter: authGuard,
+      component: SubmitForm1
     },
     {
       path: "/start-form2",
@@ -226,35 +261,29 @@ const routes = [
       component: SubmitForm6
     },
     {
-      path: "/checklist-form1",
-      name: "checklist-form1",
+      path: "/start-form7",
+      name: "start-form7",
       beforeEnter: authGuard,
-      component: ChecklistForm1
+      component: StartForm7
     },
     {
-      path: "/access-form1",
-      name: "access-form1",
+      path: "/fill-form7",
+      name: "fill-form7",
       beforeEnter: authGuard,
-      component: AccessForm1
+      component: FillForm7
     },
     {
-      path: "/start-form1",
-      name: "start-form1",
+      path: "/preview-form7",
+      name: "preview-form7",
       beforeEnter: authGuard,
-      component: StartForm1
+      component: PreviewForm7
     },
     {
-      path: "/preview-form1",
-      name: "preview-form1",
+      path: "/proceed-form7",
+      name: "proceed-form7",
       beforeEnter: authGuard,
-      component: PreviewForm1
-    },
-    {
-      path: "/proceed-form1",
-      name: "proceed-form1",
-      beforeEnter: authGuard,
-      component: SubmitForm1
-    },
+      component: SubmitForm7
+    },    
     {
       path: "/start-form8",
       name: "start-form8",

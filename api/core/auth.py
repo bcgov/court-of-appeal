@@ -7,7 +7,7 @@ from django.urls.exceptions import NoReverseMatch
 
 from rest_framework.reverse import reverse
 
-from form7.form7_cso_web_service.form7_csows_authorized_user_info import Form7AuthorizedUserInfo
+from csows.csows_service.csows_authorized_user_info import AuthorizedUserInfo
 
 from oidc_rp.models import OIDCUser
 
@@ -55,7 +55,7 @@ def sync_keycloak_user(oidc_user: OIDCUser, claims: dict):
     oidc_user.user.has_efiling_early_adopters = "/efiling-early-adopters" in claims.get("groups", {})
     oidc_user.user.save()    
     if (oidc_user.user.account_id is None or oidc_user.user.client_id is None):
-        Form7AuthorizedUserInfo().get_authorized_user_info(claims.get("universal-id"), claims.get("sub"))
+        AuthorizedUserInfo().get_authorized_user_info(claims.get("universal-id"), claims.get("sub"))
 
 def get_efiling_streams(logged_in, request):
     return ""

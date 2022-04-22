@@ -22,6 +22,7 @@
         <table-form-4 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-5 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-6 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>  
+        <table-form-7 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/> 
         <table-form-8 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>      
         <table-form-9 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-16 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
@@ -36,12 +37,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+import TableForm1 from './Tables/TableForm1.vue'
 import TableForm2 from './Tables/TableForm2.vue'
 import TableForm3 from './Tables/TableForm3.vue'
 import TableForm4 from './Tables/TableForm4.vue'
 import TableForm5 from './Tables/TableForm5.vue'
 import TableForm6 from './Tables/TableForm6.vue'
-import TableForm1 from './Tables/TableForm1.vue'
+import TableForm7 from './Tables/TableForm7.vue'
 import TableForm8 from './Tables/TableForm8.vue'
 import TableForm9 from './Tables/TableForm9.vue'
 import TableForm16 from './Tables/TableForm16.vue'
@@ -53,12 +55,13 @@ import NewFormModal from './NewFormModal.vue'
 
 @Component({
     components:{
+        TableForm1,
         TableForm2,
         TableForm3,
         TableForm4,
         TableForm5,
         TableForm6,
-        TableForm1,
+        TableForm7,
         TableForm8, 
         TableForm9,  
         TableForm16,
