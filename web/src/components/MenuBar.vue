@@ -16,6 +16,9 @@ import { Component, Vue} from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
@@ -31,8 +34,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form1";
-const form1State = namespace("Form1");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
@@ -55,6 +58,9 @@ const form20State = namespace("Form20");
 @Component
 export default class MenuBar extends Vue {
 	
+	@form1State.Action
+	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+	
 	@form2State.Action
 	public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void
 
@@ -70,8 +76,8 @@ export default class MenuBar extends Vue {
 	@form6State.Action
 	public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void
 
-	@form1State.Action
-	public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+	@form7State.Action
+	public UpdateCurrentNoticeOfUrgentApplicationId!: (newCurrentNoticeOfUrgentApplicationId: string) => void
 
 	@form8State.Action
     public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
@@ -99,6 +105,7 @@ export default class MenuBar extends Vue {
 		this.UpdateCurrentCaseId(null);
 		this.UpdateCurrentNoticeOfHearingOfAppealId(null);
 		this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+		this.UpdateCurrentNoticeOfUrgentApplicationId(null);
 		this.UpdateCurrentNoticeOfApplicationId(null);
 		this.UpdateCurrentNoticeOfCrossAppealId(null);
 		this.UpdateCurrentNoticeOfAppealId(null);

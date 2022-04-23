@@ -28,7 +28,7 @@
     "moment-timezone": "^0.5.32",
     "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
-    "save": "^2.5.0",
+    "save": "^2.4.0",
     "sortablejs": "^1.15.0",
     "ts-loader": "^8.0.10",
     "underscore": "^1.10.2",

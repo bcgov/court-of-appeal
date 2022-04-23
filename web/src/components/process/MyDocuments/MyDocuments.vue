@@ -14,6 +14,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import "@/store/modules/forms/form2";
 const form2State = namespace("Form2");
 
@@ -29,8 +32,8 @@ const form5State = namespace("Form5");
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
 
-import "@/store/modules/forms/form1";
-const form1State = namespace("Form1");
+import "@/store/modules/forms/form7";
+const form7State = namespace("Form7");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
@@ -52,12 +55,13 @@ const form20State = namespace("Form20");
 
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
+import { form1DataInfoType } from '@/types/Information/Form1';
 import { caseJsonDataType } from '@/types/Information/json';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
 import { form4FormsJsonDataType } from '@/types/Information/Form4';
-import { form1DataInfoType } from '@/types/Information/Form1';
 import { form5FormsJsonDataType } from '@/types/Information/Form5';
 import { form6FormsJsonDataType } from '@/types/Information/Form6';
+import { form7FormsJsonDataType } from '@/types/Information/Form7';
 import { form8FormsJsonDataType } from '@/types/Information/Form8';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
 import { form16FormsJsonDataType } from '@/types/Information/Form16';
@@ -72,6 +76,9 @@ import { form20FormsJsonDataType } from '@/types/Information/Form20';
 })
 export default class MyDocuments extends Vue {
 
+    @form1State.Action
+    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
+    
     @form2State.Action
     public UpdateCasesJson!: (newCasesJson: caseJsonDataType[]) => void
 
@@ -87,8 +94,8 @@ export default class MyDocuments extends Vue {
     @form6State.Action
     public UpdateForm6FormsJson!: (newForm6FormsJson: form6FormsJsonDataType[])=> void
 
-    @form1State.Action
-    public UpdateForm1FormsJson!: (newForm1FormsJson: form1DataInfoType[])=> void
+    @form7State.Action
+    public UpdateForm7FormsJson!: (newForm7FormsJson: form7FormsJsonDataType[])=> void
 
     @form8State.Action
     public UpdateForm8FormsJson!: (newForm8FormsJson: form8FormsJsonDataType[])=> void
@@ -138,6 +145,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form4/forms'));
         calls.push(this.$http.get('/form8/forms'));
         calls.push(this.$http.get('/form16/forms'));
+        calls.push(this.$http.get('/form7/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -155,6 +163,7 @@ export default class MyDocuments extends Vue {
             if(values[9]?.data) this.UpdateForm4FormsJson(values[9]?.data)
             if(values[10]?.data) this.UpdateForm8FormsJson(values[10]?.data)
             if(values[11]?.data) this.UpdateForm16FormsJson(values[11]?.data)
+            if(values[12]?.data) this.UpdateForm7FormsJson(values[12]?.data)
 
             this.dataLoaded = true;
         })
