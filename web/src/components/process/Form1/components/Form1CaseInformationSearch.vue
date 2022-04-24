@@ -4,54 +4,54 @@
         <b-card class="ml-2 mt-2 border-white" >
             <h2 class="ml-4 mt-3 text-primary">Lower Court Case Information</h2>      
 
-            <p>Find the Supreme Court case you are appealing by entering the following information about the case.</p>
+            <p class="ml-4">Find the Supreme Court case you are appealing by entering the following information about the case.</p>
 
-            <b-form-group
-                class="mx-1" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Level of Court" 
-                label-for="level-of-court">
-                <b-form-input 
-                    id="level-of-court"
-                    disabled
-                    style="max-width:75%" 
-                    v-model="levelOfCourt">
-                </b-form-input>
-            </b-form-group>
+            <b-row class="mt-0 question">
+                <b-col cols="7" class="labels">
+                    Level of Court                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-input                       
+                        disabled
+                        style="max-width:75%" 
+                        v-model="levelOfCourt">
+                    </b-form-input>
+                                       
+                </b-col>
+            </b-row>
 
-            <b-form-group
-                class="mx-1" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Supreme Court File no." 
-                label-for="supreme-court-file-no">
-                <b-form-input 
-                    id="supreme-court-file-no"
-                    style="max-width:75%" 
-                    v-model="searchParams.file">
-                </b-form-input>            
-            </b-form-group>       
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Supreme Court File No.                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-input 
+                        
+                        style="max-width:75%" 
+                        v-model="searchParams.file">
+                    </b-form-input>
+                                       
+                </b-col>
+            </b-row>
 
-            <b-form-group
-                class="mx-1" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Supreme Court Registry" 
-                label-for="location">
-                <b-form-select
-                    style="max-width:75%"
-                    id="location"                                                                                                           
-                    v-model="searchParams.location">
-                        <b-form-select-option
-                            v-for="location in locationsInfo" 
-                            :key="location.id"
-                            :value="location.id">
-                                {{location.name}}
-                        </b-form-select-option>    
-                </b-form-select>
-                
-            </b-form-group>        
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Supreme Court Registry                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-select
+                        style="max-width:75%"                                                                                                                                 
+                        v-model="searchParams.location">
+                            <b-form-select-option
+                                v-for="location in locationsInfo" 
+                                :key="location.id"
+                                :value="location.id">
+                                    {{location.name}}
+                            </b-form-select-option>    
+                    </b-form-select>
+                                       
+                </b-col>
+            </b-row>         
 
             <b-button 
                 style="float: right;  width: 80px; height: 50px; opacity:1;" 
@@ -121,12 +121,13 @@
             </b-card>
 
             <b-card no-body class="border-white">
-                <p>
-                    If you have the information corresponding to the case, you may enter 
+                <p class="ml-3">
+                    <span v-if="!notFound">If the order you are appealing is not listed above and you have </span>
+                    <span v-else>If you have </span>information corresponding to the case, you may enter 
                     the information manually:
                     <b-button 
-                        class="mx-4 bg-success"
-                        style="opacity:1; width: 25%;"            
+                        class="bg-success mr-4 mt-2"
+                        style="display: block; float: right; height: 50px; opacity:1;"            
                         @click="navigateToForm1()">
                         Continue to Notice of Appeal
                     </b-button> 
@@ -267,6 +268,8 @@ export default class Form1CaseInformationSearch extends Vue {
                 this.loadingOrders = false;
 
             } else {
+                this.UpdateSupremeCourtCaseJson(null);
+                this.UpdateSupremeCourtOrderJson(null);
                 this.noOrdersFound = true;
             }
                 
@@ -290,11 +293,24 @@ export default class Form1CaseInformationSearch extends Vue {
 
     public selectOrder(){
         const locationName = this.locationsInfo.filter(location => {return location.id == this.searchParams.location})[0].name;
-        this.$emit('fillForm', this.levelOfCourt, this.searchParams.location, locationName);
+        this.$emit('fillForm', this.levelOfCourt, this.searchParams.location, this.searchParams.file, locationName);
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+    
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
 
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
+    }
 </style>

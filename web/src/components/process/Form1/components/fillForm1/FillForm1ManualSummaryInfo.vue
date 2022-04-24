@@ -30,6 +30,7 @@
                 </span>                   
             </b-col>
         </b-row>
+        
         <b-row v-else class="mt-0 question">
             <b-col cols="7" class="labels">
                 Supreme Court File No.                                
@@ -51,7 +52,7 @@
             </b-col>
         </b-row>
 
-        <b-row v-if="manualSummaryInfo.appealingScFlaDivorce" class="mt-4 question">
+        <b-row v-if="manualSummaryInfo.appealingScFlaDivorce || manualSummaryInfo.requiresManualEntry" class="mt-4 question">
             <b-col cols="7" class="labels">
                 Registry Location:                                
             </b-col>
