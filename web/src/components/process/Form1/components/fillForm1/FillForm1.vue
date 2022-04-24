@@ -50,7 +50,7 @@ const commonState = namespace("Common");
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
-import { serviceInformationJsonDataType, supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
+import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import { locationsInfoType } from '@/types/Common';
 import { accountInfoType, userAccessInfoType, form1DataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
@@ -159,15 +159,12 @@ export default class FillForm1 extends Vue {
     public loadOrderDetails(){
 
         const form1SubmissionData = this.form1Info;
-        form1SubmissionData.manualSop = [];
-        // form1SubmissionData.appealingFirmAddress = {} as serviceInformationJsonDataType;
-        // form1SubmissionData.appealingFirmAddress.province = "British Columbia";
-        // form1SubmissionData.appealingFirmAddress.country = "Canada";
+        form1SubmissionData.manualSop = [];       
         form1SubmissionData.addresses = [];
         form1SubmissionData.emailAdresses = [];
         form1SubmissionData.phoneNumbers = [];
             
-        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce){
+        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce || form1SubmissionData.requiresManualEntry){
 
             this.showTribunalDetailsForm = true;
 
@@ -209,9 +206,7 @@ export default class FillForm1 extends Vue {
 
         let stateCheck = true;
         
-        this.fieldStates = this.form1InfoStates;
-
-        console.log(this.fieldStates)
+        this.fieldStates = this.form1InfoStates;        
 
         if (this.form1Info.appealTribunal || this.form1Info.appealingScFlaDivorce){
             this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
@@ -231,7 +226,6 @@ export default class FillForm1 extends Vue {
         }        
 
         const durationValue = this.form1Info.trialDurationDays?.trim().toLowerCase();
-      //  this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
         const includesIdentifier = durationValue?.includes('day') || durationValue?.includes('hour')
         this.fieldStates.appearanceDays = !(this.form1Info.trialDurationDays && includesIdentifier)? false : null;
         this.fieldStates.applyLeave = !(this.form1Info.applyLeave != null)? false : null;
@@ -433,12 +427,10 @@ export default class FillForm1 extends Vue {
         return data;
     }
 
-    public navigateToPreviewPage() {  
-        
+    public navigateToPreviewPage() {          
         if (this.checkStates()){
             this.$router.push({name: "preview-form1"});
-        }
-        
+        }        
     }
 
     public displayResults(){

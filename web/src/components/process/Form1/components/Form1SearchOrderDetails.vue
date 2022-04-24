@@ -110,18 +110,17 @@ export default class Form1SearchOrderDetails extends Vue {
     }
 
     public extractCaseOrders(){
-        
+
+        this.UpdateSupremeCourtOrderJson(null);        
         this.orderList = [];
         if (this.supremeCourtCaseJson?.orders){
             for (const order of this.supremeCourtCaseJson?.orders){            
                 order.judgeDisplayName = order.honorificTitle + ' ' + order.judgeSurname;            
                 this.orderList.push(order)
             }
-        }
-       
+        }       
         this.dataReady = true;
     }
-
 
     public selectOrder(selectedOrder: supremeCourtOrdersJsonInfoType){
         const caseInfo = this.supremeCourtCaseJson
@@ -144,9 +143,7 @@ export default class Form1SearchOrderDetails extends Vue {
             this.UpdateSupremeCourtOrderJson(selectedOrder);
             this.dataReady = true;
             this.$emit('selectOrder');
-        })
-
-        
+        })        
     }
     
 }

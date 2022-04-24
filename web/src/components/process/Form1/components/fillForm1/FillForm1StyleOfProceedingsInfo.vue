@@ -358,9 +358,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
 
     public extractInfo(){
 
-        const styleOfProceedings = this.form1Info;
-
-        styleOfProceedings.appealingFirm = this.userName;
+        const styleOfProceedings = this.form1Info;       
         
         styleOfProceedings.appellants = [];
         styleOfProceedings.respondents = [];

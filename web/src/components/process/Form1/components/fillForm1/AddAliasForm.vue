@@ -81,9 +81,11 @@
 <script lang="ts">
     import { Component, Vue, Prop } from 'vue-property-decorator';
     import { namespace } from 'vuex-class';
+
     import "@/store/modules/common";
-import { lookupsInfoType, aliasInfoType } from '@/types/Information/Form1';
-    const commonState = namespace("Common");    
+    const commonState = namespace("Common"); 
+
+    import { lookupsInfoType, aliasInfoType } from '@/types/Information/Form1';   
 
     @Component
     export default class AddAliasForm extends Vue {        
