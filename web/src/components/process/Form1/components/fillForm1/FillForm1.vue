@@ -1,23 +1,22 @@
 <template>
     <b-card v-if="dataReady" no-body border-variant="light" bg-variant="light" :key="updatedInfo">        
               
-        <save-or-preview-buttons class="mx-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
+        <save-or-preview-buttons class="mx-2 mb-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
-        <fill-form-1-tribunal-summary-info v-if="form1Info.appealTribunal" class="mt-2 mx-2" @displayResults="displayResults"/>
+        <fill-form-1-manual-summary-info 
+            v-if="form1Info.appealTribunal || form1Info.appealingScFlaDivorce || form1Info.requiresManualEntry" 
+            class="mt-2 mx-2" 
+            @displayResults="displayResults"/>
 
-        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>
-
-        <!-- <b-card class="mb-2 border-light bg-light">
-            <b-row class="ml-0 mt-0 font-weight-bold">Please complete the following fields:</b-row>
-        </b-card> -->
+        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>      
 
         <fill-form-1-common-info class="mx-2"/>
 
-        <fill-form-1-style-of-proceedings-info />
+        <fill-form-1-style-of-proceedings-info class="mx-2" />
 
-        <b-card class="mb-4 border-white bg-white">
+        <b-card class="mb-4 mx-2 border-white bg-white">
 
-            <b-row class="mt-2 question">
+            <b-row class="question">
                 <b-col cols="7" class="labels">
                     Reference Number (optional) 
                     <p class="content text-primary">
@@ -32,7 +31,7 @@
 
         </b-card>
 
-        <save-or-preview-buttons :expiredDeadline="expiredDeadline" @saveForm1="saveForm1" />
+        <save-or-preview-buttons class="mx-2" :expiredDeadline="expiredDeadline" @saveForm1="saveForm1" />
         
     </b-card>
 </template>
@@ -56,7 +55,7 @@ import { locationsInfoType } from '@/types/Common';
 import { accountInfoType, userAccessInfoType, form1DataInfoType, form1StatesInfoType } from '@/types/Information/Form1';
 
 import FillForm1SummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1SummaryInfo.vue";
-import FillForm1TribunalSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1TribunalSummaryInfo.vue";
+import FillForm1ManualSummaryInfo from "@/components/process/Form1/components/fillForm1/FillForm1ManualSummaryInfo.vue";
 import FillForm1CommonInfo from "@/components/process/Form1/components/fillForm1/FillForm1CommonInfo.vue";
 import FillForm1StyleOfProceedingsInfo from "@/components/process/Form1/components/fillForm1/FillForm1StyleOfProceedingsInfo.vue";
 
@@ -65,7 +64,7 @@ import SaveOrPreviewButtons from './components/SaveOrPreviewButtons.vue'
 @Component({
     components:{        
         FillForm1SummaryInfo,
-        FillForm1TribunalSummaryInfo,
+        FillForm1ManualSummaryInfo,
         FillForm1CommonInfo,
         FillForm1StyleOfProceedingsInfo,
         SaveOrPreviewButtons
@@ -134,15 +133,14 @@ export default class FillForm1 extends Vue {
             if(response?.data?.data){            
                             
                 const form1Data: form1DataInfoType = response.data.data   
-                if (form1Data.appealTribunal){
+                if (form1Data.appealTribunal || form1Data.appealingScFlaDivorce){
                     this.showTribunalDetailsForm = true;
                 } else {
                     this.showTribunalDetailsForm = false;
                     form1Data['appealSubmissionDeadline']=moment(form1Data['appealSubmissionDeadline']).local().format()
                     form1Data['dateOfJudgement']=moment(form1Data['dateOfJudgement']).local().format();
-                }           
+                }
                 
-                //TODO: handle tribunal case
                 this.UpdateForm1Info(form1Data) 
                 this.setCurrentCourtLocation(form1Data['lowerCourtRegistryId'])
                 this.clearStates();                
@@ -162,11 +160,14 @@ export default class FillForm1 extends Vue {
 
         const form1SubmissionData = this.form1Info;
         form1SubmissionData.manualSop = [];
-        form1SubmissionData.appealingFirmAddress = {} as serviceInformationJsonDataType;
-        form1SubmissionData.appealingFirmAddress.province = "British Columbia";
-        form1SubmissionData.appealingFirmAddress.country = "Canada";
+        // form1SubmissionData.appealingFirmAddress = {} as serviceInformationJsonDataType;
+        // form1SubmissionData.appealingFirmAddress.province = "British Columbia";
+        // form1SubmissionData.appealingFirmAddress.country = "Canada";
+        form1SubmissionData.addresses = [];
+        form1SubmissionData.emailAdresses = [];
+        form1SubmissionData.phoneNumbers = [];
             
-        if (form1SubmissionData.appealTribunal){
+        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce){
 
             this.showTribunalDetailsForm = true;
 
@@ -210,7 +211,9 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates = this.form1InfoStates;
 
-        if (this.form1Info.appealTribunal){
+        console.log(this.fieldStates)
+
+        if (this.form1Info.appealTribunal || this.form1Info.appealingScFlaDivorce){
             this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
@@ -221,6 +224,11 @@ export default class FillForm1 extends Vue {
         }   
         
         this.fieldStates.cityOfOrder = !this.form1Info.cityOfOrder? false : null;
+        if (this.form1Info.appealTribunal){
+            this.fieldStates.lowerCourtFileNo = null;
+        } else {
+            this.fieldStates.lowerCourtFileNo = !this.form1Info.lowerCourtFileNo? false : null;
+        }        
 
         const durationValue = this.form1Info.trialDurationDays?.trim().toLowerCase();
       //  this.fieldStates.appearanceDays = this.checkDay(numberOfDays)==false? false : null;
@@ -244,22 +252,11 @@ export default class FillForm1 extends Vue {
       
         this.fieldStates.mainAppellant = !this.form1Info.appealingFirm? false : null;
         
-        const phoneFormat = /^[0-9]{3}-[0-9]{3}\-[0-9]{4}((\s\x[0-9]{4})|)$/;
-        const emailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
-        const postcodeFormat = /^(([A-Z][0-9][A-Z] [0-9][A-Z][0-9])|([a-z][0-9][a-z] [0-9][a-z][0-9]))?$/;
-
-        this.fieldStates.addressLine1 = !this.form1Info.appealingFirmAddress.addressLine1? false : null;
-        this.fieldStates.city = !this.form1Info.appealingFirmAddress.city? false : null;
-
-        const postalCode = this.form1Info.appealingFirmAddress.postalCode?.trim()
-        this.fieldStates.postalCode = !postcodeFormat.test(postalCode)? false : null;   
-        
-        const phone = this.form1Info.appealingFirmAddress.phone?.trim()
-        this.fieldStates.phone = (!phone || (phone && phoneFormat.test(phone)==false))? false : null;
-
-        const email = this.form1Info.appealingFirmAddress.email?.trim();
-        this.fieldStates.email =(email && !emailFormat.test(email))? false : null; 
-        
+        this.fieldStates.phoneNumbers = !(this.form1Info.phoneNumbers && this.verifyPhoneNumbers()
+                                    && this.form1Info.phoneNumbers.length == this.form1Info.appellants.length)? false : null;
+        this.fieldStates.addresses = !(this.form1Info.addresses && this.verifyAddresses()
+                                    && this.form1Info.addresses.length == this.form1Info.appellants.length)? false : null;       
+      
         this.UpdateForm1InfoStates(this.fieldStates);
         this.updatedInfo ++;
 
@@ -269,6 +266,52 @@ export default class FillForm1 extends Vue {
         }       
 
         return stateCheck;            
+    }
+
+    public verifyPhoneNumbers(){
+        for(const phoneNumber of this.form1Info.phoneNumbers){            
+            if(phoneNumber.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public verifyAddresses(){
+        for(const address of this.form1Info.addresses){            
+            if(address.contactInfo.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public extractAddresses(){
+        const addresses = [];
+        for(const contactAddress of this.form1Info.addresses){            
+            if(contactAddress.contactInfo.trim().length != 0){
+                addresses.push(contactAddress.name + ': ' + contactAddress.contactInfo.trim());
+            }  
+        }
+        return addresses.join('<br>');        
+    }
+
+    public extractPhoneNumbers(){
+        const phoneNumbers = [];
+        for(const phone of this.form1Info.phoneNumbers){            
+            if(phone.contactInfo.trim().length != 0){
+                phoneNumbers.push(phone.name + ': ' + phone.contactInfo.trim());
+            }  
+        }
+        return phoneNumbers.join('<br>');        
+    }
+
+    public extractEmails(){
+        const emails = [];
+        for(const email of this.form1Info.emailAdresses){            
+            if(email.contactInfo.trim().length != 0){
+                emails.push(email.name + ': ' + email.contactInfo.trim());
+            }  
+        }
+        return emails.join('<br>');        
     }
 
     public saveForm1(draft: boolean) {
@@ -281,6 +324,9 @@ export default class FillForm1 extends Vue {
             url = '/form1/forms/'+this.currentNoticeOfAppealId;
             const form1 = this.form1Info;
             form1.refOptional = this.referenceNumber;
+            form1.contactAddress = this.extractAddresses();
+            form1.emails = this.extractEmails();
+            form1.phones = this.extractPhoneNumbers();
             this.UpdateForm1Info(form1);
 
             if (this.checkWithinAppealPeriod() ){ 
@@ -289,12 +335,14 @@ export default class FillForm1 extends Vue {
                 if (!draft && !this.checkStates()){               
                     return                    
                 }
+
+                const form1Data = this.getForm1Info();
                 
                 const options = {
                     method: method,
                     url: url,
                     data: {
-                        data:this.form1Info,
+                        data:form1Data,
                         type:'Form1',
                         description:'Notice of Appeal'
                     }
@@ -350,7 +398,7 @@ export default class FillForm1 extends Vue {
         data.electronicallyFiled = 'N';
         data.trialDurationDays = this.form1Info.trialDurationDays.toString();
         data.appealingFirm = this.form1Info.appealingFirm;
-        data.appealingFirmAddress = this.form1Info.appealingFirmAddress;
+        
         data.toRespondents = this.form1Info.respondents?this.form1Info.respondents.map(respondent => {return respondent.fullName}).join(', '):'';
         data.respondentSolicitor = this.form1Info.respondentSolicitor?this.form1Info.respondentSolicitor:'';
         data.wasSupremeAppeal = this.form1Info.wasSupremeAppeal;

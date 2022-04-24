@@ -2,7 +2,7 @@
     <b-card no-body v-if="dataReady" class="border-white" >  
 
         <b-card class="ml-2 mt-2 border-white" >
-            <p style="font-size: 1.25rem;" >Lower Court Case Information</p>      
+            <h2 class="ml-4 mt-3 text-primary">Lower Court Case Information</h2>      
 
             <p>Find the Supreme Court case you are appealing by entering the following information about the case.</p>
 
@@ -55,8 +55,8 @@
 
             <b-button 
                 style="float: right;  width: 80px; height: 50px; opacity:1;" 
-                :disabled="searching"
-                variant="success"
+                :class="((!searchParams.file || !searchParams.location)?inactiveButtonClass:activeButtonClass) + ' ml-4 '"
+                :disabled="searching || !searchParams.file || !searchParams.location"
                 @click="findFile()"
                 ><spinner color="#FFF" v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
                 <span style="font-size: 20px;" v-else>Find</span>
@@ -67,15 +67,18 @@
         <b-card v-if="cases.length || (!searching && notFound)" class="ml-2 mt-2 border-white">
             <hr class="mb-4">
             <p style="font-size: 1.25rem; ">Case Results</p>
-            <p v-if="!searching && notFound">
-                Please be advised that we are unable to locate the file number you have entered. Please 
-                check the case number and registry location entered, and try again. If the case cannot be 
-                located, you will need to submit your document(s) at a
-                <a
-                    href="http://www.courts.gov.bc.ca/Court_of_Appeal/court_locations_and_contacts.aspx"
-                    target="_blank">Court of Appeal Registry
-                </a>.
-            </p>
+            <b-card no-body class="border-white" v-if="!searching && notFound">
+                <p>
+                    Please be advised that we are unable to locate the file number you have entered. Please 
+                    check the case number and registry location entered, and try again. If the case cannot be 
+                    located, you will need to submit your document(s) at a
+                    <a
+                        href="http://www.courts.gov.bc.ca/Court_of_Appeal/court_locations_and_contacts.aspx"
+                        target="_blank">Court of Appeal Registry
+                    </a>.
+                </p>
+
+            </b-card>
             <b-card no-body class="border-white" v-else>
                 <p>
                     Below are the results of your search, please ensure you select the correct case using 
@@ -117,6 +120,19 @@
                 </b-card>
             </b-card>
 
+            <b-card no-body class="border-white">
+                <p>
+                    If you have the information corresponding to the case, you may enter 
+                    the information manually:
+                    <b-button 
+                        class="mx-4 bg-success"
+                        style="opacity:1; width: 25%;"            
+                        @click="navigateToForm1()">
+                        Continue to Notice of Appeal
+                    </b-button> 
+                </p>
+            </b-card>
+
         </b-card>
         
     </b-card>
@@ -133,11 +149,14 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import { supremeCourtCaseJsonDataInfoType, supremeCourtOrdersJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 import Form1SearchOrderDetails from "./Form1SearchOrderDetails.vue";
 import { locationsInfoType } from '@/types/Common';
-import { form1SearchInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, form1SearchInfoType } from '@/types/Information/Form1';
 
 @Component({
     components: {           
@@ -158,7 +177,15 @@ export default class Form1CaseInformationSearch extends Vue {
 
     @commonState.State
     public locationsInfo!: locationsInfoType[];
+
+    @form1State.State
+    public form1Info: form1DataInfoType;
+
+    @form1State.Action
+    public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
     
+    inactiveButtonClass = "bg-secondary text-white"; 
+    activeButtonClass = "bg-success text-white";
     levelOfCourt = "Supreme Court of BC";
 
     dataReady = false;
@@ -217,8 +244,7 @@ export default class Form1CaseInformationSearch extends Vue {
         console.log(data.item)
         if(!data.detailsShowing)
         {
-            this.getOrders(data.item)
-            
+            this.getOrders(data.item)            
         }       
     }
 
@@ -250,6 +276,16 @@ export default class Form1CaseInformationSearch extends Vue {
             this.loadingOrders = false;
            
         });
+    }
+
+    public navigateToForm1() {
+
+        const form1SubmissionData = this.form1Info;
+        form1SubmissionData.parties = [];
+        form1SubmissionData.requiresManualEntry = true;
+       
+        this.UpdateForm1Info(form1SubmissionData);
+        this.selectOrder();
     }
 
     public selectOrder(){

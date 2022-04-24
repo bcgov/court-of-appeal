@@ -8,11 +8,7 @@
             style="font-size: 42px; font-weight: 700;">            
             Notice of Cross Appeal Checklist
         </b-card-header>
-
-        <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
-            <form-3-did-you-know/>            
-        </b-card>  
-
+     
         <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
             <form-3-qualify-questions @disableContinue="disableNavigateForm3"/>
         </b-card>
@@ -43,13 +39,11 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
-import Form3DidYouKnow from "@/components/process/Form3/components/Form3DidYouKnow.vue";
 import Form3QualifyQuestions from "@/components/process/Form3/components/Form3QualifyQuestions.vue";
 import { form3QualificationInfoType, form3DataInfoType } from '@/types/Information/Form3';
 
 @Component({
     components:{
-        Form3DidYouKnow,
         Form3QualifyQuestions
     }
 })
@@ -64,13 +58,9 @@ export default class ChecklistForm3 extends Vue {
     activeButtonClass = "bg-success text-white"; 
     qualificationInfo = {} as form3QualificationInfoType;
     
-    // mounted(){
-        
-        
+    // mounted(){       
 
-    // }
-
-    
+    // }    
 
     public disableNavigateForm3(disable: boolean, qualificationInfo: form3QualificationInfoType) {        
         this.disableContinue = disable; 

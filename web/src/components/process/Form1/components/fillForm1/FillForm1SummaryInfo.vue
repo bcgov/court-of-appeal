@@ -1,8 +1,8 @@
 <template>
     
-    <b-card header-tag="header" class="mx-auto mb-4 border-white bg-white">
+    <b-card header-tag="header" class="mb-4 border-white bg-white">
 
-        <h2 class="ml-4 mt-3 text-primary" >Lower Court Case Information</h2>
+        <h2 class="ml-4 pl-2 mt-3 text-primary" >Lower Court Case Information</h2>
         <b-card-header 
             class="mx-4 rounded" 
             header-bg-variant="primary" 
@@ -10,7 +10,7 @@
             <fill-form-1-header-info @displayResults="displayResults"/>
         </b-card-header>        
 
-        <b-card v-if="dataReady" class="bg-white border-white text-dark">
+        <b-card v-if="dataReady" class="bg-white border-white text-dark mx-2">
             <b-row>
                 <b-col cols="4">
                     <span class="labels">Level Of Court</span>
@@ -67,7 +67,7 @@
                     trial that took two hours, enter “two hours.”
                 </p>                               
             </b-col>
-            <b-col>
+            <b-col class="mt-2">
                 <b-form-input    
                     style="width: 15rem; display: inline-block;"                    
                     :state="form1InfoStates.appearanceDays"
@@ -83,7 +83,7 @@
             <b-col cols="7" class="labels">
                 City where the Order was Pronounced                                
             </b-col>
-            <b-col>
+            <b-col class="mt-2">
                 <b-form-input
                     :state="form1InfoStates.cityOfOrder"
                     @change="update"
