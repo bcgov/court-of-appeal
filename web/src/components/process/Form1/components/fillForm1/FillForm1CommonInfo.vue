@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" no-body class="mb-4 border-light bg-light">
+    <b-card v-if="dataReady" no-body class="border-light bg-light">
 
         <b-card class="mb-4 border-white bg-white">  
 
@@ -195,13 +195,13 @@
         </b-card>
 
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
-            <h2 class="ml-4 mt-3 text-primary">Additional Information</h2>            
+            <h2 class="ml-4 mt-3 pl-2 text-primary">Additional Information</h2>            
 
             <b-row class="my-4 question">
                 <b-col cols="7" class="labels">
                    Is there an order sealing any part of the trial court or tribunal file?                                
                 </b-col>
-                <b-col>  
+                <b-col class="mt-1">  
                     <b-form-radio-group                
                         v-model="commonInfo.orderSealed"
                         :state="form1InfoStates.orderSealed"
@@ -222,7 +222,7 @@
                 <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
-                <b-col>  
+                <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
@@ -246,7 +246,7 @@
                 <b-col cols="7" class="labels">
                    Are there orders that protect the identity of a party or parties?                                
                 </b-col>
-                <b-col>  
+                <b-col class="mt-1">  
                     <b-form-radio-group                
                         v-model="commonInfo.orderBan"
                         :state="form1InfoStates.orderBan"
@@ -267,7 +267,7 @@
                 <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
-                <b-col class="ml-3" style="padding: 0;">  
+                <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
@@ -291,7 +291,7 @@
                 <b-col cols="7" class="labels">
                    Which of the following best describes what this appeal involves?                                
                 </b-col>
-                <b-col>
+                <b-col class="mt-1">
                     <b-form-checkbox-group
                         style="font-size: 1rem; font-weight:500;"        
                         v-model="commonInfo.involves"
@@ -321,8 +321,7 @@
             
         </b-card>          
         
-    </b-card>
-    
+    </b-card>    
 </template>
 
 <script lang="ts">

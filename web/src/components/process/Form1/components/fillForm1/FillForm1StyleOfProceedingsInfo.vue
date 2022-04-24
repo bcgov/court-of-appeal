@@ -1,26 +1,26 @@
 <template>
     
-    <b-card v-if="dataReady" no-body class="mb-4 border-light bg-light">
+    <b-card v-if="dataReady" no-body class="border-light bg-light">
 
         <b-card class="mb-4 border-white bg-white">            
-            <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding</h2>
+            <h2 class="ml-4 pl-2 mt-3 text-primary" >Style of Proceeding</h2>
 
-            <p class="ml-4" v-if="styleOfProceedingsInfo.appealTribunal">
+            <p class="ml-4 pl-2" v-if="styleOfProceedingsInfo.appealTribunal">
                 As this is an appeal from a Tribunal, you will need to add the parties involved in the tribunal, 
                 Once you've added the parties, you will then need to indicate who is the appellant and who is 
                 the respondent on the appeal. 
             </p>
-            <p class="ml-4" v-else>
+            <p class="ml-4 pl-2" v-else>
                 Include only those parties whose interests are affected by the order sought by the appellant(s). 
                 The order of the names will be handled for you.
             </p>
             <b-table
                 v-if="styleOfProceedingsInfo.parties.length>0"
-                :key="updateTable"                 
+                :key="updated"                 
                 :items="styleOfProceedingsInfo.parties"
                 :fields="partiesFields"
                 :state="form1InfoStates.respondents || form1InfoStates.appellants"
-                class="mx-4 text-center"
+                class="mx-4 pl-2 text-center"
                 striped
                 small 
                 responsive="sm"
@@ -81,9 +81,9 @@
                 class="mx-4 bg-white text-danger">A minimum of one Appellant and one Respondent is required.
             </span> 
 
-            <hr class="mb-3 mx-4">
+            <hr class="mb-3 pl-2 mx-4">
 
-            <style-of-proceeding-actions @updateResults="updateTableResults();"/>
+            <style-of-proceeding-actions class="pl-2" @updateResults="updateTableResults();"/>
           
             <span
                 v-if="(!editStyleOfProceedingsEnabled)" 
@@ -134,29 +134,12 @@
                 </b-col>
             </b-row> -->
 
-            <b-row class="mt-4 question">
+
+            <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 1">
                 <b-col cols="7" class="labels">
-                    Name of lawyer or party authorizing filing of this Form:                   
-                </b-col>
-                <b-col>
-                    <b-form-input 
-                        style="width: 100%"
-                        :state="form1InfoStates.mainAppellant"                         
-                        @change="update"      
-                        v-model="styleOfProceedingsInfo.appealingFirm">
-                    </b-form-input>
-                    <span class="ml-2" style="font-weight: 700; font-size:11pt">Electronically filed</span>
-
-                </b-col>
-            </b-row>
-
-            <h3 class="ml-4 mt-3 text-primary">Service Address</h3>
-
-            <b-row v-if="form1Info.appellants.length > 0" :key="updated + 1" class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
                     Name(s) and address(es) within BC for the service of the respondent(s)                                                    
                 </b-col>
-                <b-col>
+                <b-col class="mt-2">
                     <div 
                         v-for="(address,index) in form1Info.addresses" 
                         :key="'address' +index"                       
@@ -176,23 +159,22 @@
                 </b-col>                
             </b-row>
 
-            <b-row v-if="form1Info.appellants.length > 0" :key="updated" class="mt-5">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 2">
+                <b-col cols="7" class="labels">
                     Phone number(s) of the party(ies) filing the Notice of Appearance
                     <b-icon-question-circle-fill
                         style="color: #38598a;"
                         v-b-tooltip:hover.v-info.html="helpText('The registry may contact you by phone to schedule your appeal.').title"/>                                                    
                 </b-col>
-                <b-col>
+                <b-col class="mt-2">
                     <div 
                         v-for="(phone,index) in form1Info.phoneNumbers" 
                         :key="'phone' + index"                        
                         :value="phone"> {{form1Info.phoneNumbers[index].name}}                  
-                        <b-form-textarea                
-                            style="width:100%" 
-                            rows="6"                                                                                       
+                        <b-form-input                
+                            style="width:100%"                                                                    
                             v-model="form1Info.phoneNumbers[index].contactInfo">
-                        </b-form-textarea>      
+                        </b-form-input>      
                     </div>
                     <span
                         v-if="(form1InfoStates.phoneNumbers != null)" 
@@ -203,152 +185,42 @@
                 </b-col>                
             </b-row>
 
-
-
-
-            <b-row v-if="form1Info.appellants.length > 0" :key="updated + 2" class="mt-4">
-                <b-col cols="6" style="font-weight: 700;">
+            <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 3">
+                <b-col cols="7" class="labels">
                     Email(s) address(es) for service of respondent(s) 
                     <b-icon-question-circle-fill
                         style="color: #38598a;"
                         v-b-tooltip:hover.v-info.html="helpText('Receive electronic document status change notifications or be served electonically by another party.').title"                                    
                         />                               
                 </b-col>
-                <b-col>
+                <b-col class="mt-2">
                     <div 
                         v-for="(email,index) in form1Info.emailAdresses" 
                         :key="'email' + index"                       
                         :value="email"> {{form1Info.emailAdresses[index].name}}                  
-                        <b-form-textarea                
-                            style="width:100%" 
-                            rows="6"                                                                                       
+                        <b-form-input                
+                            style="width:100%"                                                                  
                             v-model="form1Info.emailAdresses[index].contactInfo">
-                        </b-form-textarea>      
+                        </b-form-input>      
                     </div>                                    
                 </b-col>                
-            </b-row>
-
-
-            <!-- <b-row class="content ml-4 text-primary">
-                Name(s) and address(es) within BC for service of the appellant(s).
-            </b-row>
-
-            
+            </b-row>    
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Address Line 1                   
-                </b-col>
-                <b-col>
-                    <b-form-input
-                        :state="form1InfoStates.addressLine1"                         
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.addressLine1">
-                    </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        class="text-secondary ml-2">Street address
-                    </span>   
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Address Line 2                   
-                </b-col>
-                <b-col>
-                    <b-form-input              
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.addressLine2">
-                    </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        class="text-secondary ml-2">Apartment, suite, unit, building, floor, etc.
-                    </span>   
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    City                    
-                </b-col>
-                <b-col>
-                    <b-form-input 
-                        :state="form1InfoStates.city"                         
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.city">                        
-                    </b-form-input>  
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">Province</b-col>
-                <b-col>British Columbia</b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">Country</b-col>
-                <b-col>Canada</b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Postal Code                   
-                </b-col>
-                <b-col>
-                    <b-form-input
-                        :state="form1InfoStates.postalCode"                         
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.postalCode">                        
-                    </b-form-input> 
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        :class="form1InfoStates.postalCode==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. A1A 1A1
-                    </span> 
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Phone 
-                    <b-icon-question-circle-fill
-                        style="color: #38598a;"
-                        v-b-tooltip:hover.v-info.html="helpText('The registry may contact you by phone to schedule your appeal.').title"/>                    
-                </b-col>
-                <b-col>
-                    <b-form-input
-                        :state="form1InfoStates.phone"                        
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.phone">
-                    </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        :class="form1InfoStates.phone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. 604-567-8901 x1234 or 250-123-4567
-                    </span>   
-                </b-col>
-            </b-row>
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Email address
-                    <b-icon-question-circle-fill
-                        style="color: #38598a;"
-                        v-b-tooltip:hover.v-info.html="helpText('Receive electronic document status change notifications or be served electonically by another party.').title"                                    
-                        />   
-
-                    <p class="content">
-                        If you provide an email address, you consent to have documents served on you by email.
-                    </p>                 
+                    Name of lawyer or party authorizing filing of this Form:                   
                 </b-col>
                 <b-col>
                     <b-form-input 
                         style="width: 100%"
-                        :state="form1InfoStates.email"                         
-                        v-model="styleOfProceedingsInfo.appealingFirmAddress.email">
+                        :state="form1InfoStates.mainAppellant"                         
+                        @change="update"      
+                        v-model="styleOfProceedingsInfo.appealingFirm">
                     </b-form-input>
-                    <span
-                        v-if="form1InfoStates.email==false" 
-                        style="font-size: 0.75rem;" 
-                        class="px-2 bg-danger text-white">Invalid Email Format!
-                    </span>
+                    <span class="ml-2" style="font-weight: 700; font-size:11pt">Electronically filed</span>
+
                 </b-col>
-            </b-row> -->
-            
+            </b-row>
         </b-card>
       
         <b-modal size="lg" v-model="showConfirmEditParties" id="bv-modal-confirm-edit-party" header-class="bg-warning text-light">
@@ -453,8 +325,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     
     applicantNameList: string[] = [];
     respondentNameList: string[] = [];
-
-    updateTable = 0;
+   
     updated = 0;
     showConfirmEditParties = false;
     rowInfo;
@@ -492,7 +363,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.appealingFirm = this.userName;
         
         styleOfProceedings.appellants = [];
-        styleOfProceedings.respondents = [];   
+        styleOfProceedings.respondents = [];
         this.applicantNameList = [];
         this.respondentNameList = [];              
 
@@ -560,7 +431,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     public updateTableResults(){
         //console.log('updating')
         this.styleOfProceedingsInfo = this.form1Info;
-        this.updateTable++;
+        this.updated++;
     }
 
     public updateAddressFields(){
@@ -704,8 +575,10 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         const styleOfProceedings = this.form1Info;
         styleOfProceedings.parties[row.index].appealRole = 'Appellant';        
         styleOfProceedings.appellants.push(styleOfProceedings.parties[row.index]);
+        this.applicantNameList.push(styleOfProceedings.parties[row.index].fullName);
+        this.updateAddressFields();
         this.UpdateForm1Info(styleOfProceedings);        
-        this.updateTable ++;
+        this.updated ++;
     }
 
     public appRight(row){          
@@ -713,8 +586,10 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.parties[row.index].appealRole = '';
         const index = styleOfProceedings.appellants.findIndex(app => app.fullName == styleOfProceedings.parties[row.index].fullName)
         styleOfProceedings.appellants.splice(index, 1);
+        this.applicantNameList.splice(index, 1);
+        this.updateAddressFields();
         this.UpdateForm1Info(styleOfProceedings);
-        this.updateTable ++;
+        this.updated ++;
     }
 
     public resLeft(row){
@@ -731,7 +606,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.respondents.splice(index, 1);
         styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm1Info(styleOfProceedings);
-        this.updateTable ++;
+        this.updated ++;
     }
 
     public resRight(row){
@@ -745,7 +620,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.respondents.push(styleOfProceedings.parties[row.index]);
         styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');
         this.UpdateForm1Info(styleOfProceedings);
-        this.updateTable ++;
+        this.updated ++;
     }
 
     public helpText(content: string){

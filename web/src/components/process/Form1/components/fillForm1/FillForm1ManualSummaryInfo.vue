@@ -1,163 +1,157 @@
-<template>
-    
-    <b-card v-if="dataReady" no-body class="mb-4 border-white bg-white">
+<template>    
+    <b-card v-if="dataReady" class="mb-4 border-white bg-white">
 
-        <h2 class="ml-4 mt-3 text-primary" >Lower Court Case Information</h2>             
+        <h2 class="ml-4 pl-2 mt-3 text-primary">Lower Court Case Information</h2>        
 
-        <b-card class="mb-4 bg-white border-white text-dark">
+        <b-row v-if="manualSummaryInfo.appealTribunal" class="mt-0 question">
+            <b-col cols="7" class="labels">
+                Type of Tribunal:                                
+            </b-col>
+            <b-col>
+                <b-form-select                
+                    style="width:100%"              
+                    v-model="tribunalType" 
+                    @change="update"                   
+                    :options="tribunalTypes">
+                </b-form-select>
+                <b-form-input
+                    v-if="tribunalType == 'Other'"
+                    style="width:100%" 
+                    placeholder="Tribunal Type"
+                    class="mt-2"
+                    @change="update"                                    
+                    v-model="otherTribunalType">
+                </b-form-input>
+                <span
+                    v-if="(form1InfoStates.tribunalType != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify Type of Tribunal.
+                </span>                   
+            </b-col>
+        </b-row>
+        <b-row v-else class="mt-0 question">
+            <b-col cols="7" class="labels">
+                Supreme Court File No.                                
+            </b-col>
+            <b-col>                    
+                <b-form-input                        
+                    style="width:100%" 
+                    placeholder="Supreme Court File No."
+                    class="mt-2"
+                    @change="update"                                    
+                    v-model="manualSummaryInfo.lowerCourtFileNo">
+                </b-form-input>
+                <span
+                    v-if="(form1InfoStates.lowerCourtFileNo != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify Supreme Court File No.
+                </span>                   
+            </b-col>
+        </b-row>
 
-            <b-row v-if="manualSummaryInfo.appealTribunal" class="mt-0 question">
-                <b-col cols="7" class="labels">
-                    Type of Tribunal:                                
-                </b-col>
-                <b-col>
-                    <b-form-select                
-                        style="width:100%"              
-                        v-model="tribunalType" 
-                        @change="update"                   
-                        :options="tribunalTypes">
-                    </b-form-select>
-                    <b-form-input
-                        v-if="tribunalType == 'Other'"
-                        style="width:100%" 
-                        placeholder="Tribunal Type"
-                        class="mt-2"
-                        @change="update"                                    
-                        v-model="otherTribunalType">
-                    </b-form-input>
-                    <span
-                        v-if="(form1InfoStates.tribunalType != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify Type of Tribunal.
-                    </span>                   
-                </b-col>
-            </b-row>
-            <b-row v-else class="mt-0 question">
-                <b-col cols="7" class="labels">
-                    Supreme Court File No.                                
-                </b-col>
-                <b-col>                    
-                    <b-form-input                        
-                        style="width:100%" 
-                        placeholder="Supreme Court File No."
-                        class="mt-2"
-                        @change="update"                                    
-                        v-model="manualSummaryInfo.lowerCourtFileNo">
-                    </b-form-input>
-                    <span
-                        v-if="(form1InfoStates.lowerCourtFileNo != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify Supreme Court File No.
-                    </span>                   
-                </b-col>
-            </b-row>
+        <b-row v-if="manualSummaryInfo.appealingScFlaDivorce" class="mt-4 question">
+            <b-col cols="7" class="labels">
+                Registry Location:                                
+            </b-col>
+            <b-col>
+                <b-form-select                
+                    style="width:100%"              
+                    v-model="manualSummaryInfo.lowerCourtRegistryId" 
+                    @change="update">
+                    <b-form-select-option
+                        v-for="location in locationsInfo" 
+                        :key="location.id"
+                        :value="location.id">
+                            {{location.name}}
+                    </b-form-select-option>
+                </b-form-select>
+                
+                <span
+                    v-if="(form1InfoStates.lowerCourtRegistryId != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify registry location.
+                </span>                   
+            </b-col>
+        </b-row>
 
-            <b-row v-if="manualSummaryInfo.appealingScFlaDivorce" class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Registry Location:                                
-                </b-col>
-                <b-col>
-                    <b-form-select                
-                        style="width:100%"              
-                        v-model="manualSummaryInfo.lowerCourtRegistryId" 
-                        @change="update">
-                        <b-form-select-option
-                            v-for="location in locationsInfo" 
-                            :key="location.id"
-                            :value="location.id">
-                                {{location.name}}
-                        </b-form-select-option>
-                    </b-form-select>
-                    
-                    <span
-                        v-if="(form1InfoStates.lowerCourtRegistryId != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify registry location.
-                    </span>                   
-                </b-col>
-            </b-row>
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                Name of Decision Maker                                
+            </b-col>
+            <b-col class="mt-2">
+                <b-form-input
+                    :state="form1InfoStates.tribunalOriginalDecisionMaker"
+                    @change="update"
+                    style="max-width:100%" 
+                    v-model="manualSummaryInfo.tribunalOriginalDecisionMaker">
+                </b-form-input> 
+            </b-col>
+        </b-row>
 
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Name of Decision Maker                                
-                </b-col>
-                <b-col class="mt-2">
-                    <b-form-input
-                        :state="form1InfoStates.tribunalOriginalDecisionMaker"
-                        @change="update"
-                        style="max-width:100%" 
-                        v-model="manualSummaryInfo.tribunalOriginalDecisionMaker">
-                    </b-form-input> 
-                </b-col>
-            </b-row>
+        <b-row class="my-4 question" style="padding: 0;">
+            <b-col cols="7" class="labels">
+                Date the Order was Pronounced:                                
+            </b-col>
+            <b-col class="ml-3" style="padding: 0;">  
+                <b-card 
+                    class="mt-2" 
+                    style="padding: 0; float: left;" 
+                    :border-variant="form1InfoStates.tribunalDateOfOrder == false?'danger': 'dark'">
+                    <div class="vuetify">
+                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                            <v-date-picker
+                                v-model="manualSummaryInfo.tribunalDateOfOrder"                           
+                                color="warning"             
+                                :allowed-dates="allowedDates"                            
+                                header-color="red"
+                                @change="update"
+                            ></v-date-picker>                            
+                        </v-app>
+                    </div>    
+                </b-card>
+            </b-col>
+        </b-row>
 
-            <b-row class="my-4 question" style="padding: 0;">
-                <b-col cols="7" class="labels">
-                    Date the Order was Pronounced:                                
-                </b-col>
-                <b-col class="ml-3" style="padding: 0;">  
-                    <b-card 
-                        class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="form1InfoStates.tribunalDateOfOrder == false?'danger': 'dark'">
-                        <div class="vuetify">
-                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                <v-date-picker
-                                    v-model="manualSummaryInfo.tribunalDateOfOrder"                           
-                                    color="warning"             
-                                    :allowed-dates="allowedDates"                            
-                                    header-color="red"
-                                    @change="update"
-                                ></v-date-picker>                            
-                            </v-app>
-                        </div>    
-                    </b-card>
-                </b-col>
-            </b-row>
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                City where the Order was Pronounced                                
+            </b-col>
+            <b-col class="mt-2">
+                <b-form-input
+                    :state="form1InfoStates.cityOfOrder"
+                    @change="update"
+                    style="max-width:100%" 
+                    v-model="manualSummaryInfo.cityOfOrder">
+                </b-form-input> 
+            </b-col>
+        </b-row>            
 
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    City where the Order was Pronounced                                
-                </b-col>
-                <b-col class="mt-2">
-                    <b-form-input
-                        :state="form1InfoStates.cityOfOrder"
-                        @change="update"
-                        style="max-width:100%" 
-                        v-model="manualSummaryInfo.cityOfOrder">
-                    </b-form-input> 
-                </b-col>
-            </b-row>            
-
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Length of the Lower Court hearing: 
-                    <p :class="form1InfoStates.appearanceDays == false?'content text-danger':'content text-primary'">
-                        Indicate in days or hours the length of the hearing 
-                        that led to the order you are appealing from. For 
-                        example, if you are appealing a judgment from a 
-                        trial that took two hours, enter “two hours.”
-                    </p>                               
-                </b-col>
-                <b-col class="mt-1">
-                    <b-form-input    
-                        style="width: 15rem; display: inline-block;"                    
-                        :state="form1InfoStates.appearanceDays"
-                        @change="update"
-                        v-model="trialDurationDays"                            
-                        size="md"
-                        type="text"                        
-                    ></b-form-input>   
-                </b-col>
-            </b-row>         
-          
-        </b-card>
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                Length of the Lower Court hearing: 
+                <p :class="form1InfoStates.appearanceDays == false?'content text-danger':'content text-primary'">
+                    Indicate in days or hours the length of the hearing 
+                    that led to the order you are appealing from. For 
+                    example, if you are appealing a judgment from a 
+                    trial that took two hours, enter “two hours.”
+                </p>                               
+            </b-col>
+            <b-col class="mt-1">
+                <b-form-input    
+                    style="width: 15rem; display: inline-block;"                    
+                    :state="form1InfoStates.appearanceDays"
+                    @change="update"
+                    v-model="trialDurationDays"                            
+                    size="md"
+                    type="text"                        
+                ></b-form-input>   
+            </b-col>
+        </b-row>
        
-    </b-card>
-    
+    </b-card>    
 </template>
 
 <script lang="ts">
@@ -171,15 +165,10 @@ const form1State = namespace("Form1");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import FillForm1HeaderInfo from "@/components/process/Form1/components/fillForm1/FillForm1HeaderInfo.vue";
 import { form1StatesInfoType, form1DataInfoType } from '@/types/Information/Form1';
 import { locationsInfoType } from '@/types/Common';
 
-@Component({
-    components:{
-        FillForm1HeaderInfo
-    }
-})
+@Component
 export default class FillForm1ManualSummaryInfo extends Vue {    
 
     @commonState.State

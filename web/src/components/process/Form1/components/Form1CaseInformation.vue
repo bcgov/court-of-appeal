@@ -63,16 +63,26 @@ export default class Form1CaseInformation extends Vue {
     public startFillingForm1(levelOfCourt, locationId, locationName){
 
         const form1Data = this.form1Info;
-        form1Data.lowerCourtStyleOfCause = this.supremeCourtCaseJson.styleOfCause;
-        form1Data.lowerCourtClassName = this.supremeCourtCaseJson.courtClass;
-        form1Data.lowerCourtClassCd = this.supremeCourtCaseJson.courtClassCd;
-        form1Data.ceisFileId = this.supremeCourtCaseJson.fileId;
-        form1Data.lowerCourtFileNo = this.supremeCourtCaseJson.courtClassCd + this.supremeCourtCaseJson.fileNumber;
-        form1Data.lowerCourtRegistryId = locationId;
-        form1Data.lowerCourtRegistryName = locationName;
-        form1Data.lowerCourtLevelCd = this.supremeCourtCaseJson.courtClassCd;
-        form1Data.lowerCourtLevelName = levelOfCourt;
-        form1Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
+        if (form1Data.requiresManualEntry){
+            
+            form1Data.lowerCourtRegistryId = locationId;
+            form1Data.lowerCourtRegistryName = locationName;            
+            form1Data.lowerCourtLevelName = levelOfCourt;
+            form1Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
+
+        } else {
+            form1Data.lowerCourtStyleOfCause = this.supremeCourtCaseJson.styleOfCause;
+            form1Data.lowerCourtClassName = this.supremeCourtCaseJson.courtClass;
+            form1Data.lowerCourtClassCd = this.supremeCourtCaseJson.courtClassCd;
+            form1Data.ceisFileId = this.supremeCourtCaseJson.fileId;
+            form1Data.lowerCourtFileNo = this.supremeCourtCaseJson.courtClassCd + this.supremeCourtCaseJson.fileNumber;
+            form1Data.lowerCourtRegistryId = locationId;
+            form1Data.lowerCourtRegistryName = locationName;
+            form1Data.lowerCourtLevelCd = this.supremeCourtCaseJson.courtClassCd;
+            form1Data.lowerCourtLevelName = levelOfCourt;
+            form1Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
+
+        }        
 
         this.UpdateForm1Info(form1Data); 
         this.UpdateCurrentNoticeOfAppealId(null);

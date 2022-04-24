@@ -51,6 +51,7 @@ export interface form1DataInfoType {
     appealingScFlaDivorce: boolean;
     appealInvolvesChild: boolean;
     appealTribunal: boolean;
+    requiresManualEntry?: boolean;
     tribunalType: string;
     cityOfOrder: string;
     tribunalDateOfOrder: string;
@@ -81,7 +82,7 @@ export interface form1DataInfoType {
     protectionOrder: boolean;
     handTypedNoSearch: boolean;
     appealingFirm: string;
-    appealingFirmAddress: serviceInformationJsonDataType;
+    // appealingFirmAddress: serviceInformationJsonDataType;
     toRespondents: string; 
     respondentSolicitor: string;
     wasSupremeAppeal: boolean;
