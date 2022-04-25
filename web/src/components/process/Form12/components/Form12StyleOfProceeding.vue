@@ -12,83 +12,207 @@
                 <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
-
-            <b-row class="mt-5">
-                <b-col cols="6" style="font-weight: 700;">First Appellant:
-                   
-                    <!-- <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="Name of the first appellant named on Form 1: Notice of Appeal."/>
-                    <b-form-select                            
-                        class="mt-2"                        
-                        :state="state.firstAppellant"                   
-                        v-model="form12Info.firstAppellant"                    
-                        :options="applicantNames">
-                    </b-form-select> -->
-                    
-                </b-col>
-
-                <b-col cols="6" style="font-weight: 700;">First Respondent:
-                   
-                    <!-- <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="Name of the first respondent named on Form 1: Notice of Appeal."/>
-                    <b-form-select 
-                        class="mt-2"             
-                        :state="state.firstRespondent"                   
-                        v-model="form12Info.firstRespondent"                    
-                        :options="respondentNames">
-                    </b-form-select> -->
-                    
-                </b-col>
-            </b-row>
-
-            <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
-
-            <!-- <b-form-group
-                class="mx-3" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Are you self-represented?" 
-                label-for="representation">
-                <b-form-radio-group
-                    id="representation"
-                    style="max-width:75%"                   
-                    v-model="form12Info.selfRepresented"
-                    :options="representationOptions"                
-                ></b-form-radio-group>
-            
-            </b-form-group> -->
+           
         </div>
+
+        <b-card class="mb-4 bg-white border-white text-dark"> 
+            <b-card no-body class="border-white">
+                <b-row class="mb-2 ml-1" style="margin-left: -0.25rem !important;">   
+                    <b-col cols="10" :class="state.originalJudgeNames !=null?'border-danger':''">
+                        <b-form-group
+                            class="labels"                
+                            label="List the judge(s) who made the order:" 
+                            label-for="judges">
+                            <span 
+                                v-if="form12Info.originalJudgeNames && form12Info.originalJudgeNames.length == 0 && !AddNewOriginalJudgeNamesForm" 
+                                id="judges" 
+                                class="text-muted ml-2 my-2">No judges have been listed.
+                            </span>
+                            <b-table
+                                v-else-if="form12Info.originalJudgeNames && form12Info.originalJudgeNames.length > 0"
+                                :key="updated"                                
+                                id="judges"
+                                :items="form12Info.originalJudgeNames"
+                                :fields="nameFields"
+                                head-row-variant="primary"
+                                borderless    
+                                small                                            
+                                responsive="sm"
+                                >
+
+                                <template v-slot:cell(name)="data" >
+                                    <span style="font-size: 16px;">
+                                        {{data.item.name}}
+                                    </span>
+                                </template>
+                                
+                                <template v-slot:cell(edit)="data" >   
+                                    <div style="float: right;">                                                                     
+                                        <b-button 
+                                            class="mr-2" 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="removeOriginalJudgeNames(data)">
+                                            <b-icon 
+                                                icon="trash-fill" 
+                                                font-scale="1.25" 
+                                                variant="danger"/>
+                                        </b-button>
+                                        <b-button 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="editOriginalJudgeNames(data)">
+                                            <b-icon 
+                                                icon="pencil-square" 
+                                                font-scale="1.25" 
+                                                variant="primary"/>
+                                        </b-button>
+                                    </div>
+                                </template>
+
+                                <template v-slot:row-details="data">
+                                    <b-card 
+                                        body-class="m-0 px-0 py-1" 
+                                        :border-variant="addOriginalJudgeNamesFormColor" 
+                                        style="border:2px solid;">
+                                        <add-judge-form 
+                                            :formData="data.item" 
+                                            :index="data.index" 
+                                            :isCreateJudge="false" 
+                                            v-on:submit="modifyOriginalJudgeNames" 
+                                            v-on:cancel="closeOriginalJudgeNamesForm" />
+                                    </b-card>
+                                </template>
+                            </b-table> 
+                        </b-form-group>
+                    </b-col>  
+                    <b-col>           
+                        <b-button 
+                            style="margin-top: 2.25rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
+                            v-if="!AddNewOriginalJudgeNamesForm" 
+                            size="sm" 
+                            variant="court" 
+                            @click="addNewOriginalJudgeNames">
+                            <b-icon icon="plus"/>Add Judge Names</b-button>
+                    </b-col>
+                </b-row>
+            </b-card>           
+
+            <b-card 
+                v-if="AddNewOriginalJudgeNamesForm" 
+                id="addJudgeForm" 
+                class="my-1 ml-4" 
+                :border-variant="addOriginalJudgeNamesFormColor" 
+                style="border:2px solid;" 
+                body-class="px-1 py-1">
+                <add-judge-form 
+                    :formData="{}" 
+                    :index="-1" 
+                    :isCreateJudge="true" 
+                    v-on:submit="modifyOriginalJudgeNames" 
+                    v-on:cancel="closeOriginalJudgeNamesForm" />                
+            </b-card>
+        </b-card>
 
         <div v-if="form12Info !=null">
 
-            <b-row>
-                <b-col cols="3" style="font-weight: 700;">
-                    Name of party(ies) who wishes to abandon an appeal or cross appeal:                                
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Name of the party(ies) bringing the application:                                
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
-                    <b-form-checkbox-group                
+                <b-col class="ml-1 mt-2">
+                    <b-form-checkbox-group 
+                        stacked               
                         style="width:100%" 
-                        :state="state.filingParties"
-                        @change="updateOtherParties"                   
+                        @change="updateOtherParties"
+                        :state="state.filingParties"              
                         v-model="form12Info.filingParties"                    
                         :options="partyNames">
-                    </b-form-checkbox-group>
-
+                    </b-form-checkbox-group>                    
                     
                 </b-col>
-            </b-row>
-            
+            </b-row> 
 
         </div>
 
         <div v-if="form12Info.filingParties && form12Info.filingParties.length > 0">
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Date of the order:
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        scale="1.1"
+                        title="Chamber applications begin at 9:30AM"/>
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: left;" 
+                        :border-variant="state.originalJudgementDate == false?'danger': 'dark'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form12Info.originalJudgementDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedOrderDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Location where the application will be heard:                                
+                </b-col>
+                <b-col class="ml-1 mt-2">  
+                    <b-form-select
+                        :state="state.hearingLocation"                                                                                                          
+                        v-model="form12Info.hearingLocation">
+                            <b-form-select-option
+                                v-for="location in locationsInfo" 
+                                :key="location.id"
+                                :value="location">
+                                    {{location.name}}
+                            </b-form-select-option>    
+                    </b-form-select>
+                    
+                </b-col>
+            </b-row>
+            
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Date the application will be heard:
+                    <b-icon-question-circle-fill 
+                        class="text-primary"
+                        v-b-tooltip.hover.noninteractive
+                        scale="1.1"
+                        title="Chamber applications begin at 9:30AM"/>
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: left;" 
+                        :border-variant="state.hearingDate == false?'danger': 'dark'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form12Info.hearingDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedHearingDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
+
+
 
             <!-- <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
@@ -108,13 +232,14 @@
 
             <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
-                    Which party(ies) are you abandoning against?                                
+                    Which party(ies) are appearing?                                
                 </b-col>
                 <b-col class="ml-1 mt-2">   
 
                     <b-form-checkbox-group 
                         :key="updated"               
                         style="width:100%" 
+                        stacked
                         :state="state.appearingParties"                   
                         v-model="form12Info.appearingParties"                    
                         :options="otherPartyNames">
@@ -133,48 +258,7 @@
                         {{form12Info.judgeName}}
                     </b-card>
                 </b-col>
-            </b-row>  
-
-            <!-- <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the order under appeal was pronounced:
-                </b-col>
-                <b-col>
-                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
-                        {{form12Info.orderDate | beautify-date-blank}}
-                    </b-card>
-                </b-col>
-            </b-row>   -->
-
-            <!-- <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
-                </b-col>
-                <b-col>
-                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
-                        {{form12Info.initiatingDocumentDate | beautify-date-blank}}
-                    </b-card>
-                </b-col>
-            </b-row>        -->
-
-            <!-- <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
-                                
-                </b-col>
-                <b-col>
-                    <b-form-input                    
-                        v-model="form12Info.authorizedName"                        
-                        :state ="state.authorizedName">
-                    </b-form-input>
-                    <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
-
-                </b-col>
-            </b-row> -->
-            
+            </b-row>              
 
             <hr/>    
 
@@ -205,8 +289,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
+import moment from 'moment-timezone';
 import { namespace } from "vuex-class";
+
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
@@ -214,9 +302,18 @@ import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
 import { form12DataInfoType } from '@/types/Information/Form12';
-import { partiesDataJsonDataType } from '@/types/Information/json';
+import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { locationsInfoType } from '@/types/Common';
 
-@Component
+import AddJudgeForm from './AddJudgeForm.vue';
+import AddPartyForm from './AddPartyForm.vue';
+
+@Component({
+    components:{        
+        AddJudgeForm,
+        AddPartyForm        
+    }
+})
 export default class Form12StyleOfProceeding extends Vue {
 
     @informationState.State
@@ -225,8 +322,14 @@ export default class Form12StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
+    @commonState.State
+    public locationsInfo!: locationsInfoType[];  
+
     @form12State.State
     public form12Info: form12DataInfoType;
+
+    @form12State.State
+    public currentOrder: previousCourtJsonInfoType;
 
     @form12State.Action
     public UpdateForm12Info!: (newForm12Info: form12DataInfoType) => void  
@@ -244,14 +347,38 @@ export default class Form12StyleOfProceeding extends Vue {
     otherPartyNames: string[] = [];
     updated=0;
 
+    addOriginalJudgeNamesFormColor = 'court';
+    AddNewOriginalJudgeNamesForm = false;
+    latestEditOriginalJudgeNamesData;
+    isEditOriginalJudgeNamesOpen = false;
+
+    nameFields = [
+        {
+            key:'name',          
+            label:'Name',                  
+            thClass: 'text-white bg-court',
+            thStyle: 'font-size: 1rem;',            
+            sortable:false            
+        },         
+        {
+            key:'edit',          
+            label:'',   
+            thClass: 'text-white bg-court',           
+            sortable:false            
+        }        
+    ]
+
     state = {
+        originalJudgeNames: null,
+        originalJudgementLocation: null,
+        originalJudgementDate: null,
         hearingLocation: null,     
         hearingDate: null,
         filingParties: null,
         judgeName: null,
         appearingParties: null,
         orderAllowed: null,
-        furtherOrders: null 
+        furtherOrders: null
     }
 
     mounted() {
@@ -276,6 +403,9 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public clearStates(){
         this.state = {
+            originalJudgeNames: null,
+            originalJudgementLocation: null,
+            originalJudgementDate: null,
             hearingLocation: null,     
             hearingDate: null,
             filingParties: null,
@@ -298,6 +428,7 @@ export default class Form12StyleOfProceeding extends Vue {
             form12Data.respondents = this.partiesJson.respondents;
             form12Data.formSevenNumber = this.fileNumber;            
             form12Data.version = this.$store.state.Application.version;
+            form12Data.originalJudgeNames = [];
             form12Data.filingParties = [];
             form12Data.appearingParties = [];
             this.UpdateForm12Info(form12Data);           
@@ -405,12 +536,100 @@ export default class Form12StyleOfProceeding extends Vue {
         // }        
     }
 
+        public addNewOriginalJudgeNames(){
+        if(this.isEditOriginalJudgeNamesOpen){            
+            this.addOriginalJudgeNamesFormColor = 'danger'
+        }else{
+            this.AddNewOriginalJudgeNamesForm = true;            
+        }
+    }
+
+    public editOriginalJudgeNames(data) {
+        if(this.AddNewOriginalJudgeNamesForm || this.isEditOriginalJudgeNamesOpen){            
+            this.addOriginalJudgeNamesFormColor = 'danger';                     
+        }else if(!this.isEditOriginalJudgeNamesOpen && !data.detailsShowing){
+            data.toggleDetails();
+            this.isEditOriginalJudgeNamesOpen = true;
+            this.latestEditOriginalJudgeNamesData = data            
+        }   
+    }
+
+    public modifyOriginalJudgeNames(isCreateOriginalJudgeNames: boolean, newOriginalJudgeNames: string[], index: number){        
+
+        if (isCreateOriginalJudgeNames){
+            
+            const form12Data = this.form12Info;
+            form12Data.originalJudgeNames.push(newOriginalJudgeNames[index])
+            
+            this.UpdateForm12Info(form12Data)
+
+            this.closeOriginalJudgeNamesForm();
+
+        } else { 
+            
+            const form12Data = this.form12Info;            
+            form12Data.originalJudgeNames[index] = newOriginalJudgeNames[index];
+           
+            this.UpdateForm12Info(form12Data);
+                      
+            this.closeOriginalJudgeNamesForm();
+        }
+        this.updated ++;
+    }
+
+    public removeOriginalJudgeNames(data){ 
+        const form12Data = this.form12Info;       
+        form12Data.originalJudgeNames.splice(data.index,1);
+        
+        this.UpdateForm12Info(form12Data);
+        this.updated ++;        
+    }
+
+    public closeOriginalJudgeNamesForm() {                     
+        this.AddNewOriginalJudgeNamesForm= false; 
+        this.addOriginalJudgeNamesFormColor = 'court'
+        if(this.isEditOriginalJudgeNamesOpen){
+            this.latestEditOriginalJudgeNamesData.toggleDetails();
+            this.isEditOriginalJudgeNamesOpen = false;
+        } 
+    }
+
     public navigateToPreviewPage() {        
         this.$router.push({name: "preview-form12"}) 
+    }
+
+    public allowedHearingDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+        return (date >= day);           
+    }
+
+    public allowedOrderDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+        return (date <= day);           
     }
 
 }
 </script>
 
 <style scoped lang="scss">
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+    }
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
+    }
+
 </style>

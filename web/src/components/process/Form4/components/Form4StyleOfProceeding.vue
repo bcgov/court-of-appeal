@@ -449,7 +449,6 @@ const form4State = namespace("Form4");
 
 import AddAffidavitForm from './AddAffidavitForm.vue';
 
-
 import { affidavitInfoType, form4DataInfoType } from '@/types/Information/Form4';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import { locationsInfoType } from '@/types/Common';
@@ -586,7 +585,6 @@ export default class Form4StyleOfProceeding extends Vue {
 
             form4Data.appellantNames = applicantNames.join(', ');
             form4Data.respondentNames = respondentNames.join(', ');
-
 
             form4Data.formSevenNumber = this.fileNumber;
             

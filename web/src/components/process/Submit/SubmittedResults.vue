@@ -1,5 +1,10 @@
 <template>
-    <div v-if="formType == 'APP'">
+    <div v-if="(formType == 'NAA')||(formType == 'NAAM')">
+        <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-1 v-else-if="result=='cancel'"/>
+        <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
+    <div v-else-if="formType == 'APP'">
         <success-submit-form-2 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-2 v-else-if="result=='cancel'"/>
         <error-submit-form-2 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -24,6 +29,11 @@
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'yyy'">
+        <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-7 v-else-if="result=='cancel'"/>
+        <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else-if="formType == 'MBAV'">
         <success-submit-form-8 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-8 v-else-if="result=='cancel'"/>
@@ -34,11 +44,16 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
+    <div v-else-if="formType == 'ORSE'">
+        <success-submit-form-12 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-12 v-else-if="result=='cancel'"/>
+        <error-submit-form-12 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     <div v-else-if="formType == 'xzz'">
         <success-submit-form-16 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-16 v-else-if="result=='cancel'"/>
         <error-submit-form-16 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
+    </div>    
     <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
@@ -53,17 +68,8 @@
         <success-submit-form-20 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
-    <div v-else-if="(formType == 'NAA')||(formType == 'NAAM')">
-        <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
-        <cancel-submit-form-1 v-else-if="result=='cancel'"/>
-        <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
-    <div v-else-if="formType == 'yyy'">
-        <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
-        <cancel-submit-form-7 v-else-if="result=='cancel'"/>
-        <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
+    </div>    
+    
 </template>
 
 <script lang="ts">
@@ -104,6 +110,10 @@ import ErrorSubmitForm8 from "./Form8/ErrorSubmitForm8.vue";
 import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
 import ErrorSubmitForm9 from "./Form9/ErrorSubmitForm9.vue";
+
+import CancelSubmitForm12 from "./Form12/CancelSubmitForm12.vue";
+import SuccessSubmitForm12 from "./Form12/SuccessSubmitForm12.vue";
+import ErrorSubmitForm12 from "./Form12/ErrorSubmitForm12.vue";
 
 import CancelSubmitForm16 from "./Form16/CancelSubmitForm16.vue";
 import SuccessSubmitForm16 from "./Form16/SuccessSubmitForm16.vue";
@@ -151,6 +161,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm9,
         SuccessSubmitForm9,
         ErrorSubmitForm9,
+        CancelSubmitForm12,
+        SuccessSubmitForm12,
+        ErrorSubmitForm12,
         CancelSubmitForm16,
         SuccessSubmitForm16,
         ErrorSubmitForm16,
@@ -210,7 +223,5 @@ export default class SubmittedResults extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-
 
 </style>
