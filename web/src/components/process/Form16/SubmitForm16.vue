@@ -73,7 +73,7 @@ import { packageInfoType } from '@/types/Information';
 export default class SubmitForm16 extends Vue {
 
     @form16State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentOfferToSettleCostsId: string;
 
     @form16State.State
     public form16Info: form16DataInfoType;
@@ -101,7 +101,7 @@ export default class SubmitForm16 extends Vue {
         this.submitting = true;
         this.errorMsg =""
 
-        const url = "/form16/efiling/"+this.currentNoticeOfSettlementOrAbandonmentId+"/submit/";
+        const url = "/form16/efiling/"+this.currentOfferToSettleCostsId+"/submit/";
 
         const header = {
             responseType: "json",

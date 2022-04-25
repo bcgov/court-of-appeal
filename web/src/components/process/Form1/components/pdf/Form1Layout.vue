@@ -41,7 +41,7 @@
                 <div class="row" style="margin-top: 0.5rem;">
                     <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Supreme Court File No.</div></div>
                     <div class="coa-text-box" style="width:40%;" v-if="result.appealTribunal"></div>
-                    <div class="coa-text-box" style="width:40%;" v-else>{{result.lowerCourtFileNo}}</div>
+                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else>{{result.lowerCourtFileNo}}</div>
                 </div>
 
                 <div class="row" >
@@ -61,8 +61,8 @@
 
                 <div class="row" style="margin-top: 0.5rem;">
                     <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Supreme Court Registry Location</div></div>
-                    <div class="coa-text-box" style="width:40%;" v-if="result.appealTribunal"></div>
-                    <div class="coa-text-box" style="width:40%;" v-else>{{caseLocation.name}}</div>
+                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-if="result.appealTribunal"></div>
+                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else>{{caseLocation.name}}</div>
                 </div>
 
                 
@@ -103,9 +103,8 @@
         
         <div class="coa-text-box-left" style="width:60%;">
 
-
             <div v-for="sop,inx in caseSop" :key="inx">
-                <div v-if="sop.appealRole.toLowerCase() == 'appellant'" style="display: block; margin:0.5rem;">
+                <div v-if="sop.appealRole && sop.appealRole.toLowerCase() == 'appellant'" style="display: block; margin:0.5rem;">
                     <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
                         <div>{{sop.conjunction}}:</div>
                     </div>
@@ -129,7 +128,6 @@
                 </div>  
             </div> 
 
-           <!-- <div class="mx-2">{{applicantNames.toString()}}</div> -->
         </div>                      
 
     </div> 
@@ -155,7 +153,7 @@
         <div class="coa-text-box-left" style="width:60%;">
 
             <div v-for="sop,inx in caseSop" :key="inx">
-                <div v-if="sop.appealRole.toLowerCase() == 'respondent'" style="display: block; margin:0.5rem;">
+                <div v-if="sop.appealRole && sop.appealRole.toLowerCase() == 'respondent'" style="display: block; margin:0.5rem;">
                     <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
                         <div>{{sop.conjunction}}:</div>
                     </div>
@@ -177,8 +175,7 @@
                         </div>
                     </div>    
                 </div>  
-            </div> 
-            <!-- <div class="mx-2">{{respondentNames.toString()}}</div>  -->
+            </div>            
         </div>                      
 
     </div> 
@@ -239,8 +236,8 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalOriginalDecisionMaker}}</div> 
-            <div class="mx-2">{{result.judgeFullName}}</div> 
+            <div class="mx-2" style="font-weight: 700;" v-if="result.appealTribunal">{{result.tribunalOriginalDecisionMaker}}</div> 
+            <div class="mx-2" style="font-weight: 700;" v-else>{{result.judgeFullName}}</div> 
         </div>                      
 
     </div> 
@@ -272,7 +269,7 @@
         </div>   
 
         <div style="width:31%;">
-            <div style="height:3.5rem; margin:0.5rem 0;" class="coa-text-box-center" v-if="result.appealTribunal">{{result.tribunalType}}</div>   
+            <div style="height:3.5rem; margin:0.5rem 0; font-weight: 700;" class="coa-text-box-center" v-if="result.appealTribunal">{{result.tribunalType}}</div>   
             <div style="height:3.5rem; margin:0.5rem 0;" class="coa-text-box-center" v-else></div>
         </div>       
                             
@@ -304,8 +301,8 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         <div style="width:20%">
             <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">
-                <div class="mx-2" v-if="result.appealTribunal">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
-                <div class="mx-2" v-else>{{result.dateOfJudgement | beautify-date-dd/mm/yyyy}}</div> 
+                <div class="mx-2" style="font-weight: 700;" v-if="result.appealTribunal">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
+                <div class="mx-2" style="font-weight: 700;" v-else>{{result.dateOfJudgement | beautify-date-dd/mm/yyyy}}</div> 
             </div> 
             <div >
                 <div class="arrow-up-flash"></div>
@@ -330,7 +327,7 @@
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.cityOfOrder}}</div> 
+            <div class="mx-2" style="font-weight: 700;">{{result.cityOfOrder}}</div> 
           
         </div>                      
 
@@ -356,7 +353,7 @@
         <div class="arrow-right-flash-76"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.trialDurationDays}}</div>             
+            <div class="mx-2" style="font-weight: 700;">{{result.trialDurationDays}}</div>             
         </div>                      
 
     </div> 
@@ -377,13 +374,13 @@
         <div style="margin-top: 0; width:34%;">              
             <check-box 
                 style="margin: 0.75rem 0 0 1rem;" 
-                :check="!result.appealTribunal?'yes':''" 
+                :check="result.appealFrom == 'Trial Judgment'?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Trial Judgment"/> 
             <check-box 
                 style="margin: 0.5rem 0 0 1rem;" 
-                :check="!result.appealTribunal?'yes':''" 
+                :check="result.appealFrom == 'Summary Trial Judgment'?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Summary Trial Judgment"/>  
@@ -392,13 +389,13 @@
         <div style="margin-top: 0; width:24%;">              
             <check-box                    
                 style="padding: 0; margin: 0.75rem .5rem 0 1rem;" 
-                :check="result.appealTribunal?'yes':''"
+                :check="result.appealFrom == 'Order of a Tribunal'?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Order of a Tribunal"/>
             <check-box                    
                 style="padding: 0; margin: 0.5rem .5rem 0 1rem;" 
-                :check="result.appealTribunal?'yes':''"
+                :check="result.appealFrom == 'Chambers Judgment'?'yes':''"
                 shiftmark="1" 
                 marginLeft="0.5rem"
                 text="Chambers Judgment"/>
@@ -422,7 +419,7 @@
 
     <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
         <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 600;"><b class="mr-3">PART A:</b> LEAVE NOT REQUIRED</div>     
-               
+<!-- <part-of-judgment>-->               
         <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
@@ -440,11 +437,11 @@
             <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
-                <div v-if="!result.applyLeave" class="mx-2">{{result.partOfJudgment}}</div>             
+                <div v-if="!result.applyLeave" class="mx-2" style="font-weight: 700;">{{result.partOfJudgment}}</div>             
             </div>                      
 
         </div>
-
+<!-- <order-sought>-->  
         <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
@@ -463,7 +460,7 @@
             <div class="arrow-right-flash-76" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
-                <div v-if="!result.applyLeave" class="mx-2">{{result.orderSought}}</div>             
+                <div v-if="!result.applyLeave" class="mx-2" style="font-weight: 700;">{{result.orderSought}}</div>             
             </div>                      
 
         </div>         
@@ -474,7 +471,7 @@
 <!-- <PART B> -->
     <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
         <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">PART B:</b> SEEKING LEAVE TO APPEAL</div>
-               
+<!-- <part-of-judgment>-->                 
         <div style="display:flex; font-size: 9pt; margin:0.2rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.6rem 0px; height:6.5rem; background:#FFF;">
@@ -492,11 +489,11 @@
             <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
-                <div v-if="result.applyLeave" class="mx-2">{{result.partOfJudgment}}</div>             
+                <div v-if="result.applyLeave" class="mx-2" style="font-weight: 700;">{{result.partOfJudgment}}</div>             
             </div>                      
 
         </div>
-
+<!-- <order-sought>-->  
         <div style="display:flex; font-size: 9pt; margin:0.5rem 0px;">
 
             <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
@@ -515,7 +512,7 @@
             <div class="arrow-right-flash-76" style="border-left-color: #FFF;"></div> <!-- < width ~ 8% > -->
             
             <div class="coa-text-box-left" style="width:60%; background: white;">
-                <div v-if="result.applyLeave" class="mx-2">{{result.orderSought}}</div>             
+                <div v-if="result.applyLeave" class="mx-2" style="font-weight: 700;">{{result.orderSought}}</div>             
             </div>                      
 
         </div>         
@@ -568,7 +565,7 @@
         <div style="width:20%;">           
                 
             <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">
-                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-if="result.orderSealed">{{result.dateSealed}}</div>
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0; font-weight: 700;" v-if="result.orderSealed">{{result.dateSealed}}</div>
                 <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-else></div>
             </div>
             <div >
@@ -625,7 +622,7 @@
         <div style="width:20%;">           
                 
             <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">                
-                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-if="result.orderBan">{{result.dateBan}}</div>
+                <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0; font-weight: 700;" v-if="result.orderBan">{{result.dateBan}}</div>
                 <div class="mx-2" style="height:3rem; margin:1.25rem 0 0 0;" v-else></div>
             </div>
             <div >
@@ -825,8 +822,8 @@
 
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
-        <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{address}}</div> 
+        <div class="coa-text-box-left" style="width:60%; font-weight: 700;">
+            <div class="mx-2" v-html="result.contactAddress"></div>
         </div>                      
 
     </div> 
@@ -843,8 +840,8 @@
 
         <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
         
-        <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.appealingFirmAddress.phone}}</div>
+        <div class="coa-text-box-left" style="width:60%; font-weight: 700;">
+            <div class="mx-2" v-html="result.phones"></div>
         </div>                       
 
     </div> 
@@ -865,8 +862,8 @@
 
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
                 
-        <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2">{{result.appealingFirmAddress.email}}</div> 
+        <div class="coa-text-box-left" style="width:60%; font-weight: 700;">
+            <div class="mx-2" v-html="result.emails"></div> 
         </div>                      
 
     </div> 
@@ -882,7 +879,7 @@
         </div>
         <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->      
 
-        <div class="coa-text-box-center" style="width:15%;">{{result.completionDate}}</div> 
+        <div class="coa-text-box-center" style="width:15%; font-weight: 700;">{{result.completionDate}}</div> 
         
         <div style="width:3.28%;"></div>
         
@@ -891,7 +888,7 @@
         </div>
         <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
-        <div class="coa-text-box-center" style="width:25%;"> {{result.appealingFirm}}</div>
+        <div class="coa-text-box-center" style="width:25%; font-weight: 700;"> {{result.appealingFirm}}</div>
             
     </div>
 
@@ -1039,18 +1036,8 @@ export default class Form1Layout extends Vue {
         }        
     }
    
-    public extractInfo(){
-
-        // console.log(this.result)
-        // console.log(this.caseLocation)
-
-        const serviceInfo = this.result.appealingFirmAddress;
-        this.address =   (serviceInfo.addressLine1? (serviceInfo.addressLine1 + ', '):'')
-                        + (serviceInfo.addressLine2? (serviceInfo.addressLine2 + ', '):'') 
-                        + (serviceInfo.city? (serviceInfo.city + ', '):'')
-                        + (serviceInfo.province? (serviceInfo.province + ', '):'') 
-                        + (serviceInfo.country? ( serviceInfo.country + ', '):'')
-                        + (serviceInfo.postalCode? serviceInfo.postalCode:'');
+    public extractInfo(){       
+        
         
         const parties = this.result.parties
         // this.applicantNames = [];

@@ -1,6 +1,5 @@
 import json
 import logging
-from xmlrpc.client import ResponseError
 
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
@@ -10,7 +9,7 @@ from rest_framework import permissions
 from rest_framework import generics
 
 from core.pdf import render as render_pdf, create_zip_download_response, create_download_response
-from form7.models import NoticeOfAppeal, FormPdf
+from form7.models import NoticeOfUrgentApplication, FormPdf
 
 LOGGER = logging.getLogger(__name__)
 no_record_found = "No record found."
@@ -22,42 +21,42 @@ class Form7ToPdfView(generics.GenericAPIView):
 
 
 
-    def get_notice_for_user(self, notice_id, account_id):
+    def get_notice_of_urgent_application_for_user(self, notice_of_urgent_application_id, uid):
         try:
-            notice_query = NoticeOfAppeal.objects.get(noticeOfAppealId=notice_id, accountId=account_id)
-            return notice_query
-        except (NoticeOfAppeal.DoesNotExist):
+            notice_of_urgent_application = NoticeOfUrgentApplication.objects.get(id=notice_of_urgent_application_id, user_id=uid)
+            return notice_of_urgent_application
+        except (NoticeOfUrgentApplication.DoesNotExist):
             LOGGER.debug(no_record_found)
             return
  
 
 
-    def get_pdf_by_notice_id_and_type(self, id, pdf_type):
+    def get_pdf_by_notice_of_urgent_application_id_and_type(self, id, pdf_type):
         try:
-            pdf_result = FormPdf.objects.get(noticeOfAppeal_id=id, pdf_type=pdf_type)
+            pdf_result = FormPdf.objects.get(notice_of_urgent_application_id=id, pdf_type=pdf_type)
             return pdf_result
-        except (FormPdf.DoesNotExist, NoticeOfAppeal.DoesNotExist):
+        except (FormPdf.DoesNotExist, NoticeOfUrgentApplication.DoesNotExist):
             LOGGER.debug(no_record_found)
             return
     
 
 
-    def get(self, request, notice_id = None):
+    def get(self, request, notice_of_urgent_application_id = None):
 
-        account_id = request.user.account_id
+        uid = request.user.id
 
         pdf_type = request.query_params.get("pdf_type")
         if pdf_type is None:
             return HttpResponseBadRequest("Missing pdf_type parameters.")
 
-        notice_ids = request.query_params.getlist("id")                            
+        notice_of_urgent_application_ids = request.query_params.getlist("id")                            
 
-        if not notice_ids:        
-            notice = self.get_notice_for_user(notice_id, account_id)
-            if not notice:
+        if not notice_of_urgent_application_ids:        
+            notice_of_urgent_application = self.get_notice_of_urgent_application_for_user(notice_of_urgent_application_id, uid)
+            if not notice_of_urgent_application:
                 return HttpResponseNotFound(no_record_found)
 
-            prepared_pdf = self.get_pdf_by_notice_id_and_type(notice_id, pdf_type)
+            prepared_pdf = self.get_pdf_by_notice_of_urgent_application_id_and_type(notice_of_urgent_application_id, pdf_type)
             if prepared_pdf is None:
                 return HttpResponseNotFound(no_record_found)
                 
@@ -65,29 +64,29 @@ class Form7ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for noticeId in notice_ids:
-                notice = self.get_notice_for_user(noticeId, account_id)
-                if not notice:
+            for notice_of_urgent_applicationId in notice_of_urgent_application_ids:
+                notice_of_urgent_application = self.get_notice_of_urgent_application_for_user(notice_of_urgent_applicationId, uid)
+                if not notice_of_urgent_application:
                     continue
 
-                prepared_pdf = self.get_pdf_by_notice_id_and_type(noticeId, pdf_type)
+                prepared_pdf = self.get_pdf_by_notice_of_urgent_application_id_and_type(notice_of_urgent_applicationId, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":noticeId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":notice_of_urgent_applicationId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)
 
 
 
-    def post(self, request, notice_id):
+    def post(self, request, notice_of_urgent_application_id):
         html = request.data['html']
         json_data = request.data['json_data']
         
-        account_id = request.user.account_id
-        notice = self.get_notice_for_user(notice_id, account_id)
-        if not notice:
+        uid = request.user.id
+        notice_of_urgent_application = self.get_notice_of_urgent_application_for_user(notice_of_urgent_application_id, uid)
+        if not notice_of_urgent_application:
             return HttpResponseNotFound(no_record_found)
 
         name = request.query_params.get("name")
@@ -96,10 +95,9 @@ class Form7ToPdfView(generics.GenericAPIView):
         if None in [name, pdf_type, version]:
             return HttpResponseBadRequest("Missing parameters.")
 
-        print(notice_id)
 
         try:
-            pdf_result = self.get_pdf_by_notice_id_and_type(notice_id, pdf_type)            
+            pdf_result = self.get_pdf_by_notice_of_urgent_application_id_and_type(notice_of_urgent_application_id, pdf_type)            
             pdf_content = render_pdf(html)
             (pdf_key_id, pdf_content_enc) = settings.ENCRYPTOR.encrypt(pdf_content)
             (pdf_key_id, json_enc) = settings.ENCRYPTOR.encrypt(
@@ -113,7 +111,7 @@ class Form7ToPdfView(generics.GenericAPIView):
                 pdf_result.version = version
             else:
                 pdf_result = FormPdf(
-                    noticeOfAppeal=notice,
+                    notice_of_urgent_application=notice_of_urgent_application,
                     data=pdf_content_enc,
                     json_data=json_enc,
                     key_id=pdf_key_id,
@@ -121,6 +119,9 @@ class Form7ToPdfView(generics.GenericAPIView):
                     version=version,
                 )
             pdf_result.save()
+
+            notice_of_urgent_application.pdf_types = pdf_type
+            notice_of_urgent_application.save()
 
         except Exception as ex:
             LOGGER.error("ERROR: Pdf generation failed %s", ex)

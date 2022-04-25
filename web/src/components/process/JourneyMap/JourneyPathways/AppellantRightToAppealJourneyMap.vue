@@ -221,7 +221,11 @@
 
         <b-card no-body class="bg-white border-white">
 
-            <b-row v-if="initialDocumentsContent" style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" class="mb-1 ml-2">Would you like to start your appeal?</b-row>            
+            <b-row 
+                v-if="initialDocumentsContent" 
+                style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" 
+                class="mb-1 ml-2">Would you like to start your appeal?
+            </b-row>            
 
             <b-row no-gutters>
                 <b-col cols="1">
@@ -395,14 +399,14 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
             this.windowTitle = "Apply for Leave to Appeal";
             this.pathTypes = ["info", "share", "info"];
-            this.pathHeights = ['10rem', '0', '0'];
+            this.pathHeights = ['7rem', '0', '0'];
             this.applyForLeaveToAppealContent = true;
 
         } else if (contentType == "Applications") {
 
             this.windowTitle = "Applications";
-            this.pathTypes = ["share", "share", "share"];
-            this.pathHeights = ['14rem', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share"];
+            this.pathHeights = ['19rem', '0', '0', '0'];
             this.applicationsContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){

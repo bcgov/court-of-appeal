@@ -37,7 +37,8 @@
                 Name of the party(ies) bringing the application:                                
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-checkbox-group                
+                <b-form-checkbox-group 
+                    stacked               
                     style="width:100%" 
                     :state="state.filingParties"              
                     v-model="form8Info.filingParties"                    
@@ -179,17 +180,17 @@ export default class Form8StyleOfProceeding extends Vue {
             let applicantNames = [];
             let respondentNames = [];
             
-            for (const respondent of this.form8Info.respondents){
+            for (const respondent of form8Data.respondents){
                 respondentNames.push(respondent.name);
             }
 
-            for (const applicant of this.form8Info.appellants){ 
+            for (const applicant of form8Data.appellants){ 
                 applicantNames.push(applicant.name);
             }
 
             form8Data.respondentNames = respondentNames.join(', ');
-            form8Data.respondentNames = respondentNames.join(', ');
-            
+            form8Data.appellantNames = applicantNames.join(', ');
+  
             this.UpdateForm8Info(form8Data);                       
             this.saveForm(true);
         }
@@ -288,21 +289,21 @@ export default class Form8StyleOfProceeding extends Vue {
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfApplicationToVaryId(response.data.file_id);
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfApplicationToVaryId(response.data.file_id);
                         this.extractPartiesData();                        
-                    // }
+                    }
 
-                    // this.clearStates();                    
+                    this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }
 
     public navigateToPreviewPage() {        

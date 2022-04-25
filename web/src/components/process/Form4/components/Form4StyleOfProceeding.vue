@@ -40,8 +40,6 @@
                 </b-col>
             </b-row>
 
-
-
         </b-card>
 
         <b-card class="border-white bg-white">
@@ -66,7 +64,8 @@
                 </b-col>
                 <b-col :class="state.jurisdictionType==false?'border border-danger ml-1 mt-2': 'ml-1 mt-2'">   
 
-                    <b-form-radio-group                
+                    <b-form-radio-group
+                        stacked                
                         style="width:100%" 
                         :state="state.jurisdictionType"                   
                         v-model="form4Info.jurisdictionType"                    
@@ -82,6 +81,7 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group                
+                        stacked
                         style="width:100%" 
                         :state="state.applicantParties"
                         @change="updateOtherParties"                   
@@ -102,6 +102,7 @@
                     <b-col class="ml-1 mt-2">   
 
                         <b-form-checkbox-group 
+                            stacked
                             :key="updated"               
                             style="width:100%" 
                             :state="state.respondentParties"                   
@@ -731,22 +732,22 @@ export default class Form4StyleOfProceeding extends Vue {
 
     public saveInfo(options, draft){
 
-        // this.$http(options)
-        //     .then(response => {
-        //         if(response.data){
-        //             if(options.method == "post"){
-        //                 this.UpdateCurrentNoticeOfApplicationId(response.data.file_id);
+        this.$http(options)
+            .then(response => {
+                if(response.data){
+                    if(options.method == "post"){
+                        this.UpdateCurrentNoticeOfApplicationId(response.data.file_id);
                         this.extractPartiesData();                        
-                    // }
+                    }
                     const data = this.form4Info;
                     this.UpdateForm4Info(data)
                     this.clearStates();                    
                     if(!draft) this.navigateToPreviewPage();                           
-            //     }
-            // }, err => {
-            //     const errMsg = err.response.data.error;
+                }
+            }, err => {
+                const errMsg = err.response.data.error;
                 
-            // })
+            })
     }
     
     public updateOtherParties(){

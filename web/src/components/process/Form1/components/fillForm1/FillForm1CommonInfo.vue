@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" no-body class="mb-4 border-light bg-light">
+    <b-card v-if="dataReady" no-body class="border-light bg-light">
 
         <b-card class="mb-4 border-white bg-white">  
 
@@ -47,6 +47,21 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
+                    Does this appeal involve the rights or interests of a child?                                
+                </b-col>
+                <b-col>
+                    <b-form-radio-group                
+                        v-model="commonInfo.appealInvolvesChild"
+                        :state="form1InfoStates.appealInvolvesChild"
+                        @change="update"
+                        :options="responseOptions"
+                        style="font-size: 1rem; font-weight:400;"                    
+                    ></b-form-radio-group>                                   
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     What type of proceeding are you appealing from?                                
                 </b-col>
                 <b-col>
@@ -82,7 +97,7 @@
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Was this matter already appealed in Supreme Court?   
-                    <p class="content">
+                    <p class="help-content">
                         From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
                         <a
                             href=""
@@ -90,17 +105,17 @@
                             Supreme Court Civil Rules 18-3
                         </a>
                     </p>
-                    <p class="content mt-1">
+                    <p class="help-content mt-1">
                         From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
-                        <a
+                        <a                            
                             href=""
                             target="_blank">
                             Supreme Civil Court Rules 23-6(8)
                         </a>
                     </p>
-                    <p class="content mt-1">
+                    <p class="help-content mt-1">
                         From a <b>Tribunal</b> to a Supreme Court Judge - 
-                        <a
+                        <a                            
                             href=""
                             target="_blank">
                             Supreme Court Civil Rules 18-3
@@ -109,7 +124,7 @@
                 </b-col>
                 <b-col>
                     <b-form-radio-group 
-                        class="mt-0"               
+                        class="mt-0"     
                         v-model="commonInfo.wasSupremeAppeal"
                         @change="update"
                         :state="form1InfoStates.wasSupremeAppeal"
@@ -180,13 +195,13 @@
         </b-card>
 
         <b-card v-if="commonInfo.applyLeave != null" class="mb-4 border-white bg-white">
-            <h2 class="ml-4 mt-3 text-primary">Additional Information</h2>            
+            <h2 class="ml-4 mt-3 pl-2 text-primary">Additional Information</h2>            
 
             <b-row class="my-4 question">
                 <b-col cols="7" class="labels">
                    Is there an order sealing any part of the trial court or tribunal file?                                
                 </b-col>
-                <b-col>  
+                <b-col class="mt-1">  
                     <b-form-radio-group                
                         v-model="commonInfo.orderSealed"
                         :state="form1InfoStates.orderSealed"
@@ -207,7 +222,7 @@
                 <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
-                <b-col>  
+                <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
@@ -231,7 +246,7 @@
                 <b-col cols="7" class="labels">
                    Are there orders that protect the identity of a party or parties?                                
                 </b-col>
-                <b-col>  
+                <b-col class="mt-1">  
                     <b-form-radio-group                
                         v-model="commonInfo.orderBan"
                         :state="form1InfoStates.orderBan"
@@ -252,7 +267,7 @@
                 <b-col cols="7" class="labels">
                     What is the date of this order?                                
                 </b-col>
-                <b-col class="ml-3" style="padding: 0;">  
+                <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
@@ -276,7 +291,7 @@
                 <b-col cols="7" class="labels">
                    Which of the following best describes what this appeal involves?                                
                 </b-col>
-                <b-col>
+                <b-col class="mt-1">
                     <b-form-checkbox-group
                         style="font-size: 1rem; font-weight:500;"        
                         v-model="commonInfo.involves"
@@ -306,8 +321,7 @@
             
         </b-card>          
         
-    </b-card>
-    
+    </b-card>    
 </template>
 
 <script lang="ts">
@@ -410,6 +424,12 @@ export default class FillForm1CommonInfo extends Vue {
         font-size: 0.75rem; 
         font-weight:400;       
     }    
+
+    .help-content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.9rem; 
+        font-weight:400;       
+    } 
 
     .labels {
         font-size: 1.15rem; font-weight:600;

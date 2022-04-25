@@ -54,7 +54,7 @@ import { form16StatusInfoType } from '@/types/Information/Form16';
 export default class PreviewForm16 extends Vue {
 
     @form16State.State
-    public currentNoticeOfSettlementOrAbandonmentId: string;
+    public currentOfferToSettleCostsId: string;
 
     stepsCompleted = {} as form16StatusInfoType; 
     

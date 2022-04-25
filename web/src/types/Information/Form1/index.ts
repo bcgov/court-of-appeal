@@ -1,3 +1,4 @@
+import { partiesContact } from "..";
 import { serviceInformationJsonDataType } from "../json";
 
 export interface form1QualificationInfoType {
@@ -8,8 +9,7 @@ export interface form1QualificationInfoType {
     appealingFeesWaived: boolean;
     appealingSupremeCourtMaster: boolean;    
     appealingSupremeCourtOrder: boolean;  
-    appealingScFlaDivorce: boolean;
-    appealInvolvesChild: boolean;
+    appealingScFlaDivorce: boolean;    
     appealTribunal: boolean;
 }
 
@@ -51,10 +51,11 @@ export interface form1DataInfoType {
     appealingScFlaDivorce: boolean;
     appealInvolvesChild: boolean;
     appealTribunal: boolean;
+    requiresManualEntry?: boolean;
     tribunalType: string;
     cityOfOrder: string;
     tribunalDateOfOrder: string;
-    tribunalOriginalDecisionMaker?: string;
+    tribunalOriginalDecisionMaker?: string;    
     applyLeave: boolean;
     amending: boolean;
     parties: form1PartiesInfoType[];
@@ -81,7 +82,7 @@ export interface form1DataInfoType {
     protectionOrder: boolean;
     handTypedNoSearch: boolean;
     appealingFirm: string;
-    appealingFirmAddress: serviceInformationJsonDataType;
+    // appealingFirmAddress: serviceInformationJsonDataType;
     toRespondents: string; 
     respondentSolicitor: string;
     wasSupremeAppeal: boolean;
@@ -96,8 +97,12 @@ export interface form1DataInfoType {
     dateSealed?: string;
     orderBan: boolean;
     dateBan?: string;  
-    emails?: string;
-    phoneNumbers?: string;
+    phoneNumbers: partiesContact[];
+    emailAdresses: partiesContact[];
+    addresses: partiesContact[]; 
+    phones: string;
+    emails: string;
+    contactAddress: string;    
     judgeFullName: string;
     respondents: form1PartiesInfoType[];    
     appellants: form1PartiesInfoType[];
@@ -110,9 +115,12 @@ export interface form1StatesInfoType {
     tribunalType: null | boolean;    
     tribunalDateOfOrder: null | boolean;
     tribunalOriginalDecisionMaker: null | boolean;
+    lowerCourtFileNo: null | boolean;
+    lowerCourtRegistryId: null | boolean;
     cityOfOrder: null | boolean;
     applyLeave: null | boolean;
     amending: null | boolean;
+    appealInvolvesChild: null | boolean;
     appearanceDays: null | boolean;
     respondents: null | boolean;
     appellants: null | boolean;
@@ -127,13 +135,8 @@ export interface form1StatesInfoType {
     orderBan: null | boolean;
     dateBan: null | boolean;
     mainAppellant: null | boolean;
-    serviceAddress: null | boolean;
-    validServiceAddress: null | boolean;    
-    addressLine1: null | boolean;
-    city: null | boolean;
-    postalCode: null | boolean;
-    phone: null | boolean;
-    email: null | boolean;
+    addresses: null | boolean;    
+    phoneNumbers: null | boolean;
     referenceNumber: null | boolean;
 }
 
