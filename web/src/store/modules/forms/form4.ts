@@ -1,4 +1,5 @@
 import { form4DataInfoType, form4FormsJsonDataType } from '@/types/Information/Form4';
+import { supportingDocumentInfoType } from '@/types/Common';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -9,6 +10,7 @@ class Form4 extends VuexModule {
     public form4FormsJson: form4FormsJsonDataType[] = [];
     public form4Info = {} as form4DataInfoType; 
     public currentNoticeOfApplicationId = null; 
+    public supportingDocuments: supportingDocumentInfoType[] = [];
 
     @Mutation
     public setForm4FormsJson(form4FormsJson: form4FormsJsonDataType[]): void {   
@@ -36,6 +38,15 @@ class Form4 extends VuexModule {
     public UpdateCurrentNoticeOfApplicationId(newCurrentNoticeOfApplicationId: string): void {
         this.context.commit('setCurrentNoticeOfApplicationId', newCurrentNoticeOfApplicationId);
     }  
+
+    @Mutation
+    public setSupportingDocuments(supportingDocuments): void {
+        this.supportingDocuments = supportingDocuments;
+    }
+    @Action
+    public UpdateSupportingDocuments(newSupportingDocuments) {
+        this.context.commit("setSupportingDocuments", newSupportingDocuments);
+    }
     
 }
 
