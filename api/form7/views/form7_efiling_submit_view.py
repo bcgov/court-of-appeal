@@ -98,7 +98,7 @@ class Form7EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, notice_of_urgent_application_id):
         
-        document_type = "CNWD" # type Form7 for Efiling
+        document_type = "MCHU" # type Form7 for Efiling
         uid = request.user.id
 
         notice_of_urgent_application = self.get_notice_of_urgent_application_for_user(notice_of_urgent_application_id, uid)        

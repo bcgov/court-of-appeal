@@ -18,7 +18,7 @@
                 </b-row>
                 <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
                     Please note that you must serve the notice of appearance on the appellant 
-                    within 10 days of receiving the Notice of Appeal or Notice of Application for Leave to Appeal.
+                    within 10 days of receiving the Notice of Appeal.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
