@@ -98,7 +98,7 @@ class Form20EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, objection_withdraw_id):
         
-        document_type = "UNKOWN" # type Form20 for Efiling
+        document_type = "NOW" # type Form20 for Efiling
         uid = request.user.id
 
         objection_withdraw = self.get_objection_withdraw_for_user(objection_withdraw_id, uid)        

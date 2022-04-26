@@ -18,16 +18,16 @@
 
         <b-card class="my-2 mx-4 px-4 bg-white border-white">
 
-            <b-card-header class="bg-white border-white" style="font-size: 1.25rem;">
+            <b-row class="ml-4" style="font-size: 1.25rem;">
                 When Do You Use the Notice of Objection to Withdrawal (Form 20)?
-            </b-card-header> 
-            <b-card class="bg-white border-white" style="font-size: 14px; display: inline;">
+            </b-row> 
+            <b-row class="ml-4 mt-4" style="font-size: 14px; display: inline-block;">
                 If you are served with a notice of intention to withdraw by 
                 your lawyer, you may object to the withdrawal by filing an 
                 objection form and serving it on the lawyer who filed the 
-                notice of withdrawal <b>within 7 days of being served</b> with the 
+                notice of withdrawal <b style="font-size: 14px;">within 7 days of being served</b> with the 
                 Notice of Withdrawal.
-            </b-card>
+            </b-row>
            
         </b-card>
 

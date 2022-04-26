@@ -29,7 +29,7 @@
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'yyy'">
+    <div v-else-if="formType == 'MCHU'">
         <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-7 v-else-if="result=='cancel'"/>
         <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -64,11 +64,11 @@
         <cancel-submit-form-19 v-else-if="result=='cancel'"/>
         <error-submit-form-19 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'xxz'">
+    <div v-else-if="formType == 'NOW'">
         <success-submit-form-20 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>    
+    </div>   
     
 </template>
 
