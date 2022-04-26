@@ -113,7 +113,7 @@ export default class SubmitForm7 extends Vue {
         }
 
         const body = {
-            document_type: GetForm7PdfType(this.form7Info) //"ABA"
+            document_type: GetForm7PdfType(this.form7Info)
         }
 
         this.$http.post(url, body, header)

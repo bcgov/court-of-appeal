@@ -73,7 +73,8 @@
                 Name of the party(ies) bringing the application:                                
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-checkbox-group                
+                <b-form-checkbox-group 
+                    stacked               
                     style="width:100%" 
                     :state="state.filingParties"              
                     v-model="form7Info.filingParties"                    

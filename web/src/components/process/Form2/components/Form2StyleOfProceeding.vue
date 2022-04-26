@@ -59,6 +59,7 @@
 
                     <b-form-checkbox-group
                         style="width:100%" 
+                        stacked
                         :state="state.filingParties"   
                         @change="updateAddressFields"                                     
                         v-model="form2Info.filingParties"                    
@@ -66,30 +67,6 @@
                     </b-form-checkbox-group>
                                      
                 </b-col>
-            </b-row>
-
-            <b-row v-if="form2Info.filingParties.length > 0" :key="updated" class="mt-5">
-                <b-col cols="6" style="font-weight: 700;">
-                    Phone number(s) of the party(ies) filing the Notice of Appearance                                
-                </b-col>
-                <b-col>
-                    <div 
-                        v-for="(phone,index) in form2Info.phoneNumbers" 
-                        :key="'phone' + index"                        
-                        :value="phone"> {{form2Info.phoneNumbers[index].name}}                  
-                        <b-form-textarea                
-                            style="width:100%" 
-                            rows="6"                                                                                       
-                            v-model="form2Info.phoneNumbers[index].contactInfo">
-                        </b-form-textarea>      
-                    </div>
-                    <span
-                        v-if="(state.phoneNumbers != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
-                    </span>
-                </b-col>                
             </b-row>
 
             <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
@@ -116,6 +93,30 @@
                 </b-col>                
             </b-row>
 
+            <b-row v-if="form2Info.filingParties.length > 0" :key="updated" class="mt-5">
+                <b-col cols="6" style="font-weight: 700;">
+                    Phone number(s) of the party(ies) filing the Notice of Appearance                                
+                </b-col>
+                <b-col>
+                    <div 
+                        v-for="(phone,index) in form2Info.phoneNumbers" 
+                        :key="'phone' + index"                        
+                        :value="phone"> {{form2Info.phoneNumbers[index].name}}                  
+                        <b-form-input                
+                            style="width:100%" 
+                            rows="6"                                                                                       
+                            v-model="form2Info.phoneNumbers[index].contactInfo">
+                        </b-form-input>      
+                    </div>
+                    <span
+                        v-if="(state.phoneNumbers != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
+                    </span>
+                </b-col>                
+            </b-row>
+
             <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 2" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Email(s) address(es) for service of respondent(s)                                
@@ -125,11 +126,11 @@
                         v-for="(email,index) in form2Info.emailAdresses" 
                         :key="'email' + index"                       
                         :value="email"> {{form2Info.emailAdresses[index].name}}                  
-                        <b-form-textarea                
+                        <b-form-input                
                             style="width:100%" 
                             rows="6"                                                                                       
                             v-model="form2Info.emailAdresses[index].contactInfo">
-                        </b-form-textarea>      
+                        </b-form-input>      
                     </div>                                    
                 </b-col>                
             </b-row>

@@ -59,7 +59,7 @@
                         :options="partyNames">
                     </b-form-checkbox-group> 
                     <b-form-input
-                        v-if="form20Info.objectingParties.includes('Other')"
+                        v-if="form20Info.objectingParties && form20Info.objectingParties.includes('Other')"
                         style="width:100%" 
                         placeholder="party name"
                         class="mt-2"
