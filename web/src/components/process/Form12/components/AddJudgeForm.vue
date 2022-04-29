@@ -101,7 +101,10 @@ export default class AddJudgeForm extends Vue {
 
     public saveForm(){
             
-        this.nameState = this.name != "";                
+        this.nameState = this.name != "";         
+        console.log(this.name)
+        console.log(this.isCreateJudge) 
+        console.log(this.index)      
         
         if (this.nameState){
             const judgeName = this.name;            

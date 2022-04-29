@@ -42,6 +42,105 @@
 
                                 <template v-slot:cell(name)="data" >
                                     <span style="font-size: 16px;">
+                                        {{data.item}}
+                                    </span>
+                                </template>
+                                
+                                <template v-slot:cell(edit)="data" >   
+                                    <div style="float: right;">                                                                     
+                                        <b-button 
+                                            class="mr-2" 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="removeOriginalJudgeNames(data.item)">
+                                            <b-icon 
+                                                icon="trash-fill" 
+                                                font-scale="1.25" 
+                                                variant="danger"/>
+                                        </b-button>
+                                        <b-button 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="editOriginalJudgeNames(data)">
+                                            <b-icon 
+                                                icon="pencil-square" 
+                                                font-scale="1.25" 
+                                                variant="primary"/>
+                                        </b-button>
+                                    </div>
+                                </template>
+
+                                <template v-slot:row-details="data">
+                                    <b-card 
+                                        body-class="m-0 px-0 py-1" 
+                                        :border-variant="addOriginalJudgeNamesFormColor" 
+                                        style="border:2px solid;">
+                                        <add-judge-form 
+                                            :formData="data.item" 
+                                            :index="data.index" 
+                                            :isCreateJudge="false" 
+                                            v-on:submit="modifyOriginalJudgeNames" 
+                                            v-on:cancel="closeOriginalJudgeNamesForm" />
+                                    </b-card>
+                                </template>
+                            </b-table> 
+                        </b-form-group>
+                    </b-col>  
+                    <b-col>           
+                        <b-button 
+                            style="margin-top: 2.25rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
+                            v-if="!AddNewOriginalJudgeNamesForm" 
+                            size="sm" 
+                            variant="court" 
+                            @click="addNewOriginalJudgeNames">
+                            <b-icon icon="plus"/>Add Judge Names</b-button>
+                    </b-col>
+                </b-row>
+            </b-card>           
+
+            <b-card 
+                v-if="AddNewOriginalJudgeNamesForm" 
+                id="addJudgeForm" 
+                class="my-1 ml-4" 
+                :border-variant="addOriginalJudgeNamesFormColor" 
+                style="border:2px solid;" 
+                body-class="px-1 py-1">
+                <add-judge-form 
+                    :formData="{}" 
+                    :index="-1" 
+                    :isCreateJudge="true" 
+                    v-on:submit="modifyOriginalJudgeNames" 
+                    v-on:cancel="closeOriginalJudgeNamesForm" />                
+            </b-card>
+        </b-card>
+
+        <!-- <b-card class="mb-4 bg-white border-white text-dark"> 
+            <b-card no-body class="border-white">
+                <b-row class="mb-2 ml-1" style="margin-left: -0.25rem !important;">   
+                    <b-col cols="10" :class="state.originalJudgeNames !=null?'border-danger':''">
+                        <b-form-group
+                            class="labels"                
+                            label="List the judge(s) who made the order:" 
+                            label-for="judges">
+                            <span 
+                                v-if="form12Info.originalJudgeNames && form12Info.originalJudgeNames.length == 0 && !AddNewOriginalJudgeNamesForm" 
+                                id="judges" 
+                                class="text-muted ml-2 my-2">No judges have been listed.
+                            </span>
+                            <b-table
+                                v-else-if="form12Info.originalJudgeNames && form12Info.originalJudgeNames.length > 0"
+                                :key="updated"                                
+                                id="judges"
+                                :items="form12Info.originalJudgeNames"
+                                :fields="nameFields"
+                                head-row-variant="primary"
+                                borderless    
+                                small                                            
+                                responsive="sm"
+                                >
+
+                                <template v-slot:cell(name)="data" >
+                                    <span style="font-size: 16px;">
                                         {{data.item.name}}
                                     </span>
                                 </template>
@@ -112,7 +211,7 @@
                     v-on:submit="modifyOriginalJudgeNames" 
                     v-on:cancel="closeOriginalJudgeNamesForm" />                
             </b-card>
-        </b-card>
+        </b-card> -->
 
         <div v-if="form12Info !=null">
 
@@ -230,8 +329,8 @@
                 </b-col>
             </b-row> -->
 
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Which party(ies) are appearing?                                
                 </b-col>
                 <b-col class="ml-1 mt-2">   
@@ -248,17 +347,34 @@
                 </b-col>
             </b-row> 
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Who made the Order?
+            <b-row v-if="form12Info.originalJudgeNames.length > 0" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Whose order are you varying?
                 </b-col>
-                <b-col>
-                    <b-card body-class="py-2 bg-select" >                   
-                        {{form12Info.judgeName}}
-                    </b-card>
+                <b-col class="ml-1 mt-2">
+                    <b-form-radio-group 
+                        :key="updated"               
+                        style="width:100%" 
+                        stacked
+                        :state="state.judgeName"                   
+                        v-model="form12Info.judgeName"                    
+                        :options="form12Info.originalJudgeNames">
+                    </b-form-radio-group>
                 </b-col>
-            </b-row>              
+            </b-row> 
+
+            <b-row v-if="form12Info.judgeName && form12Info.judgeName.length > 0" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    The order to vary the order of Mr./Madam Justice {{form12Info.judgeName}}:
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-radio-group
+                        :state="state.orderAllowed"                 
+                        v-model="form12Info.orderAllowed"
+                        :options="allowedOptions"                
+                    ></b-form-radio-group>
+                </b-col>
+            </b-row>
 
             <hr/>    
 
@@ -351,6 +467,11 @@ export default class Form12StyleOfProceeding extends Vue {
     AddNewOriginalJudgeNamesForm = false;
     latestEditOriginalJudgeNamesData;
     isEditOriginalJudgeNamesOpen = false;
+
+    allowedOptions = [
+        {text: 'Allowed', value: true},
+        {text: 'Dismissed', value: false}
+    ];
 
     nameFields = [
         {
@@ -536,7 +657,7 @@ export default class Form12StyleOfProceeding extends Vue {
         // }        
     }
 
-        public addNewOriginalJudgeNames(){
+    public addNewOriginalJudgeNames(){
         if(this.isEditOriginalJudgeNamesOpen){            
             this.addOriginalJudgeNamesFormColor = 'danger'
         }else{
@@ -545,21 +666,23 @@ export default class Form12StyleOfProceeding extends Vue {
     }
 
     public editOriginalJudgeNames(data) {
+        console.log(data)
         if(this.AddNewOriginalJudgeNamesForm || this.isEditOriginalJudgeNamesOpen){            
             this.addOriginalJudgeNamesFormColor = 'danger';                     
         }else if(!this.isEditOriginalJudgeNamesOpen && !data.detailsShowing){
+            console.log(data);
             data.toggleDetails();
             this.isEditOriginalJudgeNamesOpen = true;
-            this.latestEditOriginalJudgeNamesData = data            
+            this.latestEditOriginalJudgeNamesData = data;            
         }   
     }
 
-    public modifyOriginalJudgeNames(isCreateOriginalJudgeNames: boolean, newOriginalJudgeNames: string[], index: number){        
+    public modifyOriginalJudgeNames(isCreateOriginalJudgeNames: boolean, newOriginalJudgeName: string, index: number){        
 
         if (isCreateOriginalJudgeNames){
             
             const form12Data = this.form12Info;
-            form12Data.originalJudgeNames.push(newOriginalJudgeNames[index])
+            form12Data.originalJudgeNames.push(newOriginalJudgeName)
             
             this.UpdateForm12Info(form12Data)
 
@@ -568,7 +691,7 @@ export default class Form12StyleOfProceeding extends Vue {
         } else { 
             
             const form12Data = this.form12Info;            
-            form12Data.originalJudgeNames[index] = newOriginalJudgeNames[index];
+            form12Data.originalJudgeNames[index] = newOriginalJudgeName;
            
             this.UpdateForm12Info(form12Data);
                       
