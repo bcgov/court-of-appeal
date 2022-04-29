@@ -26,7 +26,18 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Are you amending a Notice of Appeal that has been filed?                                
+                    Are you amending a Notice of Appeal that has been filed? 
+                    <p class="help-content">
+                        Pursuant to 
+                        <a
+                            href=""
+                            target="_blank">
+                            Rule 84 of the Court of Appeal Rules
+                        </a>
+                        you may amend a notice of appeal form without permission of 
+                        the court or a justice in certain circumstances. Please 
+                        ensure that you review the rule for those circumstances.
+                    </p>                               
                 </b-col>
                 <b-col>
                     <b-form-radio-group                

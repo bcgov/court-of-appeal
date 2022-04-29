@@ -59,6 +59,9 @@ export default class ChecklistForm1 extends Vue {
     @commonState.Action
     public UpdateAccountInfo!: (newAccountInfo: accountInfoType) => void
    
+    @commonState.State
+    public accountInfo!: accountInfoType;
+
     @form1State.Action
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
@@ -112,6 +115,8 @@ export default class ChecklistForm1 extends Vue {
             form1SubmissionData.parties = [];
         }
         this.UpdateForm1Info(form1SubmissionData);
+
+        this.businessAccount = this.accountInfo.accountUsers.length>1;
 
         if (this.businessAccount){
             this.$router.push({name: "access-form1"});

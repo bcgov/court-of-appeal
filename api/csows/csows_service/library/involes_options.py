@@ -15,13 +15,13 @@ class InvolvesOptions:
         CorollaryReliefInADivorceProceedingHelp = ""
         
         Divorce = "Divorce Act"
-        DivorceHelp = ""
+        DivorceHelp = "Appeals from decisions made under the Divorce Act relating to divorce, division of property, parenting arrangements, parenting responsibilities, maintenance."
         
         Equity = "Equity"
         EquityHelp = "Appeal from decisions based on the application of fairness and other principles of equity."
         
         FamilyLawAct = "Family Law Act"
-        FamilyLawActHelp = ""
+        FamilyLawActHelp = "Appeals from decisions made under the Family Law Act relating to parenting arrangements, maintenance."
         
         MotorVehicleAccidents = "Motor Vehicle Accidents"
         MotorVehicleAccidentsHelp = "Appeal from a decision of someone being found at fault or for damages as a result of a motor vehicle accident."
@@ -30,7 +30,7 @@ class InvolvesOptions:
         MunicipalLawHelp = "Appeal from a decision of legal issues relating to municipal (towns or city) governments."
         
         Other = "Other"
-        OtherHelp = ""
+        OtherHelp = "Appeals from decisions not listed in any other category."
         
         OtherFamily = "Other Family"
         OtherFamilyHelp = ""
