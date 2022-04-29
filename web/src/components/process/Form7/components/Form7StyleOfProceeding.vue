@@ -88,17 +88,29 @@
             <b-col cols="7" class="labels">
                 Location where the application will be heard:                                
             </b-col>
-            <b-col class="ml-1 mt-2">  
-                <b-form-select
-                    :state="state.hearingLocation"                                                                                                          
-                    v-model="form7Info.hearingLocation">
-                        <b-form-select-option
-                            v-for="location in locationsInfo" 
-                            :key="location.id"
-                            :value="location">
-                                {{location.name}}
-                        </b-form-select-option>    
+            <b-col class="ml-1 mt-2">
+                <b-form-select                
+                    style="width:100%"              
+                    v-model="hearingLocation" 
+                    @change="update"                   
+                    :options="hearingLocationList">
                 </b-form-select>
+                <b-row v-if="hearingLocation == 'Other'">
+                    <span class="mt-3 ml-3">Specify:</span>
+                    <b-form-select                        
+                        style="width:70%; float: right;"
+                        class="mt-2 ml-5"
+                        @change="update"
+                        :options="otherHearingLocationList"                                    
+                        v-model="otherHearingLocation">
+                    </b-form-select>
+                </b-row>
+                <span
+                    v-if="(state.hearingLocation != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify Hearing Location.
+                </span>  
                 
             </b-col>
         </b-row>
@@ -236,6 +248,7 @@ import moment from 'moment-timezone';
 
 import { form7DataInfoType } from '@/types/Information/Form7';
 import { partiesDataJsonDataType } from '@/types/Information/json';
+import { hearingLocationsInfoType } from '@/types/Common';
 
 import "@/store/modules/information";
 const informationState = namespace("Information");
@@ -244,7 +257,6 @@ import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
 import "@/store/modules/common";
-import { locationsInfoType } from '@/types/Common';
 const commonState = namespace("Common");
 
 @Component
@@ -257,7 +269,7 @@ export default class Form7StyleOfProceeding extends Vue {
     public fileNumber: string;
 
     @commonState.State
-    public locationsInfo!: locationsInfoType[];
+    public hearingLocationsInfo!: hearingLocationsInfoType[];
 
     @form7State.State
     public form7Info: form7DataInfoType;
@@ -275,6 +287,10 @@ export default class Form7StyleOfProceeding extends Vue {
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     partyNames: string[] = [];    
+    hearingLocationList: string[] = [];
+    otherHearingLocationList: string[] = [];
+    hearingLocation = "";
+    otherHearingLocation = "";
     
     yesNoOptions = [
         {text: 'Yes', value: true},
@@ -299,11 +315,22 @@ export default class Form7StyleOfProceeding extends Vue {
         this.extractInfo();              
     }
 
-    public extractInfo(){      
+    public extractInfo(){ 
+
+        this.hearingLocationList = [];
+        
+        for (const hearingLocation of this.hearingLocationsInfo){
+            if (hearingLocation.other){
+                this.otherHearingLocationList.push(hearingLocation.name);
+            } else {
+                this.hearingLocationList.push(hearingLocation.name);    
+            }           
+        }
+
+        this.hearingLocationList.push('Other');        
 
         if(this.currentNoticeOfUrgentApplicationId){
-            this.getForm7Data();
-           
+            this.getForm7Data();           
         } else {   
             
             const form7Data = {} as form7DataInfoType;
@@ -315,8 +342,7 @@ export default class Form7StyleOfProceeding extends Vue {
            
             this.UpdateForm7Info(form7Data);                       
             this.saveForm(true);
-        }  
-          
+        }
 
     }
 
@@ -340,14 +366,42 @@ export default class Form7StyleOfProceeding extends Vue {
 
     }
 
+    public update(){ 
+              
+        const form7 = this.form7Info;        
+        form7.hearingLocation = {} as hearingLocationsInfoType;
+       
+        if (this.hearingLocation == 'Other' && this.otherHearingLocation.length > 0){
+            form7.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.otherHearingLocation)[0]
+        } else if (this.hearingLocation != 'Other') {
+            form7.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.hearingLocation)[0]
+        }          
+          
+        this.UpdateForm7Info(form7);
+    }
+
     public getForm7Data() {        
        
         this.$http.get('/form7/forms/'+this.currentNoticeOfUrgentApplicationId)
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form7Data = response.data.data                
-                this.UpdateForm7Info(form7Data) 
+                const form7Data = response.data.data
+                this.UpdateForm7Info(form7Data);
+                if (form7Data.hearingLocation?.name){
+
+                    if (this.hearingLocationList.includes(form7Data.hearingLocation.name)){
+                        this.hearingLocation = form7Data.hearingLocation.name;
+                        this.otherHearingLocation = '';            
+                    } else {
+                        this.hearingLocation = 'Other';
+                        this.otherHearingLocation = form7Data.hearingLocation.name;            
+                    }
+
+                } else {
+                    this.hearingLocation = '';
+                    this.otherHearingLocation = '';
+                } 
                 this.extractPartiesData();
                 this.clearStates();                
             }
