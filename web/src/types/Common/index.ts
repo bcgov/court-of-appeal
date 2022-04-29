@@ -33,6 +33,13 @@ export interface locationsInfoType {
     postalCode: string;
 }
 
+export interface hearingLocationsInfoType {    
+    name: string;
+    address: string;
+    postalCode: string;
+    other: true;
+}
+
 export interface supportingDocumentInfoType {
     fileName: string;
     file: File;

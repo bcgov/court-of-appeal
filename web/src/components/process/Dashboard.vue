@@ -116,6 +116,7 @@ import AdditionalForms from "@/components/utils/AdditionalForms.vue";
 import RepresentationAddressForms from "@/components/utils/RepresentationAddressForms.vue";
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
+import {GetHearingLocations} from '@/components/utils/GetHearingLocations';
 
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
 import { pathwayTypeInfoType } from '@/types/Information';
@@ -271,6 +272,7 @@ export default class DashboardPage extends Vue {
         this.dataLoaded = false;
         this.initSteps();
         this.loadInfo(); 
+        this.extractHearingLocations();
         this.extractFilingLocations();       
     }
 
@@ -340,6 +342,10 @@ export default class DashboardPage extends Vue {
       
     public extractFilingLocations() {
         GetFilingLocations();       
+    }
+
+    public extractHearingLocations() {
+        GetHearingLocations();       
     }
 
 

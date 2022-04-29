@@ -22,11 +22,12 @@
                 When Do you Use the Notice of Application To Vary an Order of a Justice (Form 8)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you do not wish to proceed with your appeal or application for 
-                leave to appeal because the matter has settled or for any other reason.
+                If you wish to apply to have the court vary an order of a justice.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You must immediately file and serve a Notice of Application To Vary an Order of a Justice.    
+                You must immediately file and serve a Notice of Application To 
+                Vary an Order of a Justice, any supporting documents, and any 
+                written argument within 7 days after the order was made by a justice.    
             </b-row>        
            
         </b-card>
