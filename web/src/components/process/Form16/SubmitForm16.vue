@@ -8,10 +8,16 @@
         <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
 
             <b-row class="ml-2" style="font-size: 2rem;">
-                Submit through E-Filing
+                Download and Submit
             </b-row> 
+            <b-row class="ml-2 my-2" style="font-size: 14px;">
+                You can print or download your Offer to Settle Costs to 
+                serve on the other party.
+            </b-row>
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
-                By submitting, you will be redirected to the E-Filing Hub.
+                Please note that the Offer To Settle Costs cannot be 
+                submitted to the Registrar until the conclusion of 
+                the hearing on the assessment of costs.
             </b-row>
             <b-row>
                 <b-alert
@@ -24,24 +30,22 @@
             </b-row>
 
             <b-row class="ml-5">
-                <b-col cols="10">
+                <b-col cols="9">
                     <b-button 
-                        style="float: right; width: 120px; height: 50px; font-size: 20px;" 
+                        style="float: right; width: 120px; font-size: 20px;" 
                         variant="danger"
                         @click="cancel()"
                         >
                         Cancel
                     </b-button>
                 </b-col>
-                <b-col cols="2">
+                <b-col cols="3">
                     <b-button
-                        style="float: left; width: 120px; height: 50px; font-size: 20px; opacity:1;" 
-                        :disabled="submitting"
+                        style="float: right; margin-right:1rem; font-size: 20px;" 
                         variant="success"
-                        @click="submit()"
-                        ><spinner color="#FFF" v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
-                        <span v-else style="margin:0; padding: 0;">Submit
-                        <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
+                        @click="savePdf()"
+                        >Download PDF
+                        <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
                     </b-button>
                 </b-col>
             </b-row>
@@ -95,6 +99,31 @@ export default class SubmitForm16 extends Vue {
         }
         this.mountedData = true;         
     }  
+
+    public savePdf(){        
+        const pdfType = "FORM"
+        const pdfName ="Form16"
+        const url = '/form16/form-print/'+this.currentOfferToSettleCostsId+'/?pdf_type='+pdfType
+        const options = {
+            responseType: "blob",
+            headers: {
+            "Content-Type": "application/json",
+            }
+        }
+        this.$http.get(url, options)
+        .then(res => {
+            const blob = res.data;
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.download = pdfName+".pdf";
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
+
+        },err => {
+            console.error(err);
+        });
+    }
 
     public submit() {
 
