@@ -118,17 +118,28 @@
                         Location where the application will be heard:                                
                     </b-col>
                     <b-col class="ml-1 mt-2">  
-                        <b-form-select
-                            :state="state.hearingLocation"                                                                                                          
-                            v-model="form4Info.hearingLocation">
-                                <b-form-select-option
-                                    v-for="location in locationsInfo" 
-                                    :key="location.id"
-                                    :value="location">
-                                        {{location.name}}
-                                </b-form-select-option>    
+                        <b-form-select                
+                            style="width:100%"              
+                            v-model="hearingLocation" 
+                            @change="update"                   
+                            :options="hearingLocationList">
                         </b-form-select>
-                        
+                        <b-row v-if="hearingLocation == 'Other'">
+                            <span class="mt-3 ml-3">Specify:</span>
+                            <b-form-select                        
+                                style="width:70%; float: right;"
+                                class="mt-2 ml-5"
+                                @change="update"
+                                :options="otherHearingLocationList"                                    
+                                v-model="otherHearingLocation">
+                            </b-form-select>
+                        </b-row>
+                        <span
+                            v-if="(state.hearingLocation != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify Hearing Location.
+                        </span>                        
                     </b-col>
                 </b-row>
 
@@ -452,7 +463,7 @@ import AddAffidavitForm from './AddAffidavitForm.vue';
 
 import { affidavitInfoType, form4DataInfoType } from '@/types/Information/Form4';
 import { partiesDataJsonDataType } from '@/types/Information/json';
-import { locationsInfoType } from '@/types/Common';
+import { hearingLocationsInfoType, locationsInfoType } from '@/types/Common';
 
 @Component({
     components:{        
@@ -462,7 +473,10 @@ import { locationsInfoType } from '@/types/Common';
 export default class Form4StyleOfProceeding extends Vue {
 
     @commonState.State
-    public locationsInfo!: locationsInfoType[];  
+    public locationsInfo!: locationsInfoType[]; 
+    
+    @commonState.State
+    public hearingLocationsInfo!: hearingLocationsInfoType[];
     
     @informationState.State
     public partiesJson: partiesDataJsonDataType;
@@ -487,6 +501,10 @@ export default class Form4StyleOfProceeding extends Vue {
     respondentNames: string[] = [];
     partyNames: string[] = [];
     otherPartyNames: string[] = [];
+    hearingLocationList: string[] = [];
+    otherHearingLocationList: string[] = [];
+    hearingLocation = "";
+    otherHearingLocation = "";
 
     updated=0; 
     addAffidavitFormColor = 'court';
@@ -561,6 +579,18 @@ export default class Form4StyleOfProceeding extends Vue {
 
     public extractInfo(){
 
+        this.hearingLocationList = [];
+        
+        for (const hearingLocation of this.hearingLocationsInfo){
+            if (hearingLocation.other){
+                this.otherHearingLocationList.push(hearingLocation.name);
+            } else {
+                this.hearingLocationList.push(hearingLocation.name);    
+            }           
+        }
+
+        this.hearingLocationList.push('Other');
+
         this.invalidApplicantParties = false;
 
         if(this.currentNoticeOfApplicationId){
@@ -620,6 +650,21 @@ export default class Form4StyleOfProceeding extends Vue {
 
     }
 
+    public update(){ 
+              
+        const form4 = this.form4Info;
+       
+        form4.hearingLocation = {} as hearingLocationsInfoType;
+       
+        if (this.hearingLocation == 'Other' && this.otherHearingLocation.length > 0){
+            form4.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.otherHearingLocation)[0]
+        } else if (this.hearingLocation != 'Other') {
+            form4.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.hearingLocation)[0]
+        }  
+        
+        this.UpdateForm4Info(form4);
+    }
+
     public getForm4Data() {        
        
         this.$http.get('/form4/forms/'+this.currentNoticeOfApplicationId)
@@ -627,7 +672,22 @@ export default class Form4StyleOfProceeding extends Vue {
             if(response?.data?.data){            
                             
                 const form4Data = response.data.data                
-                this.UpdateForm4Info(form4Data) 
+                this.UpdateForm4Info(form4Data);
+                if (form4Data.hearingLocation?.name){
+
+                    if (this.hearingLocationList.includes(form4Data.hearingLocation.name)){
+                        this.hearingLocation = form4Data.hearingLocation.name;
+                        this.otherHearingLocation = '';            
+                    } else {
+                        this.hearingLocation = 'Other';
+                        this.otherHearingLocation = form4Data.hearingLocation.name;            
+                    }
+                    
+                } else {
+                    this.hearingLocation = '';
+                    this.otherHearingLocation = '';
+                } 
+
                 this.extractPartiesData();
                 this.clearStates();                
             }

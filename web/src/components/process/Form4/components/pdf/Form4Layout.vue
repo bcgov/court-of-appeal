@@ -196,7 +196,7 @@
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">
                     {{result.hearingLocation.name}}<br> 
-                    {{result.hearingLocation.address}}<br>
+                    <b v-html="result.hearingLocation.address">{{result.hearingLocation.address}}</b><br>
                     {{result.hearingLocation.postalCode}}
                 </div>                       
             </div> 
