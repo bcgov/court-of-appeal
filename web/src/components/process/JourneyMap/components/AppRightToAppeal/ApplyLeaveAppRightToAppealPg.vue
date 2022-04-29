@@ -371,7 +371,7 @@
                                 <b-col cols="8">                                    
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
-                                        target="_blank">Application Motion
+                                        target="_blank">Application Book
                                     </a>
                                 </b-col>
                                 <!-- <b-col cols="2">
