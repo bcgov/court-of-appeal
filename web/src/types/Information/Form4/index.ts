@@ -1,4 +1,4 @@
-import { locationsInfoType } from "@/types/Common";
+import { hearingLocationsInfoType, locationsInfoType } from "@/types/Common";
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
 export interface form4FormsJsonDataType {
@@ -39,7 +39,7 @@ export interface form4DataInfoType {
     jurisdictionType: string;
     applicantParties: string[];
     respondentParties: string[];
-    hearingLocation: locationsInfoType;
+    hearingLocation: hearingLocationsInfoType;
     hearingDate: string;
     estimatedDuration: string;
     relyingSectionRule: string[];

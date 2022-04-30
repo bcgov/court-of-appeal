@@ -22,11 +22,15 @@
                 When Do you Use the Offer To Settle Costs (Form 16)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you do not wish to proceed with your appeal or application for 
-                leave to appeal because the matter has settled or for any other reason.
+                Before a registrar makes an assessment of costs, 
+                you may serve on another party, an offer to settle 
+                the amount of a bill of costs.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You must immediately file and serve a Offer To Settle Costs.    
+                Please note that you cannot submit this document 
+                to the registrar until the conclusion of a hearing 
+                on the assessment of costs providing that the offer 
+                to settle costs was served on the other party.    
             </b-row>        
            
         </b-card>

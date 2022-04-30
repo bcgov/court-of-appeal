@@ -1,5 +1,5 @@
 
-import { locationsInfoType } from '@/types/Common';
+import { hearingLocationsInfoType, locationsInfoType } from '@/types/Common';
 import { accountInfoType, lookupsInfoType } from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -17,6 +17,7 @@ class Common extends VuexModule {
     public locationsInfo: locationsInfoType[] = [];
     public lookups = {} as lookupsInfoType;
     public accountInfo = {} as accountInfoType;
+    public hearingLocationsInfo: hearingLocationsInfoType[] = [];
 
     @Mutation
     public  setUserName(userName: string): void {
@@ -52,6 +53,15 @@ class Common extends VuexModule {
     @Action
     public UpdateLocationsInfo(newLocationsInfo: locationsInfoType[]): void {
         this.context.commit('setLocationsInfo', newLocationsInfo)
+    }
+
+    @Mutation
+    public setHearingLocationsInfo(hearingLocationsInfo: hearingLocationsInfoType[]): void {   
+        this.hearingLocationsInfo = hearingLocationsInfo
+    }
+    @Action
+    public UpdateHearingLocationsInfo(newhearingLocationsInfo: hearingLocationsInfoType[]): void {
+        this.context.commit('setHearingLocationsInfo', newhearingLocationsInfo)
     }
 
     @Mutation

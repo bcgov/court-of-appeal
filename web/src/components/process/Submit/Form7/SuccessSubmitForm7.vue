@@ -13,12 +13,31 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="mx-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Settlement or Abandonment form has been submitted.  Please click on 
-                    the CSO Package number below to retrieve a filed copy of your document.
+                    Your Notice of Urgent Application has been submitted. Please click 
+                    on the CSO Package number below to retrieve a filed copy of your 
+                    document(s).
                 </b-row>
                 <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
-                    <b class="mr-2">NOTE:</b>  In accordance with the Court of Appeal Rule 44, you must serve 
-                    each party with a filed copy of the Notice of Settlement or Abandonment.
+                    Please note that on an urgent application, a judge or the registrar 
+                    may do one or more of the following:
+                    <ol type="a">
+                        <li>
+                            order that an application be heard on shorter notice than otherwise
+                             required under these rules, including
+                            <ol type="i">
+                                <li>
+                                    setting the date for hearing the application, and                                    
+                                </li>
+                                <li>
+                                    setting the date by which a document in relation to the application must be filed and served;
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            impose conditions or give directions related to the urgent application, including that notice be given to another party.
+                        </li>
+                    </ol>
+                    Please note, If an order is made, you must serve notice of the order on each party.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">

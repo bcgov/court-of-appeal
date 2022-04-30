@@ -1,4 +1,4 @@
-import { locationsInfoType } from "@/types/Common";
+import { hearingLocationsInfoType, locationsInfoType } from "@/types/Common";
 import { applicantJsonDataType, respondentsJsonDataType } from "../json";
 
 export interface form7FormsJsonDataType {
@@ -38,7 +38,7 @@ export interface form7DataInfoType {
     firstRespondent: string;       
     authorizedName: string;
     filingParties: string[];
-    hearingLocation: locationsInfoType;
+    hearingLocation: hearingLocationsInfoType;
     hearingDate: string;
     hearingTime: string;    
     affidavits: string;

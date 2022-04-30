@@ -54,7 +54,7 @@
             <b-col cols="11">
 
                 <p class="question pb-0 mt-3">
-                    Was the order pronounced by a tribunal court?
+                    Was the order pronounced by a tribunal?
                     <b-icon-question-circle-fill
                         style="color: #38598a;"
                         v-b-tooltip:hover.v-info.html="helpText().title"                                    
@@ -65,7 +65,24 @@
                     v-model="qualificationInfo.appealTribunal"
                     @change="changeTribunal()"
                     :options="responseOptions">               
-                </b-form-radio-group>                
+                </b-form-radio-group>   
+
+                <b-card 
+                    class="border-primary bg-primary text-white mt-2 mr-5" 
+                    v-if="qualificationInfo.appealTribunal">    
+
+                    <p>
+                        The appeal period for filing and serving an appeal is usually 30 days 
+                        commencing on the day after the order is pronounced (the date the 
+                        order was spoken or written by the tribunal); however, if another 
+                        enactment specifies a different period, that different period applies.
+                    </p>           
+
+                    <p>                        
+                        Please check the enactment for the time period to appeal.                                         
+                    </p>                    
+                    
+                </b-card>             
                 
             </b-col>
              
@@ -116,7 +133,10 @@
                         <a  href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/169_2009_04#F80"
                             target="_blank"
                             class= "text-white">Form F80</a><br/>                        
-                    </p>                    
+                    </p>   
+                    <p>
+                        Please check that you should not be filing in the Supreme Court before proceeding.
+                    </p>                 
                     
                 </b-card>                           
                 
@@ -239,7 +259,17 @@
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingScFlaDivorce"
                     :options="responseOptions">            
-                </b-form-radio-group>                                      
+                </b-form-radio-group>    
+
+                <b-card 
+                    class="border-primary bg-primary text-white mt-2 mr-5" 
+                    v-if="qualificationInfo.appealingScFlaDivorce"> 
+                    <p>
+                        Supreme Court Family Law and Divorce Act matters are subject to access 
+                        restrictions, you will need to complete the required fields including 
+                        the party names and party roles as shown on the order that you are appealing.
+                    </p>                     
+                </b-card>                                       
                 
             </b-col>           
             
@@ -296,12 +326,24 @@
                     v-model="qualificationInfo.insideTimeLimit"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
-                <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.insideTimeLimit">
-                    The time limit for <i>filing and serving</i> an appeal is usually 30 days commencing on the 
-                    day after the order is pronounced (the date the order was spoken by the lower court judge). 
-                    An appeal relating to bankruptcy needs to be filed and served within 10 days. If it is past 
-                    the deadline, you need to file the Notice of Appeal along with the Notice of Motion and 
-                    supporting affidavit seeking an extension of time.<br/>                    
+                <b-card 
+                    class="border-primary bg-primary text-white mt-2 mr-5" 
+                    v-if="qualificationInfo.insideTimeLimit">
+                    The time limit for filing and serving an appeal is usually 30 days commencing on the 
+                    day after the order is pronounced. If you have missed the deadline to file the Notice 
+                    of Appeal, you may apply for an extension of time by completing the Notice of 
+                    Appeal along with a 
+                    <a style="color: blue; margin-left: 0.25rem; text-decoration: underline; display: inline;"
+                        @click="startNewForm4Document"
+                        target="_blank"                                                                                
+                        > Notice of Application
+                    </a> and supporting affidavit(s).  
+                    <p>
+                        You will need to submit to the registry, the Notice of Application 
+                        and supporting affidavit(s) at the same time as your Notice of 
+                        Appeal form.
+                        
+                    </p>                 
                 </b-card>                           
                 
             </b-col> 
@@ -326,13 +368,21 @@
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingFeesWaived">                    
 
                     <p>
-                        If you are applying for an order to have the fees waived, you need to file the 
-                        Notice of Appeal along with the Notice of Motion and supporting affidavit  
+                        If you are unable to pay the fees associated with the appeal, you may apply 
+                        for an order that no fees are payable under Rule 84 of the Court of Appeal Rules.  
                         <a  href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form19.pdf"
                             target="_blank"
-                            class= "text-white">(Form 19 - Affidavit: No Fees Payable (Indigent Status))
+                            class= "text-white">Rule 84 of the Court of Appeal Rules
                         </a>.
-                    </p>                    
+                    </p>   
+                    <p>
+                        To make an application for an order that no fees are payable, you must complete  
+                        <a style="color: blue; margin-left: 0.25rem; text-decoration: underline; display: inline;"
+                            @click="startNewForm22Document"
+                            target="_blank"                                                                                
+                            > Form 22
+                        </a> with your Notice of Appeal form.
+                    </p>                 
 
                 </b-card>                           
                 
@@ -349,6 +399,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 import StepNumber from "@/components/utils/StepNumber.vue";
 import { form1DataInfoType, form1QualificationInfoType } from '@/types/Information/Form1';
 
@@ -364,6 +417,9 @@ export default class Form1QualifyQuestions extends Vue {
 
     @form1State.State
     public form1Info: form1DataInfoType;
+
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
 
     dataReady = false;
     tribunalCase = false;
@@ -485,6 +541,16 @@ export default class Form1QualifyQuestions extends Vue {
 
     public changeTribunal(){       
         this.tribunalCase = this.qualificationInfo.appealTribunal;
+    }
+
+    public startNewForm4Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form4" });
+    }
+
+    public startNewForm22Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form22" });
     }
 
 }
