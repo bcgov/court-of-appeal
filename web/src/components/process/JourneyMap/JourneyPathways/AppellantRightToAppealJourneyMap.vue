@@ -283,7 +283,7 @@ import PathSidebar from '../components/PathSidebar.vue';
 
 import InitialDocumentsAppRightToAppealPg from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
 import ApplyLeaveAppRightToAppealPg from '../components/AppRightToAppeal/ApplyLeaveAppRightToAppealPg.vue';
-import ManagingAppealProcessPg from '@/components/utils/ManagingAppealProcessPg.vue';
+import ManagingAppealProcessPg from '@/components/process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 import AppealRecordTranscriptAppRightToAppealPg from '../components/AppRightToAppeal/AppealRecordTranscriptAppRightToAppealPg.vue';
 import FactumAppealBookCertificateAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookCertificateAppRightToAppealPg.vue';
 import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
@@ -353,7 +353,6 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
         this.currentStep = this.stPgNo.APP_RIGHT_TO_APPEAL._StepNo;
         this.numOfPages = Object.keys(this.stPgNo.APP_RIGHT_TO_APPEAL).length-1;
-
         this.getJourneyMapCurrentState();
         
         this.dataReady = true;
@@ -398,15 +397,15 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         } else if (contentType == "Apply for Leave to Appeal") {
 
             this.windowTitle = "Apply for Leave to Appeal";
-            this.pathTypes = ["info", "share", "info"];
-            this.pathHeights = ['7rem', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "share", "info", "share"];
+            this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
 
         } else if (contentType == "Applications") {
 
             this.windowTitle = "Applications";
-            this.pathTypes = ["info", "share", "share", "share"];
-            this.pathHeights = ['19rem', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "share", "share"];
+            this.pathHeights = ['34rem', '0', '0', '0', '0', '0'];
             this.applicationsContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){

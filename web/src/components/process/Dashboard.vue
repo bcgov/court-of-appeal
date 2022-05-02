@@ -42,6 +42,7 @@
                     <most-used-forms></most-used-forms>
                     <additional-forms></additional-forms>
                     <representation-address-forms></representation-address-forms>
+                    <orders></orders>
                     <need-help class="mt-3"></need-help>
 
                 </b-col>
@@ -91,6 +92,9 @@ const form8State = namespace("Form8");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form12";
+const form12State = namespace("Form12");
+
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
@@ -114,6 +118,7 @@ import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
 import AdditionalForms from "@/components/utils/AdditionalForms.vue";
 import RepresentationAddressForms from "@/components/utils/RepresentationAddressForms.vue";
+import Orders from "@/components/utils/Orders.vue";
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
 import {GetHearingLocations} from '@/components/utils/GetHearingLocations';
@@ -130,6 +135,7 @@ import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form7FormsJsonDataType } from '@/types/Information/Form7';
 import { form8FormsJsonDataType } from '@/types/Information/Form8';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
+import { form12FormsJsonDataType } from '@/types/Information/Form12';
 import { form16FormsJsonDataType } from '@/types/Information/Form16';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
@@ -143,7 +149,8 @@ import { form20FormsJsonDataType } from '@/types/Information/Form20';
         NeedHelp,
         MostUsedForms,
         AdditionalForms,
-        RepresentationAddressForms
+        RepresentationAddressForms,
+        Orders
     }
 })
 export default class DashboardPage extends Vue {
@@ -186,6 +193,9 @@ export default class DashboardPage extends Vue {
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
+
+    @form12State.Action
+    public UpdateForm12FormsJson!: (newForm12FormsJson: form12FormsJsonDataType[])=> void
 
     @form16State.Action
     public UpdateForm16FormsJson!: (newForm16FormsJson: form16FormsJsonDataType[])=> void
@@ -306,6 +316,7 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form8/forms'));
         calls.push(this.$http.get('/form16/forms'));
         calls.push(this.$http.get('/form7/forms'));
+        //calls.push(this.$http.get('/form12/forms'));
 
         Promise.all(calls).then(values => {
             
@@ -334,6 +345,7 @@ export default class DashboardPage extends Vue {
             if(values[12]?.data) this.UpdateForm8FormsJson(values[12]?.data)
             if(values[13]?.data) this.UpdateForm16FormsJson(values[13]?.data)
             if(values[14]?.data) this.UpdateForm7FormsJson(values[14]?.data)
+            //if(values[15]?.data) this.UpdateForm12FormsJson(values[15]?.data)
             
             this.dataLoaded = true;
 

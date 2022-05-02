@@ -9,7 +9,8 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 3</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF CROSS APPEAL: RULE 9(a)</b></div>
+                <div v-if="result.amending" style="width:75%; font-size:14pt;"><b>AMENDED NOTICE OF CROSS APPEAL: RULE 9(a)</b></div>
+                <div v-else style="width:75%; font-size:14pt;"><b>NOTICE OF CROSS APPEAL: RULE 9(a)</b></div>
             </div>         
         </div>
        

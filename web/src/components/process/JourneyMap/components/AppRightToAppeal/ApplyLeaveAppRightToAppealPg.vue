@@ -29,124 +29,21 @@
             </p>           
         </b-row> 
 
-        <!-- <b-row :class="showIntroInfo?'mt-2':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showIntroInfo?'mt-0':'mt-4'" style="padding-top: 0.65rem;">            
             <b-col cols="11" class="step-title-column pl-0">
-                Notice of Motion and Motion Book
+                Notice of Application and Application Book – Leave to Appeal
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showMotion(!showMotionBookInfo)"
+                    @click="showNoaLeave(!showNoaLeaveInfo)"
                     class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showMotionBookInfo"></expand-icon>
+                    <expand-icon v-bind:showExpanded="showNoaLeaveInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
         </b-row>
 
-        <b-row v-if="showMotionBookInfo" class="mt-4 mr-5 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0;">
-                You have 
-                    <span 
-                        class="text-danger font-weight-bold">30 days
-                    </span> 
-                to file the documents below after filing your Notice of Application for Leave 
-                to Appeal. Next, serve each respondent with a copy
-                    <span 
-                        class="text-danger font-weight-bold">at least 10 business days
-                    </span>
-                before the hearing.
-            </b-col>              
-        </b-row>
-
-        <b-row v-if="showMotionBookInfo" class="mt-4" >            
-
-           <ol>
-                <li>
-                    Complete either the .DOC or .PDF below. Click on the document name for more information.
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
-                                        target="_blank">Notice of Motion
-                                    </a>
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/form%203.doc"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form3.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.1-how-do-you-start-an-appeal?ct=t(step-index-link)"
-                                        target="_blank">Motion Book
-                                    </a>
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%204.doc"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%204.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    File the indicated number of copies with the registry.
-                </li>
-                <li>
-                    Serve one copy to each respondent.
-                </li>
-            </ol>      
-        </b-row>  -->
-
-        <b-row :class="showIntroInfo?'mt-2':'mt-4'" style="padding-top: 0.65rem;">            
-            <b-col cols="11" class="step-title-column pl-0">
-                Notice of Application and Application Book
-            </b-col> 
-            <b-col cols="1">
-                <b-button
-                    @click="showMotion(!showMotionBookInfo)"
-                    class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showMotionBookInfo"></expand-icon>
-                </b-button>
-                
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showMotionBookInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="showNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -165,7 +62,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showMotionBookInfo" class="mt-4" >            
+        <b-row v-if="showNoaLeaveInfo" class="mt-4" >            
 
            <ol>
                 <li>
@@ -176,7 +73,7 @@
                                 <b-col cols="9">
                                     <a 
                                         href=""
-                                        target="_blank">Notice of Application
+                                        target="_blank">Notice of Application – Form 4
                                     </a>
                                 </b-col>                                
                                 <b-col cols="2" class="p-0" >
@@ -200,7 +97,63 @@
                                 <b-col cols="9">
                                     <a 
                                         href=""
-                                        target="_blank">Application Book
+                                        target="_blank">Application Book for Leave
+                                    </a>
+                                </b-col>
+                            </b-row>
+                        </li>
+                    </ul>                
+                </li>
+                <li>
+                    File the Notice of Application and Application Book with the registry.
+                </li>
+                <li>
+                    Serve one copy to each party.
+                </li>
+            </ol>      
+        </b-row> 
+
+        <b-row :class="showNoaLeaveInfo?'mt-3':'mt-4'" style="padding-top: 0.65rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Notice of Application and Application Book – Leave to Appeal and Stay
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showNoaLeaveStay(!showNoaLeaveStayInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showNoaLeaveStayInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                You have 
+                    <span class="text-danger font-weight-bold">
+                        at least 10 days before the application hearing date,
+                    </span> and 
+                    <span class="text-danger font-weight-bold">
+                        not more than 30 days after filing the notice of application.
+                    </span>                
+            </b-col>              
+        </b-row>
+
+        <b-row v-if="showNoaLeaveStayInfo" class="mt-4" >            
+            File and serve the documents below after filing
+           <ol class="mt-2">
+                <li>
+                    Complete either the Online form or the .PDF. Click the document name for more information.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    <a 
+                                        href=""
+                                        target="_blank">Notice of Application – Form 4
                                     </a>
                                 </b-col>                                
                                 <b-col cols="2" class="p-0" >
@@ -219,18 +172,178 @@
                                 </b-col>
                             </b-row>
                         </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    <a 
+                                        href=""
+                                        target="_blank">Application Book for Leave to Appeal and Stay
+                                    </a>
+                                </b-col>
+                            </b-row>
+                        </li>
                     </ul>                
                 </li>
                 <li>
                     File the Notice of Application and Application Book with the registry.
                 </li>
                 <li>
-                    Serve one copy to each respondent.
+                    Serve one copy to each party.
+                </li>
+            </ol>      
+        </b-row>
+
+        <b-row :class="showNoaLeaveStayInfo?'mt-4':'mt-4'" style="padding-top: 0.95rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Respond to an Application for Leave to Appeal
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showRespNoaLeave(!showRespNoaLeaveInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showRespNoaLeaveInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveInfo" class="mt-4">
+            <p>
+                If you have been served with a Notice of Application 
+                for Leave to Appeal, and you wish to respond, you must 
+                apply for leave to appeal from the court. Follow the 
+                steps below to complete the process.
+            </p>
+            <p>
+                Every appeal process is unique. If you have any questions, please visit the 
+                <a 
+                    href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
+                    target="_blank">Online Guidebook
+                </a> or 
+                <a 
+                    href="mailto:courts.cso@gov.bc.ca">contact the registry
+                </a>.
+            </p>              
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">                
+                You must file and serve the documents below 
+                    <span 
+                        class="text-danger font-weight-bold">at least 5 business days
+                    </span>
+                before the application hearing date.
+            </b-col>              
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveInfo" class="mt-4" >            
+
+           <ol>
+                <li>
+                    Complete the following using the Completion Instructions. 
+                    Please note that you must submit the book in a pdf format. 
+                    Click the document name for more information.
+                    <ul>                        
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    <a 
+                                        href=""
+                                        target="_blank">Response Book
+                                    </a>
+                                </b-col>
+                            </b-row>
+                        </li>
+                    </ul>                
+                </li>
+                <li>
+                    File the Response Book with the registry.
+                </li>
+                <li>
+                    Serve one copy to each party.
                 </li>
             </ol>      
         </b-row> 
 
-        <b-row :class="showMotionBookInfo?'mt-3': 'mt-4'" :style="showMotionBookInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showRespNoaLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.25rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Respond to an Application for Leave to Apply and Stay
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showRespNoaLeaveStay(!showRespNoaLeaveStayInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showRespNoaLeaveStayInfo"></expand-icon>
+                </b-button>
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" >            
+            <p>
+                If you have been served with a Notice of Application for Leave to 
+                Appeal and Stay, and you wish to respond. Follow the steps below 
+                to complete the process.
+            </p>
+            <p>
+                Every appeal process is unique. If you have any questions, please visit the 
+                <a 
+                    href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
+                    target="_blank">Online Guidebook
+                </a> or 
+                <a 
+                    href="mailto:courts.cso@gov.bc.ca">contact the registry
+                </a>.
+            </p>    
+               
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                You must file and serve the documents below 
+                    <span class="text-danger font-weight-bold">
+                        at least 5 business days
+                    </span>
+                    before the application hearing date.                                    
+            </b-col>              
+        </b-row>
+
+        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" > 
+           <ol class="mt-2">
+                <li>
+                    Complete the following using the Completion Instructions. 
+                    Please note that you must submit the book in a pdf format. 
+                    Click the document name for more information.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    <a 
+                                        href=""
+                                        target="_blank">Response Book for Leave to Appeal and Stay
+                                    </a>
+                                </b-col>                              
+                                
+                            </b-row>
+                        </li>
+                        
+                    </ul>                
+                </li>
+                <li>
+                    File the Response Book with the registry.
+                </li>
+                <li>
+                    Serve one copy to each party.
+                </li>
+            </ol>      
+        </b-row>        
+
+        <b-row :class="showRespNoaLeaveStayInfo?'mt-0': 'mt-4'" :style="showRespNoaLeaveStayInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Was your leave to appeal granted or refused?
             </b-col> 
@@ -301,14 +414,7 @@
                                         target="_blank"> -->
                                         Supporting Affidavit (if any)
                                     <!-- </a> -->
-                                </b-col>                                
-                                <!-- <b-col cols="3" class="p-0" >
-                                    <b-button
-                                        @click="startNewForm8Document"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                    </b-button>
-                                </b-col> -->
+                                </b-col> 
                             </b-row>
                         </li>
                         <li>
@@ -320,13 +426,7 @@
                                         Written argument (if any)
                                     <!-- </a> -->
                                 </b-col>                                
-                                <!-- <b-col cols="3" class="p-0" >
-                                    <b-button
-                                        @click="startNewForm8Document"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                    </b-button>
-                                </b-col> -->
+                                
                             </b-row>
                         </li>
                     </ul>
@@ -335,7 +435,7 @@
                     File the document with the registry.
                 </li>
                 <li>
-                    Serve one copy of the document(s) and each attached order to each respondent.
+                    Serve one copy of the document(s) and each attached order to each party.
                 </li>
             </ol>
         </b-row>
@@ -373,24 +473,7 @@
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Application Book
                                     </a>
-                                </b-col>
-                                <!-- <b-col cols="2">
-                                    6 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2016.doc"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2016.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col> -->
+                                </b-col>                               
                             </b-row>
                         </li>                        
                     </ul>
@@ -399,13 +482,94 @@
                     File the Application Book with the registry.
                 </li>
                 <li>
-                    Serve one copy to each respondent.
+                    Serve one copy to each party.
                 </li>
             </ol>
         </b-row>          
 
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-3">
             <app-leave-refused-final-instructions/>
+        </b-row>
+
+        <b-row :class="showDecisionOnLeaveInfo?'mt-4':'mt-4'" style="padding-top: 0.65rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Responding to Application to Vary An Order of a Justice
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showRespVaryOrder(!showRespVaryOrderInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showRespVaryOrderInfo"></expand-icon>
+                </b-button>
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showRespVaryOrderInfo" class="mt-4" >            
+            <p>
+                If you were served with an application to vary an order of a justice 
+                and an application book, and you can complete the steps below to respond:
+            </p>               
+        </b-row>
+
+        <b-row v-if="showRespVaryOrderInfo" class="mt-2 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                File and serve the documents below 
+                    <span class="text-danger font-weight-bold">
+                        within 7 days
+                    </span>
+                    after being served the application book.                                    
+            </b-col>              
+        </b-row>
+
+        <b-row v-if="showRespVaryOrderInfo" class="mt-4" > 
+           <ol class="mt-2">
+                <li>
+                    Complete the documents below. Click on the document name for more information.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    <a 
+                                        href=""
+                                        target="_blank">Response Book
+                                    </a>
+                                </b-col>                              
+                                
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">Supporting Affidavit (if any)
+                                    <!-- <a 
+                                        href=""
+                                        target="_blank">Response Book
+                                    </a> -->
+                                </b-col>                              
+                                
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">Written argument (if any)
+                                    <!-- <a 
+                                        href=""
+                                        target="_blank">Response Book
+                                    </a> -->
+                                </b-col>
+                            </b-row>
+                        </li>                        
+                    </ul>                
+                </li>
+                <li>
+                    File the documents with the registry.
+                </li>
+                <li>
+                    Serve copy of the Response book and document(s) on each party.
+                </li>
+            </ol>      
         </b-row>
         
     </b-card>
@@ -441,37 +605,81 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
 
     showIntroInfo = true;  
-    showMotionBookInfo = false;    
+    showNoaLeaveInfo = false;    
+    showNoaLeaveStayInfo = false;
+    showRespNoaLeaveInfo = false;    
+    showRespNoaLeaveStayInfo = false;
     showDecisionOnLeaveInfo = false;
+    showRespVaryOrderInfo = false;
     transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial or hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
 
     public showIntro(show: boolean){
         if (show) {
             this.showIntroInfo = true;
-            this.$emit('adjustHeights', 0, "7rem");
+            this.$emit('adjustHeights', 0, "14rem");
         } else {
             this.showIntroInfo = false;
             this.$emit('adjustHeights', 0, "0");
         }
     }
 
-    public showMotion(show: boolean){
+    public showNoaLeave(show: boolean){
         if (show) {
-            this.showMotionBookInfo = true;
+            this.showNoaLeaveInfo = true;
             this.$emit('adjustHeights', 1, "21rem");
         } else {
-            this.showMotionBookInfo = false;
+            this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
+        }
+    }
+
+    public showNoaLeaveStay(show: boolean){
+        if (show) {
+            this.showNoaLeaveStayInfo = true;
+            this.$emit('adjustHeights', 2, "21rem");
+        } else {
+            this.showNoaLeaveStayInfo = false;
+            this.$emit('adjustHeights', 2, "0");
+        }
+    }
+
+    public showRespNoaLeave(show: boolean){
+        if (show) {
+            this.showRespNoaLeaveInfo = true;
+            this.$emit('adjustHeights', 3, "24rem");
+        } else {
+            this.showRespNoaLeaveInfo = false;
+            this.$emit('adjustHeights', 3, "0");
+        }
+    }
+
+    public showRespNoaLeaveStay(show: boolean){
+        if (show) {
+            this.showRespNoaLeaveStayInfo = true;
+            this.$emit('adjustHeights', 4, "24rem");
+        } else {
+            this.showRespNoaLeaveStayInfo = false;
+            this.$emit('adjustHeights', 4, "0");
         }
     }
 
     public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', 2, "52rem");
+            this.$emit('adjustHeights', 5, "52rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
-            this.$emit('adjustHeights', 2, "0");
+            this.$emit('adjustHeights', 5, "0");
+        }
+    }
+
+    public showRespVaryOrder(show: boolean){
+        if (show) {
+            this.showRespVaryOrderInfo = true;
+            this.$emit('adjustHeights', 6, "22rem");
+        } else {
+            this.showRespVaryOrderInfo = false;
+            this.$emit('adjustHeights', 6, "0");
         }
     }
 

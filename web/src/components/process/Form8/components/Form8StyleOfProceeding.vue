@@ -313,7 +313,6 @@ export default class Form8StyleOfProceeding extends Vue {
 }
 </script>
 
-
 <style scoped lang="scss">
 
     .content {        

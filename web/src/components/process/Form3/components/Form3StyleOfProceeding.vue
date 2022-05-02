@@ -258,6 +258,12 @@
                         v-model="form3Info.amending"
                         :options="yesNoOptions">
                     </b-form-radio-group>
+                    <span
+                        v-if="(state.amending != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether you are amending a Notice of Cross Appeal that has been filed.
+                    </span>
                 </b-col>
             </b-row>  
 
@@ -441,11 +447,11 @@
                         v-for="(phone,index) in form3Info.phoneNumbers" 
                         :key="'phone' + index"                        
                         :value="phone"> {{form3Info.phoneNumbers[index].name}}                  
-                        <b-form-textarea                
+                        <b-form-input                
                             style="width:100%" 
                             rows="6"                                                                                       
                             v-model="form3Info.phoneNumbers[index].contactInfo">
-                        </b-form-textarea>      
+                        </b-form-input>      
                     </div>
                     <span
                         v-if="(state.phoneNumbers != null)" 
@@ -465,11 +471,11 @@
                         v-for="(email,index) in form3Info.emailAdresses" 
                         :key="'email' + index"                       
                         :value="email"> {{form3Info.emailAdresses[index].name}}                  
-                        <b-form-textarea                
+                        <b-form-input                
                             style="width:100%" 
                             rows="6"                                                                                       
                             v-model="form3Info.emailAdresses[index].contactInfo">
-                        </b-form-textarea>      
+                        </b-form-input>      
                     </div>                  
                 </b-col>                
             </b-row>              
@@ -686,7 +692,7 @@ export default class Form3StyleOfProceeding extends Vue {
                       
                 form3Data.formSevenNumber = this.fileNumber;
 
-                form3Data.judgeName = Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
+                form3Data.judgeName = this.previousCourts[0]?.JudgeSalutation + ' ' + Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
                 form3Data.orderDate = this.previousCourts[0]?.JudgmentDate;
 
             }
