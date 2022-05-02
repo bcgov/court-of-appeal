@@ -10,7 +10,10 @@
         </div>   
         <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
             <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 1</b></div>
-            <div style="width:75%; font-size:14pt;"><b>
+            <div v-if="result.amending" style="width:75%; font-size:14pt;"><b>
+                AMENDED NOTICE OF APPEAL: RULE 6(1)
+            </b></div>
+            <div v-else style="width:75%; font-size:14pt;"><b>
                 NOTICE OF APPEAL: RULE 6(1)
             </b></div>
         </div>         
@@ -62,7 +65,7 @@
                 <div class="row" style="margin-top: 0.5rem;">
                     <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Supreme Court Registry Location</div></div>
                     <div class="coa-text-box" style="width:40%; font-weight: 700;" v-if="result.appealTribunal"></div>
-                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else>{{caseLocation.name}}</div>
+                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else> {{result.lowerCourtRegistryName}}</div>
                 </div>
 
                 
@@ -1037,7 +1040,7 @@ export default class Form1Layout extends Vue {
     }
    
     public extractInfo(){       
-        
+        console.log(this.result)
         
         const parties = this.result.parties
         // this.applicantNames = [];

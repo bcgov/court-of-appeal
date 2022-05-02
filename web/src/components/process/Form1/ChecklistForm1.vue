@@ -111,7 +111,9 @@ export default class ChecklistForm1 extends Vue {
         form1SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;        
         form1SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
         form1SubmissionData.requiresManualEntry = false;
-        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce){
+        if (form1SubmissionData.appealTribunal || 
+            form1SubmissionData.appealingScFlaDivorce || 
+            form1SubmissionData.insideTimeLimit){
             form1SubmissionData.parties = [];
         }
         this.UpdateForm1Info(form1SubmissionData);

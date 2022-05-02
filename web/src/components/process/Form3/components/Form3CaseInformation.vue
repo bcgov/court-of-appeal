@@ -213,8 +213,10 @@ export default class Form3CaseInformation extends Vue {
                 this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
             }
 
-            else
+            if (!res.data){
                 this.notFound = true;
+            }
+                
         },err => {
             console.error(err); 
             this.notFound = true;  

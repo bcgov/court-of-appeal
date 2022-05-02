@@ -4,7 +4,7 @@
         <save-or-preview-buttons class="mx-2 mb-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
         <fill-form-1-manual-summary-info 
-            v-if="form1Info.appealTribunal || form1Info.appealingScFlaDivorce || form1Info.requiresManualEntry" 
+            v-if="form1Info.appealTribunal || form1Info.appealingScFlaDivorce || form1Info.insideTimeLimit || form1Info.requiresManualEntry" 
             class="mt-2 mx-2" 
             @displayResults="displayResults"/>
 
@@ -133,7 +133,7 @@ export default class FillForm1 extends Vue {
             if(response?.data?.data){            
                             
                 const form1Data: form1DataInfoType = response.data.data   
-                if (form1Data.appealTribunal || form1Data.appealingScFlaDivorce){
+                if (form1Data.appealTribunal || form1Data.appealingScFlaDivorce || form1Data.insideTimeLimit){
                     this.showTribunalDetailsForm = true;
                 } else {
                     this.showTribunalDetailsForm = false;
@@ -164,7 +164,10 @@ export default class FillForm1 extends Vue {
         form1SubmissionData.emailAdresses = [];
         form1SubmissionData.phoneNumbers = [];
             
-        if (form1SubmissionData.appealTribunal || form1SubmissionData.appealingScFlaDivorce || form1SubmissionData.requiresManualEntry){
+        if (form1SubmissionData.appealTribunal || 
+            form1SubmissionData.appealingScFlaDivorce || 
+            form1SubmissionData.insideTimeLimit || 
+            form1SubmissionData.requiresManualEntry){
 
             this.showTribunalDetailsForm = true;
 
@@ -208,7 +211,7 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates = this.form1InfoStates;        
 
-        if (this.form1Info.appealTribunal || this.form1Info.appealingScFlaDivorce){
+        if (this.form1Info.appealTribunal){
             this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
