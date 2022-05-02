@@ -56,7 +56,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import ManagingAppealProcessPg from './ManagingAppealProcessPg.vue';
+import ManagingAppealProcessPg from '../process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 import InstructionWindowFooter from '../process/JourneyMap/components/InstructionWindowFooter.vue';
 import PathSidebar from '../process/JourneyMap/components/PathSidebar.vue';
 
@@ -95,8 +95,8 @@ export default class AdditionalForms extends Vue {
         if (contentType == "Managing the Appeal Process"){
 
             this.windowTitle = "Managing the Appeal Process";
-            this.pathTypes = ["info", "share", "share", "share"];
-            this.pathHeights = ['19rem', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "share", "share"];
+            this.pathHeights = ['19rem', '0', '0', '0', '0', '0'];            
             this.managingAppealProcessContent = true;
         }
 

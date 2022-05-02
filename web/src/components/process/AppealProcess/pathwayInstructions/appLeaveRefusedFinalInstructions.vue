@@ -9,7 +9,7 @@
         <p>
             For more information about the process, please visit the 
             <a href="https://www.scc-csc.ca/court-cour/role-eng.aspx#"
-               target="_blank">Supreme Court website</a> or  
+               target="_blank">Supreme Court of Canada website</a> or  
             <a href="mailto:courts.cso@gov.bc.ca"
                target="_blank">contact the registry</a>. 
             

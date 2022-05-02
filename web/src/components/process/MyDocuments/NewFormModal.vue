@@ -207,7 +207,7 @@ export default class NewFormModal extends Vue {
             this.$router.push({name: "start-form9" });
         }else if(form=='form12'){
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
-            this.$router.push({name: "start-form12" });
+            //this.$router.push({name: "start-form12" });
         }else if(form=='form16'){
             this.UpdateCurrentOfferToSettleCostsId(null);
             this.$router.push({name: "start-form16" });
