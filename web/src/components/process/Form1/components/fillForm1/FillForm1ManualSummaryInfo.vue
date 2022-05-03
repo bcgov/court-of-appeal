@@ -3,7 +3,7 @@
 
         <h2 class="ml-4 pl-2 mt-3 text-primary">Lower Court Case Information</h2>        
 
-        <b-row v-if="manualSummaryInfo.appealTribunal" class="mt-0 question">
+        <b-row v-if="manualTrib" class="mt-0 question">
             <b-col cols="7" class="labels">
                 Type of Tribunal:                                
             </b-col>
@@ -52,7 +52,7 @@
             </b-col>
         </b-row>
 
-        <b-row v-if="manualSummaryInfo.appealingScFlaDivorce || manualSummaryInfo.requiresManualEntry" class="mt-4 question">
+        <b-row v-if="manualNorm || manualNTrib" class="mt-4 question">
             <b-col cols="7" class="labels">
                 Registry Location:                                
             </b-col>
@@ -156,7 +156,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import moment from 'moment-timezone';
 import { namespace } from "vuex-class";
 
@@ -185,6 +185,16 @@ export default class FillForm1ManualSummaryInfo extends Vue {
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
     manualSummaryInfo = {} as form1DataInfoType;
+
+    @Prop({required: true})
+    manualNTrib!: boolean
+
+    @Prop({required: true})
+    manualTrib!: boolean
+
+    @Prop({required: true})
+    manualNorm!: boolean
+
     
     dataReady = false;
     //TODO: add tribunal types
@@ -232,7 +242,7 @@ export default class FillForm1ManualSummaryInfo extends Vue {
         } else {
             form1.tribunalType = this.tribunalType;
         }
-
+        //TODO  determine this
         if (form1.appealingScFlaDivorce && form1.lowerCourtRegistryId){
             const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == form1.lowerCourtRegistryId)[0]
             form1.lowerCourtRegistryName = selectedLocation.name;

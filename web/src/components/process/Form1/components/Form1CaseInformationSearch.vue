@@ -26,10 +26,14 @@
                 </b-col>
                 <b-col class="mt-2">                    
                     <b-form-input 
-                        
+                        :formatter="supremeFileformatter"
                         style="max-width:75%" 
                         v-model="searchParams.file">
                     </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">ex. S12345678
+                    </span>
                                        
                 </b-col>
             </b-row>
@@ -294,6 +298,17 @@ export default class Form1CaseInformationSearch extends Vue {
     public selectOrder(){
         const locationName = this.locationsInfo.filter(location => {return location.id == this.searchParams.location})[0].name;
         this.$emit('fillForm', this.levelOfCourt, this.searchParams.location, this.searchParams.file, locationName);
+    }
+
+    public supremeFileformatter(value){
+        if(value.slice(0,1)!='S'){
+            if(isNaN(Number(value.slice(0))))
+                return 'S'
+            else
+                return 'S'+value
+        }
+        if(isNaN(Number(value.slice(-1)))) return value.slice(0,-1)
+        return value
     }
 }
 </script>

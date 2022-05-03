@@ -7,7 +7,7 @@
             </template>
             <b-row style="border-bottom:1px solid #DDD; background:#EEE; padding: 1rem 0;">
                 <b-col cols="4">
-                    <b class="text-primary float-right">Search Forms by a key:</b>
+                    <b class="text-primary float-right">Search Forms by a keyword:</b>
                 </b-col>
                 <b-col cols="8">
                     <b-form-input v-model="searchingKey" style="margin:-0.45rem 0 -0.5rem 0; width:27rem;"/>
