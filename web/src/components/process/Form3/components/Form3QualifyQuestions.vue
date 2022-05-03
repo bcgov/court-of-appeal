@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" class="bg-white border-white">
+    <b-card v-if="dataReady" class="bg-white border-white" :key="update">
 
         <b-row class="mb-4 ml-1 bg-white border-white" style="font-size: 2rem; font-weight: 700;">            
             Do these apply to your appeal?
@@ -19,6 +19,7 @@
 
                 <b-form-radio-group                     
                     v-model="qualificationInfo.selfRepresenting"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.selfRepresenting != null">    
@@ -57,6 +58,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingProvincialCourtOrder"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingProvincialCourtOrder">    
@@ -114,6 +116,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.insideTimeLimit"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.insideTimeLimit">
@@ -146,6 +149,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingBankruptcy"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingBankruptcy">
@@ -197,6 +201,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingFeesWaived"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingFeesWaived">                    
@@ -232,6 +237,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingSupremeCourtMaster"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtMaster">    
@@ -285,6 +291,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingSupremeCourtOrder"
+                    @change="qualificationResponse()"
                     :options="responseOptions">        
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtOrder">    
@@ -336,6 +343,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingScFlaDivorce"
+                    @change="qualificationResponse()"
                     :options="responseOptions">            
                 </b-form-radio-group>                                      
                 
@@ -357,6 +365,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealInvolvesChild"
+                    @change="qualificationResponse()"
                     :options="responseOptions">               
                 </b-form-radio-group>
                 
@@ -378,6 +387,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealTribunal"
+                    @change="qualificationResponse()"
                     :options="responseOptions">               
                 </b-form-radio-group>
                 
@@ -414,6 +424,7 @@ export default class Form1QualifyQuestions extends Vue {
     dataReady = false;
     stepStyle = "font-size: 2rem;";
     qualificationInfo = {} as form3QualificationInfoType;
+    update = 0;
 
     state = {
         selfRepresenting: null,
@@ -441,6 +452,7 @@ export default class Form1QualifyQuestions extends Vue {
         } else {            
             this.qualificationInfo.selfRepresenting = this.$store.state.Common.userSelfRepresented;
             this.clearStates();
+            this.qualificationResponse();
             Vue.nextTick(()=> {
                 this.dataReady = true;
             });
@@ -459,30 +471,20 @@ export default class Form1QualifyQuestions extends Vue {
         this.qualificationInfo.appealInvolvesChild = this.form3Info.appealInvolvesChild;
         this.qualificationInfo.appealTribunal = this.form3Info.appealTribunal;
 
-        const qualified = this.qualificationResponse;
-        this.$emit('disableContinue', !qualified, 
-            this.qualificationInfo);
+        this.qualificationResponse();
+            
         Vue.nextTick(()=> {
             this.dataReady = true;
         });
     }
 
-    get qualificationResponse(){       
-        if (this.qualificationInfo.appealingSupremeCourtMaster == false &&           
-            this.checkStates()){
-            return true;
-        } else {
-            return false;
-        }             
-    }
 
-    @Watch('qualificationResponse')
-    setQualification(qualified: boolean) 
-    {
-        console.log('watching')
-        this.$emit('disableContinue', !qualified, 
-            this.qualificationInfo);
-    }  
+    public qualificationResponse(){ 
+        const qualified = this.checkStates() && (this.qualificationInfo.appealingSupremeCourtMaster == false)
+        this.$emit('disableContinue', !qualified, this.qualificationInfo);          
+        this.update++;            
+    }
+ 
 
     public clearStates(){       
         this.state = {

@@ -3,12 +3,17 @@
               
         <save-or-preview-buttons class="mx-2 mb-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
+        <fill-form-1-summary-info v-if="normalForm" class="mt-2 mx-2" @displayResults="displayResults"/> 
+        
         <fill-form-1-manual-summary-info 
-            v-if="form1Info.appealTribunal || form1Info.appealingScFlaDivorce || form1Info.insideTimeLimit || form1Info.requiresManualEntry" 
+            v-else 
+            :manualNorm="manualNorm"
+            :manualNTrib="manualNTrib"
+            :manualTrib="manualTrib"
             class="mt-2 mx-2" 
             @displayResults="displayResults"/>
 
-        <fill-form-1-summary-info v-else class="mt-2 mx-2" @displayResults="displayResults"/>      
+             
 
         <fill-form-1-common-info class="mx-2"/>
 
@@ -115,6 +120,12 @@ export default class FillForm1 extends Vue {
     fieldStates = {} as form1StatesInfoType;
     showTribunalDetailsForm = false;
 
+    manualNTrib = false
+    manualTrib = false
+    manualNorm = false
+    normalForm = false
+
+
     mounted() { 
         this.expiredDeadline = false;
         this.dataReady = false;
@@ -124,16 +135,24 @@ export default class FillForm1 extends Vue {
             this.getForm1Data();
         }          
                        
-    }  
+    }
+    
+    public determineFormType(form1Info: form1DataInfoType){          
+        this.manualNTrib = form1Info.appealingScFlaDivorce || form1Info.insideTimeLimit         
+        this.manualTrib = form1Info.appealTribunal
+        this.manualNorm = form1Info.requiresManualEntry
+        this.normalForm = !this.manualNTrib && !this.manualTrib && !this.manualNorm
+    }
     
     public getForm1Data() {        
        
         this.$http.get('/form1/forms/'+this.currentNoticeOfAppealId)
         .then((response) => {
             if(response?.data?.data){            
-                            
-                const form1Data: form1DataInfoType = response.data.data   
-                if (form1Data.appealTribunal || form1Data.appealingScFlaDivorce || form1Data.insideTimeLimit){
+                
+                const form1Data: form1DataInfoType = response.data.data 
+                this.determineFormType(form1Data)  
+                if (this.manualTrib || this.manualNTrib){
                     this.showTribunalDetailsForm = true;
                 } else {
                     this.showTribunalDetailsForm = false;
@@ -163,14 +182,11 @@ export default class FillForm1 extends Vue {
         form1SubmissionData.addresses = [];
         form1SubmissionData.emailAdresses = [];
         form1SubmissionData.phoneNumbers = [];
-            
-        if (form1SubmissionData.appealTribunal || 
-            form1SubmissionData.appealingScFlaDivorce || 
-            form1SubmissionData.insideTimeLimit || 
-            form1SubmissionData.requiresManualEntry){
-
+        
+        this.determineFormType(form1SubmissionData)
+        
+        if (!this.normalForm){
             this.showTribunalDetailsForm = true;
-
         } else {
             this.showTribunalDetailsForm = false;
             form1SubmissionData.parties = this.supremeCourtCaseJson.parties;            
@@ -211,7 +227,7 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates = this.form1InfoStates;        
 
-        if (this.form1Info.appealTribunal){
+        if (this.manualTrib){
             this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
@@ -222,7 +238,7 @@ export default class FillForm1 extends Vue {
         }   
         
         this.fieldStates.cityOfOrder = !this.form1Info.cityOfOrder? false : null;
-        if (this.form1Info.appealTribunal){
+        if (this.manualTrib){
             this.fieldStates.lowerCourtFileNo = null;
         } else {
             this.fieldStates.lowerCourtFileNo = !this.form1Info.lowerCourtFileNo? false : null;

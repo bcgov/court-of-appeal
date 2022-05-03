@@ -65,6 +65,12 @@ export default class ChecklistForm1 extends Vue {
     @form1State.Action
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
 
+    @form1State.State
+    public currentNoticeOfAppealId: string;
+
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
     disableContinue = true;
     businessAccount = true;
     inactiveButtonClass = "bg-secondary text-white"; 
@@ -120,13 +126,30 @@ export default class ChecklistForm1 extends Vue {
 
         this.businessAccount = this.accountInfo.accountUsers.length>1;
 
+        this.deleteApplication();
+
         if (this.businessAccount){
             this.$router.push({name: "access-form1"});
 
-        } else {
+        } else {            
             this.$router.push({name: "start-form1"}); 
         }       
                
+    }
+
+    public deleteApplication() { 
+        if(this.currentNoticeOfAppealId){
+            const data = {
+                data:{ ids:[this.currentNoticeOfAppealId] }
+            }
+            
+            this.UpdateCurrentNoticeOfAppealId(null);
+            const url = '/form1/forms';
+            this.$http.delete(url, data)
+            .then(response => {
+            }, err => {            
+            })
+        }
     }
 
 }

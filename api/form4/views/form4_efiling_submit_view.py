@@ -17,6 +17,7 @@ from api.efiling import EFilingPackaging, EFilingSubmission, EFilingParsing
 from api.utils import convert_document_to_multi_part
 
 from core.utils.json_message_response import JsonMessageResponse
+from core.attachment_files_util import (_get_validation_errors, _unique_file_names, _process_incoming_files_and_documents)
 
 logger = logging.getLogger(__name__)
 no_record_found = "No record found."
@@ -98,12 +99,28 @@ class Form4EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, notice_of_application_id):
         
-        if 'document_type' in request.data:
-            document_type = request.data['document_type']
-        else: 
+        uid = request.user.id
+        
+        document_type = request.POST.get("document_type")
+        documents_string = request.POST.get("documents")
+        attachment_files = request.FILES.getlist("files")
+        
+        if not document_type:
             document_type = "MCH" # type Form4 for Efiling
 
-        uid = request.user.id
+        
+        # Validations.
+        validations_errors = _get_validation_errors(
+            attachment_files, documents_string
+        )
+        if validations_errors:
+            return validations_errors
+
+        # Unique names.
+        attachment_files = _unique_file_names(attachment_files)
+
+        # Data conversion.
+        incoming_documents = json.loads(documents_string)
 
         notice_of_application = self.get_notice_of_application_for_user(notice_of_application_id, uid)        
         if not notice_of_application:
@@ -112,11 +129,17 @@ class Form4EFilingSubmitView(generics.GenericAPIView):
         if notice_of_application.package_number or notice_of_application.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(notice_of_application, document_type)               
+        outgoing_documents = self._get_pdf_content(notice_of_application, document_type)                       
+        
+        outgoing_documents = _process_incoming_files_and_documents(
+            incoming_documents, attachment_files, outgoing_documents
+        )
+        del attachment_files 
+
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
             request, notice_of_application, outgoing_documents, document_type
         )
-        
+
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())
         notice_of_application.transaction_id = transaction_id

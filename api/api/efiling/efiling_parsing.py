@@ -87,9 +87,10 @@ class EFilingParsing:
         return converted_data
 
         
-    def convert_form7_data_for_efiling(self, request, notice, parties, documents, doc_type):
+    def convert_form1_data_for_efiling(self, request, notice, parties, documents, doc_type):
 
-        id = str(notice.noticeOfAppealId)
+        id = str(notice.id)
+
         converted_data = {
             "formId": id,
             "fileNumber": '',
@@ -100,12 +101,12 @@ class EFilingParsing:
                     [
                         {
                             "partyType": "IND",
-                            "roleType": self.get_party_type_code(party.appealRole),
-                            "firstName": party.firstGivenName,
-                            "middleName": self.get_party_middle_name(party.secondGivenName, party.thirdGivenName),
-                            "lastName": party.surname,
+                            "roleType": self.get_party_type_code(party['appealRole']) if 'appealRole' in party else None,
+                            "firstName": party['firstGivenName'] if 'firstGivenName' in party else None,
+                            "middleName": self.get_party_middle_name(party['secondGivenName'], party['thirdGivenName']) if 'secondGivenName' in party and 'thirdGivenName' in party else None,
+                            "lastName": party['surname'] if 'surname' in party else None,
                         }
-                        for party in parties if (party.isOrganization==False)
+                        for party in parties if ('isOrganization' in party and party['isOrganization']==False)
                     ],                                      
                 ]
             ),
@@ -115,10 +116,10 @@ class EFilingParsing:
                     [
                         {
                             "partyType": "ORG",
-                            "roleType": self.get_party_type_code(party.appealRole),
-                            "name": party.organizationName,                            
+                            "roleType": self.get_party_type_code(party['appealRole']) if 'appealRole' in party else None,
+                            "name": party['organizationName'] if 'organizationName' in party else None,                            
                         }
-                        for party in parties if (party.isOrganization==True or party.surname is None)
+                        for party in parties if (('isOrganization' in party and party['isOrganization']==True) or ('surname' in party and party['surname'] is None))
                     ],                                      
                 ]
             ),
