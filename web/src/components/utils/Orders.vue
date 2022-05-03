@@ -26,7 +26,7 @@
                  
         public startNewForm12Document(){
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
-            this.$router.push({name: "start-form12" })
+            //this.$router.push({name: "start-form12" })
         }     
 
     }
