@@ -1,28 +1,29 @@
 <template>
     <b-card no-body border-variant="white">
        
-        <p style="font-size: 0.95rem; font-weight: 700;">Payment of security</p>
         <p>
-            If you wish to apply to have a party pursuant to Section 34 
-            of the Court of Appeal Act pay monies or security into court, 
-            you must complete the following:  
+            If you are <b>not applying for leave to appeal</b> but still 
+            want to make an application for a stay, you must complete 
+            the following:
         </p>
+
+        <b-row class="ml-2 mt-2 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                You must 
+                    <span 
+                        class="text-danger font-weight-bold">at least 5 business days
+                    </span> 
+                before the application hearing date, file and serve on 
+                each party, the application materials listed below.
+            </b-col>              
+        </b-row>
        
         <ol class="mt-3">
             <li>Obtain an application hearing date from the registrar.</li>
-            <b-row class="mt-2 ml-1 mr-4 bg-warning warning-message-row">
-                <b-col cols="1">
-                    <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
-                </b-col>
-                <b-col cols="11" style="padding-left: 0;">
-                    You must 
-                        <span 
-                            class="text-danger font-weight-bold">at least 5 business days
-                        </span> 
-                    before the application hearing date, file and serve on each party, 
-                    the application materials listed below.
-                </b-col>              
-            </b-row>
+            
             <li class="mt-2">
                 Complete either the Online form or the .PDF. Click the document name for more information.  
                 <ul class="mt-2">
@@ -41,14 +42,8 @@
                         </b-row>
                     </li> 
                     <li class="my-2">
-                        Application Book (as per completion instructions)
-                    </li>
-                    <li>
-                        Supporting affidavits (if any) 
-                    </li>
-                    <li class="my-2">
-                        Written argument (if any)
-                    </li>
+                        Application Book (completion instructions)
+                    </li>                    
                 </ul>
             </li> 
             <li class="my-2">
@@ -57,7 +52,7 @@
             <li>
                 Serve a copy of the document(s) to each party. 
             </li>
-        </ol>         
+        </ol>          
         
     </b-card>
 </template>
@@ -70,7 +65,7 @@ import "@/store/modules/forms/form4";
 const form4State = namespace("Form4");
 
 @Component
-export default class Rule58ApplicationInstructions extends Vue {   
+export default class Rule20ApplicationInstructions extends Vue {   
 
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void

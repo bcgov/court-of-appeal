@@ -2,25 +2,10 @@
     <b-card no-body border-variant="white">
 
         <p style="font-size: 0.95rem; font-weight: 700;">Quashing an appeal or raising a preliminary objection</p>
+        
         <p>
-            This type of application is used to do one or more of the following:  
-        </p>
-
-         <ol class="mt-0">            
-            
-            <li class="mt-2">
-                Strike part of a factum                    
-            </li> 
-            <li class="my-2">
-                Raise a preliminary objection to an appeal
-            </li>
-            <li>
-                Quash an appeal before it is heard 
-            </li>
-        </ol>
-
-        <p>
-            If you want to apply for one of the above, you must complete the following:  
+            If you are served with an application to quash an appeal or raise a preliminary 
+            objection and you want to respond, you must complete the following:   
         </p>
 
         <b-row class="ml-2 mt-2 mr-5 bg-warning warning-message-row">
@@ -30,33 +15,18 @@
             <b-col cols="11" style="padding-left: 0;">
                 You must 
                     <span 
-                        class="text-danger font-weight-bold">at least 7 days
+                        class="text-danger font-weight-bold">at least 2 business days
                     </span> 
                 before the application hearing date, file and serve on each 
                 party, the application materials listed below.
             </b-col>              
         </b-row>
        
-        <ol class="mt-3">
-            <li>Obtain an application hearing date from the registrar.</li>
+        <ol class="mt-3">            
             
             <li class="mt-2">
-                Complete either the Online form or the .PDF. Click the document name for more information.  
-                <ul class="mt-2">
-                    <li>
-                        <b-row class="my-1" style="width: 90%;">
-                            <b-col cols="10">
-                                Notice of Application (Form 4)                                
-                            </b-col>                                
-                            <b-col cols="2" class="p-0" >
-                                <b-button
-                                    @click="startNewForm4Document"
-                                    target="_blank"                                                                                
-                                    class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                </b-button>
-                            </b-col>
-                        </b-row>
-                    </li> 
+                Complete in a .PDF format. Click the document name for more information.  
+                <ul class="mt-2">                    
                     <li class="my-2">
                         Supporting Affidavits (if any)
                     </li> 
