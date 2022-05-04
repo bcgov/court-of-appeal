@@ -110,7 +110,7 @@
 <!--Respond to an Application  -->
         <b-row :class="showStayApplicationsInfo?'mt-3':'mt-4'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
-                Respond to an Application:
+                Respond to an Application
             </b-col>   
             <b-col cols="1">
                 <b-button
@@ -194,7 +194,7 @@
 <!-- I need to Request -->
         <b-row :class="showForm8Info?'mt-0':'mt-4'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
-                I would like to submit a request
+                Request to adjourn or reset a matter
             </b-col>   
             <b-col cols="1">
                 <b-button
