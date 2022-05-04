@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" class="bg-white border-white">
+    <b-card v-if="dataReady" class="bg-white border-white" :key="update">
 
         <b-row class="mb-4 ml-1 bg-white border-white" style="font-size: 2rem; font-weight: 700;">            
             Do these apply to you or your appeal?
@@ -19,6 +19,7 @@
 
                 <b-form-radio-group                     
                     v-model="qualificationInfo.selfRepresenting"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card 
@@ -63,7 +64,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealTribunal"
-                    @change="changeTribunal()"
+                    @change="qualificationResponse()"
                     :options="responseOptions">               
                 </b-form-radio-group>   
 
@@ -103,6 +104,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingProvincialCourtOrder"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingProvincialCourtOrder">    
@@ -158,6 +160,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingBankruptcy"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingBankruptcy">
@@ -206,6 +209,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingSupremeCourtMaster"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtMaster">    
@@ -258,6 +262,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingScFlaDivorce"
+                    @change="qualificationResponse()"
                     :options="responseOptions">            
                 </b-form-radio-group>    
 
@@ -290,6 +295,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingSupremeCourtOrder"
+                    @change="qualificationResponse()"
                     :options="responseOptions">        
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtOrder">
@@ -324,6 +330,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.insideTimeLimit"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card 
@@ -363,6 +370,7 @@
 
                 <b-form-radio-group 
                     v-model="qualificationInfo.appealingFeesWaived"
+                    @change="qualificationResponse()"
                     :options="responseOptions">                   
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingFeesWaived">                    
@@ -426,6 +434,8 @@ export default class Form1QualifyQuestions extends Vue {
     stepStyle = "font-size: 2rem;";
     qualificationInfo = {} as form1QualificationInfoType;
 
+    update = 0;
+
     state = {
         selfRepresenting: null,
         appealingProvincialCourtOrder: null,        
@@ -443,7 +453,7 @@ export default class Form1QualifyQuestions extends Vue {
         {text: 'No', value: false}
     ];
 
-    mounted(){
+    mounted(){        
         this.dataReady = false;
         this.tribunalCase = false;
         this.qualificationInfo = {} as form1QualificationInfoType;
@@ -452,6 +462,7 @@ export default class Form1QualifyQuestions extends Vue {
         } else {            
             this.qualificationInfo.selfRepresenting = this.$store.state.Common.userSelfRepresented;
             this.clearStates();
+            this.qualificationResponse();
             Vue.nextTick(()=> {
                 this.dataReady = true;
             });
@@ -469,30 +480,20 @@ export default class Form1QualifyQuestions extends Vue {
         this.qualificationInfo.appealingScFlaDivorce = this.form1Info.appealingScFlaDivorce;
         this.qualificationInfo.appealTribunal = this.form1Info.appealTribunal;
 
-        const qualified = this.qualificationResponse;
-        this.$emit('disableContinue', !qualified, 
-            this.qualificationInfo);
+        this.qualificationResponse();
+        
         Vue.nextTick(()=> {
             this.dataReady = true;
         });
     }
 
-    get qualificationResponse(){ 
-              
-        if (this.checkStates()){
-            return true;
-        } else {
-            return false;
-        }             
-    }
+    public qualificationResponse(){ 
+        this.tribunalCase = this.qualificationInfo.appealTribunal;
 
-    @Watch('qualificationResponse')
-    setQualification(qualified: boolean) 
-    {
-        console.log('watching')
-        this.$emit('disableContinue', !qualified, 
-            this.qualificationInfo);
-    }  
+        const qualified = this.checkStates()
+        this.$emit('disableContinue', !qualified, this.qualificationInfo);          
+        this.update++;
+    }
 
     public clearStates(){       
         this.state = {
@@ -537,10 +538,6 @@ export default class Form1QualifyQuestions extends Vue {
     public helpText(){
         const content = 'The name given to a decision-making body that has been established by statute which is not a court; for example the Labour Relations Board or the Workers’ Compensation Board.'
         return {title: "<div style='margin: 0;'>" +content+ "</div>"};
-    }
-
-    public changeTribunal(){       
-        this.tribunalCase = this.qualificationInfo.appealTribunal;
     }
 
     public startNewForm4Document(){

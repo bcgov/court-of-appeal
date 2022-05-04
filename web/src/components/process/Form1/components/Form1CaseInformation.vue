@@ -48,11 +48,15 @@ export default class Form1CaseInformation extends Vue {
     @form1State.Action
     public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
 
-    orderSelected = false;   
+    orderSelected = false;  
+    
+    manualNTrib = false
+    manualTrib = false
+    manualNorm = false
 
     mounted(){   
-         
-        if (this.form1Info.appealTribunal || this.form1Info.appealingScFlaDivorce || this.form1Info.insideTimeLimit || this.currentNoticeOfAppealId) {
+        this.determineFormType(this.form1Info)
+        if (this.manualTrib || this.manualNTrib || this.currentNoticeOfAppealId) {
             this.orderSelected = true;
         } else {
             this.UpdateSupremeCourtCaseJson({} as supremeCourtCaseJsonDataInfoType);
@@ -60,16 +64,23 @@ export default class Form1CaseInformation extends Vue {
         }        
     }
 
-    public startFillingForm1(levelOfCourt, locationId, fileNumber, locationName){
+    public determineFormType(form1Info: form1DataInfoType){          
+        this.manualNTrib = form1Info.appealingScFlaDivorce || form1Info.insideTimeLimit         
+        this.manualTrib = form1Info.appealTribunal
+        this.manualNorm = form1Info.requiresManualEntry
+    }
 
+    public startFillingForm1(levelOfCourt, locationId, fileNumber, locationName){
+        
+        this.determineFormType(this.form1Info)
         const form1Data = this.form1Info;
-        if (form1Data.requiresManualEntry){
+        if (this.manualNorm){
             
             form1Data.lowerCourtRegistryId = locationId;
             form1Data.lowerCourtRegistryName = locationName;            
             form1Data.lowerCourtLevelName = levelOfCourt;
             form1Data.lowerCourtInitiatingDocument = 'Notice of Civil Claim';
-            form1Data.lowerCourtFileNo = 'S' + fileNumber;
+            form1Data.lowerCourtFileNo = fileNumber;
 
         } else {
             form1Data.lowerCourtStyleOfCause = this.supremeCourtCaseJson.styleOfCause;

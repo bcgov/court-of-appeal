@@ -86,7 +86,7 @@
                 </b-alert>
             </b-row>
 
-            <b-row class="ml-5">
+            <b-row class="ml-5 mt-3">
                 <b-col cols="10">
                     <b-button 
                         style="float: right; width: 120px; height: 50px; font-size: 20px;" 
@@ -263,11 +263,9 @@ export default class SubmitForm4 extends Vue {
             }
         }
 
-        const body = {
-            document_type: GetForm4PdfType(this.form4Info) //"MCH"
-        }
+        bodyFormData.append('document_type', GetForm4PdfType(this.form4Info)); //"MCH"
 
-        this.$http.post(url, body, header)
+        this.$http.post(url, bodyFormData, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

@@ -8,7 +8,7 @@
         <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
 
             <b-row class="ml-2" style="font-size: 2rem;">
-                Download and Submit
+                Download and Print
             </b-row> 
             <b-row class="ml-2 my-2" style="font-size: 14px;">
                 You can print or download your Offer to Settle Costs to 
@@ -66,7 +66,6 @@ const form16State = namespace("Form16");
 import Form16ProcessHeader from "@/components/process/Form16/components/Form16ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 import { form16DataInfoType, form16StatusInfoType } from '@/types/Information/Form16';
-import { packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
@@ -83,14 +82,11 @@ export default class SubmitForm16 extends Vue {
     public form16Info: form16DataInfoType;
 
     stepsCompleted = {} as form16StatusInfoType;  
-    mountedData = false; 
-    packageInfo = {} as packageInfoType;
-    submitting = false;
-    errorMsg=""
+    mountedData = false;   
+    errorMsg="";
 
     mounted() {
-        this.mountedData = false;    
-        this.submitting = false;    
+        this.mountedData = false;
         this.errorMsg = ""
         this.stepsCompleted = {
             first: true,
@@ -123,45 +119,7 @@ export default class SubmitForm16 extends Vue {
         },err => {
             console.error(err);
         });
-    }
-
-    public submit() {
-
-        this.submitting = true;
-        this.errorMsg =""
-
-        const url = "/form16/efiling/"+this.currentOfferToSettleCostsId+"/submit/";
-
-        const header = {
-            responseType: "json",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }
-
-        const body = {
-            document_type: "ABA"
-        }
-
-        this.$http.post(url, body, header)
-        .then(res => {                            
-            this.submitting = false;
-            if(res.data?.message=="success" && res.data?.redirectUrl){
-                const eFilingUrl = res.data?.redirectUrl
-                location.replace(eFilingUrl);
-            }
-        }, err => {
-            console.log(err.response?.data?.message);
-            const generalError = " Error in submission. Please refresh the page and try again."
-            if(err.response?.data?.message)
-                this.errorMsg = err.response.data.message
-            else if(err.response?.data?.detail)
-                this.errorMsg = err.response.data.detail+generalError
-            else
-                this.errorMsg = generalError
-            this.submitting = false;
-        });        
-    }
+    }    
 
     public cancel() {
         this.$router.push({name: "dashboard" }) 

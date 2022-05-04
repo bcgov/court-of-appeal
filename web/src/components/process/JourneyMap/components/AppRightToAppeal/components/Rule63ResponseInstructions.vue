@@ -1,0 +1,68 @@
+<template>
+    <b-card no-body border-variant="white">
+
+        <p style="font-size: 0.95rem; font-weight: 700;">
+            Varying or cancelling an order of the registrar
+        </p>
+        <p>
+            If you are served with a notice of application to vary or cancel an order or 
+            direction of the registrar and you wish to respond, you must complete the 
+            following:   
+        </p>
+
+        <b-row class="ml-2 mt-2 mr-5 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0;">
+                You must 
+                    <span 
+                        class="text-danger font-weight-bold">at least 2 business days
+                    </span> 
+                before the application hearing date, file and serve on each 
+                party, the application materials listed below.
+            </b-col>              
+        </b-row>
+       
+        <ol class="mt-3">            
+            <li class="mt-2">
+                Complete in a .PDF format the documents below. Click the document name for more information.  
+                <ul class="mt-2">
+                    <li>Support Affidavits (if any)</li>
+                    <li class="my-2">
+                        Written argument (if any)
+                    </li>                    
+                </ul>
+            </li> 
+            <li class="my-2">
+                File the documents with the registry.
+            </li>
+            <li>
+                Serve a copy of the document(s) to each party. 
+            </li>
+        </ol>           
+        
+    </b-card>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
+@Component
+export default class Rule63ApplicationInstructions extends Vue {   
+
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
+        
+    public startNewForm4Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form4" });
+    }
+
+}
+
+</script>

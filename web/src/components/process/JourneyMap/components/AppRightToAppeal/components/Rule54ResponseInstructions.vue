@@ -2,9 +2,8 @@
     <b-card no-body border-variant="white">
        
         <p>
-            Before filing a notice of application or any other document 
-            for commencing an application, you must first obtain an 
-            application hearing date from the registrar.  
+            If you have been served with a notice of application and 
+            you want to respond, you must complete the following:  
         </p>
         <b-row class="mt-2 mx-2 bg-warning warning-message-row">
             <b-col cols="1">
@@ -13,33 +12,18 @@
             <b-col cols="11" style="padding-left: 0;">
                 You must 
                     <span 
-                        class="text-danger font-weight-bold">at least 5 business days
+                        class="text-danger font-weight-bold">at least 2 business days
                     </span> 
-                before the application the application hearing date file filed 
-                and serve on each party, the application materials listed below.
+                before the application hearing date, file filed and serve on each 
+                party, the application materials listed below.
             </b-col>              
         </b-row>
 
-        <ol class="mt-3">
-            <li>Obtain an application hearing date from the registrar.</li>
+        <ol class="mt-3">            
             <li class="mt-2">Complete the following: 
-                <ul class="mt-2">
-                    <li>
-                        <b-row class="my-1" style="width: 90%;">
-                            <b-col cols="10">
-                                Notice of Application (Form 4)                                
-                            </b-col>                                
-                            <b-col cols="2" class="p-0" >
-                                <b-button
-                                    @click="startNewForm4Document"
-                                    target="_blank"                                                                                
-                                    class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                </b-button>
-                            </b-col>
-                        </b-row>
-                    </li> 
+                <ul class="mt-2">                    
                     <li class="my-2">
-                        Affidavits (if any),
+                        Supporting Affidavits (if any),
                     </li>
                     <li>
                         Written argument (if any)
