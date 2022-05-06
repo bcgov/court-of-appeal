@@ -64,8 +64,6 @@ import Spinner from "@/components/utils/Spinner.vue";
 import { form7DataInfoType, form7StatusInfoType } from '@/types/Information/Form7';
 import { packageInfoType } from '@/types/Information';
 
-import { GetForm7PdfType } from "./components/Form7PdfType"
-
 @Component({
     components:{
         Form7ProcessHeader,
