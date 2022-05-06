@@ -2,7 +2,6 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-
             
             <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
@@ -47,33 +46,31 @@
                 </b-col>
             </b-row>
 
-            <p class="mt-5 mb-0" style="font-weight: 700;">Representation</p>
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    <p>Are you self-represented?</p>                    
+                </b-col>
+                <b-col class="ml-1">
+                    <b-form-radio-group                
+                        style="width:100%"                                       
+                        v-model="form6Info.selfRepresented"
+                        :options="representationOptions">
+                    </b-form-radio-group>
+                </b-col>
+            </b-row>  
 
-            <b-form-group
-                class="mx-3" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Are you self-represented?" 
-                label-for="representation">
-                <b-form-radio-group
-                    id="representation"
-                    style="max-width:75%"                   
-                    v-model="form6Info.selfRepresented"
-                    :options="representationOptions"                
-                ></b-form-radio-group>
-            
-            </b-form-group>
+           
         </div>
 
         <div v-if="form6Info.selfRepresented !=null">
 
-            <b-row>
-                <b-col cols="3" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Name of party(ies) who wishes to abandon an appeal or cross appeal:                                
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
-                    <b-form-checkbox-group                
+                <b-col class="ml-1 mt-2">
+                    <b-form-checkbox-group  
+                        stacked              
                         style="width:100%" 
                         :state="state.abandoningParties"
                         @change="updateOtherParties"                   
@@ -91,8 +88,8 @@
 
         <div v-if="!invalidAbandoningParties && form6Info.abandoningParties && form6Info.abandoningParties.length > 0">
 
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     This party is abandoning a:                                
                 </b-col>
                 <b-col :class="state.abandonType==false?'border border-danger ml-1': 'ml-1'">   
@@ -107,64 +104,100 @@
                 </b-col>
             </b-row>
 
-            <b-row class="mt-4">
-                <b-col cols="3" style="font-weight: 700;">
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
                     Which party(ies) are you abandoning against?                                
                 </b-col>
-                <b-col class="ml-1 mt-2">   
-
+                <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
+                        stacked
                         :key="updated"               
                         style="width:100%" 
                         :state="state.abandoningAgainstParties"                   
                         v-model="form6Info.abandoningAgainstParties"                    
                         :options="otherPartyNames">
                     </b-form-checkbox-group>
-                    
                 </b-col>
             </b-row> 
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Who made the Order?
+           <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Who made the Order?
                 </b-col>
-                <b-col>
-                    <b-card body-class="py-2 bg-select" >                   
-                        {{form6Info.judgeName}}
-                    </b-card>
+                <b-col>                    
+                    <b-form-input                
+                        style="width:100%"                        
+                        :state="state.judgeName"                                                           
+                        v-model="form6Info.judgeName">
+                    </b-form-input>
                 </b-col>
             </b-row>  
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the order under appeal was pronounced:
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Date the order under appeal was pronounced:
                 </b-col>
                 <b-col>
-                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
+
+                    <b-card                 
+                        class="mt-2" 
+                        style="padding: 0; float: left;" 
+                        :border-variant="state.orderDate == false?'danger': 'dark'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    @change="updateOrderDate"
+                                    v-model="orderDateValue"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>
+                    <span 
+                        style="display: inline-block; font-size: 0.75rem;" 
+                        class="text-danger"
+                        :key="updateOrderDetails"
+                        v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
+
+                    <!-- <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
                         {{form6Info.orderDate | beautify-date-blank}}
-                    </b-card>
+                    </b-card> -->
                 </b-col>
             </b-row>  
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Date the initiating document in the appeal or cross appeal you are abandoning was filed:
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Date the initiating document in the appeal or cross appeal 
+                    you are abandoning was filed:
                 </b-col>
                 <b-col>
-                    <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
-                        {{form6Info.initiatingDocumentDate | beautify-date-blank}}
+                    <b-card                 
+                        class="mt-2" 
+                        style="padding: 0; float: left;" 
+                        :border-variant="state.initiatingDocumentDate == false?'danger': 'dark'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    @change="updateInitiatingDocumentDate"
+                                    v-model="initiatingDocumentDateValue"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
                     </b-card>
+                    <!-- <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
+                        {{form6Info.initiatingDocumentDate | beautify-date-blank}}
+                    </b-card> -->
                 </b-col>
             </b-row>       
 
-            <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">Name of lawyer or party authorizing filing of this Form: 
-                                
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Name of lawyer or party authorizing filing of this Form:                                 
                 </b-col>
                 <b-col>
                     <b-form-input                    
@@ -206,16 +239,18 @@
 
 <script lang="ts">
 
-import { form6DataInfoType } from '@/types/Information/Form6';
-import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
-
+import moment from 'moment-timezone';
 import { namespace } from "vuex-class";
+
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import "@/store/modules/forms/form6";
 const form6State = namespace("Form6");
+
+import { form6DataInfoType } from '@/types/Information/Form6';
+import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 @Component
 export default class Form6StyleOfProceeding extends Vue {
@@ -260,6 +295,9 @@ export default class Form6StyleOfProceeding extends Vue {
     state = {
         firstAppellant: null,
         firstRespondent: null,
+        orderDate: null,
+        judgeName: null,
+        initiatingDocumentDate: null,
         abandoningParties:null,
         abandonType: null,
         abandoningAgainstParties: null,        
@@ -269,10 +307,24 @@ export default class Form6StyleOfProceeding extends Vue {
     respondentName = ""; 
     updated=0;  
     invalidAbandoningParties = false;
+    updateOrderDetails = 0;
+    orderDateValue = '';
+    updateInitiatingDocumentDateDetails = 0;
+    initiatingDocumentDateValue = '';
 
     mounted() {
         this.dataReady = false;
         this.extractInfo();              
+    }
+
+    public updateOrderDate(){       
+        this.form6Info.orderDate = this.orderDateValue;
+        this.updateOrderDetails ++;
+    }
+
+    public updateInitiatingDocumentDate(){       
+        this.form6Info.initiatingDocumentDate = this.initiatingDocumentDateValue;
+        this.updateInitiatingDocumentDateDetails ++;
     }
 
     public extractInfo(){
@@ -293,14 +345,28 @@ export default class Form6StyleOfProceeding extends Vue {
             form6Data.version = this.$store.state.Application.version;  
             form6Data.selfRepresented = this.$store.state.Common.userSelfRepresented;
             form6Data.judgeName = Vue.filter('getFullJudgeName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
-            form6Data.orderDate = this.previousCourts[0]?.JudgmentDate;
-            form6Data.initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled;  
+            const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
+            form6Data.orderDate = orderDate;
+            this.orderDateValue = orderDate;
+            const initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled?this.initiatingDocuments[0].DateFiled.slice(0,10):'';
+            form6Data.initiatingDocumentDate = initiatingDocumentDate;
+            this.initiatingDocumentDateValue = initiatingDocumentDate;  
            
             this.UpdateForm6Info(form6Data);                       
             this.saveForm(true);
-        }  
-          
+        }
 
+    }
+
+    get isPastDeadline(){
+
+        const today = new Date();
+        const orderDate = new Date(this.form6Info.orderDate);
+
+        const TimePast = today.getTime() - orderDate.getTime();
+        const daysPast = TimePast / (1000 * 3600 * 24);        
+        
+        return daysPast > 30;
     }
 
     public extractPartiesData(){
@@ -329,7 +395,9 @@ export default class Form6StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form6Data = response.data.data                
+                const form6Data = response.data.data;
+                this.orderDateValue = form6Data.orderDate;  
+                this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate;              
                 this.UpdateForm6Info(form6Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -344,6 +412,9 @@ export default class Form6StyleOfProceeding extends Vue {
         this.state = {
             firstAppellant: null,
             firstRespondent: null,
+            orderDate: null,
+            judgeName: null,
+            initiatingDocumentDate: null,
             abandoningParties:null,
             abandonType: null,
             abandoningAgainstParties: null,        
@@ -356,6 +427,9 @@ export default class Form6StyleOfProceeding extends Vue {
         
         this.state.firstAppellant = !this.form6Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form6Info.firstRespondent? false : null; 
+        this.state.orderDate = this.form6Info.orderDate != null? null:false;
+        this.state.judgeName = this.form6Info.judgeName != null? null:false;        
+        this.state.initiatingDocumentDate = this.form6Info.initiatingDocumentDate != null? null:false;
         this.state.abandoningParties = this.form6Info.abandoningParties?.length>0? null :false;
         this.state.abandonType = !this.form6Info.abandonType? false : null;
         this.state.abandoningAgainstParties = this.form6Info.abandoningAgainstParties?.length>0? null :false;
@@ -367,6 +441,11 @@ export default class Form6StyleOfProceeding extends Vue {
         }
         return true            
     }    
+
+    public allowedDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+        return (date <= day);           
+    }
 
     public saveForm(draft: boolean) { 
         
@@ -458,4 +537,24 @@ export default class Form6StyleOfProceeding extends Vue {
 </script>
 
 <style scoped lang="scss">
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+    }
+
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
+
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 0.75rem !important;
+    }
+
 </style>

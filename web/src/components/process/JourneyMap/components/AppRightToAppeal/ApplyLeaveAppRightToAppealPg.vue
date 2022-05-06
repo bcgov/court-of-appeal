@@ -29,7 +29,7 @@
             </p>           
         </b-row> 
 
-        <b-row :class="showIntroInfo?'mt-0':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showIntroInfo?'mt-0':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal
             </b-col> 
@@ -193,7 +193,7 @@
             </ol>      
         </b-row>
 
-        <b-row :class="showNoaLeaveStayInfo?'mt-4':'mt-4'" style="padding-top: 0.95rem;">            
+        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 1.15rem;':'padding-top: 0.95rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -268,7 +268,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.25rem;">            
+        <b-row :class="showRespNoaLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.5rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -491,7 +491,7 @@
             <app-leave-refused-final-instructions/>
         </b-row>
 
-        <b-row :class="showDecisionOnLeaveInfo?'mt-4':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showDecisionOnLeaveInfo?'mt-4':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Responding to Application to Vary An Order of a Justice
             </b-col> 

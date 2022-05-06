@@ -252,7 +252,7 @@
 
             <div class="coa-text-box-left" style="width:64%;">                
                 <div class="ml-2" style="font-weight: 700;">
-                    {{rules}}
+                    {{result.relyingSectionRule}}
                 </div>
             </div>
 
@@ -274,8 +274,10 @@
             <div class="arrow-right-flash-80"></div> 
 
             <div class="coa-text-box-left" style="width:64%;">                
-                <div class="ml-2" style="font-weight: 700;">
-                    {{result.seekingOrder}}
+                <div 
+                    class="ml-2" 
+                    style="font-weight: 700;" 
+                    v-html="result.orderDetails">
                 </div>
             </div>
 
@@ -459,21 +461,21 @@ export default class Form4Layout extends Vue {
 
     mounted(){
         this.dataReady = false;
-        if (this.result.selfRepresented){
+        // if (this.result.selfRepresented){
 
-            const ruleList = [];
-            for (const rule of this.result.relyingSectionRule){                
-                if (rule == 'Other' && this.result.otherRelyingSectionRule){
-                    ruleList.push(this.result.otherRelyingSectionRule);
-                } else {
-                    ruleList.push(rule);
-                }
-            }
-            this.rules = ruleList.join(', ');
+        //     const ruleList = [];
+        //     for (const rule of this.result.relyingSectionRule){                
+        //         if (rule == 'Other' && this.result.otherRelyingSectionRule){
+        //             ruleList.push(this.result.otherRelyingSectionRule);
+        //         } else {
+        //             ruleList.push(rule);
+        //         }
+        //     }
+        //     this.rules = ruleList.join(', ');
 
-        } else {
-            this.rules = this.result.lawyerRelyingSectionRule;
-        }
+        // } else {
+        //     this.rules = this.result.lawyerRelyingSectionRule;
+        // }
         this.dataReady = true;
     }
 }

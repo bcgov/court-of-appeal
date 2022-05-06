@@ -53,9 +53,11 @@
                 Who made the Order?
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-card body-class="py-2 bg-select" >                   
-                    {{form8Info.judgeName}}
-                </b-card>
+                <b-form-input                
+                    style="width:100%"                        
+                    :state="state.judgeName"                                                           
+                    v-model="form8Info.judgeName">
+                </b-form-input>
             </b-col>
         </b-row>  
 
@@ -64,9 +66,27 @@
                 Date the order under appeal was pronounced:
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
-                    {{form8Info.orderDate | beautify-date-blank}}
+                <b-card                 
+                    class="mt-2" 
+                    style="padding: 0; float: left;" 
+                    :border-variant="state.orderDate == false?'danger': 'dark'">
+                    <div class="vuetify">
+                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                            <v-date-picker
+                                @change="updateOrderDate"
+                                v-model="orderDateValue"                           
+                                color="warning"             
+                                :allowed-dates="allowedDates"                            
+                                header-color="red"
+                            ></v-date-picker>                            
+                        </v-app>
+                    </div>    
                 </b-card>
+                <span 
+                    style="display: inline-block; font-size: 0.75rem;" 
+                    class="text-danger"
+                    :key="updateOrderDetails"
+                    v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
             </b-col>
         </b-row>                   
 
@@ -112,16 +132,17 @@
 
 <script lang="ts">
 
-import { form8DataInfoType } from '@/types/Information/Form8';
-import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import { Component, Vue } from 'vue-property-decorator';
-
+import moment from 'moment-timezone';
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
+
+import { form8DataInfoType } from '@/types/Information/Form8';
+import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 @Component
 export default class Form8StyleOfProceeding extends Vue {
@@ -149,15 +170,24 @@ export default class Form8StyleOfProceeding extends Vue {
     
     dataReady = false;    
     partyNames: string[] = [];  
+    updateOrderDetails = 0;
+    orderDateValue = '';
 
     state = {        
         filingParties:null,         
-        authorizedName:null
+        authorizedName:null,
+        orderDate: null,
+        judgeName: null
     }  
 
     mounted() {
         this.dataReady = false;
         this.extractInfo();              
+    }
+
+    public updateOrderDate(){       
+        this.form8Info.orderDate = this.orderDateValue;
+        this.updateOrderDetails ++;
     }
 
     public extractInfo(){       
@@ -174,8 +204,10 @@ export default class Form8StyleOfProceeding extends Vue {
             form8Data.formSevenNumber = this.fileNumber;
             
             form8Data.version = this.$store.state.Application.version;  
-            form8Data.judgeName = Vue.filter('getFullJudgeName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
-            form8Data.orderDate = this.previousCourts[0]?.JudgmentDate;
+            form8Data.judgeName = this.previousCourts[0]?.JudgeSalutation + ' ' + Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
+            const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
+            form8Data.orderDate = orderDate;
+            this.orderDateValue = orderDate; 
 
             let applicantNames = [];
             let respondentNames = [];
@@ -194,6 +226,17 @@ export default class Form8StyleOfProceeding extends Vue {
             this.UpdateForm8Info(form8Data);                       
             this.saveForm(true);
         }
+    }
+
+    get isPastDeadline(){
+
+        const today = new Date();
+        const orderDate = new Date(this.form8Info.orderDate);
+
+        const TimePast = today.getTime() - orderDate.getTime();
+        const daysPast = TimePast / (1000 * 3600 * 24);        
+        
+        return daysPast > 30;
     }
 
     public extractPartiesData(){
@@ -216,7 +259,8 @@ export default class Form8StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form8Data = response.data.data                
+                const form8Data = response.data.data    
+                this.orderDateValue = form8Data.orderDate;
                 this.UpdateForm8Info(form8Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -229,15 +273,24 @@ export default class Form8StyleOfProceeding extends Vue {
 
      public clearStates(){
         this.state = {            
-            filingParties:null,                 
+            filingParties:null,
+            orderDate: null,
+            judgeName: null,                 
             authorizedName:null
         }
         this.dataReady = true; 
     }
 
+    public allowedDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+        return (date <= day);           
+    }
+
     public checkStates(){
 
-        this.state.filingParties = this.form8Info.filingParties?.length>0? null :false;        
+        this.state.filingParties = this.form8Info.filingParties?.length>0? null :false; 
+        this.state.orderDate = this.form8Info.orderDate != null? null:false;
+        this.state.judgeName = this.form8Info.judgeName != null? null:false;
         this.state.authorizedName = !this.form8Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
@@ -314,6 +367,11 @@ export default class Form8StyleOfProceeding extends Vue {
 </script>
 
 <style scoped lang="scss">
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+    }
 
     .content {        
         margin-bottom: 0px !important; 

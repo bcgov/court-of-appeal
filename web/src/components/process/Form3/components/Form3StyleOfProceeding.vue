@@ -273,10 +273,7 @@
                 </b-col>
                 <b-col>
                     <b-form-input                
-                        style="width:100%" 
-                        :class="!form3Info.appealTribunal?'py-2 bg-select':''"
-                        :disabled="!form3Info.appealTribunal"
-                        rows="6" 
+                        style="width:100%"                        
                         :state="state.judgeName"                                                           
                         v-model="form3Info.judgeName">
                     </b-form-input>
@@ -288,15 +285,15 @@
                     Date the order under appeal was pronounced:
                 </b-col>
                 <b-col>                   
-                    <b-card 
-                        v-if="form3Info.appealTribunal"
+                    <b-card                 
                         class="mt-2" 
                         style="padding: 0; float: left;" 
                         :border-variant="state.orderDate == false?'danger': 'dark'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form3Info.orderDate"                           
+                                    @change="updateOrderDate"
+                                    v-model="orderDateValue"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -304,9 +301,11 @@
                             </v-app>
                         </div>    
                     </b-card>
-                    <b-card v-else body-class="py-2 bg-select" style="min-height:2.75rem;">
-                        {{form3Info.orderDate | beautify-date-blank}}
-                    </b-card>
+                    <span 
+                        style="display: inline-block; font-size: 0.75rem;" 
+                        class="text-danger"
+                        :key="updateOrderDetails"
+                        v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
                 </b-col>
             </b-row>    
 
@@ -568,6 +567,8 @@ export default class Form3StyleOfProceeding extends Vue {
     
     dataReady = false;
     updated=0; 
+    updateOrderDetails = 0;
+    orderDateValue = '';
   
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
@@ -644,6 +645,11 @@ export default class Form3StyleOfProceeding extends Vue {
 
     }
 
+    public updateOrderDate(){       
+        this.form3Info.orderDate = this.orderDateValue;
+        this.updateOrderDetails ++;
+    }
+
     public extractInfo(){       
 
         if(this.currentNoticeOfCrossAppealId){
@@ -693,10 +699,11 @@ export default class Form3StyleOfProceeding extends Vue {
                 form3Data.formSevenNumber = this.fileNumber;
 
                 form3Data.judgeName = this.previousCourts[0]?.JudgeSalutation + ' ' + Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
-                form3Data.orderDate = this.previousCourts[0]?.JudgmentDate;
-
+                const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
+                form3Data.orderDate = orderDate;
+                this.orderDateValue = orderDate;                
             }
-            this.UpdateForm3Info(form3Data);            
+            this.UpdateForm3Info(form3Data);
             
             this.saveForm(true);
         }            
@@ -729,6 +736,17 @@ export default class Form3StyleOfProceeding extends Vue {
         }      
         return partyNames;
     }  
+
+    get isPastDeadline(){
+
+        const today = new Date();
+        const orderDate = new Date(this.form3Info.orderDate);
+
+        const TimePast = today.getTime() - orderDate.getTime();
+        const daysPast = TimePast / (1000 * 3600 * 24);        
+        
+        return daysPast > 30;
+    }
 
     public updateAddressFields(){
 
@@ -783,7 +801,8 @@ export default class Form3StyleOfProceeding extends Vue {
         this.$http.get('/form3/forms/'+this.currentNoticeOfCrossAppealId)
         .then((response) => {
             if(response?.data?.data){
-                const form3Data = response.data.data                
+                const form3Data = response.data.data   
+                this.orderDateValue = form3Data.orderDate;             
                 this.UpdateForm3Info(form3Data);
                 this.clearStates();                
             }

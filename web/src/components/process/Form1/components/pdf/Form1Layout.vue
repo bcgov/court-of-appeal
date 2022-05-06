@@ -105,8 +105,11 @@
         <div class="arrow-right-flash-76"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
+            <div class="ml-2" style="font-weight: 700;">
+                {{applicantNames.join(', ')}}
+            </div>
 
-            <div v-for="sop,inx in caseSop" :key="inx">
+            <!-- <div v-for="sop,inx in caseSop" :key="inx">
                 <div v-if="sop.appealRole && sop.appealRole.toLowerCase() == 'appellant'" style="display: block; margin:0.5rem;">
                     <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
                         <div>{{sop.conjunction}}:</div>
@@ -129,7 +132,7 @@
                         </div>
                     </div>    
                 </div>  
-            </div> 
+            </div>  -->
 
         </div>                      
 
@@ -154,8 +157,11 @@
         <div class="arrow-right-flash-80"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
+            <div class="ml-2" style="font-weight: 700;">
+                {{respondentNames.join(', ')}}
+            </div>
 
-            <div v-for="sop,inx in caseSop" :key="inx">
+            <!-- <div v-for="sop,inx in caseSop" :key="inx">
                 <div v-if="sop.appealRole && sop.appealRole.toLowerCase() == 'respondent'" style="display: block; margin:0.5rem;">
                     <div class="my-0 row" style="line-height:1rem; padding:0.25rem;margin:0;font-weight: 700;display: block;">
                         <div>{{sop.conjunction}}:</div>
@@ -178,7 +184,7 @@
                         </div>
                     </div>    
                 </div>  
-            </div>            
+            </div>             -->
         </div>                      
 
     </div> 
@@ -1013,13 +1019,12 @@ export default class Form1Layout extends Vue {
     @form1State.Action
     public UpdateForm1Info!: (newForm1Info: form1DataInfoType) => void
     
-    dataReady = false;
-    address = '';
-    // applicantNames: string[] = [];
-    // respondentNames: string[] = [];
+    dataReady = false;   
+    applicantNames: string[] = [];
+    respondentNames: string[] = [];
 
-    caseSop :manualSopInfoType[] = [];
-    noRolePartySop: manualSopInfoType[] = [];    
+    // caseSop :manualSopInfoType[] = [];
+    // noRolePartySop: manualSopInfoType[] = [];    
 
     mounted(){
         this.dataReady = false;
@@ -1039,59 +1044,58 @@ export default class Form1Layout extends Vue {
         }        
     }
    
-    public extractInfo(){       
-        console.log(this.result)
+    public extractInfo(){
         
         const parties = this.result.parties
-        // this.applicantNames = [];
-        // this.respondentNames = [];
+        this.applicantNames = [];
+        this.respondentNames = [];
         
-        // for(const party of parties){
-        //     if(party.appealRole=="Appellant")
-        //         this.applicantNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
-        //     else if(party.appealRole=="Respondent")
-        //         this.respondentNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
-        // }
-
-        if (this.result.manualSop?.length > 1){
-            this.caseSop = this.result.manualSop;
-        } else {
-
-            this.caseSop = [];
-            this.noRolePartySop = [];  
-            for(const party of parties)
-                this.prePopulateSop(party);          
-
-
-            if (this.noRolePartySop.length > 0){
-                this.caseSop = this.caseSop.concat(this.noRolePartySop);
-            }           
-
+        for(const party of parties){
+            if(party.appealRole=="Appellant")
+                this.applicantNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
+            else if(party.appealRole=="Respondent")
+                this.respondentNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
         }
+
+        // if (this.result.manualSop?.length > 1){
+        //     this.caseSop = this.result.manualSop;
+        // } else {
+
+        //     this.caseSop = [];
+        //     this.noRolePartySop = [];  
+        //     for(const party of parties)
+        //         this.prePopulateSop(party);          
+
+
+        //     if (this.noRolePartySop.length > 0){
+        //         this.caseSop = this.caseSop.concat(this.noRolePartySop);
+        //     }           
+
+        // }
 
     }
     
-    public prePopulateSop(partyInfo: form1PartiesInfoType){
+    // public prePopulateSop(partyInfo: form1PartiesInfoType){
 
-        let sop = {} as manualSopInfoType;            
-        sop.plural = false;
-        sop.appealRole = partyInfo.appealRole;
-        sop.lowerCourtRole = partyInfo.lowerCourtRole;
+    //     let sop = {} as manualSopInfoType;            
+    //     sop.plural = false;
+    //     sop.appealRole = partyInfo.appealRole;
+    //     sop.lowerCourtRole = partyInfo.lowerCourtRole;
         
-        sop.partyName=this.getFullName(partyInfo)
-        if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
-            sop.conjunction = 'And';
-            this.noRolePartySop.push(sop);
-        } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
-            partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
-            partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
-                sop.conjunction = 'Between';
-                this.caseSop.unshift(sop);
-        } else {
-            sop.conjunction = 'And';
-            this.caseSop.push(sop);
-        }
-    }
+    //     sop.partyName=this.getFullName(partyInfo)
+    //     if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
+    //         sop.conjunction = 'And';
+    //         this.noRolePartySop.push(sop);
+    //     } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
+    //         partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
+    //         partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
+    //             sop.conjunction = 'Between';
+    //             this.caseSop.unshift(sop);
+    //     } else {
+    //         sop.conjunction = 'And';
+    //         this.caseSop.push(sop);
+    //     }
+    // }
 }
 
 </script>

@@ -110,11 +110,7 @@ export default class SubmitForm8 extends Vue {
             }
         }
 
-        const body = {
-            document_type: "MBAV"
-        }
-
-        this.$http.post(url, body, header)
+        this.$http.post(url, header)
         .then(res => {                            
             this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){
