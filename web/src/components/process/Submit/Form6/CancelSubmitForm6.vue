@@ -14,7 +14,9 @@
             <b-card no-body class="border-white bg-white mx-4"> 
                 <b-row class="ml-5 my-3" style="font-size: 14px;">
                     <b-col cols="10">
-                        <div class="h3 text-white bg-secondary p-3 text-center" style="margin: 0.5rem 0; width:22rem; border-radius:10px; "> E-Filing has been cancelled. </div>
+                        <div 
+                            class="h3 text-white bg-secondary p-3 text-center" 
+                            style="margin: 0.5rem 0; width:22rem; border-radius:10px; "> E-Filing has been cancelled. </div>
                     </b-col>
                     <b-col cols="2">
                         <b-button                         

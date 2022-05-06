@@ -15,7 +15,7 @@
                 <b-row class="ml-5 my-3" style="font-size: 14px;">
                     <b-col cols="10">
                         <div class="h3 text-white bg-dark p-3 text-center" style="margin: 0.5rem 0; width:60rem; border-radius:10px; "> 
-                            <div class="my-3">There has been an error while attempting to E-File your Notice of Settlement or Abandonment.</div>
+                            <div class="my-3">There has been an error while attempting to E-File your Notice of Application.</div>
                             <div class="text-warning my-5">Error Message: {{errMsg}}</div>                                                
                             <div class="my-3">
                                 Please try again. If this error persists contact 
