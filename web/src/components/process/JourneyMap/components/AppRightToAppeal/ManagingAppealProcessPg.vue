@@ -206,10 +206,63 @@
         </b-row>
 
         <b-row v-if="showForm9Info" class="mt-4" >
-            If you wish to submit a request:
+            <p>
+                This form is used for general requests, including but not 
+                limited to requests to adjourn matters by consent, or 
+                requests to reset matters.  
+            </p>
+            <p class="step-title-column ml-1">Adjourning an application</p>
+            <p>
+                If you are <b>making an application</b> and you want to 
+                adjourn an application before the hearing date. 
+            </p>
+            <p>
+                If you are <b>responding</b> to an application, with the consent 
+                of the party making the application, you may seek to 
+                adjourn the hearing by filing a Requisition.  
+            </p>
+            <b-row class="mt-2 mx-2 bg-warning warning-message-row">
+                <b-col cols="1">
+                    <b-icon-exclamation-triangle-fill class="mt-4 ml-2" scale="2"/>
+                </b-col>
+                <b-col cols="11" style="padding-left: 0;">
+                    If you are filing the requisition to adjourn an application, 
+                    it must be filed 
+                        <span 
+                            class="text-danger font-weight-bold">
+                            If you are filing the requisition to adjourn an 
+                            application, it must be filed before 2:00 p.m. of 
+                            the business day before the application hearing date
+                        </span>.
+                </b-col>              
+            </b-row>
+
+            <p class="step-title-column mt-4 ml-1">Resetting an application</p>
+            <p>
+                If an application was adjourned without a new date being set, 
+                the party making the application may set a new hearing date 
+                by filing and serving a requisition.
+            </p>
+
+            <b-row class="mt-2 mx-2 bg-warning warning-message-row">
+                <b-col cols="1">
+                    <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+                </b-col>
+                <b-col cols="11" style="padding-left: 0;">
+                    
+                    The requisition must be filed and served 
+                        <span 
+                            class="text-danger font-weight-bold">
+                            at least 5 business days
+                        </span>
+                    before the new application hearing date.   
+                </b-col>              
+            </b-row> 
+                       
+           
             <ol class="mt-3">
                 <li>
-                    Complete either the .DOC or .PDF below. Click on the document name for more information.
+                    Complete either the Online form or the .PDF. Click on the document name for more information.
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
@@ -553,7 +606,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showForm9(show: boolean){
         if (show) {
             this.showForm9Info = true;
-            this.$emit('adjustHeights', 5, "12rem");
+            this.$emit('adjustHeights', 5, "44rem");
         } else {
             this.showForm9Info = false;
             this.$emit('adjustHeights', 5, "0");

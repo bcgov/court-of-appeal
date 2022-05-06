@@ -181,8 +181,7 @@
                         title="It will be between 5-30 minutes."/>                                    
                     </b-col>
                     <b-col class="ml-1 mt-2">
-                        <b-form-input    
-                            style="width: 6rem;"                    
+                        <b-form-input         
                             v-model="form4Info.estimatedDuration" 
                             :state = "state.estimatedDuration"                           
                             size="md"
@@ -195,50 +194,70 @@
 
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
-                        Enter the section(s) or rule(s) that you are relying on for your application                                
+                        Enter the section(s) or rule(s) that you are relying on for your application    
+                        <p class="content text-primary">
+                            E.g., If you are applying for leave to appeal, enter 
+                        “Section 31 of the Court of Appeal Act”. If you are applying 
+                        for a stay of proceedings, enter “Section 33 of the Court 
+                        of Appeal Act”. 
+                        </p>                             
                     </b-col>
-                    <b-col v-if="form4Info.selfRepresented" class="ml-1 mt-2">
-                        <b-form-checkbox-group 
-                            :key="updated"               
-                            style="width:100%" 
-                            @change="updateSeekingOrder"
-                            v-model="form4Info.relyingSectionRule"
-                            :state ="state.relyingSectionRule"                   
-                            :options="relyingSectionRuleOptions">
-                        </b-form-checkbox-group>
-                        
-                        <b-form-textarea
-                            v-if="form4Info.relyingSectionRule && form4Info.relyingSectionRule.includes('Other')"
-                            style="width:100%"
-                            class="mt-2"                       
-                            v-model="form4Info.otherRelyingSectionRule">
-                        </b-form-textarea>
-                        <span
-                            v-if="(state.relyingSectionRule != null)" 
-                            style="font-size: 0.75rem;" 
-                            class="bg-white text-danger"><b-icon-exclamation-circle/>
-                            Specify section(s) or rule(s) that you are relying on for your application.
-                        </span>                   
-                    </b-col>
-                    <b-col v-else class="ml-1 mt-2">                   
+                    <b-col class="ml-1 mt-2">                   
                         <b-form-textarea  
-                            style="width:100%"                                                            
-                            v-model="form4Info.lawyerRelyingSectionRule"
-                            :state ="state.lawyerRelyingSectionRule">
-                        </b-form-textarea>                    
+                            style="width:100%" 
+                            rows="6"                                                           
+                            v-model="form4Info.relyingSectionRule"
+                            :state ="state.relyingSectionRule">
+                        </b-form-textarea> 
+
                     </b-col>                
                 </b-row>
 
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
-                        Enter the order that you are seeking                                
+                        Select the order(s) that you are seeking                                
                     </b-col>
-                    <b-col class="ml-1 mt-2">                   
-                        <b-form-textarea                
-                            style="width:100%"                                                            
-                            v-model="form4Info.seekingOrder"
-                            :state ="state.seekingOrder">
-                        </b-form-textarea>                    
+                    <b-col class="ml-1 mt-2">
+
+                        <b-form-checkbox-group
+                            style="width:100%" 
+                            stacked
+                            @change="updateSeekingOrder"
+                            v-model="form4Info.orderList"
+                            :state ="state.orderList"                   
+                            :options="orderList">
+                        </b-form-checkbox-group>
+                        
+                        <span
+                            v-if="(state.orderList != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify the order(s) you are seeking.
+                        </span>                   
+                    </b-col>                               
+                </b-row>
+
+                <b-row class="mt-4 question" v-if="form4Info.orderList.length > 0" :key="updated + 1">
+                    <b-col cols="7" class="labels">
+                        Enter details on each order you are seeking                                                    
+                    </b-col>
+                    <b-col class="mt-2">
+                        <div 
+                            v-for="(order,index) in form4Info.seekingOrder" 
+                            :key="'order' +index"                       
+                            :value="order"> {{form4Info.seekingOrder[index].name}}                  
+                            <b-form-textarea                
+                                style="width:100%" 
+                                rows="6"                                                                                       
+                                v-model="form4Info.seekingOrder[index].details">
+                            </b-form-textarea>      
+                        </div> 
+                        <span
+                            v-if="(state.seekingOrder != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify the details of the order(s) you are seeking.
+                        </span>             
                     </b-col>                
                 </b-row>
 
@@ -261,9 +280,9 @@
                 </b-row>   
 
                 <b-card v-if="form4Info.bookRequired == false" class="mb-4 bg-white border-white text-dark"> 
-                    <b-card no-body class="border-white">
+                    <b-card no-body :class="state.affidavitList !=null?'border-danger':'border-white'">
                         <b-row class="mb-2 ml-1" style="margin-left: -0.25rem !important;">   
-                            <b-col cols="10" :class="state.affidavitList !=null?'border-danger':''">
+                            <b-col cols="10" >
                                 <b-form-group
                                     class="labels"                
                                     label="List the affidavit(s) in support of this application:" 
@@ -460,7 +479,7 @@ const form4State = namespace("Form4");
 
 import AddAffidavitForm from './AddAffidavitForm.vue';
 
-import { affidavitInfoType, form4DataInfoType } from '@/types/Information/Form4';
+import { affidavitInfoType, form4DataInfoType, orderInfoType } from '@/types/Information/Form4';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import { hearingLocationsInfoType, locationsInfoType } from '@/types/Common';
 
@@ -544,8 +563,40 @@ export default class Form4StyleOfProceeding extends Vue {
         {text: 'Uncontested', value: false}
     ];
 
-    relyingSectionRuleOptions = [
-        'rule1', 'rule2', 'Other'
+    // orderList = [
+    //     {text: 'adjournment', value:'adjournment'},
+    //     {text: 'adducing fresh or new evidence', value:'adducing'},
+    //     {text: 'to consolidate or have appeals heard together', value:'consolidate'},
+    //     {text: 'directions', value:'directions'},
+    //     {text: 'dismissal of appeal in chambers', value:'dismissalChambers'},
+    //     {text: 'dismissal (other)', value:'dismissalOther'},
+    //     {text: 'extend time to file books or documents', value:'extendOther'},
+    //     {text: 'extend time to appeal or cross-appeal', value:'extendCrossAppeal'},
+    //     {text: 'intervener status', value:'intervener'},       
+    //     {text: 'payment of security', value:'security'},
+    //     {text: 'quashing an appeal or raising a preliminary objection', value:'objection'},
+    //     {text: 'reinstate appeal that is dismissed as abandoned', value:'reinstate'},
+    //     {text: 'remove appeal from the inactive list', value:'remove'},       
+    //     {text: 'varying or cancelling an order of the registrar', value:'varying'},
+    //     {text: 'other', value:'other'}
+    // ];
+
+    orderList = [
+        'adjournment',
+        'adducing fresh or new evidence',
+        'to consolidate or have appeals heard together',
+        'directions',
+        'dismissal of appeal in chambers',
+        'dismissal (other)',
+        'extend time to file books or documents',
+        'extend time to appeal or cross-appeal',
+        'intervener status',       
+        'payment of security',
+        'quashing an appeal or raising a preliminary objection',
+        'reinstate appeal that is dismissed as abandoned',
+        'remove appeal from the inactive list',       
+        'varying or cancelling an order of the registrar',
+        'other'
     ];
 
     jurisdictionTypeOptions = [ 'The Court (3 Judges)', 'A Chambers Judge', 'The Registrar' ];
@@ -556,9 +607,9 @@ export default class Form4StyleOfProceeding extends Vue {
         jurisdictionType: null,  
         hearingLocation: null, 
         hearingDate: null, 
-        estimatedDuration: null, 
-        lawyerRelyingSectionRule: null,
+        estimatedDuration: null,
         relyingSectionRule: null, 
+        orderList: null,
         seekingOrder: null, 
         bookRequired: null, 
         affidavitList: null, 
@@ -620,7 +671,9 @@ export default class Form4StyleOfProceeding extends Vue {
             
             form4Data.version = this.$store.state.Application.version;  
             form4Data.selfRepresented = this.$store.state.Common.userSelfRepresented;
-            form4Data.affidavitList = [];             
+            form4Data.affidavitList = [];   
+            form4Data.orderList = []; 
+            form4Data.seekingOrder = [];         
            
             this.UpdateForm4Info(form4Data);                       
             this.saveForm(true);
@@ -643,9 +696,8 @@ export default class Form4StyleOfProceeding extends Vue {
             this.applicantNames.push(applicant.name);
             this.partyNames.push(applicant.name);  
         }
-        this.updateOtherParties()
+        this.updateOtherParties();
         this.dataReady = true;
-
     }
 
     public update(){ 
@@ -702,9 +754,9 @@ export default class Form4StyleOfProceeding extends Vue {
             jurisdictionType: null,  
             hearingLocation: null, 
             hearingDate: null, 
-            estimatedDuration: null, 
-            lawyerRelyingSectionRule: null,
+            estimatedDuration: null,
             relyingSectionRule: null, 
+            orderList: null,
             seekingOrder: null, 
             bookRequired: null, 
             affidavitList: null, 
@@ -727,9 +779,11 @@ export default class Form4StyleOfProceeding extends Vue {
         this.state.hearingLocation = !this.form4Info.hearingLocation? false : null; 
         this.state.hearingDate = !this.form4Info.hearingDate? false : null; 
         this.state.estimatedDuration = !this.form4Info.estimatedDuration? false : null;         
-        this.state.lawyerRelyingSectionRule = (this.form4Info.selfRepresented == false && !this.form4Info.lawyerRelyingSectionRule)? false :null 
-        this.state.relyingSectionRule = (this.form4Info.selfRepresented && !this.form4Info.relyingSectionRule)? false :null  
+        this.state.relyingSectionRule = !this.form4Info.relyingSectionRule? false :null;  
         this.state.seekingOrder = !this.form4Info.seekingOrder? false : null;  
+        this.state.seekingOrder = !(this.form4Info.seekingOrder && this.verifyOrders()
+                                    && this.form4Info.seekingOrder.length == this.form4Info.orderList.length)? false : null;       
+      
         this.state.bookRequired = this.form4Info.bookRequired==null? false :null
         const affidavitRequired = this.form4Info.bookRequired ==false; 
         this.state.affidavitList = (affidavitRequired && this.form4Info.affidavitList?.length == 0)? false :null 
@@ -746,7 +800,25 @@ export default class Form4StyleOfProceeding extends Vue {
                 return false
         }
         return true            
-    }    
+    }   
+    
+    public verifyOrders(){
+        for(const order of this.form4Info.seekingOrder){            
+            if(order.details.trim().length == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public extractOrderDetails(){
+        const orders = [];
+        for(const order of this.form4Info.seekingOrder){            
+            if(order.details.trim().length != 0){
+                orders.push(order.name + ': ' + order.details.trim());
+            }  
+        }
+        return orders.join('<br>');        
+    }
 
     public saveForm(draft: boolean) { 
         
@@ -760,6 +832,9 @@ export default class Form4StyleOfProceeding extends Vue {
             if (!draft && !this.checkStates()){               
                 return                
             } 
+
+            const form4Data = this.form4Info;
+            form4Data.orderDetails = this.extractOrderDetails();
             
             const options = {
                 method: method,
@@ -891,8 +966,28 @@ export default class Form4StyleOfProceeding extends Vue {
     }
 
     public updateSeekingOrder(){
-        //TODO: specify content
-        console.log('update seeking order')
+        
+        const formData = this.form4Info;
+        const orderData = formData.seekingOrder;
+        const orders: orderInfoType[] = []; 
+
+        for (const orderName of this.form4Info.orderList){
+           
+            const matchingOrderRecords = orderData.filter(order => order.name == orderName);
+
+            if (matchingOrderRecords.length == 0){
+                orders.push({name: orderName, details: ''});
+            } else {                
+                const index = orderData.findIndex(order => order.name == matchingOrderRecords[0].name);               
+                orders.push(orderData[index]);
+            }            
+        }
+
+        formData.seekingOrder = orders;
+        
+        this.UpdateForm4Info(formData)
+
+        this.updated ++;               
 
     }
 

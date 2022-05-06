@@ -338,6 +338,7 @@ export default class Form7StyleOfProceeding extends Vue {
             form7Data.appellants = this.partiesJson.appellants
             form7Data.respondents = this.partiesJson.respondents;
             form7Data.formSevenNumber = this.fileNumber;            
+            form7Data.hearingTime = '10:00:00';
             form7Data.version = this.$store.state.Application.version;             
            
             this.UpdateForm7Info(form7Data);                       

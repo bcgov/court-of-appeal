@@ -478,55 +478,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         this.UpdateForm1Info(formData)
 
         this.updated ++;               
-    }
-
-    public verifyPhoneNumbers(){
-        for(const phoneNumber of this.form1Info.phoneNumbers){            
-            if(phoneNumber.contactInfo.trim().length == 0)
-                return false;
-        }
-        return true;
-    }
-
-    public verifyAddresses(){
-        for(const address of this.form1Info.addresses){            
-            if(address.contactInfo.trim().length == 0)
-                return false;
-        }
-        return true;
-    }
-
-    public extractAddresses(){
-        const addresses = [];
-        for(const contactAddress of this.form1Info.addresses){            
-            if(contactAddress.contactInfo.trim().length != 0){
-                addresses.push(contactAddress.name + ': ' + contactAddress.contactInfo.trim());
-            }  
-        }
-        return addresses.join('<br>');        
-    }
-
-    public extractPhoneNumbers(){
-        const phoneNumbers = [];
-        for(const phone of this.form1Info.phoneNumbers){            
-            if(phone.contactInfo.trim().length != 0){
-                phoneNumbers.push(phone.name + ': ' + phone.contactInfo.trim());
-            }  
-        }
-        return phoneNumbers.join('<br>');        
-    }
-
-    public extractEmails(){
-        const emails = [];
-        for(const email of this.form1Info.emailAdresses){            
-            if(email.contactInfo.trim().length != 0){
-                emails.push(email.name + ': ' + email.contactInfo.trim());
-            }  
-        }
-        return emails.join('<br>');        
-    }
-
-
+    } 
 
     public showConfirmEditParty(row, app, left){
 

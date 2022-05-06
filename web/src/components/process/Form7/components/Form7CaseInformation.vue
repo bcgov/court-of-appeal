@@ -126,7 +126,7 @@ import "@/store/modules/forms/form7";
 const form7State = namespace("Form7");
 
 import { form7SearchInfoType } from '@/types/Information/Form7';
-import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -137,13 +137,7 @@ import Spinner from "@/components/utils/Spinner.vue";
 export default class Form7CaseInformation extends Vue {
 
     @informationState.Action
-    public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void
-
-    @informationState.Action
-    public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
-
-    @informationState.Action
-    public UpdateInitiatingDocuments!: (newInitiatingDocuments: initiatingDocumentJsonInfoType[]) => void
+    public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void    
 
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
@@ -208,14 +202,6 @@ export default class Form7CaseInformation extends Vue {
                 this.UpdateFileNumber(this.searchParams.file)
                 this.UpdateCurrentNoticeOfUrgentApplicationId(null);
                 this.$router.push({name: "fill-form7"})
-            }
-
-            if(res.data?.previousCourts){
-                this.UpdatePreviousCourts(res.data?.previousCourts)
-            }
-
-            if(res.data?.initiatingDocuments?.InitiatingDocument){
-                this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
             }
 
             else

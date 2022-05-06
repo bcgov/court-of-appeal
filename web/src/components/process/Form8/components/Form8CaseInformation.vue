@@ -126,7 +126,7 @@ import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
 
 import { form8SearchInfoType } from '@/types/Information/Form8';
-import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -141,10 +141,7 @@ export default class Form8CaseInformation extends Vue {
 
     @informationState.Action
     public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
-
-    @informationState.Action
-    public UpdateInitiatingDocuments!: (newInitiatingDocuments: initiatingDocumentJsonInfoType[]) => void
-
+    
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
     
@@ -212,10 +209,6 @@ export default class Form8CaseInformation extends Vue {
 
             if(res.data?.previousCourts){
                 this.UpdatePreviousCourts(res.data?.previousCourts)
-            }
-
-            if(res.data?.initiatingDocuments?.InitiatingDocument){
-                this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
             }
 
             else

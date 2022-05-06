@@ -124,7 +124,7 @@ import "@/store/modules/forms/form4";
 const form4State = namespace("Form4");
 
 import { form4SearchInfoType } from '@/types/Information/Form4';
-import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -135,13 +135,7 @@ import Spinner from "@/components/utils/Spinner.vue";
 export default class Form4CaseInformation extends Vue {
 
     @informationState.Action
-    public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void
-
-    @informationState.Action
-    public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
-
-    @informationState.Action
-    public UpdateInitiatingDocuments!: (newInitiatingDocuments: initiatingDocumentJsonInfoType[]) => void
+    public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void     
 
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void

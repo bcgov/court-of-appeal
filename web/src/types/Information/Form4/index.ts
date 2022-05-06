@@ -42,10 +42,10 @@ export interface form4DataInfoType {
     hearingLocation: hearingLocationsInfoType;
     hearingDate: string;
     estimatedDuration: string;
-    relyingSectionRule: string[];
-    otherRelyingSectionRule: string;
-    lawyerRelyingSectionRule: string;
-    seekingOrder: string;    
+    relyingSectionRule: string;
+    orderList: string[];
+    seekingOrder: orderInfoType[];  
+    orderDetails: string;  
     bookRequired: boolean;
     affidavitList: affidavitInfoType[];
     applicationContested: boolean;
@@ -60,4 +60,9 @@ export interface form4DataInfoType {
 export interface affidavitInfoType {
     name: string;
     date: string;
+}
+
+export interface orderInfoType {
+    name: string;    
+    details: string;
 }
