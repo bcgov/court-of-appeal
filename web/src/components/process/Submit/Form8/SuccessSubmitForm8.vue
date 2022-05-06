@@ -13,12 +13,12 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="mx-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Settlement or Abandonment form has been submitted.  Please click on 
-                    the CSO Package number below to retrieve a filed copy of your document.
+                    Your Notice of Application to Vary An Order of Justice has been submitted. 
+                    Please click on the CSO Package number below to retrieve a filed copy of your document(s).
                 </b-row>
-                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
-                    <b class="mr-2">NOTE:</b>  In accordance with the Court of Appeal Rule 44, you must serve 
-                    each party with a filed copy of the Notice of Settlement or Abandonment.
+                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;  font-weight: 700; font-style: italic;">
+                    Please note that you must serve the Notice of Application to Vary An Order of a Justice along with 
+                    any supporting materials no later than 7 days after the order was made by a justice.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
