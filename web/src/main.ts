@@ -43,10 +43,10 @@ const router = new VueRouter({
 if(!location.pathname.includes('/submitted/') && !location.pathname.includes('/signout/'))
     history.pushState({page: "home"}, "", process.env.BASE_URL)
 
-if(location.host=='localhost:8080' && location.pathname.includes('/court-of-appeal/submitted/')){
-    const newPath = location.pathname.replace('/court-of-appeal/','/')
-    history.pushState({}, "", newPath)
-}
+// if(location.host=='localhost:8080' && location.pathname.includes('/court-of-appeal/submitted/')){
+//     const newPath = location.pathname.replace('/court-of-appeal/','/')
+//     history.pushState({}, "", newPath)
+// }
 
 SessionManager.redirectIfQuickExitCookie();
 
