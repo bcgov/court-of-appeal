@@ -71,29 +71,14 @@ export default class ChecklistForm3 extends Vue {
 
         const form3SubmissionData = {} as form3DataInfoType;
         form3SubmissionData.selfRepresenting = this.qualificationInfo.selfRepresenting;
-        form3SubmissionData.appealingProvincialCourtOrder = this.qualificationInfo.appealingProvincialCourtOrder;
+        form3SubmissionData.filedNoA = this.qualificationInfo.filedNoA;
         form3SubmissionData.insideTimeLimit = this.qualificationInfo.insideTimeLimit;
-        form3SubmissionData.appealingBankruptcy = this.qualificationInfo.appealingBankruptcy;
-        form3SubmissionData.appealingFeesWaived = this.qualificationInfo.appealingFeesWaived;
-        form3SubmissionData.appealingSupremeCourtMaster = this.qualificationInfo.appealingSupremeCourtMaster;
+        form3SubmissionData.vary = this.qualificationInfo.vary;
+        form3SubmissionData.appealingFeesWaived = this.qualificationInfo.appealingFeesWaived;        
         form3SubmissionData.appealingSupremeCourtOrder = this.qualificationInfo.appealingSupremeCourtOrder;
-        form3SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;
-        form3SubmissionData.appealInvolvesChild = this.qualificationInfo.appealInvolvesChild;
-        form3SubmissionData.appealTribunal = this.qualificationInfo.appealTribunal
-        if (form3SubmissionData.appealTribunal){
-            form3SubmissionData.appellants = [];
-            form3SubmissionData.respondents = [];
-            form3SubmissionData.tribunalAppellants = [];
-            form3SubmissionData.tribunalRespondents = [];
-        }
-        this.UpdateForm3Info(form3SubmissionData);
-
-        if (form3SubmissionData.appealTribunal){
-            this.$router.push({name: "fill-form3"});
-
-        } else {
-            this.$router.push({name: "start-form3"});
-        }        
+        form3SubmissionData.appealingScFlaDivorce = this.qualificationInfo.appealingScFlaDivorce;  
+        this.UpdateForm3Info(form3SubmissionData);        
+        this.$router.push({name: "start-form3"});
                
     }
 

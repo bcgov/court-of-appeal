@@ -1,111 +1,125 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
+        
+        <b-card class="ml-2 mt-2 border-white" >
+            <h2 class="mt-3 text-primary">
+                Court of Appeal Case Information
+            </h2>
 
-        <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
+            <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
 
-        <b-form-group
-            class="mx-1" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Level of Court" 
-            label-for="level-of-court">
-            <b-form-input 
-                id="level-of-court"
-                style="max-width:75%" 
-                :disabled="true"
-                v-model="levelOfCourt">
-            </b-form-input>
-        </b-form-group>
+            <b-row class="mt-0 question">
+                <b-col cols="7" class="labels">
+                    Level of Court                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-input                       
+                        disabled
+                        style="max-width:75%" 
+                        v-model="levelOfCourt">
+                    </b-form-input>
+                                        
+                </b-col>
+            </b-row>
 
-        <b-form-group
-            class="mx-1" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Court of Appeal File no." 
-            label-for="court-of-appeal-file-no">
-            <b-form-input 
-                id="court-of-appeal-file-no"
-                style="max-width:75%" 
-                :state="fileNumberState? null:false"
-                v-model="searchParams.file">
-            </b-form-input>
-            <span 
-                style="font-size: 0.75rem;" 
-                class="text-secondary ml-2">ex. CA12345
-            </span>
-        </b-form-group>
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Court of Appeal File No.                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-input 
+                        :formatter="coaFileformatter"
+                        style="max-width:75%" 
+                        v-model="searchParams.file">
+                    </b-form-input>
+                    <span 
+                        style="font-size: 0.75rem;" 
+                        class="text-secondary ml-2">ex. CA12345
+                    </span>
+                                        
+                </b-col>
+            </b-row>
 
-        <b-form-group
-            class="mx-1" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Party" 
-            label-for="party">
-            <b-form-radio-group
-                id="party"
-                style="max-width:75%" 
-                :state="partyState? null:false"
-                v-model="searchParams.searchBy"
-                :options="partyOptions"                
-            ></b-form-radio-group>
-           
-        </b-form-group>
+            <b-row class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Party                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-radio-group                    
+                        style="max-width:75%" 
+                        :state="partyState? null:false"
+                        v-model="searchParams.searchBy"
+                        :options="partyOptions"                
+                    ></b-form-radio-group>
+                                        
+                </b-col>
+            </b-row>
 
-        <b-form-group
-            v-if="searchParams.searchBy=='Organization'"
-            class="mx-1" 
-            label-cols-sm="3"
-            content-cols-sm="3"
-            label="Organization Name" 
-            label-for="organization-name">
-            <b-form-input 
-                id="organization-name"
-                style="width:150%" 
-                v-model="searchParams.organizationName">
-            </b-form-input>
-        </b-form-group>
+            <b-row v-if="searchParams.searchBy=='Organization'" class="mt-2 question">
+                <b-col cols="7" class="labels">
+                    Organization Name                                
+                </b-col>
+                <b-col class="mt-2">                    
+                    <b-form-input 
+                        style="width:75%" 
+                        v-model="searchParams.organizationName">
+                    </b-form-input>                                    
+                </b-col>
+            </b-row> 
 
-        <div v-else>
+            <div v-else>
 
-            <b-form-group
-                class="mx-1" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="First Name" 
-                label-for="first-name">
-                <b-form-input 
-                    id="first-name"
-                    style="max-width:75%" 
-                    v-model="searchParams.firstName">
-                </b-form-input>
-            </b-form-group>
+                <b-row class="mt-2 question">
+                    <b-col cols="7" class="labels">
+                        First Name                                
+                    </b-col>
+                    <b-col class="mt-2">                    
+                        <b-form-input 
+                            style="width:75%" 
+                            v-model="searchParams.firstName">
+                        </b-form-input>                                    
+                    </b-col>
+                </b-row> 
 
-            <b-form-group
-                class="mx-1" 
-                label-cols-sm="3"
-                content-cols-sm="3"
-                label="Last Name" 
-                label-for="last-name">
-                <b-form-input 
-                    id="last-name"
-                    style="max-width:75%" 
-                    v-model="searchParams.lastName">
-                </b-form-input>
-            </b-form-group>            
-        </div>
-        <div>
-            <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
-        </div>        
+                <b-row class="mt-2 question">
+                    <b-col cols="7" class="labels">
+                        Last Name                                
+                    </b-col>
+                    <b-col class="mt-2">                    
+                        <b-form-input 
+                            style="width:75%" 
+                            v-model="searchParams.lastName">
+                        </b-form-input>                                    
+                    </b-col>
+                </b-row>
+                    
+            </div>
+            <div>
+                <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
+            </div>        
 
-        <b-button 
-            style="float: right;  width: 80px; height: 50px; opacity:1;" 
-            :disabled="searching"
-            variant="success"
-            @click="findFile()"
-            ><spinner color="#FFF" v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
-            <span style="font-size: 20px;" v-else>Find</span>
-        </b-button>               
+            <b-button 
+                style="float: right;  width: 80px; height: 50px; opacity:1;" 
+                :disabled="searching"
+                variant="success"
+                @click="findFile()"
+                ><spinner color="#FFF" v-if="searching" style="margin:0; padding: 0; transform:translate(-12px,-22px);"/>
+                <span style="font-size: 20px;" v-else>Find</span>
+            </b-button> 
+        </b-card>  
+
+        <b-card class="border-white">
+            <p class="ml-3 mt-2">
+                If you have information corresponding to the case, you may enter 
+                the information manually:
+                <b-button 
+                    class="bg-success"
+                    style="display: block; float: right; height: 50px; opacity:1;"            
+                    @click="navigateToForm3()">
+                    Continue to Notice of Cross Appeal
+                </b-button> 
+            </p>
+        </b-card>            
         
     </b-card>
 </template>
@@ -120,7 +134,7 @@ const informationState = namespace("Information");
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
-import { form3SearchInfoType } from '@/types/Information/Form3';
+import { form3DataInfoType, form3SearchInfoType } from '@/types/Information/Form3';
 import { initiatingDocumentJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
@@ -146,11 +160,16 @@ export default class Form3CaseInformation extends Vue {
     @form3State.Action
     public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void
     
+    @form3State.Action
+    public UpdateForm3Info!: (newForm3Info: form3DataInfoType) => void
+
+    @form3State.State
+    public form3Info: form3DataInfoType;
+    
     levelOfCourt = "Court of Appeal";
 
     fileNumberState = true;
     partyState = true;
-
     dataReady = false;
     searching = false;
 
@@ -167,6 +186,19 @@ export default class Form3CaseInformation extends Vue {
         this.dataReady = false;
         this.searching = false;
         this.dataReady = true; 
+    }
+
+    public navigateToForm3() {
+
+        const form3SubmissionData = this.form3Info;
+        form3SubmissionData.manualAppellants = [];
+        form3SubmissionData.manualRespondents = [];
+        form3SubmissionData.appellants = [];
+        form3SubmissionData.manualRespondents = [];
+        form3SubmissionData.requiresManualEntry = true;       
+        this.UpdateForm3Info(form3SubmissionData);
+        this.UpdateCurrentNoticeOfCrossAppealId(null);
+        this.$router.push({name: "fill-form3"})
     }
 
     public findFile(){
@@ -223,11 +255,34 @@ export default class Form3CaseInformation extends Vue {
             this.searching = false;     
         });
     }
+
+    public coaFileformatter(value){
+        if(value.slice(0,2)!='CA'){
+            if(isNaN(Number(value.slice(0))))
+                return 'CA'
+            else
+                return 'CA'+value
+        }
+        if(isNaN(Number(value.slice(-1)))) return value.slice(0,-1)
+        return value
+    }
 }
 </script>
 
 <style scoped lang="scss">
 
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
 
+    .labels {
+        font-size: 1.15rem; font-weight:600;
+    }
+
+    .question {
+        margin-left: 1.15rem !important;
+    }
 
 </style>

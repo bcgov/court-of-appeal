@@ -1,7 +1,7 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">                 
 
-        <b-card v-if="form3Info.appealTribunal" class="mb-4 bg-white border-white text-dark"> 
+        <b-card v-if="form3Info.requiresManualEntry" class="mb-4 bg-white border-white text-dark"> 
             <b-card no-body class="border-white">
                 <b-row class="mb-2">   
                     <b-col cols="10" :class="state.appellants !=null?'border-danger':''">
@@ -10,15 +10,15 @@
                             label="Appellants:" 
                             label-for="appellants">
                             <span 
-                                v-if="form3Info.tribunalAppellants.length == 0 && !AddNewAppellantForm" 
+                                v-if="form3Info.manualAppellants.length == 0 && !AddNewAppellantForm" 
                                 id="appellants" 
                                 class="text-muted ml-2 my-2">No appellants have been assigned.
                             </span>
                             <b-table
-                                v-else-if="form3Info.tribunalAppellants.length > 0"
+                                v-else-if="form3Info.manualAppellants.length > 0"
                                 :key="updated"                                
                                 id="appellants"
-                                :items="form3Info.tribunalAppellants"
+                                :items="form3Info.manualAppellants"
                                 :fields="partyFields"
                                 head-row-variant="primary"
                                 borderless    
@@ -110,15 +110,15 @@
                             label="Respondents:" 
                             label-for="respondents">
                             <span 
-                                v-if="form3Info.tribunalRespondents.length == 0 && !AddNewRespondentForm" 
+                                v-if="form3Info.manualRespondents.length == 0 && !AddNewRespondentForm" 
                                 id="respondents" 
                                 class="text-muted ml-2 my-2">No respondents have been assigned.
                             </span>
                             <b-table
-                                v-else-if="form3Info.tribunalRespondents.length > 0"
+                                v-else-if="form3Info.manualRespondents.length > 0"
                                 :key="updated"                                
                                 id="respondents"
-                                :items="form3Info.tribunalRespondents"
+                                :items="form3Info.manualRespondents"
                                 :fields="partyFields"
                                 head-row-variant="primary"
                                 borderless    
@@ -390,7 +390,7 @@
                 </b-col>
             </b-row> 
          
-            <b-row class="mt-5 question" v-if="!form3Info.appealTribunal">
+            <b-row class="mt-5 question" v-if="!form3Info.requiresManualEntry">
                 <b-col cols="7" class="labels">
                     Are you self-represented?                                
                 </b-col>
@@ -633,15 +633,17 @@ export default class Form3StyleOfProceeding extends Vue {
 
     get partyDataExists(){
 
-        const existsTribunal = this.form3Info.appealTribunal && 
-            this.form3Info.tribunalAppellants.length>0 && 
-            this.form3Info.tribunalRespondents.length>0;
+        console.log('heree')
 
-        const existsSupreme = !this.form3Info.appealTribunal && 
+        const existsManual = this.form3Info.requiresManualEntry && 
+            this.form3Info.manualAppellants.length>0 && 
+            this.form3Info.manualRespondents.length>0;
+
+        const existsSupreme = !this.form3Info.requiresManualEntry && 
             this.form3Info.appellants.length>0 && 
             this.form3Info.respondents.length>0;
             
-        return existsTribunal || existsSupreme;
+        return existsManual || existsSupreme;
 
     }
 
@@ -660,14 +662,14 @@ export default class Form3StyleOfProceeding extends Vue {
             const form3Data = this.form3Info;
             form3Data.crossAppealRequired = true;
             form3Data.version = this.$store.state.Application.version;
-            form3Data.tribunalRespondents = [];
-            form3Data.tribunalAppellants = [];
+            form3Data.manualRespondents = [];
+            form3Data.manualAppellants = [];
             form3Data.crossAppealingParties = [];
             form3Data.addresses = [];
             form3Data.emailAdresses = [];
             form3Data.phoneNumbers = [];
 
-            if (this.form3Info?.appealTribunal){
+            if (this.form3Info?.requiresManualEntry){
                 
                 form3Data.appellants = [];
                 form3Data.respondents = [];
@@ -714,13 +716,13 @@ export default class Form3StyleOfProceeding extends Vue {
         
         let partyNames: string[] = [];
 
-        if (this.form3Info.appealTribunal){
+        if (this.form3Info.requiresManualEntry){
 
-            for (const respondent of this.form3Info.tribunalRespondents){
+            for (const respondent of this.form3Info.manualRespondents){
                 partyNames.push(respondent.name) 
             }
 
-            for (const applicant of this.form3Info.tribunalAppellants){
+            for (const applicant of this.form3Info.manualAppellants){
                 partyNames.push(applicant.name);  
             }
 
@@ -835,9 +837,9 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public checkStates(){   
 
-        if(this.form3Info.appealTribunal){
-            this.state.appellants = this.form3Info.tribunalAppellants?.length>0? null :false;
-            this.state.respondents = this.form3Info.tribunalRespondents?.length>0? null :false;
+        if(this.form3Info.requiresManualEntry){
+            this.state.appellants = this.form3Info.manualAppellants?.length>0? null :false;
+            this.state.respondents = this.form3Info.manualRespondents?.length>0? null :false;
         } else {
             this.state.appellants = null;
             this.state.respondents = null;
@@ -1004,9 +1006,9 @@ export default class Form3StyleOfProceeding extends Vue {
 
             const respondentNames = []
             const form3Data = this.form3Info;
-            form3Data.tribunalRespondents.push(newParty)
+            form3Data.manualRespondents.push(newParty)
 
-            for (const respondent of form3Data.tribunalRespondents){
+            for (const respondent of form3Data.manualRespondents){
                 respondentNames.push(respondent.name);                
             }
             form3Data.respondentNames = respondentNames.join(', '); 
@@ -1022,12 +1024,12 @@ export default class Form3StyleOfProceeding extends Vue {
             
             const respondentNames = [];
             const form3Data = this.form3Info;
-            form3Data.tribunalRespondents[index].organization = newParty.organization;
-            form3Data.tribunalRespondents[index].name = newParty.name; 
-            form3Data.tribunalRespondents[index].firstName = newParty.firstName;
-            form3Data.tribunalRespondents[index].lastName = newParty.lastName;
+            form3Data.manualRespondents[index].organization = newParty.organization;
+            form3Data.manualRespondents[index].name = newParty.name; 
+            form3Data.manualRespondents[index].firstName = newParty.firstName;
+            form3Data.manualRespondents[index].lastName = newParty.lastName;
 
-            for (const respondent of form3Data.tribunalRespondents){
+            for (const respondent of form3Data.manualRespondents){
                 respondentNames.push(respondent.name);                
             }
             form3Data.respondentNames = respondentNames.join(', '); 
@@ -1040,9 +1042,9 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public removeRespondent(data){ 
         const form3Data = this.form3Info;       
-        form3Data.tribunalRespondents.splice(data.index,1);
+        form3Data.manualRespondents.splice(data.index,1);
         const respondentNames = [];
-        for (const respondent of form3Data.tribunalRespondents){
+        for (const respondent of form3Data.manualRespondents){
             respondentNames.push(respondent.name);                
         }
         form3Data.respondentNames = respondentNames.join(', '); 
@@ -1087,9 +1089,9 @@ export default class Form3StyleOfProceeding extends Vue {
 
             const appellantNames = []
             const form3Data = this.form3Info;
-            form3Data.tribunalAppellants.push(newParty)
+            form3Data.manualAppellants.push(newParty)
 
-            for (const appellant of form3Data.tribunalAppellants){
+            for (const appellant of form3Data.manualAppellants){
                 appellantNames.push(appellant.name);                
             }
             form3Data.appellantNames = appellantNames.join(', '); 
@@ -1104,12 +1106,12 @@ export default class Form3StyleOfProceeding extends Vue {
             
             const appellantNames = [];
             const form3Data = this.form3Info;
-            form3Data.tribunalAppellants[index].organization = newParty.organization;
-            form3Data.tribunalAppellants[index].name = newParty.name; 
-            form3Data.tribunalAppellants[index].firstName = newParty.firstName;
-            form3Data.tribunalAppellants[index].lastName = newParty.lastName;
+            form3Data.manualAppellants[index].organization = newParty.organization;
+            form3Data.manualAppellants[index].name = newParty.name; 
+            form3Data.manualAppellants[index].firstName = newParty.firstName;
+            form3Data.manualAppellants[index].lastName = newParty.lastName;
 
-            for (const appellant of form3Data.tribunalAppellants){
+            for (const appellant of form3Data.manualAppellants){
                 appellantNames.push(appellant.name);                
             }
             form3Data.appellantNames = appellantNames.join(', '); 
@@ -1122,9 +1124,9 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public removeAppellant(data){   
         const form3Data = this.form3Info;       
-        form3Data.tribunalAppellants.splice(data.index,1);
+        form3Data.manualAppellants.splice(data.index,1);
         const appellantNames = [];
-        for (const appellant of form3Data.tribunalAppellants){
+        for (const appellant of form3Data.manualAppellants){
             appellantNames.push(appellant.name);                
         }
         form3Data.appellantNames = appellantNames.join(', '); 

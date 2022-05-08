@@ -119,8 +119,7 @@ export default class NoticeOfAppearanceRspToLeavePg extends Vue {
     
     @form2State.Action
     public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
-      
-    
+        
     public startNewDocument(){
         this.UpdateCurrentCaseId(null);
         this.$router.push({name: "start-form2" })

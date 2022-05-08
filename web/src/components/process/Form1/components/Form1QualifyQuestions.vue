@@ -377,7 +377,7 @@
 
                     <p>
                         If you are unable to pay the fees associated with the appeal, you may apply 
-                        for an order that no fees are payable under Rule 84 of the Court of Appeal Rules.  
+                        for an order that no fees are payable under   
                         <a  href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form19.pdf"
                             target="_blank"
                             class= "text-white">Rule 84 of the Court of Appeal Rules
@@ -401,7 +401,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form1";

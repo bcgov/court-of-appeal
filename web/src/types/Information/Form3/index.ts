@@ -32,30 +32,25 @@ export interface form3SearchInfoType {
 
 export interface form3QualificationInfoType {
     selfRepresenting: boolean;
-    appealingProvincialCourtOrder: boolean;
-    insideTimeLimit: boolean;
-    appealingBankruptcy: boolean;
-    appealingFeesWaived: boolean;
-    appealingSupremeCourtMaster: boolean;    
-    appealingSupremeCourtOrder: boolean;  
+    filedNoA: boolean;
+    vary: boolean;
     appealingScFlaDivorce: boolean;
-    appealInvolvesChild: boolean;
-    appealTribunal: boolean;
+    insideTimeLimit: boolean;
+    appealingSupremeCourtOrder: boolean;    
+    appealingFeesWaived: boolean;
 }
 
 export interface form3DataInfoType {
     selfRepresenting: boolean;
-    appealingProvincialCourtOrder: boolean;
-    insideTimeLimit: boolean;
-    appealingBankruptcy: boolean;
-    appealingFeesWaived: boolean;
-    appealingSupremeCourtMaster: boolean;    
-    appealingSupremeCourtOrder: boolean;  
+    filedNoA: boolean;
+    vary: boolean;
     appealingScFlaDivorce: boolean;
-    appealInvolvesChild: boolean;
-    appealTribunal: boolean;    
-    tribunalAppellants: partyInfoType[];
-    tribunalRespondents: partyInfoType[];
+    insideTimeLimit: boolean;
+    appealingSupremeCourtOrder: boolean;    
+    appealingFeesWaived: boolean;
+    requiresManualEntry: boolean;
+    manualAppellants: partyInfoType[];
+    manualRespondents: partyInfoType[];
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
