@@ -10,7 +10,8 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 4</b></div>
                 <div style="width:70%; font-size:14pt; text-align: left; padding-left: 0.75rem; line-height:1.75rem;">
-                    <b style="font-size:16pt;">NOTICE OF APPLICATION:</b><b class="ml-2" > RULES 13(a), 20(3) and (4), 54(a), 58(1), 59(1), 60(2), 61(2), 63(2)</b>
+                    <b style="font-size:16pt;">NOTICE OF APPLICATION</b>
+                    <b class="ml-2" > (RULES 13(a), 20(3) and (4), 54(a), 58(1), 59(1), 60(2), 61(2), 63(2) )</b>
                 </div>
             </div>         
         </div>
@@ -131,10 +132,10 @@
 <!-- <Comment To the Party(ies)> -->
         <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem -15px 0.5rem -15px; text-align: left; padding: 0.5rem;">
             <div style="font-weight: 700; margin-bottom: 0.75rem;">
-                To the party(ies) filing the application
+                To the person(s) filing the application (the applicant):
             </div>
             <div style="margin-bottom: 0.75rem;">
-                If your application is before a chambers judge check the 
+                If your application is before a chambers justice, check the 
                 <a 
                     target='_blank' 
                     href="https://www.bccourts.ca/court_of_appeal/hearing_list/lists/available%20chambers%20dates/Available%20Chambers%20Dates.pdf">
@@ -143,13 +144,12 @@
                  on the court website and the timelines for bringing your application under the rules.
             </div>
             <div style="margin-bottom: 0.75rem;">
-                If your application is before the court or the registrar contact the appropriate 
-                scheduler before completing this form.
+                If your application is before the court or the registrar, contact the 
+                appropriate scheduler before completing this form.
             </div>
             <div style="margin-bottom: 0.75rem;">
-                Communicate with the other party or parties to ensure they are available on the 
-                requested date. Chambers applications are to be no more than 30 minutes.
-
+                Communicate with the other person(s) to ensure they are available on the requested date. 
+                Chambers applications are to be no more than 30 minutes.
             </div>
         </div>
 
@@ -157,7 +157,7 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1.2rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name(s) of the party(ies) bringing the application</b>
+                <b class="ml-2">Name(s) of the person(s) bringing the application</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -171,7 +171,7 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name(s) of responding party(ies) to be served <br/>with the application</b>
+                <b class="ml-2">Name(s) of responding person(s) to be served <br/>with the application</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -263,7 +263,7 @@
 
             <div class="coa-arrow-box-left" style="line-height: 1rem; width:28%; margin:.5rem 0; height:9.0rem;">
                 <div class="ml-2">
-                    <b> Enter the order that you are seeking</b>
+                    <b> Enter the order(s) that you are seeking</b>
                     <i>
                         <br>E.g., “stay of proceedings” or “extension of time to file an appeal book” 
                         and any request with respect to costs. If you are seeking leave to appeal, 
@@ -419,7 +419,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

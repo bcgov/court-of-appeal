@@ -9,8 +9,8 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 3</b></div>
-                <div v-if="result.amending" style="width:75%; font-size:14pt;"><b>AMENDED NOTICE OF CROSS APPEAL: RULE 9(a)</b></div>
-                <div v-else style="width:75%; font-size:14pt;"><b>NOTICE OF CROSS APPEAL: RULE 9(a)</b></div>
+                <div v-if="result.amending" style="width:75%; font-size:14pt;"><b>AMENDED NOTICE OF CROSS APPEAL RULE 9(a)</b></div>
+                <div v-else style="width:75%; font-size:14pt;"><b>NOTICE OF CROSS APPEAL RULE 9(a)</b></div>
             </div>         
         </div>
        
@@ -106,7 +106,10 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name of the party(ies) who wish to cross appeal the order under appeal.</b>
+                <b class="ml-2">
+                    Name of the party(ies) who wish
+                    to cross appeal the order under appeal.
+                </b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -159,13 +162,14 @@
 <!-- <name-of-judge> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.65rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6rem;">
                 <div class="ml-2">
                     <b> Who made the order?</b>
                     <i>
-                        <br>Name the justice or decision maker
-                            who pronounced the order in the
-                            appeal you are cross appealing.
+                        <br>Name the justice or other decision
+                            maker who pronounced the order
+                            in the appeal you are cross
+                            appealing.
                     </i>
                 </div>
             </div>
@@ -345,7 +349,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.45rem 0; height:7.3rem;">
                 <div class="ml-2">
-                    <b>Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.</b>
+                    <b>Name(s) and address(es) within BC for service of the party(ies) filing cross appeal</b>
                     <i>
                         <br>If you have a lawyer, include the law firm’s address. Otherwise provide your own residential address.
                     </i>
@@ -406,7 +410,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 6</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF SETTLEMENT OR ABANDONMENT: RULE 46</b></div>
+                <div style="width:75%; font-size:14pt;"><b>NOTICE OF SETTLEMENT OR ABANDONMENT: <i>(RULE 46)</i></b></div>
             </div>         
         </div>
        
@@ -77,7 +77,7 @@
                     To the appellant(s):
                 </div>
                 <div>
-                    A person or party who abandons an appeal may be liable for the costs associated with the appeal.
+                    A party who abandons an appeal may be liable for the costs associated with the appeal.
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name of the party(ies) who wish to abandon an appeal or cross appeal</b>
+                <b class="ml-2">Name(s) of party(ies) wishing to abandon an appeal or cross appeal</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -196,7 +196,7 @@
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; line-height:1.1rem; height:5.75rem;">
                 <div class="ml-2">
                     <b>Date initiating document in the appeal or cross appeal you are abandoning was filed </b>
-                    <i><br>Notice of Appeal/Form 1 or Notice of Cross Appeal/Form 3.</i>
+                    <i><br>Notice of Appeal: Form 1 or Notice of Cross Appeal: Form 3.</i>
                 </div>
                 
             </div>
@@ -229,7 +229,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

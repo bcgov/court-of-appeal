@@ -10,7 +10,7 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 19</b></div>
                 <div style="width:75%; font-size:14pt;"><b>
-                    NOTICE OF WITHDRAWAL OF LAWYER: RULE 87(1)
+                    NOTICE OF WITHDRAWAL OF LAWYER: <i>(RULE 87(1))</i>
                 </b></div>
             </div>         
         </div> 
@@ -99,7 +99,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="font-weight: 600;">
-                    Name(s) of party(ies) the lawyer represents
+                    Name(s) of person(s) the lawyer represents
                 </div>               
             </div>
 
@@ -117,7 +117,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="font-weight: 600; line-height:1.1rem;">
-                    Last known address(es) for the party(ies) the lawyer represents
+                    Last known address(es) for the person(s) the lawyer represents
                 </div>                
             </div>
 
@@ -136,7 +136,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="font-weight: 600; line-height:1.1rem;">
-                    Last known phone number(s) of party(ies) the lawyer represents
+                    Last known phone number(s) of person(s) the lawyer represents
                 </div>                
             </div>
 
@@ -155,7 +155,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="font-weight: 600; line-height:1.1rem;">
-                    Last known email(s) for the party(ies) the lawyer represents
+                    Last known email(s) for the person(s) the lawyer represents
                 </div>                
             </div>
 
@@ -182,7 +182,7 @@
             <div style="width:3.28%;"></div>
 
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
@@ -202,13 +202,12 @@
 
         <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 1.5rem 0rem; text-align: left; padding: 0.5rem;">
             <div style="margin-bottom: 0.75rem;">
-                <b>To the party(ies) receiving this notice of withdrawal</b><br>
-                If you object to the lawyer withdrawing from this proceeding, you may file and serve an objection 
-                in Form 20 not more than seven days after being served with this notice of withdrawal. If you do not
-                file an objection within the required timeline the lawyer will be removed from the record.<br><br>
-                If no objection is filed, the other parties to the proceeding may serve all further documents 
-                on you by mail to your last known address(es) noted above. If you wish to change your address of 
-                service, complete part B of Form 18.
+                <b>To the person(s) receiving this notice of withdrawal:</b><br>
+                If you object to the lawyer’s withdrawal from this proceeding, you may file and serve an objection in Form 20 not more than
+                seven days after being served with this notice of withdrawal. If you do not file an objection within the required timeline the
+                lawyer will be removed from the record.<br><br>
+                If no objection is filed, the other parties to the proceeding may serve all further documents on you by mail to your last
+                known address(es) noted above. If you wish to change your address for service, complete Part B of Form 18.
             </div>                
         </div>
 

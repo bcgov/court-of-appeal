@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 2</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF APPEARANCE: RULES 7(1), 8(a), 10(1)</b></div>
+                <div style="width:75%; font-size:14pt;"><b>NOTICE OF APPEARANCE (RULES 7(1), 8(a), 10(1) )</b></div>
             </div>         
         </div>
        
@@ -77,7 +77,7 @@
         <div class="row mt-4" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Enter the name(s) of the party(ies) filing the notice of appearance</b>
+                <b class="ml-2">Name(s) of party(ies) filing the notice of appearance</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -93,10 +93,10 @@
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6.5rem;">
                 <div class="ml-2" style="line-height:1.1rem;">
                     
-                    <b>Name(s) and address(es) within BC for service of the respondent(s)</b>
+                    <b>Name(s) and address(es) within BC for service of party(ies).</b>
                     <i>
-                        If you have a lawyer, include the law firm's address. 
-                        Otherwise provide another address for service.
+                        If you have a lawyer, include the law firm's address; 
+                        otherwise provide another address for service.
                     </i>
                 </div>                
             </div>
@@ -132,11 +132,11 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6.5rem;">
                 <div class="ml-2" style="line-height:1.1rem;">
-                    <b >
-                        Email address(es) for the service of respondent(s)
+                    <b>
+                        Email address(es) for service of party(ies)
                     </b> 
                     <i >
-                        If you provide an email address, you consent to have documents served on you by email
+                        If you provide an email address, you consent to have documents served on you by email.
                     </i>               
                 </div>
             </div>
@@ -162,7 +162,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

@@ -265,7 +265,9 @@
                     <b-col cols="7" class="labels">
                         Is an application book required?   
                         <p class="content text-primary">
-                            You will need to submit an application book if XXXXX
+                            See Rule 13 for leave applications
+                            and Division 2 of Part 9 of the Rules
+                            for other applications.
                         </p>                               
                     </b-col>
                     <b-col class="ml-1 mt-2">   

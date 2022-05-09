@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 7</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF URGENT APPLICATION: RULE 57(2)</b></div>
+                <div style="width:75%; font-size:14pt;"><b>NOTICE OF URGENT APPLICATION: <i>(RULE 57(2))</i></b></div>
             </div>         
         </div>
        
@@ -74,14 +74,12 @@
 
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="font-weight: 700; margin-bottom: 0.75rem;">
-                    To the party(ies) filing the notice of urgent application:
+                    To the person(s) filing the notice of urgent application (the applicant):
                 </div>
                 <div>
-                    In cases of urgency you may apply for permission to bring an application 
-                    on shorter notice than is otherwise required under the Court of Appeal 
-                    Rules. You must obtain an urgent application hearing date from the 
-                    Registrar. Even in cases of urgency, you must give notice and attempt 
-                    to serve the application material on all parties.
+                    In cases of urgency you may apply for permission to bring an application on shorter notice than is otherwise required under
+                    the Court of Appeal Rules. You must obtain an urgent application hearing date from the registrar. Even in cases of urgency, you
+                    must give notice and attempt to serve the application material on all parties.
                 </div>
             </div>
 
@@ -91,7 +89,7 @@
         <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name of the party(ies) bringing the urgent application</b>
+                <b class="ml-2">Name of the person(s) bringing the urgent application</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -238,7 +236,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
