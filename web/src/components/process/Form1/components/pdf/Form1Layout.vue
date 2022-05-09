@@ -456,12 +456,11 @@
             <div class="coa-arrow-box-left" style="width:32%; margin:0.7rem 0px; height:8rem; background:#FFF;">
                 <div class="ml-2">
                     <b>
-                        Order you are seeking on appeal
+                        Order(s) you are seeking on appeal
                     </b>    
                     <i><br>
                         Briefly list the order(s) you will ask this Court to make on appeal.
-                        For example: “Set aside the trial judgment and order a new trial”.
-                        Include any order as to costs.
+                        For example: “Set aside the trial judgment and order a new trial”.                        
                     </i> 
                 </div>                       
             </div>
@@ -684,7 +683,7 @@
                 :check="result.involves.includes('Divorce Act')?'yes':''" 
                 shiftmark="1" 
                 marginLeft="0rem"
-                text="Divorce Act"/>  
+                text="Divorce Act (Canada)"/>  
         </div>
 
         <div style="font-size:8.75pt; margin-top: 1rem; width:19.5%;">              
@@ -752,7 +751,7 @@
                 </b>  
                 <i style="font-size:8.65pt;"><br>
                     Does this appeal involve the rights or interests of a child?
-                    E.g., parenting order
+                    E.g., parenting order.
                 </i>  
                
             </div> 
@@ -820,10 +819,10 @@
         <div class="coa-arrow-box-left" style="width:32%; margin:.35rem 0px; height:6rem;">
             <div class="ml-2">
                 <b>
-                    Name(s) and address(es) within BC for service of the appellant(s).
+                    Name(s) and address(es) within BC for service of the appellant(s)
                 </b>    
                 <i><br>
-                    If you have a lawyer, include the law firm’s address. Otherwise 
+                    If you have a lawyer, include the law firm’s address; otherwise 
                     provide your own residential address.
                 </i> 
             </div>                       
@@ -947,7 +946,7 @@
         </p>
         
         <p style="margin-top:0.75rem;">
-            <b>You are presumed to take no position if you fail to</b> file and serve a 
+            <b>You are presumed to take no position if you fail</b>  to file and serve a 
             Notice of Appearance within the time described above. The filing 
             registries for the British Columbia Court of Appeal are as follows.
         </p>    
@@ -956,7 +955,7 @@
             <div style="width:40%; padding:0;">
                 <div style="display:block; margin: 0 0 0.75rem 0;">Central Registry:</div>
                 <div style="display:block;">B.C. Court of Appeal</div>
-                <div style="display:block;">Suite 400, 800 Hornby Street</div>
+                <div style="display:block;">Suite 400, 800 Hornby St.</div>
                 <div style="display:block;">Vancouver BC V6Z 2C5</div>
             </div>
         

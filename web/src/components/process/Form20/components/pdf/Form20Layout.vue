@@ -10,7 +10,7 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 20</b></div>
                 <div style="width:75%; font-size:14pt;"><b>
-                    NOTICE OF OBJECTION TO WITHDRAWAL: RULE 87(2)
+                    NOTICE OF OBJECTION TO WITHDRAWAL: <i>(RULE 87(2))</i>
                 </b></div>
             </div>         
         </div> 
@@ -81,7 +81,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="height:1rem; font-weight: 600;">
-                    Name(s) of party(ies) objecting
+                    Name(s) of person(s) objecting
                 </div>               
             </div>
 
@@ -125,7 +125,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

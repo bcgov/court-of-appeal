@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 5</b></div>
-                <div style="width:75%; font-size:14pt;"><b>NOTICE OF HEARING OF APPEAL: RULE 33(2), 34(2)</b></div>
+                <div style="width:75%; font-size:14pt;"><b>NOTICE OF HEARING OF APPEAL: (RULE 33(2), 34(2))</b></div>
             </div>         
         </div> 
 
@@ -112,13 +112,18 @@
 
             <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center">{{result.dateOfAppealHearing | beautify-date-dd/mm/yyyy}}</div>           
             
-            <div style="width:10%;"> 
-                <div class="mt-2"  style="text-align:center" >at</div> 
+            <div style="width:5%;"></div>
+            
+            <div class="coa-help-box" style="width:35%; height:2.5rem; margin:0.1rem 0 0 0; text-align:center; background: #E8E8E8;">
+                time to be confirmed by court scheduler
             </div>
+            <!-- <div style="width:10%;"> 
+                <div class="mt-2"  style="text-align:center" >at</div> 
+            </div> -->
             
-            <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
+            <!-- <div class="coa-text-box-center" style="width:20%; font-weight: 700; text-align:center;">{{result.timeOfAppealHearing | beautify-time-am-pm}}</div>
             
-            <div style="width:14.25%;"></div>  
+            <div style="width:14.25%;"></div>   -->
 
         </div>
 
@@ -180,7 +185,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 9</b></div>
-                <div style="width:75%; font-size:14pt;"><b>REQUISITION: RULE 65(2) and (5)</b></div>
+                <div style="width:75%; font-size:14pt;"><b>REQUISITION <i>(RULE 65(2) and (5))</i></b></div>
             </div>         
         </div> 
 
@@ -74,7 +74,7 @@
 
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="margin-bottom: 0.75rem;">
-                    This form may be used for general requests, including but not limited to: setting a new application 
+                    This form may be used for general requests, including but not limited to setting a new application 
                     hearing date for matters adjourned generally and adjourning matters by consent.
                 </div>                
             </div>
@@ -85,7 +85,7 @@
         <div class="row mt-4" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name of the party(ies) filing the requisition</b>
+                <b class="ml-2">Name of the person(s) filing the requisition</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -130,7 +130,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

@@ -9,7 +9,9 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 8</b></div>
-                <div style="width:72%; font-size:14pt; text-align:left; padding-left:1rem; line-height:1.65rem;"><b>NOTICE OF APPLICATION TO VARY AN ORDER OF A JUSTICE: RULE 62(2)</b></div>
+                <div style="width:72%; font-size:14pt; text-align:left; padding-left:1rem; line-height:1.65rem;"><b>
+                    NOTICE OF APPLICATION TO VARY AN ORDER OF A JUSTICE: <i>(RULE 62(2))</i>
+                </b></div>
             </div>         
         </div>
        
@@ -57,7 +59,7 @@
                     <div class="ml-2">
                         <b> Appellant(s)</b>
                         <i>
-                            <br>List the name(s) of the appellant(s) named on Form 1: Notice of Appeal
+                            <br>List the name(s) of the appellant(s) named on Form 1: Notice of Appeal.
                         </i>
                     </div> 
                 </div>
@@ -76,7 +78,7 @@
                     <div class="ml-2">
                         <b> Respondent(s)</b>
                         <i>
-                            <br>List the name(s) of the respondent(s) named on Form 1: Notice of Appeal
+                            <br>List the name(s) of the respondent(s) named on Form 1: Notice of Appeal.
                         </i>
                     </div>  
                 </div>
@@ -90,7 +92,7 @@
 
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin:1rem 0.5rem 0.5rem 0.5rem; text-align: left; padding: 0.5rem;">
                 <div style="font-weight: 700; margin-bottom: 0.75rem;">
-                    To the party(ies) filing the application
+                    To the person(s) filing the application
                 </div>
                 <div style="margin-bottom: 0.75rem;">
                     An application to vary is heard by a division of the court. 
@@ -98,7 +100,7 @@
                     date and time.
                 </div>
                 <div>
-                    Communicate with the other party or parties to ensure they 
+                    Communicate with the other person(s) to ensure they 
                     are available on the requested date. Applications to vary 
                     are to be no more than 30 minutes.
                 </div>
@@ -111,7 +113,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.6rem 0; height:5.5rem;">
                 <div class="ml-2">
-                    <b> Name of the party(ies) bringing the application.</b>
+                    <b> Name of the person(s) bringing the application</b>
                     <i>
                         <br>Include name of law firm if represented.
                     </i>
@@ -180,7 +182,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 

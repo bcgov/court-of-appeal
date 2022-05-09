@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 16</b></div>
-                <div style="width:75%; font-size:14pt;"><b>OFFER TO SETTLE COSTS: RULE 76(1)</b></div>
+                <div style="width:75%; font-size:14pt;"><b>OFFER TO SETTLE COSTS: <i>(RULE 76(1))</i></b></div>
             </div>         
         </div>
        

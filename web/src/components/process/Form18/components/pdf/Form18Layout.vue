@@ -10,7 +10,7 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white; display:flex; align-items:center; justify-content:center;"><b>FORM 18</b></div>
                 <div style="width:75%; font-size:14pt; line-height:2rem;"><b>
-                    NOTICE OF CHANGE OF REPRESENTATION/CHANGE OF ADDRESS FOR SERVICE: RULE 86
+                    NOTICE OF CHANGE OF REPRESENTATION/CHANGE OF ADDRESS FOR SERVICE: <i>(RULE 86)</i>
                 </b></div>
             </div>         
         </div> 
@@ -76,8 +76,8 @@
 
             <div style="border: 1px solid #E8E8E8; background: #E8E8E8; font-size: 10pt; margin: 0.5rem 0.5rem; text-align: left; padding: 0.75rem 0.5rem 0rem 0.5rem;">
                 <div style="margin-bottom: 0.75rem;">
-                    If you are changing representation, complete <b>Part A</b> and <b>Part B</b>. If you are only changing 
-                    your address for service, complete <b>Part B</b> only. If you are a lawyer seeking to withdraw 
+                    If you are changing representation, complete Part A and Part B. If you are only changing 
+                    your address for service, complete Part B only. If you are a lawyer seeking to withdraw 
                     from the record without your client's permission, use Form 19.
                 </div>                
             </div>
@@ -90,9 +90,8 @@
             <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0;  height:6.5rem;">
                 <div class="ml-2">
                     <b>
-                        Enter the name(s) of the party(ies) filing the 
-                        notice of change of representation/change of 
-                        address for service
+                        Name(s) of person(s) filing the notice of change of
+                        representation/change of address for service
                     </b>                          
                 </div>
             </div>
@@ -211,7 +210,7 @@
                     <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0px; height:6.5rem;">
                         <div class="ml-2">
                             <b>
-                                Name(s) and residential or business address(es) within B.C. for service of party(ies) completing this form
+                                Name(s) and residential or business address(es) within B.C. for service of person(s) completing this form
                             </b>    
                             <i><br>Include law firm if represented.</i> 
                         </div>                       
@@ -231,7 +230,7 @@
 
                     <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0; height:3.5rem;">
                         <div class="ml-2" style="font-weight: 700;">
-                            Phone number(s) of the party(ies) completing this form
+                            Phone number(s) of the person(s) completing this form
                         </div>               
                     </div>
 
@@ -249,7 +248,7 @@
 
                     <div class="coa-arrow-box-left" style="width:32%; margin:.5rem 0;  height:6.5rem;">
                         <div class="ml-2">
-                            <b>Email address(es)</b><b style="font-size:8pt;"> for service of the party(ies) completing this form</b>
+                            <b>Email address(es)</b><b style="font-size:8pt;"> for service of the person(s) completing this form</b>
                             <i><br>If you provide an email address you consent to have documents served on you by email.</i>      
                         </div>
                     </div>
