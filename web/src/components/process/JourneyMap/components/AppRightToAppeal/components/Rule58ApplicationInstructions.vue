@@ -8,7 +8,7 @@
             you must complete the following:  
         </p>
        
-        <ol class="mt-3">
+        <ol class="mt-1">
             <li>Obtain an application hearing date from the registrar.</li>
             <b-row class="mt-2 ml-1 mr-4 bg-warning warning-message-row">
                 <b-col cols="1">
@@ -27,12 +27,13 @@
                 Complete either the Online form or the .PDF. Click the document name for more information.  
                 <ul class="mt-2">
                     <li>
-                        <b-row class="my-1" style="width: 90%;">
+                        <b-row style="width: 90%;">
                             <b-col cols="10">
                                 Notice of Application (Form 4)                                
                             </b-col>                                
                             <b-col cols="2" class="p-0" >
                                 <b-button
+                                    v-if="displayButton"
                                     @click="startNewForm4Document"
                                     target="_blank"                                                                                
                                     class="p-1 bg-white text-primary border-primary online-form-button">Online form
@@ -40,18 +41,18 @@
                             </b-col>
                         </b-row>
                     </li> 
-                    <li class="my-2">
+                    <li>
                         Application Book (as per completion instructions)
                     </li>
                     <li>
                         Supporting affidavits (if any) 
                     </li>
-                    <li class="my-2">
+                    <li>
                         Written argument (if any)
                     </li>
                 </ul>
             </li> 
-            <li class="my-2">
+            <li>
                 File the documents with the registry.
             </li>
             <li>
@@ -63,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form4";
@@ -72,6 +73,9 @@ const form4State = namespace("Form4");
 @Component
 export default class Rule58ApplicationInstructions extends Vue {   
 
+    @Prop({required: true})
+    displayButton!: boolean;
+    
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
         

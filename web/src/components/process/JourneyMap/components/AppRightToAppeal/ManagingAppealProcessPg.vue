@@ -14,12 +14,16 @@
             </b-col>         
         </b-row>       
 
-        <b-row v-if="showAppIntroInfo" class="mt-4" >
+        <b-row v-if="showAppIntroInfo" class="mt-2" >
 
             <p>
                 If you need to make an application, please select the items 
                 below that you will be applying for to see the instructions 
-                of what will be required.
+                of what will be required.<br>            
+                If you select more than one option from the list below, you 
+                only need to complete one Notice of Application form (Form 4); 
+                however, you will need to complete the application requirements 
+                and steps outlined in the instructions for all items selected.
             </p>
             <p class="step-title-column ml-5">I am applying for:</p>
             <p class="ml-5 mt-2">
@@ -43,34 +47,35 @@
                 class="step-title-column">Applications Requirements or Steps</p>
 
             <div v-if="getAppRules().includes('54')">
-                <rule-54-application-instructions/>
-            </div>
-
-            <div v-if="getAppRules().includes('59')">
-                <rule-59-application-instructions/>
-            </div>
-
-            <div v-if="getAppRules().includes('58')">
-                <rule-58-application-instructions/>
+                <rule-54-application-instructions :displayButton='form4Button == 54'/>
             </div>            
 
+            <div v-if="getAppRules().includes('58')">
+                <rule-58-application-instructions :displayButton='form4Button == 58'/>
+            </div>    
+
+            <div v-if="getAppRules().includes('59')">
+                <rule-59-application-instructions :displayButton='form4Button == 59'/>
+            </div>        
+
             <div v-if="getAppRules().includes('60')">
-                <rule-60-application-instructions/>
+                <rule-60-application-instructions :displayButton='form4Button == 60'/>
             </div>
 
             <div v-if="getAppRules().includes('61')">
-                <rule-61-application-instructions/>
+                <rule-61-application-instructions :displayButton='form4Button == 61'/>
             </div>
 
             <div v-if="getAppRules().includes('63')">
-                <rule-63-application-instructions/>
+                <rule-63-application-instructions :displayButton='form4Button == 63'/>
             </div>
 
         </b-row>
 <!-- urgent applications -->
         <b-row 
-            :class="showAppIntroInfo?'mt-2':'mt-4'" 
-            :style="showAppIntroInfo?'padding-top: 1.75rem;':'padding-top: 0.75rem;'">            
+            :class="showAppIntroInfo?'':'mt-4'" 
+            style="padding-top: 0.75rem;"
+            >            
             <b-col cols="11" class="step-title-column pl-0">
                 Urgent Applications
             </b-col>   
@@ -124,7 +129,7 @@
         <b-row v-if="showRespIntroInfo" class="mt-4" >
 
             <p>
-                If you need to make an application, please select the items 
+                If you need to respond to an application, please select the items 
                 below that you will be applying for to see the instructions 
                 of what will be required.
             </p>
@@ -403,8 +408,10 @@ export default class ManagingAppealProcessPg extends Vue {
     responses = [];
     updatedApps = 0;
     updatedResps = 0;
-    appStepsLength = 31;
+    appStepsLength = 33;
     respStepsLength = 16;
+    appUrgentSectionClass = '';
+    appUrgentSectionStyle = '';
     Rule54 = [
         'adjournment', 'consolidate', 'directions', 'dismissalChambers', 
         'dismissalOther', 'extendOther', 'extendCrossAppeal', 
@@ -415,36 +422,77 @@ export default class ManagingAppealProcessPg extends Vue {
     Rule61 = ['intervener'];
     Rule63 = ['varying'];
 
+    form4Button = 0;
+
     mounted(){
-        this.appStepsLength = 31;
+        this.appStepsLength = 33;
         this.respStepsLength = 31;
     }
 
     public updateApps(){          
-        this.appStepsLength = 31;
+        this.appStepsLength = 33;
+        this.form4Button = 0;
 
         if (this.getAppRules().includes('54')){
-            this.appStepsLength = this.appStepsLength + 29;
+            this.appStepsLength = this.appStepsLength + 27;
+            if (this.form4Button == 0){
+                this.form4Button = 54;
+            }
         }
 
         if (this.getAppRules().includes('58')){
-            this.appStepsLength = this.appStepsLength + 33;
+            this.appStepsLength = this.appStepsLength + 31;
+            if (this.form4Button == 0){30
+                this.form4Button = 58;
+            }
         }
 
         if (this.getAppRules().includes('59')){
-            this.appStepsLength = this.appStepsLength + 34;
+            this.appStepsLength = this.appStepsLength + 31;
+            if (this.form4Button == 0){
+                this.form4Button = 59;
+            }
         }
 
         if (this.getAppRules().includes('60')){
-            this.appStepsLength = this.appStepsLength + 42;
+            this.appStepsLength = this.appStepsLength + 39;
+            if (this.form4Button == 0){
+                this.form4Button = 60;
+            }
         }
 
         if (this.getAppRules().includes('61')){
-            this.appStepsLength = this.appStepsLength + 29;
+            this.appStepsLength = this.appStepsLength + 28;
+            if (this.form4Button == 0){
+                this.form4Button = 61;
+            }
         }      
 
         if (this.getAppRules().includes('63')){
-            this.appStepsLength = this.appStepsLength + 29;
+            this.appStepsLength = this.appStepsLength + 28;
+            if (this.form4Button == 0){
+                this.form4Button = 63;
+            }
+        }
+
+        if (this.getAppRules().length == 2){
+            this.appStepsLength = this.appStepsLength - 4;            
+        }
+
+        if (this.getAppRules().length == 3){
+            this.appStepsLength = this.appStepsLength - 7;            
+        }
+
+        if (this.getAppRules().length == 4){
+            this.appStepsLength = this.appStepsLength - 10;            
+        }
+
+        if (this.getAppRules().length == 5){
+            this.appStepsLength = this.appStepsLength - 15;            
+        }
+
+        if (this.getAppRules().length == 6){
+            this.appStepsLength = this.appStepsLength - 18;            
         }
 
         if (this.showAppIntroInfo){
