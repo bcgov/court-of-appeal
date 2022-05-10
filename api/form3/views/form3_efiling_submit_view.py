@@ -17,6 +17,7 @@ from api.efiling import EFilingPackaging, EFilingSubmission, EFilingParsing
 from api.utils import convert_document_to_multi_part
 
 from core.utils.json_message_response import JsonMessageResponse
+from core.attachment_files_util import (_get_validation_errors, _unique_file_names, _process_incoming_files_and_documents)
 
 logger = logging.getLogger(__name__)
 no_record_found = "No record found."
@@ -97,14 +98,29 @@ class Form3EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, notice_of_cross_appeal_id):
+        
+        uid = request.user.id
+      
+        document_type = request.POST.get("document_type")
+        documents_string = request.POST.get("documents")
+        attachment_files = request.FILES.getlist("files")
 
-        if 'document_type' in request.data:
-            document_type = request.data['document_type']
-        else: 
+        if not document_type:
             document_type = "NCA" # type Form3 for Efiling
 
-            
-        uid = request.user.id
+        # Validations.
+        validations_errors = _get_validation_errors(
+            attachment_files, documents_string
+        )
+        if validations_errors:
+            return validations_errors
+
+        # Unique names.
+        attachment_files = _unique_file_names(attachment_files)
+
+        # Data conversion.
+        incoming_documents = json.loads(documents_string)    
+        
 
         notice_of_cross_appeal = self.get_notice_of_cross_appeal_for_user(notice_of_cross_appeal_id, uid)        
         if not notice_of_cross_appeal:
@@ -113,7 +129,13 @@ class Form3EFilingSubmitView(generics.GenericAPIView):
         if notice_of_cross_appeal.package_number or notice_of_cross_appeal.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(notice_of_cross_appeal, document_type)               
+        outgoing_documents = self._get_pdf_content(notice_of_cross_appeal, document_type)
+
+        outgoing_documents = _process_incoming_files_and_documents(
+            incoming_documents, attachment_files, outgoing_documents
+        )
+        del attachment_files 
+                       
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
             request, notice_of_cross_appeal, outgoing_documents, document_type
         )

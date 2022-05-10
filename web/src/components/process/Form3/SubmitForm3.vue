@@ -374,7 +374,28 @@ export default class SubmitForm3 extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-
+    .btnfile {
+        margin:0 0 0.5rem 0;
+        padding: 0;
+        width: 25px;
+        height: 25px;       
+        border-radius: 17px; 
+        background: rgb(4, 153, 49);
+        font-size: 30px;
+        color: white;
+    }
+    .btnfile:hover {
+        background-color: #103c6b;
+        color: white;
+    }
+    #drop-area {
+        border: 2px dashed #ccc;
+        border-radius: 20px;        
+        margin: 10px 1.5rem;
+        padding: 0;
+    }
+    #drop-area.highlight {
+    border-color: purple;
+    }
 
 </style>
