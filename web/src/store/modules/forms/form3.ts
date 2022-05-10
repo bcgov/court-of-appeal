@@ -1,3 +1,4 @@
+import { supportingDocumentInfoType } from '@/types/Common';
 import { form3DataInfoType, form3FormsJsonDataType } from '@/types/Information/Form3';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -9,6 +10,7 @@ class Form3 extends VuexModule {
     public form3FormsJson: form3FormsJsonDataType[] = [];
     public form3Info = {} as form3DataInfoType; 
     public currentNoticeOfCrossAppealId = null; 
+    public supportingDocuments: supportingDocumentInfoType[] = [];
 
     @Mutation
     public setForm3FormsJson(form3FormsJson: form3FormsJsonDataType[]): void {   
@@ -36,6 +38,15 @@ class Form3 extends VuexModule {
     public UpdateCurrentNoticeOfCrossAppealId(newCurrentNoticeOfCrossAppealId: string): void {
         this.context.commit('setCurrentNoticeOfCrossAppealId', newCurrentNoticeOfCrossAppealId);
     }  
+
+    @Mutation
+    public setSupportingDocuments(supportingDocuments): void {
+        this.supportingDocuments = supportingDocuments;
+    }
+    @Action
+    public UpdateSupportingDocuments(newSupportingDocuments) {
+        this.context.commit("setSupportingDocuments", newSupportingDocuments);
+    }   
     
 }
 

@@ -91,7 +91,7 @@ export default class ChecklistForm1 extends Vue {
             if(response?.data){
                 const accountInfo = response.data
                 this.UpdateAccountInfo(accountInfo);
-                this.businessAccount = accountInfo.accountUsers.length>1;
+                this.businessAccount = accountInfo.accountUsers?.length>1;
             }
                 
         },(err) => {
@@ -124,7 +124,7 @@ export default class ChecklistForm1 extends Vue {
         }
         this.UpdateForm1Info(form1SubmissionData);
 
-        this.businessAccount = this.accountInfo.accountUsers.length>1;
+        this.businessAccount = this.accountInfo.accountUsers?.length>1;
 
         this.deleteApplication();
 

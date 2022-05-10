@@ -192,7 +192,7 @@ export default class SuccessSubmitForm4 extends Vue {
         });    
     }    
 
-     public getForm4Data(fileNumber) {        
+    public getForm4Data(fileNumber) {        
        
         this.$http.get('/form4/forms/'+fileNumber)
         .then((response) => {

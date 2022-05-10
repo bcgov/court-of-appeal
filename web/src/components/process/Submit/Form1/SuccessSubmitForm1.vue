@@ -18,7 +18,9 @@
                 </b-row>
                 <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic;">
                     Please note that <span style="font-weight: 700; margin:0 0.25rem;"> you must file and serve the Notice of Appeal form </span> 
-                    on each Respondent within 30 days after the initial court order is declared.
+                    on each Respondent within 30 days after the initial 
+                    <span v-if="form1Data.appealTribunal"> tribunal order is made unless another enactment specifies another time period.</span>
+                    <span class="ml-2" v-else> court order is declared.</span>
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
@@ -96,7 +98,7 @@ import { Component, Vue, Prop} from 'vue-property-decorator';
 
 import Form1ProcessHeader from "@/components/process/Form1/components/Form1ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form1StatusInfoType } from '@/types/Information/Form1';
+import { form1DataInfoType, form1StatusInfoType } from '@/types/Information/Form1';
 
 @Component({
     components:{
@@ -111,6 +113,7 @@ export default class SuccessSubmitForm1 extends Vue {
     stepsCompleted = {} as form1StatusInfoType;  
     mountedData = false; 
 
+    form1Data = {} as form1DataInfoType;
 
     mounted() {
         this.mountedData = false;
@@ -140,12 +143,29 @@ export default class SuccessSubmitForm1 extends Vue {
 
         this.$http.put(url, data, header)
         .then(res => {                            
-            this.mountedData = true;
+            this.getForm1Data(newPackageInfo.fileNumber);
         }, err => {
             console.error(err);
             this.mountedData = true;
         });    
     }    
+
+    public getForm1Data(fileNumber) {        
+       
+        this.$http.get('/form1/forms/'+fileNumber)
+        .then((response) => {
+            if(response?.data?.data){            
+                            
+                this.form1Data = response.data.data
+                console.log(this.form1Data)
+                
+                this.mountedData = true;
+            }
+                
+        },(err) => {
+            console.log(err)        
+        });      
+    }
 
     public done() {
         this.$router.push({name: "dashboard" }) 
