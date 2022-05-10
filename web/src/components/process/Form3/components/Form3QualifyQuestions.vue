@@ -370,7 +370,7 @@ export default class Form1QualifyQuestions extends Vue {
 
 
     public qualificationResponse(){ 
-        const qualified = this.checkStates()
+        const qualified = this.checkStates() && this.qualificationInfo.filedNoA;
         this.$emit('disableContinue', !qualified, this.qualificationInfo);          
         this.update++;            
     }

@@ -1,3 +1,4 @@
+import { supportingDocumentInfoType } from '@/types/Common';
 import { userAccessInfoType, form1StatesInfoType, form1DataInfoType, form1FormsJsonDataType} from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -11,7 +12,8 @@ class Information extends VuexModule {
     public form1AccessInfo: userAccessInfoType[] = [];
     public form1InfoStates = {} as form1StatesInfoType;   
     public currentNoticeOfAppealId = null;    
-    public form1ManualSopOrder: number[] = []
+    public form1ManualSopOrder: number[] = [];
+    public supportingDocuments: supportingDocumentInfoType[] = [];
 
     @Mutation
     public setForm1FormsJson(form1FormsJson: form1FormsJsonDataType[]): void {   
@@ -66,7 +68,15 @@ class Information extends VuexModule {
     public UpdateForm1ManualSopOrder(newForm1ManualSopOrder: number[]): void {
         this.context.commit('setForm1ManualSopOrder', newForm1ManualSopOrder);
     }
-    
+
+    @Mutation
+    public setSupportingDocuments(supportingDocuments): void {
+        this.supportingDocuments = supportingDocuments;
+    }
+    @Action
+    public UpdateSupportingDocuments(newSupportingDocuments) {
+        this.context.commit("setSupportingDocuments", newSupportingDocuments);
+    }    
 }
 
 export default Information

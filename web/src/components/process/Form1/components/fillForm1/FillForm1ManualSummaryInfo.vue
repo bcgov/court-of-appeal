@@ -7,7 +7,7 @@
             <b-col cols="7" class="labels">
                 Type of Tribunal:                                
             </b-col>
-            <b-col>
+            <b-col>                
                 <b-form-select                
                     style="width:100%"              
                     v-model="tribunalType" 
@@ -194,90 +194,97 @@ export default class FillForm1ManualSummaryInfo extends Vue {
 
     @Prop({required: true})
     manualNorm!: boolean
-
     
-    dataReady = false;
-    //TODO: add tribunal types
-    tribunalTypes = [
-    { text: 'Tribunal', value: 'a', disabled: true },
-    "British Columbia Utilities Commission",    
-    "Building Code Appeal Board", 
-    "Civil Resolution Tribunal", 
-    "Community Care and Assisted Living Appeal Board", 
-    "Disciplinary and Professional Conduct Board", 
-    "Employment and Assistance Appeal Board", 
-    "Employment Standards Tribunal", 
-    "Enviornmental Appeal Board", 
-    "Expropriation Compensation Board", 
-    "Financial Services Tribunal", 
-    "Forest Appeals Commission", 
-    "Forest Practices Board", 
-    "Health Care Practitioners' Special Special Committee for Audit Hearings", 
-    "Health Professions Review Board", 
-    "Hospital Appeal Board", 
-    "Industry Training Appeal Board", 
-    "Labour Relations Board", 
-    "Mental Health Review Board", 
-    "Oli and Gas Appeal Tribunal", 
-    "Property Assessment Appeal Board", 
-    "Property Assessment Review Panels", 
-    "Safety Standards Appeal Board", 
-    "Surface Rights Board", 
-    "Workers' Compensation Appeal Tribunal", 
-    "Other",
-    { text: 'Regulatory Bodies', value: 'b', disabled: true },
-    "Applied Science Technologists and Technicians of BC", 
-    "Architectural Institute of BC", 
-    "Assayer Certification Board of Examiners", 
-    "Association of BC Land Surveyors", 
-    "Association of British Columbia Forest Professionals", 
-    "Association of Professional Engineers and Geoscientists of BC", 
-    "British Columbia Broiler Hatching Egg Commission", 
-    "British Columbia Chicken Marketing Board", 
-    "British Columbia College of Social Workers", 
-    "British Columbia Cranberry Marketing Commission", 
-    "British Columbia Egg Marketing Board", 
-    "British Columbia Ferry Commission", 
-    "British Columbia Hog Marketing Commission", 
-    "British Columbia Institute of Agrologists", 
-    "British Columbia Milk Marketing Board", 
-    "British Columbia Securities Commission", 
-    "British Columbia Teachers' Council", 
-    "British Columbia Turkey Marketing Board", 
-    "British Columbia Vegetable Marketing Commission", 
-    "British Columbia Society of Landscape Architects", 
-    "Board of Examiners of the British Columbia Registered Music Teachers Association", 
-    "British Columbia Container Trucking Commissioner", 
-    "Chartered Professional Accountants of British Columbia", 
-    "College of Applied Biology", 
-    "Consumer Protection BC", 
-    "Emergency Medical Assistants Licensing Board", 
-    "Insurance Council of British Columbia", 
-    "Land Title and Survey Authority of British Columbia", 
-    "Law Society of British Columbia", 
-    "Notaries Public Board of Examiners", 
-    "British Columbia College of Nurses and Midwives",
-    "College of Chiropractors of British Columbia",
-    "College of Dental Hygienists of British Columbia",
-    "College of Dental Surgeons of British Columbia",
-    "College of Dental Technicians of British Columbia",
-    "College of Denturists of British Columbia",
-    "College of Dietitians of British Columbia",
-    "College of Massage Therapists of British Columbia",
-    "College of Naturopathic Physicians of British Columbia",
-    "College of Occupational Therapists of British Columbia",
-    "College of Opticians of British Columbia",
-    "College of Optometrists of British Columbia",
-    "College of Pharmacists of British Columbia",
-    "College of Physical Therapists of British Columbia",
-    "College of Physicians and Surgeons of British Columbia",
-    "College of Psychologists of British Columbia",
-    "College of Speech & Hearing Health Professionals of BC",
-    "College of Traditional Chinese Medicine Practioners and Acupuncturists of British Columbia",
-    "College of Veterinarians of British Columbia",
-    "Real Estate Errors and Omissions Insurance Corporation",
-    "WorkSafeBC",
-    "Vehicle Sales Authority of British Columbia"
+    dataReady = false;    
+    tribunalTypes = [    
+        {
+            label: 'Tribunal',
+            options: [
+                "British Columbia Utilities Commission",    
+                "Building Code Appeal Board", 
+                "Civil Resolution Tribunal", 
+                "Community Care and Assisted Living Appeal Board", 
+                "Disciplinary and Professional Conduct Board", 
+                "Employment and Assistance Appeal Board", 
+                "Employment Standards Tribunal", 
+                "Enviornmental Appeal Board", 
+                "Expropriation Compensation Board", 
+                "Financial Services Tribunal", 
+                "Forest Appeals Commission", 
+                "Forest Practices Board", 
+                "Health Care Practitioners' Special Special Committee for Audit Hearings", 
+                "Health Professions Review Board", 
+                "Hospital Appeal Board", 
+                "Industry Training Appeal Board", 
+                "Labour Relations Board", 
+                "Mental Health Review Board", 
+                "Oli and Gas Appeal Tribunal", 
+                "Property Assessment Appeal Board", 
+                "Property Assessment Review Panels", 
+                "Safety Standards Appeal Board", 
+                "Surface Rights Board", 
+                "Workers' Compensation Appeal Tribunal", 
+                "Other"
+            ]
+        },
+        {
+            label: 'Regulatory Bodies',
+            options: [
+                "Applied Science Technologists and Technicians of BC", 
+                "Architectural Institute of BC", 
+                "Assayer Certification Board of Examiners", 
+                "Association of BC Land Surveyors", 
+                "Association of British Columbia Forest Professionals", 
+                "Association of Professional Engineers and Geoscientists of BC", 
+                "British Columbia Broiler Hatching Egg Commission", 
+                "British Columbia Chicken Marketing Board", 
+                "British Columbia College of Social Workers", 
+                "British Columbia Cranberry Marketing Commission", 
+                "British Columbia Egg Marketing Board", 
+                "British Columbia Ferry Commission", 
+                "British Columbia Hog Marketing Commission", 
+                "British Columbia Institute of Agrologists", 
+                "British Columbia Milk Marketing Board", 
+                "British Columbia Securities Commission", 
+                "British Columbia Teachers' Council", 
+                "British Columbia Turkey Marketing Board", 
+                "British Columbia Vegetable Marketing Commission", 
+                "British Columbia Society of Landscape Architects", 
+                "Board of Examiners of the British Columbia Registered Music Teachers Association", 
+                "British Columbia Container Trucking Commissioner", 
+                "Chartered Professional Accountants of British Columbia", 
+                "College of Applied Biology", 
+                "Consumer Protection BC", 
+                "Emergency Medical Assistants Licensing Board", 
+                "Insurance Council of British Columbia", 
+                "Land Title and Survey Authority of British Columbia", 
+                "Law Society of British Columbia", 
+                "Notaries Public Board of Examiners", 
+                "British Columbia College of Nurses and Midwives",
+                "College of Chiropractors of British Columbia",
+                "College of Dental Hygienists of British Columbia",
+                "College of Dental Surgeons of British Columbia",
+                "College of Dental Technicians of British Columbia",
+                "College of Denturists of British Columbia",
+                "College of Dietitians of British Columbia",
+                "College of Massage Therapists of British Columbia",
+                "College of Naturopathic Physicians of British Columbia",
+                "College of Occupational Therapists of British Columbia",
+                "College of Opticians of British Columbia",
+                "College of Optometrists of British Columbia",
+                "College of Pharmacists of British Columbia",
+                "College of Physical Therapists of British Columbia",
+                "College of Physicians and Surgeons of British Columbia",
+                "College of Psychologists of British Columbia",
+                "College of Speech & Hearing Health Professionals of BC",
+                "College of Traditional Chinese Medicine Practioners and Acupuncturists of British Columbia",
+                "College of Veterinarians of British Columbia",
+                "Real Estate Errors and Omissions Insurance Corporation",
+                "WorkSafeBC",
+                "Vehicle Sales Authority of British Columbia"
+            ]
+        }  
+    
     ];
     otherTribunalType = "";
     tribunalType = "";
@@ -296,7 +303,7 @@ export default class FillForm1ManualSummaryInfo extends Vue {
 
         if (this.manualSummaryInfo.tribunalType?.trim().length>0){
 
-            if (this.tribunalTypes.includes(this.manualSummaryInfo.tribunalType)){
+            if (this.tribunalTypes[0].options.includes(this.manualSummaryInfo.tribunalType) || this.tribunalTypes[1].options.includes(this.manualSummaryInfo.tribunalType)){
                 this.tribunalType = this.manualSummaryInfo.tribunalType;
                 this.otherTribunalType = '';            
             } else {
@@ -322,8 +329,8 @@ export default class FillForm1ManualSummaryInfo extends Vue {
         } else {
             form1.tribunalType = this.tribunalType;
         }
-        //TODO  determine this
-        if (form1.appealingScFlaDivorce && form1.lowerCourtRegistryId){
+        
+        if ((this.manualNorm || this.manualNTrib) && form1.lowerCourtRegistryId){
             const selectedLocation: locationsInfoType = this.locationsInfo.filter(location=>location.id == form1.lowerCourtRegistryId)[0]
             form1.lowerCourtRegistryName = selectedLocation.name;
         }

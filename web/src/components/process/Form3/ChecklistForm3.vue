@@ -17,7 +17,7 @@
             style="width: 30%; height: 3rem; padding:0;"
             class="mt-4 p-0"
             v-b-tooltip.hover.top.v-warning
-            :title="disableContinue?'In order to proceed, you must respond to all questions and answer No to question 6 above.':''">
+            :title="disableContinue?'In order to proceed, you must respond to all questions and answer Yes to question 2 above.':''">
 
             <b-button 
                 :class="(disableContinue?inactiveButtonClass:activeButtonClass) + ' ml-4 '"

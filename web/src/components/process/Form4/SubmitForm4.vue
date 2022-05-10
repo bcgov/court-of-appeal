@@ -9,7 +9,16 @@
 
             <b-row class="ml-2" style="font-size: 2rem;">
                 Submit through E-Filing
-            </b-row> 
+            </b-row>
+
+            <b-row class="ml-2 mb-1" style="font-size: 14px;">
+                Do you have additional documents (Affidavits or an application book) to submit?
+                If so, proceed to upload.
+            </b-row>
+            <b-row class="ml-2 mb-1" style="font-size: 14px;">
+                <b class="mr-2">Note: </b> Your Notice of Application will be uploaded for you and you do not need to add it here. 
+            </b-row>
+
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
                 By submitting, you will be redirected to the E-Filing Hub.
             </b-row>
