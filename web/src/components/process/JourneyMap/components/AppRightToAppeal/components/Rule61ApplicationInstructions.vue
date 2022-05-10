@@ -7,7 +7,7 @@
             leave to intervene in an appeal, you must complete the following:  
         </p>
 
-        <b-row class="ml-2 mt-2 mr-5 bg-warning warning-message-row">
+        <b-row class="ml-2 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -24,9 +24,9 @@
         <ol class="mt-3">
             <li>Obtain an application hearing date from the registrar.</li>
             
-            <li class="mt-2">
+            <li>
                 Complete either the Online form or the .PDF. Click the document name for more information.  
-                <ul class="mt-2">
+                <ul>
                     <li>
                         <b-row class="my-1" style="width: 90%;">
                             <b-col cols="10">
@@ -34,6 +34,7 @@
                             </b-col>                                
                             <b-col cols="2" class="p-0" >
                                 <b-button
+                                    v-if="displayButton"
                                     @click="startNewForm4Document"
                                     target="_blank"                                                                                
                                     class="p-1 bg-white text-primary border-primary online-form-button">Online form
@@ -41,13 +42,13 @@
                             </b-col>
                         </b-row>
                     </li> 
-                    <li class="my-2">
+                    <li>
                         Memorandum of argument, not exceeding 10 pages 
                         (completion instructions for intervener apps)
                     </li>                    
                 </ul>
             </li> 
-            <li class="my-2">
+            <li>
                 File the documents with the registry.
             </li>
             <li>
@@ -59,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form4";
@@ -68,6 +69,9 @@ const form4State = namespace("Form4");
 @Component
 export default class Rule61ApplicationInstructions extends Vue {   
 
+    @Prop({required: true})
+    displayButton!: boolean;
+    
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
         
