@@ -43,7 +43,7 @@
 
                 <div class="row" style="margin-top: 0.5rem;">
                     <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Supreme Court File No.</div></div>
-                    <div class="coa-text-box" style="width:40%;" v-if="result.appealTribunal"></div>
+                    <div class="coa-text-box" style="width:40%;" v-if="manualTrib"></div>
                     <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else>{{result.lowerCourtFileNo}}</div>
                 </div>
 
@@ -64,7 +64,7 @@
 
                 <div class="row" style="margin-top: 0.5rem;">
                     <div style="width:45.5%; padding:0.5rem;"><div style="text-align:right; margin-right:0.5rem;">Supreme Court Registry Location</div></div>
-                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-if="result.appealTribunal"></div>
+                    <div class="coa-text-box" style="width:40%; font-weight: 700;" v-if="manualTrib"></div>
                     <div class="coa-text-box" style="width:40%; font-weight: 700;" v-else> {{result.lowerCourtRegistryName}}</div>
                 </div>
 
@@ -245,7 +245,7 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         
         <div class="coa-text-box-left" style="width:60%;">
-            <div class="mx-2" style="font-weight: 700;" v-if="result.appealTribunal">{{result.tribunalOriginalDecisionMaker}}</div> 
+            <div class="mx-2" style="font-weight: 700;" v-if="!normalForm">{{result.tribunalOriginalDecisionMaker}}</div> 
             <div class="mx-2" style="font-weight: 700;" v-else>{{result.judgeFullName}}</div> 
         </div>                      
 
@@ -310,7 +310,7 @@
         <div class="arrow-right-flash-54"></div> <!-- < width ~ 8% > -->
         <div style="width:20%">
             <div class="coa-text-box-center" style="height:3rem; margin:1.25rem 0 0 0; ">
-                <div class="mx-2" style="font-weight: 700;" v-if="result.appealTribunal">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
+                <div class="mx-2" style="font-weight: 700;" v-if="!normalForm">{{result.tribunalDateOfOrder | beautify-date-dd/mm/yyyy}}</div> 
                 <div class="mx-2" style="font-weight: 700;" v-else>{{result.dateOfJudgement | beautify-date-dd/mm/yyyy}}</div> 
             </div> 
             <div >
@@ -1011,6 +1011,18 @@ export default class Form1Layout extends Vue {
 
     @Prop({required:true})
     result!: form1DataInfoType; 
+
+    @Prop({required: true})
+    manualNTrib!: boolean
+
+    @Prop({required: true})
+    manualTrib!: boolean
+
+    @Prop({required: true})
+    manualNorm!: boolean
+
+    @Prop({required: true})
+    normalForm!: boolean
 
     @informationState.State
     public caseLocation: locationsInfoType;
