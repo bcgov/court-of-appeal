@@ -13,14 +13,14 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Appeal form has been submitted.  Please click on the CSO package number 
-                    below to retrieve a filed copy of your Notice of Appearance.
+                   Your Notice of Appeal form has been submitted. Please click on the CSO package number below 
+                   to retrieve a filed copy of your Notice of Appeal.
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic;">
+                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-style: italic; display: inline-block;">
                     Please note that <span style="font-weight: 700; margin:0 0.25rem;"> you must file and serve the Notice of Appeal form </span> 
-                    on each Respondent within 30 days after the initial 
-                    <span v-if="form1Data.appealTribunal"> tribunal order is made unless another enactment specifies another time period.</span>
-                    <span class="ml-2" v-else> court order is declared.</span>
+                    on each Respondent within 30 days after the
+                    <span v-if="form1Data.appealTribunal">initial tribunal order is made unless another enactment specifies another time period.</span>
+                    <span v-else> court order you are appealing was made.</span>
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
