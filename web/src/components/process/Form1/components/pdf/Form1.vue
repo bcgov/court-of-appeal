@@ -39,7 +39,12 @@
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-            <form-1-layout v-bind:result="result"/>
+            <form-1-layout 
+                v-bind:result="result"
+                :manualNorm="manualNorm"
+                :manualNTrib="manualNTrib"
+                :manualTrib="manualTrib"
+                :normalForm="normalForm"/>
         </b-card>
 
     </b-card>
@@ -72,6 +77,11 @@ export default class Form1 extends Vue {
 
     result = {} as form1DataInfoType;
     dataReady = false;
+
+    manualNTrib = false
+    manualTrib = false
+    manualNorm = false
+    normalForm = false
    
     mounted(){
         this.dataReady = false;
@@ -142,6 +152,13 @@ export default class Form1 extends Vue {
     public navigateToSubmitPage(){
         this.$emit('navigateToSubmitPage')
     }
+
+    public determineFormType(form1Info: form1DataInfoType){          
+        this.manualNTrib = form1Info.appealingScFlaDivorce || form1Info.insideTimeLimit         
+        this.manualTrib = form1Info.appealTribunal
+        this.manualNorm = form1Info.requiresManualEntry
+        this.normalForm = !this.manualNTrib && !this.manualTrib && !this.manualNorm
+    }
  
     public getForm1Data() {        
        
@@ -150,6 +167,7 @@ export default class Form1 extends Vue {
             if(response?.data?.data){            
                             
                 this.result = response.data.data
+                this.determineFormType(this.result)
                 this.result.completionDate = Vue.filter('beautify-date-dd/mm/yyyy')(response.data.modified);
                 this.UpdateForm1Info(this.result)                         
                 this.dataReady = true;
