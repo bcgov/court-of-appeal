@@ -72,7 +72,7 @@
                     <p>
                         Pursuant to Court of Appeal Rule 8, a respondent may only file a 
                         cross appeal if they have filed a notice of appearance in
-                        <a style="color: blue; margin-left: 0.25rem; text-decoration: underline; display: inline;"
+                        <a style="color: yellow; cursor:pointer; margin-left: 0.25rem; text-decoration: underline; display: inline;"
                             @click="startNewForm2Document"
                             target="_blank"                                                                                
                             > Form 2
