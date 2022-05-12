@@ -11,6 +11,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.applyLeave"
                         :state="form1InfoStates.applyLeave"
+                        :class="form1InfoStates.applyLeave==false? 'border border-danger w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -43,6 +44,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.amending"
                         :state="form1InfoStates.amending"
+                        :class="form1InfoStates.amending==false? 'border border-danger w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -64,6 +66,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.appealInvolvesChild"
                         :state="form1InfoStates.appealInvolvesChild"
+                        :class="form1InfoStates.appealInvolvesChild==false? 'border border-danger w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -79,6 +82,7 @@
                     <b-form-radio-group
                         v-model="commonInfo.appealFrom"
                         :state="form1InfoStates.appealFrom"
+                        :class="form1InfoStates.appealFrom==false? 'border border-danger w-75':''"
                         :disabled="commonInfo.appealTribunal"
                         @change="update" 
                         style="font-size: 1rem;"  
@@ -139,6 +143,7 @@
                         v-model="commonInfo.wasSupremeAppeal"
                         @change="update"
                         :state="form1InfoStates.wasSupremeAppeal"
+                        :class="form1InfoStates.wasSupremeAppeal==false? 'border border-danger w-50':''"
                         style="font-size: 1rem; font-weight:400;" 
                         :options="appealedInSupremeCourtOptions"
                     ></b-form-radio-group> 
@@ -170,10 +175,23 @@
             <fill-form-1-sought-info/>           
 
             <b-row class="my-4 question">
-                <b-col 
-                    cols="7" 
-                    class="labels" 
-                    v-text="commonInfo.applyLeave?'Enter the grounds for leave to appeal:':'Enter the order you are seeking on appeal:'">                                              
+                <b-col cols="7">
+                    <div v-if="commonInfo.applyLeave"
+                        class="labels">
+                        Enter the grounds for leave to appeal:
+                        <p class="content text-primary font-italic">
+                            Be as specific as possible. For example, if you believe the trial 
+                            judge used an incorrect legal test or otherwise misapplied the law, indicate that here.
+                        </p>
+                    </div>
+                    <div v-else
+                        class="labels">
+                        Enter the order you are seeking on appeal:
+                        <p class="content text-primary font-italic">
+                            Briefly list the order(s) you will ask this Court to make on appeal. 
+                            For example: “Set aside the trial judgment and order a new trial.”
+                        </p>
+                    </div>                                              
                 </b-col>
                 <b-col>  
                     <b-form-textarea
@@ -181,17 +199,21 @@
                         :state="form1InfoStates.orderSought"
                         @change="update"                   
                         v-model="commonInfo.orderSought">
-                    </b-form-textarea>
-                   
+                    </b-form-textarea>                   
                 </b-col>
             </b-row>
 
             <b-row class="my-4 question">
-                <b-col 
-                    cols="7" 
-                    class="labels" 
-                    v-text="commonInfo.applyLeave?'If you are only seeking leave to appeal one part of the judgment, enter the part that you are seeking leave to appeal:':'If you only want to appeal one part of a judgment, enter the part that is being appealed:'">
-                                              
+                <b-col cols="7" >
+                    <div v-if="commonInfo.applyLeave"
+                        class="labels"> 
+                        If you are only seeking leave to appeal one part of the judgment, 
+                        enter the part that you are seeking leave to appeal:
+                    </div>
+                    <div v-else
+                        class="labels">
+                        If you only want to appeal one part of an order, enter the part that is being appealed:
+                    </div>                                              
                 </b-col>
                 <b-col>  
                     <b-form-textarea
@@ -216,6 +238,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.orderSealed"
                         :state="form1InfoStates.orderSealed"
+                        :class="form1InfoStates.orderSealed==false? 'border border-danger w-50':''"
                         @change="update"                        
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -261,6 +284,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.orderBan"
                         :state="form1InfoStates.orderBan"
+                        :class="form1InfoStates.orderBan==false? 'border border-danger w-50':''"
                         @change="update"                        
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    

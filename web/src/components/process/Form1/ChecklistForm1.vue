@@ -8,7 +8,7 @@
             style="font-size: 42px; font-weight: 700;">            
             NOTICE OF APPEAL FORM (Form 1)
             <p style="font-size: 18px; font-weight: 300;">
-                To assist you in the completing the Notice of Appeal 
+                To assist you in completing the Notice of Appeal 
                 form, you will need to answer the questions in the section below.
             </p>
         </b-card-header>      
