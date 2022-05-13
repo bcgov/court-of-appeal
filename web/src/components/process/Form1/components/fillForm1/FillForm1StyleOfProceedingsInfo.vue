@@ -137,7 +137,11 @@
 
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 1">
                 <b-col cols="7" class="labels">
-                    Name(s) and address(es) within BC for the service of the respondent(s)                                                    
+                    Name(s) and address(es) within BC for the service of the appellant(s) 
+                    <p class="content text-primary font-italic">
+                        If you have a lawyer, include the law firm’s address; 
+                        otherwise provide your own residential address
+                    </p>                                                   
                 </b-col>
                 <b-col class="mt-2">
                     <div 
@@ -145,55 +149,54 @@
                         :key="'address' +index"                       
                         :value="address"> {{form1Info.addresses[index].name}}                  
                         <b-form-textarea                
-                            style="width:100%" 
+                            style="width:100%; margin-bottom:1rem;" 
                             rows="6"                                                                                       
                             v-model="form1Info.addresses[index].contactInfo">
                         </b-form-textarea>      
                     </div> 
-                    <span
+                    <div
                         v-if="(form1InfoStates.addresses != null)" 
-                        style="font-size: 0.75rem;" 
+                        style="font-size: 0.75rem; margin-top:-0.75rem;" 
                         class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify the addresses of the party(ies) filing the Notice of Appearance.
-                    </span>             
+                        Specify the addresses of the party(ies) filing the Notice of Appeal.
+                    </div>             
                 </b-col>                
             </b-row>
 
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 2">
                 <b-col cols="7" class="labels">
-                    Phone number(s) of the party(ies) filing the Notice of Appearance
+                    Phone number(s) of the party(ies) filing the Notice of Appeal
                     <b-icon-question-circle-fill
                         style="color: #38598a;"
                         v-b-tooltip:hover.v-info.html="helpText('The registry may contact you by phone to schedule your appeal.').title"/>                                                    
                 </b-col>
-                <b-col class="mt-2">
+                <b-col class="mt-1">
                     <div 
                         v-for="(phone,index) in form1Info.phoneNumbers" 
                         :key="'phone' + index"                        
                         :value="phone"> {{form1Info.phoneNumbers[index].name}}                  
                         <b-form-input                
-                            style="width:100%"                                                                    
+                            style="width:100%; margin-bottom:1rem;"                                                                    
                             v-model="form1Info.phoneNumbers[index].contactInfo">
                         </b-form-input>      
                     </div>
-                    <span
+                    <div
                         v-if="(form1InfoStates.phoneNumbers != null)" 
-                        style="font-size: 0.75rem;" 
+                        style="font-size: 0.75rem; margin-top:-0.75rem;" 
                         class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
-                    </span>
+                        Specify the phone numbers of the party(ies) filing the Notice of Appeal.
+                    </div>
                 </b-col>                
             </b-row>
 
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 3">
                 <b-col cols="7" class="labels">
-                    Email(s) address(es) for service of respondent(s) 
-                    <b-icon-question-circle-fill
-                        style="color: #38598a;"
-                        v-b-tooltip:hover.v-info.html="helpText('Receive electronic document status change notifications or be served electonically by another party.').title"                                    
-                        />                               
+                    Email(s) address(es) for service of appellant(s) 
+                    <p class="content text-primary font-italic"> 
+                        If you provide an email address, you consent to have documents served on you by email.                         
+                    </p>
                 </b-col>
-                <b-col class="mt-2">
+                <b-col class="mt-1">
                     <div 
                         v-for="(email,index) in form1Info.emailAdresses" 
                         :key="'email' + index"                       

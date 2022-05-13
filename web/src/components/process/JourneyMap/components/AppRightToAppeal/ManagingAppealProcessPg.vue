@@ -196,8 +196,66 @@
 
         <rule-62-application-instructions v-if="showForm8Info"/>        
 
+<!-- Order that no fees are payable -->
+        <b-row :class="showForm8Info?'mt-1':'mt-4'" style="padding-top: 1rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Order that no fees are payable
+            </b-col>   
+            <b-col cols="1">
+                <b-button
+                    @click="showForm22(!showForm22Info)"                                       
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showForm22Info"></expand-icon>
+                </b-button>
+            </b-col>         
+        </b-row>
+
+        <b-row v-if="showForm22Info" class="mt-4" >
+            <p>
+                If you wish to apply for an order that no fees are payable 
+                under rule 84 of the Court of Appeal Rules, you will need to:  
+            </p>            
+           
+            <ol class="mt-3">
+                <li>
+                    Complete either the Online form or the .PDF.  Click on the document name for more information.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="9">
+                                    Application For Order that No Fees are Payable (Form 22)
+                                    <!-- <a 
+                                        href=""
+                                        target="_blank">Requisition
+                                    </a> -->
+                                </b-col>                                
+                                <b-col cols="3" class="p-0" >
+                                    <b-button
+                                        @click="startNewForm22Document"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                    </b-button>
+                                </b-col>
+                            </b-row>
+                        </li>
+                    </ul>
+                </li>                
+                <li>
+                    File the document with the registry.
+                </li>                
+            </ol>
+
+            <p style="font-style: italic;">
+                Note: If the registrar determines that a hearing is required, they 
+                will set the date and notify yourself.  The other parties will not 
+                need to receive notice of the application.  
+            </p>
+
+        </b-row> 
+
+
 <!-- I need to Request -->
-        <b-row :class="showForm8Info?'mt-0':'mt-4'" style="padding-top: 1rem;">            
+        <b-row :class="showForm22Info?'mt-0':'mt-3'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Request to adjourn or reset a matter
             </b-col>   
@@ -315,6 +373,9 @@ const form8State = namespace("Form8");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
+
 import Rule20ApplicationInstructions from "./components/Rule20ApplicationInstructions.vue";
 import Rule54ApplicationInstructions from "./components/Rule54ApplicationInstructions.vue";
 import Rule57ApplicationInstructions from "./components/Rule57ApplicationInstructions.vue";
@@ -362,6 +423,9 @@ export default class ManagingAppealProcessPg extends Vue {
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
 
+    @form22State.Action
+    public UpdateCurrentNoFeesPayableId!: (newCurrentNoFeesPayableId: string) => void
+
     applicationsList = [
         {text: 'adjournment', value:'adjournment'},
         {text: 'adducing fresh or new evidence', value:'adducing'},
@@ -403,6 +467,7 @@ export default class ManagingAppealProcessPg extends Vue {
     showStayApplicationsInfo = false;
     showRespIntroInfo = false;
     showForm8Info = false; 
+    showForm22Info = false;
     showForm9Info = false;     
     applications = [];
     responses = [];
@@ -649,21 +714,36 @@ export default class ManagingAppealProcessPg extends Vue {
             this.showForm8Info = false;
             this.$emit('adjustHeights', 4, "0");
         }
-    }    
+    }  
+    
+    public showForm22(show: boolean){
+        if (show) {
+            this.showForm22Info = true;
+            this.$emit('adjustHeights', 5, "15rem");
+        } else {
+            this.showForm22Info = false;
+            this.$emit('adjustHeights', 5, "0");
+        }
+    }
 
     public showForm9(show: boolean){
         if (show) {
             this.showForm9Info = true;
-            this.$emit('adjustHeights', 5, "44rem");
+            this.$emit('adjustHeights', 6, "44rem");
         } else {
             this.showForm9Info = false;
-            this.$emit('adjustHeights', 5, "0");
+            this.$emit('adjustHeights', 6, "0");
         }
     }
     
     public startNewForm8Document(){
         this.UpdateCurrentNoticeOfApplicationToVaryId(null);
         this.$router.push({name: "start-form8" })
+    }
+
+    public startNewForm22Document(){        
+        this.UpdateCurrentNoFeesPayableId(null);
+        this.$router.push({name: "start-form22" })
     }
 
     public startNewForm9Document(){

@@ -24,7 +24,7 @@
                 </b-form-radio-group> 
                 <b-card 
                     class="border-primary bg-primary text-white mt-2 mr-5" 
-                    v-if="qualificationInfo.selfRepresenting != null">    
+                    v-if="qualificationInfo.selfRepresenting">    
 
                     <p>
                         If you are representing yourself in the Court of Appeal, you will need to learn 
@@ -87,7 +87,7 @@
                 
             </b-col>
              
-          </b-row> 
+        </b-row> 
 
         <b-row v-if="!tribunalCase" class="mb-5">
             <b-col cols="1">               
@@ -116,7 +116,7 @@
 
                     <p>
                         Supreme Court Civil 
-                        <a  href="http://www.bclaws.ca/civix/document/LOC/complete/statreg/--%20C%20--/Court%20Rules%20Act%20[RSBC%201996]%20c.%2080/05_Regulations/17_168_2009%20-%20Supreme%20Court%20Civil%20Rules/168_2009_02.xml#rule18-3"
+                        <a  href="https://www.bclaws.gov.bc.ca/civix/document/id/roc/roc/168_2009_02"
                             target="_blank"
                             class= "text-white">Rule 18-3</a>:
                         <a  href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/168_2009_04#Form73"
@@ -126,7 +126,7 @@
                             target="_blank"
                             class= "text-white">Form 74</a><br/>
                         Supreme Court Family 
-                        <a  href="http://www.bclaws.ca/civix/document/LOC/complete/statreg/--%20C%20--/Court%20Rules%20Act%20[RSBC%201996]%20c.%2080/05_Regulations/18_169_2009%20-%20Supreme%20Court%20Family%20Rules/169_2009_03.xml#rule18-3"
+                        <a  href="https://www.bclaws.gov.bc.ca/civix/document/id/roc/roc/169_2009_03"
                             target="_blank"
                             class= "text-white">Rule 18-3</a>:
                         <a  href="http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/169_2009_04#F79"
@@ -175,18 +175,18 @@
                         Bankruptcy and Insolvency Act - 
                         <a  href="http://laws.justice.gc.ca/eng/regulations/C.R.C.,_c._368/page-2.html#h-10"
                             target="_blank"
-                            class= "text-white">Section 31(1) and (2) Bankruptcy and Insolvency General Rules
+                            class= "text-white mr-1">Section 31(1) and (2) Bankruptcy and Insolvency General Rules
                         </a> 
-                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger">10 day appeal period</b>.
+                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger px-1">10 day appeal period</b>.
                     </p>
 
                     <p>
                         Companies’ Creditors Arrangement Act – 
                         <a  href="http://laws.justice.gc.ca/eng/acts/C-36/page-7.html#docCont"
                             target="_blank"
-                            class= "text-white">Section 14(2) 
+                            class= "text-white mr-1">Section 14(2) 
                         </a>
-                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger">21 day appeal period</b>.
+                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger px-1">21 day appeal period</b>.
                     </p>
                 </b-card>                           
                 
@@ -304,7 +304,10 @@
                         (stop enforcement) of the order pending the outcome of the appeal.                        
                     </p> 
                     <p>
-                        To complete a stay application, please proceed to applications for details on how to apply.                        
+                        To complete a stay application, please proceed to 
+                        <a  style="color: white; cursor:pointer; margin:0 0.25rem; text-decoration: underline; display: inline;"
+                            @click="showApplicationsWindow = true"
+                            target="_blank">applications</a> for details on how to apply.                        
                     </p> 
                 </b-card>                           
                 
@@ -340,8 +343,8 @@
                     day after the order is pronounced. If you have missed the deadline to file the Notice 
                     of Appeal, you may apply for an extension of time by completing the Notice of 
                     Appeal along with a 
-                    <a style="color: blue; margin-left: 0.25rem; text-decoration: underline; display: inline;"
-                        @click="startNewForm4Document"
+                    <a style="color: white; cursor:pointer; margin:0 0.25rem; text-decoration: underline; display: inline;"
+                        @click="showApplicationsWindow = true"
                         target="_blank"                                                                                
                         > Notice of Application
                     </a> and supporting affidavit(s).  
@@ -385,7 +388,7 @@
                     </p>   
                     <p>
                         To make an application for an order that no fees are payable, you must complete  
-                        <a style="color: blue; margin-left: 0.25rem; text-decoration: underline; display: inline;"
+                        <a style="color: yellow; cursor:pointer; margin:0 0.25rem; text-decoration: underline; display: inline;"
                             @click="startNewForm22Document"
                             target="_blank"                                                                                
                             > Form 22
@@ -395,7 +398,25 @@
                 </b-card>                           
                 
             </b-col>            
-        </b-row>          
+        </b-row> 
+
+        <b-modal size="xl" footer-class="d-none" v-model="showApplicationsWindow" header-class="bg-primary">
+
+            <template v-slot:modal-title>
+                <div style="font-size: 2em;" class="mb-0 text-white">Applications</div>
+            </template>
+
+            <applications-process-modal />
+            
+            <template v-slot:modal-header-close>
+                <b-button
+                variant="outline-primary text-white"
+                style="font-weight: bold; font-size: 1.25em;"
+                @click="showApplicationsWindow = false"> &times;
+                </b-button>
+            </template>
+
+        </b-modal>         
         
     </b-card>
 </template>
@@ -413,9 +434,12 @@ const form4State = namespace("Form4");
 import StepNumber from "@/components/utils/StepNumber.vue";
 import { form1DataInfoType, form1QualificationInfoType } from '@/types/Information/Form1';
 
+import ApplicationsProcessModal from '@/components/process/JourneyMap/components/AppRightToAppeal/ApplicationsProcessModal.vue'
+
 @Component({
     components:{
-        StepNumber
+        StepNumber,
+        ApplicationsProcessModal
     }
 })
 export default class Form1QualifyQuestions extends Vue {
@@ -433,6 +457,8 @@ export default class Form1QualifyQuestions extends Vue {
     tribunalCase = false;
     stepStyle = "font-size: 2rem;";
     qualificationInfo = {} as form1QualificationInfoType;
+
+    showApplicationsWindow=false
 
     update = 0;
 

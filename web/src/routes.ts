@@ -74,6 +74,11 @@ import FillForm20 from "@/components/process/Form20/FillForm20.vue";
 import PreviewForm20 from "@/components/process/Form20/PreviewForm20.vue";
 import SubmitForm20 from "@/components/process/Form20/SubmitForm20.vue";
 
+import StartForm22 from "@/components/process/Form22/StartForm22.vue";
+import FillForm22 from "@/components/process/Form22/FillForm22.vue";
+import PreviewForm22 from "@/components/process/Form22/PreviewForm22.vue";
+import SubmitForm22 from "@/components/process/Form22/SubmitForm22.vue";
+
 import SubmittedResults from "@/components/process/Submit/SubmittedResults.vue"
 import SignOutPage from "@/components/SignOutPage.vue"
 import { SessionManager } from "@/components/utils/utils";
@@ -456,6 +461,30 @@ const routes = [
       name: "proceed-form20",
       beforeEnter: authGuard,
       component: SubmitForm20
+    },
+    {
+      path: "/start-form22",
+      name: "start-form22",
+      beforeEnter: authGuard,
+      component: StartForm22
+    },
+    {
+      path: "/fill-form22",
+      name: "fill-form22",
+      beforeEnter: authGuard,
+      component: FillForm22
+    },
+    {
+      path: "/preview-form22",
+      name: "preview-form22",
+      beforeEnter: authGuard,
+      component: PreviewForm22
+    },
+    {
+      path: "/proceed-form22",
+      name: "proceed-form22",
+      beforeEnter: authGuard,
+      component: SubmitForm22
     },
     {
       path: "/submitted/:id/:result/:formType",

@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="dataReady" class="ml-4 border-white">                 
+    <b-card v-if="dataReady" class="ml-4 border-white" :key="updated">                 
 
         <b-card v-if="form3Info.requiresManualEntry" class="mb-4 bg-white border-white text-dark"> 
             <b-card no-body class="border-white">
@@ -16,7 +16,7 @@
                             </span>
                             <b-table
                                 v-else-if="form3Info.manualAppellants.length > 0"
-                                :key="updated"                                
+                                                                
                                 id="appellants"
                                 :items="form3Info.manualAppellants"
                                 :fields="partyFields"
@@ -115,8 +115,7 @@
                                 class="text-muted ml-2 my-2">No respondents have been assigned.
                             </span>
                             <b-table
-                                v-else-if="form3Info.manualRespondents.length > 0"
-                                :key="updated"                                
+                                v-else-if="form3Info.manualRespondents.length > 0"                                                                
                                 id="respondents"
                                 :items="form3Info.manualRespondents"
                                 :fields="partyFields"
@@ -215,10 +214,8 @@
                 </b-col>
             </b-row>         
         </b-card>
-
-        <div 
-            :key="updated" 
-            v-if="partyDataExists">
+        
+        <div v-if="partyDataExists()">
             <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
             
             <b-row class="mt-4" style="font-weight: 700;">
@@ -389,7 +386,7 @@
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row> 
-         
+        
             <b-row class="mt-5 question" v-if="!form3Info.requiresManualEntry">
                 <b-col cols="7" class="labels">
                     Are you self-represented?                                
@@ -405,12 +402,10 @@
                     
                 </b-col>
             </b-row> 
+        
            
-        </div>
 
-        <div v-if="partyDataExists">    
-
-            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated + 1" class="mt-4 question">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.    
                     <p class="content text-primary">
@@ -437,7 +432,7 @@
                 </b-col>                
             </b-row>
           
-            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated" class="mt-5 question">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" class="mt-5 question">
                 <b-col cols="7" class="labels">
                     Phone number(s) of party(ies) filing cross appeal                                
                 </b-col>
@@ -461,7 +456,7 @@
                 </b-col>                
             </b-row>
             
-            <b-row v-if="form3Info.crossAppealingParties.length > 0" :key="updated + 2" class="mt-4 question">
+            <b-row v-if="form3Info.crossAppealingParties.length > 0" class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Email address(es) for party(ies) providing service for cross appeal                                
                 </b-col>
@@ -631,9 +626,7 @@ export default class Form3StyleOfProceeding extends Vue {
         this.extractInfo();              
     }
 
-    get partyDataExists(){
-
-        console.log('heree')
+    public partyDataExists(){
 
         const existsManual = this.form3Info.requiresManualEntry && 
             this.form3Info.manualAppellants.length>0 && 
@@ -644,7 +637,6 @@ export default class Form3StyleOfProceeding extends Vue {
             this.form3Info.respondents.length>0;
             
         return existsManual || existsSupreme;
-
     }
 
     public updateOrderDate(){       

@@ -11,7 +11,7 @@
                 Notice of Appeal
             </b-row> 
             <b-row style="font-size: 14px;">
-                Form 1 - Rule 11 (A)
+                Form 1 - Rule 6 (1)
             </b-row>           
            
         </b-card>

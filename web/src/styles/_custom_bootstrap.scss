@@ -63,6 +63,7 @@ $form16: #999229;
 $form18: #abc7d3;
 $form19: #cfee5e;
 $form20: #c5a873;
+$form22: #696867;
 
 
 $colors: () !default;
@@ -127,6 +128,7 @@ $theme-colors: map-merge(
     "form18":     $form18,
     "form19":     $form19,
     "form20":     $form20,
+    "form22":     $form22,
 
   ),
   $theme-colors

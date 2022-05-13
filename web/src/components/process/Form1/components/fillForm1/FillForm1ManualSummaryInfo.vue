@@ -80,7 +80,11 @@
 
         <b-row class="mt-4 question">
             <b-col cols="7" class="labels">
-                Name of Decision Maker                                
+                Name of Decision Maker 
+                <p class="content text-primary font-italic">
+                    Who made the order?  
+                    Name the justice or other decision maker who pronounced the order you are appealing.
+                </p>                               
             </b-col>
             <b-col class="mt-2">
                 <b-form-input

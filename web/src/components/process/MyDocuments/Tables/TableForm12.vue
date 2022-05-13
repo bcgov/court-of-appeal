@@ -339,7 +339,7 @@ export default class TableForm12 extends Vue {
     }
 
     public createDocument() {
-        //this.$router.push({name: "start-form12" });
+        this.$router.push({name: "start-form12" });
     }
 
     public downloadDocument(fileNumber?) {
