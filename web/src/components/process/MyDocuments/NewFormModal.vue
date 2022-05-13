@@ -86,6 +86,9 @@ const form19State = namespace("Form19");
 import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
+
 @Component
 export default class NewFormModal extends Vue {
 
@@ -132,7 +135,10 @@ export default class NewFormModal extends Vue {
     public UpdateCurrentNoticeOfWithdrawalOfLawyerId!: (newCurrentNoticeOfWithdrawalOfLawyerId: string) => void
 
     @form20State.Action
-    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void    
+
+    @form22State.Action
+    public UpdateCurrentNoFeesPayableId!: (newCurrentNoFeesPayableId: string) => void
 
     forms = [
         {name:'form1', title:'Notice of Appeal (Form 1)'},
@@ -148,7 +154,8 @@ export default class NewFormModal extends Vue {
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
-        {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'}
+        {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'},
+        {name:'form22', title:'Application For Order that No Fees are Payable (Form 22)'}
         // {name:'form7', title:''},
     ]
 
@@ -207,7 +214,7 @@ export default class NewFormModal extends Vue {
             this.$router.push({name: "start-form9" });
         }else if(form=='form12'){
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
-            //this.$router.push({name: "start-form12" });
+            this.$router.push({name: "start-form12" });
         }else if(form=='form16'){
             this.UpdateCurrentOfferToSettleCostsId(null);
             this.$router.push({name: "start-form16" });
@@ -220,8 +227,10 @@ export default class NewFormModal extends Vue {
         }else if(form=='form20'){
             this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null)
             this.$router.push({name: "start-form20" });
-        }
-        
+        }else if(form=='form22'){
+            this.UpdateCurrentNoFeesPayableId(null)
+            this.$router.push({name: "start-form22" });
+        }        
     }
 }
 </script>

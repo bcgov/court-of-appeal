@@ -58,6 +58,9 @@ const form19State = namespace("Form19");
 import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
+
 @Component
 export default class MenuBar extends Vue {
 	
@@ -102,6 +105,9 @@ export default class MenuBar extends Vue {
 
 	@form20State.Action
     public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
+
+	@form22State.Action
+    public UpdateCurrentNoFeesPayableId!: (newCurrentNoFeesPayableId: string) => void
     
 	mounted() {
 	
@@ -122,6 +128,7 @@ export default class MenuBar extends Vue {
 		this.UpdateCurrentNoticeOfRepChangeAddressId(null);
 		this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null);
 		this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null);
+		this.UpdateCurrentNoFeesPayableId(null);
 	}
 }
 </script>

@@ -98,7 +98,7 @@ class Form22EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, order_nofees_payable_id):
         
-        document_type = "UNKNOWN" # type Form22 for Efiling
+        document_type = "MWF" # type Form22 for Efiling
         uid = request.user.id
 
         order_nofees_payable = self.get_order_nofees_payable_for_user(order_nofees_payable_id, uid)        

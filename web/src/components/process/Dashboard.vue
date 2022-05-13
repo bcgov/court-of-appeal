@@ -107,6 +107,9 @@ const form19State = namespace("Form19");
 import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
+
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
@@ -140,6 +143,8 @@ import { form16FormsJsonDataType } from '@/types/Information/Form16';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
 import { form20FormsJsonDataType } from '@/types/Information/Form20';
+import { form22FormsJsonDataType } from '@/types/Information/Form22';
+
 
 @Component({
     components:{
@@ -208,6 +213,9 @@ export default class DashboardPage extends Vue {
 
     @form20State.Action
     public UpdateForm20FormsJson!: (newForm20FormsJson: form20FormsJsonDataType[])=> void
+
+    @form22State.Action
+    public UpdateForm22FormsJson!: (newForm22FormsJson: form22FormsJsonDataType[])=> void
 
     @informationState.Action
     public UpdateJourneyJson!: (newJourneyJson: journeyJsonDataType) => void
@@ -316,7 +324,8 @@ export default class DashboardPage extends Vue {
         calls.push(this.$http.get('/form8/forms'));
         calls.push(this.$http.get('/form16/forms'));
         calls.push(this.$http.get('/form7/forms'));
-        //calls.push(this.$http.get('/form12/forms'));
+        calls.push(this.$http.get('/form12/forms'));
+        calls.push(this.$http.get('/form22/forms'));
 
         Promise.all(calls).then(values => {
             
@@ -345,7 +354,8 @@ export default class DashboardPage extends Vue {
             if(values[12]?.data) this.UpdateForm8FormsJson(values[12]?.data)
             if(values[13]?.data) this.UpdateForm16FormsJson(values[13]?.data)
             if(values[14]?.data) this.UpdateForm7FormsJson(values[14]?.data)
-            //if(values[15]?.data) this.UpdateForm12FormsJson(values[15]?.data)
+            if(values[15]?.data) this.UpdateForm12FormsJson(values[15]?.data)
+            if(values[16]?.data) this.UpdateForm22FormsJson(values[16]?.data)
             
             this.dataLoaded = true;
 
@@ -359,7 +369,6 @@ export default class DashboardPage extends Vue {
     public extractHearingLocations() {
         GetHearingLocations();       
     }
-
 
     public restartJourney() {
         this.journeyStarted = false;
