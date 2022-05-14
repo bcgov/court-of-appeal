@@ -43,17 +43,7 @@
         <success-submit-form-9 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
-    <div v-else-if="formType == 'ORSE'">
-        <success-submit-form-12 :packageInfo="packageInfo" v-if="result=='success'"/>
-        <cancel-submit-form-12 v-else-if="result=='cancel'"/>
-        <error-submit-form-12 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>
-    <div v-else-if="formType == 'xzz'">
-        <success-submit-form-16 :packageInfo="packageInfo" v-if="result=='success'"/>
-        <cancel-submit-form-16 v-else-if="result=='cancel'"/>
-        <error-submit-form-16 :errMsg="errorMsg" v-else-if="result=='error'"/>        
-    </div>    
+    </div>        
     <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
@@ -69,6 +59,11 @@
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>   
+    <div v-else-if="formType == 'MWF'">
+        <success-submit-form-22 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-22 v-else-if="result=='cancel'"/>
+        <error-submit-form-22 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>  
     
 </template>
 
@@ -111,14 +106,6 @@ import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
 import ErrorSubmitForm9 from "./Form9/ErrorSubmitForm9.vue";
 
-import CancelSubmitForm12 from "./Form12/CancelSubmitForm12.vue";
-import SuccessSubmitForm12 from "./Form12/SuccessSubmitForm12.vue";
-import ErrorSubmitForm12 from "./Form12/ErrorSubmitForm12.vue";
-
-import CancelSubmitForm16 from "./Form16/CancelSubmitForm16.vue";
-import SuccessSubmitForm16 from "./Form16/SuccessSubmitForm16.vue";
-import ErrorSubmitForm16 from "./Form16/ErrorSubmitForm16.vue";
-
 import CancelSubmitForm18 from "./Form18/CancelSubmitForm18.vue";
 import SuccessSubmitForm18 from "./Form18/SuccessSubmitForm18.vue";
 import ErrorSubmitForm18 from "./Form18/ErrorSubmitForm18.vue";
@@ -130,6 +117,10 @@ import ErrorSubmitForm19 from "./Form19/ErrorSubmitForm19.vue";
 import CancelSubmitForm20 from "./Form20/CancelSubmitForm20.vue";
 import SuccessSubmitForm20 from "./Form20/SuccessSubmitForm20.vue";
 import ErrorSubmitForm20 from "./Form20/ErrorSubmitForm20.vue";
+
+import CancelSubmitForm22 from "./Form22/CancelSubmitForm22.vue";
+import SuccessSubmitForm22 from "./Form22/SuccessSubmitForm22.vue";
+import ErrorSubmitForm22 from "./Form22/ErrorSubmitForm22.vue";
 import { packageInfoType } from '@/types/Information';
 
 @Component({
@@ -160,13 +151,7 @@ import { packageInfoType } from '@/types/Information';
         ErrorSubmitForm8,
         CancelSubmitForm9,
         SuccessSubmitForm9,
-        ErrorSubmitForm9,
-        CancelSubmitForm12,
-        SuccessSubmitForm12,
-        ErrorSubmitForm12,
-        CancelSubmitForm16,
-        SuccessSubmitForm16,
-        ErrorSubmitForm16,
+        ErrorSubmitForm9,        
         CancelSubmitForm18,
         SuccessSubmitForm18,
         ErrorSubmitForm18,
@@ -175,7 +160,10 @@ import { packageInfoType } from '@/types/Information';
         ErrorSubmitForm19,
         CancelSubmitForm20,
         SuccessSubmitForm20,
-        ErrorSubmitForm20
+        ErrorSubmitForm20,
+        CancelSubmitForm22,
+        SuccessSubmitForm22,
+        ErrorSubmitForm22
     }
 })
 export default class SubmittedResults extends Vue {

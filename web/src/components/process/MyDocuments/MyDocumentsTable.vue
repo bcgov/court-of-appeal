@@ -30,6 +30,7 @@
         <table-form-18 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-19 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-20 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-22 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
 
         <new-form-modal :showSelectFormToFill="showSelectFormToFill" @closeModal="CloseModal" />
     </b-card>
@@ -52,6 +53,7 @@ import TableForm16 from './Tables/TableForm16.vue'
 import TableForm18 from './Tables/TableForm18.vue'
 import TableForm19 from './Tables/TableForm19.vue'
 import TableForm20 from './Tables/TableForm20.vue'
+import TableForm22 from './Tables/TableForm22.vue'
 
 import NewFormModal from './NewFormModal.vue'
 
@@ -70,7 +72,8 @@ import NewFormModal from './NewFormModal.vue'
         TableForm16,
         TableForm18, 
         TableForm19,
-        TableForm20,      
+        TableForm20,  
+        TableForm22,     
         NewFormModal
     }
 })

@@ -11,12 +11,12 @@
             {{errorMsg}}
         </b-alert>
 
-        <b-row v-if="enableActions && documentsList.length" class="bg-form12 mb-2 py-1 mx-0">
+        <b-row v-if="enableActions && documentsList.length" class="bg-form22 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div 
                     style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
                     class="p-0 text-center text-primary">
-                    Order from an application to vary the order of a justice (Form 12)
+                    Notice of Objection to Withdrawal (Form 22)
                 </div>
             </b-col>
             <b-col  cols="2">
@@ -51,7 +51,9 @@
             <b-col cols="12">
                 <div 
                     style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" 
-                    class="p-0 text-center text-primary">Offer To Settle Costs (Form 12) </div>
+                    class="p-0 text-center text-primary">
+                    Application For Order that No Fees are Payable (Form 22)
+                </div>
             </b-col>
         </b-row>
        
@@ -171,7 +173,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Settlement or Abandonment </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Withdrawal of Lawyer </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
@@ -191,23 +193,23 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import * as _ from 'underscore';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/forms/form12";
-const form12State = namespace("Form12");
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
 
 import { documentInfoType } from "@/types/Information";
-import { form12FormsJsonDataType } from "@/types/Information/Form12";
+import { form22FormsJsonDataType } from "@/types/Information/Form22";
 
 @Component
-export default class TableForm12 extends Vue {
+export default class TableForm22 extends Vue {
 
     @Prop({required: true})
     enableActions!: boolean;
     
-    @form12State.State
-    public form12FormsJson!: form12FormsJsonDataType[];
+    @form22State.State
+    public form22FormsJson!: form22FormsJsonDataType[];
     
-    @form12State.Action
-    public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
+    @form22State.Action
+    public UpdateCurrentNoticeOfObjectionToWithdrawalId!: (newCurrentNoticeOfObjectionToWithdrawalId: string) => void
     
     allDocumentsChecked = false;
     showSelectFormToFill = false;
@@ -244,7 +246,7 @@ export default class TableForm12 extends Vue {
             label: "Parties",
             sortable: false,
             thClass: 'border-dark border-bottom',
-        },            
+        },          
         {
             key: "status",
             label: "Status",
@@ -279,14 +281,15 @@ export default class TableForm12 extends Vue {
     errorMsgDismissCountDown = 0;
    
 
-    mounted() {        
+    mounted() {
+        console.log('form 22s')
         this.extractDocuments();       
     }
 
     public extractDocuments () {
     //TODO: when extending to use throughout the province, the timezone should be changed accordingly    
         this.documentsList = [];
-        for (const docJson of this.form12FormsJson) {                
+        for (const docJson of this.form22FormsJson) {                
             const doc = {
                 isChecked: false, 
                 pdf_types:'', 
@@ -334,12 +337,14 @@ export default class TableForm12 extends Vue {
 
     public resumeApplication(fileInfo: documentInfoType) {
         const caseId = fileInfo.fileNumber.toString()
-        this.UpdateCurrentOfferToSettleCostsId(caseId);             
-        this.$router.push({name: "fill-form12"});       
+        this.UpdateCurrentNoticeOfObjectionToWithdrawalId(caseId);  
+        // console.log(fileInfo)      
+        this.$router.push({name: "fill-form22"});
+       
     }
 
     public createDocument() {
-        this.$router.push({name: "start-form12" });
+        this.$router.push({name: "start-form22" });
     }
 
     public downloadDocument(fileNumber?) {
@@ -356,8 +361,8 @@ export default class TableForm12 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'ABA';
-            const url = '/form12/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
+            const pdf_type = 'FORM';
+            const url = '/form22/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
                 headers: {
@@ -393,17 +398,17 @@ export default class TableForm12 extends Vue {
         if(this.applicationsToDelete.length>0 || this.applicationsNotAllowedToDelete.length>0){
             this.confirmDelete=true;            
         }
-    } 
-    
-    
+    }
+
     public confirmDeleteApplication() { 
+        
         const data ={
             data:{
                 ids:this.applicationsToDelete
             }
         }
 
-        const url = '/form12/forms';
+        const url = '/form22/forms';
 
         this.$http.delete(url, data)
         .then(response => {

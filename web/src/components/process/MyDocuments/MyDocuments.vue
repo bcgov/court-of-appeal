@@ -56,6 +56,9 @@ const form19State = namespace("Form19");
 import "@/store/modules/forms/form20";
 const form20State = namespace("Form20");
 
+import "@/store/modules/forms/form22";
+const form22State = namespace("Form22");
+
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
 
 import { form1DataInfoType } from '@/types/Information/Form1';
@@ -72,6 +75,7 @@ import { form16FormsJsonDataType } from '@/types/Information/Form16';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
 import { form19FormsJsonDataType } from '@/types/Information/Form19';
 import { form20FormsJsonDataType } from '@/types/Information/Form20';
+import { form22FormsJsonDataType } from '@/types/Information/Form22';
 
 @Component({
     components:{
@@ -121,6 +125,9 @@ export default class MyDocuments extends Vue {
 
     @form20State.Action
     public UpdateForm20FormsJson!: (newForm20FormsJson: form20FormsJsonDataType[])=> void
+
+    @form22State.Action
+    public UpdateForm22FormsJson!: (newForm22FormsJson: form22FormsJsonDataType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -154,6 +161,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form16/forms'));
         calls.push(this.$http.get('/form7/forms'));
         //calls.push(this.$http.get('/form12/forms'));
+        //calls.push(this.$http.get('/form22/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -173,6 +181,7 @@ export default class MyDocuments extends Vue {
             if(values[11]?.data) this.UpdateForm16FormsJson(values[11]?.data)
             if(values[12]?.data) this.UpdateForm7FormsJson(values[12]?.data)
             //if(values[13]?.data) this.UpdateForm12FormsJson(values[13]?.data)
+            //if(values[14]?.data) this.UpdateForm22FormsJson(values[14]?.data)
 
             this.dataLoaded = true;
         })

@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-16-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-22-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -11,14 +11,18 @@
                 Form Submitted
             </b-row> 
             
-            <b-card no-body class="border-white bg-white mx-4">
-                <b-row class="ml-5 mt-4" style="font-size: 14px;">
-                    Your Offer To Settle Costs has been submitted and accepted.  Please click on the 
-                    CSO Package number below to retrieve a filed copy of your Offer To Settle Costs for Service.
+            <b-card no-body class="border-white bg-white mx-5">
+                <b-row class="mx-5 mt-4" style="font-size: 14px;">
+                    Your Application For Order That No Fees Are Payable has been submitted.  
+                    Please click on the CSO Package number below to retrieve a filed copy of your document. 
                 </b-row>
-                <b-row class="ml-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the Offer To Settle Costs for Service on the appellant 
-                    within 10 days of receiving the Offer To Settle Costs to Appeal.
+                <b-row class="mx-5 mt-2" style="font-size: 14px; font-weight: 700; font-style: italic;">
+                    Please note that you will be notified by the registry if a hearing is required and 
+                    if your application has been granted or dismissed.
+                </b-row>
+                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
+                    You do not need to serve this form on the other parties as 
+                    this is a “without notice” application. 
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
@@ -94,23 +98,22 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form16ProcessHeader from "@/components/process/Form16/components/Form16ProcessHeader.vue";
+import Form22ProcessHeader from "@/components/process/Form22/components/Form22ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form16StatusInfoType } from '@/types/Information/Form16';
+import { form22StatusInfoType } from '@/types/Information/Form22';
 
 @Component({
     components:{
-        Form16ProcessHeader
+        Form22ProcessHeader
     }
 })
-export default class SuccessSubmitForm16 extends Vue {
+export default class SuccessSubmitForm22 extends Vue {
 
     @Prop({required: true})
     packageInfo!: packageInfoType;
 
-    stepsCompleted = {} as form16StatusInfoType;  
+    stepsCompleted = {} as form22StatusInfoType;  
     mountedData = false; 
-
 
     mounted() {
         this.mountedData = false;
@@ -129,7 +132,7 @@ export default class SuccessSubmitForm16 extends Vue {
             packageUrl: newPackageInfo.eFilingUrl 
         } 
 
-        const url = "/form16/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/form22/efiling/"+newPackageInfo.fileNumber+"/submit/";
 
         const header = {
             responseType: "json",

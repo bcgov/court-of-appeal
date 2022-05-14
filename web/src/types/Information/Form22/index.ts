@@ -31,9 +31,11 @@ export interface form22SearchInfoType {
 }
 
 export interface form22DataInfoType {
-    formSevenNumber:string;
+    formSevenNumber?:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
+    appellantNames: string;
+    respondentNames: string;
     requiresManualEntry: boolean;
     manualAppellants: partyInfoType[];
     manualRespondents: partyInfoType[];
@@ -43,9 +45,9 @@ export interface form22DataInfoType {
     applyingParties: string[];   
     orders: string;
     grounds: string;
-    income: string;
-    assets: string;
-    finances: string;    
+    income: number;
+    assets: boolean;
+    finances?: string;
     completionDate?: string;
     version?: string;
 }

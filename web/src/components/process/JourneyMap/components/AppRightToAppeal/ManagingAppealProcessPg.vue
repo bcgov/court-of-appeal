@@ -741,10 +741,9 @@ export default class ManagingAppealProcessPg extends Vue {
         this.$router.push({name: "start-form8" })
     }
 
-    public startNewForm22Document(){
-        //TODO: 
-        // this.UpdateCurrentNoFeesPayableId(null);
-        // this.$router.push({name: "start-form22" })
+    public startNewForm22Document(){        
+        this.UpdateCurrentNoFeesPayableId(null);
+        this.$router.push({name: "start-form22" })
     }
 
     public startNewForm9Document(){

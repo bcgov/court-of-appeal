@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-12-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-22-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -15,7 +15,7 @@
                 <b-row class="ml-5 my-3" style="font-size: 14px;">
                     <b-col cols="10">
                         <div class="h3 text-white bg-dark p-3 text-center" style="margin: 0.5rem 0; width:60rem; border-radius:10px; "> 
-                            <div class="my-3">There has been an error while attempting to E-File your Offer To Settle Costs.</div>
+                            <div class="my-3">There has been an error while attempting to E-File your Application For Order that No Fees are Payable.</div>
                             <div class="text-warning my-5">Error Message: {{errMsg}}</div>                                                
                             <div class="my-3">
                                 Please try again. If this error persists contact 
@@ -44,20 +44,20 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form12ProcessHeader from "@/components/process/Form12/components/Form12ProcessHeader.vue";
-import { form12StatusInfoType } from '@/types/Information/Form12';
+import Form22ProcessHeader from "@/components/process/Form22/components/Form22ProcessHeader.vue";
+import { form22StatusInfoType } from '@/types/Information/Form22';
 
 @Component({
     components:{
-        Form12ProcessHeader
+        Form22ProcessHeader
     }
 })
-export default class ErrorSubmitForm12 extends Vue {
+export default class ErrorSubmitForm22 extends Vue {
     
     @Prop({required: true, default:" "})
     errMsg!: string;
 
-    stepsCompleted = {} as form12StatusInfoType;  
+    stepsCompleted = {} as form22StatusInfoType;  
     mountedData = false;     
 
     mounted() {
