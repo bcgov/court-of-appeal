@@ -14,6 +14,7 @@
                 Include only those parties whose interests are affected by the order sought by the appellant(s). 
                 The order of the names will be handled for you.
             </p>
+
             <b-table
                 v-if="styleOfProceedingsInfo.parties.length>0"
                 :key="updated"                 
@@ -92,49 +93,8 @@
             </span>
 
             <hr class="mb-4 mx-4">
-            <!-- <p class="ml-4 mt-2 mb-5" style="font-weight:700;">Please ensure that the required names and address fields are completed.</p> -->
-           
-            <!-- <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Respondent(s): 
-                    <p class="content text-primary">
-                        The names of the parties in the Respondent Column 
-                        above should populate below and you will need to 
-                        add in the address for service.                
-                    </p>                               
-                </b-col>
-                <b-col class="mt-1">
-                    <b-form-textarea
-                        rows="3"
-                        disabled                    
-                        @change="update"
-                        v-model="respondentNames">
-                    </b-form-textarea>   
-                </b-col>
-            </b-row>            
 
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                   And to the respondent(s) solicitor   
-                    <p class="content text-primary">
-                        If counsel represented the Respondent include their name and address in the box below.
-                    </p>
-                    <p class="content mt-1 text-primary">
-                        <b>Note</b>: You may serve a Notice of Appeal to the Respondent(s) solicitor in the lower court.
-                    </p>    
-                </b-col>
-                <b-col>                   
-                    <b-form-textarea 
-                        style="width: 100%"
-                        disabled
-                        rows="3"
-                        @change="update"
-                        v-model="styleOfProceedingsInfo.respondentSolicitor">
-                    </b-form-textarea>                    
-                </b-col>
-            </b-row> -->
-
-
+<!-- <ADDRESS> -->
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 1">
                 <b-col cols="7" class="labels">
                     Name(s) and address(es) within BC for the service of the appellant(s) 
@@ -163,6 +123,7 @@
                 </b-col>                
             </b-row>
 
+<!-- <PHONE> -->
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 2">
                 <b-col cols="7" class="labels">
                     Phone number(s) of the party(ies) filing the Notice of Appeal
@@ -189,6 +150,7 @@
                 </b-col>                
             </b-row>
 
+<!-- <EMAIL> -->
             <b-row class="mt-4 question" v-if="form1Info.appellants.length > 0" :key="updated + 3">
                 <b-col cols="7" class="labels">
                     Email(s) address(es) for service of appellant(s) 
@@ -209,6 +171,7 @@
                 </b-col>                
             </b-row>    
 
+<!-- <AUTHORIZING PARTY> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Name of lawyer or party authorizing filing of this Form:                   
@@ -264,6 +227,7 @@ const form1State = namespace("Form1");
 import styleOfProceedingActions from './StyleOfProceedingComponents/styleOfProceedingsActions.vue'
 import { form1DataInfoType, form1StatesInfoType, lookupsInfoType, form1PartiesStatesInfoType, form1PartiesInfoType } from '@/types/Information/Form1';
 import { partiesContact } from '@/types/Information';
+import {getPartyTitles, getFullName} from "./PartyTitles"
 
 @Component({
     components:{ 
@@ -369,70 +333,38 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         this.respondentNameList = [];              
 
         for (const partyInfo of styleOfProceedings.parties){
-             
-            if (partyInfo.isOrganization){                
-                partyInfo.fullName = partyInfo.organizationName;
-            } else {                
-                partyInfo.fullName = 
-                    partyInfo.surname + ', ' + 
-                    partyInfo.firstGivenName + 
-                    (partyInfo.secondGivenName? ' ' + partyInfo.secondGivenName:'') +
-                    (partyInfo.thirdGivenName? ' ' + partyInfo.thirdGivenName:'')
-            }  
-            partyInfo.title = this.getPartyTitles(partyInfo);
+                           
+            partyInfo.fullName = getFullName(partyInfo);
+            
+            partyInfo.title = getPartyTitles(partyInfo, '</br>', false);
 
-            if (partyInfo.appealRole && partyInfo.appealRole == "Respondent"){
-
+            if (partyInfo.appealRole == "Respondent"){
                 styleOfProceedings.respondents.push(partyInfo);
                 this.respondentNameList.push(partyInfo.fullName);
 
-            } else if (partyInfo.appealRole && partyInfo.appealRole == "Appellant"){
-
+            } else if (partyInfo.appealRole == "Appellant"){
                 styleOfProceedings.appellants.push(partyInfo);
                 this.applicantNameList.push(partyInfo.fullName);
             }                                 
         }
         
-        for (const respondent of styleOfProceedings.respondents){
-            this.respondents.push(respondent.fullName);
-            if (respondent.counselName) {
-                this.respondentSolicitors.push(respondent.counselName);
-            }
-        }
-        styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');     
+        // for (const respondent of styleOfProceedings.respondents){
+        //     this.respondents.push(respondent.fullName);
+        //     if (respondent.counselName) {
+        //         this.respondentSolicitors.push(respondent.counselName);
+        //     }
+        // }
+        // styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');     
 
         this.UpdateForm1Info(styleOfProceedings)      
     }  
-
-    public getPartyTitles(partyInfo: form1PartiesInfoType){
-        let title = '';
-        if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
-            title = partyInfo.lowerCourtRole + "</br>" + partyInfo.fullName;
-        } else {
-
-            const repTitle = [];
-            for (const legalRep of partyInfo.legalReps){                
-                const repFormat = this.lookups.legalRepFormatters[legalRep.repType].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
-                repTitle.push(repFormat);
-            }
-            
-            const aliasTitle = [];
-            for (const alias of partyInfo.aliases){                    
-                aliasTitle.push(alias.nameType + ' ' + alias.name);
-            }
-           
-            const repText = repTitle.length?repTitle.join('</br> or'): '';
-            const aliasText = aliasTitle.length?aliasTitle.join('</br>'): '';            
-            title = partyInfo.lowerCourtRole + "</br>" + (repText?(repText + "</br>"):'') + aliasText;
-        }
-
-        return title;
-    }    
+   
 
     public updateTableResults(){
         //console.log('updating')
         this.styleOfProceedingsInfo = this.form1Info;
-        this.updated++;
+        this.extractInfo();
+        this.updateAddressFields();        
     }
 
     public updateAddressFields(){
@@ -529,9 +461,8 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.parties[row.index].appealRole = 'Appellant';        
         styleOfProceedings.appellants.push(styleOfProceedings.parties[row.index]);
         this.applicantNameList.push(styleOfProceedings.parties[row.index].fullName);
+        this.UpdateForm1Info(styleOfProceedings);
         this.updateAddressFields();
-        this.UpdateForm1Info(styleOfProceedings);        
-        this.updated ++;
     }
 
     public appRight(row){          
@@ -539,10 +470,9 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         styleOfProceedings.parties[row.index].appealRole = '';
         const index = styleOfProceedings.appellants.findIndex(app => app.fullName == styleOfProceedings.parties[row.index].fullName)
         styleOfProceedings.appellants.splice(index, 1);
-        this.applicantNameList.splice(index, 1);
-        this.updateAddressFields();
+        this.applicantNameList.splice(index, 1);        
         this.UpdateForm1Info(styleOfProceedings);
-        this.updated ++;
+        this.updateAddressFields();
     }
 
     public resLeft(row){
