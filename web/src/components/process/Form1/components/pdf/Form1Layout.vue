@@ -989,6 +989,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import {getPartyTitles} from "../fillForm1/PartyTitles"
 import { namespace } from "vuex-class";
 import "@/store/modules/information";
 import { locationsInfoType } from '@/types/Common';
@@ -1043,17 +1044,6 @@ export default class Form1Layout extends Vue {
         this.dataReady = true;
     }
 
-    public getFullName(party){
-
-        if(party.isOrganization || !party.surname){
-            return (party.organizationName?party.organizationName:'')
-        } else{
-            return  (party.firstGivenName? party.firstGivenName+' ':'')+
-                    (party.secondGivenName? party.secondGivenName+' ':'')+
-                    (party.thirdGivenName? party.thirdGivenName+' ':'')+
-                    (party.surname? party.surname+' ':'')
-        }        
-    }
    
     public extractInfo(){
         
@@ -1062,51 +1052,14 @@ export default class Form1Layout extends Vue {
         this.respondentNames = [];
         
         for(const party of parties){
+            
             if(party.appealRole=="Appellant")
-                this.applicantNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
+                this.applicantNames.push(getPartyTitles(party, ' ', true))
             else if(party.appealRole=="Respondent")
-                this.respondentNames.push(this.getFullName(party) + '(' + party.lowerCourtRole + ')');
+                this.respondentNames.push(getPartyTitles(party, ' ', true))
         }
-
-        // if (this.result.manualSop?.length > 1){
-        //     this.caseSop = this.result.manualSop;
-        // } else {
-
-        //     this.caseSop = [];
-        //     this.noRolePartySop = [];  
-        //     for(const party of parties)
-        //         this.prePopulateSop(party);          
-
-
-        //     if (this.noRolePartySop.length > 0){
-        //         this.caseSop = this.caseSop.concat(this.noRolePartySop);
-        //     }           
-
-        // }
-
-    }
-    
-    // public prePopulateSop(partyInfo: form1PartiesInfoType){
-
-    //     let sop = {} as manualSopInfoType;            
-    //     sop.plural = false;
-    //     sop.appealRole = partyInfo.appealRole;
-    //     sop.lowerCourtRole = partyInfo.lowerCourtRole;
-        
-    //     sop.partyName=this.getFullName(partyInfo)
-    //     if (partyInfo.lowerCourtRole == 'NONE (New Party)'){
-    //         sop.conjunction = 'And';
-    //         this.noRolePartySop.push(sop);
-    //     } else if (partyInfo.lowerCourtRole.toLowerCase() == 'plaintiff' || 
-    //         partyInfo.lowerCourtRole.toLowerCase() == 'applicant' || 
-    //         partyInfo.lowerCourtRole.toLowerCase() == 'petitioner'){
-    //             sop.conjunction = 'Between';
-    //             this.caseSop.unshift(sop);
-    //     } else {
-    //         sop.conjunction = 'And';
-    //         this.caseSop.push(sop);
-    //     }
-    // }
+    }    
+   
 }
 
 </script>

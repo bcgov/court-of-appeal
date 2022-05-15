@@ -26,8 +26,9 @@
                     <b-icon-pencil-square class="ml-1 mr-0" variant="primary" scale="1" />
                 </b-button>
             </b-col>
-        </b-row> 
+        </b-row>
 
+<!-- <ADD/EDIT PARTY> -->
             <b-modal size="xl" v-model="showPartyWindow" header-class="bg-primary text-white" :key="updatedPartyInfo">
                 <template v-slot:modal-title>
                     <h1 v-if="isCreate" class="my-2 ml-2">Add Party</h1>
@@ -148,7 +149,7 @@
                     </b-card>
 
                     <b-card no-body v-else-if="partyDataReady && !displayWarning && !party.isOrganization" class="border-white">
-
+<!-- <SURNAME> -->
                         <b-row class="ml-1">
                             <b-col cols="6">                    
                                 <b-form-group
@@ -191,7 +192,7 @@
                                 </b-form-group>    
                             </b-col>         
                         </b-row>
-
+<!-- <FIRST NAME> -->
                         <b-row class="ml-1">
                             <b-col cols="6">
                                 <b-form-group
@@ -217,6 +218,7 @@
                                 </b-form-group>
                             </b-col>           
                         </b-row>
+<!-- <SECOND NAME> -->
                         <b-row class="ml-1">
                             <b-col cols="6">
                                 <b-form-group
@@ -230,6 +232,7 @@
                                 </b-form-group>
                             </b-col>                     
                         </b-row>
+<!-- <THIRD NAME>  -->
                         <b-row class="ml-1">
                             <b-col cols="6">
                                 <b-form-group
@@ -246,7 +249,7 @@
                     </b-card>
 
                     <b-card no-body v-if="partyDataReady && !displayWarning" class="border-white">
-
+<!-- <ALIASES> -->
                         <b-card no-body class="border-white">
                             <b-row class="ml-1">   
                                 <b-col cols="10">
@@ -342,7 +345,7 @@
                                 v-on:submit="modifyAliasList" 
                                 v-on:cancel="closeAliasForm" />                
                         </b-card>
-
+<!-- <LEGAL REP> -->
                         <b-card no-body class="border-white">
                             <b-row class="ml-1">   
                                 <b-col cols="10">
@@ -625,6 +628,7 @@ const form1State = namespace("Form1");
 
 import AddAliasForm from '../AddAliasForm.vue';
 import AddRepresentativeForm from '../AddRepresentativeForm.vue';
+import {getPartyTitles, getFullName} from "../PartyTitles"
 
 import { supremeCourtPartiesJsonInfoType } from '@/types/Information/json';
 
@@ -782,8 +786,6 @@ export default class styleOfProceedingsActions extends Vue {
         this.styleOfProceedingsInfo = this.form1Info;
         this.form1PartiesStates = {} as form1PartiesStatesInfoType;
         this.dataReady = true;
-          
-                       
     }    
 
     public addParties(){       
@@ -803,26 +805,26 @@ export default class styleOfProceedingsActions extends Vue {
         if (this.checkPartyStates()){
             const styleOfProceedings = this.form1Info;
             const partiesList = this.form1Info.parties;
+            const partiesListIds = partiesList.map(party => party.ceisPartyId)
+            const ceisPartyId = partiesListIds.length>0? Math.max(...partiesListIds)+1 : 1
 
             if (this.party.isOrganization){
                 this.party.surname = null;
                 this.party.firstGivenName = null;
                 this.party.secondGivenName = null;
                 this.party.thirdGivenName = null;
-                this.party.fullName = this.party.organizationName;
+                this.party.fullName = getFullName(this.party);
+                this.party.ceisPartyId = ceisPartyId;
 
             } else {
                 if (!this.party.secondGivenName) this.party.secondGivenName = null;
                 if (!this.party.thirdGivenName)this.party.thirdGivenName = null;
                 this.party.organizationName = null;
-                this.party.fullName = 
-                this.party.surname + ', ' + 
-                this.party.firstGivenName + 
-                (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
-                (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
+                this.party.fullName = getFullName(this.party); 
+                this.party.ceisPartyId = ceisPartyId;              
             }           
 
-            this.party.title = this.getPartyTitles(this.party);        
+            this.party.title = getPartyTitles(this.party, '</br>', false);        
             partiesList.push(this.party);       
             styleOfProceedings.parties = partiesList;
             this.UpdateForm1Info(styleOfProceedings);        
@@ -832,31 +834,6 @@ export default class styleOfProceedingsActions extends Vue {
             });           
 
         }        
-    }
-
-    public getPartyTitles(partyInfo: form1PartiesInfoType){
-        let title = '';
-        if (partyInfo.legalReps.length == 0 && partyInfo.aliases.length == 0){            
-            title = partyInfo.lowerCourtRole + "</br>" + partyInfo.fullName;
-        } else {
-
-            const repTitle = [];
-            for (const legalRep of partyInfo.legalReps){                
-                const repFormat = this.lookups.legalRepFormatters[legalRep.repType].replace('{0}', legalRep.name).replace('{1}', partyInfo.fullName);
-                repTitle.push(repFormat);
-            }
-            
-            const aliasTitle = [];
-            for (const alias of partyInfo.aliases){                    
-                aliasTitle.push(alias.nameType + ' ' + alias.name);
-            }
-           
-            const repText = repTitle.length?repTitle.join('</br> or'): '';
-            const aliasText = aliasTitle.length?aliasTitle.join('</br>'): '';            
-            title = partyInfo.lowerCourtRole + "</br>" + (repText?(repText + "</br>"):'') + aliasText;
-        }
-
-        return title;
     }
 
     public editParties(){
@@ -874,57 +851,30 @@ export default class styleOfProceedingsActions extends Vue {
         if (this.checkPartyStates()){
 
             const styleOfProceedings = this.form1Info;
-            if (this.party.isOrganization){
-                this.party.fullName = this.party.organizationName;
-            } else {
-                this.party.fullName = 
-                this.party.surname + ', ' + 
-                this.party.firstGivenName + 
-                (this.party.secondGivenName? ' ' + this.party.secondGivenName:'') +
-                (this.party.thirdGivenName? ' ' + this.party.thirdGivenName:'')
-            }        
 
-            this.party.title = this.getPartyTitles(this.party);
-            
-            if (this.party.appealRole && this.party.appealRole == 'Respondent') {
-                this.party.appealRole = ''
-                const resIndex = styleOfProceedings.respondents.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
-                if (resIndex != -1) {
-                    styleOfProceedings.respondents.splice(resIndex, 1);
-                }
+            this.party.fullName = getFullName(this.party);
 
-                const resNameIndex =  this.respondents.indexOf(this.party.fullName);
-                if (resNameIndex != -1) {
-                    this.respondents.splice(resNameIndex, 1);
-                }
+            this.party.title = getPartyTitles(this.party, '</br>', false);
 
-                if (this.party.counselName) {            
-                    const solicitorNameIndex =  this.respondentSolicitors.indexOf(this.party.counselName);
-                    if (solicitorNameIndex != -1){
-                        this.respondentSolicitors.splice(solicitorNameIndex, 1);
-                    }
-                }
-                    
-            } else if (this.party.appealRole && this.party.appealRole == 'Appellant') {
-                this.party.appealRole = ''
-                const appIndex = styleOfProceedings.appellants.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)
-                if (appIndex != -1) {
-                    styleOfProceedings.appellants.splice(appIndex, 1);
-                }                     
-            } 
+            if (this.party.appealRole) {
+                this.party.appealRole = ''                                                  
+            }  
 
-            const partiesList = this.form1Info.parties;
-            
-            const index = partiesList.findIndex(originalParty => originalParty.ceisPartyId == this.party.ceisPartyId)                         
-            partiesList[index] = this.party;
-            styleOfProceedings.parties = partiesList;
-            styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');
+            // styleOfProceedings.respondents = [];
+            // styleOfProceedings.appellants = [];
+            // for(const party  of this.form1Info.parties){
+
+            //     if(party.appealRole == 'Appellant')        
+            //         styleOfProceedings.appellants.push(party);
+            //     if(party.appealRole ==  'Respondent')        
+            //         styleOfProceedings.respondents.push(party);
+            // }
+
             this.UpdateForm1Info(styleOfProceedings);        
             this.showPartyWindow = false;
             Vue.nextTick(()=> {
                 this.updateResults();
             });
-
         }
        
     }

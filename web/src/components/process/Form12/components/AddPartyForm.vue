@@ -2,39 +2,64 @@
     <div v-if="dataReady">
         <b-table-simple small borderless>
             <b-tbody >
-                <b-tr class="my-4 mx-2">
-                    <b-td style="width: 45%;">
-                        <div class="m-0 p-0 labels"> Name of person whose affidavit is being filed: </div>                        
-                        <b-form-input
-                            tabindex="0"
-                            class="my-2"
-                            style="padding 0; margin:0; width: 90%;"
-                            size="sm"
-                            v-model="name"                                
-                            :state = "nameState?null:false">
-                        </b-form-input>                                                   
-                    </b-td>   
-                    <b-td style="width: 30%">
-                        <label class="ml-1 m-0 p-0 labels"> Date affidavit was sworn: </label>
-                        <b-card                             
-                            class="mt-2" 
-                            style="padding: 0; float: left; display: inline-block;" 
-                            :border-variant="dateState == false?'danger': 'dark'">
-                            <div class="vuetify">
-                                <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                    <v-date-picker
-                                        v-model="date"                           
-                                        color="warning"             
-                                        :allowed-dates="allowedDates"                            
-                                        header-color="red"
-                                    ></v-date-picker>                            
-                                </v-app>
-                            </div>    
-                        </b-card>
-                                               
-                    </b-td>                                                     
-                    <b-td style="width: 25%">
-                        <div style="float: right;">
+                <b-tr>
+                    <b-td>
+                        <label class="h6 ml-2 m-0 p-0"> Party Type: </label>
+                        <b-form-group style="margin: 0.05rem 0 0 0.5rem;width: 10rem;"> 
+                            <b-form-select
+                                tabindex="1"
+                                size = "sm"
+                                @change="changed"
+                                v-model="selectedPartyType"
+                                :state = "partyTypeState?null:false">                                   
+                                    <b-form-select-option
+                                        v-for="option in partyTypeOptions" 
+                                        :key="option.text"
+                                        :value="option.value">
+                                            {{option.text}}
+                                    </b-form-select-option>     
+                            </b-form-select>
+                        </b-form-group>                                               
+                    </b-td>
+                    <b-td :key="updated" v-if="selectedPartyType == true">
+                        <label class="h6 m-0 p-0"> Firm Name: </label>
+                        <b-input-group  style="padding 0; margin:0 ;width: 20rem">
+                            <b-form-input
+                                tabindex="2"
+                                class="mb-1"
+                                size="sm"
+                                v-model="firmName"                                
+                                :state = "firmNameState?null:false"
+                                >
+                            </b-form-input>
+                        </b-input-group>                                           
+                    </b-td> 
+                    <b-td :key="updated" v-else>
+                        <label class="h6 m-0 p-0"> First Name: </label>
+                        <b-input-group  style="padding 0; margin:0 ;width: 20rem">
+                            <b-form-input
+                                tabindex="2"
+                                class="mb-1"
+                                size="sm"
+                                v-model="firstName"                                
+                                :state = "firstNameState?null:false"
+                                >
+                            </b-form-input>
+                        </b-input-group>    
+                        <label class="h6 m-0 p-0"> Last Name: </label>
+                        <b-input-group  style="padding 0; margin:0 ;width: 20rem">
+                            <b-form-input
+                                tabindex="3"
+                                class="mb-1"
+                                size="sm"
+                                v-model="lastName"                                
+                                :state = "lastNameState?null:false"
+                                >
+                            </b-form-input>
+                        </b-input-group>                                        
+                    </b-td>                   
+                    <b-td >
+                        <div>
                             <b-button                                    
                                 style="margin: 1.7rem 0 0 0; padding:0; width: 4.5rem;"
                                 variant="secondary"
@@ -56,8 +81,8 @@
 
         <b-modal v-model="showCancelWarning" id="bv-modal-alias-cancel-warning" header-class="bg-warning text-light">            
             <template v-slot:modal-title>
-                <h2 v-if="isCreateAffidavit" class="mb-0 text-light"> Unsaved New Affidavit Details </h2>                
-                <h2 v-else class="mb-0 text-light"> Unsaved Affidavit Details Changes </h2>                                 
+                <h2 v-if="isCreateParty" class="mb-0 text-light"> Unsaved New Party </h2>                
+                <h2 v-else class="mb-0 text-light"> Unsaved Party Changes </h2>                                 
             </template>
             <p>Are you sure you want to cancel without saving your changes?</p>
             <template v-slot:modal-footer>
@@ -76,29 +101,43 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'; 
-import moment from 'moment-timezone';
-import { affidavitInfoType } from '@/types/Information/Form4';
+import { partyInfoType } from '@/types/Information/Form3';
 
 @Component
-export default class AddAffidavitForm extends Vue {        
+export default class AddPartyForm extends Vue {        
 
     @Prop({required: true})
-    formData!: affidavitInfoType;
+    formData!: partyInfoType;
 
     @Prop({required: true})
     index!: number;
 
     @Prop({required: true})
-    isCreateAffidavit!: boolean;    
+    isCreateParty!: boolean;   
     
-    name = '';
-    nameState = true;
+    partyTypeOptions = [
+        {text: 'an individual', value: false},
+        {text: 'an organization', value: true}
+    ];
 
-    date = '';
-    dateState = true;
+    updated = 0;
+
+    selectedPartyType;
+    partyTypeState = true; 
     
-    originalName = ''; 
-    originalDate = '';    
+    firmName = '';
+    firmNameState = true;
+
+    firstName = '';
+    firstNameState = true;  
+    
+    lastName = '';
+    lastNameState = true;
+
+    originalPartyType;
+    originalFirmName = ''; 
+    originalFirstName = '';  
+    originalLastName = '';   
     
     showCancelWarning = false;
 
@@ -109,7 +148,7 @@ export default class AddAffidavitForm extends Vue {
     { 
         this.dataReady = false;
         this.clearSelections();
-        if(!this.isCreateAffidavit) {
+        if(!this.isCreateParty) {
             this.extractFormInfo();
             this.addButtonText = 'Save';
         } else {
@@ -117,25 +156,43 @@ export default class AddAffidavitForm extends Vue {
         }
         
         this.dataReady = true;              
+    }    
+    
+    public changed(){
+        this.updated++;
     }
 
     public extractFormInfo(){
-        this.originalName = this.name = this.formData.name;
-        this.originalDate = this.date = this.formData.date;           
+        const index = this.partyTypeOptions.findIndex(partyType=>{if(partyType.value == this.formData.organization)return true})            
+        this.originalPartyType = this.selectedPartyType = (index>=0)? this.partyTypeOptions[index].value: null;            
+        this.originalFirmName = this.firmName = this.formData.name;
+        this.originalFirstName = this.firstName = this.formData.firstName;
+        this.originalLastName = this.lastName = this.formData.lastName;            
     }
 
     public saveForm(){
             
-        this.nameState = this.name != "";
-        this.dateState = this.date != "";        
+        this.partyTypeState = this.selectedPartyType != null;
+
+        if (this.selectedPartyType){
+            this.firmNameState = this.firmName != ""; 
+            this.firstNameState = true;
+            this.lastNameState = true; 
+        } else {
+            this.firmNameState = true; 
+            this.firstNameState = this.firstName != "";
+            this.lastNameState = this.lastName != ""; 
+        }
         
-        if (this.nameState && this.dateState){        
-            const affidavitInfo = {} as affidavitInfoType;            
-            affidavitInfo.name = this.name;    
-            affidavitInfo.date = this.date;
+        if (this.partyTypeState && this.firmNameState && this.firstNameState && this.lastNameState){        
+            const party = {} as partyInfoType;
+            party.organization = this.selectedPartyType;
+            party.name = this.firmName;    
+            party.firstName = this.firstName;
+            party.lastName = this.lastName;   
+            this.$emit('submit', this.isCreateParty, party, this.index);
+        }
             
-            this.$emit('submit', this.isCreateAffidavit, affidavitInfo, this.index);
-        }            
     }
 
     public closeForm(){
@@ -146,13 +203,15 @@ export default class AddAffidavitForm extends Vue {
     }
 
     public isChanged(){
-        if(this.isCreateAffidavit){
-            if(this.name.length && this.date.length) return true;
+        if(this.isCreateParty){
+            if(this.selectedPartyType != null && (this.firmName.length || this.firstName.length && this.lastName.length) ) return true;
             return false;
         } else {
 
-            if ( this.originalName != this.name || 
-                this.originalDate != this.date ) {
+            if ( this.originalPartyType != this.selectedPartyType || 
+                this.originalFirmName != this.firmName || 
+                this.originalFirstName != this.firstName || 
+                this.originalLastName != this.lastName ) {
                     return true;
                 } else {
                     return false;
@@ -166,36 +225,28 @@ export default class AddAffidavitForm extends Vue {
     }
 
     public clearSelections(){
-        this.name = '';
-        this.nameState = true; 
-        
-        this.date = '';
-        this.dateState = true;
-    }
 
-    public allowedDates(date){
-        const day = moment().startOf('day').format('YYYY-MM-DD');
-        return (date <= day);           
+        this.selectedPartyType = null;
+        this.partyTypeState = true; 
+        
+        this.firmName = '';
+        this.firmNameState = true;
+
+        this.firstName = '';
+        this.firstNameState = true;  
+        
+        this.lastName = '';
+        this.lastNameState = true;    
+
     }
     
 }
 </script>
 
-<style scoped lang="scss">
-
-    ::v-deep .vuetify{
-        @import "@/styles/vuetify.scss";
-        @import "@/styles/_custom_vuetify.scss";
-    }
-
+<style scoped>
     td {
         margin: 0rem 0.5rem 0.1rem 0rem;
         padding: 0rem 0.5rem 0.1rem 0rem;        
         background-color: white ;
-    }
-
-    .labels {
-        font-size: 0.85rem; 
-        font-weight:300;
     }
 </style>

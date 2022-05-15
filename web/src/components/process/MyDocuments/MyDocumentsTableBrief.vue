@@ -707,9 +707,14 @@ export default class MyDocumentsTableBrief extends Vue {
         }else if(item.formName=='Form 7'){
             this.UpdateCurrentNoticeOfUrgentApplicationId(item.id);             
             this.$router.push({name: "fill-form7"}); 
+
         } else if(item.formName=='Form 22'){
             this.UpdateCurrentNoFeesPayableId(item.id);             
             this.$router.push({name: "fill-form22"}); 
+
+        } else if(item.formName=='Form 12'){
+            this.UpdateCurrentOrderToVarySingleJusticeId(item.id);             
+            this.$router.push({name: "fill-form12"}); 
         }
 
     }

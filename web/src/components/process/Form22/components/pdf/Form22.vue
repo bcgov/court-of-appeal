@@ -163,7 +163,7 @@ export default class Form22 extends Vue {
     }
 
     // public onPrintSave() { 
-    //     const pdf_type = "NCA"
+    //     const pdf_type = "FORM"
     //     const pdf_name = "form22-" + this.currentNoFeesPayableId
     //     const el= document.getElementById("print");
       

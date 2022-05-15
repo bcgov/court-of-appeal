@@ -19,17 +19,15 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Notice of Appearance (Form 2)?
+                When Do You Use the Order from an Application to Vary the Order of a Justice (Form 12)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you have been served a Notice of Appeal (Form 1), and you want to respond, 
-                fill out the Notice of Appearance (Form 2). If you do not respond, you will 
-                not be included in future court proceedings related to this case, and will 
-                not have access to the case documents filed.
+                If you have made an application to vary the order of a justice, 
+                you would need to draft the order.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
-                You have 10 days to serve a filed copy of the Notice of Appearance to the 
-                appellant, after receiving a Notice of Appeal.    
+                Before you can submit the order to the registry for entry, you will need to have the 
+                order you prepared signed by all parties.    
             </b-row>        
            
         </b-card>

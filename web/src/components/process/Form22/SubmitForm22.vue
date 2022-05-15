@@ -5,7 +5,7 @@
             <form-22-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
-        <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
+        <b-card v-if="fileNumberExists" text-variant="dark" class="my-2 mx-5 bg-light border-light">
 
             <b-row class="ml-2" style="font-size: 2rem;">
                 Submit through E-Filing
@@ -49,6 +49,51 @@
             </b-row>
 
         </b-card>
+        <b-card v-else text-variant="dark" class="my-2 mx-5 bg-light border-light">
+
+            <!-- <b-row class="ml-2" style="font-size: 2rem;">
+                Submit through E-Filing
+            </b-row>  -->
+            
+            <b-row class="ml-2 mb-5" style="font-size: 14px;">
+                You have indicated that you do not currently have a Court of Appeal file number.  
+                Please be advised that you will need to submit this Application For Order that 
+                No Fees are Payable by saving a copy to your computer and submit it with your 
+                prepared Notice of Appeal form.
+            </b-row>           
+
+            <b-row>
+                <b-alert
+                    :show="errorMsg !=''"
+                    style="margin:0 0 2rem auto;"
+                    dismissible
+                    variant="danger"
+                > {{errorMsg}}
+                </b-alert>
+            </b-row>
+
+            <b-row class="ml-5 mt-3">
+                <b-col cols="7">
+                    <b-button 
+                        style="float: right; width: 120px; height: 50px; font-size: 20px;" 
+                        variant="danger"
+                        @click="cancel()"
+                        >
+                        Cancel
+                    </b-button>
+                </b-col>
+                <b-col cols="5">
+                    <b-button
+                        style="float: left; height: 50px; font-size: 20px; opacity:1;"
+                        variant="success"
+                        @click="startNewForm1Document()"
+                        >
+                        <span style="margin:0; padding: 0;">Navigate to Notice of Appeal Form</span>
+                    </b-button>
+                </b-col>
+            </b-row>
+
+        </b-card>
         
     </b-card>
 </template>
@@ -57,11 +102,15 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
+
 import "@/store/modules/forms/form22";
 const form22State = namespace("Form22");
 
+import "@/store/modules/forms/form1";
+const form1State = namespace("Form1");
+
 import { packageInfoType } from '@/types/Information';
-import { form22StatusInfoType } from '@/types/Information/Form22';
+import { form22DataInfoType, form22StatusInfoType } from '@/types/Information/Form22';
 
 import Form22ProcessHeader from "@/components/process/Form22/components/Form22ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
@@ -77,17 +126,25 @@ export default class SubmitForm22 extends Vue {
     @form22State.State
     public currentNoFeesPayableId: string;
 
+    @form22State.State
+    public form22Info: form22DataInfoType;
+
+    @form1State.Action
+    public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
+
     stepsCompleted = {} as form22StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
     submitting = false;
     errorMsg="";   
+    fileNumberExists = false;
 
 
     mounted() {
         this.mountedData = false;
         this.submitting = false;    
         this.errorMsg = ""
+        this.fileNumberExists = !this.form22Info.requiresManualEntry && this.form22Info.formSevenNumber?.length > 0;
         this.stepsCompleted = {
             first: true,
             second: true,
@@ -128,6 +185,11 @@ export default class SubmitForm22 extends Vue {
                 this.errorMsg = generalError
             this.submitting = false;
         });    
+    }    
+    
+    public startNewForm1Document(){
+        this.UpdateCurrentNoticeOfAppealId(null)
+        this.$router.push({name: "checklist-form1" })
     }
 
     public cancel() {
