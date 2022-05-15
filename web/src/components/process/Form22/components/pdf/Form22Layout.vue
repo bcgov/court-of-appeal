@@ -9,7 +9,7 @@
             </div>   
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>Form 22</b></div>               
-                <div style="width:75%; font-size:14pt;">
+                <div style="width:75%; font-size:14pt; line-height:1.2rem; margin-top:0.35rem;">
                     <b>APPLICATION FOR ORDER THAT NO FEES ARE PAYABLE <i>(RULE 85)</i></b>
                 </div>
             </div>         
@@ -115,9 +115,9 @@
                 <div class="ml-2">{{result.applyingParties.join(', ')}}</div>                       
             </div> 
         </div>
-
+        <div class="new-page" />
 <!-- <PART A> -->
-        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
+        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: -1.5rem -.95rem 0.5rem -.95rem; text-align: left; padding:0 0.5rem;">
             <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 600;"><b class="mr-3">PART A:</b> BASIS FOR BRINGING THE APPEAL</div>
 
             <!-- <orders> -->
@@ -165,13 +165,13 @@
         </div>
 
 <!-- <PART B> -->
-        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
+        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem -0.95rem; text-align: left; padding:0 0 0 0.5rem;">
             <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">PART B:</b> INCOME AND ASSETS</div>
 
             <!-- <part-of-order-cross-appealed> -->
             <div class="row mt-1" style="font-size: 9pt; margin: 0.5rem 0.5rem;">
 
-                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.3rem 0; height:6.1rem;">
+                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.75rem 0; height:6.1rem;">
                     <div class="ml-2">
                         <b>Check the applicable boxes</b>
                         <i style="font-size:8.8pt;">
@@ -181,25 +181,25 @@
                     </div>
                 </div>
 
-                <div class="arrow-right-flash-54" style="border-left-color: #FFF;"></div>
+                <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div>
                         
-                <div style="width:63.25%; margin:0;"> 
+                <div style="width:62%; margin:0; font-size:8.75pt;"> 
                     <b>Income</b>                 
                     <check-box 
-                        style="margin-left:1rem;"
+                        style="margin-left:0.85rem;"
                         :check="(result.income == 1)?'yes':''" 
                         shiftmark="1" 
                         marginLeft="0.5rem"
-                        text="1-3 household members - My gross household income is less than $60,000"/> 
+                        text="<i>1-3 household members</i> - My gross household income is less than $60,000"/> 
                     <check-box 
-                        style="margin-left:1rem;" 
+                        style="margin-left:0.85rem;line-height:1rem;" 
                         :check="(result.income == 2)?'yes':''"
                         shiftmark="1" 
                         marginLeft="0.5rem"
-                        text="4 or more household members - My gross household income is less than $84,000"/> 
+                        text="<i>4 or more household members</i> - My gross household income is less than $84,000"/> 
                     <b>Assets</b>                 
                     <check-box 
-                        style="margin-left:1rem;"
+                        style="margin-left:0.85rem;"
                         :check="(result.assets)?'yes':''" 
                         shiftmark="1" 
                         marginLeft="0.5rem"
@@ -211,16 +211,16 @@
         </div>
 
 <!-- <PART C> -->
-        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem 0; text-align: left; padding:0 0.5rem;">
+        <div style="border: 1px solid #E8E8E8; background:#E8E8E8; font-size: 10pt; margin: 0.5rem -0.95rem; text-align: left; padding:0 0.5rem;">
             <div class="row" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">PART C:</b> FINANCIAL CIRCUMSTANCES</div>
 
             <!-- <financial> -->
             <div class="row mt-1" style="font-size: 9pt; margin: 0.5rem 0.5rem;">
 
-                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.3rem 0; height:8.7rem;">
+                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.25rem 0; height:7.2rem;">
                     <div class="ml-2">
-                        <b>Special financial circumstances</b>
-                        <i style="font-size:8.8pt;">
+                        <b style="font-size:8.5pt;">Special financial circumstances</b>
+                        <i style="font-size:8.5pt;">
                             <br>Be as specific as possible about your financial circumstances. For example,
                             if you have recently lost employment or have a large number of
                             dependants note that here.
@@ -228,7 +228,7 @@
                     </div>
                 </div>
 
-                <div class="arrow-right-flash-54" style="border-left-color: #FFF;"></div>
+                <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div>
                         
                 <div class="coa-text-box-left" style="width:63.25%; background:#FFF; font-weight: 700;">
                     <div v-if="result.assets == false && result.income == 0" class="ml-2">{{result.finances}}</div>                       
@@ -237,17 +237,17 @@
                        
         </div>
 
-        <!-- <hearing-location-address> -->
-        <div class="row mt-3" style="font-size: 9pt;">
+<!-- <hearing-location-address> -->
+        <div class="row mt-2" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.5rem 0; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.35rem 0; height:3rem;">
                 <div class="ml-2" style="line-height:1.1rem;">
                     <b>Location of hearing</b><br/>
                     <i style="font-size:8.7pt;">Enter the address of the courthouse.</i>
                 </div>
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-30"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">
@@ -257,7 +257,7 @@
         </div>
 
 <!-- <date-of-hearing> -->
-        <div class="row mt-3" style="font-size: 9pt;">
+        <div class="row mt-2" style="font-size: 9pt;">
             
             <div class="coa-arrow-box-left" style="width:28%; margin:0.29rem 0; line-height:1.25rem; height:2.5rem;">
                 <b class="ml-2">Date hearing will take place</b>
@@ -288,7 +288,7 @@
         </div> 
 
 <!-- <Sign-Date> -->
-        <div class="row mt-5" style="font-size: 9pt;">
+        <div class="row mt-3" style="font-size: 9pt;">
             
             <div class="coa-arrow-box-left" style="width:19%; margin:0.5rem 0; line-height:0.75rem;  height:2rem;">
                 <div class="ml-2"> Date form completed</div>

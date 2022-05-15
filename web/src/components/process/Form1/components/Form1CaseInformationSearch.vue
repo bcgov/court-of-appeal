@@ -301,11 +301,14 @@ export default class Form1CaseInformationSearch extends Vue {
     }
 
     public supremeFileformatter(value){
-        if(value.slice(0,1)!='S'){
-            if(isNaN(Number(value.slice(0))))
-                return 'S'
+        const courtClass = ['B', 'E', 'H', 'L', 'M', 'P', 'S', 'V'];
+        const firstChar = value.slice(0,1).toUpperCase()
+        
+        if(courtClass.includes(firstChar)){
+            if(isNaN(Number(value.slice(1))))
+                return firstChar
             else
-                return 'S'+value
+                return firstChar+value.slice(1)
         }
         if(isNaN(Number(value.slice(-1)))) return value.slice(0,-1)
         return value
