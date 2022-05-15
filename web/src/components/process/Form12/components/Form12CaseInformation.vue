@@ -126,11 +126,12 @@
                         striped                   
                         small
                         responsive="sm">
-                        <template v-slot:cell(edit)="data">
+                        
+                        <template v-slot:cell(edit)="data">                            
                             <b-button 
                                 size="sm" 
                                 variant="primary" 
-                                @click="selectOrder(data)">
+                                @click="selectOrder(data.item)">
                                 Select Order
                             </b-button>                       
                         </template>  

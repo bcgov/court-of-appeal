@@ -207,7 +207,7 @@ export default class TableForm12 extends Vue {
     public form12FormsJson!: form12FormsJsonDataType[];
     
     @form12State.Action
-    public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
+    public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
     
     allDocumentsChecked = false;
     showSelectFormToFill = false;
@@ -334,7 +334,7 @@ export default class TableForm12 extends Vue {
 
     public resumeApplication(fileInfo: documentInfoType) {
         const caseId = fileInfo.fileNumber.toString()
-        this.UpdateCurrentOfferToSettleCostsId(caseId);             
+        this.UpdateCurrentOrderToVarySingleJusticeId(caseId);             
         this.$router.push({name: "fill-form12"});       
     }
 
@@ -394,7 +394,6 @@ export default class TableForm12 extends Vue {
             this.confirmDelete=true;            
         }
     } 
-    
     
     public confirmDeleteApplication() { 
         const data ={

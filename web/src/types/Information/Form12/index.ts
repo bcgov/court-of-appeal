@@ -1,3 +1,4 @@
+import { hearingLocationsInfoType } from "@/types/Common";
 import { partyInfoType } from "../Form3";
 import { applicantJsonDataType, respondentsJsonDataType } from "../json"
 
@@ -55,18 +56,22 @@ export interface form12DataInfoType {
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
     requiresManualEntry: boolean;
-    manualAppellants: partyInfoType[];
-    manualRespondents: partyInfoType[];
-    originalJudgeNames: string[]; 
-    hearingLocation: string;    //2 
-    dateOfJudgement: string;//3
-    applyingParties: string[]; //4   
-    judgeName: string;//5
-    hearingDate: string;//6
-    filingParties: string[];//7
-    appearingParties: string[];//8
+    appellantsInfo: partyInfoType[];
+    respondentsInfo: partyInfoType[];
+    appellantNames: string;
+    respondentNames: string;
+    judgeNames: string[]; 
+    hearingLocation: hearingLocationsInfoType;   
+    dateOfJudgement: string;
+    applyingParties: string[]; 
+    varyingOrderJudgeName: string;
+    varyingOrderDate: string;
+    filingParties: string[];
+    appearingParties: string[];
     orderAllowed: boolean;
-    furtherOrders: string;
+    otherOrders: boolean;
+    furtherOrders?: string;
+    authorizedName: string;
     completionDate?: string;
     version?: string;
 }

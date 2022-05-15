@@ -4,15 +4,19 @@
             <b-tbody >
                 <b-tr class="my-4 mx-2">
                     <b-td style="width: 45%;">
-                        <div class="m-0 p-0 labels"> Name of Judge: </div>                        
-                        <b-form-input
-                            tabindex="0"
-                            class="my-2"
-                            style="padding 0; margin:0; width: 90%;"
-                            size="sm"
-                            v-model="name"                                
-                            :state = "nameState?null:false">
-                        </b-form-input>                                                   
+                        <label class="h6 ml-2 m-0 p-0"> Name of Judge: </label>                        
+                        <b-form-select
+                                tabindex="1"
+                                size = "sm"
+                                v-model="name"
+                                :state = "nameState?null:false">                                   
+                                    <b-form-select-option
+                                        v-for="option in justiceNameOptions" 
+                                        :key="option"
+                                        :value="option">
+                                            {{option}}
+                                    </b-form-select-option>     
+                            </b-form-select>                                                 
                     </b-td>   
                                                                          
                     <b-td style="width: 25%">
@@ -69,7 +73,35 @@ export default class AddJudgeForm extends Vue {
     index!: number;
 
     @Prop({required: true})
-    isCreateJudge!: boolean;    
+    isCreateJudge!: boolean;   
+    
+    justiceNameOptions = [
+        'Chief Justice Bauman',
+        'Mr. Justice Abrioux',
+        'Madam Justice Bennett',
+        'Mr. Justice Butler',
+        'Madam Justice DeWitt-Van Oosten',
+        'Madam Justice Dickson',
+        'Madam Justice Fenlon',
+        'Madam Justice Fisher',
+        'Mr. Justice Fitch',
+        'Mr. Justice Frankel',
+        'Mr. Justice Goepel',
+        'Mr. Justice Grauer',
+        'Justice Griffin',
+        'Mr. Justice Groberman',
+        'Mr. Justice Harris',
+        'Justice Horsman',
+        'Mr. Justice Hunter',
+        'Madam Justice MacKenzie',
+        'Mr. Justice Marchand',
+        'Madam Justice Newbury',
+        'Madam Justice Saunders',
+        'Madam Justice Stromberg-Stein',
+        'Mr. Justice Voith',
+        'Mr. Justice Wilcock',
+        'Other'
+    ];
     
     name = '';
     nameState = true;
