@@ -92,7 +92,7 @@
                 </b-col>
                 <b-col cols="11">
                     <p class="question pb-0 mt-3">
-                        Do you want to produce an order which varies an order of a justice
+                        Do you want to produce an order which varies an order of a justice?
                     </p>
                     <b-form-radio-group 
                         v-model="varyOrder"
