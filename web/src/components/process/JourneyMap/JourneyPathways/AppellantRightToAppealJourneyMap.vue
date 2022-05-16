@@ -23,8 +23,8 @@
         <form-icon   
             style="left: 17%"
             :twoPages="false"
-            stepTitle="Initial Documents"
-            @action="displayWindow('Initial Documents')"
+            stepTitle="Initial Document"
+            @action="displayWindow('Initial Document')"
             @completed="completed"            
             order=1
             v-bind="pageState[0]"           
@@ -94,8 +94,8 @@
         <form-icon 
             :style="{top: '46%', left: '21%'}"
             :twoPages="true"
-            stepTitle="Factum, Appeal Book, and Certificate of Readiness"
-            @action="displayWindow('Factum, Appeal Book, and Certificate of Readiness')"
+            stepTitle="Factums and Appeal Book"
+            @action="displayWindow('Factums and Appeal Book')"
             stepTitleClass="step-title-wide"
             @completed="completed"            
             order=5
@@ -185,8 +185,8 @@
             :style="{left: '54%', top: '84.7%'}"
             class="journey-box"
             :twoPages="false"
-            stepTitle="Court Order"
-            @action="displayWindow('Court Order')"
+            stepTitle="Orders"
+            @action="displayWindow('Orders')"
             @completed="completed"            
             order=9
             v-bind="pageState[8]"
@@ -236,12 +236,12 @@
                     <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
                     <apply-leave-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="applyForLeaveToAppealContent"/>
                     <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
-                    <factum-appeal-book-certificate-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookCertificateContent"/>              
+                    <factum-appeal-book-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
 
                     <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
                     <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
-                    <court-order-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
+                    <orders-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                     <managing-appeal-process-pg @adjustHeights="adjustHeights" v-if="applicationsContent"/>
                 
@@ -285,11 +285,11 @@ import InitialDocumentsAppRightToAppealPg from '../components/AppRightToAppeal/I
 import ApplyLeaveAppRightToAppealPg from '../components/AppRightToAppeal/ApplyLeaveAppRightToAppealPg.vue';
 import ManagingAppealProcessPg from '@/components/process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 import AppealRecordTranscriptAppRightToAppealPg from '../components/AppRightToAppeal/AppealRecordTranscriptAppRightToAppealPg.vue';
-import FactumAppealBookCertificateAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookCertificateAppRightToAppealPg.vue';
+import FactumAppealBookAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookAppRightToAppealPg.vue';
 import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
 import NoticeOfHearingAppRightToAppealPg from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
 import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
-import CourtOrderAppRightToAppealPg from '../components/AppRightToAppeal/CourtOrderAppRightToAppealPg.vue';
+import OrdersAppRightToAppealPg from '../components/AppRightToAppeal/OrdersAppRightToAppealPg.vue';
 import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
 
 import {activatePage, evaluateCompletedTrails, evaluatePageState} from '@/components/utils/TrailOperations'
@@ -312,11 +312,11 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         InitialDocumentsAppRightToAppealPg,
         ApplyLeaveAppRightToAppealPg,
         AppealRecordTranscriptAppRightToAppealPg,
-        FactumAppealBookCertificateAppRightToAppealPg,
+        FactumAppealBookAppRightToAppealPg,
         BookAppealDateAppRightToAppealPg,
         NoticeOfHearingAppRightToAppealPg,
         TheHearingAppRightToAppealPg,
-        CourtOrderAppRightToAppealPg,
+        OrdersAppRightToAppealPg,
         AppealProcessCompleteAppRightToAppealPg,
         ManagingAppealProcessPg
     }
@@ -340,7 +340,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
     applyForLeaveToAppealContent = false;
     applicationsContent = false;
     appealRecordTranscriptContent = false;
-    factumAppealBookCertificateContent = false;
+    factumAppealBookContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
     theHearingContent = false;
@@ -380,16 +380,16 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.applicationsContent = false;
         this.appealRecordTranscriptContent = false;
         
-        this.factumAppealBookCertificateContent = false;
+        this.factumAppealBookContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
         this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false; 
 
-        if (contentType == "Initial Documents"){
+        if (contentType == "Initial Document"){
 
-            this.windowTitle = "Initial Documents";
+            this.windowTitle = "Initial Document";
             this.pathTypes = ["share"];
             this.pathHeights = ['29rem'];
             this.initialDocumentsContent = true;
@@ -412,42 +412,42 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
             this.windowTitle = "Appeal Record and Transcript";
             this.pathTypes = ["share", "info"];
-            this.pathHeights = ['15rem', '0'];
+            this.pathHeights = ['33rem', '0'];
             this.appealRecordTranscriptContent = true;
 
-        } else if (contentType == "Factum, Appeal Book, and Certificate of Readiness"){
+        } else if (contentType == "Factums and Appeal Book"){
 
-            this.windowTitle = "The Factum, Appeal Book and Certificate of Readiness";
-            this.pathTypes = ["share", "share", "info"];
-            this.pathHeights = ['20rem', '0', '0'];
-            this.factumAppealBookCertificateContent = true;
+            this.windowTitle = "The Factums and Appeal Book";
+            this.pathTypes = ["share", "share", "info", "info"];
+            this.pathHeights = ['18rem', '0', '0', '0'];
+            this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
             this.pathTypes = ["gavel"];
-            this.pathHeights = ['2rem'];
+            this.pathHeights = ['35rem'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){
 
             this.windowTitle = "Notice of Hearing";
-            this.pathTypes = ["question", "share"];
-            this.pathHeights = ['38rem', '0'];
+            this.pathTypes = ["question", "share", "share"];
+            this.pathHeights = ['31rem', '0', '0'];
             this.noticeOfHearingContent = true;
 
         }  else if (contentType == "The Hearing"){
 
             this.windowTitle = "The Hearing";
             this.pathTypes = ["gavel"];
-            this.pathHeights = ['6rem'];
+            this.pathHeights = ['86rem'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Court Order"){
+        } else if (contentType == "Orders"){
 
-            this.windowTitle = "Court Order";
+            this.windowTitle = "Orders";
             this.pathTypes = ["info"];
-            this.pathHeights = ['6rem'];
+            this.pathHeights = ['36rem'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){
