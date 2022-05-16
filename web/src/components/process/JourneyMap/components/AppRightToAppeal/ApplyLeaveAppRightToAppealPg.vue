@@ -384,7 +384,11 @@
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
             <ol class="mt-3">
                 <li>
-                    Obtain an application hearing date from the registrar
+                    Obtain an application hearing date from the registrar from 
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                        target="_blank">Court of Appeal - Scheduling
+                    </a>.
                 </li>
                 <li>
                     Complete the documents below. Click on the document name for more information.
