@@ -2,9 +2,20 @@
     <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3">            
-            <div class="mb-2" style="text-align: left; font-weight: bold;">
+            <b-col cols="11" class="step-title-column pl-0">
                 When is an appeal ready for hearing?
-            </div>     
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showAppealReady(!showAppealReadyInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showAppealReadyInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row>
+        
+        <b-row v-if="showAppealReadyInfo" class="mt-3">
             <p>
                 An appeal is ready for hearing on the date when 
                 the appellant has filed both:
@@ -18,17 +29,32 @@
                     <li>on the date specified by a justice or registrar</li>
                 </ul>                
             </p>       
-        </b-row>  
+        </b-row> 
 
-        <b-row class="mt-0">            
-            <div class="mb-2" style="text-align: left; font-weight: bold;">
+        <b-row :class="showAppealReadyInfo?'mt-0': 'mt-4'" :style="showAppealReadyInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
+            <b-col cols="11" class="step-title-column pl-0">
                 How do I obtain an appeal hearing date?
-            </div>     
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showObtain(!showObtainInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showObtainInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row> 
+
+        <b-row v-if="showObtainInfo" class="mt-0">
             <p>
                 After an appeal is ready for hearing, you must, without delay,
                 <ul>
                     <li>obtain a hearing date for the appeal by 
-                        contacting the court registry (hyperlink)
+                        contacting the 
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                            target="_blank"> registrar
+                        </a>.
                     </li>
                     <li>
                         inform the registrar is the parties disagree 
@@ -40,11 +66,23 @@
                 that has attached a copy of each order being appealed.                
             </p>       
         </b-row> 
-
-        <b-row class="mt-2">            
-            <div class="mb-2" style="text-align: left; font-weight: bold;">
+        
+        <b-row :class="showObtainInfo?'mt-0': 'mt-4'" :style="showObtainInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
+                   
+            <b-col cols="11" class="step-title-column pl-0">
                 Can I expedite the hearing of the appeal?
-            </div>     
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showExpedite(!showExpediteInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showExpediteInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row> 
+
+        <b-row v-if="showExpediteInfo" class="mt-2">
             <p>
                 You may request to expedite an appeal by filing and 
                 serving a written request which must state the following:
@@ -63,23 +101,57 @@
                 </ul>
                                 
             </p>       
-        </b-row>          
-
-        <!-- <b-row class="mt-4 ml-3" >            
-            <a 
-                href="http://www.courts.gov.bc.ca/court_of_appeal/court_locations_and_contacts.aspx"
-                target="_blank">BC Court of Appeal locations and contacts
-            </a>                               
-        </b-row>         -->
+        </b-row>        
         
     </b-card>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 
-@Component
+@Component({
+    components:{
+        ExpandIcon
+    }
+})
 export default class BookAppealDateAppRightToAppealPg extends Vue { 
+
+    showAppealReadyInfo = true;
+    showObtainInfo = false;
+    showExpediteInfo = false;
+
+    public showAppealReady(show: boolean){
+        if (show) {
+            this.showAppealReadyInfo = true;
+            this.$emit('adjustHeights', 0, "7rem")
+        } else {
+            this.showAppealReadyInfo = false;
+            this.$emit('adjustHeights', 0, "0");
+        }
+    }
+
+    public showObtain(show: boolean){
+        if (show) {
+            this.showObtainInfo = true;
+            this.$emit('adjustHeights', 1, "8rem")
+        } else {
+            this.showObtainInfo = false;
+            this.$emit('adjustHeights', 1, "0");
+        }
+    }
+
+    public showExpedite(show: boolean){
+        if (show) {
+            this.showExpediteInfo = true;
+            this.$emit('adjustHeights', 2, "13rem")
+        } else {
+            this.showExpediteInfo = false;
+            this.$emit('adjustHeights', 2, "0");
+        }
+    }
+
+
 
 
 }

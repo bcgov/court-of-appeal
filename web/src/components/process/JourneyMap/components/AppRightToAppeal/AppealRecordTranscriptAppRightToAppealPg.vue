@@ -34,76 +34,42 @@
                     An appeal record must be completed in accordance with the Completion Instructions.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-90">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.4-preparing-an-appeal-record?ct=t(sidebar-link)"
-                                        target="_blank">Appeal Record
-                                    </a>                                   
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%209.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%209.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-90">
-                                <b-col cols="8">
-                                    <a 
-                                        href=""
-                                        target="_blank">Paper Completion Instructions
-                                    </a>
-                                    <!-- <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                     -->
-                                </b-col>
-                                <b-col cols="3"></b-col>                               
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-90">
-                                <b-col cols="8">
-                                    <a 
-                                        href=""
-                                        target="_blank">E-Completion Instructions
-                                    </a>
-                                    <!-- <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                     -->
-                                </b-col>
-                                <b-col cols="3"></b-col>                                
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
+                            Appeal Record
+                                    
+                            <ul>
+                                <li>
+                                    <b-row class="my-1 w-100">
+                                        <b-col cols="8">
+                                            E-Completion Instructions                                           
+                                        </b-col>
+                                        <b-col cols="2"></b-col>                                
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('e-appeal-record')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                     
+                                        </b-col>
+                                    </b-row>
+                                </li>
+                                <li>
+                                    <b-row class="my-1 w-100">
+                                        <b-col cols="8">
+                                            Paper Completion Instructions                                                                       
+                                        </b-col>
+                                        <b-col cols="2"></b-col>                               
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('paper-appeal-record')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                    
+                                        </b-col>
+                                    </b-row>
+                                </li>
+                                
+                            </ul>
+                        </li>                        
                     </ul>
                 </li>
                 <li>
@@ -166,6 +132,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
 
 @Component({
     components:{
@@ -197,6 +164,12 @@ export default class AppealRecordTranscriptAppRightToAppealPg extends Vue {
             this.showNoaCaInfo = false;
             this.$emit('adjustHeights', 1, "0");
         }        
+    }
+
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
     }
 
 }
