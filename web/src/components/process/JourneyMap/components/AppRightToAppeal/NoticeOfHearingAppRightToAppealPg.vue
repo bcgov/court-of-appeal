@@ -167,66 +167,44 @@
             <ol>
                 <li>
                     Prepare the Book of Authorities in accordance with the Completion Instructions.
-                    <ul>
+                    <ul>                       
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.8-replies?ct=t(sidebar-link)"
-                                        target="_blank">Book of Authorities
-                                    </a>                                    
-                                </b-col>                                
-                                <b-col cols="3" ></b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href=""
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href=""
-                                        target="_blank">Paper Completion Instructions
-                                    </a>
-                                    <!-- <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                     -->
-                                </b-col>
-                                <b-col cols="3"></b-col>                                
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.11-prepare-and-file-a-certificate-of-readiness?ct=t(sidebar-link)"
-                                        target="_blank">E-Completion Instructions
-                                    </a>                                                                     
-                                </b-col>
-                                <b-col cols="3"></b-col>
+                            Book of Authorities                                    
+                            <ul>
+                                <li>
+                                    <b-row class="my-1 w-100">
+                                        <b-col cols="8">
+                                            E-Completion Instructions                                           
+                                        </b-col>
+                                        <b-col cols="2"></b-col>                                
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('e-auth-book')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                     
+                                        </b-col>
+                                    </b-row>
+                                </li>
+                                <li>
+                                    <b-row class="my-1 w-100">
+                                        <b-col cols="8">
+                                            Paper Completion Instructions                                                                       
+                                        </b-col>
+                                        <b-col cols="2"></b-col>                               
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('paper-auth-book')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                    
+                                        </b-col>
+                                    </b-row>
+                                </li>
                                 
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form14.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
+                            </ul>
+                        </li> 
+                        
                     </ul>
                 </li>                
                 <li>
@@ -247,6 +225,7 @@ import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 
 import "@/store/modules/forms/form5";
+import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 const form5State = namespace("Form5");
 
 @Component({
@@ -297,6 +276,12 @@ export default class NoticeOfHearingAppRightToAppealPg extends Vue {
     public startNewForm5Document(){
         this.UpdateCurrentNoticeOfHearingOfAppealId(null);            
         this.$router.push({name: "start-form5" })
+    }
+
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
     }
 
 }

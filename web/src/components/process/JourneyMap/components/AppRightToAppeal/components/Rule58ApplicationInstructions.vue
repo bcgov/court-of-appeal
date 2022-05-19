@@ -40,15 +40,50 @@
                                 </b-button>
                             </b-col>
                         </b-row>
-                    </li> 
-                    <li>
-                        Application Book (as per completion instructions)
                     </li>
+                    <li>
+                        Application Book                                
+                        <ul>
+                            <li>
+                                <b-row class="my-1 w-100">
+                                    <b-col cols="8">
+                                        E-Completion Instructions                                           
+                                    </b-col>
+                                    <b-col cols="2"></b-col>                                
+                                    <b-col cols="1">
+                                        <b-button
+                                            @click="downloadInstructions('e-security-costs')"
+                                            target="_blank"                                                                                
+                                            class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                        </b-button>                                     
+                                    </b-col>
+                                </b-row>
+                            </li>
+                            <li>
+                                <b-row class="my-1 w-100">
+                                    <b-col cols="8">
+                                        Paper Completion Instructions                                                                       
+                                    </b-col>
+                                    <b-col cols="2"></b-col>                               
+                                    <b-col cols="1">
+                                        <b-button
+                                            @click="downloadInstructions('paper-security-costs')"
+                                            target="_blank"                                                                                
+                                            class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                        </b-button>                                    
+                                    </b-col>
+                                </b-row>
+                            </li>
+                            
+                        </ul>
+                    </li> 
                     <li>
                         Supporting affidavits (if any) 
                     </li>
-                    <li>
-                        Written argument (if any)
+                    <li class="link-button" 
+                        @click="downloadInstructions('written-argument')"
+                        target="_blank">
+                        Written argument (if any)               
                     </li>
                 </ul>
             </li> 
@@ -70,6 +105,8 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form4";
 const form4State = namespace("Form4");
 
+import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
+
 @Component
 export default class Rule58ApplicationInstructions extends Vue {   
 
@@ -84,6 +121,28 @@ export default class Rule58ApplicationInstructions extends Vue {
         this.$router.push({name: "start-form4" });
     }
 
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
+    }
+
 }
 
 </script>
+
+<style scoped lang="scss">
+
+    @import "src/styles/common";
+
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
+
+</style>

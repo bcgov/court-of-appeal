@@ -225,7 +225,13 @@
                 v-if="initialDocumentsContent" 
                 style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" 
                 class="mb-1 ml-2">Would you like to start your appeal?
-            </b-row>            
+            </b-row>    
+
+            <b-row 
+                v-if="theHearingContent" 
+                style="font-size: 1.5em; font-weight: 700; padding: 0 0 0 6rem;" 
+                class="mb-1 ml-2">For more information about the hearing process, click the topics below:
+            </b-row>           
 
             <b-row no-gutters>
                 <b-col cols="1">
@@ -238,10 +244,10 @@
                     <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
                     <factum-appeal-book-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
 
-                    <book-appeal-date-app-right-to-appeal-pg v-else-if="bookAppealDateContent"/>
+                    <book-appeal-date-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
-                    <the-hearing-app-right-to-appeal-pg v-else-if="theHearingContent"/>                
-                    <orders-app-right-to-appeal-pg v-else-if="courtOrderContent"/>
+                    <the-hearing-app-right-to-appeal-pg @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
+                    <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                     <managing-appeal-process-pg @adjustHeights="adjustHeights" v-if="applicationsContent"/>
                 
@@ -373,6 +379,11 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.pathHeights[index] = pathHeight;
     }
 
+    public showOrders(){
+        this.showWindow = false;
+        this.displayWindow('Orders');
+    }
+
     public displayWindow(contentType: string){
 
         this.initialDocumentsContent = false;
@@ -391,7 +402,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
             this.windowTitle = "Initial Document";
             this.pathTypes = ["share"];
-            this.pathHeights = ['29rem'];
+            this.pathHeights = ['35rem'];
             this.initialDocumentsContent = true;
 
         } else if (contentType == "Apply for Leave to Appeal") {
@@ -417,16 +428,16 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
         } else if (contentType == "Factums and Appeal Book"){
 
-            this.windowTitle = "The Factums and Appeal Book";
+            this.windowTitle = "Factums and Appeal Book";
             this.pathTypes = ["share", "share", "info", "info"];
-            this.pathHeights = ['18rem', '0', '0', '0'];
+            this.pathHeights = ['56rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
-            this.pathTypes = ["gavel"];
-            this.pathHeights = ['35rem'];
+            this.pathTypes = ["gavel", "info", "info"];
+            this.pathHeights = ['7rem', '0', '0'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){
@@ -439,15 +450,15 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         }  else if (contentType == "The Hearing"){
 
             this.windowTitle = "The Hearing";
-            this.pathTypes = ["gavel"];
-            this.pathHeights = ['86rem'];
+            this.pathTypes = ["gavel", "share", "share", "share", "info"];
+            this.pathHeights = ['5rem', '0', '0', '0', '0'];
             this.theHearingContent = true;
 
         } else if (contentType == "Orders"){
 
             this.windowTitle = "Orders";
-            this.pathTypes = ["info"];
-            this.pathHeights = ['36rem'];
+            this.pathTypes = ["info", "info"];
+            this.pathHeights = ['21rem', '0'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){

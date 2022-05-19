@@ -40,10 +40,43 @@
                                 </b-button>
                             </b-col>
                         </b-row>
-                    </li> 
-                    <li class="my-2">
-                        Application Book (completion instructions)
-                    </li>                    
+                    </li>
+                    <li>
+                        Application Book
+                        <ul>
+                            <li>
+                                <b-row class="my-1 w-100">
+                                    <b-col cols="8">
+                                        E-Completion Instructions                                           
+                                    </b-col>
+                                    <b-col cols="2"></b-col>                                
+                                    <b-col cols="1">
+                                        <b-button
+                                            @click="downloadInstructions('e-application-leave-stay')"
+                                            target="_blank"                                                                                
+                                            class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                        </b-button>                                     
+                                    </b-col>
+                                </b-row>
+                            </li>
+                            <li>
+                                <b-row class="my-1 w-100">
+                                    <b-col cols="8">
+                                        Paper Completion Instructions                                                                       
+                                    </b-col>
+                                    <b-col cols="2"></b-col>                               
+                                    <b-col cols="1">
+                                        <b-button
+                                            @click="downloadInstructions('paper-application-leave-stay')"
+                                            target="_blank"                                                                                
+                                            class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                        </b-button>                                    
+                                    </b-col>
+                                </b-row>
+                            </li>
+                            
+                        </ul>
+                    </li>                   
                 </ul>
             </li> 
             <li class="my-2">
@@ -64,6 +97,8 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form4";
 const form4State = namespace("Form4");
 
+import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
+
 @Component
 export default class Rule20ApplicationInstructions extends Vue {   
 
@@ -73,6 +108,12 @@ export default class Rule20ApplicationInstructions extends Vue {
     public startNewForm4Document(){
         this.UpdateCurrentNoticeOfApplicationId(null);
         this.$router.push({name: "start-form4" });
+    }
+
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
     }
 
 }

@@ -12,6 +12,12 @@
                 target="_blank">
                 Offer To Settle Costs (Form 16)                
             </li>
+            <li class="link-button" 
+                @click="downloadInstructions('ca-cover-page')"
+                target="_blank">
+                CA Cover Page template                
+            </li>
+
         </ul>
 
         <b-modal size="xl" v-model="showWindow" header-class="bg-primary">
@@ -61,6 +67,7 @@ import InstructionWindowFooter from '../process/JourneyMap/components/Instructio
 import PathSidebar from '../process/JourneyMap/components/PathSidebar.vue';
 
 import "@/store/modules/forms/form16";
+import { GetInstructionFile } from './GetInstructionFile';
 const form16State = namespace("Form16");
 
 @Component({
@@ -107,6 +114,12 @@ export default class AdditionalForms extends Vue {
     public startNewForm16Document(){
         this.UpdateCurrentOfferToSettleCostsId(null);
         this.$router.push({name: "start-form16" });
+    }
+
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
     }
 
 }

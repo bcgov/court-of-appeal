@@ -20,10 +20,8 @@
                         <li>
                             <b-row class="my-1" style="width: 90%;">
                                 <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Notice of Application (Form 7)
-                                    </a>
+                                    Notice of Application (Form 7)
+                                   
                                 </b-col>                                
                                 <b-col cols="3" class="p-0" >
                                     <b-button

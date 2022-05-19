@@ -65,40 +65,55 @@
         <b-row v-if="showNoaLeaveInfo" class="mt-4" >            
 
            <ol>
+               <li>
+                    Obtain an application hearing date from the  
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                        target="_blank"> registrar
+                    </a>.
+                </li>
                 <li>
                     Complete either the Online form or the .PDF. Click the document name for more information.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Notice of Application – Form 4
-                                    </a>
+                            <b-row class="my-1 w-125">
+                                <b-col cols="4">
+                                    Notice of Application – Form 4                                    
                                 </b-col>                                
-                                <b-col cols="2" class="p-0" >
+                                <b-col cols="4" class="p-0" >
                                     <b-button
                                         @click="startNewForm4Document"
                                         target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
                                 </b-col>
-                                <b-col cols="1">
-                                    <b-button
+                                <b-col cols="4">
+                                    <!-- <b-button
                                         href=""
                                         target="_blank"
                                         class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
+                                    </b-button>                                     -->
                                 </b-col>
                             </b-row>
                         </li>
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Application Book for Leave
-                                    </a>
+                            <b-row class="my-1 w-125">
+                                <b-col cols="4">
+                                    Application Book for Leave                                    
+                                </b-col>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-application-leave-stay')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-application-leave-stay')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
@@ -146,39 +161,54 @@
             File and serve the documents below after filing
            <ol class="mt-2">
                 <li>
+                    Obtain an application hearing date from the  
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                        target="_blank"> registrar
+                    </a>.
+                </li>
+                <li>
                     Complete either the Online form or the .PDF. Click the document name for more information.
                     <ul>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Notice of Application – Form 4
-                                    </a>
+                         <li>
+                            <b-row class="my-1 w-100">
+                                <b-col cols="4">
+                                    Notice of Application – Form 4                                    
                                 </b-col>                                
-                                <b-col cols="2" class="p-0" >
+                                <b-col cols="4" class="p-0" >
                                     <b-button
                                         @click="startNewForm4Document"
                                         target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
                                 </b-col>
-                                <b-col cols="1">
-                                    <b-button
+                                <b-col cols="4">
+                                    <!-- <b-button
                                         href=""
                                         target="_blank"
                                         class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
+                                    </b-button>                                     -->
                                 </b-col>
                             </b-row>
                         </li>
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Application Book for Leave to Appeal and Stay
-                                    </a>
+                            <b-row class="my-1 w-100">
+                                <b-col cols="4">
+                                    Application Book for Leave to Appeal and Stay                                    
+                                </b-col>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-application-leave-stay')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-application-leave-stay')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
                                 </b-col>
                             </b-row>
                         </li>
@@ -193,7 +223,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 1.15rem;':'padding-top: 0.95rem;'">            
+        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 0.15rem;':'padding-top: 0.95rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -248,14 +278,25 @@
                     Click the document name for more information.
                     <ul>                        
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Response Book
-                                    </a>
+                            <b-row class="my-1 w-100">
+                                <b-col cols="4">
+                                    Response Book                                   
                                 </b-col>
-                            </b-row>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-application-leave-stay')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-application-leave-stay')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>                            
                         </li>
                     </ul>                
                 </li>
@@ -268,7 +309,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.5rem;">            
+        <b-row :class="showRespNoaLeaveInfo?'mt-2':'mt-4'" style="padding-top: 0.5rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -320,16 +361,26 @@
                     Please note that you must submit the book in a pdf format. 
                     Click the document name for more information.
                     <ul>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Response Book for Leave to Appeal and Stay
-                                    </a>
-                                </b-col>                              
-                                
-                            </b-row>
+                        <li>                            
+                            <b-row class="my-1 w-100">
+                                <b-col cols="4">
+                                    Response Book for Leave to Appeal and Stay                                  
+                                </b-col>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-application-leave-stay')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-application-leave-stay')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>  
                         </li>
                         
                     </ul>                
@@ -384,29 +435,32 @@
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
             <ol class="mt-3">
                 <li>
-                    Obtain an application hearing date from the registrar from 
+                    Obtain an application hearing date from the  
                     <a 
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
-                        target="_blank">Court of Appeal - Scheduling
+                        target="_blank"> registrar
                     </a>.
                 </li>
                 <li>
                     Complete the documents below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
+                            <b-row class="my-1 w-145">
+                                <b-col cols="4">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Notice of Application to Vary
                                     </a>
                                 </b-col>                                
-                                <b-col cols="3" class="p-0" >
+                                <b-col cols="5" class="p-0" >
                                     <b-button
                                         @click="startNewForm8Document"
-                                        target="_blank"                                                                                
+                                        target="_blank" 
+                                        style="width: 80%;"                                                                               
                                         class="p-1 bg-white text-primary border-primary online-form-button">Online form
                                     </b-button>
+                                </b-col>
+                                <b-col class="p-0" cols="3">                                   
                                 </b-col>
                             </b-row>
                         </li>
@@ -421,18 +475,11 @@
                                 </b-col> 
                             </b-row>
                         </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank"> -->
-                                        Written argument (if any)
-                                    <!-- </a> -->
-                                </b-col>                                
-                                
-                            </b-row>
-                        </li>
+                        <li class="link-button" 
+                            @click="downloadInstructions('written-argument')"
+                            target="_blank">
+                            Written argument (if any)               
+                        </li>                        
                     </ul>
                 </li>                
                 <li>
@@ -468,9 +515,10 @@
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-4" >
             <ol>
                 <li>
-                    Complete either the online form or .PDF below. Click on the document name for more information.
+                    Complete the following using the Completion Instructions. Please note that you must submit 
+                    the book in a pdf format. Click the document name for more information.
                     <ul>
-                        <li>
+                        <li>                            
                             <b-row style="width: 113%;" class="my-1">
                                 <b-col cols="8">                                    
                                     <a 
@@ -495,7 +543,7 @@
             <app-leave-refused-final-instructions/>
         </b-row>
 
-        <b-row :class="showDecisionOnLeaveInfo?'mt-4':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row :class="showDecisionOnLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Responding to Application to Vary An Order of a Justice
             </b-col> 
@@ -533,16 +581,26 @@
                 <li>
                     Complete the documents below. Click on the document name for more information.
                     <ul>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <a 
-                                        href=""
-                                        target="_blank">Response Book
-                                    </a>
-                                </b-col>                              
-                                
-                            </b-row>
+                        <li>                            
+                            <b-row style="width: 113%;" class="my-1">
+                                <b-col cols="4">
+                                    Application to vary an order of a justice                                  
+                                </b-col>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-vary')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-vary')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>  
                         </li>
                         <li>
                             <b-row class="my-1 w-110">
@@ -557,11 +615,11 @@
                         </li>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="9">Written argument (if any)
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank">Response Book
-                                    </a> -->
+                                <b-col cols="9">                                
+                                    <a 
+                                        href="downloadInstructions('written-argument')"
+                                        target="_blank">Written argument (if any)
+                                    </a>                                
                                 </b-col>
                             </b-row>
                         </li>                        
@@ -592,6 +650,8 @@ const form4State = namespace("Form4");
 
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
+
+import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
 
 @Component({
     components:{
@@ -630,7 +690,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeave(show: boolean){
         if (show) {
             this.showNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 1, "21rem");
+            this.$emit('adjustHeights', 1, "23rem");
         } else {
             this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -640,7 +700,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeaveStay(show: boolean){
         if (show) {
             this.showNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 2, "21rem");
+            this.$emit('adjustHeights', 2, "23rem");
         } else {
             this.showNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 2, "0");
@@ -650,7 +710,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespNoaLeave(show: boolean){
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 3, "24rem");
+            this.$emit('adjustHeights', 3, "26rem");
         } else {
             this.showRespNoaLeaveInfo = false;
             this.$emit('adjustHeights', 3, "0");
@@ -660,7 +720,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespNoaLeaveStay(show: boolean){
         if (show) {
             this.showRespNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 4, "24rem");
+            this.$emit('adjustHeights', 4, "26rem");
         } else {
             this.showRespNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 4, "0");
@@ -680,7 +740,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespVaryOrder(show: boolean){
         if (show) {
             this.showRespVaryOrderInfo = true;
-            this.$emit('adjustHeights', 6, "22rem");
+            this.$emit('adjustHeights', 6, "25rem");
         } else {
             this.showRespVaryOrderInfo = false;
             this.$emit('adjustHeights', 6, "0");
@@ -697,11 +757,26 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
         this.$router.push({name: "start-form4" });
     }
 
+    public downloadInstructions(file_name: string){
+        GetInstructionFile(file_name);
+    }
+        
+
 }
 </script>
 
 <style scoped lang="scss">
 
+    @import "src/styles/common";
 
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
 
 </style>
