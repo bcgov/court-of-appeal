@@ -62,22 +62,7 @@
             <ul class="w-100">
                 <li>
                     Condensed Book of Authorities                                    
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-100">
-                                <b-col cols="8">
-                                    E-Completion Instructions                                           
-                                </b-col>
-                                <b-col cols="2"></b-col>                                
-                                <b-col cols="1">
-                                    <b-button
-                                        @click="downloadInstructions('e-condensed-auth-book')"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
-                                    </b-button>                                     
-                                </b-col>
-                            </b-row>
-                        </li>
+                    <ul>                        
                         <li>
                             <b-row class="my-1 w-100">
                                 <b-col cols="8">
@@ -98,22 +83,7 @@
                 </li>
                 <li>
                     Condensed Book of Evidence                                    
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-100">
-                                <b-col cols="8">
-                                    E-Completion Instructions                                           
-                                </b-col>
-                                <b-col cols="2"></b-col>                                
-                                <b-col cols="1">
-                                    <b-button
-                                        @click="downloadInstructions('e-condensed-evidence-book')"
-                                        target="_blank"                                                                                
-                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
-                                    </b-button>                                     
-                                </b-col>
-                            </b-row>
-                        </li>
+                    <ul>                        
                         <li>
                             <b-row class="my-1 w-100">
                                 <b-col cols="8">
@@ -294,7 +264,7 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public showPoints(show: boolean){
         if (show) {
             this.showPointsInfo = true;
-            this.$emit('adjustHeights', 1, "38rem")
+            this.$emit('adjustHeights', 1, "33rem")
         } else {
             this.showPointsInfo = false;
             this.$emit('adjustHeights', 1, "0");
