@@ -41,6 +41,9 @@ const form8State = namespace("Form8");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form10";
+const form10State = namespace("Form10");
+
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
@@ -70,6 +73,7 @@ import { form6FormsJsonDataType } from '@/types/Information/Form6';
 import { form7FormsJsonDataType } from '@/types/Information/Form7';
 import { form8FormsJsonDataType } from '@/types/Information/Form8';
 import { form9FormsJsonDataType } from '@/types/Information/Form9';
+import { form10FormsJsonDataType } from '@/types/Information/Form10';
 import { form12FormsJsonDataType } from '@/types/Information/Form12';
 import { form16FormsJsonDataType } from '@/types/Information/Form16';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
@@ -110,6 +114,9 @@ export default class MyDocuments extends Vue {
 
     @form9State.Action
     public UpdateForm9FormsJson!: (newForm9FormsJson: form9FormsJsonDataType[])=> void
+
+    @form10State.Action
+    public UpdateForm10FormsJson!: (newForm10FormsJson: form10FormsJsonDataType[])=> void
 
     @form12State.Action
     public UpdateForm12FormsJson!: (newForm12FormsJson: form12FormsJsonDataType[])=> void
@@ -162,6 +169,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form7/forms'));
         calls.push(this.$http.get('/form12/forms'));
         calls.push(this.$http.get('/form22/forms'));
+        calls.push(this.$http.get('/form10/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -182,6 +190,7 @@ export default class MyDocuments extends Vue {
             if(values[12]?.data) this.UpdateForm7FormsJson(values[12]?.data)
             if(values[13]?.data) this.UpdateForm12FormsJson(values[13]?.data)
             if(values[14]?.data) this.UpdateForm22FormsJson(values[14]?.data)
+            if(values[15]?.data) this.UpdateForm10FormsJson(values[15]?.data)
 
             this.dataLoaded = true;
         })

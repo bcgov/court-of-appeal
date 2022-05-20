@@ -163,6 +163,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
+import "@/store/modules/forms/form10";
+const form10State = namespace("Form10");
+
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
@@ -175,6 +178,9 @@ import StepNumber from "@/components/utils/StepNumber.vue";
 })
 export default class ChecklistOrders extends Vue {    
 
+    @form10State.Action
+    public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
+	 
     @form12State.Action
     public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
 	    
@@ -284,13 +290,13 @@ export default class ChecklistOrders extends Vue {
     }
 
     public startNewForm10Document(){
-        // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form4" });
+        this.UpdateCurrentOrderSingleJusticeId(null);
+        this.$router.push({name: "start-form10" });
     }
 
     public startNewForm11Document(){
         // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form4" });
+        // this.$router.push({name: "start-form11" });
     }
     
 

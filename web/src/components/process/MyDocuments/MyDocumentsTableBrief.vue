@@ -113,6 +113,9 @@ const form8State = namespace("Form8");
 import "@/store/modules/forms/form9";
 const form9State = namespace("Form9");
 
+import "@/store/modules/forms/form10";
+const form10State = namespace("Form10");
+
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
@@ -140,6 +143,7 @@ import { form6FormsJsonDataType } from "@/types/Information/Form6";
 import { form7FormsJsonDataType } from "@/types/Information/Form7";
 import { form8FormsJsonDataType } from "@/types/Information/Form8";
 import { form9FormsJsonDataType } from "@/types/Information/Form9";
+import { form10FormsJsonDataType } from "@/types/Information/Form10";
 import { form12FormsJsonDataType } from "@/types/Information/Form12";
 import { form16FormsJsonDataType } from "@/types/Information/Form16";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
@@ -207,6 +211,12 @@ export default class MyDocumentsTableBrief extends Vue {
 
     @form9State.Action
     public UpdateCurrentRequisitionId!: (newCurrentRequisitionId: string) => void
+
+    @form10State.State
+    public form10FormsJson!: form10FormsJsonDataType[];
+
+    @form10State.Action
+	public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
 
     @form12State.State
     public form12FormsJson!: form12FormsJsonDataType[];
@@ -461,6 +471,30 @@ export default class MyDocumentsTableBrief extends Vue {
                 form:'form9',
                 formName:'Form 9',
                 description:'Requisition',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
+        //___Form 10___
+        for (const docJson of this.form10FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form10',
+                formName:'Form 10',
+                description:'Order of a single justice',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 

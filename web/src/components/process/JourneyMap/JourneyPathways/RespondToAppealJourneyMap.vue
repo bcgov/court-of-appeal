@@ -177,7 +177,8 @@
                     <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">               
-                    
+                    <notice-of-appearance-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfAppearanceContent"/>
+                
                     <notice-of-cross-appeal-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfCrossAppealContent"/>
                     <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
                     <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfHearingContent"/>
@@ -314,10 +315,10 @@ export default class RespondToAppealJourneyMap extends Vue {
         this.appealProcessCompleteContent = false;
 
         if (contentType == "Notice of Appearance"){
-            this.singlePath = true;
+            this.singlePath = false;
             this.windowTitle = "Notice of Appearance";
-            this.pathTypes = ["share"];
-            this.pathHeights = ['28rem'];
+            this.pathTypes = ["share", "info", "info"];
+            this.pathHeights = ['14rem', '0', '0'];
             this.noticeOfAppearanceContent = true;
 
         } else if (contentType == "Notice of Cross Appeal"){

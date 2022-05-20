@@ -89,6 +89,32 @@
         </b-card>
 
         <b-card class="mt-3" v-if="respondToAppeal" no-body border-variant="white">
+            <h4>Are you representing yourself?</h4>
+
+            <b-row>
+                <b-col>              
+                    <b-button 
+                        block
+                        @click="responseToAppealPath(true)" 
+                        variant="outline-primary bg-success text-white" 
+                        >
+                        Yes
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+                <b-col>
+                    <b-button 
+                        block
+                        @click="responseToAppealPath(false)" 
+                        variant="outline-primary bg-success text-white" 
+                    >No
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    </b-button>
+                </b-col>
+            </b-row>
+        </b-card>
+
+        <!-- <b-card class="mt-3" v-if="respondToAppeal" no-body border-variant="white">
             <p>Were you served with a Notice of Appeal form, or a Notice of Application for Leave to Appeal?</p>
 
             <b-row>
@@ -112,7 +138,7 @@
                     </b-button>
                 </b-col>
             </b-row>
-        </b-card>
+        </b-card> -->
 
     </b-card>
 </template>
@@ -183,29 +209,30 @@ export default class StartEfiling extends Vue {
         });    
     }
 
-    public appApplyLeavePath() {
+    // public appApplyLeavePath() {
 
-        const pathType = {} as pathwayTypeInfoType;
-        pathType.appApplyLeave = true;
-        this.UpdatePathType(pathType);   
+    //     const pathType = {} as pathwayTypeInfoType;
+    //     pathType.appApplyLeave = true;
+    //     this.UpdatePathType(pathType);   
 
-    }
+    // }
 
-    public responseToAppealPath() {
+    public responseToAppealPath(selfRep: boolean) {
         
+        this.updateSelfRepresented(selfRep);
         const pathType = {} as pathwayTypeInfoType;
         pathType.rspToAppeal = true;
         this.UpdatePathType(pathType);
 
     }
 
-    public responseToLeavePath() {
+    // public responseToLeavePath() {
         
-        const pathType = {} as pathwayTypeInfoType;
-        pathType.rspToLeave = true;
-        this.UpdatePathType(pathType);
+    //     const pathType = {} as pathwayTypeInfoType;
+    //     pathType.rspToLeave = true;
+    //     this.UpdatePathType(pathType);
         
-    }
+    // }
 
     public switchDisableRow(newAppeal: boolean){
 
