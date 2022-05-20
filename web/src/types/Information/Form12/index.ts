@@ -1,6 +1,5 @@
 import { hearingLocationsInfoType } from "@/types/Common";
-import { partyInfoType } from "../Form3";
-import { applicantJsonDataType, respondentsJsonDataType } from "../json"
+import { applicantJsonDataType, previousCourtJsonInfoType} from "../json"
 
 
 export interface form12FormsJsonDataType {
@@ -53,25 +52,59 @@ export interface form12SearchInfoType {
 
 export interface form12DataInfoType {
     formSevenNumber:string;
-    appellants: applicantJsonDataType[];
-    respondents: respondentsJsonDataType[];
+    appellants: form12PartiesInfoType[];
+    respondents: form12PartiesInfoType[];
     requiresManualEntry: boolean;
-    appellantsInfo: partyInfoType[];
-    respondentsInfo: partyInfoType[];
     appellantNames: string;
     respondentNames: string;
-    judgeNames: string[]; 
+    judgeNames: judgeInfoType[]; 
     hearingLocation: hearingLocationsInfoType;   
     dateOfJudgement: string;
-    applyingParties: string[]; 
+    applyingParties: form12PartiesInfoType[]; 
     varyingOrderJudgeName: string;
+    varyingOrderJudgeNameOther: string
     varyingOrderDate: string;
-    filingParties: string[];
-    appearingParties: string[];
+    filingParties: form12PartiesInfoType[];
+    appearingParties: form12PartiesInfoType[];
     orderAllowed: boolean;
     otherOrders: boolean;
     furtherOrders?: string;
     authorizedName: string;
     completionDate?: string;
     version?: string;
+    previousCourts?: previousCourtJsonInfoType;
+}
+
+export interface judgeInfoType {   
+    name: string;
+    other: string;
+    text: string;
+}
+
+export interface form12PartiesInfoType extends applicantJsonDataType{    
+    isOrganization?: boolean;
+    responding?: boolean;
+    title?: string;
+    counselName?: string;
+    aliases?: aliasInfoType[];
+    legalReps?: representativeInfoType[]; 
+    isCounsel?: boolean;      
+} 
+
+export interface aliasInfoType {
+    nameType: string;
+    name: string;
+}
+
+export interface representativeInfoType {
+    repType: string;
+    name: string;
+}
+
+export interface form12PartiesStatesInfoType {
+    firstName: null | boolean;
+    lastName: null | boolean;
+    organizationName: null | boolean;
+    counselName: null | boolean;
+    type: null | boolean;
 }

@@ -98,7 +98,7 @@ class Form12EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, order_to_vary_order_of_justice_id):
         
-        document_type = "CNWD" # type Form12 for Efiling
+        document_type = "UNKOWN" # type Form12 for Efiling
         uid = request.user.id
 
         order_to_vary_order_of_justice = self.get_order_to_vary_order_of_justice_for_user(order_to_vary_order_of_justice_id, uid)        

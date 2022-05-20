@@ -1,80 +1,136 @@
 <template>
-    <div v-if="dataReady">
+    <div>
 
         <div>
-            <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b>
-            <div style="display: block; text-align: center;">
-                <!-- <div style="font-size:12pt;"><b>FORM 2</b></div>
-                <div style="font-size:11pt;"><b>(RULES 5 (A), 13 (A) AND 17 (A))</b></div> -->
-            </div>            
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
         </div> 
 
-        <div class="my-3 row" style="float:right;">Court of Appeal File No. {{result.formSevenNumber}}</div>       
-
-        <div class="my-5" style="display: block; text-align: center; font-weight: 700; font-size:12pt;">COURT OF APPEAL</div>
-
-        <div class="my-3 row" style="font-weight: 700;">
-            <div class="col-md-10">
-                BETWEEN: <span style="font-weight: 200; margin-left: 5rem;">{{applicantNames.join(", ")}}</span>
-            </div>
-            <div class="col-md-2">Appellant</div>
-        </div>
-        <div class="my-3 row" style="font-weight: 700;">
-            <div class="col-md-10">
-                AND: <span style="font-weight: 200; margin-left: 7rem;">{{respondentNames.join(", ")}}</span>
-            </div>
-            <div class="col-md-2">Respondent</div>
+        <div class="my-0">
+            <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
         </div>
 
-        <div class="mt-3" style="display: block; text-align: center; font-weight: 700; font-size:12pt;">NOTICE OF APPEARANCE</div>
+        <div class="mt-5 mb-4 mx-auto text-center " style="font-weight: 600; font-size:14pt;">COURT OF APPEAL FOR BRITISH COLUMBIA</div>
 
-        <div class="my-3 row" style="font-weight: 700;">
-            <div class="col-md-10">
+<!-- <BETWEEN> -->
+        <div class="mb-3 mx-0 row" style="font-weight: 700;">
+            <div style="width:11%;">
+                BETWEEN: 
+            </div>
+        </div>
+        <div class="my-3 mx-0 row" style="font-weight: 700;">
+            <div style="width:11%;"/>
+            <div style="width:78%;">
+                <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
+            </div>
+            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1" >s</span></div>
+        </div>
+
+<!-- <AND> -->
+        <div class="my-3 mx-0 row" style="font-weight: 600;">
+            <div style="width:11%;">
+                AND: 
+            </div>
+        </div>
+        <div class="my-3 mx-0 row" style="font-weight: 600;">
+            <div style="width:11%;" />                
+            <div style="width:76%;">
+                <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
+            </div>
+            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
+        </div>
+
+<!-- <ORDER> -->
+        <div class="mt-5" style="display: block; text-align: center; font-weight: 600; font-size:14pt;">ORDER</div>
+
+<!-- <BEFORE> -->
+        <div class="mb-2 mx-0 row" style="font-weight: 600;">
+            <div>
                 BEFORE: 
             </div>
-            <!-- <div class="col-md-2">Respondent</div> -->
         </div>
 
-        <div class="my-3 row" style="font-weight: 700;">
-            <div v-for="judgeName,inx in result.originalJudgeNames" :key="inx" style="text-indent:10px;display:inline;">
-                <div style="display:inline-block;"> {{judgeName}} </div>
+        <div>
+            <div v-for="judgeName,inx in result.judgeNames" :key="inx">
+                <div style="margin-left:2.25rem;"> The Honourable {{judgeName.text}} </div>
+            </div>
+        </div>
+
+<!-- <HEARING LOCATION-DATE> -->
+        <div class="mt-2 mb-4 mx-0 row">
+            <div>
+                {{result.hearingLocation.name}}, British Columbia, {{result.dateOfJudgement | beautify-date-full}} 
             </div>
         </div>
         
-        
-        <div class="mt-4">
-            <div  style="font-weight: 700;">Enter an appearance on behalf of:</div>
-            <div class="mt-2" >{{respondentNames.join(", ")}}</div> 
+<!-- <THE APPEAL> -->
+        <div class="my-3 mx-0 row">
+            <div>
+                <b>THE APPEAL</b> from the judgment of the Honourable {{varyingOrderJudgeName}} of the <b class="text-danger">UNKOWN</b> Court 
+                of British Columbia at <b class="text-danger">UNKOWN</b>, British Columbia, dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
+                for hearing on <b class="text-danger">UNKOWN</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
+                <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
+            </div>
         </div>
 
-        <!-- <div class="mt-4">
-            <div style="font-weight: 700;">Address for service:</div>
-            <div class="mt-2" v-if="!result.selfRepresented" >{{result.serviceInformation.firmName}}</div>
-            <div>{{result.serviceInformation.addressLine1}}</div>
-            <div v-if="result.serviceInformation.addressLine2">{{result.serviceInformation.addressLine2}}</div> 
-            <div>{{result.serviceInformation.city}}, {{result.serviceInformation.province}}, {{result.serviceInformation.postalCode}}</div>
-            <div>{{result.serviceInformation.country}}</div>
+<!-- <DISMISS> -->
+        <div class="my-3 mx-0 row">
+            <div>
+                <b>THIS COURT ORDERS</b> that the application to vary the order of {{varyingOrderJudgeName}} 
+                Was the application to vary the order of <span v-if="result.orderAllowed"> allowed. </span> <span v-else> dismissed.</span>
+            </div>
         </div>
 
-        <div v-if="result.useServiceEmail" class="mt-4">
-            <div style="font-weight: 700;">I agree to accept documents served to the following email address:</div>
-            <div class="mt-2">{{result.serviceInformation.email}}</div>
+<!-- <FURTHER ORDERS> -->
+        <div v-if="result.otherOrders" class="my-3 mx-0 row">
+            <div>
+                <b>THIS COURT FURTHER ORDERS</b> that {{result.furtherOrders}}.
+            </div>
+        </div>
+
+<!-- <APPROVED> -->
+        <div class="mb-3 mt-5 mx-0 row">
+            <div  style="width:50%;">APPROVED AS TO FORM:</div>
+            <div  style="width:50%;">BY THE COURTS</div>
+        </div>
+
+<!-- <Appellants Signature> -->
+        <div class="my-5 mx-0 row">
+            <div  style="width:50%;">
+                <div>....................................................................</div>
+                <div v-for="party,inx in appearingAppellants" :key="'appl'+inx"> 
+                    <div v-if="party.isCounsel" > {{party.name}}</div>
+                </div> 
+                <div v-if="applicantNamesFull">{{applicantNamesFull}}</div>              
+            </div>
+
+            <div  style="width:50%;">
+                <div>....................................................................</div>
+                <div>Deputy Registrar</div>
+            </div>
+        </div>
+
+<!-- <Respondents Signature> -->
+        <div class="mt-5 mx-0 row">
+            <div  style="width:50%;">
+                <div>....................................................................</div>
+                <div v-for="party,inx in appearingRespondents" :key="'appl'+inx"> 
+                    <div v-if="party.isCounsel" > {{party.name}}</div>
+                </div>
+                <div v-if="respondentNamesFull">{{respondentNamesFull}}</div>
+            </div>
+            <div  style="width:50%;"/>
+        </div>
+
+<!-- <Instructions> -->
+        <!-- <div class="mt-5 mx-0 row" style="text-align: justify;">
+            <div>
+                <b>Instructions:</b> <br/>
+                Before you can submit the order to the registry for entry, you will need to have the order 
+                you prepared signed by all parties.  If someone refuses to sign an order, you may go before 
+                the registrar to settle the order pursuant to <b class="text-danger"> Rule 68 (hyperlink) </b> of the Court of Appeal Rules.
+            </div>
         </div> -->
 
-        <div class="my-3" style="float:right;">
-            <div style="text-align: center;">"Electronically Filed"</div>
-            <div>............................................................................................................</div>
-            <!-- <div 
-                v-if="result.selfRepresented" 
-                style="text-align: right;" 
-                class="mt-2">{{result.serviceInformation.name}} Respondent for the Respondents, {{respondentNames.toString()}}
-            </div> -->
-            <!-- <div 
-                v-else 
-                style="text-align: right;" 
-                class="mt-2">Solicitor for the Respondents, {{respondentNames.toString()}}
-            </div> -->
-        </div>
     </div>
 </template>
 
@@ -87,7 +143,7 @@ import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
 import { form12DataInfoType } from '@/types/Information/Form12';
-import { serviceInformationJsonDataType } from '@/types/Information/json';
+import {getPartyTitles, getFullName} from '../PartyTitlesForm12'
 
 @Component
 export default class Form12Layout extends Vue {
@@ -100,11 +156,19 @@ export default class Form12Layout extends Vue {
     
     dataReady = false;
     applicantNames: string[] = [];
-    respondentNames: string[] = [];  
+    respondentNames: string[] = [];
+    
+    applicantNamesFull='';
+    respondentNamesFull='';
+    varyingOrderJudgeName=''
+    appearingParties='';
+
+    appearingAppellants =[]
+    appearingRespondents =[]
 
     mounted(){
         // this.dataReady = false;
-        console.log(this.result)
+        //console.log(this.result)
         this.extractInfo();       
         this.dataReady = true;
     }
@@ -113,29 +177,57 @@ export default class Form12Layout extends Vue {
        
         this.applicantNames = [];
         this.respondentNames = [];
+        this.applicantNamesFull='';
+        this.respondentNamesFull='';
 
-        for (const respondent of this.result.respondents){
-            if (respondent.organization){
-                this.respondentNames.push(respondent.organization);
-            } else {                
-                this.respondentNames.push(respondent.name); 
-            }   
+        for (const resInx in this.result.respondents){
+            const fullTitle = getPartyTitles(this.result.respondents[resInx],' ')
+            this.respondentNames.push(fullTitle);
+            this.respondentNamesFull = this.combineNames(resInx, fullTitle, this.respondentNamesFull, this.result.respondents.length)
         }
 
-        for (const applicant of this.result.appellants){
-            if (applicant.organization){
-                this.applicantNames.push(applicant.organization);
-            } else {                
-                this.applicantNames.push(applicant.name); 
-            }  
+        for (const appInx in this.result.appellants){
+            const fullTitle = getPartyTitles(this.result.appellants[appInx],' ')
+            this.applicantNames.push(fullTitle);            
+            this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
         }
-        
-        // if(!this.result.serviceInformation){
-        //     const result = this.result
-        //     result.serviceInformation = {} as serviceInformationJsonDataType
-        //     this.UpdateForm12Info(result);
-        // }
-    } 
+
+        this.varyingOrderJudgeName = this.result.varyingOrderJudgeName=='Other'? this.result.varyingOrderJudgeNameOther :this.result.varyingOrderJudgeName;        
+        this.extractAppearingParties();
+    }
+
+    public extractAppearingParties(){
+        let appellantnames = ''
+        let respondentnames = ''
+        this.appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
+        this.appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
+
+        for(const appInx in this.appearingAppellants){                        
+            appellantnames = this.combineNames(appInx, this.appearingAppellants[appInx].name, appellantnames, this.appearingAppellants.length)
+        }
+
+        for(const resInx in this.appearingRespondents){            
+            respondentnames = this.combineNames(resInx, this.appearingRespondents[resInx].name, respondentnames, this.appearingRespondents.length)
+        }
+
+        //console.log(appellantnames)
+        //console.log(respondentnames)
+        this.appearingParties += appellantnames
+        this.appearingParties += (appellantnames && respondentnames)?' and ':''
+        this.appearingParties += respondentnames
+ 
+    }
+    
+    public combineNames(inx, fullTitle, namesFull, length){
+        if(Number(inx)>0 && Number(inx)+1 == length)
+            namesFull += ' and '+fullTitle
+        else if(Number(inx)==0)
+            namesFull += fullTitle
+        else
+            namesFull += ', '+fullTitle
+
+        return namesFull
+    }
 }
 
 </script>

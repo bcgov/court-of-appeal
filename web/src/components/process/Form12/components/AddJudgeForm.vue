@@ -2,25 +2,37 @@
     <div v-if="dataReady">
         <b-table-simple small borderless>
             <b-tbody >
-                <b-tr class="my-4 mx-2">
-                    <b-td style="width: 45%;">
-                        <label class="h6 ml-2 m-0 p-0"> Name of Judge: </label>                        
-                        <b-form-select
-                                tabindex="1"
-                                size = "sm"
-                                v-model="name"
-                                :state = "nameState?null:false">                                   
-                                    <b-form-select-option
-                                        v-for="option in justiceNameOptions" 
-                                        :key="option"
-                                        :value="option">
-                                            {{option}}
-                                    </b-form-select-option>     
-                            </b-form-select>                                                 
+                <b-tr class="my-4">
+                    <b-td style="width: 1%;" />
+                        
+                    <b-td style="width: 20%;">
+                        <label class="h6 m-0 p-0"> Name of Judge: </label>                        
+                        <b-form-select                            
+                            tabindex="1"                            
+                            size = "sm"
+                            v-model="name"
+                            :state = "nameState?null:false">                                   
+                                <b-form-select-option
+                                    v-for="option in justiceNameOptions" 
+                                    :key="option"
+                                    :value="option">
+                                        {{option}}
+                                </b-form-select-option>     
+                        </b-form-select>                                                 
                     </b-td>   
-                                                                         
-                    <b-td style="width: 25%">
-                        <div style="float: right;">
+                    <b-td style="width: 15%;">
+                        <div v-if="name=='Other'"> 
+                            <label class="h6 m-0 p-0"> Other Name: </label>                                                
+                            <b-form-input 
+                                style="margin-top:0.1rem;"
+                                size = "sm" 
+                                :state="otherNameState"
+                                v-model="otherName" 
+                        />
+                        </div>
+                    </b-td>
+                    <b-td style="width: 15%">
+                        <div style="float: right; margin-right:1rem;">
                             <b-button                                    
                                 style="margin: 1.7rem 0 0 0; padding:0; width: 4.5rem;"
                                 variant="secondary"
@@ -62,12 +74,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import {justiceNames} from './JusticeName'
 
 @Component
 export default class AddJudgeForm extends Vue {        
 
     @Prop({required: true})
-    formData!: string;
+    formData!: {name:string, other:string};
 
     @Prop({required: true})
     index!: number;
@@ -75,37 +88,16 @@ export default class AddJudgeForm extends Vue {
     @Prop({required: true})
     isCreateJudge!: boolean;   
     
-    justiceNameOptions = [
-        'Chief Justice Bauman',
-        'Mr. Justice Abrioux',
-        'Madam Justice Bennett',
-        'Mr. Justice Butler',
-        'Madam Justice DeWitt-Van Oosten',
-        'Madam Justice Dickson',
-        'Madam Justice Fenlon',
-        'Madam Justice Fisher',
-        'Mr. Justice Fitch',
-        'Mr. Justice Frankel',
-        'Mr. Justice Goepel',
-        'Mr. Justice Grauer',
-        'Justice Griffin',
-        'Mr. Justice Groberman',
-        'Mr. Justice Harris',
-        'Justice Horsman',
-        'Mr. Justice Hunter',
-        'Madam Justice MacKenzie',
-        'Mr. Justice Marchand',
-        'Madam Justice Newbury',
-        'Madam Justice Saunders',
-        'Madam Justice Stromberg-Stein',
-        'Mr. Justice Voith',
-        'Mr. Justice Wilcock',
-        'Other'
-    ];
+    justiceNameOptions = [];
+    created(){
+        this.justiceNameOptions = justiceNames
+    }
     
     name = '';
+    otherName = ''
     nameState = true;
-    
+    otherNameState = null;
+
     originalName = '';    
     
     showCancelWarning = false;
@@ -128,19 +120,22 @@ export default class AddJudgeForm extends Vue {
     }
 
     public extractFormInfo(){
-        this.originalName = this.name = this.formData;                   
+        this.originalName = this.name = this.formData.name; 
+        this.otherName = this.formData.other;                  
     }
 
     public saveForm(){
             
-        this.nameState = this.name != "";         
-        console.log(this.name)
-        console.log(this.isCreateJudge) 
-        console.log(this.index)      
-        
-        if (this.nameState){
+        this.nameState = this.name != "";
+        this.otherNameState = this.name=='Other' && this.otherName==''? false : null         
+        // console.log(this.name)
+        // console.log(this.isCreateJudge) 
+        // console.log(this.index)      
+        const othername = this.name=='Other'? this.otherName :''
+
+        if (this.nameState && this.otherNameState==null){
             const judgeName = this.name;            
-            this.$emit('submit', this.isCreateJudge, judgeName, this.index);
+            this.$emit('submit', this.isCreateJudge, judgeName, this.index, othername);
         }            
     }
 

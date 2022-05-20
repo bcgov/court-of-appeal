@@ -147,6 +147,20 @@ Vue.filter('beautify-date-weekday-nohr', function(date){
 		return ''
 })
 
+Vue.filter('beautify-date-full', function(date){
+	if(date)
+		return	moment(date).format('dddd, DD MMMM YYYY');
+	else
+		return ''
+})
+
+Vue.filter('beautify-date-full-no-weekday', function(date){
+	if(date)
+		return	moment(date).format('DD MMMM YYYY');
+	else
+		return ''
+})
+
 Vue.filter('scrollToLocation', function(locationName){
 	if(locationName){
 		Vue.nextTick(()=>{

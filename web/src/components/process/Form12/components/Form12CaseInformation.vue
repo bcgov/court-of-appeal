@@ -282,11 +282,11 @@ export default class Form12CaseInformation extends Vue {
         orders = courtOrders;
 
         for(const orderInx in orders){
-            console.log(orderInx)
+            //console.log(orderInx)
             orders[orderInx].JudgeFullName = 'The Honourable ' +  
-                orders[orderInx].JudgeSalutation + ' ' + 
-                orders[orderInx].JudgeFirstName + ' ' + 
-                orders[orderInx].JudgeLastName;
+                (orders[orderInx].JudgeSalutation? orders[orderInx].JudgeSalutation + ' ':'') + 
+                (orders[orderInx].JudgeFirstName? orders[orderInx].JudgeFirstName + ' ':'' )+ 
+                (orders[orderInx].JudgeLastName? orders[orderInx].JudgeLastName:'');
         }
 
         return orders;        
@@ -332,7 +332,7 @@ export default class Form12CaseInformation extends Vue {
                     this.orders = this.extractInfo(res.data?.previousCourts);
                     this.UpdatePreviousCourts(res.data?.previousCourts)
                 } 
-                console.log(this.orders)
+                //console.log(this.orders)
                 
                 this.notFound = false;
 
