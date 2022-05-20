@@ -1,8 +1,9 @@
 import store from '@/store/index';
-import Axios from "axios";
-import * as _ from 'underscore';
 
-export async function GetInstructionFile(pdf_name: string) {
+import * as _ from 'underscore';
+import Vue from 'vue'
+
+export function GetInstructionFile(pdf_name: string) {
 
     const url = '/print-fillable-pdf?name='+pdf_name
     const options = {
@@ -11,13 +12,13 @@ export async function GetInstructionFile(pdf_name: string) {
         "Content-Type": "application/json",
         }
     }
-    this.$http.get(url, options)
+    Vue.prototype.$http.get(url, options)
     .then(res => {
         const blob = res.data;
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
         document.body.appendChild(link);
-        link.download = pdf_name+".pdf";
+        link.download = pdf_name+".docx";
         link.click();
         setTimeout(() => URL.revokeObjectURL(link.href), 1000);  
         return true;           
