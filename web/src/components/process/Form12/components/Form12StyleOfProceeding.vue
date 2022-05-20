@@ -428,10 +428,11 @@
                         <b-col class="ml-1">   
                             <b-form-checkbox-group 
                                 stacked                                               
-                                style="width:100%"                        
+                                style="width:100%"
+                                @change="updated++"                       
                                 :state="state.appearingParties"                                      
                                 v-model="form12Info.appearingParties">
-                                <div v-for="filingparty,inx in getFilingParties"
+                                <div v-for="filingparty,inx in getFilingParties()"
                                     :key="'appling-party-'+inx">
                                     <b-form-checkbox
                                         :value="filingparty">
@@ -732,10 +733,10 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public extractJudgeNames(){
         const currentOrder = this.form12Info.previousCourts
-        const judgeName = (
+        const judgeName = currentOrder? (
             (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
             (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
-        ).trim()
+        ).trim() : ''
 
         if(judgeName){
             const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
@@ -835,8 +836,7 @@ export default class Form12StyleOfProceeding extends Vue {
                 this.UpdateForm12Info(form12Data);
                 this.revaluateForm12Data()
                 this.initHearingLocation()
-                this.clearStates();
-                this.extractJudgeNames()                
+                this.clearStates();                
             }                
         },(err) => {
             console.log(err)        
@@ -885,7 +885,7 @@ export default class Form12StyleOfProceeding extends Vue {
         this.state.otherOrders = this.form12Info.otherOrders == true || this.form12Info.otherOrders ==false? null :false;
         this.state.furtherOrders = this.form12Info.otherOrders == true && !this.form12Info.furtherOrders? false :null
 
-        this.state.authorizedName = !this.form12Info.authorizedName? false : null;       
+        // this.state.authorizedName = !this.form12Info.authorizedName? false : null;       
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -1097,7 +1097,7 @@ export default class Form12StyleOfProceeding extends Vue {
         this.updated++;
     }
 
-    get getFilingParties(){
+    public getFilingParties(){
         const filingParties=[]
             for(const party of this.form12Info.filingParties){
                 filingParties.push(party)                
