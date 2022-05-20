@@ -1,6 +1,6 @@
 <template>
     <div :key="'party-modal-'+update">
-        {{party}}
+        <!-- {{party}} -->
 
         <b-card class="bg-white border-white text-dark">
 
