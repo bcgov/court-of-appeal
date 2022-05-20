@@ -1,263 +1,200 @@
 <template>
-    <b-card v-if="dataReady" class="ml-4 border-white" :key="updated">                 
+    <b-card v-if="dataReady" class="ml-4 border-white" :key="updated">              
 
+<!-- <PARTIES> -->
         <b-card class="mb-4 bg-white border-white text-dark"> 
-            <b-card no-body class="border-white">
-                <b-row class="mb-2">   
-                    <b-col cols="10" :class="state.appellantsInfo !=null?'border-danger':''">
-                        <b-form-group
-                            class="labels"                
-                            label="Appellants:" 
-                            label-for="appellants">
-                            <p class="content text-primary">
-                                You must enter the full names of all the appellant(s) as 
-                                it appears on the reasons for judgment or notice of appeal.
-                            </p>  
-                            <span 
-                                v-if="form12Info.appellantsInfo.length == 0 && !AddNewAppellantForm" 
-                                id="appellants" 
-                                class="text-muted ml-2 my-2">No appellants have been assigned.
-                            </span>
-                            <b-table
-                                v-else-if="form12Info.appellantsInfo.length > 0"                                                                
-                                id="appellants"
-                                class="mt-2"
-                                :items="form12Info.appellantsInfo"
-                                :fields="partyFields"
-                                head-row-variant="primary"
-                                borderless    
-                                small                                            
-                                responsive="sm"
-                                >                                          
-                                <template v-slot:cell(organization)="data" >
-                                    <span v-if="data.item.organization" style="font-size: 16px;">
-                                        Organization
-                                    </span>
-                                     <span v-else style="font-size: 16px;">
-                                        Individual
-                                    </span>                                    
-                                </template>
 
-                                <template v-slot:cell(name)="data" >
-                                    <span style="font-size: 16px;">
-                                        {{data.item.name}}</span>
-                                </template>
-                                
-                                <template v-slot:cell(edit)="data" >   
-                                    <div style="float: right;">                                                                     
-                                        <b-button 
-                                            class="mr-2" 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="removeAppellant(data)">
-                                            <b-icon 
-                                                icon="trash-fill" 
-                                                font-scale="1.25" 
-                                                variant="danger"/>
-                                        </b-button>
-                                        <b-button 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="editAppellant(data)">
-                                            <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
-                                        </b-button>
-                                    </div>
-                                </template>
+<!-- <Appellants> -->
+            <b-row class="mb-2 mx-n4">   
+                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
+                    <b-form-group
+                        class="labels"                
+                        label="Appellants:" 
+                        label-for="appellants">
+                        <p class="content text-primary">
+                            You must enter the full names of all the appellant(s) as 
+                            it appears on the reasons for judgment or notice of appeal.
+                        </p>  
+                        <span 
+                            v-if="form12Info.appellants.length == 0 && !AddNewAppellantForm" 
+                            id="appellants" 
+                            class="text-muted ml-2 my-2">No appellants have been assigned.
+                        </span>
+                        <b-table
+                            v-else-if="form12Info.appellants.length > 0"                                                                
+                            id="appellants"
+                            class="mt-2"
+                            :items="form12Info.appellants"
+                            :fields="partyFields"
+                            head-row-variant="primary"
+                            borderless    
+                            small                                            
+                            responsive="sm"
+                            >                                          
+                            <template v-slot:cell(organization)="data" >
+                                <span v-if="data.item.isOrganization" style="font-size: 16px;">
+                                    Organization
+                                </span>
+                                    <span v-else style="font-size: 16px;">
+                                    Individual
+                                </span>                                    
+                            </template>
 
-                                <template v-slot:row-details="data">
-                                    <b-card 
-                                        body-class="m-0 px-0 py-1" 
-                                        :border-variant="addAppellantFormColor" 
-                                        style="border:2px solid;">
-                                        <add-party-form 
-                                            :formData="data.item" 
-                                            :index="data.index" 
-                                            :isCreateParty="false" 
-                                            v-on:submit="modifyAppellantList" 
-                                            v-on:cancel="closeAppellantForm" />
-                                    </b-card>
-                                </template>
-                            </b-table> 
-                        </b-form-group>
-                    </b-col>  
-                    <b-col cols="2">           
-                        <b-button                            
-                            style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%;"
-                            v-if="!AddNewAppellantForm" 
-                            size="sm" 
-                            variant="court" 
-                            @click="addNewAppellant"><b-icon icon="plus"/>Add Appellant</b-button>
-                    </b-col>
-                </b-row>
-            </b-card>           
+                            <template v-slot:cell(name)="data" >
+                                <span style="font-size: 16px;">
+                                    {{data.item.name}}</span>
+                            </template>
+                            
+                            <template v-slot:cell(edit)="data" >   
+                                <div style="float: right;">                                                                     
+                                    <b-button 
+                                        class="mr-2" 
+                                        size="sm" 
+                                        variant="transparent" 
+                                        @click="removeAppellant(data)">
+                                        <b-icon 
+                                            icon="trash-fill" 
+                                            font-scale="1.25" 
+                                            variant="danger"/>
+                                    </b-button>
+                                    <b-button 
+                                        size="sm" 
+                                        variant="transparent" 
+                                        @click="editAppellant(data)">
+                                        <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
+                                    </b-button>
+                                </div>
+                            </template>
 
-            <b-card 
-                v-if="AddNewAppellantForm" 
-                id="addAppellantForm" 
-                class="my-1 ml-4" 
-                :border-variant="addAppellantFormColor" 
-                style="border:2px solid; width: 81%;" 
-                body-class="px-1 py-1">
-                <add-party-form 
-                    :formData="{}" 
-                    :index="-1" 
-                    :isCreateParty="true" 
-                    v-on:submit="modifyAppellantList" 
-                    v-on:cancel="closeAppellantForm" />                
-            </b-card>
+                        </b-table> 
+                    </b-form-group>
+                </b-col>  
+                <b-col cols="2">           
+                    <b-button                            
+                        style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%;"
+                        v-if="!AddNewAppellantForm" 
+                        size="sm" 
+                        variant="court" 
+                        @click="addNewAppellant"><b-icon icon="plus"/>Add Appellant</b-button>
+                </b-col>
+            </b-row>
 
-            <b-card no-body class="border-white">
-                <b-row class="mb-2">   
-                    <b-col cols="10" :class="state.respondentsInfo !=null?'border-danger':''">
-                        <b-form-group
-                            class="labels"                
-                            label="Respondents:" 
-                            label-for="respondents">
-                            <p class="content text-primary">
-                                You must enter full names of all the respondent(s) as it 
-                                appears on reasons for judgment or notice of appeal.
-                            </p> 
-                            <span 
-                                v-if="form12Info.respondentsInfo.length == 0 && !AddNewRespondentForm" 
-                                id="respondents" 
-                                class="text-muted ml-2 my-2">No respondents have been assigned.
-                            </span>
-                            <b-table
-                                v-else-if="form12Info.respondentsInfo.length > 0"                                                                
-                                id="respondents"
-                                class="mt-2"
-                                :items="form12Info.respondentsInfo"
-                                :fields="partyFields"
-                                head-row-variant="primary"
-                                borderless    
-                                small                                            
-                                responsive="sm"
-                                >                                          
-                                <template v-slot:cell(organization)="data" >
-                                    <span v-if="data.item.organization" style="font-size: 16px;">
-                                        Organization
-                                    </span>
-                                     <span v-else style="font-size: 16px;">
-                                        Individual
-                                    </span>                                    
-                                </template>
+<!-- <Respondents> -->
+            <b-row class="mb-2 mx-n4">   
+                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
+                    <b-form-group
+                        class="labels"                
+                        label="Respondents:" 
+                        label-for="respondents">
+                        <p class="content text-primary">
+                            You must enter full names of all the respondent(s) as it 
+                            appears on reasons for judgment or notice of appeal.
+                        </p> 
+                        <span 
+                            v-if="form12Info.respondents.length == 0 && !AddNewRespondentForm" 
+                            id="respondents" 
+                            class="text-muted ml-2 my-2">No respondents have been assigned.
+                        </span>
+                        <b-table
+                            v-else-if="form12Info.respondents.length > 0"                                                                
+                            id="respondents"
+                            class="mt-2"
+                            :items="form12Info.respondents"
+                            :fields="partyFields"
+                            head-row-variant="primary"
+                            borderless    
+                            small                                            
+                            responsive="sm"
+                            >                                          
+                            <template v-slot:cell(organization)="data" >
+                                <span v-if="data.item.isOrganization" style="font-size: 16px;">
+                                    Organization
+                                </span>
+                                    <span v-else style="font-size: 16px;">
+                                    Individual
+                                </span>                                    
+                            </template>
 
-                                <template v-slot:cell(name)="data" >
-                                    <span style="font-size: 16px;">
-                                        {{data.item.name}}</span>
-                                </template>
-                                
-                                <template v-slot:cell(edit)="data" >   
-                                    <div style="float: right;">                                                                     
-                                        <b-button 
-                                            class="mr-2" 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="removeRespondent(data)">
-                                            <b-icon 
-                                                icon="trash-fill" 
-                                                font-scale="1.25" 
-                                                variant="danger"/>
-                                        </b-button>
-                                        <b-button 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="editRespondent(data)">
-                                            <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
-                                        </b-button>
-                                    </div>
-                                </template>
+                            <template v-slot:cell(name)="data" >
+                                <span style="font-size: 16px;">
+                                    {{data.item.name}}</span>
+                            </template>
+                            
+                            <template v-slot:cell(edit)="data" >   
+                                <div style="float: right;">                                                                     
+                                    <b-button 
+                                        class="mr-2" 
+                                        size="sm" 
+                                        variant="transparent" 
+                                        @click="removeRespondent(data)">
+                                        <b-icon 
+                                            icon="trash-fill" 
+                                            font-scale="1.25" 
+                                            variant="danger"/>
+                                    </b-button>
+                                    <b-button 
+                                        size="sm" 
+                                        variant="transparent" 
+                                        @click="editRespondent(data)">
+                                        <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
+                                    </b-button>
+                                </div>
+                            </template>
 
-                                <template v-slot:row-details="data">
-                                    <b-card 
-                                        body-class="m-0 px-0 py-1" 
-                                        :border-variant="addRespondentFormColor" 
-                                        style="border:2px solid;">
-                                        <add-party-form 
-                                            :formData="data.item" 
-                                            :index="data.index" 
-                                            :isCreateParty="false" 
-                                            v-on:submit="modifyRespondentList" 
-                                            v-on:cancel="closeRespondentForm" />
-                                    </b-card>
-                                </template>
-                            </b-table> 
-                        </b-form-group>
-                    </b-col>  
-                    <b-col cols="2">           
-                        <b-button 
-                            style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%;"
-                            v-if="!AddNewRespondentForm" 
-                            size="sm" 
-                            variant="court" 
-                            @click="addNewRespondent"><b-icon icon="plus"/>Add Respondent</b-button>
-                    </b-col>
-                </b-row>
-            </b-card>           
+                        </b-table> 
+                    </b-form-group>
+                </b-col>  
+                <b-col cols="2">           
+                    <b-button 
+                        style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%;"
+                        v-if="!AddNewRespondentForm" 
+                        size="sm" 
+                        variant="court" 
+                        @click="addNewRespondent"><b-icon icon="plus"/>Add Respondent</b-button>
+                </b-col>
+            </b-row>
 
-            <b-card 
-                v-if="AddNewRespondentForm" 
-                id="addPartyForm" 
-                class="my-1 ml-4" 
-                :border-variant="addRespondentFormColor" 
-                style="border:2px solid; width: 81%;" 
-                body-class="px-1 py-1">
-                <add-party-form 
-                    :formData="{}" 
-                    :index="-1" 
-                    :isCreateParty="true" 
-                    v-on:submit="modifyRespondentList" 
-                    v-on:cancel="closeRespondentForm" />                
-            </b-card>                 
         </b-card>
+        <!-- {{partyNames}} -->
         
-        <div v-if="partyDataExists()">
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
+        <div v-if="this.form12Info.appellants && this.form12Info.appellants.length>0 && this.form12Info.respondents && this.form12Info.respondents.length>0">
+            <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
+
+<!-- <BETWEEN> -->
+            <b-row class="mt-4 ml-1" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{form12Info.appellantNames}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
+<!-- <AND> -->
+            <b-row class="mt-3 ml-1" style="font-weight: 700;">
                 <b-col cols="10">And: <span style="font-weight: 200;">{{form12Info.respondentNames}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>   
-
+<!-- <JudgeNames> -->
             <b-card class="mb-4 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
-                    <b-row class="mb-2 ml-1" style="margin-left: -0.25rem !important;">   
-                        <b-col cols="10" :class="state.judgeNames !=null?'border-danger':''">
+                    <b-row class="mb-2"  style="margin:0 -1rem !important;">   
+                        <b-col cols="10" :class="state.judgeNames !=null?'border border-danger':''">
                             <b-form-group
                                 class="labels"                
-                                label="Provide the names of the justices who heard the application:" 
-                                label-for="judges">
+                                label="Provide the names of the justices who heard the application:">
                                 <p class="content text-primary">
                                     <b>Note:</b> Justices’ names must be set out in the same order 
                                     as the reasons for Judgment.
-                                </p> 
-                                <span 
-                                    v-if="form12Info.judgeNames && form12Info.judgeNames.length == 0 && !AddNewJudgeNamesForm" 
-                                    id="judges" 
-                                    class="text-muted ml-2 mb-2 mt-4">No judges have been listed.
-                                </span>
+                                </p>                                 
+                                <div 
+                                    v-if="form12Info.judgeNames && form12Info.judgeNames.length == 0 && !AddNewJudgeNamesForm"                                      
+                                    class="text-muted mt-3">No judges have been listed.
+                                </div>
                                 <b-table
                                     v-else-if="form12Info.judgeNames && form12Info.judgeNames.length > 0"
-                                    :key="updated"                                
-                                    id="judges"
                                     class="mt-2"
                                     :items="form12Info.judgeNames"
                                     :fields="judgeFields"
                                     head-row-variant="primary"
                                     borderless    
                                     small                                            
-                                    responsive="sm"
-                                    >
-
-                                    <template v-slot:cell(name)="data" >
-                                        <span style="font-size: 16px;">
-                                            {{data.item}}
-                                        </span>
-                                    </template>
+                                    responsive="sm">
                                     
                                     <template v-slot:cell(edit)="data" >   
                                         <div style="float: right;">                                                                     
@@ -319,34 +256,36 @@
                     style="border:2px solid;" 
                     body-class="px-1 py-1">
                     <add-judge-form 
-                        :formData="{}" 
+                        :formData="{name:'', other:''}" 
                         :index="-1" 
                         :isCreateJudge="true" 
                         v-on:submit="modifyJudgeNames" 
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
             </b-card>
-
+<!-- <HEARING LOCATION> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Where was the hearing held?                                
                 </b-col>
-                <b-col class="ml-1 mt-2">  
+                <b-col class="ml-0 mt-2">  
                     <b-form-select                
                         style="width:100%"              
                         v-model="hearingLocation" 
-                        @change="update"                   
+                        @change="updateHearingLocation"                   
                         :options="hearingLocationList">
                     </b-form-select>
-                    <b-row v-if="hearingLocation == 'Other'">
-                        <span class="mt-3 ml-3">Specify:</span>
-                        <b-form-select                        
-                            style="width:70%; float: right;"
-                            class="mt-2 ml-5"
-                            @change="update"
-                            :options="otherHearingLocationList"                                    
-                            v-model="otherHearingLocation">
-                        </b-form-select>
+                    <b-row v-if="hearingLocation == 'Other'" class="m-0 p-0">
+                        <div style="width:39%;" class="mt-3 ml-1">Please specify:</div>
+                        <div style="width:60%;">
+                            <b-form-select
+                                :state="state.hearingLocationOther"
+                                class="mt-2"
+                                @change="updateHearingLocation"
+                                :options="otherHearingLocationList"                                    
+                                v-model="otherHearingLocation">
+                            </b-form-select>
+                        </div>
                     </b-row>
                     <span
                         v-if="(state.hearingLocation != null)" 
@@ -356,16 +295,15 @@
                     </span>                        
                 </b-col>
             </b-row>
-
+<!-- Date of Judgment -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     What was the date of the judgment?                    
                 </b-col>
                 <b-col>                   
-                    <b-card                        
-                        class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="state.dateOfJudgement == false?'danger': 'dark'">
+                    <b-card                                                
+                        style="margin:0 1px; padding:0; float: center;" 
+                        :border-variant="state.dateOfJudgement == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -379,45 +317,63 @@
                     </b-card>                    
                 </b-col>
             </b-row>
-
+<!-- <ApplyingParties-Who Made Application to VARY ORDER> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Who made the application to vary the order of a justice?                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked               
+                        stacked
+                        @change="applyingPartiesChanged()"               
                         style="width:100%"                        
                         :state="state.applyingParties"                                      
-                        v-model="form12Info.applyingParties"                    
-                        :options="partyNames">
+                        v-model="form12Info.applyingParties">
+                        <b-form-checkbox
+                            :value="partyname" 
+                            v-for="partyname,inx in partyNames" 
+                            :key="'party-made-app-'+inx">
+                            {{partyname.name}}
+                        </b-form-checkbox>
                     </b-form-checkbox-group> 
                 </b-col>
-            </b-row>    
+            </b-row> 
+            <!-- {{form12Info.applyingParties}}    -->
 
-            <div v-if="justiceDataExists() && form12Info.applyingParties.length > 0">   
-
+            <div v-if="this.form12Info.judgeNames && this.form12Info.judgeNames.length>0 && form12Info.applyingParties.length > 0">   
+<!-- <Who Made Order-VaryOrderJudgeName> -->
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
                         Who made the order that you were seeking to vary?                                
                     </b-col>
                     <b-col class="ml-1">   
-                        <b-form-radio-group 
+                        <b-form-select 
                             stacked               
                             style="width:100%"                                    
-                            v-model="form12Info.varyingOrderJudgeName"                    
-                            :options="form12Info.judgeNames">
-                        </b-form-radio-group> 
+                            v-model="form12Info.varyingOrderJudgeName"
+                            text-field="text"
+                            value-field="text"                    
+                            :options="justiceNameOptions">                            
+                        </b-form-select>
+                        <b-row v-if="form12Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
+                            <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
+                            <div style="width:74%;">
+                                <b-form-input 
+                                    style="margin-top:0.5rem;"                                
+                                    :state="state.varyingOrderJudgeNameOther"
+                                    v-model="form12Info.varyingOrderJudgeNameOther" 
+                                />
+                            </div>
+                        </b-row> 
                         <span
                             v-if="(state.varyingOrderJudgeName != null)" 
                             style="font-size: 0.75rem;" 
                             class="bg-white text-danger"><b-icon-exclamation-circle/>
                             Specify who made the order that you were seeking to vary.
                         </span>
-
                     </b-col>
                 </b-row>   
-
+<!-- <Date of Order> -->
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
                         What was the date of the order that were seeking to vary?                    
@@ -425,8 +381,8 @@
                     <b-col>                   
                         <b-card                        
                             class="mt-2" 
-                            style="padding: 0; float: left;" 
-                            :border-variant="state.varyingOrderDate == false?'danger': 'dark'">
+                            style="padding: 0; float: center;" 
+                            :border-variant="state.varyingOrderDate == false?'danger': 'muted'">
                             <div class="vuetify">
                                 <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                     <v-date-picker
@@ -440,39 +396,53 @@
                         </b-card>                    
                     </b-col>
                 </b-row>
-
+<!-- <FilingParties-Made Application> -->
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
                         Who made the application?                                
                     </b-col>
                     <b-col class="ml-1">   
                         <b-form-checkbox-group 
-                            stacked               
+                            stacked
+                            @change="filingPartiesChanged()"               
                             style="width:100%"                        
                             :state="state.filingParties"                                      
-                            v-model="form12Info.filingParties"                    
-                            :options="form12Info.applyingParties">
+                            v-model="form12Info.filingParties">
+                            <b-form-checkbox
+                                :value="applyingparty"
+                                v-for="applyingparty,inx in form12Info.applyingParties"
+                                :key="'appling-party-'+inx">
+                                    {{applyingparty.name}}
+                            </b-form-checkbox>
                         </b-form-checkbox-group> 
                     </b-col>
                 </b-row> 
+                <!-- {{form12Info.filingParties}} -->
 
-                <div v-if="form12Info.filingParties.length > 0 && form12Info.varyingOrderJudgeName">
-
+                <div v-if="form12Info.filingParties && form12Info.filingParties.length > 0 && form12Info.varyingOrderJudgeName">
+<!-- <Appearing Partie -Attended Hearing> -->
                     <b-row class="mt-4 question">
                         <b-col cols="7" class="labels">
                             Enter the names of parties who attended at the hearing:                                
                         </b-col>
                         <b-col class="ml-1">   
                             <b-form-checkbox-group 
-                                stacked               
+                                stacked                                               
                                 style="width:100%"                        
                                 :state="state.appearingParties"                                      
-                                v-model="form12Info.appearingParties"                    
-                                :options="form12Info.filingParties">
+                                v-model="form12Info.appearingParties">
+                                <div v-for="filingparty,inx in getFilingParties"
+                                    :key="'appling-party-'+inx">
+                                    <b-form-checkbox
+                                        :value="filingparty">
+                                            {{filingparty.name}}
+                                    </b-form-checkbox>                                    
+                                </div>
                             </b-form-checkbox-group> 
                         </b-col>
                     </b-row>
-
+                    <!-- {{form12Info.appearingParties}} -->
+<!-- <Order Allowed> -->
                     <b-row class="mt-4 question">
                         <b-col cols="7" class="labels">
                             The application to vary the order of {{form12Info.varyingOrderJudgeName}} was:
@@ -491,7 +461,7 @@
                             </span>
                         </b-col>
                     </b-row>
-
+<!-- <Other Order> -->
                     <b-row class="mt-4 question">
                         <b-col cols="7" class="labels">
                             Did the Justices’ make any other orders?
@@ -509,11 +479,10 @@
                             </span>
                         </b-col>
                     </b-row>
-
+<!-- <Other Order Details> -->
                     <b-row v-if="form12Info.otherOrders" class="mt-4 question">
                         <b-col cols="7" class="labels">
-                            Enter the other orders that the Justices' made: 
-                                                           
+                            Enter the other orders that the Justices' made:                                                            
                         </b-col>
                         <b-col>                    
                             <b-form-textarea                
@@ -529,8 +498,8 @@
             </div>  
 
         </div>          
-
-        <b-row class="my-3 question" style="padding: 0;">
+<!-- <Authorizing Name> -->
+        <!-- <b-row class="my-3 question" style="padding: 0;">
             <b-col cols="7" class="labels">
                 Name of lawyer or party authorizing filing of this Form:                                
             </b-col>
@@ -539,12 +508,11 @@
                     v-model="form12Info.authorizedName"                        
                     :state ="state.authorizedName">
                 </b-form-input>
-                <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
-
+                <div class="ml-2 mt-1" style="font-weight: 600; font-size:11pt;">Electronically filed</div>
             </b-col>
-        </b-row>            
+        </b-row>             -->
 
-        <hr/>    
+        <hr class="mt-5"/>    
 
         <b-row >
             <b-col cols="10">
@@ -565,6 +533,17 @@
                 </b-button>
             </b-col>
         </b-row>
+
+        <b-modal size="xl" v-model="showPartyWindow" footer-class="d-none" header-class="bg-primary text-white">
+            <template v-slot:modal-title>
+                <h1 v-if="isCreate" class="my-2 ml-2">Add {{partyType}}</h1>
+                <h1 v-else class="my-2 ml-2">Edit {{partyType}}</h1>
+            </template>
+            <add-party-modal :isCreate="isCreate" :party="partyToEdit" @partyChanged="partyChanged" />
+            <template v-slot:modal-header-close>
+                <b-button variant="primary"  class="mt-1" @click="showPartyWindow = false">&times;</b-button>
+            </template>
+        </b-modal>
         
     </b-card>
 </template>
@@ -584,19 +563,21 @@ const commonState = namespace("Common");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
-import { partyInfoType } from '@/types/Information/Form3';
-import { form12DataInfoType } from '@/types/Information/Form12';
+
+import { form12DataInfoType, form12PartiesInfoType } from '@/types/Information/Form12';
 import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
 import AddJudgeForm from './AddJudgeForm.vue';
+import AddPartyModal from './AddPartyModal.vue';
 import { hearingLocationsInfoType } from '@/types/Common';
-
+import {justiceNames} from './JusticeName'
 
 @Component({
     components:{        
         AddJudgeForm,
-        AddPartyForm        
+        AddPartyForm,
+        AddPartyModal        
     }
 })
 export default class Form12StyleOfProceeding extends Vue {
@@ -632,13 +613,11 @@ export default class Form12StyleOfProceeding extends Vue {
   
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
-    latestEditRespondentData;
-    isEditRespondentOpen = false;
 
     addAppellantFormColor = 'court';
     AddNewAppellantForm = false;
-    latestEditAppellantData;
-    isEditAppellantOpen = false;
+
+    partyNames: form12PartiesInfoType[] = [];
 
     addJudgeNamesFormColor = 'court';
     AddNewJudgeNamesForm = false;
@@ -649,6 +628,11 @@ export default class Form12StyleOfProceeding extends Vue {
     otherHearingLocationList: string[] = [];
     hearingLocation = "";
     otherHearingLocation = "";
+
+    partyToEdit = {} as form12PartiesInfoType;
+    showPartyWindow = false
+    isCreate = true
+    partyType = ''
 
     allowedOptions = [
         {text: 'Allowed', value: true},
@@ -684,29 +668,21 @@ export default class Form12StyleOfProceeding extends Vue {
     ]
 
     judgeFields = [
-        {
-            key:'name',          
-            label:'Name',                  
-            thClass: 'text-white bg-court',
-            thStyle: 'font-size: 1rem;',            
-            sortable:false            
-        },         
-        {
-            key:'edit',          
-            label:'',   
-            thClass: 'text-white bg-court',           
-            sortable:false            
-        }        
+        { key:'name', label:'Name', thClass:'text-white bg-court', thStyle: 'font-size: 1rem;', sortable:false },
+        { key:'other',label:'', thClass:'text-white bg-court', thStyle: 'font-size: 1rem;', sortable:false},         
+        { key:'edit', label:'', thClass: 'text-white bg-court', sortable:false}
     ]
 
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
         judgeNames: null,        
-        hearingLocation: null,     
+        hearingLocation: null,
+        hearingLocationOther: null,     
         dateOfJudgement: null,
         applyingParties: null,   
         varyingOrderJudgeName: null,
+        varyingOrderJudgeNameOther: null,
         varyingOrderDate: null,
         filingParties: null,
         appearingParties: null,
@@ -716,32 +692,94 @@ export default class Form12StyleOfProceeding extends Vue {
         authorizedName: null
     }
 
+    justiceNameOptions = [];
+    created(){
+        this.justiceNameOptions = justiceNames
+    }
+
     mounted() {
         this.dataReady = false;        
         this.extractInfo();              
     }
+    
+    public extractInfo(){
+        
+        this.extractHearingLocations()
 
-    public partyDataExists(){
+        if(this.currentOrderToVarySingleJusticeId){
+            this.getForm12Data();
+           
+        } else { 
 
-        const exists =  
-            this.form12Info.appellantsInfo.length>0 && 
-            this.form12Info.respondentsInfo.length>0;
-            
-        return exists;
+            const form12Data = this.form12Info;            
+            form12Data.version = this.$store.state.Application.version;
+            form12Data.applyingParties = [];
+            form12Data.judgeNames = [];
+            form12Data.appellants = this.partiesJson.appellants
+            form12Data.respondents = this.partiesJson.respondents
+            form12Data.formSevenNumber = this.fileNumber; 
+            form12Data.appearingParties = [];
+            form12Data.applyingParties = [];
+            form12Data.filingParties = [];           
+            form12Data.previousCourts = this.currentOrder;
+            this.UpdateForm12Info(form12Data);
+            this.initHearingLocation()
+            this.revaluateForm12Data()
+            this.extractJudgeNames()
+            this.saveForm(true);
+        }          
     }
 
-    public justiceDataExists(){
+    public extractJudgeNames(){
+        const currentOrder = this.form12Info.previousCourts
+        const judgeName = (
+            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
+            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
+        ).trim()
 
-        const exists =  
-            this.form12Info.judgeNames.length>0;
-            
-        return exists;
+        if(judgeName){
+            const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
+            if(justiceIndex>-1){
+                this.form12Info.varyingOrderJudgeName=justiceNames[justiceIndex]
+                this.form12Info.varyingOrderJudgeNameOther=''
+            }
+            else{
+                this.form12Info.varyingOrderJudgeName='Other'
+                this.form12Info.varyingOrderJudgeNameOther=judgeName
+            }
+            this.form12Info.varyingOrderDate= currentOrder.JudgmentDate.slice(0,10)            
+        }
+        else{
+            this.form12Info.varyingOrderJudgeName='';
+            this.form12Info.varyingOrderJudgeNameOther='';
+            this.form12Info.varyingOrderDate='';
+        }
+        this.UpdateForm12Info(this.form12Info);
+    } 
+
+    public extractHearingLocations(){
+        this.hearingLocationList = [];
+        
+        for (const hearingLocation of this.hearingLocationsInfo){
+            if (hearingLocation.other)
+                this.otherHearingLocationList.push(hearingLocation.name);
+            else 
+                this.hearingLocationList.push(hearingLocation.name);                
+        }
+        this.hearingLocationList.push('Other');
+    }
+    
+    public initHearingLocation(){
+        this.hearingLocation = this.form12Info.hearingLocation?.name
+        if(this.otherHearingLocationList.includes(this.hearingLocation)){
+            this.hearingLocation ='Other'
+            this.otherHearingLocation = this.form12Info.hearingLocation.name
+        }
     }
 
-    public update(){ 
+    public updateHearingLocation(){ 
               
-        const form12 = this.form12Info;
-       
+        const form12 = this.form12Info;       
         form12.hearingLocation = {} as hearingLocationsInfoType;
        
         if (this.hearingLocation == 'Other' && this.otherHearingLocation.length > 0){
@@ -753,118 +791,40 @@ export default class Form12StyleOfProceeding extends Vue {
         this.UpdateForm12Info(form12);
     }
 
-    public extractInfo(){       
+    public revaluateForm12Data(){
 
-        this.hearingLocationList = [];
-        
-        for (const hearingLocation of this.hearingLocationsInfo){
-            if (hearingLocation.other){
-                this.otherHearingLocationList.push(hearingLocation.name);
-            } else {
-                this.hearingLocationList.push(hearingLocation.name);    
-            }           
-        }
+        const form12Data = this.form12Info;
 
-        this.hearingLocationList.push('Other');
-
-        if(this.currentOrderToVarySingleJusticeId){
-            this.getForm12Data();
-           
-        } else { 
-
-            const form12Data = this.form12Info;            
-            form12Data.version = this.$store.state.Application.version;
-            form12Data.respondentsInfo = [];
-            form12Data.appellantsInfo = [];
-            form12Data.applyingParties = [];
-            form12Data.judgeNames = [];                          
-
-            let applicantNames = [];
-            let respondentNames = []; 
-            let applicantInfo: partyInfoType[] = [];
-            let respondentInfo: partyInfoType[] = [];              
-
-            form12Data.appellants = this.partiesJson.appellants
-            form12Data.respondents = this.partiesJson.respondents;
-
-            for (const respondent of form12Data.respondents){
-                const party = {} as partyInfoType;
-                party.name = respondent.name;
-                if (party.firstName && party.lastName){
-                    party.firstName = respondent.firstName;
-                    party.lastName = respondent.lastName;
-                    party.organization = false;
-                } else if (respondent.organization){
-                    party.organization = true;
-                }
-                respondentInfo.push(party);
-                respondentNames.push(party.name);                
+        for (const respondent of form12Data.respondents){
+            if (respondent.firstName && respondent.lastName){                    
+                respondent.isOrganization = false;
+            } else if (respondent.organization){
+                respondent.isOrganization = true;
             }
+            if(respondent.solicitor?.counselFirstName && respondent.solicitor?.counselLastName)
+                respondent.counselName = respondent.solicitor.counselFirstName+' '+respondent.solicitor.counselLastName                          
+            respondent.responding = true;
+        }
 
-            for (const applicant of form12Data.appellants){
-                const party = {} as partyInfoType;
-                party.name = applicant.name;
-                if (party.firstName && party.lastName){
-                    party.firstName = applicant.firstName;
-                    party.lastName = applicant.lastName;
-                    party.organization = false;
-                } else if (applicant.organization){
-                    party.organization = true;
-                }
-                applicantInfo.push(party);                
-                applicantNames.push(party.name);                
+        for (const applicant of form12Data.appellants){
+            if (applicant.firstName && applicant.lastName){
+                applicant.isOrganization = false;
+            } else if (applicant.organization){
+                applicant.isOrganization = true;
             }
+            if(applicant.solicitor?.counselFirstName && applicant.solicitor?.counselLastName)
+                applicant.counselName = applicant.solicitor.counselFirstName+' '+applicant.solicitor.counselLastName             
+            applicant.responding = false;
+        }
 
-            form12Data.appellantNames = applicantNames.join(', ');
-            form12Data.respondentNames = respondentNames.join(', ');   
-            form12Data.appellantsInfo = applicantInfo;
-            form12Data.respondentsInfo = respondentInfo;  
-                    
-            form12Data.formSevenNumber = this.fileNumber;
-            
-            this.UpdateForm12Info(form12Data);
-            
-            this.saveForm(true);
-        }            
+        const appellants = form12Data.appellants.map(resp=>resp.name)
+        const respondents = form12Data.respondents.map(resp=>resp.name)
+        form12Data.appellantNames = appellants.join(', ');
+        form12Data.respondentNames = respondents.join(', ');
 
+        this.partyNames = [...form12Data.appellants, ...form12Data.respondents]
+        this.UpdateForm12Info(form12Data);
     }
-
-    get partyNames(){
-        
-        let partyNames: string[] = [];        
-
-        for (const respondent of this.form12Info.respondentsInfo){
-            partyNames.push(respondent.name) 
-        }
-
-        for (const applicant of this.form12Info.appellantsInfo){
-            partyNames.push(applicant.name);  
-        }
-        
-        return partyNames;
-    }  
-
-    get applicantNames(){
-        
-        let applicantNames: string[] = [];                  
-
-        for (const applicant of this.form12Info.appellantsInfo){
-            applicantNames.push(applicant.name);  
-        }
-            
-        return applicantNames;
-    }
-
-    get respondentNames(){
-        
-        let respondentNames: string[] = [];       
-
-        for (const respondent of this.form12Info.respondentsInfo){
-            respondentNames.push(respondent.name) 
-        } 
-
-        return respondentNames;
-    }   
 
     public getForm12Data() {        
        
@@ -873,9 +833,11 @@ export default class Form12StyleOfProceeding extends Vue {
             if(response?.data?.data){
                 const form12Data = response.data.data
                 this.UpdateForm12Info(form12Data);
-                this.clearStates();                
-            }
-                
+                this.revaluateForm12Data()
+                this.initHearingLocation()
+                this.clearStates();
+                this.extractJudgeNames()                
+            }                
         },(err) => {
             console.log(err)        
         });      
@@ -886,10 +848,12 @@ export default class Form12StyleOfProceeding extends Vue {
             appellantsInfo: null,
             respondentsInfo: null,
             judgeNames: null,        
-            hearingLocation: null,     
+            hearingLocation: null,
+            hearingLocationOther: null,     
             dateOfJudgement: null,
             applyingParties: null,   
             varyingOrderJudgeName: null,
+            varyingOrderJudgeNameOther: null,
             varyingOrderDate: null,
             filingParties: null,
             appearingParties: null,
@@ -902,25 +866,26 @@ export default class Form12StyleOfProceeding extends Vue {
     }
 
     public checkStates(){  
+        
+        this.state.appellantsInfo = this.form12Info.appellants?.length>0? null :false;
+        this.state.respondentsInfo = this.form12Info.respondents?.length>0? null :false;            
+        this.state.judgeNames = this.form12Info.judgeNames?.length>0? null :false;
+        
+        this.state.hearingLocation =  this.hearingLocation? null :false
+        this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null
+        
+        this.state.dateOfJudgement = this.form12Info.dateOfJudgement? null: false;
+        this.state.applyingParties = this.form12Info.applyingParties?.length>0? null :false;
+        this.state.varyingOrderJudgeName = this.form12Info.varyingOrderJudgeName? null :false;
+        this.state.varyingOrderJudgeNameOther = this.form12Info.varyingOrderJudgeName=='Other' && !this.form12Info.varyingOrderJudgeNameOther? false: null;
+        this.state.varyingOrderDate = this.form12Info.varyingOrderDate? null :false;
+        this.state.filingParties = this.form12Info.filingParties?.length>0? null :false;
+        this.state.appearingParties = this.form12Info.appearingParties?.length>0? null :false;
+        this.state.orderAllowed = this.form12Info.orderAllowed == true || this.form12Info.orderAllowed ==false? null :false;
+        this.state.otherOrders = this.form12Info.otherOrders == true || this.form12Info.otherOrders ==false? null :false;
+        this.state.furtherOrders = this.form12Info.otherOrders == true && !this.form12Info.furtherOrders? false :null
 
-        
-        // this.state.appellants = this.form12Info.appellantsInfo?.length>0? null :false;
-        // this.state.respondents = this.form12Info.respondentsInfo?.length>0? null :false;            
-        
-        
-        // this.state.firstAppellant = this.form12Info.firstAppellant != null? null:false;
-        // this.state.firstRespondent = this.form12Info.firstRespondent != null? null:false;
-        // this.state.applyingParties = this.form12Info.applyingParties?.length>0? null :false;
-        
-        // this.state.orders = this.form12Info.orders != null? null:false;
-        // this.state.grounds = this.form12Info.grounds != null? null:false;
-        
-        // this.state.assets = this.form12Info.assets != null? null:false;
-        // this.state.income = this.form12Info.income != null? null:false;
-        // const financesRequired = this.form12Info.assets == false && this.form12Info.income == 0
-        // this.state.finances = (financesRequired && !this.form12Info.finances)? false: null;
-        
-        // this.state.authorizedName = !this.form12Info.authorizedName? false : null;       
+        this.state.authorizedName = !this.form12Info.authorizedName? false : null;       
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -966,8 +931,7 @@ export default class Form12StyleOfProceeding extends Vue {
                 }
             }
             this.saveInfo(options, draft);
-        }        
-       
+        }
     }
 
     public saveInfo(options, draft){
@@ -983,223 +947,116 @@ export default class Form12StyleOfProceeding extends Vue {
                     if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
-                const errMsg = err.response.data.error;
-                
+                const errMsg = err.response.data.error;                
             })
     }
 
     public addNewRespondent(){
-        if(this.isEditRespondentOpen){            
-            this.addRespondentFormColor = 'danger'
-        }else{
-            this.AddNewRespondentForm = true;            
-        }
+        this.state.respondentsInfo = null
+        this.partyToEdit = {} as form12PartiesInfoType
+        this.partyType = 'Respondent'
+        this.isCreate = true;
+        this.showPartyWindow = true;        
     }
 
     public editRespondent(data) {
-        if(this.AddNewRespondentForm || this.isEditRespondentOpen){            
-            this.addRespondentFormColor = 'danger';                     
-        }else if(!this.isEditRespondentOpen && !data.detailsShowing){
-            data.toggleDetails();
-            this.isEditRespondentOpen = true;
-            this.latestEditRespondentData = data            
-        }   
-    }
-
-    public modifyRespondentList(isCreateParty: boolean, newParty: partyInfoType, index: number){        
-
-        if (isCreateParty){
-
-            if (!newParty.organization){
-                newParty.name = newParty.firstName + ' ' + newParty.lastName;
-            }
-
-            const respondentNames = []
-            const form12Data = this.form12Info;
-            form12Data.respondentsInfo.push(newParty)
-
-            for (const respondent of form12Data.respondentsInfo){
-                respondentNames.push(respondent.name);                
-            }
-            form12Data.respondentNames = respondentNames.join(', '); 
-            this.UpdateForm12Info(form12Data)
-
-            this.closeRespondentForm();
-
-        } else {  
-
-            if (!newParty.organization){
-                newParty.name = newParty.firstName + ' ' + newParty.lastName;
-            }  
-            
-            const respondentNames = [];
-            const form12Data = this.form12Info;
-            form12Data.respondentsInfo[index].organization = newParty.organization;
-            form12Data.respondentsInfo[index].name = newParty.name; 
-            form12Data.respondentsInfo[index].firstName = newParty.firstName;
-            form12Data.respondentsInfo[index].lastName = newParty.lastName;
-
-            for (const respondent of form12Data.respondentsInfo){
-                respondentNames.push(respondent.name);                
-            }
-            form12Data.respondentNames = respondentNames.join(', '); 
-            this.UpdateForm12Info(form12Data);
-                      
-            this.closeRespondentForm();
-        }
-        this.updated ++;
+        this.partyToEdit = data.item
+        this.partyType = 'Respondent';
+        this.isCreate = false;
+        this.showPartyWindow = true;
     }
 
     public removeRespondent(data){ 
         const form12Data = this.form12Info;       
-        form12Data.respondentsInfo.splice(data.index,1);
-        const respondentNames = [];
-        for (const respondent of form12Data.respondentsInfo){
-            respondentNames.push(respondent.name);                
-        }
-        form12Data.respondentNames = respondentNames.join(', '); 
+        form12Data.respondents.splice(data.index,1);
+        form12Data.respondentNames = form12Data.respondents.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form12Data.appellants, ...form12Data.respondents]
+        this.somePartiesChanged()
         this.UpdateForm12Info(form12Data);
         this.updated ++;        
     }
 
-    public closeRespondentForm() {                     
-        this.AddNewRespondentForm= false; 
-        this.addRespondentFormColor = 'court'
-        if(this.isEditRespondentOpen){
-            this.latestEditRespondentData.toggleDetails();
-            this.isEditRespondentOpen = false;
-        } 
-    }
-
     public addNewAppellant(){
-        if(this.isEditAppellantOpen){            
-            this.addAppellantFormColor = 'danger'
-        }else{
-            this.AddNewAppellantForm = true;            
-        }
+        this.state.appellantsInfo = null
+        this.partyToEdit = {} as form12PartiesInfoType
+        this.partyType = 'Appellant'
+        this.isCreate = true;
+        this.showPartyWindow = true;        
     }
 
     public editAppellant(data) {
-        if(this.AddNewAppellantForm || this.isEditAppellantOpen){            
-            this.addAppellantFormColor = 'danger';                     
-        }else if(!this.isEditAppellantOpen && !data.detailsShowing){
-            data.toggleDetails();
-            this.isEditAppellantOpen = true;
-            this.latestEditAppellantData = data            
-        }   
-    }
-    
-    public modifyAppellantList(isCreateParty: boolean, newParty: partyInfoType, index: number){        
-
-        if (isCreateParty){ 
-
-            if (!newParty.organization){
-                newParty.name = newParty.firstName + ' ' + newParty.lastName;
-            }    
-
-            const appellantNames = [];
-            const form12Data = this.form12Info;
-            form12Data.appellantsInfo.push(newParty)
-
-            for (const appellant of form12Data.appellantsInfo){
-                appellantNames.push(appellant.name);                
-            }
-            form12Data.appellantNames = appellantNames.join(', '); 
-            this.UpdateForm12Info(form12Data);
-
-            this.closeAppellantForm();
-        } else {  
-
-            if (!newParty.organization){
-                newParty.name = newParty.firstName + ' ' + newParty.lastName
-            } 
-            
-            const appellantNames = [];
-            const form12Data = this.form12Info;
-            form12Data.appellantsInfo[index].organization = newParty.organization;
-            form12Data.appellantsInfo[index].name = newParty.name; 
-            form12Data.appellantsInfo[index].firstName = newParty.firstName;
-            form12Data.appellantsInfo[index].lastName = newParty.lastName;
-
-            for (const appellant of form12Data.appellantsInfo){
-                appellantNames.push(appellant.name);                
-            }
-            form12Data.appellantNames = appellantNames.join(', '); 
-            this.UpdateForm12Info(form12Data);  
-            this.closeAppellantForm();
-        }
-        this.updated ++;
-        
+        this.partyToEdit = data.item
+        this.partyType = 'Appellant';
+        this.isCreate = false;
+        this.showPartyWindow = true;        
     }
 
     public removeAppellant(data){   
         const form12Data = this.form12Info;       
-        form12Data.appellantsInfo.splice(data.index,1);
-        const appellantNames = [];
-        for (const appellant of form12Data.appellantsInfo){
-            appellantNames.push(appellant.name);                
-        }
-        form12Data.appellantNames = appellantNames.join(', '); 
+        form12Data.appellants.splice(data.index,1); 
+        form12Data.appellantNames = form12Data.appellants.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form12Data.appellants, ...form12Data.respondents]        
+        this.somePartiesChanged()
         this.UpdateForm12Info(form12Data);
         this.updated ++;        
     }
 
-    public closeAppellantForm() {                     
-        this.AddNewAppellantForm= false; 
-        this.addAppellantFormColor = 'court'
-        if(this.isEditAppellantOpen){
-            this.latestEditAppellantData.toggleDetails();
-            this.isEditAppellantOpen = false;
-        } 
+    public partyChanged(partyCreated){
+        if(partyCreated){
+            const form12Info = this.form12Info
+            const party = JSON.parse(JSON.stringify(this.partyToEdit))
+            if(this.partyType == 'Appellant'){
+                form12Info.appellants.push(party);
+            }
+            else if(this.partyType =='Respondent'){
+                form12Info.respondents.push(party);
+            }
+            this.UpdateForm12Info(form12Info)
+        }
+        this.revaluateForm12Data();
+        this.showPartyWindow = false;
+        this.somePartiesChanged() 
+        this.updated++;
     }
 
-        public addNewJudgeNames(){
+    public addNewJudgeNames(){
         if(this.isEditJudgeNamesOpen){            
             this.addJudgeNamesFormColor = 'danger'
         }else{
+            this.state.judgeNames = null;
             this.AddNewJudgeNamesForm = true;            
         }
     }
 
     public editJudgeNames(data) {
-        console.log(data)
+        // console.log(data)
         if(this.AddNewJudgeNamesForm || this.isEditJudgeNamesOpen){            
             this.addJudgeNamesFormColor = 'danger';                     
         }else if(!this.isEditJudgeNamesOpen && !data.detailsShowing){
-            console.log(data);
+            //console.log(data);
             data.toggleDetails();
             this.isEditJudgeNamesOpen = true;
             this.latestEditJudgeNamesData = data;            
         }   
     }
 
-    public modifyJudgeNames(isCreateJudgeNames: boolean, newJudgeName: string, index: number){        
+    public modifyJudgeNames(isCreateJudgeNames: boolean, newJudgeName: string, index: number, otherName){        
 
-        if (isCreateJudgeNames){
-            
-            const form12Data = this.form12Info;
-            form12Data.judgeNames.push(newJudgeName)
-            
-            this.UpdateForm12Info(form12Data)
+        const form12Data = this.form12Info;
 
-            this.closeJudgeNamesForm();
-
-        } else { 
-            
-            const form12Data = this.form12Info;            
-            form12Data.judgeNames[index] = newJudgeName;
-           
-            this.UpdateForm12Info(form12Data);
-                      
-            this.closeJudgeNamesForm();
+        if (isCreateJudgeNames){           
+            form12Data.judgeNames.push({name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) })            
+        } else {                    
+            form12Data.judgeNames[index] = {name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) };        
         }
+        this.UpdateForm12Info(form12Data)
+        this.closeJudgeNamesForm();
         this.updated ++;
     }
 
     public removeJudgeNames(data){ 
         const form12Data = this.form12Info;       
-        form12Data.judgeNames.splice(data.index,1);
-        
+        form12Data.judgeNames.splice(data.index,1);        
         this.UpdateForm12Info(form12Data);
         this.updated ++;        
     }
@@ -1222,6 +1079,38 @@ export default class Form12StyleOfProceeding extends Vue {
         this.$router.push({name: "preview-form12"}) 
     }
 
+    public somePartiesChanged(){
+        this.form12Info.applyingParties=[]
+        this.form12Info.filingParties=[]
+        this.form12Info.appearingParties=[]
+        this.updated++;
+    }
+
+    public applyingPartiesChanged(){
+        this.form12Info.filingParties=[]
+        this.form12Info.appearingParties=[]
+        this.updated++;
+    }
+    
+    public filingPartiesChanged(){
+        this.form12Info.appearingParties=[]
+        this.updated++;
+    }
+
+    get getFilingParties(){
+        const filingParties=[]
+            for(const party of this.form12Info.filingParties){
+                filingParties.push(party)                
+                if(party.counselName){
+                    const counsel: form12PartiesInfoType = JSON.parse(JSON.stringify(party))
+                    counsel.isCounsel = true
+                    counsel.name = counsel.counselName+', counsel for '+counsel.name
+                    filingParties.push(counsel)                    
+                }
+            }
+        return filingParties
+    }
+
 }
 </script>
 
@@ -1230,6 +1119,7 @@ export default class Form12StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        

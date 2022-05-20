@@ -31,6 +31,27 @@
             </b-row>
 
             <b-row class="ml-5">
+                <b-col cols="9">
+                    <b-button 
+                        style="float: right; width: 120px; font-size: 20px;" 
+                        variant="danger"
+                        @click="cancel()"
+                        >
+                        Cancel
+                    </b-button>
+                </b-col>
+                <b-col cols="3">
+                    <b-button
+                        style="float: right; margin-right:1rem; font-size: 20px;" 
+                        variant="success"
+                        @click="savePdf()"
+                        >Download PDF
+                        <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
+                    </b-button>
+                </b-col>
+            </b-row>
+
+            <!-- <b-row class="ml-5">
                 <b-col cols="10">
                     <b-button 
                         style="float: right; width: 120px; height: 50px; font-size: 20px;" 
@@ -51,7 +72,7 @@
                         <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
                     </b-button>
                 </b-col>
-            </b-row>
+            </b-row> -->
 
         </b-card>
 
@@ -100,39 +121,64 @@ export default class SubmitForm12 extends Vue {
         this.mountedData = true;         
     }  
 
-    public submit() {
-
-        this.submitting = true;
-        this.errorMsg =""
-
-        const url = "/efiling/"+this.currentOrderToVarySingleJusticeId+"/submit/";
-
-        const header = {
-            responseType: "json",
+    public savePdf(){        
+        const pdfType = "FORM"
+        const pdfName ="Form12"
+        const url = '/form12/form-print/'+this.currentOrderToVarySingleJusticeId+'/?pdf_type='+pdfType
+        const options = {
+            responseType: "blob",
             headers: {
-                "Content-Type": "application/json",
+            "Content-Type": "application/json",
             }
         }
+        this.$http.get(url, options)
+        .then(res => {
+            const blob = res.data;
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.download = pdfName+".pdf";
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
 
-        this.$http.post(url, header)
-        .then(res => {                            
-            this.submitting = false;
-            if(res.data?.message=="success" && res.data?.redirectUrl){
-                const eFilingUrl = res.data?.redirectUrl
-                location.replace(eFilingUrl);
-            }
-        }, err => {
-            console.log(err.response?.data?.message);
-            const generalError = " Error in submission. Please refresh the page and try again."
-            if(err.response?.data?.message)
-                this.errorMsg = err.response.data.message
-            else if(err.response?.data?.detail)
-                this.errorMsg = err.response.data.detail+generalError
-            else
-                this.errorMsg = generalError
-            this.submitting = false;
-        });        
+        },err => {
+            console.error(err);
+        });
     }
+
+    // public submit() {
+
+    //     this.submitting = true;
+    //     this.errorMsg =""
+
+    //     const url = "/form12/efiling/"+this.currentOrderToVarySingleJusticeId+"/submit/";
+
+    //     const header = {
+    //         responseType: "json",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         }
+    //     }
+
+    //     this.$http.post(url, header)
+    //     .then(res => {                            
+    //         this.submitting = false;
+    //         if(res.data?.message=="success" && res.data?.redirectUrl){
+    //             const eFilingUrl = res.data?.redirectUrl
+    //             location.replace(eFilingUrl);
+    //         }
+    //     }, err => {
+    //         console.log(err.response?.data?.message);
+    //         const generalError = " Error in submission. Please refresh the page and try again."
+    //         if(err.response?.data?.message)
+    //             this.errorMsg = err.response.data.message
+    //         else if(err.response?.data?.detail)
+    //             this.errorMsg = err.response.data.detail+generalError
+    //         else
+    //             this.errorMsg = generalError
+    //         this.submitting = false;
+    //     });        
+    // }
 
     public cancel() {
         this.$router.push({name: "dashboard" }) 
