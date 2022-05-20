@@ -44,7 +44,7 @@
             </p>
 
             <p v-if="applications.length > 0"                
-                class="step-title-column">Applications Requirements or Steps</p>
+                class="step-title-column">Application Requirements or Steps</p>
 
             <div v-if="getAppRules().includes('54')">
                 <rule-54-application-instructions :displayButton='form4Button == 54'/>
@@ -113,7 +113,7 @@
         </b-row> 
 
 <!--Respond to an Application  -->
-        <b-row :class="showStayApplicationsInfo?'mt-3':'mt-4'" style="padding-top: 1rem;">            
+        <b-row :class="showStayApplicationsInfo?'mt-0':'mt-4'" :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 1rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application
             </b-col>   
@@ -506,14 +506,14 @@ export default class ManagingAppealProcessPg extends Vue {
         }
 
         if (this.getAppRules().includes('58')){
-            this.appStepsLength = this.appStepsLength + 31;
-            if (this.form4Button == 0){30
+            this.appStepsLength = this.appStepsLength + 35;
+            if (this.form4Button == 0){
                 this.form4Button = 58;
             }
         }
 
         if (this.getAppRules().includes('59')){
-            this.appStepsLength = this.appStepsLength + 31;
+            this.appStepsLength = this.appStepsLength + 32;
             if (this.form4Button == 0){
                 this.form4Button = 59;
             }
@@ -689,7 +689,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showStayApplications(show: boolean){
         if (show) {
             this.showStayApplicationsInfo = true;
-            this.$emit('adjustHeights', 2, "26rem");
+            this.$emit('adjustHeights', 2, "28rem");
         } else {
             this.showStayApplicationsInfo = false;
             this.$emit('adjustHeights', 2, "0");
@@ -709,7 +709,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showForm8(show: boolean){
         if (show) {
             this.showForm8Info = true;
-            this.$emit('adjustHeights', 4, "31rem");
+            this.$emit('adjustHeights', 4, "38rem");
         } else {
             this.showForm8Info = false;
             this.$emit('adjustHeights', 4, "0");

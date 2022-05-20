@@ -55,18 +55,11 @@
                                 </b-col> 
                             </b-row>
                         </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank"> -->
-                                        Written argument (if any)
-                                    <!-- </a> -->
-                                </b-col>                                
-                                
-                            </b-row>
-                        </li>
+                        <li class="link-button" 
+                            @click="downloadInstructions('written-argument')"
+                            target="_blank">
+                            Written argument (if any)               
+                        </li>    
                     </ul>
                 </li>                
                 <li>
@@ -83,6 +76,43 @@
             <ol class="mt-3">              
                 <li>
                     File an application book in Form 16 
+                    <ul>
+                        <li>
+                            Application Book
+                            <ul>
+                                <li>
+                                    <b-row class="my-1 w-145">
+                                        <b-col cols="8">
+                                            E-Completion Instructions                                           
+                                        </b-col>
+                                        <b-col cols="3"></b-col>                                
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('e-vary')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                     
+                                        </b-col>
+                                    </b-row>
+                                </li>
+                                <li>
+                                    <b-row class="my-1 w-145">
+                                        <b-col cols="8">
+                                            Paper Completion Instructions                                                                       
+                                        </b-col>
+                                        <b-col cols="3"></b-col>                               
+                                        <b-col cols="1">
+                                            <b-button
+                                                @click="downloadInstructions('paper-vary')"
+                                                target="_blank"                                                                                
+                                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                            </b-button>                                    
+                                        </b-col>
+                                    </b-row>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     Service on each party a copy of the filed application book.
@@ -98,6 +128,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form8";
+import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 const form8State = namespace("Form8");
 
 @Component
@@ -111,6 +142,28 @@ export default class Rule62ApplicationInstructions extends Vue {
         this.$router.push({name: "start-form8" })
     }
 
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
+    }
+
 }
 
 </script>
+
+<style scoped lang="scss">
+
+    @import "src/styles/common";
+
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
+
+</style>

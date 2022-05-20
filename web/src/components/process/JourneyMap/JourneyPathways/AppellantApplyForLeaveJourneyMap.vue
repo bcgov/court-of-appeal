@@ -24,8 +24,8 @@
         <form-icon   
             style="left: 28%"
             :twoPages="false"
-            stepTitle="Initial Documents"
-            @action="displayWindow('Initial Documents')"
+            stepTitle="Initial Document"
+            @action="displayWindow('Initial Document')"
             @completed="completed"            
             order=1
             v-bind="pageState[0]"           
@@ -188,9 +188,9 @@ export default class AppellantApplyForLeaveJourneyMap extends Vue {
         this.hearingDocumentsContent = false;
         this.decisionOnLeaveContent = false;
 
-        if (contentType == "Initial Documents"){
+        if (contentType == "Initial Document"){
 
-            this.windowTitle = "Initial Documents";
+            this.windowTitle = "Initial Document";
             this.pathTypes = ["share"];
             this.pathHeights = ['28rem'];
             this.initialDocumentsContent = true;

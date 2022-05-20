@@ -60,7 +60,11 @@
                     <li>
                         Supporting Affidavits (if any)
                     </li> 
-                    <li>Written argument (if any)</li>                   
+                    <li class="link-button" 
+                        @click="downloadInstructions('written-argument')"
+                        target="_blank">
+                        Written argument (if any)               
+                    </li>                   
                 </ul>
             </li> 
             <li>
@@ -83,6 +87,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form4";
+import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 const form4State = namespace("Form4");
 
 @Component
@@ -99,6 +104,28 @@ export default class Rule60ApplicationInstructions extends Vue {
         this.$router.push({name: "start-form4" });
     }
 
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
+    }
+
 }
 
 </script>
+
+<style scoped lang="scss">
+
+    @import "src/styles/common";
+
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
+
+</style>

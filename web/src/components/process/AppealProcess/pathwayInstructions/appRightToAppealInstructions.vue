@@ -26,7 +26,7 @@
 
         <p>
             You have indicated that you are starting the appeal process, 
-            so you would start by clicking on the Initial Documents to 
+            so you would start by clicking on the Initial Document to 
             complete the Notice of Appeal Form.             
         </p>
         
