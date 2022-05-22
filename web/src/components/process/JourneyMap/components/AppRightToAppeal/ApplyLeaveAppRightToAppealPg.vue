@@ -16,7 +16,7 @@
         </b-row>
 
         <b-row v-if="showIntroInfo" class="mt-4">
-            <app-apply-leave-instructions/>
+            <app-apply-leave-instructions v-bind:app="app"/>
             <p>
                 Every appeal process is unique. If you have any questions, please visit the 
                 <a 
@@ -638,7 +638,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
@@ -661,6 +661,9 @@ import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
     }
 })
 export default class ApplyLeaveAppRightToAppealPg extends Vue {
+
+    @Prop({required: true})
+    app!: boolean;
 
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void

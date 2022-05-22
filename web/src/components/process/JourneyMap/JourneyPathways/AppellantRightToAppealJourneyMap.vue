@@ -229,8 +229,8 @@
 
             <b-row 
                 v-if="theHearingContent" 
-                style="font-size: 1.5em; font-weight: 700; padding: 0 0 0 6rem;" 
-                class="mb-1 ml-2">For more information about the hearing process, click the topics below:
+                style="font-size: 2em; font-weight: 700;" 
+                class="mb-1 ml-4">For more information about the hearing process, click the topics below:
             </b-row>           
 
             <b-row no-gutters>
@@ -240,13 +240,13 @@
                 <b-col cols="11" style="padding: 0 0 0 1rem;">
 
                     <initial-documents-app-right-to-appeal-pg v-if="initialDocumentsContent"/> 
-                    <apply-leave-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="applyForLeaveToAppealContent"/>
+                    <apply-leave-app-right-to-appeal-pg v-bind:app='true' @adjustHeights="adjustHeights" v-if="applyForLeaveToAppealContent"/>
                     <appeal-record-transcript-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="appealRecordTranscriptContent"/>
                     <factum-appeal-book-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
 
                     <book-appeal-date-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
-                    <the-hearing-app-right-to-appeal-pg @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
+                    <the-hearing-app-right-to-appeal-pg v-bind:app='true' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
                     <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                     <managing-appeal-process-pg @adjustHeights="adjustHeights" v-if="applicationsContent"/>
@@ -255,7 +255,6 @@
             </b-row>
 
         </b-card>
-
 
       
         <template v-slot:modal-footer>
