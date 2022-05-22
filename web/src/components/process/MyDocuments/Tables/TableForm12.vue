@@ -51,7 +51,7 @@
             <b-col cols="12">
                 <div 
                     style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" 
-                    class="p-0 text-center text-primary">Offer To Settle Costs (Form 12) </div>
+                    class="p-0 text-center text-primary">Order from an application to vary the order of a justice (Form 12) </div>
             </b-col>
         </b-row>
        
@@ -171,7 +171,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Settlement or Abandonment </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Order from an application to vary the order of a justice </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
@@ -339,7 +339,7 @@ export default class TableForm12 extends Vue {
     }
 
     public createDocument() {
-        this.$router.push({name: "start-form12" });
+        this.$router.push({name: "checklist-orders" });
     }
 
     public downloadDocument(fileNumber?) {
@@ -356,7 +356,7 @@ export default class TableForm12 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'ABA';
+            const pdf_type = 'FORM';
             const url = '/form12/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",

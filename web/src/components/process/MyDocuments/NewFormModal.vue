@@ -219,27 +219,35 @@ export default class NewFormModal extends Vue {
         }else if(form=='form9'){
             this.UpdateCurrentRequisitionId(null)
             this.$router.push({name: "start-form9" });
+
         }else if(form=='form10'){
             this.UpdateCurrentOrderSingleJusticeId(null);
             this.$router.push({name: "checklist-orders" });
+
         }else if(form=='form12'){
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
             this.$router.push({name: "checklist-orders" });
+
         }else if(form=='form16'){
             this.UpdateCurrentOfferToSettleCostsId(null);
             this.$router.push({name: "start-form16" });
+
         }else if(form=='form18'){
             this.UpdateCurrentNoticeOfRepChangeAddressId(null)
             this.$router.push({name: "start-form18" });
+
         }else if(form=='form19'){
             this.UpdateCurrentNoticeOfWithdrawalOfLawyerId(null)
             this.$router.push({name: "start-form19" });
+
         }else if(form=='form20'){
             this.UpdateCurrentNoticeOfObjectionToWithdrawalId(null)
             this.$router.push({name: "start-form20" });
+
         }else if(form=='form22'){
             this.UpdateCurrentNoFeesPayableId(null)
             this.$router.push({name: "start-form22" });
+            
         }        
     }
 }
