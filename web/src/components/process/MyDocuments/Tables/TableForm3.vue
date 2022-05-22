@@ -357,7 +357,7 @@ export default class TableForm3 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'NCA';
+            const pdf_type = 'FORM';
             const url = '/form3/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",

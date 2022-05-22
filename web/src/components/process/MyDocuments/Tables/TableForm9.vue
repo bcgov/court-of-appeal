@@ -165,7 +165,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Settlement or Abandonment </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Requisition </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
