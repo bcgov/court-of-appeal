@@ -26,6 +26,7 @@
         <table-form-8 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>      
         <table-form-9 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-10 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-11 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-12 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-16 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-18 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
@@ -50,6 +51,7 @@ import TableForm7 from './Tables/TableForm7.vue'
 import TableForm8 from './Tables/TableForm8.vue'
 import TableForm9 from './Tables/TableForm9.vue'
 import TableForm10 from './Tables/TableForm10.vue'
+import TableForm11 from './Tables/TableForm11.vue'
 import TableForm12 from './Tables/TableForm12.vue'
 import TableForm16 from './Tables/TableForm16.vue'
 import TableForm18 from './Tables/TableForm18.vue'
@@ -71,6 +73,7 @@ import NewFormModal from './NewFormModal.vue'
         TableForm8, 
         TableForm9,  
         TableForm10,
+        TableForm11,
         TableForm12,
         TableForm16,
         TableForm18, 

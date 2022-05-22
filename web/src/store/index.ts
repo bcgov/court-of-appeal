@@ -11,6 +11,7 @@ import Form7 from '@/store/modules/forms/form7';
 import Form8 from '@/store/modules/forms/form8';
 import Form9 from '@/store/modules/forms/form9';
 import Form10 from '@/store/modules/forms/form10';
+import Form11 from '@/store/modules/forms/form11';
 import Form12 from '@/store/modules/forms/form12';
 import Form16 from '@/store/modules/forms/form16';
 import Form18 from '@/store/modules/forms/form18';
@@ -36,6 +37,7 @@ const store = new Vuex.Store({
 		Form8,
 		Form9,
 		Form10,
+		Form11,
 		Form12,
 		Form16,
 		Form18,

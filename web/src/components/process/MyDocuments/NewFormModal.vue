@@ -74,6 +74,9 @@ const form9State = namespace("Form9");
 import "@/store/modules/forms/form10";
 const form10State = namespace("Form10");
 
+import "@/store/modules/forms/form11";
+const form11State = namespace("Form11");
+
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
@@ -128,6 +131,9 @@ export default class NewFormModal extends Vue {
     @form10State.Action
 	public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
 
+    @form11State.Action
+	public UpdateCurrentOrderMultipleJusticesId!: (newCurrentOrderMultipleJusticesId: string) => void
+
     @form12State.Action
 	public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
 
@@ -157,6 +163,7 @@ export default class NewFormModal extends Vue {
         {name:'form8', title:'Notice of Application to Vary an Order of a Justice (Form 8)'},     
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form10', title:'Order of a single justice (Form 10)'},
+        {name:'form11', title:'Order of three or more justices (Form 11)'},
         {name:'form12', title:'Order from an application to vary the order of a justice (Form 12)'},
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
@@ -222,6 +229,10 @@ export default class NewFormModal extends Vue {
 
         }else if(form=='form10'){
             this.UpdateCurrentOrderSingleJusticeId(null);
+            this.$router.push({name: "checklist-orders" });
+
+        }else if(form=='form11'){
+            this.UpdateCurrentOrderMultipleJusticesId(null);
             this.$router.push({name: "checklist-orders" });
 
         }else if(form=='form12'){

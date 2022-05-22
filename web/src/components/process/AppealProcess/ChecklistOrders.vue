@@ -166,6 +166,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form10";
 const form10State = namespace("Form10");
 
+import "@/store/modules/forms/form11";
+const form11State = namespace("Form11");
+
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
@@ -180,6 +183,9 @@ export default class ChecklistOrders extends Vue {
 
     @form10State.Action
     public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
+
+    @form11State.Action
+    public UpdateCurrentOrderMultipleJusticesId!: (newCurrentOrderMultipleJusticesId: string) => void
 	 
     @form12State.Action
     public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
@@ -295,10 +301,9 @@ export default class ChecklistOrders extends Vue {
     }
 
     public startNewForm11Document(){
-        // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form11" });
-    }
-    
+        this.UpdateCurrentOrderToVarySingleJusticeId(null);
+        this.$router.push({name: "start-form11" });
+    }    
 
     public startNewForm12Document(){
         this.UpdateCurrentOrderToVarySingleJusticeId(null);
