@@ -748,7 +748,11 @@ export default class MyDocumentsTableBrief extends Vue {
 
         } else if(item.formName=='Form 12'){
             this.UpdateCurrentOrderToVarySingleJusticeId(item.id);             
-            this.$router.push({name: "fill-form12"}); 
+            this.$router.push({name: "fill-form12"});        
+
+        } else if(item.formName=='Form 10'){
+            this.UpdateCurrentOrderSingleJusticeId(item.id);             
+            this.$router.push({name: "fill-form10"}); 
         }
 
     }

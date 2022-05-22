@@ -43,47 +43,46 @@
         <div class="mt-5" style="display: block; text-align: center; font-weight: 600; font-size:14pt;">ORDER</div>
 
 <!-- <BEFORE> -->
-        <div class="mb-2 mx-0 row" style="font-weight: 600;">
+        <div class="mt-3 mb-1 mx-0 row">
             <div>
-                BEFORE: 
+                <b>BEFORE THE HONOURABLE</b> {{result.judgeNames[0].text}} <b>IN CHAMBERS</b>
             </div>
-        </div>
-
-        <div>
-            <div v-for="judgeName,inx in result.judgeNames" :key="inx">
-                <div style="margin-left:2.25rem;"> The Honourable {{judgeName.text}} </div>
-            </div>
-        </div>
+        </div>        
 
 <!-- <HEARING LOCATION-DATE> -->
-        <div class="mt-2 mb-4 mx-0 row">
+        <div class="mb-4 mx-0 row">
             <div>
-                {{result.hearingLocation.name}}, British Columbia, {{result.dateOfJudgement | beautify-date-full}} 
+                {{result.hearingLocation.name}}, British Columbia, {{hearingDate | beautify-date-full}} 
+            </div>
+        </div>
+
+<!-- <Reasons to Follow> -->
+        <div class="mb-4 mx-0 row" v-if="result.reasonsIndicated">
+            <div>
+                Reasons to follow being released on {{result.reasonsDate | beautify-date-full}}.
             </div>
         </div>
         
 <!-- <THE APPEAL> -->
         <div class="my-3 mx-0 row">
             <div>
-                <b>THE APPEAL</b> from the judgment of the Honourable {{varyingOrderJudgeName}} of the <b class="text-danger">UNKOWN</b> Court 
-                of British Columbia at <b class="text-danger">UNKOWN</b>, British Columbia, dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
-                for hearing on <b class="text-danger">UNKOWN</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
+                <b>THE APPLICATION OF</b> {{applicantNamesFull}} and {{respondentNamesFull}} for {{applicationType}} coming on
+                for hearing on <b class="text-danger">UNKOWN DATE</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
                 <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
             </div>
         </div>
 
-<!-- <DISMISS> -->
+<!-- <ORDER Make> -->
         <div class="my-3 mx-0 row">
             <div>
-                <b>THIS COURT ORDERS</b> that the application to vary the order of {{varyingOrderJudgeName}} 
-                Was the application to vary the order of <span v-if="result.orderAllowed"> allowed. </span> <span v-else> dismissed.</span>
+                <b>IT IS ORDERED</b> that {{result.ordersJusticeMake}}
             </div>
         </div>
 
 <!-- <FURTHER ORDERS> -->
         <div v-if="result.otherOrders" class="my-3 mx-0 row">
             <div>
-                <b>THIS COURT FURTHER ORDERS</b> that {{result.furtherOrders}}.
+                <b>IT IS FURTHER ORDERED</b> that {{result.furtherOrders}}.
             </div>
         </div>
 
@@ -105,7 +104,7 @@
 
             <div  style="width:50%;">
                 <div>....................................................................</div>
-                <div>Deputy Registrar</div>
+                <div>A Justice of the Court of Appeal</div>
             </div>
         </div>
 
@@ -150,9 +149,11 @@ export default class Form10Layout extends Vue {
     
     applicantNamesFull='';
     respondentNamesFull='';
-    varyingOrderJudgeName=''
     appearingParties='';
 
+    hearingDate = ''
+    applicationType = ''
+    
     appearingAppellants =[]
     appearingRespondents =[]
 
@@ -181,8 +182,8 @@ export default class Form10Layout extends Vue {
             this.applicantNames.push(fullTitle);            
             this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
         }
-
-        this.varyingOrderJudgeName = this.result.varyingOrderJudgeName=='Other'? this.result.varyingOrderJudgeNameOther :this.result.varyingOrderJudgeName;        
+        this.applicationType = this.result.applicationFor?.name =='other' ? this.result.applicationFor.other :this.result.applicationFor?.name
+        this.hearingDate = this.result.judgmentReserved? this.result.hearingHeldDate : this.result.dateOfJudgement;
         this.extractAppearingParties();
     }
 
