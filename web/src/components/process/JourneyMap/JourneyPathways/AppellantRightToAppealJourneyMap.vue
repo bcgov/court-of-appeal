@@ -222,16 +222,10 @@
         <b-card no-body class="bg-white border-white">
 
             <b-row 
-                v-if="initialDocumentsContent" 
                 style="font-size: 2em; font-weight: 700; padding: 0 0 0 6rem;" 
-                class="mb-1 ml-2">Would you like to start your appeal?
-            </b-row>    
-
-            <b-row 
-                v-if="theHearingContent" 
-                style="font-size: 2em; font-weight: 700;" 
-                class="mb-1 ml-4">For more information about the hearing process, click the topics below:
-            </b-row>           
+                class="mb-1 ml-2">
+                {{contentTitle}}
+            </b-row> 
 
             <b-row no-gutters>
                 <b-col cols="1">
@@ -339,6 +333,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     showWindow = false;
     windowTitle = '';
+    contentTitle = '';
     pathTypes = [] as string[];
     pathHeights = [] as string[];
     initialDocumentsContent = false;
@@ -385,11 +380,11 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     public displayWindow(contentType: string){
 
+        this.contentTitle = '';
         this.initialDocumentsContent = false;
         this.applyForLeaveToAppealContent = false;
         this.applicationsContent = false;
-        this.appealRecordTranscriptContent = false;
-        
+        this.appealRecordTranscriptContent = false;        
         this.factumAppealBookContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
@@ -398,7 +393,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.appealProcessCompleteContent = false; 
 
         if (contentType == "Initial Document"){
-
+            this.contentTitle = 'Would you like to start your appeal?';
             this.windowTitle = "Initial Document";
             this.pathTypes = ["share"];
             this.pathHeights = ['35rem'];
@@ -447,7 +442,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.noticeOfHearingContent = true;
 
         }  else if (contentType == "The Hearing"){
-
+            this.contentTitle = "For more information about the hearing process, click the topics below:";
             this.windowTitle = "The Hearing";
             this.pathTypes = ["gavel", "share", "share", "share", "info"];
             this.pathHeights = ['5rem', '0', '0', '0', '0'];
