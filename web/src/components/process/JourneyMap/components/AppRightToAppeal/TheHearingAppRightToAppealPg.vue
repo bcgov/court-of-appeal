@@ -234,7 +234,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 
@@ -244,6 +244,9 @@ import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
     }
 })
 export default class TheHearingAppRightToAppealPg extends Vue { 
+
+    @Prop({required: true})
+    app!: boolean;
 
     showPrepareHearingInfo = true;
     showPointsInfo = false;
@@ -262,9 +265,10 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     }
 
     public showPoints(show: boolean){
+        const pointsLength = this.app?'33rem':'35rem';
         if (show) {
             this.showPointsInfo = true;
-            this.$emit('adjustHeights', 1, "33rem")
+            this.$emit('adjustHeights', 1, pointsLength)
         } else {
             this.showPointsInfo = false;
             this.$emit('adjustHeights', 1, "0");

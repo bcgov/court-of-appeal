@@ -19,17 +19,12 @@
             Appeal is ready for hearing when:
             <ol>
                 <li>
-                    <ol class="mt-2" type="a">
-                        <li>
-                            Appellant has filed their factum, <b>and</b>
-                        </li>
-                        <li>
-                            A copy of each order being appealed was entered in the court appealed from
-                        </li>
-                    </ol>
+                    Appellant has filed their factum, <b>and</b>
+                    a copy of each order being appealed was entered in the court appealed from
+                        
                 </li>
                 <li>
-                    Or a date specified by a justice or the registrar as the date when the hearing ready.
+                    <b>Or</b> a date specified by a justice or the registrar as the date when the hearing ready.
                 </li>
             </ol>
         </b-row>        
@@ -103,7 +98,7 @@
                     File the document with the registry.
                 </li>
                 <li>
-                    Serve one copy of the notice hearing and each attached order to each respondent.
+                    Serve one copy of the notice hearing and each attached order to each appellant.
                 </li>
             </ol>
         </b-row>        

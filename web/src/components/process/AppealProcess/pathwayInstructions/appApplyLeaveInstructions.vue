@@ -3,7 +3,7 @@
        
         <p> 
             If you do not have the right to appeal, and you would still 
-            like to appeal your case, you must apply for leave to appeal 
+            like to <span v-if="!app">cross </span> appeal your case, you must apply for leave to appeal 
             from the court. Follow the steps below to complete the process.
         </p>
         <p>
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form4";
@@ -34,6 +34,9 @@ const form4State = namespace("Form4");
 
 @Component
 export default class appApplyLeaveInstructions extends Vue {   
+
+    @Prop({required: true})
+    app!: boolean;
 
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
