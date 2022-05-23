@@ -8,6 +8,7 @@
             <div class="bend-bottom-left-border"/>
             <div :class="{'bend-top-left-border': true,    'top-left-completed': circling}"/>
             <div :class="{'bend-bottom-left-border': true, 'bottom-left-completed': circling}"/>
+            <div :class="{'bend-bottom-left-border': true, 'bottom-left-completed-extension': circling && extendEnd}"/>
         </div>
     </div>
 </template>
@@ -20,6 +21,9 @@ export default class LeftTurn extends Vue {
 
     @Prop({required: false})
     circling!: boolean;
+
+    @Prop({required: false})
+    extendEnd!: boolean;
 
 }
 </script>

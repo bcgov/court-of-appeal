@@ -1,9 +1,10 @@
 <template>
     <div v-if="dataReady">
-    <div class="journey-map-container">
+    <div class="journey-map-container" style="margin-bottom:8rem;">
 
         <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
-            
+
+<!-- <LEVEL 1> -->            
         <div
             :style="{marginLeft: '50px',
                 borderTop: '9px solid rgb(159, 191, 226)',
@@ -31,6 +32,7 @@
         />
                     
         <trail
+            :startDelay="200"            
             className="journey-trail-l1-moveable"
             :completed="completedTrail[0]"
             width='24%'
@@ -55,75 +57,94 @@
             level=1
         />
 
-        <form-icon 
+        <form-icon   
             style="left: 68%"
-            :twoPages="true"
-            stepTitle="Factum and Appeal Book"
-            @action="displayWindow('Factum and Appeal Book')"
+            :twoPages="false"
+            stepTitle="Apply for Leave to Appeal"
+            stepTitleOptional="(Optional)"
+            @action="displayWindow('Apply for Leave to Appeal')"
             @completed="completed"            
             order=3
-            v-bind="pageState[2]"
+            v-bind="pageState[2]"           
         />
 
         <return-trail
             :status="completedTrail[2]?'completed':''"
             startpoint='70%'
+            :extendEnd="true"
         />
 
+<!-- <LEVEL 2> -->
         <div
             :style="{marginLeft: '141px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '67%',
+                width: '57%',
                 position: 'absolute',
                 top: '374px',
                 zIndex: '1',
                 marginBottom: '81px'}"
         />
-
+                
         <form-icon 
-            :style="{left: '20%', top: '69.75%'}"
-            :twoPages="false"
-            stepTitle="Notice of Hearing"
-            stepTitleOptional="(if required)"
-            @action="displayWindow('Notice of Hearing')"
+            :style="{left: '30%', top: '34%'}"
+            :twoPages="true"
+            stepTitle="Applications"
+            stepTitleOptional="(Optional)"            
+            @action="displayWindow('Applications')"
             @completed="completed"            
             order=4
             v-bind="pageState[3]"            
         />
-
+        
         <trail
             className="journey-trail-l1-moveable"
             :completed="completedTrail[3]"
-            :style="{position: 'absolute', marginLeft:'20%', top:'70.3%',width: '22%'}"
+            :style="{position: 'absolute', marginLeft:'33%', top:'34.12%',width: '30%'}"
             width='22%'
             level=2
         />
 
-        <gavel-icon 
-            :style="{left: '42%', top: '65%'}"
-            class="journey-box" 
-            stepTitle="The Hearing" 
-            @action="displayWindow('The Hearing')"
+        <form-icon 
+            :style="{left: '60%', top: '34%'}"
+            :twoPages="true"
+            stepTitle="Factum and Appeal Book"
+            @action="displayWindow('Factum and Appeal Book')"
             @completed="completed"            
             order=5
-            v-bind="pageState[4]"            
-        />
+            v-bind="pageState[4]"
+        /> 
 
         <trail
             className="journey-trail-l1-moveable"
             :completed="completedTrail[4]"
-            :style="{position: 'absolute', marginLeft:'41%', top:'70.3%',width: '25%'}"
-            width='25%'
+            :style="{position: 'absolute', marginLeft:'65%', top:'34.12%', width: '10%'}"
+            width='22%'
             level=2
         />
 
-        <form-icon 
-            :style="{left: '64%', top: '69%'}"
-            :twoPages="false"
-            stepTitle="Orders"
-            stepTitleOptional="(if required)"            
+        <return-trail
+            :status="completedTrail[4]?'completed':''"
+            startpoint='70%'
+            top='117px'
+        />
+
+<!-- <LEVEL 3> -->
+        <div
+            :style="{marginLeft: '141px',
+                borderTop: '9px solid rgb(159, 191, 226)',
+                width: '57%',
+                position: 'absolute',
+                top: '67.6%',
+                zIndex: '1',
+                marginBottom: '81px'}"
+        />
+
+        <calendar-icon 
+            :style="{left: '20%', top: '64%',  height:'6rem'}"
+            stepTitle="Book Appeal Date with Registry"
+            stepTitleOptional="(Optional)"
             stepTitleClass="step-title-wide"
-            @action="displayWindow('Orders')"
+            @action="displayWindow('Book Appeal Date')"
             @completed="completed"            
             order=6
             v-bind="pageState[5]"
@@ -132,19 +153,106 @@
         <trail
             className="journey-trail-l1-moveable"
             :completed="completedTrail[5]"
+            :style="{position: 'absolute', marginLeft:'26%', top:'63.12%',width: '20%'}"
+            width='22%'
+            level=2
+        />
+
+        <form-icon 
+            :style="{left: '44%', top: '63.5%'}"
+            :twoPages="false"
+            stepTitle="Notice of Hearing"
+            stepTitleOptional="(Optional)"
+            @action="displayWindow('Notice of Hearing')"
+            @completed="completed"            
+            order=7
+            v-bind="pageState[6]"            
+        />
+
+        <trail
+            className="journey-trail-l1-moveable"
+            :completed="completedTrail[6]"
+            :style="{position: 'absolute', marginLeft:'46%', top:'63.12%',width: '22%'}"
+            width='22%'
+            level=2
+        />
+
+        <form-icon 
+            :style="{left: '67.5%', top: '63.5%'}"
+            :twoPages="false"
+            stepTitle="Book of Authorities"
+            @action="displayWindow('Book of Authorities')"
+            @completed="completed"            
+            order=8
+            v-bind="pageState[7]"            
+        />
+
+<!-- <LEVEL 4> -->        
+
+        <return-trail
+            :status="completedTrail[7]?'completed':''"
+            startpoint='70%'
+            top='147px'
+            :extendEnd="true"
+        />
+
+        <div
+            :style="{marginLeft: '141px',
+                borderTop: '9px solid rgb(159, 191, 226)',
+                width: '67%',
+                position: 'absolute',
+                top: '96.35%',
+                zIndex: '1',
+                marginBottom: '81px'}"
+        />
+        
+
+        <gavel-icon 
+            :style="{left: '28%', top: '90%'}"
+            class="journey-box" 
+            stepTitle="The Hearing" 
+            @action="displayWindow('The Hearing')"
+            @completed="completed"            
+            order=9
+            v-bind="pageState[8]"            
+        />
+
+        <trail
+            className="journey-trail-l1-moveable"
+            :completed="completedTrail[8]"
+            :style="{position: 'absolute', marginLeft:'33%', top:'91.9%',width: '28%'}"
+            width='25%'
+            level=2
+        />
+
+        <form-icon 
+            :style="{left: '60%', top: '92%'}"
+            :twoPages="false"
+            stepTitle="Orders"
+            stepTitleOptional="(if required)"            
+            stepTitleClass="step-title-wide"
+            @action="displayWindow('Orders')"
+            @completed="completed"            
+            order=10
+            v-bind="pageState[9]"
+        />
+
+        <trail
+            className="journey-trail-l1-moveable"
+            :completed="completedTrail[9]"
             width='20%'
-            :style="{position: 'absolute', width: '20%', left: '64%', top: '70.3%'}"
+            :style="{position: 'absolute', width: '20%', left: '64%', top: '91.9%'}"
             level=2
         />
 
         <end-circle
             stepTitle="Appeal Process Complete"
-            :style="{top: '70%', left: '80%'}"
+            :style="{left: '80%', top: '92%'}"
             titleStyle="margin-top: 1.5rem;"
             @action="displayWindow('Appeal Process Complete')" 
-            :completed="completedTrail[5]"
-            order=6
-            v-bind="pageState[6]"           
+            :completed="completedTrail[9]"
+            order=11
+            v-bind="pageState[10]"           
         />
     </div>
 
@@ -385,8 +493,9 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Book of Authorities"){            
             this.windowTitle = "Book of Authorities";
             this.pathTypes = ["info"];
-            this.pathHeights = ['12rem'];
+            this.pathHeights = ['12rem'];            
             this.bookOfAuthoritiesContent = true;
+
         } else if (contentType == "The Hearing"){
             this.windowTitle = "The Hearing";
             this.contentTitle = 'For more information about the hearing process, click the topics below:';
