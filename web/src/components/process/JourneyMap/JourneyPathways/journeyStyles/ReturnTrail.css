@@ -145,6 +145,18 @@
     z-index:4;
     animation: expandlowerright 2000ms linear forwards;
 }
+
+.bottom-left-completed-extension {
+    position: absolute;
+    height: 0px;
+    width: 0;
+    left: 150px;
+    border-top: 9px solid #377d22;
+    top: 111px;
+    z-index:4;
+    animation: expandlowerrightextension 2200ms linear forwards;
+}
+
 /* go around the first corner: */
 @keyframes expandtoptoright {
     0% {    width: 0;}
@@ -215,6 +227,14 @@
     100% { box-shadow: 0 0 0 #3c763d inset;transform: rotate(-135deg)}
 }
 @keyframes expandlowerright {
+    0% {    width: 0;}
+    45% {   width: 0px; }
+    50% { box-shadow: 0 0 0 #3c763d;  width: 90px;}
+    70% { box-shadow: 0 0 8px #3c763d; ;}
+    85% { box-shadow: 0 0 8px #3c763d;  }
+    100% { box-shadow: 0 0 0 #3c763d;  width: 90px;}
+}
+@keyframes expandlowerrightextension{
     0% {    width: 0;}
     45% {   width: 0px; }
     50% { box-shadow: 0 0 0 #3c763d;  width: 90px;}

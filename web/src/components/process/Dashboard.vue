@@ -171,7 +171,7 @@ export default class DashboardPage extends Vue {
     //___________________________
     //___________________________
     //___________________________NEW VERSION goes here _________________
-    CURRENT_VERSION: string = "1.2";
+    CURRENT_VERSION: string = "1.2.5";
     //__________________________
     //___________________________
     //___________________________

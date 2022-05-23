@@ -76,6 +76,7 @@
 }
 
 .journey-trail-l1-moveable.completed-step-l1 {
+    
     animation: glowing 1500ms;
 }
 .journey-trail-basis {
