@@ -68,8 +68,12 @@ export interface RSP_TO_APPEAL_stPgTypes {
     
     NoticeOfAppearance: number;
     NoticeOfCrossAppeal: number;
+    ApplyForLeaveToAppeal: number;
+    Applications: number;
     FactumAndAppealBook: number;
+    BookAppealDateWithRegistry: number;
     NoticeOfHearing: number;
+    BookOfAuthorities: number;    
     TheHearing: number;
     CourtOrder: number;
     AppealProcessComplete: number;

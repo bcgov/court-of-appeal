@@ -288,6 +288,22 @@ class Application extends VuexModule {
 
         p = {} as pageInfoType;
         p.key = "2";
+        p.name = "ApplyForLeaveToAppeal";
+        p.label = "Apply for Leave to Appeal";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "3";
+        p.name = "Applications";
+        p.label = "Applications";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "4";
         p.name = "FactumAndAppealBook";
         p.label = "Factum and Appeal Book";
         p.active = false;
@@ -295,7 +311,15 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "3";
+        p.key = "5";
+        p.name = "BookAppealDateWithRegistry";
+        p.label = "Book Appeal Date with Registry";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "6";
         p.name = "NoticeOfHearing";
         p.label = "Notice of Hearing";
         p.active = false;
@@ -303,7 +327,15 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "4";
+        p.key = "7";
+        p.name = "BookOfAuthorities";
+        p.label = "Book of Authorities";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "8";
         p.name = "TheHearing";
         p.label = "The Hearing";
         p.active = false;
@@ -311,7 +343,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "5";
+        p.key = "9";
         p.name = "CourtOrder";
         p.label = "Court Order";
         p.active = false;
@@ -319,7 +351,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "6";
+        p.key = "10";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
         p.active = false;
