@@ -120,10 +120,10 @@
         <form-icon 
             :style="{left: '64%', top: '69%'}"
             :twoPages="false"
-            stepTitle="Court Order"
+            stepTitle="Orders"
             stepTitleOptional="(if required)"            
             stepTitleClass="step-title-wide"
-            @action="displayWindow('Court Order')"
+            @action="displayWindow('Orders')"
             @completed="completed"            
             order=6
             v-bind="pageState[5]"
@@ -153,22 +153,8 @@
         <template v-slot:modal-title>
             <div style="font-size: 2em;" class="mb-0 text-white">{{windowTitle}}</div>
         </template>
-
-        <b-row v-if="singlePath" no-gutters>
-            <b-col cols="1">
-                <path-sidebar v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
-            </b-col>
-            <b-col cols="11" style="padding: 0 0 0 2rem;">                
-                
-                <notice-of-appearance-rsp-to-appeal-pg v-if="noticeOfAppearanceContent"/>
-                <the-hearing-rsp-to-appeal-pg v-if="theHearingContent"/>
-                <court-order-rsp-to-appeal-pg v-if="courtOrderContent"/>
-                <appeal-process-complete-rsp-to-appeal-pg v-if="appealProcessCompleteContent"/>                
-
-            </b-col>
-
-        </b-row>
-        <b-card v-else no-body class="bg-white border-white">
+       
+        <b-card no-body class="bg-white border-white">
 
             <b-row style="font-size: 2em; font-weight: 700;" class="mb-1 ml-4">{{contentTitle}}</b-row>
             
@@ -178,9 +164,21 @@
                 </b-col>
                 <b-col cols="11" style="padding: 0 0 0 2rem;">               
                     
-                    <notice-of-cross-appeal-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfCrossAppealContent"/>
-                    <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="factumAppealBookContent"/>              
-                    <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfHearingContent"/>
+                    <notice-of-appearance-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-if="noticeOfAppearanceContent"/>
+                    <notice-of-cross-appeal-rsp-to-appeal-pg @showFactums="showFactums" @adjustHeights="adjustHeights" v-else-if="noticeOfCrossAppealContent"/>
+                    <apply-leave-app-right-to-appeal-pg v-bind:app='false' @adjustHeights="adjustHeights" v-else-if="applyForLeaveToAppealContent"/>
+                    
+                    <managing-appeal-process-pg @adjustHeights="adjustHeights" v-else-if="applicationsContent"/>
+                
+                    <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="factumAppealBookContent"/>              
+                    <book-appeal-date-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
+                    
+                    <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>
+                    <book-of-authorities-rsp-to-appeal-pg v-else-if="bookOfAuthoritiesContent"/>
+                    <the-hearing-app-right-to-appeal-pg v-bind:app='false' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
+                    <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>                    
+                    <appeal-process-complete-rsp-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
+                
                 </b-col>
             </b-row>
 
@@ -218,9 +216,15 @@ import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
 import NoticeOfAppearanceRspToAppealPg from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
 import NoticeOfCrossAppealRspToAppealPg from '../components/RspToAppeal/NoticeOfCrossAppealRspToAppealPg.vue';
+import ApplyLeaveAppRightToAppealPg from '../components/AppRightToAppeal/ApplyLeaveAppRightToAppealPg.vue';
+import ManagingAppealProcessPg from '@/components/process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
+
 import FactumAppealBookRspToAppealPg from '../components/RspToAppeal/FactumAppealBookRspToAppealPg.vue';
-import TheHearingRspToAppealPg from '../components/RspToAppeal/TheHearingRspToAppealPg.vue';
-import CourtOrderRspToAppealPg from '../components/RspToAppeal/CourtOrderRspToAppealPg.vue';
+import BookAppealDateRspToAppealPg from '../components/RspToAppeal/BookAppealDateRspToAppealPg.vue';
+import BookOfAuthoritiesRspToAppealPg from '../components/RspToAppeal/BookOfAuthoritiesRspToAppealPg.vue';
+import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
+import OrdersAppRightToAppealPg from '../components/AppRightToAppeal/OrdersAppRightToAppealPg.vue';
+
 import AppealProcessCompleteRspToAppealPg from '../components/RspToAppeal/AppealProcessCompleteRspToAppealPg.vue';
 import NoticeOfHearingRspToAppealPg from '../components/RspToAppeal/NoticeOfHearingRspToAppealPg.vue'
 
@@ -243,9 +247,13 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         PathSidebar,      
         NoticeOfAppearanceRspToAppealPg,
         NoticeOfCrossAppealRspToAppealPg,
+        ApplyLeaveAppRightToAppealPg,
+        ManagingAppealProcessPg,
         FactumAppealBookRspToAppealPg,
-        TheHearingRspToAppealPg,
-        CourtOrderRspToAppealPg,
+        BookAppealDateRspToAppealPg,
+        BookOfAuthoritiesRspToAppealPg,
+        TheHearingAppRightToAppealPg,
+        OrdersAppRightToAppealPg,
         AppealProcessCompleteRspToAppealPg,
         NoticeOfHearingRspToAppealPg
     }
@@ -262,15 +270,18 @@ export default class RespondToAppealJourneyMap extends Vue {
     pageState : {active:boolean; status:string; ready:boolean;}[] = []
 
     showWindow = false;
-    singlePath = true;
     windowTitle = '';
     contentTitle = '';
     pathTypes = [] as string[];
     pathHeights = [] as string[];    
     noticeOfAppearanceContent = false; 
     noticeOfCrossAppealContent = false;
+    applyForLeaveToAppealContent = false;
+    applicationsContent = false;
     factumAppealBookContent = false;
+    bookAppealDateContent = false;
     noticeOfHearingContent = false;
+    bookOfAuthoritiesContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false;
@@ -303,62 +314,93 @@ export default class RespondToAppealJourneyMap extends Vue {
         this.pathHeights[index] = pathHeight;
     }
 
+    public showOrders(){
+        this.showWindow = false;
+        this.displayWindow('Orders');
+    }
+
+    public showFactums(){
+        this.showWindow = false;
+        this.displayWindow('Factum and Appeal Book');
+    }
+
     public displayWindow(contentType: string){
 
         this.noticeOfAppearanceContent = false; 
         this.noticeOfCrossAppealContent = false;
+        this.applyForLeaveToAppealContent = false;
+        this.applicationsContent = false;
         this.factumAppealBookContent = false;
+        this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
+        this.bookOfAuthoritiesContent = false;
         this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false;
+        this.contentTitle = '';
 
-        if (contentType == "Notice of Appearance"){
-            this.singlePath = true;
+        if (contentType == "Notice of Appearance"){            
             this.windowTitle = "Notice of Appearance";
-            this.pathTypes = ["share"];
-            this.pathHeights = ['28rem'];
+            this.pathTypes = ["share", "info", "info"];
+            this.pathHeights = ['14rem', '0', '0'];
             this.noticeOfAppearanceContent = true;
 
-        } else if (contentType == "Notice of Cross Appeal"){
-            this.singlePath = false;
+        } else if (contentType == "Notice of Cross Appeal"){            
             this.windowTitle = "Cross Appeal (Optional)";
             this.contentTitle = 'Were you served with any of the following documents?';
-            this.pathTypes = ["share", "info"];
-            this.pathHeights = ['15rem', '0'];
+            this.pathTypes = ["info", "share", "share", "info"];
+            this.pathHeights = ['3rem', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
-        } else if (contentType == "Factum and Appeal Book"){
-            this.singlePath = false;
-            this.windowTitle = "The Factum and Appeal Book";
-            this.contentTitle = '';
-            this.pathTypes = ["share", "info", "info", "info", "calendar"];
-            this.pathHeights = ['17rem', '0', '0', '0', '0'];
+        } else if (contentType == "Apply for Leave to Appeal") {
+            this.windowTitle = "Apply for Leave to Appeal";
+            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
+            this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
+            this.applyForLeaveToAppealContent = true;
+
+        } else if (contentType == "Applications") {
+            this.windowTitle = "Applications";
+            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
+            this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
+            this.applicationsContent = true;
+
+        } else if (contentType == "Factum and Appeal Book"){            
+            this.windowTitle = "Factum and Appeal Book";
+            this.pathTypes = ["share", "info", "info", "info"];
+            this.pathHeights = ['41rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
-        } else if (contentType == "Notice of Hearing"){
-            this.singlePath = false;
+        } else if (contentType == "Book Appeal Date"){            
+            this.windowTitle = "Book Appeal Date";
+            this.pathTypes = ["gavel", "info", "info", "info"];
+            this.pathHeights = ['7rem', '0', '0', '0'];
+            this.bookAppealDateContent = true;
+
+        } else if (contentType == "Notice of Hearing"){            
             this.windowTitle = "Notice of Hearing";
             this.pathTypes = ["question", "share"];
             this.pathHeights = ['17rem', '0'];
             this.noticeOfHearingContent = true; 
 
+        } else if (contentType == "Book of Authorities"){            
+            this.windowTitle = "Book of Authorities";
+            this.pathTypes = ["info"];
+            this.pathHeights = ['12rem'];
+            this.bookOfAuthoritiesContent = true;
         } else if (contentType == "The Hearing"){
-            this.singlePath = true;
             this.windowTitle = "The Hearing";
-            this.pathTypes = ["gavel"];
-            this.pathHeights = ['6rem'];
+            this.contentTitle = 'For more information about the hearing process, click the topics below:';
+            this.pathTypes = ["gavel", "share", "share", "share", "info"];
+            this.pathHeights = ['5rem', '0', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Court Order"){
-            this.singlePath = true;
-            this.windowTitle = "Court Order";
-            this.pathTypes = ["info"];
-            this.pathHeights = ['6rem'];
+        } else if (contentType == "Orders"){
+            this.windowTitle = "Orders";
+            this.pathTypes = ["info", "info"];
+            this.pathHeights = ['21rem', '0'];
             this.courtOrderContent = true;
 
-        } else if (contentType == "Appeal Process Complete"){
-            this.singlePath = true;
+        }else if (contentType == "Appeal Process Complete"){
             this.windowTitle = "Appeal Process Complete";
             this.pathTypes = ["info"];
             this.pathHeights = ['3rem'];

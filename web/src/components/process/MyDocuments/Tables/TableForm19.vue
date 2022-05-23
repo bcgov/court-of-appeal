@@ -282,7 +282,7 @@ export default class TableForm19 extends Vue {
    
 
     mounted() {
-        console.log('form 19s')
+        // console.log('form 19s')
         this.extractDocuments();       
     }
 

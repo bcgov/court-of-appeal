@@ -16,7 +16,7 @@
                 <div 
                     style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
                     class="p-0 text-center text-primary">
-                    Notice of Objection to Withdrawal (Form 22)
+                    Application For Order that No Fees are Payable (Form 22)
                 </div>
             </b-col>
             <b-col  cols="2">
@@ -173,7 +173,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Notice of Withdrawal of Lawyer </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Application For Order that No Fees are Payable </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
@@ -282,7 +282,7 @@ export default class TableForm22 extends Vue {
    
 
     mounted() {
-        console.log('form 22s')
+        // console.log('form 22s')
         this.extractDocuments();       
     }
 

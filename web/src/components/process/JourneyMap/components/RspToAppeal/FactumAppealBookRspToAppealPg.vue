@@ -3,7 +3,7 @@
 
         <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
-                The Factum and Appeal Book
+                Factum and Appeal Book
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -15,255 +15,354 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showFactumInfo" class="mt-4 bg-warning warning-message-row">
+        <b-row v-if="showFactumInfo" class="mt-0" >
+            <p style="padding: 0;">
+                A factum is required to be filed and served by a respondent.
+            </p>       
+        </b-row> 
+
+        <b-row v-if="showFactumInfo" class="mt-2 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill style="padding-top: 1.05rem;" class="mt-4 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
+                If you did not file a cross appeal, you need to file 
+                and serve your respondent’s factum 
+                <span class="text-danger font-weight-bold">
+                    not more than 30 days after
+                </span> 
+                being served with an appellant’s factum.<br>
+                If you did file a cross appeal, you need to file and 
+                serve a respondent’s cross appeal factum instead of 
+                a respondent’s factum 
+                <span class="text-danger font-weight-bold">
+                    not more than 30 days after
+                </span> 
+                being served with an appellant’s factum.
+            </b-col>           
+        </b-row>
+
+        <h5 class="mt-4" v-if="showFactumInfo" style="display: block;">Respondent’s Factum</h5>
+
+        <b-row v-if="showFactumInfo" class="mt-4" >
+
+            <ol>
+                <li>
+                    Prepare your factum in accordance with the Completion Instructions for factums.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    E-Completion Instructions                                           
+                                </b-col>
+                                <b-col cols="2"></b-col>                                
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('e-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                     
+                                </b-col>
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    Paper Completion Instructions                                                                       
+                                </b-col>
+                                <b-col cols="2"></b-col>                               
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('paper-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>
+                        </li>                        
+                    </ul>
+                </li>
+                <li>
+                     File with the registry.
+                </li>
+                <li>
+                    Serve one copy on each party.
+                </li>
+            </ol>
+            
+        </b-row> 
+
+        <h5 class="mt-4" v-if="showFactumInfo" style="display: block;">
+            Respondent’s Cross Appeal Factum
+        </h5>
+
+        <b-row v-if="showFactumInfo" style="width: 85%;" class="mt-4" >
+
+            <ol>
+                <li>
+                    Prepare your cross appeal factum in accordance with the Completion Instructions for factums.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    E-Completion Instructions                                           
+                                </b-col>
+                                <b-col cols="1"></b-col>                                
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('e-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                     
+                                </b-col>
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    Paper Completion Instructions                                                                       
+                                </b-col>
+                                <b-col cols="1"></b-col>                               
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('paper-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>
+                        </li>                        
+                    </ul>
+                </li>
+                <li>
+                     File with the registry.
+                </li>
+                <li>
+                    Serve one copy on each appellant.
+                </li>
+            </ol>
+            
+        </b-row>
+
+        <b-row :class="showFactumInfo?'mt-3': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Were you served with an appellant’s cross appeal response?
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showServedResponse(!showServedResponseInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">
+                    <expand-icon v-bind:showExpanded="showServedResponseInfo"></expand-icon>
+                </b-button>
+                
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showServedResponseInfo" class="mt-2" >
+            <p style="padding: 0;">
+                If you were served with an appellant’s cross appeal response, you may reply by completing the following steps.
+            </p>       
+        </b-row> 
+
+        <b-row v-if="showServedResponseInfo" class="mt-2 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
+                You may file and serve a respondent’s cross appeal reply 
+                <span class="text-danger font-weight-bold">
+                    not more than 7 days after
+                </span> 
+                being served the appellant’s cross appeal response factum.
+            </b-col>           
+        </b-row>       
+
+        <b-row v-if="showServedResponseInfo" class="mt-4">
+            <ol>
+                <li>
+                    Prepare your cross appeal reply in accordance with the Completion Instructions for factums.
+                    <ul>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    E-Completion Instructions                                           
+                                </b-col>
+                                <b-col cols="2"></b-col>                                
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('e-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                     
+                                </b-col>
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-110">
+                                <b-col cols="8">
+                                    Paper Completion Instructions                                                                       
+                                </b-col>
+                                <b-col cols="2"></b-col>                               
+                                <b-col cols="1">
+                                    <b-button
+                                        @click="downloadInstructions('paper-factum')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>
+                        </li>                        
+                    </ul>
+                </li>
+                <li>
+                     File with the registry.
+                </li>
+                <li>
+                    Serve one copy on each appellant.
+                </li>
+            </ol>
+            
+        </b-row> 
+
+        <b-row :class="showServedResponseInfo?'mt-4': 'mt-4'" :style="showServedResponseInfo?'':'padding-top: 0.85rem;'">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Appeal Book 
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showAppealBook(!showAppealBookInfo)"                                      
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showAppealBookInfo"></expand-icon>                    
+                </b-button>
+                
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showAppealBookInfo" class="mt-0" >
+            <p style="padding: 0;">
+                An appeal book contains the evidence referred to in a factum.  
+                If you have filed a factum or a cross appeal factum, and it 
+                refers to evidence which is not included in the appellant’s 
+                appeal book or a joint appeal book, you must file and serve 
+                an appeal book when you file and serve your factum or your 
+                cross appeal factum.
+            </p>       
+        </b-row>
+
+        <b-row v-if="showAppealBookInfo" class="mt-2 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                You have <span class="text-danger font-weight-bold">30 days</span> 
-                to file and serve your documents.
+                You must file your appeal book when you file and serve your 
+                cross appeal factum. 
             </b-col>           
-        </b-row>
-
-        <b-row v-if="showFactumInfo" class="mt-4" >
-            <ol>
-                <li>
-                    Complete either the .DOC or .PDF below. Click on the document names for more information.
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/respondent-guidebook/1.9-write-your-argument?ct=t(step-index-link)"
-                                        target="_blank">Factum
-                                    </a>                                    
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_respondent_Final.dotx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/CA12345_factum_appellant_respondent_Final.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/respondent-guidebook/1.10-the-appellant-may-serve-a-transcript-extract-book?ct=t(step-index-link)"
-                                        target="_blank">Optional - Transcript Extract Book
-                                    </a>
-                                    <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        v-b-tooltip.hover.html="transcriptExtractBookHelpText"/>                                    
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form13.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2013.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li>
-                            <b-row class="my-1 w-110">
-                                <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/respondent-guidebook/1.8-the-appellant-serves-an-appeal-book?ct=t(step-index-link)"
-                                        target="_blank">Optional - Appeal Book
-                                    </a> 
-                                    <b-icon-question-circle-fill 
-                                        class="text-primary"
-                                        v-b-tooltip.hover.noninteractive
-                                        v-b-tooltip.hover.html="appealBookHelpText"/>                                    
-                                </b-col>
-                                <b-col cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col cols="1" >
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="1">
-                                    <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2012.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                     File the indicated number of copies with the registry.
-                </li>
-                <li>
-                    Serve one copy to each party.
-                </li>
-            </ol>
         </b-row> 
 
-        <b-row :class="showFactumInfo?'mt-1': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" class="step-title-column pl-0">
-                The Transcript Extract Book
-            </b-col> 
-            <b-col cols="1">
-                <b-button
-                    @click="showTranscript(!showTranscriptInfo)"
-                    class="p-1 bg-white border-white expand-steps-button">
-                    <expand-icon v-bind:showExpanded="showTranscriptInfo"></expand-icon>
-                </b-button>
-                
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showTranscriptInfo" class="mt-2" >
+        <b-row v-if="showAppealBookInfo" class="mt-2" >
             <p style="padding: 0;">
-                If you are served with the appellant's Transcript Extract Book, you do not have to respond to this document.
+                If you agree with the appellant(s) that you will file a 
+                joint appeal book not more than 30 days after filing the 
+                respondent’s factum or the respondent’s cross appeal factum. 
+                If a joint appeal book is filed, this satisfies the 
+                requirement of a party to file and serve an appeal book.
             </p>       
-        </b-row> 
-
-        <b-row class="mt-4" style="padding-top: 0.85rem;">            
-            <b-col cols="11" class="step-title-column pl-0">
-                The Certificate of Readiness
-            </b-col> 
-            <b-col cols="1">
-                <b-button
-                    @click="showCertificate(!showCertificateInfo)"                                      
-                    class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showCertificateInfo"></expand-icon>                    
-                </b-button>
-                
-            </b-col>           
         </b-row>
 
-        <b-row v-if="showCertificateInfo" class="mt-2" >
+        <b-row v-if="showAppealBookInfo" class="mt-2 bg-warning warning-message-row">
+            <b-col cols="1">
+                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+            </b-col>
+            <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
+                Joint Appeal books must be filed not more than 
+                <span class="text-danger font-weight-bold">
+                    30 days
+                </span> 
+                after filing the respondent’s factum or cross appeal factum is filed.
+            </b-col>           
+        </b-row> 
 
-            <p style="padding: 0;">
-                You should have received the appellant's Certificate of Readiness immediately after receiving the Factum. 
-                If you have not received the Certificate of Readiness, contact the appellant or the registry to see if 
-                one has been filed. If a Certificate of Readiness has not been filed, and you would like the appeal to 
-                proceed, you are responsible for completing the Certificate of Readiness and submitting it immediately 
-                after your Factum.
-            </p>
+        <b-row v-if="showAppealBookInfo" class="mt-2" >
 
             <ol class="mt-1">
                 <li>
-                    Complete either the .DOC or .PDF below. Click on the document names for more information.
+                    Prepare your appeal book in accordance with the 
+                    Completion Instructions for appeal books.                                                        
                     <ul>
                         <li>
-                            <b-row style="width: 113%;" class="my-1">
+                            <b-row class="my-1 w-100">
                                 <b-col cols="8">
-                                    <a 
-                                        href="https://www.courtofappealbc.ca/respondent-guidebook/1.12-if-the-appellant-does-not-prepare-a-certificate-of-readiness?ct=t(sidebar-link)"
-                                        target="_blank">The Certificate of Readiness
-                                    </a>                                    
+                                    E-Completion Instructions                                           
                                 </b-col>
-                                <b-col class="pl-0" cols="2">
-                                    4 copies
-                                </b-col>
-                                <b-col class="pl-0" cols="1">
+                                <b-col cols="2"></b-col>                                
+                                <b-col cols="1">
                                     <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/Form%2014.docx"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">DOC
-                                    </b-button>
+                                        @click="downloadInstructions('e-appeal-book')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                                    </b-button>                                     
                                 </b-col>
-                                <b-col class="pl-0" cols="1">
+                            </b-row>
+                        </li>
+                        <li>
+                            <b-row class="my-1 w-100">
+                                <b-col cols="8">
+                                    Paper Completion Instructions                                                                       
+                                </b-col>
+                                <b-col cols="2"></b-col>                               
+                                <b-col cols="1">
                                     <b-button
-                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form14.pdf"
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
+                                        @click="downloadInstructions('paper-appeal-book')"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">DOC
                                     </b-button>                                    
                                 </b-col>
                             </b-row>
-                        </li>  
-                    </ul>  
+                        </li>
+                        
+                    </ul>                          
                 </li>
                 <li>
-                    File the indicated number of copies with the registry.
+                    File with the registry.
                 </li>
                 <li>
-                    Serve one copy to each party.
+                    Serve one copy to each appellant.
                 </li>
-            </ol>       
+            </ol>
+                   
         </b-row>  
 
-        <b-row :class="showCertificateInfo?'mt-3 pt-3': 'mt-4 pt-3'" :style="showCertificateInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showAppealBookInfo?'mt-1 pt-0': 'mt-4 pt-3'" :style="showAppealBookInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
-                A Reply to your Factum
+                What if there is disagreement about the contents of a book?
             </b-col> 
             <b-col cols="1">
                 <b-button
-                    @click="showReply(!showReplyInfo)"                                       
+                    @click="showDisagreement(!showDisagreementInfo)"                                       
                     class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showReplyInfo"></expand-icon>
+                    <expand-icon v-bind:showExpanded="showDisagreementInfo"></expand-icon>
                 </b-button>
                 
             </b-col>           
         </b-row>
 
-        <b-row v-if="showReplyInfo" class="mt-2" >
+        <b-row v-if="showDisagreementInfo" class="mt-2" >
             <p style="padding: 0;">
-                If you are served with the appellant's Reply to your Factum, you do not have to respond to this document.
+                You may apply to the registrar to settle the contents of one or more of the following:
+                <ul>
+                    <li>an appeal record</li>
+                    <li>a transcript</li>
+                    <li>an appeal book</li>
+                </ul>
+                On application, the registrar may do one or more of the following:
+                <ul>
+                    <li>settle or limit the content</li>
+                    <li>direct that a party add or remove materials</li>
+                    <li>direct that a document not be used in the appeal</li>
+                    <li>provide any other direction arising from settling the contents that may be required.</li>
+                </ul>
             </p>       
-        </b-row> 
-
-        <b-row class="mt-3" :style="showReplyInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" class="step-title-column pl-0">
-                A Notice of Hearing
-            </b-col> 
-            <b-col cols="1">
-                <b-button
-                    @click="showNotice(!showNoticeInfo)"                                       
-                    class="p-1 bg-white border-white expand-steps-button">                    
-                    <expand-icon v-bind:showExpanded="showNoticeInfo"></expand-icon>
-                </b-button>
-                
-            </b-col>           
-        </b-row>
-
-        <b-row v-if="showNoticeInfo" class="mt-3">
-            <p style="padding: 0;">
-                You should be served a Notice of Hearing from the appellant, 
-                which will tell you the date and length of your hearing. However, 
-                if you were the one who submitted the Certificate of Readiness, 
-                please click the link for more information:
-            </p>
-            <p>
-                <a 
-                    href="https://www.courtofappealbc.ca/respondent-guidebook/2.3-schedule-the-appeal-for-hearing?ct=t(step-index-link)"
-                    target="_blank">Schedule the appeal for hearing
-                </a> 
-            </p>       
-        </b-row>
+        </b-row>         
         
     </b-card>
 </template>
@@ -271,6 +370,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 
 @Component({
     components:{
@@ -280,62 +380,65 @@ import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 export default class FactumAppealBookRspToAppealPg extends Vue {
 
     showFactumInfo = true;
-    showTranscriptInfo = false;    
-    showCertificateInfo = false;
-    showReplyInfo = false;
-    showNoticeInfo = false;    
-    transcriptExtractBookHelpText = '<div>If a witness spoke at your original trial or hearing, and you mentioned this oral testimony in your Factum, you will need to complete a Transcript Extract Book.</div>';
-    appealBookHelpText = '<div>If you would like to provide information that is not included in the appellant’s Appeal Book, please complete your own Appeal Book.</div>';
-
+    showServedResponseInfo = false;    
+    showAppealBookInfo = false;
+    showDisagreementInfo = false;
+    
     public showFactum(show: boolean){
         if (show) {
             this.showFactumInfo = true;
-            this.$emit('adjustHeights', 0, "17rem");
+            this.$emit('adjustHeights', 0, "41rem");
         } else {
             this.showFactumInfo = false;
             this.$emit('adjustHeights', 0, "0");
         }
     }
 
-    public showTranscript(show: boolean){
+    public showServedResponse(show: boolean){
         if (show) {
-            this.showTranscriptInfo = true;
-            this.$emit('adjustHeights', 1, "3rem");
+            this.showServedResponseInfo = true;
+            this.$emit('adjustHeights', 1, "20rem");
         } else {
-            this.showTranscriptInfo = false;
+            this.showServedResponseInfo = false;
             this.$emit('adjustHeights', 1, "0");
         }
     }
 
-     public showCertificate(show: boolean){
+     public showAppealBook(show: boolean){
         if (show) {
-            this.showCertificateInfo = true;
-            this.$emit('adjustHeights', 2, "16rem");
+            this.showAppealBookInfo = true;
+            this.$emit('adjustHeights', 2, "31rem");
         } else {
-            this.showCertificateInfo = false;
+            this.showAppealBookInfo = false;
             this.$emit('adjustHeights', 2, "0");
         }
     }
 
-    public showReply(show: boolean){
+    public showDisagreement(show: boolean){
         if (show) {
-            this.showReplyInfo = true;
-            this.$emit('adjustHeights', 3, "2rem");
+            this.showDisagreementInfo = true;
+            this.$emit('adjustHeights', 3, "16rem");
         } else {
-            this.showReplyInfo = false;
+            this.showDisagreementInfo = false;
             this.$emit('adjustHeights', 3, "0");
         }
     }
 
-    public showNotice(show: boolean){
-        if (show) {
-            this.showNoticeInfo = true;
-            this.$emit('adjustHeights', 4, "8rem");
-        } else {
-            this.showNoticeInfo = false;
-            this.$emit('adjustHeights', 4, "0");
-        }
-    }  
+    public downloadInstructions(pdf_name){
+
+        GetInstructionFile(pdf_name);
+        
+    }
+
+    // public showNotice(show: boolean){
+    //     if (show) {
+    //         this.showNoticeInfo = true;
+    //         this.$emit('adjustHeights', 4, "8rem");
+    //     } else {
+    //         this.showNoticeInfo = false;
+    //         this.$emit('adjustHeights', 4, "0");
+    //     }
+    // }  
 
 }
 </script>
