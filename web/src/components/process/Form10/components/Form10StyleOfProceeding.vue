@@ -900,11 +900,12 @@ export default class Form10StyleOfProceeding extends Vue {
         this.state.dateOfJudgement = this.form10Info.dateOfJudgement? null: false;
         
         this.state.judgmentReserved = this.form10Info.judgmentReserved == true || this.form10Info.judgmentReserved ==false? null :false; 
-        this.state.hearingHeldDate = this.form10Info.hearingHeldDate? null :false;
-        this.state.reasonsIndicated = this.form10Info.reasonsIndicated == true || this.form10Info.reasonsIndicated ==false? null :false; 
-        this.state.reasonsDate = this.form10Info.reasonsDate? null :false;
+        this.state.hearingHeldDate = this.form10Info.judgmentReserved && !this.form10Info.hearingHeldDate? false:null;
         
-        this.state.applicationFor = this.form10Info.applicationFor? null :false
+        this.state.reasonsIndicated = this.form10Info.reasonsIndicated == true || this.form10Info.reasonsIndicated ==false? null :false; 
+        this.state.reasonsDate = this.form10Info.reasonsIndicated && !this.form10Info.reasonsDate? false: null;
+        
+        this.state.applicationFor = this.applicationFor? null :false
         this.state.applicationForOther = this.applicationFor=='other' && !this.applicationForOther? false :null
 
         this.state.ordersJusticeMake = this.form10Info.ordersJusticeMake? null :false
@@ -945,7 +946,7 @@ export default class Form10StyleOfProceeding extends Vue {
                 data: {
                     data:this.form10Info,
                     type:'Form10',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order of a single justice'
                 }
             }
             this.saveInfo(options, draft);
@@ -957,7 +958,7 @@ export default class Form10StyleOfProceeding extends Vue {
                 data: {
                     data:this.form10Info,
                     type:'Form10',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order of a single justice'
                 }
             }
             this.saveInfo(options, draft);
