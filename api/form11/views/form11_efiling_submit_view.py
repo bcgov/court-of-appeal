@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseNotFound, HttpRe
 from django.http.response import Http404
 from django.utils import timezone
 
-from form12.models import OrderToVaryOrderOfJustice, FormPdf
+from form11.models import OrderOfThreeJustices, FormPdf
 
 from rest_framework import permissions, generics
 from rest_framework.exceptions import NotFound
@@ -23,7 +23,7 @@ no_record_found = "No record found."
 
 
 
-class Form12EFilingSubmitView(generics.GenericAPIView):
+class Form11EFilingSubmitView(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def __init__(self):
@@ -32,23 +32,23 @@ class Form12EFilingSubmitView(generics.GenericAPIView):
 
     # """ This inserts our generated file, iterates over files and converts to PDF if necessary. """
 
-    def get_order_to_vary_order_of_justice_for_user(self, order_to_vary_order_of_justice_id, uid):
+    def get_order_of_three_justices_for_user(self, order_of_three_justices_id, uid):
         try:
-            order_to_vary_order_of_justice_query = OrderToVaryOrderOfJustice.objects.get(id=order_to_vary_order_of_justice_id, user_id=uid)
-            return order_to_vary_order_of_justice_query
-        except (OrderToVaryOrderOfJustice.DoesNotExist):
+            order_of_three_justices_query = OrderOfThreeJustices.objects.get(id=order_of_three_justices_id, user_id=uid)
+            return order_of_three_justices_query
+        except (OrderOfThreeJustices.DoesNotExist):
             logger.debug(no_record_found)
             return
 
 
-    def _get_pdf_content(self, order_to_vary_order_of_justice, document_type):
+    def _get_pdf_content(self, order_of_three_justices, document_type):
         outgoing_documents = [] 
         #Modify If more than one form type exist in the future       
         
         current_document_type = "FORM"
         try:                      
             prepared_pdf = FormPdf.objects.get(
-                order_to_vary_order_of_justice_id=order_to_vary_order_of_justice.id, pdf_type=f"{current_document_type}"
+                order_of_three_justices_id=order_of_three_justices.id, pdf_type=f"{current_document_type}"
             )
         except FormPdf.DoesNotExist:
             raise NotFound(
@@ -62,13 +62,13 @@ class Form12EFilingSubmitView(generics.GenericAPIView):
                 prepared_pdf.key_id, prepared_pdf.json_data
             ).decode("utf-8")
         )
-        document_json.update({"applicationId": order_to_vary_order_of_justice.id})
+        document_json.update({"applicationId": order_of_three_justices.id})
 
         
         outgoing_documents.append(
             {
                 "type": f"{document_type}",
-                "name": "form12.pdf",
+                "name": "form11.pdf",
                 "file_data": pdf_content,
                 "data": document_json,
                 "md5": hashlib.md5(pdf_content).hexdigest(),
@@ -77,46 +77,46 @@ class Form12EFilingSubmitView(generics.GenericAPIView):
         return outgoing_documents
 
 
-    def put(self, request, order_to_vary_order_of_justice_id):
+    def put(self, request, order_of_three_justices_id):
         uid = request.user.id
         body = request.data
 
-        order_to_vary_order_of_justice = self.get_order_to_vary_order_of_justice_for_user(order_to_vary_order_of_justice_id, uid)
-        if not order_to_vary_order_of_justice:        
+        order_of_three_justices = self.get_order_of_three_justices_for_user(order_of_three_justices_id, uid)
+        if not order_of_three_justices:        
             return HttpResponseNotFound("no record found")
 
-        if not order_to_vary_order_of_justice.submission_id or  not order_to_vary_order_of_justice.transaction_id:
+        if not order_of_three_justices.submission_id or  not order_of_three_justices.transaction_id:
             return HttpResponseNotFound("no record found")
 
-        order_to_vary_order_of_justice.package_number = body.get("packageNumber")
-        order_to_vary_order_of_justice.package_url = body.get("packageUrl")
-        order_to_vary_order_of_justice.status="Submitted"
-        order_to_vary_order_of_justice.last_filed = timezone.now()
-        order_to_vary_order_of_justice.save()
+        order_of_three_justices.package_number = body.get("packageNumber")
+        order_of_three_justices.package_url = body.get("packageUrl")
+        order_of_three_justices.status="Submitted"
+        order_of_three_justices.last_filed = timezone.now()
+        order_of_three_justices.save()
         return HttpResponse(status=204)
 
 
-    def post(self, request, order_to_vary_order_of_justice_id):
+    def post(self, request, order_of_three_justices_id):
         
-        document_type = "UNKNOWN" # type Form12 for Efiling
+        document_type = "UNKNOWN" # type Form11 for Efiling
         uid = request.user.id
 
-        order_to_vary_order_of_justice = self.get_order_to_vary_order_of_justice_for_user(order_to_vary_order_of_justice_id, uid)        
-        if not order_to_vary_order_of_justice:
+        order_of_three_justices = self.get_order_of_three_justices_for_user(order_of_three_justices_id, uid)        
+        if not order_of_three_justices:
             return HttpResponseNotFound("no record found")
 
-        if order_to_vary_order_of_justice.package_number or order_to_vary_order_of_justice.package_url: 
+        if order_of_three_justices.package_number or order_of_three_justices.package_url: 
             return JsonMessageResponse("This application has already been submitted.", status=500)
 
-        outgoing_documents = self._get_pdf_content(order_to_vary_order_of_justice, document_type)               
+        outgoing_documents = self._get_pdf_content(order_of_three_justices, document_type)               
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
-            request, order_to_vary_order_of_justice, outgoing_documents, document_type
+            request, order_of_three_justices, outgoing_documents, document_type
         )
         
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())
-        order_to_vary_order_of_justice.transaction_id = transaction_id
-        order_to_vary_order_of_justice.save()
+        order_of_three_justices.transaction_id = transaction_id
+        order_of_three_justices.save()
 
         outgoing_files = convert_document_to_multi_part(outgoing_documents)
         del outgoing_documents
@@ -140,9 +140,9 @@ class Form12EFilingSubmitView(generics.GenericAPIView):
         )
 
         if redirect_url is not None:
-            order_to_vary_order_of_justice.submission_id = submission_id 
-            order_to_vary_order_of_justice.last_filed = timezone.now()            
-            order_to_vary_order_of_justice.save()
+            order_of_three_justices.submission_id = submission_id 
+            order_of_three_justices.last_filed = timezone.now()            
+            order_of_three_justices.save()
 
             return JsonResponse({"redirectUrl": redirect_url, "message": message})
 
