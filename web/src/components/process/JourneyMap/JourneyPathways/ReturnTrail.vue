@@ -8,6 +8,7 @@
                 zIndex: '10'
             }"
             :circling="status == 'completed'"
+            :extendEnd="extendEnd"
         />
         <Trail
             :style="{
@@ -69,6 +70,9 @@ export default class ReturnTrail extends Vue {
 
     @Prop({required: false})
     top!: string;
+
+    @Prop({required: false})
+    extendEnd!: boolean;
 
 
 

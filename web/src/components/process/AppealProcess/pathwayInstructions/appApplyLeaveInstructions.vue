@@ -14,7 +14,7 @@
             to appeal, but need to follow the instructions under 
             <a  @click="startNewForm4Document"
                 target="_blank"
-                style="text-decoration: underline; color: blue;">
+                style="text-decoration: underline; color: blue; cursor:pointer;">
                 Notice of Application
             </a> and 
             <a>
