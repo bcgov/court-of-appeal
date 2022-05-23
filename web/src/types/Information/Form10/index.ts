@@ -60,19 +60,30 @@ export interface form10DataInfoType {
     judgeNames: judgeInfoType[]; 
     hearingLocation: hearingLocationsInfoType;   
     dateOfJudgement: string;
-    applyingParties: form10PartiesInfoType[]; 
-    varyingOrderJudgeName: string;
-    varyingOrderJudgeNameOther: string
-    varyingOrderDate: string;
+    
     filingParties: form10PartiesInfoType[];
     appearingParties: form10PartiesInfoType[];
-    orderAllowed: boolean;
+    
+    judgmentReserved: boolean;
+    hearingHeldDate: string;
+    
+    reasonsIndicated: boolean;
+    reasonsDate: string;
+
     otherOrders: boolean;
     furtherOrders?: string;
-    authorizedName: string;
+
+    applicationFor: applicationForInfoType;
+    ordersJusticeMake: string;
+
     completionDate?: string;
     version?: string;
     previousCourts?: previousCourtJsonInfoType;
+}
+
+export interface applicationForInfoType{
+    name: string;
+    other: string;
 }
 
 export interface judgeInfoType {   

@@ -171,16 +171,15 @@
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>   
 <!-- <JudgeNames> -->
-            <b-card class="mb-4 bg-white border-white text-dark"> 
+            <b-card class="mb-4 mt-5 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
                         <b-col cols="10" :class="state.judgeNames !=null?'border border-danger':''">
                             <b-form-group
                                 class="labels"                
-                                label="Provide the names of the justices who heard the application:">
+                                label="Provide the name of the justice who heard the application:">
                                 <p class="content text-primary">
-                                    <b>Note:</b> Justices’ names must be set out in the same order 
-                                    as the reasons for Judgment.
+                                    <b>Note:</b> <i>Name of chambers justice</i>
                                 </p>                                 
                                 <div 
                                     v-if="form10Info.judgeNames && form10Info.judgeNames.length == 0 && !AddNewJudgeNamesForm"                                      
@@ -239,7 +238,7 @@
                         <b-col>           
                             <b-button 
                                 style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
-                                v-if="!AddNewJudgeNamesForm" 
+                                v-if="!AddNewJudgeNamesForm && form10Info.judgeNames.length<1" 
                                 size="sm" 
                                 variant="court" 
                                 @click="addNewJudgeNames">
@@ -298,7 +297,10 @@
 <!-- Date of Judgment -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    What was the date of the judgment?                    
+                    What was the date of the judgment?
+                    <div class="content text-primary font-italic">
+                        Date reserve judgment was released or, if judgment not reserved, the date when the judgment was given in court
+                    </div>                    
                 </b-col>
                 <b-col>                   
                     <b-card                                                
@@ -317,200 +319,212 @@
                     </b-card>                    
                 </b-col>
             </b-row>
-<!-- <ApplyingParties-Who Made Application to VARY ORDER> -->
+
+<!-- <Judgment Reserved> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Who made the application to vary the order of a justice?                                
+                    Was judgment reserved?
+                </b-col>
+                <b-col class="ml-1">   
+                    <b-form-radio-group                                                           
+                        :class="state.judgmentReserved==false?'border border-danger w-50':''"                                      
+                        v-model="form10Info.judgmentReserved">
+                        <b-form-radio :value="true"> Yes </b-form-radio>
+                        <b-form-radio :value="false"> No </b-form-radio>
+                    </b-form-radio-group> 
+                </b-col>
+            </b-row>
+  
+<!-- <Hearing Held Date> -->
+            <b-row class="mt-4 question" v-if="form10Info.judgmentReserved">
+                <b-col cols="7" class="labels">
+                    When was the hearing held?
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.hearingHeldDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form10Info.hearingHeldDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
+
+<!-- <Reasons for Judgment Indicated> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Did the justice indicate that reasons for judgment were to follow?                
+                </b-col>
+                <b-col class="ml-1">   
+                    <b-form-radio-group                      
+                        :class="state.reasonsIndicated==false?'border border-danger w-50':''"                                      
+                        v-model="form10Info.reasonsIndicated">
+                        <b-form-radio :value="true"> Yes </b-form-radio>
+                        <b-form-radio :value="false"> No </b-form-radio>
+                    </b-form-radio-group> 
+                </b-col>
+            </b-row>
+  
+<!-- <Reasons Date> -->
+            <b-row class="mt-4 question" v-if="form10Info.reasonsIndicated">
+                <b-col cols="7" class="labels">
+                    What date did the justice indicate that reasons for judgment were to follow?
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.reasonsDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form10Info.reasonsDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
+
+
+<!-- <FilingParties-Made Application> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Who made the application?                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
                         stacked
-                        @change="applyingPartiesChanged()"               
-                        style="width:100%"                        
-                        :state="state.applyingParties"                                      
-                        v-model="form10Info.applyingParties">
+                        @change="filingPartiesChanged()"         
+                        :state="state.filingParties"                                      
+                        v-model="form10Info.filingParties">
                         <b-form-checkbox
-                            :value="partyname" 
-                            v-for="partyname,inx in partyNames" 
-                            :key="'party-made-app-'+inx">
-                            {{partyname.name}}
+                            :value="applyingparty"
+                            v-for="applyingparty,inx in partyNames"
+                            :key="'appling-party-'+inx">
+                                {{applyingparty.name}}
                         </b-form-checkbox>
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row> 
-            <!-- {{form10Info.applyingParties}}    -->
+            <!-- {{form10Info.filingParties}} -->
 
-            <div v-if="this.form10Info.judgeNames && this.form10Info.judgeNames.length>0 && form10Info.applyingParties.length > 0">   
-<!-- <Who Made Order-VaryOrderJudgeName> -->
+            <div v-if="form10Info.filingParties && form10Info.filingParties.length > 0">
+<!-- <Appearing Partie -Attended Hearing> -->
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
-                        Who made the order that you were seeking to vary?                                
-                    </b-col>
-                    <b-col class="ml-1">   
-                        <b-form-select 
-                            stacked               
-                            style="width:100%"                                    
-                            v-model="form10Info.varyingOrderJudgeName"
-                            text-field="text"
-                            value-field="text"                    
-                            :options="justiceNameOptions">                            
-                        </b-form-select>
-                        <b-row v-if="form10Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
-                            <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
-                            <div style="width:74%;">
-                                <b-form-input 
-                                    style="margin-top:0.5rem;"                                
-                                    :state="state.varyingOrderJudgeNameOther"
-                                    v-model="form10Info.varyingOrderJudgeNameOther" 
-                                />
-                            </div>
-                        </b-row> 
-                        <span
-                            v-if="(state.varyingOrderJudgeName != null)" 
-                            style="font-size: 0.75rem;" 
-                            class="bg-white text-danger"><b-icon-exclamation-circle/>
-                            Specify who made the order that you were seeking to vary.
-                        </span>
-                    </b-col>
-                </b-row>   
-<!-- <Date of Order> -->
-                <b-row class="mt-4 question">
-                    <b-col cols="7" class="labels">
-                        What was the date of the order that were seeking to vary?                    
-                    </b-col>
-                    <b-col>                   
-                        <b-card                        
-                            class="mt-2" 
-                            style="padding: 0; float: center;" 
-                            :border-variant="state.varyingOrderDate == false?'danger': 'muted'">
-                            <div class="vuetify">
-                                <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                    <v-date-picker
-                                        v-model="form10Info.varyingOrderDate"                           
-                                        color="warning"             
-                                        :allowed-dates="allowedDates"                            
-                                        header-color="red"
-                                    ></v-date-picker>                            
-                                </v-app>
-                            </div>    
-                        </b-card>                    
-                    </b-col>
-                </b-row>
-<!-- <FilingParties-Made Application> -->
-                <b-row class="mt-4 question">
-                    <b-col cols="7" class="labels">
-                        Who made the application?                                
+                        Enter the names of parties who attended at the hearing:
+                        <div class="content text-primary font-italic">
+                            Ensure you enter the name of the lawyer who attended the hearing.
+                        </div>                                
                     </b-col>
                     <b-col class="ml-1">   
                         <b-form-checkbox-group 
-                            stacked
-                            @change="filingPartiesChanged()"               
+                            stacked                                               
                             style="width:100%"                        
-                            :state="state.filingParties"                                      
-                            v-model="form10Info.filingParties">
-                            <b-form-checkbox
-                                :value="applyingparty"
-                                v-for="applyingparty,inx in form10Info.applyingParties"
+                            :state="state.appearingParties"                                      
+                            v-model="form10Info.appearingParties">
+                            <div v-for="filingparty,inx in getFilingParties()"
                                 :key="'appling-party-'+inx">
-                                    {{applyingparty.name}}
-                            </b-form-checkbox>
+                                <b-form-checkbox
+                                    :value="filingparty">
+                                        {{filingparty.name}}
+                                </b-form-checkbox>                                    
+                            </div>
                         </b-form-checkbox-group> 
                     </b-col>
-                </b-row> 
-                <!-- {{form10Info.filingParties}} -->
+                </b-row>
+                <!-- {{form10Info.appearingParties}} -->
 
-                <div v-if="form10Info.filingParties && form10Info.filingParties.length > 0 && form10Info.varyingOrderJudgeName">
-<!-- <Appearing Partie -Attended Hearing> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Enter the names of parties who attended at the hearing:                                
-                        </b-col>
-                        <b-col class="ml-1">   
-                            <b-form-checkbox-group 
-                                stacked                                               
-                                style="width:100%"                        
-                                :state="state.appearingParties"                                      
-                                v-model="form10Info.appearingParties">
-                                <div v-for="filingparty,inx in getFilingParties"
-                                    :key="'appling-party-'+inx">
-                                    <b-form-checkbox
-                                        :value="filingparty">
-                                            {{filingparty.name}}
-                                    </b-form-checkbox>                                    
-                                </div>
-                            </b-form-checkbox-group> 
-                        </b-col>
-                    </b-row>
-                    <!-- {{form10Info.appearingParties}} -->
-<!-- <Order Allowed> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            The application to vary the order of {{form10Info.varyingOrderJudgeName}} was:
-                        </b-col>
-                        <b-col class="ml-1 mt-2">
-                            <b-form-radio-group
-                                :state="state.orderAllowed"                 
-                                v-model="form10Info.orderAllowed"
-                                :options="allowedOptions"                
-                            ></b-form-radio-group>
-                            <span
-                                v-if="(state.orderAllowed != null)" 
-                                style="font-size: 0.75rem;" 
-                                class="bg-white text-danger"><b-icon-exclamation-circle/>
-                                Specify whether the order was allowed or dismissed.
-                            </span>
-                        </b-col>
-                    </b-row>
+<!-- <Application For> -->
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
+                        What was the application for?
+                    </b-col>
+                    <b-col class="ml-1 mt-2">
+                         <b-form-select
+                            v-model="applicationFor"
+                            @change="updateApplicationFor"
+                            :state ="state.applicationFor"                   
+                            :options="applicationList">
+                         </b-form-select>
+                        <b-row v-if="applicationFor == 'other'" class="m-0 p-0">
+                            <div style="width:39%;" class="mt-3 ml-1">Please specify:</div>
+                            <div style="width:60%;">
+                                <b-form-input
+                                    :state="state.applicationForOther"
+                                    class="mt-2"
+                                    @change="updateApplicationFor"                                    
+                                    v-model="applicationForOther">
+                                </b-form-input>
+                            </div>
+                        </b-row>                       
+                    </b-col>
+                </b-row>
+
+<!-- <Orders Justice Make> -->
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
+                        What orders did the justice make?
+                    </b-col>
+                    <b-col class="ml-1 mt-2">                         
+                        <div>
+                            <b-form-input
+                                :state="state.ordersJusticeMake"
+                                class="mt-2"                                    
+                                v-model="form10Info.ordersJusticeMake">
+                            </b-form-input>
+                        </div>                                             
+                    </b-col>
+                </b-row>
+
 <!-- <Other Order> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Did the Justices’ make any other orders?
-                        </b-col>
-                        <b-col class="ml-1 mt-2">
-                            <b-form-radio-group                                              
-                                v-model="form10Info.otherOrders"
-                                :options="responseOptions"                
-                            ></b-form-radio-group>
-                            <span
-                                v-if="(state.otherOrders != null)" 
-                                style="font-size: 0.75rem;" 
-                                class="bg-white text-danger"><b-icon-exclamation-circle/>
-                                Specify whether the Justices’ made any other orders.
-                            </span>
-                        </b-col>
-                    </b-row>
+                <b-row class="mt-4 question">
+                    <b-col cols="7" class="labels">
+                        Were there any other orders made (ie. costs)?
+                    </b-col>
+                    <b-col class="ml-1 mt-2">
+                        <b-form-radio-group                                              
+                            v-model="form10Info.otherOrders"
+                            :options="yesNoOptions"                
+                        ></b-form-radio-group>
+                        <span
+                            v-if="(state.otherOrders != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify whether any other orders made.
+                        </span>
+                    </b-col>
+                </b-row>
 <!-- <Other Order Details> -->
-                    <b-row v-if="form10Info.otherOrders" class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Enter the other orders that the Justices' made:                                                            
-                        </b-col>
-                        <b-col>                    
-                            <b-form-textarea                
-                                style="width:100%" 
-                                rows="6"  
-                                :state="state.furtherOrders"                                                          
-                                v-model="form10Info.furtherOrders">
-                            </b-form-textarea>                    
-                        </b-col>                
-                    </b-row>
-                </div>
-
-            </div>  
+                <b-row v-if="form10Info.otherOrders" class="mt-4 question">
+                    <b-col cols="7" class="labels">
+                        Enter the other orders that were made:                                                            
+                    </b-col>
+                    <b-col>                    
+                        <b-form-textarea                
+                            style="width:100%" 
+                            rows="6"  
+                            :state="state.furtherOrders"                                                          
+                            v-model="form10Info.furtherOrders">
+                        </b-form-textarea>                    
+                    </b-col>                
+                </b-row>
+            </div>           
 
         </div>          
-<!-- <Authorizing Name> -->
-        <!-- <b-row class="my-3 question" style="padding: 0;">
-            <b-col cols="7" class="labels">
-                Name of lawyer or party authorizing filing of this Form:                                
-            </b-col>
-            <b-col>
-                <b-form-input                    
-                    v-model="form10Info.authorizedName"                        
-                    :state ="state.authorizedName">
-                </b-form-input>
-                <div class="ml-2 mt-1" style="font-weight: 600; font-size:11pt;">Electronically filed</div>
-            </b-col>
-        </b-row>             -->
 
         <hr class="mt-5"/>    
 
@@ -564,7 +578,7 @@ import "@/store/modules/forms/form10";
 const form10State = namespace("Form10");
 
 
-import { form10DataInfoType, form10PartiesInfoType } from '@/types/Information/Form10';
+import { applicationForInfoType, form10DataInfoType, form10PartiesInfoType } from '@/types/Information/Form10';
 import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
@@ -607,9 +621,7 @@ export default class Form10StyleOfProceeding extends Vue {
     public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
     
     dataReady = false;
-    updated=0; 
-    updateOrderDetails = 0;
-    orderDateValue = '';
+    updated=0;  
   
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
@@ -629,17 +641,16 @@ export default class Form10StyleOfProceeding extends Vue {
     hearingLocation = "";
     otherHearingLocation = "";
 
+    applicationFor ="";
+    applicationForOther="";
+
     partyToEdit = {} as form10PartiesInfoType;
     showPartyWindow = false
     isCreate = true
     partyType = ''
 
-    allowedOptions = [
-        {text: 'Allowed', value: true},
-        {text: 'Dismissed', value: false}
-    ];
 
-    responseOptions = [
+    yesNoOptions = [
         {text: 'Yes', value: true},
         {text: 'No', value: false}
     ]; 
@@ -673,6 +684,24 @@ export default class Form10StyleOfProceeding extends Vue {
         { key:'edit', label:'', thClass: 'text-white bg-court', sortable:false}
     ]
 
+    applicationList = [
+        'adjournment',
+        'adducing fresh or new evidence',
+        'to consolidate or have appeals heard together',
+        'directions',
+        'dismissal of appeal in chambers',
+        'dismissal (other)',
+        'extend time to file books or documents',
+        'extend time to appeal or cross-appeal',
+        'intervener status',       
+        'payment of security',
+        'quashing an appeal or raising a preliminary objection',
+        'reinstate appeal that is dismissed as abandoned',
+        'remove appeal from the inactive list',       
+        'varying or cancelling an order of the registrar',
+        'other'
+    ];
+
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
@@ -680,13 +709,15 @@ export default class Form10StyleOfProceeding extends Vue {
         hearingLocation: null,
         hearingLocationOther: null,     
         dateOfJudgement: null,
-        applyingParties: null,   
-        varyingOrderJudgeName: null,
-        varyingOrderJudgeNameOther: null,
-        varyingOrderDate: null,
+        judgmentReserved: null,
+        hearingHeldDate:null,
+        reasonsIndicated: null,
+        reasonsDate: null,
+        applicationFor: null,
+        applicationForOther: null,
+        ordersJusticeMake: null,
         filingParties: null,
         appearingParties: null,
-        orderAllowed: null,
         otherOrders: null,
         furtherOrders: null,
         authorizedName: null
@@ -713,49 +744,21 @@ export default class Form10StyleOfProceeding extends Vue {
 
             const form10Data = this.form10Info;            
             form10Data.version = this.$store.state.Application.version;
-            form10Data.applyingParties = [];
+
             form10Data.judgeNames = [];
             form10Data.appellants = this.partiesJson.appellants
             form10Data.respondents = this.partiesJson.respondents
             form10Data.formSevenNumber = this.fileNumber; 
             form10Data.appearingParties = [];
-            form10Data.applyingParties = [];
+            form10Data.applicationFor= {} as applicationForInfoType;
             form10Data.filingParties = [];           
             form10Data.previousCourts = this.currentOrder;
             this.UpdateForm10Info(form10Data);
             this.initHearingLocation()
             this.revaluateForm10Data()
-            this.extractJudgeNames()
             this.saveForm(true);
         }          
     }
-
-    public extractJudgeNames(){
-        const currentOrder = this.form10Info.previousCourts
-        const judgeName = (
-            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
-            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
-        ).trim()
-
-        if(judgeName){
-            const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
-            if(justiceIndex>-1){
-                this.form10Info.varyingOrderJudgeName=justiceNames[justiceIndex]
-                this.form10Info.varyingOrderJudgeNameOther=''
-            }
-            else{
-                this.form10Info.varyingOrderJudgeName='Other'
-                this.form10Info.varyingOrderJudgeNameOther=judgeName
-            }
-            this.form10Info.varyingOrderDate= currentOrder.JudgmentDate.slice(0,10)            
-        }
-        else{
-            this.form10Info.varyingOrderJudgeName='';
-            this.form10Info.varyingOrderJudgeNameOther='';
-            this.form10Info.varyingOrderDate='';
-        }
-        this.UpdateForm10Info(this.form10Info);
-    } 
 
     public extractHearingLocations(){
         this.hearingLocationList = [];
@@ -787,6 +790,24 @@ export default class Form10StyleOfProceeding extends Vue {
         } else if (this.hearingLocation != 'Other') {
             form10.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.hearingLocation)[0]
         }  
+        
+        this.UpdateForm10Info(form10);
+    }
+
+    public initApplicationFor(){
+        this.applicationFor = this.form10Info.applicationFor?.name
+        this.applicationForOther = this.form10Info.applicationFor?.other
+    }
+
+    public updateApplicationFor(){ 
+              
+        const form10 = this.form10Info;       
+        form10.applicationFor = {} as applicationForInfoType;
+       
+        if(this.applicationFor == 'other')
+            form10.applicationFor = { name:this.applicationFor, other:this.applicationForOther}
+        else
+            form10.applicationFor = { name:this.applicationFor, other:''}
         
         this.UpdateForm10Info(form10);
     }
@@ -835,8 +856,8 @@ export default class Form10StyleOfProceeding extends Vue {
                 this.UpdateForm10Info(form10Data);
                 this.revaluateForm10Data()
                 this.initHearingLocation()
-                this.clearStates();
-                this.extractJudgeNames()                
+                this.initApplicationFor()
+                this.clearStates();             
             }                
         },(err) => {
             console.log(err)        
@@ -850,14 +871,16 @@ export default class Form10StyleOfProceeding extends Vue {
             judgeNames: null,        
             hearingLocation: null,
             hearingLocationOther: null,     
-            dateOfJudgement: null,
-            applyingParties: null,   
-            varyingOrderJudgeName: null,
-            varyingOrderJudgeNameOther: null,
-            varyingOrderDate: null,
+            dateOfJudgement: null,      
+            judgmentReserved: null,
+            hearingHeldDate:null,
+            reasonsIndicated: null,
+            reasonsDate: null,
+            applicationFor: null,
+            applicationForOther: null,
+            ordersJusticeMake: null,
             filingParties: null,
             appearingParties: null,
-            orderAllowed: null,
             otherOrders: null,
             furtherOrders: null,
             authorizedName: null
@@ -875,17 +898,25 @@ export default class Form10StyleOfProceeding extends Vue {
         this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null
         
         this.state.dateOfJudgement = this.form10Info.dateOfJudgement? null: false;
-        this.state.applyingParties = this.form10Info.applyingParties?.length>0? null :false;
-        this.state.varyingOrderJudgeName = this.form10Info.varyingOrderJudgeName? null :false;
-        this.state.varyingOrderJudgeNameOther = this.form10Info.varyingOrderJudgeName=='Other' && !this.form10Info.varyingOrderJudgeNameOther? false: null;
-        this.state.varyingOrderDate = this.form10Info.varyingOrderDate? null :false;
+        
+        this.state.judgmentReserved = this.form10Info.judgmentReserved == true || this.form10Info.judgmentReserved ==false? null :false; 
+        this.state.hearingHeldDate = this.form10Info.judgmentReserved && !this.form10Info.hearingHeldDate? false:null;
+        
+        this.state.reasonsIndicated = this.form10Info.reasonsIndicated == true || this.form10Info.reasonsIndicated ==false? null :false; 
+        this.state.reasonsDate = this.form10Info.reasonsIndicated && !this.form10Info.reasonsDate? false: null;
+        
+        this.state.applicationFor = this.applicationFor? null :false
+        this.state.applicationForOther = this.applicationFor=='other' && !this.applicationForOther? false :null
+
+        this.state.ordersJusticeMake = this.form10Info.ordersJusticeMake? null :false
+
         this.state.filingParties = this.form10Info.filingParties?.length>0? null :false;
         this.state.appearingParties = this.form10Info.appearingParties?.length>0? null :false;
-        this.state.orderAllowed = this.form10Info.orderAllowed == true || this.form10Info.orderAllowed ==false? null :false;
+        
         this.state.otherOrders = this.form10Info.otherOrders == true || this.form10Info.otherOrders ==false? null :false;
         this.state.furtherOrders = this.form10Info.otherOrders == true && !this.form10Info.furtherOrders? false :null
 
-        this.state.authorizedName = !this.form10Info.authorizedName? false : null;       
+       
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -915,7 +946,7 @@ export default class Form10StyleOfProceeding extends Vue {
                 data: {
                     data:this.form10Info,
                     type:'Form10',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order of a single justice'
                 }
             }
             this.saveInfo(options, draft);
@@ -927,7 +958,7 @@ export default class Form10StyleOfProceeding extends Vue {
                 data: {
                     data:this.form10Info,
                     type:'Form10',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order of a single justice'
                 }
             }
             this.saveInfo(options, draft);
@@ -1080,13 +1111,6 @@ export default class Form10StyleOfProceeding extends Vue {
     }
 
     public somePartiesChanged(){
-        this.form10Info.applyingParties=[]
-        this.form10Info.filingParties=[]
-        this.form10Info.appearingParties=[]
-        this.updated++;
-    }
-
-    public applyingPartiesChanged(){
         this.form10Info.filingParties=[]
         this.form10Info.appearingParties=[]
         this.updated++;
@@ -1097,7 +1121,7 @@ export default class Form10StyleOfProceeding extends Vue {
         this.updated++;
     }
 
-    get getFilingParties(){
+    public getFilingParties(){
         const filingParties=[]
             for(const party of this.form10Info.filingParties){
                 filingParties.push(party)                
