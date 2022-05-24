@@ -38,3 +38,4 @@ if (os.getenv('DJANGO_SETTINGS_MODULE') == "api.settings"):
     urlpatterns.append(path("api/v1/", include("form12.urls")))
     urlpatterns.append(path("api/v1/", include("form22.urls")))
     urlpatterns.append(path("api/v1/", include("form10.urls")))
+    urlpatterns.append(path("api/v1/", include("form11.urls")))

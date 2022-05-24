@@ -98,7 +98,7 @@ class Form10EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, order_of_single_justice_id):
         
-        document_type = "UNKOWN" # type Form10 for Efiling
+        document_type = "UNKNOWN" # type Form10 for Efiling
         uid = request.user.id
 
         order_of_single_justice = self.get_order_of_single_justice_for_user(order_of_single_justice_id, uid)        

@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-12-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-11-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
@@ -52,8 +52,6 @@
             </b-row>
 
         </b-card>
-
-        
     </b-card>
 </template>
 
@@ -61,24 +59,24 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { namespace } from "vuex-class";
-import "@/store/modules/forms/form12";
-const form12State = namespace("Form12");
+import "@/store/modules/forms/form11";
+const form11State = namespace("Form11");
 
-import Form12ProcessHeader from "@/components/process/Form12/components/Form12ProcessHeader.vue";
+import Form11ProcessHeader from "@/components/process/Form11/components/Form11ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form12StatusInfoType } from '@/types/Information/Form12';
+import { form11StatusInfoType } from '@/types/Information/Form11';
 
 @Component({
     components:{
-        Form12ProcessHeader
+        Form11ProcessHeader
     }
 })
-export default class SubmitForm12 extends Vue {
+export default class SubmitForm11 extends Vue {
 
-    @form12State.State
-    public currentOrderToVarySingleJusticeId: string;
+    @form11State.State
+    public currentOrderMultipleJusticesId: string;
 
-    stepsCompleted = {} as form12StatusInfoType;  
+    stepsCompleted = {} as form11StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
     submitting = false;
@@ -98,8 +96,8 @@ export default class SubmitForm12 extends Vue {
 
     public savePdf(){        
         const pdfType = "FORM"
-        const pdfName ="Form12"
-        const url = '/form12/form-print/'+this.currentOrderToVarySingleJusticeId+'/?pdf_type='+pdfType
+        const pdfName ="Form11"
+        const url = '/form11/form-print/'+this.currentOrderMultipleJusticesId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -119,7 +117,7 @@ export default class SubmitForm12 extends Vue {
         },err => {
             console.error(err);
         });
-    }   
+    }
 
     public cancel() {
         this.$router.push({name: "dashboard" }) 
