@@ -518,16 +518,31 @@
                     Complete the following using the Completion Instructions. Please note that you must submit 
                     the book in a pdf format. Click the document name for more information.
                     <ul>
+                        
                         <li>                            
                             <b-row style="width: 113%;" class="my-1">
-                                <b-col cols="8">                                    
+                                <b-col cols="4">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
                                         target="_blank">Application Book
-                                    </a>
-                                </b-col>                               
-                            </b-row>
-                        </li>                        
+                                    </a>                                 
+                                </b-col>
+                                <b-col cols="4" class="p-0" >
+                                    <b-button
+                                        @click="downloadInstructions('e-vary')"
+                                        target="_blank"                                                                                
+                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="4">
+                                    <b-button
+                                        @click="downloadInstructions('paper-vary')"
+                                        target="_blank"
+                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                    </b-button>                                    
+                                </b-col>
+                            </b-row>  
+                        </li>                      
                     </ul>
                 </li>
                 <li>
@@ -579,12 +594,14 @@
         <b-row v-if="showRespVaryOrderInfo" class="mt-4" > 
            <ol class="mt-2">
                 <li>
-                    Complete the documents below. Click on the document name for more information.
+                    Complete the following using the Completion Instructions. 
+                    Please note that you must submit the book in a pdf format.  
+                    Click the document name for more information.
                     <ul>
                         <li>                            
                             <b-row style="width: 113%;" class="my-1">
                                 <b-col cols="4">
-                                    Application to vary an order of a justice                                  
+                                    Response book to vary an order of a justice                                  
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
                                     <b-button
