@@ -6,11 +6,11 @@
 
                 <div v-if="stepsCompleted.first">
                     <b-icon-check-circle-fill class="icon-complete ml-1 mt-2" variant="success" />
-                    <span class="step-complete text-success ml-4 mb-2">Form 10</span>                
+                    <span class="step-complete text-success ml-4 mb-2">Form 17</span>                
                 </div>
                 <div v-else>
                     <step-number class="ml-1 mt-2" v-bind:stepNumber="1" v-bind:active="true"/>
-                    <span class="text-dark step-incomplete">Form 10</span>
+                    <span class="text-dark step-incomplete">Form 17</span>
                 </div>               
 
             </b-col>
@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { form10StatusInfoType } from '@/types/Information/Form10';
+import { form17StatusInfoType } from '@/types/Information/Form17';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import StepNumber from "@/components/utils/StepNumber.vue";
@@ -58,10 +58,10 @@ import StepNumber from "@/components/utils/StepNumber.vue";
         StepNumber
     }
 })
-export default class Form10ProcessHeader extends Vue {  
+export default class Form17ProcessHeader extends Vue {  
     
     @Prop({required: true})
-    stepsCompleted!: form10StatusInfoType;
+    stepsCompleted!: form17StatusInfoType;
 
 }
 </script>

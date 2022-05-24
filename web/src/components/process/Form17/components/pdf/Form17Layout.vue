@@ -128,20 +128,20 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/forms/form10";
-const form10State = namespace("Form10");
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
-import { form10DataInfoType } from '@/types/Information/Form10';
-import {getPartyTitles, getFullName} from '../PartyTitlesForm10'
+import { form17DataInfoType } from '@/types/Information/Form17';
+import {getPartyTitles, getFullName} from '../PartyTitlesForm17'
 
 @Component
-export default class Form10Layout extends Vue {
+export default class Form17Layout extends Vue {
 
     @Prop({required:true})
-    result!: form10DataInfoType; 
+    result!: form17DataInfoType; 
 
-    @form10State.Action
-    public UpdateForm10Info!: (newForm10Info: form10DataInfoType) => void
+    @form17State.Action
+    public UpdateForm17Info!: (newForm17Info: form17DataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];

@@ -39,7 +39,7 @@
         </b-row>  
     
         <b-card id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="mt-4 mb-4 container" no-body>
-            <form-10-layout v-bind:result="result"/>
+            <form-17-layout v-bind:result="result"/>
         </b-card>
 
     </b-card>
@@ -49,51 +49,51 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/forms/form10";
-const form10State = namespace("Form10");
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
-import { form10DataInfoType } from '@/types/Information/Form10';
+import { form17DataInfoType } from '@/types/Information/Form17';
 
-import Form10Layout from "./Form10Layout.vue";
+import Form17Layout from "./Form17Layout.vue";
 import moment from 'moment';
 
 @Component({
     components:{        
-        Form10Layout
+        Form17Layout
     }
 })
-export default class Form10 extends Vue {
+export default class Form17 extends Vue {
 
     @Prop({required: true})
     caseId!: string;
     
-    @form10State.State
-    public currentOrderSingleJusticeId: string;
+    @form17State.State
+    public currentCertificateOfCostsId: string;
 
-    @form10State.State
-    public form10Info!: form10DataInfoType;
+    @form17State.State
+    public form17Info!: form17DataInfoType;
 
-    @form10State.Action
-    public UpdateForm10Info!: (newForm10Info: form10DataInfoType) => void
+    @form17State.Action
+    public UpdateForm17Info!: (newForm17Info: form17DataInfoType) => void
 
-    result = {} as form10DataInfoType;
+    result = {} as form17DataInfoType;
     dataReady = false;
    
     mounted(){
         this.dataReady = false;
-        this.getForm10Data(); 
+        this.getForm17Data(); 
     }   
            
     public onPrint() { 
         const pdf_type = "FORM"
-        const pdf_name = "form10-" + this.caseId;
+        const pdf_name = "form17-" + this.caseId;
         const el= document.getElementById("print");
         
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;
         //const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 66(3)(c)"`;
-        //const bottomRightText = `"Form 10: Order from an application to vary the order of a justice"`;        
-        const url = '/form10/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
+        //const bottomRightText = `"Form 17: Order from an application to vary the order of a justice"`;        
+        const url = '/form17/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
@@ -118,8 +118,8 @@ export default class Form10 extends Vue {
 
     public savePdf(){        
         const pdfType = "FORM"
-        const pdfName ="Form10"
-        const url = '/form10/form-print/'+this.caseId+'/?pdf_type='+pdfType
+        const pdfName ="Form17"
+        const url = '/form17/form-print/'+this.caseId+'/?pdf_type='+pdfType
         const options = {
             responseType: "blob",
             headers: {
@@ -142,23 +142,23 @@ export default class Form10 extends Vue {
     }
 
     public navigateToEditPage() {
-        this.$router.push({name: "fill-form10" })
+        this.$router.push({name: "fill-form17" })
     }
 
     public navigateToSubmitPage(){
         this.$emit('navigateToSubmitPage')
     }
  
-    public getForm10Data() {        
+    public getForm17Data() {        
 
-        this.result = this.form10Info;
+        this.result = this.form17Info;
        
-        this.$http.get('/form10/forms/'+this.currentOrderSingleJusticeId)
+        this.$http.get('/form17/forms/'+this.currentCertificateOfCostsId)
         .then((response) => {
             if(response?.data?.data){            
                             
                 this.result = response.data.data
-                this.UpdateForm10Info(this.result)                         
+                this.UpdateForm17Info(this.result)                         
                 this.dataReady = true;
                 Vue.nextTick(()=> this.onPrint())
             }
@@ -170,12 +170,12 @@ export default class Form10 extends Vue {
 
     // public onPrintSave() { 
     //     const pdf_type = "FORM"
-    //     const pdf_name = "form10-" + this.currentOrderSingleJusticeId
+    //     const pdf_name = "form17-" + this.currentCertificateOfCostsId
     //     const el= document.getElementById("print");
       
     //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
     //     const bottomRightText = `" "`;        
-    //     const url = '/form10/form-print/'+this.currentOrderSingleJusticeId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+    //     const url = '/form17/form-print/'+this.currentCertificateOfCostsId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
     //     const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
     //     const body = {
@@ -196,7 +196,7 @@ export default class Form10 extends Vue {
     //         const link = document.createElement("a");
     //         link.href = URL.createObjectURL(blob);
     //         document.body.appendChild(link);
-    //         link.download = "Form10.pdf";
+    //         link.download = "Form17.pdf";
     //         link.click();
     //         setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
     //     },err => {

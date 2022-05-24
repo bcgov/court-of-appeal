@@ -2,22 +2,22 @@
     <b-card header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light" header-border-variant="white">            
-            <form-10-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-17-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>
 
         <b-card border-variant="light" bg-variant="light" class="my-2 mx-4">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Order of a Single Justice
+                Certificate of Costs
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
-                Form 10
+                Form 17
             </b-row>           
            
         </b-card>
 
         <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
-            <form-10-case-information/>          
+            <form-17-case-information/>          
             
         </b-card>       
         
@@ -27,19 +27,19 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Form10ProcessHeader from "@/components/process/Form10/components/Form10ProcessHeader.vue";
-import Form10CaseInformation from "@/components/process/Form10/components/Form10CaseInformation.vue";
-import { form10StatusInfoType } from '@/types/Information/Form10';
+import Form17ProcessHeader from "@/components/process/Form17/components/Form17ProcessHeader.vue";
+import Form17CaseInformation from "@/components/process/Form17/components/Form17CaseInformation.vue";
+import { form17StatusInfoType } from '@/types/Information/Form17';
 
 @Component({
     components:{
-        Form10ProcessHeader,
-        Form10CaseInformation
+        Form17ProcessHeader,
+        Form17CaseInformation
     }
 })
-export default class StartForm10 extends Vue {
+export default class StartForm17 extends Vue {
 
-    stepsCompleted = {} as form10StatusInfoType;   
+    stepsCompleted = {} as form17StatusInfoType;   
 
     mounted() {  
         this.stepsCompleted = {

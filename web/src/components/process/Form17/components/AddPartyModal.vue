@@ -311,11 +311,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { aliasInfoType, form10PartiesInfoType, form10PartiesStatesInfoType, representativeInfoType } from '@/types/Information/Form10';
+import { aliasInfoType, form17PartiesInfoType, form17PartiesStatesInfoType, representativeInfoType } from '@/types/Information/Form17';
 
 import AddAliasForm from '@/components/process/Form1/components/fillForm1/AddAliasForm.vue';
 import AddRepresentativeForm from '@/components/process/Form1/components/fillForm1/AddRepresentativeForm.vue';
-import {getPartyTitles, getFullName} from "./PartyTitlesForm10"
+import {getPartyTitles, getFullName} from "./PartyTitlesForm17"
 
 @Component({
     components:{        
@@ -329,9 +329,9 @@ export default class AddPartyModal extends Vue {
     isCreate: boolean;
 
     @Prop({required:true})
-    party: form10PartiesInfoType;
+    party: form17PartiesInfoType;
 
-    partyStates= {} as form10PartiesStatesInfoType;
+    partyStates= {} as form17PartiesStatesInfoType;
 
     partyTypeOptions = [
         {text: 'an individual', value: false},
@@ -395,7 +395,7 @@ export default class AddPartyModal extends Vue {
     isEditRepresentativeOpen = false;
 
     update = 0;
-    originalParty = {} as form10PartiesInfoType
+    originalParty = {} as form17PartiesInfoType
 
     mounted(){
         this.initPartyStates()

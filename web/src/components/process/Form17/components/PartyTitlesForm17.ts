@@ -1,8 +1,8 @@
 import { lookupsInfoType } from "@/types/Information/Form1";
 import store from "@/store";
-import { form10PartiesInfoType } from "@/types/Information/Form10";
+import { form17PartiesInfoType } from "@/types/Information/Form17";
 
-export function getPartyTitles(partyInfo: form10PartiesInfoType, divider:string){
+export function getPartyTitles(partyInfo: form17PartiesInfoType, divider:string){
     
     const lookups: lookupsInfoType = store.state.Common.lookups;    
         
@@ -36,7 +36,7 @@ export function getPartyTitles(partyInfo: form10PartiesInfoType, divider:string)
 }  
 
 
-export function getFullName(partyInfo: form10PartiesInfoType){
+export function getFullName(partyInfo: form17PartiesInfoType){
     
     let fullName =''
     if (partyInfo.isOrganization){                

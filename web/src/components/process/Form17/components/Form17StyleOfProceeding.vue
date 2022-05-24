@@ -16,15 +16,15 @@
                             it appears on the reasons for judgment or notice of appeal.
                         </p>  
                         <span 
-                            v-if="form10Info.appellants.length == 0 && !AddNewAppellantForm" 
+                            v-if="form17Info.appellants.length == 0 && !AddNewAppellantForm" 
                             id="appellants" 
                             class="text-muted ml-2 my-2">No appellants have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form10Info.appellants.length > 0"                                                                
+                            v-else-if="form17Info.appellants.length > 0"                                                                
                             id="appellants"
                             class="mt-2"
-                            :items="form10Info.appellants"
+                            :items="form17Info.appellants"
                             :fields="partyFields"
                             head-row-variant="primary"
                             borderless    
@@ -91,15 +91,15 @@
                             appears on reasons for judgment or notice of appeal.
                         </p> 
                         <span 
-                            v-if="form10Info.respondents.length == 0 && !AddNewRespondentForm" 
+                            v-if="form17Info.respondents.length == 0 && !AddNewRespondentForm" 
                             id="respondents" 
                             class="text-muted ml-2 my-2">No respondents have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form10Info.respondents.length > 0"                                                                
+                            v-else-if="form17Info.respondents.length > 0"                                                                
                             id="respondents"
                             class="mt-2"
-                            :items="form10Info.respondents"
+                            :items="form17Info.respondents"
                             :fields="partyFields"
                             head-row-variant="primary"
                             borderless    
@@ -157,17 +157,17 @@
         </b-card>
         <!-- {{partyNames}} -->
         
-        <div v-if="this.form10Info.appellants && this.form10Info.appellants.length>0 && this.form10Info.respondents && this.form10Info.respondents.length>0">
+        <div v-if="this.form17Info.appellants && this.form17Info.appellants.length>0 && this.form17Info.respondents && this.form17Info.respondents.length>0">
             <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
 
 <!-- <BETWEEN> -->
             <b-row class="mt-4 ml-1" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{form10Info.appellantNames}}</span></b-col>
+                <b-col cols="10">Between: <span style="font-weight: 200;">{{form17Info.appellantNames}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
 <!-- <AND> -->
             <b-row class="mt-3 ml-1" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{form10Info.respondentNames}}</span></b-col>
+                <b-col cols="10">And: <span style="font-weight: 200;">{{form17Info.respondentNames}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>   
 <!-- <JudgeNames> -->
@@ -182,13 +182,13 @@
                                     <b>Note:</b> <i>Name of chambers justice</i>
                                 </p>                                 
                                 <div 
-                                    v-if="form10Info.judgeNames && form10Info.judgeNames.length == 0 && !AddNewJudgeNamesForm"                                      
+                                    v-if="form17Info.judgeNames && form17Info.judgeNames.length == 0 && !AddNewJudgeNamesForm"                                      
                                     class="text-muted mt-3">No judges have been listed.
                                 </div>
                                 <b-table
-                                    v-else-if="form10Info.judgeNames && form10Info.judgeNames.length > 0"
+                                    v-else-if="form17Info.judgeNames && form17Info.judgeNames.length > 0"
                                     class="mt-2"
-                                    :items="form10Info.judgeNames"
+                                    :items="form17Info.judgeNames"
                                     :fields="judgeFields"
                                     head-row-variant="primary"
                                     borderless    
@@ -238,7 +238,7 @@
                         <b-col>           
                             <b-button 
                                 style="margin-top: 4rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
-                                v-if="!AddNewJudgeNamesForm && form10Info.judgeNames.length<1" 
+                                v-if="!AddNewJudgeNamesForm && form17Info.judgeNames.length<1" 
                                 size="sm" 
                                 variant="court" 
                                 @click="addNewJudgeNames">
@@ -309,7 +309,7 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form10Info.dateOfJudgement"                           
+                                    v-model="form17Info.dateOfJudgement"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -328,7 +328,7 @@
                 <b-col class="ml-1">   
                     <b-form-radio-group                                                           
                         :class="state.judgmentReserved==false?'border border-danger w-50':''"                                      
-                        v-model="form10Info.judgmentReserved">
+                        v-model="form17Info.judgmentReserved">
                         <b-form-radio :value="true"> Yes </b-form-radio>
                         <b-form-radio :value="false"> No </b-form-radio>
                     </b-form-radio-group> 
@@ -336,7 +336,7 @@
             </b-row>
   
 <!-- <Hearing Held Date> -->
-            <b-row class="mt-4 question" v-if="form10Info.judgmentReserved">
+            <b-row class="mt-4 question" v-if="form17Info.judgmentReserved">
                 <b-col cols="7" class="labels">
                     When was the hearing held?
                 </b-col>
@@ -348,7 +348,7 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form10Info.hearingHeldDate"                           
+                                    v-model="form17Info.hearingHeldDate"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -367,7 +367,7 @@
                 <b-col class="ml-1">   
                     <b-form-radio-group                      
                         :class="state.reasonsIndicated==false?'border border-danger w-50':''"                                      
-                        v-model="form10Info.reasonsIndicated">
+                        v-model="form17Info.reasonsIndicated">
                         <b-form-radio :value="true"> Yes </b-form-radio>
                         <b-form-radio :value="false"> No </b-form-radio>
                     </b-form-radio-group> 
@@ -375,7 +375,7 @@
             </b-row>
   
 <!-- <Reasons Date> -->
-            <b-row class="mt-4 question" v-if="form10Info.reasonsIndicated">
+            <b-row class="mt-4 question" v-if="form17Info.reasonsIndicated">
                 <b-col cols="7" class="labels">
                     What date did the justice indicate that reasons for judgment were to follow?
                 </b-col>
@@ -387,7 +387,7 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form10Info.reasonsDate"                           
+                                    v-model="form17Info.reasonsDate"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -409,7 +409,7 @@
                         stacked
                         @change="filingPartiesChanged()"         
                         :state="state.filingParties"                                      
-                        v-model="form10Info.filingParties">
+                        v-model="form17Info.filingParties">
                         <b-form-checkbox
                             :value="applyingparty"
                             v-for="applyingparty,inx in partyNames"
@@ -419,9 +419,9 @@
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row> 
-            <!-- {{form10Info.filingParties}} -->
+            <!-- {{form17Info.filingParties}} -->
 
-            <div v-if="form10Info.filingParties && form10Info.filingParties.length > 0">
+            <div v-if="form17Info.filingParties && form17Info.filingParties.length > 0">
 <!-- <Appearing Partie -Attended Hearing> -->
                 <b-row class="mt-4 question">
                     <b-col cols="7" class="labels">
@@ -435,7 +435,7 @@
                             stacked                                               
                             style="width:100%"                        
                             :state="state.appearingParties"                                      
-                            v-model="form10Info.appearingParties">
+                            v-model="form17Info.appearingParties">
                             <div v-for="filingparty,inx in getFilingParties()"
                                 :key="'appling-party-'+inx">
                                 <b-form-checkbox
@@ -446,7 +446,7 @@
                         </b-form-checkbox-group> 
                     </b-col>
                 </b-row>
-                <!-- {{form10Info.appearingParties}} -->
+                <!-- {{form17Info.appearingParties}} -->
 
 <!-- <Application For> -->
                 <b-row class="mt-4 question">
@@ -484,7 +484,7 @@
                             <b-form-input
                                 :state="state.ordersJusticeMake"
                                 class="mt-2"                                    
-                                v-model="form10Info.ordersJusticeMake">
+                                v-model="form17Info.ordersJusticeMake">
                             </b-form-input>
                         </div>                                             
                     </b-col>
@@ -497,7 +497,7 @@
                     </b-col>
                     <b-col class="ml-1 mt-2">
                         <b-form-radio-group                                              
-                            v-model="form10Info.otherOrders"
+                            v-model="form17Info.otherOrders"
                             :options="yesNoOptions"                
                         ></b-form-radio-group>
                         <span
@@ -509,7 +509,7 @@
                     </b-col>
                 </b-row>
 <!-- <Other Order Details> -->
-                <b-row v-if="form10Info.otherOrders" class="mt-4 question">
+                <b-row v-if="form17Info.otherOrders" class="mt-4 question">
                     <b-col cols="7" class="labels">
                         Enter the other orders that were made:                                                            
                     </b-col>
@@ -518,7 +518,7 @@
                             style="width:100%" 
                             rows="6"  
                             :state="state.furtherOrders"                                                          
-                            v-model="form10Info.furtherOrders">
+                            v-model="form17Info.furtherOrders">
                         </b-form-textarea>                    
                     </b-col>                
                 </b-row>
@@ -574,11 +574,11 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import "@/store/modules/forms/form10";
-const form10State = namespace("Form10");
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
 
-import { applicationForInfoType, form10DataInfoType, form10PartiesInfoType } from '@/types/Information/Form10';
+import { applicationForInfoType, form17DataInfoType, form17PartiesInfoType } from '@/types/Information/Form17';
 import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
@@ -594,7 +594,7 @@ import {justiceNames} from './JusticeName'
         AddPartyModal        
     }
 })
-export default class Form10StyleOfProceeding extends Vue {
+export default class Form17StyleOfProceeding extends Vue {
 
     @informationState.State
     public partiesJson: partiesDataJsonDataType;   
@@ -605,20 +605,20 @@ export default class Form10StyleOfProceeding extends Vue {
     @commonState.State
     public hearingLocationsInfo!: hearingLocationsInfoType[];
 
-    @form10State.State
+    @form17State.State
     public currentOrder: previousCourtJsonInfoType;
 
-    @form10State.State
-    public form10Info: form10DataInfoType;
+    @form17State.State
+    public form17Info: form17DataInfoType;
 
-    @form10State.Action
-    public UpdateForm10Info!: (newForm10Info: form10DataInfoType) => void  
+    @form17State.Action
+    public UpdateForm17Info!: (newForm17Info: form17DataInfoType) => void  
     
-    @form10State.State
-    public currentOrderSingleJusticeId: string;
+    @form17State.State
+    public currentCertificateOfCostsId: string;
 
-    @form10State.Action
-    public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
+    @form17State.Action
+    public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
     
     dataReady = false;
     updated=0;  
@@ -629,7 +629,7 @@ export default class Form10StyleOfProceeding extends Vue {
     addAppellantFormColor = 'court';
     AddNewAppellantForm = false;
 
-    partyNames: form10PartiesInfoType[] = [];
+    partyNames: form17PartiesInfoType[] = [];
 
     addJudgeNamesFormColor = 'court';
     AddNewJudgeNamesForm = false;
@@ -644,7 +644,7 @@ export default class Form10StyleOfProceeding extends Vue {
     applicationFor ="";
     applicationForOther="";
 
-    partyToEdit = {} as form10PartiesInfoType;
+    partyToEdit = {} as form17PartiesInfoType;
     showPartyWindow = false
     isCreate = true
     partyType = ''
@@ -737,25 +737,25 @@ export default class Form10StyleOfProceeding extends Vue {
         
         this.extractHearingLocations()
 
-        if(this.currentOrderSingleJusticeId){
-            this.getForm10Data();
+        if(this.currentCertificateOfCostsId){
+            this.getForm17Data();
            
         } else { 
 
-            const form10Data = this.form10Info;            
-            form10Data.version = this.$store.state.Application.version;
+            const form17Data = this.form17Info;            
+            form17Data.version = this.$store.state.Application.version;
 
-            form10Data.judgeNames = [];
-            form10Data.appellants = this.partiesJson.appellants
-            form10Data.respondents = this.partiesJson.respondents
-            form10Data.formSevenNumber = this.fileNumber; 
-            form10Data.appearingParties = [];
-            form10Data.applicationFor= {} as applicationForInfoType;
-            form10Data.filingParties = [];           
-            form10Data.previousCourts = this.currentOrder;
-            this.UpdateForm10Info(form10Data);
+            form17Data.judgeNames = [];
+            form17Data.appellants = this.partiesJson.appellants
+            form17Data.respondents = this.partiesJson.respondents
+            form17Data.formSevenNumber = this.fileNumber; 
+            form17Data.appearingParties = [];
+            form17Data.applicationFor= {} as applicationForInfoType;
+            form17Data.filingParties = [];           
+            form17Data.previousCourts = this.currentOrder;
+            this.UpdateForm17Info(form17Data);
             this.initHearingLocation()
-            this.revaluateForm10Data()
+            this.revaluateForm17Data()
             this.saveForm(true);
         }          
     }
@@ -773,50 +773,50 @@ export default class Form10StyleOfProceeding extends Vue {
     }
     
     public initHearingLocation(){
-        this.hearingLocation = this.form10Info.hearingLocation?.name
+        this.hearingLocation = this.form17Info.hearingLocation?.name
         if(this.otherHearingLocationList.includes(this.hearingLocation)){
             this.hearingLocation ='Other'
-            this.otherHearingLocation = this.form10Info.hearingLocation.name
+            this.otherHearingLocation = this.form17Info.hearingLocation.name
         }
     }
 
     public updateHearingLocation(){ 
               
-        const form10 = this.form10Info;       
-        form10.hearingLocation = {} as hearingLocationsInfoType;
+        const form17 = this.form17Info;       
+        form17.hearingLocation = {} as hearingLocationsInfoType;
        
         if (this.hearingLocation == 'Other' && this.otherHearingLocation.length > 0){
-            form10.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.otherHearingLocation)[0]
+            form17.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.otherHearingLocation)[0]
         } else if (this.hearingLocation != 'Other') {
-            form10.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.hearingLocation)[0]
+            form17.hearingLocation = this.hearingLocationsInfo.filter(location => location.name == this.hearingLocation)[0]
         }  
         
-        this.UpdateForm10Info(form10);
+        this.UpdateForm17Info(form17);
     }
 
     public initApplicationFor(){
-        this.applicationFor = this.form10Info.applicationFor?.name
-        this.applicationForOther = this.form10Info.applicationFor?.other
+        this.applicationFor = this.form17Info.applicationFor?.name
+        this.applicationForOther = this.form17Info.applicationFor?.other
     }
 
     public updateApplicationFor(){ 
               
-        const form10 = this.form10Info;       
-        form10.applicationFor = {} as applicationForInfoType;
+        const form17 = this.form17Info;       
+        form17.applicationFor = {} as applicationForInfoType;
        
         if(this.applicationFor == 'other')
-            form10.applicationFor = { name:this.applicationFor, other:this.applicationForOther}
+            form17.applicationFor = { name:this.applicationFor, other:this.applicationForOther}
         else
-            form10.applicationFor = { name:this.applicationFor, other:''}
+            form17.applicationFor = { name:this.applicationFor, other:''}
         
-        this.UpdateForm10Info(form10);
+        this.UpdateForm17Info(form17);
     }
 
-    public revaluateForm10Data(){
+    public revaluateForm17Data(){
 
-        const form10Data = this.form10Info;
+        const form17Data = this.form17Info;
 
-        for (const respondent of form10Data.respondents){
+        for (const respondent of form17Data.respondents){
             if (respondent.firstName && respondent.lastName){                    
                 respondent.isOrganization = false;
             } else if (respondent.organization){
@@ -827,7 +827,7 @@ export default class Form10StyleOfProceeding extends Vue {
             respondent.responding = true;
         }
 
-        for (const applicant of form10Data.appellants){
+        for (const applicant of form17Data.appellants){
             if (applicant.firstName && applicant.lastName){
                 applicant.isOrganization = false;
             } else if (applicant.organization){
@@ -838,23 +838,23 @@ export default class Form10StyleOfProceeding extends Vue {
             applicant.responding = false;
         }
 
-        const appellants = form10Data.appellants.map(resp=>resp.name)
-        const respondents = form10Data.respondents.map(resp=>resp.name)
-        form10Data.appellantNames = appellants.join(', ');
-        form10Data.respondentNames = respondents.join(', ');
+        const appellants = form17Data.appellants.map(resp=>resp.name)
+        const respondents = form17Data.respondents.map(resp=>resp.name)
+        form17Data.appellantNames = appellants.join(', ');
+        form17Data.respondentNames = respondents.join(', ');
 
-        this.partyNames = [...form10Data.appellants, ...form10Data.respondents]
-        this.UpdateForm10Info(form10Data);
+        this.partyNames = [...form17Data.appellants, ...form17Data.respondents]
+        this.UpdateForm17Info(form17Data);
     }
 
-    public getForm10Data() {        
+    public getForm17Data() {        
        
-        this.$http.get('/form10/forms/'+this.currentOrderSingleJusticeId)
+        this.$http.get('/form17/forms/'+this.currentCertificateOfCostsId)
         .then((response) => {
             if(response?.data?.data){
-                const form10Data = response.data.data
-                this.UpdateForm10Info(form10Data);
-                this.revaluateForm10Data()
+                const form17Data = response.data.data
+                this.UpdateForm17Info(form17Data);
+                this.revaluateForm17Data()
                 this.initHearingLocation()
                 this.initApplicationFor()
                 this.clearStates();             
@@ -890,31 +890,31 @@ export default class Form10StyleOfProceeding extends Vue {
 
     public checkStates(){  
         
-        this.state.appellantsInfo = this.form10Info.appellants?.length>0? null :false;
-        this.state.respondentsInfo = this.form10Info.respondents?.length>0? null :false;            
-        this.state.judgeNames = this.form10Info.judgeNames?.length>0? null :false;
+        this.state.appellantsInfo = this.form17Info.appellants?.length>0? null :false;
+        this.state.respondentsInfo = this.form17Info.respondents?.length>0? null :false;            
+        this.state.judgeNames = this.form17Info.judgeNames?.length>0? null :false;
         
         this.state.hearingLocation =  this.hearingLocation? null :false
         this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null
         
-        this.state.dateOfJudgement = this.form10Info.dateOfJudgement? null: false;
+        this.state.dateOfJudgement = this.form17Info.dateOfJudgement? null: false;
         
-        this.state.judgmentReserved = this.form10Info.judgmentReserved == true || this.form10Info.judgmentReserved ==false? null :false; 
-        this.state.hearingHeldDate = this.form10Info.judgmentReserved && !this.form10Info.hearingHeldDate? false:null;
+        this.state.judgmentReserved = this.form17Info.judgmentReserved == true || this.form17Info.judgmentReserved ==false? null :false; 
+        this.state.hearingHeldDate = this.form17Info.judgmentReserved && !this.form17Info.hearingHeldDate? false:null;
         
-        this.state.reasonsIndicated = this.form10Info.reasonsIndicated == true || this.form10Info.reasonsIndicated ==false? null :false; 
-        this.state.reasonsDate = this.form10Info.reasonsIndicated && !this.form10Info.reasonsDate? false: null;
+        this.state.reasonsIndicated = this.form17Info.reasonsIndicated == true || this.form17Info.reasonsIndicated ==false? null :false; 
+        this.state.reasonsDate = this.form17Info.reasonsIndicated && !this.form17Info.reasonsDate? false: null;
         
         this.state.applicationFor = this.applicationFor? null :false
         this.state.applicationForOther = this.applicationFor=='other' && !this.applicationForOther? false :null
 
-        this.state.ordersJusticeMake = this.form10Info.ordersJusticeMake? null :false
+        this.state.ordersJusticeMake = this.form17Info.ordersJusticeMake? null :false
 
-        this.state.filingParties = this.form10Info.filingParties?.length>0? null :false;
-        this.state.appearingParties = this.form10Info.appearingParties?.length>0? null :false;
+        this.state.filingParties = this.form17Info.filingParties?.length>0? null :false;
+        this.state.appearingParties = this.form17Info.appearingParties?.length>0? null :false;
         
-        this.state.otherOrders = this.form10Info.otherOrders == true || this.form10Info.otherOrders ==false? null :false;
-        this.state.furtherOrders = this.form10Info.otherOrders == true && !this.form10Info.furtherOrders? false :null
+        this.state.otherOrders = this.form17Info.otherOrders == true || this.form17Info.otherOrders ==false? null :false;
+        this.state.furtherOrders = this.form17Info.otherOrders == true && !this.form17Info.furtherOrders? false :null
 
        
 
@@ -928,13 +928,13 @@ export default class Form10StyleOfProceeding extends Vue {
     public saveForm(draft: boolean) { 
         
         let method = 'post';
-        let url = '/form10/forms';
+        let url = '/form17/forms';
 
-        if (this.currentOrderSingleJusticeId){
+        if (this.currentCertificateOfCostsId){
             method = 'put';
-            url = '/form10/forms/'+this.currentOrderSingleJusticeId;
-            const form10Data = this.form10Info;            
-            this.UpdateForm10Info(form10Data);
+            url = '/form17/forms/'+this.currentCertificateOfCostsId;
+            const form17Data = this.form17Info;            
+            this.UpdateForm17Info(form17Data);
 
             if (!draft && !this.checkStates()){               
                 return                
@@ -944,9 +944,9 @@ export default class Form10StyleOfProceeding extends Vue {
                 method: method,
                 url: url,
                 data: {
-                    data:this.form10Info,
-                    type:'Form10',
-                    description:'Order of a single justice'
+                    data:this.form17Info,
+                    type:'Form17',
+                    description:'Certificate of Costs'
                 }
             }
             this.saveInfo(options, draft);
@@ -956,9 +956,9 @@ export default class Form10StyleOfProceeding extends Vue {
                 method: method,
                 url: url,
                 data: {
-                    data:this.form10Info,
-                    type:'Form10',
-                    description:'Order of a single justice'
+                    data:this.form17Info,
+                    type:'Form17',
+                    description:'Certificate of Costs'
                 }
             }
             this.saveInfo(options, draft);
@@ -971,7 +971,7 @@ export default class Form10StyleOfProceeding extends Vue {
             .then(response => {
                 if(response.data){
                     if(options.method == "post"){
-                        this.UpdateCurrentOrderSingleJusticeId(response.data.file_id); 
+                        this.UpdateCurrentCertificateOfCostsId(response.data.file_id); 
                     }
 
                     this.clearStates();                                     
@@ -984,7 +984,7 @@ export default class Form10StyleOfProceeding extends Vue {
 
     public addNewRespondent(){
         this.state.respondentsInfo = null
-        this.partyToEdit = {} as form10PartiesInfoType
+        this.partyToEdit = {} as form17PartiesInfoType
         this.partyType = 'Respondent'
         this.isCreate = true;
         this.showPartyWindow = true;        
@@ -998,18 +998,18 @@ export default class Form10StyleOfProceeding extends Vue {
     }
 
     public removeRespondent(data){ 
-        const form10Data = this.form10Info;       
-        form10Data.respondents.splice(data.index,1);
-        form10Data.respondentNames = form10Data.respondents.map(resp=>resp.name).join(', ');
-        this.partyNames = [...form10Data.appellants, ...form10Data.respondents]
+        const form17Data = this.form17Info;       
+        form17Data.respondents.splice(data.index,1);
+        form17Data.respondentNames = form17Data.respondents.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form17Data.appellants, ...form17Data.respondents]
         this.somePartiesChanged()
-        this.UpdateForm10Info(form10Data);
+        this.UpdateForm17Info(form17Data);
         this.updated ++;        
     }
 
     public addNewAppellant(){
         this.state.appellantsInfo = null
-        this.partyToEdit = {} as form10PartiesInfoType
+        this.partyToEdit = {} as form17PartiesInfoType
         this.partyType = 'Appellant'
         this.isCreate = true;
         this.showPartyWindow = true;        
@@ -1023,28 +1023,28 @@ export default class Form10StyleOfProceeding extends Vue {
     }
 
     public removeAppellant(data){   
-        const form10Data = this.form10Info;       
-        form10Data.appellants.splice(data.index,1); 
-        form10Data.appellantNames = form10Data.appellants.map(resp=>resp.name).join(', ');
-        this.partyNames = [...form10Data.appellants, ...form10Data.respondents]        
+        const form17Data = this.form17Info;       
+        form17Data.appellants.splice(data.index,1); 
+        form17Data.appellantNames = form17Data.appellants.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form17Data.appellants, ...form17Data.respondents]        
         this.somePartiesChanged()
-        this.UpdateForm10Info(form10Data);
+        this.UpdateForm17Info(form17Data);
         this.updated ++;        
     }
 
     public partyChanged(partyCreated){
         if(partyCreated){
-            const form10Info = this.form10Info
+            const form17Info = this.form17Info
             const party = JSON.parse(JSON.stringify(this.partyToEdit))
             if(this.partyType == 'Appellant'){
-                form10Info.appellants.push(party);
+                form17Info.appellants.push(party);
             }
             else if(this.partyType =='Respondent'){
-                form10Info.respondents.push(party);
+                form17Info.respondents.push(party);
             }
-            this.UpdateForm10Info(form10Info)
+            this.UpdateForm17Info(form17Info)
         }
-        this.revaluateForm10Data();
+        this.revaluateForm17Data();
         this.showPartyWindow = false;
         this.somePartiesChanged() 
         this.updated++;
@@ -1073,22 +1073,22 @@ export default class Form10StyleOfProceeding extends Vue {
 
     public modifyJudgeNames(isCreateJudgeNames: boolean, newJudgeName: string, index: number, otherName){        
 
-        const form10Data = this.form10Info;
+        const form17Data = this.form17Info;
 
         if (isCreateJudgeNames){           
-            form10Data.judgeNames.push({name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) })            
+            form17Data.judgeNames.push({name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) })            
         } else {                    
-            form10Data.judgeNames[index] = {name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) };        
+            form17Data.judgeNames[index] = {name: newJudgeName, other: otherName, text: (otherName?otherName:newJudgeName) };        
         }
-        this.UpdateForm10Info(form10Data)
+        this.UpdateForm17Info(form17Data)
         this.closeJudgeNamesForm();
         this.updated ++;
     }
 
     public removeJudgeNames(data){ 
-        const form10Data = this.form10Info;       
-        form10Data.judgeNames.splice(data.index,1);        
-        this.UpdateForm10Info(form10Data);
+        const form17Data = this.form17Info;       
+        form17Data.judgeNames.splice(data.index,1);        
+        this.UpdateForm17Info(form17Data);
         this.updated ++;        
     }
 
@@ -1107,26 +1107,26 @@ export default class Form10StyleOfProceeding extends Vue {
     }
 
     public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form10"}) 
+        this.$router.push({name: "preview-form17"}) 
     }
 
     public somePartiesChanged(){
-        this.form10Info.filingParties=[]
-        this.form10Info.appearingParties=[]
+        this.form17Info.filingParties=[]
+        this.form17Info.appearingParties=[]
         this.updated++;
     }
     
     public filingPartiesChanged(){
-        this.form10Info.appearingParties=[]
+        this.form17Info.appearingParties=[]
         this.updated++;
     }
 
     public getFilingParties(){
         const filingParties=[]
-            for(const party of this.form10Info.filingParties){
+            for(const party of this.form17Info.filingParties){
                 filingParties.push(party)                
                 if(party.counselName){
-                    const counsel: form10PartiesInfoType = JSON.parse(JSON.stringify(party))
+                    const counsel: form17PartiesInfoType = JSON.parse(JSON.stringify(party))
                     counsel.isCounsel = true
                     counsel.name = counsel.counselName+', counsel for '+counsel.name
                     filingParties.push(counsel)                    

@@ -183,19 +183,19 @@ import { namespace } from "vuex-class";
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import "@/store/modules/forms/form10";
-const form10State = namespace("Form10");
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
 import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
-import { form10SearchInfoType, orderInfoDataType } from '@/types/Information/Form10';
+import { form17SearchInfoType, orderInfoDataType } from '@/types/Information/Form17';
 
 @Component({
     components: {           
         Spinner
     }        
 }) 
-export default class Form10CaseInformation extends Vue {
+export default class Form17CaseInformation extends Vue {
 
     @informationState.Action
     public UpdatePartiesJson!: (newPartiesJson: partiesDataJsonDataType) => void
@@ -206,11 +206,11 @@ export default class Form10CaseInformation extends Vue {
     @informationState.Action
     public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
 
-    @form10State.Action
+    @form17State.Action
     public UpdateCurrentOrder!: (newCurrentOrder: previousCourtJsonInfoType) => void
     
-    @form10State.Action
-    public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
+    @form17State.Action
+    public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
     
     levelOfCourt = "Court of Appeal";
 
@@ -221,7 +221,7 @@ export default class Form10CaseInformation extends Vue {
     resultsReady = false;
     searching = false;
 
-    searchParams = {} as form10SearchInfoType;
+    searchParams = {} as form17SearchInfoType;
     notFound = false;
     orders: previousCourtJsonInfoType[] = [];
 
@@ -266,14 +266,14 @@ export default class Form10CaseInformation extends Vue {
 
     public selectOrder(courtOrder: previousCourtJsonInfoType){
         this.UpdateCurrentOrder(courtOrder);
-        this.UpdateCurrentOrderSingleJusticeId(null);            
-        this.$router.push({name: "fill-form10"});
+        this.UpdateCurrentCertificateOfCostsId(null);            
+        this.$router.push({name: "fill-form17"});
     }
 
     public otherOrder(){
         this.UpdateCurrentOrder(null);
-        this.UpdateCurrentOrderSingleJusticeId(null);            
-        this.$router.push({name: "fill-form10"});
+        this.UpdateCurrentCertificateOfCostsId(null);            
+        this.$router.push({name: "fill-form17"});
     }
 
     public extractInfo(courtOrders: previousCourtJsonInfoType[]){
