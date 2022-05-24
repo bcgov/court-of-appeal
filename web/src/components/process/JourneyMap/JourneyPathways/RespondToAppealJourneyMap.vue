@@ -493,7 +493,7 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Book of Authorities"){            
             this.windowTitle = "Book of Authorities";
             this.pathTypes = ["info"];
-            this.pathHeights = ['12rem'];            
+            this.pathHeights = ['23rem'];            
             this.bookOfAuthoritiesContent = true;
 
         } else if (contentType == "The Hearing"){

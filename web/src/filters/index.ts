@@ -231,7 +231,9 @@ Vue.filter('setProgressForPages', function(currentStep: number, pageNumbers: num
 			store.commit("Application/setPageProgress", { currentStep: currentStep, currentPage:page, progress:progress });
 })
 
-Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
+Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeaderLeft? , pageHeaderRight?){
+	
+
 
 	const body = 
 		`<!DOCTYPE html>
@@ -243,7 +245,20 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight){
 			`@page {
 				size: 8.5in 11in !important;
 				margin: .7in 0.7in 0.9in 0.7in !important;
-				font-size: 10pt !important;			
+				font-size: 10pt !important;
+				@top-left {
+					content: `+pageHeaderLeft+`;
+					white-space: pre;
+					font-size: 7pt;
+					color: #606060;
+				}
+				@top-right {
+					content: `+pageHeaderRight+`;
+					white-space: pre;
+					font-size: 7pt;
+					font-style: italic;
+					color: #606060;
+				}		
 				@bottom-left {
 					content: `+pageFooterLeft+`;
 					white-space: pre;
