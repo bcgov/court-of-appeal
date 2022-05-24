@@ -89,12 +89,14 @@ export default class Form10 extends Vue {
         const pdf_name = "form10-" + this.caseId;
         const el= document.getElementById("print");
         
-        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+        const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 10: ORDER OF A SINGLE JUSTICE"`;
+        const topRightText   = `"(Rule 66(3)(a) )"`;
+
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 10: ORDER OF A SINGLE JUSTICE  (Rule 66(3)(a) )"`;
         const bottomRightText = `" "`;
-        //const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 66(3)(c)"`;
-        //const bottomRightText = `"Form 10: Order from an application to vary the order of a justice"`;        
+                
         const url = '/form10/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
-        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText, topLeftText, topRightText);
 
         const body = {
             'html':pdfhtml,
