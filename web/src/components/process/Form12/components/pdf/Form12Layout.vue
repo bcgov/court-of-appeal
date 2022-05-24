@@ -9,8 +9,6 @@
             <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
         </div>
 
-        <div class="mt-5 mb-4 mx-auto text-center " style="font-weight: 600; font-size:14pt;">COURT OF APPEAL FOR BRITISH COLUMBIA</div>
-
 <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
@@ -31,7 +29,7 @@
                 AND: 
             </div>
         </div>
-        <div class="my-3 mx-0 row" style="font-weight: 600;">
+        <div class="mt-3 mx-0 row" style="font-weight: 600;">
             <div style="width:11%;" />                
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
@@ -39,11 +37,8 @@
             <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
         </div>
 
-<!-- <ORDER> -->
-        <div class="mt-5" style="display: block; text-align: center; font-weight: 600; font-size:14pt;">ORDER</div>
-
 <!-- <BEFORE> -->
-        <div class="mb-2 mx-0 row" style="font-weight: 600;">
+        <div class="mb-2 mt-4 mx-0 row" style="font-weight: 600;">
             <div>
                 BEFORE: 
             </div>
@@ -63,20 +58,25 @@
         </div>
         
 <!-- <THE APPEAL> -->
-        <div class="my-3 mx-0 row">
-            <div>
-                <b>THE APPEAL</b> from the judgment of the Honourable {{varyingOrderJudgeName}} of the <b class="text-danger">UNKOWN</b> Court 
-                of British Columbia at <b class="text-danger">UNKOWN</b>, British Columbia, dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
-                for hearing on <b class="text-danger">UNKOWN</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
+        <div class="my-2 mx-0 row">
+            <div class="mb-2">
+                The application of the {{applicantNamesFull}} and {{respondentNamesFull}} to vary the order of {{varyingOrderJudgeName}}
+                dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
+                for hearing on <b class="text-danger">UNKNOWN DATE</b>;
+            </div>
+            <div class="my-2">    
+                <b>AND ON HEARING</b> {{appearingParties}}; 
+            </div>
+            <div class="my-2">
                 <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
             </div>
         </div>
 
 <!-- <DISMISS> -->
-        <div class="my-3 mx-0 row">
+        <div class="my-2 mx-0 row">
             <div>
                 <b>THIS COURT ORDERS</b> that the application to vary the order of {{varyingOrderJudgeName}} 
-                Was the application to vary the order of <span v-if="result.orderAllowed"> allowed. </span> <span v-else> dismissed.</span>
+                is <span v-if="result.orderAllowed"> allowed. </span> <span v-else> dismissed.</span>
             </div>
         </div>
 
@@ -88,7 +88,7 @@
         </div>
 
 <!-- <APPROVED> -->
-        <div class="mb-3 mt-5 mx-0 row">
+        <div class="mb-3 mt-4 mx-0 row">
             <div  style="width:50%;">APPROVED AS TO FORM:</div>
             <div  style="width:50%;">BY THE COURTS</div>
         </div>
@@ -110,7 +110,7 @@
         </div>
 
 <!-- <Respondents Signature> -->
-        <div class="mt-5 mx-0 row">
+        <div class="mt-4 mx-0 row">
             <div  style="width:50%;">
                 <div>....................................................................</div>
                 <div v-for="party,inx in appearingRespondents" :key="'appl'+inx"> 
