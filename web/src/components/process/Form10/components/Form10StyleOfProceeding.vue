@@ -262,6 +262,29 @@
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
             </b-card>
+
+<!-- HEARING DATE -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    When was the hearing held?                    
+                </b-col>
+                <b-col>                   
+                    <b-card                                                
+                        style="margin:0 1px; padding:0; float: center;" 
+                        :border-variant="state.hearingDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form10Info.hearingDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
 <!-- <HEARING LOCATION> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -481,11 +504,12 @@
                     </b-col>
                     <b-col class="ml-1 mt-2">                         
                         <div>
-                            <b-form-input
+                            <b-form-textarea
                                 :state="state.ordersJusticeMake"
-                                class="mt-2"                                    
+                                class="mt-2" 
+                                rows="8"                                   
                                 v-model="form10Info.ordersJusticeMake">
-                            </b-form-input>
+                            </b-form-textarea>
                         </div>                                             
                     </b-col>
                 </b-row>
@@ -516,7 +540,7 @@
                     <b-col>                    
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6"  
+                            rows="8"  
                             :state="state.furtherOrders"                                                          
                             v-model="form10Info.furtherOrders">
                         </b-form-textarea>                    
@@ -706,6 +730,7 @@ export default class Form10StyleOfProceeding extends Vue {
         appellantsInfo: null,
         respondentsInfo: null,
         judgeNames: null,        
+        hearingDate: null,
         hearingLocation: null,
         hearingLocationOther: null,     
         dateOfJudgement: null,
@@ -869,6 +894,7 @@ export default class Form10StyleOfProceeding extends Vue {
             appellantsInfo: null,
             respondentsInfo: null,
             judgeNames: null,        
+            hearingDate: null,
             hearingLocation: null,
             hearingLocationOther: null,     
             dateOfJudgement: null,      
@@ -893,6 +919,7 @@ export default class Form10StyleOfProceeding extends Vue {
         this.state.appellantsInfo = this.form10Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form10Info.respondents?.length>0? null :false;            
         this.state.judgeNames = this.form10Info.judgeNames?.length>0? null :false;
+        this.state.hearingDate = this.form10Info.hearingDate? null: false;
         
         this.state.hearingLocation =  this.hearingLocation? null :false
         this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null

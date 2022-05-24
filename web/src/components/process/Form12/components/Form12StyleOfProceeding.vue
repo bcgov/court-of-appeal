@@ -263,6 +263,28 @@
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
             </b-card>
+<!-- HEARING DATE -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    When was the hearing held?                    
+                </b-col>
+                <b-col>                   
+                    <b-card                                                
+                        style="margin:0 1px; padding:0; float: center;" 
+                        :border-variant="state.hearingDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form12Info.hearingDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
 <!-- <HEARING LOCATION> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -678,6 +700,7 @@ export default class Form12StyleOfProceeding extends Vue {
         appellantsInfo: null,
         respondentsInfo: null,
         judgeNames: null,        
+        hearingDate: null,
         hearingLocation: null,
         hearingLocationOther: null,     
         dateOfJudgement: null,
@@ -848,6 +871,7 @@ export default class Form12StyleOfProceeding extends Vue {
             appellantsInfo: null,
             respondentsInfo: null,
             judgeNames: null,        
+            hearingDate: null,
             hearingLocation: null,
             hearingLocationOther: null,     
             dateOfJudgement: null,
@@ -870,7 +894,7 @@ export default class Form12StyleOfProceeding extends Vue {
         this.state.appellantsInfo = this.form12Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form12Info.respondents?.length>0? null :false;            
         this.state.judgeNames = this.form12Info.judgeNames?.length>0? null :false;
-        
+        this.state.hearingDate = this.form12Info.hearingDate? null: false;
         this.state.hearingLocation =  this.hearingLocation? null :false
         this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null
         
