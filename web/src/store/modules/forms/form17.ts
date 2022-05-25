@@ -9,8 +9,7 @@ class Form17 extends VuexModule {
 
     public form17FormsJson: form17FormsJsonDataType[] = [];
     public form17Info = {} as form17DataInfoType; 
-    public currentCertificateOfCostsId = null; 
-    public currentOrder = {} as previousCourtJsonInfoType;
+    public currentCertificateOfCostsId = null;
 
     @Mutation
     public setForm17FormsJson(form17FormsJson: form17FormsJsonDataType[]): void {   
@@ -37,16 +36,7 @@ class Form17 extends VuexModule {
     @Action
     public UpdateCurrentCertificateOfCostsId(newCurrentCertificateOfCostsId: string): void {
         this.context.commit('setCurrentCertificateOfCostsId', newCurrentCertificateOfCostsId);
-    }  
-
-    @Mutation
-    public setCurrentOrder(currentOrder: previousCourtJsonInfoType): void {   
-        this.currentOrder = currentOrder;
-    }    
-    @Action
-    public UpdateCurrentOrder(newCurrentOrder: previousCourtJsonInfoType): void {
-        this.context.commit('setCurrentOrder', newCurrentOrder);
-    }
+    }   
     
 }
 

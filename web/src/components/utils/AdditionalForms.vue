@@ -13,6 +13,11 @@
                 Offer To Settle Costs (Form 16)                
             </li>
             <li class="link-button" 
+                @click="startNewForm17Document"
+                target="_blank">
+                Certificate of Costs (Form 17)                
+            </li>
+            <li class="link-button" 
                 @click="downloadInstructions('ca-cover-page')"
                 target="_blank">
                 CA Cover Page template                
@@ -65,10 +70,13 @@ import { namespace } from "vuex-class";
 import ManagingAppealProcessPg from '../process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 import InstructionWindowFooter from '../process/JourneyMap/components/InstructionWindowFooter.vue';
 import PathSidebar from '../process/JourneyMap/components/PathSidebar.vue';
+import { GetInstructionFile } from './GetInstructionFile';
 
 import "@/store/modules/forms/form16";
-import { GetInstructionFile } from './GetInstructionFile';
 const form16State = namespace("Form16");
+
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
 @Component({
     components:{
@@ -81,6 +89,9 @@ export default class AdditionalForms extends Vue {
 
     @form16State.Action
     public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
+
+    @form17State.Action
+    public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
     
     showWindow = false;
     windowTitle = '';
@@ -114,6 +125,11 @@ export default class AdditionalForms extends Vue {
     public startNewForm16Document(){
         this.UpdateCurrentOfferToSettleCostsId(null);
         this.$router.push({name: "start-form16" });
+    }
+
+    public startNewForm17Document(){
+        this.UpdateCurrentCertificateOfCostsId(null);
+        this.$router.push({name: "start-form17" });
     }
 
     public downloadInstructions(pdf_name){

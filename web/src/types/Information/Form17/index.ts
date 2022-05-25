@@ -53,31 +53,31 @@ export interface form17DataInfoType {
     formSevenNumber:string;
     appellants: form17PartiesInfoType[];
     respondents: form17PartiesInfoType[];
-    requiresManualEntry: boolean;
     appellantNames: string;
     respondentNames: string;
-    judgeNames: judgeInfoType[]; 
-    hearingLocation: hearingLocationsInfoType;   
-    dateOfJudgement: string;
+    // judgeNames: judgeInfoType[]; 
+    // hearingLocation: hearingLocationsInfoType;   
+    // dateOfJudgement: string;
     
-    filingParties: form17PartiesInfoType[];
-    appearingParties: form17PartiesInfoType[];
+    allowedCostsParties: string[];
+    payingCostsParties: string[];
+    amount: string;
     
-    judgmentReserved: boolean;
-    hearingHeldDate: string;
+    // judgmentReserved: boolean;
+    // hearingHeldDate: string;
     
-    reasonsIndicated: boolean;
-    reasonsDate: string;
+    // reasonsIndicated: boolean;
+    // reasonsDate: string;
 
-    otherOrders: boolean;
-    furtherOrders?: string;
+    // otherOrders: boolean;
+    // furtherOrders?: string;
 
-    applicationFor: applicationForInfoType;
-    ordersJusticeMake: string;
+    // applicationFor: applicationForInfoType;
+    // ordersJusticeMake: string;
 
     completionDate?: string;
     version?: string;
-    previousCourts?: previousCourtJsonInfoType;
+    // previousCourts?: previousCourtJsonInfoType;
 }
 
 export interface applicationForInfoType{

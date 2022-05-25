@@ -91,8 +91,8 @@ export default class Form17 extends Vue {
         
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;
-        //const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 66(3)(c)"`;
-        //const bottomRightText = `"Form 17: Order from an application to vary the order of a justice"`;        
+        //const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 77"`;
+        //const bottomRightText = `"Form 17: Certificate of Costs"`;        
         const url = '/form17/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 

@@ -182,8 +182,6 @@ export default class Form17Layout extends Vue {
             this.applicantNames.push(fullTitle);            
             this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
         }
-        this.applicationType = this.result.applicationFor?.name =='other' ? this.result.applicationFor.other :this.result.applicationFor?.name
-        this.hearingDate = this.result.judgmentReserved? this.result.hearingHeldDate : this.result.dateOfJudgement;
         this.extractAppearingParties();
     }
 
