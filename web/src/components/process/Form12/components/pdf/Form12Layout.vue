@@ -62,7 +62,7 @@
             <div class="mb-2">
                 The application of the {{applicantNamesFull}} and {{respondentNamesFull}} to vary the order of {{varyingOrderJudgeName}}
                 dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
-                for hearing on <b class="text-danger">UNKNOWN DATE</b>;
+                for hearing on {{result.hearingDate | beautify-date-full-no-weekday}};
             </div>
             <div class="my-2">    
                 <b>AND ON HEARING</b> {{appearingParties}}; 

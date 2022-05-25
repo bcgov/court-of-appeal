@@ -8,6 +8,8 @@
             style="font-size: 42px; font-weight: 700;">            
             Orders Checklist
             <p style="font-size: 18px; font-weight: 300;">
+                Some preliminary questions will appear below to ensure 
+                that you are directed to the correct form of order to prepare.
             </p>
         </b-card-header>      
 

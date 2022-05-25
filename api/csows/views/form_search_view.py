@@ -28,11 +28,12 @@ class FormSearchView(APIView):
         lastName = request.query_params.get("lastName")
         searchBy = request.query_params.get("searchBy")
         organizationName = request.query_params.get("organizationName")
+        addChambersHearing = request.query_params.get("addChambersHearing")
 
         if not caseNumber:
             return HttpResponseBadRequest("Missing request parameters")
 
-        result = self.form_search.execute_search(caseNumber)
+        result = self.form_search.execute_search(caseNumber, addChambersHearing)
         if (result == 'NOT FOUND'):
             return HttpResponseNotFound()
 

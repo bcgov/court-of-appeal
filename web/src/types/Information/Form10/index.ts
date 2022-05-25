@@ -58,24 +58,19 @@ export interface form10DataInfoType {
     appellantNames: string;
     respondentNames: string;
     judgeNames: judgeInfoType[]; 
+    hearingDate: string;
     hearingLocation: hearingLocationsInfoType;   
-    dateOfJudgement: string;
-    
+    dateOfJudgement: string;    
     filingParties: form10PartiesInfoType[];
-    appearingParties: form10PartiesInfoType[];
-    
+    appearingParties: form10PartiesInfoType[];    
     judgmentReserved: boolean;
-    hearingHeldDate: string;
-    
+    hearingHeldDate: string;    
     reasonsIndicated: boolean;
     reasonsDate: string;
-
     otherOrders: boolean;
     furtherOrders?: string;
-
     applicationFor: applicationForInfoType;
     ordersJusticeMake: string;
-
     completionDate?: string;
     version?: string;
     previousCourts?: previousCourtJsonInfoType;

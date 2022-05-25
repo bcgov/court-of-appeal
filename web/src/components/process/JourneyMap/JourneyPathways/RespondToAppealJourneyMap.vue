@@ -60,7 +60,7 @@
         <form-icon   
             style="left: 68%"
             :twoPages="false"
-            stepTitle="Apply for Leave to Appeal"
+            stepTitle="Apply/Respond to Leave to Appeal"
             stepTitleOptional="(Optional)"
             @action="displayWindow('Apply for Leave to Appeal')"
             @completed="completed"            
