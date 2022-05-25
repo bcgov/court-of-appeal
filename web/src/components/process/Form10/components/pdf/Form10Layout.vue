@@ -65,7 +65,7 @@
         <div class="my-3 mx-0 row">
             <div>
                 <b>THE APPLICATION OF</b> {{applicantNamesFull}} and {{respondentNamesFull}} for {{applicationType}} coming on
-                for hearing on <b class="text-danger">UNKNOWN DATE</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
+                for hearing on {{result.hearingDate | beautify-date-full-no-weekday}}; <b>AND ON HEARING</b> {{appearingParties}}; 
                 <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
             </div>
         </div>
