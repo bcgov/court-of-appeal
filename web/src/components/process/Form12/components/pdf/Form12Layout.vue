@@ -6,7 +6,7 @@
         </div> 
 
         <div class="my-0">
-            <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
+            <div class="text-right" >Court of Appeal File No. <b class="ml-3" style="text-transform: uppercase">{{result.formSevenNumber}}</b></div>       
         </div>
 
 <!-- <BETWEEN> -->
@@ -60,7 +60,7 @@
 <!-- <THE APPEAL> -->
         <div class="my-2 mx-0 row">
             <div class="mb-2">
-                The application of the {{applicantNamesFull}} and {{respondentNamesFull}} to vary the order of {{varyingOrderJudgeName}}
+                The application of the {{applyingParties}} to vary the order of {{varyingOrderJudgeName}}
                 dated {{result.varyingOrderDate | beautify-date-full-no-weekday}}, coming on
                 for hearing on {{result.hearingDate | beautify-date-full-no-weekday}};
             </div>
@@ -90,36 +90,20 @@
 <!-- <APPROVED> -->
         <div class="mb-3 mt-4 mx-0 row">
             <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">BY THE COURTS</div>
+            <div  style="width:50%;"></div>
         </div>
 
-<!-- <Appellants Signature> -->
-        <div class="my-5 mx-0 row">
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div v-for="party,inx in appearingAppellants" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
-                </div> 
-                <div v-if="applicantNamesFull">{{applicantNamesFull}}</div>              
-            </div>
-
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div>Deputy Registrar</div>
+<!-- <Parties Signature> -->
+        <div  style="display:inline;" class="my-5 mx-0" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+            <div  style="width:50%; display:inline-block; ">                
+                <div style="border-top:1px dashed grey; width:94%; margin:3rem 0 0 0;" > 
+                    {{party.name}}
+                </div>                               
             </div>
         </div>
 
-<!-- <Respondents Signature> -->
-        <div class="mt-4 mx-0 row">
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div v-for="party,inx in appearingRespondents" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
-                </div>
-                <div v-if="respondentNamesFull">{{respondentNamesFull}}</div>
-            </div>
-            <div  style="width:50%;"/>
-        </div>
+        
+
 
 <!-- <Instructions> -->
         <!-- <div class="mt-5 mx-0 row" style="text-align: justify;">
@@ -142,8 +126,9 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
-import { form12DataInfoType } from '@/types/Information/Form12';
+import { form12DataInfoType, form12PartiesInfoType } from '@/types/Information/Form12';
 import {getPartyTitles, getFullName} from '../PartyTitlesForm12'
+
 
 @Component
 export default class Form12Layout extends Vue {
@@ -162,13 +147,11 @@ export default class Form12Layout extends Vue {
     respondentNamesFull='';
     varyingOrderJudgeName=''
     appearingParties='';
+    applyingParties=''
 
-    appearingAppellants =[]
-    appearingRespondents =[]
+    signingPartyList =[]    
 
     mounted(){
-        // this.dataReady = false;
-        //console.log(this.result)
         this.extractInfo();       
         this.dataReady = true;
     }
@@ -194,28 +177,61 @@ export default class Form12Layout extends Vue {
 
         this.varyingOrderJudgeName = this.result.varyingOrderJudgeName=='Other'? this.result.varyingOrderJudgeNameOther :this.result.varyingOrderJudgeName;        
         this.extractAppearingParties();
+        this.extractApplyingParties();
     }
 
     public extractAppearingParties(){
         let appellantnames = ''
         let respondentnames = ''
-        this.appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
-        this.appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
+        const appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
+        const appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
 
-        for(const appInx in this.appearingAppellants){                        
-            appellantnames = this.combineNames(appInx, this.appearingAppellants[appInx].name, appellantnames, this.appearingAppellants.length)
+        for(const appInx in appearingAppellants){                        
+            appellantnames = this.combineNames(appInx, appearingAppellants[appInx].name, appellantnames, appearingAppellants.length)
         }
 
-        for(const resInx in this.appearingRespondents){            
-            respondentnames = this.combineNames(resInx, this.appearingRespondents[resInx].name, respondentnames, this.appearingRespondents.length)
+        for(const resInx in appearingRespondents){            
+            respondentnames = this.combineNames(resInx, appearingRespondents[resInx].name, respondentnames, appearingRespondents.length)
         }
 
-        //console.log(appellantnames)
-        //console.log(respondentnames)
+        this.extractSigningPartyList(appearingAppellants, appearingRespondents)
+
         this.appearingParties += appellantnames
         this.appearingParties += (appellantnames && respondentnames)?' and ':''
-        this.appearingParties += respondentnames
- 
+        this.appearingParties += respondentnames 
+    }
+
+    public extractSigningPartyList(appearingAppellants, appearingRespondents){
+        const registrar = {} as form12PartiesInfoType;
+        registrar.name = 'Deputy Registrar (BY THE COURTS)';
+
+        if(appearingAppellants.length>1)
+            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingAppellants.slice(1), ...appearingRespondents]
+        else if(appearingAppellants.length==1)
+            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingRespondents]
+        else if(appearingAppellants.length==0 && appearingRespondents.length>1)
+            this.signingPartyList =[appearingRespondents[0], registrar, ...appearingRespondents.slice(1)]
+        else
+            this.signingPartyList =[appearingRespondents[0], registrar]
+    }
+
+    public extractApplyingParties(){
+        let appellantnames = ''
+        let respondentnames = ''
+        const applyingAppellants = this.result.applyingParties.filter(party=> !party.responding)
+        const applyingRespondents = this.result.applyingParties.filter(party=> party.responding)
+
+        for(const appInx in applyingAppellants){                        
+            appellantnames = this.combineNames(appInx, applyingAppellants[appInx].name, appellantnames, applyingAppellants.length)
+        }
+
+        for(const resInx in applyingRespondents){            
+            respondentnames = this.combineNames(resInx, applyingRespondents[resInx].name, respondentnames, applyingRespondents.length)
+        }
+
+        this.applyingParties += appellantnames
+        this.applyingParties += (appellantnames && respondentnames)?' and ':''
+        this.applyingParties += respondentnames
     }
     
     public combineNames(inx, fullTitle, namesFull, length){
