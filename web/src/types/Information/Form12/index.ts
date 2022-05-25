@@ -1,5 +1,5 @@
 import { hearingLocationsInfoType } from "@/types/Common";
-import { applicantJsonDataType, previousCourtJsonInfoType} from "../json"
+import { applicantJsonDataType, chambersHearingJsonInfoType, previousCourtJsonInfoType} from "../json"
 
 
 export interface form12FormsJsonDataType {
@@ -65,7 +65,6 @@ export interface form12DataInfoType {
     varyingOrderJudgeName: string;
     varyingOrderJudgeNameOther: string
     varyingOrderDate: string;
-    filingParties: form12PartiesInfoType[];
     appearingParties: form12PartiesInfoType[];
     orderAllowed: boolean;
     otherOrders: boolean;
@@ -74,6 +73,7 @@ export interface form12DataInfoType {
     completionDate?: string;
     version?: string;
     previousCourts?: previousCourtJsonInfoType;
+    chambersHearing?: chambersHearingJsonInfoType;
 }
 
 export interface judgeInfoType {   

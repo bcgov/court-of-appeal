@@ -9,21 +9,19 @@
                 <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
                     <b-form-group
                         class="labels"                
-                        label="Appellants:" 
-                        label-for="appellants">
+                        label="Appellants:">
                         <p class="content text-primary">
                             You must enter the full names of all the appellant(s) as 
                             it appears on the reasons for judgment or notice of appeal.
                         </p>  
                         <span 
-                            v-if="form12Info.appellants.length == 0 && !AddNewAppellantForm" 
-                            id="appellants" 
+                            v-if="form12Info.appellants.length == 0 && !AddNewAppellantForm"
                             class="text-muted ml-2 my-2">No appellants have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form12Info.appellants.length > 0"                                                                
-                            id="appellants"
+                            v-else-if="form12Info.appellants.length > 0"
                             class="mt-2"
+                            style="font-size: 16px;"
                             :items="form12Info.appellants"
                             :fields="partyFields"
                             head-row-variant="primary"
@@ -35,14 +33,13 @@
                                 <span v-if="data.item.isOrganization" style="font-size: 16px;">
                                     Organization
                                 </span>
-                                    <span v-else style="font-size: 16px;">
+                                <span v-else style="font-size: 16px;">
                                     Individual
                                 </span>                                    
                             </template>
 
-                            <template v-slot:cell(name)="data" >
-                                <span style="font-size: 16px;">
-                                    {{data.item.name}}</span>
+                            <template v-slot:cell(name)="data" >                                
+                                    {{data.item.name}}
                             </template>
                             
                             <template v-slot:cell(edit)="data" >   
@@ -84,24 +81,22 @@
                 <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
                     <b-form-group
                         class="labels"                
-                        label="Respondents:" 
-                        label-for="respondents">
+                        label="Respondents:">
                         <p class="content text-primary">
                             You must enter full names of all the respondent(s) as it 
                             appears on reasons for judgment or notice of appeal.
                         </p> 
                         <span 
                             v-if="form12Info.respondents.length == 0 && !AddNewRespondentForm" 
-                            id="respondents" 
                             class="text-muted ml-2 my-2">No respondents have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form12Info.respondents.length > 0"                                                                
-                            id="respondents"
+                            v-else-if="form12Info.respondents.length > 0"
                             class="mt-2"
                             :items="form12Info.respondents"
                             :fields="partyFields"
                             head-row-variant="primary"
+                            style="font-size: 16px;"
                             borderless    
                             small                                            
                             responsive="sm"
@@ -115,15 +110,11 @@
                                 </span>                                    
                             </template>
 
-                            <template v-slot:cell(name)="data" >
-                                <span style="font-size: 16px;">
-                                    {{data.item.name}}</span>
-                            </template>
                             
                             <template v-slot:cell(edit)="data" >   
                                 <div style="float: right;">                                                                     
                                     <b-button 
-                                        class="mr-2" 
+                                        class="mr-2 border-0" 
                                         size="sm" 
                                         variant="transparent" 
                                         @click="removeRespondent(data)">
@@ -133,7 +124,7 @@
                                             variant="danger"/>
                                     </b-button>
                                     <b-button 
-                                        size="sm" 
+                                        size="sm border-0" 
                                         variant="transparent" 
                                         @click="editRespondent(data)">
                                         <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
@@ -364,179 +355,155 @@
                 </b-col>
             </b-row> 
             <!-- {{form12Info.applyingParties}}    -->
-
-            <div v-if="this.form12Info.judgeNames && this.form12Info.judgeNames.length>0 && form12Info.applyingParties.length > 0">   
+            
 <!-- <Who Made Order-VaryOrderJudgeName> -->
-                <b-row class="mt-4 question">
-                    <b-col cols="7" class="labels">
-                        Who made the order that you were seeking to vary?                                
-                    </b-col>
-                    <b-col class="ml-1">   
-                        <b-form-select 
-                            stacked               
-                            style="width:100%"                                    
-                            v-model="form12Info.varyingOrderJudgeName"
-                            text-field="text"
-                            value-field="text"                    
-                            :options="justiceNameOptions">                            
-                        </b-form-select>
-                        <b-row v-if="form12Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
-                            <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
-                            <div style="width:74%;">
-                                <b-form-input 
-                                    style="margin-top:0.5rem;"                                
-                                    :state="state.varyingOrderJudgeNameOther"
-                                    v-model="form12Info.varyingOrderJudgeNameOther" 
-                                />
-                            </div>
-                        </b-row> 
-                        <span
-                            v-if="(state.varyingOrderJudgeName != null)" 
-                            style="font-size: 0.75rem;" 
-                            class="bg-white text-danger"><b-icon-exclamation-circle/>
-                            Specify who made the order that you were seeking to vary.
-                        </span>
-                    </b-col>
-                </b-row>   
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Who made the order that you were seeking to vary?                                
+                </b-col>
+                <b-col class="ml-1">   
+                    <b-form-select 
+                        stacked               
+                        style="width:100%"                                    
+                        v-model="form12Info.varyingOrderJudgeName"
+                        text-field="text"
+                        value-field="text"                    
+                        :options="justiceNameOptions">                            
+                    </b-form-select>
+                    <b-row v-if="form12Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
+                        <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
+                        <div style="width:74%;">
+                            <b-form-input 
+                                style="margin-top:0.5rem;"                                
+                                :state="state.varyingOrderJudgeNameOther"
+                                v-model="form12Info.varyingOrderJudgeNameOther" 
+                            />
+                        </div>
+                    </b-row> 
+                    <span
+                        v-if="(state.varyingOrderJudgeName != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify who made the order that you were seeking to vary.
+                    </span>
+                </b-col>
+            </b-row>   
 <!-- <Date of Order> -->
-                <b-row class="mt-4 question">
-                    <b-col cols="7" class="labels">
-                        What was the date of the order that were seeking to vary?                    
-                    </b-col>
-                    <b-col>                   
-                        <b-card                        
-                            class="mt-2" 
-                            style="padding: 0; float: center;" 
-                            :border-variant="state.varyingOrderDate == false?'danger': 'muted'">
-                            <div class="vuetify">
-                                <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                    <v-date-picker
-                                        v-model="form12Info.varyingOrderDate"                           
-                                        color="warning"             
-                                        :allowed-dates="allowedDates"                            
-                                        header-color="red"
-                                    ></v-date-picker>                            
-                                </v-app>
-                            </div>    
-                        </b-card>                    
-                    </b-col>
-                </b-row>
-<!-- <FilingParties-Made Application> -->
-                <b-row class="mt-4 question">
-                    <b-col cols="7" class="labels">
-                        Who made the application?                                
-                    </b-col>
-                    <b-col class="ml-1">   
-                        <b-form-checkbox-group 
-                            stacked
-                            @change="filingPartiesChanged()"               
-                            style="width:100%"                        
-                            :state="state.filingParties"                                      
-                            v-model="form12Info.filingParties">
-                            <b-form-checkbox
-                                :value="applyingparty"
-                                v-for="applyingparty,inx in form12Info.applyingParties"
-                                :key="'appling-party-'+inx">
-                                    {{applyingparty.name}}
-                            </b-form-checkbox>
-                        </b-form-checkbox-group> 
-                    </b-col>
-                </b-row> 
-                <!-- {{form12Info.filingParties}} -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    What was the date of the order that were seeking to vary?                    
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.varyingOrderDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form12Info.varyingOrderDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
 
-                <div v-if="form12Info.filingParties && form12Info.filingParties.length > 0 && form12Info.varyingOrderJudgeName">
+            
 <!-- <Appearing Partie -Attended Hearing> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Enter the names of parties who attended at the hearing:                                
-                        </b-col>
-                        <b-col class="ml-1">   
-                            <b-form-checkbox-group 
-                                stacked                                               
-                                style="width:100%"
-                                @change="updated++"                       
-                                :state="state.appearingParties"                                      
-                                v-model="form12Info.appearingParties">
-                                <div v-for="filingparty,inx in getFilingParties()"
-                                    :key="'appling-party-'+inx">
-                                    <b-form-checkbox
-                                        :value="filingparty">
-                                            {{filingparty.name}}
-                                    </b-form-checkbox>                                    
-                                </div>
-                            </b-form-checkbox-group> 
-                        </b-col>
-                    </b-row>
-                    <!-- {{form12Info.appearingParties}} -->
-<!-- <Order Allowed> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            The application to vary the order of {{form12Info.varyingOrderJudgeName}} was:
-                        </b-col>
-                        <b-col class="ml-1 mt-2">
-                            <b-form-radio-group
-                                :state="state.orderAllowed"                 
-                                v-model="form12Info.orderAllowed"
-                                :options="allowedOptions"                
-                            ></b-form-radio-group>
-                            <span
-                                v-if="(state.orderAllowed != null)" 
-                                style="font-size: 0.75rem;" 
-                                class="bg-white text-danger"><b-icon-exclamation-circle/>
-                                Specify whether the order was allowed or dismissed.
-                            </span>
-                        </b-col>
-                    </b-row>
-<!-- <Other Order> -->
-                    <b-row class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Did the Justices’ make any other orders?
-                        </b-col>
-                        <b-col class="ml-1 mt-2">
-                            <b-form-radio-group                                              
-                                v-model="form12Info.otherOrders"
-                                :options="responseOptions"                
-                            ></b-form-radio-group>
-                            <span
-                                v-if="(state.otherOrders != null)" 
-                                style="font-size: 0.75rem;" 
-                                class="bg-white text-danger"><b-icon-exclamation-circle/>
-                                Specify whether the Justices’ made any other orders.
-                            </span>
-                        </b-col>
-                    </b-row>
-<!-- <Other Order Details> -->
-                    <b-row v-if="form12Info.otherOrders" class="mt-4 question">
-                        <b-col cols="7" class="labels">
-                            Enter the other orders that the Justices' made:                                                            
-                        </b-col>
-                        <b-col>                    
-                            <b-form-textarea                
-                                style="width:100%"                                
-                                max-rows="6"  
-                                :state="state.furtherOrders"                                                          
-                                v-model="form12Info.furtherOrders">
-                            </b-form-textarea>                    
-                        </b-col>                
-                    </b-row>
-                </div>
+            <b-row class="mt-4 question">
+                <b-col class="labels">
+                    Enter the names of parties who attended at the hearing:                                
+                </b-col>
+            </b-row>
+            <b-row class="mx-3">
+                <b-col class="mx-1 p-2 bg-light border-light rounded">   
+                    <b-form-checkbox-group 
+                        stacked                                               
+                        style="width:100%"
+                        @change="updated++"                       
+                        :state="state.appearingParties"                                      
+                        v-model="form12Info.appearingParties">
 
-            </div>  
+                        <div v-for="filingparty,inx in partyNames" :key="'appling-party-'+inx">
+                            <b-row>
+                                <b-col>
+                                    <b-form-checkbox :value="filingparty">
+                                        {{filingparty.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                                <b-col>
+                                    <b-form-checkbox v-if="filingparty.counselName" :value="getCounselParty(filingparty)">
+                                        {{filingparty.counselName}}, counsel for {{filingparty.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                            </b-row>                        
+                        </div>
+
+                    </b-form-checkbox-group> 
+                </b-col>
+            </b-row>
+            <!-- {{form12Info.appearingParties}} -->
+<!-- <Order Allowed> -->
+            <b-row class="mt-4 question" v-if="form12Info.varyingOrderJudgeName">
+                <b-col cols="7" class="labels" v-if="form12Info.varyingOrderJudgeName=='Other'">
+                    The application to vary the order of {{form12Info.varyingOrderJudgeNameOther}} was:
+                </b-col>
+                <b-col cols="7" class="labels" v-else>
+                    The application to vary the order of {{form12Info.varyingOrderJudgeName}} was:
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-radio-group
+                        :state="state.orderAllowed"                 
+                        v-model="form12Info.orderAllowed"
+                        :options="allowedOptions"                
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(state.orderAllowed != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether the order was allowed or dismissed.
+                    </span>
+                </b-col>
+            </b-row>
+<!-- <Other Order> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Did the Justices’ make any other orders?
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-radio-group                                              
+                        v-model="form12Info.otherOrders"
+                        :options="responseOptions"                
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(state.otherOrders != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether the Justices’ made any other orders.
+                    </span>
+                </b-col>
+            </b-row>
+<!-- <Other Order Details> -->
+            <b-row v-if="form12Info.otherOrders" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Enter the other orders that the Justices' made:                                                            
+                </b-col>
+                <b-col>                    
+                    <b-form-textarea                
+                        style="width:100%"                                
+                        max-rows="6"  
+                        :state="state.furtherOrders"                                                          
+                        v-model="form12Info.furtherOrders">
+                    </b-form-textarea>                    
+                </b-col>                
+            </b-row>
+             
 
         </div>          
-<!-- <Authorizing Name> -->
-        <!-- <b-row class="my-3 question" style="padding: 0;">
-            <b-col cols="7" class="labels">
-                Name of lawyer or party authorizing filing of this Form:                                
-            </b-col>
-            <b-col>
-                <b-form-input                    
-                    v-model="form12Info.authorizedName"                        
-                    :state ="state.authorizedName">
-                </b-form-input>
-                <div class="ml-2 mt-1" style="font-weight: 600; font-size:11pt;">Electronically filed</div>
-            </b-col>
-        </b-row>             -->
 
         <hr class="mt-5"/>    
 
@@ -591,7 +558,7 @@ const form12State = namespace("Form12");
 
 
 import { form12DataInfoType, form12PartiesInfoType } from '@/types/Information/Form12';
-import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType, chambersHearingJsonInfoType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
 import AddJudgeForm from './AddJudgeForm.vue';
@@ -618,7 +585,7 @@ export default class Form12StyleOfProceeding extends Vue {
     public hearingLocationsInfo!: hearingLocationsInfoType[];
 
     @form12State.State
-    public currentOrder: previousCourtJsonInfoType;
+    public currentOrder: chambersHearingJsonInfoType;
 
     @form12State.State
     public form12Info: form12DataInfoType;
@@ -671,26 +638,10 @@ export default class Form12StyleOfProceeding extends Vue {
     ]; 
 
     partyFields = [
-        {
-            key:'organization',          
-            label:'Party Type',                  
-            thClass: 'text-white bg-court',
-            thStyle: 'font-size: 1rem;',            
-            sortable:false            
-        }, 
-        {
-            key:'name',          
-            label:'Party Name',   
-            thClass: 'text-white bg-court', 
-            thStyle: 'font-size: 1rem;',          
-            sortable:false            
-        }, 
-        {
-            key:'edit',          
-            label:'',   
-            thClass: 'text-white bg-court',           
-            sortable:false            
-        }        
+        { key:'organization', label:'Party Type', thClass: 'text-white bg-court', thStyle: '', sortable:false }, 
+        { key:'name', label:'Party Name', thClass: 'text-white bg-court', thStyle: '',  sortable:false  },
+        { key:'counselName', label:'Counsel Name', thClass: 'text-white bg-court', thStyle: '',  sortable:false  },
+        { key:'edit', label:'', thClass: 'text-white bg-court', sortable:false }        
     ]
 
     judgeFields = [
@@ -712,7 +663,6 @@ export default class Form12StyleOfProceeding extends Vue {
         varyingOrderJudgeName: null,
         varyingOrderJudgeNameOther: null,
         varyingOrderDate: null,
-        filingParties: null,
         appearingParties: null,
         orderAllowed: null,
         otherOrders: null,
@@ -747,19 +697,18 @@ export default class Form12StyleOfProceeding extends Vue {
             form12Data.respondents = this.partiesJson.respondents
             form12Data.formSevenNumber = this.fileNumber; 
             form12Data.appearingParties = [];
-            form12Data.applyingParties = [];
-            form12Data.filingParties = [];           
-            form12Data.previousCourts = this.currentOrder;
+            form12Data.applyingParties = [];        
+            form12Data.chambersHearing = this.currentOrder;
             this.UpdateForm12Info(form12Data);
             this.initHearingLocation()
             this.revaluateForm12Data()
-            this.extractJudgeNames()
+            this.extractJudgeName()
             this.saveForm(true);
         }          
     }
 
-    public extractJudgeNames(){
-        const currentOrder = this.form12Info.previousCourts
+    public extractJudgeName(){
+        const currentOrder = this.form12Info.chambersHearing
         const judgeName = currentOrder? (
             (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
             (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
@@ -775,7 +724,7 @@ export default class Form12StyleOfProceeding extends Vue {
                 this.form12Info.varyingOrderJudgeName='Other'
                 this.form12Info.varyingOrderJudgeNameOther=judgeName
             }
-            this.form12Info.varyingOrderDate= currentOrder.JudgmentDate.slice(0,10)            
+            this.form12Info.varyingOrderDate= currentOrder.JudgmentDate? currentOrder.JudgmentDate.slice(0,10) : currentOrder.ScheduleDate.slice(0,10)           
         }
         else{
             this.form12Info.varyingOrderJudgeName='';
@@ -884,7 +833,6 @@ export default class Form12StyleOfProceeding extends Vue {
             varyingOrderJudgeName: null,
             varyingOrderJudgeNameOther: null,
             varyingOrderDate: null,
-            filingParties: null,
             appearingParties: null,
             orderAllowed: null,
             otherOrders: null,
@@ -910,7 +858,6 @@ export default class Form12StyleOfProceeding extends Vue {
         this.state.varyingOrderJudgeName = this.form12Info.varyingOrderJudgeName? null :false;
         this.state.varyingOrderJudgeNameOther = this.form12Info.varyingOrderJudgeName=='Other' && !this.form12Info.varyingOrderJudgeNameOther? false: null;
         this.state.varyingOrderDate = this.form12Info.varyingOrderDate? null :false;
-        this.state.filingParties = this.form12Info.filingParties?.length>0? null :false;
         this.state.appearingParties = this.form12Info.appearingParties?.length>0? null :false;
         this.state.orderAllowed = this.form12Info.orderAllowed == true || this.form12Info.orderAllowed ==false? null :false;
         this.state.otherOrders = this.form12Info.otherOrders == true || this.form12Info.otherOrders ==false? null :false;
@@ -1112,13 +1059,11 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public somePartiesChanged(){
         this.form12Info.applyingParties=[]
-        this.form12Info.filingParties=[]
         this.form12Info.appearingParties=[]
         this.updated++;
     }
 
     public applyingPartiesChanged(){
-        this.form12Info.filingParties=[]
         this.form12Info.appearingParties=[]
         this.updated++;
     }
@@ -1128,18 +1073,29 @@ export default class Form12StyleOfProceeding extends Vue {
         this.updated++;
     }
 
-    public getFilingParties(){
-        const filingParties=[]
-            for(const party of this.form12Info.filingParties){
-                filingParties.push(party)                
+    public getAppearingParties(){
+        const appearingParties=[]
+            for(const party of this.partyNames){
+                appearingParties.push(party)                
                 if(party.counselName){
                     const counsel: form12PartiesInfoType = JSON.parse(JSON.stringify(party))
                     counsel.isCounsel = true
                     counsel.name = counsel.counselName+', counsel for '+counsel.name
-                    filingParties.push(counsel)                    
+                    appearingParties.push(counsel)                    
                 }
             }
-        return filingParties
+        return appearingParties
+    }
+
+    public getCounselParty(party){
+
+        if(party.counselName){
+            const counsel: form12PartiesInfoType = JSON.parse(JSON.stringify(party))
+            counsel.isCounsel = true
+            counsel.name = counsel.counselName+', counsel for '+counsel.name
+            return counsel
+        }        
+        return party
     }
 
 }

@@ -43,7 +43,7 @@
             style="left: 44%"
             :twoPages="false"
             stepTitle="Notice of Cross Appeal"
-            stepTitleOptional="(optional)"
+            stepTitleOptional="(Optional)"
             @action="displayWindow('Notice of Cross Appeal')"
             @completed="completed"            
             order=2
