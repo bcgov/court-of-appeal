@@ -507,7 +507,7 @@
                             <b-form-textarea
                                 :state="state.ordersJusticeMake"
                                 class="mt-2" 
-                                rows="8"                                   
+                                max-rows="8"                                   
                                 v-model="form10Info.ordersJusticeMake">
                             </b-form-textarea>
                         </div>                                             
@@ -540,7 +540,7 @@
                     <b-col>                    
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="8"  
+                            max-rows="6"  
                             :state="state.furtherOrders"                                                          
                             v-model="form10Info.furtherOrders">
                         </b-form-textarea>                    

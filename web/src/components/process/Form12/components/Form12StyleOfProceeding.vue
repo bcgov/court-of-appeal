@@ -509,8 +509,8 @@
                         </b-col>
                         <b-col>                    
                             <b-form-textarea                
-                                style="width:100%" 
-                                rows="6"  
+                                style="width:100%"                                
+                                max-rows="6"  
                                 :state="state.furtherOrders"                                                          
                                 v-model="form12Info.furtherOrders">
                             </b-form-textarea>                    
