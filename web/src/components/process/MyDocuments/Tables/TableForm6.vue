@@ -13,11 +13,11 @@
 
         <b-row v-if="enableActions && documentsList.length" class="bg-form6 mb-2 py-1 mx-0">
             <b-col cols="10">
-                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center text-primary">Notice of Settlement or Abandonment (Form 6)</div>
+                <div style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" class="p-0 text-center">Notice of Settlement or Abandonment (Form 6)</div>
             </b-col>
             <b-col  cols="2">
                 <b-button 
-                    class="mr-2  bg-transparent border border-primary"
+                    class="mr-2  bg-light border border-primary"
                     size="sm"
                     @click="downloadDocument('')"
                     v-b-tooltip.hover.noninteractive
@@ -25,7 +25,7 @@
                     <b-icon-download variant="primary"/>
                 </b-button>
                 <b-button 
-                    class="mr-2 bg-transparent border border-danger" 
+                    class="mr-2 bg-light border border-danger" 
                     size="sm"
                     @click="deleteDocument"
                     v-b-tooltip.hover.noninteractive.v-danger
@@ -33,7 +33,7 @@
                     <b-icon-trash-fill variant="danger"/>
                 </b-button>
                 <b-button 
-                    class="bg-transparent border border-success"
+                    class="bg-light border border-success"
                     size="sm"
                     @click="createDocument"
                     v-b-tooltip.hover.noninteractive.v-success

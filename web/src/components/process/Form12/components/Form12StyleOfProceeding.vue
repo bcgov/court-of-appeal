@@ -262,6 +262,9 @@
                         v-on:submit="modifyJudgeNames" 
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
+                <div class="text-danger h4 mt-4" v-if="state.judgeNamesNumber==false">
+                    There should be either 3 or 5 Judges.
+                </div>
             </b-card>
 <!-- <HEARING LOCATION> -->
             <b-row class="mt-4 question">
@@ -677,7 +680,8 @@ export default class Form12StyleOfProceeding extends Vue {
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
-        judgeNames: null,        
+        judgeNames: null,
+        judgeNamesNumber: null,      
         hearingLocation: null,
         hearingLocationOther: null,     
         dateOfJudgement: null,
@@ -847,7 +851,8 @@ export default class Form12StyleOfProceeding extends Vue {
         this.state = {
             appellantsInfo: null,
             respondentsInfo: null,
-            judgeNames: null,        
+            judgeNames: null,
+            judgeNamesNumber: null,        
             hearingLocation: null,
             hearingLocationOther: null,     
             dateOfJudgement: null,
@@ -870,6 +875,7 @@ export default class Form12StyleOfProceeding extends Vue {
         this.state.appellantsInfo = this.form12Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form12Info.respondents?.length>0? null :false;            
         this.state.judgeNames = this.form12Info.judgeNames?.length>0? null :false;
+        this.state.judgeNamesNumber = (this.form12Info.judgeNames?.length==3 || this.form12Info.judgeNames?.length==5)? null :false;
         
         this.state.hearingLocation =  this.hearingLocation? null :false
         this.state.hearingLocationOther =  this.hearingLocation=='Other' && !this.otherHearingLocation? false :null

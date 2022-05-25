@@ -60,16 +60,21 @@ export interface form11DataInfoType {
     judgeNames: judgeInfoType[]; 
     hearingLocation: hearingLocationsInfoType;   
     dateOfJudgement: string;
-    applyingParties: form11PartiesInfoType[]; 
     varyingOrderJudgeName: string;
     varyingOrderJudgeNameOther: string
     varyingOrderDate: string;
+    varyingOrderLocation: string;
     filingParties: form11PartiesInfoType[];
     appearingParties: form11PartiesInfoType[];
     orderAllowed: boolean;
     otherOrders: boolean;
     furtherOrders?: string;
-    authorizedName: string;
+    judgmentReserved: boolean;
+    hearingHeldDate: string;
+    laterDateDecided: boolean;
+    laterDate: string;
+    supplementaryReasons: boolean;
+    supplementaryReasonsDate: string;  
     completionDate?: string;
     version?: string;
     previousCourts?: previousCourtJsonInfoType;
