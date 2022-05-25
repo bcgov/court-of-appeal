@@ -48,6 +48,7 @@ class FormCaseBasicsParsing:
 
             response['previousCourts'] = self.getPriviousCourt(data)   
             response['initiatingDocuments'] = self.getInitiatingDocuments(data)
+            response['chambersHearing'] = data.ChambersHearing
 
             return response
         else:

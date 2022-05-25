@@ -58,6 +58,7 @@ export interface form12DataInfoType {
     appellantNames: string;
     respondentNames: string;
     judgeNames: judgeInfoType[]; 
+    hearingDate: string;
     hearingLocation: hearingLocationsInfoType;   
     dateOfJudgement: string;
     applyingParties: form12PartiesInfoType[]; 
