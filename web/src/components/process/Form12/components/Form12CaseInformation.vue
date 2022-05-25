@@ -126,6 +126,11 @@
                         striped                   
                         small
                         responsive="sm">
+
+                        <template v-slot:cell(ScheduleDate)="data">
+                            {{data.value | beautify-date}}
+                        </template>
+
                         
                         <template v-slot:cell(edit)="data">                            
                             <b-button 
@@ -186,7 +191,7 @@ const informationState = namespace("Information");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
-import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { partiesDataJsonDataType, chambersHearingJsonInfoType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 import { form12SearchInfoType, orderInfoDataType } from '@/types/Information/Form12';
 
@@ -203,11 +208,8 @@ export default class Form12CaseInformation extends Vue {
     @informationState.Action
     public UpdateFileNumber!: (newFileNumber: string) => void
 
-    @informationState.Action
-    public UpdatePreviousCourts!: (newPreviousCourts: previousCourtJsonInfoType[]) => void
-
     @form12State.Action
-    public UpdateCurrentOrder!: (newCurrentOrder: previousCourtJsonInfoType) => void
+    public UpdateCurrentOrder!: (newCurrentOrder: chambersHearingJsonInfoType) => void
     
     @form12State.Action
     public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
@@ -223,12 +225,12 @@ export default class Form12CaseInformation extends Vue {
 
     searchParams = {} as form12SearchInfoType;
     notFound = false;
-    orders: previousCourtJsonInfoType[] = [];
+    orders: chambersHearingJsonInfoType[] = [];
 
     orderFields =  
     [
         {
-            key:'JudgmentDate',          
+            key:'ScheduleDate',          
             label:'Judgment Date',                  
             thClass: 'text-white bg-court',
             thStyle: 'font-size: 1rem;',            
@@ -264,7 +266,7 @@ export default class Form12CaseInformation extends Vue {
         this.dataReady = true; 
     }
 
-    public selectOrder(courtOrder: previousCourtJsonInfoType){
+    public selectOrder(courtOrder: chambersHearingJsonInfoType){
         this.UpdateCurrentOrder(courtOrder);
         this.UpdateCurrentOrderToVarySingleJusticeId(null);            
         this.$router.push({name: "fill-form12"});
@@ -276,17 +278,19 @@ export default class Form12CaseInformation extends Vue {
         this.$router.push({name: "fill-form12"});
     }
 
-    public extractInfo(courtOrders: previousCourtJsonInfoType[]){
+    public extractInfo(courtOrders: chambersHearingJsonInfoType[]){
 
         let orders: orderInfoDataType[] = [];
         orders = courtOrders;
 
         for(const orderInx in orders){
             //console.log(orderInx)
-            orders[orderInx].JudgeFullName = 'The Honourable ' +  
-                (orders[orderInx].JudgeSalutation? orders[orderInx].JudgeSalutation + ' ':'') + 
+            orders[orderInx].JudgeFullName = orders[orderInx].JudgeLastName? 
+                ('The Honourable ' +  
+                (orders[orderInx].JudgeSalutation? orders[orderInx].JudgeSalutation + ' ':'Justice ') + 
                 (orders[orderInx].JudgeFirstName? orders[orderInx].JudgeFirstName + ' ':'' )+ 
-                (orders[orderInx].JudgeLastName? orders[orderInx].JudgeLastName:'');
+                (orders[orderInx].JudgeLastName? orders[orderInx].JudgeLastName:''))
+                :'UNKNOWN';
         }
 
         return orders;        
@@ -316,7 +320,8 @@ export default class Form12CaseInformation extends Vue {
             '&firstName='+(this.searchParams.firstName?this.searchParams.firstName:'')+
             '&lastName='+(this.searchParams.lastName?this.searchParams.lastName:'')+
             '&searchBy='+(this.searchParams.searchBy?this.searchParams.searchBy:'')+
-            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:''); 
+            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:'')+
+            '&addChambersHearing=True'; 
         
         this.$http.get(url)
         .then(res => {            
@@ -328,9 +333,8 @@ export default class Form12CaseInformation extends Vue {
                     this.UpdateFileNumber(this.searchParams.file)                
                 }
 
-                if(res.data?.previousCourts){
-                    this.orders = this.extractInfo(res.data?.previousCourts);
-                    this.UpdatePreviousCourts(res.data?.previousCourts)
+                if(res.data?.chambersHearing){
+                    this.orders = this.extractInfo(res.data?.chambersHearing);                    
                 } 
                 //console.log(this.orders)
                 

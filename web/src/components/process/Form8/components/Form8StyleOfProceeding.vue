@@ -142,7 +142,7 @@ import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
 
 import { form8DataInfoType } from '@/types/Information/Form8';
-import { partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { chambersHearingJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
 
 @Component
 export default class Form8StyleOfProceeding extends Vue {
@@ -150,8 +150,8 @@ export default class Form8StyleOfProceeding extends Vue {
     @informationState.State
     public partiesJson: partiesDataJsonDataType;
 
-    @informationState.State
-    public previousCourts: previousCourtJsonInfoType[]    
+    @form8State.State
+    public currentOrder: chambersHearingJsonInfoType;  
 
     @informationState.State
     public fileNumber: string;
@@ -204,8 +204,13 @@ export default class Form8StyleOfProceeding extends Vue {
             form8Data.formSevenNumber = this.fileNumber;
             
             form8Data.version = this.$store.state.Application.version;  
-            form8Data.judgeName = this.previousCourts[0]?.JudgeSalutation + ' ' + Vue.filter('getFullName')(this.previousCourts[0]?.JudgeFirstName, this.previousCourts[0]?.JudgeLastName) 
-            const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
+            
+            form8Data.judgeName = this.currentOrder? (
+                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')+
+                (this.currentOrder.JudgeFirstName? this.currentOrder.JudgeFirstName:'') +
+                (this.currentOrder.JudgeLastName? this.currentOrder.JudgeLastName:'')
+            ).trim() : ''
+            const orderDate = this.currentOrder?.JudgmentDate?this.currentOrder.JudgmentDate.slice(0,10):'';
             form8Data.orderDate = orderDate;
             this.orderDateValue = orderDate; 
 
