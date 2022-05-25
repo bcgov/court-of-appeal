@@ -14,6 +14,25 @@ export interface form8FormsJsonDataType {
     description: string;
 }
 
+export interface orderInfoDataType {
+    AppealFrom?: string;
+    BoardTribunalName?: string;
+    Charge?: string;
+    ConvictionAcquittalDate?: string;
+    FileNumber?: string;
+    JudgeFirstName?: string;
+    JudgeLastName?: string;
+    JudgeSalutation?: string;
+    JudgmentDate?: string;
+    Jury?: boolean;
+    Level?: string;
+    Location?: string;
+    LocationID?: number;
+    Sentence?: string;
+    SentenceDate?: string;
+    JudgeFullName?: string;
+}
+
 export interface form8StatusInfoType {
     first?: boolean;
     second?: boolean;
