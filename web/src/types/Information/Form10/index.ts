@@ -1,5 +1,5 @@
 import { hearingLocationsInfoType } from "@/types/Common";
-import { applicantJsonDataType, previousCourtJsonInfoType} from "../json"
+import { applicantJsonDataType, chambersHearingJsonInfoType, previousCourtJsonInfoType} from "../json"
 
 
 export interface form10FormsJsonDataType {
@@ -64,22 +64,20 @@ export interface form10DataInfoType {
     filingParties: form10PartiesInfoType[];
     appearingParties: form10PartiesInfoType[];    
     judgmentReserved: boolean;
-    hearingHeldDate: string;    
+    judgmentReservedDate: string;    
     reasonsIndicated: boolean;
     reasonsDate: string;
     otherOrders: boolean;
     furtherOrders?: string;
-    applicationFor: applicationForInfoType;
+    applicationFor: string[];
+    applicationForOther: string;
     ordersJusticeMake: string;
     completionDate?: string;
     version?: string;
     previousCourts?: previousCourtJsonInfoType;
+    chambersHearing?: chambersHearingJsonInfoType;
 }
 
-export interface applicationForInfoType{
-    name: string;
-    other: string;
-}
 
 export interface judgeInfoType {   
     name: string;
