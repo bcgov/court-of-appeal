@@ -77,7 +77,7 @@
 
             <p style="padding: 0;">
                 The permitted methods of service under 
-                Court of Appeal Rule 4 (hyperlink) are as follows:
+                Court of Appeal Rule 4 are as follows:
             </p>
        
         </b-row>
