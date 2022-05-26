@@ -122,6 +122,9 @@ const form11State = namespace("Form11");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
+import "@/store/modules/forms/form14";
+const form14State = namespace("Form14");
+
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
@@ -152,6 +155,7 @@ import { form9FormsJsonDataType } from "@/types/Information/Form9";
 import { form10FormsJsonDataType } from "@/types/Information/Form10";
 import { form11FormsJsonDataType } from "@/types/Information/Form11";
 import { form12FormsJsonDataType } from "@/types/Information/Form12";
+import { form14FormsJsonDataType } from "@/types/Information/Form14";
 import { form16FormsJsonDataType } from "@/types/Information/Form16";
 import { form17FormsJsonDataType } from "@/types/Information/Form17";
 import { form18FormsJsonDataType } from "@/types/Information/Form18";
@@ -237,6 +241,12 @@ export default class MyDocumentsTableBrief extends Vue {
 
     @form12State.Action
 	public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
+
+    @form14State.State
+    public form14FormsJson!: form14FormsJsonDataType[];
+
+    @form14State.Action
+	public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 
     @form16State.State
     public form16FormsJson!: form16FormsJsonDataType[];
@@ -579,6 +589,30 @@ export default class MyDocumentsTableBrief extends Vue {
             this.documentsList.push(doc);
         }
 
+        //___Form 14___
+        for (const docJson of this.form14FormsJson) {
+            const doc = { 
+                id:'',
+                pdfType:'FORM',
+                form:'form14',
+                formName:'Form 14',
+                description:'Consent order to remove an appeal from the inactive list',
+                fileNumber:'',                 
+                status:'', 
+                modifiedDate:'', 
+                packageNum:'',
+                packageUrl:'',                
+            };
+            doc.id = String(docJson.id); 
+            doc.fileNumber = docJson.data.formSevenNumber;
+            doc.status = docJson.status;
+            doc.modifiedDate = docJson.modified
+            doc.packageUrl = docJson.packageUrl;
+            doc.packageNum = docJson.packageNumber;
+            doc.pdfType = docJson.pdf_types;
+            this.documentsList.push(doc);
+        }
+
         //___Form 16___
         for (const docJson of this.form16FormsJson) {
             const doc = { 
@@ -828,11 +862,12 @@ export default class MyDocumentsTableBrief extends Vue {
         } else if(item.formName=='Form 17'){
             this.UpdateCurrentCertificateOfCostsId(item.id);             
             this.$router.push({name: "fill-form17"}); 
+        } else if(item.formName=='Form 14'){
+            this.UpdateCurrentConsentOrderRemoveInactiveId(item.id);             
+            this.$router.push({name: "fill-form14"}); 
         }
 
-
     }
-
    
 }
 </script>
