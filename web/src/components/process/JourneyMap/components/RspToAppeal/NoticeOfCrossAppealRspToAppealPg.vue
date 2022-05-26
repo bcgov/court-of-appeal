@@ -18,12 +18,15 @@
         <b-row v-if="showNoaInfo" class="mt-3" >
 
             <p style="padding: 0;">
-                If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.
+                As a respondent, you may only file a notice of cross appeal if you are 
+                seeking to vary the order being appealed, and you are seeking relief 
+                from the court that is different from what the appellant is asking 
+                the court for in the notice of appeal.
             </p>
        
         </b-row>
 
-        <b-row :class="showNoaInfo?'mt-3': 'mt-4'" :style="showNoaInfo?'padding-top: 1rem;': 'padding-top: 0.85rem;'">            
+        <b-row :class="showNoaInfo?'mt-1': 'mt-4'" :style="showNoaInfo?'padding-top: 0.5rem;': 'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 How do I bring a cross appeal?
             </b-col> 
@@ -37,7 +40,13 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showBringCrossAppealInfo" class="mt-4 bg-warning warning-message-row">
+        <b-row v-if="showBringCrossAppealInfo" class="mt-1" >
+            <p style="padding: 0;">
+                If you want to bring a cross appeal, you must complete the steps below.
+            </p>       
+        </b-row>
+
+        <b-row v-if="showBringCrossAppealInfo" class="mt-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
@@ -80,7 +89,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showBringCrossAppealInfo?'mt-3': 'mt-4'" :style="!showBringCrossAppealInfo?'padding-top: 0.85rem;': ''">            
+        <b-row :class="showBringCrossAppealInfo?'mt-1': 'mt-4'" :style="!showBringCrossAppealInfo?'padding-top: 0.85rem;': ''">            
             <b-col cols="11" class="step-title-column pl-0">
                 Are there any additional documents that I need to file for a cross appeal?
             </b-col> 
@@ -168,7 +177,7 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
     public showNoa(show: boolean){
         if (show) {
             this.showNoaInfo = true;
-            this.$emit('adjustHeights', 0, "3rem");
+            this.$emit('adjustHeights', 0, "5rem");
         } else {
             this.showNoaInfo = false;
             this.$emit('adjustHeights', 0, "0");
@@ -178,7 +187,7 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
     public showBringCrossAppeal(show: boolean){
         if (show) {
             this.showBringCrossAppealInfo = true;
-            this.$emit('adjustHeights', 1, "14rem")
+            this.$emit('adjustHeights', 1, "15rem")
         } else {
             this.showBringCrossAppealInfo = false;
             this.$emit('adjustHeights', 1, "0");
