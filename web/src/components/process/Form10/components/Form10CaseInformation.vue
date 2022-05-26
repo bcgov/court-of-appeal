@@ -126,7 +126,9 @@
                         striped                   
                         small
                         responsive="sm">
-                        
+                        <template v-slot:cell(ScheduleDate)="data">
+                            {{data.value | beautify-date}}
+                        </template>
                         <template v-slot:cell(edit)="data">                            
                             <b-button 
                                 size="sm" 
@@ -228,12 +230,12 @@ export default class Form10CaseInformation extends Vue {
     orderFields =  
     [
         {
-            key:'JudgmentDate',          
+            key:'ScheduleDate',          
             label:'Judgment Date',                  
             thClass: 'text-white bg-court',
             thStyle: 'font-size: 1rem;',            
             sortable:false            
-        }, 
+        },
         {
             key:'JudgeFullName',          
             label:'Judge Full Name',   
@@ -316,7 +318,8 @@ export default class Form10CaseInformation extends Vue {
             '&firstName='+(this.searchParams.firstName?this.searchParams.firstName:'')+
             '&lastName='+(this.searchParams.lastName?this.searchParams.lastName:'')+
             '&searchBy='+(this.searchParams.searchBy?this.searchParams.searchBy:'')+
-            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:''); 
+            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:'')+
+            '&addChambersHearing=True';
         
         this.$http.get(url)
         .then(res => {            
@@ -328,9 +331,8 @@ export default class Form10CaseInformation extends Vue {
                     this.UpdateFileNumber(this.searchParams.file)                
                 }
 
-                if(res.data?.previousCourts){
-                    this.orders = this.extractInfo(res.data?.previousCourts);
-                    this.UpdatePreviousCourts(res.data?.previousCourts)
+                if(res.data?.chambersHearing){
+                    this.orders = this.extractInfo(res.data.chambersHearing);
                 } 
                 //console.log(this.orders)
                 
