@@ -64,7 +64,7 @@
 <!-- <THE APPEAL> -->
         <div class="my-3 mx-0 row">
             <div>
-                <b>THE APPLICATION OF</b> {{applicantNamesFull}} and {{respondentNamesFull}} for {{applicationType}} coming on
+                <b>THE APPLICATION OF</b> {{applyingParties}} for {{applicationType}} coming on
                 for hearing on {{result.hearingDate | beautify-date-full-no-weekday}}; <b>AND ON HEARING</b> {{appearingParties}}; 
                 <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
             </div>
@@ -90,33 +90,15 @@
             <div  style="width:50%;"></div>
         </div>
 
-<!-- <Appellants Signature> -->
-        <div class="my-5 mx-0 row">
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div v-for="party,inx in appearingAppellants" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
-                </div> 
-                <div v-if="applicantNamesFull">{{applicantNamesFull}}</div>              
-            </div>
-
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div>A Justice of the Court of Appeal</div>
+        <!-- <Parties Signature> -->
+        <div  style="display:inline;" class="my-5 mx-0" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+            <div  style="width:50%; display:inline-block; ">                
+                <div style="border-top:1px dashed grey; width:94%; margin:3rem 0 0  0;" > 
+                    {{party.name}}
+                </div>                               
             </div>
         </div>
 
-<!-- <Respondents Signature> -->
-        <div class="mt-5 mx-0 row">
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div v-for="party,inx in appearingRespondents" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
-                </div>
-                <div v-if="respondentNamesFull">{{respondentNamesFull}}</div>
-            </div>
-            <div  style="width:50%;"/>
-        </div>
 
     </div>
 </template>
@@ -129,7 +111,7 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form10";
 const form10State = namespace("Form10");
 
-import { form10DataInfoType } from '@/types/Information/Form10';
+import { form10DataInfoType, form10PartiesInfoType } from '@/types/Information/Form10';
 import {getPartyTitles, getFullName} from '../PartyTitlesForm10'
 
 @Component
@@ -148,16 +130,15 @@ export default class Form10Layout extends Vue {
     applicantNamesFull='';
     respondentNamesFull='';
     appearingParties='';
+    applyingParties=''
+
+    signingPartyList =[]
 
     hearingDate = ''
     applicationType = ''
-    
-    appearingAppellants =[]
-    appearingRespondents =[]
+
 
     mounted(){
-        // this.dataReady = false;
-        //console.log(this.result)
         this.extractInfo();       
         this.dataReady = true;
     }
@@ -166,56 +147,103 @@ export default class Form10Layout extends Vue {
        
         this.applicantNames = [];
         this.respondentNames = [];
-        this.applicantNamesFull='';
-        this.respondentNamesFull='';
 
         for (const resInx in this.result.respondents){
             const fullTitle = getPartyTitles(this.result.respondents[resInx],' ')
-            this.respondentNames.push(fullTitle);
-            this.respondentNamesFull = this.combineNames(resInx, fullTitle, this.respondentNamesFull, this.result.respondents.length)
+            this.respondentNames.push(fullTitle);            
         }
+        this.respondentNamesFull=this.combineNames(this.result.respondents, '', this.respondentNames);
 
         for (const appInx in this.result.appellants){
             const fullTitle = getPartyTitles(this.result.appellants[appInx],' ')
-            this.applicantNames.push(fullTitle);            
-            this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
+            this.applicantNames.push(fullTitle);                        
         }
-        this.applicationType = this.result.applicationFor?.name =='other' ? this.result.applicationFor.other :this.result.applicationFor?.name
-        this.hearingDate = this.result.judgmentReserved? this.result.hearingHeldDate : this.result.dateOfJudgement;
+        this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
+        
+         
+        this.hearingDate = this.result.judgmentReserved? this.result.judgmentReservedDate : this.result.dateOfJudgement;
         this.extractAppearingParties();
+        this.extractApplyingParties();
+        this.extractApplicationTypes();
+    }
+
+    public extractApplicationTypes(){
+
+        const otherTypeIndex = this.result.applicationFor.findIndex(item =>item=='other')
+        if(otherTypeIndex>-1){
+            const applicationFor = JSON.parse(JSON.stringify(this.result.applicationFor))
+            applicationFor.splice(otherTypeIndex,1)
+            applicationFor.push(this.result.applicationForOther)
+
+            this.applicationType = this.combineNames(applicationFor)
+        }
+        else 
+            this.applicationType = this.combineNames(this.result.applicationFor)
     }
 
     public extractAppearingParties(){
-        let appellantnames = ''
-        let respondentnames = ''
-        this.appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
-        this.appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
 
-        for(const appInx in this.appearingAppellants){                        
-            appellantnames = this.combineNames(appInx, this.appearingAppellants[appInx].name, appellantnames, this.appearingAppellants.length)
-        }
+        const appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
+        const appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
+                               
+        const appellantnames = this.combineNames(appearingAppellants, 'name')                   
+        const respondentnames = this.combineNames(appearingRespondents, 'name')        
 
-        for(const resInx in this.appearingRespondents){            
-            respondentnames = this.combineNames(resInx, this.appearingRespondents[resInx].name, respondentnames, this.appearingRespondents.length)
-        }
+        this.extractSigningPartyList(appearingAppellants, appearingRespondents)
 
-        //console.log(appellantnames)
-        //console.log(respondentnames)
         this.appearingParties += appellantnames
         this.appearingParties += (appellantnames && respondentnames)?' and ':''
-        this.appearingParties += respondentnames
- 
+        this.appearingParties += respondentnames 
+    }
+
+    public extractSigningPartyList(appearingAppellants, appearingRespondents){
+        const registrar = {} as form10PartiesInfoType;
+        registrar.name = 'A Justice of the Court of Appeal (BY THE COURTS)';
+
+        if(appearingAppellants.length>1)
+            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingAppellants.slice(1), ...appearingRespondents]
+        else if(appearingAppellants.length==1)
+            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingRespondents]
+        else if(appearingAppellants.length==0 && appearingRespondents.length>1)
+            this.signingPartyList =[appearingRespondents[0], registrar, ...appearingRespondents.slice(1)]
+        else
+            this.signingPartyList =[appearingRespondents[0], registrar]
+    }
+
+    public extractApplyingParties(){
+        
+        const applyingAppellants = this.result.filingParties.filter(party=> !party.responding)
+        const applyingRespondents = this.result.filingParties.filter(party=> party.responding)
+                     
+        const appellantnames = this.combineNames(applyingAppellants, 'name')            
+        const respondentnames = this.combineNames(applyingRespondents, 'name')        
+
+        this.applyingParties += appellantnames
+        this.applyingParties += (appellantnames && respondentnames)?' and ':''
+        this.applyingParties += respondentnames
     }
     
-    public combineNames(inx, fullTitle, namesFull, length){
-        if(Number(inx)>0 && Number(inx)+1 == length)
-            namesFull += ' and '+fullTitle
-        else if(Number(inx)==0)
-            namesFull += fullTitle
-        else
-            namesFull += ', '+fullTitle
+    public combineNames(names, nameField?, addingNameArray?){
+        let namesString = ''
+        const numberOfNames = names.length       
+        for(const index in names){
+            let addingName=''
+            if(addingNameArray?.length>0){
+                addingName=addingNameArray[index]
+            }
+            else if(nameField)
+                addingName = names[index][nameField] 
+            else
+                addingName = names[index]
 
-        return namesFull
+            if(Number(index)>0 && Number(index)+1 == numberOfNames)
+                namesString += ' and '+addingName
+            else if(Number(index)==0)
+                namesString += addingName
+            else
+                namesString += ', '+addingName
+        }
+        return namesString
     }
 }
 

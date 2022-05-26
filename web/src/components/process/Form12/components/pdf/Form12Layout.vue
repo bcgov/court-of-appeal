@@ -104,17 +104,6 @@
 
         
 
-
-<!-- <Instructions> -->
-        <!-- <div class="mt-5 mx-0 row" style="text-align: justify;">
-            <div>
-                <b>Instructions:</b> <br/>
-                Before you can submit the order to the registry for entry, you will need to have the order 
-                you prepared signed by all parties.  If someone refuses to sign an order, you may go before 
-                the registrar to settle the order pursuant to <b class="text-danger"> Rule 68 (hyperlink) </b> of the Court of Appeal Rules.
-            </div>
-        </div> -->
-
     </div>
 </template>
 
@@ -159,21 +148,21 @@ export default class Form12Layout extends Vue {
     public extractInfo(){        
        
         this.applicantNames = [];
-        this.respondentNames = [];
-        this.applicantNamesFull='';
-        this.respondentNamesFull='';
+        this.respondentNames = [];        
 
         for (const resInx in this.result.respondents){
             const fullTitle = getPartyTitles(this.result.respondents[resInx],' ')
             this.respondentNames.push(fullTitle);
-            this.respondentNamesFull = this.combineNames(resInx, fullTitle, this.respondentNamesFull, this.result.respondents.length)
         }
+        this.respondentNamesFull = this.combineNames(this.result.respondents, '', this.respondentNames)
+      
 
         for (const appInx in this.result.appellants){
             const fullTitle = getPartyTitles(this.result.appellants[appInx],' ')
             this.applicantNames.push(fullTitle);            
-            this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
         }
+        this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
+        
 
         this.varyingOrderJudgeName = this.result.varyingOrderJudgeName=='Other'? this.result.varyingOrderJudgeNameOther :this.result.varyingOrderJudgeName;        
         this.extractAppearingParties();
@@ -181,18 +170,12 @@ export default class Form12Layout extends Vue {
     }
 
     public extractAppearingParties(){
-        let appellantnames = ''
-        let respondentnames = ''
+        
         const appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
         const appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
-
-        for(const appInx in appearingAppellants){                        
-            appellantnames = this.combineNames(appInx, appearingAppellants[appInx].name, appellantnames, appearingAppellants.length)
-        }
-
-        for(const resInx in appearingRespondents){            
-            respondentnames = this.combineNames(resInx, appearingRespondents[resInx].name, respondentnames, appearingRespondents.length)
-        }
+                               
+        const appellantnames = this.combineNames(appearingAppellants, 'name')        
+        const respondentnames = this.combineNames(appearingRespondents, 'name')
 
         this.extractSigningPartyList(appearingAppellants, appearingRespondents)
 
@@ -216,33 +199,39 @@ export default class Form12Layout extends Vue {
     }
 
     public extractApplyingParties(){
-        let appellantnames = ''
-        let respondentnames = ''
+        
         const applyingAppellants = this.result.applyingParties.filter(party=> !party.responding)
         const applyingRespondents = this.result.applyingParties.filter(party=> party.responding)
 
-        for(const appInx in applyingAppellants){                        
-            appellantnames = this.combineNames(appInx, applyingAppellants[appInx].name, appellantnames, applyingAppellants.length)
-        }
-
-        for(const resInx in applyingRespondents){            
-            respondentnames = this.combineNames(resInx, applyingRespondents[resInx].name, respondentnames, applyingRespondents.length)
-        }
-
+        const appellantnames = this.combineNames(applyingAppellants, 'name');
+        const respondentnames = this.combineNames(applyingRespondents, 'name');
+        
         this.applyingParties += appellantnames
         this.applyingParties += (appellantnames && respondentnames)?' and ':''
         this.applyingParties += respondentnames
     }
     
-    public combineNames(inx, fullTitle, namesFull, length){
-        if(Number(inx)>0 && Number(inx)+1 == length)
-            namesFull += ' and '+fullTitle
-        else if(Number(inx)==0)
-            namesFull += fullTitle
-        else
-            namesFull += ', '+fullTitle
+    public combineNames(names, nameField?, addingNameArray?){
+        let namesString = ''
+        const numberOfNames = names.length       
+        for(const index in names){
+            let addingName=''
+            if(addingNameArray?.length>0){
+                addingName=addingNameArray[index]
+            }
+            else if(nameField)
+                addingName = names[index][nameField] 
+            else
+                addingName = names[index]
 
-        return namesFull
+            if(Number(index)>0 && Number(index)+1 == numberOfNames)
+                namesString += ' and '+addingName
+            else if(Number(index)==0)
+                namesString += addingName
+            else
+                namesString += ', '+addingName
+        }
+        return namesString
     }
 }
 
