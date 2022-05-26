@@ -43,7 +43,7 @@
             style="left: 44%"
             :twoPages="false"
             stepTitle="Notice of Cross Appeal"
-            stepTitleOptional="(optional)"
+            stepTitleOptional="(Optional)"
             @action="displayWindow('Notice of Cross Appeal')"
             @completed="completed"            
             order=2
@@ -455,9 +455,9 @@ export default class RespondToAppealJourneyMap extends Vue {
 
         } else if (contentType == "Notice of Cross Appeal"){            
             this.windowTitle = "Cross Appeal (Optional)";
-            this.contentTitle = 'Were you served with any of the following documents?';
+            this.contentTitle = '';
             this.pathTypes = ["info", "share", "share", "info"];
-            this.pathHeights = ['3rem', '0', '0', '0'];
+            this.pathHeights = ['5rem', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
         } else if (contentType == "Apply for Leave to Appeal") {

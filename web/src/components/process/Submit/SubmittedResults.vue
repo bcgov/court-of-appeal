@@ -34,7 +34,7 @@
         <cancel-submit-form-7 v-else-if="result=='cancel'"/>
         <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'MBAV'">
+    <div v-else-if="formType == 'MCV'">
         <success-submit-form-8 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-8 v-else-if="result=='cancel'"/>
         <error-submit-form-8 :errMsg="errorMsg" v-else-if="result=='error'"/>        

@@ -156,3 +156,25 @@ export interface previousCourtJsonInfoType {
     SentenceDate?: string;
 }
 
+export interface chambersHearingJsonInfoType {
+    ActualRoom?: string;
+    ChambersHearingID?: number;
+    CitationNumber?: string;
+    Decision?: string;
+    HearingType?: string;
+    JudgeChiefJustice?: boolean;
+    JudgeFirstName?: string;
+    JudgeLastName?: string;
+    JudgeSalutation?: string;
+    JudgeSupernumerary?: boolean;
+    JudgmentDate?: string;
+    JudgmentType?: string;
+    Location?: string;
+    MethodName?: string;
+    ReleaseDate?: string;
+    ReserveDate?: string;
+    ScheduleDate?: string;
+    StartTime?: string;
+    TimeOfCall?: string;
+}
+

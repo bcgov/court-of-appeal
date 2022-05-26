@@ -50,7 +50,7 @@
                 When an appeal is ready for hearing, under 
                 <a 
                     href=""
-                    target="_blank"> rule 33
+                    target="_blank"> Rule 33
                 </a> 
                 of the Court of Appeal Rules, an appellant 
                 must without delay obtain a hearing date and 
@@ -86,7 +86,7 @@
                     <li>the appellant has not complied with 
                         <a 
                             href=""
-                            target="_blank"> rule 33(1) or (2)
+                            target="_blank"> Rule 33(1) or (2)
                         </a>                         
                         of the Court of Appeal rules.
                     </li>
