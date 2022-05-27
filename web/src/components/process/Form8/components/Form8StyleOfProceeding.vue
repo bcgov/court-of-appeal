@@ -233,11 +233,10 @@ export default class Form8StyleOfProceeding extends Vue {
             
             form8Data.version = this.$store.state.Application.version;  
             
-            const judgeName = this.currentOrder? (
-                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')+
-                (this.currentOrder.JudgeFirstName? this.currentOrder.JudgeFirstName:'') +
-                (this.currentOrder.JudgeLastName? this.currentOrder.JudgeLastName:'')
-            ).trim() : '';
+            const judgeName = this.currentOrder && this.currentOrder.JudgeLastName? (
+                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')
+                +this.currentOrder.JudgeLastName
+            ).trim() : ''
 
             if(judgeName){
                 const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
