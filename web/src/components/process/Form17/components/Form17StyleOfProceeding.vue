@@ -144,7 +144,6 @@ export default class Form17StyleOfProceeding extends Vue {
     updated=0;  
     invalidAllowedCostsParties = false;
 
-
     mounted() {
         this.dataReady = false;
         this.extractInfo();              

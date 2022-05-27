@@ -12,7 +12,7 @@
             </b-row> 
             
             <b-card no-body class="border-white bg-white mx-5">
-                <b-row class="mx-5 mt-4" style="font-size: 14px;">
+                <b-row class="mx-5 my-4" style="font-size: 14px;">
                     Your Certificate of Costs form has been submitted. Please click on 
                     the CSO package number below to retrieve a filed copy of your 
                     Certificate of Costs.

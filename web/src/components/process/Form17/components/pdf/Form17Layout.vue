@@ -8,9 +8,7 @@
         <div class="my-0">
             <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
         </div>
-
-        <div class="mt-5 mb-4 mx-auto text-center " style="font-weight: 600; font-size:14pt;">COURT OF APPEAL FOR BRITISH COLUMBIA</div>
-
+       
 <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
@@ -39,85 +37,36 @@
             <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
         </div>
 
-<!-- <ORDER> -->
-        <div class="mt-5" style="display: block; text-align: center; font-weight: 600; font-size:14pt;">ORDER</div>
-
-<!-- <BEFORE> -->
-        <div class="mt-3 mb-1 mx-0 row">
-            <div>
-                <b>BEFORE THE HONOURABLE</b> {{result.judgeNames[0].text}} <b>IN CHAMBERS</b>
-            </div>
-        </div>        
-
-<!-- <HEARING LOCATION-DATE> -->
-        <div class="mb-4 mx-0 row">
-            <div>
-                {{result.hearingLocation.name}}, British Columbia, {{hearingDate | beautify-date-full}} 
-            </div>
-        </div>
-
-<!-- <Reasons to Follow> -->
-        <div class="mb-4 mx-0 row" v-if="result.reasonsIndicated">
-            <div>
-                Reasons to follow being released on {{result.reasonsDate | beautify-date-full}}.
-            </div>
-        </div>
         
 <!-- <THE APPEAL> -->
         <div class="my-3 mx-0 row">
             <div>
-                <b>THE APPLICATION OF</b> {{applicantNamesFull}} and {{respondentNamesFull}} for {{applicationType}} coming on
-                for hearing on <b class="text-danger">UNKOWN DATE</b>; <b>AND ON HEARING</b> {{appearingParties}}; 
-                <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
+                <underline-form 
+                    style="display:inline-block;line-height:1rem;" 
+                    textwidth="10rem" 
+                    beforetext="I CERTIFY that on" 
+                    hint="" 
+                    :italicHint="false" 
+                    text=""
+                />
+                , the costs of the {{allowedCostsParties}}; 
+                have been allowed against the {{payingParties}} at $ {{result.amount}}
             </div>
-        </div>
-
-<!-- <ORDER Make> -->
-        <div class="my-3 mx-0 row">
-            <div>
-                <b>IT IS ORDERED</b> that {{result.ordersJusticeMake}}
-            </div>
-        </div>
-
-<!-- <FURTHER ORDERS> -->
-        <div v-if="result.otherOrders" class="my-3 mx-0 row">
-            <div>
-                <b>IT IS FURTHER ORDERED</b> that {{result.furtherOrders}}.
-            </div>
-        </div>
-
-<!-- <APPROVED> -->
-        <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">BY THE COURTS</div>
         </div>
 
 <!-- <Appellants Signature> -->
         <div class="my-5 mx-0 row">
             <div  style="width:50%;">
                 <div>....................................................................</div>
-                <div v-for="party,inx in appearingAppellants" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
+                <div> Date
                 </div> 
-                <div v-if="applicantNamesFull">{{applicantNamesFull}}</div>              
+                      
             </div>
 
             <div  style="width:50%;">
                 <div>....................................................................</div>
-                <div>A Justice of the Court of Appeal</div>
+                <div>Registrar</div>
             </div>
-        </div>
-
-<!-- <Respondents Signature> -->
-        <div class="mt-5 mx-0 row">
-            <div  style="width:50%;">
-                <div>....................................................................</div>
-                <div v-for="party,inx in appearingRespondents" :key="'appl'+inx"> 
-                    <div v-if="party.isCounsel" > {{party.name}}</div>
-                </div>
-                <div v-if="respondentNamesFull">{{respondentNamesFull}}</div>
-            </div>
-            <div  style="width:50%;"/>
         </div>
 
     </div>
@@ -132,9 +81,14 @@ import "@/store/modules/forms/form17";
 const form17State = namespace("Form17");
 
 import { form17DataInfoType } from '@/types/Information/Form17';
-import {getPartyTitles, getFullName} from '../PartyTitlesForm17'
+import {getPartyTitles} from '../PartyTitlesForm17';
+import UnderlineForm from "@/components/utils/PopulateForms/components/UnderlineForm.vue";
 
-@Component
+@Component({
+    components:{       
+        UnderlineForm         
+    }
+})
 export default class Form17Layout extends Vue {
 
     @Prop({required:true})
@@ -149,10 +103,9 @@ export default class Form17Layout extends Vue {
     
     applicantNamesFull='';
     respondentNamesFull='';
-    appearingParties='';
-
-    hearingDate = ''
-    applicationType = ''
+    allowedCostsParties='';
+    payingParties = '';
+    
     
     appearingAppellants =[]
     appearingRespondents =[]
@@ -167,56 +120,49 @@ export default class Form17Layout extends Vue {
     public extractInfo(){        
        
         this.applicantNames = [];
-        this.respondentNames = [];
-        this.applicantNamesFull='';
-        this.respondentNamesFull='';
+        this.respondentNames = [];        
 
         for (const resInx in this.result.respondents){
             const fullTitle = getPartyTitles(this.result.respondents[resInx],' ')
             this.respondentNames.push(fullTitle);
-            this.respondentNamesFull = this.combineNames(resInx, fullTitle, this.respondentNamesFull, this.result.respondents.length)
         }
+        this.respondentNamesFull = this.combineNames(this.result.respondents, '', this.respondentNames)
+      
 
         for (const appInx in this.result.appellants){
             const fullTitle = getPartyTitles(this.result.appellants[appInx],' ')
             this.applicantNames.push(fullTitle);            
-            this.applicantNamesFull = this.combineNames(appInx, fullTitle, this.applicantNamesFull, this.result.appellants.length)
         }
-        this.extractAppearingParties();
-    }
-
-    public extractAppearingParties(){
-        let appellantnames = ''
-        let respondentnames = ''
-        this.appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
-        this.appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
-
-        for(const appInx in this.appearingAppellants){                        
-            appellantnames = this.combineNames(appInx, this.appearingAppellants[appInx].name, appellantnames, this.appearingAppellants.length)
-        }
-
-        for(const resInx in this.appearingRespondents){            
-            respondentnames = this.combineNames(resInx, this.appearingRespondents[resInx].name, respondentnames, this.appearingRespondents.length)
-        }
-
-        //console.log(appellantnames)
-        //console.log(respondentnames)
-        this.appearingParties += appellantnames
-        this.appearingParties += (appellantnames && respondentnames)?' and ':''
-        this.appearingParties += respondentnames
- 
+        this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
+        
+        this.payingParties = this.result.payingCostsParties.join(', ')
+        this.allowedCostsParties = this.result.allowedCostsParties.join(', ') 
     }
     
-    public combineNames(inx, fullTitle, namesFull, length){
-        if(Number(inx)>0 && Number(inx)+1 == length)
-            namesFull += ' and '+fullTitle
-        else if(Number(inx)==0)
-            namesFull += fullTitle
-        else
-            namesFull += ', '+fullTitle
 
-        return namesFull
+    public combineNames(names, nameField?, addingNameArray?){
+        let namesString = ''
+        const numberOfNames = names.length       
+        for(const index in names){
+            let addingName=''
+            if(addingNameArray?.length>0){
+                addingName=addingNameArray[index]
+            }
+            else if(nameField)
+                addingName = names[index][nameField] 
+            else
+                addingName = names[index]
+
+            if(Number(index)>0 && Number(index)+1 == numberOfNames)
+                namesString += ' and '+addingName
+            else if(Number(index)==0)
+                namesString += addingName
+            else
+                namesString += ', '+addingName
+        }
+        return namesString
     }
+    
 }
 
 </script>
