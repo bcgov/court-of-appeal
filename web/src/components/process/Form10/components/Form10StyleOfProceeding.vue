@@ -479,7 +479,7 @@
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row>
-            <!-- {{form12Info.appearingParties}} -->        
+            <!-- {{form10Info.appearingParties}} -->        
 
 <!-- <Application For> -->
             <b-row class="mt-4 question">
@@ -794,9 +794,9 @@ export default class Form10StyleOfProceeding extends Vue {
 
     public extractJudgeName(){
         const currentOrder = this.form10Info.chambersHearing
-        const judgeName = currentOrder? (
+        const judgeName = currentOrder && currentOrder.JudgeLastName? (
             (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
-            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
+            (currentOrder.JudgeLastName)
         ).trim() : ''
 
         if(judgeName){
