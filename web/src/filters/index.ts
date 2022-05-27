@@ -149,14 +149,14 @@ Vue.filter('beautify-date-weekday-nohr', function(date){
 
 Vue.filter('beautify-date-full', function(date){
 	if(date)
-		return	moment(date).format('dddd, DD MMMM YYYY');
+		return	moment(date).format('dddd, MMMM DD, YYYY');
 	else
 		return ''
 })
 
 Vue.filter('beautify-date-full-no-weekday', function(date){
 	if(date)
-		return	moment(date).format('DD MMMM YYYY');
+		return	moment(date).format('MMMM DD, YYYY');
 	else
 		return ''
 })

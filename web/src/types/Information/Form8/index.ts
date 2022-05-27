@@ -55,6 +55,7 @@ export interface form8DataInfoType {
     respondentNames: string;
     appellantNames: string;
     judgeName: string;
+    judgeNameOther?: string;
     orderDate: string;   
     filingParties: string[];  
     authorizedName: string; 
