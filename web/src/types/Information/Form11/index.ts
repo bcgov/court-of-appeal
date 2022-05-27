@@ -70,14 +70,19 @@ export interface form11DataInfoType {
     otherOrders: boolean;
     furtherOrders?: string;
     judgmentReserved: boolean;
-    hearingHeldDate: string;
+    judgmentReservedDate: string;
     laterDateDecided: boolean;
     laterDate: string;
     supplementaryReasons: boolean;
     supplementaryReasonsDate: string;  
     completionDate?: string;
     version?: string;
+    hearingDate: string;
     previousCourts?: previousCourtJsonInfoType;
+    ordersCourtMade: string;
+    orderedAwardingCosts: boolean;
+    successfulParties: form11PartiesInfoType[];
+    unsuccessfulParties: form11PartiesInfoType[];
 }
 
 export interface judgeInfoType {   

@@ -263,6 +263,28 @@
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
             </b-card>
+<!-- HEARING DATE -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    When was the hearing held?                    
+                </b-col>
+                <b-col>                   
+                    <b-card                                                
+                        style="margin:0 1px; padding:0; float: center;" 
+                        :border-variant="state.hearingDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form11Info.hearingDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
 <!-- <HEARING LOCATION> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -348,7 +370,7 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form11Info.hearingHeldDate"                           
+                                    v-model="form11Info.judgmentReservedDate"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -410,7 +432,7 @@
             </b-row>
 
 <!-- <Supplementary Reasons> -->
-             <b-row class="mt-2 question">
+            <b-row class="mt-2 question">
                 <b-col cols="7" class="labels">
                     <ul style="list-style-type: square">
                         <li>
@@ -544,29 +566,48 @@
         
 <!-- <Appearing Partie -Attended Hearing> -->
             <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
-                    Enter the names of parties who attended at the hearing:                                
+                <b-col class="labels">
+                    Enter the names of parties who attended at the hearing:
+                    <div class="content text-primary font-italic">
+                        Ensure you enter the name of the lawyer who attended the hearing.
+                    </div>                                
                 </b-col>
-                <b-col class="ml-1">   
+            </b-row>
+            <b-row class="mx-3">
+                <b-col class="mx-1 p-2 bg-light border-light rounded">   
                     <b-form-checkbox-group 
-                        stacked                                              
+                        stacked                                               
+                        style="width:100%"
+                        @change="updated++"                       
                         :state="state.appearingParties"                                      
                         v-model="form11Info.appearingParties">
-                        <div v-for="appearingparty,inx in getAppearingParties()"
-                            :key="'appling-party-'+inx">
-                            <b-form-checkbox
-                                :value="appearingparty">
-                                    {{appearingparty.name}}
-                            </b-form-checkbox>                                    
+
+                        <div v-for="party,inx in partyNames" :key="'appling-party-'+inx">
+                            <b-row>
+                                <b-col>
+                                    <b-form-checkbox :value="party">
+                                        {{party.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                                <b-col>
+                                    <b-form-checkbox v-if="party.counselName" :value="getCounselParty(party)">
+                                        {{party.counselName}}, counsel for {{party.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                            </b-row>                        
                         </div>
+
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row>
-                <!-- {{form11Info.appearingParties}} -->
+            <!-- {{form11Info.appearingParties}} --> 
 
 <!-- <Order Allowed> -->
-            <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
+            <b-row class="mt-4 question" v-if="form11Info.varyingOrderJudgeName">
+                <b-col cols="7" class="labels" v-if="form11Info.varyingOrderJudgeName=='Other'">
+                    Was the order to vary the order of {{form11Info.varyingOrderJudgeNameOther}} :
+                </b-col>
+                <b-col cols="7" class="labels" v-else>
                     Was the order to vary the order of {{form11Info.varyingOrderJudgeName}} :
                 </b-col>
                 <b-col class="ml-1 mt-2">
@@ -583,10 +624,35 @@
                     </span>
                 </b-col>
             </b-row>
+
+<!-- <Orders Court Made> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    What orders did the court make?
+                    <div class="content text-primary font-italic">
+                        Enter the orders that the court made as numbered paragraphs.
+                    </div>
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-textarea
+                        style="width:100%" 
+                        max-rows="6"  
+                        :state="state.ordersCourtMade"
+                        v-model="form11Info.ordersCourtMade"               
+                    ></b-form-textarea>
+                    <span
+                        v-if="(state.ordersCourtMade != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify the Court’s Orders.
+                    </span>
+                </b-col>
+            </b-row>
+
 <!-- <Other Order> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Did the Justices’ make any other orders?
+                    Did the court make any additional orders?
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group                                              
@@ -609,12 +675,69 @@
                 <b-col>                    
                     <b-form-textarea                
                         style="width:100%" 
-                        rows="6"  
+                        max-rows="6"  
                         :state="state.furtherOrders"                                                          
                         v-model="form11Info.furtherOrders">
                     </b-form-textarea>                    
                 </b-col>                
-            </b-row>            
+            </b-row> 
+
+<!-- <Order Awarding Costs> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Did the court make an order awarding costs?
+                </b-col>
+                <b-col class="ml-1">   
+                    <b-form-radio-group
+                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties()"                                                           
+                        :class="state.orderedAwardingCosts==false?'border border-danger w-50':''"                                      
+                        v-model="form11Info.orderedAwardingCosts"
+                        :options="yesNoOptions">                        
+                    </b-form-radio-group> 
+                </b-col>
+            </b-row>  
+
+            <b-row class="mt-4 question" v-if="form11Info.orderedAwardingCosts">
+                <b-col cols="7" class="labels">
+                    Who was the successful party?
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-checkbox-group  
+                        stacked
+                        :state="state.successfulParties"
+                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties()"                   
+                        v-model="form11Info.successfulParties">
+                        <b-form-checkbox
+                            :value="successparty"
+                            v-for="successparty,inx in partyNames"
+                            :key="'success-party-'+inx">
+                                {{successparty.name}}
+                        </b-form-checkbox>
+                    </b-form-checkbox-group>
+
+                    <b-row class="ml-1 text-danger" v-if="invalidSuccessfulParties">You cannot select all parties.</b-row>                    
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question" v-if="form11Info.orderedAwardingCosts">
+                <b-col cols="7" class="labels">
+                    Who was ordered to pay costs?
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-checkbox-group 
+                        stacked                        
+                        :state="state.unsuccessfulParties"                   
+                        v-model="form11Info.unsuccessfulParties">
+                        <b-form-checkbox
+                            :value="unsuccessparty"
+                            v-for="unsuccessparty,inx in nonSuccessfulPartyNames"
+                            :key="'unsuccess-party-'+inx">
+                                {{unsuccessparty.name}}
+                        </b-form-checkbox>
+                    </b-form-checkbox-group>
+                </b-col>
+            </b-row> 
+
 
         </div>          
 
@@ -740,6 +863,9 @@ export default class Form11StyleOfProceeding extends Vue {
     showPartyWindow = false
     isCreate = true
     partyType = ''
+    
+    invalidSuccessfulParties=false
+    nonSuccessfulPartyNames: form11PartiesInfoType[]= []
 
     allowedOptions = [
         {text: 'Allowed', value: true},
@@ -801,7 +927,12 @@ export default class Form11StyleOfProceeding extends Vue {
         laterDateDecided: null,
         laterDate: null,
         supplementaryReasons: null,
-        supplementaryReasonsDate: null
+        hearingDate: null,
+        ordersCourtMade: null,
+        orderedAwardingCosts: null,
+        supplementaryReasonsDate: null,
+        successfulParties: null,
+        unsuccessfulParties: null,
     }
 
     justiceNameOptions = [];
@@ -830,39 +961,44 @@ export default class Form11StyleOfProceeding extends Vue {
             form11Data.respondents = this.partiesJson.respondents
             form11Data.formSevenNumber = this.fileNumber; 
             form11Data.appearingParties = [];
-            form11Data.filingParties = [];           
+            form11Data.filingParties = []; 
+            form11Data.successfulParties = [];
+            form11Data.unsuccessfulParties = [];          
             form11Data.previousCourts = this.currentOrder;
             this.UpdateForm11Info(form11Data);
             this.initHearingLocation()
             this.revaluateForm11Data()
             this.extractJudgeNames()
+            this.updateNonSuccessfulParties()
             this.saveForm(true);
         }          
     }
 
     public extractJudgeNames(){
         const currentOrder = this.form11Info.previousCourts
-        const judgeName = currentOrder? (
+        const judgeName = currentOrder && currentOrder.JudgeLastName? (
             (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
-            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
+            (currentOrder.JudgeLastName)
         ).trim() : ''
 
         if(judgeName){
             const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
             if(justiceIndex>-1){
                 this.form11Info.varyingOrderJudgeName=justiceNames[justiceIndex]
-                this.form11Info.varyingOrderJudgeNameOther=''
+                this.form11Info.varyingOrderJudgeNameOther=''                
             }
             else{
                 this.form11Info.varyingOrderJudgeName='Other'
                 this.form11Info.varyingOrderJudgeNameOther=judgeName
             }
             this.form11Info.varyingOrderDate= currentOrder.JudgmentDate.slice(0,10)            
+            this.form11Info.varyingOrderLocation = currentOrder.Location? currentOrder.Location: ''
         }
         else{
             this.form11Info.varyingOrderJudgeName='';
             this.form11Info.varyingOrderJudgeNameOther='';
             this.form11Info.varyingOrderDate='';
+            this.form11Info.varyingOrderLocation ='';
         }
         this.UpdateForm11Info(this.form11Info);
     } 
@@ -945,7 +1081,8 @@ export default class Form11StyleOfProceeding extends Vue {
                 this.UpdateForm11Info(form11Data);
                 this.revaluateForm11Data()
                 this.initHearingLocation()
-                this.clearStates();                
+                this.clearStates();
+                this.updateNonSuccessfulParties()               
             }                
         },(err) => {
             console.log(err)        
@@ -974,7 +1111,12 @@ export default class Form11StyleOfProceeding extends Vue {
             laterDateDecided: null,
             laterDate: null,
             supplementaryReasons: null,
-            supplementaryReasonsDate: null
+            supplementaryReasonsDate: null,
+            hearingDate: null,
+            ordersCourtMade: null,
+            orderedAwardingCosts: null,
+            successfulParties: null,
+            unsuccessfulParties: null
         }
         this.dataReady = true; 
     }
@@ -1000,12 +1142,17 @@ export default class Form11StyleOfProceeding extends Vue {
         this.state.furtherOrders = this.form11Info.otherOrders == true && !this.form11Info.furtherOrders? false :null
 
         this.state.judgmentReserved = this.form11Info.judgmentReserved == true || this.form11Info.judgmentReserved ==false? null :false;
-        this.state.hearingHeldDate = this.form11Info.judgmentReserved && !this.form11Info.hearingHeldDate? false :null
+        this.state.hearingHeldDate = this.form11Info.judgmentReserved && !this.form11Info.judgmentReservedDate? false :null
         this.state.laterDateDecided = this.form11Info.laterDateDecided == true || this.form11Info.laterDateDecided ==false? null :false;
         this.state.laterDate = this.form11Info.laterDateDecided && !this.form11Info.laterDate? false :null
         this.state.supplementaryReasons = this.form11Info.supplementaryReasons == true || this.form11Info.supplementaryReasons ==false? null :false;
         this.state.supplementaryReasonsDate = this.form11Info.supplementaryReasons && !this.form11Info.supplementaryReasonsDate? false :null
-     
+        this.state.orderedAwardingCosts = this.form11Info.orderedAwardingCosts == true || this.form11Info.orderedAwardingCosts ==false? null :false;
+        this.state.successfulParties = this.form11Info.orderedAwardingCosts && (this.invalidSuccessfulParties || this.form11Info.successfulParties?.length==0) ?false : null
+        this.state.unsuccessfulParties = this.form11Info.orderedAwardingCosts && this.form11Info.unsuccessfulParties?.length==0 ? false : null
+        this.state.ordersCourtMade = this.form11Info.ordersCourtMade? null:false
+        
+        this.state.hearingDate = this.form11Info.hearingDate? null :false;
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -1202,22 +1349,43 @@ export default class Form11StyleOfProceeding extends Vue {
     public somePartiesChanged(){
         this.form11Info.filingParties=[]
         this.form11Info.appearingParties=[]
+        this.form11Info.successfulParties = [];
+        this.form11Info.unsuccessfulParties = [];
+        this.updateNonSuccessfulParties();
         this.updated++;
     }
 
-    public getAppearingParties(){
-        const appearingParties=[]
-            for(const party of this.partyNames){
-                appearingParties.push(party)                
-                if(party.counselName){
-                    const counsel: form11PartiesInfoType = JSON.parse(JSON.stringify(party))
-                    counsel.isCounsel = true
-                    counsel.name = counsel.counselName+', counsel for '+counsel.name
-                    appearingParties.push(counsel)                    
+    public getCounselParty(party){
+
+        if(party.counselName){
+            const counsel: form11PartiesInfoType = JSON.parse(JSON.stringify(party))
+            counsel.isCounsel = true
+            counsel.name = counsel.counselName+', counsel for '+counsel.name
+            return counsel
+        }        
+        return party
+    }
+
+    public updateNonSuccessfulParties(){
+        const otherParties = [];
+
+        if (this.partyNames.length == this.form11Info.successfulParties?.length){
+            this.invalidSuccessfulParties = true;
+
+        } else {
+            this.invalidSuccessfulParties = false;
+
+            for (const partyName of this.partyNames){
+                const index = this.form11Info.successfulParties?.indexOf(partyName)
+                if (index == -1){
+                    otherParties.push(partyName);
                 }
             }
-        return appearingParties
+            this.nonSuccessfulPartyNames = otherParties;
+            this.updated ++;
+        }      
     }
+
 
 }
 </script>

@@ -709,9 +709,9 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public extractJudgeName(){
         const currentOrder = this.form12Info.chambersHearing
-        const judgeName = currentOrder? (
-            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
-            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
+        const judgeName = currentOrder && currentOrder.JudgeLastName? (
+            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')
+            +currentOrder.JudgeLastName
         ).trim() : ''
 
         if(judgeName){
@@ -1071,20 +1071,6 @@ export default class Form12StyleOfProceeding extends Vue {
     public filingPartiesChanged(){
         this.form12Info.appearingParties=[]
         this.updated++;
-    }
-
-    public getAppearingParties(){
-        const appearingParties=[]
-            for(const party of this.partyNames){
-                appearingParties.push(party)                
-                if(party.counselName){
-                    const counsel: form12PartiesInfoType = JSON.parse(JSON.stringify(party))
-                    counsel.isCounsel = true
-                    counsel.name = counsel.counselName+', counsel for '+counsel.name
-                    appearingParties.push(counsel)                    
-                }
-            }
-        return appearingParties
     }
 
     public getCounselParty(party){
