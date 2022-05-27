@@ -11,8 +11,12 @@
                         class="labels"                
                         label="Appellants:">
                         <p class="content text-primary">
-                            You must enter the full names of all the appellant(s) as 
-                            it appears on the reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full names of 
+                            all the appellant(s) as it appears on the reasons for 
+                            judgment or notice of appeal.  In addition, if counsel 
+                            appeared at the application, enter the name of counsel 
+                            by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p>  
                         <span 
                             v-if="form12Info.appellants.length == 0 && !AddNewAppellantForm"
@@ -83,8 +87,12 @@
                         class="labels"                
                         label="Respondents:">
                         <p class="content text-primary">
-                            You must enter full names of all the respondent(s) as it 
-                            appears on reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full names of 
+                            all the respondent(s) as it appears on the reasons for 
+                            judgment or notice of appeal.  In addition, if counsel 
+                            appeared at the application, enter the name of counsel 
+                            by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p> 
                         <span 
                             v-if="form12Info.respondents.length == 0 && !AddNewRespondentForm" 
@@ -416,7 +424,13 @@
 <!-- <Appearing Partie -Attended Hearing> -->
             <b-row class="mt-4 question">
                 <b-col class="labels">
-                    Enter the names of parties who attended at the hearing:                                
+                    Enter the names of the parties and/or counsel who attended at the hearing:  
+                    <p class="content text-primary">
+                        Please select the names of the parties and/or counsel 
+                        who attended at the hearing.  If the name of counsel 
+                        is not appearing, please ensure that you enter 
+                        counsel’s name at the top of the page.
+                    </p>                              
                 </b-col>
             </b-row>
             <b-row class="mx-3">
@@ -709,9 +723,9 @@ export default class Form12StyleOfProceeding extends Vue {
 
     public extractJudgeName(){
         const currentOrder = this.form12Info.chambersHearing
-        const judgeName = currentOrder? (
-            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')+
-            (currentOrder.JudgeLastName? currentOrder.JudgeLastName:'')
+        const judgeName = currentOrder && currentOrder.JudgeLastName? (
+            (currentOrder.JudgeSalutation? currentOrder.JudgeSalutation+' ':'Justice ')
+            +currentOrder.JudgeLastName
         ).trim() : ''
 
         if(judgeName){
@@ -1071,20 +1085,6 @@ export default class Form12StyleOfProceeding extends Vue {
     public filingPartiesChanged(){
         this.form12Info.appearingParties=[]
         this.updated++;
-    }
-
-    public getAppearingParties(){
-        const appearingParties=[]
-            for(const party of this.partyNames){
-                appearingParties.push(party)                
-                if(party.counselName){
-                    const counsel: form12PartiesInfoType = JSON.parse(JSON.stringify(party))
-                    counsel.isCounsel = true
-                    counsel.name = counsel.counselName+', counsel for '+counsel.name
-                    appearingParties.push(counsel)                    
-                }
-            }
-        return appearingParties
     }
 
     public getCounselParty(party){

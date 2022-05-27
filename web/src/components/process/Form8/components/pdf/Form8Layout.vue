@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="dataReady">
 
 <!-- <header> -->
         <div style="margin-top:-1.25rem;">
@@ -148,7 +148,7 @@
             <div class="arrow-right-flash-36"></div> 
 
             <div class="coa-text-box-left" style="width:21.5%; margin:0 0 0 -0.5rem;">
-                <div class="ml-2" style="font-weight: 700;">{{result.judgeName}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">{{judgeName}}</div>                       
             </div>      
        
         </div>
@@ -218,6 +218,19 @@ export default class Form8Layout extends Vue {
 
     @Prop({required:true})
     result!: form8DataInfoType;
+
+    judgeName='';
+    dataReady = false;
+
+    mounted(){
+        this.extractInfo();       
+        this.dataReady = true;
+    }
+
+    public extractInfo(){ 
+        this.judgeName = this.result.judgeName=='Other'? this.result.judgeNameOther :this.result.judgeName;        
+    }
+
 }
 
 </script>

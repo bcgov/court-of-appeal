@@ -2,7 +2,7 @@
     <b-card v-if="dataReady" class="bg-light border-light" >  
 
         <b-row>
-            <!-- <b-col cols="2" class="ml-3">
+            <b-col cols="2" class="ml-3">
                 <b-button 
                     style="float: right;" 
                     variant="primary"
@@ -10,7 +10,7 @@
                     >
                     Print-Save
                 </b-button>
-            </b-col> -->
+            </b-col>
             <b-col cols="10">
                 <b-button
                     style="float: right;" 
@@ -168,41 +168,45 @@ export default class Form11 extends Vue {
         });      
     }
 
-    // public onPrintSave() { 
-    //     const pdf_type = "FORM"
-    //     const pdf_name = "form11-" + this.currentOrderMultipleJusticesId
-    //     const el= document.getElementById("print");
-      
-    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
-    //     const bottomRightText = `" "`;        
-    //     const url = '/form11/form-print/'+this.currentOrderMultipleJusticesId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
-    //     const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
-
-    //     const body = {
-    //         'html':pdfhtml,
-    //         'json_data':this.result
-    //     }       
+    public onPrintSave() { 
+        const pdf_type = "FORM"
+        const pdf_name = "form11-" + this.currentOrderMultipleJusticesId
+        const el= document.getElementById("print");
         
-    //     const options = {
-    //         responseType: "blob",
-    //         headers: {
-    //         "Content-Type": "application/json",
-    //         }
-    //     }  
+        const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11: ORDER OF THREE OR MORE JUSTICES"`;
+        const topRightText   = `"(Rule 66(3)(b) )"`;
 
-    //     this.$http.post(url,body, options)
-    //     .then(res => {                       
-    //         const blob = res.data;
-    //         const link = document.createElement("a");
-    //         link.href = URL.createObjectURL(blob);
-    //         document.body.appendChild(link);
-    //         link.download = "Form11.pdf";
-    //         link.click();
-    //         setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
-    //     },err => {
-    //         console.error(err);        
-    //     });
-    // }
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11: ORDER OF THREE OR MORE JUSTICES  (Rule 66(3)(b) )"`;
+        const bottomRightText = `" "`;
+        
+        const url = '/form11/form-print/'+this.currentOrderMultipleJusticesId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'
+        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText, topLeftText, topRightText );
+
+        const body = {
+            'html':pdfhtml,
+            'json_data':this.result
+        }       
+        
+        const options = {
+            responseType: "blob",
+            headers: {
+            "Content-Type": "application/json",
+            }
+        }  
+
+        this.$http.post(url,body, options)
+        .then(res => {                       
+            const blob = res.data;
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.download = "Form11.pdf";
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
+        },err => {
+            console.error(err);        
+        });
+    }
 }
 </script>
 <style scoped lang="scss" src="@/styles/_pdf.scss">

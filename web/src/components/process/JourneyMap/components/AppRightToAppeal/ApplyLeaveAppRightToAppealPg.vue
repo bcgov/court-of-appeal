@@ -98,7 +98,7 @@
                         </li>
                         <li>
                             <b-row class="my-1 w-125">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Application Book for Leave                                    
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
@@ -193,7 +193,7 @@
                         </li>
                         <li>
                             <b-row class="my-1 w-100">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Application Book for Leave to Appeal and Stay                                    
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
@@ -279,7 +279,7 @@
                     <ul>                        
                         <li>
                             <b-row class="my-1 w-100">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Response Book                                   
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
@@ -363,7 +363,7 @@
                     <ul>
                         <li>                            
                             <b-row class="my-1 w-100">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Response Book for Leave to Appeal and Stay                                  
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
@@ -600,7 +600,7 @@
                     <ul>
                         <li>                            
                             <b-row style="width: 113%;" class="my-1">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Response book to vary an order of a justice                                  
                                 </b-col>
                                 <b-col cols="4" class="p-0" >

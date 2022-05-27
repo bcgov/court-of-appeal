@@ -3,7 +3,7 @@
 
         <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
-                The Notice of Appeal or the order granting leave to appeal
+                The Notice of Cross Appeal
             </b-col> 
             <b-col cols="1">
                 <b-button

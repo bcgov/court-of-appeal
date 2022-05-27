@@ -53,11 +53,31 @@
                 Who made the Order?
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-input                
-                    style="width:100%"                        
-                    :state="state.judgeName"                                                           
-                    v-model="form8Info.judgeName">
-                </b-form-input>
+                
+                <b-form-select 
+                        stacked               
+                        style="width:100%"                                    
+                        v-model="form8Info.judgeName"
+                        text-field="text"
+                        value-field="text"                    
+                        :options="justiceNameOptions">                            
+                    </b-form-select>
+                    <b-row v-if="form8Info.judgeName == 'Other'" class="m-0 p-0">
+                        <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
+                        <div style="width:74%;">
+                            <b-form-input 
+                                style="margin-top:0.5rem;"                                
+                                :state="state.judgeNameOther"
+                                v-model="form8Info.judgeNameOther" 
+                            />
+                        </div>
+                    </b-row> 
+                    <span
+                        v-if="(state.judgeName != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify who made the order.
+                    </span>
             </b-col>
         </b-row>  
 
@@ -142,7 +162,8 @@ import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
 
 import { form8DataInfoType } from '@/types/Information/Form8';
-import { chambersHearingJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { chambersHearingJsonInfoType, partiesDataJsonDataType } from '@/types/Information/json';
+import {justiceNames} from '@/components/process/Form12/components/JusticeName';
 
 @Component
 export default class Form8StyleOfProceeding extends Vue {
@@ -177,8 +198,15 @@ export default class Form8StyleOfProceeding extends Vue {
         filingParties:null,         
         authorizedName:null,
         orderDate: null,
-        judgeName: null
+        judgeName: null,
+        judgeNameOther: null
     }  
+
+    justiceNameOptions = [];
+    
+    created(){
+        this.justiceNameOptions = justiceNames
+    }
 
     mounted() {
         this.dataReady = false;
@@ -205,11 +233,26 @@ export default class Form8StyleOfProceeding extends Vue {
             
             form8Data.version = this.$store.state.Application.version;  
             
-            form8Data.judgeName = this.currentOrder? (
-                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')+
-                (this.currentOrder.JudgeFirstName? this.currentOrder.JudgeFirstName:'') +
-                (this.currentOrder.JudgeLastName? this.currentOrder.JudgeLastName:'')
+            const judgeName = this.currentOrder && this.currentOrder.JudgeLastName? (
+                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')
+                +this.currentOrder.JudgeLastName
             ).trim() : ''
+
+            if(judgeName){
+                const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
+                if(justiceIndex>-1){
+                    form8Data.judgeName = justiceNames[justiceIndex]
+                    form8Data.judgeNameOther=''
+                }
+                else{
+                    form8Data.judgeName='Other'
+                    form8Data.judgeNameOther=judgeName
+                }
+            } else {
+                form8Data.judgeName='';
+                form8Data.judgeNameOther='';
+            }
+
             const orderDate = this.currentOrder?.JudgmentDate?this.currentOrder.JudgmentDate.slice(0,10):'';
             form8Data.orderDate = orderDate;
             this.orderDateValue = orderDate; 
@@ -280,7 +323,8 @@ export default class Form8StyleOfProceeding extends Vue {
         this.state = {            
             filingParties:null,
             orderDate: null,
-            judgeName: null,                 
+            judgeName: null,  
+            judgeNameOther: null,               
             authorizedName:null
         }
         this.dataReady = true; 
@@ -296,6 +340,9 @@ export default class Form8StyleOfProceeding extends Vue {
         this.state.filingParties = this.form8Info.filingParties?.length>0? null :false; 
         this.state.orderDate = this.form8Info.orderDate != null? null:false;
         this.state.judgeName = this.form8Info.judgeName != null? null:false;
+        this.state.judgeName = this.form8Info.judgeName? null :false;
+        this.state.judgeNameOther = this.form8Info.judgeName=='Other' && !this.form8Info.judgeNameOther? false: null;
+        
         this.state.authorizedName = !this.form8Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
