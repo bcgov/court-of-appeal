@@ -115,18 +115,26 @@
 <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
             <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;"></div>
+            <div  style="width:50%;">BY THE COURTS:</div>
         </div>
 
 <!-- <Parties Signature> -->
-        <div  style="display:inline;" class="my-5 mx-0" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
-            <div  style="width:50%; display:inline-block; ">                
-                <div style="border-top:1px dashed grey; width:94%; margin:3rem 0 0 0;" > 
-                    {{party.name}}
+        <div  class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+            <div style="width:50%;">
+                <div style="height:3rem;" />                               
+                <div style="border-top:1px dashed grey; width:94%; " > 
+                    {{party.name}} 
+                    <span v-if="party.responding">, Respondent</span>
+                    <span v-else>, Appellant</span>
                 </div>                               
             </div>
+            <div v-if="inx==0" style="width:50%;">
+                <div style="height:3rem;" />
+                <div style="border-top:1px dashed grey;">
+                    Deputy Registrar
+                </div>
+            </div>            
         </div>
-
 
 
     </div>
@@ -203,8 +211,8 @@ export default class Form11Layout extends Vue {
         const appearingAppellants = this.result.appearingParties.filter(party=> !party.responding)
         const appearingRespondents = this.result.appearingParties.filter(party=> party.responding)
 
-        const appellantnames = this.combineNames(appearingAppellants, 'name')        
-        const respondentnames = this.combineNames(appearingRespondents, 'name')
+        const appellantnames = this.combineNames(appearingAppellants, 'name', null, ', appellant')                   
+        const respondentnames = this.combineNames(appearingRespondents, 'name', null, ', respondent')
         
         this.extractSigningPartyList(appearingAppellants, appearingRespondents)
         
@@ -215,17 +223,8 @@ export default class Form11Layout extends Vue {
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
-        const registrar = {} as form11PartiesInfoType;
-        registrar.name = 'Deputy Registrar (BY THE COURTS)';
-
-        if(appearingAppellants.length>1)
-            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingAppellants.slice(1), ...appearingRespondents]
-        else if(appearingAppellants.length==1)
-            this.signingPartyList =[appearingAppellants[0], registrar, ...appearingRespondents]
-        else if(appearingAppellants.length==0 && appearingRespondents.length>1)
-            this.signingPartyList =[appearingRespondents[0], registrar, ...appearingRespondents.slice(1)]
-        else
-            this.signingPartyList =[appearingRespondents[0], registrar]
+    
+        this.signingPartyList =[...appearingAppellants, ...appearingRespondents]
     }
 
     public extractSuccessUnsucessParties(){
@@ -233,18 +232,24 @@ export default class Form11Layout extends Vue {
         this.unsuccessfullParties = this.combineNames(this.result.unsuccessfulParties, 'name')
     }
     
-    public combineNames(names, nameField?, addingNameArray?){
+    public combineNames(names, nameField?, addingNameArray?, role?){
         let namesString = ''
+        
         const numberOfNames = names.length       
         for(const index in names){
-            let addingName=''
+            
+            let addingName = ''
+            const partyRole = role? (role+  
+                (!names[index].isCounsel && !names[index].isOrganization?', appearing in person':'')) 
+            : ''            
+
             if(addingNameArray?.length>0){
-                addingName=addingNameArray[index]
+                addingName = addingNameArray[index] + partyRole
             }
             else if(nameField)
-                addingName = names[index][nameField] 
+                addingName = names[index][nameField] + partyRole
             else
-                addingName = names[index]
+                addingName = names[index] + partyRole
 
             if(Number(index)>0 && Number(index)+1 == numberOfNames)
                 namesString += ' and '+addingName
