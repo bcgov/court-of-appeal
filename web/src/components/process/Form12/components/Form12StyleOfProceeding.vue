@@ -1043,6 +1043,7 @@ export default class Form12StyleOfProceeding extends Vue {
         }
         this.UpdateForm12Info(form12Data)
         this.closeJudgeNamesForm();
+        this.state.judgeNamesNumber = (this.form12Info.judgeNames?.length==3 || this.form12Info.judgeNames?.length==5)? null :false;        
         this.updated ++;
     }
 
