@@ -205,9 +205,7 @@ export default class Form10Layout extends Vue {
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
-        const registrar = {} as form10PartiesInfoType;
-        registrar.name = 'A Justice of the Court of Appeal';
-
+    
         this.signingPartyList =[...appearingAppellants, ...appearingRespondents]
     }
 
