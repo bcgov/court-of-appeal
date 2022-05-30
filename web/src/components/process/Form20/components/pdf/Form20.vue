@@ -14,6 +14,7 @@
                 <b-button
                     style="float: right; margin-right:1rem;" 
                     variant="success"
+                    :disabled="!printReady"
                     @click="savePdf()"
                     >Download PDF
                     <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
@@ -64,9 +65,11 @@ export default class Form20 extends Vue {
 
     result = {} as form20DataInfoType;
     dataReady = false;
+    printReady = false;
    
     mounted(){
-        this.dataReady = false;       
+        this.dataReady = false;
+        this.printReady = false;       
         this.getForm20Data(); 
     }   
 
@@ -99,7 +102,7 @@ export default class Form20 extends Vue {
 
         this.$http.post(url,body, options)
         .then(res => {                       
-                
+            this.printReady = true;    
         },err => {
             console.error(err);        
         });

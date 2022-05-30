@@ -259,8 +259,8 @@
                 <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="form1InfoStates.dateSealed == false?'danger': 'dark'">
+                        style="padding: 0; float: center;" 
+                        :border-variant="form1InfoStates.dateSealed == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -305,8 +305,8 @@
                 <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
                         class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="form1InfoStates.dateBan == false?'danger': 'dark'">
+                        style="padding: 0; float: center;" 
+                        :border-variant="form1InfoStates.dateBan == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -477,6 +477,7 @@ export default class FillForm1CommonInfo extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
 </style>

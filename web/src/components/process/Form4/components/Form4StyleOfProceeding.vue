@@ -155,8 +155,8 @@
                     <b-col>                   
                         <b-card                        
                             class="mt-2" 
-                            style="padding: 0; float: left;" 
-                            :border-variant="state.hearingDate == false?'danger': 'dark'">
+                            style="padding: 0; float: center;" 
+                            :border-variant="state.hearingDate == false?'danger': 'muted'">
                             <div class="vuetify">
                                 <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                     <v-date-picker
@@ -196,7 +196,7 @@
                     <b-col cols="7" class="labels">
                         Enter the section(s) or rule(s) that you are relying on for your application    
                         <p class="content text-primary">
-                            E.g., If you are applying for leave to appeal, enter 
+                            <i>E.g.,</i> If you are applying for leave to appeal, enter 
                         “Section 31 of the Court of Appeal Act”. If you are applying 
                         for a stay of proceedings, enter “Section 33 of the Court 
                         of Appeal Act”. 
@@ -237,7 +237,7 @@
                     </b-col>                               
                 </b-row>
 
-                <b-row class="mt-4 question" v-if="form4Info.orderList.length > 0" :key="updated + 1">
+                <b-row class="mt-4 question" v-if="form4Info.orderList && form4Info.orderList.length > 0" :key="updated + 1">
                     <b-col cols="7" class="labels">
                         Enter details on each order you are seeking                                                    
                     </b-col>
@@ -779,12 +779,13 @@ export default class Form4StyleOfProceeding extends Vue {
         this.state.jurisdictionType = !this.form4Info.jurisdictionType? false : null;
 
         this.state.hearingLocation = !this.form4Info.hearingLocation? false : null; 
-        this.state.hearingDate = !this.form4Info.hearingDate? false : null; 
+        this.state.hearingDate = this.form4Info.hearingDate && this.allowedDates(this.form4Info.hearingDate)? null: false; 
         this.state.estimatedDuration = !this.form4Info.estimatedDuration? false : null;         
         this.state.relyingSectionRule = !this.form4Info.relyingSectionRule? false :null;  
-        this.state.seekingOrder = !this.form4Info.seekingOrder? false : null;  
+          
+        this.state.orderList = this.form4Info.orderList?.length>0 ? null: false  
         this.state.seekingOrder = !(this.form4Info.seekingOrder && this.verifyOrders()
-                                    && this.form4Info.seekingOrder.length == this.form4Info.orderList.length)? false : null;       
+                                    && this.form4Info.seekingOrder.length == this.form4Info.orderList?.length)? false : null;       
       
         this.state.bookRequired = this.form4Info.bookRequired==null? false :null
         const affidavitRequired = this.form4Info.bookRequired ==false; 
@@ -806,7 +807,7 @@ export default class Form4StyleOfProceeding extends Vue {
     
     public verifyOrders(){
         for(const order of this.form4Info.seekingOrder){            
-            if(order.details.trim().length == 0)
+            if(order.details?.trim()?.length == 0)
                 return false;
         }
         return true;
@@ -815,7 +816,7 @@ export default class Form4StyleOfProceeding extends Vue {
     public extractOrderDetails(){
         const orders = [];
         for(const order of this.form4Info.seekingOrder){            
-            if(order.details.trim().length != 0){
+            if(order.details?.trim()?.length != 0){
                 orders.push(order.name + ': ' + order.details.trim());
             }  
         }
@@ -970,7 +971,7 @@ export default class Form4StyleOfProceeding extends Vue {
     public updateSeekingOrder(){
         
         const formData = this.form4Info;
-        const orderData = formData.seekingOrder;
+        const orderData = Array.isArray(formData.seekingOrder)? formData.seekingOrder: [];
         const orders: orderInfoType[] = []; 
 
         for (const orderName of this.form4Info.orderList){
@@ -1011,6 +1012,7 @@ export default class Form4StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        

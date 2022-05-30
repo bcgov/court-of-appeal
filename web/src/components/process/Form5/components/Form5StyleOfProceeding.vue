@@ -127,7 +127,7 @@
                                 
                 </b-col>
                 <b-col class="ml-3" style="padding: 0;">  
-                    <b-card class="mt-2" style="padding: 0; float: left;" :border-variant="state.dateOfAppealHearing == false?'danger': 'dark'">
+                    <b-card class="mt-2" style="padding: 0; float: left;" :border-variant="state.dateOfAppealHearing == false?'danger': 'muted'">
                         <div class="vuetify">                            
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -395,8 +395,7 @@ export default class Form5StyleOfProceeding extends Vue {
     }
 
     public allowedDates(date){
-        const day = moment().startOf('day').format('YYYY-MM-DD');
-           
+        const day = moment().startOf('day').format('YYYY-MM-DD');           
         return (date >= day);           
     }
 
@@ -412,7 +411,7 @@ export default class Form5StyleOfProceeding extends Vue {
         else
             this.state.timeOfAppealHearing =false;
         
-        this.state.dateOfAppealHearing = !this.form5Info.dateOfAppealHearing? false : null;
+        this.state.dateOfAppealHearing = this.form5Info.dateOfAppealHearing && this.allowedDates(this.form5Info.dateOfAppealHearing)? null: false;
         
         const numberOfDaysApp = this.form5Info.numberOfDaysApp?.trim();
         this.state.numberOfDaysApp = this.checkDay(numberOfDaysApp)==false? false : null;
@@ -433,7 +432,7 @@ export default class Form5StyleOfProceeding extends Vue {
     public checkDay(day: string){
 
         let valid = false;
-        if (Number(day) % 1 == 0 || Number(day) % 1 == 0.5){
+        if (day && (Number(day) % 1 == 0 || Number(day) % 1 == 0.5)){
             valid = true;
         }       
 
@@ -532,6 +531,7 @@ export default class Form5StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 </style>
 

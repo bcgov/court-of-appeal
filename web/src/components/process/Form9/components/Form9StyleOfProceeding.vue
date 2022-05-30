@@ -277,7 +277,7 @@ export default class Form9StyleOfProceeding extends Vue {
         
         this.state.firstAppellant = !this.form9Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form9Info.firstRespondent? false : null; 
-        this.state.filingRequisitionParties = !this.form9Info.filingRequisitionParties? false : null;  
+        this.state.filingRequisitionParties = this.form9Info.filingRequisitionParties?.length>0 ? null: false;  
         this.state.reliefSought = !this.form9Info.reliefSought? false : null;     
         this.state.authorizedName = !this.form9Info.authorizedName? false : null;       
         

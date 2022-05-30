@@ -91,8 +91,9 @@
             <b-col class="ml-1 mt-2">
                 <b-form-select                
                     style="width:100%"              
-                    v-model="hearingLocation" 
-                    @change="update"                   
+                    v-model="hearingLocation"
+                    :state="state.hearingLocation"
+                    @change="updateLocation"                   
                     :options="hearingLocationList">
                 </b-form-select>
                 <b-row v-if="hearingLocation == 'Other'">
@@ -100,7 +101,8 @@
                     <b-form-select                        
                         style="width:70%; float: right;"
                         class="mt-2 ml-5"
-                        @change="update"
+                        :state="state.hearingLocationOther"
+                        @change="updateLocation"
                         :options="otherHearingLocationList"                                    
                         v-model="otherHearingLocation">
                     </b-form-select>
@@ -127,8 +129,8 @@
             <b-col>                   
                 <b-card                        
                     class="mt-2" 
-                    style="padding: 0; float: left;" 
-                    :border-variant="state.hearingDate == false?'danger': 'dark'">
+                    style="padding: 0; float: center;" 
+                    :border-variant="state.hearingDate == false?'danger': 'muted'">
                     <div class="vuetify">
                         <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                             <v-date-picker
@@ -302,6 +304,7 @@ export default class Form7StyleOfProceeding extends Vue {
         firstRespondent: null,
         filingParties: null,
         hearingLocation: null,
+        hearingLocationOther: null,
         hearingDate: null,
         hearingTime: null,    
         affidavits: null,
@@ -367,7 +370,7 @@ export default class Form7StyleOfProceeding extends Vue {
 
     }
 
-    public update(){ 
+    public updateLocation(){ 
               
         const form7 = this.form7Info;        
         form7.hearingLocation = {} as hearingLocationsInfoType;
@@ -418,6 +421,7 @@ export default class Form7StyleOfProceeding extends Vue {
             firstRespondent: null,
             filingParties: null,
             hearingLocation: null,
+            hearingLocationOther: null,
             hearingDate: null,
             hearingTime: null,    
             affidavits: null,
@@ -433,8 +437,10 @@ export default class Form7StyleOfProceeding extends Vue {
         this.state.firstAppellant = !this.form7Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form7Info.firstRespondent? false : null; 
         this.state.filingParties = this.form7Info.filingParties?.length>0? null :false;
-        this.state.hearingLocation = !this.form7Info.hearingLocation? false : null;
-        this.state.hearingDate = this.form7Info.hearingDate? null :false;
+        this.state.hearingLocation = this.hearingLocation? null: false;
+        this.state.hearingLocationOther = (this.hearingLocation=='Other' && !this.otherHearingLocation) ?false: null
+
+        this.state.hearingDate = this.form7Info.hearingDate && this.allowedDates(this.form7Info.hearingDate)? null :false;
         this.state.hearingTime = this.form7Info.hearingTime? null :false;
         this.state.affidavits = this.form7Info.affidavits? null :false;
         this.state.filedMaterial = this.form7Info.filedMaterial != null? null :false;
@@ -510,8 +516,7 @@ export default class Form7StyleOfProceeding extends Vue {
     }
 
     public allowedDates(date){
-        const day = moment().startOf('day').format('YYYY-MM-DD');
-           
+        const day = moment().startOf('day').format('YYYY-MM-DD');           
         return (date >= day);           
     }
 
