@@ -80,6 +80,9 @@ const form11State = namespace("Form11");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
+import "@/store/modules/forms/form13";
+const form13State = namespace("Form13");
+
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
@@ -143,6 +146,9 @@ export default class NewFormModal extends Vue {
     @form12State.Action
 	public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
 
+    @form13State.Action
+	public UpdateCurrentConsentOrderExtendTimeId!: (newCurrentConsentOrderExtendTimeId: string) => void
+
     @form14State.Action
 	public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 
@@ -177,6 +183,7 @@ export default class NewFormModal extends Vue {
         {name:'form10', title:'Order of a single justice (Form 10)'},
         {name:'form11', title:'Order of three or more justices (Form 11)'},
         {name:'form12', title:'Order from an application to vary the order of a justice (Form 12)'},
+        {name:'form13', title:'Consent order to extend time to file a document (Form 13)'},
         {name:'form14', title:'Consent order to remove an appeal from the inactive list (Form 14)'},
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
         {name:'form17', title:'Certificate of Costs (Form 17)'},
@@ -253,7 +260,11 @@ export default class NewFormModal extends Vue {
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
             this.$router.push({name: "checklist-orders" });
 
-        } else if(form=='form14'){
+        } else if(form=='form13'){
+            this.UpdateCurrentConsentOrderExtendTimeId(null);
+            this.$router.push({name: "checklist-orders" });
+
+        }else if(form=='form14'){
             this.UpdateCurrentConsentOrderRemoveInactiveId(null);
             this.$router.push({name: "checklist-orders" });
 

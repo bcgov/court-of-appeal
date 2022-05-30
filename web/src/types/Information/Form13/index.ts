@@ -1,6 +1,7 @@
 import { applicantJsonDataType} from "../json"
 
-export interface form14FormsJsonDataType {
+
+export interface form13FormsJsonDataType {
     id: number;
     personId: number;
     type: string;
@@ -10,18 +11,18 @@ export interface form14FormsJsonDataType {
     packageUrl?: string;
     packageNumber?: string;
     pdf_types: string;
-    data: form14DataInfoType;
+    data: form13DataInfoType;
     description: string;
 }
 
-export interface form14StatusInfoType {
+export interface form13StatusInfoType {
     first?: boolean;
     second?: boolean;
     third?: boolean;
     thirdError?: boolean;
 }
 
-export interface form14SearchInfoType {
+export interface form13SearchInfoType {
     file: string;
     lastName: string;
     firstName: string;
@@ -29,14 +30,17 @@ export interface form14SearchInfoType {
     searchBy: string;
 }
 
-export interface form14DataInfoType {
+export interface form13DataInfoType {
     formSevenNumber:string;
-    appellants: form14PartiesInfoType[];
-    respondents: form14PartiesInfoType[];   
+    appellants: form13PartiesInfoType[];
+    respondents: form13PartiesInfoType[];   
     appellantNames: string;
     respondentNames: string;
     orderDate: string;
-    seekingRemoved: string[];    
+    filingParties: form13PartiesInfoType[];
+    seekingExtension: string[]; 
+    seekingExtensionOther: string; 
+    extensionDate: string;  
     completionDate?: string;
     version?: string;
 }
@@ -52,7 +56,7 @@ export interface judgeInfoType {
     text: string;
 }
 
-export interface form14PartiesInfoType extends applicantJsonDataType{    
+export interface form13PartiesInfoType extends applicantJsonDataType{    
     isOrganization?: boolean;
     responding?: boolean;
     title?: string;
@@ -72,7 +76,7 @@ export interface representativeInfoType {
     name: string;
 }
 
-export interface form14PartiesStatesInfoType {
+export interface form13PartiesStatesInfoType {
     firstName: null | boolean;
     lastName: null | boolean;
     organizationName: null | boolean;

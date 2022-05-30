@@ -15,14 +15,14 @@
                             it appears on the reasons for judgment or notice of appeal.
                         </p>  
                         <span 
-                            v-if="form14Info.appellants.length == 0 && !AddNewAppellantForm"
+                            v-if="form13Info.appellants.length == 0 && !AddNewAppellantForm"
                             class="text-muted ml-2 my-2">No appellants have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form14Info.appellants.length > 0"
+                            v-else-if="form13Info.appellants.length > 0"
                             class="mt-2"
                             style="font-size: 16px;"
-                            :items="form14Info.appellants"
+                            :items="form13Info.appellants"
                             :fields="partyFields"
                             head-row-variant="primary"
                             borderless    
@@ -87,13 +87,13 @@
                             appears on reasons for judgment or notice of appeal.
                         </p> 
                         <span 
-                            v-if="form14Info.respondents.length == 0 && !AddNewRespondentForm" 
+                            v-if="form13Info.respondents.length == 0 && !AddNewRespondentForm" 
                             class="text-muted ml-2 my-2">No respondents have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form14Info.respondents.length > 0"
+                            v-else-if="form13Info.respondents.length > 0"
                             class="mt-2"
-                            :items="form14Info.respondents"
+                            :items="form13Info.respondents"
                             :fields="partyFields"
                             head-row-variant="primary"
                             style="font-size: 16px;"
@@ -148,43 +148,93 @@
         </b-card>
         <!-- {{partyNames}} -->
         
-        <div v-if="this.form14Info.appellants && this.form14Info.appellants.length>0 && this.form14Info.respondents && this.form14Info.respondents.length>0">
+        <div v-if="this.form13Info.appellants && this.form13Info.appellants.length>0 && this.form13Info.respondents && this.form13Info.respondents.length>0">
             <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
 
 <!-- <BETWEEN> -->
             <b-row class="mt-4 ml-1" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{form14Info.appellantNames}}</span></b-col>
+                <b-col cols="10">Between: <span style="font-weight: 200;">{{form13Info.appellantNames}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
             </b-row>
 <!-- <AND> -->
             <b-row class="mt-3 ml-1" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{form14Info.respondentNames}}</span></b-col>
+                <b-col cols="10">And: <span style="font-weight: 200;">{{form13Info.respondentNames}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>  
 
 
-<!-- <seeking to have removed from the inactive list> -->
+<!-- <FilingParties-Made Application> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    What are you seeking to have removed from the inactive list?                                
+                    Name of party applying to extend time:                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                                       
-                        style="width:100%"                        
-                        :state="state.seekingRemoved"   
-                        :options="seekingRemovedOptions"                                   
-                        v-model="form14Info.seekingRemoved">
-                        <!-- <b-form-checkbox
-                            :value="partyname" 
-                            v-for="partyname,inx in partyNames" 
-                            :key="'party-made-app-'+inx">
-                            {{partyname.name}}
-                        </b-form-checkbox> -->
+                        stacked                                 
+                        :state="state.filingParties"                                      
+                        v-model="form13Info.filingParties">
+                        <b-form-checkbox
+                            :value="applyingparty"
+                            v-for="applyingparty,inx in partyNames"
+                            :key="'appling-party-'+inx">
+                                {{applyingparty.name}}
+                        </b-form-checkbox>
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row> 
 
+
+
+
+<!-- <seeking extention> -->            
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    What are you wanting to extend the time to file?
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-checkbox-group 
+                        stacked  
+                        :state="state.seekingExtension"
+                        v-model="form13Info.seekingExtension"
+                        :options="seekingExtensionOptions"> 
+                        <b-form-checkbox value="other">
+                            <b-row style="margin-left:0.1rem; width:138%"> 
+                                <div style="width:15%;">other </div>
+                                <div  style="width:85%;">
+                                    <b-form-input size="sm" 
+                                        :state="state.seekingExtensionOther"
+                                        v-model="form13Info.seekingExtensionOther" />
+                                </div>
+                            </b-row>
+                        </b-form-checkbox>
+                    </b-form-checkbox-group>
+                </b-col>
+            </b-row>
+
+<!-- <Extension Date> -->
+            <b-row class="mt-4 question" >
+                <b-col cols="7" class="labels">
+                    What is the date of the extension when you want to file?
+                </b-col>
+                <b-col>                   
+                    <b-card                        
+                        class="mt-2" 
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.extensionDate == false?'danger': 'muted'">
+                        <div class="vuetify">
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
+                                <v-date-picker
+                                    v-model="form13Info.extensionDate"                           
+                                    color="warning"             
+                                    :allowed-dates="allowedDates"                            
+                                    header-color="red"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>    
+                    </b-card>                    
+                </b-col>
+            </b-row>
              
 
         </div>          
@@ -237,11 +287,11 @@ const informationState = namespace("Information");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-import "@/store/modules/forms/form14";
-const form14State = namespace("Form14");
+import "@/store/modules/forms/form13";
+const form13State = namespace("Form13");
 
 
-import { form14DataInfoType, form14PartiesInfoType } from '@/types/Information/Form14';
+import { form13DataInfoType, form13PartiesInfoType } from '@/types/Information/Form13';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
@@ -256,7 +306,7 @@ import AddPartyModal from './AddPartyModal.vue';
         AddPartyModal        
     }
 })
-export default class Form14StyleOfProceeding extends Vue {
+export default class Form13StyleOfProceeding extends Vue {
 
     @informationState.State
     public partiesJson: partiesDataJsonDataType;   
@@ -264,17 +314,17 @@ export default class Form14StyleOfProceeding extends Vue {
     @informationState.State
     public fileNumber: string;
 
-    @form14State.State
-    public form14Info: form14DataInfoType;
+    @form13State.State
+    public form13Info: form13DataInfoType;
 
-    @form14State.Action
-    public UpdateForm14Info!: (newForm14Info: form14DataInfoType) => void  
+    @form13State.Action
+    public UpdateForm13Info!: (newForm13Info: form13DataInfoType) => void  
     
-    @form14State.State
-    public currentConsentOrderRemoveInactiveId: string;
+    @form13State.State
+    public currentConsentOrderExtendTimeId: string;
 
-    @form14State.Action
-    public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
+    @form13State.Action
+    public UpdateCurrentConsentOrderExtendTimeId!: (newCurrentConsentOrderExtendTimeId: string) => void
     
     dataReady = false;
     updated=0;     
@@ -285,18 +335,19 @@ export default class Form14StyleOfProceeding extends Vue {
     addAppellantFormColor = 'court';
     AddNewAppellantForm = false;
 
-    partyNames: form14PartiesInfoType[] = [];
+    partyNames: form13PartiesInfoType[] = [];
     
 
-    partyToEdit = {} as form14PartiesInfoType;
+    partyToEdit = {} as form13PartiesInfoType;
     showPartyWindow = false
     isCreate = true
     partyType = ''   
-    seekingRemovedOptions = [
-        'appeal',
-        'application leave to appeal',
-        'cross appeal',
-        'application for leave to cross appeal'
+    seekingExtensionOptions = [
+        'appeal record',
+        'transcript',
+        'factum',
+        'appeal book',
+        'book of authorities'
     ]
 
     partyFields = [
@@ -309,7 +360,11 @@ export default class Form14StyleOfProceeding extends Vue {
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
-        seekingRemoved: null       
+        filingParties: null,
+        seekingExtension: null,  
+        seekingExtensionOther: null, 
+        extensionDate: null 
+               
     }    
 
     mounted() {
@@ -319,31 +374,32 @@ export default class Form14StyleOfProceeding extends Vue {
     
     public extractInfo(){       
 
-        if(this.currentConsentOrderRemoveInactiveId){
-            this.getForm14Data();
+        if(this.currentConsentOrderExtendTimeId){
+            this.getForm13Data();
            
         } else { 
 
-            const form14Data = this.form14Info;            
-            form14Data.version = this.$store.state.Application.version;
-            form14Data.seekingRemoved = [];
+            const form13Data = this.form13Info;            
+            form13Data.version = this.$store.state.Application.version;
+            form13Data.seekingExtension = [];
+            form13Data.seekingExtensionOther = '';
+            form13Data.filingParties = [];
+            form13Data.appellants = this.partiesJson.appellants
+            form13Data.respondents = this.partiesJson.respondents
+            form13Data.formSevenNumber = this.fileNumber; 
+            form13Data.orderDate = moment().format("YYYY-MM-DD")
             
-            form14Data.appellants = this.partiesJson.appellants
-            form14Data.respondents = this.partiesJson.respondents
-            form14Data.formSevenNumber = this.fileNumber; 
-            form14Data.orderDate = moment().format("YYYY-MM-DD")
-            
-            this.UpdateForm14Info(form14Data);           
-            this.revaluateForm14Data();            
+            this.UpdateForm13Info(form13Data);           
+            this.revaluateForm13Data();            
             this.saveForm(true);
         }          
     }
 
-    public revaluateForm14Data(){
+    public revaluateForm13Data(){
 
-        const form14Data = this.form14Info;
+        const form13Data = this.form13Info;
 
-        for (const respondent of form14Data.respondents){
+        for (const respondent of form13Data.respondents){
             if (respondent.firstName && respondent.lastName){                    
                 respondent.isOrganization = false;
             } else if (respondent.organization){
@@ -354,7 +410,7 @@ export default class Form14StyleOfProceeding extends Vue {
             respondent.responding = true;
         }
 
-        for (const applicant of form14Data.appellants){
+        for (const applicant of form13Data.appellants){
             if (applicant.firstName && applicant.lastName){
                 applicant.isOrganization = false;
             } else if (applicant.organization){
@@ -365,23 +421,23 @@ export default class Form14StyleOfProceeding extends Vue {
             applicant.responding = false;
         }
 
-        const appellants = form14Data.appellants.map(resp=>resp.name)
-        const respondents = form14Data.respondents.map(resp=>resp.name)
-        form14Data.appellantNames = appellants.join(', ');
-        form14Data.respondentNames = respondents.join(', ');
+        const appellants = form13Data.appellants.map(resp=>resp.name)
+        const respondents = form13Data.respondents.map(resp=>resp.name)
+        form13Data.appellantNames = appellants.join(', ');
+        form13Data.respondentNames = respondents.join(', ');
 
-        this.partyNames = [...form14Data.appellants, ...form14Data.respondents]
-        this.UpdateForm14Info(form14Data);
+        this.partyNames = [...form13Data.appellants, ...form13Data.respondents]
+        this.UpdateForm13Info(form13Data);
     }
 
-    public getForm14Data() {        
+    public getForm13Data() {        
        
-        this.$http.get('/form14/forms/'+this.currentConsentOrderRemoveInactiveId)
+        this.$http.get('/form13/forms/'+this.currentConsentOrderExtendTimeId)
         .then((response) => {
             if(response?.data?.data){
-                const form14Data = response.data.data
-                this.UpdateForm14Info(form14Data);
-                this.revaluateForm14Data();               
+                const form13Data = response.data.data
+                this.UpdateForm13Info(form13Data);
+                this.revaluateForm13Data();               
                 this.clearStates();                
             }                
         },(err) => {
@@ -393,16 +449,22 @@ export default class Form14StyleOfProceeding extends Vue {
         this.state = {
             appellantsInfo: null,
             respondentsInfo: null,
-            seekingRemoved: null            
+            filingParties: null,
+            seekingExtension: null,
+            seekingExtensionOther: null,
+            extensionDate: null            
         }
         this.dataReady = true; 
     }
 
     public checkStates(){  
         
-        this.state.appellantsInfo = this.form14Info.appellants?.length>0? null :false;
-        this.state.respondentsInfo = this.form14Info.respondents?.length>0? null :false;            
-        this.state.seekingRemoved = this.form14Info.seekingRemoved?.length>0? null :false;
+        this.state.appellantsInfo = this.form13Info.appellants?.length>0? null :false;
+        this.state.respondentsInfo = this.form13Info.respondents?.length>0? null :false;            
+        this.state.seekingExtension = this.form13Info.seekingExtension?.length>0? null :false
+        this.state.seekingExtensionOther = this.form13Info.seekingExtension?.includes('other') && !this.form13Info.seekingExtensionOther? false :null
+        this.state.filingParties = this.form13Info.filingParties?.length>0? null :false;
+        
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -414,13 +476,13 @@ export default class Form14StyleOfProceeding extends Vue {
     public saveForm(draft: boolean) { 
         
         let method = 'post';
-        let url = '/form14/forms';
+        let url = '/form13/forms';
 
-        if (this.currentConsentOrderRemoveInactiveId){
+        if (this.currentConsentOrderExtendTimeId){
             method = 'put';
-            url = '/form14/forms/'+this.currentConsentOrderRemoveInactiveId;
-            const form14Data = this.form14Info;            
-            this.UpdateForm14Info(form14Data);
+            url = '/form13/forms/'+this.currentConsentOrderExtendTimeId;
+            const form13Data = this.form13Info;            
+            this.UpdateForm13Info(form13Data);
 
             if (!draft && !this.checkStates()){               
                 return                
@@ -430,9 +492,9 @@ export default class Form14StyleOfProceeding extends Vue {
                 method: method,
                 url: url,
                 data: {
-                    data:this.form14Info,
-                    type:'Form14',
-                    description:'Consent order to remove an appeal from the inactive list'
+                    data:this.form13Info,
+                    type:'Form13',
+                    description:'Consent order to extend time to file a document'
                 }
             }
             this.saveInfo(options, draft);
@@ -442,9 +504,9 @@ export default class Form14StyleOfProceeding extends Vue {
                 method: method,
                 url: url,
                 data: {
-                    data:this.form14Info,
-                    type:'Form14',
-                    description:'Consent order to remove an appeal from the inactive list'
+                    data:this.form13Info,
+                    type:'Form13',
+                    description:'Consent order to extend time to file a document'
                 }
             }
             this.saveInfo(options, draft);
@@ -457,7 +519,7 @@ export default class Form14StyleOfProceeding extends Vue {
             .then(response => {
                 if(response.data){
                     if(options.method == "post"){
-                        this.UpdateCurrentConsentOrderRemoveInactiveId(response.data.file_id); 
+                        this.UpdateCurrentConsentOrderExtendTimeId(response.data.file_id); 
                     }
 
                     this.clearStates();                                     
@@ -470,7 +532,7 @@ export default class Form14StyleOfProceeding extends Vue {
 
     public addNewRespondent(){
         this.state.respondentsInfo = null
-        this.partyToEdit = {} as form14PartiesInfoType
+        this.partyToEdit = {} as form13PartiesInfoType
         this.partyType = 'Respondent'
         this.isCreate = true;
         this.showPartyWindow = true;        
@@ -484,18 +546,18 @@ export default class Form14StyleOfProceeding extends Vue {
     }
 
     public removeRespondent(data){ 
-        const form14Data = this.form14Info;       
-        form14Data.respondents.splice(data.index,1);
-        form14Data.respondentNames = form14Data.respondents.map(resp=>resp.name).join(', ');
-        this.partyNames = [...form14Data.appellants, ...form14Data.respondents]
+        const form13Data = this.form13Info;       
+        form13Data.respondents.splice(data.index,1);
+        form13Data.respondentNames = form13Data.respondents.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form13Data.appellants, ...form13Data.respondents]
         this.somePartiesChanged()
-        this.UpdateForm14Info(form14Data);
+        this.UpdateForm13Info(form13Data);
         this.updated ++;        
     }
 
     public addNewAppellant(){
         this.state.appellantsInfo = null
-        this.partyToEdit = {} as form14PartiesInfoType
+        this.partyToEdit = {} as form13PartiesInfoType
         this.partyType = 'Appellant'
         this.isCreate = true;
         this.showPartyWindow = true;        
@@ -509,45 +571,46 @@ export default class Form14StyleOfProceeding extends Vue {
     }
 
     public removeAppellant(data){   
-        const form14Data = this.form14Info;       
-        form14Data.appellants.splice(data.index,1); 
-        form14Data.appellantNames = form14Data.appellants.map(resp=>resp.name).join(', ');
-        this.partyNames = [...form14Data.appellants, ...form14Data.respondents]        
+        const form13Data = this.form13Info;       
+        form13Data.appellants.splice(data.index,1); 
+        form13Data.appellantNames = form13Data.appellants.map(resp=>resp.name).join(', ');
+        this.partyNames = [...form13Data.appellants, ...form13Data.respondents]        
         this.somePartiesChanged()
-        this.UpdateForm14Info(form14Data);
+        this.UpdateForm13Info(form13Data);
         this.updated ++;        
     }
 
     public partyChanged(partyCreated){
         if(partyCreated){
-            const form14Info = this.form14Info
+            const form13Info = this.form13Info
             const party = JSON.parse(JSON.stringify(this.partyToEdit))
             if(this.partyType == 'Appellant'){
-                form14Info.appellants.push(party);
+                form13Info.appellants.push(party);
             }
             else if(this.partyType =='Respondent'){
-                form14Info.respondents.push(party);
+                form13Info.respondents.push(party);
             }
-            this.UpdateForm14Info(form14Info)
+            this.UpdateForm13Info(form13Info)
         }
-        this.revaluateForm14Data();
+        this.revaluateForm13Data();
         this.showPartyWindow = false;
         this.somePartiesChanged() 
         this.updated++;
     }
 
     public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form14"}) 
+        this.$router.push({name: "preview-form13"}) 
     }
 
-    public somePartiesChanged(){       
+    public somePartiesChanged(){     
+        this.form13Info.filingParties=[]  
         this.updated++;
-    }    
+    }
 
     public getCounselParty(party){
 
         if(party.counselName){
-            const counsel: form14PartiesInfoType = JSON.parse(JSON.stringify(party))
+            const counsel: form13PartiesInfoType = JSON.parse(JSON.stringify(party))
             counsel.isCounsel = true
             counsel.name = counsel.counselName+', counsel for '+counsel.name
             return counsel
@@ -555,10 +618,21 @@ export default class Form14StyleOfProceeding extends Vue {
         return party
     }
 
+    public allowedDates(date){
+        const day = moment().startOf('day').format('YYYY-MM-DD');
+        return (date >= day);           
+    }
+
 }
 </script>
 
 <style scoped lang="scss">    
+
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
+    }
 
     .content {        
         margin-bottom: 0px !important; 

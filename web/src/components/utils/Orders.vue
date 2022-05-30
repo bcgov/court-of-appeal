@@ -18,6 +18,11 @@
                 Order from an application to vary the order of a justice (Form 12)                
             </li>  
             <li class="link-button" 
+                @click="startNewForm13Document"
+                target="_blank">
+                Consent order to extend time to file a document (Form 13)                
+            </li>
+            <li class="link-button" 
                 @click="startNewForm14Document"
                 target="_blank">
                 Consent order to remove an appeal from the inactive list (Form 14)                
@@ -39,6 +44,9 @@
     import "@/store/modules/forms/form12";
     const form12State = namespace("Form12");
 
+    import "@/store/modules/forms/form13";
+    const form13State = namespace("Form13");
+
     import "@/store/modules/forms/form14";
     const form14State = namespace("Form14");
 
@@ -53,6 +61,9 @@
         
         @form12State.Action
         public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
+
+        @form13State.Action
+        public UpdateCurrentConsentOrderExtendTimeId!: (newCurrentConsentOrderExtendTimeId: string) => void
 
         @form14State.Action
         public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
@@ -69,6 +80,11 @@
 
         public startNewForm12Document(){
             this.UpdateCurrentOrderToVarySingleJusticeId(null);
+            this.$router.push({name: "checklist-orders"})
+        }  
+
+        public startNewForm13Document(){
+            this.UpdateCurrentConsentOrderExtendTimeId(null);
             this.$router.push({name: "checklist-orders"})
         }  
 
