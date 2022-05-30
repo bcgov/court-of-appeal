@@ -182,6 +182,8 @@ export default class Form17CaseInformation extends Vue {
             return
         }
         
+        this.UpdateCurrentCertificateOfCostsId(null)
+
         const url = '/form7s/?'+
             'caseNumber='+(this.searchParams.file?this.searchParams.file:'')+
             '&firstName='+(this.searchParams.firstName?this.searchParams.firstName:'')+

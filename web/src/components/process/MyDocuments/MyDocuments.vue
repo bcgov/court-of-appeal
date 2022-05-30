@@ -185,7 +185,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form22/forms'));
         calls.push(this.$http.get('/form10/forms'));
         calls.push(this.$http.get('/form11/forms'));
-        // calls.push(this.$http.get('/form17/forms'));
+        calls.push(this.$http.get('/form17/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -208,7 +208,7 @@ export default class MyDocuments extends Vue {
             if(values[14]?.data) this.UpdateForm22FormsJson(values[14]?.data)
             if(values[15]?.data) this.UpdateForm10FormsJson(values[15]?.data)
             if(values[16]?.data) this.UpdateForm11FormsJson(values[16]?.data)
-            // if(values[17]?.data) this.UpdateForm17FormsJson(values[17]?.data)
+            if(values[17]?.data) this.UpdateForm17FormsJson(values[17]?.data)
 
             this.dataLoaded = true;
         })
