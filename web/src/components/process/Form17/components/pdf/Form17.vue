@@ -92,7 +92,7 @@ export default class Form17 extends Vue {
         const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA      FORM 17: CERTIFICATE OF COSTS"`;
         const topRightText   = `"(Rule 77)"`;
 
-        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA      FORM 17: CERTIFICATE OF COSTS"`;
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA      FORM 17: CERTIFICATE OF COSTS (Rule 77)"`;
         const bottomRightText = `" "`;        
         const url = '/form17/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText, topLeftText, topRightText);

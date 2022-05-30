@@ -174,6 +174,9 @@ const form11State = namespace("Form11");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
+import "@/store/modules/forms/form14";
+const form14State = namespace("Form14");
+
 import StepNumber from "@/components/utils/StepNumber.vue";
 
 @Component({
@@ -191,6 +194,9 @@ export default class ChecklistOrders extends Vue {
 	 
     @form12State.Action
     public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
+
+    @form14State.Action
+    public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 	    
     inactiveButtonClass = "bg-secondary text-white"; 
     activeButtonClass = "bg-success text-white"; 
@@ -314,12 +320,12 @@ export default class ChecklistOrders extends Vue {
 
     public startNewForm13Document(){
         // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form4" });
+        // this.$router.push({name: "start-form13" });
     }
 
     public startNewForm14Document(){
-        // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form4" });
+        this.UpdateCurrentConsentOrderRemoveInactiveId(null);
+        this.$router.push({name: "start-form14" });
     }
 
     public startNewForm15Document(){

@@ -38,24 +38,9 @@ export interface form14DataInfoType {
     appellantNames: string;
     respondentNames: string;
     orderDate: string;
-    seekingRemoved: string[];
-    // judgeNames: judgeInfoType[]; 
-    // hearingDate: string;
-    // hearingLocation: hearingLocationsInfoType;   
-    // dateOfJudgement: string;    
-    // filingParties: form14PartiesInfoType[];
-    // appearingParties: form14PartiesInfoType[];    
-    // judgmentReserved: boolean;
-    // hearingHeldDate: string;    
-    // reasonsIndicated: boolean;
-    // reasonsDate: string;
-    // otherOrders: boolean;
-    // furtherOrders?: string;
-    // applicationFor: applicationForInfoType;
-    // ordersJusticeMake: string;
+    seekingRemoved: string[];    
     completionDate?: string;
     version?: string;
-    // previousCourts?: previousCourtJsonInfoType;
 }
 
 export interface applicationForInfoType{

@@ -39,7 +39,7 @@
 
         
 <!-- <THE APPEAL> -->
-        <div class="my-3 mx-0 row">
+        <div class="my-5 mx-0 row">
             <div>
                 <underline-form 
                     style="display:inline-block;line-height:1rem;" 
@@ -49,8 +49,8 @@
                     :italicHint="false" 
                     text=""
                 />
-                , the costs of the {{allowedCostsParties}}; 
-                have been allowed against the {{payingParties}} at $ {{result.amount}}
+                , the costs of the {{allowedCostsParties}} 
+                have been allowed against the {{payingParties}} at $ {{result.amount}}.
             </div>
         </div>
 

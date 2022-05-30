@@ -16,7 +16,7 @@
 
         <div>
 
-            <b-row class="mt-4 question">
+            <b-row class="mt-5 question">
                 <b-col cols="7" class="labels">
                     Name of party(ies) who are allowed costs:                                
                 </b-col>
