@@ -19,7 +19,7 @@
                         <b-card                             
                             class="mt-2" 
                             style="padding: 0; float: left; display: inline-block;" 
-                            :border-variant="dateState == false?'danger': 'dark'">
+                            :border-variant="dateState == false?'danger': 'muted'">
                             <div class="vuetify">
                                 <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                     <v-date-picker
@@ -186,6 +186,7 @@ export default class AddAffidavitForm extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     td {

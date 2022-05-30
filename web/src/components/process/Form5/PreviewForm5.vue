@@ -11,7 +11,7 @@
                 Preview Your Form
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
-                Your can review your form here to ensure everything to correct before submitting. 
+                You can review your form here to ensure everything is correct before submitting. 
                 If edits are required, you may still go back and make the necessary changes.
             </b-row>           
            

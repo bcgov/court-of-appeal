@@ -200,7 +200,7 @@ export default class Form11Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
-        this.varyingOrderJudgeName = this.result.varyingOrderJudgeName=='Other'? this.result.varyingOrderJudgeNameOther :this.result.varyingOrderJudgeName;        
+        this.varyingOrderJudgeName = this.result.varyingOrderJudgeName;        
         this.hearingDate = this.result.judgmentReserved? this.result.judgmentReservedDate : this.result.dateOfJudgement;
         this.extractAppearingParties();
         this.extractSuccessUnsucessParties()

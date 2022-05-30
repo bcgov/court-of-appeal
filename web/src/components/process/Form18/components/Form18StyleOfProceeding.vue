@@ -668,25 +668,25 @@ export default class Form18StyleOfProceeding extends Vue {
 
         const selfRep = this.form18Info.selfRepresented || this.form18Info.newRepresentation!='Lawyer';
 
-        const phone = this.form18Info.serviceInformation.phone?.trim()
+        const phone = this.form18Info.serviceInformation?.phone?.trim()
         this.state.phone = (selfRep && phoneFormat.test(phone)==false)? false : null;
 
-        this.state.counselFirstName = !selfRep && !this.form18Info.serviceInformation.counselFirstName? false : null;
-        this.state.counselLastName =  !selfRep && !this.form18Info.serviceInformation.counselLastName? false : null;
-        this.state.firmName =  !selfRep && !this.form18Info.serviceInformation.firmName?  false : null;
+        this.state.counselFirstName = !selfRep && !this.form18Info.serviceInformation?.counselFirstName? false : null;
+        this.state.counselLastName =  !selfRep && !this.form18Info.serviceInformation?.counselLastName? false : null;
+        this.state.firmName =  !selfRep && !this.form18Info.serviceInformation?.firmName?  false : null;
         
-        const firmPhone = this.form18Info.serviceInformation.firmPhone?.trim()
+        const firmPhone = this.form18Info.serviceInformation?.firmPhone?.trim()
         this.state.firmPhone = (!selfRep && phoneFormat.test(firmPhone)==false)? false : null;
         
-        const email = this.form18Info.serviceInformation.email?.trim();
+        const email = this.form18Info.serviceInformation?.email?.trim();
         this.state.email =(email && !emailFormat.test(email) ||(!email && this.form18Info.useServiceEmail))? false : null;
         
-        this.state.addressLine1 = !this.form18Info.serviceInformation.addressLine1? false : null;
-        this.state.city = !this.form18Info.serviceInformation.city? false : null;
+        this.state.addressLine1 = !this.form18Info.serviceInformation?.addressLine1? false : null;
+        this.state.city = !this.form18Info.serviceInformation?.city? false : null;
 
-        const postalCode = this.form18Info.serviceInformation.postalCode?.trim()
+        const postalCode = this.form18Info.serviceInformation?.postalCode?.trim()
         this.state.postalCode = !postcodeFormat.test(postalCode)? false : null;        
-        this.state.filingParties = (this.form18Info.filingParties.length == 0)? false : null; 
+        this.state.filingParties = (this.form18Info.filingParties?.length > 0)? null: false; 
            
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
         this.state.selfRepresented = selfRep==null && !changeRep? false :null

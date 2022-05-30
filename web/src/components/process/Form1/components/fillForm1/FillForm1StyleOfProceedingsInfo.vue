@@ -306,7 +306,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
     {
-        console.log("RESP WATCH")
+        //console.log("RESP WATCH")
         this.respondentNames = newRespondents.join('; ');
         this.styleOfProceedingsInfo = this.form1Info;
         this.styleOfProceedingsInfo.respondentSolicitor = this.respondentSolicitors.join('; ');

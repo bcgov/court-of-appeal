@@ -284,8 +284,8 @@
                 <b-col>                   
                     <b-card                 
                         class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="state.orderDate == false?'danger': 'dark'">
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.orderDate == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -300,7 +300,7 @@
                     </b-card>
                     <span 
                         style="display: inline-block; font-size: 0.75rem;" 
-                        class="text-danger"
+                        class="text-orange"
                         :key="updateOrderDetails"
                         v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
                 </b-col>
@@ -796,7 +796,7 @@ export default class Form3StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){
                 const form3Data = response.data.data   
-                this.orderDateValue = form3Data.orderDate;             
+                this.orderDateValue = form3Data.orderDate? form3Data.orderDate.slice(0,10): '';             
                 this.UpdateForm3Info(form3Data);
                 this.clearStates();                
             }
@@ -1152,6 +1152,7 @@ export default class Form3StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        
