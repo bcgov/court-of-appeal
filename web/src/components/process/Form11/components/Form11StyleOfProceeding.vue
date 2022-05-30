@@ -481,15 +481,12 @@
                     </div>                               
                 </b-col>
                 <b-col class="ml-1">   
-                    <b-form-select 
-                        stacked               
+                    <b-form-input 
+                        :state="state.varyingOrderJudgeName"               
                         style="width:100%"                                    
-                        v-model="form11Info.varyingOrderJudgeName"
-                        text-field="text"
-                        value-field="text"                    
-                        :options="justiceNameOptions">                            
-                    </b-form-select>
-                    <b-row v-if="form11Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
+                        v-model="form11Info.varyingOrderJudgeName">                            
+                    </b-form-input>
+                    <!-- <b-row v-if="form11Info.varyingOrderJudgeName == 'Other'" class="m-0 p-0">
                         <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
                         <div style="width:74%;">
                             <b-form-input 
@@ -504,7 +501,7 @@
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger"><b-icon-exclamation-circle/>
                         Specify who made the order that you were seeking to vary.
-                    </span>
+                    </span> -->
                 </b-col>
             </b-row>
 <!-- <Vary Order Location> -->
@@ -604,10 +601,10 @@
 
 <!-- <Order Allowed> -->
             <b-row class="mt-4 question" v-if="form11Info.varyingOrderJudgeName">
-                <b-col cols="7" class="labels" v-if="form11Info.varyingOrderJudgeName=='Other'">
+                <!-- <b-col cols="7" class="labels" v-if="form11Info.varyingOrderJudgeName=='Other'">
                     Was the order to vary the order of {{form11Info.varyingOrderJudgeNameOther}} :
-                </b-col>
-                <b-col cols="7" class="labels" v-else>
+                </b-col> -->
+                <b-col cols="7" class="labels">
                     Was the order to vary the order of {{form11Info.varyingOrderJudgeName}} :
                 </b-col>
                 <b-col class="ml-1 mt-2">
@@ -914,7 +911,7 @@ export default class Form11StyleOfProceeding extends Vue {
         hearingLocationOther: null,     
         dateOfJudgement: null, 
         varyingOrderJudgeName: null,
-        varyingOrderJudgeNameOther: null,
+        // varyingOrderJudgeNameOther: null,
         varyingOrderDate: null,
         filingParties: null,
         appearingParties: null,
@@ -982,21 +979,22 @@ export default class Form11StyleOfProceeding extends Vue {
         ).trim() : ''
 
         if(judgeName){
-            const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
-            if(justiceIndex>-1){
-                this.form11Info.varyingOrderJudgeName=justiceNames[justiceIndex]
-                this.form11Info.varyingOrderJudgeNameOther=''                
-            }
-            else{
-                this.form11Info.varyingOrderJudgeName='Other'
-                this.form11Info.varyingOrderJudgeNameOther=judgeName
-            }
+            // const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
+            // if(justiceIndex>-1){
+            //     this.form11Info.varyingOrderJudgeName=justiceNames[justiceIndex]
+            //     this.form11Info.varyingOrderJudgeNameOther=''                
+            // }
+            // else{
+            //     this.form11Info.varyingOrderJudgeName='Other'
+            //     this.form11Info.varyingOrderJudgeNameOther=judgeName
+            // }
+            this.form11Info.varyingOrderJudgeName=judgeName;
             this.form11Info.varyingOrderDate= currentOrder.JudgmentDate.slice(0,10)            
             this.form11Info.varyingOrderLocation = currentOrder.Location? currentOrder.Location: ''
         }
         else{
             this.form11Info.varyingOrderJudgeName='';
-            this.form11Info.varyingOrderJudgeNameOther='';
+            //this.form11Info.varyingOrderJudgeNameOther='';
             this.form11Info.varyingOrderDate='';
             this.form11Info.varyingOrderLocation ='';
         }
@@ -1098,7 +1096,7 @@ export default class Form11StyleOfProceeding extends Vue {
             hearingLocationOther: null,     
             dateOfJudgement: null,
             varyingOrderJudgeName: null,
-            varyingOrderJudgeNameOther: null,
+            //varyingOrderJudgeNameOther: null,
             varyingOrderLocation: null,
             varyingOrderDate: null,
             filingParties: null,
@@ -1132,7 +1130,7 @@ export default class Form11StyleOfProceeding extends Vue {
         
         this.state.dateOfJudgement = this.form11Info.dateOfJudgement? null: false;
         this.state.varyingOrderJudgeName = this.form11Info.varyingOrderJudgeName? null :false;
-        this.state.varyingOrderJudgeNameOther = this.form11Info.varyingOrderJudgeName=='Other' && !this.form11Info.varyingOrderJudgeNameOther? false: null;
+        //this.state.varyingOrderJudgeNameOther = this.form11Info.varyingOrderJudgeName=='Other' && !this.form11Info.varyingOrderJudgeNameOther? false: null;
         this.state.varyingOrderLocation = this.form11Info.varyingOrderLocation? null :false;
         this.state.varyingOrderDate = this.form11Info.varyingOrderDate? null :false;
         this.state.filingParties = this.form11Info.filingParties?.length>0? null :false;
