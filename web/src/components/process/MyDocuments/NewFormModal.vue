@@ -83,6 +83,9 @@ const form12State = namespace("Form12");
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
+
 import "@/store/modules/forms/form18";
 const form18State = namespace("Form18");
 
@@ -140,6 +143,9 @@ export default class NewFormModal extends Vue {
     @form16State.Action
     public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
 
+    @form17State.Action
+    public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
+
     @form18State.Action
     public UpdateCurrentNoticeOfRepChangeAddressId!: (newCurrentNoticeOfRepChangeAddressId: string) => void
 
@@ -166,6 +172,7 @@ export default class NewFormModal extends Vue {
         {name:'form11', title:'Order of three or more justices (Form 11)'},
         {name:'form12', title:'Order from an application to vary the order of a justice (Form 12)'},
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
+        {name:'form17', title:'Certificate of Costs (Form 17)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
         {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'},
@@ -242,6 +249,10 @@ export default class NewFormModal extends Vue {
         }else if(form=='form16'){
             this.UpdateCurrentOfferToSettleCostsId(null);
             this.$router.push({name: "start-form16" });
+
+        }else if(form=='form17'){
+            this.UpdateCurrentCertificateOfCostsId(null)
+            this.$router.push({name: "start-form17" });
 
         }else if(form=='form18'){
             this.UpdateCurrentNoticeOfRepChangeAddressId(null)

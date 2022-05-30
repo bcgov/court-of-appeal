@@ -183,12 +183,19 @@
                 as outlined in Rule 53 and Rule 54 of the Court of Appeal Rules.
             </p>       
 
-            <p class="mt-1 ml-3" >            
-                <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
-                    target="_blank">Application a bill of costs (Form 21)
-                </a>                              
-            </p>
+            <ul class="mt-1 ml-3" > 
+                <li>           
+                    <a 
+                        href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                        target="_blank">Application a bill of costs (Form 21)
+                    </a>    
+                </li>
+                <li class="link-button" 
+                    @click="startNewForm17Document"
+                    target="_blank">
+                    Certificate of Costs (Form 17)                
+                </li>                         
+            </ul>
         </b-row>
 
         <b-row :class="showCostsInfo?'mt-3': 'mt-4'" :style="showCostsInfo?'padding-top: 0rem;':'padding-top: 0.65rem;'" >
@@ -235,8 +242,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
+
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
+
+import "@/store/modules/forms/form17";
+const form17State = namespace("Form17");
 
 @Component({
     components:{
@@ -248,6 +260,9 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     @Prop({required: true})
     app!: boolean;
 
+    @form17State.Action
+    public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
+    
     showPrepareHearingInfo = true;
     showPointsInfo = false;
     showOrderInfo = false;
@@ -288,7 +303,7 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public showCosts(show: boolean){
         if (show) {
             this.showCostsInfo = true;
-            this.$emit('adjustHeights', 3, "7rem")
+            this.$emit('adjustHeights', 3, "9rem")
         } else {
             this.showCostsInfo = false;
             this.$emit('adjustHeights', 3, "0");
@@ -314,6 +329,11 @@ export default class TheHearingAppRightToAppealPg extends Vue {
 
         GetInstructionFile(pdf_name);
         
+    }
+
+    public startNewForm17Document(){
+        this.UpdateCurrentCertificateOfCostsId(null);
+        this.$router.push({name: "start-form17" });
     }
 
 }
