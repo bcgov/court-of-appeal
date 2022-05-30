@@ -88,8 +88,8 @@
             <b-col class="ml-1 mt-2">
                 <b-card                 
                     class="mt-2" 
-                    style="padding: 0; float: left;" 
-                    :border-variant="state.orderDate == false?'danger': 'dark'">
+                    style="padding: 0; float: center;" 
+                    :border-variant="state.orderDate == false?'danger': 'muted'">
                     <div class="vuetify">
                         <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                             <v-date-picker
@@ -104,9 +104,9 @@
                 </b-card>
                 <span 
                     style="display: inline-block; font-size: 0.75rem;" 
-                    class="text-danger"
+                    class="text-orange"
                     :key="updateOrderDetails"
-                    v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
+                    v-if="isPastDeadline">You may need to apply to extend the time to vary the order.</span>
             </b-col>
         </b-row>                   
 
@@ -308,7 +308,7 @@ export default class Form8StyleOfProceeding extends Vue {
             if(response?.data?.data){            
                             
                 const form8Data = response.data.data    
-                this.orderDateValue = form8Data.orderDate;
+                this.orderDateValue = form8Data.orderDate? form8Data.orderDate.slice(0,10): '';
                 this.UpdateForm8Info(form8Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -338,8 +338,8 @@ export default class Form8StyleOfProceeding extends Vue {
     public checkStates(){
 
         this.state.filingParties = this.form8Info.filingParties?.length>0? null :false; 
-        this.state.orderDate = this.form8Info.orderDate != null? null:false;
-        this.state.judgeName = this.form8Info.judgeName != null? null:false;
+        this.state.orderDate = this.form8Info.orderDate? null:false;
+        
         this.state.judgeName = this.form8Info.judgeName? null :false;
         this.state.judgeNameOther = this.form8Info.judgeName=='Other' && !this.form8Info.judgeNameOther? false: null;
         
@@ -423,6 +423,7 @@ export default class Form8StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        

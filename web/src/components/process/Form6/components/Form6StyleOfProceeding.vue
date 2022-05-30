@@ -70,10 +70,9 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group  
-                        stacked              
-                        style="width:100%" 
+                        stacked
                         :state="state.abandoningParties"
-                        @change="updateOtherParties"                   
+                        @change="form6Info.abandoningAgainstParties=[]; updateOtherParties()"                   
                         v-model="form6Info.abandoningParties"                    
                         :options="partyNames">
                     </b-form-checkbox-group>
@@ -111,8 +110,7 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
                         stacked
-                        :key="updated"               
-                        style="width:100%" 
+                        :key="updated" 
                         :state="state.abandoningAgainstParties"                   
                         v-model="form6Info.abandoningAgainstParties"                    
                         :options="otherPartyNames">
@@ -141,8 +139,8 @@
 
                     <b-card                 
                         class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="state.orderDate == false?'danger': 'dark'">
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.orderDate == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -157,7 +155,7 @@
                     </b-card>
                     <span 
                         style="display: inline-block; font-size: 0.75rem;" 
-                        class="text-danger"
+                        class="text-orange"
                         :key="updateOrderDetails"
                         v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
 
@@ -175,8 +173,8 @@
                 <b-col>
                     <b-card                 
                         class="mt-2" 
-                        style="padding: 0; float: left;" 
-                        :border-variant="state.initiatingDocumentDate == false?'danger': 'dark'">
+                        style="padding: 0; float: center;" 
+                        :border-variant="state.initiatingDocumentDate == false?'danger': 'muted'">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -348,7 +346,7 @@ export default class Form6StyleOfProceeding extends Vue {
             const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
             form6Data.orderDate = orderDate;
             this.orderDateValue = orderDate;
-            const initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled?this.initiatingDocuments[0].DateFiled.slice(0,10):'';
+            const initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled? this.initiatingDocuments[0].DateFiled.slice(0,10):'';
             form6Data.initiatingDocumentDate = initiatingDocumentDate;
             this.initiatingDocumentDateValue = initiatingDocumentDate;  
            
@@ -396,8 +394,8 @@ export default class Form6StyleOfProceeding extends Vue {
             if(response?.data?.data){            
                             
                 const form6Data = response.data.data;
-                this.orderDateValue = form6Data.orderDate;  
-                this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate;              
+                this.orderDateValue = form6Data.orderDate? form6Data.orderDate.slice(0,10):'';  
+                this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate? form6Data.initiatingDocumentDate.slice(0,10):'';              
                 this.UpdateForm6Info(form6Data) 
                 this.extractPartiesData();
                 this.clearStates();                
@@ -509,6 +507,7 @@ export default class Form6StyleOfProceeding extends Vue {
     public updateOtherParties(){
 
         const otherParties = [];
+        
 
         if (this.partyNames.length == this.form6Info.abandoningParties?.length){
 
@@ -541,6 +540,7 @@ export default class Form6StyleOfProceeding extends Vue {
     ::v-deep .vuetify{
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
     }
 
     .content {        

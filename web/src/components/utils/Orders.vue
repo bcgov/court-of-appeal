@@ -1,21 +1,26 @@
 <template>
     <b-card border-variant="white">
         <h3>Orders</h3>
-        <ol>           
+        <ol>            
             <li class="link-button" 
-                @click="startNewForm12Document"
+                @click="startNewForm10Document"
                 target="_blank">
-                Order from an application to vary the order of a justice (Form 12)                
-            </li>  
+                Order of a single justice (Form 10)                
+            </li>
             <li class="link-button" 
                 @click="startNewForm11Document"
                 target="_blank">
                 Order of three or more justices (Form 11)                
             </li>
-            <li class="link-button" 
-                @click="startNewForm10Document"
+             <li class="link-button" 
+                @click="startNewForm12Document"
                 target="_blank">
-                Order of a single justice (Form 10)                
+                Order from an application to vary the order of a justice (Form 12)                
+            </li>  
+            <li class="link-button" 
+                @click="startNewForm14Document"
+                target="_blank">
+                Consent order to remove an appeal from the inactive list (Form 14)                
             </li>
         </ol>
     </b-card>
@@ -23,43 +28,54 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';    
-    import { namespace } from "vuex-class";
-
-    import "@/store/modules/forms/form12";
-    const form12State = namespace("Form12");
-
-    import "@/store/modules/forms/form11";
-    const form11State = namespace("Form11");
+    import { namespace } from "vuex-class";    
 
     import "@/store/modules/forms/form10";
     const form10State = namespace("Form10");
 
-    @Component
-    export default class Orders extends Vue {        
+    import "@/store/modules/forms/form11";
+    const form11State = namespace("Form11");
 
+    import "@/store/modules/forms/form12";
+    const form12State = namespace("Form12");
+
+    import "@/store/modules/forms/form14";
+    const form14State = namespace("Form14");
+
+    @Component
+    export default class Orders extends Vue {       
+        
+        @form10State.Action
+        public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
+        
+        @form11State.Action
+        public UpdateCurrentOrderMultipleJusticesId!: (newCurrentOrderMultipleJusticesId: string) => void
+        
         @form12State.Action
         public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
 
-        @form11State.Action
-        public UpdateCurrentOrderMultipleJusticesId!: (newCurrentOrderMultipleJusticesId: string) => void
+        @form14State.Action
+        public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 
-        @form10State.Action
-        public UpdateCurrentOrderSingleJusticeId!: (newCurrentOrderSingleJusticeId: string) => void
-                 
-        public startNewForm12Document(){
-            this.UpdateCurrentOrderToVarySingleJusticeId(null);
+        public startNewForm10Document(){
+            this.UpdateCurrentOrderSingleJusticeId(null);
             this.$router.push({name: "checklist-orders"})
-        }   
+        }          
         
         public startNewForm11Document(){
             this.UpdateCurrentOrderMultipleJusticesId(null);
             this.$router.push({name: "checklist-orders"})
         } 
 
-        public startNewForm10Document(){
-            this.UpdateCurrentOrderSingleJusticeId(null);
+        public startNewForm12Document(){
+            this.UpdateCurrentOrderToVarySingleJusticeId(null);
             this.$router.push({name: "checklist-orders"})
-        } 
+        }  
+
+        public startNewForm14Document(){
+            this.UpdateCurrentConsentOrderRemoveInactiveId(null);
+            this.$router.push({name: "checklist-orders"})
+        }  
 
     }
 

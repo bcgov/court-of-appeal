@@ -60,8 +60,7 @@ export interface form11DataInfoType {
     judgeNames: judgeInfoType[]; 
     hearingLocation: hearingLocationsInfoType;   
     dateOfJudgement: string;
-    varyingOrderJudgeName: string;
-    varyingOrderJudgeNameOther: string
+    varyingOrderJudgeName: string;    
     varyingOrderDate: string;
     varyingOrderLocation: string;
     filingParties: form11PartiesInfoType[];

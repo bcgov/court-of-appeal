@@ -23,7 +23,7 @@
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
                 This form is used when costs have been awarded and there has been an 
-                assessment of costs before the registry or the party liable to pay 
+                assessment of costs before the registrar or the party liable to pay 
                 costs has consented to the assessed amount.
             </b-row>
            
