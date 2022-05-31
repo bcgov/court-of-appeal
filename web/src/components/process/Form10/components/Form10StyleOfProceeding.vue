@@ -6,7 +6,7 @@
 
 <!-- <Appellants> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Appellants:">
@@ -83,7 +83,7 @@
 
 <!-- <Respondents> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Respondents:">
@@ -178,7 +178,7 @@
             <b-card class="mb-4 mt-5 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
-                        <b-col cols="10" :class="state.judgeNames !=null?'border border-danger':''">
+                        <b-col cols="10" :class="state.judgeNames !=null?'border border-danger  is-invalid':''">
                             <b-form-group
                                 class="labels"                
                                 label="Provide the name of the justice who heard the application:">
@@ -273,9 +273,9 @@
                     When was the hearing held?                    
                 </b-col>
                 <b-col>                   
-                    <b-card                                                
-                        style="margin:0 1px; padding:0; float: center;" 
-                        :border-variant="state.hearingDate == false?'danger': 'muted'">
+                    <b-card
+                        :class="state.hearingDate == false?'border border-danger is-invalid': 'muted'"                                                 
+                        style="margin:0 1px; padding:0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -296,7 +296,8 @@
                 </b-col>
                 <b-col class="ml-0 mt-2">  
                     <b-form-select                
-                        style="width:100%"              
+                        style="width:100%"
+                        :state="state.hearingLocation"              
                         v-model="hearingLocation" 
                         @change="updateHearingLocation"                   
                         :options="hearingLocationList">
@@ -330,9 +331,9 @@
                     </div>                    
                 </b-col>
                 <b-col>                   
-                    <b-card                                                
-                        style="margin:0 1px; padding:0; float: center;" 
-                        :border-variant="state.dateOfJudgement == false?'danger': 'muted'">
+                    <b-card
+                        :class="state.dateOfJudgement == false?'border border-danger is-invalid mt-2': 'muted mt-2'"                                                
+                        style="margin:0 1px; padding:0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -354,7 +355,7 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-radio-group                                                           
-                        :class="state.judgmentReserved==false?'border border-danger w-50':''"                                      
+                        :class="state.judgmentReserved==false?'border border-danger is-invalid w-50':''"                                      
                         v-model="form10Info.judgmentReserved">
                         <b-form-radio :value="true"> Yes </b-form-radio>
                         <b-form-radio :value="false"> No </b-form-radio>
@@ -369,9 +370,8 @@
                 </b-col>
                 <b-col>                   
                     <b-card                        
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.judgmentReservedDate == false?'danger': 'muted'">
+                        :class="state.judgmentReservedDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'" 
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -393,7 +393,7 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-radio-group                      
-                        :class="state.reasonsIndicated==false?'border border-danger w-50':''"                                      
+                        :class="state.reasonsIndicated==false?'border border-danger is-invalid w-50':''"                                      
                         v-model="form10Info.reasonsIndicated">
                         <b-form-radio :value="true"> Yes </b-form-radio>
                         <b-form-radio :value="false"> No </b-form-radio>
@@ -408,9 +408,8 @@
                 </b-col>
                 <b-col>                   
                     <b-card                        
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.reasonsDate == false?'danger': 'muted'">
+                        :class="state.reasonsDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'" 
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -536,7 +535,8 @@
                     Were there any other orders made (ie. costs)?
                 </b-col>
                 <b-col class="ml-1 mt-2">
-                    <b-form-radio-group                                              
+                    <b-form-radio-group
+                        :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"                                              
                         v-model="form10Info.otherOrders"
                         :options="yesNoOptions"                
                     ></b-form-radio-group>
@@ -952,8 +952,10 @@ export default class Form10StyleOfProceeding extends Vue {
        
 
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     } 
@@ -969,7 +971,7 @@ export default class Form10StyleOfProceeding extends Vue {
             const form10Data = this.form10Info;            
             this.UpdateForm10Info(form10Data);
 
-            if (!draft && !this.checkStates()){               
+            if (!draft && !this.checkStates()){                               
                 return                
             } 
             
@@ -1164,6 +1166,7 @@ export default class Form10StyleOfProceeding extends Vue {
         }        
         return party
     }
+
 
 }
 </script>
