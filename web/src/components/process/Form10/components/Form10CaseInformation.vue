@@ -109,9 +109,8 @@
 
         </b-card>
 
-        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white">
-            <hr class="mb-4">
-            <h2 class="text-primary mx-3">Results</h2>
+        <b-card v-if="!searching" class="ml-2 mt-2 border-white">
+            
             <p v-if="notFound">
                 No such Court of Appeal document found.
             </p>
@@ -120,6 +119,8 @@
                 no-body 
                 class="mx-3 mb-5 border-white">                
                 <div v-if="orders.length > 0">
+                    <hr class="mb-4">
+                    <h2 class="text-primary mx-3">Results</h2>
                     <b-table
                         :items="orders"
                         :fields="orderFields" 
@@ -300,6 +301,7 @@ export default class Form10CaseInformation extends Vue {
         this.notFound = false;
         this.fileNumberState = true;
         this.respondentState = true;
+        this.orders =[]
 
         if(!this.searchParams.file){
             this.fileNumberState = false;
