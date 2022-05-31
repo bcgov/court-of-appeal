@@ -153,8 +153,7 @@
                 </b-col>
             </b-row>
 
-        </b-card>
-        <!-- {{partyNames}} -->
+        </b-card>       
         
         <div v-if="this.form14Info.appellants && this.form14Info.appellants.length>0 && this.form14Info.respondents && this.form14Info.respondents.length>0">
             <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
@@ -182,13 +181,7 @@
                         style="width:100%"                        
                         :state="state.seekingRemoved"   
                         :options="seekingRemovedOptions"                                   
-                        v-model="form14Info.seekingRemoved">
-                        <!-- <b-form-checkbox
-                            :value="partyname" 
-                            v-for="partyname,inx in partyNames" 
-                            :key="'party-made-app-'+inx">
-                            {{partyname.name}}
-                        </b-form-checkbox> -->
+                        v-model="form14Info.seekingRemoved">                       
                     </b-form-checkbox-group> 
                 </b-col>
             </b-row> 

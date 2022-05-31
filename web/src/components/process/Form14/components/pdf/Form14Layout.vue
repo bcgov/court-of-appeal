@@ -151,10 +151,8 @@ export default class Form14Layout extends Vue {
     respondentNames: string[] = [];
     
     applicantNamesFull='';
-    respondentNamesFull='';
-    // varyingOrderJudgeName=''
+    respondentNamesFull='';    
     signingParties='';
-    // applyingParties=''
 
     signingPartyList =[]    
 
@@ -181,9 +179,7 @@ export default class Form14Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
-        this.extractSigningParties();
-        // this.extractSigningPartyList(this.applicantNames, this.respondentNames)
-        
+        this.extractSigningParties();        
     }  
 
     public extractSigningParties(){

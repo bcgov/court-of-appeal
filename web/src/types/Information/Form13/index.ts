@@ -38,6 +38,7 @@ export interface form13DataInfoType {
     respondentNames: string;
     orderDate: string;
     filingParties: form13PartiesInfoType[];
+    signingParties: form13PartiesInfoType[];
     seekingExtension: string[]; 
     seekingExtensionOther: string; 
     extensionDate: string;  
