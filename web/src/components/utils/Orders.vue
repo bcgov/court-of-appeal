@@ -27,6 +27,11 @@
                 target="_blank">
                 Consent order to remove an appeal from the inactive list (Form 14)                
             </li>
+            <li class="link-button" 
+                @click="startNewForm15Document"
+                target="_blank">
+                Consent Order - General (Form 15)                
+            </li>
         </ol>
     </b-card>
 </template>
@@ -50,6 +55,9 @@
     import "@/store/modules/forms/form14";
     const form14State = namespace("Form14");
 
+    import "@/store/modules/forms/form15";
+    const form15State = namespace("Form15");
+
     @Component
     export default class Orders extends Vue {       
         
@@ -67,6 +75,9 @@
 
         @form14State.Action
         public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
+
+        @form15State.Action
+        public UpdateCurrentConsentOrderId!: (newCurrentConsentOrderId: string) => void
 
         public startNewForm10Document(){
             this.UpdateCurrentOrderSingleJusticeId(null);
@@ -92,6 +103,11 @@
             this.UpdateCurrentConsentOrderRemoveInactiveId(null);
             this.$router.push({name: "checklist-orders"})
         }  
+
+        public startNewForm15Document(){
+            this.UpdateCurrentConsentOrderId(null);
+            this.$router.push({name: "checklist-orders"})
+        } 
 
     }
 

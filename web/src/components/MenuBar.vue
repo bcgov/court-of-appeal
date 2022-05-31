@@ -58,6 +58,9 @@ const form13State = namespace("Form13");
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
+import "@/store/modules/forms/form15";
+const form15State = namespace("Form15");
+
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
@@ -121,6 +124,9 @@ export default class MenuBar extends Vue {
 	@form14State.Action
     public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 
+	@form15State.Action
+    public UpdateCurrentConsentOrderId!: (newCurrentConsentOrderId: string) => void
+
 	@form16State.Action
     public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
 
@@ -158,6 +164,7 @@ export default class MenuBar extends Vue {
 		this.UpdateCurrentOrderToVarySingleJusticeId(null);
 		this.UpdateCurrentConsentOrderExtendTimeId(null);
 		this.UpdateCurrentConsentOrderRemoveInactiveId(null);
+		this.UpdateCurrentConsentOrderId(null);
 		this.UpdateCurrentOfferToSettleCostsId(null);
 		this.UpdateCurrentCertificateOfCostsId(null);
 		this.UpdateCurrentNoticeOfRepChangeAddressId(null);
