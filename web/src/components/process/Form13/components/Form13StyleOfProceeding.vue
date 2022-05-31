@@ -177,7 +177,7 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                                 
+                        stacked                       
                         :state="state.filingParties"                                      
                         v-model="form13Info.filingParties">
                         <b-form-checkbox
@@ -186,7 +186,13 @@
                             :key="'appling-party-'+inx">
                                 {{applyingparty.name}}
                         </b-form-checkbox>
-                    </b-form-checkbox-group> 
+                    </b-form-checkbox-group>
+                    <span
+                        v-if="(state.filingParties != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify at least one respondent and one appellant.
+                    </span>
                 </b-col>
             </b-row> 
 
@@ -240,7 +246,7 @@
                 </b-col>
             </b-row>
 
-                        <!-- <Signing Parties> -->
+<!-- <Signing Parties> -->
             <b-row class="mt-4 question">
                 <b-col class="labels">
                     Select the names of the parties and/or counsel who will be signing the order:  
@@ -509,7 +515,12 @@ export default class Form13StyleOfProceeding extends Vue {
         this.state.respondentsInfo = this.form13Info.respondents?.length>0? null :false;            
         this.state.seekingExtension = this.form13Info.seekingExtension?.length>0? null :false
         this.state.seekingExtensionOther = this.form13Info.seekingExtension?.includes('other') && !this.form13Info.seekingExtensionOther? false :null
-        this.state.filingParties = this.form13Info.filingParties?.length>0? null :false;
+        
+        const filingParties = this.form13Info.filingParties?this.form13Info.filingParties:[];
+        const applyingAppellants = filingParties.filter(party=> !party.responding)
+        const applyingRespondents = filingParties.filter(party=> party.responding)
+        
+        this.state.filingParties = (applyingAppellants.length>0 && applyingRespondents.length > 0)? null :false;
         this.state.signingParties = this.form13Info.signingParties?.length>0? null :false;
                 
         for(const field of Object.keys(this.state)){
