@@ -100,9 +100,7 @@
                     </b-form-input>
                 </b-form-group>            
             </div>
-            <!-- <div>
-                <h2 v-if="notFound" style="float:left" class="mt-4"><b-badge variant="danger">No such Court of Appeal document found</b-badge></h2>           
-            </div> -->
+           
 
 
             <b-button 
@@ -115,17 +113,17 @@
             </b-button>   
         </b-card> 
 
-        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white">
-            <hr class="mb-4">
-            <h2 class="text-primary mx-3">Results</h2>
+        <b-card v-if="!searching" class="ml-2 mt-2 border-white">
             <p v-if="notFound">
                 No such Court of Appeal document found.
             </p>
-            <b-card 
-                v-else
+            <b-card
+                v-else                 
                 no-body 
                 class="mx-3 mb-5 border-white">                
                 <div v-if="orders.length > 0">
+                    <hr class="mb-4">
+                    <h2 class="text-primary mx-3">Results</h2>
                     <b-table
                         :items="orders"
                         :fields="orderFields" 
@@ -197,7 +195,7 @@ import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
 
 import { form8SearchInfoType, orderInfoDataType } from '@/types/Information/Form8';
-import { chambersHearingJsonInfoType, partiesDataJsonDataType, previousCourtJsonInfoType } from '@/types/Information/json';
+import { chambersHearingJsonInfoType, partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -225,7 +223,6 @@ export default class Form8CaseInformation extends Vue {
     partyState = true;
 
     dataReady = false;
-    resultsReady = false;
     searching = false;
 
     searchParams = {} as form8SearchInfoType;
@@ -264,7 +261,6 @@ export default class Form8CaseInformation extends Vue {
         this.fileNumberState = true;
         this.partyState = true;
         this.dataReady = false;
-        this.resultsReady = false;
         this.orders = [];
         this.searching = false;
         this.dataReady = true; 
@@ -306,6 +302,7 @@ export default class Form8CaseInformation extends Vue {
         this.notFound = false;
         this.fileNumberState = true;
         this.partyState = true;
+        this.orders = [];
 
         if(!this.searchParams.file){
             this.fileNumberState = false;
@@ -338,21 +335,19 @@ export default class Form8CaseInformation extends Vue {
 
                 if(res.data?.chambersHearing){
                     this.orders = this.extractInfo(res.data?.chambersHearing);                    
-                } 
-                //console.log(this.orders)
-                
-                this.notFound = false;
+                }               
+               
 
             } else {
                 this.notFound = true;
             }
-            this.searching = false;
-            this.resultsReady = true;
+            this.searching = false;            
+            
         },err => {
             console.error(err); 
-            this.notFound = true;  
-            this.searching = false;     
-        });
+            this.notFound = true;
+            this.searching = false;
+        });        
     }
 }
 </script>

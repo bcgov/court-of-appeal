@@ -109,7 +109,7 @@
 
         </b-card>
 
-        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white">
+        <b-card v-if="!searching" class="ml-2 mt-2 border-white">
             <p v-if="notFound">
                 No such Court of Appeal document found.
             </p>
@@ -220,7 +220,6 @@ export default class Form12CaseInformation extends Vue {
     respondentState = true;
 
     dataReady = false;
-    resultsReady = false;
     searching = false;
 
     searchParams = {} as form12SearchInfoType;
@@ -260,7 +259,6 @@ export default class Form12CaseInformation extends Vue {
         this.fileNumberState = true;
         this.respondentState = true;
         this.dataReady = false;
-        this.resultsReady = false;
         this.orders = [];
         this.searching = false;
         this.dataReady = true; 
@@ -302,7 +300,8 @@ export default class Form12CaseInformation extends Vue {
         this.notFound = false;
         this.fileNumberState = true;
         this.respondentState = true;
-
+        this.orders =[]
+        
         if(!this.searchParams.file){
             this.fileNumberState = false;
             this.searching = false;
@@ -340,9 +339,7 @@ export default class Form12CaseInformation extends Vue {
             else
                 this.notFound = true;
 
-            this.searching = false;
-            this.resultsReady = true;
-            
+            this.searching = false;            
                 
         },err => {
             console.error(err); 
