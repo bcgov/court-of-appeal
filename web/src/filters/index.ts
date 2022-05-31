@@ -74,6 +74,13 @@ Vue.filter('beautify-date-month', function(date){
 		return 'unknown'
 })
 
+Vue.filter('findInvalidFields',function(){
+	Vue.nextTick(()=>{
+		const el = document.getElementsByClassName('is-invalid')
+		if(el[0]) el[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start'});
+	})
+})
+
 Vue.filter('beautify-date-month-year', function(date){
 	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
 	

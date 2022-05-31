@@ -6,7 +6,7 @@
 
 <!-- <Appellants> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Appellants:">
@@ -82,7 +82,7 @@
 
 <!-- <Respondents> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Respondents:">
@@ -173,7 +173,7 @@
             <b-card class="mb-4 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
-                        <b-col cols="10" :class="state.judgeNames !=null?'border border-danger':''">
+                        <b-col cols="10" :class="state.judgeNames !=null?'border border-danger is-invalid':''">
                             <b-form-group
                                 class="labels"                
                                 label="Provide the names of the justices who heard the application:">
@@ -261,7 +261,7 @@
                         v-on:submit="modifyJudgeNames" 
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
-                <div class="text-danger h4 mt-4" v-if="state.judgeNamesNumber==false">
+                <div class="text-danger h4 ml-1 mt-4 is-invalid" v-if="state.judgeNamesNumber==false">
                     There should be either 3 or 5 Judges.
                 </div>
             </b-card>
@@ -271,9 +271,9 @@
                     When was the hearing held?                    
                 </b-col>
                 <b-col>                   
-                    <b-card                                                
-                        style="margin:0 1px; padding:0; float: center;" 
-                        :border-variant="state.hearingDate == false?'danger': 'muted'">
+                    <b-card
+                        :class="state.hearingDate == false?'border border-danger is-invalid': 'muted'"                                                
+                        style="margin:0 1px; padding:0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -294,7 +294,8 @@
                 </b-col>
                 <b-col class="ml-0 mt-2">  
                     <b-form-select                
-                        style="width:100%"              
+                        style="width:100%"
+                        :state="state.hearingLocation"
                         v-model="hearingLocation" 
                         @change="updateHearingLocation"                   
                         :options="hearingLocationList">
@@ -325,9 +326,9 @@
                     What was the date of the judgment?                    
                 </b-col>
                 <b-col>                   
-                    <b-card                                                
-                        style="margin:0 1px; padding:0; float: center;" 
-                        :border-variant="state.dateOfJudgement == false?'danger': 'muted'">
+                    <b-card
+                        :class="state.dateOfJudgement == false?'border border-danger is-invalid': 'muted'"                                                
+                        style="margin:0 1px; padding:0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -371,7 +372,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-select 
-                        stacked               
+                        stacked
+                        :state="state.varyingOrderJudgeName"               
                         style="width:100%"                                    
                         v-model="form12Info.varyingOrderJudgeName"
                         text-field="text"
@@ -403,9 +405,8 @@
                 </b-col>
                 <b-col>                   
                     <b-card                        
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.varyingOrderDate == false?'danger': 'muted'">
+                        :class="state.varyingOrderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'" 
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -471,7 +472,7 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group
-                        :state="state.orderAllowed"                 
+                        :class="state.orderAllowed==false?'border border-danger is-invalid':''"
                         v-model="form12Info.orderAllowed"
                         :options="allowedOptions"                
                     ></b-form-radio-group>
@@ -489,7 +490,8 @@
                     Did the Justices’ make any other orders?
                 </b-col>
                 <b-col class="ml-1 mt-2">
-                    <b-form-radio-group                                              
+                    <b-form-radio-group
+                        :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"                                             
                         v-model="form12Info.otherOrders"
                         :options="responseOptions"                
                     ></b-form-radio-group>
@@ -880,8 +882,10 @@ export default class Form12StyleOfProceeding extends Vue {
         // this.state.authorizedName = !this.form12Info.authorizedName? false : null;       
 
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     } 
