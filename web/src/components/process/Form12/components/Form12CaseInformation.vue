@@ -109,17 +109,17 @@
 
         </b-card>
 
-        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white">
-            <hr class="mb-4">
-            <h2 class="text-primary mx-3">Results</h2>
+        <b-card v-if="!searching" class="ml-2 mt-2 border-white">
             <p v-if="notFound">
                 No such Court of Appeal document found.
             </p>
-            <b-card 
-                v-else
+            <b-card
+                v-else                 
                 no-body 
                 class="mx-3 mb-5 border-white">                
                 <div v-if="orders.length > 0">
+                    <hr class="mb-4">
+                    <h2 class="text-primary mx-3">Results</h2>
                     <b-table
                         :items="orders"
                         :fields="orderFields" 
@@ -220,7 +220,6 @@ export default class Form12CaseInformation extends Vue {
     respondentState = true;
 
     dataReady = false;
-    resultsReady = false;
     searching = false;
 
     searchParams = {} as form12SearchInfoType;
@@ -260,7 +259,6 @@ export default class Form12CaseInformation extends Vue {
         this.fileNumberState = true;
         this.respondentState = true;
         this.dataReady = false;
-        this.resultsReady = false;
         this.orders = [];
         this.searching = false;
         this.dataReady = true; 
@@ -302,7 +300,8 @@ export default class Form12CaseInformation extends Vue {
         this.notFound = false;
         this.fileNumberState = true;
         this.respondentState = true;
-
+        this.orders =[]
+        
         if(!this.searchParams.file){
             this.fileNumberState = false;
             this.searching = false;
@@ -335,16 +334,12 @@ export default class Form12CaseInformation extends Vue {
 
                 if(res.data?.chambersHearing){
                     this.orders = this.extractInfo(res.data?.chambersHearing);                    
-                } 
-                //console.log(this.orders)
-                
-                this.notFound = false;
-
-            } else {
-                this.notFound = true;
+                }
             }
-            this.searching = false;
-            this.resultsReady = true;
+            else
+                this.notFound = true;
+
+            this.searching = false;            
                 
         },err => {
             console.error(err); 

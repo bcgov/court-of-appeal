@@ -11,8 +11,12 @@
                         class="labels"                
                         label="Appellants:">
                         <p class="content text-primary">
-                            You must enter the full names of all the appellant(s) as 
-                            it appears on the reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full 
+                            names of all the appellant(s) as it appears on 
+                            the reasons for judgment or notice of appeal. 
+                            In addition, if counsel will be signing the order, 
+                            enter the name of counsel by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p>  
                         <span 
                             v-if="form14Info.appellants.length == 0 && !AddNewAppellantForm"
@@ -83,8 +87,12 @@
                         class="labels"                
                         label="Respondents:">
                         <p class="content text-primary">
-                            You must enter full names of all the respondent(s) as it 
-                            appears on reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full names of 
+                            all the respondent(s) as it appears on the reasons for 
+                            judgment or notice of appeal. In addition, if counsel 
+                            will be signing the order, enter the name of counsel 
+                            by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p> 
                         <span 
                             v-if="form14Info.respondents.length == 0 && !AddNewRespondentForm" 
@@ -185,7 +193,45 @@
                 </b-col>
             </b-row> 
 
-             
+            <!-- <Signing Parties> -->
+            <b-row class="mt-4 question">
+                <b-col class="labels">
+                    Select the names of the parties and/or counsel who will be signing the order:  
+                    <p class="content text-primary">
+                        Please select the names of the parties and/or counsel 
+                        who will be signing the order. If the name of counsel 
+                        is not appearing, please ensure that you enter 
+                        counsel’s name at the top of the page.
+                    </p>                              
+                </b-col>
+            </b-row>
+            <b-row class="mx-3">
+                <b-col class="mx-1 p-2 bg-light border-light rounded">   
+                    <b-form-checkbox-group 
+                        stacked                                               
+                        style="width:100%"
+                        @change="updated++"                       
+                        :state="state.signingParties"                                      
+                        v-model="form14Info.signingParties">
+
+                        <div v-for="filingparty,inx in partyNames" :key="'appling-party-'+inx">
+                            <b-row>
+                                <b-col>
+                                    <b-form-checkbox :value="filingparty">
+                                        {{filingparty.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                                <b-col>
+                                    <b-form-checkbox v-if="filingparty.counselName" :value="getCounselParty(filingparty)">
+                                        {{filingparty.counselName}}, counsel for {{filingparty.name}}
+                                    </b-form-checkbox>
+                                </b-col>
+                            </b-row>                        
+                        </div>
+
+                    </b-form-checkbox-group> 
+                </b-col>
+            </b-row>
 
         </div>          
 
@@ -234,21 +280,14 @@ import moment from 'moment-timezone';
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import "@/store/modules/common";
-const commonState = namespace("Common");
-
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
-
 
 import { form14DataInfoType, form14PartiesInfoType } from '@/types/Information/Form14';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
-
 import AddPartyModal from './AddPartyModal.vue';
-
-
 
 @Component({
     components:{
@@ -294,7 +333,7 @@ export default class Form14StyleOfProceeding extends Vue {
     partyType = ''   
     seekingRemovedOptions = [
         'appeal',
-        'application leave to appeal',
+        'application for leave to appeal',
         'cross appeal',
         'application for leave to cross appeal'
     ]
@@ -309,7 +348,8 @@ export default class Form14StyleOfProceeding extends Vue {
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
-        seekingRemoved: null       
+        seekingRemoved: null,
+        signingParties: null       
     }    
 
     mounted() {
@@ -327,7 +367,7 @@ export default class Form14StyleOfProceeding extends Vue {
             const form14Data = this.form14Info;            
             form14Data.version = this.$store.state.Application.version;
             form14Data.seekingRemoved = [];
-            
+            form14Data.signingParties = []; 
             form14Data.appellants = this.partiesJson.appellants
             form14Data.respondents = this.partiesJson.respondents
             form14Data.formSevenNumber = this.fileNumber; 
@@ -393,7 +433,8 @@ export default class Form14StyleOfProceeding extends Vue {
         this.state = {
             appellantsInfo: null,
             respondentsInfo: null,
-            seekingRemoved: null            
+            seekingRemoved: null,
+            signingParties: null            
         }
         this.dataReady = true; 
     }
@@ -403,6 +444,7 @@ export default class Form14StyleOfProceeding extends Vue {
         this.state.appellantsInfo = this.form14Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form14Info.respondents?.length>0? null :false;            
         this.state.seekingRemoved = this.form14Info.seekingRemoved?.length>0? null :false;
+        this.state.signingParties = this.form14Info.signingParties?.length>0? null :false;
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
@@ -540,7 +582,8 @@ export default class Form14StyleOfProceeding extends Vue {
         this.$router.push({name: "preview-form14"}) 
     }
 
-    public somePartiesChanged(){       
+    public somePartiesChanged(){   
+        this.form14Info.signingParties = [];    
         this.updated++;
     }    
 
