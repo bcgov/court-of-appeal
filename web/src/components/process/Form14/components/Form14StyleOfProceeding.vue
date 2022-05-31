@@ -196,7 +196,7 @@
             <!-- <Signing Parties> -->
             <b-row class="mt-4 question">
                 <b-col class="labels">
-                    Enter the names of the parties and/or counsel who will be signing the order:  
+                    Select the names of the parties and/or counsel who will be signing the order:  
                     <p class="content text-primary">
                         Please select the names of the parties and/or counsel 
                         who will be signing the order. If the name of counsel 
