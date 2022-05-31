@@ -219,12 +219,27 @@ export default class Form11Layout extends Vue {
         this.appearingParties += appellantnames
         this.appearingParties += (appellantnames && respondentnames)?' and ':''
         this.appearingParties += respondentnames
+        this.appearingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
+        this.appearingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
  
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
-    
-        this.signingPartyList =[...appearingAppellants, ...appearingRespondents]
+        const allParties: form11PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
+        this.signingPartyList =[]
+        for(const party of allParties){
+            if(!party.isCounsel){
+                const sameParty = allParties.filter(par => {
+                    return(
+                        (par.organization && par.isOrganization && par.organization==party.organization) ||
+                        (par.firstName && par.lastName && par.firstName == party.firstName && par.lastName == party.lastName)
+                    )
+                })
+                if(sameParty.length==1) this.signingPartyList.push(party)
+            }else{
+                this.signingPartyList.push(party)
+            }
+        }
     }
 
     public extractSuccessUnsucessParties(){

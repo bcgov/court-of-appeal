@@ -9,20 +9,22 @@
                 <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
                     <b-form-group
                         class="labels"                
-                        label="Appellants:" 
-                        label-for="appellants">
+                        label="Appellants:">
                         <p class="content text-primary">
-                            You must enter the full names of all the appellant(s) as 
-                            it appears on the reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full names of 
+                            all the appellant(s) as it appears on the reasons for 
+                            judgment or notice of appeal.  In addition, if counsel 
+                            appeared at the application, enter the name of counsel 
+                            by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p>  
                         <span 
-                            v-if="form11Info.appellants.length == 0 && !AddNewAppellantForm" 
-                            id="appellants" 
+                            v-if="form11Info.appellants.length == 0 && !AddNewAppellantForm"                             
                             class="text-muted ml-2 my-2">No appellants have been assigned.
                         </span>
                         <b-table
                             v-else-if="form11Info.appellants.length > 0"                                                                
-                            id="appellants"
+                            style="font-size: 16px;"
                             class="mt-2"
                             :items="form11Info.appellants"
                             :fields="partyFields"
@@ -84,21 +86,23 @@
                 <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
                     <b-form-group
                         class="labels"                
-                        label="Respondents:" 
-                        label-for="respondents">
+                        label="Respondents:">
                         <p class="content text-primary">
-                            You must enter full names of all the respondent(s) as it 
-                            appears on reasons for judgment or notice of appeal.
+                            To prepare your order, you must enter the full names of 
+                            all the respondent(s) as it appears on the reasons for 
+                            judgment or notice of appeal.  In addition, if counsel 
+                            appeared at the application, enter the name of counsel 
+                            by clicking on <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/> 
+                            and type the name in the counsel’s name field.
                         </p> 
                         <span 
-                            v-if="form11Info.respondents.length == 0 && !AddNewRespondentForm" 
-                            id="respondents" 
+                            v-if="form11Info.respondents.length == 0 && !AddNewRespondentForm"
                             class="text-muted ml-2 my-2">No respondents have been assigned.
                         </span>
                         <b-table
-                            v-else-if="form11Info.respondents.length > 0"                                                                
-                            id="respondents"
+                            v-else-if="form11Info.respondents.length > 0"                        
                             class="mt-2"
+                            style="font-size: 16px;"
                             :items="form11Info.respondents"
                             :fields="partyFields"
                             head-row-variant="primary"
@@ -564,10 +568,13 @@
 <!-- <Appearing Partie -Attended Hearing> -->
             <b-row class="mt-4 question">
                 <b-col class="labels">
-                    Enter the names of parties who attended at the hearing:
-                    <div class="content text-primary font-italic">
-                        Ensure you enter the name of the lawyer who attended the hearing.
-                    </div>                                
+                    Enter the names of the parties and/or counsel who attended at the hearing:  
+                    <p class="content text-primary">
+                        Please select the names of the parties and/or counsel 
+                        who attended at the hearing.  If the name of counsel 
+                        is not appearing, please ensure that you enter 
+                        counsel’s name at the top of the page.
+                    </p>                                
                 </b-col>
             </b-row>
             <b-row class="mx-3">
@@ -875,26 +882,10 @@ export default class Form11StyleOfProceeding extends Vue {
     ]; 
 
     partyFields = [
-        {
-            key:'organization',          
-            label:'Party Type',                  
-            thClass: 'text-white bg-court',
-            thStyle: 'font-size: 1rem;',            
-            sortable:false            
-        }, 
-        {
-            key:'name',          
-            label:'Party Name',   
-            thClass: 'text-white bg-court', 
-            thStyle: 'font-size: 1rem;',          
-            sortable:false            
-        }, 
-        {
-            key:'edit',          
-            label:'',   
-            thClass: 'text-white bg-court',           
-            sortable:false            
-        }        
+        { key:'organization', label:'Party Type', thClass: 'text-white bg-court', thStyle: '', sortable:false }, 
+        { key:'name', label:'Party Name', thClass: 'text-white bg-court', thStyle: '',  sortable:false  },
+        { key:'counselName', label:'Counsel Name', thClass: 'text-white bg-court', thStyle: '',  sortable:false  },
+        { key:'edit', label:'', thClass: 'text-white bg-court', sortable:false }        
     ]
 
     judgeFields = [
