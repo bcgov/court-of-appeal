@@ -96,9 +96,9 @@
             <div style="width:50%;">
                 <div style="height:3rem;" />                               
                 <div style="border-top:1px dashed grey; width:94%; " > 
-                    {{party}} 
-                    <!-- <span v-if="party.responding">, Respondent</span>
-                    <span v-else>, Appellant</span> -->
+                    {{party.name}} 
+                    <span v-if="party.responding">, Respondent</span>
+                    <span v-else>, Appellant</span>
                 </div>                               
             </div>
             <div v-if="inx==0" style="width:50%;">
@@ -133,7 +133,7 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
-import { form14DataInfoType } from '@/types/Information/Form14';
+import { form14DataInfoType, form14PartiesInfoType } from '@/types/Information/Form14';
 import {getPartyTitles} from '../PartyTitlesForm14'
 
 
@@ -153,7 +153,7 @@ export default class Form14Layout extends Vue {
     applicantNamesFull='';
     respondentNamesFull='';
     // varyingOrderJudgeName=''
-    // appearingParties='';
+    signingParties='';
     // applyingParties=''
 
     signingPartyList =[]    
@@ -181,13 +181,44 @@ export default class Form14Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
-        this.extractSigningPartyList(this.applicantNames, this.respondentNames)
+        this.extractSigningParties();
+        // this.extractSigningPartyList(this.applicantNames, this.respondentNames)
         
     }  
 
-    public extractSigningPartyList(signingAppellants, signingRespondents){
-    
-        this.signingPartyList =[...signingAppellants, ...signingRespondents]
+    public extractSigningParties(){
+        
+        const appearingAppellants = this.result.signingParties.filter(party=> !party.responding)
+        const appearingRespondents = this.result.signingParties.filter(party=> party.responding)
+                               
+        const appellantnames = this.combineNames(appearingAppellants, 'name', null, ', appellant')                   
+        const respondentnames = this.combineNames(appearingRespondents, 'name', null, ', respondent') 
+
+        this.extractSigningPartyList(appearingAppellants, appearingRespondents)
+
+        this.signingParties += appellantnames
+        this.signingParties += (appellantnames && respondentnames)?' and ':''
+        this.signingParties += respondentnames 
+        this.signingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
+        this.signingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
+    }
+
+    public extractSigningPartyList(appearingAppellants, appearingRespondents){
+        const allParties: form14PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
+        this.signingPartyList =[]
+        for(const party of allParties){
+            if(!party.isCounsel){
+                const sameParty = allParties.filter(par => {
+                    return(
+                        (par.organization && par.isOrganization && par.organization==party.organization) ||
+                        (par.firstName && par.lastName && par.firstName == party.firstName && par.lastName == party.lastName)
+                    )
+                })
+                if(sameParty.length==1) this.signingPartyList.push(party)
+            }else{
+                this.signingPartyList.push(party)
+            }
+        }
     }
     
     public combineNames(names, nameField?, addingNameArray?, role?){

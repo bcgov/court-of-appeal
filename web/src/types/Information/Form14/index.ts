@@ -38,7 +38,8 @@ export interface form14DataInfoType {
     appellantNames: string;
     respondentNames: string;
     orderDate: string;
-    seekingRemoved: string[];    
+    seekingRemoved: string[];   
+    signingParties: form14PartiesInfoType[];
     completionDate?: string;
     version?: string;
 }
