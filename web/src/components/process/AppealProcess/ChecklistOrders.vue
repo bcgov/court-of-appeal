@@ -174,6 +174,9 @@ const form11State = namespace("Form11");
 import "@/store/modules/forms/form12";
 const form12State = namespace("Form12");
 
+import "@/store/modules/forms/form13";
+const form13State = namespace("Form13");
+
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
@@ -194,6 +197,9 @@ export default class ChecklistOrders extends Vue {
 	 
     @form12State.Action
     public UpdateCurrentOrderToVarySingleJusticeId!: (newCurrentOrderToVarySingleJusticeId: string) => void
+
+    @form13State.Action
+	public UpdateCurrentConsentOrderExtendTimeId!: (newCurrentConsentOrderExtendTimeId: string) => void
 
     @form14State.Action
     public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
@@ -319,8 +325,8 @@ export default class ChecklistOrders extends Vue {
     }
 
     public startNewForm13Document(){
-        // this.UpdateCurrentOrderToVarySingleJusticeId(null);
-        // this.$router.push({name: "start-form13" });
+        this.UpdateCurrentConsentOrderExtendTimeId(null);
+        this.$router.push({name: "start-form13" });
     }
 
     public startNewForm14Document(){

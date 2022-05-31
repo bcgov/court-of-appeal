@@ -69,21 +69,13 @@
 <!-- <ORDERED> -->
         <div class="my-2 mx-0 row">
             <div>
-                <b>IT IS ORDERED</b> that this {{result.seekingRemoved.join(', ')}} 
-                be removed from the inactive list and that the time limit for taking 
-                the next step required by the Court of Appeal Act or Court 
-                of Appeal Rules must begin to run as of the date of this order.
+                <b>IT IS ORDERED</b> that the time set for {{applyingParties}} 
+                 to file and serve the {{applicationType}} is extended until
+                {{extensionDate | beautify-date-full-no-weekday}} 
             </div>
         </div>
 
-<!-- <FURTHER ORDERS> -->
-        <div class="my-3 mx-0 row">
-            <div>
-                <b>IT IS FURTHER ORDERED</b> that the notice of hearing be filed 
-                within 180 days of the date of this order, failing which the 
-                {{result.seekingRemoved.join(', ')}} must be returned to the inactive list.
-            </div>
-        </div>
+
 
 <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
@@ -109,19 +101,6 @@
             </div>            
         </div>
 
-<!-- <NOTES> -->
-         <div class="my-2 ml-3 mr-0 font-italic">
-            <div class="mb-2 row">
-                Note: This form of order may not be used to reinstate 
-                appeals that have been dismissed as abandoned under Rule 51.
-            </div>
-            <div class="my-2 row">    
-                Note: This form of order may be used only if there is no 
-                prior order to remove the appeal or application for leave to
-                appeal from the inactive list.
-            </div>            
-        </div>
-
     </div>
 </template>
 
@@ -130,31 +109,33 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/forms/form14";
-const form14State = namespace("Form14");
+import "@/store/modules/forms/form13";
+const form13State = namespace("Form13");
 
-import { form14DataInfoType, form14PartiesInfoType } from '@/types/Information/Form14';
-import {getPartyTitles} from '../PartyTitlesForm14'
+import { form13DataInfoType, form13PartiesInfoType } from '@/types/Information/Form13';
+import {getPartyTitles} from '../PartyTitlesForm13'
 
 
 @Component
-export default class Form14Layout extends Vue {
+export default class Form13Layout extends Vue {
 
     @Prop({required:true})
-    result!: form14DataInfoType; 
+    result!: form13DataInfoType; 
 
-    @form14State.Action
-    public UpdateForm14Info!: (newForm14Info: form14DataInfoType) => void
+    @form13State.Action
+    public UpdateForm13Info!: (newForm13Info: form13DataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     
-    applicantNamesFull='';
-    respondentNamesFull='';    
-    signingParties='';
-
-    signingPartyList =[]    
+    applicantNamesFull = '';
+    respondentNamesFull = '';
+    extensionDate = '';
+    applicationType = '';
+    applyingParties = '';
+    // signingParties='';
+    signingPartyList = [];    
 
     mounted(){
         this.extractInfo();       
@@ -179,28 +160,51 @@ export default class Form14Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
-        this.extractSigningParties();        
+        this.extensionDate = this.result.extensionDate;
+        this.extractFilingParties();
+        this.extractSeekingTypes();        
+        
+        this.extractSigningParties();
     }  
 
     public extractSigningParties(){
         
-        const appearingAppellants = this.result.signingParties.filter(party=> !party.responding)
-        const appearingRespondents = this.result.signingParties.filter(party=> party.responding)
+        const signingAppellants = this.result.signingParties.filter(party=> !party.responding)
+        const signingRespondents = this.result.signingParties.filter(party=> party.responding)
                                
-        const appellantnames = this.combineNames(appearingAppellants, 'name', null, ', appellant')                   
-        const respondentnames = this.combineNames(appearingRespondents, 'name', null, ', respondent') 
+        // const appellantnames = this.combineNames(signingAppellants, 'name', null, ', appellant')                   
+        // const respondentnames = this.combineNames(signingRespondents, 'name', null, ', respondent') 
 
-        this.extractSigningPartyList(appearingAppellants, appearingRespondents)
+        this.extractSigningPartyList(signingAppellants, signingRespondents)
 
-        this.signingParties += appellantnames
-        this.signingParties += (appellantnames && respondentnames)?' and ':''
-        this.signingParties += respondentnames 
-        this.signingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
-        this.signingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
+        // this.signingParties += appellantnames
+        // this.signingParties += (appellantnames && respondentnames)?' and ':''
+        // this.signingParties += respondentnames 
+        // this.signingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
+        // this.signingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
+    }
+
+    public extractFilingParties(){
+        
+        const applyingAppellants = this.result.filingParties.filter(party=> !party.responding)
+        const applyingRespondents = this.result.filingParties.filter(party=> party.responding)
+                     
+        const appellantnames = this.combineNames(applyingAppellants, 'name', null, ', the appellant')            
+        const respondentnames = this.combineNames(applyingRespondents, 'name', null, ', the respondent')        
+
+        // this.applyingParties += appellantnames
+        // this.applyingParties += (appellantnames && respondentnames)?' and ':''
+        // this.applyingParties += respondentnames
+
+        this.applyingParties += appellantnames
+        this.applyingParties += (appellantnames && respondentnames)?' and ':''
+        this.applyingParties += respondentnames 
+        this.applyingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
+        this.applyingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
-        const allParties: form14PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
+        const allParties: form13PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
         this.signingPartyList =[]
         for(const party of allParties){
             if(!party.isCounsel){
@@ -216,6 +220,22 @@ export default class Form14Layout extends Vue {
             }
         }
     }
+
+    public extractSeekingTypes(){
+
+        const otherTypeIndex = this.result.seekingExtension.findIndex(item =>item=='other')
+        if(otherTypeIndex>-1){
+            const seekingExtension = JSON.parse(JSON.stringify(this.result.seekingExtension))
+            seekingExtension.splice(otherTypeIndex,1)
+            seekingExtension.push(this.result.seekingExtensionOther)
+
+            this.applicationType = this.combineNames(seekingExtension)
+        }
+        else 
+            this.applicationType = this.combineNames(this.result.seekingExtension)
+    }
+
+
     
     public combineNames(names, nameField?, addingNameArray?, role?){
         let namesString = ''
