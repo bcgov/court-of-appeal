@@ -56,7 +56,8 @@
                 
                 <b-form-select 
                         stacked               
-                        style="width:100%"                                    
+                        style="width:100%"
+                        :state="state.judgeName"                                   
                         v-model="form8Info.judgeName"
                         text-field="text"
                         value-field="text"                    
@@ -87,9 +88,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-card                 
-                    class="mt-2" 
-                    style="padding: 0; float: center;" 
-                    :border-variant="state.orderDate == false?'danger': 'muted'">
+                    :class="state.orderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'" 
+                    style="padding: 0; float: center;">
                     <div class="vuetify">
                         <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                             <v-date-picker
@@ -346,8 +346,10 @@ export default class Form8StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form8Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }            
         }
         return true            
     }    

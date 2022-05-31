@@ -80,7 +80,7 @@
 <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
             <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">BY THE COURTS:</div>
+            <div  style="width:50%;">FOR THE COURT</div>
         </div>
 
 <!-- <Parties Signature> -->
@@ -96,7 +96,7 @@
             <div v-if="inx==0" style="width:50%;">
                 <div style="height:3rem;" />
                 <div style="border-top:1px dashed grey;">
-                    A Justice of the Court of Appeal
+                    Deputy Registrar
                 </div>
             </div>            
         </div>
@@ -133,8 +133,7 @@ export default class Form13Layout extends Vue {
     respondentNamesFull = '';
     extensionDate = '';
     applicationType = '';
-    applyingParties = '';
-    // signingParties='';
+    applyingParties = '';   
     signingPartyList = [];    
 
     mounted(){
@@ -170,18 +169,10 @@ export default class Form13Layout extends Vue {
     public extractSigningParties(){
         
         const signingAppellants = this.result.signingParties.filter(party=> !party.responding)
-        const signingRespondents = this.result.signingParties.filter(party=> party.responding)
-                               
-        // const appellantnames = this.combineNames(signingAppellants, 'name', null, ', appellant')                   
-        // const respondentnames = this.combineNames(signingRespondents, 'name', null, ', respondent') 
+        const signingRespondents = this.result.signingParties.filter(party=> party.responding)       
 
         this.extractSigningPartyList(signingAppellants, signingRespondents)
-
-        // this.signingParties += appellantnames
-        // this.signingParties += (appellantnames && respondentnames)?' and ':''
-        // this.signingParties += respondentnames 
-        // this.signingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
-        // this.signingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
+       
     }
 
     public extractFilingParties(){
@@ -190,17 +181,11 @@ export default class Form13Layout extends Vue {
         const applyingRespondents = this.result.filingParties.filter(party=> party.responding)
                      
         const appellantnames = this.combineNames(applyingAppellants, 'name', null, ', the appellant')            
-        const respondentnames = this.combineNames(applyingRespondents, 'name', null, ', the respondent')        
-
-        // this.applyingParties += appellantnames
-        // this.applyingParties += (appellantnames && respondentnames)?' and ':''
-        // this.applyingParties += respondentnames
+        const respondentnames = this.combineNames(applyingRespondents, 'name', null, ', the respondent')         
 
         this.applyingParties += appellantnames
         this.applyingParties += (appellantnames && respondentnames)?' and ':''
         this.applyingParties += respondentnames 
-        this.applyingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
-        this.applyingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
