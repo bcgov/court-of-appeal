@@ -26,8 +26,7 @@
                 @click="startNewForm6Document"
                 target="_blank">
                 Notice of Settlement or Abandonment (Form 6)                
-            </li>    
-            <li>Certificate of Readiness</li>
+            </li>
             <li>Affidavit</li>
         </ol>
     </b-card>
