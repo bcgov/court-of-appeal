@@ -35,52 +35,48 @@
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
             <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
-        </div>        
+        </div>  
 
-<!-- <ORDER-DATE> -->
-        <div class="mt-4 mb-4 mx-0 row">
+<!-- <BEFORE THE HONOURABLE> -->
+        <div class="my-4 mx-0 row">
             <div>
-                {{result.orderDate | beautify-date-full}} 
+                <b>BEFORE THE HONOURABLE</b>
             </div>
         </div>
 
-<!-- <WHEREAS:> -->
-        <div class="mb-2 mt-2 mx-0 row" style="font-weight: 600;">
+<!-- <IN CHAMBERS:> -->
+        <div class="mb-2 mt-4 mx-0 row" style="font-weight: 600;">
             <div>
-                WHEREAS: 
-            </div>
-        </div>
-        
-<!-- <Description> -->
-        <div class="my-2 ml-5 mr-0">
-            <div class="mb-2 row">
-                (a) all parties have consented to this order,
-            </div>
-            <div class="my-2 row">    
-                (b) no person involved is under any legal disability, and 
-            </div>
-            <div class="my-2 row">    
-                (c) all parties have agreed to comply hereafter with the 
-                time limits set forth in the Court of Appeal Act and Court of
-                Appeal Rules, 
+                IN CHAMBERS: 
             </div>
         </div>
 
-<!-- <ORDERED> -->
-        <div class="my-2 mx-0 row">
+<!-- <ON APPLICATION> -->
+        <div class="my-2 ml-5 row">
             <div>
-                <b>IT IS ORDERED</b> that the time set for {{applyingParties}} 
-                 to file and serve the {{applicationType}} is extended until
-                {{extensionDate | beautify-date-full-no-weekday}} 
+                ON application of {{applyingParties}} 
+                 herein; AND BY CONSENT; 
+            </div>
+        </div>
+
+<!-- <ORDERS> -->
+        <div class="my-2 ml-5 row">
+            <div>
+                IT IS ORDERED that {{result.orders}}
             </div>
         </div>
 
 
+<!-- <FURTHER ORDERS> -->
+        <div class="my-2 ml-5 row">
+            <div>
+                IT IS FURTHER ORDERED that {{result.additionalOrders}}
+            </div>
+        </div>
 
 <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">FOR THE COURT</div>
+            <div  style="width:50%;">APPROVED AS TO FORM:</div>           
         </div>
 
 <!-- <Parties Signature> -->
@@ -93,12 +89,7 @@
                     <span v-else>, Appellant</span>
                 </div>                               
             </div>
-            <div v-if="inx==0" style="width:50%;">
-                <div style="height:3rem;" />
-                <div style="border-top:1px dashed grey;">
-                    Deputy Registrar
-                </div>
-            </div>            
+                        
         </div>
 
     </div>
@@ -109,32 +100,32 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
-import "@/store/modules/forms/form13";
-const form13State = namespace("Form13");
+import "@/store/modules/forms/form15";
+const form15State = namespace("Form15");
 
-import { form13DataInfoType, form13PartiesInfoType } from '@/types/Information/Form13';
-import {getPartyTitles} from '../PartyTitlesForm13'
+import { form15DataInfoType, form15PartiesInfoType } from '@/types/Information/Form15';
+import {getPartyTitles} from '../PartyTitlesForm15'
 
 
 @Component
-export default class Form13Layout extends Vue {
+export default class Form15Layout extends Vue {
 
     @Prop({required:true})
-    result!: form13DataInfoType; 
+    result!: form15DataInfoType; 
 
-    @form13State.Action
-    public UpdateForm13Info!: (newForm13Info: form13DataInfoType) => void
+    @form15State.Action
+    public UpdateForm15Info!: (newForm15Info: form15DataInfoType) => void
     
     dataReady = false;
     applicantNames: string[] = [];
     respondentNames: string[] = [];
     
-    applicantNamesFull = '';
-    respondentNamesFull = '';
-    extensionDate = '';
-    applicationType = '';
-    applyingParties = '';   
-    signingPartyList = [];    
+    applicantNamesFull='';
+    respondentNamesFull='';    
+    applyingParties = '';
+    signingParties='';
+
+    signingPartyList =[]    
 
     mounted(){
         this.extractInfo();       
@@ -159,11 +150,8 @@ export default class Form13Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
-        this.extensionDate = this.result.extensionDate;
         this.extractFilingParties();
-        this.extractSeekingTypes();        
-        
-        this.extractSigningParties();
+        this.extractSigningParties();        
     }  
 
     public extractSigningParties(){
@@ -189,7 +177,7 @@ export default class Form13Layout extends Vue {
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
-        const allParties: form13PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
+        const allParties: form15PartiesInfoType[] = [...appearingAppellants, ...appearingRespondents]        
         this.signingPartyList =[]
         for(const party of allParties){
             if(!party.isCounsel){
@@ -205,22 +193,6 @@ export default class Form13Layout extends Vue {
             }
         }
     }
-
-    public extractSeekingTypes(){
-
-        const otherTypeIndex = this.result.seekingExtension.findIndex(item =>item=='other')
-        if(otherTypeIndex>-1){
-            const seekingExtension = JSON.parse(JSON.stringify(this.result.seekingExtension))
-            seekingExtension.splice(otherTypeIndex,1)
-            seekingExtension.push(this.result.seekingExtensionOther)
-
-            this.applicationType = this.combineNames(seekingExtension)
-        }
-        else 
-            this.applicationType = this.combineNames(this.result.seekingExtension)
-    }
-
-
     
     public combineNames(names, nameField?, addingNameArray?, role?){
         let namesString = ''
@@ -229,7 +201,7 @@ export default class Form13Layout extends Vue {
         for(const index in names){
             
             let addingName = ''
-            const partyRole = role?role:'';            
+            const partyRole = role?role: ''            
 
             if(addingNameArray?.length>0){
                 addingName = addingNameArray[index] + partyRole

@@ -56,6 +56,9 @@ const form13State = namespace("Form13");
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
+import "@/store/modules/forms/form15";
+const form15State = namespace("Form15");
+
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
@@ -90,6 +93,7 @@ import { form11FormsJsonDataType } from '@/types/Information/Form11';
 import { form12FormsJsonDataType } from '@/types/Information/Form12';
 import { form13FormsJsonDataType } from '@/types/Information/Form13';
 import { form14FormsJsonDataType } from '@/types/Information/Form14';
+import { form15FormsJsonDataType } from '@/types/Information/Form15';
 import { form16FormsJsonDataType } from '@/types/Information/Form16';
 import { form17FormsJsonDataType } from '@/types/Information/Form17';
 import { form18FormsJsonDataType } from '@/types/Information/Form18';
@@ -145,6 +149,9 @@ export default class MyDocuments extends Vue {
 
     @form14State.Action
     public UpdateForm14FormsJson!: (newForm14FormsJson: form14FormsJsonDataType[])=> void
+
+    @form15State.Action
+    public UpdateForm15FormsJson!: (newForm15FormsJson: form15FormsJsonDataType[])=> void
     
     @form16State.Action
     public UpdateForm16FormsJson!: (newForm16FormsJson: form16FormsJsonDataType[])=> void
@@ -202,6 +209,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form17/forms'));
         calls.push(this.$http.get('/form14/forms'));
         calls.push(this.$http.get('/form13/forms'));
+        calls.push(this.$http.get('/form15/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -227,6 +235,7 @@ export default class MyDocuments extends Vue {
             if(values[17]?.data) this.UpdateForm17FormsJson(values[17]?.data)
             if(values[18]?.data) this.UpdateForm14FormsJson(values[18]?.data)
             if(values[19]?.data) this.UpdateForm13FormsJson(values[19]?.data)
+            if(values[20]?.data) this.UpdateForm15FormsJson(values[20]?.data)
 
             this.dataLoaded = true;
         })

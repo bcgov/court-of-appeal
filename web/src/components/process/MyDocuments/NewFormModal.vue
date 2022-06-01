@@ -86,6 +86,9 @@ const form13State = namespace("Form13");
 import "@/store/modules/forms/form14";
 const form14State = namespace("Form14");
 
+import "@/store/modules/forms/form15";
+const form15State = namespace("Form15");
+
 import "@/store/modules/forms/form16";
 const form16State = namespace("Form16");
 
@@ -152,6 +155,9 @@ export default class NewFormModal extends Vue {
     @form14State.Action
 	public UpdateCurrentConsentOrderRemoveInactiveId!: (newCurrentConsentOrderRemoveInactiveId: string) => void
 
+    @form15State.Action
+	public UpdateCurrentConsentOrderId!: (newCurrentConsentOrderId: string) => void
+
     @form16State.Action
     public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
 
@@ -185,13 +191,13 @@ export default class NewFormModal extends Vue {
         {name:'form12', title:'Order from an application to vary the order of a justice (Form 12)'},
         {name:'form13', title:'Consent order to extend time to file a document (Form 13)'},
         {name:'form14', title:'Consent order to remove an appeal from the inactive list (Form 14)'},
+        {name:'form15', title:'Consent Order - General (Form 15)'},
         {name:'form16', title:'Offer To Settle Costs (Form 16)'},
         {name:'form17', title:'Certificate of Costs (Form 17)'},
         {name:'form18', title:'Notice of Change of Representation/Change of Address for Service (Form 18)'},
         {name:'form19', title:'Notice of Withdrawal of Lawyer (Form 19)'},
         {name:'form20', title:'Notice of Objection to Withdrawal (Form 20)'},
-        {name:'form22', title:'Application For Order that No Fees are Payable (Form 22)'}
-        // {name:'form7', title:''},
+        {name:'form22', title:'Application For Order that No Fees are Payable (Form 22)'}       
     ]
 
     searchingKey=''
@@ -266,6 +272,10 @@ export default class NewFormModal extends Vue {
 
         }else if(form=='form14'){
             this.UpdateCurrentConsentOrderRemoveInactiveId(null);
+            this.$router.push({name: "checklist-orders" });
+
+        }else if(form=='form15'){
+            this.UpdateCurrentConsentOrderId(null);
             this.$router.push({name: "checklist-orders" });
 
         }else if(form=='form16'){
