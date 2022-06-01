@@ -1,17 +1,19 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
 
-            
-            <b-row  class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>
+                
+                <b-row  class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>
 
             <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
@@ -53,10 +55,9 @@
                 class="mx-3" 
                 label-cols-sm="3"
                 content-cols-sm="3"
-                label="Are you self-represented?" 
-                label-for="representation">
+                label="Are you self-represented?">
                 <b-form-radio-group
-                    id="representation"
+                    :class="state.selfRepresented==false?'border border-danger is-invalid w-50':''"
                     style="max-width:75%"                   
                     v-model="form5Info.selfRepresented"
                     :options="representationOptions"                
@@ -127,7 +128,9 @@
                                 
                 </b-col>
                 <b-col class="ml-3" style="padding: 0;">  
-                    <b-card class="mt-2" style="padding: 0; float: left;" :border-variant="state.dateOfAppealHearing == false?'danger': 'muted'">
+                    <b-card 
+                        :class="state.dateOfAppealHearing == false?'border border-danger is-invalid': 'muted'"
+                        style="padding: 0; margin:1rem 0 0 0.2rem; float: left;">
                         <div class="vuetify">                            
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -313,7 +316,8 @@ export default class Form5StyleOfProceeding extends Vue {
         numberOfDaysApp: null,
         numberOfDaysRes: null,
         acknowledge: null,
-        authorizedName:null
+        authorizedName:null,
+        selfRepresented: null
     }
 
     respondentName = ""; 
@@ -389,7 +393,8 @@ export default class Form5StyleOfProceeding extends Vue {
             numberOfDaysApp: null,
             numberOfDaysRes: null,
             acknowledge: null,
-            authorizedName:null
+            authorizedName:null,
+            selfRepresented: null
         }
         this.dataReady = true; 
     }
@@ -421,10 +426,13 @@ export default class Form5StyleOfProceeding extends Vue {
 
         this.state.acknowledge = !this.form5Info.acknowledge? false : null; 
         this.state.authorizedName = !this.form5Info.authorizedName? false : null;       
-        
+        this.state.selfRepresented = this.form5Info.selfRepresented != null? null: false;
+
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }

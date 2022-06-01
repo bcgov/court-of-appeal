@@ -1,17 +1,18 @@
 <template>
     <b-card no-body v-if="dataReady" class="border-white bg-white">
         <b-card class="border-white bg-white"> 
-
-            <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding (Parties) in Case</h2>
-            
-            <b-row class="mt-4 ml-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{form8Info.appellantNames}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3 ml-4" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{form8Info.respondentNames}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>         
+            <b-card class="bg-light border-0">
+                <h2 class="ml-3 mt-2 text-primary" >Style of Proceeding (Parties) in Case</h2>
+                
+                <b-row class="mt-4 ml-1" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{form8Info.appellantNames}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3 ml-1" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{form8Info.respondentNames}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>         
+            </b-card>
 
             <b-row class="mt-4 mx-5 bg-info p-3" style="border-radius: 1rem;">
                 <b-col cols="1">

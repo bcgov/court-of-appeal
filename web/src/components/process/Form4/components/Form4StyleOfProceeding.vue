@@ -1,18 +1,19 @@
 <template>
     <b-card no-body v-if="dataReady" class="border-white bg-white">
         <b-card class="border-white bg-white"> 
+            <b-card class="bg-light border-0">
+                <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding (Parties) in Case</h2>
 
-            <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding (Parties) in Case</h2>
-
-            
-            <b-row class="mt-4 ml-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3 ml-4" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>    
+                
+                <b-row class="mt-4 ml-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3 ml-4" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>    
 
             <b-row class="mt-4 mx-5 bg-info p-3" style="border-radius: 1rem;">
                 <b-col cols="1">
@@ -50,7 +51,7 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group
-                        id="representation"
+                        :class="state.selfRepresented==false?'border border-danger is-invalid w-50': ''"
                         style="max-width:75%"                   
                         v-model="form4Info.selfRepresented"
                         :options="yesNoOptions"                
@@ -62,7 +63,7 @@
                 <b-col cols="7" class="labels">
                     This application is in the jurisdiction of:                                
                 </b-col>
-                <b-col :class="state.jurisdictionType==false?'border border-danger ml-1 mt-2': 'ml-1 mt-2'">   
+                <b-col :class="state.jurisdictionType==false?'border border-danger is-invalid ml-1 mt-2': 'ml-1 mt-2'">   
 
                     <b-form-radio-group
                         stacked                
@@ -118,7 +119,8 @@
                         Location where the application will be heard:                                
                     </b-col>
                     <b-col class="ml-1 mt-2">  
-                        <b-form-select                
+                        <b-form-select 
+                            :state="state.hearingLocation"               
                             style="width:100%"              
                             v-model="hearingLocation" 
                             @change="update"                   
@@ -128,6 +130,7 @@
                             <span class="mt-3 ml-3">Specify:</span>
                             <b-form-select                        
                                 style="width:70%; float: right;"
+                                :state="state.hearingLocationOther"
                                 class="mt-2 ml-5"
                                 @change="update"
                                 :options="otherHearingLocationList"                                    
@@ -154,9 +157,8 @@
                     </b-col>
                     <b-col>                   
                         <b-card                        
-                            class="mt-2" 
-                            style="padding: 0; float: center;" 
-                            :border-variant="state.hearingDate == false?'danger': 'muted'">
+                            :class="state.hearingDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                            style="padding: 0; float: center;">
                             <div class="vuetify">
                                 <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                     <v-date-picker
@@ -255,7 +257,7 @@
                         <span
                             v-if="(state.seekingOrder != null)" 
                             style="font-size: 0.75rem;" 
-                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                             Specify the details of the order(s) you are seeking.
                         </span>             
                     </b-col>                
@@ -273,6 +275,7 @@
                     <b-col class="ml-1 mt-2">   
 
                         <b-form-radio-group
+                            :class="state.bookRequired==false?'border border-danger is-invalid w-50':''"
                             :state="state.bookRequired"                 
                             v-model="form4Info.bookRequired"
                             :options="yesNoOptions"                
@@ -282,7 +285,7 @@
                 </b-row>   
 
                 <b-card v-if="form4Info.bookRequired == false" class="mb-4 bg-white border-white text-dark"> 
-                    <b-card no-body :class="state.affidavitList !=null?'border-danger':'border-white'">
+                    <b-card no-body :class="state.affidavitList !=null?'border-danger is-invalid':'border-white'">
                         <b-row class="mb-2 ml-1" style="margin-left: -0.25rem !important;">   
                             <b-col cols="10" >
                                 <b-form-group
@@ -387,6 +390,7 @@
                     </b-col>
                     <b-col class="ml-1 mt-2">
                         <b-form-radio-group
+                            :class="state.applicationContested==false?'border border-danger is-invalid':''"
                             :state="state.applicationContested"                 
                             v-model="form4Info.applicationContested"
                             :options="contestedOptions"                
@@ -400,6 +404,7 @@
                     </b-col>
                     <b-col class="ml-1 mt-2">
                         <b-form-radio-group
+                            :class="state.acknowledgeEmailService==false?'border border-danger is-invalid w-50':''"
                             :state="state.acknowledgeEmailService"                 
                             v-model="form4Info.acknowledgeEmailService"
                             :options="yesNoOptions"                
@@ -607,7 +612,8 @@ export default class Form4StyleOfProceeding extends Vue {
         applicantParties:null,            
         respondentParties: null,  
         jurisdictionType: null,  
-        hearingLocation: null, 
+        hearingLocation: null,
+        hearingLocationOther: null, 
         hearingDate: null, 
         estimatedDuration: null,
         relyingSectionRule: null, 
@@ -754,7 +760,8 @@ export default class Form4StyleOfProceeding extends Vue {
             applicantParties:null,            
             respondentParties: null,  
             jurisdictionType: null,  
-            hearingLocation: null, 
+            hearingLocation: null,
+            hearingLocationOther: null, 
             hearingDate: null, 
             estimatedDuration: null,
             relyingSectionRule: null, 
@@ -778,7 +785,8 @@ export default class Form4StyleOfProceeding extends Vue {
         this.state.respondentParties = this.form4Info.respondentParties?.length>0? null :false;
         this.state.jurisdictionType = !this.form4Info.jurisdictionType? false : null;
 
-        this.state.hearingLocation = !this.form4Info.hearingLocation? false : null; 
+        this.state.hearingLocation = !this.form4Info.hearingLocation? false : null;
+        this.state.hearingLocationOther = this.hearingLocation=='Other' && !this.otherHearingLocation ?false : null;
         this.state.hearingDate = this.form4Info.hearingDate && this.allowedDates(this.form4Info.hearingDate)? null: false; 
         this.state.estimatedDuration = !this.form4Info.estimatedDuration? false : null;         
         this.state.relyingSectionRule = !this.form4Info.relyingSectionRule? false :null;  
@@ -799,8 +807,10 @@ export default class Form4StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form4Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }   
@@ -910,6 +920,7 @@ export default class Form4StyleOfProceeding extends Vue {
     }
 
     public addNewAffidavit(){
+        this.state.affidavitList= null
         if(this.isEditAffidavitOpen){            
             this.addAffidavitFormColor = 'danger'
         }else{
