@@ -21,8 +21,12 @@
                 @click="startNewForm5Document"
                 target="_blank">
                 Notice of Hearing of Appeal (Form 5)                
-            </li>           
-            <li>Certificate of Readiness</li>
+            </li>       
+            <li class="link-button" 
+                @click="startNewForm6Document"
+                target="_blank">
+                Notice of Settlement or Abandonment (Form 6)                
+            </li>
             <li>Affidavit</li>
         </ol>
     </b-card>
@@ -31,6 +35,9 @@
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';    
     import { namespace } from "vuex-class";
+
+    import "@/store/modules/forms/form1";
+    const form1State = namespace("Form1"); 
 
     import "@/store/modules/forms/form2";
     const form2State = namespace("Form2");
@@ -41,11 +48,14 @@
     import "@/store/modules/forms/form5";
     const form5State = namespace("Form5");
 
-    import "@/store/modules/forms/form1";
-    const form1State = namespace("Form1");   
+    import "@/store/modules/forms/form6";
+    const form6State = namespace("Form6");  
 
     @Component
-    export default class MostUsedForms extends Vue {        
+    export default class MostUsedForms extends Vue {     
+        
+        @form1State.Action
+        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void
         
         @form2State.Action
         public UpdateCurrentCaseId!: (newCurrentCaseId: string) => void        
@@ -54,11 +64,16 @@
 	    public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void 
         
         @form3State.Action
-	    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void 
-
-        @form1State.Action
-        public UpdateCurrentNoticeOfAppealId!: (newCurrentNoticeOfAppealId: string) => void      
-                
+	    public UpdateCurrentNoticeOfCrossAppealId!: (newCurrentNoticeOfCrossAppealId: string) => void            
+        
+        @form6State.Action
+        public UpdateCurrentNoticeOfSettlementOrAbandonmentId!: (newCurrentNoticeOfSettlementOrAbandonmentId: string) => void                
+        
+        public startNewForm1Document(){
+            this.UpdateCurrentNoticeOfAppealId(null);
+            this.$router.push({name: "checklist-form1" })
+        }  
+        
         public startNewForm2Document(){
             this.UpdateCurrentCaseId(null);
             this.$router.push({name: "start-form2" })
@@ -74,10 +89,10 @@
             this.$router.push({name: "start-form5" })
         }
 
-        public startNewForm1Document(){
-            this.UpdateCurrentNoticeOfAppealId(null);
-            this.$router.push({name: "checklist-form1" })
-        }       
+        public startNewForm6Document(){
+            this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+            this.$router.push({name: "start-form6" })
+        }     
 
     }
 
