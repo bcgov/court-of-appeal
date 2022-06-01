@@ -87,7 +87,7 @@
                     <span
                         v-if="(state.addresses != null)" 
                         style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the addresses of the party(ies) filing the Notice of Appearance.
                     </span>             
                 </b-col>                
@@ -111,7 +111,7 @@
                     <span
                         v-if="(state.phoneNumbers != null)" 
                         style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the phone numbers of the party(ies) filing the Notice of Appearance.
                     </span>
                 </b-col>                
@@ -359,8 +359,10 @@ export default class Form2StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form2Info.authorizedName? false : null; 
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
-                return false;
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
+                return false
+            }
         }
         return true;            
     } 

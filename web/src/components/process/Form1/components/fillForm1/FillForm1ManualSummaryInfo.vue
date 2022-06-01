@@ -8,7 +8,8 @@
                 Type of Tribunal:                                
             </b-col>
             <b-col>                
-                <b-form-select                
+                <b-form-select
+                    :state="form1InfoStates.tribunalType"                
                     style="width:100%"              
                     v-model="tribunalType" 
                     @change="update"                   
@@ -36,7 +37,8 @@
                 Supreme Court File No.                                
             </b-col>
             <b-col>                    
-                <b-form-input                        
+                <b-form-input
+                    :state="form1InfoStates.lowerCourtFileNo"                        
                     style="width:100%" 
                     placeholder="Supreme Court File No."
                     class="mt-2"
@@ -58,7 +60,8 @@
             </b-col>
             <b-col>
                 <b-form-select                
-                    style="width:100%"              
+                    style="width:100%"
+                    :state="form1InfoStates.lowerCourtRegistryId"              
                     v-model="manualSummaryInfo.lowerCourtRegistryId" 
                     @change="update">
                     <b-form-select-option
@@ -102,9 +105,8 @@
             </b-col>
             <b-col class="ml-3" style="padding: 0;">  
                 <b-card 
-                    class="mt-2" 
-                    style="padding: 0; float: left;" 
-                    :border-variant="form1InfoStates.tribunalDateOfOrder == false?'danger': 'dark'">
+                    :class="form1InfoStates.tribunalDateOfOrder== false?'border border-danger is-invalid': 'muted'"
+                    style="padding: 0; margin:1rem 1rem 0 0rem; float: center;">
                     <div class="vuetify">
                         <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                             <v-date-picker

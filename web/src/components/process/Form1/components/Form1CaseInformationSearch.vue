@@ -127,13 +127,15 @@
             <b-card no-body class="border-white">
                 <p class="ml-3">
                     <span v-if="!notFound">If the order you are appealing is not listed above and you have </span>
-                    <span v-else>If you have </span>information corresponding to the case, you may enter 
-                    the information manually:
+                    <span v-else>If you have </span>information corresponding to the case, you may <b>enter 
+                    the information manually:</b>
                     <b-button 
-                        class="bg-success mr-4 mt-2"
+                        variant="outline-success"
+                        class=" mr-4 mt-2"
                         style="display: block; float: right; height: 50px; opacity:1;"            
                         @click="navigateToForm1()">
-                        Continue to Notice of Appeal
+                        Manually enter Notice of Appeal information
+                        <b-icon-pencil-square />
                     </b-button> 
                 </p>
             </b-card>

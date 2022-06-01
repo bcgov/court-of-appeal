@@ -79,7 +79,7 @@
             <span
                 v-if="(form1InfoStates.respondents != null || form1InfoStates.appellants != null)" 
                 style="font-size: 0.75rem;" 
-                class="mx-4 bg-white text-danger">A minimum of one Appellant and one Respondent is required.
+                class="mx-4 bg-white text-danger is-invalid">A minimum of one Appellant and one Respondent is required.
             </span> 
 
             <hr class="mb-3 pl-2 mx-4">
@@ -89,7 +89,7 @@
             <span
                 v-if="(!editStyleOfProceedingsEnabled)" 
                 style="font-size: 0.75rem;" 
-                class="mx-4 bg-white text-danger">A minimum of one Appellant and one Respondent is required to edit style of proceedings.
+                class="mx-4 bg-white text-danger is-invalid">A minimum of one Appellant and one Respondent is required to edit style of proceedings.
             </span>
 
             <hr class="mb-4 mx-4">
@@ -117,7 +117,7 @@
                     <div
                         v-if="(form1InfoStates.addresses != null)" 
                         style="font-size: 0.75rem; margin-top:-0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the addresses of the party(ies) filing the Notice of Appeal.
                     </div>             
                 </b-col>                
@@ -144,7 +144,7 @@
                     <div
                         v-if="(form1InfoStates.phoneNumbers != null)" 
                         style="font-size: 0.75rem; margin-top:-0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the phone numbers of the party(ies) filing the Notice of Appeal.
                     </div>
                 </b-col>                
