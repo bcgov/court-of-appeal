@@ -222,27 +222,34 @@ export default class FillForm1 extends Vue {
     }
 
     public checkStates(){
-
-        let stateCheck = true;
         
         this.fieldStates = this.form1InfoStates;        
 
-        if (this.manualTrib){
-            this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;            
+        if (this.manualTrib)
+            this.fieldStates.tribunalType = !this.form1Info.tribunalType? false : null;
+        else 
+           this.fieldStates.tribunalType = null;
+           
+        if (this.manualTrib || this.manualNorm || this.manualNTrib){   
             this.fieldStates.tribunalDateOfOrder = !this.form1Info.tribunalDateOfOrder? false : null;
             this.fieldStates.tribunalOriginalDecisionMaker = !this.form1Info.tribunalOriginalDecisionMaker? false : null;
-        } else {
-            this.fieldStates.tribunalType = null;           
+        } else {                       
             this.fieldStates.tribunalDateOfOrder = null;
             this.fieldStates.tribunalOriginalDecisionMaker = null;
         }   
         
         this.fieldStates.cityOfOrder = !this.form1Info.cityOfOrder? false : null;
+
         if (this.manualTrib){
-            this.fieldStates.lowerCourtFileNo = null;
+            this.fieldStates.lowerCourtFileNo = null;            
         } else {
-            this.fieldStates.lowerCourtFileNo = !this.form1Info.lowerCourtFileNo? false : null;
-        }        
+            this.fieldStates.lowerCourtFileNo = !this.form1Info.lowerCourtFileNo? false : null;            
+        } 
+        
+        if (this.manualNorm || this.manualNTrib){
+            this.fieldStates.lowerCourtRegistryId = this.form1Info.lowerCourtRegistryId? null: false
+        } else
+            this.fieldStates.lowerCourtRegistryId = null;
 
         const durationValue = this.form1Info.trialDurationDays?.trim().toLowerCase();
         const includesIdentifier = durationValue?.includes('day') || durationValue?.includes('hour')
@@ -274,11 +281,13 @@ export default class FillForm1 extends Vue {
         this.updatedInfo ++;
 
         for(const field of Object.keys(this.fieldStates)){
-            if(this.fieldStates[field]==false)
-                stateCheck = false;
+            if(this.fieldStates[field]==false){
+                Vue.filter('findInvalidFields')()
+                return false
+            }                
         }       
 
-        return stateCheck;            
+        return true;            
     }
 
     public verifyPhoneNumbers(){

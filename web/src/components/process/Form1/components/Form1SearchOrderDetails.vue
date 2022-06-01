@@ -27,9 +27,8 @@
             <template v-slot:cell(action)="row">
                 <span v-if="row.item.isPastDeadline" class="text-secondary">Past 30-day deadline</span>
                 <b-button v-else 
-                    variant="bg-transparent" 
-                    class="text-primary" 
-                    style="padding-top:0;"
+                    variant="court" 
+                    class="text-white"                     
                     @click="selectOrder(row.item)">
                     Appeal this Order                    
                 </b-button>                                     
@@ -83,22 +82,26 @@ export default class Form1SearchOrderDetails extends Vue {
         {
             key: "judgeDisplayName",
             label: "Name of Judge",
-            sortable: false
+            sortable: false,
+            tdClass:'align-middle'
         },
         {
             key: "orderDate",
             label: "Date of Order",
-            sortable: true
+            sortable: true,
+            tdClass:'align-middle'
         },
         {
             key: "appealSubmissionDeadline",
             label: "Deadline to File and Serve",
-            sortable: false
+            sortable: false,
+            tdClass:'align-middle'
         },        
         {
             key: "action",
             label: "",
-            sortable: false
+            sortable: false,
+            tdClass:'align-middle'
         }
     ];
 

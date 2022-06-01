@@ -11,7 +11,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.applyLeave"
                         :state="form1InfoStates.applyLeave"
-                        :class="form1InfoStates.applyLeave==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.applyLeave==false? 'border border-danger is-invalid w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -44,7 +44,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.amending"
                         :state="form1InfoStates.amending"
-                        :class="form1InfoStates.amending==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.amending==false? 'border border-danger is-invalid w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -66,7 +66,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.appealInvolvesChild"
                         :state="form1InfoStates.appealInvolvesChild"
-                        :class="form1InfoStates.appealInvolvesChild==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.appealInvolvesChild==false? 'border border-danger is-invalid w-50':''"
                         @change="update"
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -82,7 +82,7 @@
                     <b-form-radio-group
                         v-model="commonInfo.appealFrom"
                         :state="form1InfoStates.appealFrom"
-                        :class="form1InfoStates.appealFrom==false? 'border border-danger w-75':''"
+                        :class="form1InfoStates.appealFrom==false? 'border border-danger is-invalid w-75':''"
                         :disabled="commonInfo.appealTribunal"
                         @change="update" 
                         style="font-size: 1rem;"  
@@ -143,7 +143,7 @@
                         v-model="commonInfo.wasSupremeAppeal"
                         @change="update"
                         :state="form1InfoStates.wasSupremeAppeal"
-                        :class="form1InfoStates.wasSupremeAppeal==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.wasSupremeAppeal==false? 'border border-danger is-invalid w-50':''"
                         style="font-size: 1rem; font-weight:400;" 
                         :options="appealedInSupremeCourtOptions"
                     ></b-form-radio-group> 
@@ -238,7 +238,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.orderSealed"
                         :state="form1InfoStates.orderSealed"
-                        :class="form1InfoStates.orderSealed==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.orderSealed==false? 'border border-danger is-invalid w-50':''"
                         @change="update"                        
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -258,9 +258,8 @@
                 </b-col>
                 <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="form1InfoStates.dateSealed == false?'danger': 'muted'">
+                        :class="form1InfoStates.dateSealed== false?'border border-danger is-invalid': 'muted'"
+                        style="padding: 0; margin:1rem 1rem 0 0rem; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -284,7 +283,7 @@
                     <b-form-radio-group                
                         v-model="commonInfo.orderBan"
                         :state="form1InfoStates.orderBan"
-                        :class="form1InfoStates.orderBan==false? 'border border-danger w-50':''"
+                        :class="form1InfoStates.orderBan==false? 'border border-danger is-invalid w-50':''"
                         @change="update"                        
                         :options="responseOptions"
                         style="font-size: 1rem; font-weight:400;"                    
@@ -304,9 +303,8 @@
                 </b-col>
                 <b-col class="ml-3 mt-1" style="padding: 0;">  
                     <b-card 
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="form1InfoStates.dateBan == false?'danger': 'muted'">
+                        :class="form1InfoStates.dateBan== false?'border border-danger is-invalid': 'muted'"
+                        style="padding: 0; margin:1rem 1rem 0 0rem; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
