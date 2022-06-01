@@ -186,13 +186,7 @@
                             :key="'appling-party-'+inx">
                                 {{applyingparty.name}}
                         </b-form-checkbox>
-                    </b-form-checkbox-group>
-                    <span
-                        v-if="(state.filingParties != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify at least one respondent and one appellant.
-                    </span>
+                    </b-form-checkbox-group>                    
                 </b-col>
             </b-row> 
 
@@ -281,6 +275,12 @@
                                 </b-col>
                             </b-row>                        
                         </div>
+                        <span
+                            v-if="(state.signingParties != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify at least one respondent and one appellant.
+                        </span>
 
                     </b-form-checkbox-group> 
                 </b-col>
@@ -334,21 +334,14 @@ import moment from 'moment-timezone';
 import "@/store/modules/information";
 const informationState = namespace("Information");
 
-import "@/store/modules/common";
-const commonState = namespace("Common");
-
 import "@/store/modules/forms/form13";
 const form13State = namespace("Form13");
-
 
 import { form13DataInfoType, form13PartiesInfoType } from '@/types/Information/Form13';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 
 import AddPartyForm from './AddPartyForm.vue';
-
 import AddPartyModal from './AddPartyModal.vue';
-
-
 
 @Component({
     components:{
@@ -515,13 +508,13 @@ export default class Form13StyleOfProceeding extends Vue {
         this.state.respondentsInfo = this.form13Info.respondents?.length>0? null :false;            
         this.state.seekingExtension = this.form13Info.seekingExtension?.length>0? null :false
         this.state.seekingExtensionOther = this.form13Info.seekingExtension?.includes('other') && !this.form13Info.seekingExtensionOther? false :null
+        this.state.filingParties = this.form13Info.filingParties?.length>0? null :false;
         
-        const filingParties = this.form13Info.filingParties?this.form13Info.filingParties:[];
-        const applyingAppellants = filingParties.filter(party=> !party.responding)
-        const applyingRespondents = filingParties.filter(party=> party.responding)
+        const signingParties = this.form13Info.signingParties?this.form13Info.signingParties:[];
+        const signingAppellants = signingParties.filter(party=> !party.responding)
+        const signingRespondents = signingParties.filter(party=> party.responding)
         
-        this.state.filingParties = (applyingAppellants.length>0 && applyingRespondents.length > 0)? null :false;
-        this.state.signingParties = this.form13Info.signingParties?.length>0? null :false;
+        this.state.signingParties = (signingAppellants.length>0 && signingRespondents.length > 0)? null :false;
                 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
