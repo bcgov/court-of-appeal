@@ -1,16 +1,18 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+                
+                <b-row class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>
 
             <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
@@ -51,7 +53,8 @@
                     <p>Are you self-represented?</p>                    
                 </b-col>
                 <b-col class="ml-1">
-                    <b-form-radio-group                
+                    <b-form-radio-group
+                        :class="state.selfRepresented==false?'border border-danger is-invalid w-50':''"                
                         style="width:100%"                                       
                         v-model="form6Info.selfRepresented"
                         :options="representationOptions">
@@ -91,7 +94,7 @@
                 <b-col cols="7" class="labels">
                     This party is abandoning a:                                
                 </b-col>
-                <b-col :class="state.abandonType==false?'border border-danger ml-1': 'ml-1'">   
+                <b-col :class="state.abandonType==false?'border border-danger is-invalid ml-1': 'ml-1'">   
 
                     <b-form-radio-group                
                         style="width:100%" 
@@ -138,9 +141,8 @@
                 <b-col>
 
                     <b-card                 
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.orderDate == false?'danger': 'muted'">
+                        :class="state.orderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -172,9 +174,8 @@
                 </b-col>
                 <b-col>
                     <b-card                 
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.initiatingDocumentDate == false?'danger': 'muted'">
+                        :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -299,7 +300,8 @@ export default class Form6StyleOfProceeding extends Vue {
         abandoningParties:null,
         abandonType: null,
         abandoningAgainstParties: null,        
-        authorizedName:null
+        authorizedName:null,
+        selfRepresented: null,
     }
 
     respondentName = ""; 
@@ -416,7 +418,8 @@ export default class Form6StyleOfProceeding extends Vue {
             abandoningParties:null,
             abandonType: null,
             abandoningAgainstParties: null,        
-            authorizedName:null
+            authorizedName:null,
+            selfRepresented: null
         }
         this.dataReady = true; 
     }
@@ -425,17 +428,20 @@ export default class Form6StyleOfProceeding extends Vue {
         
         this.state.firstAppellant = !this.form6Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form6Info.firstRespondent? false : null; 
-        this.state.orderDate = this.form6Info.orderDate != null? null:false;
-        this.state.judgeName = this.form6Info.judgeName != null? null:false;        
-        this.state.initiatingDocumentDate = this.form6Info.initiatingDocumentDate != null? null:false;
+        this.state.orderDate = this.form6Info.orderDate? null:false;
+        this.state.judgeName = this.form6Info.judgeName? null:false;        
+        this.state.initiatingDocumentDate = this.form6Info.initiatingDocumentDate? null:false;
         this.state.abandoningParties = this.form6Info.abandoningParties?.length>0? null :false;
         this.state.abandonType = !this.form6Info.abandonType? false : null;
         this.state.abandoningAgainstParties = this.form6Info.abandoningAgainstParties?.length>0? null :false;
         this.state.authorizedName = !this.form6Info.authorizedName? false : null;       
-        
+        this.state.selfRepresented = this.form6Info.selfRepresented != null? null: false
+
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }    

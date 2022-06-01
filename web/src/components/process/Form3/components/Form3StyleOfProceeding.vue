@@ -216,18 +216,20 @@
         </b-card>
         
         <div v-if="partyDataExists()">
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{form3Info.appellantNames}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{form3Info.respondentNames}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>  
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem;">Style of Proceeding (Parties) in Case</p>
+                
+                <b-row class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{form3Info.appellantNames}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{form3Info.respondentNames}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>  
 
-            <b-row class="mt-4 question">
+            <b-row class="mt-5 question">
                 <b-col cols="7" class="labels">
                     <p>Is Leave to Cross Appeal Required?</p>
                     <p style="font-size: 0.75rem;">
@@ -236,8 +238,7 @@
                 </b-col>
                 <b-col class="ml-1">
                     <b-form-radio-group                
-                        style="width:100%" 
-                        :state="state.crossAppealRequired"                                         
+                        :class="state.crossAppealRequired==false?'border border-danger is-invalid w-50':''"                                          
                         v-model="form3Info.crossAppealRequired"
                         :options="yesNoOptions">
                     </b-form-radio-group>
@@ -250,7 +251,7 @@
                 </b-col>
                 <b-col class="ml-1">
                     <b-form-radio-group                
-                        style="width:100%" 
+                        :class="state.amending==false?'border border-danger is-invalid w-50':''"
                         :state="state.amending"                                         
                         v-model="form3Info.amending"
                         :options="yesNoOptions">
@@ -283,9 +284,8 @@
                 </b-col>
                 <b-col>                   
                     <b-card                 
-                        class="mt-2" 
-                        style="padding: 0; float: center;" 
-                        :border-variant="state.orderDate == false?'danger': 'muted'">
+                        :class="state.orderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                        style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
@@ -394,7 +394,7 @@
                 <b-col class="ml-1">   
 
                     <b-form-radio-group
-                        id="representation"
+                        :class="state.selfRepresenting==false?'border border-danger is-invalid w-50':''"
                         style="max-width:75%"                   
                         v-model="form3Info.selfRepresenting"
                         :options="yesNoOptions"                
@@ -426,7 +426,7 @@
                     <span
                         v-if="(state.addresses != null)" 
                         style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the addresses of the party(ies) filing cross appeal.
                     </span>                  
                 </b-col>                
@@ -450,7 +450,7 @@
                     <span
                         v-if="(state.phoneNumbers != null)" 
                         style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the phone numbers of the party(ies) filing the Cross Appeal.
                     </span>                    
                 </b-col>                
@@ -618,7 +618,8 @@ export default class Form3StyleOfProceeding extends Vue {
         groundsLeaveCrossAppeal:null,       
         phoneNumbers:null,        
         addresses:null,               
-        authorizedName:null
+        authorizedName:null, 
+        selfRepresenting: null
     }
 
     mounted() {
@@ -822,7 +823,8 @@ export default class Form3StyleOfProceeding extends Vue {
             groundsLeaveCrossAppeal:null,       
             phoneNumbers:null,
             addresses:null,               
-            authorizedName:null
+            authorizedName:null,
+            selfRepresenting: null
         }
         this.dataReady = true; 
     }
@@ -838,8 +840,8 @@ export default class Form3StyleOfProceeding extends Vue {
         }
 
         this.state.formSevenNumber = this.form3Info.formSevenNumber?.trim().length>0? null:false;
-        this.state.orderDate = this.form3Info.orderDate != null? null:false;
-        this.state.judgeName = this.form3Info.judgeName != null? null:false;        
+        this.state.orderDate = this.form3Info.orderDate? null:false;
+        this.state.judgeName = this.form3Info.judgeName? null:false;        
         this.state.crossAppealRequired = this.form3Info.crossAppealRequired != null? null:false;
         this.state.amending = this.form3Info.amending != null? null:false;
         this.state.crossAppealingParties = this.form3Info.crossAppealingParties?.length>0? null :false;
@@ -852,11 +854,14 @@ export default class Form3StyleOfProceeding extends Vue {
         this.state.addresses = !(this.form3Info.addresses && this.verifyAddresses()
                                     && this.form3Info.addresses.length == this.form3Info.crossAppealingParties.length)? false : null;       
                 
-        this.state.authorizedName = !this.form3Info.authorizedName? false : null;       
+        this.state.authorizedName = !this.form3Info.authorizedName? false : null;
+        this.state.selfRepresenting = this.form3Info.selfRepresenting != null? null: false;
 
-        for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+        for(const field of Object.keys(this.state)){            
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }   

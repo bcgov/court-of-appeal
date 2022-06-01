@@ -1,17 +1,19 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        <b-card class="border-white bg-white"> 
+        <b-card class="border-white bg-white">
 
-            <h2 class="ml-4 mt-3 text-primary" >Style of Proceeding (Parties) in Case</h2>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>
+            <b-card class="bg-light border-0">
+                <h2 class="ml-1 mt-2 text-primary" >Style of Proceeding (Parties) in Case</h2>
+                
+                <b-row class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>
 
             <b-row class="mt-4 mx-5 bg-info p-3" style="border-radius: 1rem;">
                 <b-col cols="1">
@@ -128,9 +130,8 @@
             </b-col>
             <b-col>                   
                 <b-card                        
-                    class="mt-2" 
-                    style="padding: 0; float: center;" 
-                    :border-variant="state.hearingDate == false?'danger': 'muted'">
+                    :class="state.hearingDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                    style="padding: 0; float: center;">
                     <div class="vuetify">
                         <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                             <v-date-picker
@@ -182,7 +183,7 @@
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-radio-group
-                    :class="state.filedMaterial==false? 'border border-danger' :''"
+                    :class="state.filedMaterial==false? 'border border-danger is-invalid' :''"
                     @change="state.filedMaterial=null"                 
                     v-model="form7Info.filedMaterial"
                     :options="yesNoOptions"                
@@ -448,8 +449,10 @@ export default class Form7StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form7Info.authorizedName? false : null;       
         //console.log(this.state)
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }            
         }
         return true            
     }    
