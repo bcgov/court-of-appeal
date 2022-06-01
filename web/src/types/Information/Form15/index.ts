@@ -35,8 +35,9 @@ export interface form15DataInfoType {
     respondents: form15PartiesInfoType[];   
     appellantNames: string;
     respondentNames: string;
-    orderDate: string;
-    seekingRemoved: string[];   
+    filingParties: form15PartiesInfoType[];
+    orders: string;
+    additionalOrders: string;   
     signingParties: form15PartiesInfoType[];
     completionDate?: string;
     version?: string;

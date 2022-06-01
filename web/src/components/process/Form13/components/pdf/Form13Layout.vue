@@ -229,9 +229,7 @@ export default class Form13Layout extends Vue {
         for(const index in names){
             
             let addingName = ''
-            const partyRole = role? (role+  
-                (!names[index].isCounsel && !names[index].isOrganization?', appearing in person':'')) 
-            : ''            
+            const partyRole = role?role:'';            
 
             if(addingNameArray?.length>0){
                 addingName = addingNameArray[index] + partyRole

@@ -1,6 +1,12 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>       
+        <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>   
+
+         <b-row class="ml-2 mt-2 mb-4" style="font-size: 14px;">
+            You may use this form for any other consent order except to 
+            remove an appeal from the inactive list or to extend the time 
+            to file a document(s). 
+        </b-row>    
 
         <b-form-group
             class="mx-1" 

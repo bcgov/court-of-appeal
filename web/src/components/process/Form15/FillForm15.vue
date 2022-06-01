@@ -19,20 +19,17 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Consent order to Remove an Appeal 
-                from the Inactive List (Form 15)?
+                When Do You Use the Consent Order - General (Form 15)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                This form of order may be used only if there is no prior order 
-                to remove the appeal from the inactive list and the other 
-                party is consenting. If there is an any application for 
-                leave to appeal that relates to the appeal, it is deemed 
-                to be on the inactive appeal list during the same period.
+                This form of consent order may be used for any other consent 
+                order except to remove an appeal from the inactive list or 
+                to extend the time to file a document(s).
             </b-row>
 
-            <b-row class="ml-4 mt-4 text-secondary" style="font-size: 14px; font-style: italic;">
-                Note: This form of order may not be used to reinstate appeals that 
-                have been dismissed as abandoned under Rule 51. 
+            <b-row class="ml-4 mt-2" style="font-size: 14px;">
+                The consent order would be signed by both parties and 
+                then submitted to the registry for approval. 
             </b-row>
            
         </b-card>

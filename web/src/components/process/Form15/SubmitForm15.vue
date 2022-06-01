@@ -11,14 +11,16 @@
                 Download and Print
             </b-row> 
             <b-row class="ml-2 my-2" style="font-size: 14px;">
-                Before you can submit the order to the registry for entry, you will need to have the 
-                order you prepared signed by all parties.  If someone refuses to sign an order, you may 
-                go before the registrar to settle the order pursuant to Rule 68 of the 
-                Court of Appeal Rules.
+                Before you can submit the order to the registry for 
+                entry, you will need to have the order you prepared 
+                signed by all parties. If someone refuses to sign 
+                an order, you will need to make an application for 
+                the orders you are seeking. 
             </b-row>
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
-                Once you have collected the party signatures, you can return to this application to 
-                submit your order to the registry. 
+                Once you have collected the party signatures, you 
+                can return to this application to submit your 
+                order to the registry. 
             </b-row>
             <b-row>
                 <b-alert

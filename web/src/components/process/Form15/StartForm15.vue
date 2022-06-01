@@ -17,8 +17,7 @@
         </b-card>
 
         <b-card border-variant="white" bg-variant="white" class="mt-3 bg-white mx-4">
-            <form-15-case-information/>          
-            
+            <form-15-case-information/>
         </b-card>       
         
     </b-card>

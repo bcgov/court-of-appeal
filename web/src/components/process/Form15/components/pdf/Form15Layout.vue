@@ -35,60 +35,48 @@
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
             <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
-        </div>        
+        </div>  
 
-<!-- <ORDER-DATE> -->
-        <div class="mt-4 mb-4 mx-0 row">
+<!-- <BEFORE THE HONOURABLE> -->
+        <div class="my-4 mx-0 row">
             <div>
-                {{result.orderDate | beautify-date-full}} 
-            </div>
-        </div>
-
-<!-- <WHEREAS:> -->
-        <div class="mb-2 mt-2 mx-0 row" style="font-weight: 600;">
-            <div>
-                WHEREAS: 
-            </div>
-        </div>
-        
-<!-- <Description> -->
-        <div class="my-2 ml-5 mr-0">
-            <div class="mb-2 row">
-                (a) all parties have consented to this order,
-            </div>
-            <div class="my-2 row">    
-                (b) no person involved is under any legal disability, and 
-            </div>
-            <div class="my-2 row">    
-                (c) all parties have agreed to comply hereafter with the 
-                time limits set forth in the Court of Appeal Act and Court of
-                Appeal Rules, 
+                <b>BEFORE THE HONOURABLE</b>
             </div>
         </div>
 
-<!-- <ORDERED> -->
-        <div class="my-2 mx-0 row">
+<!-- <IN CHAMBERS:> -->
+        <div class="mb-2 mt-4 mx-0 row" style="font-weight: 600;">
             <div>
-                <b>IT IS ORDERED</b> that this {{result.seekingRemoved.join(', ')}} 
-                be removed from the inactive list and that the time limit for taking 
-                the next step required by the Court of Appeal Act or Court 
-                of Appeal Rules must begin to run as of the date of this order.
+                IN CHAMBERS: 
             </div>
         </div>
+
+<!-- <ON APPLICATION> -->
+        <div class="my-2 ml-5 row">
+            <div>
+                ON application of {{applyingParties}} 
+                 herein; AND BY CONSENT; 
+            </div>
+        </div>
+
+<!-- <ORDERS> -->
+        <div class="my-2 ml-5 row">
+            <div>
+                IT IS ORDERED that {{result.orders}}
+            </div>
+        </div>
+
 
 <!-- <FURTHER ORDERS> -->
-        <div class="my-3 mx-0 row">
+        <div class="my-2 ml-5 row">
             <div>
-                <b>IT IS FURTHER ORDERED</b> that the notice of hearing be filed 
-                within 180 days of the date of this order, failing which the 
-                {{result.seekingRemoved.join(', ')}} must be returned to the inactive list.
+                IT IS FURTHER ORDERED that {{result.additionalOrders}}
             </div>
         </div>
 
 <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">BY THE COURTS:</div>
+            <div  style="width:50%;">APPROVED AS TO FORM:</div>           
         </div>
 
 <!-- <Parties Signature> -->
@@ -101,25 +89,7 @@
                     <span v-else>, Appellant</span>
                 </div>                               
             </div>
-            <div v-if="inx==0" style="width:50%;">
-                <div style="height:3rem;" />
-                <div style="border-top:1px dashed grey;">
-                    A Justice of the Court of Appeal
-                </div>
-            </div>            
-        </div>
-
-<!-- <NOTES> -->
-         <div class="my-2 ml-3 mr-0 font-italic">
-            <div class="mb-2 row">
-                Note: This form of order may not be used to reinstate 
-                appeals that have been dismissed as abandoned under Rule 51.
-            </div>
-            <div class="my-2 row">    
-                Note: This form of order may be used only if there is no 
-                prior order to remove the appeal or application for leave to
-                appeal from the inactive list.
-            </div>            
+                        
         </div>
 
     </div>
@@ -152,6 +122,7 @@ export default class Form15Layout extends Vue {
     
     applicantNamesFull='';
     respondentNamesFull='';    
+    applyingParties = '';
     signingParties='';
 
     signingPartyList =[]    
@@ -179,24 +150,30 @@ export default class Form15Layout extends Vue {
         }
         this.applicantNamesFull = this.combineNames(this.result.appellants, '', this.applicantNames)
 
+        this.extractFilingParties();
         this.extractSigningParties();        
     }  
 
     public extractSigningParties(){
         
-        const appearingAppellants = this.result.signingParties.filter(party=> !party.responding)
-        const appearingRespondents = this.result.signingParties.filter(party=> party.responding)
-                               
-        const appellantnames = this.combineNames(appearingAppellants, 'name', null, ', appellant')                   
-        const respondentnames = this.combineNames(appearingRespondents, 'name', null, ', respondent') 
+        const signingAppellants = this.result.signingParties.filter(party=> !party.responding)
+        const signingRespondents = this.result.signingParties.filter(party=> party.responding)       
 
-        this.extractSigningPartyList(appearingAppellants, appearingRespondents)
+        this.extractSigningPartyList(signingAppellants, signingRespondents)
+       
+    }
 
-        this.signingParties += appellantnames
-        this.signingParties += (appellantnames && respondentnames)?' and ':''
-        this.signingParties += respondentnames 
-        this.signingParties += (!appellantnames)?  ' and no one appearing on behalf of the appellant(s)':''
-        this.signingParties += (!respondentnames)? ' and no one appearing on behalf of the respondent(s)':''
+    public extractFilingParties(){
+        
+        const applyingAppellants = this.result.filingParties.filter(party=> !party.responding)
+        const applyingRespondents = this.result.filingParties.filter(party=> party.responding)
+                     
+        const appellantnames = this.combineNames(applyingAppellants, 'name', null, ', the appellant')            
+        const respondentnames = this.combineNames(applyingRespondents, 'name', null, ', the respondent')         
+
+        this.applyingParties += appellantnames
+        this.applyingParties += (appellantnames && respondentnames)?' and ':''
+        this.applyingParties += respondentnames 
     }
 
     public extractSigningPartyList(appearingAppellants, appearingRespondents){
@@ -224,9 +201,7 @@ export default class Form15Layout extends Vue {
         for(const index in names){
             
             let addingName = ''
-            const partyRole = role? (role+  
-                (!names[index].isCounsel && !names[index].isOrganization?', appearing in person':'')) 
-            : ''            
+            const partyRole = role?role: ''            
 
             if(addingNameArray?.length>0){
                 addingName = addingNameArray[index] + partyRole

@@ -170,19 +170,52 @@
             </b-row>  
 
 
-<!-- <seeking to have removed from the inactive list> -->
+<!-- <FilingParties-Made Application> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    What are you seeking to have removed from the inactive list?                                
+                    Who is making the application?                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                                       
-                        style="width:100%"                        
-                        :state="state.seekingRemoved"   
-                        :options="seekingRemovedOptions"                                   
-                        v-model="form15Info.seekingRemoved">                       
-                    </b-form-checkbox-group> 
+                        stacked                       
+                        :state="state.filingParties"                                      
+                        v-model="form15Info.filingParties">
+                        <b-form-checkbox
+                            :value="applyingparty"
+                            v-for="applyingparty,inx in partyNames"
+                            :key="'appling-party-'+inx">
+                                {{applyingparty.name}}
+                        </b-form-checkbox>
+                    </b-form-checkbox-group>                    
+                </b-col>
+            </b-row> 
+
+
+<!-- <orders> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    What orders are you asking to be made?                                
+                </b-col>
+                <b-col class="ml-1 mt-2">   
+                    <b-form-textarea
+                        max-rows="8"                        
+                        :state="state.orders"              
+                        v-model="form15Info.orders">                       
+                    </b-form-textarea> 
+                </b-col>
+            </b-row> 
+
+<!-- <additional orders> -->
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Are there any additional orders you are seeking?                                
+                </b-col>
+                <b-col class="ml-1 mt-2">   
+                    <b-form-textarea
+                        max-rows="8"                        
+                        :state="state.additionalOrders"              
+                        v-model="form15Info.additionalOrders">                       
+                    </b-form-textarea> 
                 </b-col>
             </b-row> 
 
@@ -221,6 +254,12 @@
                                 </b-col>
                             </b-row>                        
                         </div>
+                        <span
+                            v-if="(state.signingParties != null)" 
+                            style="font-size: 0.75rem;" 
+                            class="bg-white text-danger"><b-icon-exclamation-circle/>
+                            Specify at least one respondent and one appellant.
+                        </span>
 
                     </b-form-checkbox-group> 
                 </b-col>
@@ -341,7 +380,9 @@ export default class Form15StyleOfProceeding extends Vue {
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
-        seekingRemoved: null,
+        filingParties: null,
+        orders: null,
+        additionalOrders: null,
         signingParties: null       
     }    
 
@@ -359,12 +400,11 @@ export default class Form15StyleOfProceeding extends Vue {
 
             const form15Data = this.form15Info;            
             form15Data.version = this.$store.state.Application.version;
-            form15Data.seekingRemoved = [];
+            form15Data.filingParties = [];
             form15Data.signingParties = []; 
             form15Data.appellants = this.partiesJson.appellants
             form15Data.respondents = this.partiesJson.respondents
             form15Data.formSevenNumber = this.fileNumber; 
-            form15Data.orderDate = moment().format("YYYY-MM-DD")
             
             this.UpdateForm15Info(form15Data);           
             this.revaluateForm15Data();            
@@ -426,7 +466,9 @@ export default class Form15StyleOfProceeding extends Vue {
         this.state = {
             appellantsInfo: null,
             respondentsInfo: null,
-            seekingRemoved: null,
+            filingParties: null,
+            orders: null,
+            additionalOrders: null,
             signingParties: null            
         }
         this.dataReady = true; 
@@ -436,9 +478,16 @@ export default class Form15StyleOfProceeding extends Vue {
         
         this.state.appellantsInfo = this.form15Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form15Info.respondents?.length>0? null :false;            
-        this.state.seekingRemoved = this.form15Info.seekingRemoved?.length>0? null :false;
-        this.state.signingParties = this.form15Info.signingParties?.length>0? null :false;
+        this.state.filingParties = this.form15Info.filingParties?.length>0? null :false;
+        this.state.orders = this.form15Info.orders? null :false;
+        this.state.additionalOrders = this.form15Info.additionalOrders? null :false;
+
+        const signingParties = this.form15Info.signingParties?this.form15Info.signingParties:[];
+        const signingAppellants = signingParties.filter(party=> !party.responding)
+        const signingRespondents = signingParties.filter(party=> party.responding)
         
+        this.state.signingParties = (signingAppellants.length>0 && signingRespondents.length > 0)? null :false;
+         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false)
                 return false
@@ -576,6 +625,7 @@ export default class Form15StyleOfProceeding extends Vue {
     }
 
     public somePartiesChanged(){   
+        this.form15Info.filingParties = [];
         this.form15Info.signingParties = [];    
         this.updated++;
     }    
