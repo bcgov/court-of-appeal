@@ -37,6 +37,7 @@ export interface form15DataInfoType {
     respondentNames: string;
     filingParties: form15PartiesInfoType[];
     orders: string;
+    otherOrders: boolean;
     additionalOrders: string;   
     signingParties: form15PartiesInfoType[];
     completionDate?: string;

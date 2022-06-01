@@ -205,10 +205,30 @@
                 </b-col>
             </b-row> 
 
-<!-- <additional orders> -->
+<!-- <Other Order exists?> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Are there any additional orders you are seeking?                                
+                    Are there any additional orders you are seeking?
+                </b-col>
+                <b-col class="ml-1 mt-2">
+                    <b-form-radio-group
+                        :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"                                             
+                        v-model="form15Info.otherOrders"
+                        :options="responseOptions"                
+                    ></b-form-radio-group>
+                    <span
+                        v-if="(state.otherOrders != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                        Specify whether the Justices’ made any other orders.
+                    </span>
+                </b-col>
+            </b-row>
+
+<!-- <additional orders> -->
+            <b-row v-if="form15Info.otherOrders" class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Please specify:                                                     
                 </b-col>
                 <b-col class="ml-1 mt-2">   
                     <b-form-textarea
@@ -377,11 +397,17 @@ export default class Form15StyleOfProceeding extends Vue {
         { key:'edit', label:'', thClass: 'text-white bg-court', sortable:false }        
     ]   
 
+    responseOptions = [
+        {text: 'Yes', value: true},
+        {text: 'No', value: false}
+    ]; 
+
     state = { 
         appellantsInfo: null,
         respondentsInfo: null,
         filingParties: null,
         orders: null,
+        otherOrders: null,
         additionalOrders: null,
         signingParties: null       
     }    
@@ -468,6 +494,7 @@ export default class Form15StyleOfProceeding extends Vue {
             respondentsInfo: null,
             filingParties: null,
             orders: null,
+            otherOrders: null,
             additionalOrders: null,
             signingParties: null            
         }
@@ -480,8 +507,8 @@ export default class Form15StyleOfProceeding extends Vue {
         this.state.respondentsInfo = this.form15Info.respondents?.length>0? null :false;            
         this.state.filingParties = this.form15Info.filingParties?.length>0? null :false;
         this.state.orders = this.form15Info.orders? null :false;
-        this.state.additionalOrders = this.form15Info.additionalOrders? null :false;
-
+        this.state.otherOrders = this.form15Info.otherOrders == true || this.form15Info.otherOrders ==false? null :false;
+        this.state.additionalOrders = this.form15Info.otherOrders == true && !this.form15Info.additionalOrders? false :null;
         const signingParties = this.form15Info.signingParties?this.form15Info.signingParties:[];
         const signingAppellants = signingParties.filter(party=> !party.responding)
         const signingRespondents = signingParties.filter(party=> party.responding)

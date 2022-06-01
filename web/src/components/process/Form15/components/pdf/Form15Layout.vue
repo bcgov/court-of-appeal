@@ -68,7 +68,7 @@
 
 
 <!-- <FURTHER ORDERS> -->
-        <div class="my-2 ml-5 row">
+        <div v-if="result.otherOrders" class="my-2 ml-5 row">
             <div>
                 IT IS FURTHER ORDERED that {{result.additionalOrders}}
             </div>
