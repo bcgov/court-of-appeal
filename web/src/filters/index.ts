@@ -81,6 +81,14 @@ Vue.filter('findInvalidFields',function(){
 	})
 })
 
+Vue.filter('scrollInto',function(className: string){
+	Vue.nextTick(()=>{
+		const el = document.getElementsByClassName(className)
+		if(el[0]) el[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start'});
+	})
+})
+
+
 Vue.filter('beautify-date-month-year', function(date){
 	enum MonthList {'January' = 1, 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
 	

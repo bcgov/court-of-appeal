@@ -67,7 +67,7 @@
         </div>
 
 <!-- <ORDERED> -->
-        <div class="my-2 mx-0 row">
+        <div class="mt-3 mb-2 mx-0 row">
             <div>
                 <b>IT IS ORDERED</b> that this {{result.seekingRemoved.join(', ')}} 
                 be removed from the inactive list and that the time limit for taking 
@@ -110,7 +110,7 @@
         </div>
 
 <!-- <NOTES> -->
-         <div class="my-2 ml-3 mr-0 font-italic">
+         <div class="mt-5 ml-3 mr-0 font-italic">
             <div class="mb-2 row">
                 Note: This form of order may not be used to reinstate 
                 appeals that have been dismissed as abandoned under Rule 51.

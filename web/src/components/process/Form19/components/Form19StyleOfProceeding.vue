@@ -1,16 +1,18 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem; font-weight: 700;">Style of Proceeding (Parties) in Case</p>
+                
+                <b-row class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>
 
             <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">First Appellant:
@@ -335,8 +337,10 @@ export default class Form19StyleOfProceeding extends Vue {
         this.state.authorizedName = !this.form19Info.authorizedName? false : null;       
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }    
@@ -350,10 +354,8 @@ export default class Form19StyleOfProceeding extends Vue {
             method = 'put';
             url = '/form19/forms/'+this.currentNoticeOfWithdrawalOfLawyerId;               
 
-            if (!draft && !this.checkStates()){
-               
-                return
-                
+            if (!draft && !this.checkStates()){               
+                return                
             } 
             
             const options = {

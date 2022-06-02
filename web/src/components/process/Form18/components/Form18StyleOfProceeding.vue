@@ -1,7 +1,8 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        <div>
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+        
+        <b-card class="bg-light border-0">
+            <p style="font-size: 1.25rem;font-weight: 700;">Style of Proceeding (Parties) in Case</p>
             
             <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
@@ -11,7 +12,8 @@
                 <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
-        </div>
+        </b-card>
+        
         
         <b-row style="margin-top:4rem;">
             <b-col cols="6" style="font-weight: 700;">First Appellant:
@@ -57,7 +59,7 @@
             </b-col>
             <b-col >
                 <b-form-radio-group                
-                    style="width:100%"            
+                    :class="state.changeRepresentation==false?'border border-danger is-invalid w-50':''"
                     v-model="form18Info.changeRepresentation"
                     :options="changeRepresentationOptions">
                 </b-form-radio-group>
@@ -78,7 +80,8 @@
                 </b-col>
                 <b-col>
                     <b-form-radio-group                
-                        style="width:100%" 
+                        style="width:100%"
+                        :class="state.currentRepresentation==false?'border border-danger is-invalid':''" 
                         :state="state.currentRepresentation"                                    
                         v-model="form18Info.currentRepresentation"                    
                         :options="representationOptions">
@@ -111,7 +114,8 @@
                 </b-col>
                 <b-col>
                     <b-form-radio-group                
-                        style="width:100%" 
+                        style="width:100%"
+                        :class="state.newRepresentation==false?'border border-danger is-invalid':''" 
                         :state="state.newRepresentation"
                         @change="updated++;"                                    
                         v-model="form18Info.newRepresentation"                    
@@ -160,13 +164,13 @@
             </b-col>
         </b-row> 
 
-        <b-row class="mt-5" v-if="form18Info.changeRepresentation != null && !form18Info.changeRepresentation">
+        <b-row class="mt-5" v-if="form18Info.changeRepresentation == false">
             <b-col cols="6" style="font-weight: 700;">
                 Are you self-represented?                                
             </b-col>
             <b-col >
                 <b-form-radio-group 
-                    :class="this.state.selfRepresented==false?'border w-25 border-danger':'' "               
+                    :class="this.state.selfRepresented==false?'border w-25 border-danger is-invalid':'' "               
                     @change="toggleRepresentation" 
                     v-model="form18Info.selfRepresented"
                     :options="changeRepresentationOptions"                
@@ -689,13 +693,15 @@ export default class Form18StyleOfProceeding extends Vue {
         this.state.filingParties = (this.form18Info.filingParties?.length > 0)? null: false; 
            
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
-        this.state.selfRepresented = selfRep==null && !changeRep? false :null
+        this.state.selfRepresented = this.form18Info.selfRepresented==null && !changeRep? false :null
 
         //console.log(this.state)
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }    

@@ -6,7 +6,7 @@
 
 <!-- <Appellants> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.appellantsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Appellants:">
@@ -82,7 +82,7 @@
 
 <!-- <Respondents> -->
             <b-row class="mb-2 mx-n4">   
-                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger':''">
+                <b-col cols="10" :class="state.respondentsInfo !=null?'border border-danger is-invalid':''">
                     <b-form-group
                         class="labels"                
                         label="Respondents:">
@@ -156,22 +156,24 @@
         </b-card>       
         
         <div v-if="this.form14Info.appellants && this.form14Info.appellants.length>0 && this.form14Info.respondents && this.form14Info.respondents.length>0">
-            <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem; margin:0 0 0 1rem; font-weight: 700;">Style of Proceeding (Parties) in Case</p>
 
-<!-- <BETWEEN> -->
-            <b-row class="mt-4 ml-1" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{form14Info.appellantNames}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-<!-- <AND> -->
-            <b-row class="mt-3 ml-1" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{form14Info.respondentNames}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>  
+    <!-- <BETWEEN> -->
+                <b-row class="mt-4 ml-1" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{form14Info.appellantNames}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+    <!-- <AND> -->
+                <b-row class="mt-3 ml-1" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{form14Info.respondentNames}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>  
 
 
 <!-- <seeking to have removed from the inactive list> -->
-            <b-row class="mt-4 question">
+            <b-row class="mt-5 question">
                 <b-col cols="7" class="labels">
                     What are you seeking to have removed from the inactive list?                                
                 </b-col>
@@ -440,8 +442,10 @@ export default class Form14StyleOfProceeding extends Vue {
         this.state.signingParties = this.form14Info.signingParties?.length>0? null :false;
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     } 
