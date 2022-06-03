@@ -83,7 +83,7 @@
                 </p>
 
             </b-card>
-            <b-card no-body class="border-white" v-else>
+            <b-card no-body class="border-white results-table" v-else>
                 <p>
                     Below are the results of your search, please ensure you select the correct case using 
                     the style of proceeding (names of the parties) and the date of the order that you are 
@@ -124,7 +124,7 @@
                 </b-card>
             </b-card>
 
-            <b-card no-body class="border-white">
+            <b-card no-body class="border-white results-table">
                 <p class="ml-3">
                     <span v-if="!notFound">If the order you are appealing is not listed above and you have </span>
                     <span v-else>If you have </span>information corresponding to the case, you may <b>enter 
@@ -238,6 +238,7 @@ export default class Form1CaseInformationSearch extends Vue {
             } else {
                 this.notFound = true;
             }
+            Vue.filter('scrollInto')('results-table')
                 
         },err => {
             console.error(err); 
@@ -278,6 +279,7 @@ export default class Form1CaseInformationSearch extends Vue {
                 this.UpdateSupremeCourtOrderJson(null);
                 this.noOrdersFound = true;
             }
+            Vue.filter('scrollInto')('results-table')
                 
         },err => {
             console.error(err); 
