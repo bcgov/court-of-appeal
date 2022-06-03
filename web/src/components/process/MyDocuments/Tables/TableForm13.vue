@@ -15,7 +15,7 @@
             <b-col cols="10">
                 <div 
                     style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
-                    class="p-0 text-center">
+                    class="p-0 text-center text-white">
                     Consent order to extend time to file a document (Form 13)
                 </div>
             </b-col>

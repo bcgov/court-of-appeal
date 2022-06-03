@@ -67,7 +67,7 @@
         </div>
 
 <!-- <ORDERED> -->
-        <div class="my-2 mx-0 row">
+        <div class="mt-4 mb-2 mx-0 row">
             <div>
                 <b>IT IS ORDERED</b> that the time set for {{applyingParties}} 
                  to file and serve the {{applicationType}} is extended until

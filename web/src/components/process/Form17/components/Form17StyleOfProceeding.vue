@@ -1,16 +1,18 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
-            <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
-            
-            <b-row class="mt-4" style="font-weight: 700;">
-                <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-primary">Appellant</b-col>
-            </b-row>
-            <b-row class="mt-3" style="font-weight: 700;">
-                <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
-                <b-col cols="2" class="text-info">Respondent</b-col>
-            </b-row>
+            <b-card class="bg-light border-0">
+                <p style="font-size: 1.25rem; font-weight: 700;">Style of Proceeding (Parties) in Case</p>
+                
+                <b-row class="mt-4" style="font-weight: 700;">
+                    <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-primary">Appellant</b-col>
+                </b-row>
+                <b-row class="mt-3" style="font-weight: 700;">
+                    <b-col cols="10">And: <span style="font-weight: 200;">{{respondentNames.join(', ')}}</span></b-col>
+                    <b-col cols="2" class="text-info">Respondent</b-col>
+                </b-row>
+            </b-card>
            
         </div>
 
@@ -227,8 +229,10 @@ export default class Form17StyleOfProceeding extends Vue {
         this.state.amount = !this.form17Info.amount? false : null;       
         
         for(const field of Object.keys(this.state)){
-            if(this.state[field]==false)
+            if(this.state[field]==false){
+                Vue.filter('findInvalidFields')()
                 return false
+            }
         }
         return true            
     }   

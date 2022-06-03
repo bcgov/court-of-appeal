@@ -109,7 +109,7 @@
 
         </b-card>
 
-        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white">
+        <b-card v-if="resultsReady && !searching" class="ml-2 mt-2 border-white results-table">
             
             <p v-if="notFound">
                 No such Court of Appeal document found.
@@ -346,7 +346,7 @@ export default class Form10CaseInformation extends Vue {
                 this.notFound = true;
             }
             this.searching = false;
-            
+            Vue.filter('scrollInto')('results-table')
                 
         },err => {
             console.error(err); 

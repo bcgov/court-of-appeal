@@ -2,7 +2,7 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <div>
             <b-card class="bg-light border-0">
-                <p style="font-size: 1.25rem; ">Style of Proceeding (Parties) in Case</p>
+                <p style="font-size: 1.25rem; font-weight: 700;">Style of Proceeding (Parties) in Case</p>
                 
                 <b-row class="mt-4" style="font-weight: 700;">
                     <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>

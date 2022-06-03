@@ -164,7 +164,7 @@
         <div v-if="this.form10Info.appellants && this.form10Info.appellants.length>0 && this.form10Info.respondents && this.form10Info.respondents.length>0">
             
             <b-card class="bg-light border-0">
-                <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
+                <p style="font-size: 1.25rem; margin:0 0 0 1rem;font-weight:600;">Style of Proceeding (Parties) in Case</p>
 
     <!-- <BETWEEN> -->
                 <b-row class="mt-4 ml-1" style="font-weight: 700;">

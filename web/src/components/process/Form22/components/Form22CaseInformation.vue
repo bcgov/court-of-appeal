@@ -23,7 +23,7 @@
 
             <div v-if="caseInfoExists">
 
-                <p class="mt-3 ml-5">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
+                <p style="margin:1rem 0 1rem 2rem;">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
 
                 <b-row class="mt-0 question">
                     <b-col cols="7" class="labels">
@@ -46,6 +46,7 @@
                     <b-col class="mt-2">                    
                         <b-form-input 
                             :formatter="coaFileformatter"
+                            :state="fileNumberState? null:false"
                             style="max-width:75%" 
                             v-model="searchParams.file">
                         </b-form-input>
@@ -63,7 +64,8 @@
                     </b-col>
                     <b-col class="mt-2">                    
                         <b-form-radio-group                    
-                            style="max-width:75%" 
+                            style="max-width:75%"
+                            :class="partyState==false? 'border border-danger':''" 
                             :state="partyState? null:false"
                             v-model="searchParams.searchBy"
                             :options="partyOptions"                
@@ -128,14 +130,16 @@
         </b-card>  
 
         <b-card class="border-white">
-            <p class="ml-3 mt-2">
-                If you have information corresponding to the case, you may enter 
-                the information manually:
+            <p class="ml-2 mt-2">
+                If you have information corresponding to the case, you may <b>enter 
+                the information manually:</b>
                 <b-button 
-                    class="bg-success mt-2"
+                    variant="outline-success"
+                    class="mt-2"
                     style="display: block; float: right; height: 50px; opacity:1;"            
                     @click="navigateToForm22()">
-                    Continue to Application For Order that No Fees are Payable
+                    Manually enter information to file Application For Order that No Fees are Payable
+                    <b-icon-pencil-square />
                 </b-button> 
             </p>
         </b-card>            

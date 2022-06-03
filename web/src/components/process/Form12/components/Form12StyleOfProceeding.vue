@@ -174,7 +174,7 @@
             </b-card>
 
 <!-- <JudgeNames> -->
-            <b-card class="mb-4 bg-white border-white text-dark"> 
+            <b-card class="mt-3 mb-4 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
                         <b-col cols="10" :class="state.judgeNames !=null?'border border-danger is-invalid':''">

@@ -164,7 +164,7 @@
         <div v-if="this.form11Info.appellants && this.form11Info.appellants.length>0 && this.form11Info.respondents && this.form11Info.respondents.length>0">
             
             <b-card class="bg-light border-0">
-                <p style="font-size: 1.25rem; margin:0 0 0 1rem;">Style of Proceeding (Parties) in Case</p>
+                <p style="font-size: 1.25rem; margin:0 0 0 1rem;font-weight:600;">Style of Proceeding (Parties) in Case</p>
 
     <!-- <BETWEEN> -->
                 <b-row class="mt-4 ml-1" style="font-weight: 700;">
@@ -179,7 +179,7 @@
             </b-card>
                
 <!-- <JudgeNames> -->
-            <b-card class="mb-4 bg-white border-white text-dark"> 
+            <b-card class="mt-3 mb-4 bg-white border-white text-dark"> 
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
                         <b-col cols="10" :class="state.judgeNames !=null?'border border-danger is-invalid':''">

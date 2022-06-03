@@ -33,12 +33,12 @@
             </b-row> 
 
             <b-row v-if="displayConsentOrderType" class="mt-2 question">
+                <b-col cols="1" />
                 <b-col cols="5" class="labels">
                     Please select one of the following options:                                
                 </b-col>
                 <b-col class="mt-2">                    
-                    <b-form-radio-group                    
-                        style="max-width:75%" 
+                    <b-form-radio-group 
                         @change="updateConsentOrderType()"
                         v-model="consentOrderType"
                         :options="consentOrderTypeOptions"                
