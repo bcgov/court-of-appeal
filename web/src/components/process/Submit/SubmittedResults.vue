@@ -69,6 +69,11 @@
         <cancel-submit-form-22 v-else-if="result=='cancel'"/>
         <error-submit-form-22 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>  
+    <div v-else-if="formType == 'MANUAL'">
+        <success-submit-manual-form :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-manual-form v-else-if="result=='cancel'"/>
+        <error-submit-manual-form :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div>
     
 </template>
 
@@ -130,6 +135,10 @@ import ErrorSubmitForm20 from "./Form20/ErrorSubmitForm20.vue";
 import CancelSubmitForm22 from "./Form22/CancelSubmitForm22.vue";
 import SuccessSubmitForm22 from "./Form22/SuccessSubmitForm22.vue";
 import ErrorSubmitForm22 from "./Form22/ErrorSubmitForm22.vue";
+
+import CancelSubmitManualForm from "./ManualForm/CancelSubmitManualForm.vue";
+import SuccessSubmitManualForm from "./ManualForm/SuccessSubmitManualForm.vue";
+import ErrorSubmitManualForm from "./ManualForm/ErrorSubmitManualForm.vue";
 import { packageInfoType } from '@/types/Information';
 
 @Component({
@@ -175,7 +184,10 @@ import { packageInfoType } from '@/types/Information';
         ErrorSubmitForm20,
         CancelSubmitForm22,
         SuccessSubmitForm22,
-        ErrorSubmitForm22
+        ErrorSubmitForm22,
+        CancelSubmitManualForm,
+        SuccessSubmitManualForm,
+        ErrorSubmitManualForm
     }
 })
 export default class SubmittedResults extends Vue {

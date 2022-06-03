@@ -14,7 +14,6 @@
                 By submitting, you will be redirected to the E-Filing Hub.
             </b-row>
 
-
             <b-card id="drop-area" @click="uploadClicked" class="mb-5">                    
                 <div style="padding:0; margin: 0 auto; width:33px;">
                     <label class="btn btn-default btnfile">
@@ -189,9 +188,6 @@ export default class SubmitForm5 extends Vue {
         { key: 'edit', thClass: 'd-none',tdClass:'align-middle'},
         { key: 'preview', thClass: 'd-none'}
     ];
-
-
-
 
     mounted() {
         this.mountedData = false; 

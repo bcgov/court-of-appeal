@@ -14,6 +14,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
+import "@/store/modules/forms/manualForm";
+const manualFormState = namespace("ManualForm");
+
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
@@ -78,7 +81,7 @@ import "@/store/modules/forms/form22";
 const form22State = namespace("Form22");
 
 import MyDocumentsTable from "@/components/process/MyDocuments/MyDocumentsTable.vue";
-
+import { manualFormsJsonDataType } from '@/types/Information/ManualForm';
 import { form1DataInfoType } from '@/types/Information/Form1';
 import { caseJsonDataType } from '@/types/Information/json';
 import { form3FormsJsonDataType } from '@/types/Information/Form3';
@@ -170,6 +173,9 @@ export default class MyDocuments extends Vue {
 
     @form22State.Action
     public UpdateForm22FormsJson!: (newForm22FormsJson: form22FormsJsonDataType[])=> void
+
+    @manualFormState.Action
+    public UpdateManualFormsJson!: (newManualFormsJson: manualFormsJsonDataType[])=> void
     
     windowHeight = 0;
     footerHeight = 0;
@@ -210,6 +216,7 @@ export default class MyDocuments extends Vue {
         calls.push(this.$http.get('/form14/forms'));
         calls.push(this.$http.get('/form13/forms'));
         calls.push(this.$http.get('/form15/forms'));
+        // calls.push(this.$http.get('/manual-form/forms'));
 
         Promise.all(calls).then(values => { 
 
@@ -236,6 +243,7 @@ export default class MyDocuments extends Vue {
             if(values[18]?.data) this.UpdateForm14FormsJson(values[18]?.data)
             if(values[19]?.data) this.UpdateForm13FormsJson(values[19]?.data)
             if(values[20]?.data) this.UpdateForm15FormsJson(values[20]?.data)
+            // if(values[21]?.data) this.UpdateManualFormsJson(values[21]?.data)
 
             this.dataLoaded = true;
         })

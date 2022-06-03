@@ -2,6 +2,7 @@ import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
 import ChecklistOrders from "@/components/process/AppealProcess/ChecklistOrders.vue";
+import FileSubmissionPage from "@/components/process/ManualFileSubmission/FileSubmissionPage.vue";
 
 import ChecklistForm1 from "@/components/process/Form1/ChecklistForm1.vue";
 import AccessForm1 from "@/components/process/Form1/AccessForm1.vue";
@@ -144,6 +145,12 @@ const routes = [
       name: "my-submissions",
       beforeEnter: authGuard,
       component: MyDocuments
+    },
+    {
+      path: "/file-submission",
+      name: "file-submission",
+      beforeEnter: authGuard,
+      component: FileSubmissionPage
     },
     {
       path: "/checklist-orders",

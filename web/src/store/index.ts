@@ -22,6 +22,7 @@ import Form18 from '@/store/modules/forms/form18';
 import Form19 from '@/store/modules/forms/form19';
 import Form20 from '@/store/modules/forms/form20';
 import Form22 from '@/store/modules/forms/form22';
+import ManualForm from '@/store/modules/forms/manualForm';
 import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex)
@@ -51,7 +52,8 @@ const store = new Vuex.Store({
 		Form18,
 		Form19,
 		Form20,
-		Form22
+		Form22,
+		ManualForm
 	}
 })
 
