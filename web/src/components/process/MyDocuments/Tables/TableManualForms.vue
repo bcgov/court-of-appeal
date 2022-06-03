@@ -22,8 +22,9 @@
             </b-col>
             <b-col  cols="2">               
                 <b-button 
-                    class="bg-light border border-success"
+                    class="bg-light border border-success mr-3"
                     size="sm"
+                    style="float: right;"
                     @click="createDocument"
                     v-b-tooltip.hover.noninteractive.v-success
                     title="create new submission">
