@@ -45,3 +45,8 @@ export interface supportingDocumentInfoType {
     file: File;
     documentType: string;
 }
+
+export interface documentTypesJsonInfoType {
+    description: string;
+    type: string;
+}

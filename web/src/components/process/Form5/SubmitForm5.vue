@@ -124,7 +124,7 @@
                         id="documentType"
                         v-model="fileType"
                         :state = "selectedDocumentTypeState?null:false">
-                        <b-form-select-option v-for="docType in fileTypes" :value="docType.type" :key="docType.type">{{docType.description}}</b-form-select-option>  
+                        <b-form-select-option v-for="docType in documentTypesJson" :value="docType.type" :key="docType.type">{{docType.description}}</b-form-select-option>  
                     </b-form-select>
                 </b-form-group> 
             </b-card>
@@ -147,12 +147,15 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import Form5ProcessHeader from "@/components/process/Form5/components/Form5ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 import { form5StatusInfoType } from '@/types/Information/Form5';
 import { packageInfoType } from '@/types/Information';
+import { documentTypesJsonInfoType } from '@/types/Common';
 
-import JsonDocumentTypes from "@/components/utils/documentTypes.json"
 
 @Component({
     components:{
@@ -171,6 +174,9 @@ export default class SubmitForm5 extends Vue {
     @form5State.Action
     public UpdateSupportingDocuments!: (newSupportingDocuments) => void
 
+    @commonState.State
+    public documentTypesJson: documentTypesJsonInfoType[]
+
     stepsCompleted = {} as form5StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
@@ -180,7 +186,7 @@ export default class SubmitForm5 extends Vue {
     supportingFile = null;
     showTypeOfDocuments = false;
     fileType = "";
-    fileTypes = []
+
     selectedDocumentTypeState = true;
     supportingDocumentFields = [
         { key: 'fileName', label: 'File Name',tdClass:'align-middle'},
@@ -190,8 +196,7 @@ export default class SubmitForm5 extends Vue {
     ];
 
     mounted() {
-        this.mountedData = false; 
-        this.fileTypes = JsonDocumentTypes;        
+        this.mountedData = false;       
         this.submitting = false;    
         this.errorMsg = ""
         this.stepsCompleted = {
@@ -210,9 +215,7 @@ export default class SubmitForm5 extends Vue {
         })
     }  
 
-    public submit() {
-
-        
+    public submit() {        
         this.errorMsg =""
         const bodyFormData = new FormData();
         const docType = []

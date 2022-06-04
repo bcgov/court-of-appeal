@@ -10,6 +10,7 @@ from csows.views import (
     FileDetailView,
     FileOrdersView,
     FilePartiesView,
+    DocumentTypesView
 )
 
 
@@ -19,6 +20,7 @@ urlpatterns = [
     path("form7s/", FormSearchView.as_view()),
 
     path("locations/",CourtLocationsView.as_view()),
+    path("document-types/", DocumentTypesView.as_view()),
     path("lookup/",LookupView.as_view()),
     path("holidays/<int:year>/",HolidaysListView.as_view()),
     path("account-info/",AccountInfoView.as_view()),

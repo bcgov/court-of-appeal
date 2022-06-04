@@ -30,13 +30,9 @@ export function GetFilingLocations() {
             const sortedLocationsInfo = _.sortBy(locationsInfo, 'name');
 
             store.dispatch('Common/UpdateLocationsInfo',sortedLocationsInfo); 
-            return true;
         }
-        else 
-            return false;
 
     },err => {
         console.error(err);
-        return false;
     });
 }

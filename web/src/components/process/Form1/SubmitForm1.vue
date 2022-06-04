@@ -138,7 +138,7 @@
                         v-model="fileType"
                         :state = "selectedDocumentTypeState?null:false">
                         <b-form-select-option 
-                            v-for="docType in fileTypes" 
+                            v-for="docType in documentTypesJson" 
                             :value="docType.type" 
                             :key="docType.type">{{docType.description}}
                         </b-form-select-option>  
@@ -162,13 +162,17 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/form1";
 const form1State = namespace("Form1");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import { packageInfoType } from '@/types/Information';
 import { form1DataInfoType, form1StatusInfoType } from '@/types/Information/Form1';
 
 import { GetForm1PdfType } from "./components/Form1PdfType";
 import Form1ProcessHeader from "@/components/process/Form1/components/Form1ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import JsonDocumentTypes from "@/components/utils/documentTypes.json";
+import { documentTypesJsonInfoType } from '@/types/Common';
+
 
 @Component({
     components:{
@@ -190,6 +194,9 @@ export default class SubmitForm1 extends Vue {
     @form1State.Action
     public UpdateSupportingDocuments!: (newSupportingDocuments) => void
 
+    @commonState.State
+    public documentTypesJson: documentTypesJsonInfoType[]
+
     stepsCompleted = {} as form1StatusInfoType;  
     mountedData = false; 
     packageInfo = {} as packageInfoType;
@@ -199,7 +206,7 @@ export default class SubmitForm1 extends Vue {
     supportingFile = null;
     showTypeOfDocuments = false;
     fileType = "";
-    fileTypes = []
+
     selectedDocumentTypeState = true;
     supportingDocumentFields = [
         { key: 'fileName', label: 'File Name',tdClass:'align-middle'},
@@ -210,7 +217,6 @@ export default class SubmitForm1 extends Vue {
 
     mounted() {
         this.mountedData = false;  
-        this.fileTypes = JsonDocumentTypes;  
         this.submitting = false;    
         this.errorMsg = ""
         this.stepsCompleted = {
