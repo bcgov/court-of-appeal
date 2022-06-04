@@ -49,6 +49,7 @@ $other:   #7a4528 !default;
 $select:  #e6d9e2 !default;
 $inactive:  #cccccc !default;
 
+$manualForm:  #dd854a;
 $form1: #f6ad7d;
 $form2: #6ce2fa;
 $form3: #5eeea1;
@@ -121,6 +122,7 @@ $theme-colors: map-merge(
     "escort":     $escort,
     "other":      $other,
     "select":     $select,
+    "manualForm": $manualForm,
     "form1":      $form1,
     "form2":      $form2,
     "form3":      $form3,
