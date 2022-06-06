@@ -142,6 +142,8 @@ import RepresentationAddressForms from "@/components/utils/RepresentationAddress
 import Orders from "@/components/utils/Orders.vue";
 import { toggleStep, toggleAllSteps} from '@/components/utils/StepsPagesFunctions';
 import {GetFilingLocations} from '@/components/utils/GetFilingLocations';
+import {GetDocumentTypes} from '@/components/utils/GetDocumentTypes'
+
 import {GetHearingLocations} from '@/components/utils/GetHearingLocations';
 
 import { caseJsonDataType, journeyJsonDataType } from '@/types/Information/json';
@@ -333,7 +335,8 @@ export default class DashboardPage extends Vue {
         this.initSteps();
         this.loadInfo(); 
         this.extractHearingLocations();
-        this.extractFilingLocations();       
+        this.extractFilingLocations(); 
+        this.extractDocumentTypes();     
     }
 
     public getCurrentState(){
@@ -418,6 +421,10 @@ export default class DashboardPage extends Vue {
       
     public extractFilingLocations() {
         GetFilingLocations();       
+    }
+
+    public extractDocumentTypes() {
+        GetDocumentTypes();       
     }
 
     public extractHearingLocations() {

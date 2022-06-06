@@ -6,3 +6,4 @@ from .file_detail_view import FileDetailView
 from .file_orders_view import FileOrdersView
 from .file_parties_view import FilePartiesView
 from .form_search_view import FormSearchView
+from .document_type_view import DocumentTypesView

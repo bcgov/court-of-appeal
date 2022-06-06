@@ -1,5 +1,5 @@
 
-import { hearingLocationsInfoType, locationsInfoType } from '@/types/Common';
+import { documentTypesJsonInfoType, hearingLocationsInfoType, locationsInfoType } from '@/types/Common';
 import { accountInfoType, lookupsInfoType } from '@/types/Information/Form1';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
@@ -11,6 +11,7 @@ class Common extends VuexModule {
     public userName = ""
     public userId = ""
     public userLocation = '';
+    public documentTypesJson = [];
 
     public userSelfRepresented = false;
 
@@ -89,6 +90,15 @@ class Common extends VuexModule {
     @Action
     public UpdateUserSelfRepresented(newUserSelfRepresented: boolean): void {
         this.context.commit('setUserSelfRepresented', newUserSelfRepresented);
+    }
+
+    @Mutation
+    public setDocumentTypesJson(documentTypesJson: documentTypesJsonInfoType[]): void {
+        this.documentTypesJson = documentTypesJson;
+    }
+    @Action
+    public UpdateDocumentTypesJson(newDocumentTypesJson: documentTypesJsonInfoType[]) {
+        this.context.commit("setDocumentTypesJson", newDocumentTypesJson);
     }
 
 }

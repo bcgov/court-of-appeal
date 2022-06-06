@@ -10,7 +10,10 @@ from .efiling_hub_caller_base import EFilingHubCallerBase
 
 class EfilingCourtsAddress(EFilingHubCallerBase):
 
-    def __init__(self):       
+    def __init__(self):
+        self.access_token = None
+        self.court_level = settings.EFILING_COURT_LEVEL
+        self.court_class = settings.EFILING_COURT_CLASS       
         EFilingHubCallerBase.__init__(self)
 
     def get_court_locations_address(self) -> {}:        
@@ -58,4 +61,13 @@ class EfilingCourtsAddress(EFilingHubCallerBase):
                 break
         return response
     
-    
+    def get_document_types(self):
+        query_string = (
+            f"?courtLevel={self.court_level}&courtClassification={self.court_class}"
+        )
+        url = f"{self.api_base_url}/documents/types{query_string}"
+        response = self._get_api(url, headers={})
+        if response.status_code == 200:
+            return response.json()
+        logger.error("Error getting document types.")
+        return None

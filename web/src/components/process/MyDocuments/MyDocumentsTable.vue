@@ -15,8 +15,8 @@
                 </b-button>            
             </b-col> 
         </b-row>
-        
-        <table-form-1 :class="enableActions?'mt-1 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-manual-forms :class="enableActions?'mt-1 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
+        <table-form-1 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-2 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>        
         <table-form-3 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
         <table-form-4 :class="enableActions?'mt-5 mx-0':'mt-1 mx-0'" :enableActions="enableActions" @reload="reload"/>
@@ -45,6 +45,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+import TableManualForms from './Tables/TableManualForms.vue'
 import TableForm1 from './Tables/TableForm1.vue'
 import TableForm2 from './Tables/TableForm2.vue'
 import TableForm3 from './Tables/TableForm3.vue'
@@ -71,6 +72,7 @@ import NewFormModal from './NewFormModal.vue'
 
 @Component({
     components:{
+        TableManualForms,
         TableForm1,
         TableForm2,
         TableForm3,
