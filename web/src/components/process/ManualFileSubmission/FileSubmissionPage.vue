@@ -97,7 +97,7 @@
            
         </b-card>
 
-        <div class="mx-4 mt-3" v-if="displayFileSearch">
+        <div class="mx-4 mt-3 scroll-into-point" v-if="displayFileSearch">
             <b-card class="mt-2 border-white" >
                 <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
 
@@ -241,12 +241,6 @@
                                 {{respondentNames}}
                             </b-col>
                         </b-row>
-                        
-                    
-
-
-                
-                    
                 </b-card> 
 
             </b-card>
@@ -256,7 +250,7 @@
             v-if="displayApplicationSubmission" 
             border-variant="white" 
             bg-variant="white" 
-            class="mt-3 bg-white mx-4">
+            class="mt-3 bg-white mx-4 scroll-into-point">
 
             <b-card style="border:1px solid #ddebed; border-radius:10px;" bg-variant="white" class="mt-4 mb-2">
 
@@ -393,7 +387,7 @@
                         id="documentType"
                         v-model="fileType"
                         :state = "selectedDocumentTypeState?null:false">
-                        <b-form-select-option v-for="docType in fileTypes" :value="docType.type" :key="docType.type">{{docType.description}}</b-form-select-option>  
+                        <b-form-select-option v-for="docType in documentTypesJson" :value="docType.type" :key="docType.type">{{docType.description}}</b-form-select-option>  
                     </b-form-select>
                 </b-form-group> 
             </b-card>
@@ -414,14 +408,17 @@ import { namespace } from "vuex-class";
 import "@/store/modules/forms/manualForm";
 const manualFormState = namespace("ManualForm");
 
+import "@/store/modules/common";
+const commonState = namespace("Common");
+
 import StepNumber from "@/components/utils/StepNumber.vue";
 import GetHelpForPdf from "./components/GetHelpForPDF.vue";
 import UploadDocumentHeader from "./components/UploadDocumentHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 
-import JsonDocumentTypes from "@/components/utils/documentTypes.json"
 import { manualFormSearchInfoType } from '@/types/Information/ManualForm';
 import { partiesDataJsonDataType } from '@/types/Information/json';
+import { documentTypesJsonInfoType } from '@/types/Common';
 
 @Component({
     components:{
@@ -435,6 +432,9 @@ export default class ChecklistOrders extends Vue {
 
     @manualFormState.State
     public currentManualFormsId!: string;
+
+    @commonState.State
+    public documentTypesJson: documentTypesJsonInfoType[]
 
     supportingDocuments = []; 
 	    
@@ -491,7 +491,7 @@ export default class ChecklistOrders extends Vue {
     selectedDocumentTypeState = true;
     selectedSupportingDocumentState = true;
     fileType = "";
-    fileTypes = [];
+
 
     supportingDocumentFields = [
         { key: 'fileName', label: 'File Name',tdClass:'align-middle'},
@@ -511,7 +511,7 @@ export default class ChecklistOrders extends Vue {
         this.newApplication = null;       
         this.rejectionResponse = null;
         this.waiveFees = null;  
-        this.fileTypes = JsonDocumentTypes;
+
         this.submitting = false;    
         this.error = "";     
         this.appellantNames = "";
@@ -603,13 +603,16 @@ export default class ChecklistOrders extends Vue {
     public updateNewApplication(){
         this.resetValues();        
         this.displayRejectionQuestion = this.newApplication != null;
+        this.displayWaiveFeesQuestion = this.rejectionResponse != null;
+        this.determineSubmissionQualification() 
         this.update++;
     }
 
     public updateRejectionQuestion(){
         this.resetValues();
         this.displayRejectionQuestion = true;       
-        this.displayWaiveFeesQuestion = this.rejectionResponse != null;        
+        this.displayWaiveFeesQuestion = this.rejectionResponse != null;
+        this.determineSubmissionQualification()        
         this.update++;
     }
 
@@ -627,6 +630,7 @@ export default class ChecklistOrders extends Vue {
                 && this.waiveFees == false){
                     this.displayFileSearch = !this.newApplication;
                     this.displayApplicationSubmission = this.newApplication;
+                    Vue.filter('scrollInto')('scroll-into-point') 
         } else {
             this.displayFileSearch = false;
             this.displayApplicationSubmission = false;
@@ -645,7 +649,8 @@ export default class ChecklistOrders extends Vue {
         for(const filetype of lastFileTypes){
         
             const tempSupportingDocs = this.supportingDocuments?.filter(doc=>{return(doc.documentType==filetype)})
-        
+            const filetypeName = this.documentTypesJson.filter(doc => doc.type==filetype)
+
             if(tempSupportingDocs.length>0){
                 const filesIndices = [];
                 const filesRotation = [];
@@ -655,7 +660,16 @@ export default class ChecklistOrders extends Vue {
                     filesRotation.push(supportingDoc['imageRotation'])
                     fileIndex++;
                 }
-                docType.push({type: tempSupportingDocs[0]['documentType'], files: filesIndices, rotations:filesRotation})
+                docType.push(
+                    {
+                        type: tempSupportingDocs[0]['documentType'],
+                        typeName: filetypeName.length>0 ? filetypeName[0].description: '',  
+                        fileName: tempSupportingDocs.map(doc => doc['fileName']),
+                        data:{appellants:[],respondents:[]},
+                        description:"Manual Submission",
+                        files: filesIndices, 
+                        rotations:filesRotation
+                    })
             }
         }
         
