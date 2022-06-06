@@ -177,28 +177,120 @@
         </b-row>
 
         <b-row v-if="showCostsInfo" class="mt-3">
-            <p class="mt-2" style="display: inline-block;">
+            <p style="display: inline-block; font-weight: 500;">
+                Assessment of Costs
+            </p>
+            <p class="mt-1" style="display: inline-block;">
                 If you were awarded costs, you may apply to the registrar for an 
                 assessment of costs by bringing an application 
                 as outlined in Rule 53 and Rule 54 of the Court of Appeal Rules.
-            </p>       
+            </p>  
 
-            <ul class="mt-1 ml-3" > 
-                <li>           
-                    <a 
-                        href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
-                        target="_blank">Application a bill of costs (Form 21)
-                    </a>    
-                </li>
-                <li class="link-button" 
-                    @click="startNewForm17Document"
-                    target="_blank">
-                    Certificate of Costs (Form 17)                
-                </li>                         
-            </ul>
+            <ol class="mt-1 ml-3 w-100" > 
+                <li>Obtain application date</li>
+                <li class="my-2">
+                    <b-row style="width: 90%;">
+                        <b-col cols="10">
+                            Prepare Notice of Application (Form 4)                                
+                        </b-col>                                
+                        <b-col cols="2" class="p-0" >
+                            <b-button                                    
+                                @click="startNewForm4Document"
+                                target="_blank"                                                                                
+                                class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                            </b-button>
+                        </b-col>
+                    </b-row>
+                </li> 
+                <li>
+                    <b-row style="width: 90%;">
+                        <b-col cols="10">
+                            <a 
+                                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                                target="_blank">
+                                Complete the Bill of Costs (Form 21)          
+                            </a>                      
+                        </b-col>                                
+                        <b-col cols="2" class="p-0">
+                            <b-button
+                                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                                target="_blank"
+                                class="form-download-button p-1 bg-white text-primary border-primary ml-5">DOC
+                            </b-button>
+                        </b-col>
+                    </b-row> 
+                </li>               
+            </ol>
+
         </b-row>
 
-        <b-row :class="showCostsInfo?'mt-3': 'mt-4'" :style="showCostsInfo?'padding-top: 0rem;':'padding-top: 0.65rem;'" >
+        <b-row v-if="showCostsInfo" class="mt-3">
+            <p style="display: inline-block; font-weight: 500;">
+                Offer to Settle Costs
+            </p>
+            <p class="mt-1" style="display: inline-block;">
+                Before the Registrar makes an assessment of costs, a party 
+                under Court of Appeal Rule 76 (hyperlink) may serve another 
+                party, in Form 16, an offer to settle the amount of a bill of costs.
+            </p>  
+
+            <ul class="mt-1 ml-3 w-100" >                 
+                <li class="my-2">
+                    <b-row style="width: 90%;">
+                        <b-col cols="10">
+                            Offer to Settle Costs (Form 16)                                
+                        </b-col>                                
+                        <b-col cols="2" class="p-0" >
+                            <b-button                                    
+                                @click="startNewForm16Document"
+                                target="_blank"                                                                                
+                                class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                            </b-button>
+                        </b-col>
+                    </b-row>
+                </li>                                      
+            </ul>           
+        </b-row>
+
+        <b-row v-if="showCostsInfo" class="mt-3">
+            <p style="display: inline-block; font-weight: 500;">
+                Certificate of Costs
+            </p>
+            <p class="mt-1" style="display: inline-block;">
+                At the conclusion of the assessment before the registrar, 
+                you may need to complete a Certificate of Costs for the 
+                registrar to issue or if the other party who must pay costs 
+                has consented to the assessed amount.
+            </p>  
+
+            <ol class="mt-1 ml-3 w-100" >
+                <li class="my-2">
+                    Prepare the form online or the .pdf version.
+                    <ul class="mt-1 ml-3" >                         
+                        <li > 
+                            <b-row style="width: 90%;">
+                                <b-col cols="10">
+                                    Certificate of Costs (Form 17)                                
+                                </b-col>                                
+                                <b-col cols="2" class="p-0" >
+                                    <b-button                                    
+                                        @click="startNewForm17Document"
+                                        target="_blank"                                                                                
+                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                    </b-button>
+                                </b-col>
+                            </b-row>      
+                        </li>                         
+                    </ul>
+
+                </li>  
+                <li class="my-2">
+                    Submit to the registrar.
+                </li>                                    
+            </ol>            
+        </b-row>
+
+        <b-row :class="showCostsInfo?'mt-1': 'mt-4'" :style="showCostsInfo?'padding-top: 0rem;':'padding-top: 0.65rem;'" >
             <b-col cols="11" class="step-title-column pl-0">
                 Directions
             </b-col> 
@@ -250,6 +342,12 @@ import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 import "@/store/modules/forms/form17";
 const form17State = namespace("Form17");
 
+import "@/store/modules/forms/form16";
+const form16State = namespace("Form16");
+
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
+
 @Component({
     components:{
         ExpandIcon
@@ -260,6 +358,12 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     @Prop({required: true})
     app!: boolean;
 
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
+
+    @form16State.Action
+    public UpdateCurrentOfferToSettleCostsId!: (newCurrentOfferToSettleCostsId: string) => void
+    
     @form17State.Action
     public UpdateCurrentCertificateOfCostsId!: (newCurrentCertificateOfCostsId: string) => void
     
@@ -303,7 +407,7 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public showCosts(show: boolean){
         if (show) {
             this.showCostsInfo = true;
-            this.$emit('adjustHeights', 3, "9rem")
+            this.$emit('adjustHeights', 3, "42rem")
         } else {
             this.showCostsInfo = false;
             this.$emit('adjustHeights', 3, "0");
@@ -334,6 +438,16 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public startNewForm17Document(){
         this.UpdateCurrentCertificateOfCostsId(null);
         this.$router.push({name: "start-form17" });
+    }
+
+    public startNewForm16Document(){
+        this.UpdateCurrentOfferToSettleCostsId(null);
+        this.$router.push({name: "start-form16" });
+    }
+
+    public startNewForm4Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form4" })
     }
 
 }
