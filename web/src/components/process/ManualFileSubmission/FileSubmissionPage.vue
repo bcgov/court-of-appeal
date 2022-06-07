@@ -417,7 +417,7 @@ import UploadDocumentHeader from "./components/UploadDocumentHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 
 import { manualFormSearchInfoType } from '@/types/Information/ManualForm';
-import { partiesDataJsonDataType } from '@/types/Information/json';
+import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
 import { documentTypesJsonInfoType } from '@/types/Common';
 
 @Component({
@@ -470,6 +470,8 @@ export default class ChecklistOrders extends Vue {
 
     appellantNames = '';
     respondentNames = '';
+    appellants: applicantJsonDataType[] = [];
+    respondents: respondentsJsonDataType[]= [];    
 
     newApplication = null;    
     rejectionResponse = null;
@@ -516,6 +518,8 @@ export default class ChecklistOrders extends Vue {
         this.error = "";     
         this.appellantNames = "";
         this.respondentNames = "";
+        this.appellants=[];
+        this.respondents=[];
         this.resetValues();
         this.searching = false;
         this.dataReady = true;  
@@ -529,7 +533,8 @@ export default class ChecklistOrders extends Vue {
     }
 
     public extractInfo(parties: partiesDataJsonDataType){
-        
+        this.appellants = parties.appellants? parties.appellants: [];
+        this.respondents = parties.respondents? parties.respondents: [];
         this.displayApplicationSubmission = true; 
         const appellants = parties.appellants.map(resp=>resp.name)
         const respondents = parties.respondents.map(resp=>resp.name)
@@ -546,6 +551,8 @@ export default class ChecklistOrders extends Vue {
         this.displayApplicationSubmission = false;
         this.appellantNames = "";
         this.respondentNames = "";
+        this.appellants=[];
+        this.respondents=[];
 
         if(!this.searchParams.file){
             this.fileNumberState = false;
@@ -596,8 +603,8 @@ export default class ChecklistOrders extends Vue {
         this.displayRejectionQuestion = false;
         this.displayWaiveFeesQuestion = false;  
         this.displayFileSearch = false;
-        this.displayApplicationSubmission = false;  
-          
+        this.displayApplicationSubmission = false;
+        this.error = "";
     }
 
     public updateNewApplication(){
@@ -635,7 +642,6 @@ export default class ChecklistOrders extends Vue {
             this.displayFileSearch = false;
             this.displayApplicationSubmission = false;
         }
-
     }
 
     public submit() {
@@ -644,7 +650,11 @@ export default class ChecklistOrders extends Vue {
         const bodyFormData = new FormData();
         const docType = []
         const lastFileTypes = this.supportingDocuments[this.supportingDocuments.length-1]?this.supportingDocuments[this.supportingDocuments.length-1].typeIndex:[]
-        
+        if (!this.supportingDocuments?.length){
+            this.error = 'Please upload your supporting documents'
+            return
+        }
+
         let fileIndex = 0;
         for(const filetype of lastFileTypes){
         
@@ -665,8 +675,6 @@ export default class ChecklistOrders extends Vue {
                         type: tempSupportingDocs[0]['documentType'],
                         typeName: filetypeName.length>0 ? filetypeName[0].description: '',  
                         fileName: tempSupportingDocs.map(doc => doc['fileName']),
-                        data:{appellants:[],respondents:[]},
-                        description:"Manual Submission",
                         files: filesIndices, 
                         rotations:filesRotation
                     })
@@ -674,10 +682,22 @@ export default class ChecklistOrders extends Vue {
         }
         
         const docTypeJson = JSON.stringify(docType);
-        bodyFormData.append('documents', docTypeJson);          
-        
+        bodyFormData.append('documents', docTypeJson); 
+
+        const body = {
+            data:{  
+                appellants: this.appellants,  
+                respondents: this.respondents, 
+                doc_type: docType,
+                formSevenNumber: null               
+            },
+            description:"Manual Submission",
+            type:"ManualSubmission"
+        }
+        bodyFormData.append('body', JSON.stringify(body));
+
         this.submitting = true;
-        const url = "/form5/efiling/"+this.currentManualFormsId+"/submit/";
+        const url = "/manual-submissions/efiling/new/submit/";
         const header = {
             responseType: "json",
             headers: {
