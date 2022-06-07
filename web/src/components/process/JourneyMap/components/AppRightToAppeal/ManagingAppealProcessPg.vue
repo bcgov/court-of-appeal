@@ -364,9 +364,6 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 
-import "@/store/modules/forms/form4";
-const form4State = namespace("Form4");
-
 import "@/store/modules/forms/form8";
 const form8State = namespace("Form8");
 
@@ -413,9 +410,6 @@ import Rule63ResponseInstructions from "./components/Rule63ResponseInstructions.
     }
 })
 export default class ManagingAppealProcessPg extends Vue {  
-
-    @form4State.Action
-    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
 
     @form8State.Action
     public UpdateCurrentNoticeOfApplicationToVaryId!: (newCurrentNoticeOfApplicationToVaryId: string) => void
@@ -749,11 +743,6 @@ export default class ManagingAppealProcessPg extends Vue {
     public startNewForm9Document(){
         this.UpdateCurrentRequisitionId(null);
         this.$router.push({name: "start-form9" })
-    }
-
-    public startNewForm4Document(){
-        this.UpdateCurrentNoticeOfApplicationId(null);
-        this.$router.push({name: "start-form4" })
     }
     
 }
