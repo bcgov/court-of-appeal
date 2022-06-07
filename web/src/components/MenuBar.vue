@@ -2,7 +2,7 @@
 	<header name="menu-bar" class="app-header">
 		<b-navbar toggleable="lg" class="navbar navbar-expand-lg navbar-dark" style="background-color: #38598a;">    
            
-			<b-navbar-nav class="my-0 mx-5">
+			<b-navbar-nav v-if="showMenuItems" class="my-0 mx-5">
                 <b-nav-item @click="resetCaseId" to="/dashboard" ><div style="display: inline-block; white-space: nowrap;">HOME</div></b-nav-item>
 				<b-nav-item @click="resetCaseId" to="/my-submissions" ><div style="display: inline-block; white-space: nowrap;">MY SUBMISSIONS</div></b-nav-item>                        
 			</b-navbar-nav>
@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue} from 'vue-property-decorator';	
-
+import { Component, Vue, Watch} from 'vue-property-decorator';	
+import { Route } from 'vue-router';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/form1";
@@ -144,6 +144,17 @@ export default class MenuBar extends Vue {
 
 	@form22State.Action
     public UpdateCurrentNoFeesPayableId!: (newCurrentNoFeesPayableId: string) => void
+
+	showMenuItems=true
+
+	@Watch('$route', { immediate: true, deep: true })
+	onUrlChange(newVal: Route) {			
+		
+		if(newVal.name=="submitted")
+			this.showMenuItems=false
+		else
+			this.showMenuItems=true		
+	}
     
 	mounted() {
 	

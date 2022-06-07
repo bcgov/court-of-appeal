@@ -20,10 +20,14 @@ class EFilingParsing:
         data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
         data = json.loads(data_dec)
         
+        file_number=''
+        if ("formSevenNumber" in data) and data["formSevenNumber"]:
+            file_number = "CA"+ data["formSevenNumber"].upper().replace("CA", "")
+
 
         converted_data = {
             "formId": case.id,
-            "fileNumber": "CA"+ data["formSevenNumber"].replace("CA", ""),
+            "fileNumber": file_number,
             "locationCode": "COA",
 
             "parties": flatten(

@@ -1,30 +1,24 @@
 <template>
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
-
-        <b-card-header header-bg-variant="light">            
-            <form-22-process-header v-bind:stepsCompleted="stepsCompleted"/>
-        </b-card-header>        
+              
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
-
-            <b-row class="ml-5 mb-4 mt-2" style="font-size: 2rem;">
-                Form Submitted
-            </b-row> 
+            <div style="float: right;">
+                <b-icon-check-circle-fill class="icon-complete mt-2" variant="success"/>
+                <span style="font-size: 2rem;" class="step-complete text-success mr-4 ml-3 mb-2">Form Submitted</span>                
+            </div>            
             
             <b-card no-body class="border-white bg-white mx-5">
                 <b-row class="mx-5 mt-4" style="font-size: 14px;">
-                    Your Application For Order That No Fees Are Payable has been submitted.  
+                    Your Application has been submitted.  
                     Please click on the CSO Package number below to retrieve a filed copy of your document. 
                 </b-row>
                 <b-row class="mx-5 mt-2" style="font-size: 14px; font-weight: 700; font-style: italic;">
                     Please note that you will be notified by the registry if a hearing is required and 
                     if your application has been granted or dismissed.
                 </b-row>
-                <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;">
-                    You do not need to serve this form on the other parties as 
-                    this is a “without notice” application. 
-                </b-row>
-                <b-row class="ml-5">
+                
+                <b-row class="mt-5 ml-5">
                     <b-col cols="3">
                         <span style="float: left; font-weight: 700">
                             Package Number:                        
@@ -98,30 +92,22 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form22ProcessHeader from "@/components/process/Form22/components/Form22ProcessHeader.vue";
 import { packageInfoType } from '@/types/Information';
-import { form22StatusInfoType } from '@/types/Information/Form22';
 
 @Component({
-    components:{
-        Form22ProcessHeader
+    components:{        
     }
 })
-export default class SuccessSubmitForm22 extends Vue {
+export default class SuccessSubmitManualForm extends Vue {
 
     @Prop({required: true})
     packageInfo!: packageInfoType;
 
-    stepsCompleted = {} as form22StatusInfoType;  
+
     mountedData = false; 
 
     mounted() {
         this.mountedData = false;
-        this.stepsCompleted = {
-            first: true,
-            second: true,
-            third: true
-        } 
         this.saveApplication(this.packageInfo);               
     }
 
@@ -132,7 +118,7 @@ export default class SuccessSubmitForm22 extends Vue {
             packageUrl: newPackageInfo.eFilingUrl 
         } 
 
-        const url = "/form22/efiling/"+newPackageInfo.fileNumber+"/submit/";
+        const url = "/manual-submissions/efiling/"+newPackageInfo.fileNumber+"/submit/";
 
         const header = {
             responseType: "json",
@@ -157,7 +143,18 @@ export default class SuccessSubmitForm22 extends Vue {
 </script>
 
 <style scoped lang="scss">
+    .step-complete {
+        font-size: 20px; 
+        font-weight: 700; 
+        display: inline-block; 
+        transform:translate(10px,-22px);
+    }
 
+    .icon-complete {
+        width: 82px;
+        height: 82px;
+        transform:translate(15px,7px);
+    }
 
 
 </style>

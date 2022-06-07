@@ -69,7 +69,7 @@
         <cancel-submit-form-22 v-else-if="result=='cancel'"/>
         <error-submit-form-22 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>  
-    <div v-else-if="formType == 'MANUAL'">
+    <div v-else-if="formType == 'MANUALSUB'">
         <success-submit-manual-form :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-manual-form v-else-if="result=='cancel'"/>
         <error-submit-manual-form :errMsg="errorMsg" v-else-if="result=='error'"/>        

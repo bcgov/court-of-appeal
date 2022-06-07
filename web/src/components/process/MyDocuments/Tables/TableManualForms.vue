@@ -187,8 +187,8 @@ export default class TableManualForms extends Vue {
     @manualFormState.State
     public manualFormsJson!: manualFormsJsonDataType[];
     
-    @manualFormState.Action
-    public UpdateCurrentManualFormsId!: (newCurrentManualFormsId: string) => void
+    // @manualFormState.Action
+    // public UpdateCurrentManualFormsId!: (newCurrentManualFormsId: string) => void
     
     allDocumentsChecked = false;
     showSelectFormToFill = false;

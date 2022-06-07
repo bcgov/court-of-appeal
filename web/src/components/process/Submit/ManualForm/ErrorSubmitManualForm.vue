@@ -1,15 +1,13 @@
 <template>
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
-        <b-card-header header-bg-variant="light">            
-            <form-22-process-header v-bind:stepsCompleted="stepsCompleted"/>
-        </b-card-header>
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
+            <div  style="float: right;">
+                <b-icon-x-circle-fill class="icon-complete mt-2" variant="danger"/>
+                <span style="font-size: 2rem;" class="step-complete text-danger mr-4 ml-4 mb-2">Error in E-Filing Submission</span>                
+            </div>
 
-            <b-row class="ml-5 mt-2 mb-4" style="font-size: 2rem;">
-                Error in E-Filing
-            </b-row>
 
             <b-card no-body class="border-white bg-white mx-4"> 
                 <b-row class="ml-5 my-3" style="font-size: 14px;">
@@ -24,13 +22,14 @@
                         </div>
                     </b-col>
                     <b-col cols="2">
-                        <b-button                         
-                            style="margin: 1rem 2rem; float: right;" 
-                            variant="success"
-                            @click="done()"
-                            >
-                            Done
+                        <div style="position: absolute; top: 45%; left:30% " >
+                            <b-button
+                                variant="success"
+                                @click="done()"
+                                >
+                                Done
                         </b-button> 
+                        </div>
                     </b-col>                           
                 </b-row>
             </b-card>
@@ -44,33 +43,39 @@
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 
-import Form22ProcessHeader from "@/components/process/Form22/components/Form22ProcessHeader.vue";
-import { form22StatusInfoType } from '@/types/Information/Form22';
 
 @Component({
     components:{
-        Form22ProcessHeader
     }
 })
-export default class ErrorSubmitForm22 extends Vue {
+export default class ErrorSubmitManualForm extends Vue {
     
     @Prop({required: true, default:" "})
     errMsg!: string;
-
-    stepsCompleted = {} as form22StatusInfoType;  
+ 
     mountedData = false;     
 
     mounted() {
         this.mountedData = false;        
-
-        this.stepsCompleted = {
-            first: true,
-            second: true,
-            third: false,
-            thirdError:true
-        }
+        this.deleteApplication()       
         this.mountedData = true;                   
-    }    
+    }
+    
+    public deleteApplication() {
+
+        const caseId = this.$route.params?.id
+        const data ={
+            data:{
+                ids:[caseId]
+            }
+        }
+
+        const url = '/manual-submissions/forms';
+        this.$http.delete(url, data)
+        .then(response => {
+        }, err => {            
+        })
+    }
 
     public done() {
         this.$router.push({name: "dashboard" }) 
@@ -82,9 +87,19 @@ export default class ErrorSubmitForm22 extends Vue {
     }
 }
 </script>
-
 <style scoped lang="scss">
 
+    .step-complete {
+        font-size: 20px; 
+        font-weight: 700; 
+        display: inline-block; 
+        transform:translate(10px,-22px);
+    }
 
+    .icon-complete {
+        width: 82px;
+        height: 82px;
+        transform:translate(15px,7px);
+    }
 
 </style>
