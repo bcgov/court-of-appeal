@@ -290,7 +290,7 @@
             </ol>            
         </b-row>
 
-        <b-row :class="showCostsInfo?'mt-1': 'mt-4'" :style="showCostsInfo?'padding-top: 0rem;':'padding-top: 0.65rem;'" >
+        <b-row :class="showCostsInfo?'mt-1': 'mt-4'" :style="showCostsInfo?'padding-top: 0.25rem;':'padding-top: 0.65rem;'" >
             <b-col cols="11" class="step-title-column pl-0">
                 Directions
             </b-col> 
@@ -407,7 +407,7 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public showCosts(show: boolean){
         if (show) {
             this.showCostsInfo = true;
-            this.$emit('adjustHeights', 3, "42rem")
+            this.$emit('adjustHeights', 3, "43rem")
         } else {
             this.showCostsInfo = false;
             this.$emit('adjustHeights', 3, "0");

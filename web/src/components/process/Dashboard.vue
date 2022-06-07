@@ -15,6 +15,12 @@
                     @click="navigateToDocumentsPage">
                     View All Submissions
                 </b-button>
+                <b-button 
+                    class="ml-5 mb-1 bg-primary outline-dark"
+                    size="sm"
+                    @click="navigateToSubmitPackagePage">
+                    Submit Court of Appeal Package
+                </b-button>
             </b-row>
         </b-card>
 
@@ -440,6 +446,10 @@ export default class DashboardPage extends Vue {
     public navigateToDocumentsPage() {
 
         this.$router.push({name: "my-submissions" }) 
+    }
+
+    public navigateToSubmitPackagePage() {
+        this.$router.push({name: "file-submission" });
     }
 
     public initSteps(){
