@@ -51,22 +51,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { namespace } from "vuex-class";
-
-import "@/store/modules/forms/form4";
-const form4State = namespace("Form4");
 import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
 
 @Component
 export default class Rule59ApplicationInstructions extends Vue {   
-
-    @form4State.Action
-    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
-        
-    public startNewForm4Document(){
-        this.UpdateCurrentNoticeOfApplicationId(null);
-        this.$router.push({name: "start-form4" });
-    }
 
     public downloadInstructions(pdf_name){
 
