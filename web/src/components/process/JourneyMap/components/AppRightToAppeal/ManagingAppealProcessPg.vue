@@ -181,7 +181,9 @@
         </b-row>
 
 <!-- Vary an Order of a Justice -->
-        <b-row :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" style="padding-top: 0.5rem;">            
+        <b-row 
+            :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" 
+            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.5rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Vary an Order of a Justice
             </b-col>   
