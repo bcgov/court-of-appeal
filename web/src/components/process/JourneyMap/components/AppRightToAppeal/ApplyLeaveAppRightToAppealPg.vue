@@ -223,7 +223,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 0.15rem;':'padding-top: 0.95rem;'">            
+        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 0;':'padding-top: 0.95rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -730,7 +730,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespNoaLeave(show: boolean){
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 3, "26rem");
+            this.$emit('adjustHeights', 3, "27rem");
         } else {
             this.showRespNoaLeaveInfo = false;
             this.$emit('adjustHeights', 3, "0");

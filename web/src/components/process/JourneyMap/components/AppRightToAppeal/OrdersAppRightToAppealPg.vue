@@ -72,7 +72,9 @@
             </p>
         </b-row>
 
-        <b-row :class="showOrderInfo?'mt-0': 'mt-4'" style="padding-top: 0.5rem;" >            
+        <b-row 
+            :class="showOrderInfo?'mt-0': 'mt-4'"
+            :style="showOrderInfo?'padding-top: 0;': 'padding-top: 0.75rem;'" >            
             <b-col cols="11" class="pl-0" style="text-align: left; font-weight: bold;">
                 What happens if a respondent(s) refuses to sign the order?
             </b-col> 

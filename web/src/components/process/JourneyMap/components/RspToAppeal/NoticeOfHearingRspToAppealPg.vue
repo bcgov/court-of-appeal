@@ -43,7 +43,7 @@
             </ol>            
         </b-row>            
         
-        <b-row :class="showReadyInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showReadyInfo?'mt-3':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Notice of Hearing
             </b-col>   
