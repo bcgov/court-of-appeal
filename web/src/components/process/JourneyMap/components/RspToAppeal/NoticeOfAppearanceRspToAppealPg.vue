@@ -30,7 +30,7 @@
                     Complete the online form below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-125">
+                            <b-row class="my-1 w-100">
                                 <b-col cols="9">
                                     <a 
                                         href="https://www.courtofappealbc.ca/respondent-guidebook/1.5-if-the-appellant-applies-for-leave-to-appeal?ct=t(sidebar-link)"

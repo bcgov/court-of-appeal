@@ -203,22 +203,23 @@
                     </b-row>
                 </li> 
                 <li>
-                    <b-row style="width: 90%;">
-                        <b-col cols="10">
+                    <b-row class="my-1 w-100">
+                        <b-col cols="8">
                             <a 
                                 href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
                                 target="_blank">
                                 Complete the Bill of Costs (Form 21)          
-                            </a>                      
-                        </b-col>                                
-                        <b-col cols="2" class="p-0">
-                            <b-button
-                                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
-                                target="_blank"
-                                class="form-download-button p-1 bg-white text-primary border-primary ml-5">DOC
-                            </b-button>
+                            </a>                                                                       
                         </b-col>
-                    </b-row> 
+                        <b-col cols="2"></b-col>                               
+                        <b-col cols="1">
+                            <b-button
+                                @click="downloadInstructions('form-21')"
+                                target="_blank"                                                                                
+                                class="p-1 bg-white text-primary border-primary online-form-button">DOC
+                            </b-button>                                    
+                        </b-col>
+                    </b-row>                    
                 </li>               
             </ol>
 
