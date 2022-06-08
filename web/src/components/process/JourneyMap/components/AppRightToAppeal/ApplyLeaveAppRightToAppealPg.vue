@@ -72,7 +72,7 @@
                         target="_blank"> registrar
                     </a>.
                 </li>
-                <li>
+                <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
                     <ul>
                         <li>
@@ -96,7 +96,7 @@
                                 </b-col>
                             </b-row>
                         </li>
-                        <li>
+                        <li class="my-2">
                             <b-row class="my-1 w-125">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Application Book for Leave                                    
@@ -119,16 +119,16 @@
                         </li>
                     </ul>                
                 </li>
-                <li>
+                <li class="mt-3">
                     File the Notice of Application and Application Book with the registry.
                 </li>
-                <li>
+                <li class="mt-2">
                     Serve one copy to each party.
                 </li>
             </ol>      
         </b-row> 
 
-        <b-row :class="showNoaLeaveInfo?'mt-3':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 0.65rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal and Stay
             </b-col> 
@@ -167,7 +167,7 @@
                         target="_blank"> registrar
                     </a>.
                 </li>
-                <li>
+                <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
                     <ul>
                          <li>
@@ -191,7 +191,7 @@
                                 </b-col>
                             </b-row>
                         </li>
-                        <li>
+                        <li class="my-2">
                             <b-row class="my-1 w-100">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Application Book for Leave to Appeal and Stay                                    
@@ -214,7 +214,7 @@
                         </li>
                     </ul>                
                 </li>
-                <li>
+                <li class="my-3">
                     File the Notice of Application and Application Book with the registry.
                 </li>
                 <li>
@@ -223,7 +223,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-4" :style="showNoaLeaveStayInfo?'padding-top: 0.15rem;':'padding-top: 0.95rem;'">            
+        <b-row class="mt-3" :style="showNoaLeaveStayInfo?'padding-top: 0;':'padding-top: 1.2rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -593,7 +593,7 @@
 
         <b-row v-if="showRespVaryOrderInfo" class="mt-4" > 
            <ol class="mt-2">
-                <li>
+                <li class="mb-3">
                     Complete the following using the Completion Instructions. 
                     Please note that you must submit the book in a pdf format.  
                     Click the document name for more information.
@@ -645,7 +645,7 @@
                 <li>
                     File the documents with the registry.
                 </li>
-                <li>
+                <li class="mt-2">
                     Serve copy of the Response book and document(s) on each party.
                 </li>
             </ol>      
@@ -710,7 +710,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeave(show: boolean){
         if (show) {
             this.showNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 1, "23rem");
+            this.$emit('adjustHeights', 1, "24.5rem");
         } else {
             this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -720,7 +720,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeaveStay(show: boolean){
         if (show) {
             this.showNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 2, "23rem");
+            this.$emit('adjustHeights', 2, "24.5rem");
         } else {
             this.showNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 2, "0");

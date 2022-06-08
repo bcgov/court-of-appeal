@@ -43,7 +43,7 @@
             </ol>            
         </b-row>            
         
-        <b-row :class="showReadyInfo?'mt-2':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showReadyInfo?'mt-3':'mt-4'" style="padding-top: 0.85rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Complete the Notice of Hearing
             </b-col>   
@@ -73,7 +73,7 @@
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-110">
+                            <b-row class="my-1 w-100">
                                 <b-col cols="9">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"

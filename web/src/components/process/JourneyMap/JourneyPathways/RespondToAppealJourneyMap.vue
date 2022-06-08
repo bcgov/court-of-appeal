@@ -475,7 +475,7 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Factum and Appeal Book"){            
             this.windowTitle = "Factum and Appeal Book";
             this.pathTypes = ["share", "info", "info", "info"];
-            this.pathHeights = ['41rem', '0', '0', '0'];
+            this.pathHeights = ['39rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){            

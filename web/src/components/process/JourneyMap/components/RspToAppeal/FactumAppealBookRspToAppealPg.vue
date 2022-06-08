@@ -44,7 +44,7 @@
 
         <h5 class="mt-4" v-if="showFactumInfo" style="display: block;">Respondent’s Factum</h5>
 
-        <b-row v-if="showFactumInfo" class="mt-4" >
+        <b-row v-if="showFactumInfo" class="mt-4 mx-0" >
 
             <ol>
                 <li>
@@ -52,7 +52,7 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">
+                                <b-col cols="9">
                                     E-Completion Instructions                                           
                                 </b-col>
                                 <b-col cols="2"></b-col>                                
@@ -67,7 +67,7 @@
                         </li>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">
+                                <b-col cols="9">
                                     Paper Completion Instructions                                                                       
                                 </b-col>
                                 <b-col cols="2"></b-col>                               
@@ -96,7 +96,7 @@
             Respondent’s Cross Appeal Factum
         </h5>
 
-        <b-row v-if="showFactumInfo" style="width: 85%;" class="mt-4" >
+        <b-row v-if="showFactumInfo" class="mt-4  mx-0" >
 
             <ol>
                 <li>
@@ -104,11 +104,11 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="8">
+                                <b-col cols="7">
                                     E-Completion Instructions                                           
                                 </b-col>
-                                <b-col cols="1"></b-col>                                
-                                <b-col cols="1">
+                                <b-col cols="2"></b-col>                                
+                                <b-col class="pr-0" cols="1">
                                     <b-button
                                         @click="downloadInstructions('e-factum')"
                                         target="_blank"                                                                                
@@ -123,7 +123,7 @@
                                     Paper Completion Instructions                                                                       
                                 </b-col>
                                 <b-col cols="1"></b-col>                               
-                                <b-col cols="1">
+                                <b-col class="pr-0" cols="1">
                                     <b-button
                                         @click="downloadInstructions('paper-factum')"
                                         target="_blank"                                                                                
@@ -144,7 +144,7 @@
             
         </b-row>
 
-        <b-row :class="showFactumInfo?'mt-3': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="showFactumInfo?'mt-2': 'mt-4'" :style="showFactumInfo?'':'padding-top: 0.85rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Were you served with an appellant’s cross appeal response?
             </b-col> 
@@ -183,11 +183,11 @@
                     Prepare your cross appeal reply in accordance with the Completion Instructions for factums.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-110">
+                            <b-row class="my-1 w-100">
                                 <b-col cols="8">
                                     E-Completion Instructions                                           
                                 </b-col>
-                                <b-col cols="2"></b-col>                                
+                                <b-col cols="3"></b-col>                                
                                 <b-col cols="1">
                                     <b-button
                                         @click="downloadInstructions('e-factum')"
@@ -198,11 +198,11 @@
                             </b-row>
                         </li>
                         <li>
-                            <b-row class="my-1 w-110">
+                            <b-row class="my-1 w-100">
                                 <b-col cols="8">
                                     Paper Completion Instructions                                                                       
                                 </b-col>
-                                <b-col cols="2"></b-col>                               
+                                <b-col cols="3"></b-col>                               
                                 <b-col cols="1">
                                     <b-button
                                         @click="downloadInstructions('paper-factum')"
@@ -294,7 +294,7 @@
                                 <b-col cols="8">
                                     E-Completion Instructions                                           
                                 </b-col>
-                                <b-col cols="2"></b-col>                                
+                                <b-col cols="3"></b-col>                                
                                 <b-col cols="1">
                                     <b-button
                                         @click="downloadInstructions('e-appeal-book')"
@@ -309,7 +309,7 @@
                                 <b-col cols="8">
                                     Paper Completion Instructions                                                                       
                                 </b-col>
-                                <b-col cols="2"></b-col>                               
+                                <b-col cols="3"></b-col>                               
                                 <b-col cols="1">
                                     <b-button
                                         @click="downloadInstructions('paper-appeal-book')"
@@ -387,7 +387,7 @@ export default class FactumAppealBookRspToAppealPg extends Vue {
     public showFactum(show: boolean){
         if (show) {
             this.showFactumInfo = true;
-            this.$emit('adjustHeights', 0, "41rem");
+            this.$emit('adjustHeights', 0, "39rem");
         } else {
             this.showFactumInfo = false;
             this.$emit('adjustHeights', 0, "0");

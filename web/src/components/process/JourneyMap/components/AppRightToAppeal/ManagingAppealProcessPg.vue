@@ -74,8 +74,7 @@
 <!-- urgent applications -->
         <b-row 
             :class="showAppIntroInfo?'':'mt-4'" 
-            style="padding-top: 0.75rem;"
-            >            
+            :style="showAppIntroInfo?'padding-top: 0.5rem;':'padding-top: 0.75rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Urgent Applications
             </b-col>   
@@ -95,7 +94,9 @@
         </b-row>        
 
 <!-- stay applications -->
-        <b-row :class="showUrgentInfo?'mt-2':'mt-3'" style="padding-top: 1rem;">            
+        <b-row 
+            :class="showUrgentInfo?'mt-2':'mt-3'"
+            :style="showUrgentInfo?'padding-top: 1rem;':'padding-top: 1rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Stay Applications when not joined with an application for leave to appeal
             </b-col>   
@@ -113,7 +114,9 @@
         </b-row> 
 
 <!--Respond to an Application  -->
-        <b-row :class="showStayApplicationsInfo?'mt-0':'mt-4'" :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 1rem;'">            
+        <b-row 
+            :class="showStayApplicationsInfo?'mt-0':'mt-4'" 
+            :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 1rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application
             </b-col>   
@@ -170,9 +173,9 @@
                 <rule-60-response-instructions/>
             </div>
 
-            <!-- <div v-if="getRespRules().includes('61')">
+            <div v-if="getRespRules().includes('61')">
                 <rule-61-response-instructions/>
-            </div> -->
+            </div>
 
             <div v-if="getRespRules().includes('63')">
                 <rule-63-response-instructions/>
@@ -181,7 +184,9 @@
         </b-row>
 
 <!-- Vary an Order of a Justice -->
-        <b-row :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" style="padding-top: 0.5rem;">            
+        <b-row 
+            :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" 
+            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.75rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Vary an Order of a Justice
             </b-col>   
@@ -197,7 +202,9 @@
         <rule-62-application-instructions v-if="showForm8Info"/>        
 
 <!-- Order that no fees are payable -->
-        <b-row :class="showForm8Info?'mt-1':'mt-4'" style="padding-top: 1rem;">            
+        <b-row 
+            :class="showForm8Info?'mt-1':'mt-4'" 
+            :style="showForm8Info?'padding-top: 1.75rem;':'padding-top: 1rem;'">             
             <b-col cols="11" class="step-title-column pl-0">
                 Order that no fees are payable
             </b-col>   
@@ -255,7 +262,9 @@
 
 
 <!-- I need to Request -->
-        <b-row :class="showForm22Info?'mt-0':'mt-3'" style="padding-top: 1rem;">            
+        <b-row 
+            :class="showForm22Info?'mt-0':'mt-3'" 
+            :style="showForm22Info?'padding-top: 1rem;':'padding-top: 1rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Request to adjourn or reset a matter
             </b-col>   
@@ -580,10 +589,10 @@ export default class ManagingAppealProcessPg extends Vue {
         if (this.getRespRules().includes('60')){
             this.respStepsLength = this.respStepsLength + 29;
         }
-
-        // if (this.getRespRules().includes('61')){
-        //     this.respStepsLength = this.respStepsLength + 29;
-        // }      
+        
+        if (this.getRespRules().includes('61')){
+            this.respStepsLength = this.respStepsLength + 28;            
+        }  
 
         if (this.getRespRules().includes('63')){
             this.respStepsLength = this.respStepsLength + 26;
