@@ -8,9 +8,13 @@
             style="font-size: 42px; font-weight: 700;">            
                 Forms Submission
             <p style="font-size: 18px; font-weight: 300;">
-                You would use this feature if when uploading a document which has not 
-                been created using the application or was previously created (i.e. 
-                orders) using the application and it needs to be submitted.
+                This service is to be used when uploading a document which has not been created using the application 
+                or was previously created (i.e., orders) using the application but required an additional step 
+                before submission.
+            </p>
+            <p style="font-size: 18px; font-weight: 300;">
+                <b>Note:</b> The current size limit for this service is 10MB, if your document exceeds 10MB please 
+                submit your document using <a href="https://justice.gov.bc.ca/cso/index.do"  target="_blank">Court Services Online</a>.
             </p>
         </b-card-header>      
 
@@ -56,7 +60,7 @@
                             by the registry please use the 
                             <a  href="https://justice.gov.bc.ca/cso/index.do"
                                 target="_blank"
-                                class= "text-white">CSO website
+                                class= "text-white mr-1">CSO website
                             </a>
                             to resubmit your documents.
                         </p> 
@@ -64,7 +68,7 @@
                 </b-col>
             </b-row> 
 
-            <b-row v-if="displayWaiveFeesQuestion" class="mb-5">
+            <b-row v-if="displayWaiveFeesQuestion && !rejectionResponse" class="mb-5">
                 <b-col cols="1">               
                     <div>
                         <step-number v-bind:stepNumber="3" v-bind:active="true" v-bind:stepStyle="stepStyle"/>                    
@@ -86,7 +90,7 @@
                             You will need to submit your documents via the 
                             <a  href="https://justice.gov.bc.ca/cso/index.do"
                                 target="_blank"
-                                class= "text-white">CSO website
+                                class= "text-white mr-1">CSO website
                             </a>
                             and attach the proper application (Form 22) or a 
                             copy of the order granting the fee to be waived.
@@ -205,10 +209,10 @@
                 </b-button>
 
             </b-card>
-
-            <b-card v-if="resultsReady && !searching" class="mt-2 border-white results-table">
                 
-                <p v-if="notFound">
+            <b-card v-if="resultsReady && !searching" class="border-white results-table">
+                
+                <p v-if="notFound" class="text-orange">
                     No such Court of Appeal document found.
                 </p>
                 <b-card 
@@ -243,11 +247,14 @@
                         </b-row>
                 </b-card> 
 
-            </b-card>
+            </b-card> 
+        </div>               
+
+        <div v-if="displayParties"  class="mt-3 py-5 bg-white mx-4 scroll-into-point" :key="partyUpdated">
+            <parties-table :formInfo="formInfo" :state="states" @partyChanged="partyUpdated++;" style="border:1px solid #ddebed; border-radius:10px;" :class="partyState==false?'border-danger is-invalid':''"/>
         </div>
 
-        <b-card 
-            v-if="displayApplicationSubmission" 
+        <b-card v-if="displayApplicationSubmission" 
             border-variant="white" 
             bg-variant="white" 
             class="mt-3 bg-white mx-4 scroll-into-point">
@@ -270,57 +277,57 @@
                 <b-card border-variant="white" body-class="mb-0 pb-0">
                     <h4 style="height: 2px; padding:0; margin:0 0 1.5rem 0;">Uploaded Documents:</h4>
                     <hr class="bg-light" style="height: 2px; padding:0; margin:0;"/> 
-                </b-card>
+                    
+                    <b-card border-variant="white" bg-variant="white" no-body v-if="!supportingDocuments.length">
+                        <span class="text-muted ml-4 mb-5">No uploaded documents.</span>
+                    </b-card>
+                    <b-card v-else no-body border-variant="white" bg-variant="white" id="supportingdocs">
+                        <b-table 
+                            :items="supportingDocuments"
+                            :fields="supportingDocumentFields"
+                            class="mx-0"
+                            borderless                        
+                            striped
+                            small 
+                            fixed>
 
-                <b-card border-variant="white" bg-variant="white" no-body v-if="!supportingDocuments.length">
-                    <span class="text-muted ml-4 mb-5">No uploaded documents.</span>
-                </b-card>
-                <b-card v-else no-body border-variant="white" bg-variant="white" id="supportingdocs">
-                    <b-table 
-                        :items="supportingDocuments"
-                        :fields="supportingDocumentFields"
-                        class="mx-0"
-                        borderless                        
-                        striped
-                        small 
-                        fixed>
+                            <template v-slot:table-colgroup>
+                                <col style="width:20rem">
+                                <col style="width:10rem">
+                                <col style="width:5rem">
+                                <col style="width:6rem">
+                            </template>
 
-                        <template v-slot:table-colgroup>
-                            <col style="width:20rem">
-                            <col style="width:10rem">
-                            <col style="width:5rem">
-                            <col style="width:6rem">
-                        </template>
-
-                        <template v-slot:cell(edit)="row">
-                            <b-button size="sm" v-b-tooltip.hover.noninteractive = "'delete file'" style="border:0px;" variant="transparent" @click="removeDocument(row.index)">
-                                <b-icon-trash-fill font-scale="1.75" variant="danger"></b-icon-trash-fill>                    
-                            </b-button>
-                        </template>
-                        <template v-slot:cell(fileName)="row">                  
-                            <span>{{row.item.fileName}}</span>
-                        </template>
-                        <template v-slot:cell(fileType)="row">                  
-                            <span>{{row.item.documentType}}</span>
-                        </template>
-                        
-                        <template v-slot:cell(preview)="data">                            
-                            <embed v-if="data.item.file.type=='application/pdf'" style="float:right" :src="data.item.image" width="100" height="120" type="application/pdf">
-                            <div style="float:right; margin-right:1rem;" v-else>
-                                <b-row>
-                                    <b-img  :style="{transform:'rotate('+data.item.imageRotation+'deg)'}" :src="data.item.image" width="100" height="100"  />
-                                </b-row>
-                                <b-row>
-                                    <b-button size="sm" v-b-tooltip.hover.noninteractive.bottom = "'rotate image'"  style="width:3rem;height:1.2rem;padding:0; margin-right:0.25rem;" variant="info" @click="data.item.imageRotation=(data.item.imageRotation+270)%360">                                        
-                                        <span class="fa fa-undo"></span>
-                                    </b-button>
-                                    <b-button size="sm" v-b-tooltip.hover.noninteractive.bottom = "'rotate image'" style="width:3rem;height:1.2rem;padding:0;" variant="info" @click="data.item.imageRotation=(data.item.imageRotation+90)%360">
-                                        <span class="fa fa-undo" style="transform:rotateY(180deg)"></span>
-                                    </b-button>                                    
-                                </b-row>
-                            </div>
-                        </template>
-                    </b-table>
+                            <template v-slot:cell(edit)="row">
+                                <b-button size="sm" v-b-tooltip.hover.noninteractive = "'delete file'" style="border:0px;" variant="transparent" @click="removeDocument(row.index)">
+                                    <b-icon-trash-fill font-scale="1.75" variant="danger"></b-icon-trash-fill>                    
+                                </b-button>
+                            </template>
+                            <template v-slot:cell(fileName)="row">                  
+                                <span>{{row.item.fileName}}</span>
+                            </template>
+                            <template v-slot:cell(fileType)="row">                  
+                                <span>{{row.item.documentType}}</span>
+                            </template>
+                            
+                            <template v-slot:cell(preview)="data">                            
+                                <embed v-if="data.item.file.type=='application/pdf'" style="float:right" :src="data.item.image" width="100" height="120" type="application/pdf">
+                                <div style="float:right; margin-right:1rem;" v-else>
+                                    <b-row>
+                                        <b-img  :style="{transform:'rotate('+data.item.imageRotation+'deg)'}" :src="data.item.image" width="100" height="100"  />
+                                    </b-row>
+                                    <b-row>
+                                        <b-button size="sm" v-b-tooltip.hover.noninteractive.bottom = "'rotate image'"  style="width:3rem;height:1.2rem;padding:0; margin-right:0.25rem;" variant="info" @click="data.item.imageRotation=(data.item.imageRotation+270)%360">                                        
+                                            <span class="fa fa-undo"></span>
+                                        </b-button>
+                                        <b-button size="sm" v-b-tooltip.hover.noninteractive.bottom = "'rotate image'" style="width:3rem;height:1.2rem;padding:0;" variant="info" @click="data.item.imageRotation=(data.item.imageRotation+90)%360">
+                                            <span class="fa fa-undo" style="transform:rotateY(180deg)"></span>
+                                        </b-button>                                    
+                                    </b-row>
+                                </div>
+                            </template>
+                        </b-table>
+                    </b-card>
                 </b-card>
 
             </b-card>           
@@ -402,7 +409,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import "@/store/modules/forms/manualForm";
@@ -416,16 +423,18 @@ import GetHelpForPdf from "./components/GetHelpForPDF.vue";
 import UploadDocumentHeader from "./components/UploadDocumentHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 
-import { manualFormSearchInfoType } from '@/types/Information/ManualForm';
-import { applicantJsonDataType, partiesDataJsonDataType, respondentsJsonDataType } from '@/types/Information/json';
+import { manualFormSearchInfoType, partiesFormInfoType, partiesStateInfoType } from '@/types/Information/ManualForm';
+import { partiesDataJsonDataType } from '@/types/Information/json';
 import { documentTypesJsonInfoType } from '@/types/Common';
+import PartiesTable from './PartiesTable.vue';
 
 @Component({
     components:{
         StepNumber,
         GetHelpForPdf,        
         UploadDocumentHeader,
-        Spinner            
+        Spinner,
+        PartiesTable            
     }
 })
 export default class ChecklistOrders extends Vue { 
@@ -470,9 +479,8 @@ export default class ChecklistOrders extends Vue {
 
     appellantNames = '';
     respondentNames = '';
-    appellants: applicantJsonDataType[] = [];
-    respondents: respondentsJsonDataType[]= [];    
-
+    formInfo = {} as partiesFormInfoType;
+    states = {appellants:null, respondents:null, interveners: null} as partiesStateInfoType;
     newApplication = null;    
     rejectionResponse = null;
     waiveFees = null;
@@ -481,8 +489,11 @@ export default class ChecklistOrders extends Vue {
     displayWaiveFeesQuestion = false;    
     displayFileSearch = false;
     displayApplicationSubmission = false;
+    displayParties = false;
+    partyState=null
 
     update = 0;
+    partyUpdated = 0;
 
     error = "";
     showGetHelpForPDF = false;
@@ -492,8 +503,7 @@ export default class ChecklistOrders extends Vue {
     supportingFile = null;
     selectedDocumentTypeState = true;
     selectedSupportingDocumentState = true;
-    fileType = "";
-
+    fileType = "";    
 
     supportingDocumentFields = [
         { key: 'fileName', label: 'File Name',tdClass:'align-middle'},
@@ -504,6 +514,18 @@ export default class ChecklistOrders extends Vue {
        
     showTypeOfDocuments = false;
     submitEnable = true;
+
+    @Watch('displayApplicationSubmission')
+    public addDropListeners(){ 
+        if(this.displayApplicationSubmission == true) 
+            Vue.nextTick(()=>{      
+                const dropArea = document.getElementById('drop-area');
+                dropArea.addEventListener('drop', this.handleFileDrop, false);
+                dropArea.addEventListener('dragenter', this.dragPreventDefaults, false);
+                dropArea.addEventListener('dragleave', this.dragPreventDefaults, false);
+                dropArea.addEventListener('dragover', this.dragPreventDefaults, false);
+            })             
+    }
     
     mounted(){
         this.dataReady = false;  
@@ -513,28 +535,22 @@ export default class ChecklistOrders extends Vue {
         this.newApplication = null;       
         this.rejectionResponse = null;
         this.waiveFees = null;  
-
-        this.submitting = false;    
+        this.formInfo.appellants = []
+        this.formInfo.respondents =[]
+        this.formInfo.interveners =[]
+        this.submitting = false;
+        this.partyState=null
         this.error = "";     
         this.appellantNames = "";
         this.respondentNames = "";
-        this.appellants=[];
-        this.respondents=[];
         this.resetValues();
         this.searching = false;
-        this.dataReady = true;  
-        Vue.nextTick(()=>{
-            const dropArea = document.getElementById('drop-area');
-            dropArea.addEventListener('drop', this.handleFileDrop, false);
-            dropArea.addEventListener('dragenter', this.dragPreventDefaults, false);
-            dropArea.addEventListener('dragleave', this.dragPreventDefaults, false);
-            dropArea.addEventListener('dragover', this.dragPreventDefaults, false);     
-        })
+        this.dataReady = true; 
     }
 
     public extractInfo(parties: partiesDataJsonDataType){
-        this.appellants = parties.appellants? parties.appellants: [];
-        this.respondents = parties.respondents? parties.respondents: [];
+        this.formInfo.appellants = parties.appellants? parties.appellants: [];
+        this.formInfo.respondents = parties.respondents? parties.respondents: [];
         this.displayApplicationSubmission = true; 
         const appellants = parties.appellants.map(resp=>resp.name)
         const respondents = parties.respondents.map(resp=>resp.name)
@@ -551,8 +567,9 @@ export default class ChecklistOrders extends Vue {
         this.displayApplicationSubmission = false;
         this.appellantNames = "";
         this.respondentNames = "";
-        this.appellants=[];
-        this.respondents=[];
+        this.formInfo.appellants = []
+        this.formInfo.respondents =[]
+        this.formInfo.interveners =[]
 
         if(!this.searchParams.file){
             this.fileNumberState = false;
@@ -605,10 +622,15 @@ export default class ChecklistOrders extends Vue {
         this.displayFileSearch = false;
         this.displayApplicationSubmission = false;
         this.error = "";
+        this.searchParams = {} as manualFormSearchInfoType
+        this.resultsReady = false;
+        this.notFound = false;
+        this.displayParties = false;
+        this.partyState=null;
     }
 
     public updateNewApplication(){
-        this.resetValues();        
+        this.resetValues();                
         this.displayRejectionQuestion = this.newApplication != null;
         this.displayWaiveFeesQuestion = this.rejectionResponse != null;
         this.determineSubmissionQualification() 
@@ -633,14 +655,15 @@ export default class ChecklistOrders extends Vue {
 
     public determineSubmissionQualification(){
 
-        if (this.newApplication != null && this.rejectionResponse == false 
-                && this.waiveFees == false){
-                    this.displayFileSearch = !this.newApplication;
-                    this.displayApplicationSubmission = this.newApplication;
-                    Vue.filter('scrollInto')('scroll-into-point') 
+        if (this.newApplication != null && this.rejectionResponse == false && this.waiveFees == false){
+            this.displayFileSearch = !this.newApplication;
+            Vue.nextTick(()=>this.displayApplicationSubmission = this.newApplication);
+            this.displayParties = this.newApplication;
+            Vue.filter('scrollInto')('scroll-into-point') 
         } else {
             this.displayFileSearch = false;
             this.displayApplicationSubmission = false;
+            this.displayParties = false;
         }
     }
 
@@ -649,11 +672,21 @@ export default class ChecklistOrders extends Vue {
         this.error =""
         const bodyFormData = new FormData();
         const docType = []
+
         const lastFileTypes = this.supportingDocuments[this.supportingDocuments.length-1]?this.supportingDocuments[this.supportingDocuments.length-1].typeIndex:[]
         if (!this.supportingDocuments?.length){
             this.error = 'Please upload your supporting documents'
             return
         }
+
+        if(this.formInfo.appellants.length==0 && this.formInfo.respondents.length==0 && this.formInfo.interveners.length==0){
+            this.error = 'Please add parties'
+            this.partyState=false
+            Vue.filter('scrollInto')('is-invalid')
+            return
+        }
+
+
 
         let fileIndex = 0;
         for(const filetype of lastFileTypes){
@@ -686,10 +719,11 @@ export default class ChecklistOrders extends Vue {
 
         const body = {
             data:{  
-                appellants: this.appellants,  
-                respondents: this.respondents, 
+                appellants: this.formInfo.appellants,
+                respondents: this.formInfo.respondents,
+                interveners:this.formInfo.interveners,
                 doc_type: docType,
-                formSevenNumber: null               
+                formSevenNumber: this.searchParams?.file? this.searchParams.file : null               
             },
             description:"Manual Submission",
             type:"ManualSubmission"
@@ -727,6 +761,8 @@ export default class ChecklistOrders extends Vue {
         });        
 
     }
+
+
 
     public dragPreventDefaults (e) {
         e.preventDefault()

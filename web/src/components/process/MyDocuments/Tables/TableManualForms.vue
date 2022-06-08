@@ -11,8 +11,8 @@
             {{errorMsg}}
         </b-alert>
 
-        <!-- <b-row v-if="enableActions && documentsList.length" class="bg-manualForm mb-2 py-1 mx-0"> -->
-        <b-row v-if="enableActions" class="bg-manualForm mb-2 py-1 mx-0">    
+        
+        <b-row class="bg-manualForm mb-2 py-1 mx-0">    
             <b-col cols="10">
                 <div 
                     style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
@@ -33,19 +33,7 @@
             </b-col>
         </b-row>
 
-        <!-- <b-row v-else-if="documentsList.length" class="bg-select mb-2 py-1 mx-0"> -->
-        <b-row v-else class="bg-select mb-2 py-1 mx-0">
-            <b-col cols="12">
-                <div 
-                    style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" 
-                    class="p-0 text-center text-primary">
-                    Manually Submitted Files
-                </div>
-            </b-col>
-        </b-row>
-       
 
-        <!-- <b-row v-if="documentsList.length" style="p-0"> -->
         <b-row style="p-0">
             <b-col> 
                 <b-card no-body border-variant="white" bg-variant="white" v-if="!documentsList.length">
@@ -67,35 +55,8 @@
                         small 
                         responsive="sm"
                         >
-
-                        <template v-if="enableActions" v-slot:head(select) >                                  
-                            <b-form-checkbox                            
-                                class="m-0"
-                                v-b-tooltip.hover.left
-                                title="Select All"
-                                v-model="allDocumentsChecked"
-                                @change="checkAllDocuments"                                                                       					
-                                size="sm"/>
-                        </template>
-
-                        <template v-if="enableActions" v-slot:cell(select)="data" >                                  
-                            <b-form-checkbox
-                                size="sm"
-                                class="m-0"
-                                v-b-tooltip.hover.noninteractive.v-warning
-                                :title="data.item.status=='Submitted'?'Cannot Delete submitted app':''"
-                                v-model="data.item.isChecked"
-                                @change="toggleSelectedDocuments"                                            					
-                                />
-                        </template>
-
-                        <template v-slot:cell(action)="row">
-                            <!-- <b-button v-if="row.item.status == 'Draft'" size="sm" variant="transparent" class="my-0 py-0 px-1"
-                                @click="resumeApplication(row.item)"
-                                v-b-tooltip.hover.noninteractive
-                                title="Resume Application">
-                                <b-icon-pencil-square font-scale="1.25" variant="primary"></b-icon-pencil-square>                    
-                            </b-button> -->
+                        
+                        <template v-slot:cell(action)="row">                           
                             <b-button 
                                 v-if="row.item.status == 'Submitted'" 
                                 size="sm" 
@@ -111,29 +72,34 @@
                         <template v-slot:cell(status)="row">                  
                             <span v-if="row.value == 'Submitted'" class="text-white bg-success px-1">{{row.value}}</span> 
                             <span v-if="row.value == 'Draft'" class="text-primary">{{row.value}}</span>
-
                         </template>
 
                         <template v-slot:cell(parties)="row">                  
                             <span 
                                 v-b-tooltip.hover.noninteractive
-                                :title="row.item.appNames">{{ row.item.appNames | truncate-text(10)}}
+                                :title="row.item.appNames">{{ row.item.appNames | truncate-text(20)}}
                             </span>
                             <b class="text-info"> / </b>
                             <span 
                                 v-b-tooltip.hover.noninteractive
-                                :title="row.item.resNames">{{ row.item.resNames | truncate-text(10)}}
+                                :title="row.item.resNames">{{ row.item.resNames | truncate-text(20)}}
                             </span>
                            
                         </template>
 
-                        <template v-slot:cell(description)="row">                  
-                            <ul style="list-style-type: ''; padding-inline-start: 3px; margin:0; padding:0;">
-                                <li  v-for="(desc,inx) in row.value" 
-                                    :key="inx"
-                                    v-b-tooltip.hover.noninteractive
-                                    :title="desc">
-                                    {{desc | truncate-text(20)}}
+                        <template v-slot:cell(description)="row">                             
+                            <ul style="margin:0; padding:0;">
+                                <li  v-for="(rowvalue,inx) in row.value" 
+                                    :key="'type-'+inx">                                    
+                                    {{rowvalue['typeName'] | truncate-text(40)}}
+                                    <ul style="padding-inline-start: 12px; margin:0 0 0 2rem; padding:0;">
+                                        <li  v-for="(filename,fileInx) in rowvalue['fileName']"
+                                            :key="'file-'+fileInx"
+                                            v-b-tooltip.hover.noninteractive.left
+                                            :title="filename">
+                                            {{filename| truncate-text(40)}}
+                                        </li>
+                                    </ul>
                                     </li>
                             </ul>
                         </template>
@@ -146,23 +112,6 @@
                 </b-card>                
             </b-col>
         </b-row>
-
-
-        <!-- <b-modal size="lg" v-model="confirmDelete" id="bv-modal-confirm-delete" header-class="bg-danger text-light">                    
-            <template v-slot:modal-title>
-                <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
-            </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Application For Order that No Fees are Payable </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
-            <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
-            <template v-slot:modal-footer>
-                <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>
-                <b-button variant="primary" @click="$bvModal.hide('bv-modal-confirm-delete')">Cancel</b-button>
-            </template>            
-            <template v-slot:modal-header-close>                 
-                <b-button style="height:1rem" variant="outline-warning" class="m-0 p-0 text-light closeButton" @click="$bvModal.hide('bv-modal-confirm-delete')"
-                ><div style="transform: translate(0px, -20px); ">&times;</div></b-button>
-            </template>
-        </b-modal> -->
 
     </div>
 </template>
@@ -186,69 +135,68 @@ export default class TableManualForms extends Vue {
     
     @manualFormState.State
     public manualFormsJson!: manualFormsJsonDataType[];
-    
-    // @manualFormState.Action
-    // public UpdateCurrentManualFormsId!: (newCurrentManualFormsId: string) => void
-    
+        
     allDocumentsChecked = false;
     showSelectFormToFill = false;
     
     documentsList: documentInfoType[] = [];
   
-    documentsFields = [
-        {
-            key:'select',          
-            label:'',                  
-            thClass: 'border-dark border-bottom',            
-            sortable:false            
-        },       
+    documentsFields = [            
         {
             key: "fileNumber",
             label: "App #",
             sortable: true,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "description",
             label: "Document Description",
             sortable: false,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "caseNumber",
             label: "File #",
             sortable: false,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "parties",
             label: "Parties",
             sortable: false,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },          
         {
             key: "status",
             label: "Status",
             sortable: true,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "modifiedDate",
             label: "Last Updated",
             sortable: true,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "packageNum",
             label: "eFiling #",
             sortable: true,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         },
         {
             key: "action",
             label: "Action",
             sortable: false,
             thClass: 'border-dark border-bottom',
+            tdClass:'align-middle'
         }
     ];   
 
@@ -284,7 +232,7 @@ export default class TableManualForms extends Vue {
             doc.status = docJson.archive? "Archived":docJson.status;
             doc.modifiedDate = docJson.modified;
             doc.pdf_types = docJson.pdf_types;
-            doc.description = [docJson.description];
+            doc.description = docJson.data.doc_type;
             doc.packageUrl = docJson.packageUrl;
             doc.packageNum = docJson.packageNumber;
 

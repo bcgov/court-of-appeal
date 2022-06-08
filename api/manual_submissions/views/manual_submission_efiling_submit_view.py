@@ -1,7 +1,7 @@
 import logging
 import json
 import uuid
-
+from datetime import timedelta
 
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.utils import timezone
@@ -40,7 +40,7 @@ class ManualSubmissionEFilingSubmitView(generics.GenericAPIView):
             return
 
 
-    def delete_extra_file(self, uid):
+    def delete_redundant_file(self, uid):
         
         manual_submission_query = ManualSubmission.objects.filter(
             user_id = uid,
@@ -48,8 +48,17 @@ class ManualSubmissionEFilingSubmitView(generics.GenericAPIView):
             package_number = None, 
             package_url = None )
         
-        manual_submission_query.delete()        
-        
+        manual_submission_query.delete()
+
+        thinkoverdate = timezone.now()+ timedelta(days=-1)        
+        manual_submission_query = ManualSubmission.objects.filter(
+            user_id = uid,
+            package_number = None,
+            package_url = None,
+            created_date__lte=thinkoverdate
+        )
+        manual_submission_query.delete()
+
 
     def put(self, request, manual_submission_id):
         uid = request.user.id
@@ -77,13 +86,10 @@ class ManualSubmissionEFilingSubmitView(generics.GenericAPIView):
         documents_string = request.POST.get("documents")
         attachment_files = request.FILES.getlist("files")
         data_body = json.loads(request.POST.get("body"))
-        
-        # print(data_body["data"])
 
-        # self.delete_extra_file(uid)
+        self.delete_redundant_file(uid)
         created_manual_submission = modify_form(None, data_body, uid)
         manual_submission_id = created_manual_submission.get('file_id')
-        # print(manual_submission_id)
 
         manual_submission = self.get_manual_submission_for_user(manual_submission_id, uid)        
         if not manual_submission:
@@ -111,14 +117,10 @@ class ManualSubmissionEFilingSubmitView(generics.GenericAPIView):
         )
         del attachment_files
 
-       
-        # print(outgoing_documents)
 
         data_for_efiling = self.efiling_parsing.convert_data_for_efiling(
             request, manual_submission, outgoing_documents, "MANUALSUB"
         )
-
-        # print(data_for_efiling)
         
         # EFiling upload document.
         transaction_id = str(uuid.uuid4())

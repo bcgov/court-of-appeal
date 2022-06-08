@@ -19,6 +19,9 @@ class EFilingParsing:
 
         data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
         data = json.loads(data_dec)
+        if not "interveners" in data :
+            data["interveners"]=[]
+
         
         file_number=''
         if ("formSevenNumber" in data) and data["formSevenNumber"]:
@@ -52,6 +55,16 @@ class EFilingParsing:
                         }
                         for respondent in data["respondents"] if ("firstName" in respondent and "lastName" in respondent)
                     ],
+                    [
+                        {
+                            "partyType": "IND",
+                            "roleType": "ITV",
+                            "firstName": intervener["firstName"],
+                            "middleName": "",
+                            "lastName": intervener["lastName"],
+                        }
+                        for intervener in data["interveners"] if ("firstName" in intervener and "lastName" in intervener)
+                    ],
                 ]
             ),
 
@@ -61,9 +74,9 @@ class EFilingParsing:
                         {
                             "partyType": "ORG",
                             "roleType": "APL",
-                            "name": applicant["name"],                            
+                            "name": applicant["organization"],                            
                         }
-                        for applicant in data["appellants"] if ("organization" in applicant)
+                        for applicant in data["appellants"] if ("organization" in applicant and applicant["organization"])
                     ],
                     [
                         {
@@ -71,7 +84,15 @@ class EFilingParsing:
                             "roleType": "RES",
                             "name": respondent["organization"],                            
                         }
-                        for respondent in data["respondents"] if ("organization" in respondent)
+                        for respondent in data["respondents"] if ("organization" in respondent and respondent["organization"])
+                    ],
+                    [
+                        {
+                            "partyType": "ORG",
+                            "roleType": "ITV",
+                            "name": intervener["organization"],                            
+                        }
+                        for intervener in data["interveners"] if ("organization" in intervener and intervener["organization"])
                     ],                                     
                 ]
             ),
@@ -88,6 +109,8 @@ class EFilingParsing:
             ),
         }
         #form2 APP , form5 NHA
+        # print("__________________________")
+        # print(converted_data)
         return converted_data
 
         

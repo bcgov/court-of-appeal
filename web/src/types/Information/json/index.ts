@@ -69,6 +69,48 @@ export interface respondentsJsonDataType {
     responding?: boolean;
 }
 
+export interface intervenersJsonDataType {
+    name: string;
+    firstName?: string;
+    lastName?: string;
+    organization?: string;
+    solicitor: solicitorJsonDataType;
+    partyId: number;
+    id?: number;
+    responding?: boolean;
+    intervener?: boolean;
+}
+
+export interface partyJsonDataType {
+    name: string;
+    firstName?: string;
+    lastName?: string;
+    organization?: string;
+    solicitor: solicitorJsonDataType;
+    partyId: number;
+    id?: number;
+    type?: string;
+    title?: string;
+    responding?: boolean;
+    intervener?: boolean;
+    isOrganization?: boolean;
+}
+
+export interface partiesStateJsonDataType {
+    name?: boolean|null;
+    firstName?: boolean|null;
+    lastName?: boolean|null;
+    organization?: boolean|null;
+    solicitor?: boolean|null;
+    partyId?: boolean|null;
+    id?: boolean|null;
+    type?: boolean|null;
+    title?: boolean|null;
+    responding?: boolean|null;
+    intervener?: boolean|null;
+    isOrganization?: boolean|null;
+}
+
 export interface serviceInformationJsonDataType {
     province: string;
     country: string;

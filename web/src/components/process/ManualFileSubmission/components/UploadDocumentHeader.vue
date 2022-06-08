@@ -12,19 +12,19 @@
             to submit the document.
         </p> 
         <p class="font-italic">
-            Note: Instructions for submitting larger size files can be found here – 
+            <b>Note:</b> Instructions for submitting larger size files can be found here – 
             <a  href="https://justice.gov.bc.ca/pdfs/cso/InstructionsforLargeDocumentSubmissionviaCSOforCourtofAppeal_apr_2021.pdf"
                 target="_blank">Large document upload
             </a>
             .
         </p>
-        <ul class="mt-4">            
+        <ul class="mt-4 ml-n3">            
             <div class="my-3 text-primary" @click="showGetHelpScanning = true" style="cursor: pointer;border-bottom:1px solid; width:15.7rem;">
                 <div style='font-size:1.2rem;' class="fa fa-question-circle" /> Get help scanning documents 
             </div>
         </ul>
         
-        <ul class="mt-3">
+        <ul class="mt-5">
             <li>Upload the documents below:</li>
         </ul>
 
