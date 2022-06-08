@@ -43,7 +43,7 @@ class EFilingParsing:
                             "middleName": "",
                             "lastName": applicant["lastName"],
                         }
-                        for applicant in data["appellants"] if ("firstName" in applicant and "lastName" in applicant)
+                        for applicant in data["appellants"] if ("firstName" in applicant and "lastName" in applicant and applicant["firstName"] and applicant["lastName"])
                     ],
                     [
                         {
@@ -53,7 +53,7 @@ class EFilingParsing:
                             "middleName": "",
                             "lastName": respondent["lastName"],
                         }
-                        for respondent in data["respondents"] if ("firstName" in respondent and "lastName" in respondent)
+                        for respondent in data["respondents"] if ("firstName" in respondent and "lastName" in respondent and respondent["firstName"] and respondent["lastName"])
                     ],
                     [
                         {
