@@ -295,7 +295,8 @@ export default class PartiesTable extends Vue {
             }
         }        
         this.showPartyWindow = false;        
-        this.updated++;
+        this.$emit('partyChanged')
+
     }
 }
 </script>

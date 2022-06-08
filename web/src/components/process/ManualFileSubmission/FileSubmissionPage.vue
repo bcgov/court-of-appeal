@@ -251,7 +251,7 @@
         </div>               
 
         <div v-if="displayParties"  class="mt-3 py-5 bg-white mx-4 scroll-into-point" :key="partyUpdated">
-            <parties-table :formInfo="formInfo" :state="states" @partyChanged="partyUpdated++;" style="border:1px solid #ddebed; border-radius:10px;" :class="partyState==false?'border-danger is-invalid':''"/>
+            <parties-table :formInfo="formInfo" :state="states" @partyChanged="partyState=null;partyUpdated++;" style="border:1px solid #ddebed; border-radius:10px;" :class="partyState==false?'border-danger is-invalid':''"/>
         </div>
 
         <b-card v-if="displayApplicationSubmission" 
@@ -668,7 +668,7 @@ export default class ChecklistOrders extends Vue {
     }
 
     public submit() {
-        //TODO: if new application, add a check for at least one file with doc-type:  Notice of Appeal
+        
         this.error =""
         const bodyFormData = new FormData();
         const docType = []
@@ -678,15 +678,18 @@ export default class ChecklistOrders extends Vue {
             this.error = 'Please upload your supporting documents'
             return
         }
+        
+        if(this.newApplication && !lastFileTypes.includes('NAA')){
+            this.error = 'Please add the "Notice of Appeal - Court of Appeal" document as well.'
+            return
+        }
 
         if(this.formInfo.appellants.length==0 && this.formInfo.respondents.length==0 && this.formInfo.interveners.length==0){
-            this.error = 'Please add parties'
             this.partyState=false
             Vue.filter('scrollInto')('is-invalid')
             return
         }
-
-
+                        
 
         let fileIndex = 0;
         for(const filetype of lastFileTypes){
@@ -742,10 +745,11 @@ export default class ChecklistOrders extends Vue {
         
         this.$http.post(url, bodyFormData, header)
         .then(res => {
-            this.submitting = false;
+            
             if(res.data?.message=="success" && res.data?.redirectUrl){
                 const eFilingUrl = res.data?.redirectUrl
                 location.replace(eFilingUrl);
+                //this.submitting = false;
             }
             
         }, err => {
@@ -824,7 +828,7 @@ export default class ChecklistOrders extends Vue {
                 supportingdocuments.push(newFile);
             }
 
-            
+            this.error = "";
             this.supportingFile = null;
             this.fileType = "";
             Vue.nextTick(()=>{
