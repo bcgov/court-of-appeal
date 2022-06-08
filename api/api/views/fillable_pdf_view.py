@@ -37,8 +37,9 @@ class FillablePdfView(generics.GenericAPIView):
             {"file":"Paper-Completion_Instructions_Application-Response-Books-Vary-2022-05-05-Final-draft",           "name":"paper-vary"},
             {"file":"Paper-Completion_Instructions_CONDENSED-Book-of-Authorities-2022-05-09-Final-draft",             "name":"paper-condensed-auth-book"},                        
             {"file":"Paper-Completion_Instructions_CONDENSED-Evidence-Book-2022-05-09-Final-draft",                   "name":"paper-condensed-evidence-book"},
-            {"file":"Paper-Completion_Instructions-all-Factums-Replies-draft-2022-05-03-Final-draft",                 "name":"paper-factum"}
+            {"file":"Paper-Completion_Instructions-all-Factums-Replies-draft-2022-05-03-Final-draft",                 "name":"paper-factum"},
             # {"file":"Paper-Completion_Instructions_Book-of-Authorities-2022-05-06-Final-draft",                       "name":"paper-auth-book"},
+            {"file":"CA_Form21_v7",                                                                                   "name":"form-21"}
         ]
         return [fileitem["file"] for fileitem in files if fileitem["name"]==name]
         

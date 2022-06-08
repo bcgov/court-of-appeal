@@ -1,5 +1,5 @@
 import { partyInfoType } from "../Form3";
-import { applicantJsonDataType, respondentsJsonDataType } from "../json";
+import { partyJsonDataType } from "../json";
 
 export interface manualFormsJsonDataType {
     id: number;
@@ -12,7 +12,13 @@ export interface manualFormsJsonDataType {
     packageNumber?: string;
     pdf_types: string;
     data: manualFormDataInfoType;
-    description: string;
+    description: string;    
+}
+
+export interface document_typeInfoType{
+    fileName: string[];
+    type: string;
+    typeName: string;
 }
 
 export interface manualFormStatusInfoType {
@@ -32,8 +38,8 @@ export interface manualFormSearchInfoType {
 
 export interface manualFormDataInfoType {
     formSevenNumber?:string;
-    appellants: applicantJsonDataType[];
-    respondents: respondentsJsonDataType[];
+    appellants: partyJsonDataType[];
+    respondents: partyJsonDataType[];
     appellantNames: string;
     respondentNames: string;
     requiresManualEntry: boolean;
@@ -50,4 +56,18 @@ export interface manualFormDataInfoType {
     finances?: string;
     completionDate?: string;
     version?: string;
+    doc_type: document_typeInfoType [];
+}
+
+
+export interface partiesFormInfoType {
+    appellants: partyJsonDataType[], 
+    respondents: partyJsonDataType[], 
+    interveners: partyJsonDataType[]
+} 
+    
+export interface partiesStateInfoType {
+    appellants:boolean|null, 
+    respondents:boolean|null, 
+    interveners: boolean|null
 }

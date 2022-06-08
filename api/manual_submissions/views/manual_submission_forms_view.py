@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
 
-from manual_submissions.manual_submissions_service.form_service import get_form, modify_form
+from manual_submissions.manual_submissions_service.form_service import get_form
 from manual_submissions.models import ManualSubmission
 
 
@@ -27,7 +27,7 @@ class ManualSubmissionFormsView(APIView):
         if not uid:
             return HttpResponseForbidden("Missing user ID")
         
-        forms = get_form(pk, uid, True)
+        forms = get_form(pk, uid, submitted=True)
         return Response(forms)
 
 
