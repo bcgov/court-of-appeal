@@ -64,16 +64,16 @@ class Form14ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for consent_remove_inactive_appealId in consent_remove_inactive_appeal_ids:
-                consent_remove_inactive_appeal = self.get_consent_remove_inactive_appeal_for_user(consent_remove_inactive_appealId, uid)
+            for each_consent_remove_inactive_appeal_id in consent_remove_inactive_appeal_ids:
+                consent_remove_inactive_appeal = self.get_consent_remove_inactive_appeal_for_user(each_consent_remove_inactive_appeal_id, uid)
                 if not consent_remove_inactive_appeal:
                     continue
 
-                prepared_pdf = self.get_pdf_by_consent_remove_inactive_appeal_id_and_type(consent_remove_inactive_appealId, pdf_type)
+                prepared_pdf = self.get_pdf_by_consent_remove_inactive_appeal_id_and_type(each_consent_remove_inactive_appeal_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":consent_remove_inactive_appealId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_consent_remove_inactive_appeal_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

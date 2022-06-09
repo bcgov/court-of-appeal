@@ -168,7 +168,7 @@
                 <b-col class="p-0">            
                     
                     <b-form-input    
-                        style="width: 6rem;"                    
+                        style="width: 8rem;"                    
                         v-model="form5Info.numberOfDaysApp"                            
                         size="md"
                         type="text"
@@ -176,7 +176,7 @@
                         @paste.prevent
                         :state = "state.numberOfDaysApp"
                     ></b-form-input>
-                    
+                    <div v-if="state.numberOfDaysApp==false" style="font-size:8pt" class="mt-0 text-danger"> Numbers only </div>
                     
                 </b-col>
             </b-row>      
@@ -188,7 +188,7 @@
                 <b-col class="p-0">            
                     
                     <b-form-input    
-                        style="width: 6rem;"                    
+                        style="width: 8rem;"                    
                         v-model="form5Info.numberOfDaysResp"                            
                         size="md"
                         type="text"
@@ -196,7 +196,7 @@
                         @paste.prevent
                         :state="state.numberOfDaysRes"
                     ></b-form-input>
-                    
+                    <div v-if="state.numberOfDaysRes==false" style="font-size:8pt" class="mt-0 text-danger"> Numbers only </div>
                 </b-col>
             </b-row>
 

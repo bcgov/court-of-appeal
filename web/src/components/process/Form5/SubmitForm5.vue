@@ -254,11 +254,12 @@ export default class SubmitForm5 extends Vue {
         
         this.$http.post(url, bodyFormData, header)
         .then(res => {
-            this.submitting = false;
+            // this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){
                 const eFilingUrl = res.data?.redirectUrl
                 location.replace(eFilingUrl);
-            }
+            }else
+                this.submitting = false;
             
         }, err => {
             console.log(err.response?.data?.message);

@@ -2,7 +2,7 @@
     
     <b-card v-if="dataReady" no-body class="border-light bg-light">
 
-        <b-card class="mb-4 border-white bg-white">            
+        <b-card class="mb-4 border-white bg-white" :key="updated">            
             <h2 class="ml-4 pl-2 mt-3 text-primary" >Style of Proceeding</h2>
 
             <p class="ml-4 pl-2" v-if="styleOfProceedingsInfo.appealTribunal">
@@ -17,7 +17,7 @@
 
             <b-table
                 v-if="styleOfProceedingsInfo.parties.length>0"
-                :key="updated"                 
+                                 
                 :items="styleOfProceedingsInfo.parties"
                 :fields="partiesFields"
                 :state="form1InfoStates.respondents || form1InfoStates.appellants"

@@ -64,16 +64,16 @@ class Form20ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for objection_withdrawId in objection_withdraw_ids:
-                objection_withdraw = self.get_objection_withdraw_for_user(objection_withdrawId, uid)
+            for each_objection_withdraw_id in objection_withdraw_ids:
+                objection_withdraw = self.get_objection_withdraw_for_user(each_objection_withdraw_id, uid)
                 if not objection_withdraw:
                     continue
 
-                prepared_pdf = self.get_pdf_by_objection_withdraw_id_and_type(objection_withdrawId, pdf_type)
+                prepared_pdf = self.get_pdf_by_objection_withdraw_id_and_type(each_objection_withdraw_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":objection_withdrawId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_objection_withdraw_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

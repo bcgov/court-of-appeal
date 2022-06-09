@@ -98,7 +98,7 @@ class Form15EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, consent_order_general_id):
         
-        document_type = "CNWD" # type Form15 for Efiling
+        document_type = "UNKNOWN" # type Form15 for Efiling
         uid = request.user.id
 
         consent_order_general = self.get_consent_order_general_for_user(consent_order_general_id, uid)        

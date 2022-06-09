@@ -64,16 +64,16 @@ class Form13ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for consent_extend_filing_timeId in consent_extend_filing_time_ids:
-                consent_extend_filing_time = self.get_consent_extend_filing_time_for_user(consent_extend_filing_timeId, uid)
+            for each_consent_extend_filing_time_id in consent_extend_filing_time_ids:
+                consent_extend_filing_time = self.get_consent_extend_filing_time_for_user(each_consent_extend_filing_time_id, uid)
                 if not consent_extend_filing_time:
                     continue
 
-                prepared_pdf = self.get_pdf_by_consent_extend_filing_time_id_and_type(consent_extend_filing_timeId, pdf_type)
+                prepared_pdf = self.get_pdf_by_consent_extend_filing_time_id_and_type(each_consent_extend_filing_time_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":consent_extend_filing_timeId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_consent_extend_filing_time_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

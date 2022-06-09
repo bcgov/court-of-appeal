@@ -72,7 +72,12 @@ class Form20FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            objection_withdraw_query = ObjectionWithdraw.objects.filter(id = id)
+            objection_withdraw_query = ObjectionWithdraw.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             objection_withdraw_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

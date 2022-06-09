@@ -72,7 +72,12 @@ class Form18FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            change_of_address_query = ChangeOfAddress.objects.filter(id = id)
+            change_of_address_query = ChangeOfAddress.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             change_of_address_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

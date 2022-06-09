@@ -72,7 +72,12 @@ class Form12FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            order_to_vary_order_of_justice_query = OrderToVaryOrderOfJustice.objects.filter(id = id)
+            order_to_vary_order_of_justice_query = OrderToVaryOrderOfJustice.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             order_to_vary_order_of_justice_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
