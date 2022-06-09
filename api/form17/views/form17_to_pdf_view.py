@@ -64,16 +64,16 @@ class Form17ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for certificate_of_costsId in certificate_of_costs_ids:
-                certificate_of_costs = self.get_certificate_of_costs_for_user(certificate_of_costsId, uid)
+            for each_certificate_of_costs_id in certificate_of_costs_ids:
+                certificate_of_costs = self.get_certificate_of_costs_for_user(each_certificate_of_costs_id, uid)
                 if not certificate_of_costs:
                     continue
 
-                prepared_pdf = self.get_pdf_by_certificate_of_costs_id_and_type(certificate_of_costsId, pdf_type)
+                prepared_pdf = self.get_pdf_by_certificate_of_costs_id_and_type(each_certificate_of_costs_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":certificate_of_costsId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_certificate_of_costs_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

@@ -14,7 +14,7 @@
         <b-row v-if="enableActions && documentsList.length" class="bg-form17 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div 
-                    style="font-weight:600; font-size:14pt; margin:0 0 0 14rem;" 
+                    style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
                     class="p-0 text-center">
                     Certificate of Costs (Form 17)
                 </div>

@@ -72,7 +72,12 @@ class Form1FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            notice_of_appeal_query = NoticeOfAppeal.objects.filter(id = id)
+            notice_of_appeal_query = NoticeOfAppeal.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             notice_of_appeal_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

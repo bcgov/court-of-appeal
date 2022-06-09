@@ -64,16 +64,16 @@ class Form22ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for order_nofees_payableId in order_nofees_payable_ids:
-                order_nofees_payable = self.get_order_nofees_payable_for_user(order_nofees_payableId, uid)
+            for each_order_nofees_payable_id in order_nofees_payable_ids:
+                order_nofees_payable = self.get_order_nofees_payable_for_user(each_order_nofees_payable_id, uid)
                 if not order_nofees_payable:
                     continue
 
-                prepared_pdf = self.get_pdf_by_order_nofees_payable_id_and_type(order_nofees_payableId, pdf_type)
+                prepared_pdf = self.get_pdf_by_order_nofees_payable_id_and_type(each_order_nofees_payable_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":order_nofees_payableId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_order_nofees_payable_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

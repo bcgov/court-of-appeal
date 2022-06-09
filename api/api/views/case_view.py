@@ -128,8 +128,8 @@ class CaseView(APIView):
             case.save()
             return Response("success")
         else:
-            for caseId in case_ids:
-                case = get_case_for_user(caseId, uid)
+            for each_case_id in case_ids:
+                case = get_case_for_user(each_case_id, uid)
                 if not case:
                     continue
 
@@ -156,8 +156,8 @@ class CaseView(APIView):
 
             case.delete()
         else:
-            for caseId in case_ids:
-                case = get_case_for_user(caseId, uid)
+            for each_case_id in case_ids:
+                case = get_case_for_user(each_case_id, uid)
                 if not case:
                     continue
                 

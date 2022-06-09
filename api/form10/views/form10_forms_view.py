@@ -72,7 +72,12 @@ class Form10FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            order_of_single_justice_query = OrderOfSingleJustice.objects.filter(id = id)
+            order_of_single_justice_query = OrderOfSingleJustice.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             order_of_single_justice_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

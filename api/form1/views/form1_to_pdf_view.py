@@ -64,16 +64,16 @@ class Form1ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for notice_of_appealId in notice_of_appeal_ids:
-                notice_of_appeal = self.get_notice_of_appeal_for_user(notice_of_appealId, uid)
+            for each_notice_of_appeal_id in notice_of_appeal_ids:
+                notice_of_appeal = self.get_notice_of_appeal_for_user(each_notice_of_appeal_id, uid)
                 if not notice_of_appeal:
                     continue
 
-                prepared_pdf = self.get_pdf_by_notice_of_appeal_id_and_type(notice_of_appealId, pdf_type)
+                prepared_pdf = self.get_pdf_by_notice_of_appeal_id_and_type(each_notice_of_appeal_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":notice_of_appealId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_notice_of_appeal_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

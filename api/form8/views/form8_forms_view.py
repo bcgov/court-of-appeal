@@ -72,7 +72,12 @@ class Form8FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            notice_of_application_to_vary_order_query = NoticeOfApplicationToVaryOrder.objects.filter(id = id)
+            notice_of_application_to_vary_order_query = NoticeOfApplicationToVaryOrder.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             notice_of_application_to_vary_order_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

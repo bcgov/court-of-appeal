@@ -22,7 +22,7 @@
 
                 </a>
 
-                <div class="navbar-brand navbar-text">
+                <div class="navbar-brand navbar-text" style="cursor:pointer;" @click="home()">
                     Court of Appeal Application                  
                 </div>
 
@@ -76,6 +76,12 @@ export default class NavigationTopbar extends Vue {
 
     public logout() {
         SessionManager.logout(this.$store);
+    }
+
+    public home() {
+        //console.log(this.$route.name)
+        if(this.$route.name != "dashboard")
+            this.$router.push({name: "dashboard" }) 
     }
 
 }

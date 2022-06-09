@@ -72,7 +72,12 @@ class Form17FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            certificate_of_costs_query = CertificateOfCosts.objects.filter(id = id)
+            certificate_of_costs_query = CertificateOfCosts.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             certificate_of_costs_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

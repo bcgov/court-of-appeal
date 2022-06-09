@@ -14,7 +14,7 @@
         <b-row v-if="enableActions && documentsList.length" class="bg-form18 mb-2 py-1 mx-0">
             <b-col cols="10">
                 <div 
-                    style="font-weight:600; font-size:14pt; margin:0 0 0 8rem;" 
+                    style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
                     class="p-0 text-center">
                     Notice of Change of Representation/Change of Address for Service (Form 18)
                 </div>
@@ -282,7 +282,7 @@ export default class TableForm18 extends Vue {
    
 
     mounted() {
-        console.log('form 18s')
+        // console.log('form 18s')
         this.extractDocuments();       
     }
 

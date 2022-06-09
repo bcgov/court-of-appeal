@@ -72,7 +72,12 @@ class Form14FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            consent_remove_inactive_appeal_query = ConsentRemoveInactiveAppeal.objects.filter(id = id)
+            consent_remove_inactive_appeal_query = ConsentRemoveInactiveAppeal.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             consent_remove_inactive_appeal_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

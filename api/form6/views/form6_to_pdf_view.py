@@ -64,16 +64,16 @@ class Form6ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for noticeId in notice_ids:
-                notice = self.get_notice_for_user(noticeId, uid)
+            for each_notice_id in notice_ids:
+                notice = self.get_notice_for_user(each_notice_id, uid)
                 if not notice:
                     continue
 
-                prepared_pdf = self.get_pdf_by_notice_id_and_type(noticeId, pdf_type)
+                prepared_pdf = self.get_pdf_by_notice_id_and_type(each_notice_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":noticeId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_notice_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

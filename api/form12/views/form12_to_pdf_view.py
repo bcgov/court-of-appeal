@@ -64,16 +64,16 @@ class Form12ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for order_to_vary_order_of_justiceId in order_to_vary_order_of_justice_ids:
-                order_to_vary_order_of_justice = self.get_order_to_vary_order_of_justice_for_user(order_to_vary_order_of_justiceId, uid)
+            for each_order_to_vary_order_of_justice_id in order_to_vary_order_of_justice_ids:
+                order_to_vary_order_of_justice = self.get_order_to_vary_order_of_justice_for_user(each_order_to_vary_order_of_justice_id, uid)
                 if not order_to_vary_order_of_justice:
                     continue
 
-                prepared_pdf = self.get_pdf_by_order_to_vary_order_of_justice_id_and_type(order_to_vary_order_of_justiceId, pdf_type)
+                prepared_pdf = self.get_pdf_by_order_to_vary_order_of_justice_id_and_type(each_order_to_vary_order_of_justice_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":order_to_vary_order_of_justiceId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_order_to_vary_order_of_justice_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)
