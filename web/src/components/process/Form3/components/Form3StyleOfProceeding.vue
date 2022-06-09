@@ -202,12 +202,17 @@
             </b-card>  
 
             <b-row class="mt-4 question">
-                <b-col cols="7" class="labels">
+                <b-col cols="7" class="labels ml-n4">
                     What is the court of appeal Number?
+                    <span 
+                        style="font-size: 9pt;" 
+                        class="text-secondary ml-1">(ex. CA12345)
+                    </span>
                 </b-col>
                 <b-col>
                     <b-form-input                
-                        style="width:100%"                        
+                        style="width:100%"
+                        @change="recheckStates()"                        
                         :state="state.formSevenNumber"                                                           
                         v-model="form3Info.formSevenNumber">
                     </b-form-input>
@@ -240,6 +245,7 @@
                     <b-form-radio-group                
                         :class="state.crossAppealRequired==false?'border border-danger is-invalid w-50':''"                                          
                         v-model="form3Info.crossAppealRequired"
+                        @change="recheckStates()" 
                         :options="yesNoOptions">
                     </b-form-radio-group>
                 </b-col>
@@ -252,7 +258,8 @@
                 <b-col class="ml-1">
                     <b-form-radio-group                
                         :class="state.amending==false?'border border-danger is-invalid w-50':''"
-                        :state="state.amending"                                         
+                        :state="state.amending" 
+                        @change="recheckStates()"                                        
                         v-model="form3Info.amending"
                         :options="yesNoOptions">
                     </b-form-radio-group>
@@ -271,7 +278,8 @@
                 </b-col>
                 <b-col>
                     <b-form-input                
-                        style="width:100%"                        
+                        style="width:100%"
+                        @change="recheckStates()"                        
                         :state="state.judgeName"                                                           
                         v-model="form3Info.judgeName">
                     </b-form-input>
@@ -319,7 +327,8 @@
                     <b-col>                    
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6"  
+                            rows="6"
+                            @change="recheckStates()"  
                             :state="state.partOfOrderLeaveCrossAppealed"                                                          
                             v-model="form3Info.partOfOrderLeaveCrossAppealed">
                         </b-form-textarea>                    
@@ -332,7 +341,8 @@
                     <b-col>                   
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6" 
+                            rows="6"
+                            @change="recheckStates()" 
                             :state="state.groundsLeaveCrossAppeal"                                                           
                             v-model="form3Info.groundsLeaveCrossAppeal">
                         </b-form-textarea>                    
@@ -349,7 +359,8 @@
                     <b-col>                    
                         <b-form-textarea                
                             style="width:100%"  
-                            rows="6" 
+                            rows="6"
+                            @change="recheckStates()" 
                             :state="state.partOfOrderCrossAppealed"                                                          
                             v-model="form3Info.partOfOrderCrossAppealed">
                         </b-form-textarea>                    
@@ -362,7 +373,8 @@
                     <b-col>                   
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6" 
+                            rows="6"
+                            @change="recheckStates()" 
                             :state="state.seekingOrder"                                                           
                             v-model="form3Info.seekingOrder">
                         </b-form-textarea>                    
@@ -395,7 +407,8 @@
 
                     <b-form-radio-group
                         :class="state.selfRepresenting==false?'border border-danger is-invalid w-50':''"
-                        style="max-width:75%"                   
+                        style="max-width:75%"
+                        @change="recheckStates()"                   
                         v-model="form3Info.selfRepresenting"
                         :options="yesNoOptions"                
                     ></b-form-radio-group>                    
@@ -419,7 +432,8 @@
                         :value="address"> {{form3Info.addresses[index].name}}                  
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6"                                                                                       
+                            rows="6"
+                            @change="recheckStates()"                                                                                       
                             v-model="form3Info.addresses[index].contactInfo">
                         </b-form-textarea>      
                     </div> 
@@ -443,7 +457,8 @@
                         :value="phone"> {{form3Info.phoneNumbers[index].name}}                  
                         <b-form-input                
                             style="width:100%" 
-                            rows="6"                                                                                       
+                            rows="6"
+                            @change="recheckStates()"                                                                                       
                             v-model="form3Info.phoneNumbers[index].contactInfo">
                         </b-form-input>      
                     </div>
@@ -479,7 +494,8 @@
                     Name of lawyer or party authorizing filing of this Form:                                
                 </b-col>
                 <b-col>
-                    <b-form-input                    
+                    <b-form-input 
+                        @change="recheckStates()"                   
                         v-model="form3Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
@@ -642,6 +658,7 @@ export default class Form3StyleOfProceeding extends Vue {
 
     public updateOrderDate(){       
         this.form3Info.orderDate = this.orderDateValue;
+        this.recheckStates()
         this.updateOrderDetails ++;
     }
 
@@ -787,7 +804,7 @@ export default class Form3StyleOfProceeding extends Vue {
         formData.emailAdresses = emails;
         formData.phoneNumbers = phoneNumbers;
         this.UpdateForm3Info(formData)
-
+        this.recheckStates();
         this.updated ++;               
     }
 
@@ -827,6 +844,15 @@ export default class Form3StyleOfProceeding extends Vue {
             selfRepresenting: null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   

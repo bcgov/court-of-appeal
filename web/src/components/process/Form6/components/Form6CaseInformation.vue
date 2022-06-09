@@ -203,13 +203,7 @@ export default class Form6CaseInformation extends Vue {
         this.$http.get(url)
         .then(res => {
             this.searching = false;
-            if(res.data?.parties){
-                this.UpdatePartiesJson(res.data.parties);
-                this.UpdateFileNumber(this.searchParams.file)
-                this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
-                this.$router.push({name: "fill-form6"})
-            }
-
+            
             if(res.data?.previousCourts){
                 this.UpdatePreviousCourts(res.data?.previousCourts)
             }
@@ -218,8 +212,15 @@ export default class Form6CaseInformation extends Vue {
                 this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
             }
 
-            else
+            if(res.data?.parties){
+                this.UpdatePartiesJson(res.data.parties);
+                this.UpdateFileNumber(this.searchParams.file)
+                this.UpdateCurrentNoticeOfSettlementOrAbandonmentId(null);
+                this.$router.push({name: "fill-form6"})
+            }else
                 this.notFound = true;
+            
+
         },err => {
             console.error(err); 
             this.notFound = true;  

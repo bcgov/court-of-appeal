@@ -6,6 +6,9 @@
             <my-documents-table @reload="loadForms()" v-bind:enableActions="true" v-bind:title="'My Submissions'"></my-documents-table>
             
         </b-card>
+        <b-card v-else no-body class="border-0">  
+            <loading-spinner color="#000" waitingText="Loading ..." /> 
+        </b-card>
         
     </b-card>
 </template>
