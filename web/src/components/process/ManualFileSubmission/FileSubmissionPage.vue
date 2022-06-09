@@ -750,7 +750,8 @@ export default class ChecklistOrders extends Vue {
                 const eFilingUrl = res.data?.redirectUrl
                 location.replace(eFilingUrl);
                 //this.submitting = false;
-            }
+            }else
+                this.submitting = false;
             
         }, err => {
             console.log(err.response?.data?.message);

@@ -175,6 +175,7 @@
 
 <!-- <JudgeNames> -->
             <b-card class="mt-3 mb-4 bg-white border-white text-dark"> 
+                <div class="mt-4 is-invalid" v-if="state.judgeNamesNumber==false" />
                 <b-card no-body class="border-white">
                     <b-row class="mb-2"  style="margin:0 -1rem !important;">   
                         <b-col cols="10" :class="state.judgeNames !=null?'border border-danger is-invalid':''">
@@ -250,7 +251,7 @@
                         </b-col>
                     </b-row>
                 </b-card>           
-
+                                
                 <b-card 
                     v-if="AddNewJudgeNamesForm" 
                     id="addJudgeForm" 
@@ -266,7 +267,7 @@
                         v-on:cancel="closeJudgeNamesForm" />                
                 </b-card>
                 <div class="text-danger h4 ml-1 mt-4 is-invalid" v-if="state.judgeNamesNumber==false">
-                    There should be either 3 or 5 Judges.
+                    There should be either 3 or 5 Judge Names. <b-icon-arrow-up-circle-fill class="ml-2" scale="1.5" />
                 </div>
             </b-card>
 <!-- HEARING DATE -->

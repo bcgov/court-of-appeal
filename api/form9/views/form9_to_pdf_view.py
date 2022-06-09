@@ -64,16 +64,16 @@ class Form9ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for requisitionId in requisition_ids:
-                requisition = self.get_requisition_for_user(requisitionId, uid)
+            for each_requisition_id in requisition_ids:
+                requisition = self.get_requisition_for_user(each_requisition_id, uid)
                 if not requisition:
                     continue
 
-                prepared_pdf = self.get_pdf_by_requisition_id_and_type(requisitionId, pdf_type)
+                prepared_pdf = self.get_pdf_by_requisition_id_and_type(each_requisition_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":requisitionId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_requisition_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

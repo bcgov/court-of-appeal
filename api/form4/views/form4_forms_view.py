@@ -72,7 +72,12 @@ class Form4FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            notice_of_application_query = NoticeOfApplication.objects.filter(id = id)
+            notice_of_application_query = NoticeOfApplication.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             notice_of_application_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

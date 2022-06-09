@@ -64,16 +64,16 @@ class Form18ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for change_of_addressId in change_of_address_ids:
-                change_of_address = self.get_change_of_address_for_user(change_of_addressId, uid)
+            for each_change_of_address_id in change_of_address_ids:
+                change_of_address = self.get_change_of_address_for_user(each_change_of_address_id, uid)
                 if not change_of_address:
                     continue
 
-                prepared_pdf = self.get_pdf_by_change_of_address_id_and_type(change_of_addressId, pdf_type)
+                prepared_pdf = self.get_pdf_by_change_of_address_id_and_type(each_change_of_address_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":change_of_addressId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_change_of_address_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

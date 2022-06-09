@@ -72,7 +72,12 @@ class Form19FormsView(APIView):
 
         body = request.data
         for id in body['ids']:
-            withdraw_lawyer_query = WithdrawLawyer.objects.filter(id = id)
+            withdraw_lawyer_query = WithdrawLawyer.objects.filter(
+                id = id, 
+                user_id = uid, 
+                package_number = None, 
+                package_url = None 
+            )
             withdraw_lawyer_query.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)

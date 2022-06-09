@@ -64,16 +64,16 @@ class Form19ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for withdraw_lawyerId in withdraw_lawyer_ids:
-                withdraw_lawyer = self.get_withdraw_lawyer_for_user(withdraw_lawyerId, uid)
+            for each_withdraw_lawyer_id in withdraw_lawyer_ids:
+                withdraw_lawyer = self.get_withdraw_lawyer_for_user(each_withdraw_lawyer_id, uid)
                 if not withdraw_lawyer:
                     continue
 
-                prepared_pdf = self.get_pdf_by_withdraw_lawyer_id_and_type(withdraw_lawyerId, pdf_type)
+                prepared_pdf = self.get_pdf_by_withdraw_lawyer_id_and_type(each_withdraw_lawyer_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":withdraw_lawyerId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_withdraw_lawyer_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)

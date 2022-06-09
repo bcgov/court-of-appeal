@@ -64,16 +64,16 @@ class Form15ToPdfView(generics.GenericAPIView):
             return create_download_response(pdf_content)
         else :
             pdf_contents = list()
-            for consent_order_generalId in consent_order_general_ids:
-                consent_order_general = self.get_consent_order_general_for_user(consent_order_generalId, uid)
+            for each_consent_order_general_id in consent_order_general_ids:
+                consent_order_general = self.get_consent_order_general_for_user(each_consent_order_general_id, uid)
                 if not consent_order_general:
                     continue
 
-                prepared_pdf = self.get_pdf_by_consent_order_general_id_and_type(consent_order_generalId, pdf_type)
+                prepared_pdf = self.get_pdf_by_consent_order_general_id_and_type(each_consent_order_general_id, pdf_type)
                 if prepared_pdf is None:
                     continue
 
-                pdf_contents.append({"id":consent_order_generalId, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
+                pdf_contents.append({"id":each_consent_order_general_id, "type":pdf_type, "pdf": settings.ENCRYPTOR.decrypt(prepared_pdf.key_id, prepared_pdf.data)})
             if not pdf_contents:
                 return HttpResponseNotFound(no_record_found)
             return create_zip_download_response(pdf_contents)
