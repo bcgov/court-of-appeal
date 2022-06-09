@@ -23,7 +23,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form2Info.firstAppellant"                    
                         :options="applicantNames">
@@ -39,7 +40,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form2Info.firstRespondent"                    
                         :options="respondentNames">
@@ -82,7 +84,8 @@
                         :value="address"> {{form2Info.addresses[index].name}}                  
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6"                                                                                       
+                            rows="6"
+                            @change="recheckStates()"                                                                                       
                             v-model="form2Info.addresses[index].contactInfo">
                         </b-form-textarea>      
                     </div> 
@@ -106,7 +109,8 @@
                         :value="phone"> {{form2Info.phoneNumbers[index].name}}                  
                         <b-form-input                
                             style="width:100%" 
-                            rows="6"                                                                                       
+                            rows="6"
+                            @change="recheckStates()"                                                                                       
                             v-model="form2Info.phoneNumbers[index].contactInfo">
                         </b-form-input>      
                     </div>
@@ -144,7 +148,8 @@
                     Name of lawyer or party authorizing filing of this Form:
                 </b-col>
                 <b-col>
-                    <b-form-input                    
+                    <b-form-input
+                        @change="recheckStates()"               
                         v-model="form2Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
@@ -345,8 +350,17 @@ export default class Form2StyleOfProceeding extends Vue {
         formData.emailAdresses = emails;
         formData.phoneNumbers = phoneNumbers;
         this.UpdateForm2Info(formData)
-
+        this.recheckStates();
         this.updated ++;               
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){ 

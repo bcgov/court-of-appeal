@@ -52,7 +52,8 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group
                         :class="state.selfRepresented==false?'border border-danger is-invalid w-50': ''"
-                        style="max-width:75%"                   
+                        style="max-width:75%"
+                        @change="recheckStates()"                   
                         v-model="form4Info.selfRepresented"
                         :options="yesNoOptions"                
                     ></b-form-radio-group>
@@ -67,7 +68,8 @@
 
                     <b-form-radio-group
                         stacked                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.jurisdictionType"                   
                         v-model="form4Info.jurisdictionType"                    
                         :options="jurisdictionTypeOptions">
@@ -105,7 +107,8 @@
                         <b-form-checkbox-group 
                             stacked
                             :key="updated"               
-                            style="width:100%" 
+                            style="width:100%"
+                            @change="recheckStates()" 
                             :state="state.respondentParties"                   
                             v-model="form4Info.respondentParties"                    
                             :options="otherPartyNames">
@@ -162,7 +165,8 @@
                             <div class="vuetify">
                                 <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                     <v-date-picker
-                                        v-model="form4Info.hearingDate"                           
+                                        v-model="form4Info.hearingDate"
+                                        @change="recheckStates()"                           
                                         color="warning"             
                                         :allowed-dates="allowedDates"                            
                                         header-color="red"
@@ -185,7 +189,8 @@
                     <b-col class="ml-1 mt-2">
                         <b-form-input         
                             v-model="form4Info.estimatedDuration" 
-                            :state = "state.estimatedDuration"                           
+                            :state = "state.estimatedDuration"
+                            @change="recheckStates()"                           
                             size="md"
                             type="text"
                             autocomplete="off"
@@ -207,7 +212,8 @@
                     <b-col class="ml-1 mt-2">                   
                         <b-form-textarea  
                             style="width:100%" 
-                            rows="6"                                                           
+                            rows="6"
+                            @change="recheckStates()"                                                           
                             v-model="form4Info.relyingSectionRule"
                             :state ="state.relyingSectionRule">
                         </b-form-textarea> 
@@ -250,7 +256,8 @@
                             :value="order"> {{form4Info.seekingOrder[index].name}}                  
                             <b-form-textarea                
                                 style="width:100%" 
-                                rows="6"                                                                                       
+                                rows="6"
+                                @change="recheckStates()"                                                                                       
                                 v-model="form4Info.seekingOrder[index].details">
                             </b-form-textarea>      
                         </div> 
@@ -276,7 +283,8 @@
 
                         <b-form-radio-group
                             :class="state.bookRequired==false?'border border-danger is-invalid w-50':''"
-                            :state="state.bookRequired"                 
+                            :state="state.bookRequired"
+                            @change="recheckStates()"                 
                             v-model="form4Info.bookRequired"
                             :options="yesNoOptions"                
                         ></b-form-radio-group>
@@ -391,7 +399,8 @@
                     <b-col class="ml-1 mt-2">
                         <b-form-radio-group
                             :class="state.applicationContested==false?'border border-danger is-invalid':''"
-                            :state="state.applicationContested"                 
+                            :state="state.applicationContested"
+                            @change="recheckStates()"                 
                             v-model="form4Info.applicationContested"
                             :options="contestedOptions"                
                         ></b-form-radio-group>
@@ -405,7 +414,8 @@
                     <b-col class="ml-1 mt-2">
                         <b-form-radio-group
                             :class="state.acknowledgeEmailService==false?'border border-danger is-invalid w-50':''"
-                            :state="state.acknowledgeEmailService"                 
+                            :state="state.acknowledgeEmailService"
+                            @change="recheckStates()"                 
                             v-model="form4Info.acknowledgeEmailService"
                             :options="yesNoOptions"                
                         ></b-form-radio-group>
@@ -420,7 +430,8 @@
                         </b-col>
                         <b-col class="ml-1 mt-2">
                             <b-form-textarea
-                                :state="state.emailAddresses"                 
+                                :state="state.emailAddresses"
+                                @change="recheckStates()"                 
                                 v-model="form4Info.emailAddresses"                                            
                             ></b-form-textarea>
                         </b-col>
@@ -434,7 +445,8 @@
                     </b-col>
                     <b-col class="ml-1 mt-2">
                         <b-form-input                    
-                            v-model="form4Info.authorizedName"                        
+                            v-model="form4Info.authorizedName"
+                            @change="recheckStates()"                        
                             :state ="state.authorizedName">
                         </b-form-input>
                         <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -721,6 +733,7 @@ export default class Form4StyleOfProceeding extends Vue {
         }  
         
         this.UpdateForm4Info(form4);
+        this.recheckStates();
     }
 
     public getForm4Data() {        
@@ -776,6 +789,15 @@ export default class Form4StyleOfProceeding extends Vue {
             authorizedName:null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   
@@ -916,7 +938,8 @@ export default class Form4StyleOfProceeding extends Vue {
             }
             this.otherPartyNames = otherParties;
             this.updated ++;
-        }        
+        } 
+        this.recheckStates();
     }
 
     public addNewAffidavit(){
@@ -1000,7 +1023,7 @@ export default class Form4StyleOfProceeding extends Vue {
         formData.seekingOrder = orders;
         
         this.UpdateForm4Info(formData)
-
+        this.recheckStates();
         this.updated ++;               
 
     }

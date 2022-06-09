@@ -23,7 +23,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form6Info.firstAppellant"                    
                         :options="applicantNames">
@@ -39,7 +40,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form6Info.firstRespondent"                    
                         :options="respondentNames">
@@ -55,7 +57,8 @@
                 <b-col class="ml-1">
                     <b-form-radio-group
                         :class="state.selfRepresented==false?'border border-danger is-invalid w-50':''"                
-                        style="width:100%"                                       
+                        style="width:100%"
+                        @change="recheckStates()"                                       
                         v-model="form6Info.selfRepresented"
                         :options="representationOptions">
                     </b-form-radio-group>
@@ -97,7 +100,8 @@
                 <b-col :class="state.abandonType==false?'border border-danger is-invalid ml-1': 'ml-1'">   
 
                     <b-form-radio-group                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.abandonType"                   
                         v-model="form6Info.abandonType"                    
                         :options="abandonTypeOptions">
@@ -113,6 +117,7 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
                         stacked
+                        @change="recheckStates()"
                         :key="updated" 
                         :state="state.abandoningAgainstParties"                   
                         v-model="form6Info.abandoningAgainstParties"                    
@@ -127,7 +132,8 @@
                 </b-col>
                 <b-col>                    
                     <b-form-input                
-                        style="width:100%"                        
+                        style="width:100%"
+                        @change="recheckStates()"                        
                         :state="state.judgeName"                                                           
                         v-model="form6Info.judgeName">
                     </b-form-input>
@@ -199,7 +205,8 @@
                     Name of lawyer or party authorizing filing of this Form:                                 
                 </b-col>
                 <b-col>
-                    <b-form-input                    
+                    <b-form-input
+                        @change="recheckStates()"                    
                         v-model="form6Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
@@ -319,11 +326,13 @@ export default class Form6StyleOfProceeding extends Vue {
 
     public updateOrderDate(){       
         this.form6Info.orderDate = this.orderDateValue;
+        this.recheckStates();
         this.updateOrderDetails ++;
     }
 
     public updateInitiatingDocumentDate(){       
         this.form6Info.initiatingDocumentDate = this.initiatingDocumentDateValue;
+        this.recheckStates();
         this.updateInitiatingDocumentDateDetails ++;
     }
 
@@ -422,6 +431,15 @@ export default class Form6StyleOfProceeding extends Vue {
             selfRepresented: null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   
@@ -531,7 +549,8 @@ export default class Form6StyleOfProceeding extends Vue {
             }
             this.otherPartyNames = otherParties;
             this.updated ++;
-        }        
+        }
+        this.recheckStates();
     }
 
     public navigateToPreviewPage() {        

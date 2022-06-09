@@ -24,7 +24,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form5Info.firstAppellant"                    
                         :options="applicantNames">
@@ -40,7 +41,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form5Info.firstRespondent"                    
                         :options="respondentNames">
@@ -58,7 +60,8 @@
                 label="Are you self-represented?">
                 <b-form-radio-group
                     :class="state.selfRepresented==false?'border border-danger is-invalid w-50':''"
-                    style="max-width:75%"                   
+                    style="max-width:75%"
+                    @change="recheckStates()"                   
                     v-model="form5Info.selfRepresented"
                     :options="representationOptions"                
                 ></b-form-radio-group>
@@ -86,6 +89,7 @@
                 label-for="registry">
                 <b-form-select 
                     id="registry"
+                    @change="recheckStates()"
                     style="width:300%" 
                     :state="state.courtHouse"                   
                     v-model="form5Info.courtHouse"                    
@@ -135,7 +139,8 @@
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
                                     v-model="form5Info.dateOfAppealHearing"                           
-                                    color="warning"             
+                                    color="warning"
+                                    @change="recheckStates()"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
                                 ></v-date-picker>                            
@@ -172,6 +177,7 @@
                         v-model="form5Info.numberOfDaysApp"                            
                         size="md"
                         type="text"
+                        @change="recheckStates()"
                         autocomplete="off"
                         @paste.prevent
                         :state = "state.numberOfDaysApp"
@@ -192,6 +198,7 @@
                         v-model="form5Info.numberOfDaysResp"                            
                         size="md"
                         type="text"
+                        @change="recheckStates()"
                         autocomplete="off"
                         @paste.prevent
                         :state="state.numberOfDaysRes"
@@ -206,7 +213,8 @@
                     <b-form-checkbox
                         class="ml-4"
                         style="display: inline;"
-                        size="lg"									
+                        size="lg"
+                        @change="recheckStates()"									
                         v-model="form5Info.acknowledge"
                         :state="state.acknowledge"
                         >  
@@ -222,7 +230,8 @@
                                 
                 </b-col>
                 <b-col>
-                    <b-form-input                    
+                    <b-form-input 
+                        @change="recheckStates()"                   
                         v-model="form5Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
@@ -402,6 +411,15 @@ export default class Form5StyleOfProceeding extends Vue {
     public allowedDates(date){
         const day = moment().startOf('day').format('YYYY-MM-DD');           
         return (date >= day);           
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){        
