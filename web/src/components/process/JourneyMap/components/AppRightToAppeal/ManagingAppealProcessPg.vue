@@ -96,7 +96,7 @@
 <!-- stay applications -->
         <b-row 
             :class="showUrgentInfo?'mt-2':'mt-3'"
-            :style="showUrgentInfo?'padding-top: 1rem;':'padding-top: 1rem;'">            
+            :style="showUrgentInfo?'padding-top: 0.5rem;':'padding-top: 1.25rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Stay Applications when not joined with an application for leave to appeal
             </b-col>   
@@ -116,7 +116,7 @@
 <!--Respond to an Application  -->
         <b-row 
             :class="showStayApplicationsInfo?'mt-0':'mt-4'" 
-            :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 1rem;'">            
+            :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 0.95rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application
             </b-col>   
@@ -186,7 +186,7 @@
 <!-- Vary an Order of a Justice -->
         <b-row 
             :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" 
-            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.75rem;'">            
+            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.95rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Vary an Order of a Justice
             </b-col>   
@@ -204,7 +204,7 @@
 <!-- Order that no fees are payable -->
         <b-row 
             :class="showForm8Info?'mt-1':'mt-4'" 
-            :style="showForm8Info?'padding-top: 1.75rem;':'padding-top: 1rem;'">             
+            :style="showForm8Info?'padding-top: 1.85rem;':'padding-top: 0.75rem;'">             
             <b-col cols="11" class="step-title-column pl-0">
                 Order that no fees are payable
             </b-col>   
@@ -229,12 +229,8 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                    Application For Order that No Fees are Payable (Form 22)
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank">Requisition
-                                    </a> -->
+                                <b-col class="font-weight-bold" cols="9">
+                                    Application For Order that No Fees are Payable (Form 22)                                    
                                 </b-col>                                
                                 <b-col cols="3" class="p-0" >
                                     <b-button
@@ -591,12 +587,33 @@ export default class ManagingAppealProcessPg extends Vue {
         }
         
         if (this.getRespRules().includes('61')){
-            this.respStepsLength = this.respStepsLength + 28;            
+            this.respStepsLength = this.respStepsLength + 25;            
         }  
 
         if (this.getRespRules().includes('63')){
             this.respStepsLength = this.respStepsLength + 26;
         }
+
+        if (this.getRespRules().length == 2){
+            this.respStepsLength = this.respStepsLength - 1;            
+        }
+
+        if (this.getRespRules().length == 3){
+            this.respStepsLength = this.respStepsLength - 2;            
+        }
+
+        if (this.getRespRules().length == 4){
+            this.respStepsLength = this.respStepsLength - 3;            
+        }
+
+        if (this.getRespRules().length == 5){
+            this.respStepsLength = this.respStepsLength - 5;            
+        }
+
+        if (this.getRespRules().length == 6){
+            this.respStepsLength = this.respStepsLength - 6;            
+        }
+
 
         if (this.showRespIntroInfo){
             this.$emit('adjustHeights', 3, this.respStepsLength + "rem");
@@ -682,7 +699,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showUrgent(show: boolean){
         if (show) {
             this.showUrgentInfo = true;
-            this.$emit('adjustHeights', 1, "22rem");
+            this.$emit('adjustHeights', 1, "21rem");
         } else {
             this.showUrgentInfo = false;
             this.$emit('adjustHeights', 1, "0");

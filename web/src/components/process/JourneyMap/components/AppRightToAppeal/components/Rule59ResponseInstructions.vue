@@ -29,7 +29,10 @@
                 <ul class="mt-2">                    
                     
                     <li class="my-2">
-                        Supporting affidavits (if any)
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a> 
                     </li>
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"

@@ -44,7 +44,7 @@
                 <ul>
                     <li>
                         <b-row class="mt-1" style="width: 90%;">
-                            <b-col cols="10">
+                            <b-col class="font-weight-bold" cols="10">
                                 Notice of Application (Form 4)                                
                             </b-col>                                
                             <b-col cols="2" class="p-0" >
@@ -58,7 +58,10 @@
                         </b-row>
                     </li> 
                     <li>
-                        Supporting Affidavits (if any)
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a> 
                     </li> 
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"

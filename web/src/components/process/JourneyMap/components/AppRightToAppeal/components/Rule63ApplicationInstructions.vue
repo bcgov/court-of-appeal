@@ -32,7 +32,7 @@
                 <ul class="mt-2">
                     <li>
                         <b-row class="my-1" style="width: 90%;">
-                            <b-col cols="10">
+                            <b-col class="font-weight-bold" cols="10">
                                 Notice of Application (Form 4)                                
                             </b-col>                                
                             <b-col cols="2" class="p-0" >

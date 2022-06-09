@@ -1,6 +1,6 @@
 <template>
     <b-card class="bg-white border-white w-90">
-
+        
         <b-row class="mt-3">            
             <b-col cols="11" class="step-title-column pl-0">
                 Factum and Appeal Book
@@ -404,7 +404,7 @@ export default class FactumAppealBookRspToAppealPg extends Vue {
         }
     }
 
-     public showAppealBook(show: boolean){
+    public showAppealBook(show: boolean){
         if (show) {
             this.showAppealBookInfo = true;
             this.$emit('adjustHeights', 2, "31rem");
@@ -425,20 +425,8 @@ export default class FactumAppealBookRspToAppealPg extends Vue {
     }
 
     public downloadInstructions(pdf_name){
-
-        GetInstructionFile(pdf_name);
-        
+        GetInstructionFile(pdf_name);        
     }
-
-    // public showNotice(show: boolean){
-    //     if (show) {
-    //         this.showNoticeInfo = true;
-    //         this.$emit('adjustHeights', 4, "8rem");
-    //     } else {
-    //         this.showNoticeInfo = false;
-    //         this.$emit('adjustHeights', 4, "0");
-    //     }
-    // }  
 
 }
 </script>

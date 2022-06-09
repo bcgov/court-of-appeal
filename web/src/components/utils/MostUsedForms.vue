@@ -27,7 +27,12 @@
                 target="_blank">
                 Notice of Settlement or Abandonment (Form 6)                
             </li>
-            <li>Affidavit</li>
+            <li>
+                <a 
+                    href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                    target="_blank">Affidavit
+                </a> 
+            </li>
         </ol>
     </b-card>
 </template>

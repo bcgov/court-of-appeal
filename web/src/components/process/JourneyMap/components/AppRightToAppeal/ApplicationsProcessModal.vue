@@ -37,9 +37,9 @@ export default class ApplicationsProcessModal extends Vue {
 
     updated=0;
 
-    public adjustHeights(index: number, pathHeight: string) {
-        this.updated++;
+    public adjustHeights(index: number, pathHeight: string) {        
         this.pathHeights[index] = pathHeight;
+        this.updated++;
     }
 
     mounted(){        
