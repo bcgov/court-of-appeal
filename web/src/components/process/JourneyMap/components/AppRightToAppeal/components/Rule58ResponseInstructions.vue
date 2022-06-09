@@ -30,7 +30,10 @@
                         Response Book (as per completion instructions)
                     </li>
                     <li>
-                        Supporting affidavits (if any) 
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a>  
                     </li>
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"
@@ -52,16 +55,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { namespace } from "vuex-class";
-
-import "@/store/modules/forms/form4";
-const form4State = namespace("Form4");
-
 import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
 
 @Component
 export default class Rule58ApplicationInstructions extends Vue {      
-
 
     public downloadInstructions(pdf_name){
 

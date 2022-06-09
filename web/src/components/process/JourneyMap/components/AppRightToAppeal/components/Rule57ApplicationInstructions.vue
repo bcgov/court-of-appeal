@@ -19,9 +19,8 @@
                     <ul>
                         <li>
                             <b-row class="my-1" style="width: 90%;">
-                                <b-col cols="9">
-                                    Notice of Application (Form 7)
-                                   
+                                <b-col class="font-weight-bold" cols="9">
+                                    Notice of Application (Form 7)                                   
                                 </b-col>                                
                                 <b-col cols="3" class="p-0" >
                                     <b-button

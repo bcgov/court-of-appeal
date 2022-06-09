@@ -26,9 +26,14 @@
        
         <ol class="mt-3">            
             <li class="mt-2">
-                Complete in a .PDF format the documents below. Click the document name for more information.  
+                Complete in a .PDF format of the documents below. Click the document name for more information.  
                 <ul class="mt-2">
-                    <li>Support Affidavits (if any)</li>
+                    <li>
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a> 
+                    </li>
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"
                         target="_blank">
@@ -55,9 +60,7 @@ import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 export default class Rule63ApplicationInstructions extends Vue {   
 
     public downloadInstructions(pdf_name){
-
         GetInstructionFile(pdf_name);
-        
     }
 
 }

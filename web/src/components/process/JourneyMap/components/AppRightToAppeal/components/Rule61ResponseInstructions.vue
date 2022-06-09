@@ -3,8 +3,8 @@
        
         <p style="font-size: 0.95rem; font-weight: 700;">Intervener status</p>
         <p>
-            If you are not a party to the appeal, but you want to apply for 
-            leave to intervene in an appeal, you must complete the following:  
+            If you have been served with a notice of application and 
+            you want to respond, you must complete the following:  
         </p>
 
         <b-row class="ml-2 mt-2 mr-5 bg-warning warning-message-row">
@@ -14,39 +14,33 @@
             <b-col cols="11" style="padding-left: 0;">
                 You must 
                     <span 
-                        class="text-danger font-weight-bold">no later than 14 days
+                        class="text-danger font-weight-bold">at least 2 business days
                     </span> 
-                after the appellant files the appellant’s factum, file and 
-                serve on each party, the application materials listed below.
+                before the application hearing date, file filed and serve 
+                on each party, the application materials listed below.
             </b-col>              
         </b-row>
        
         <ol class="mt-3">
-            <li>Obtain an application hearing date from the registrar.</li>
+           
             
             <li class="mt-2">
-                Complete either the Online form or the .PDF. Click the document name for more information.  
+                Complete the following:  
                 <ul class="mt-2">
-                    <li>
-                        <b-row class="my-1" style="width: 90%;">
-                            <b-col cols="10">
-                                Notice of Application (Form 4)                                
-                            </b-col>                                
-                            <b-col cols="2" class="p-0" >
-                                <b-button
-                                    @click="startNewForm4Document"
-                                    target="_blank"                                                                                
-                                    class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                </b-button>
-                            </b-col>
-                        </b-row>
-                    </li> 
+                                        
                     <li class="my-2">
-                        Memorandum of argument, not exceeding 10 pages 
-                        (completion instructions for intervener apps)
-                    </li>                    
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a> 
+                    </li>
+                    <li class="link-button" 
+                        @click="downloadInstructions('written-argument')"
+                        target="_blank">
+                        Written argument (if any)               
+                    </li>
                 </ul>
-            </li> 
+            </li>
             <li class="my-2">
                 File the documents with the registry.
             </li>
@@ -60,22 +54,31 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { namespace } from "vuex-class";
-
-import "@/store/modules/forms/form4";
-const form4State = namespace("Form4");
+import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
 
 @Component
 export default class Rule61ApplicationInstructions extends Vue {   
 
-    @form4State.Action
-    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
-        
-    public startNewForm4Document(){
-        this.UpdateCurrentNoticeOfApplicationId(null);
-        this.$router.push({name: "start-form4" });
+    public downloadInstructions(pdf_name){
+        GetInstructionFile(pdf_name);        
     }
 
 }
 
 </script>
+
+<style scoped lang="scss">
+
+    @import "src/styles/common";
+
+    .link-button {
+        text-decoration: underline;
+        cursor: pointer;
+        background-color: transparent;
+        color: $text-color-link;
+        &:hover, &:focus {
+            color: $text-color-link-hover;
+        }
+    }
+
+</style>

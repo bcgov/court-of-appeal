@@ -47,11 +47,10 @@
                         <li>
                             <b-row class="my-1 w-110">
                                 <b-col cols="9">
-                                    <!-- <a 
-                                        href=""
-                                        target="_blank"> -->
-                                        Supporting Affidavit (if any)
-                                    <!-- </a> -->
+                                    <a 
+                                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                                        target="_blank">Supporting Affidavits (if any),
+                                    </a> 
                                 </b-col> 
                             </b-row>
                         </li>

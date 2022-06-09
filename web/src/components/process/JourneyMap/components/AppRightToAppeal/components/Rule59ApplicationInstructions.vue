@@ -29,7 +29,7 @@
                 <ul>
                     <li>
                         <b-row style="width: 90%;">
-                            <b-col cols="10">
+                            <b-col class="font-weight-bold" cols="10">
                                 Notice of Application (Form 4)                                
                             </b-col>                                
                             <b-col cols="2" class="p-0" >
@@ -43,11 +43,18 @@
                         </b-row>
                     </li> 
                     <li>
-                        Support Affidavit(s) that includes the evidence that you are 
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits
+                        </a>  that includes the evidence that you are 
                         seeking to adduce. 
                     </li>
                     <li>
-                        Other supporting affidavits (if any)
+                        Other
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                            target="_blank">Supporting Affidavits (if any),
+                        </a> 
                     </li>
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"
