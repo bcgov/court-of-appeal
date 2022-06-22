@@ -334,7 +334,7 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="9">
+                                <b-col class="font-weight-bold" cols="9">
                                     Requisition
                                     <!-- <a 
                                         href=""

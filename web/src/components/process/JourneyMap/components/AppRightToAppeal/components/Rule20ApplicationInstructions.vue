@@ -42,7 +42,7 @@
                         </b-row>
                     </li>
                     <li>
-                        Application Book
+                        <b>Application Book</b>
                         <ul>
                             <li>
                                 <b-row class="my-1 w-100">

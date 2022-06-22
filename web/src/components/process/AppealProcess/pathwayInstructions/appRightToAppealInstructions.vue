@@ -15,7 +15,7 @@
                 </a>
             </p>                    
 
-        </b-card> 
+        </b-card>        
        
         <p>
             Follow the steps below to complete the appeal process. Follow the 

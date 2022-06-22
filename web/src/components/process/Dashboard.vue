@@ -21,6 +21,15 @@
                     @click="navigateToSubmitPackagePage">
                     Submit Court of Appeal Package
                 </b-button>
+                <b-button 
+                    style="float:right;"
+                    class="ml-5 mb-1 bg-success"
+                    size="sm" 
+                    variant="success" 
+                    @click="showSelectFormToFill=true">
+                    New Form
+                    <b-icon-plus scale="1.5" variant="white"/>
+                </b-button>
             </b-row>
         </b-card>
 
@@ -54,6 +63,7 @@
                 </b-col>
             </b-row>
         </b-card>       
+        <new-form-modal :showSelectFormToFill="showSelectFormToFill" @closeModal="CloseModal" />
         
     </b-card>
 </template>
@@ -137,7 +147,7 @@ const form22State = namespace("Form22");
 import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
 
 import {migrate} from './MigrateStore'
-
+import NewFormModal from "@/components/process/MyDocuments/NewFormModal.vue";
 import MyDocumentsTableBrief from "@/components/process/MyDocuments/MyDocumentsTableBrief.vue";
 import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue";
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
@@ -187,7 +197,8 @@ import { form17FormsJsonDataType } from '@/types/Information/Form17';
         MostUsedForms,
         AdditionalForms,
         RepresentationAddressForms,
-        Orders
+        Orders,
+        NewFormModal
     }
 })
 export default class DashboardPage extends Vue {
@@ -284,6 +295,8 @@ export default class DashboardPage extends Vue {
     error = '';
     updated = 0;
 
+    showSelectFormToFill=false;
+
     casesJson: caseJsonDataType[] = [];
     journeyJson = {} as journeyJsonDataType;
 
@@ -343,6 +356,10 @@ export default class DashboardPage extends Vue {
         this.extractHearingLocations();
         this.extractFilingLocations(); 
         this.extractDocumentTypes();     
+    }
+
+    public CloseModal(){
+        this.showSelectFormToFill=false
     }
 
     public getCurrentState(){

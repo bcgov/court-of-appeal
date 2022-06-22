@@ -77,7 +77,7 @@
                     File an application book in Form 16 
                     <ul>
                         <li>
-                            Application Book
+                            <b>Application Book</b>
                             <ul>
                                 <li>
                                     <b-row class="my-1 w-145">
