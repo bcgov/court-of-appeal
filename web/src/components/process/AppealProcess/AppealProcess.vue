@@ -1,7 +1,29 @@
 <template>
     <b-card border-variant="white">
+
+         <p v-if="!selfRep">
+            If you are not representing yourself, you can still use this service 
+            to assist in the completion of and submission of the forms online.
+            <ol class="mt-2">
+                <li>
+                    If you will be filing documents for multiple Court of Appeal 
+                    matters, you may wish to use the direct links to the forms by 
+                    clicking the 
+                    <span class="bg-success text-white p-1" >New Form
+                        <b-icon-plus scale="1.5" variant="white"/>
+                    </span>                    
+                    button found on this screen or by clicking 
+                    on the document descriptions found on the right-side menus.
+                </li>
+                <li>
+                    Alternatively, you can use the journey map process below.
+                </li>
+            </ol>
+
+        </p>
         
-        <h3>The Appeal Process</h3>
+        <h3>The Appeal Process</h3>      
+
         <app-right-to-appeal-instructions v-if="appRightToAppeal"/>
         <app-apply-leave-instructions v-else-if="appApplyLeave" />
         <app-leave-refused-instructions v-else-if="appLeaveRefused" />
@@ -86,8 +108,10 @@ export default class AppealProcess extends Vue {
     rspToLeaveRefusedFinal = false;
     rspToLeaveRefused = false;
     rspToLeaveGranted = false;
+    selfRep = false;
 
     mounted(){
+        this.selfRep = this.$store.state.Common.userSelfRepresented;
         this.appApplyLeave = this.steps[this.stPgNo.APP_APPLY_LEAVE._StepNo].active;
         this.appLeaveGranted = this.steps[this.stPgNo.APP_LEAVE_GRANTED._StepNo].active;
         this.appLeaveRefused = this.steps[this.stPgNo.APP_LEAVE_REFUSED._StepNo].active;
