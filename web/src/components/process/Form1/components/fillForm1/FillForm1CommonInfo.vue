@@ -5,7 +5,11 @@
 
             <b-row class="mt-2 question">
                 <b-col cols="7" class="labels">
-                    Are you seeking leave to appeal?                                
+                    Are you seeking leave to appeal?  
+                    <p class="content text-primary font-italic">
+                        Court of Appeal Rule 12 explains when you need leave 
+                        to appeal.  If you are unsure, check “Yes”.
+                    </p>                               
                 </b-col>
                 <b-col>
                     <b-form-radio-group                
@@ -28,7 +32,7 @@
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Are you amending a Notice of Appeal that has been filed? 
-                    <p class="help-content">
+                    <p class="content text-primary font-italic">
                         Pursuant to 
                         <a
                             href=""
@@ -232,7 +236,12 @@
 
             <b-row class="my-4 question">
                 <b-col cols="7" class="labels">
-                   Is there an order sealing any part of the trial court or tribunal file?                                
+                   Is there an order sealing any part of the trial court or tribunal file?      
+                   <p class="content text-primary font-italic">
+                        If there is a sealing order, please submit either a letter to 
+                        the Registrar and application/evidence to be relied on with 
+                        the Notice of Appeal form.
+                    </p>                          
                 </b-col>
                 <b-col class="mt-1">  
                     <b-form-radio-group                
@@ -277,7 +286,12 @@
 
             <b-row class="mb-4 mt-5 question">
                 <b-col cols="7" class="labels">
-                   Are there orders that protect the identity of a party or parties?                                
+                   Are there orders that protect the identity of a party or parties? 
+                   <p class="content text-primary font-italic">
+                        If there is an order, please submit either a letter to the 
+                        Registrar and application/evidence to be relied on with the 
+                        Notice of Appeal form.
+                    </p>                               
                 </b-col>
                 <b-col class="mt-1">  
                     <b-form-radio-group                

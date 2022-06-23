@@ -177,7 +177,7 @@
                             target="_blank"
                             class= "text-white mr-1">Section 31(1) and (2) Bankruptcy and Insolvency General Rules
                         </a> 
-                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger px-1">10 day appeal period</b>.
+                            prescribes a <b style="text-decoration: underline;">10 day appeal period</b>.
                     </p>
 
                     <p>
@@ -186,7 +186,7 @@
                             target="_blank"
                             class= "text-white mr-1">Section 14(2) 
                         </a>
-                            prescribes a <b style="font-weight: 400;" class="bg-warning text-danger px-1">21 day appeal period</b>.
+                            prescribes a <b style="text-decoration: underline;">21 day appeal period</b>.
                     </p>
                 </b-card>                           
                 
@@ -339,8 +339,8 @@
                 <b-card 
                     class="border-primary bg-primary text-white mt-2 mr-5" 
                     v-if="qualificationInfo.insideTimeLimit">
-                    The time limit for filing and serving an appeal is usually 30 days commencing on the 
-                    day after the order is pronounced. If you have missed the deadline to file the Notice 
+                    The time limit for filing and serving an appeal is usually <b style="text-decoration: underline;">30 days commencing on the 
+                    day after the order is pronounced</b>. If you have missed the deadline to file the Notice 
                     of Appeal, you may apply for an extension of time by completing the Notice of 
                     Appeal along with a 
                     <a style="color: white; cursor:pointer; margin:0 0.25rem; text-decoration: underline; display: inline;"
