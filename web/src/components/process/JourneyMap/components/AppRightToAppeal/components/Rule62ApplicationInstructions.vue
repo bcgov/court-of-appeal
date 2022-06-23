@@ -81,7 +81,7 @@
                             <ul>
                                 <li>
                                     <b-row class="my-1 w-145">
-                                        <b-col cols="8">
+                                        <b-col cols="8" style="font-weight: 700;">
                                             E-Completion Instructions                                           
                                         </b-col>
                                         <b-col cols="3"></b-col>                                
@@ -96,7 +96,7 @@
                                 </li>
                                 <li>
                                     <b-row class="my-1 w-145">
-                                        <b-col cols="8">
+                                        <b-col cols="8" style="font-weight: 700;">
                                             Paper Completion Instructions                                                                       
                                         </b-col>
                                         <b-col cols="3"></b-col>                               

@@ -32,9 +32,8 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-110">
-                                <b-col cols="9">
-                                   Orders
-                                   
+                                <b-col cols="9" style="font-weight: 700;">
+                                   Orders                                   
                                 </b-col>                                
                                 <b-col cols="3" class="p-0" >
                                     <b-button

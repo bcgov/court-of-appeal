@@ -190,7 +190,7 @@
                 <li>Obtain application date</li>
                 <li class="my-2">
                     <b-row style="width: 90%;">
-                        <b-col cols="10">
+                        <b-col cols="10" style="font-weight: 700;">
                             Prepare Notice of Application (Form 4)                                
                         </b-col>                                
                         <b-col cols="2" class="p-0" >
@@ -238,7 +238,7 @@
             <ul class="mt-1 ml-3 w-100" >                 
                 <li class="my-2">
                     <b-row style="width: 90%;">
-                        <b-col cols="10">
+                        <b-col cols="10" style="font-weight: 700;">
                             Offer to Settle Costs (Form 16)                                
                         </b-col>                                
                         <b-col cols="2" class="p-0" >
@@ -270,7 +270,7 @@
                     <ul class="mt-1 ml-3" >                         
                         <li > 
                             <b-row style="width: 90%;">
-                                <b-col cols="10">
+                                <b-col cols="10" style="font-weight: 700;">
                                     Certificate of Costs (Form 17)                                
                                 </b-col>                                
                                 <b-col cols="2" class="p-0" >
