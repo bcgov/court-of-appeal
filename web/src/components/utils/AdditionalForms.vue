@@ -3,9 +3,9 @@
         <h3>Additional Forms</h3>
         <ul>
             <li class="link-button" 
-                @click="displayWindow('Managing the Appeal Process')"
+                @click="displayWindow('Make an Application')"
                 target="_blank">
-                Managing the Appeal Process            
+                Make an Application            
             </li>
             <li class="link-button" 
                 @click="startNewForm16Document"
@@ -110,9 +110,9 @@ export default class AdditionalForms extends Vue {
 
         this.managingAppealProcessContent = false;        
 
-        if (contentType == "Managing the Appeal Process"){
+        if (contentType == "Make an Application"){
 
-            this.windowTitle = "Managing the Appeal Process";
+            this.windowTitle = "Make an Application";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
             this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
             this.managingAppealProcessContent = true;

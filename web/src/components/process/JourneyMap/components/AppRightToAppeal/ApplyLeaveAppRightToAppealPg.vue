@@ -77,7 +77,7 @@
                     <ul>
                         <li>
                             <b-row class="my-1 w-125">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Notice of Application – Form 4                                    
                                 </b-col>                                
                                 <b-col cols="4" class="p-0" >
@@ -172,7 +172,7 @@
                     <ul>
                          <li>
                             <b-row class="my-1 w-100">
-                                <b-col cols="4">
+                                <b-col cols="4" style="font-weight: 700;">
                                     Notice of Application – Form 4                                    
                                 </b-col>                                
                                 <b-col cols="4" class="p-0" >
