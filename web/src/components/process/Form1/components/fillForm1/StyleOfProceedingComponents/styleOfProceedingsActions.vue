@@ -27,6 +27,11 @@
                 </b-button>
             </b-col>
         </b-row>
+        <span
+            v-if="(!editStyleOfProceedingsEnabled)" 
+            style="font-size: 0.75rem;" 
+            class="mx-3 mt-2 text-danger is-invalid">A minimum of one Appellant and one Respondent is required to edit style of proceedings.
+        </span>
 
 <!-- <ADD/EDIT PARTY> -->
             <b-modal size="xl" v-model="showPartyWindow" header-class="bg-primary text-white" :key="updatedPartyInfo">

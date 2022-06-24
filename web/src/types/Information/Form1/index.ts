@@ -135,9 +135,11 @@ export interface form1StatesInfoType {
     orderBan: null | boolean;
     dateBan: null | boolean;
     mainAppellant: null | boolean;
-    addresses: null | boolean;    
+    addresses: null | boolean; 
+    nonBcAddress: null | boolean;   
     phoneNumbers: null | boolean;
     referenceNumber: null | boolean;
+    emails: null | boolean;
 }
 
 export interface form1PartiesInfoType {

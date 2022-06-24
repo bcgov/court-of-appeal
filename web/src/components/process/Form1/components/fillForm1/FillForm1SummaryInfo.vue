@@ -71,7 +71,7 @@
                 <b-form-input    
                     style="width: 15rem; display: inline-block;"                    
                     :state="form1InfoStates.appearanceDays"
-                    @change="update"
+                    @change="update();recheckStates()"
                     v-model="trialDurationDays"                            
                     size="md"
                     type="text"                        
@@ -86,7 +86,7 @@
             <b-col class="mt-2">
                 <b-form-input
                     :state="form1InfoStates.cityOfOrder"
-                    @change="update"
+                    @change="update();recheckStates()"
                     style="max-width:100%" 
                     v-model="cityOfOrder">
                 </b-form-input> 
@@ -159,6 +159,10 @@ export default class FillForm1SummaryInfo extends Vue {
         form1.judgeFullName = this.judgeFullName;
         this.UpdateForm1Info(form1);
     }
+    
+    public recheckStates(){
+        this.$emit('recheckStates')
+    } 
 
 }
 </script>
