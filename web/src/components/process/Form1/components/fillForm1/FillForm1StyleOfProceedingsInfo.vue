@@ -76,21 +76,15 @@
                 </template>                
                 
             </b-table> 
-            <span
+            <div
                 v-if="(form1InfoStates.respondents != null || form1InfoStates.appellants != null)" 
                 style="font-size: 0.75rem;" 
-                class="mx-4 bg-white text-danger is-invalid">A minimum of one Appellant and one Respondent is required.
-            </span> 
+                class="mx-4 bg-white text-danger is-invalid"><b-icon-exclamation-circle scale="1.5" class="mr-2" /> A minimum of one Appellant and one Respondent is required. 
+            </div> 
 
             <hr class="mb-3 pl-2 mx-4">
 
             <style-of-proceeding-actions class="pl-2" @updateResults="updateTableResults();"/>
-          
-            <span
-                v-if="(!editStyleOfProceedingsEnabled)" 
-                style="font-size: 0.75rem;" 
-                class="mx-4 bg-white text-danger is-invalid">A minimum of one Appellant and one Respondent is required to edit style of proceedings.
-            </span>
 
             <hr class="mb-4 mx-4">
 
@@ -101,7 +95,12 @@
                     <p class="content text-primary font-italic">
                         If you have a lawyer, include the law firm’s address; 
                         otherwise provide your own residential address
-                    </p>                                                   
+                    </p>
+                    <div class="text-warning mt-3" v-if="form1InfoStates.nonBcAddress == true">
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                        to use a residential address or business address for service outside of British Columbia
+                        must submit a written request to the registrar.
+                    </div>                                                   
                 </b-col>
                 <b-col class="mt-2">
                     <div 
@@ -110,7 +109,8 @@
                         :value="address"> {{form1Info.addresses[index].name}}                  
                         <b-form-textarea                
                             style="width:100%; margin-bottom:1rem;" 
-                            rows="6"                                                                                       
+                            rows="6"
+                            @change="recheckStates()"                                                                                       
                             v-model="form1Info.addresses[index].contactInfo">
                         </b-form-textarea>      
                     </div> 
@@ -118,7 +118,10 @@
                         v-if="(form1InfoStates.addresses != null)" 
                         style="font-size: 0.75rem; margin-top:-0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
-                        Specify the addresses of the party(ies) filing the Notice of Appeal.
+                        Specify the addresses of the party(ies) filing the Notice of Appeal. <br/>
+                        Please note that the email address is not mandatory but rather as per the 
+                        wording of the rule must either have an address or an email address for service.  
+                        It is okay if they put both.
                     </div>             
                 </b-col>                
             </b-row>
@@ -137,7 +140,8 @@
                         :key="'phone' + index"                        
                         :value="phone"> {{form1Info.phoneNumbers[index].name}}                  
                         <b-form-input                
-                            style="width:100%; margin-bottom:1rem;"                                                                    
+                            style="width:100%; margin-bottom:1rem;"
+                            @change="recheckStates()"                                                                    
                             v-model="form1Info.phoneNumbers[index].contactInfo">
                         </b-form-input>      
                     </div>
@@ -145,7 +149,7 @@
                         v-if="(form1InfoStates.phoneNumbers != null)" 
                         style="font-size: 0.75rem; margin-top:-0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
-                        Specify the phone numbers of the party(ies) filing the Notice of Appeal.
+                        Specify the phone numbers of the party(ies) filing the Notice of Appeal. <br/> <i> e.g. 123-456-7890</i>
                     </div>
                 </b-col>                
             </b-row>
@@ -164,11 +168,19 @@
                         :key="'email' + index"                       
                         :value="email"> {{form1Info.emailAdresses[index].name}}                  
                         <b-form-input                
-                            style="width:100%"                                                                  
+                            style="width:100%; margin-bottom:1rem;"
+                            @change="recheckStates()"                                                                  
                             v-model="form1Info.emailAdresses[index].contactInfo">
                         </b-form-input>      
-                    </div>                                    
-                </b-col>                
+                    </div>
+                    <div
+                        v-if="(form1InfoStates.emails != null)" 
+                        style="font-size: 0.75rem; margin-top:-0.75rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Invalid Email Address. <i>(If you provide an email address, It must be valid.)</i>
+                    </div>                                                   
+                </b-col>
+                
             </b-row>    
 
 <!-- <AUTHORIZING PARTY> -->
@@ -301,7 +313,6 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
     
     styleOfProceedingsInfo = {} as form1DataInfoType;
     form1PartiesStates = {} as form1PartiesStatesInfoType; 
-    editStyleOfProceedingsEnabled = true;
 
     @Watch('respondents')
     setRespondentNames(newRespondents: string[]) 
@@ -364,7 +375,8 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         //console.log('updating')
         this.styleOfProceedingsInfo = this.form1Info;
         this.extractInfo();
-        this.updateAddressFields();        
+        this.updateAddressFields(); 
+        this.recheckStates()  
     }
 
     public updateAddressFields(){
@@ -424,7 +436,8 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
             this.showConfirmEditParties = true;
         } else {
             this.confirmEditPartyAppealRoles();
-        }       
+        }
+        this.recheckStates()    
     }
 
     public cancelShowConfirmEditParties(){
@@ -510,10 +523,14 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         return {title: "<div style='margin: 0;'>" +content+ "</div>"};
     }
 
-    public update(){        
-        
+    public update(){ 
         this.UpdateForm1Info(this.styleOfProceedingsInfo);
+        this.recheckStates()
     } 
+
+    public recheckStates(){
+        this.$emit('recheckStates')
+    }   
 
 }
 </script>

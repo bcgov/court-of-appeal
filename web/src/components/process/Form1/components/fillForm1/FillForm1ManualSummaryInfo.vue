@@ -342,6 +342,7 @@ export default class FillForm1ManualSummaryInfo extends Vue {
         }
           
         this.UpdateForm1Info(form1);
+        this.recheckStates()
     }
 
     public allowedDates(date){
@@ -349,6 +350,10 @@ export default class FillForm1ManualSummaryInfo extends Vue {
            
         return (date <= day);           
     }
+
+    public recheckStates(){
+        this.$emit('recheckStates')
+    } 
 
 }
 </script>

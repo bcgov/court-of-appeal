@@ -3,21 +3,22 @@
               
         <save-or-preview-buttons class="mx-2 mb-2" :expiredDeadline="expiredDeadline" :textBelow="false" @saveForm1="saveForm1" />    
 
-        <fill-form-1-summary-info v-if="normalForm" class="mt-2 mx-2" @displayResults="displayResults"/> 
+        <fill-form-1-summary-info v-if="normalForm" class="mt-2 mx-2" @displayResults="displayResults" @recheckStates="recheckStates()" /> 
         
         <fill-form-1-manual-summary-info 
             v-else 
             :manualNorm="manualNorm"
             :manualNTrib="manualNTrib"
             :manualTrib="manualTrib"
-            class="mt-2 mx-2" 
-            @displayResults="displayResults"/>
+            class="mt-2 mx-2"
+            @recheckStates="recheckStates()" 
+            @displayResults="displayResults" />
 
              
 
-        <fill-form-1-common-info class="mx-2"/>
+        <fill-form-1-common-info class="mx-2" @recheckStates="recheckStates()" />
 
-        <fill-form-1-style-of-proceedings-info class="mx-2" />
+        <fill-form-1-style-of-proceedings-info class="mx-2" @recheckStates="recheckStates()" />
 
         <b-card class="mb-4 mx-2 border-white bg-white">
 
@@ -38,6 +39,20 @@
 
         <save-or-preview-buttons class="mx-2" :expiredDeadline="expiredDeadline" @saveForm1="saveForm1" />
         
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+            </template>
+            <div>
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                to use a residential address or business address for service outside of British Columbia
+                must submit a written request to the registrar.
+            </div>			
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+            </template>
+        </b-modal>
+
     </b-card>
 </template>
 
@@ -125,6 +140,7 @@ export default class FillForm1 extends Vue {
     manualNorm = false
     normalForm = false
 
+    showNoneBcAlert= false
 
     mounted() { 
         this.expiredDeadline = false;
@@ -221,6 +237,16 @@ export default class FillForm1 extends Vue {
         return valid;
     }
 
+    public recheckStates(){
+        //console.log('check')
+        for(const field of Object.keys(this.fieldStates)){
+            if(this.fieldStates[field]==false){
+                this.checkStates()
+                return 
+            }
+        }  
+    }
+
     public checkStates(){
         
         this.fieldStates = this.form1InfoStates;        
@@ -274,9 +300,13 @@ export default class FillForm1 extends Vue {
         
         this.fieldStates.phoneNumbers = !(this.form1Info.phoneNumbers && this.verifyPhoneNumbers()
                                     && this.form1Info.phoneNumbers.length == this.form1Info.appellants.length)? false : null;
-        this.fieldStates.addresses = !(this.form1Info.addresses && this.verifyAddresses()
-                                    && this.form1Info.addresses.length == this.form1Info.appellants.length)? false : null;       
+        
+        const verifiedAddresses = this.verifyAddresses()
+        this.fieldStates.addresses = verifiedAddresses.valid;
+        this.fieldStates.nonBcAddress = verifiedAddresses.nonBC;       
       
+        this.fieldStates.emails = this.verifyEmails()? null: false;
+
         this.UpdateForm1InfoStates(this.fieldStates);
         this.updatedInfo ++;
 
@@ -290,20 +320,38 @@ export default class FillForm1 extends Vue {
         return true;            
     }
 
+    public verifyEmails(){
+        for(const email of this.form1Info.emailAdresses){
+            if(email.contactInfo && !Vue.filter('verifyEmail')(email.contactInfo))
+                return false
+        }
+        return true
+    }
+
     public verifyPhoneNumbers(){
         for(const phoneNumber of this.form1Info.phoneNumbers){            
-            if(phoneNumber.contactInfo.trim().length == 0)
+            if(!Vue.filter('verifyPhone')(phoneNumber.contactInfo))
                 return false;
         }
         return true;
     }
 
     public verifyAddresses(){
-        for(const address of this.form1Info.addresses){            
-            if(address.contactInfo.trim().length == 0)
-                return false;
+        let nonBC = null
+        for(const index in this.form1Info.addresses){ 
+            const address = this.form1Info.addresses[index]
+            const verifiedAddress = Vue.filter('verifyAddress')(address.contactInfo)
+            // console.log(verifiedAddress)
+            // console.log(this.form1Info.emailAdresses[index].contactInfo)
+            // console.log(!this.form1Info.emailAdresses[index].contactInfo)
+            // console.log(Vue.filter('verifyEmail')(this.form1Info.emailAdresses[index].contactInfo))
+            if(verifiedAddress=='EMPTY' && (!this.form1Info.emailAdresses[index].contactInfo || !Vue.filter('verifyEmail')(this.form1Info.emailAdresses[index].contactInfo)))                  
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='ERR')
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='NONE_BC') nonBC = true
         }
-        return true;
+        return {valid:null, nonBC:nonBC};
     }
 
     public extractAddresses(){
@@ -409,7 +457,7 @@ export default class FillForm1 extends Vue {
                     if(!draft) this.navigateToPreviewPage();                           
                 }
             }, err => {
-                const errMsg = err.response.data.error;
+                //const errMsg = err.response.data.error;
                 
             })
     }
@@ -457,8 +505,16 @@ export default class FillForm1 extends Vue {
 
     public navigateToPreviewPage() {          
         if (this.checkStates()){
-            this.$router.push({name: "preview-form1"});
+            if(this.fieldStates.nonBcAddress)
+               this.showNoneBcAlert=true
+            else
+                this.$router.push({name: "preview-form1"});
         }        
+    }
+
+    public confirmNavigateToPreviewPage(){
+        this.showNoneBcAlert=false
+        this.$router.push({name: "preview-form1"});
     }
 
     public displayResults(){

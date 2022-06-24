@@ -454,11 +454,16 @@ export default class FillForm1CommonInfo extends Vue {
 
     public update(){        
         this.UpdateForm1Info(this.commonInfo);
+        this.recheckStates()
     }
 
     public allowedDates(date){
         const day = moment().startOf('day').format('YYYY-MM-DD');           
         return (date <= day);           
+    }
+
+    public recheckStates(){
+        this.$emit('recheckStates')
     }
 
 }

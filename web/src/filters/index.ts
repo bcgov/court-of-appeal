@@ -229,6 +229,36 @@ Vue.filter('getFullContactInfo',function(nameObject){
 	}
 })
 
+Vue.filter('verifyPhone', function(phone){	
+	const phoneFormat = /^[0-9]{3}[\-\.\ ][0-9]{3}[\-\.\ ][0-9]{4}?$/;
+	return phoneFormat.test(phone.trim())
+})
+
+Vue.filter('verifyEmail', function(email){
+	const emailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
+	return emailFormat.test(email)
+})
+
+Vue.filter('verifyAddress', function(address: string){
+
+	if(address.trim().length==0) return 'EMPTY'
+	
+	const bc = ['b.c.', 'bc', 'british columbia']
+	const statesAbrv = ['nl','pe','ns','nb','qc','on','mb','sk','ab','yt','nt','nu']
+	const statesAbrvDot = ['n.l.', 'p.e.i.', 'n.s.', 'n.b.', 'que.', 'ont.', 'man.', 'sask.', 'alta.', 'y.t.', 'n.w.t.', 'nvt.']
+	const stateNames = ['alberta', 'manitoba', 'new brunswick', 'newfoundland', 'nova scotia', 'ontario', 'prince edward', 'quebec', 'saskatchewan', 'northwest territories', 'nunavut', 'yukon']
+	const noneBC = [...statesAbrv, ...statesAbrvDot, ...stateNames ]
+	const addressLower = address.toLowerCase()
+	
+	for(const bcNames of bc)
+		if(addressLower.includes(bcNames)) return 'BC'
+
+	for(const noneBcName of noneBC)
+		if(addressLower.includes(noneBcName)) return 'NONE_BC'
+
+	return 'ERR'
+})
+
 Vue.filter('setSurveyProgress', function(survey, currentStep: number, currentPage: number, defaultProgress: number, beforeDestroy: boolean){
 
 	let progress =  defaultProgress;
