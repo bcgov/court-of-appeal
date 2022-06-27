@@ -233,19 +233,25 @@ export default class Form3CaseInformation extends Vue {
         this.$http.get(url)
         .then(res => {
             this.searching = false;
-            if(res.data?.parties){
-                this.UpdatePartiesJson(res.data.parties);
-                this.UpdateFileNumber(this.searchParams.file)
-                this.UpdateCurrentNoticeOfCrossAppealId(null);
-                this.$router.push({name: "fill-form3"})
-            }
-
+            
             if(res.data?.previousCourts){
                 this.UpdatePreviousCourts(res.data?.previousCourts)
             }
 
             if(res.data?.initiatingDocuments?.InitiatingDocument){
                 this.UpdateInitiatingDocuments(res.data?.initiatingDocuments?.InitiatingDocument)
+            }
+            
+            if(res.data?.parties){
+                this.UpdatePartiesJson(res.data.parties);
+                this.UpdateFileNumber(this.searchParams.file)
+                this.UpdateCurrentNoticeOfCrossAppealId(null);
+
+                const form3SubmissionData = this.form3Info;
+                form3SubmissionData.requiresManualEntry = false;       
+                this.UpdateForm3Info(form3SubmissionData);
+
+                this.$router.push({name: "fill-form3"})
             }
 
             if (!res.data){
