@@ -27,12 +27,11 @@
             <li class="mt-2">
                 Complete in a .PDF format. Click the document name for more information.  
                 <ul class="mt-2">                    
-                    <li class="my-2">
-                        <a 
-                            href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
-                            target="_blank">Supporting Affidavits (if any),
-                        </a> 
-                    </li> 
+                    <li class="link-button my-2" 
+                        @click="affidavit = true;"
+                        target="_blank">
+                        Supporting Affidavits (if any),                
+                    </li>  
                     <li class="link-button" 
                         @click="downloadInstructions('written-argument')"
                         target="_blank">
@@ -52,6 +51,41 @@
             <b>Note:</b><i> These applications are normally heard at 
             the time of the hearing of the appeal unless otherwise ordered.</i>
         </p>
+
+        <b-modal size="xl" v-model="affidavit" header-class="bg-info">
+            <template v-slot:modal-title>
+                <h1 class="mb-0 text-primary">Access Affidavit</h1>
+            </template>
+            <div class="m-3">                
+                <p>
+                    <b>Warning:</b> Some browsers or PDF readers do not 
+                    support "PDF Fillable" forms. These forms may need 
+                    to be downloaded, saved locally and then opened directly 
+                    in an appropriate PDF reader in order to fill in the content.
+                </p>
+                <p>
+                    Please see the bottom of this page for additional forms not 
+                    officially numbered by the Court.
+                </p>
+                <p>                
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                        target="_blank">Affidavit
+                    </a> 
+                </p>
+            </div>
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="affidavit = false">Close</b-button>
+            </template>
+            <template v-slot:modal-header-close>
+                <b-button
+                    variant="outline-dark"
+                    class="closeButton"
+                    @click="affidavit = false"
+                    >&times;
+                </b-button>
+            </template>
+        </b-modal>  
         
     </b-card>
 </template>
@@ -63,6 +97,12 @@ import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
 @Component
 export default class Rule60ApplicationInstructions extends Vue {   
 
+    affidavit = false;
+
+    mounted(){
+        this.affidavit = false;
+    }
+    
     public downloadInstructions(pdf_name){
 
         GetInstructionFile(pdf_name);        
