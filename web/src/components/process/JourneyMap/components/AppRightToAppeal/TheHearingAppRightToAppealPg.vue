@@ -61,11 +61,11 @@
             </p>
             <ul class="w-100">
                 <li>
-                    Condensed Book of Authorities                                    
+                    <b>Condensed Book of Authorities</b>                                    
                     <ul>                        
                         <li>
                             <b-row class="my-1 w-100">
-                                <b-col cols="8">
+                                <b-col cols="8" style="font-weight: 700;">
                                     Paper Completion Instructions                                                                       
                                 </b-col>
                                 <b-col cols="2"></b-col>                               
@@ -82,11 +82,11 @@
                     </ul>
                 </li>
                 <li>
-                    Condensed Book of Evidence                                    
+                    <b>Condensed Book of Evidence</b>                                    
                     <ul>                        
                         <li>
                             <b-row class="my-1 w-100">
-                                <b-col cols="8">
+                                <b-col cols="8" style="font-weight: 700;">
                                     Paper Completion Instructions                                                                       
                                 </b-col>
                                 <b-col cols="2"></b-col>                               

@@ -1,26 +1,26 @@
 <template>
     <b-card border-variant="white">
-
-         <p v-if="!selfRep">
-            If you are not representing yourself, you can still use this service 
-            to assist in the completion of and submission of the forms online.
+      
+        <b-card class="border-primary bg-primary text-white my-4 mr-5" v-if="!selfRep">                    
+            <h3 style="text-decoration: underline;">Not self-represented</h3>
+            If you are filing for multiple Court of Appeal matters, this service 
+            will assist you in completing and submitting forms online.
+            <h4 class="mt-2">Options for using the service:</h4>
             <ol class="mt-2">
                 <li>
-                    If you will be filing documents for multiple Court of Appeal 
-                    matters, you may wish to use the direct links to the forms by 
-                    clicking the 
+                    You can use direct links to the forms by clicking the  
                     <span class="bg-success text-white p-1" >New Form
                         <b-icon-plus scale="1.5" variant="white"/>
                     </span>                    
-                    button found on this screen or by clicking 
-                    on the document descriptions found on the right-side menus.
+                    button found on this screen or by clicking on the document 
+                    descriptions found on the right-side menus to complete the forms.
                 </li>
                 <li>
-                    Alternatively, you can use the journey map process below.
+                    Use the journey map below for a specific matter.
                 </li>
-            </ol>
+            </ol>                  
 
-        </p>
+        </b-card>  
         
         <h3>The Appeal Process</h3>      
 

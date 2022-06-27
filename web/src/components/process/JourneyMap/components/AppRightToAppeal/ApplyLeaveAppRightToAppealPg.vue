@@ -171,7 +171,7 @@
                     Complete either the Online form or the .PDF. Click the document name for more information.
                     <ul>
                          <li>
-                            <b-row class="my-1 w-100">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Notice of Application – Form 4                                    
                                 </b-col>                                
@@ -192,7 +192,7 @@
                             </b-row>
                         </li>
                         <li class="my-2">
-                            <b-row class="my-1 w-100">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Application Book for Leave to Appeal and Stay                                    
                                 </b-col>
@@ -278,7 +278,7 @@
                     Click the document name for more information.
                     <ul>                        
                         <li>
-                            <b-row class="my-1 w-100">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Response Book                                   
                                 </b-col>
@@ -362,7 +362,7 @@
                     Click the document name for more information.
                     <ul>
                         <li>                            
-                            <b-row class="my-1 w-100">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Response Book for Leave to Appeal and Stay                                  
                                 </b-col>
@@ -452,7 +452,7 @@
                                         target="_blank">Notice of Application to Vary
                                     </a>
                                 </b-col>                                
-                                <b-col cols="5" class="p-0" >
+                                <b-col cols="4" class="p-0" >
                                     <b-button
                                         @click="startNewForm8Document"
                                         target="_blank" 
@@ -520,7 +520,7 @@
                     <ul>
                         
                         <li>                            
-                            <b-row style="width: 113%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4">
                                     <a 
                                         href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
@@ -599,7 +599,7 @@
                     Click the document name for more information.
                     <ul>
                         <li>                            
-                            <b-row style="width: 113%;" class="my-1">
+                            <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
                                     Response book to vary an order of a justice                                  
                                 </b-col>
