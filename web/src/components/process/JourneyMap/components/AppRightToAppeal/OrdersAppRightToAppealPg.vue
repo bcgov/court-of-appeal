@@ -31,7 +31,7 @@
                     Prepare the order using the Online form or .PDF.
                     <ul>
                         <li>
-                            <b-row class="my-1 w-110">
+                            <b-row class="my-1 w-145">
                                 <b-col cols="9" style="font-weight: 700;">
                                    Orders                                   
                                 </b-col>                                
@@ -100,6 +100,29 @@
             </p>
         </b-row>
 
+        <b-row v-if="showSignInfo" class="mt-4" >
+            <ol class="w-90">
+                <li>Obtain application date</li>
+                <li>
+                    <b-row class="my-1 w-110">
+                        <b-col cols="6" style="font-weight: 700;">
+                            Prepare Notice of Application (Form 4)                                
+                        </b-col>                                
+                        <b-col cols="3" class="p-0" >
+                            <b-button                                    
+                                @click="startNewForm4Document"
+                                target="_blank"                                                                                
+                                class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                            </b-button>
+                        </b-col>
+                    </b-row>
+                </li>          
+            </ol>            
+        </b-row>
+        <b-row v-if="showSignInfo">
+            <i>Note: You must attach a copy of the draft order</i>
+        </b-row>
+
         <b-row v-if="showSignInfo" class="mt-3">
             <p>
                 For additional information about finding out about your judgement, please 
@@ -121,7 +144,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+
+import "@/store/modules/forms/form4";
+const form4State = namespace("Form4");
 
 @Component({
     components:{
@@ -129,6 +156,10 @@ import ExpandIcon from "@/components/utils/ExpandIcon.vue";
     }
 })
 export default class OrdersAppRightToAppealPg extends Vue { 
+
+    @form4State.Action
+    public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
+
 
     showOrderInfo = true;
     showSignInfo = false;
@@ -150,11 +181,16 @@ export default class OrdersAppRightToAppealPg extends Vue {
     public showSign(show: boolean){
         if (show) {
             this.showSignInfo = true;
-            this.$emit('adjustHeights', 1, "14rem");
+            this.$emit('adjustHeights', 1, "20rem");
         } else {
             this.showSignInfo = false;
             this.$emit('adjustHeights', 1, "0");
         }        
+    }
+
+    public startNewForm4Document(){
+        this.UpdateCurrentNoticeOfApplicationId(null);
+        this.$router.push({name: "start-form4" })
     }
 
 

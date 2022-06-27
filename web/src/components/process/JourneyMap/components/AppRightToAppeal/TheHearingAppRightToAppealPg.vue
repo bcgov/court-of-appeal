@@ -206,7 +206,7 @@
                     <b-row class="my-1 w-100">
                         <b-col cols="8">
                             <a 
-                                href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                                href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Civil_Rules_Forms.aspx"
                                 target="_blank">
                                 Complete the Bill of Costs (Form 21)          
                             </a>                                                                       
