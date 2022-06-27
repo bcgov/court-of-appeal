@@ -75,7 +75,12 @@
 
             <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    Name(s) and address(es) within BC for the service of the respondent(s)                                                    
+                    Name(s) and address(es) within BC for the service of the respondent(s)
+                    <div class="text-warning mt-3" v-if="state.nonBcAddress == true">
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                        to use a residential address or business address for service outside of British Columbia
+                        must submit a written request to the registrar.
+                    </div>                                                   
                 </b-col>
                 <b-col>
                     <div 
@@ -93,7 +98,10 @@
                         v-if="(state.addresses != null)" 
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
-                        Specify the addresses of the party(ies) filing the Notice of Appearance.
+                        Specify the addresses of the party(ies) filing the Notice of Appearance.<br/>
+                        Please note that the email address is not mandatory but rather as per the 
+                        wording of the rule must either have an address or an email address for service.  
+                        It is okay if they put both.
                     </span>             
                 </b-col>                
             </b-row>
@@ -118,7 +126,7 @@
                         v-if="(state.phoneNumbers != null)" 
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
-                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.
+                        Specify the phone numbers of the party(ies) filing the Notice of Appearance.<br/> <i> e.g. 123-456-7890</i>
                     </span>
                 </b-col>                
             </b-row>
@@ -137,7 +145,13 @@
                             rows="6"                                                                                       
                             v-model="form2Info.emailAdresses[index].contactInfo">
                         </b-form-input>      
-                    </div>                                    
+                    </div> 
+                    <div
+                        v-if="state.email==false"
+                        style="font-size: 0.75rem; margin-top:0rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Invalid Email Address. <i>(If you provide an email address, It must be valid.)</i>
+                    </div>                                   
                 </b-col>                
             </b-row>
 
@@ -182,6 +196,19 @@
 
         </div>
         
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+            </template>
+            <div>
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                to use a residential address or business address for service outside of British Columbia
+                must submit a written request to the registrar.
+            </div>			
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+            </template>
+        </b-modal>
     </b-card>
 </template>
 
@@ -225,6 +252,7 @@ export default class Form2StyleOfProceeding extends Vue {
     respondentNames: string[] = [];
     partyNames: string[] = [];
     updated=0;
+    showNoneBcAlert=false
 
     state = {
         firstAppellant: null,
@@ -232,7 +260,9 @@ export default class Form2StyleOfProceeding extends Vue {
         filingParties:null,
         authorizedName: null,
         phoneNumbers: null,       
-        addresses: null 
+        addresses: null,
+        email:null,
+        nonBcAddress: null 
     }
 
     mounted() {
@@ -262,7 +292,9 @@ export default class Form2StyleOfProceeding extends Vue {
             filingParties:null,
             authorizedName: null,
             phoneNumbers: null,       
-            addresses: null 
+            addresses: null,
+            email: null,
+            nonBcAddress: null
         }
         this.dataReady = true; 
     }
@@ -369,9 +401,14 @@ export default class Form2StyleOfProceeding extends Vue {
         this.state.filingParties = (this.form2Info.filingParties.length == 0)? false : null; 
         this.state.phoneNumbers = !(this.form2Info.phoneNumbers && this.verifyPhoneNumbers()
                                     && this.form2Info.phoneNumbers.length == this.form2Info.filingParties.length)? false : null;
-        this.state.addresses = !(this.form2Info.addresses && this.verifyAddresses()
-                                    && this.form2Info.addresses.length == this.form2Info.filingParties.length)? false : null;       
-                                    
+        
+        
+        const verifiedAddresses = this.verifyAddresses()
+        this.state.addresses = verifiedAddresses.valid;
+        this.state.nonBcAddress = verifiedAddresses.nonBC;
+
+        this.state.email = this.verifyEmails()? null: false;
+
         this.state.authorizedName = !this.form2Info.authorizedName? false : null; 
         
         for(const field of Object.keys(this.state)){
@@ -385,18 +422,33 @@ export default class Form2StyleOfProceeding extends Vue {
     
     public verifyPhoneNumbers(){
         for(const phoneNumber of this.form2Info.phoneNumbers){            
-            if(phoneNumber.contactInfo.trim().length == 0)
+            if(!Vue.filter('verifyPhone')(phoneNumber.contactInfo))            
                 return false;
         }
         return true;
     }
 
-    public verifyAddresses(){
-        for(const address of this.form2Info.addresses){            
-            if(address.contactInfo.trim().length == 0)
-                return false;
+    public verifyEmails(){
+        for(const email of this.form2Info.emailAdresses){
+            if(email.contactInfo && !Vue.filter('verifyEmail')(email.contactInfo))
+                return false
         }
-        return true;
+        return true
+    }
+
+    public verifyAddresses(){
+        let nonBC = null
+        for(const index in this.form2Info.addresses){ 
+            const address = this.form2Info.addresses[index]
+            const verifiedAddress = Vue.filter('verifyAddress')(address.contactInfo)
+            
+            if(verifiedAddress=='EMPTY' && (!this.form2Info.emailAdresses[index].contactInfo || !Vue.filter('verifyEmail')(this.form2Info.emailAdresses[index].contactInfo)))                  
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='ERR')
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='NONE_BC') nonBC = true
+        }
+        return {valid:null, nonBC:nonBC};
     }
 
     public extractAddresses(){
@@ -476,8 +528,18 @@ export default class Form2StyleOfProceeding extends Vue {
             })
     }   
 
-    public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form2"}) 
+    public navigateToPreviewPage() {          
+        if (this.checkStates()){
+            if(this.state.nonBcAddress)
+               this.showNoneBcAlert=true
+            else
+                this.$router.push({name: "preview-form2"});
+        }        
+    }
+
+    public confirmNavigateToPreviewPage(){
+        this.showNoneBcAlert=false
+        this.$router.push({name: "preview-form2"});
     }
 
 }

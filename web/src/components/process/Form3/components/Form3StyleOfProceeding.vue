@@ -423,7 +423,12 @@
                     Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.    
                     <p class="content text-primary">
                         NOTE: If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
-                    </p>                                                
+                    </p>
+                    <div class="text-warning mt-3" v-if="state.nonBcAddress == true">
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                        to use a residential address or business address for service outside of British Columbia
+                        must submit a written request to the registrar.
+                    </div>                                                
                 </b-col>
                 <b-col>  
                     <div 
@@ -441,7 +446,10 @@
                         v-if="(state.addresses != null)" 
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
-                        Specify the addresses of the party(ies) filing cross appeal.
+                        Specify the addresses of the party(ies) filing cross appeal.<br/>
+                        Please note that the email address is not mandatory but rather as per the 
+                        wording of the rule must either have an address or an email address for service.  
+                        It is okay if they put both.
                     </span>                  
                 </b-col>                
             </b-row>
@@ -467,6 +475,7 @@
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the phone numbers of the party(ies) filing the Cross Appeal.
+                        <br/> <i> e.g. 123-456-7890</i>
                     </span>                    
                 </b-col>                
             </b-row>
@@ -485,7 +494,13 @@
                             rows="6"                                                                                       
                             v-model="form3Info.emailAdresses[index].contactInfo">
                         </b-form-input>      
-                    </div>                  
+                    </div> 
+                    <div
+                        v-if="state.email==false"
+                        style="font-size: 0.75rem; margin-top:0rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Invalid Email Address. <i>(If you provide an email address, It must be valid.)</i>
+                    </div>                 
                 </b-col>                
             </b-row>              
 
@@ -528,6 +543,19 @@
 
         </div>
         
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+            </template>
+            <div>
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                to use a residential address or business address for service outside of British Columbia
+                must submit a written request to the registrar.
+            </div>			
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+            </template>
+        </b-modal>
     </b-card>
 </template>
 
@@ -580,7 +608,9 @@ export default class Form3StyleOfProceeding extends Vue {
     updated=0; 
     updateOrderDetails = 0;
     orderDateValue = '';
-  
+    
+    showNoneBcAlert=false
+
     addRespondentFormColor = 'court';
     AddNewRespondentForm = false;
     latestEditRespondentData;
@@ -635,7 +665,9 @@ export default class Form3StyleOfProceeding extends Vue {
         phoneNumbers:null,        
         addresses:null,               
         authorizedName:null, 
-        selfRepresenting: null
+        selfRepresenting: null,
+        email:null,
+        nonBcAddress: null
     }
 
     mounted() {
@@ -841,7 +873,9 @@ export default class Form3StyleOfProceeding extends Vue {
             phoneNumbers:null,
             addresses:null,               
             authorizedName:null,
-            selfRepresenting: null
+            selfRepresenting: null,
+            email:null,
+            nonBcAddress: null
         }
         this.dataReady = true; 
     }
@@ -877,9 +911,13 @@ export default class Form3StyleOfProceeding extends Vue {
         this.state.seekingOrder = (!this.form3Info.crossAppealRequired && !this.form3Info.seekingOrder)? false: null;
         this.state.phoneNumbers = !(this.form3Info.phoneNumbers && this.verifyPhoneNumbers()
                                     && this.form3Info.phoneNumbers.length == this.form3Info.crossAppealingParties.length)? false : null;
-        this.state.addresses = !(this.form3Info.addresses && this.verifyAddresses()
-                                    && this.form3Info.addresses.length == this.form3Info.crossAppealingParties.length)? false : null;       
-                
+         
+        const verifiedAddresses = this.verifyAddresses()
+        this.state.addresses = verifiedAddresses.valid;
+        this.state.nonBcAddress = verifiedAddresses.nonBC;
+
+        this.state.email = this.verifyEmails()? null: false;
+
         this.state.authorizedName = !this.form3Info.authorizedName? false : null;
         this.state.selfRepresenting = this.form3Info.selfRepresenting != null? null: false;
 
@@ -894,18 +932,33 @@ export default class Form3StyleOfProceeding extends Vue {
     
     public verifyPhoneNumbers(){
         for(const phoneNumber of this.form3Info.phoneNumbers){            
-            if(phoneNumber.contactInfo.trim().length == 0)
+            if(!Vue.filter('verifyPhone')(phoneNumber.contactInfo))            
                 return false;
         }
         return true;
     }
 
-    public verifyAddresses(){
-        for(const address of this.form3Info.addresses){            
-            if(address.contactInfo.trim().length == 0)
-                return false;
+    public verifyEmails(){
+        for(const email of this.form3Info.emailAdresses){
+            if(email.contactInfo && !Vue.filter('verifyEmail')(email.contactInfo))
+                return false
         }
-        return true;
+        return true
+    }
+
+    public verifyAddresses(){
+        let nonBC = null
+        for(const index in this.form3Info.addresses){ 
+            const address = this.form3Info.addresses[index]
+            const verifiedAddress = Vue.filter('verifyAddress')(address.contactInfo)
+            
+            if(verifiedAddress=='EMPTY' && (!this.form3Info.emailAdresses[index].contactInfo || !Vue.filter('verifyEmail')(this.form3Info.emailAdresses[index].contactInfo)))                  
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='ERR')
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='NONE_BC') nonBC = true
+        }
+        return {valid:null, nonBC:nonBC};
     }
 
     public extractAddresses(){
@@ -1170,9 +1223,19 @@ export default class Form3StyleOfProceeding extends Vue {
         const day = moment().startOf('day').format('YYYY-MM-DD');
         return (date <= day);           
     }
+   
+    public navigateToPreviewPage() {          
+        if (this.checkStates()){
+            if(this.state.nonBcAddress)
+               this.showNoneBcAlert=true
+            else
+                this.$router.push({name: "preview-form3"});
+        }        
+    }
 
-    public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form3"}) 
+    public confirmNavigateToPreviewPage(){
+        this.showNoneBcAlert=false
+        this.$router.push({name: "preview-form3"});
     }
 
 }
