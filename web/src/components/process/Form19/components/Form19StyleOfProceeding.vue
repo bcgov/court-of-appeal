@@ -23,7 +23,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form19Info.firstAppellant"                    
                         :options="applicantNames">
@@ -39,7 +40,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form19Info.firstRespondent"                    
                         :options="respondentNames">
@@ -55,7 +57,8 @@
                 <b-col>
                     <b-form-select                
                         style="width:100%" 
-                        :state="state.withdrawingLawyerName"                                    
+                        :state="state.withdrawingLawyerName"
+                        @change="recheckStates()"                                    
                         v-model="form19Info.withdrawingLawyerName"                    
                         :options="lawyerNameOptions">
                     </b-form-select>
@@ -63,6 +66,7 @@
                         v-if="form19Info.withdrawingLawyerName == 'Other'"
                         style="width:100%" 
                         placeholder="Lawyer name"
+                        @change="recheckStates()"
                         class="mt-2"
                         :state="state.withdrawingLawyerNameOther"                                    
                         v-model="form19Info.withdrawingLawyerNameOther">
@@ -78,7 +82,8 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group                
                         stacked
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.representingParties"                                        
                         v-model="form19Info.representingParties"                    
                         :options="partyNames">
@@ -94,23 +99,51 @@
                 </b-col>
                 <b-col>                    
                     <b-form-textarea                
-                        style="width:100%"  
+                        style="width:100%"
+                        @change="recheckStates()"  
                         :state="state.phoneNumbers"                                                          
                         v-model="form19Info.phoneNumbers">
-                    </b-form-textarea>                    
+                    </b-form-textarea>
+                     <span
+                        v-if="(state.phoneNumbers != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Specify the comma separated phone numbers of the party(ies).
+                        <br/> <i> e.g. 123-456-7890, 123-987-6543</i>
+                    </span>                    
                 </b-col>                
             </b-row>
             <b-row class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    Last known address(es) of the party(ies) the lawyer represents                                                    
+                    Last known address(es) of the party(ies) the lawyer represents
+                    <p class="content text-primary">
+                        <b> Note: </b>It must be a residential address or business address in British Columbia, 
+                        other than a post office box.                        
+                        <br/> <i>In case of multiple parties, provide semicolon ( <b>;</b> ) separated addresses.</i>
+                    </p>
+                    <div class="text-warning mt-3" v-if="state.nonBcAddress == true">
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                        to use a residential address or business address for service outside of British Columbia
+                        must submit a written request to the registrar.
+                    </div>                                                  
                 </b-col>
                 <b-col>                   
                     <b-form-textarea                
                         style="width:100%" 
-                        rows="6" 
+                        rows="6"
+                        @change="recheckStates()" 
                         :state="state.addresses"                                                           
                         v-model="form19Info.addresses">
-                    </b-form-textarea>                    
+                    </b-form-textarea> 
+                    <span
+                        v-if="(state.addresses != null)" 
+                        style="font-size: 0.75rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Specify the address(es) of the party(ies).<br/>
+                        Please note that the email address is not mandatory but rather as per the 
+                        wording of the rule must either have an address or an email address for service.  
+                        It is okay if they put both.
+                    </span>                   
                 </b-col>                
             </b-row>
             <b-row class="mt-4">
@@ -119,9 +152,16 @@
                 </b-col>
                 <b-col>                   
                     <b-form-textarea                
-                        style="width:100%"                                                            
+                        style="width:100%"
+                        @change="recheckStates()"                                                            
                         v-model="form19Info.emailAdresses">
-                    </b-form-textarea>                    
+                    </b-form-textarea>
+                    <div
+                        v-if="state.email==false"
+                        style="font-size: 0.75rem; margin-top:0rem;" 
+                        class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
+                        Invalid Email Address(es). Please provide comma ( , ) separated Email addresses.
+                    </div>                   
                 </b-col>                
             </b-row>
         </div> 
@@ -134,7 +174,8 @@
             </b-col>
             <b-col>
                 <b-form-input                    
-                    v-model="form19Info.authorizedName"                        
+                    v-model="form19Info.authorizedName"
+                    @change="recheckStates()"                        
                     :state ="state.authorizedName">
                 </b-form-input>
                 <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -164,6 +205,19 @@
             </b-col>
         </b-row>        
         
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+            </template>
+            <div>
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                to use a residential address or business address for service outside of British Columbia
+                must submit a written request to the registrar.
+            </div>			
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+            </template>
+        </b-modal>
     </b-card>
 </template>
 
@@ -206,6 +260,7 @@ export default class Form19StyleOfProceeding extends Vue {
     respondentNames: string[] = [];
     partyNames: string[] = [];
     lawyerNameOptions: string[] = [];
+    showNoneBcAlert=false
 
     state = {
         firstAppellant: null,
@@ -215,7 +270,9 @@ export default class Form19StyleOfProceeding extends Vue {
         representingParties: null,
         phoneNumbers: null,       
         addresses: null,  
-        authorizedName:null
+        authorizedName:null,
+        email: null,
+        nonBcAddress: null
     }
 
     mounted() {
@@ -313,9 +370,23 @@ export default class Form19StyleOfProceeding extends Vue {
             representingParties: null,
             phoneNumbers: null,           
             addresses: null, 
-            authorizedName:null
+            authorizedName:null,
+            email: null,
+            nonBcAddress: null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        
+        this.state.nonBcAddress = this.verifyAddresses().nonBC;
+
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){        
@@ -331,8 +402,14 @@ export default class Form19StyleOfProceeding extends Vue {
         }
 
         this.state.representingParties = (this.form19Info.representingParties.length == 0)? false : null; 
-        this.state.phoneNumbers = !this.form19Info.phoneNumbers? false : null;
-        this.state.addresses = !this.form19Info.addresses? false : null;
+        
+        this.state.phoneNumbers = !this.verifyPhoneNumbers()? false : null;
+        
+        const verifiedAddresses = this.verifyAddresses()
+        this.state.addresses = verifiedAddresses.valid;
+        this.state.nonBcAddress = verifiedAddresses.nonBC;
+
+        this.state.email = !this.verifyEmails()? false : null;
            
         this.state.authorizedName = !this.form19Info.authorizedName? false : null;       
         
@@ -343,7 +420,41 @@ export default class Form19StyleOfProceeding extends Vue {
             }
         }
         return true            
-    }    
+    } 
+    
+    public verifyPhoneNumbers(){
+        const phoneNumbers = this.form19Info.phoneNumbers?.split(',');
+        for(const phoneNumber of phoneNumbers){            
+            if(!Vue.filter('verifyPhone')(phoneNumber))            
+                return false;
+        }
+        return true;
+    }
+
+    public verifyEmails(){
+        const emails = this.form19Info.emailAdresses?.split(',');
+        for(const email of emails){
+            if(email && !Vue.filter('verifyEmail')(email.trim()))
+                return false
+        }
+        return true
+    }
+
+    public verifyAddresses(){
+        let nonBC = null
+        const addresses = this.form19Info.addresses?.split(';');
+        for(const address of addresses){ 
+
+            const verifiedAddress = Vue.filter('verifyAddress')(address)
+            
+            if(verifiedAddress=='EMPTY' && (!this.form19Info.emailAdresses || !this.verifyEmails()))                  
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='ERR')
+                return {valid:false, nonBC:null};
+            if(verifiedAddress=='NONE_BC') nonBC = true
+        }
+        return {valid:null, nonBC:nonBC};
+    }
 
     public saveForm(draft: boolean) { 
         
@@ -404,12 +515,27 @@ export default class Form19StyleOfProceeding extends Vue {
             })
     }   
 
-    public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form19"}) 
+    public navigateToPreviewPage() {          
+        if (this.checkStates()){
+            if(this.state.nonBcAddress)
+               this.showNoneBcAlert=true
+            else
+                this.$router.push({name: "preview-form19"});
+        }        
+    }
+
+    public confirmNavigateToPreviewPage(){
+        this.showNoneBcAlert=false
+        this.$router.push({name: "preview-form19"});
     }
 
 }
 </script>
 
 <style scoped lang="scss">
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
 </style>

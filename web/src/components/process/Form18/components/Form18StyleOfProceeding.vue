@@ -14,7 +14,7 @@
             </b-row>
         </b-card>
         
-        
+<!-- <Appellant/Respondent> -->
         <b-row style="margin-top:4rem;">
             <b-col cols="6" style="font-weight: 700;">First Appellant:
                 
@@ -24,7 +24,8 @@
                     scale="1.1"
                     title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                 <b-form-select                            
-                    class="mt-2"                        
+                    class="mt-2"
+                    @change="recheckStates()"                        
                     :state="state.firstAppellant"                   
                     v-model="form18Info.firstAppellant"                    
                     :options="applicantNames">
@@ -40,7 +41,8 @@
                     scale="1.1"
                     title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                 <b-form-select 
-                    class="mt-2"             
+                    class="mt-2"
+                    @change="recheckStates()"             
                     :state="state.firstRespondent"                   
                     v-model="form18Info.firstRespondent"                    
                     :options="respondentNames">
@@ -49,6 +51,7 @@
             </b-col>
         </b-row>
 
+<!-- <Asking for Changing Representation> -->
         <b-row class="mt-5">
             <b-col cols="6" style="font-weight: 700;">
                 Are you changing your representation?
@@ -60,6 +63,7 @@
             <b-col >
                 <b-form-radio-group                
                     :class="state.changeRepresentation==false?'border border-danger is-invalid w-50':''"
+                    @change="recheckStates()"
                     v-model="form18Info.changeRepresentation"
                     :options="changeRepresentationOptions">
                 </b-form-radio-group>
@@ -72,6 +76,7 @@
             </b-col>
         </b-row> 
 
+<!-- <Change Representation Lawyers> -->
         <div v-if="form18Info.changeRepresentation">
 
             <b-row class="mt-4">
@@ -82,7 +87,8 @@
                     <b-form-radio-group                
                         style="width:100%"
                         :class="state.currentRepresentation==false?'border border-danger is-invalid':''" 
-                        :state="state.currentRepresentation"                                    
+                        :state="state.currentRepresentation"
+                        @change="recheckStates()"                                    
                         v-model="form18Info.currentRepresentation"                    
                         :options="representationOptions">
                     </b-form-radio-group>
@@ -99,9 +105,10 @@
                 <b-col cols="6" style="font-weight: 700;">
                     What is the current lawyer's name and firm name?                                
                 </b-col>
-                <b-col >
+                <b-col :class="state.currentLawyerName==false? 'is-invalid' :''">
                     <b-form-textarea                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.currentLawyerName"                                    
                         v-model="form18Info.currentLawyerName">
                     </b-form-textarea> 
@@ -117,7 +124,7 @@
                         style="width:100%"
                         :class="state.newRepresentation==false?'border border-danger is-invalid':''" 
                         :state="state.newRepresentation"
-                        @change="updated++;"                                    
+                        @change="recheckStates();updated++;"                                    
                         v-model="form18Info.newRepresentation"                    
                         :options="form18Info.currentRepresentation == 'Lawyer' ? representationOptions: lawyerRepresentationOptions ">
                     </b-form-radio-group>
@@ -135,9 +142,10 @@
                 <b-col cols="6" style="font-weight: 700;">
                     What is the new lawyer's name and firm name?                                
                 </b-col>
-                <b-col >
+                <b-col :class="state.newLawyerName==false? 'is-invalid' :''">
                     <b-form-textarea                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()"
                         :state="state.newLawyerName"                                    
                         v-model="form18Info.newLawyerName">
                     </b-form-textarea>
@@ -146,24 +154,24 @@
 
         </div> 
 
-        <b-row class="mt-4">
+<!-- <Name of Filing Parties> -->
+        <b-row class="mt-4" v-if="form18Info.changeRepresentation != null">
             <b-col cols="6" style="font-weight: 700;">
                 Name of party(ies) filing this form:                                
             </b-col>
-            <b-col >   
-
+            <b-col >
                 <b-form-checkbox-group                
                     stacked
+                    @change="recheckStates()"
                     style="width:100%" 
                     :state="state.filingParties"                                        
                     v-model="form18Info.filingParties"                    
                     :options="partyNames">
                 </b-form-checkbox-group>
-
-                                    
             </b-col>
         </b-row> 
 
+<!-- <Ask Self-Represented> -->
         <b-row class="mt-5" v-if="form18Info.changeRepresentation == false">
             <b-col cols="6" style="font-weight: 700;">
                 Are you self-represented?                                
@@ -176,8 +184,9 @@
                     :options="changeRepresentationOptions"                
                 ></b-form-radio-group>                
             </b-col>
-        </b-row>        
+        </b-row> 
 
+<!-- <Change Address> -->
         <div :key="updated" v-if="form18Info.selfRepresented !=null || form18Info.changeRepresentation">
 
             <b-row class="mt-5">
@@ -193,6 +202,7 @@
 
             <p class="mt-4" style="font-weight: 700;">Service Information</p>
 
+<!-- <Self-Represented Name for Service> -->
             <b-row  v-if="getServiceInfoCondition">
                 <b-col cols="3">
                     Phone <span class="text-danger">* </span>
@@ -205,7 +215,8 @@
                 <b-col cols="4">
                     <b-form-input 
                         style="width: 100%"
-                        :state="state.phone"                        
+                        :state="state.phone"
+                        @change="recheckStates()"                        
                         v-model="form18Info.serviceInformation.phone">
                     </b-form-input>
                     <span 
@@ -215,6 +226,7 @@
                 </b-col>
             </b-row>
 
+<!-- < ^| Counsel Name for Service> -->
             <b-card no-body border-variant="white" v-else >
 
                 <b-row class="mt-2">
@@ -223,7 +235,8 @@
                     </b-col>
                     <b-col cols="4">
                         <b-form-input 
-                            style="width: 100%" 
+                            style="width: 100%"
+                            @change="recheckStates()" 
                             :state="state.counselFirstName"             
                             v-model="form18Info.serviceInformation.counselFirstName">
                         </b-form-input>  
@@ -237,6 +250,7 @@
                     <b-col cols="4">
                         <b-form-input 
                             style="width: 100%"
+                            @change="recheckStates()"
                             :state="state.counselLastName"
                             v-model="form18Info.serviceInformation.counselLastName">
                         </b-form-input>  
@@ -250,6 +264,7 @@
                     <b-col cols="4">
                         <b-form-input 
                             style="width: 100%"
+                            @change="recheckStates()"
                             :state="state.firmName"                        
                             v-model="form18Info.serviceInformation.firmName">
                         </b-form-input>  
@@ -268,6 +283,7 @@
                     <b-col cols="4">
                         <b-form-input 
                             style="width: 100%"
+                            @change="recheckStates()"
                             :state="state.firmPhone"                        
                             v-model="form18Info.serviceInformation.firmPhone">
                         </b-form-input>
@@ -280,6 +296,7 @@
 
             </b-card>
 
+<!-- <Email> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Email address
@@ -292,17 +309,19 @@
                 <b-col cols="4">
                     <b-form-input 
                         style="width: 100%"
+                        @change="recheckStates()"
                         :state="state.email"                         
                         v-model="form18Info.serviceInformation.email">
                     </b-form-input>
                     <span
                         v-if="state.email==false" 
                         style="font-size: 0.75rem;" 
-                        class="px-2 bg-danger text-white">Invalid Email Format!
+                        class="text-danger ml-1">Invalid Email Address. <div class="ml-1 mt-n1"> <i>(If you provide an email address, It must be valid.)</i></div>
                     </span>
                 </b-col>
             </b-row>
 
+<!-- <Address Line 1> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Address Line 1 <span class="text-danger">*</span>                   
@@ -310,6 +329,7 @@
                 <b-col cols="4">
                     <b-form-input 
                         style="width: 100%"
+                        @change="recheckStates()"
                         :state="state.addressLine1"                         
                         v-model="form18Info.serviceInformation.addressLine1">
                     </b-form-input>
@@ -320,6 +340,7 @@
                 </b-col>
             </b-row>
 
+<!-- <Address Line 2> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Address Line 2                   
@@ -336,6 +357,7 @@
                 </b-col>
             </b-row>
 
+<!-- <City> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     City <span class="text-danger">*</span>                   
@@ -343,29 +365,46 @@
                 <b-col cols="4">
                     <b-form-input 
                         style="width: 100%"
+                        @change="recheckStates()"
                         :state="state.city"                         
                         v-model="form18Info.serviceInformation.city">
                     </b-form-input>  
                 </b-col>
             </b-row>
 
+<!-- <Province> -->
             <b-row class="mt-2">
-                <b-col cols="3">Province</b-col>
-                <b-col cols="4">BC</b-col>
+                <b-col cols="3">Province <span class="text-danger">*</span></b-col>
+                <b-col cols="4">
+                    <b-form-select
+                        v-model="form18Info.serviceInformation.province" 
+                        @change="recheckStates()"
+                        :state="state.province"
+                        :options="provinces" >                        
+                    </b-form-select>
+                    <div style="font-size: 0.75rem; text-align: justify;" v-if="state.nonBcAddress == true" class="text-warning mt-1" >
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                        to use a residential address or business address for service outside of British Columbia
+                        must submit a written request to the registrar.
+                    </div>
+                </b-col>
             </b-row>
 
+<!-- <Country> -->
             <b-row class="mt-2">
                 <b-col cols="3">Country</b-col>
                 <b-col cols="4">Canada</b-col>
             </b-row>
 
+<!-- <Postal Code> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Postal Code <span class="text-danger">*</span>                   
                 </b-col>
                 <b-col cols="4">
                     <b-form-input 
-                        style="width: 100%" 
+                        style="width: 100%"
+                        @change="recheckStates()" 
                         :state="state.postalCode"                        
                         v-model="form18Info.serviceInformation.postalCode">
                     </b-form-input> 
@@ -375,8 +414,9 @@
                     </span> 
                 </b-col>
             </b-row>        
-        </div> 
+        </div>
 
+<!-- <Use Service Email > -->
         <div class="mt-5" v-if="form18Info.changeRepresentation != null">       
 
             <b-row>
@@ -416,7 +456,8 @@
                     Name of lawyer or party authorizing filing of this Form:
                 </b-col>
                 <b-col>
-                    <b-form-input                    
+                    <b-form-input
+                        @change="recheckStates()"                    
                         v-model="form18Info.authorizedName"                        
                         :state ="state.authorizedName">
                     </b-form-input>
@@ -428,7 +469,7 @@
         </div>
 
         <hr/>    
-
+<!-- <Save Buttons> -->
         <b-row >
             <b-col cols="10">
                 <b-button 
@@ -449,6 +490,19 @@
             </b-col>
         </b-row>        
         
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
+			<template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+            </template>
+            <div>
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                to use a residential address or business address for service outside of British Columbia
+                must submit a written request to the registrar.
+            </div>			
+            <template v-slot:modal-footer>
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+            </template>
+        </b-modal>        
     </b-card>
 </template>
 
@@ -499,6 +553,24 @@ export default class Form18StyleOfProceeding extends Vue {
     representationOptions = [ 'Self-represented', 'Lawyer' ];
     lawyerRepresentationOptions = [ 'Lawyer' ];
 
+    provinces = [
+        {text:'british columbia', value:'BC'}, 
+        {text:'ontario', value:'ON'}, 
+        {text:'quebec', value:'QC'}, 
+        {text:'alberta', value:'AB'}, 
+        {text:'saskatchewan', value:'SK'}, 
+        {text:'manitoba', value:'MB'},
+        {text:'newfoundland and labrador', value:'NL'},
+        {text:'newfoundland', value:'NL'},
+        {text:'labrador', value:'NL'},
+        {text:'prince edward island', value:'PE'},
+        {text:'nova scotia', value:'NS'},
+        {text:'new brunswick', value:'NB'},
+        {text:'yukon', value:'YT'},
+        {text:'northwest territories', value:'NT'},
+        {text:'nunavut', value:'NU'}
+    ]
+
     state = {
         firstAppellant: null,
         firstRespondent: null,
@@ -518,12 +590,14 @@ export default class Form18StyleOfProceeding extends Vue {
         firmPhone:null,
         filingParties:null,            
         authorizedName:null,
-        selfRepresented:null
+        selfRepresented:null,
+        province:null,
+        nonBcAddress: null
     }
 
     respondentName = ""; 
     updated=0;  
-  
+    showNoneBcAlert=false
 
     mounted() {
         this.dataReady = false;
@@ -544,7 +618,7 @@ export default class Form18StyleOfProceeding extends Vue {
             form18Data.respondents = this.partiesJson.respondents;
             form18Data.formSevenNumber = this.fileNumber;
             form18Data.serviceInformation = {} as serviceInformationJsonDataType;
-            form18Data.serviceInformation.province = "British Columbia";
+            form18Data.serviceInformation.province = "BC";
             form18Data.serviceInformation.country = "Canada";
             form18Data.filingParties = [];           
             form18Data.version = this.$store.state.Application.version;
@@ -619,6 +693,7 @@ export default class Form18StyleOfProceeding extends Vue {
                 }
 
             }
+            this.recheckStates()
         })
     }
 
@@ -642,17 +717,27 @@ export default class Form18StyleOfProceeding extends Vue {
             firmPhone:null,
             filingParties:null,           
             authorizedName:null,
-            selfRepresented: null
+            selfRepresented: null,
+            province: null,
+            nonBcAddress: null
         }
         this.dataReady = true; 
     }
 
+    public recheckStates(){
+        
+        this.state.nonBcAddress = this.form18Info.serviceInformation?.province && this.form18Info.serviceInformation?.province != 'BC' ? true : null
+        
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
+    }
+
     public checkStates(){         
-
-        const phoneFormat = /^[0-9]{3}-[0-9]{3}\-[0-9]{4}((\s\x[0-9]{4})|)$/;
-        const emailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
-        const postcodeFormat = /^(([A-Z][0-9][A-Z] [0-9][A-Z][0-9])|([a-z][0-9][a-z] [0-9][a-z][0-9]))?$/;
-
+        
         if(this.form18Info.currentRepresentation!='Lawyer' && this.form18Info.newRepresentation!='Lawyer')
             this.form18Info.newRepresentation=''
 
@@ -670,32 +755,35 @@ export default class Form18StyleOfProceeding extends Vue {
         this.state.newLawyerName = (changeRep && this.form18Info.newRepresentation=='Lawyer' && !this.form18Info.newLawyerName)? false : null;
 
 
-        const selfRep = this.form18Info.selfRepresented || this.form18Info.newRepresentation!='Lawyer';
+        const selfRep = this.form18Info.selfRepresented || (changeRep && this.form18Info.newRepresentation!='Lawyer');
 
         const phone = this.form18Info.serviceInformation?.phone?.trim()
-        this.state.phone = (selfRep && phoneFormat.test(phone)==false)? false : null;
+        this.state.phone = (selfRep && Vue.filter('verifyPhone')(phone)==false)? false : null;
 
         this.state.counselFirstName = !selfRep && !this.form18Info.serviceInformation?.counselFirstName? false : null;
         this.state.counselLastName =  !selfRep && !this.form18Info.serviceInformation?.counselLastName? false : null;
         this.state.firmName =  !selfRep && !this.form18Info.serviceInformation?.firmName?  false : null;
         
         const firmPhone = this.form18Info.serviceInformation?.firmPhone?.trim()
-        this.state.firmPhone = (!selfRep && phoneFormat.test(firmPhone)==false)? false : null;
+        this.state.firmPhone = (!selfRep && Vue.filter('verifyPhone')(firmPhone)==false)? false : null;
         
         const email = this.form18Info.serviceInformation?.email?.trim();
-        this.state.email =(email && !emailFormat.test(email) ||(!email && this.form18Info.useServiceEmail))? false : null;
+        this.state.email =(email && !Vue.filter('verifyEmail')(email) ||(!email && this.form18Info.useServiceEmail))? false : null;
         
         this.state.addressLine1 = !this.form18Info.serviceInformation?.addressLine1? false : null;
         this.state.city = !this.form18Info.serviceInformation?.city? false : null;
 
+        this.state.province = !this.form18Info.serviceInformation?.province ? false : null
+        this.state.nonBcAddress = this.form18Info.serviceInformation?.province && this.form18Info.serviceInformation?.province != 'BC' ? true : null  
+
         const postalCode = this.form18Info.serviceInformation?.postalCode?.trim()
-        this.state.postalCode = !postcodeFormat.test(postalCode)? false : null;        
+        this.state.postalCode = !Vue.filter('verifyPostCode')(postalCode)? false : null;        
         this.state.filingParties = (this.form18Info.filingParties?.length > 0)? null: false; 
            
         this.state.authorizedName = !this.form18Info.authorizedName? false : null; 
         this.state.selfRepresented = this.form18Info.selfRepresented==null && !changeRep? false :null
 
-        //console.log(this.state)
+        // console.log(this.state)
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
@@ -704,7 +792,8 @@ export default class Form18StyleOfProceeding extends Vue {
             }
         }
         return true            
-    }    
+    }
+
 
     public saveForm(draft: boolean) { 
         
@@ -765,8 +854,18 @@ export default class Form18StyleOfProceeding extends Vue {
             })
     }   
 
-    public navigateToPreviewPage() {        
-        this.$router.push({name: "preview-form18"}) 
+    public navigateToPreviewPage() {          
+        if (this.checkStates()){
+            if(this.state.nonBcAddress)
+               this.showNoneBcAlert=true
+            else
+                this.$router.push({name: "preview-form18"});
+        }        
+    }
+
+    public confirmNavigateToPreviewPage(){
+        this.showNoneBcAlert=false
+        this.$router.push({name: "preview-form18"});
     }
 
     get getServiceInfoCondition(){

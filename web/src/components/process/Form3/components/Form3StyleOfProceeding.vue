@@ -320,8 +320,8 @@
                     <b-col cols="7" class="labels">
                         Part of the Order being cross appealed 
                         <p class="content text-primary">
-                            NOTE: If you are only seeking leave to cross appeal one part of an order, 
-                            enter the part that you are seeking leave to cross appeal.
+                            <b> Note: </b> If you are only seeking leave to cross appeal one part of an order, 
+                            enter the part that you are seeking leave to cross appeal.                            
                         </p>                               
                     </b-col>
                     <b-col>                    
@@ -422,7 +422,9 @@
                 <b-col cols="7" class="labels">
                     Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.    
                     <p class="content text-primary">
-                        NOTE: If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
+                        <b>Note:</b> If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
+                        <br/>It must be a residential address or business address in British Columbia, 
+                        other than a post office box.
                     </p>
                     <div class="text-warning mt-3" v-if="state.nonBcAddress == true">
                         Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 

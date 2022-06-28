@@ -93,8 +93,11 @@
                 <b-col cols="7" class="labels">
                     Name(s) and address(es) within BC for the service of the appellant(s) 
                     <p class="content text-primary font-italic">
+                       <b> Note: </b>
                         If you have a lawyer, include the law firm’s address; 
-                        otherwise provide your own residential address
+                        otherwise provide your own residential address.
+                        <br/>It must be a residential address or business address in British Columbia, 
+                        other than a post office box.
                     </p>
                     <div class="text-warning mt-3" v-if="form1InfoStates.nonBcAddress == true">
                         Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
