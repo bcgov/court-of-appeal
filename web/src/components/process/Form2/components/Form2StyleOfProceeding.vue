@@ -76,6 +76,10 @@
             <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Name(s) and address(es) within BC for the service of the respondent(s)
+                    <p class="content text-primary">
+                        <b>Note:</b> It must be a residential address or business address in British Columbia, 
+                        other than a post office box.
+                    </p>
                     <div class="text-warning mt-3" v-if="state.nonBcAddress == true">
                         Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
                         to use a residential address or business address for service outside of British Columbia
@@ -546,4 +550,9 @@ export default class Form2StyleOfProceeding extends Vue {
 </script>
 
 <style scoped lang="scss">
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+    }
 </style>

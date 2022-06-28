@@ -230,8 +230,8 @@ Vue.filter('getFullContactInfo',function(nameObject){
 })
 
 Vue.filter('verifyPhone', function(phone){	
-	const phoneFormat = /^[0-9]{3}[\-\.\ ][0-9]{3}[\-\.\ ][0-9]{4}?$/;
-	return phoneFormat.test(phone.trim())
+	const phoneFormat = /^[0-9]{3}[\-\.\ ][0-9]{3}[\-\.\ ][0-9]{4}((\s\x[0-9]{4})|)?$/;
+	return phoneFormat.test(phone?.trim())
 })
 
 Vue.filter('verifyEmail', function(email){
@@ -239,9 +239,14 @@ Vue.filter('verifyEmail', function(email){
 	return emailFormat.test(email)
 })
 
+Vue.filter('verifyPostCode', function(postcode){	
+	const postcodeFormat = /^(([A-Z][0-9][A-Z] [0-9][A-Z][0-9])|([a-z][0-9][a-z] [0-9][a-z][0-9]))?$/;
+	return postcodeFormat.test(postcode?.trim())
+})
+
 Vue.filter('verifyAddress', function(address: string){
 
-	if(address.trim().length==0) return 'EMPTY'
+	if(address?.trim()?.length==0) return 'EMPTY'
 	
 	const bc = ['b.c.', 'bc', 'british columbia']
 	const statesAbrv = ['nl','pe','ns','nb','qc','on','mb','sk','ab','yt','nt','nu']
