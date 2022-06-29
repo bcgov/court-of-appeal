@@ -237,7 +237,7 @@
             <b-row class="mt-5 question">
                 <b-col cols="7" class="labels">
                     <p>Is Leave to Cross Appeal Required?</p>
-                    <p style="font-size: 0.75rem;">
+                    <p style="font-size: 0.75rem; margin-top:-1rem;">
                         (Court of Appeal Rule 12 explains when you need leave to cross appeal, if unsure check "yes")
                     </p>
                 </b-col>
@@ -484,7 +484,10 @@
             
             <b-row v-if="form3Info.crossAppealingParties.length > 0" class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Email address(es) for party(ies) providing service for cross appeal                                
+                    Email address(es) for party(ies) providing service for cross appeal 
+                    <p class="content text-primary">
+                        <b> Note: </b> If you provide an email address, you consent to have documents served on you by email.
+                    </p>                               
                 </b-col>
                 <b-col>                   
                     <div 
@@ -1255,6 +1258,7 @@ export default class Form3StyleOfProceeding extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;
+        font-style: italic;
     }
 
     .labels {

@@ -255,8 +255,8 @@
 
                     <div class="arrow-right-flash-62"></div> <!-- < width ~ 8% > -->
                             
-                    <div class="coa-text-box-left" style="width:60%;">
-                        <div class="mx-2">{{result.serviceInformation.email}}</div> 
+                    <div class="coa-text-box-left" style="width:60%;">                        
+                        <div v-if="result.useServiceEmail" class="mx-2">{{result.serviceInformation.email}}</div> 
                     </div>                      
 
                 </div> 

@@ -92,21 +92,21 @@
                         :key="'address' +index"                       
                         :value="address"> {{form2Info.addresses[index].name}}                  
                         <b-form-textarea                
-                            style="width:100%" 
+                            style="width:100%; margin-bottom:0.75rem;" 
                             rows="6"
                             @change="recheckStates()"                                                                                       
                             v-model="form2Info.addresses[index].contactInfo">
                         </b-form-textarea>      
                     </div> 
-                    <span
+                    <div
                         v-if="(state.addresses != null)" 
-                        style="font-size: 0.75rem;" 
+                        style="font-size: 0.75rem; margin-top:-0.65rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the addresses of the party(ies) filing the Notice of Appearance.<br/>
                         Please note that the email address is not mandatory but rather as per the 
                         wording of the rule must either have an address or an email address for service.  
                         It is okay if they put both.
-                    </span>             
+                    </div>             
                 </b-col>                
             </b-row>
 
@@ -120,24 +120,27 @@
                         :key="'phone' + index"                        
                         :value="phone"> {{form2Info.phoneNumbers[index].name}}                  
                         <b-form-input                
-                            style="width:100%" 
+                            style="width:100%; margin-bottom:0.75rem;" 
                             rows="6"
                             @change="recheckStates()"                                                                                       
                             v-model="form2Info.phoneNumbers[index].contactInfo">
                         </b-form-input>      
                     </div>
-                    <span
+                    <div
                         v-if="(state.phoneNumbers != null)" 
-                        style="font-size: 0.75rem;" 
+                        style="font-size: 0.75rem; margin-top:-0.65rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Specify the phone numbers of the party(ies) filing the Notice of Appearance.<br/> <i> e.g. 123-456-7890</i>
-                    </span>
+                    </div>
                 </b-col>                
             </b-row>
 
             <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 2" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    Email(s) address(es) for service of respondent(s)                                
+                    Email(s) address(es) for service of respondent(s)
+                    <p class="content text-primary">
+                        <b> Note: </b> If you provide an email address, you consent to have documents served on you by email.
+                    </p>                                
                 </b-col>
                 <b-col>
                     <div 
@@ -145,14 +148,15 @@
                         :key="'email' + index"                       
                         :value="email"> {{form2Info.emailAdresses[index].name}}                  
                         <b-form-input                
-                            style="width:100%" 
-                            rows="6"                                                                                       
+                            style="width:100%; margin-bottom:0.75rem;" 
+                            rows="6"
+                            @change="recheckStates()"                                                                                      
                             v-model="form2Info.emailAdresses[index].contactInfo">
                         </b-form-input>      
                     </div> 
                     <div
                         v-if="state.email==false"
-                        style="font-size: 0.75rem; margin-top:0rem;" 
+                        style="font-size: 0.75rem; margin-top:-0.65rem;" 
                         class="bg-white text-danger is-invalid"><b-icon-exclamation-circle/>
                         Invalid Email Address. <i>(If you provide an email address, It must be valid.)</i>
                     </div>                                   
@@ -554,5 +558,6 @@ export default class Form2StyleOfProceeding extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;
+        font-style: italic;
     }
 </style>
