@@ -55,8 +55,7 @@
         <b-row class="mt-5">
             <b-col cols="6" style="font-weight: 700;">
                 Are you changing your representation?
-                <div class="text-info"
-                    style="display: block; font-size: 0.75rem;"><b>Note:</b> Changing Representation means a change from one lawyer to another; 
+                <div class="content text-primary"><b>Note:</b> Changing Representation means a change from one lawyer to another; 
                     or from being self-represented to having a lawyer; or from having a lawyer 
                     to being self-represented</div>                                
             </b-col>
@@ -305,6 +304,10 @@
                         scale="1.1"
                         v-b-tooltip.hover                    
                         title="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below."/>
+                    <p class="content text-primary">
+                        <b> Note: </b> If you provide an email address, you consent to have documents served on you by email.
+                    </p>
+
                 </b-col>
                 <b-col cols="4">
                     <b-form-input 
@@ -324,7 +327,11 @@
 <!-- <Address Line 1> -->
             <b-row class="mt-2">
                 <b-col cols="3">
-                    Address Line 1 <span class="text-danger">*</span>                   
+                    Address Line 1 <span class="text-danger">*</span>
+                    <p class="content text-primary">
+                        <b> Note: </b>It must be a residential address or business address in British Columbia, 
+                        other than a post office box. 
+                    </p>                    
                 </b-col>
                 <b-col cols="4">
                     <b-form-input 
@@ -419,20 +426,20 @@
 <!-- <Use Service Email > -->
         <div class="mt-5" v-if="form18Info.changeRepresentation != null">       
 
-            <b-row>
+            <!-- <b-row>
                 <b-form-group>
                     <span class="ml-3">I would like to receive email notifications when the status of my document changes</span>	
                     <b-form-checkbox
                         class="ml-5"
                         style="display: inline;"
                         size="sm"									
-                        v-model="form18Info.useServiceEmail"
+                        v-model="form18Info.sendNotifications"
                         >  
                     </b-form-checkbox>						
                 </b-form-group>
-            </b-row>
+            </b-row> -->
 
-            <b-row >
+            <b-row>
                 <b-form-group>
                     <span class="ml-3 mr-1">I agree to be served documents electronically by another party</span>
                     <b-icon-question-circle-fill 
@@ -441,9 +448,9 @@
                         scale="1.1"
                         title="Electronic service will replace in-person service if you select this option."/>	
                     <b-form-checkbox                        
-                        style="display: inline; margin-left: 8.25rem;"
-                        size="sm"									
-                        v-model="form18Info.sendNotifications"
+                        style="display: inline; margin-left: 3.75rem;"
+                        									
+                        v-model="form18Info.useServiceEmail"
                         >  
                     </b-form-checkbox>						
                 </b-form-group>
@@ -876,4 +883,10 @@ export default class Form18StyleOfProceeding extends Vue {
 </script>
 
 <style scoped lang="scss">
+    .content {        
+        margin-bottom: 0px !important; 
+        font-size: 0.75rem; 
+        font-weight:400;
+        font-style: italic;
+    }
 </style>

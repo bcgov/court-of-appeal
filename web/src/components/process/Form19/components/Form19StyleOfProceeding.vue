@@ -148,7 +148,10 @@
             </b-row>
             <b-row class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    Last known email(s) of the party(ies) the lawyer represents                                
+                    Last known email(s) of the party(ies) the lawyer represents 
+                    <p class="content text-primary">
+                        <b> Note: </b> If you provide an email address, you consent to have documents served on you by email.
+                    </p>                               
                 </b-col>
                 <b-col>                   
                     <b-form-textarea                
@@ -423,7 +426,7 @@ export default class Form19StyleOfProceeding extends Vue {
     } 
     
     public verifyPhoneNumbers(){
-        const phoneNumbers = this.form19Info.phoneNumbers?.split(',');
+        const phoneNumbers = this.form19Info.phoneNumbers? this.form19Info.phoneNumbers.split(','): [''];
         for(const phoneNumber of phoneNumbers){            
             if(!Vue.filter('verifyPhone')(phoneNumber))            
                 return false;
@@ -432,7 +435,7 @@ export default class Form19StyleOfProceeding extends Vue {
     }
 
     public verifyEmails(){
-        const emails = this.form19Info.emailAdresses?.split(',');
+        const emails = this.form19Info.emailAdresses? this.form19Info.emailAdresses.split(','):[''];
         for(const email of emails){
             if(email && !Vue.filter('verifyEmail')(email.trim()))
                 return false
@@ -442,7 +445,7 @@ export default class Form19StyleOfProceeding extends Vue {
 
     public verifyAddresses(){
         let nonBC = null
-        const addresses = this.form19Info.addresses?.split(';');
+        const addresses = this.form19Info.addresses? this.form19Info.addresses.split(';'): [''];
         for(const address of addresses){ 
 
             const verifiedAddress = Vue.filter('verifyAddress')(address)
@@ -537,5 +540,6 @@ export default class Form19StyleOfProceeding extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;
+        font-style: italic;
     }
 </style>
