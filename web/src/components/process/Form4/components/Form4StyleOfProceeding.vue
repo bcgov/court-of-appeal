@@ -610,10 +610,12 @@ export default class Form4StyleOfProceeding extends Vue {
         'extend time to file books or documents',
         'extend time to appeal or cross-appeal',
         'intervener status',       
+        'leave to appeal',
         'payment of security',
         'quashing an appeal or raising a preliminary objection',
         'reinstate appeal that is dismissed as abandoned',
-        'remove appeal from the inactive list',       
+        'remove appeal from the inactive list',  
+        'stay of proceedings',      
         'varying or cancelling an order of the registrar',
         'other'
     ];
