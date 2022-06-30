@@ -129,7 +129,13 @@ void deploy(String appName, String appSuffix, String namespace, String envTag) {
 }
 
 node {
-  def config = load "../workspace@script/jenkins/config.groovy"
+  //def config = load "../workspace@script/jenkins/config.groovy"
+  stage("Init") {
+    script {
+      config = load 'jenkins/config.groovy'
+    }
+  }
+  
   def waitTimeout = config.WAIT_TIMEOUT
   def pipeline_name = "${config.WEB_APP_NAME}-pipeline"
   def contextDirectory = "${config.WEB_APP_NAME}"
