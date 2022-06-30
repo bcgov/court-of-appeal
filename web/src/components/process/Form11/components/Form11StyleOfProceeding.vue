@@ -283,7 +283,8 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form11Info.hearingDate"                           
+                                    v-model="form11Info.hearingDate"
+                                    @change="recheckStates()"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -342,7 +343,8 @@
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
                                     v-model="form11Info.dateOfJudgement"                           
-                                    color="warning"             
+                                    color="warning"
+                                    @change="recheckStates()"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
                                 ></v-date-picker>                            
@@ -359,7 +361,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-radio-group                                                           
-                        :class="state.judgmentReserved==false?'border border-danger is-invalid w-50':''"                                      
+                        :class="state.judgmentReserved==false?'border border-danger is-invalid w-50':''" 
+                        @change="recheckStates()"                                     
                         v-model="form11Info.judgmentReserved"
                         :options="yesNoOptions">                        
                     </b-form-radio-group> 
@@ -378,7 +381,8 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form11Info.judgmentReservedDate"                           
+                                    v-model="form11Info.judgmentReservedDate"
+                                    @change="recheckStates()"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -408,7 +412,8 @@
                 </b-col>
                 <b-col> 
                     <b-form-radio-group                                                           
-                        :class="state.laterDateDecided==false?'border border-danger is-invalid w-50':''"                                      
+                        :class="state.laterDateDecided==false?'border border-danger is-invalid w-50':''"
+                        @change="recheckStates()"                                      
                         v-model="form11Info.laterDateDecided">
                         <b-form-radio :value="true"> Yes </b-form-radio>
                         <b-form-radio :value="false"> No </b-form-radio>
@@ -428,7 +433,8 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form11Info.laterDate"                           
+                                    v-model="form11Info.laterDate"
+                                    @change="recheckStates()"                           
                                     color="warning"                                                                             
                                     header-color="red"
                                 ></v-date-picker>                            
@@ -451,6 +457,7 @@
                     <b-form-radio-group                                                           
                         :class="state.supplementaryReasons==false?'border border-danger is-invalid w-50':''"                                      
                         v-model="form11Info.supplementaryReasons"
+                        @change="recheckStates()"
                         :options="yesNoOptions">                        
                     </b-form-radio-group>
                 </b-col>
@@ -468,7 +475,8 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form11Info.supplementaryReasonsDate"                           
+                                    v-model="form11Info.supplementaryReasonsDate"
+                                    @change="recheckStates()"                           
                                     color="warning"                                                                             
                                     header-color="red"
                                 ></v-date-picker>                            
@@ -488,7 +496,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-input 
-                        :state="state.varyingOrderJudgeName"               
+                        :state="state.varyingOrderJudgeName"
+                        @change="recheckStates()"               
                         style="width:100%"                                    
                         v-model="form11Info.varyingOrderJudgeName">                            
                     </b-form-input>
@@ -516,7 +525,8 @@
                     Location of court/tribunal   
                 </b-col>
                 <b-col class="ml-1">   
-                    <b-form-input                                                             
+                    <b-form-input
+                        @change="recheckStates()"                                                             
                         v-model="form11Info.varyingOrderLocation"                                                        
                         :state="state.varyingOrderLocation"                           
                     />
@@ -535,7 +545,8 @@
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
                                     v-model="form11Info.varyingOrderDate"                           
-                                    color="warning"             
+                                    color="warning"
+                                    @change="recheckStates()"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
                                 ></v-date-picker>                            
@@ -553,6 +564,7 @@
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
                         stacked
+                        @change="recheckStates(true)"
                         :state="state.filingParties"                                      
                         v-model="form11Info.filingParties">
                         <b-form-checkbox
@@ -583,7 +595,7 @@
                     <b-form-checkbox-group 
                         stacked                                               
                         style="width:100%"
-                        @change="updated++"                       
+                        @change="updated++;recheckStates(true);"                       
                         :state="state.appearingParties"                                      
                         v-model="form11Info.appearingParties">
 
@@ -617,7 +629,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group
-                        :class="state.orderAllowed==false?'border border-danger is-invalid':''"                                         
+                        :class="state.orderAllowed==false?'border border-danger is-invalid':''"
+                        @change="recheckStates()"                                         
                         v-model="form11Info.orderAllowed"
                         :options="allowedOptions"                
                     ></b-form-radio-group>
@@ -641,7 +654,8 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-textarea
                         style="width:100%" 
-                        max-rows="6"  
+                        max-rows="6"
+                        @change="recheckStates()"  
                         :state="state.ordersCourtMade"
                         v-model="form11Info.ordersCourtMade"               
                     ></b-form-textarea>
@@ -661,7 +675,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-radio-group 
-                        :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"                                             
+                        :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"
+                        @change="recheckStates()"                                             
                         v-model="form11Info.otherOrders"
                         :options="yesNoOptions"                
                     ></b-form-radio-group>
@@ -680,7 +695,8 @@
                 </b-col>
                 <b-col>                    
                     <b-form-textarea                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         max-rows="6"  
                         :state="state.furtherOrders"                                                          
                         v-model="form11Info.furtherOrders">
@@ -695,7 +711,7 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-radio-group
-                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties()"                                                           
+                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties();recheckStates();"                                                           
                         :class="state.orderedAwardingCosts==false?'border border-danger is-invalid w-50':''"                                      
                         v-model="form11Info.orderedAwardingCosts"
                         :options="yesNoOptions">                        
@@ -711,7 +727,7 @@
                     <b-form-checkbox-group  
                         stacked
                         :state="state.successfulParties"
-                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties()"                   
+                        @change="form11Info.unsuccessfulParties=[];updateNonSuccessfulParties();recheckStates();"                   
                         v-model="form11Info.successfulParties">
                         <b-form-checkbox
                             :value="successparty"
@@ -731,7 +747,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
-                        stacked                        
+                        stacked
+                        @change="recheckStates()"                        
                         :state="state.unsuccessfulParties"                   
                         v-model="form11Info.unsuccessfulParties">
                         <b-form-checkbox
@@ -1026,6 +1043,7 @@ export default class Form11StyleOfProceeding extends Vue {
         }  
         
         this.UpdateForm11Info(form11);
+        this.recheckStates()
     }
 
     public revaluateForm11Data(){
@@ -1112,7 +1130,16 @@ export default class Form11StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
-    public checkStates(){  
+    public recheckStates(dontFindInvalidFields?){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates(dontFindInvalidFields)
+                return 
+            }
+        }
+    }
+
+    public checkStates(dontFindInvalidFields?){  
         
         this.state.appellantsInfo = this.form11Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form11Info.respondents?.length>0? null :false;            
@@ -1144,6 +1171,8 @@ export default class Form11StyleOfProceeding extends Vue {
         this.state.ordersCourtMade = this.form11Info.ordersCourtMade? null:false
         
         this.state.hearingDate = this.form11Info.hearingDate? null :false;
+
+        if(dontFindInvalidFields == true) return true
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
@@ -1327,7 +1356,8 @@ export default class Form11StyleOfProceeding extends Vue {
         if(this.isEditJudgeNamesOpen){
             this.latestEditJudgeNamesData.toggleDetails();
             this.isEditJudgeNamesOpen = false;
-        } 
+        }
+        this.recheckStates()
     }
 
     public allowedDates(date){
@@ -1395,6 +1425,7 @@ export default class Form11StyleOfProceeding extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;
+        font-style: italic;
     }
 
     .labels {

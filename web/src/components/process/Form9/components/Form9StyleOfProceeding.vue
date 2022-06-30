@@ -24,7 +24,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                       
                         :state="state.firstAppellant"                   
                         v-model="form9Info.firstAppellant"                    
                         :options="applicantNames">
@@ -40,7 +41,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form9Info.firstRespondent"                    
                         :options="respondentNames">
@@ -58,7 +60,8 @@
                 label="Are you self-represented?">
                 <b-form-radio-group
                     :class="state.selfRepresented==false?'border border-danger is-invalid w-50':''"
-                    style="max-width:75%"                   
+                    style="max-width:75%"
+                    @change="recheckStates()"                   
                     v-model="form9Info.selfRepresented"
                     :options="representationOptions"                
                 ></b-form-radio-group>
@@ -75,6 +78,7 @@
                 <b-col class="ml-1 mt-2"> 
                     <b-form-checkbox-group                
                         stacked
+                        @change="recheckStates()"
                         style="width:100%" 
                         :state="state.filingRequisitionParties"                                    
                         v-model="form9Info.filingRequisitionParties"                    
@@ -90,7 +94,8 @@
                 <b-col class="ml-1">   
 
                     <b-form-textarea                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.reliefSought"                   
                         v-model="form9Info.reliefSought">
                     </b-form-textarea>
@@ -106,7 +111,8 @@
                 </b-col>
                 <b-col class="ml-1">
                     <b-form-input                    
-                        v-model="form9Info.authorizedName"                        
+                        v-model="form9Info.authorizedName"
+                        @change="recheckStates()"                        
                         :state ="state.authorizedName">
                     </b-form-input>
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -274,6 +280,15 @@ export default class Form9StyleOfProceeding extends Vue {
             selfRepresented:null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   

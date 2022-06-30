@@ -179,7 +179,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                                       
+                        stacked
+                        @change="recheckStates(true)"                                       
                         style="width:100%"                        
                         :state="state.seekingRemoved"   
                         :options="seekingRemovedOptions"                                   
@@ -205,7 +206,7 @@
                     <b-form-checkbox-group 
                         stacked                                               
                         style="width:100%"
-                        @change="updated++"                       
+                        @change="updated++;recheckStates(true);"                       
                         :state="state.signingParties"                                      
                         v-model="form14Info.signingParties">
 
@@ -434,12 +435,23 @@ export default class Form14StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
-    public checkStates(){  
+    public recheckStates(dontFindInvalidFields?){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates(dontFindInvalidFields)
+                return 
+            }
+        }
+    }
+
+    public checkStates(dontFindInvalidFields?){  
         
         this.state.appellantsInfo = this.form14Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form14Info.respondents?.length>0? null :false;            
         this.state.seekingRemoved = this.form14Info.seekingRemoved?.length>0? null :false;
         this.state.signingParties = this.form14Info.signingParties?.length>0? null :false;
+        
+        if(dontFindInvalidFields == true) return true
         
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){

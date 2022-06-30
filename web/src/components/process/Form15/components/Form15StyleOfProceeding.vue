@@ -180,7 +180,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                       
+                        stacked
+                        @change="recheckStates(true)"                      
                         :state="state.filingParties"                                      
                         v-model="form15Info.filingParties">
                         <b-form-checkbox
@@ -201,7 +202,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">   
                     <b-form-textarea
-                        max-rows="8"                        
+                        max-rows="8"
+                        @change="recheckStates()"                       
                         :state="state.orders"              
                         v-model="form15Info.orders">                       
                     </b-form-textarea> 
@@ -217,6 +219,7 @@
                     <b-form-radio-group
                         :class="state.otherOrders==false?'border border-danger is-invalid w-50':''"                                             
                         v-model="form15Info.otherOrders"
+                        @change="recheckStates()"
                         :options="responseOptions"                
                     ></b-form-radio-group>
                     <span
@@ -235,7 +238,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">   
                     <b-form-textarea
-                        max-rows="8"                        
+                        max-rows="8"
+                        @change="recheckStates()"                        
                         :state="state.additionalOrders"              
                         v-model="form15Info.additionalOrders">                       
                     </b-form-textarea> 
@@ -259,7 +263,7 @@
                     <b-form-checkbox-group 
                         stacked                                               
                         style="width:100%"
-                        @change="checkStates()"                       
+                        @change="checkStates(true)"                       
                         :state="state.signingParties"                                      
                         v-model="form15Info.signingParties">
 
@@ -504,7 +508,16 @@ export default class Form15StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
-    public checkStates(){  
+    public recheckStates(dontFindInvalidFields?){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates(dontFindInvalidFields)
+                return 
+            }
+        }
+    }
+
+    public checkStates(dontFindInvalidFields?){  
         
         this.state.appellantsInfo = this.form15Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form15Info.respondents?.length>0? null :false;            
@@ -517,7 +530,9 @@ export default class Form15StyleOfProceeding extends Vue {
         const signingRespondents = signingParties.filter(party=> party.responding)
         
         this.state.signingParties = (signingAppellants.length>0 && signingRespondents.length > 0)? null :false;
-         
+        
+        if(dontFindInvalidFields == true) return true 
+        
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
                 Vue.filter('findInvalidFields')()
