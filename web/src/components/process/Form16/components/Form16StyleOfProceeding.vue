@@ -23,7 +23,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form16Info.firstAppellant"                    
                         :options="applicantNames">
@@ -39,7 +40,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form16Info.firstRespondent"                    
                         :options="respondentNames">
@@ -60,7 +62,7 @@
                     stacked               
                     style="width:100%" 
                     :state="state.offeringParties"
-                    @change="updateOtherParties"                   
+                    @change="updateOtherParties();recheckStates()"                   
                     v-model="form16Info.offeringParties"                    
                     :options="partyNames">
                 </b-form-checkbox-group>
@@ -80,7 +82,8 @@
 
                     <b-form-checkbox-group 
                         stacked
-                        :key="updated"               
+                        :key="updated"
+                        @change="recheckStates()"               
                         style="width:100%" 
                         :state="state.receivingParties"                   
                         v-model="form16Info.receivingParties"                    
@@ -96,7 +99,8 @@
                 </b-col>
                 <b-col class="ml-1">
                     <b-form-input                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.amount"                   
                         v-model="form16Info.amount">
                     </b-form-input>
@@ -109,7 +113,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-input                    
-                        v-model="form16Info.authorizedName"                        
+                        v-model="form16Info.authorizedName"
+                        @change="recheckStates()"                        
                         :state ="state.authorizedName">
                     </b-form-input>
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -271,6 +276,15 @@ export default class Form16StyleOfProceeding extends Vue {
             authorizedName:null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   

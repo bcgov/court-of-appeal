@@ -45,7 +45,8 @@
                     scale="1.1"
                     title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                 <b-form-select                            
-                    class="mt-2"                        
+                    class="mt-2"
+                    @change="recheckStates()"                        
                     :state="state.firstAppellant"                   
                     v-model="form7Info.firstAppellant"                    
                     :options="applicantNames">
@@ -61,7 +62,8 @@
                     scale="1.1"
                     title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                 <b-form-select 
-                    class="mt-2"             
+                    class="mt-2"
+                    @change="recheckStates()"             
                     :state="state.firstRespondent"                   
                     v-model="form7Info.firstRespondent"                    
                     :options="respondentNames">
@@ -77,7 +79,8 @@
             <b-col class="ml-1 mt-2">
                 <b-form-checkbox-group 
                     stacked               
-                    style="width:100%" 
+                    style="width:100%"
+                    @change="recheckStates()" 
                     :state="state.filingParties"              
                     v-model="form7Info.filingParties"                    
                     :options="partyNames">
@@ -139,6 +142,7 @@
                                 color="warning"             
                                 :allowed-dates="allowedDates"                            
                                 header-color="red"
+                                @change="recheckStates()"
                             ></v-date-picker>                            
                         </v-app>
                     </div>    
@@ -172,6 +176,7 @@
                 <b-form-textarea                
                     style="width:100%"                                                            
                     v-model="form7Info.affidavits"
+                    @change="recheckStates()"
                     :state ="state.affidavits">
                 </b-form-textarea>                    
             </b-col>                
@@ -184,7 +189,7 @@
             <b-col class="ml-1 mt-2">
                 <b-form-radio-group
                     :class="state.filedMaterial==false? 'border border-danger is-invalid' :''"
-                    @change="state.filedMaterial=null"                 
+                    @change="recheckStates()"                 
                     v-model="form7Info.filedMaterial"
                     :options="yesNoOptions"                
                 ></b-form-radio-group>
@@ -198,7 +203,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">                   
                 <b-form-textarea                
-                    style="width:100%"                                                            
+                    style="width:100%"
+                    @change="recheckStates()"                                                            
                     v-model="form7Info.materialList"
                     :state ="state.materialList">
                 </b-form-textarea>                    
@@ -211,7 +217,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-input                    
-                    v-model="form7Info.authorizedName"                        
+                    v-model="form7Info.authorizedName"
+                    @change="recheckStates()"                        
                     :state ="state.authorizedName">
                 </b-form-input>
                 <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -383,6 +390,7 @@ export default class Form7StyleOfProceeding extends Vue {
         }          
           
         this.UpdateForm7Info(form7);
+        this.recheckStates()
     }
 
     public getForm7Data() {        
@@ -431,6 +439,15 @@ export default class Form7StyleOfProceeding extends Vue {
             authorizedName:null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){   

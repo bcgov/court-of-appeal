@@ -27,7 +27,7 @@
                         stacked              
                         style="width:100%" 
                         :state="state.allowedCostsParties"
-                        @change="updateOtherParties"                   
+                        @change="updateOtherParties();recheckStates();"                   
                         v-model="form17Info.allowedCostsParties"                    
                         :options="partyNames">
                     </b-form-checkbox-group>
@@ -48,6 +48,7 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
                         stacked
+                        @change="recheckStates()"
                         :key="updated"               
                         style="width:100%" 
                         :state="state.payingCostsParties"                   
@@ -63,7 +64,8 @@
                 </b-col>
                 <b-col>
                     <b-form-input                    
-                        v-model="form17Info.amount"                        
+                        v-model="form17Info.amount"
+                        @change="recheckStates()"                        
                         :state ="state.amount">
                     </b-form-input>
                 </b-col>
@@ -220,9 +222,17 @@ export default class Form17StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
+    }
+
     public checkStates(){   
-        
-        
+                
         this.state.allowedCostsParties = this.form17Info.allowedCostsParties?.length>0? null :false;
         
         this.state.payingCostsParties = this.form17Info.payingCostsParties?.length>0? null :false;
