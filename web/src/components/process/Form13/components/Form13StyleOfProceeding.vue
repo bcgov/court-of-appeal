@@ -179,7 +179,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked                       
+                        stacked 
+                        @change="recheckStates(true)"                      
                         :state="state.filingParties"                                      
                         v-model="form13Info.filingParties">
                         <b-form-checkbox
@@ -200,7 +201,8 @@
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group 
-                        stacked  
+                        stacked
+                        @change="recheckStates(true)" 
                         :state="state.seekingExtension"
                         v-model="form13Info.seekingExtension"
                         :options="seekingExtensionOptions"> 
@@ -208,7 +210,8 @@
                             <b-row style="margin-left:0.1rem; width:138%"> 
                                 <div style="width:15%;">other </div>
                                 <div  style="width:85%;">
-                                    <b-form-input size="sm" 
+                                    <b-form-input size="sm"
+                                        @change="recheckStates()" 
                                         :state="state.seekingExtensionOther"
                                         v-model="form13Info.seekingExtensionOther" />
                                 </div>
@@ -230,7 +233,8 @@
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
-                                    v-model="form13Info.extensionDate"                           
+                                    v-model="form13Info.extensionDate"
+                                    @change="recheckStates()"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -257,8 +261,8 @@
                 <b-col class="mx-1 p-2 bg-light border-light rounded">   
                     <b-form-checkbox-group 
                         stacked                                               
-                        style="width:100%"
-                        @change="checkStates()"                       
+                        style="width:100%"                        
+                        @change="checkStates(true)"                       
                         :state="state.signingParties"                                      
                         v-model="form13Info.signingParties">
 
@@ -503,7 +507,16 @@ export default class Form13StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
-    public checkStates(){  
+    public recheckStates(dontFindInvalidFields?){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates(dontFindInvalidFields)
+                return 
+            }
+        }
+    }
+
+    public checkStates(dontFindInvalidFields?){  
         
         this.state.appellantsInfo = this.form13Info.appellants?.length>0? null :false;
         this.state.respondentsInfo = this.form13Info.respondents?.length>0? null :false;            
@@ -517,7 +530,9 @@ export default class Form13StyleOfProceeding extends Vue {
         const signingRespondents = signingParties.filter(party=> party.responding)
         
         this.state.signingParties = (signingAppellants.length>0 && signingRespondents.length > 0)? null :false;
-                
+        
+        if(dontFindInvalidFields == true) return true     
+        
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
                 Vue.filter('findInvalidFields')()

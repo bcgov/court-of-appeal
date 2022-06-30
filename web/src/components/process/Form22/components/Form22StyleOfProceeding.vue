@@ -224,7 +224,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form22Info.firstAppellant"                    
                         :options="applicantNames">
@@ -240,7 +241,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form22Info.firstRespondent"                    
                         :options="respondentNames">
@@ -255,7 +257,8 @@
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
-                        stacked               
+                        stacked
+                        @change="recheckStates(true)"               
                         style="width:100%"                        
                         :state="state.applyingParties"                                      
                         v-model="form22Info.applyingParties"                    
@@ -276,7 +279,8 @@
                 <b-col>                    
                     <b-form-textarea                
                         style="width:100%" 
-                        rows="6"  
+                        rows="6"
+                        @change="recheckStates()"  
                         :state="state.orders"                                                          
                         v-model="form22Info.orders">
                     </b-form-textarea>                    
@@ -294,7 +298,8 @@
                 <b-col>                   
                     <b-form-textarea                
                         style="width:100%" 
-                        rows="6" 
+                        rows="6"
+                        @change="recheckStates()" 
                         :state="state.grounds"                                                           
                         v-model="form22Info.grounds">
                     </b-form-textarea>                    
@@ -310,7 +315,8 @@
                 <b-col class="ml-1">
                     <b-form-radio-group   
                         stacked             
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :class="state.income==false?'border border-danger is-invalid':''"                     
                         v-model="form22Info.income"
                         :options="incomeOptions">
@@ -331,6 +337,7 @@
                 <b-col class="ml-1">
                     <b-form-radio-group                
                         stacked
+                        @change="recheckStates()"
                         :class="state.assets==false?'border border-danger is-invalid':''"
                         style="width:100%"                      
                         v-model="form22Info.assets"
@@ -366,7 +373,8 @@
                     <b-col>                    
                         <b-form-textarea                
                             style="width:100%" 
-                            rows="6"  
+                            rows="6"
+                            @change="recheckStates()"  
                             :state="state.finances"                                                          
                             v-model="form22Info.finances">
                         </b-form-textarea>                    
@@ -380,7 +388,8 @@
                 </b-col>
                 <b-col>
                     <b-form-input                    
-                        v-model="form22Info.authorizedName"                        
+                        v-model="form22Info.authorizedName"
+                        @change="recheckStates()"                        
                         :state ="state.authorizedName">
                     </b-form-input>
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
@@ -683,7 +692,16 @@ export default class Form22StyleOfProceeding extends Vue {
         this.dataReady = true; 
     }
 
-    public checkStates(){   
+    public recheckStates(dontFindInvalidFields?){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates(dontFindInvalidFields)
+                return 
+            }
+        }
+    }
+
+    public checkStates(dontFindInvalidFields?){   
 
         if(this.form22Info.requiresManualEntry){
             this.state.appellants = this.form22Info.manualAppellants?.length>0? null :false;
@@ -706,6 +724,8 @@ export default class Form22StyleOfProceeding extends Vue {
         this.state.finances = (financesRequired && !this.form22Info.finances)? false: null;
         
         this.state.authorizedName = !this.form22Info.authorizedName? false : null;       
+
+        if(dontFindInvalidFields == true) return true
 
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
@@ -938,6 +958,7 @@ export default class Form22StyleOfProceeding extends Vue {
             this.latestEditAppellantData.toggleDetails();
             this.isEditAppellantOpen = false;
         } 
+        this.recheckStates()
     }
 
     public navigateToPreviewPage() {        
@@ -959,6 +980,7 @@ export default class Form22StyleOfProceeding extends Vue {
         margin-bottom: 0px !important; 
         font-size: 0.75rem; 
         font-weight:400;
+        font-style: italic;
     }
 
     .labels {

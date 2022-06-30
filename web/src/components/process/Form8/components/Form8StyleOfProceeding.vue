@@ -39,7 +39,8 @@
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-checkbox-group 
-                    stacked               
+                    stacked
+                    @change="recheckStates()"               
                     style="width:100%" 
                     :state="state.filingParties"              
                     v-model="form8Info.filingParties"                    
@@ -60,6 +61,7 @@
                         style="width:100%"
                         :state="state.judgeName"                                   
                         v-model="form8Info.judgeName"
+                        @change="recheckStates()"
                         text-field="text"
                         value-field="text"                    
                         :options="justiceNameOptions">                            
@@ -68,7 +70,8 @@
                         <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
                         <div style="width:74%;">
                             <b-form-input 
-                                style="margin-top:0.5rem;"                                
+                                style="margin-top:0.5rem;"
+                                @change="recheckStates()"                                
                                 :state="state.judgeNameOther"
                                 v-model="form8Info.judgeNameOther" 
                             />
@@ -117,7 +120,8 @@
                             
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-input                    
+                <b-form-input 
+                    @change="recheckStates()"                   
                     v-model="form8Info.authorizedName"                        
                     :state ="state.authorizedName">
                 </b-form-input>
@@ -215,8 +219,9 @@ export default class Form8StyleOfProceeding extends Vue {
     }
 
     public updateOrderDate(){       
-        this.form8Info.orderDate = this.orderDateValue;
+        this.form8Info.orderDate = this.orderDateValue;        
         this.updateOrderDetails ++;
+        this.recheckStates()
     }
 
     public extractInfo(){       
@@ -334,6 +339,15 @@ export default class Form8StyleOfProceeding extends Vue {
     public allowedDates(date){
         const day = moment().startOf('day').format('YYYY-MM-DD');
         return (date <= day);           
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){

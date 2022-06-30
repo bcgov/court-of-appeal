@@ -23,7 +23,8 @@
                         scale="1.1"
                         title="Name of the first appellant named on Form 1: Notice of Appeal."/>
                     <b-form-select                            
-                        class="mt-2"                        
+                        class="mt-2"
+                        @change="recheckStates()"                        
                         :state="state.firstAppellant"                   
                         v-model="form20Info.firstAppellant"                    
                         :options="applicantNames">
@@ -39,7 +40,8 @@
                         scale="1.1"
                         title="Name of the first respondent named on Form 1: Notice of Appeal."/>
                     <b-form-select 
-                        class="mt-2"             
+                        class="mt-2"
+                        @change="recheckStates()"             
                         :state="state.firstRespondent"                   
                         v-model="form20Info.firstRespondent"                    
                         :options="respondentNames">
@@ -55,7 +57,8 @@
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group                
                         stacked
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.objectingParties"                                        
                         v-model="form20Info.objectingParties"                    
                         :options="partyNames">
@@ -64,6 +67,7 @@
                         v-if="form20Info.objectingParties && form20Info.objectingParties.includes('Other')"
                         style="width:100%" 
                         placeholder="party name"
+                        @change="recheckStates()"
                         class="mt-2"
                         :state="state.objectingPartiesOther"                                    
                         v-model="form20Info.objectingPartiesOther">
@@ -77,13 +81,15 @@
                 </b-col>
                 <b-col>
                     <b-form-select                
-                        style="width:100%" 
+                        style="width:100%"
+                        @change="recheckStates()" 
                         :state="state.withdrawingLawyerName"                                    
                         v-model="form20Info.withdrawingLawyerName"                    
                         :options="lawyerNameOptions">
                     </b-form-select>
                     <b-form-input
                         v-if="form20Info.withdrawingLawyerName == 'Other'"
+                        @change="recheckStates()"
                         style="width:100%" 
                         placeholder="Lawyer name"
                         class="mt-2"
@@ -105,7 +111,8 @@
             </b-col>
             <b-col>
                 <b-form-input                    
-                    v-model="form20Info.authorizedName"                        
+                    v-model="form20Info.authorizedName"
+                    @change="recheckStates()"                        
                     :state ="state.authorizedName">
                 </b-form-input>
                 <span class="ml-2" style="font-weight: 600;font-size:11pt;">Electronically filed</span>
@@ -288,6 +295,15 @@ export default class Form20StyleOfProceeding extends Vue {
             authorizedName:null
         }
         this.dataReady = true; 
+    }
+
+    public recheckStates(){
+        for(const field of Object.keys(this.state)){
+            if(this.state[field]==false){
+                this.checkStates()
+                return 
+            }
+        }
     }
 
     public checkStates(){        
