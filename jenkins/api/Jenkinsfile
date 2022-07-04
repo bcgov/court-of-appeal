@@ -26,7 +26,7 @@ boolean triggerBuild(String contextDirectory) {
 
   // // Always trigger build - for test purposes only
   // // Under normal conditions this line should be commented out
-  // // filesChangeCnt = 1
+  filesChangeCnt = 1
 
   if ( filesChangeCnt < 1 ) {
     echo('The changes do not require a build.')
@@ -129,10 +129,14 @@ void deploy(String appName, String appSuffix, String namespace, String envTag) {
 }
 
 node {
+  def rootDir = pwd()    
+  echo "${rootDir}"
   //def config = load "../workspace@script/jenkins/config.groovy"
   stage("Init") {
     script {
-      config = load 'jenkins/config.groovy'
+      dir(rootDir){
+        config = load 'jenkins/config.groovy'
+      }
     }
   }
 
