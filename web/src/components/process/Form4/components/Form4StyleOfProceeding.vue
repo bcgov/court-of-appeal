@@ -69,7 +69,7 @@
                     <b-form-radio-group
                         stacked                
                         style="width:100%"
-                        @change="recheckStates()" 
+                        @change="changeOrderList(false);recheckStates()" 
                         :state="state.jurisdictionType"                   
                         v-model="form4Info.jurisdictionType"                    
                         :options="jurisdictionTypeOptions">
@@ -582,25 +582,9 @@ export default class Form4StyleOfProceeding extends Vue {
         {text: 'Uncontested', value: false}
     ];
 
-    // orderList = [
-    //     {text: 'adjournment', value:'adjournment'},
-    //     {text: 'adducing fresh or new evidence', value:'adducing'},
-    //     {text: 'to consolidate or have appeals heard together', value:'consolidate'},
-    //     {text: 'directions', value:'directions'},
-    //     {text: 'dismissal of appeal in chambers', value:'dismissalChambers'},
-    //     {text: 'dismissal (other)', value:'dismissalOther'},
-    //     {text: 'extend time to file books or documents', value:'extendOther'},
-    //     {text: 'extend time to appeal or cross-appeal', value:'extendCrossAppeal'},
-    //     {text: 'intervener status', value:'intervener'},       
-    //     {text: 'payment of security', value:'security'},
-    //     {text: 'quashing an appeal or raising a preliminary objection', value:'objection'},
-    //     {text: 'reinstate appeal that is dismissed as abandoned', value:'reinstate'},
-    //     {text: 'remove appeal from the inactive list', value:'remove'},       
-    //     {text: 'varying or cancelling an order of the registrar', value:'varying'},
-    //     {text: 'other', value:'other'}
-    // ];
+    orderList = []
 
-    orderList = [
+    orderListJudge = [
         'adjournment',
         'adducing fresh or new evidence',
         'to consolidate or have appeals heard together',
@@ -609,16 +593,42 @@ export default class Form4StyleOfProceeding extends Vue {
         'dismissal (other)',
         'extend time to file books or documents',
         'extend time to appeal or cross-appeal',
-        'intervener status',       
-        'leave to appeal',
+        'intervener status',
         'payment of security',
         'quashing an appeal or raising a preliminary objection',
         'reinstate appeal that is dismissed as abandoned',
-        'remove appeal from the inactive list',  
-        'stay of proceedings',      
+        'remove appeal from the inactive list',              
         'varying or cancelling an order of the registrar',
         'other'
     ];
+
+    orderListRegistrar = [
+        'settle order',
+        'assessment',
+        'settle order and assessment',
+        'settle contents of books',       
+        'other'
+    ];
+
+    // orderList = [
+    //     'adjournment',
+    //     'adducing fresh or new evidence',
+    //     'to consolidate or have appeals heard together',
+    //     'directions',
+    //     'dismissal of appeal in chambers',
+    //     'dismissal (other)',
+    //     'extend time to file books or documents',
+    //     'extend time to appeal or cross-appeal',
+    //     'intervener status',       
+    //     'leave to appeal',
+    //     'payment of security',
+    //     'quashing an appeal or raising a preliminary objection',
+    //     'reinstate appeal that is dismissed as abandoned',
+    //     'remove appeal from the inactive list',  
+    //     'stay of proceedings',      
+    //     'varying or cancelling an order of the registrar',
+    //     'other'
+    // ];
 
     jurisdictionTypeOptions = [ 'The Court (3 Judges)', 'A Chambers Judge', 'The Registrar' ];
 
@@ -646,7 +656,8 @@ export default class Form4StyleOfProceeding extends Vue {
 
     mounted() {
         this.dataReady = false;
-        this.extractInfo();              
+        this.extractInfo();
+        this.changeOrderList(true)             
     }
 
     public extractInfo(){
@@ -1002,6 +1013,14 @@ export default class Form4StyleOfProceeding extends Vue {
             this.latestEditAffidavitData.toggleDetails();
             this.isEditAffidavitOpen = false;
         } 
+    }
+
+    public changeOrderList(mounted){
+        if(!mounted) this.form4Info.orderList=[]
+        if(this.form4Info.jurisdictionType == 'The Registrar')
+            this.orderList = this.orderListRegistrar
+        else
+            this.orderList = this.orderListJudge
     }
 
     public updateSeekingOrder(){
