@@ -65,7 +65,7 @@
         <b-row v-if="showOrderInfo" class="mt-0">
             <p class="ml-3" >            
                 <a 
-                    href=""
+                    href="https://www.courtofappealbc.ca/appellant-guidebook/4.3-court-orders?ct=t(step-index-link)"
                     target="_blank">Drafting Orders
                 </a>                               
             </p>
