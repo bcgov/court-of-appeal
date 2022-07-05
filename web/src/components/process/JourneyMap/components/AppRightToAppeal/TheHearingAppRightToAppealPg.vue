@@ -127,7 +127,7 @@
                 </li>    
                 <li class="mt-1" >            
                     <a 
-                        href=""
+                        href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgment?ct=t(sidebar-link)"
                         target="_blank">Getting Judgment
                     </a>   
                 </li>                         

@@ -41,7 +41,6 @@ boolean triggerBuild(String contextDirectory) {
 int extractBuildNo( String input ) {
   String result = input.replaceAll("[^0-9]", "")
   int num_result = result as Integer
-  //echo "${num_result}"
   return num_result
 }
 
@@ -132,7 +131,10 @@ node {
   //def config = load "../workspace@script/jenkins/config.groovy"
   stage("Init") {
     script {
-      config = load 'jenkins/config.groovy'
+      dir(''){
+        checkout scm
+        config = load 'jenkins/config.groovy'
+      }
     }
   }
   
