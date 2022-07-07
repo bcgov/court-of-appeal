@@ -98,7 +98,7 @@ class Form8EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, notice_of_application_to_vary_order_id):
         
-        document_type = "MCV" # type Form8 for Efiling
+        document_type = "APDV" # type Form8 for Efiling
         uid = request.user.id
 
         notice_of_application_to_vary_order = self.get_notice_of_application_to_vary_order_for_user(notice_of_application_to_vary_order_id, uid)        
