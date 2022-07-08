@@ -25,6 +25,7 @@ export const SessionManager = {
             const loginUrl = response.data.login_uri;
             const userLocation = response.data.location;
             const userSelfRepresented = response.data.represented? false: true;
+            const userHasStatisticsAccess = response.data.stats? true : false;
 
             if (userId) {
                 const universalId = response.data.universal_id;
@@ -36,8 +37,9 @@ export const SessionManager = {
                 store.commit("Common/setUserId", userId);
                 store.commit("Common/setUserLocation", userLocation); 
                 store.commit("Common/setUserSelfRepresented", userSelfRepresented);
+                store.commit("Common/setUserHasStatisticsAccess", userHasStatisticsAccess);
             }
-            return { userId, loginUrl };
+            return { userId, loginUrl, userHasStatisticsAccess };
         }
         catch (error) {
             console.log(error);  

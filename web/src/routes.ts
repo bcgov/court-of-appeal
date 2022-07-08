@@ -1,5 +1,6 @@
 import LandingPage from "@/components/home/LandingPage.vue";
 import DashboardPage from "@/components/process/Dashboard.vue";
+import Statistics from "@/components/process/Statistics/Statistics.vue";
 import MyDocuments from "@/components/process/MyDocuments/MyDocuments.vue";
 import ChecklistOrders from "@/components/process/AppealProcess/ChecklistOrders.vue";
 import FileSubmissionPage from "@/components/process/ManualFileSubmission/FileSubmissionPage.vue";
@@ -125,6 +126,20 @@ async function authGuard(to: any, from: any, next: any) {
     location.replace(result.loginUrl);
 }
 
+async function statsAuthGuard(to: any, from: any, next: any) {
+  var result = await SessionManager.getUserInfo(store);
+  if (result.userId){
+    if (result.userHasStatisticsAccess){
+      next();
+    } else {
+      location.replace('/dashboard');
+    }
+  }
+  else if (result.loginUrl)
+    location.replace(result.loginUrl);
+}
+
+
 const routes = [
     {
       path: "/",
@@ -139,6 +154,12 @@ const routes = [
       name: "dashboard",
       beforeEnter: authGuard,
       component: DashboardPage
+    },
+    {
+      path: "/statistics",
+      name: "statistics",
+      beforeEnter: statsAuthGuard,
+      component: Statistics
     },
     {
       path: "/my-submissions",

@@ -12,13 +12,12 @@ class Common extends VuexModule {
     public userId = ""
     public userLocation = '';
     public documentTypesJson = [];
-
     public userSelfRepresented = false;
-
     public locationsInfo: locationsInfoType[] = [];
     public lookups = {} as lookupsInfoType;
     public accountInfo = {} as accountInfoType;
     public hearingLocationsInfo: hearingLocationsInfoType[] = [];
+    public userHasStatisticsAccess = false;
 
     @Mutation
     public  setUserName(userName: string): void {
@@ -30,12 +29,12 @@ class Common extends VuexModule {
     }
     
     @Mutation
-    public setUserId(userId: string): void {   
-        this.userId = userId
+    public setUserHasStatisticsAccess(userHasStatisticsAccess: boolean): void {   
+        this.userHasStatisticsAccess = userHasStatisticsAccess
     }
     @Action
-    public UpdateUserId(newUserId: string): void {
-        this.context.commit('setUserId', newUserId)
+    public UpdateUserHasStatisticsAccess(newUserHasStatisticsAccess: boolean): void {
+        this.context.commit('setUserHasStatisticsAccess', newUserHasStatisticsAccess)
     }
 
     @Mutation
@@ -45,6 +44,15 @@ class Common extends VuexModule {
     @Action
     public UpdateUserLocation(newUserLocation: string): void {
         this.context.commit('setUserLocation', newUserLocation)
+    }
+
+    @Mutation
+    public setUserId(userId: string): void {   
+        this.userId = userId
+    }
+    @Action
+    public UpdateUserId(newUserId: string): void {
+        this.context.commit('setUserId', newUserId)
     }
 
     @Mutation
