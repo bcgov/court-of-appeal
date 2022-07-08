@@ -89,7 +89,23 @@
 
             <b-row class="mt-4">
                 <b-col cols="3" style="font-weight: 700;">
-                    Relief sought:                                
+                    I am wanting to:                                
+                </b-col>
+                <b-col class="ml-1 mt-2"> 
+                    <b-form-radio-group                
+                        stacked
+                        :class="state.requisitionType==false?'border border-danger is-invalid w-50':''"
+                        @change="recheckStates()"
+                        style="width:100%"                          
+                        v-model="form9Info.requisitionType"                    
+                        :options="requestOptions">
+                    </b-form-radio-group>
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4">
+                <b-col cols="3" style="font-weight: 700;">
+                    What are you asking for?                               
                 </b-col>
                 <b-col class="ml-1">   
 
@@ -192,12 +208,14 @@ export default class Form9StyleOfProceeding extends Vue {
         {text: 'No', value: false}
     ];
 
+    requestOptions = [ 'Adjourn a hearing', 'Reset a hearing', 'Other' ];
     abandonTypeOptions = [ 'Appeal', 'Cross Appeal' ];
 
     state = {
         firstAppellant: null,
         firstRespondent: null,
         filingRequisitionParties:null,
+        requisitionType: null,
         reliefSought: null,              
         authorizedName:null,
         selfRepresented:null
@@ -275,6 +293,7 @@ export default class Form9StyleOfProceeding extends Vue {
             firstAppellant: null,
             firstRespondent: null,
             filingRequisitionParties:null, 
+            requisitionType: null,
             reliefSought:null,                 
             authorizedName:null,
             selfRepresented:null
@@ -296,6 +315,7 @@ export default class Form9StyleOfProceeding extends Vue {
         this.state.firstAppellant = !this.form9Info.firstAppellant? false : null;
         this.state.firstRespondent = !this.form9Info.firstRespondent? false : null; 
         this.state.filingRequisitionParties = this.form9Info.filingRequisitionParties?.length>0 ? null: false;  
+        this.state.requisitionType = this.form9Info.requisitionType ? null: false;        
         this.state.reliefSought = !this.form9Info.reliefSought? false : null;     
         this.state.authorizedName = !this.form9Info.authorizedName? false : null;       
         this.state.selfRepresented = this.form9Info.selfRepresented != null? null: false;

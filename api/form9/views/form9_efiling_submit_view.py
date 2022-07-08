@@ -97,8 +97,12 @@ class Form9EFilingSubmitView(generics.GenericAPIView):
 
 
     def post(self, request, requisition_id):
-        
-        document_type = "REQ" # type Form9 for Efiling
+
+        if 'document_type' in request.data:
+            document_type = request.data['document_type']
+        else: 
+            document_type = "REQ" # type Form9 for Efiling
+                
         uid = request.user.id
 
         requisition = self.get_requisition_for_user(requisition_id, uid)        

@@ -36,6 +36,7 @@ export interface form9DataInfoType {
     firstAppellant: string;
     firstRespondent: string;
     filingRequisitionParties: string[];
+    requisitionType: string;
     reliefSought: string;     
     authorizedName: string;    
     selfRepresented?: boolean;    
