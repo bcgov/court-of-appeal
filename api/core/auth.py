@@ -1,5 +1,6 @@
 import logging
 import urllib
+import json
 
 from rest_framework.request import Request
 from django.conf import settings
@@ -10,6 +11,7 @@ from rest_framework.reverse import reverse
 from csows.csows_service.csows_authorized_user_info import AuthorizedUserInfo
 
 from oidc_rp.models import OIDCUser
+from api.models.user import User
 
 LOGGER = logging.getLogger(__name__)
 
@@ -75,3 +77,16 @@ def build_get_user_object(logged_in, request):
         "efiling_streams": get_efiling_streams(logged_in, request),
         "represented": logged_in and request.user.represented or None
     }
+
+def user_authorized_for_stats(request):
+
+    if (isinstance(request.user, User)): 
+        user_email = request.user.email
+        username = request.user.username
+        stats_authorized_list = json.loads(settings.STATS_AUTHORIZED_LIST)
+
+        for person in stats_authorized_list:
+            if person["email"]==user_email and person["username"]==username:
+                return True    
+    
+    return False
