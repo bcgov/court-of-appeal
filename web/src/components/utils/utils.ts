@@ -25,7 +25,7 @@ export const SessionManager = {
             const loginUrl = response.data.login_uri;
             const userLocation = response.data.location;
             const userSelfRepresented = response.data.represented? false: true;
-            const userHasStatisticsAccess = response.data.userHasStatisticsAccess? false: true;
+            const userHasStatisticsAccess = response.data.stats? true : false;
 
             if (userId) {
                 const universalId = response.data.universal_id;
