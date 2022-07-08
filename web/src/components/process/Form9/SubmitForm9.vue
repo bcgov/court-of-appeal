@@ -61,8 +61,10 @@ const form9State = namespace("Form9");
 
 import Form9ProcessHeader from "@/components/process/Form9/components/Form9ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
-import { form9StatusInfoType } from '@/types/Information/Form9';
+import { form9DataInfoType, form9StatusInfoType } from '@/types/Information/Form9';
 import { packageInfoType } from '@/types/Information';
+
+import { GetForm9PdfType } from "./components/Form9PdfType";
 
 @Component({
     components:{
@@ -74,6 +76,9 @@ export default class SubmitForm9 extends Vue {
 
     @form9State.State
     public currentRequisitionId: string;
+
+    @form9State.State
+    public form9Info: form9DataInfoType;
 
     stepsCompleted = {} as form9StatusInfoType;  
     mountedData = false; 
@@ -107,7 +112,11 @@ export default class SubmitForm9 extends Vue {
             }
         }
 
-        this.$http.post(url, header)
+        const body = {
+            document_type: GetForm9PdfType(this.form9Info) //"REQ"
+        }
+
+        this.$http.post(url, body, header)
         .then(res => {                            
             // this.submitting = false;
             if(res.data?.message=="success" && res.data?.redirectUrl){

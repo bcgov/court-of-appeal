@@ -14,7 +14,7 @@
                     <span 
                         class="text-danger font-weight-bold">at least 5 business days
                     </span> 
-                before the application hearing date file filed 
+                before the application hearing date file 
                 and serve on each party, the application materials listed below.
             </b-col>              
         </b-row>

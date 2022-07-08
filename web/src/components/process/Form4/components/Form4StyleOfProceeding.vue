@@ -586,7 +586,6 @@ export default class Form4StyleOfProceeding extends Vue {
 
     orderListJudge = [
         'adjournment',
-        'adducing fresh or new evidence',
         'to consolidate or have appeals heard together',
         'directions',
         'dismissal of appeal in chambers',
@@ -594,10 +593,11 @@ export default class Form4StyleOfProceeding extends Vue {
         'extend time to file books or documents',
         'extend time to appeal or cross-appeal',
         'intervener status',
+        'leave to appeal',
         'payment of security',
-        'quashing an appeal or raising a preliminary objection',
         'reinstate appeal that is dismissed as abandoned',
-        'remove appeal from the inactive list',              
+        'remove appeal from the inactive list',          
+        'stay of proceedings or execution',    
         'varying or cancelling an order of the registrar',
         'other'
     ];
@@ -606,29 +606,21 @@ export default class Form4StyleOfProceeding extends Vue {
         'settle order',
         'assessment',
         'settle order and assessment',
-        'settle contents of books',       
+        'settle contents of books',    
+        'extend time to file books or documents',
+        'extend time to appeal or cross-appeal',   
         'other'
     ];
 
-    // orderList = [
-    //     'adjournment',
-    //     'adducing fresh or new evidence',
-    //     'to consolidate or have appeals heard together',
-    //     'directions',
-    //     'dismissal of appeal in chambers',
-    //     'dismissal (other)',
-    //     'extend time to file books or documents',
-    //     'extend time to appeal or cross-appeal',
-    //     'intervener status',       
-    //     'leave to appeal',
-    //     'payment of security',
-    //     'quashing an appeal or raising a preliminary objection',
-    //     'reinstate appeal that is dismissed as abandoned',
-    //     'remove appeal from the inactive list',  
-    //     'stay of proceedings',      
-    //     'varying or cancelling an order of the registrar',
-    //     'other'
-    // ];
+    orderListCourt = [
+        'adjournment',
+        'adducing fresh or new evidence',
+        'to consolidate or have appeals heard together',
+        'directions',        
+        'dismissal (other)',        
+        'quashing an appeal or raising a preliminary objection',        
+        'other'
+    ];
 
     jurisdictionTypeOptions = [ 'The Court (3 Judges)', 'A Chambers Judge', 'The Registrar' ];
 
@@ -1019,8 +1011,10 @@ export default class Form4StyleOfProceeding extends Vue {
         if(!mounted) this.form4Info.orderList=[]
         if(this.form4Info.jurisdictionType == 'The Registrar')
             this.orderList = this.orderListRegistrar
-        else
+        else if(this.form4Info.jurisdictionType == 'A Chambers Judge')
             this.orderList = this.orderListJudge
+        else
+            this.orderList = this.orderListCourt 
     }
 
     public updateSeekingOrder(){
