@@ -50,3 +50,8 @@ export interface documentTypesJsonInfoType {
     description: string;
     type: string;
 }
+
+export interface dateRangeInfoType {
+    startDate: string;
+    endDate: string;
+}

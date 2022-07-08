@@ -39,6 +39,9 @@
                                 </template>
                                 <b-dropdown-item @click="logout()">
                                     <b-icon-box-arrow-left class="mr-2"/>Logout
+                                </b-dropdown-item>
+                                <b-dropdown-item v-if="userHasStatisticsAccess" @click="viewStats()">
+                                    <b-icon-file-earmark-bar-graph-fill class="mr-2"/>Reports
                                 </b-dropdown-item>                                
                             </b-dropdown>
                         </div>
@@ -74,8 +77,15 @@ export default class NavigationTopbar extends Vue {
     @commonState.State
     public userName!: string;
 
+    @commonState.State
+    public userHasStatisticsAccess!: boolean;
+
     public logout() {
         SessionManager.logout(this.$store);
+    }
+
+    public viewStats() {
+        this.$router.push({name: "statistics" })
     }
 
     public home() {
