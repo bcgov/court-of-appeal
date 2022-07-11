@@ -291,17 +291,16 @@
             </p>
             <b-row class="mt-2 mx-2 bg-warning warning-message-row">
                 <b-col cols="1">
-                    <b-icon-exclamation-triangle-fill class="mt-4 ml-2" scale="2"/>
+                    <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
                 </b-col>
                 <b-col cols="11" style="padding-left: 0;">
-                    If you are filing the requisition to adjourn an application, 
-                    it must be filed 
+                    If you are filing the requisition to adjourn an 
+                        application, it must be filed 
                         <span 
                             class="text-danger font-weight-bold">
-                            If you are filing the requisition to adjourn an 
-                            application, it must be filed before 2:00 p.m. of 
-                            the business day before the application hearing date
-                        </span>.
+                             before 2:00 p.m. of 
+                            the business day 
+                        </span> before the application hearing date.
                 </b-col>              
             </b-row>
 
