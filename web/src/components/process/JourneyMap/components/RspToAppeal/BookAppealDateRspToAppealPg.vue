@@ -102,7 +102,7 @@
                         </a>.
                     </li>
                     <li>
-                        inform the registrar is the parties disagree 
+                        inform the registrar if the parties disagree 
                         on the length of time required for the hearing of the appeal.
                     </li>                    
                 </ul>

@@ -602,9 +602,9 @@ export default class Form4StyleOfProceeding extends Vue {
         'other'
     ];
 
-    orderListRegistrar = [
-        'settle order',
+    orderListRegistrar = [        
         'assessment',
+        'settle order',
         'settle order and assessment',
         'settle contents of books',    
         'extend time to file books or documents',
