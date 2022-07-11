@@ -7,79 +7,85 @@
             class="border-0" 
             style="width:100%; margin:0; padding:0.5rem 1rem;"
             >
-            <span v-html="pickedDates">{{pickedDates}}</span> <b-icon-calendar style="float:right"/>
+            <span v-if="!onShow" v-html="pickedDates">{{pickedDates}}</span> <b-icon-calendar3 font-scale="1.75" style="float:right;"/>
         </b-button>
         <b-popover 
             customClass="pop-range"
             target="popover-range-button-variant"  
             triggers="manual"
-            placement="bottomleft"
+            placement="bottomcenter"
             container="date-container-range"
             ref="popover"
             :show.sync="onShow"           
             >
             <div>
-                <b-row class="mt-1 py-0" >
-                    <b-col cols="5 text-center bg-select h4 border ml-4">
-                        <span v-if="dates[1]<dates[0]"><b class="text-danger">From: </b>{{dates[1]|beautify-date-weekday}}</span>
-                        <span v-else><b class="text-danger">From: </b>{{dates[0]|beautify-date-weekday}}</span>
+                <b-row class="mt-1" style="font-size:13pt; font-weight:600;" >
+                    <b-col cols="5 text-center bg-select border ml-4 py-2">
+                        <span v-if="dates[1]<dates[0]"><b class="text-danger">From: </b>{{dates[1]|beautify-date-full-no-weekday}}</span>
+                        <span v-else><b class="text-danger">From: </b>{{dates[0]|beautify-date-full-no-weekday}}</span>
                     </b-col>
                     <b-col cols="1" />
-                    <b-col cols="5 text-center bg-select h4 border ml-2">
-                        <span v-if="dates[0]>dates[1]"><b class="text-danger">To: </b>{{dates[0]|beautify-date-weekday}}</span>
-                        <span v-else ><b class="text-danger">To: </b>{{dates[1]|beautify-date-weekday}}</span>
+                    <b-col cols="5 text-center bg-select border ml-2 py-2">
+                        <span v-if="dates[0]>dates[1]"><b class="text-danger">To: </b>{{dates[0]|beautify-date-full-no-weekday}}</span>
+                        <span v-else ><b class="text-danger">To: </b>{{dates[1]|beautify-date-full-no-weekday}}</span>
                     </b-col>
                 </b-row>
-                <b-row class="py-0" style="margin-top:-3rem;">
+                <b-row class="py-0" style="margin-top:1rem;">
                     <b-col cols="6">
-                        <v-app style="height:24rem; padding:0; margin:1rem 0 -2rem 0;">                        
-                            <v-date-picker
-                                v-model="dates"
-                                color="success" 
-                                :allowed-dates="allowedDates"                        
-                                range                                
-                                :picker-date.sync="pickerDateL"
-                            ></v-date-picker>                            
-                        </v-app>
+                        <div class="vuetify">
+                            <v-app style="height:24rem; padding:0; margin:-0.5rem 0 0.5rem 0;">                        
+                                <v-date-picker
+                                    class="calendar-left"
+                                    v-model="dates"
+                                    color="success" 
+                                    :allowed-dates="allowedDates"                        
+                                    range                                
+                                    :picker-date.sync="pickerDateL"
+                                ></v-date-picker>                            
+                            </v-app>
+                        </div>
                     </b-col>
-                    <b-col cols="4">
-                        <v-app style="height:24rem; padding:0; margin:1rem 0 -2rem 0;">                        
-                            <v-date-picker
-                                v-model="dates"
-                                color="success"
-                                :allowed-dates="allowedDates" 
-                                range
-                                :picker-date.sync="pickerDateR"                                
-                            ></v-date-picker>                            
-                        </v-app>
+                    <b-col cols="6">
+                        <div class="vuetify">
+                            <v-app style="height:24rem; padding:0; margin:-0.5rem 0 0.5rem 0;">                                                    
+                                <v-date-picker
+                                    class="calendar-right"
+                                    v-model="dates"
+                                    color="success"
+                                    :allowed-dates="allowedDates" 
+                                    range
+                                    :picker-date.sync="pickerDateR"                                
+                                ></v-date-picker>                                                        
+                            </v-app>
+                        </div>
                     </b-col>
                 </b-row>
             </div>
 
             <b-row style="margin-top:-2.25rem;">
                 <b-col>
-                    <b-button @click="setDatesToday" style="width:8rem;" variant="primary">Today</b-button>
+                    <b-button @click="setDatesToday" size="sm" style="width:8rem;" variant="primary">Today</b-button>
                 </b-col>
                 <b-col>
-                    <b-button @click="setDatesOneWeek" style="width:8rem;" variant="primary">One Week</b-button>
+                    <b-button @click="setDatesOneWeek" size="sm" style="width:8rem;" variant="primary">Last Week</b-button>
                 </b-col>
                 <b-col>
-                    <b-button @click="setDatesTwoWeeks" style="width:8rem;" variant="primary">Two Weeks</b-button>
+                    <b-button @click="setDatesTwoWeeks" size="sm" style="width:8rem;" variant="primary">Last Two Weeks</b-button>
                 </b-col>
                 <b-col>
-                    <b-button @click="setDatesOneMonth" style="width:8rem;" variant="primary" >One Month</b-button>
+                    <b-button @click="setDatesOneMonth" size="sm" style="width:8rem;" variant="primary" >Last Month</b-button>
                 </b-col>
             </b-row>
 
-            <b-row class="border rounded mx-0" style="margin-top:1rem; box-shadow: 0px 0px 6px 3px #DDD;">
+            <b-row class="border rounded mx-0 py-1" style="margin-top:1rem; box-shadow: 0px 0px 6px 3px #DDD;">
                 <b-col>
                     <b-button @click="focusSearchButton();onShow=false" class="border" variant="white" style="width:7rem;" >Cancel</b-button>
                 </b-col>
                 <b-col>
-                    <b-button @click="clearDates" class="border" variant="warning">Remove Date Filter</b-button>
+                    <b-button @click="clearDates" class="border" variant="warning">Clear selection</b-button>
                 </b-col>
                 <b-col>
-                    <b-button @click="AddDates" class="px-4" variant="success" style="float:right; width:7rem;">Add</b-button>
+                    <b-button @click="AddDates" class="px-4" variant="success" style="float:right; width:7rem;">Apply</b-button>
                 </b-col>
             </b-row>
         </b-popover>
@@ -133,19 +139,23 @@ export default class DateRangePicker extends Vue {
         this.dates.push(this.reportRange.endDate?.slice(0,10))
         this.getDatesText(_.sortBy(this.dates))
 
-        if(this.reportRange.startDate?.slice(0,7))
-            this.pickerDateL = this.reportRange.startDate.slice(0,7)
+        if(this.reportRange.startDate?.slice(0,7)){
+            if(this.reportRange.startDate?.slice(0,7) == this.reportRange.endDate?.slice(0,7))
+                this.pickerDateR = this.reportRange.startDate.slice(0,7)
+            else
+                this.pickerDateL = this.reportRange.startDate.slice(0,7)
+        }
         else
-            this.pickerDateL = moment().format("YYYY-MM")
+            this.pickerDateR = moment().format("YYYY-MM")
     }
 
     public getDatesText(reportDate){
 
         if(!reportDate[1] || !reportDate[0])
-            this.pickedDates ='All dates'
+            this.pickedDates ='<b>All dates<b>'
         else
-            this.pickedDates ='<b>From </b>'+ moment(reportDate[0]).format("MMM DD, YYYY") +
-                              '<b>  To </b>'+  moment(reportDate[1]).format("MMM DD, YYYY");      
+            this.pickedDates ='<b class="mr-1 h3">From </b><span style="font-size:14pt;">'+  moment(reportDate[0]).format("MMM DD, YYYY") + '</span> '+
+                              '<b class="ml-3 mr-1 h3">  To </b><span style="font-size:14pt;">'+  moment(reportDate[1]).format("MMM DD, YYYY")+ '</span> ';      
     }
 
     public AddDates(){
@@ -169,40 +179,56 @@ export default class DateRangePicker extends Vue {
     }
 
     public allowedDates(date){
-        const day = moment(date).weekday()
-        if(day==0 || day==6) return false
-        else return true
+        const today = moment().format()
+        if(date > today) return false
+        else 
+            return true
     }
 
     public setDatesToday(){
         const today = moment().format("YYYY-MM-DD")        
         this.dates=[today, today]
-        this.pickerDateL = moment().format("YYYY-MM")
+        this.pickerDateR = moment().format("YYYY-MM")
     }
 
     public setDatesOneWeek(){
         const today = moment().format("YYYY-MM-DD")
-        const nextWeek = moment().add(6,'days').format("YYYY-MM-DD")        
+        const nextWeek = moment().add(-6,'days').format("YYYY-MM-DD")        
         this.dates=[today, nextWeek]
-        this.pickerDateL = moment().format("YYYY-MM")
+        this.pickerDateR = moment().format("YYYY-MM")
     }
 
     public setDatesTwoWeeks(){
         const today = moment().format("YYYY-MM-DD")
-        const twoWeek = moment().add(13,'days').format("YYYY-MM-DD")
+        const twoWeek = moment().add(-13,'days').format("YYYY-MM-DD")
         this.dates=[today, twoWeek]
-        this.pickerDateL = moment().format("YYYY-MM")
+        this.pickerDateR = moment().format("YYYY-MM")
     }
 
     public setDatesOneMonth(){
         const today = moment().format("YYYY-MM-DD")
-        const oneMonth = moment(today).add(1,'month').format("YYYY-MM-DD")       
+        const oneMonth = moment(today).add(-1,'month').format("YYYY-MM-DD")       
         this.dates=[today, oneMonth]
     }
 }
 </script>
 
-<style scoped lang="scss" >    
+<style scoped lang="scss" >
+    ::v-deep .vuetify{
+        @import "@/styles/vuetify.scss";
+        @import "@/styles/_custom_vuetify.scss";
+        overflow: hidden;
+    
+    
+        .calendar-left .v-date-picker-header button[aria-label="Next month"]{
+                display: none;
+        }
+
+        .calendar-right .v-date-picker-header button[aria-label="Previous month"]{
+            display: none;
+        }
+    }
+
     .popover{
         border-radius: 10px;
         border:1px solid #EEE;

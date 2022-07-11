@@ -134,7 +134,7 @@ class EFilingSubmitView(generics.GenericAPIView):
 
         if redirect_url is not None:
             case.submission_id = submission_id
-            case.last_updated = timezone.now()
+            case.last_filed = timezone.now()
             case.save()
 
             return JsonResponse({"redirectUrl": redirect_url, "message": message})

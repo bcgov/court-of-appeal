@@ -33,7 +33,8 @@ from api.views import (
     JourneyMapView,
     FormToPdfView,
     EFilingSubmitView, 
-    FillablePdfView,   
+    FillablePdfView,
+    StatisticsView   
 )
 
 
@@ -62,6 +63,7 @@ urlpatterns = [
     #path("efiling/locations/", EFilingLocationView.as_view()),
     path("efiling/<int:case_id>/submit/", EFilingSubmitView.as_view()),
     path("print-fillable-pdf",FillablePdfView.as_view()),
+    path("statistics/", StatisticsView.as_view()),
 ]
 
 if settings.OIDC_ENABLED:
