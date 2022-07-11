@@ -1,17 +1,17 @@
 <template>
-    <b-card class="m-5 bg-light border-white">
+    <b-card class="mx-5 bg-light border-white">
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
-                
-        <b-card class="home-content border-white p-0 my-4"> 
-            <h3 class="pt-2">Reports</h3>
+        <h1 class="text-center" >Reports <b-icon-file-earmark-bar-graph font-scale="1.1" /></h1>        
+        <b-card class="border-0 w-75 text-center mx-auto"> 
+            
             <b-row>
-                <b-col cols="2" class="h4 text-primary"> 
+                <b-col cols="1" class="h2 mt-2 mb-n1 text-primary"> 
                     Dates:
                 </b-col>
                 <b-col cols="6">
                     <date-range-picker :key="updateReport" :reportRange="reportDateRange" @datesAdded="addReportDateRanges"/>
                 </b-col>
-                <b-col cols="2"></b-col>
+                <b-col cols="3"></b-col>
                 <b-col cols="2">
                     <b-button
                         name="search"
@@ -34,8 +34,17 @@
             <report :results="results"/>
         </b-card>
 
-        
-
+        <b-card class="text-center bg-light border-0" >
+            <b-button
+                v-if="!searching && dataLoaded" 
+                 
+                variant="success"
+                @click="onPrintSave()"
+                >
+                Print / Save 
+                <b-icon-printer-fill class="mx-1" variant="white" scale="1" ></b-icon-printer-fill>
+            </b-button>
+        </b-card>
         
         
     </b-card>
@@ -43,6 +52,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import moment from 'moment-timezone';
 
 import Report from "./Report.vue";
 import DateRangePicker from './DateRangePicker.vue';
@@ -76,63 +86,52 @@ export default class Statistics extends Vue {
         this.dataLoaded = false;         
     }
 
-    public loadInfo (data) {
-        
-
-        this.results = {
-            form1: 10,
-            form2: 2
-
-        }
-
-        this.dataLoaded = true;
-        this.searching = false;
-        Vue.nextTick(()=> this.onPrint());  
-
-    }
 
     public find(){   
        
         this.dataLoaded = false;
         this.searching = true;
-        const body = {
-            "dates":this.reportDateRange                    
-        }
 
-        this.$http.post('/statistics', body)
+        const start = this.reportDateRange.startDate? this.reportDateRange.startDate?.slice(0,10) : null
+        const end = this.reportDateRange.endDate? this.reportDateRange.endDate?.slice(0,10) : null
+        const url = '/statistics/?start_date='+start+
+                    '&end_date='+end+
+                    '&tz='+moment().utcOffset();
+        
+        this.$http.get(url)
         .then((response) => {            
             if(response?.data){
-                this.loadInfo(response.data);                    
+                this.results = response.data;
+                this.dataLoaded = true;                    
             }
-            
+            this.searching = false;
             
         },(err) => {
-            this.searching = false;           
+            this.searching = false;
+            this.error = err.response.data           
         });  
         
     }
 
     public addReportDateRanges(dateRange){
         this.reportDateRange = dateRange
+        this.dataLoaded = false;
         this.updateReport++;
     }
-      
-    public onPrint() { 
-        const pdf_type = "FORM"
-        const pdf_name = "Report-" //;
-        const el= document.getElementById("print");
-        
-        const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA      FORM 17: CERTIFICATE OF COSTS"`;
-        const topRightText   = `"(Rule 77)"`;
 
-        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA      FORM 17: CERTIFICATE OF COSTS (Rule 77)"`;
+    public onPrintSave() { 
+        
+        const el= document.getElementById("print");
+
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;        
-        const url = '/report/form-print/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
-        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText, topLeftText, topRightText);
+        
+        const url = '/statistics/'+'/?name=statistics_report' 
+        
+        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
         const body = {
-            'html':pdfhtml,
-            'json_data':this.results
+            'html':pdfhtml,            
         }       
         
         const options = {
@@ -144,53 +143,26 @@ export default class Statistics extends Vue {
 
         this.$http.post(url,body, options)
         .then(res => {                       
-            this.printReady = true;   
-        },err => {
-            console.error(err);        
-        });
-    }
-
-    public savePdf(){        
-        const pdfType = "FORM"
-        const pdfName ="Report"
-        const url = '/report/form-print/?pdf_type='+pdfType
-        const options = {
-            responseType: "blob",
-            headers: {
-            "Content-Type": "application/json",
-            }
-        }
-        this.$http.get(url, options)
-        .then(res => {
             const blob = res.data;
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
             document.body.appendChild(link);
-            link.download = pdfName+".pdf";
+            link.download = "StatisticsReport.pdf";
             link.click();
-            setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
-
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000); 
         },err => {
-            console.error(err);
+            console.error(err);        
         });
     }
+      
+   
     
 
 
 }
 </script>
+<style scoped lang="scss" src="@/styles/_pdf.scss">
 
-<style scoped lang="scss">
-
-@import "src/styles/common";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
-
-    .home-content {
-        padding-bottom: 20px;
-        padding-top: 0rem;
-        width: 95%;
-        color: black;
-        margin: 0 auto;
-    }
+// @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 </style>

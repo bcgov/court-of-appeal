@@ -41,7 +41,7 @@
                                     <b-icon-box-arrow-left class="mr-2"/>Logout
                                 </b-dropdown-item>
                                 <b-dropdown-item v-if="userHasStatisticsAccess" @click="viewStats()">
-                                    <b-icon-file-earmark-bar-graph-fill class="mr-2"/>Reports
+                                    <b-icon-file-earmark-bar-graph class="mr-2"/>Reports
                                 </b-dropdown-item>                                
                             </b-dropdown>
                         </div>

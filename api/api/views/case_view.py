@@ -31,7 +31,6 @@ class CaseView(APIView):
     def get(self, request, pk=None, format=None):
         
         uid = request.user.id
-        includeArchives = bool(request.query_params.get("includeArchives")=="true")
 
         if pk:
             case = get_case_for_user(pk, uid)        
@@ -45,7 +44,6 @@ class CaseView(APIView):
                 "status":case.status,              
                 "modified": case.modified,
                 "personId": case.user_id,
-                "archive": case.archive,
                 "pdf_types": case.pdf_types,
                 "description": case.description,            
                 "packageNumber": case.package_number,
@@ -53,7 +51,7 @@ class CaseView(APIView):
                 "data": case_data,               
             }
         else:
-            cases = get_case_for_user(pk, uid, includeArchives)
+            cases = get_case_for_user(pk, uid)
             responseData = list()
             for case in cases:
                 data_dec = settings.ENCRYPTOR.decrypt(case.key_id, case.data)
@@ -64,7 +62,6 @@ class CaseView(APIView):
                     "status":case.status,              
                     "modified": case.modified,
                     "personId": case.user_id,
-                    "archive": case.archive,
                     "pdf_types": case.pdf_types,
                     "description": case.description,
                     "data": case_data,
@@ -137,7 +134,6 @@ class CaseView(APIView):
                 if body.get("status"):
                     case.status = body.get("status")
                         
-                case.archive = body.get("archive")
                 case.save()
 
             return Response("success")

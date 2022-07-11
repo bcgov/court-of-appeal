@@ -1,14 +1,17 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Case(models.Model):
+
     id = models.AutoField(
         auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
     )
+    created_date = models.DateTimeField(blank=True, null=True)    
+    modified = models.DateTimeField(blank=True, null=True)
+    
     type = models.CharField(max_length=100, default="", blank=True)
-    status = models.CharField(max_length=100, default="", blank=True)    
-    modified = models.DateTimeField(blank=True, null=True) 
-
+    status = models.CharField(max_length=100, default="", blank=True)
     
     last_filed = models.DateTimeField(blank=True, null=True)
     submission_id = models.CharField(max_length=100, null=True)
@@ -16,7 +19,6 @@ class Case(models.Model):
     package_number = models.CharField(max_length=100, null=True)
     package_url = models.CharField(max_length=200, null=True)
 
-    archive = models.BooleanField(blank=True, default=False, null=True)
     pdf_types = models.CharField(max_length=100, default="", blank=True)
     last_printed = models.DateTimeField(blank=True, null=True)
     description = models.CharField(max_length=200, default="", blank=True)
@@ -26,6 +28,7 @@ class Case(models.Model):
     # stored encrypted when key_id is set
     data = models.BinaryField(blank=True, null=True)  
 
+
     user = models.ForeignKey(
         "User",
         related_name="app_user_Id",
@@ -33,3 +36,11 @@ class Case(models.Model):
         blank=True,
         null=True,
     )
+
+    
+
+    def save(self, *args, **kwargs):    
+        if not self.created_date:
+            self.created_date = timezone.now()
+        self.modified = timezone.now()
+        return super(Case, self).save(*args, **kwargs)
