@@ -22,7 +22,11 @@
         <b-row class="mt-4">
             <ol class="mt-3">
                 <li>
-                    Obtain an application hearing date from the registrar
+                Obtain an application hearing date from the  
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                        target="_blank"> registrar
+                    </a>.
                 </li>
                 <li>
                     Complete the documents below. Click on the document name for more information.

@@ -14,13 +14,19 @@
                     <span 
                         class="text-danger font-weight-bold">at least 5 business days
                     </span> 
-                before the application hearing date file filed 
+                before the application hearing date file 
                 and serve on each party, the application materials listed below.
             </b-col>              
         </b-row>
 
         <ol class="mt-3">
-            <li>Obtain an application hearing date from the registrar.</li>
+            <li>
+                Obtain an application hearing date from the  
+                    <a 
+                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                        target="_blank"> registrar
+                    </a>.
+            </li>
             <li class="mt-2">Complete the following: 
                 <ul>
                     <li>
