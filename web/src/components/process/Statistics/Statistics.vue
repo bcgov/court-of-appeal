@@ -5,13 +5,13 @@
         <b-card class="border-0 w-75 text-center mx-auto"> 
             
             <b-row>
-                <b-col cols="1" class="h2 mt-2 mb-n1 text-primary"> 
+                <b-col cols="2" class="h2 mt-2 mb-n1 text-primary"> 
                     Dates:
                 </b-col>
                 <b-col cols="6">
                     <date-range-picker :key="updateReport" :reportRange="reportDateRange" @datesAdded="addReportDateRanges"/>
                 </b-col>
-                <b-col cols="3"></b-col>
+                <b-col cols="2"></b-col>
                 <b-col cols="2">
                     <b-button
                         name="search"
