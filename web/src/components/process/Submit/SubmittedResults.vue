@@ -1,5 +1,5 @@
 <template>
-    <div v-if="(formType == 'NAA')||(formType == 'NAAM')">
+    <div v-if="(formType == 'NAA')||(formType == 'NAAM')||(formType == 'NAID')">
         <success-submit-form-1 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-1 v-else-if="result=='cancel'"/>
         <error-submit-form-1 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -14,7 +14,7 @@
         <cancel-submit-form-3 v-else-if="result=='cancel'"/>
         <error-submit-form-3 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="(formType == 'MCH')||(formType == 'MCT')">
+    <div v-else-if="form4Package">
         <success-submit-form-4 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-4 v-else-if="result=='cancel'"/>
         <error-submit-form-4 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -196,17 +196,21 @@ export default class SubmittedResults extends Vue {
     result = "" 
     formType = ""    
     packageInfo: packageInfoType = {fileNumber: "", packageNumber:"", eFilingUrl:""}
+    form4Package = false;
 
     mounted() {
         this.result = "";
         this.formType = "";
         this.errorMsg = "Missing Parameters"
         this.packageInfo = {fileNumber: "", packageNumber:"", eFilingUrl:""}
+        this.form4Package = false;
         
         const caseId = this.$route.params?.id
         const result = String(this.$route.params?.result);
         this.formType = this.$route.params?.formType
         // console.log(this.$route.params)
+        const form4Types = ['APCL', 'APCS', 'APCA', 'APCP', 'APCI', 'APCG', 'APDF', 'APDQ', 'APDG', 'APRO', 'APRA', 'APRS', 'APSB', 'APRG']
+        this.form4Package = form4Types.indexOf(this.formType) >= 0;
         
         if (result == "success"){
             this.result = "error"
