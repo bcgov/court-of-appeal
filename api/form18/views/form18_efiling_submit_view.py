@@ -101,7 +101,7 @@ class Form18EFilingSubmitView(generics.GenericAPIView):
         if 'document_type' in request.data:
             document_type = request.data['document_type']
         else: 
-            document_type = "CNAC" # type Form18 for Efiling
+            document_type = "CHAD" # type Form18 for Efiling
 
         
         uid = request.user.id
