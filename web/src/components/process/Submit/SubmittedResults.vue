@@ -24,12 +24,12 @@
         <cancel-submit-form-5 v-else-if="result=='cancel'"/>
         <error-submit-form-5 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="(formType == 'ABA')||(formType == 'ABCA')||(formType == 'ABP')||(formType == 'ABRV')">
+    <div v-else-if="(formType == 'ABA')||(formType == 'ABCA')">
         <success-submit-form-6 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-6 v-else-if="result=='cancel'"/>
         <error-submit-form-6 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'MCHU'">
+    <div v-else-if="formType == 'URGA'">
         <success-submit-form-7 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-7 v-else-if="result=='cancel'"/>
         <error-submit-form-7 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -39,7 +39,7 @@
         <cancel-submit-form-8 v-else-if="result=='cancel'"/>
         <error-submit-form-8 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'REQ'">
+    <div v-else-if="(formType == 'RQAH')||(formType == 'RQRH')||(formType == 'REQ')">
         <success-submit-form-9 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -49,7 +49,7 @@
         <cancel-submit-form-17 v-else-if="result=='cancel'"/>
         <error-submit-form-17 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>      
-    <div v-else-if="(formType == 'CNAC')||(formType == 'CNAT')">
+    <div v-else-if="(formType == 'CHRP')||(formType == 'CHAD')">
         <success-submit-form-18 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-18 v-else-if="result=='cancel'"/>
         <error-submit-form-18 :errMsg="errorMsg" v-else-if="result=='error'"/>        
@@ -59,12 +59,12 @@
         <cancel-submit-form-19 v-else-if="result=='cancel'"/>
         <error-submit-form-19 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>
-    <div v-else-if="formType == 'NOW'">
+    <div v-else-if="formType == 'CNOW'">
         <success-submit-form-20 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-20 v-else-if="result=='cancel'"/>
         <error-submit-form-20 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>   
-    <div v-else-if="formType == 'MWF'">
+    <div v-else-if="formType == 'APNF'">
         <success-submit-form-22 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-22 v-else-if="result=='cancel'"/>
         <error-submit-form-22 :errMsg="errorMsg" v-else-if="result=='error'"/>        
