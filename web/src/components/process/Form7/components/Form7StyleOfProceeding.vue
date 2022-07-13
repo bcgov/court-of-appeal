@@ -168,19 +168,105 @@
             </b-col>
         </b-row>
 
-        <b-row class="mt-4">
-            <b-col cols="7" class="labels">
-                List any affidavits being filed                                
-            </b-col>
-            <b-col class="ml-1 mt-2">                   
-                <b-form-textarea                
-                    style="width:100%"                                                            
-                    v-model="form7Info.affidavits"
-                    @change="recheckStates()"
-                    :state ="state.affidavits">
-                </b-form-textarea>                    
-            </b-col>                
-        </b-row>
+        <b-card no-body class="my-4 bg-white border-white text-dark"> 
+            <b-card no-body :class="state.affidavitList !=null?'border-danger is-invalid':'border-white'">
+                <b-row class="mb-2 ml-1" style="margin-left: -1rem !important;">   
+                    <b-col cols="10" >
+                        <b-form-group
+                            class="labels"                
+                            label="List the affidavit(s) in support of this application:" 
+                            label-for="affidavits">
+                            <span 
+                                v-if="form7Info.affidavitList && form7Info.affidavitList.length == 0 && !AddNewAffidavitForm" 
+                                id="affidavits" 
+                                class="text-muted ml-2 my-2">No affidavits have been listed.
+                            </span>
+                            <b-table
+                                v-else-if="form7Info.affidavitList && form7Info.affidavitList.length > 0"
+                                :key="updated"                                
+                                id="affidavits"
+                                :items="form7Info.affidavitList"
+                                :fields="affidavitFields"
+                                head-row-variant="primary"
+                                borderless    
+                                small                                            
+                                responsive="sm"
+                                >                                          
+                                <template v-slot:cell(date)="data" >
+                                    <span style="font-size: 16px;">
+                                        {{data.item.date | beautify-date}}
+                                    </span>                             
+                                </template>
+
+                                <template v-slot:cell(name)="data" >
+                                    <span style="font-size: 16px;">
+                                        {{data.item.name}}
+                                    </span>
+                                </template>
+                                
+                                <template v-slot:cell(edit)="data" >   
+                                    <div style="float: right;">                                                                     
+                                        <b-button 
+                                            class="mr-2" 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="removeAffidavit(data)">
+                                            <b-icon 
+                                                icon="trash-fill" 
+                                                font-scale="1.25" 
+                                                variant="danger"/>
+                                        </b-button>
+                                        <b-button 
+                                            size="sm" 
+                                            variant="transparent" 
+                                            @click="editAffidavit(data)">
+                                            <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
+                                        </b-button>
+                                    </div>
+                                </template>
+
+                                <template v-slot:row-details="data">
+                                    <b-card 
+                                        body-class="m-0 px-0 py-1" 
+                                        :border-variant="addAffidavitFormColor" 
+                                        style="border:2px solid;">
+                                        <add-affidavit-form 
+                                            :formData="data.item" 
+                                            :index="data.index" 
+                                            :isCreateAffidavit="false" 
+                                            v-on:submit="modifyAffidavitList" 
+                                            v-on:cancel="closeAffidavitForm" />
+                                    </b-card>
+                                </template>
+                            </b-table> 
+                        </b-form-group>
+                    </b-col>  
+                    <b-col>           
+                        <b-button 
+                            style="margin-top: 2.25rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
+                            v-if="!AddNewAffidavitForm" 
+                            size="sm" 
+                            variant="court" 
+                            @click="addNewAffidavit"><b-icon icon="plus"/>Add Affidavit</b-button>
+                    </b-col>
+                </b-row>
+            </b-card>           
+
+            <b-card 
+                v-if="AddNewAffidavitForm" 
+                id="addAffidavitForm" 
+                class="my-1 ml-4" 
+                :border-variant="addAffidavitFormColor" 
+                style="border:2px solid;" 
+                body-class="px-1 py-1">
+                <add-affidavit-form 
+                    :formData="{}" 
+                    :index="-1" 
+                    :isCreateAffidavit="true" 
+                    v-on:submit="modifyAffidavitList" 
+                    v-on:cancel="closeAffidavitForm" />                
+            </b-card>
+        </b-card>
 
         <b-row class="mt-4">
             <b-col cols="7" class="labels">
@@ -256,7 +342,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import moment from 'moment-timezone';
 
-import { form7DataInfoType } from '@/types/Information/Form7';
+import { form7DataInfoType, affidavitInfoType } from '@/types/Information/Form7';
 import { partiesDataJsonDataType } from '@/types/Information/json';
 import { hearingLocationsInfoType } from '@/types/Common';
 
@@ -269,7 +355,13 @@ const form7State = namespace("Form7");
 import "@/store/modules/common";
 const commonState = namespace("Common");
 
-@Component
+import AddAffidavitForm from './AddAffidavitForm.vue';
+
+@Component({
+    components:{        
+        AddAffidavitForm        
+    }
+})
 export default class Form7StyleOfProceeding extends Vue {
 
     @informationState.State
@@ -301,6 +393,35 @@ export default class Form7StyleOfProceeding extends Vue {
     otherHearingLocationList: string[] = [];
     hearingLocation = "";
     otherHearingLocation = "";
+
+    updated=0; 
+    addAffidavitFormColor = 'court';
+    AddNewAffidavitForm = false;
+    latestEditAffidavitData;
+    isEditAffidavitOpen = false;
+
+    affidavitFields = [
+        {
+            key:'name',          
+            label:'Name',                  
+            thClass: 'text-white bg-court',
+            thStyle: 'font-size: 1rem;',            
+            sortable:false            
+        }, 
+        {
+            key:'date',          
+            label:'Date',   
+            thClass: 'text-white bg-court', 
+            thStyle: 'font-size: 1rem;',          
+            sortable:false            
+        }, 
+        {
+            key:'edit',          
+            label:'',   
+            thClass: 'text-white bg-court',           
+            sortable:false            
+        }        
+    ]
     
     yesNoOptions = [
         {text: 'Yes', value: true},
@@ -315,7 +436,7 @@ export default class Form7StyleOfProceeding extends Vue {
         hearingLocationOther: null,
         hearingDate: null,
         hearingTime: null,    
-        affidavits: null,
+        affidavitList: null,
         filedMaterial: null,
         materialList: null,         
         authorizedName:null
@@ -350,12 +471,73 @@ export default class Form7StyleOfProceeding extends Vue {
             form7Data.respondents = this.partiesJson.respondents;
             form7Data.formSevenNumber = this.fileNumber;            
             form7Data.hearingTime = '10:00:00';
+            form7Data.affidavitList = [];
             form7Data.version = this.$store.state.Application.version;             
            
             this.UpdateForm7Info(form7Data);                       
             this.saveForm(true);
         }
 
+    }
+
+    public closeAffidavitForm() {                     
+        this.AddNewAffidavitForm= false; 
+        this.addAffidavitFormColor = 'court'
+        if(this.isEditAffidavitOpen){
+            this.latestEditAffidavitData.toggleDetails();
+            this.isEditAffidavitOpen = false;
+        } 
+    }
+
+    public addNewAffidavit(){
+        this.state.affidavitList= null
+        if(this.isEditAffidavitOpen){            
+            this.addAffidavitFormColor = 'danger'
+        }else{
+            this.AddNewAffidavitForm = true;            
+        }
+    }
+
+    public editAffidavit(data) {
+        if(this.AddNewAffidavitForm || this.isEditAffidavitOpen){            
+            this.addAffidavitFormColor = 'danger';                     
+        }else if(!this.isEditAffidavitOpen && !data.detailsShowing){
+            data.toggleDetails();
+            this.isEditAffidavitOpen = true;
+            this.latestEditAffidavitData = data            
+        }   
+    }
+
+    public modifyAffidavitList(isCreateAffidavit: boolean, newAffidavit: affidavitInfoType, index: number){        
+
+        if (isCreateAffidavit){
+            
+            const form7Data = this.form7Info;
+            form7Data.affidavitList.push(newAffidavit)
+            
+            this.UpdateForm7Info(form7Data)
+
+            this.closeAffidavitForm();
+
+        } else { 
+            
+            const form7Data = this.form7Info;
+            form7Data.affidavitList[index].date = newAffidavit.date;
+            form7Data.affidavitList[index].name = newAffidavit.name;
+           
+            this.UpdateForm7Info(form7Data);
+                      
+            this.closeAffidavitForm();
+        }
+        this.updated ++;
+    }
+
+    public removeAffidavit(data){ 
+        const form7Data = this.form7Info;       
+        form7Data.affidavitList.splice(data.index,1);
+        
+        this.UpdateForm7Info(form7Data);
+        this.updated ++;        
     }
 
     public extractPartiesData(){
@@ -433,7 +615,7 @@ export default class Form7StyleOfProceeding extends Vue {
             hearingLocationOther: null,
             hearingDate: null,
             hearingTime: null,    
-            affidavits: null,
+            affidavitList: null,
             filedMaterial: null,
             materialList: null,         
             authorizedName:null
@@ -460,7 +642,7 @@ export default class Form7StyleOfProceeding extends Vue {
 
         this.state.hearingDate = this.form7Info.hearingDate && this.allowedDates(this.form7Info.hearingDate)? null :false;
         this.state.hearingTime = this.form7Info.hearingTime? null :false;
-        this.state.affidavits = this.form7Info.affidavits? null :false;
+        this.state.affidavitList = this.form7Info.affidavitList? null :false;
         this.state.filedMaterial = this.form7Info.filedMaterial != null? null :false;
         this.state.materialList = this.form7Info.filedMaterial && !this.form7Info.materialList? false: null;
         this.state.authorizedName = !this.form7Info.authorizedName? false : null;       

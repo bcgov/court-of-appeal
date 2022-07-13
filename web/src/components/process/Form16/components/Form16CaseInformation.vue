@@ -4,7 +4,7 @@
 
         <p class="mt-3">
             Find the Court of Appeal case that you are wanting to create a Offer To Settle Costs
-            form for by entered the following case information:
+            form for by entering the following case information:
         </p>
 
         <b-form-group

@@ -6,7 +6,11 @@
                 Court of Appeal Case Information
             </h2>
 
-            <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
+            <p class="mt-3">
+                Find the Court of Appeal case that you want to create a 
+                Notice of Cross Appeal for by entering the following 
+                case information:
+            </p>
 
             <b-row class="mt-0 question">
                 <b-col cols="7" class="labels">
