@@ -513,10 +513,8 @@ export default class Form7StyleOfProceeding extends Vue {
         if (isCreateAffidavit){
             
             const form7Data = this.form7Info;
-            form7Data.affidavitList.push(newAffidavit)
-            
-            this.UpdateForm7Info(form7Data)
-
+            form7Data.affidavitList.push(newAffidavit);            
+            this.UpdateForm7Info(form7Data);
             this.closeAffidavitForm();
 
         } else { 
@@ -534,8 +532,7 @@ export default class Form7StyleOfProceeding extends Vue {
 
     public removeAffidavit(data){ 
         const form7Data = this.form7Info;       
-        form7Data.affidavitList.splice(data.index,1);
-        
+        form7Data.affidavitList.splice(data.index,1);        
         this.UpdateForm7Info(form7Data);
         this.updated ++;        
     }
@@ -642,11 +639,11 @@ export default class Form7StyleOfProceeding extends Vue {
 
         this.state.hearingDate = this.form7Info.hearingDate && this.allowedDates(this.form7Info.hearingDate)? null :false;
         this.state.hearingTime = this.form7Info.hearingTime? null :false;
-        this.state.affidavitList = this.form7Info.affidavitList? null :false;
+        this.state.affidavitList = this.form7Info.affidavitList?.length > 0? null :false;
         this.state.filedMaterial = this.form7Info.filedMaterial != null? null :false;
         this.state.materialList = this.form7Info.filedMaterial && !this.form7Info.materialList? false: null;
         this.state.authorizedName = !this.form7Info.authorizedName? false : null;       
-        //console.log(this.state)
+
         for(const field of Object.keys(this.state)){
             if(this.state[field]==false){
                 Vue.filter('findInvalidFields')()
