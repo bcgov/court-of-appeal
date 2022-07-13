@@ -176,7 +176,11 @@
             <div class="arrow-right-flash-54"></div>
                     
             <div class="coa-text-box-left" style="width:64%;">
-                <div class="ml-2" style="font-weight: 700;">{{result.affidavits}}</div>                       
+                <div class="ml-2" style="font-weight: 700;">
+                    <div v-for="affidavit,inx in result.affidavitList" :key="inx" style="text-indent:10px;display:inline;">
+                        <div style="display:inline-block;"> Affidavit by {{affidavit.name}} sworn on {{affidavit.date | beautify-date}} </div>
+                    </div>
+                </div>                
             </div> 
         </div>
 

@@ -23,7 +23,9 @@
 
             <div v-if="caseInfoExists">
 
-                <p style="margin:1rem 0 1rem 2rem;">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
+                <p style="margin:1rem 0 1rem 2rem;">
+                    Find the Court of Appeal case that you are wanting to submit your application to.
+                </p>
 
                 <b-row class="mt-0 question">
                     <b-col cols="7" class="labels">

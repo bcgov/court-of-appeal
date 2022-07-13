@@ -6,6 +6,10 @@
             You may use this form for any other consent order except to 
             remove an appeal from the inactive list or to extend the time 
             to file a document(s). 
+            <p class="mt-3">
+                Find the Court of Appeal case that you want to create an 
+                order for by entering the following case information.
+            </p>
         </b-row>    
 
         <b-form-group

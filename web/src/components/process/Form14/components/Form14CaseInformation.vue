@@ -2,6 +2,11 @@
     <b-card v-if="dataReady" class="ml-4 border-white">
         <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>       
 
+        <p class="mt-3">
+            Find the Court of Appeal case that you want to create an 
+            order for by entering the following case information.
+        </p>        
+        
         <b-form-group
             class="mx-1" 
             label-cols-sm="3"

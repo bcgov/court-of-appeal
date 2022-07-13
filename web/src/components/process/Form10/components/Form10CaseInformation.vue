@@ -4,8 +4,11 @@
         <b-card class="ml-2 mt-2 border-white" >
             <p style="font-size: 1.25rem; ">Court of Appeal Case Information</p>
 
-            <p class="mt-3">Find the Court of Appeal case appeal you are responding to by entering the following case information:</p>
-
+            <p class="mt-3">
+                Find the Court of Appeal case that you want to create an 
+                order for by entering the following case information.
+            </p>
+            
             <b-form-group
                 class="mx-1" 
                 label-cols-sm="3"
