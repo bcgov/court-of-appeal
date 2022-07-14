@@ -1,6 +1,6 @@
 <template>
     <div v-if="dataReady">
-        <div style="font-size:12pt; font-weight:600;" >Users: </div>
+        <div style="font-size:12pt; font-weight:600; margin-bottom: 0.5rem;" >Users: </div>
         <b-table            
             :items="users_info"
             :fields="fields"
