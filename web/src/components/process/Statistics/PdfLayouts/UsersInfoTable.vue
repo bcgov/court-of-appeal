@@ -14,13 +14,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-
+import { reportInfoType } from '@/types/Common';
 
 @Component
 export default class UsersInfoTable extends Vue {
 
     @Prop({required:true})
-    results!: any;
+    results!: reportInfoType;
        
     dataReady = false; 
     

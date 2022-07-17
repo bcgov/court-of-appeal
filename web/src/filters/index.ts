@@ -275,6 +275,12 @@ Vue.filter('setSurveyProgress', function(survey, currentStep: number, currentPag
 
 })
 
+Vue.filter('getDocumentTypeName', function(filetype: string){	
+
+	return store.state.Common.documentTypesJson.filter(doc => doc.type==filetype)[0].description;
+
+})
+
 Vue.filter('setProgressForPages', function(currentStep: number, pageNumbers: number[], progress: number){
 	for (const page of pageNumbers)
 		if(store.state.Application.steps[currentStep].pages[page].progress)
