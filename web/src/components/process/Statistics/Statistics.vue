@@ -8,7 +8,7 @@
                 <b-col cols="2" class="h2 mt-2 mb-n1 text-primary"> 
                     Dates:
                 </b-col>
-                <b-col cols="6">
+                <b-col cols="5">
                     <date-range-picker :key="updateReport" :reportRange="reportDateRange" @datesAdded="addReportDateRanges"/>
                 </b-col>
                 <b-col cols="2">
@@ -17,7 +17,8 @@
                             <div class="text-white" style="font-size: 12pt;">{{viewStatus}}</div>
                         </b-form-checkbox>
                     </div>  
-                </b-col>    
+                </b-col> 
+                <b-col cols="1" />   
                 <b-col cols="2">
                     <b-button
                         name="search"
