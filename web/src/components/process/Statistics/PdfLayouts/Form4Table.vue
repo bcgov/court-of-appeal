@@ -14,7 +14,7 @@
         </div>
         <div 
             v-if="displayTopUser" 
-            style="font-style: italic; font-size:10pt; font-weight:450; margin-bottom: 0.25rem;" >
+            style="font-size:10pt;  margin-bottom: 0.25rem;" >
             Top User: 
         </div>
         <b-table   
