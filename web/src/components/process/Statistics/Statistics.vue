@@ -2,7 +2,7 @@
     <b-card class="mx-5 bg-light border-white">
         <div class="alert alert-danger mt-4" v-if="error">{{error}}</div>
         <h1 class="text-center" >Reports <b-icon-file-earmark-bar-graph font-scale="1.1" /></h1>        
-        <b-card class="border-0 w-75 text-center mx-auto"> 
+        <b-card class="border-0 w-80 text-center mx-auto"> 
             
             <b-row>
                 <b-col cols="2" class="h2 mt-2 mb-n1 text-primary"> 
@@ -11,7 +11,13 @@
                 <b-col cols="6">
                     <date-range-picker :key="updateReport" :reportRange="reportDateRange" @datesAdded="addReportDateRanges"/>
                 </b-col>
-                <b-col cols="2"></b-col>
+                <b-col cols="2">
+                    <div :class="displayTopUser?'bg-success':'bg-primary'" style="border:1px solid green;border-radius:5px; width: 16rem; height: 100%;">
+                        <b-form-checkbox class="ml-2 my-2" v-model="displayTopUser" size="lg" switch>
+                            <div class="text-white" style="font-size: 12pt;">{{viewStatus}}</div>
+                        </b-form-checkbox>
+                    </div>  
+                </b-col>    
                 <b-col cols="2">
                     <b-button
                         name="search"
@@ -23,7 +29,8 @@
                         ><spinner color="#FFF" v-if="searching" style="margin:0; padding: 0; height:2rem; transform:translate(0px,-24px);"/>
                         <span style="font-size: 20px;" v-else>Search</span>
                     </b-button>
-                </b-col>                
+                </b-col>  
+                       
             </b-row>
                    
         </b-card> 
@@ -31,7 +38,7 @@
         <loading-spinner color="#000" v-if="searching && !dataLoaded" waitingText="Loading ..." />     
 
         <b-card v-else-if="!searching && dataLoaded" id="print" style="border:1px solid; border-radius:5px;" bg-variant="white" class="my-4 container" no-body>   
-            <report :results="results"/>
+            <report :results="results" :displayTopUser="displayTopUser"/>
         </b-card>
 
         <b-card class="text-center bg-light border-0" >
@@ -59,7 +66,6 @@ import DateRangePicker from './DateRangePicker.vue';
 import Spinner from '@/components/utils/Spinner.vue'
 import { dateRangeInfoType } from '@/types/Common';
 
-
 @Component({
     components:{
         Report,
@@ -79,13 +85,17 @@ export default class Statistics extends Vue {
 
     results;
     searching = false;
+    displayTopUser = false; 
 
     mounted() {  
-    
+        this.displayTopUser = false; 
         this.searching = false;
         this.dataLoaded = false;         
     }
 
+    get viewStatus() {
+        if(this.displayTopUser) return 'Display Top User';else return 'Hide Top User'
+    }
 
     public find(){   
        
