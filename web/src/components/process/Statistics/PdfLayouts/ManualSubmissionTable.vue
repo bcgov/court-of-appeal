@@ -81,7 +81,7 @@ export default class ManualSubmissionTable extends Vue {
     }    
 
     public extractInfo(){
-       this.manual_submission_info = [this.results.manual_submission_info.forms];
+       this.manual_submission_info = this.results.manual_submission_info.forms;
        
         // this.manual_submission_info = [{"form_type":"MCT","submitted_count":1},{"form_type":"AFF","submitted_count":1},{"form_type":"NAA","submitted_count":1}]
         this.total = this.results.manual_submission_info.forms.length;
