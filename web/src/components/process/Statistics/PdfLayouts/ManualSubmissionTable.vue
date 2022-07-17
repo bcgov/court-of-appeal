@@ -81,33 +81,33 @@ export default class ManualSubmissionTable extends Vue {
     }    
 
     public extractInfo(){
-    //    this.manual_submission_info = [this.results.manual_submission_info.forms];
+       this.manual_submission_info = [this.results.manual_submission_info.forms];
        
-        this.manual_submission_info = [{"form_type":"MCT","submitted_count":1},{"form_type":"AFF","submitted_count":1},{"form_type":"NAA","submitted_count":1}]
-        this.total = this.manual_submission_info.length;
-        // this.topUser_info = [this.results.manual_submission_info.top_user];
+        // this.manual_submission_info = [{"form_type":"MCT","submitted_count":1},{"form_type":"AFF","submitted_count":1},{"form_type":"NAA","submitted_count":1}]
+        this.total = this.results.manual_submission_info.forms.length;
+        this.topUser_info = [this.results.manual_submission_info.top_user];
 
-        this.topUser_info = [{
-            "forms": [
-                {
-                "form_type": "MCT",
-                "submitted_count": 1
-                },
-                {
-                "form_type": "AFF",
-                "submitted_count": 1
-                },
-                {
-                "form_type": "NAA",
-                "submitted_count": 1
-                }
-            ],
-            "total": 1,
-            "first_name": "Han",
-            "last_name": "",
-            "display_name": "Han Solo"
-            }
-                ];
+        // this.topUser_info = [{
+        //     "forms": [
+        //         {
+        //         "form_type": "MCT",
+        //         "submitted_count": 1
+        //         },
+        //         {
+        //         "form_type": "AFF",
+        //         "submitted_count": 1
+        //         },
+        //         {
+        //         "form_type": "NAA",
+        //         "submitted_count": 1
+        //         }
+        //     ],
+        //     "total": 1,
+        //     "first_name": "Han",
+        //     "last_name": "",
+        //     "display_name": "Han Solo"
+        //     }
+        //         ];
     }
    
  
