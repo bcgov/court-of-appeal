@@ -220,7 +220,11 @@
         <b-row v-if="showForm22Info" class="mt-4" >
             <p>
                 If you wish to apply for an order that no fees are payable 
-                under rule 84 of the Court of Appeal Rules, you will need to:  
+                under 
+                <a  href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section84"
+                    target="_blank">rule 84
+                </a>
+                of the Court of Appeal Rules, you will need to:  
             </p>            
            
             <ol class="mt-3">
@@ -738,7 +742,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showForm22(show: boolean){
         if (show) {
             this.showForm22Info = true;
-            this.$emit('adjustHeights', 5, "15rem");
+            this.$emit('adjustHeights', 5, "17rem");
         } else {
             this.showForm22Info = false;
             this.$emit('adjustHeights', 5, "0");

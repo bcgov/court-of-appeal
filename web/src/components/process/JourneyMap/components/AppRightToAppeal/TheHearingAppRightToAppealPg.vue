@@ -183,7 +183,19 @@
             <p class="mt-1" style="display: inline-block;">
                 If you were awarded costs, you may apply to the registrar for an 
                 assessment of costs by bringing an application 
-                as outlined in Rule 53 and Rule 54 of the Court of Appeal Rules.
+                as outlined in 
+                <a 
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section53"
+                    target="_blank">
+                    Rule 53          
+                </a>
+                  and 
+                <a 
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section54"
+                    target="_blank">
+                    Rule 54          
+                </a>                
+                  of the Court of Appeal Rules.
             </p>  
 
             <ol class="mt-1 ml-3 w-100" > 
@@ -231,7 +243,13 @@
             </p>
             <p class="mt-1" style="display: inline-block;">
                 Before the Registrar makes an assessment of costs, a party 
-                under Court of Appeal Rule 76 (hyperlink) may serve another 
+                under Court of Appeal 
+                <a 
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section76"
+                    target="_blank">
+                    Rule 76          
+                </a> 
+                may serve another 
                 party, in Form 16, an offer to settle the amount of a bill of costs.
             </p>  
 

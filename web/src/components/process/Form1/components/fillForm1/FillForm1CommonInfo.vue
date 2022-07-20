@@ -35,7 +35,7 @@
                     <p class="content text-primary font-italic">
                         Pursuant to 
                         <a
-                            href=""
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section84"
                             target="_blank">
                             Rule 84 of the Court of Appeal Rules
                         </a>

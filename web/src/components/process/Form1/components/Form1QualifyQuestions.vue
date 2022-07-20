@@ -381,9 +381,9 @@
                     <p>
                         If you are unable to pay the fees associated with the appeal, you may apply 
                         for an order that no fees are payable under   
-                        <a  href="http://www.courts.gov.bc.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Form19.pdf"
-                            target="_blank"
-                            class= "text-white">Rule 84 of the Court of Appeal Rules
+                        <a  style="color: yellow; cursor:pointer; margin:0 0.25rem; text-decoration: underline; display: inline;"
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section84"
+                            target="_blank">Rule 84 of the Court of Appeal Rules
                         </a>.
                     </p>   
                     <p>
