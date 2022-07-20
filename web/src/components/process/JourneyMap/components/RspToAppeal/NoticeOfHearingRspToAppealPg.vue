@@ -38,7 +38,12 @@
                     The respondent has filed their factum or their cross-appeal factum, and
                 </li>
                 <li>
-                    The appellant has not complied with Rule 30 (1) or (2) in obtaining a hearing date.
+                    The appellant has not complied with 
+                    <a
+                        href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section30"
+                        target="_blank">Rule 30 (1) or (2)
+                    </a>                     
+                    in obtaining a hearing date.
                 </li>
             </ol>            
         </b-row>            

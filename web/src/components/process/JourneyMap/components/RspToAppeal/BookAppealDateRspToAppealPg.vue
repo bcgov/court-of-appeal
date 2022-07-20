@@ -49,7 +49,7 @@
             <p>
                 When an appeal is ready for hearing, under 
                 <a 
-                    href=""
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section33"
                     target="_blank"> Rule 33
                 </a> 
                 of the Court of Appeal Rules, an appellant 
@@ -85,7 +85,7 @@
                     <li>filed a a respondent’s factum or respondent’s cross appeal factum, and</li>
                     <li>the appellant has not complied with 
                         <a 
-                            href=""
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section33"
                             target="_blank"> Rule 33(1) or (2)
                         </a>                         
                         of the Court of Appeal rules.

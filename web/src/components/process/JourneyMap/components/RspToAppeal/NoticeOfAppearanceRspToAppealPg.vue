@@ -77,7 +77,11 @@
 
             <p style="padding: 0;">
                 The permitted methods of service under 
-                Court of Appeal Rule 4 are as follows:
+                Court of Appeal 
+                <a
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section4"
+                    target="_blank">Rule 4
+                </a> are as follows:
             </p>
        
         </b-row>
