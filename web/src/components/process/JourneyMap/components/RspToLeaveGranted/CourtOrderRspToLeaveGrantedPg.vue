@@ -9,7 +9,7 @@
 
         <b-row class="mt-4 ml-3" >            
             <a 
-                href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgment?ct=t(step-index-link)"
+                href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/getting-judgment"
                 target="_blank">How will I find out about my judgment?
             </a>                               
         </b-row>

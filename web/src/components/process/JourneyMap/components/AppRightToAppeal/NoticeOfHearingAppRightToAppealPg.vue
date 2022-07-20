@@ -57,7 +57,11 @@
                     The respondent has filed their factum or their cross-appeal factum, and
                 </li>
                 <li>
-                    The appellant appellant has not complied with Rule 33(1) or (2).
+                    The appellant appellant has not complied with 
+                    <a
+                        href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section33"
+                        target="_blank">Rule 33 (1) or (2)
+                    </a>.
                 </li>
             </ol>
             If the Respondent obtains a hearing date, they must file and serve a notice of hearing 

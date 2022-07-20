@@ -65,7 +65,7 @@
         <b-row v-if="showOrderInfo" class="mt-0">
             <p class="ml-3" >            
                 <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/4.3-court-orders?ct=t(step-index-link)"
+                    href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/court-orders"
                     target="_blank">Drafting Orders
                 </a>                               
             </p>
@@ -132,7 +132,7 @@
          <b-row v-if="showSignInfo" class="mt-0">
             <p class="ml-3" >            
                 <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgment?ct=t(step-index-link)"
+                    href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/getting-judgment"
                     target="_blank">How will I find out about my judgment?
                 </a>                              
             </p>

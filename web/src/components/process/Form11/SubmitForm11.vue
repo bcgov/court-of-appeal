@@ -10,11 +10,16 @@
             <b-row class="ml-2" style="font-size: 2rem;">
                 Download and Print
             </b-row> 
-            <b-row class="ml-2 my-2" style="font-size: 14px;">
+            <b-row class="ml-2 my-2" style="font-size: 14px; display: inline-block;">
                 Before you can submit the order to the registry for entry, you will need to have the 
                 order you prepared signed by all parties.  If someone refuses to sign an order, you may 
-                go before the registrar to settle the order pursuant to Rule 68 of the 
-                Court of Appeal Rules.
+                go before the registrar to settle the order pursuant to 
+                <a
+                    
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section68"
+                    target="_blank">Rule 68
+                </a>
+                 of the Court of Appeal Rules.
             </b-row>
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
                 Once you have collected the party signatures, you can return to this application to 
