@@ -2,7 +2,7 @@
     <b-card v-if="mountedData" header-tag="header" bg-variant="light" border-variant="white" style="width: 80rem;" class="mx-auto">
 
         <b-card-header header-bg-variant="light">            
-            <form-18-process-header v-bind:stepsCompleted="stepsCompleted"/>
+            <form-16-process-header v-bind:stepsCompleted="stepsCompleted"/>
         </b-card-header>        
 
         <b-card no-body bg-variant="light" border-variant="light" class="my-2 text-dark">
@@ -13,14 +13,12 @@
             
             <b-card no-body class="border-white bg-white mx-5">
                 <b-row class="mx-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Change of Representation/Change of Address for Service has 
-                    been submitted and accepted. Please click on the CSO Package number below 
-                    to retrieve a filed copy of your Notice of Change of Representation/Change 
-                    of Address for Service.
+                    Your Offer to Settle Costs has been submitted and accepted. Please 
+                    click on the CSO Package number below to retrieve a filed copy of 
+                    your Offer to Settle Costs.
                 </b-row>
                 <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px; font-weight: 700; font-style: italic;">
-                    Please note that you must serve the Notice of Change of 
-                    Representation/Change of Address for Service on each party.
+                    Please note that you must serve the Offer to Settle Costs on each party.
                 </b-row>
                 <b-row class="ml-5">
                     <b-col cols="3">
