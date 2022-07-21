@@ -12,7 +12,7 @@
             </b-row> 
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
                 By submitting, you will be redirected to the E-Filing Hub.
-                <p>
+                <p class="mt-2">
                     Please note that although the Offer to Settle Costs is 
                     being submitted, the document will not be reviewed until 
                     the conclusion of the hearing on the assessment of costs.

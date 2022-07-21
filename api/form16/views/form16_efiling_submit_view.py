@@ -98,7 +98,7 @@ class Form16EFilingSubmitView(generics.GenericAPIView):
 
     def post(self, request, offer_to_settle_costs_id):
         
-        document_type = "UNKNOWN" # type Form16 for Efiling
+        document_type = "AOSC" # type Form16 for Efiling
         uid = request.user.id
 
         offer_to_settle_costs = self.get_offer_to_settle_costs_for_user(offer_to_settle_costs_id, uid)        
