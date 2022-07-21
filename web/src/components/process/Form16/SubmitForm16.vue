@@ -8,16 +8,15 @@
         <b-card text-variant="dark" class="my-2 mx-5 bg-light border-light">
 
             <b-row class="ml-2" style="font-size: 2rem;">
-                Download and Print
+                Submit through E-Filing
             </b-row> 
-            <b-row class="ml-2 my-2" style="font-size: 14px;">
-                You can print or download your Offer to Settle Costs to 
-                serve on the other party.
-            </b-row>
             <b-row class="ml-2 mb-5" style="font-size: 14px;">
-                Please note that the Offer To Settle Costs cannot be 
-                submitted to the Registrar until the conclusion of 
-                the hearing on the assessment of costs.
+                By submitting, you will be redirected to the E-Filing Hub.
+                <p>
+                    Please note that although the Offer to Settle Costs is 
+                    being submitted, the document will not be reviewed until 
+                    the conclusion of the hearing on the assessment of costs.
+                </p>
             </b-row>
             <b-row>
                 <b-alert
@@ -30,28 +29,28 @@
             </b-row>
 
             <b-row class="ml-5">
-                <b-col cols="9">
+                <b-col cols="10">
                     <b-button 
-                        style="float: right; width: 120px; font-size: 20px;" 
+                        style="float: right; width: 120px; height: 50px; font-size: 20px;" 
                         variant="danger"
                         @click="cancel()"
                         >
                         Cancel
                     </b-button>
                 </b-col>
-                <b-col cols="3">
+                <b-col cols="2">
                     <b-button
-                        style="float: right; margin-right:1rem; font-size: 20px;" 
+                        style="float: left; width: 120px; height: 50px; font-size: 20px; opacity:1;" 
+                        :disabled="submitting"
                         variant="success"
-                        @click="savePdf()"
-                        >Download PDF
-                        <b-icon-printer-fill class="mx-0" variant="white" scale="1" ></b-icon-printer-fill>
+                        @click="submit()"
+                        ><spinner color="#FFF" v-if="submitting" style="margin:0; padding: 0; transform:translate(0px,-22px);"/>
+                        <span v-else style="margin:0; padding: 0;">Submit
+                        <span style="margin:0; padding: 0;" class="fa fa-paper-plane btn-icon-left"/></span>
                     </b-button>
                 </b-col>
-            </b-row>
-
+            </b-row> 
         </b-card>
-
         
     </b-card>
 </template>
@@ -66,6 +65,7 @@ const form16State = namespace("Form16");
 import Form16ProcessHeader from "@/components/process/Form16/components/Form16ProcessHeader.vue";
 import Spinner from "@/components/utils/Spinner.vue";
 import { form16DataInfoType, form16StatusInfoType } from '@/types/Information/Form16';
+import { packageInfoType } from '@/types/Information';
 
 @Component({
     components:{
@@ -83,10 +83,13 @@ export default class SubmitForm16 extends Vue {
 
     stepsCompleted = {} as form16StatusInfoType;  
     mountedData = false;   
+    packageInfo = {} as packageInfoType;
+    submitting = false;
     errorMsg="";
 
     mounted() {
         this.mountedData = false;
+        this.submitting = false; 
         this.errorMsg = ""
         this.stepsCompleted = {
             first: true,
@@ -96,30 +99,44 @@ export default class SubmitForm16 extends Vue {
         this.mountedData = true;         
     }  
 
-    public savePdf(){        
-        const pdfType = "FORM"
-        const pdfName ="Form16"
-        const url = '/form16/form-print/'+this.currentOfferToSettleCostsId+'/?pdf_type='+pdfType
-        const options = {
-            responseType: "blob",
+    public submit() {
+
+        this.submitting = true;
+        this.errorMsg =""
+
+        const url = "/form16/efiling/"+this.currentOfferToSettleCostsId+"/submit/";
+
+        const header = {
+            responseType: "json",
             headers: {
-            "Content-Type": "application/json",
+                "Content-Type": "application/json",
             }
         }
-        this.$http.get(url, options)
-        .then(res => {
-            const blob = res.data;
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            document.body.appendChild(link);
-            link.download = pdfName+".pdf";
-            link.click();
-            setTimeout(() => URL.revokeObjectURL(link.href), 1000);          
 
-        },err => {
-            console.error(err);
-        });
-    }    
+        const body = {
+            document_type: "AOSC"
+        }
+
+        this.$http.post(url, body, header)
+        .then(res => {                            
+            // this.submitting = false;
+            if(res.data?.message=="success" && res.data?.redirectUrl){
+                const eFilingUrl = res.data?.redirectUrl
+                location.replace(eFilingUrl);
+            }else
+                this.submitting = false;
+        }, err => {
+            console.log(err.response?.data?.message);
+            const generalError = " Error in submission. Please refresh the page and try again."
+            if(err.response?.data?.message)
+                this.errorMsg = err.response.data.message
+            else if(err.response?.data?.detail)
+                this.errorMsg = err.response.data.detail+generalError
+            else
+                this.errorMsg = generalError
+            this.submitting = false;
+        });        
+    }   
 
     public cancel() {
         this.$router.push({name: "dashboard" }) 

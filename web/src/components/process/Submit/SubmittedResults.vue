@@ -44,6 +44,11 @@
         <cancel-submit-form-9 v-else-if="result=='cancel'"/>
         <error-submit-form-9 :errMsg="errorMsg" v-else-if="result=='error'"/>        
     </div>  
+    <div v-else-if="(formType == 'AOSC')">
+        <success-submit-form-16 :packageInfo="packageInfo" v-if="result=='success'"/>
+        <cancel-submit-form-16 v-else-if="result=='cancel'"/>
+        <error-submit-form-16 :errMsg="errorMsg" v-else-if="result=='error'"/>        
+    </div> 
     <div v-else-if="(formType == 'COS')">
         <success-submit-form-17 :packageInfo="packageInfo" v-if="result=='success'"/>
         <cancel-submit-form-17 v-else-if="result=='cancel'"/>
@@ -116,6 +121,10 @@ import CancelSubmitForm9 from "./Form9/CancelSubmitForm9.vue";
 import SuccessSubmitForm9 from "./Form9/SuccessSubmitForm9.vue";
 import ErrorSubmitForm9 from "./Form9/ErrorSubmitForm9.vue";
 
+import CancelSubmitForm16 from "./Form16/CancelSubmitForm16.vue";
+import SuccessSubmitForm16 from "./Form16/SuccessSubmitForm16.vue";
+import ErrorSubmitForm16 from "./Form16/ErrorSubmitForm16.vue";
+
 import CancelSubmitForm17 from "./Form17/CancelSubmitForm17.vue";
 import SuccessSubmitForm17 from "./Form17/SuccessSubmitForm17.vue";
 import ErrorSubmitForm17 from "./Form17/ErrorSubmitForm17.vue";
@@ -170,6 +179,9 @@ import { packageInfoType } from '@/types/Information';
         CancelSubmitForm9,
         SuccessSubmitForm9,
         ErrorSubmitForm9,  
+        CancelSubmitForm16,
+        SuccessSubmitForm16,
+        ErrorSubmitForm16, 
         CancelSubmitForm17,
         SuccessSubmitForm17,
         ErrorSubmitForm17,      
