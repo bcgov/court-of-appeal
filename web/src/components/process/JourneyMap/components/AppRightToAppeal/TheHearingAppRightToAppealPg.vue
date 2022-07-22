@@ -21,7 +21,7 @@
             </p> 
             <p class="mt-1 ml-3" >            
                 <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/3.3-how-to-prepare-for-the-hearing?ct=t(step-index-link)"
+                    href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/how-to-prepare-for-hearing"
                     target="_blank">How do I prepare for my hearing?
                 </a>                               
             </p>
@@ -115,19 +115,19 @@
             <ul class="mt-1 ml-3" >     
                 <li>       
                     <a 
-                        href="https://www.courtofappealbc.ca/appellant-guidebook/3.4-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                        href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/what-happens-at-hearing"
                         target="_blank">What will happen at my hearing?
                     </a>                               
                 </li>
                 <li class="mt-1" >            
                     <a 
-                        href="https://www.courtofappealbc.ca/appellant-guidebook/3.1-making-chambers-applications?ct=t(step-index-link)"
+                        href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/getting-judgment"
                         target="_blank">What can I expect after my hearing?
                     </a>   
                 </li>    
                 <li class="mt-1" >            
                     <a 
-                        href="https://www.courtofappealbc.ca/appellant-guidebook/4.1-getting-judgment?ct=t(sidebar-link)"
+                        href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/getting-judgment"
                         target="_blank">Getting Judgment
                     </a>   
                 </li>                         
