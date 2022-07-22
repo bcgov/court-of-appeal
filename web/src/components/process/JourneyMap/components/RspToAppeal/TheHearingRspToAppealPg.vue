@@ -9,19 +9,19 @@
 
         <b-row class="mt-4 ml-3" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.5-how-to-prepare-for-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/how-to-prepare-for-hearing"
                 target="_blank">How do I prepare for my hearing?
             </a>                               
         </b-row>
         <b-row class="mt-2 ml-3" >            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/2.6-what-happens-at-the-hearing?ct=t(sidebar-link)"
+                href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/what-happens-at-hearing"
                 target="_blank">What will happen at my hearing?
             </a>                               
         </b-row>
         <b-row class="mt-2 ml-3">            
             <a 
-                href="https://www.courtofappealbc.ca/respondent-guidebook/step-3-after-hearing?ct=t(step-index-link)"
+                href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/getting-judgment"
                 target="_blank">What can I expect after my hearing?
             </a>                               
         </b-row>        

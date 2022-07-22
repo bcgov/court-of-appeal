@@ -35,9 +35,9 @@
                     <p class="content text-primary font-italic">
                         Pursuant to 
                         <a
-                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section84"
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section82"
                             target="_blank">
-                            Rule 84 of the Court of Appeal Rules
+                            Rule 82 of the Court of Appeal Rules
                         </a>
                         you may amend a notice of appeal form without permission of 
                         the court or a justice in certain circumstances. Please 

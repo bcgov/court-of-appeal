@@ -81,7 +81,7 @@
 
         <b-row class="mt-4 question">
             <b-col cols="7" class="labels">
-                City where the Order was Pronounced                                
+                City where the Order was Pronounced:                                
             </b-col>
             <b-col class="mt-2">
                 <b-form-input
