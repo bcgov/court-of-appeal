@@ -22,10 +22,7 @@
                 </a>
             </b-col>
             <b-col cols="4">
-                <div 
-                    style="text-align: right;">
-                    Call: 1-800-663-6102
-                </div> 
+               
             </b-col>
         </b-row>        
         
