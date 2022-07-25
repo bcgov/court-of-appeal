@@ -253,7 +253,18 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Are you amending a Notice of Cross Appeal that has been filed?
+                    <p>Are you amending a Notice of Cross Appeal that has been filed?</p>
+                    <p style="font-size: 0.75rem; margin-top:-1rem;">
+                        Pursuant to 
+                        <a 
+                            target="_blank"
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section82">
+                            Rule 82 of the Court of Appeal Rules
+                        </a> 
+                        you may amend a notice of cross appeal form without permission 
+                        of the court or a justice in certain circumstances. 
+                        Please ensure that you review the rule for those circumstances.
+                    </p>
                 </b-col>
                 <b-col class="ml-1">
                     <b-form-radio-group                
