@@ -24,7 +24,7 @@ pytest-django>=3.1.2,<4
 
 # Util
 requests>=2.18.4,<3
-pillow>=9.2.0
+pillow>=8.1.0
 numpy>=1.19.5
 jsonschema>=3.2.0,<4
 zeep>=4.0.0
