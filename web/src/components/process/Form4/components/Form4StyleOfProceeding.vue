@@ -1058,7 +1058,7 @@ export default class Form4StyleOfProceeding extends Vue {
 
 <style scoped lang="scss">
 
-    ::v-deep .vuetify{
+    :deep(.vuetify){
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
         overflow: hidden;
