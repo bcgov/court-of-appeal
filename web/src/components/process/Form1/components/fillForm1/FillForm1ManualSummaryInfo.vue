@@ -359,7 +359,7 @@ export default class FillForm1ManualSummaryInfo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-    ::v-deep .vuetify{
+    :deep(.vuetify){
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
     }

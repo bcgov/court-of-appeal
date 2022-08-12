@@ -185,10 +185,3 @@ export default class MenuBar extends Vue {
 	}
 }
 </script>
-
-<style scoped>   
-
-    ul >>> .dropdown-menu {
-        width: 250px !important;
-    }
-</style>

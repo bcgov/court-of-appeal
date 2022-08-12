@@ -491,7 +491,7 @@ export default class FillForm1CommonInfo extends Vue {
         margin-left: 1.15rem !important;
     }
 
-    ::v-deep .vuetify{
+    :deep(.vuetify){
         @import "@/styles/vuetify.scss";
         @import "@/styles/_custom_vuetify.scss";
         overflow: hidden;
