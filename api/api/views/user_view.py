@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from api.models.user import User
 from core.auth import build_get_user_object, user_authorized_for_stats
-
+from django.conf import settings
 
 class UserView(APIView):
     def put(self, request):
@@ -25,9 +25,13 @@ class UserView(APIView):
 
     def get(self, request: Request):
         logged_in = isinstance(request.user, User)
-        info = build_get_user_object(logged_in, request)
+        if settings.PRIVATE_RELEASE=="true" and logged_in and not user_authorized_for_stats(request):
+            info = build_get_user_object(False, request)
+        else:
+            info = build_get_user_object(logged_in, request)
+
         info["location"] = logged_in and request.user.location
-        info["stats"] = user_authorized_for_stats(request)
-        ret = Response(info)
+        info["stats"] = user_authorized_for_stats(request)        
+        ret = Response(info)                
         ret.set_cookie("csrftoken", get_token(request))
         return ret
