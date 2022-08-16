@@ -175,6 +175,11 @@ export default class FillForm1 extends Vue {
                     form1Data['appealSubmissionDeadline']=moment(form1Data['appealSubmissionDeadline']).local().format()
                     form1Data['dateOfJudgement']=moment(form1Data['dateOfJudgement']).local().format();
                 }
+
+                if(!form1Data.manualSop) form1Data.manualSop = []
+                if(!form1Data.addresses) form1Data.addresses = []
+                if(!form1Data.emailAdresses) form1Data.emailAdresses = []
+                if(!form1Data.phoneNumbers) form1Data.phoneNumbers = []
                 
                 this.UpdateForm1Info(form1Data) 
                 this.setCurrentCourtLocation(form1Data['lowerCourtRegistryId'])
