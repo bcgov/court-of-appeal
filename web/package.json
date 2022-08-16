@@ -21,7 +21,7 @@
     "@mdi/font": "^6.9.96",
     "@types/underscore": "^1.10.0",
     "axios": "^0.27.2",
-    "bootstrap": "^4.6.2",
+    "bootstrap": "^5.2.0",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.24.1",
     "jquery": "^3.6.0",
