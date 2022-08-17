@@ -434,7 +434,7 @@
                 <b>If you intend to participate</b> in this cross appeal and you have not already filed a 
                 Notice of Appearance in this matter in a Court of Appeal registry,<b> you must give notice</b> 
                 of your intention to participate by filing a form entitled “Notice of Appearance” 
-                (Form 2 of the <i>Court of Appeal Rules</i>) in a Court of Appeal registry and serve the Notice 
+                (Form 2 of the Court of Appeal Rules) in a Court of Appeal registry and serve the Notice 
                 of Appearance on the other parties to the appeal and cross appeal <b>not more than 10 days</b> 
                 after receiving this Notice of Cross Appeal.
             </div>
