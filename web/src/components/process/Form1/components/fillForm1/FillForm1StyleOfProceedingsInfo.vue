@@ -370,7 +370,8 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         // }
         // styleOfProceedings.respondentSolicitor = this.respondentSolicitors.join(', ');     
 
-        this.UpdateForm1Info(styleOfProceedings)      
+        this.UpdateForm1Info(styleOfProceedings)
+        this.updateAddressFields();
     }  
    
 
@@ -378,7 +379,7 @@ export default class FillForm1StyleOfProceedingsInfo extends Vue {
         //console.log('updating')
         this.styleOfProceedingsInfo = this.form1Info;
         this.extractInfo();
-        this.updateAddressFields(); 
+        // this.updateAddressFields(); 
         this.recheckStates()  
     }
 
