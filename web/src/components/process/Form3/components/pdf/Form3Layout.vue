@@ -351,7 +351,7 @@
                 <div class="ml-2">
                     <b>Name(s) and address(es) within BC for service of the party(ies) filing cross appeal</b>
                     <i>
-                        <br>If you have a lawyer, include the law firm’s address. Otherwise provide your own residential address.
+                        <br>If you have a lawyer, include the law firm’s address; otherwise provide your own residential address.
                     </i>
                 </div>
             </div>

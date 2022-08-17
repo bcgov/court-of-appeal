@@ -156,7 +156,7 @@
     <!-- ROW <new-status> -->        
                 <div class="mt-3" style="display:flex; font-size: 9pt;">                      
                     <div class="coa-arrow-box-right" style="width:25%; margin:.5rem 0px; height:3.5rem;">            
-                        <div style="margin-left:8.35rem;"><b>New:</b></div>
+                        <div style="margin-left:8.35rem;"><b>New status:</b></div>
                     </div>
 
                     <div class="arrow-right-flash-36"></div> <!-- < width ~ 8% > -->
@@ -278,7 +278,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or party authorizing filing of this form.</div>
+                <div class="ml-2">Name of lawyer or party authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
