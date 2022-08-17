@@ -113,7 +113,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.6rem 0; height:5.5rem;">
                 <div class="ml-2">
-                    <b> Name of the person(s) bringing the application</b>
+                    <b> Name of person(s) bringing the application</b>
                     <i>
                         <br>Include name of law firm if represented.
                     </i>
