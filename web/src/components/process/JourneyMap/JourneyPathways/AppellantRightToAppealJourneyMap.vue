@@ -396,7 +396,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.contentTitle = 'Would you like to start your appeal?';
             this.windowTitle = "Initial Document";
             this.pathTypes = ["share"];
-            this.pathHeights = ['35rem'];
+            this.pathHeights = ['18rem'];
             this.initialDocumentsContent = true;
 
         } else if (contentType == "Apply for Leave to Appeal") {

@@ -4,7 +4,7 @@
         <p> 
             The appellant's leave to appeal was refused. You are served with a 
             Notice of Application to Vary an Order of Justice, which means the 
-            appellant is asking three judges to review the previous judge's 
+            appellant is asking three justices to review the previous justice's 
             decision. Follow the steps below if you would like to continue 
             to participate in the appeal process. " + " As you progress 
             through your appeal journey, check the box next to each step below 
