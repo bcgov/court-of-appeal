@@ -216,7 +216,7 @@
 
                     <p>
                         Appeals of a Supreme Court Master's decision are typically brought 
-                        to a Supreme Court Judge.
+                        to a Supreme Court Justice.
                     </p> 
 
                     <p>
@@ -300,7 +300,7 @@
                 </b-form-radio-group> 
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtOrder">
                     <p>
-                        You may apply for an order for a stay or proceedings (put the proceedings on hold) or execution 
+                        You may apply for an order for a stay of proceedings (put the proceedings on hold) or execution 
                         (stop enforcement) of the order pending the outcome of the appeal.                        
                     </p> 
                     <p>

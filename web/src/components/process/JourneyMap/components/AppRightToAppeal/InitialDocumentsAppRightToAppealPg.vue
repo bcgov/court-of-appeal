@@ -31,7 +31,7 @@
                             <b-row style="width: 135%;" class="my-1">
                                 <b-col cols="9">
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.2-what-do-you-prepare-if-you-have-an-automatic-right-to-appeal?ct=t(step-index-link)"
+                                        href="https://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/how-to-start-appeal"
                                         target="_blank">Notice of Appeal
                                     </a>
                                 </b-col>
@@ -57,7 +57,7 @@
             </ol>
         </b-row>
 
-        <b-row class="mt-4 mr-1 bg-warning warning-message-row">
+        <!-- <b-row class="mt-4 mr-1 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -66,9 +66,9 @@
                 to file and serve your Affidavit of Service, after serving the Notice of 
                 Appeal to all of the respondents.
             </b-col>           
-        </b-row>
+        </b-row> -->
 
-        <b-row class="mt-4" >
+        <!-- <b-row class="mt-4" >
             <ol>
                 <li>
                     Complete either the .DOC or .PDF below. Click on the document name for more information.
@@ -113,7 +113,7 @@
                     Serve one copy to each respondent.
                 </li>
             </ol>
-        </b-row>                
+        </b-row>                 -->
         
     </b-card>
 </template>

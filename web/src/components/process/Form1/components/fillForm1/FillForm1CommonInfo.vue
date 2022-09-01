@@ -117,7 +117,7 @@
                 <b-col cols="7" class="labels">
                     Was this matter already appealed in Supreme Court?   
                     <p class="help-content">
-                        From a <b>Provincial Court Judge</b> to a Supreme Court Judge - 
+                        From a <b>Provincial Court Judge</b> to a Supreme Court Justice - 
                         <a
                             href=""
                             target="_blank">
@@ -125,7 +125,7 @@
                         </a>
                     </p>
                     <p class="help-content mt-1">
-                        From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Judge - 
+                        From a <b>Master, Registrar or Special Referee</b> to a Supreme Court Justice - 
                         <a                            
                             href=""
                             target="_blank">
@@ -133,7 +133,7 @@
                         </a>
                     </p>
                     <p class="help-content mt-1">
-                        From a <b>Tribunal</b> to a Supreme Court Judge - 
+                        From a <b>Tribunal</b> to a Supreme Court Justice - 
                         <a                            
                             href=""
                             target="_blank">
