@@ -2,9 +2,9 @@
     <b-card no-body border-variant="white">
        
         <p>
-            If your leave to appeal was refused, and your application for review was refused. 
-            The Court of Appeal decision is final unless the Supreme Court of Canada agrees 
-            to hear your case.  
+            If your Application to Vary the Order for leave to appeal is dismissed 
+            by the Court of Appeal and you seek to appeal this final order, you 
+            would need to proceed to the Supreme Court of Canada. 
         </p>
         <p>
             For more information about the process, please visit the 

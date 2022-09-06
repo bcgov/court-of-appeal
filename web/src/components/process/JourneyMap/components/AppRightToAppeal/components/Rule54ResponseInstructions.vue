@@ -59,7 +59,7 @@
                 </p>
                 <p>                
                     <a 
-                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/completion_instructions/templates/general_affidavit.dotx"
                         target="_blank">Affidavit
                     </a> 
                 </p>

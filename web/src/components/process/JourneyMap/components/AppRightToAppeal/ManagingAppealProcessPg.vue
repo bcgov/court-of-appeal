@@ -515,7 +515,7 @@ export default class ManagingAppealProcessPg extends Vue {
         }
 
         if (this.getAppRules().includes('59')){
-            this.appStepsLength = this.appStepsLength + 32;
+            this.appStepsLength = this.appStepsLength + 30;
             if (this.form4Button == 0){
                 this.form4Button = 59;
             }

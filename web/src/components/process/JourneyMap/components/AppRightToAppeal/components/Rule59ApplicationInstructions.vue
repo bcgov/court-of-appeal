@@ -59,8 +59,7 @@
                         @click="downloadInstructions('written-argument')"
                         target="_blank">
                         Written argument (if any)               
-                    </li> not exceeding 10 pages that sets out 
-                        why you should be permitted to adduce the evidence                    
+                    </li>                     
                 </ul>
             </li> 
             <li>
@@ -88,7 +87,7 @@
                 </p>
                 <p>                
                     <a 
-                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/completion_instructions/templates/general_affidavit.dotx"
                         target="_blank">Affidavit
                     </a> 
                 </p>

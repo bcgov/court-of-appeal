@@ -52,8 +52,7 @@
                         </b-row>
                     </li> 
                     <li>
-                        Memorandum of argument, not exceeding 10 pages 
-                        (completion instructions for intervener apps)
+                        Memorandum of argument
                     </li>                    
                 </ul>
             </li> 
