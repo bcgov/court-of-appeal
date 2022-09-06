@@ -240,8 +240,7 @@
         <b-row v-if="showRespNoaLeaveInfo" class="mt-4">
             <p>
                 If you have been served with a Notice of Application 
-                for Leave to Appeal, and you wish to respond, you must 
-                apply for leave to appeal from the court. Follow the 
+                for Leave to Appeal, and you wish to respond, follow the 
                 steps below to complete the process.
             </p>
             <p>
@@ -568,7 +567,7 @@
         <b-row v-if="showRespVaryOrderInfo" class="mt-4" >            
             <p>
                 If you were served with an application to vary an order of a justice 
-                and an application book, and you can complete the steps below to respond:
+                and an application book, you can complete the steps below to respond:
             </p>               
         </b-row>
 
@@ -616,7 +615,7 @@
                         <li class="link-button mb-2" 
                             @click="affidavit = true;"
                             target="_blank">
-                            Supporting Affidavits (if any),                
+                            Supporting Affidavit (if any),                
                         </li> 
                         <li>
                             <b-row class="my-1 w-110">
@@ -656,7 +655,7 @@
                 </p>
                 <p>                
                     <a 
-                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/Forms/fillable_forms/civil_rules_forms/Affidavit.pdf"
+                        href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/completion_instructions/templates/general_affidavit.dotx"
                         target="_blank">Affidavit
                     </a> 
                 </p>
