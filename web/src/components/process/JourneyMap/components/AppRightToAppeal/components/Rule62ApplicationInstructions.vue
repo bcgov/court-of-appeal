@@ -35,7 +35,7 @@
                             <b-row class="my-1 w-110">
                                 <b-col cols="9">
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
+                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
                                         target="_blank">Notice of Application to vary an order of a justice
                                     </a>
                                 </b-col>                                

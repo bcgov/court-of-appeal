@@ -7,8 +7,11 @@
                 <b-col cols="7" class="labels">
                     Are you seeking leave to appeal?  
                     <p class="content text-primary font-italic">
-                        Court of Appeal Rule 12 explains when you need leave 
-                        to appeal.  If you are unsure, check “Yes”.
+                        Court of Appeal 
+                        <a
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section12" 
+                            target="_blank">Rule 12</a> 
+                        explains when you need leave to appeal.  If you are unsure, check “Yes”.
                     </p>                               
                 </b-col>
                 <b-col>
