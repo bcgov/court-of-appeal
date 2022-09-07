@@ -99,7 +99,7 @@
                             <b-row class="my-1 w-110">
                                 <b-col cols="9">
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.13-prepare-and-file-a-notice-of-hearing?ct=t(step-index-link)"
+                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/step-2-prepare-your-documents/210-set-hearing-date"
                                         target="_blank">Notice of Hearing
                                     </a>
                                 </b-col>                                

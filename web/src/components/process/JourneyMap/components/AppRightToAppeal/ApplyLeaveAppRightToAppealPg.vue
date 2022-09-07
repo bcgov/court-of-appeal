@@ -447,7 +447,7 @@
                             <b-row class="my-1 w-145">
                                 <b-col cols="4">
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
+                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
                                         target="_blank">Notice of Application to Vary
                                     </a>
                                 </b-col>                                
@@ -516,7 +516,7 @@
                             <b-row class="my-1 w-110">
                                 <b-col cols="4">
                                     <a 
-                                        href="https://www.courtofappealbc.ca/appellant-guidebook/2.3-after-obtaining-or-being-refused-leave-to-appeal?ct=t(step-index-link)"
+                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
                                         target="_blank">Application Book
                                     </a>                                 
                                 </b-col>

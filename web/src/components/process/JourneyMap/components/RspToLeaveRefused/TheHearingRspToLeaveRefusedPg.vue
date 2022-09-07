@@ -3,7 +3,7 @@
 
         <b-row class="mt-3">            
             <div style="text-align: left; font-weight: bold;">
-                A division of three judges will review the decision of the single judge who heard the appeal.
+                A division of three justices will review the decision of the single justice who heard the appeal.
             </div>            
         </b-row>
         
