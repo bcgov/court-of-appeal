@@ -460,7 +460,8 @@
                     </b>    
                     <i><br>
                         Briefly list the order(s) you will ask this Court to make on appeal.
-                        For example: “Set aside the trial judgment and order a new trial”.                        
+                        For example: “Set aside the trial judgment and order a new trial”.         
+                        Include any order as to costs.               
                     </i> 
                 </div>                       
             </div>
@@ -929,8 +930,8 @@
         <p style="margin-top:0.45rem; text-align: justify;">
             <b>If you intend to participate</b> in this proceeding, <b>you must give notice</b> 
             of your intention by doing the following <b>not more than 10 days</b> after receiving
-            this Notice of Appeal: (1) file a “Notice of Appearance” (Form 2 of the <i>Court of 
-            Appeal Rules</i>) in a Court of Appeal registry and; (2) serve the Notice of 
+            this Notice of Appeal: (1) file a “Notice of Appearance” (Form 2 of the Court of 
+            Appeal Rules) in a Court of Appeal registry and; (2) serve the Notice of 
             Appearance on the appellant.
         </p>
         <p class="mb-n1">If you fail to file and serve a Notice of Appearance:</p>

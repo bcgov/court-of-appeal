@@ -433,7 +433,7 @@
                 <b-col cols="7" class="labels">
                     Name(s) and address(es) within BC for service of the party(ies) filing cross appeal.    
                     <p class="content text-primary">
-                        <b>Note:</b> If you have a lawyer, include the law firms' address. Otherwise provide your own residential address
+                        <b>Note:</b> If you have a lawyer, include the law firms' address; otherwise provide your own residential address
                         <br/>It must be a residential address or business address in British Columbia, 
                         other than a post office box.
                     </p>
