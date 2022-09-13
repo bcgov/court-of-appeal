@@ -1,9 +1,11 @@
 <template>
 <div v-if="dataReady">
     <div class="journey-map-container">
-        
+
+        <!-- LEVEL 1 -->
+
         <div :class="{'journey-start-circle':true, 'completed-step': completedTrail[0]}" />        
-            
+        
         <div
             :style="{marginLeft: '50px',
                 borderTop: '9px solid rgb(159, 191, 226)',
@@ -14,14 +16,14 @@
         />
 
         <trail                
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
-            width='30%'
+            width='57%'
             level=1                
         />
 
         <form-icon   
-            style="left: 17%"
+            style="left: 27%"
             :twoPages="false"
             stepTitle="Initial Document"
             @action="displayWindow('Initial Document')"
@@ -30,15 +32,15 @@
             v-bind="pageState[0]"           
         />
 
-        <trail                
-            className="journey-trail-l1-moveable"
+         <trail                
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[1]"
             width='20%'
             level=1                
         />
 
         <form-icon   
-            style="left: 35%"
+            style="left: 60%"
             :twoPages="false"
             stepTitle="Apply/Respond to Leave to Appeal"
             stepTitleOptional="(Optional)"
@@ -47,16 +49,28 @@
             order=2
             v-bind="pageState[1]"           
         />
-                    
-        <trail
-            className="journey-trail-l1-moveable"
-            :completed="completedTrail[2]"
-            width='20%'
-            level=1
+
+        <return-trail
+            :status="completedTrail[1]?'completed':''"
+            startpoint='73%'
+            :extendEnd="true"
+            :returnLevel="1"
+        />
+
+        <!-- LEVEL 2 -->
+
+        <div
+            :style="{marginLeft: '190px',
+                borderTop: '9px solid rgb(159, 191, 226)',
+                width: '56%',
+                position: 'absolute',
+                top: '374px',
+                zIndex: '1',
+                marginBottom: '81px'}"
         />
 
         <form-icon 
-            style="left: 53%"
+            style="top: 34%; left: 27%"
             :twoPages="true"
             stepTitle="Applications"
             stepTitleOptional="(Optional)"            
@@ -66,8 +80,16 @@
             v-bind="pageState[2]"            
         />
 
+        <trail
+            className="journey-trail-l1-moveable-scoped"
+            :completed="completedTrail[2]"
+            width='35%'
+            :style="{top: '34.15%', left: '30%', position: 'absolute'}"
+            level=1
+        />
+
         <form-icon 
-            style="left: 72%"
+            style="top: 34%; left: 60%"
             :twoPages="true"
             stepTitle="Appeal Record and Transcript"           
             @action="displayWindow('Appeal Record and Transcript')"
@@ -76,23 +98,36 @@
             v-bind="pageState[3]"            
         />
 
+        <trail
+            className="journey-trail-l1-moveable-scoped"
+            :completed="completedTrail[3]"
+            width='10%'
+            :style="{top: '34.15%', left: '65%', position: 'absolute'}"
+            level=1
+        />
+
         <return-trail
             :status="completedTrail[3]?'completed':''"
             startpoint='73%'
+            top='117px'
+            :extendEnd="false"
+            :returnLevel="2"
         />
+
+        <!-- LEVEL 3 -->
 
         <div
             :style="{marginLeft: '204px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '53%',
+                width: '55%',
                 position: 'absolute',
-                top: '374px',
+                top: '656px',
                 zIndex: '1',
                 marginBottom: '81px'}"
         />
 
-        <form-icon 
-            :style="{top: '46%', left: '21%'}"
+       <form-icon 
+            :style="{top: '63%', left: '21%'}"
             :twoPages="true"
             stepTitle="Factums and Appeal Book"
             @action="displayWindow('Factums and Appeal Book')"
@@ -103,15 +138,15 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[4]"
-            width='25%'
-            :style="{top: '46%', left: '25%', position: 'absolute'}"
+            width='24%'
+            :style="{top: '63.25%', left: '25%', position: 'absolute'}"
             level=2
         />
 
         <calendar-icon 
-            :style="{top: '46.75%', left: '44%', height:'6rem'}"
+            :style="{top: '63.5%', left: '44%', height:'6rem'}"
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
@@ -121,15 +156,15 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[5]"
             width='25%'
-            :style="{top: '46%', left: '50%', position: 'absolute'}"
+            :style="{top: '63.25%', left: '48%', position: 'absolute'}"
             level=2
         />
 
         <form-icon 
-            :style="{top: '46%', left: '70%'}"
+            :style="{top: '63%', left: '70%'}"
             :twoPages="false"
             stepTitle="Notice of Hearing"
             @action="displayWindow('Notice of Hearing')"
@@ -138,33 +173,29 @@
             v-bind="pageState[6]"            
         />
 
-        <return-trail
+         <return-trail
             priorstep="this.state.steps[4]"
             :status="completedTrail[6]?'completed':''"
-            top='117px'
+            top='150px'
             startpoint='73%'
+            :extendEnd="true"
+            :returnLevel="3"
         />
-            
+        
+        <!-- LEVEL 4 -->  
+        
         <div
             :style="{marginLeft: '170px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '66%',
                 position: 'absolute',
-                top: '91%',
+                top: '96.65%',
                 zIndex: '1',
                 marginBottom: '81px'}"
         />
 
-        <trail
-            className="journey-trail-l1-moveable"
-            :completed="completedTrail[6]"
-            width='10%'
-            :style="{top: '85.14%', left: '15%', position: 'absolute'}"
-            level=3
-        />
-
         <gavel-icon 
-            :style="{left: '24%', top: '82%'}"
+            :style="{left: '26%', top: '89.85%'}"
             class="journey-box" 
             stepTitle="The Hearing" 
             @action="displayWindow('The Hearing')"
@@ -174,15 +205,15 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[7]"
-            width='30%'
-            :style="{top: '85.05%', left: '25%', position: 'absolute'}"
+            width='40%'
+            :style="{top: '92.25%', left: '25%', position: 'absolute'}"
             level=3
         />
 
         <form-icon 
-            :style="{left: '54%', top: '84.7%'}"
+            :style="{left: '60%', top: '92%'}"
             class="journey-box"
             :twoPages="false"
             stepTitle="Orders"
@@ -193,17 +224,17 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[8]"
-            width='30%'
-            :style="{top: '85.05%', left: '58%', position: 'absolute', marginBottom: '100px'}"
+            width='25%'
+            :style="{top: '92.25%', left: '60%', position: 'absolute', marginBottom: '100px'}"
             level=3
         />
 
-        <end-circle
+       <end-circle
             stepTitle="Appeal Process Complete"
-            :style="{top: '84.7%', left: '82%'}"
-            titleStyle="margin-top: 1.5rem;" 
+            :style="{top: '92%', left: '82%'}"
+            titleStyle="margin-top: -3.5rem;" 
             @action="displayWindow('Appeal Process Complete')"
             :completed="completedTrail[8]"
             order=10

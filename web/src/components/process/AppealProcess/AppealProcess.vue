@@ -1,5 +1,5 @@
 <template>
-    <b-card border-variant="white">
+    <b-card border-variant="white" class="pb-5">
       
         <b-card class="border-primary bg-primary text-white my-4 mr-5" v-if="!selfRep">                    
             <h3 style="text-decoration: underline;">Not self-represented</h3>
