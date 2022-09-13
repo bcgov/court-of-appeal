@@ -9,6 +9,7 @@
             }"
             :circling="status == 'completed'"
             :extendEnd="extendEnd"
+            :returnLevel="returnLevel"
         />
         <Trail
             :style="{
@@ -18,7 +19,7 @@
                 top: '13.5px',
                 zIndex: '11'
             }"
-            className="journey-return-trail"
+            className="journey-return-trail-scoped"
             :completed="status == 'completed'"
             width='75%'
             :circling="status == 'completed'"
@@ -31,7 +32,7 @@
                 top: '13.5px',
                 zIndex: '10'
             }"
-            className="journey-return-trail"
+            className="journey-return-trail-scoped"
             :completed="false"
             width='75%'
             :circling="false"
@@ -41,6 +42,8 @@
                 left: startpoint || '73%',
                 top: '-115px'}"
             :circling="status == 'completed'"
+            :extendBegin="extendBegin"
+            :returnLevel="returnLevel"
         />
 
     </div>
@@ -74,8 +77,11 @@ export default class ReturnTrail extends Vue {
     @Prop({required: false})
     extendEnd!: boolean;
 
+    @Prop({required: false})
+    extendBegin!: boolean;
 
+    @Prop({required: true})
+    returnLevel!: number;
 
 }
 </script>
-

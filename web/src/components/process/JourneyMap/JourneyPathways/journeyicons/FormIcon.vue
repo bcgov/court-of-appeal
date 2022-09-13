@@ -9,7 +9,9 @@
         />
         <span :style="{position: 'relative', top: (twoPages ? '11px' : '5px'), left: '-28%', zIndex: '9'}">{{order}}</span>
         <div :class="{'journey-icon': active, 'file-main': true, 'inactive': !active}" @click="action">
-            <two-page-icon v-if="twoPages || status=='twoPages'"/>
+
+            <two-page-icon-checked v-if="twoPages && status=='completed'"/>
+            <two-page-icon v-else-if="twoPages || status=='twoPages'"/>
             <single-page-icon v-else-if="status=='new'"/>
             <draft-page-icon v-else-if="status=='draft'"/>
             <approved-form-icon v-else-if="status=='approved'"/>
@@ -38,6 +40,7 @@ import TwoPageIcon from '@/iconSVG/TwoPageIcon.vue';
 import SinglePageIcon from '@/iconSVG/SinglePageIcon.vue';
 import DraftPageIcon from '@/iconSVG/DraftPageIcon.vue';
 import ApprovedFormIcon from '@/iconSVG/ApprovedFormIcon.vue';
+import TwoPageIconChecked from '@/iconSVG/TwoPageIconChecked.vue';
 
 @Component({
     components:{
@@ -45,7 +48,8 @@ import ApprovedFormIcon from '@/iconSVG/ApprovedFormIcon.vue';
         TwoPageIcon,
         SinglePageIcon,
         DraftPageIcon,
-        ApprovedFormIcon
+        ApprovedFormIcon,
+        TwoPageIconChecked
     }
 })
 

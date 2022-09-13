@@ -15,7 +15,7 @@
         />
 
         <trail                
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
             width='15%'
             level=1                
@@ -33,7 +33,7 @@
                     
         <trail
             :startDelay="200"            
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
             width='24%'
             level=1
@@ -51,7 +51,7 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[1]"
             width='24%'
             level=1
@@ -72,13 +72,14 @@
             :status="completedTrail[2]?'completed':''"
             startpoint='70%'
             :extendEnd="true"
+            :returnLevel="1"
         />
 
 <!-- <LEVEL 2> -->
         <div
             :style="{marginLeft: '141px',
                 borderTop: '9px solid rgb(159, 191, 226)',
-                width: '57%',
+                width: '61%',
                 position: 'absolute',
                 top: '374px',
                 zIndex: '1',
@@ -97,7 +98,7 @@
         />
         
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[3]"
             :style="{position: 'absolute', marginLeft:'33%', top:'34.12%',width: '30%'}"
             width='22%'
@@ -114,18 +115,13 @@
             v-bind="pageState[4]"
         /> 
 
-        <trail
-            className="journey-trail-l1-moveable"
-            :completed="completedTrail[4]"
-            :style="{position: 'absolute', marginLeft:'65%', top:'34.12%', width: '10%'}"
-            width='22%'
-            level=2
-        />
-
         <return-trail
             :status="completedTrail[4]?'completed':''"
             startpoint='70%'
             top='117px'
+            :extendEnd="false"
+            :returnLevel="2"
+            :extendBegin="true"
         />
 
 <!-- <LEVEL 3> -->
@@ -151,9 +147,9 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[5]"
-            :style="{position: 'absolute', marginLeft:'26%', top:'63.12%',width: '20%'}"
+            :style="{position: 'absolute', marginLeft:'24%', top:'63.12%',width: '20%'}"
             width='22%'
             level=2
         />
@@ -170,7 +166,7 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[6]"
             :style="{position: 'absolute', marginLeft:'46%', top:'63.12%',width: '22%'}"
             width='22%'
@@ -194,6 +190,7 @@
             startpoint='70%'
             top='147px'
             :extendEnd="true"
+            :returnLevel="3"
         />
 
         <div
@@ -218,9 +215,9 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[8]"
-            :style="{position: 'absolute', marginLeft:'33%', top:'91.9%',width: '28%'}"
+            :style="{position: 'absolute', marginLeft:'32%', top:'91.9%',width: '28%'}"
             width='25%'
             level=2
         />
@@ -238,7 +235,7 @@
         />
 
         <trail
-            className="journey-trail-l1-moveable"
+            className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[9]"
             width='20%'
             :style="{position: 'absolute', width: '20%', left: '64%', top: '91.9%'}"
@@ -248,7 +245,7 @@
         <end-circle
             stepTitle="Appeal Process Complete"
             :style="{left: '80%', top: '92%'}"
-            titleStyle="margin-top: 1.5rem;"
+            titleStyle="margin-top: -3.5rem;"
             @action="displayWindow('Appeal Process Complete')" 
             :completed="completedTrail[9]"
             order=11
