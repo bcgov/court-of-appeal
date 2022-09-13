@@ -21,7 +21,7 @@
                 </b-col>
                 <b-col>
                     <div style="margin-bottom: 0.75rem;">
-                        If your application is before a chambers judge check the 
+                        If your application is before a single judge in chambers check the 
                         <a 
                             target='_blank' 
                             href="https://www.bccourts.ca/court_of_appeal/hearing_list/lists/available%20chambers%20dates/Available%20Chambers%20Dates.pdf">

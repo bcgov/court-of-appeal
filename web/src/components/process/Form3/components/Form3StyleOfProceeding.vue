@@ -238,7 +238,11 @@
                 <b-col cols="7" class="labels">
                     <p>Is Leave to Cross Appeal Required?</p>
                     <p style="font-size: 0.75rem; margin-top:-1rem;">
-                        (Court of Appeal Rule 12 explains when you need leave to cross appeal, if unsure check "yes")
+                        (Court of Appeal 
+                        <a
+                            href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section12" 
+                            target="_blank">Rule 12</a>                            
+                            explains when you need leave to cross appeal, if unsure check "yes")
                     </p>
                 </b-col>
                 <b-col class="ml-1">
