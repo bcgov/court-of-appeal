@@ -89,7 +89,7 @@ export default class NavigationTopbar extends Vue {
     }
 
     public home() {
-        console.log(this.$route.name)
+        //console.log(this.$route.name)
         if(this.$route.name != "dashboard")
             this.$router.push({name: "dashboard" }) 
     }
