@@ -94,6 +94,7 @@ export default class LandingPage extends Vue {
     async mounted() {
         this.pageReady = false;
         this.safetyInst = false;
+        //console.log(process)
         await SessionManager.getUserInfo(this.$store);
         if(this.userId){
             this.isLoggedIn = true
