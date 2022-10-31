@@ -496,14 +496,14 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "The Hearing"){
             this.windowTitle = "The Hearing";
             this.contentTitle = 'For more information about the hearing process, click the topics below:';
-            this.pathTypes = ["gavel", "share", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0', '0'];
+            this.pathTypes = ["gavel", "share", "share", "info"];
+            this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
         } else if (contentType == "Orders"){
             this.windowTitle = "Orders";
-            this.pathTypes = ["info", "info"];
-            this.pathHeights = ['21rem', '0'];
+            this.pathTypes = ["info", "info", "share"];
+            this.pathHeights = ['21rem', '0', '0'];
             this.courtOrderContent = true;
 
         }else if (contentType == "Appeal Process Complete"){

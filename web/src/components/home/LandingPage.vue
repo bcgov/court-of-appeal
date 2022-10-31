@@ -19,8 +19,9 @@
                                 </div>
                             
                                 <div class="desc-step-body">
-                                    Our completely free and secure online application will assist you in completing 			                   
-                                    required forms and you can save your work so, you can proceed at your own pace.
+                                    Our secure online application will assist you in completing 
+                                    required forms, and you can save your work so, you can proceed 
+                                    at your own pace.
                                 </div>                                    
                             </b-col>
                             <b-col class="col-md-6" style="padding: 0rem 1rem 0rem 2rem;">
