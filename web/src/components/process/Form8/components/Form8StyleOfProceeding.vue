@@ -168,7 +168,7 @@ const form8State = namespace("Form8");
 
 import { form8DataInfoType } from '@/types/Information/Form8';
 import { chambersHearingJsonInfoType, partiesDataJsonDataType } from '@/types/Information/json';
-import {justiceNames} from '@/components/process/Form12/components/JusticeName';
+import {justiceNames} from '@/components/utils/JusticeName';
 
 @Component
 export default class Form8StyleOfProceeding extends Vue {

@@ -74,7 +74,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import {justiceNames} from './JusticeName'
+import {justiceNames} from '@/components/utils/JusticeName';
 
 @Component
 export default class AddJudgeForm extends Vue {        

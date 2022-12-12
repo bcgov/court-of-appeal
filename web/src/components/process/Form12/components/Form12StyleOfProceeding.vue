@@ -592,7 +592,7 @@ import AddPartyForm from './AddPartyForm.vue';
 import AddJudgeForm from './AddJudgeForm.vue';
 import AddPartyModal from './AddPartyModal.vue';
 import { hearingLocationsInfoType } from '@/types/Common';
-import {justiceNames} from './JusticeName'
+import {justiceNames} from '@/components/utils/JusticeName';
 
 @Component({
     components:{        
