@@ -20,6 +20,7 @@ export const justiceNames = [
     'Mr. Justice Marchand',
     'Madam Justice Newbury',
     'Madam Justice Saunders',
+    'Justice Skolrood',
     'Madam Justice Stromberg-Stein',
     'Mr. Justice Voith',
     'Mr. Justice Wilcock',
