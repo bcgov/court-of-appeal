@@ -82,7 +82,7 @@ export default class Statistics extends Vue {
 
     printReady = false;
     updateReport = 0;
-    reportDateRange: dateRangeInfoType = {startDate:null, endDate:null};
+    reportDateRange: dateRangeInfoType = {startDate:'', endDate:''};
 
     results;
     searching = false;
@@ -99,7 +99,7 @@ export default class Statistics extends Vue {
     }
 
     public find(){   
-       
+        this.error = '';
         this.dataLoaded = false;
         this.searching = true;
 
