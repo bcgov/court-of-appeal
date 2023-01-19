@@ -1,89 +1,235 @@
 #!/bin/bash
-export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host eclipse/che-ip)}
 export MSYS_NO_PATHCONV=1
+set -e
 
 S2I_EXE=s2i
 if [ -z $(type -P "$S2I_EXE") ]; then
   echo -e "The ${S2I_EXE} executable is needed and not on your path."
-  echo -e "It can be downloaded from here: https://github.com/openshift/source-to-image/releases"
-  echo -e "Make sure you extract the binary and place it in a directory on your path."
+  echo -e "It can be downloaded from here: https://github.com/openshift/source-to-image"
+  echo -e "Make sure you place it in a directory on your path."
   exit 1
 fi
 
 SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME-coa}"
+
 # =================================================================================================================
 # Usage:
 # -----------------------------------------------------------------------------------------------------------------
-
 usage() {
   cat <<-EOF
 
-  Usage: $0 {start|stop|build}
+  Usage: $0 {start|stop|build|rm}
 
   Options:
 
   build - Build the docker images for the project.
-          You need to do this first, since the builds require some s2i builds.
-          You can build individual components as shown below, components that have dependencies
-          will have these dependencies built too.  By default all components are built.
-
-          Examples:
-          - Build everything:
-            $0 build
-          - Build the web UI only:
-            $0 build web
-
-          Containers:
-            - web
-            - api
-            - db
-
-  restore - Restore a database backup into the container.
-            Place the backup in $(pwd)/tmp.
-            Create the folder if it does not exist.
+          You need to do this first, since the builds require
+          a combination of Docker and S2I builds.
 
   start - Creates the application containers from the built images
-          and starts the services based on the docker-compose.yaml file.
-          Example:
-            $0 start
+          and starts the services based on the docker-compose.yml file.
+
+          You can pass in a list of containers to start.  
+          By default all containers will be started.
+          
+          The API_URL used by coa-web can also be redirected.
+
+          Examples:
+          $0 start
+          $0 start coa-web
+          $0 start coa-web API_URL=http://docker.for.win.localhost:56325/api/v1
 
   stop - Stops the services.  This is a non-destructive process.  The containers
          are not deleted so they will be reused the next time you run start.
 
-  down - Brings down the services and removes the volumes (storage) and containers.
-  rm - Same as down
-
+  rm - Removes any existing application containers.
 EOF
 exit 1
 }
-
+# -----------------------------------------------------------------------------------------------------------------
+# Default Settings:
+# -----------------------------------------------------------------------------------------------------------------
+DEFAULT_CONTAINERS="db api web pdf"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
 build-all() {
- build-web
- build-api
- build-service
- build-pdf
+  build-web
+  build-db
+  # build-schema-spy
+  build-api
+  build-pdf
 }
 
-echoGreen() {
-  _msg="${@}"
-  _green='\e[32m'
-  _nc='\e[0m' # No Color
-  echo -e "${_green}${_msg}${_nc}"
+build-web() {
+  #
+  # web
+  #
+  # The coa-runtime image is used for the final runtime image.
+  # The coa-web-artifacts image is used to build the artifacts for the vue distribution.
+  # The coa-web image is copy of the coa-runtime image complete with a copy of the build artifacts.
+  #
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building the ${COMPOSE_PROJECT_NAME}-runtime image using Docker ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  docker build \
+    -t ${COMPOSE_PROJECT_NAME}'-runtime' \
+    -f './nginx-runtime/Dockerfile' './nginx-runtime/'
+  echo -e "===================================================================================================="
+  
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building the ${COMPOSE_PROJECT_NAME}-web-artifacts image using s2i (WEB_BASE_HREF: '${WEB_BASE_HREF}') ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  ${S2I_EXE} build \
+    --copy \
+    -e WEB_BASE_HREF=${WEB_BASE_HREF} \
+    '../web' \
+    'centos/nodejs-10-centos7:10' \
+    ${COMPOSE_PROJECT_NAME}'-web-artifacts'
+  echo -e "===================================================================================================="
+
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building the ${COMPOSE_PROJECT_NAME}-web image using Docker ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  docker build \
+    -t ${COMPOSE_PROJECT_NAME}'-web' \
+    -f './vue-on-nginx/Dockerfile' './vue-on-nginx/'
+  echo -e "===================================================================================================="
+}
+
+build-web-dev() {
+  #
+  # web-dev
+  #
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building the ${COMPOSE_PROJECT_NAME}-runtime image using Docker ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  docker build \
+    -t ${COMPOSE_PROJECT_NAME}'-runtime' \
+    -f './nginx-runtime/Dockerfile' './nginx-runtime/'
+  echo -e "===================================================================================================="
+
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building the ${COMPOSE_PROJECT_NAME}-web-dev image using s2i ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  ${S2I_EXE} build \
+    --copy \
+    -e "DEV_MODE=true" \
+    '../web' \
+    'centos/nodejs-10-centos7:10' \
+    ${COMPOSE_PROJECT_NAME}'-web-dev'
+  echo -e "===================================================================================================="
+}
+
+build-db() {
+  #
+  # db
+  #
+  # Nothing to build here ...
+  echo
+}
+
+# build-schema-spy() {
+#   #
+#   # schema-spy
+#   #
+#   echo -e "\n\n===================================================================================================="
+#   echo -e "Building schema-spy image ..."
+#   echo -e "----------------------------------------------------------------------------------------------------"
+#   docker build \
+#     https://github.com/bcgov/SchemaSpy.git \
+#     -t 'schema-spy'
+#   echo -e "===================================================================================================="
+# }
+
+build-api() {
+  #
+  # api
+  #
+  echo -e "\n\n===================================================================================================="
+  echo -e "Building ${COMPOSE_PROJECT_NAME}-api image using s2i ..."
+  echo -e "----------------------------------------------------------------------------------------------------"
+  ${S2I_EXE} build \
+    --copy \
+    '../api' \
+    'centos/python-38-centos7' \
+    ${COMPOSE_PROJECT_NAME}'-api'
+  echo -e "===================================================================================================="
+}
+
+build-pdf() {
+  #
+  # pdf
+  #
+  # Nothing to build here ...
+  echo
+}
+
+configureEnvironment () {
+  for arg in $@; do
+    case "$arg" in
+      *=*)
+        export ${arg}
+        ;;  
+    esac
+  done
+  
+  # db
+  export POSTGRESQL_DATABASE="appdb"
+  export POSTGRESQL_USER="coa"
+  export POSTGRESQL_PASSWORD="GHcaifx6FjLBcGLFkHb4"
+  export POSTGRESQL_ADMIN_PASSWORD="PtuBN3iFbc4EtmP2LLHo"
+
+  # schema-spy
+  export DATABASE_SERVICE_NAME="db"
+  export POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+  export POSTGRESQL_USER=${POSTGRESQL_USER}
+  export POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+
+  # api
+  export API_HTTP_PORT=${API_HTTP_PORT-8081}
+  export PDF_SERVICE_URL=${PDF_SERVICE_URL-http://pdf:5001}
+  export OVERRIDE_USER_ID=${OVERRIDE_USER_ID-}
+  export DATABASE_SERVICE_NAME="db"
+  export DATABASE_ENGINE="postgresql"
+  export DATABASE_NAME=${POSTGRESQL_DATABASE}
+  export DATABASE_USER=${POSTGRESQL_USER}
+  export DATABASE_PASSWORD=${POSTGRESQL_PASSWORD}
+  export DJANGO_SECRET_KEY=wpn1GZrouOryH2FshRrpVHcEhMfMLtmTWMC2K5Vhx8MAi74H5y
+  export DJANGO_DEBUG=True
+  export DJANGO_LOG_LEVEL=${DJANGO_LOG_LEVEL-INFO}
+  export EFILING_HUB_KEYCLOAK_BASE_URL=${EFILING_HUB_KEYCLOAK_BASE_URL}
+  export EFILING_HUB_KEYCLOAK_CLIENT_ID=${EFILING_HUB_KEYCLOAK_CLIENT_ID}
+  export EFILING_HUB_KEYCLOAK_SECRET=${EFILING_HUB_KEYCLOAK_SECRET}
+  export EFILING_HUB_API_BASE_URL=${EFILING_HUB_API_BASE_URL}
+  export FRONT_END=${FRONT_END-prod}
+  export DATA_SECURITY_KEY=${DATA_SECURITY_KEY-01234567890123456789012345678901}
+  export COA_PASSWORD=${COA_PASSWORD}
+  export COA_USERNAME=${COA_USERNAME}
+  export COA_SEARCH_ENDPOINT=${COA_SEARCH_ENDPOINT}
+  export CSOWS_USERNAME=${CSOWS_USERNAME}
+  export CSOWS_PASSWORD=${CSOWS_PASSWORD}
+  export CSOWS_ENDPOINT=${CSOWS_ENDPOINT}
+  export CSOWS_EXT_ENDPOINT=${CSOWS_EXT_ENDPOINT}
+
+  # web
+  export WEB_HTTP_PORT=${WEB_HTTP_PORT-8080}
+  export API_URL=${API_URL-http://api:8080/api}
+  export WEB_BASE_HREF=${WEB_BASE_HREF:-/court-of-appeal/}
+  export IpFilterRules='#allow all; deny all;'
+  export RealIpFrom='127.0.0.0/16'
 }
 
 getStartupParams() {
   CONTAINERS=""
-  ARGS=""
+  ARGS="--force-recreate"
 
   for arg in $@; do
     case "$arg" in
       *=*)
         # Skip it
-        ;;
+        ;;  
      -*)
         ARGS+=" $arg";;
       *)
@@ -91,75 +237,28 @@ getStartupParams() {
     esac
   done
 
+  if [ -z "$CONTAINERS" ]; then
+    CONTAINERS="$DEFAULT_CONTAINERS"
+  fi
+
   echo ${ARGS} ${CONTAINERS}
 }
 
-build-web() {
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building nginx-runtime using Docker ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  docker build \
-    -t "nginx-runtime" \
-    -f './nginx-runtime/Dockerfile' './nginx-runtime/'
-  echo -e "===================================================================================================="
+deleteVolumes() {
+  _projectName=${COMPOSE_PROJECT_NAME:-docker}
 
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building yarn-builder using Docker ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  docker build \
-    -t "yarn-builder" \
-    -f './yarn-builder/Dockerfile' './yarn-builder/'
-  echo -e "===================================================================================================="
+  echo "Stopping and removing any running containers ..."
+  docker-compose rm -svf >/dev/null
 
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building ${COMPOSE_PROJECT_NAME}-web-artifacts using s2i ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  ${S2I_EXE} build \
-    --copy \
-    '../web' \
-    'yarn-builder' \
-    ${COMPOSE_PROJECT_NAME}'-web-artifacts'
-  echo -e "===================================================================================================="
+  _pattern="^${_projectName}_\|^docker_"
+  _volumes=$(docker volume ls -q | grep ${_pattern})
 
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building ${COMPOSE_PROJECT_NAME}-web image using Docker ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  docker build \
-    -t ${COMPOSE_PROJECT_NAME}"-web" \
-    -f './react-on-nginx/Dockerfile' './react-on-nginx/'
-  echo -e "===================================================================================================="    
-}
-
-build-api() {
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building ${COMPOSE_PROJECT_NAME}-api image using s2i ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  ${S2I_EXE} build \
-    --copy \
-    '../api' \
-    'centos/nodejs-10-centos7:10' \
-    ${COMPOSE_PROJECT_NAME}"-api" 
-  echo -e "===================================================================================================="
-}
-
-build-db() {
-  echo
-}
-
-build-pdf() {
-  echo
-}
-
-build-service() {
-  echo -e "\n\n===================================================================================================="
-  echoGreen "Building ${COMPOSE_PROJECT_NAME}-service image using s2i ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  ${S2I_EXE} build \
-    --copy \
-    '../service' \
-    'registry.access.redhat.com/ubi8/python-38' \
-    ${COMPOSE_PROJECT_NAME}"-service" 
-  echo -e "===================================================================================================="
+  if [ ! -z "${_volumes}" ]; then
+    echo "Removing project volumes ..."
+    echo ${_volumes} |  xargs docker volume rm
+  else
+    echo "No project volumes exist."
+  fi
 }
 
 toLower() {
@@ -176,75 +275,27 @@ functionExists() {
   )
 }
 
-deleteVolumes() {
-  _projectName=${COMPOSE_PROJECT_NAME:-docker}
-
-  echo "Stopping and removing any running containers ..."
-  docker-compose down -v
-
-  _pattern="^${_projectName}_\|^docker_"
-  _volumes=$(docker volume ls -q | grep ${_pattern} | cat)
-
-  if [ ! -z "${_volumes}" ]; then
-    echo "Removing project volumes ..."
-    echo ${_volumes} | xargs docker volume rm
-  else
-    echo "No project volumes exist."
-  fi
-
-  echo "Removing build cache ..."
-  rm -Rf ../client/.cache
+clean() {
+  docker rmi --force ${COMPOSE_PROJECT_NAME}-runtime ${COMPOSE_PROJECT_NAME}-web-artifacts ${COMPOSE_PROJECT_NAME}-web ${COMPOSE_PROJECT_NAME}-web-dev ${COMPOSE_PROJECT_NAME}-api
+  docker image prune --force
 }
-
-configureEnvironment () {
-  if [ -f .env ]; then
-    while read line; do
-      if [[ ! "$line" =~ ^\# ]] && [[ "$line" =~ .*= ]]; then
-        export $line
-      fi
-    done < .env
-  fi
-
-  for arg in $@; do
-    case "$arg" in
-      *=*)
-        export ${arg}
-        ;;
-    esac
-  done
-
-  # api
-  export HUB_URL=${HUB_URL:-http://service:5000}
-  export HUB_TIMEOUT=${HUB_TIMEOUT:10000}
-  export PDF_SERVICE_URL=${PDF_SERVICE_URL-http://pdf:5001}
-  
-  # db
-  export POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE:-appdb}
-  export POSTGRESQL_USER=${POSTGRESQL_USER:-coa}
-  export POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD:-GHcaifx6FjLBcGLFkHb4}
-  export POSTGRESQL_ADMIN_PASSWORD=${POSTGRESQL_ADMIN_PASSWORD:-PtuBN3iFbc4EtmP2LLHo}
-  
-  # web
-  export API_URL=${API_URL:-http://api:8080/api}
-  export WEB_BASE_HREF=${WEB_BASE_HREF-/court-of-appeal/}
-
-  #service
-  export FLASK_ENV=${FLASK_ENV:-production}
-}
-
 # =================================================================================================================
 
 pushd ${SCRIPT_HOME} >/dev/null
-COMMAND=$1
-shift || true
+COMMAND=$(toLower ${1})
+shift
 
 case "$COMMAND" in
-  start|up)
+  start)
     _startupParams=$(getStartupParams $@)
     configureEnvironment $@
-    echo ${_startupParams}
-    docker-compose up -d ${_startupParams}
-    ##docker-compose logs -f
+    docker-compose up ${_startupParams}
+    ;;
+  web-dev)
+    _startupParams=$(getStartupParams $@)
+    configureEnvironment $@
+    [ -z "$SKIP_BUILD" ] && build-web-dev
+    docker-compose run --rm --service-ports ${COMPOSE_PROJECT_NAME}-web-dev
     ;;
   stop)
     configureEnvironment $@
@@ -254,10 +305,14 @@ case "$COMMAND" in
     configureEnvironment $@
     deleteVolumes
     ;;
+  clean)
+    configureEnvironment $@
+    clean
+    ;;
   build)
-buildImage=$(toLower ${1})
+    buildImage=$(toLower ${1})
     shift || buildImage=all
-    buildImage=$(echo ${buildImage} | sed s~^coa-~~)
+    buildImage=$(echo ${buildImage} | sed s~^${COMPOSE_PROJECT_NAME}-~~)
     case "$buildImage" in
       *=*)
         buildImage=all
@@ -265,6 +320,7 @@ buildImage=$(toLower ${1})
     esac
 
     if functionExists "build-${buildImage}"; then
+      configureEnvironment $@
       eval "build-${buildImage}"
     else
       echo -e "Error:\nThe build function, build-${buildImage}, does not exist.  Please check your build parameters and try again.\nUse '-h' to get full help details."

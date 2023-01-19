@@ -7,6 +7,7 @@ metadata:
     tags: ${NAME}
   name: ${NAME}-persistent-template
 objects:
+
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
@@ -29,6 +30,15 @@ objects:
                 matchLabels:
                   name: ${NAMESPACE_NAME}
                   environment: ${TAG_NAME}
+            # - podSelector:
+            #     matchLabels:
+            #       role: schema-spy
+            #       app: ${APP_NAME}
+            #       env: ${TAG_NAME}
+            #   namespaceSelector:
+            #     matchLabels:
+            #       name: ${NAMESPACE_NAME}
+            #       environment: ${TAG_NAME}
             - podSelector:
                 matchLabels:
                   role: backup
@@ -94,7 +104,7 @@ objects:
                 claimName: ${NAME}
           containers:
             - name: ${NAME}
-              image:
+              image:  
               ports:
                 - containerPort: 5432
                   protocol: TCP
@@ -267,25 +277,26 @@ parameters:
     displayName: PostgreSQL Database Name
     description: The name of the PostgreSQL database.
     required: true
-    value: APP_Database
+    generate: expression
+    from: '[a-zA-Z_][a-zA-Z0-9_]{10}'
   - name: POSTGRESQL_USER
     displayName: PostgreSQL Connection Username
     description: Username for PostgreSQL user that will be used for accessing the database.  Needs to be basee64 encoded/
     required: true
     generate: expression
-    from: "[a-zA-Z_][a-zA-Z0-9_]{10}"
+    from: '[a-zA-Z_][a-zA-Z0-9_]{10}'
   - name: POSTGRESQL_PASSWORD
     displayName: PostgreSQL Connection Password
     description: Password for the PostgreSQL connection user.  Needs to be basee64 encoded/
     required: true
     generate: expression
-    from: "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}"
+    from: '[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}'
   - name: POSTGRESQL_ADMIN_PASSWORD
     displayName: PostgreSQL Admin Password
     description: Password for the 'postgres' PostgreSQL administrative account.  Needs to be basee64 encoded.
     required: true
     generate: expression
-    from: "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}"
+    from: '[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}'
 
   - name: PERSISTENT_VOLUME_SIZE
     displayName: Persistent Volume Size

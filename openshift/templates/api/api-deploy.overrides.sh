@@ -14,26 +14,47 @@ fi
 
 if createOperation; then
   # Ask the user to supply the sensitive parameters ...
-  readParameter "DATA_SECURITY_KEY - Please provide the encryption key for the application environment.  If left blank, a 32 character long base64 encoded value will be randomly generated using openssl:" DATA_SECURITY_KEY $(generateKey 32 | fold -w 32 | head -n 1) "false"
+  readParameter "DATA_SECURITY_KEY - Please provide the encryption key for the application environment.  If left blank, a 32 character long base64 encoded value will be randomly generated using openssl:" DATA_SECURITY_KEY $(generateKey 32) "false"
+  readParameter "OIDC_RP_PROVIDER_ENDPOINT - Please provide the url for the OIDC RP Provider.  The default is a blank string." OIDC_RP_PROVIDER_ENDPOINT "" "false"
+  parseHostnameParameter "OIDC_RP_PROVIDER_ENDPOINT" "OIDC_RP_HOST"
+  readParameter "OIDC_RP_CLIENT_SECRET - Please provide the OIDC RP Client Secret.  The default is a blank string." OIDC_RP_CLIENT_SECRET "" "false"
 
-  readParameter "KEYCLOAK_AUTH_URL - Please provide the url for the KeyCloak authentication endpoint.  The default is a blank string." KEYCLOAK_AUTH_URL "" "false"
-  readParameter "KEYCLOAK_REALM - Please provide the KeyCloak authentication realm.  The default is a blank string." KEYCLOAK_REALM "" "false"
-  readParameter "KEYCLOAK_CLIENT_ID - Please provide the KeyCloak Client ID.  The default is a blank string." KEYCLOAK_CLIENT_ID "" "false"
-  readParameter "KEYCLOAK_SECRET - Please provide the KeyCloak Client Secret.  The default is a blank string." KEYCLOAK_SECRET "" "false"
+  # Get the eFiling settings
+  readParameter "EFILING_HUB_KEYCLOAK_BASE_URL - Please provide the url for the eFiling authentication.  The default is a blank string." EFILING_HUB_KEYCLOAK_BASE_URL "" "false"
+  readParameter "EFILING_HUB_KEYCLOAK_REALM - Please provide the realm for the eFiling authentication.  The default is a blank string." EFILING_HUB_KEYCLOAK_REALM "" "false"
+  readParameter "EFILING_HUB_KEYCLOAK_CLIENT_ID - Please provide the service client id for submitting the application.  The default is a blank string." EFILING_HUB_KEYCLOAK_CLIENT_ID "" "false"
+  readParameter "EFILING_HUB_KEYCLOAK_SECRET - Please provide the service client secret to use with above id.  The default is a blank string." EFILING_HUB_KEYCLOAK_SECRET "" "false"
+  readParameter "EFILING_HUB_API_BASE_URL - Please provide base url for efiling.  The default is a blank string." EFILING_HUB_API_BASE_URL "" "false"
 
-  readParameter "COOKIE_SECRET - Please provide the Cookie Secret for the environemnt.  The default is a blank string." COOKIE_SECRET "" "false"
+  readParameter "SITEMINDER_LOGOFF_URL - Please provide the SiteMinder Logoff URL for the application environment.  The default is a blank string." SITEMINDER_LOGOFF_URL "" "false"
+
+  #form7 search setting
+  readParameter "COA_PASSWORD Please provide the form7 search password for the application environment.  The default is a blank string." COA_PASSWORD "" "false"
+  readParameter "COA_USERNAME Please provide the form7 search username for the application environment.  The default is a blank string." COA_USERNAME "" "false"
+  readParameter "COA_SEARCH_ENDPOINT Please provide the form7 search Url for the application environment.  The default is a blank string." COA_SEARCH_ENDPOINT "" "false"=
+
 else
   # Secrets are removed from the configurations during update operations ...
-  printStatusMsg "Update operation detected ...\nSkipping the prompts for secrets ... \n"
-
+  printStatusMsg "Update operation detected ...\nSkipping the prompts for DATA_SECURITY_KEY, OIDC_RP_PROVIDER_ENDPOINT, OIDC_RP_CLIENT_SECRET, EFILING_HUB_KEYCLOAK_BASE_URL, EFILING_HUB_KEYCLOAK_CLIENT_ID, EFILING_HUB_KEYCLOAK_SECRET, and SITEMINDER_LOGOFF_URL secrets ... \n"
   writeParameter "DATA_SECURITY_KEY" "prompt_skipped" "false"
+  writeParameter "OIDC_RP_PROVIDER_ENDPOINT" "prompt_skipped" "false"
+  writeParameter "OIDC_RP_CLIENT_SECRET" "prompt_skipped" "false"
 
-  writeParameter "KEYCLOAK_AUTH_URL" "prompt_skipped" "false"
-  writeParameter "KEYCLOAK_REALM" "prompt_skipped" "false"
-  writeParameter "KEYCLOAK_CLIENT_ID" "prompt_skipped" "false"
-  writeParameter "KEYCLOAK_SECRET" "prompt_skipped" "false"
+  writeParameter "EFILING_HUB_KEYCLOAK_BASE_URL" "prompt_skipped" "false"
+  writeParameter "EFILING_HUB_KEYCLOAK_REALM" "prompt_skipped" "false"
+  writeParameter "EFILING_HUB_KEYCLOAK_CLIENT_ID" "prompt_skipped" "false"
+  writeParameter "EFILING_HUB_KEYCLOAK_SECRET" "prompt_skipped" "false"
+  writeParameter "EFILING_HUB_API_BASE_URL" "prompt_skipped" "false"
 
-  writeParameter "COOKIE_SECRET" "prompt_skipped" "false"
+  writeParameter "SITEMINDER_LOGOFF_URL" "prompt_skipped" "false"
+
+  writeParameter "COA_PASSWORD" "prompt_skipped" "false"
+  writeParameter "COA_USERNAME" "prompt_skipped" "false"
+  writeParameter "COA_SEARCH_ENDPOINT" "prompt_skipped" "false"
+
+  # Get OIDC_RP_HOST from secret
+  printStatusMsg "Getting OIDC_RP_HOST for the ExternalNetwork definition from secret ...\n"
+  writeParameter "OIDC_RP_HOST" $(getSecret "${NAME}" "oidc-rp-host") "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"

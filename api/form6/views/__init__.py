@@ -1,0 +1,3 @@
+from .form6_forms_view import Form6FormsView
+from .form6_to_pdf_view import Form6ToPdfView
+from .form6_efiling_submit_view import Form6EFilingSubmitView

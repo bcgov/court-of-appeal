@@ -26,7 +26,7 @@ boolean triggerBuild(String contextDirectory) {
 
   // // Always trigger build - for test purposes only
   // // Under normal conditions this line should be commented out
-  // filesChangeCnt = 1
+  // // filesChangeCnt = 1
 
   if ( filesChangeCnt < 1 ) {
     echo('The changes do not require a build.')
@@ -36,6 +36,12 @@ boolean triggerBuild(String contextDirectory) {
     echo('The changes require a build.')
     return true
   }
+}
+
+int extractBuildNo( String input ) {
+  String result = input.replaceAll("[^0-9]", "")
+  int num_result = result as Integer
+  return num_result
 }
 
 String getImageTagHash(OpenShiftDSL openshift, String imageName, String tag = "") {
@@ -122,7 +128,16 @@ void deploy(String appName, String appSuffix, String namespace, String envTag) {
 }
 
 node {
-  def config = load "../workspace@script/jenkins/config.groovy"
+  //def config = load "../workspace@script/jenkins/config.groovy"
+  stage("Init") {
+    script {
+      dir(''){
+        checkout scm
+        config = load 'jenkins/config.groovy'
+      }
+    }
+  }
+  
   def waitTimeout = config.WAIT_TIMEOUT
   def pipeline_name = "${config.WEB_APP_NAME}-pipeline"
   def contextDirectory = "${config.WEB_APP_NAME}"
@@ -131,9 +146,10 @@ node {
   def namespace = config.NAME_SPACE
   def destination = config.DEV_ENV
   def appSuffix = config.SUFFIX
-  def schemaSpy = config.SCHEMA_SPY_APP_NAME
+  // def schemaSpy = config.SCHEMA_SPY_APP_NAME
 
   if( triggerBuild(contextDirectory) ) {
+    
     stage("Cancel previous builds") {
       script {
         openshift.withCluster() {
@@ -142,7 +158,7 @@ node {
             def latestBuildNumber = 0
             def builds = openshift.selector("build", [ name : "${pipeline_name}" ])
             builds.withEach {
-              int nextBuildNumber = "${it.object().metadata.annotations.get("openshift.io/build.number")}" as Integer
+              int nextBuildNumber = extractBuildNo(it.name())
               echo "${it.name()} ..."
               if (nextBuildNumber > latestBuildNumber) {
                 latestBuildNumber = nextBuildNumber
@@ -151,7 +167,7 @@ node {
 
             echo "Latest build number is ${latestBuildNumber}, canceling all previous pipeline instances ..."
             builds.withEach {
-              int buildNumber = "${it.object().metadata.annotations.get("openshift.io/build.number")}" as Integer
+              int buildNumber = extractBuildNo(it.name())
               if (buildNumber != latestBuildNumber) {
                 echo "Canceling ${it.name()} ..."
                 it.cancelBuild()
