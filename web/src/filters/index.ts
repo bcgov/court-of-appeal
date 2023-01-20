@@ -287,9 +287,9 @@ Vue.filter('setProgressForPages', function(currentStep: number, pageNumbers: num
 			store.commit("Application/setPageProgress", { currentStep: currentStep, currentPage:page, progress:progress });
 })
 
-Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeaderLeft? , pageHeaderRight?){
+Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeaderLeft? , pageHeaderRight?, margin?){
 	
-
+	const pageMargin = margin? margin : '.7in 0.7in 0.9in 0.7in'
 
 	const body = 
 		`<!DOCTYPE html>
@@ -300,7 +300,7 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeade
 		`<style>`+
 			`@page {
 				size: 8.5in 11in !important;
-				margin: .7in 0.7in 0.9in 0.7in !important;
+				margin: `+pageMargin+` !important;
 				font-size: 10pt !important;
 				@top-left {
 					content: `+pageHeaderLeft+`;
@@ -338,6 +338,12 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeade
 				.print-block{
 					page-break-inside: avoid;
 				}
+				div.court-header {
+					position: fixed;
+					top: -0.9in;
+					width:100%; 
+					display:inline-block;
+				}
 			}`+ bootstrapCss+
 			`@page label{font-size: 9pt;}
 			.container {				
@@ -363,7 +369,9 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeade
 			`table.compactfullsize {table-layout: fixed; width: 100%; margin-top:0rem;}`+
 			`table.compactfullsize tr{border:1px solid #313132;}`+
 			`table.compactfullsize td{padding:0 0 0 .5rem; color: #313132;}`+
-
+			`.report table>thead>tr>th{background-color: #e9ecef !important;}`+
+			`.court-header-after{margin:-1rem 0 0 0;}`+
+			
 			`.answer{color: #000; display:inline; font-size:11pt;}`+
 			`.answerbox{color: #000; font-size:11pt; display:block; text-indent:0px; margin:0.5rem 0 0.5rem 0 !important;}`+
     		`.uline{text-decoration: underline; display: inline;}`+

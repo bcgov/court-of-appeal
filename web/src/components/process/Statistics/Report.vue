@@ -1,13 +1,22 @@
 <template>
-    <div v-if="dataReady">
+    <div v-if="dataReady" class="report">
         <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b>
-        <div class="row mx-1">
-            <!-- <b style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;">i</b> -->
-            <div style="font-size:15pt;"><b>Court of Appeal Reports</b></div>
-            <div class="font-italic ml-auto mt-2"><b class="mr-2">Between:</b><span class="mr-2">{{results.start_date|beautify-date}}</span> <b>-</b> <span class="ml-2">{{results.end_date|beautify-date}}</span></div>                
+        
+        <div class="court-header">
+            <div class="row m-0" style="border-bottom:1px solid #AAAAAA">
+                <div style="width:8%" >
+                    <img :src="src" alt="B.C. Gov"/>
+                </div>
+                <div style="width:3%;"/>
+                <div style="margin-top:1rem; width:50%; font-size:15pt;"><b>Court of Appeal Reports</b></div>
+                <div style="margin-top:1.45rem; width:38%;" class="font-italic text-right">
+                    <b class="mr-2">Between:</b>
+                    <span class="mr-2">{{results.start_date|beautify-date}}</span> <b>-</b> <span class="ml-2">{{results.end_date|beautify-date}}</span>
+                </div>                
+            </div>
         </div>
 
-        <users-info-table class="mt-5" :results="results" />
+        <users-info-table class="court-header-after" :results="results" />
         <summary-table class="mt-5" :results="results" />
         <manual-submission-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
         <form-1-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
@@ -64,6 +73,7 @@ import Form20Table from './PdfLayouts/Form20Table.vue';
 import Form21Table from './PdfLayouts/Form21Table.vue';
 import Form22Table from './PdfLayouts/Form22Table.vue';
 import { reportInfoType } from '@/types/Common';
+import {srcFile} from './logo'
 
 @Component({
     components:{       
@@ -103,9 +113,11 @@ export default class Report extends Vue {
     displayTopUser!: boolean;
        
     dataReady = false;       
-   
+    src =""
+
     mounted(){
-        this.dataReady = false;        
+        this.dataReady = false;
+        this.src = srcFile;        
         this.extractInfo();       
         this.dataReady = true;
     }    

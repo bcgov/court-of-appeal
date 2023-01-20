@@ -133,13 +133,14 @@ export default class Statistics extends Vue {
     public onPrintSave() { 
         
         const el= document.getElementById("print");
+        const time = moment().format("MMM DD YYYY HH:mm")
 
-        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
+        const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA  Printed on `+time+`"`;
         const bottomRightText = `" "`;        
         
         const url = '/statistics/'+'/?name=statistics_report' 
-        
-        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
+        const margin = '1.2in 0.7in 0.9in 0.7in'
+        const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText, '', '', margin);
 
         const body = {
             'html':pdfhtml,            
