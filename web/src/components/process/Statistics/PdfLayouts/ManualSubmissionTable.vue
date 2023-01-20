@@ -5,7 +5,8 @@
             :items="manual_submission_info"
             :fields="fields"            
             bordered            
-            small 
+            small
+            head-variant="light" 
             responsive="sm">
             <template v-slot:cell(form_type)="row">                  
                 <span class="text-dark px-1">{{row.value | getDocumentTypeName}}</span>
@@ -25,6 +26,7 @@
             v-if="displayTopUser"         
             :items="topUser_info"
             :fields="topUserFields"
+            head-variant="light"
             bordered                       
             small 
             responsive="sm">
