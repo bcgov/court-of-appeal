@@ -1,11 +1,12 @@
 <template>
-    <div v-if="dataReady">
+    <div v-if="dataReady" class="print-block">
         <div style="font-size:12pt; font-weight:600; margin-bottom: 0.5rem;" >Form 12: </div>
         <b-table            
             :items="form12_info"
             :fields="fields"
             bordered            
-            small 
+            small
+            head-variant="light" 
             responsive="sm">
         </b-table>
         <div style="font-size:10pt; margin-bottom: 0.5rem;">
@@ -21,6 +22,7 @@
             v-if="displayTopUser"         
             :items="topUser_info"
             :fields="topUserFields"
+            head-variant="light"
             bordered                       
             small 
             responsive="sm">
