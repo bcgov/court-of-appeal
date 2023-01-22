@@ -60,9 +60,10 @@
         <form-icon   
             style="left: 68%"
             :twoPages="false"
-            stepTitle="Apply/Respond to Leave to Appeal"
-            stepTitleOptional="(Optional)"
-            @action="displayWindow('Apply for Leave to Appeal')"
+            stepTitle="If leave required"
+            stepTitleOptional="Apply/Respond for leave to appeal"
+            stepTitleClass="step-title-wide"
+            @action="displayWindow('If leave required')"
             @completed="completed"            
             order=3
             v-bind="pageState[2]"           
@@ -457,8 +458,8 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
-        } else if (contentType == "Apply for Leave to Appeal") {
-            this.windowTitle = "Apply for Leave to Appeal";
+        } else if (contentType == "If leave required") {
+            this.windowTitle = "If leave required";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
             this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;

@@ -42,9 +42,10 @@
         <form-icon   
             style="left: 60%"
             :twoPages="false"
-            stepTitle="Apply/Respond to Leave to Appeal"
-            stepTitleOptional="(Optional)"
-            @action="displayWindow('Apply for Leave to Appeal')"
+            stepTitle="If leave required"
+            stepTitleOptional="Apply/Respond for leave to appeal"
+            stepTitleClass="step-title-wide"
+            @action="displayWindow('If leave required')"
             @completed="completed"            
             order=2
             v-bind="pageState[1]"           
@@ -216,8 +217,8 @@
             :style="{left: '60%', top: '92%'}"
             class="journey-box"
             :twoPages="false"
-            stepTitle="Orders"
-            @action="displayWindow('Orders')"
+            stepTitle="Final Order"
+            @action="displayWindow('Final Order')"
             @completed="completed"            
             order=9
             v-bind="pageState[8]"
@@ -406,7 +407,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Orders');
+        this.displayWindow('Final Order');
     }
 
     public displayWindow(contentType: string){
@@ -430,9 +431,9 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathHeights = ['18rem'];
             this.initialDocumentsContent = true;
 
-        } else if (contentType == "Apply for Leave to Appeal") {
+        } else if (contentType == "If leave required") {
 
-            this.windowTitle = "Apply for Leave to Appeal";
+            this.windowTitle = "If leave required";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
             this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
@@ -479,9 +480,9 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Orders"){
+        } else if (contentType == "Final Order"){
 
-            this.windowTitle = "Orders";
+            this.windowTitle = "Final Order";
             this.pathTypes = ["info", "info", "share"];
             this.pathHeights = ['21rem', '0', '0'];
             this.courtOrderContent = true;
