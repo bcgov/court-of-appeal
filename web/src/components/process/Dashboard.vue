@@ -43,7 +43,7 @@
                             variant="outline-success bg-light text-dark" 
                             class="mt-3 mr-3"
                             style="margin-left:auto; right:0; top: 1; border-width: 2px;">
-                            Restart journey
+                            Restart process
                         </b-button>
                     </b-row>
 
