@@ -750,7 +750,7 @@
                 <b>
                     Appeals involving children
                 </b>  
-                <i style="font-size:8.65pt;"><br>
+                <i style="font-size:8.25pt;"><br>
                     Does this appeal involve the rights or interests of a child?
                     E.g., parenting order.
                 </i>  

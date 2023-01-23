@@ -350,7 +350,7 @@ export default class TableForm6 extends Vue {
 
             if(fileNumber) pdfIds = ''
 
-            const pdf_type = 'FORM';
+            const pdf_type = 'ABA';
             const url = '/form6/form-print/'+filenum+'/?pdf_type='+pdf_type+pdfIds;
             const options = {
                 responseType: "blob",
