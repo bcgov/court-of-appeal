@@ -120,26 +120,26 @@
         </div>
 
 <!-- <1> -->
-        <div class="row mt-3" style="font-size: 12pt; margin: 0 0.5rem; font-weight: 700;"><b class="mr-3">1.</b> THE ORDER IN THE APPEAL YOU ARE CROSS APPEALING</div>
+        <div class="row" style="font-size: 12pt; margin:1.55rem 0.5rem 0 0.5rem; font-weight: 700;"><b class="mr-3">1.</b> THE ORDER IN THE APPEAL YOU ARE CROSS APPEALING</div>
 
 <!-- <REQUIRED> -->
         <div class="row mt-2" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1rem; height:5.65rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.4rem 0; line-height:1rem; height:4.75rem;">
                 <div class="ml-2">
                     <b style="font-size:8.55pt;">Is leave to cross appeal required?</b>
-                    <i>
+                    <i style="font-size:8.55pt;">
                         <br>Court of Appeal Rule 12 explains when you need leave to cross appeal. 
                             If you are unsure, check “Yes.”  
                     </i>
                 </div>
             </div>
 
-            <div class="arrow-right-flash-54"></div>           
+            <div class="arrow-right-flash-45"></div>           
             
             <div style="width:2%;"></div>
 
-            <div style="width:30%; margin:2.75rem 0;">                  
+            <div style="width:20%; margin:2.25rem 0;">                  
                 <check-box 
                     style="margin-left:1rem;"
                     :check="(result.crossAppealRequired)?'yes':''" 
@@ -148,7 +148,7 @@
                     text="Yes"/> 
             </div>
             
-            <div style="width:30%;margin:2.75rem 0;">
+            <div style="width:30%;margin:2.25rem 0;">
                 <check-box 
                     style="margin: 0 ;" 
                     :check="(!result.crossAppealRequired)?'yes':''"
@@ -162,10 +162,10 @@
 <!-- <name-of-judge> -->
         <div class="row mt-3" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.4rem 0; line-height:1rem; height:4.75rem;">
                 <div class="ml-2">
                     <b> Who made the order?</b>
-                    <i>
+                    <i style="font-size: 8.5pt;">
                         <br>Name the justice or other decision
                             maker who pronounced the order
                             in the appeal you are cross
@@ -173,7 +173,7 @@
                     </i>
                 </div>
             </div>
-            <div class="arrow-right-flash-54"></div> 
+            <div class="arrow-right-flash-45"></div> 
 
             <div class="coa-text-box-left" style="width:64%; font-weight: 700;">
                 <div class="ml-2">{{result.judgeName}}</div>                       
@@ -227,7 +227,7 @@
                 <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.5rem 0; height:5.8rem;">
                     <div class="ml-2">
                         <b>Part of the order being cross appealed</b>
-                        <i style="font-size:8.7pt;">
+                        <i style="font-size:8.5pt;">
                             <br>If you only want to cross appeal one part of an order, enter the part that is being cross appealed.
                         </i>
                     </div>
@@ -273,7 +273,7 @@
                 <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.3rem 0; height:6.1rem;">
                     <div class="ml-2">
                         <b>Part of the order being cross appealed</b>
-                        <i style="font-size:8.8pt;">
+                        <i style="font-size:8.5pt;">
                             <br>If you are only seeking leave to cross appeal one part of an order, enter the part that you are seeking leave to cross appeal.
                         </i>
                     </div>
@@ -323,7 +323,7 @@
             
             <div style="width:2%;"></div>
 
-            <div style="width:30%; margin:1.5rem 0;">                  
+            <div style="width:20%; margin:1.5rem 0;">                  
                 <check-box 
                     style="margin-left:1rem;"
                     :check="(result.selfRepresenting)?'yes':''" 
@@ -377,12 +377,12 @@
             </div> 
         </div>
 
-            <!-- <emails> -->
+        <!-- <emails> -->
         <div class="row mt-3" style="font-size: 9pt; margin: 0.5rem 0.5rem;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin:.35rem 0; height:6rem;">
                 <div class="ml-2">
-                    <b style="font-size:8.65pt;" >Email address(es) for service of party(ies) filing cross appeal</b>
+                    <b style="font-size:8.6pt;" >Email address(es) for service of party(ies) filing cross appeal</b>
                     <i>
                         <br>If you provide an email address, you consent to have documents served on you by email.
                     </i>
