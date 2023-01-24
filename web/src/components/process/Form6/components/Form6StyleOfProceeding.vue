@@ -179,14 +179,25 @@
                     you are abandoning was filed:
                 </b-col>
                 <b-col>
-                    <b-card                 
-                        :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                    <b-card no-body                
+                        :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2': 'muted mt-2 border-white'"
+                        style="padding: 0; float: center;">
+                        <b-form-select 
+                            :class="form6Info.dateOfInitiatingDocumentValidated?'mt-2':'mb-2'"                        
+                            @change="updateInitiatingDocumentDate"          
+                            v-model="initiatingDocumentDateValue"                    
+                            :options="form6Info.initiatingDocumentDates">
+                        </b-form-select>
+                    </b-card>
+                    <b-card
+                        v-if="!form6Info.dateOfInitiatingDocumentValidated"                
+                        :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2':(form6Info.dateOfInitiatingDocumentValidated?'border-white':'muted mt-2')"
                         style="padding: 0; float: center;">
                         <div class="vuetify">
                             <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
                                 <v-date-picker
                                     @change="updateInitiatingDocumentDate"
-                                    v-model="initiatingDocumentDateValue"                           
+                                    v-model="otherInitiatingDocumentDateValue"                           
                                     color="warning"             
                                     :allowed-dates="allowedDates"                            
                                     header-color="red"
@@ -318,9 +329,10 @@ export default class Form6StyleOfProceeding extends Vue {
     orderDateValue = '';
     updateInitiatingDocumentDateDetails = 0;
     initiatingDocumentDateValue = '';
+    otherInitiatingDocumentDateValue = moment().startOf('day').format('YYYY-MM-DD');
 
     mounted() {
-        this.dataReady = false;
+        this.dataReady = false;        
         this.extractInfo();              
     }
 
@@ -330,8 +342,18 @@ export default class Form6StyleOfProceeding extends Vue {
         this.updateOrderDetails ++;
     }
 
-    public updateInitiatingDocumentDate(){       
-        this.form6Info.initiatingDocumentDate = this.initiatingDocumentDateValue;
+    public updateInitiatingDocumentDate(){   
+        console.log(this.initiatingDocumentDateValue)   
+
+        if (this.initiatingDocumentDateValue == 'Other'){
+            this.form6Info.dateOfInitiatingDocumentValidated = false;
+            this.form6Info.initiatingDocumentDate = this.otherInitiatingDocumentDateValue;
+        } else {
+            this.form6Info.dateOfInitiatingDocumentValidated = true;
+            this.form6Info.initiatingDocumentDate = this.initiatingDocumentDateValue;
+        }
+        
+        
         this.recheckStates();
         this.updateInitiatingDocumentDateDetails ++;
     }
@@ -357,9 +379,20 @@ export default class Form6StyleOfProceeding extends Vue {
             const orderDate = this.previousCourts[0]?.JudgmentDate?this.previousCourts[0].JudgmentDate.slice(0,10):'';
             form6Data.orderDate = orderDate;
             this.orderDateValue = orderDate;
-            const initiatingDocumentDate = this.initiatingDocuments[0]?.DateFiled? this.initiatingDocuments[0].DateFiled.slice(0,10):'';
-            form6Data.initiatingDocumentDate = initiatingDocumentDate;
-            this.initiatingDocumentDateValue = initiatingDocumentDate;  
+
+            form6Data.initiatingDocumentDates = this.extractInitiatingDocumentDateOptions();
+
+            const initiatingDocumentDate = form6Data.initiatingDocumentDates[0]?form6Data.initiatingDocumentDates[0].slice(0,10):'Other';
+            
+            if (initiatingDocumentDate == 'Other'){
+                form6Data.dateOfInitiatingDocumentValidated = false;
+                form6Data.initiatingDocumentDate = this.otherInitiatingDocumentDateValue;
+            } else {
+                form6Data.dateOfInitiatingDocumentValidated = true;
+                form6Data.initiatingDocumentDate = initiatingDocumentDate;
+            }
+
+            this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate;  
            
             this.UpdateForm6Info(form6Data);                       
             this.saveForm(true);
@@ -376,6 +409,20 @@ export default class Form6StyleOfProceeding extends Vue {
         const daysPast = TimePast / (1000 * 3600 * 24);        
         
         return daysPast > 30;
+    }
+
+    public extractInitiatingDocumentDateOptions(){
+
+        const initiatingDocumentDateValueOptions = [];        
+
+        for (const document of this.initiatingDocuments){     
+            if (document.DateFiled && this.allowedDates(document.DateFiled)){
+                initiatingDocumentDateValueOptions.push(document.DateFiled.slice(0,10))
+            }
+        }
+        initiatingDocumentDateValueOptions.push('Other');
+
+        return initiatingDocumentDateValueOptions;
     }
 
     public extractPartiesData(){
@@ -404,9 +451,15 @@ export default class Form6StyleOfProceeding extends Vue {
         .then((response) => {
             if(response?.data?.data){            
                             
-                const form6Data = response.data.data;
-                this.orderDateValue = form6Data.orderDate? form6Data.orderDate.slice(0,10):'';  
-                this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate? form6Data.initiatingDocumentDate.slice(0,10):'';              
+                const form6Data = response.data.data as form6DataInfoType;
+                this.orderDateValue = form6Data.orderDate? form6Data.orderDate.slice(0,10):''; 
+                
+                if (form6Data.dateOfInitiatingDocumentValidated){
+                    this.initiatingDocumentDateValue = form6Data.initiatingDocumentDate?form6Data.initiatingDocumentDate.slice(0,10):'';
+                } else {
+                    this.otherInitiatingDocumentDateValue = form6Data.initiatingDocumentDate?form6Data.initiatingDocumentDate.slice(0,10):'';
+                    this.initiatingDocumentDateValue = 'Other';
+                }
                 this.UpdateForm6Info(form6Data) 
                 this.extractPartiesData();
                 this.clearStates();                

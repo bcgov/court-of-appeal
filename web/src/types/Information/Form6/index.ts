@@ -37,7 +37,9 @@ export interface form6DataInfoType {
     firstRespondent: string;
     judgeName: string;
     orderDate: string;
-    initiatingDocumentDate: string;        
+    initiatingDocumentDates: string[];
+    initiatingDocumentDate: string;  
+    dateOfInitiatingDocumentValidated: Boolean;      
     authorizedName: string;
     abandoningParties: string[];
     abandoningAgainstParties: string[];
