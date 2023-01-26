@@ -60,10 +60,10 @@
         <form-icon   
             style="left: 68%"
             :twoPages="false"
-            stepTitle="If leave required"
-            stepTitleOptional="Apply/Respond for leave to appeal"
+            stepTitle="If Leave required"
+            stepTitleOptional="Apply/Respond for Leave to Appeal"
             stepTitleClass="step-title-wide"
-            @action="displayWindow('If leave required')"
+            @action="displayWindow('If Leave required')"
             @completed="completed"            
             order=3
             v-bind="pageState[2]"           
@@ -226,10 +226,8 @@
         <form-icon 
             :style="{left: '60%', top: '92%'}"
             :twoPages="false"
-            stepTitle="Orders"
-            stepTitleOptional="(if required)"            
-            stepTitleClass="step-title-wide"
-            @action="displayWindow('Orders')"
+            stepTitle="Final Order"
+            @action="displayWindow('Final Order')"
             @completed="completed"            
             order=10
             v-bind="pageState[9]"
@@ -422,7 +420,7 @@ export default class RespondToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Orders');
+        this.displayWindow('Final Order');
     }
 
     public showFactums(){
@@ -458,8 +456,8 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
-        } else if (contentType == "If leave required") {
-            this.windowTitle = "If leave required";
+        } else if (contentType == "If Leave required") {
+            this.windowTitle = "If Leave required";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
             this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
@@ -501,8 +499,8 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Orders"){
-            this.windowTitle = "Orders";
+        } else if (contentType == "Final Order"){
+            this.windowTitle = "Final Order";
             this.pathTypes = ["info", "info", "share"];
             this.pathHeights = ['21rem', '0', '0'];
             this.courtOrderContent = true;

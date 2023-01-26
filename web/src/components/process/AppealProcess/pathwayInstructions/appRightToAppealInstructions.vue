@@ -20,7 +20,7 @@
         <p>
             Follow the steps below to complete the appeal process. Follow the 
             instructions until your appeal process is complete. As you progress 
-            through your appeal journey, check the box next to each step below 
+            through your appeal, check the box next to each step below 
             to mark it as complete.            
         </p>
 
