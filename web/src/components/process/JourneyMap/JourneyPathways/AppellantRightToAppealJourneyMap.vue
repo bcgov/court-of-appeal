@@ -42,10 +42,10 @@
         <form-icon   
             style="left: 60%"
             :twoPages="false"
-            stepTitle="If leave required"
-            stepTitleOptional="Apply/Respond for leave to appeal"
+            stepTitle="If Leave required"
+            stepTitleOptional="Apply/Respond for Leave to Appeal"
             stepTitleClass="step-title-wide"
-            @action="displayWindow('If leave required')"
+            @action="displayWindow('If Leave required')"
             @completed="completed"            
             order=2
             v-bind="pageState[1]"           
@@ -431,9 +431,9 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathHeights = ['18rem'];
             this.initialDocumentsContent = true;
 
-        } else if (contentType == "If leave required") {
+        } else if (contentType == "If Leave required") {
 
-            this.windowTitle = "If leave required";
+            this.windowTitle = "If Leave required";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
             this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
