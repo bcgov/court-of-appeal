@@ -125,7 +125,7 @@ import "@/store/modules/forms/form5";
 const form5State = namespace("Form5");
 
 import { form5SearchInfoType } from '@/types/Information/Form5';
-import { partiesDataJsonDataType } from '@/types/Information/json';
+import { chambersHearingJsonInfoType, partiesDataJsonDataType } from '@/types/Information/json';
 import Spinner from "@/components/utils/Spinner.vue";
 
 @Component({
@@ -143,6 +143,9 @@ export default class Form5CaseInformation extends Vue {
     
     @form5State.Action
     public UpdateCurrentNoticeOfHearingOfAppealId!: (newCurrentNoticeOfHearingOfAppealId: string) => void
+    
+    @form5State.Action
+    public UpdateChambersHearing!: (newChambersHearings: chambersHearingJsonInfoType[]) => void
     
     levelOfCourt = "Court of Appeal";
 
@@ -191,13 +194,15 @@ export default class Form5CaseInformation extends Vue {
             '&firstName='+(this.searchParams.firstName?this.searchParams.firstName:'')+
             '&lastName='+(this.searchParams.lastName?this.searchParams.lastName:'')+
             '&searchBy='+(this.searchParams.searchBy?this.searchParams.searchBy:'')+
-            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:''); 
-        
+            '&organizationName='+(this.searchParams.organizationName?this.searchParams.organizationName:'')+
+            '&addChambersHearing=True';
+                
         this.$http.get(url)
         .then(res => {
             this.searching = false;
             if(res.data?.parties){
                 this.UpdatePartiesJson(res.data.parties);
+                this.UpdateChambersHearing(res.data.chambersHearing)
                 this.UpdateFileNumber(this.searchParams.file)
                 this.UpdateCurrentNoticeOfHearingOfAppealId(null);
                 this.$router.push({name: "fill-form5"})
