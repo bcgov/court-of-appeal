@@ -17,19 +17,21 @@
 
         <b-row v-if="showIntroInfo" class="mt-4">
             <app-apply-leave-instructions v-bind:app="app"/>
-            <p>
-                Every appeal process is unique. If you have any questions, please visit the 
-                <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
-                    target="_blank">Online Guidebook
-                </a> or 
-                <a 
-                    href="mailto:courts.cso@gov.bc.ca">contact the registry
-                </a>.
-            </p>           
+            <b style="text-decoration: underline;">NOTE:</b> Every appeal process is unique. If you have any questions, please visit the 
+            <a 
+                href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/deciding-to-appeal" 
+                target="_blank">Online Guidebook
+            </a>, the  
+            <a 
+                href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a" 
+                target="_blank">Court of Appeal Rules
+            </a> or 
+            <a 
+                href="mailto:courts.cso@gov.bc.ca"> contact the registry
+            </a>.           
         </b-row> 
 
-        <b-row :class="showIntroInfo?'mt-0':'mt-4'" style="padding-top: 0.85rem;">            
+        <b-row :class="showIntroInfo?'mt-3':'mt-4'" style="padding-top: 0.95rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal
             </b-col> 
@@ -128,7 +130,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 0.65rem;">            
+        <b-row :class="showNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal and Stay
             </b-col> 
@@ -223,7 +225,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-3" :style="showNoaLeaveStayInfo?'padding-top: 0;':'padding-top: 1.2rem;'">            
+        <b-row class="mt-0" :style="showNoaLeaveStayInfo?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -246,11 +248,15 @@
             <p>
                 Every appeal process is unique. If you have any questions, please visit the 
                 <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
+                    href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/deciding-to-appeal" 
                     target="_blank">Online Guidebook
+                </a>, the  
+                <a 
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a" 
+                    target="_blank">Court of Appeal Rules
                 </a> or 
                 <a 
-                    href="mailto:courts.cso@gov.bc.ca">contact the registry
+                    href="mailto:courts.cso@gov.bc.ca"> contact the registry
                 </a>.
             </p>              
         </b-row>
@@ -308,7 +314,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-2':'mt-4'" style="padding-top: 0.5rem;">            
+        <b-row :class="showRespNoaLeaveInfo?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -330,11 +336,15 @@
             <p>
                 Every appeal process is unique. If you have any questions, please visit the 
                 <a 
-                    href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
+                    href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/deciding-to-appeal" 
                     target="_blank">Online Guidebook
+                </a>, the  
+                <a 
+                    href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a" 
+                    target="_blank">Court of Appeal Rules
                 </a> or 
                 <a 
-                    href="mailto:courts.cso@gov.bc.ca">contact the registry
+                    href="mailto:courts.cso@gov.bc.ca"> contact the registry
                 </a>.
             </p>    
                
@@ -727,7 +737,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showIntro(show: boolean){
         if (show) {
             this.showIntroInfo = true;
-            this.$emit('adjustHeights', 0, "14rem");
+            this.$emit('adjustHeights', 0, "16rem");
         } else {
             this.showIntroInfo = false;
             this.$emit('adjustHeights', 0, "0");
@@ -757,7 +767,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespNoaLeave(show: boolean){
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 3, "26rem");
+            this.$emit('adjustHeights', 3, "27rem");
         } else {
             this.showRespNoaLeaveInfo = false;
             this.$emit('adjustHeights', 3, "0");
@@ -767,7 +777,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespNoaLeaveStay(show: boolean){
         if (show) {
             this.showRespNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 4, "26rem");
+            this.$emit('adjustHeights', 4, "27.5rem");
         } else {
             this.showRespNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 4, "0");
@@ -787,7 +797,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showRespVaryOrder(show: boolean){
         if (show) {
             this.showRespVaryOrderInfo = true;
-            this.$emit('adjustHeights', 6, "25rem");
+            this.$emit('adjustHeights', 6, "26rem");
         } else {
             this.showRespVaryOrderInfo = false;
             this.$emit('adjustHeights', 6, "0");

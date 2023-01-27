@@ -55,6 +55,7 @@
                 <b-col cols="4">
 
                     <most-used-forms></most-used-forms>
+                    <applications></applications>
                     <additional-forms></additional-forms>
                     <representation-address-forms></representation-address-forms>
                     <orders></orders>
@@ -153,6 +154,7 @@ import AppealProcess from "@/components/process/AppealProcess/AppealProcess.vue"
 import StartEfiling from "@/components/process/AppealProcess/StartEfiling.vue";
 import NeedHelp from "@/components/utils/NeedHelp.vue";
 import MostUsedForms from "@/components/utils/MostUsedForms.vue";
+import Applications from "@/components/utils/Applications.vue";
 import AdditionalForms from "@/components/utils/AdditionalForms.vue";
 import RepresentationAddressForms from "@/components/utils/RepresentationAddressForms.vue";
 import Orders from "@/components/utils/Orders.vue";
@@ -195,6 +197,7 @@ import { form17FormsJsonDataType } from '@/types/Information/Form17';
         StartEfiling,
         NeedHelp,
         MostUsedForms,
+        Applications,
         AdditionalForms,
         RepresentationAddressForms,
         Orders,

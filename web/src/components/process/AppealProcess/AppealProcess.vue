@@ -39,8 +39,12 @@
         <p v-if="!appLeaveRefused && !appLeaveRefusedFinal && !rspToLeaveRefusedFinal">
             <b style="text-decoration: underline;">NOTE:</b> Every appeal process is unique. If you have any questions, please visit the 
             <a 
-                href="https://www.courtofappealbc.ca/appellant-guidebook/step-1-deciding-to-appeal" 
+                href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/deciding-to-appeal" 
                 target="_blank">Online Guidebook
+            </a>, the  
+            <a 
+                href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a" 
+                target="_blank">Court of Appeal Rules
             </a> or 
             <a 
                 href="mailto:courts.cso@gov.bc.ca">contact the registry
