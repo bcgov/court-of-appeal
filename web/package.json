@@ -20,7 +20,7 @@
     "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.3/bcgov-bootstrap-theme-1.1.3.tgz",
     "@mdi/font": "^7.1.96",
     "@types/underscore": "^1.10.0",
-    "axios": "^0.27.2",
+    "axios": "^1.2.6",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.24.1",
