@@ -513,6 +513,7 @@ export default class Form7StyleOfProceeding extends Vue {
         if (isCreateAffidavit){
             
             const form7Data = this.form7Info;
+            if(!form7Data.affidavitList) form7Data.affidavitList=[];
             form7Data.affidavitList.push(newAffidavit);            
             this.UpdateForm7Info(form7Data);
             this.closeAffidavitForm();

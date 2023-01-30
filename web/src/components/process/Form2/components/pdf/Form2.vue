@@ -4,6 +4,7 @@
         <b-row>
             <b-col cols="10">
                 <b-button
+                    :disabled="!printReady"
                     style="float: right;" 
                     variant="success"
                     @click="navigateToSubmitPage()"
@@ -99,7 +100,8 @@ export default class Form2 extends Vue {
 
         this.$http.post(url,body, options)
         .then(res => {                       
-            this.printReady = true;     
+            this.printReady = true;
+            this.$emit('pdfReady')     
         },err => {
             console.error(err);        
         });
