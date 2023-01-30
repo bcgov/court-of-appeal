@@ -18,10 +18,10 @@
         <b-row v-if="showNoaInfo" class="mt-3" >
 
             <p style="padding: 0;">
-                As a respondent, you may only file a notice of cross appeal if you are 
-                seeking to vary the order being appealed, and you are seeking relief 
-                from the court that is different from what the appellant is asking 
-                the court for in the notice of appeal.
+                As a respondent, you may only file a notice of cross appeal if 
+                you are seeking to vary the order being appealed, and you are 
+                seeking relief from the court that is different from what the 
+                appellant is asking the court for in the notice of appeal.
             </p>
        
         </b-row>
@@ -89,7 +89,35 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showBringCrossAppealInfo?'mt-1': 'mt-4'" :style="!showBringCrossAppealInfo?'padding-top: 0.85rem;': ''">            
+        <b-row :class="showBringCrossAppealInfo?'mt-1': 'mt-4'" :style="showBringCrossAppealInfo?'padding-top: 0.5rem;': 'padding-top: 0.85rem;'">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Do I need to apply for leave to cross appeal?
+            </b-col>
+            <b-col cols="1">
+                <b-button
+                    @click="showNeedCrossAppeal(!showNeedCrossAppealInfo)"                                    
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showNeedCrossAppealInfo"></expand-icon>
+                </b-button>
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showNeedCrossAppealInfo" class="mt-1" >
+
+            <b-row no-gutters>
+                <b-col cols="2">
+                    <path-sidebar :key="updated" v-bind:pathTypes="pathTypes" v-bind:pathHeights="pathHeights"/>
+                </b-col>
+                <b-col cols="10" style="padding: 0;">
+                    <need-to-apply-leave-to-cross-appeal @adjustHeights="adjustHeights"/>   
+
+                </b-col>
+            </b-row>
+
+
+        </b-row>
+
+        <b-row :class="showNeedCrossAppealInfo?'mt-1': 'mt-4'" :style="!showNeedCrossAppealInfo?'padding-top: 0.85rem;': ''">            
             <b-col cols="11" class="step-title-column pl-0">
                 Are there any additional documents that I need to file for a cross appeal?
             </b-col> 
@@ -149,13 +177,17 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
+import PathSidebar from '@/components/process/JourneyMap/components/PathSidebar.vue';
+import NeedToApplyLeaveToCrossAppeal from "@/components/process/JourneyMap/components/RspToAppeal/components/NeedToApplyLeaveToCrossAppeal.vue";
 
 import "@/store/modules/forms/form3";
 const form3State = namespace("Form3");
 
 @Component({
     components:{
-        ExpandIcon
+        ExpandIcon,
+        PathSidebar,
+        NeedToApplyLeaveToCrossAppeal
     }
 })
 export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
@@ -166,8 +198,12 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
     
     showNoaInfo = true;
     showBringCrossAppealInfo = false;
+    showNeedCrossAppealInfo = false;
     showAddDocsInfo = false;
     showAppealRecordInfo = false;
+    updated=0;
+    pathTypes = ["info", "share", "share"];
+    pathHeights = ['19rem', '0', '0'];  
 
     public startNoticeOfCrossAppeal(){
         this.UpdateCurrentNoticeOfCrossAppealId(null);
@@ -194,29 +230,53 @@ export default class NoticeOfCrossAppealRspToAppealPg extends Vue {
         }
     }
 
+    public showNeedCrossAppeal(show: boolean){
+        if (show) {
+            this.pathHeights = ['19rem', '0', '0'];
+            this.showNeedCrossAppealInfo = true;              
+            this.$emit('adjustHeights', 2, "35rem")
+        } else {
+            this.showNeedCrossAppealInfo = false;
+            this.$emit('adjustHeights', 2, "0");
+        }
+    }
+
     public showAddDocs(show: boolean){
         if (show) {
             this.showAddDocsInfo = true;
-            this.$emit('adjustHeights', 2, "5rem")
+            this.$emit('adjustHeights', 3, "5rem")
         } else {
             this.showAddDocsInfo = false;
-            this.$emit('adjustHeights', 2, "0");
+            this.$emit('adjustHeights', 3, "0");
         }
     }
 
     public showAppealRecord(show: boolean){
         if (show) {
             this.showAppealRecordInfo = true;
-            this.$emit('adjustHeights', 3, "3rem")
+            this.$emit('adjustHeights', 4, "3rem")
         } else {
             this.showAppealRecordInfo = false;
-            this.$emit('adjustHeights', 3, "0");
+            this.$emit('adjustHeights', 4, "0");
         }
     }
 
     public showFactumSection(){
         
         this.$emit('showFactums');
+    }
+
+    public adjustHeights(index: number, pathHeight: string){       
+        this.updated++;
+        this.pathHeights[index] = pathHeight;
+        let total = 0;
+        for (const sectionHeight of this.pathHeights){
+            const heightValue = Number(sectionHeight.replace("rem", ""));
+            total = total + heightValue;            
+        }
+        total = total + 16; 
+        this.$emit('adjustHeights', 2, total + "rem");
+        
     }
 }
 </script>
