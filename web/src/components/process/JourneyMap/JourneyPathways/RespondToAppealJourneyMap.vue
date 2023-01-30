@@ -71,10 +71,10 @@
         <form-icon   
             :style="{left: '30%', top: '34%'}"
             :twoPages="false"
-            stepTitle="If Leave required"
-            stepTitleOptional="Apply/Respond for Leave to Appeal"
+            stepTitle="Respond to Application"
+            stepTitleOptional="for Leave to Appeal"
             stepTitleClass="step-title-wide"
-            @action="displayWindow('If Leave required')"
+            @action="displayWindow('Respond to Application for Leave to Appeal')"
             @completed="completed"            
             order=3
             v-bind="pageState[2]"           
@@ -427,14 +427,14 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Notice of Cross Appeal"){            
             this.windowTitle = "Cross Appeal (Optional)";
             this.contentTitle = '';
-            this.pathTypes = ["info", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "info"];
+            this.pathHeights = ['5rem', '0', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
-        } else if (contentType == "If Leave required") {
-            this.windowTitle = "If Leave required";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['15.5rem', '0', '0', '0', '0', '0', '0'];
+        } else if (contentType == "Respond to Application for Leave to Appeal") {
+            this.windowTitle = "Respond to Application for Leave to Appeal";
+            this.pathTypes = ["info", "share", "share", "share", "share"];
+            this.pathHeights = ['9rem', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
 
         } else if (contentType == "Factum and Appeal Book"){            

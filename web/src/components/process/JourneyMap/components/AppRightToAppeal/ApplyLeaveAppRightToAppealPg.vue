@@ -2,9 +2,12 @@
     <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-3">            
-            <b-col cols="11" class="step-title-column pl-0">
+            <b-col v-if="app" cols="11" class="step-title-column pl-0">
                 Apply for Leave to Appeal
             </b-col> 
+            <b-col v-else cols="11" class="step-title-column pl-0">
+                Respond to Application for Leave to Appeal
+            </b-col>
             <b-col cols="1">
                 <b-button
                     @click="showIntro(!showIntroInfo)"                                       
@@ -17,21 +20,25 @@
 
         <b-row v-if="showIntroInfo" class="mt-4">
             <app-apply-leave-instructions v-bind:app="app"/>
-            <b style="text-decoration: underline;">NOTE:</b> Every appeal process is unique. If you have any questions, please visit the 
+            
+            <b style="text-decoration: underline; padding: 0 0.5rem 0 0;">NOTE:</b> Every appeal process is unique. If you have any questions, please visit the 
             <a 
                 href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/deciding-to-appeal" 
-                target="_blank">Online Guidebook
-            </a>, the  
+                target="_blank"
+                style="padding: 0 0.5rem 0 0.5rem;">Online Guidebook,
+            </a>the  
             <a 
                 href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a" 
-                target="_blank">Court of Appeal Rules
+                target="_blank"
+                style="padding: 0 0.5rem 0 0.5rem;">Court of Appeal Rules
             </a> or 
             <a 
-                href="mailto:courts.cso@gov.bc.ca"> contact the registry
+                href="mailto:courts.cso@gov.bc.ca"
+                style="padding: 0 0.5rem 0 0.5rem;"> contact the registry
             </a>.           
         </b-row> 
 
-        <b-row :class="showIntroInfo?'mt-3':'mt-4'" style="padding-top: 0.95rem;">            
+        <b-row v-if="app" :class="showIntroInfo?'mt-3':'mt-4'" style="padding-top: 0.95rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal
             </b-col> 
@@ -45,7 +52,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="app && showNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -64,7 +71,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showNoaLeaveInfo" class="mt-4" >            
+        <b-row v-if="app && showNoaLeaveInfo" class="mt-4" >            
 
            <ol>
                <li>
@@ -90,11 +97,7 @@
                                     </b-button>
                                 </b-col>
                                 <b-col cols="4">
-                                    <!-- <b-button
-                                        href=""
-                                        target="_blank"
-                                        class="form-download-button p-1 bg-white text-primary border-primary">PDF
-                                    </b-button>                                     -->
+                                    
                                 </b-col>
                             </b-row>
                         </li>
@@ -130,7 +133,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 1rem;">            
+        <b-row v-if="app" :class="showNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 1rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Notice of Application and Application Book – Leave to Appeal and Stay
             </b-col> 
@@ -144,7 +147,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="app && showNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
             </b-col>
@@ -159,7 +162,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showNoaLeaveStayInfo" class="mt-4" >            
+        <b-row v-if="app && showNoaLeaveStayInfo" class="mt-4" >            
             File and serve the documents below after filing
            <ol class="mt-2">
                 <li>
@@ -404,8 +407,11 @@
         </b-row>        
 
         <b-row :class="showRespNoaLeaveStayInfo?'mt-0': 'mt-4'" :style="showRespNoaLeaveStayInfo?'':'padding-top: 0.85rem;'">            
-            <b-col cols="11" class="step-title-column pl-0">
+            <b-col v-if="app" cols="11" class="step-title-column pl-0">
                 Was your leave to appeal granted or refused?
+            </b-col>
+            <b-col v-else cols="11" class="step-title-column pl-0">
+                Was leave to appeal granted or refused?
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -693,6 +699,7 @@ import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import appApplyLeaveInstructions from "@/components/process/AppealProcess/pathwayInstructions/appApplyLeaveInstructions.vue";
 import appLeaveRefusedFinalInstructions from "@/components/process/AppealProcess/pathwayInstructions/appLeaveRefusedFinalInstructions.vue";
+import respApplyCrossAppealInstructions from "@/components/process/AppealProcess/pathwayInstructions/respApplyCrossAppealInstructions.vue";
 
 import "@/store/modules/forms/form4";
 const form4State = namespace("Form4");
@@ -706,7 +713,8 @@ import {GetInstructionFile} from '@/components/utils/GetInstructionFile';
     components:{
         ExpandIcon,
         appApplyLeaveInstructions,
-        appLeaveRefusedFinalInstructions
+        appLeaveRefusedFinalInstructions,
+        respApplyCrossAppealInstructions
     }
 })
 export default class ApplyLeaveAppRightToAppealPg extends Vue {
@@ -737,7 +745,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showIntro(show: boolean){
         if (show) {
             this.showIntroInfo = true;
-            this.$emit('adjustHeights', 0, "16rem");
+            this.$emit('adjustHeights', 0, this.app?"16rem":"9rem");
         } else {
             this.showIntroInfo = false;
             this.$emit('adjustHeights', 0, "0");
@@ -765,42 +773,43 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     }
 
     public showRespNoaLeave(show: boolean){
+       
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 3, "27rem");
+            this.$emit('adjustHeights', this.app?3:1, "27rem");
         } else {
             this.showRespNoaLeaveInfo = false;
-            this.$emit('adjustHeights', 3, "0");
+            this.$emit('adjustHeights', this.app?3:1, "0");
         }
     }
 
     public showRespNoaLeaveStay(show: boolean){
         if (show) {
             this.showRespNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 4, "27.5rem");
+            this.$emit('adjustHeights', this.app?4:2, "27.5rem");
         } else {
             this.showRespNoaLeaveStayInfo = false;
-            this.$emit('adjustHeights', 4, "0");
+            this.$emit('adjustHeights', this.app?4:2, "0");
         }
     }
 
     public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', 5, "52rem");
+            this.$emit('adjustHeights', this.app?5:3, "52rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
-            this.$emit('adjustHeights', 5, "0");
+            this.$emit('adjustHeights', this.app?5:3, "0");
         }
     }
 
     public showRespVaryOrder(show: boolean){
         if (show) {
             this.showRespVaryOrderInfo = true;
-            this.$emit('adjustHeights', 6, "26rem");
+            this.$emit('adjustHeights', this.app?6:4, "26rem");
         } else {
             this.showRespVaryOrderInfo = false;
-            this.$emit('adjustHeights', 6, "0");
+            this.$emit('adjustHeights', this.app?6:4, "0");
         }
     }
 
