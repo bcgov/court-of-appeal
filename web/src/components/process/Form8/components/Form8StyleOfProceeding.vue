@@ -57,32 +57,38 @@
             <b-col class="ml-1 mt-2">
                 
                 <b-form-select 
-                        stacked               
-                        style="width:100%"
-                        :state="state.judgeName"                                   
-                        v-model="form8Info.judgeName"
-                        @change="recheckStates()"
-                        text-field="text"
-                        value-field="text"                    
-                        :options="justiceNameOptions">                            
-                    </b-form-select>
-                    <b-row v-if="form8Info.judgeName == 'Other'" class="m-0 p-0">
-                        <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
-                        <div style="width:74%;">
-                            <b-form-input 
-                                style="margin-top:0.5rem;"
-                                @change="recheckStates()"                                
-                                :state="state.judgeNameOther"
-                                v-model="form8Info.judgeNameOther" 
-                            />
-                        </div>
-                    </b-row> 
-                    <span
-                        v-if="(state.judgeName != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify who made the order.
-                    </span>
+                    stacked               
+                    style="width:100%"
+                    :state="state.judgeName"                                   
+                    v-model="form8Info.judgeName"
+                    @change="updateJudgeName"
+                    text-field="text"
+                    value-field="text"                    
+                    :options="justiceNameOptions">                            
+                </b-form-select>
+                <b-row v-if="form8Info.judgeName == 'Other'" class="m-0 p-0">
+                    <div style="width:25%;" class="mt-3 ml-1">Other Name:</div>
+                    <div style="width:74%;">
+                        <b-form-input 
+                            style="margin-top:0.5rem;"
+                            @change="updateJudgeName"                                
+                            :state="state.judgeNameOther"
+                            v-model="form8Info.judgeNameOther" 
+                        />
+                    </div>
+                </b-row> 
+                <span
+                    v-if="(state.judgeName != null)" 
+                    style="font-size: 0.75rem;" 
+                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    Specify who made the order.
+                </span>
+                <span 
+                    style="display: inline-block; font-size: 0.75rem;" 
+                    class="text-orange"
+                    v-if="form8Info.judgeNameExists && !form8Info.judgeNameValidated"
+                    :key="updateJudgeNameDetails">
+                    The information indicated does not match the court record information.</span>
             </b-col>
         </b-row>  
 
@@ -111,6 +117,12 @@
                     class="text-orange"
                     :key="updateOrderDetails"
                     v-if="isPastDeadline">You may need to apply to extend the time to vary the order.</span>
+                <span 
+                    style="display: inline-block; font-size: 0.75rem;" 
+                    class="text-orange"
+                    v-if="form8Info.orderDateExists && !form8Info.orderDateValidated"
+                    :key="updateOrderDetails">
+                    The information indicated does not match the court record information.</span>
             </b-col>
         </b-row>                   
 
@@ -196,6 +208,7 @@ export default class Form8StyleOfProceeding extends Vue {
     
     dataReady = false;    
     partyNames: string[] = [];  
+    updateJudgeNameDetails = 0;
     updateOrderDetails = 0;
     orderDateValue = '';
 
@@ -219,9 +232,36 @@ export default class Form8StyleOfProceeding extends Vue {
     }
 
     public updateOrderDate(){       
+        const originalOrderDate = this.form8Info.order?.JudgmentDate?this.form8Info.order.JudgmentDate.slice(0,10):'';
+
+        if (this.form8Info.orderDateExists){
+            this.form8Info.orderDateValidated = this.orderDateValue != originalOrderDate;
+        } else {
+            this.form8Info.orderDateValidated = false;
+        }            
+        
         this.form8Info.orderDate = this.orderDateValue;        
         this.updateOrderDetails ++;
         this.recheckStates()
+    }
+
+    public updateJudgeName(){  
+
+        if (this.form8Info.judgeNameExists){
+
+            if (this.form8Info.judgeName == 'Other'){
+                this.form8Info.judgeNameValidated = this.getJudgeFullName(this.form8Info.order) == this.form8Info.judgeNameOther;
+                
+            } else {
+                this.form8Info.judgeNameValidated = this.getJudgeFullName(this.form8Info.order) == this.form8Info.judgeName;
+            }
+
+        } else {
+            this.form8Info.judgeNameValidated = false;
+        }
+        
+        this.recheckStates();
+        this.updateJudgeNameDetails ++;
     }
 
     public extractInfo(){       
@@ -233,35 +273,44 @@ export default class Form8StyleOfProceeding extends Vue {
             
             const form8Data = {} as form8DataInfoType;
 
-            form8Data.appellants = this.partiesJson.appellants
+            form8Data.appellants = this.partiesJson.appellants;
             form8Data.respondents = this.partiesJson.respondents;
+            form8Data.order = this.currentOrder?this.currentOrder:{} as chambersHearingJsonInfoType;
             form8Data.formSevenNumber = this.fileNumber;
             
             form8Data.version = this.$store.state.Application.version;  
             
-            const judgeName = this.currentOrder && this.currentOrder.JudgeLastName? (
-                (this.currentOrder.JudgeSalutation? this.currentOrder.JudgeSalutation+' ':'Justice ')
-                +this.currentOrder.JudgeLastName
-            ).trim() : ''
+            const judgeName = this.getJudgeFullName(this.currentOrder);
 
-            if(judgeName){
+            if(judgeName.length>0){
                 const justiceIndex = justiceNames.findIndex(name=> name.toLowerCase().includes(judgeName.toLowerCase()))
                 if(justiceIndex>-1){
                     form8Data.judgeName = justiceNames[justiceIndex]
                     form8Data.judgeNameOther=''
-                }
-                else{
+                } else{
                     form8Data.judgeName='Other'
                     form8Data.judgeNameOther=judgeName
                 }
+                form8Data.judgeNameValidated = true;
+                form8Data.judgeNameExists = true;
             } else {
                 form8Data.judgeName='';
                 form8Data.judgeNameOther='';
+                form8Data.judgeNameValidated = false;
+                form8Data.judgeNameExists = false;
             }
 
             const orderDate = this.currentOrder?.JudgmentDate?this.currentOrder.JudgmentDate.slice(0,10):'';
             form8Data.orderDate = orderDate;
             this.orderDateValue = orderDate; 
+
+            if (orderDate.length == 0){
+                form8Data.orderDateValidated = false;
+                form8Data.orderDateExists = false;
+            } else {
+                form8Data.orderDateValidated = true;
+                form8Data.orderDateExists = true;
+            }
 
             let applicantNames = [];
             let respondentNames = [];
@@ -426,6 +475,14 @@ export default class Form8StyleOfProceeding extends Vue {
                 const errMsg = err.response.data.error;
                 
             })
+    }
+
+    public getJudgeFullName (order: chambersHearingJsonInfoType){
+        const judgeFullName = order && order.JudgeLastName? (
+                (order.JudgeSalutation? order.JudgeSalutation+' ':'Justice ')
+                +order.JudgeLastName).trim() : '';
+
+        return judgeFullName;
     }
 
     public navigateToPreviewPage() {        
