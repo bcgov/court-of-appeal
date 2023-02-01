@@ -60,6 +60,7 @@ export interface reportInfoType {
     start_date: string;
     end_date: string;
     users_info: userInfoReportInfoType;
+    logged_in_users: loggedInUsersInfoType[];
     manual_submission_info: manualSubmissionReportInfoType;
     form1: formReportInfoType;
     form2: formReportInfoType;
@@ -133,3 +134,29 @@ export interface userInfoReportInfoType {
     active_in_period: number;
     joined_in_period: number;
 }    
+
+
+export interface loggedInUsersInfoType {    
+    Form1: number;
+    Form2: number;
+    Form3: number;
+    Form4: number;
+    Form5: number;
+    Form6: number;
+    Form7: number;
+    Form8: number;
+    Form9: number;
+    Form10: number;
+    Form11: number;
+    Form12: number;
+    Form13: number;
+    Form14: number;
+    Form15: number;
+    Form16: number;
+    Form17: number;
+    Form18: number;
+    Form19: number;
+    Form20: number;
+    Form21: number;
+    Form22: number;
+}
