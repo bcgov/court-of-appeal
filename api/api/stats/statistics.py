@@ -3,7 +3,30 @@ from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
 from django.db.models.functions import Length
+from django.utils import timezone as django_timezone
 import collections
+
+from form22.models.order_nofees_payable import OrderNofeesPayable
+from form20.models.objection_withdraw import ObjectionWithdraw
+from form19.models.withdraw_lawyer import WithdrawLawyer
+from form18.models.change_address import ChangeOfAddress
+from form17.models.certificate_of_costs import CertificateOfCosts
+from form16.models.offer_to_settle_costs import OfferToSettleCosts
+from form15.models.consent_order_general import ConsentOrderGeneral
+from form14.models.consent_remove_inactive_appeal import ConsentRemoveInactiveAppeal
+from form13.models.consent_extend_filing_time import ConsentExtendFilingTime
+from form12.models.order_to_vary_order_of_justice import OrderToVaryOrderOfJustice
+from form11.models.order_of_three_justices import OrderOfThreeJustices
+from form10.models.order_of_single_justice import OrderOfSingleJustice
+from form9.models.requisition import Requisition
+from form8.models.notice_of_application_to_vary_order import NoticeOfApplicationToVaryOrder
+from form7.models.notice_of_urgent_application import NoticeOfUrgentApplication
+from form6.models.notice_of_settlement import NoticeOfSettlement
+from form5.models.notice_of_hearing import NoticeOfHearing
+from form4.models.notice_of_application import NoticeOfApplication
+from form3.models.notice_of_cross_appeal import NoticeOfCrossAppeal
+from api.models.case import Case
+from form1.models.notice_of_appeal import NoticeOfAppeal
 
 from api.models import User
 from manual_submissions.models import ManualSubmission
@@ -25,6 +48,8 @@ def statistics_info(start_date, end_date, tz):
     report = {"start_date":start_date, "end_date":end_date}
     
     report["users_info"] = get_users_info(start_date, end_date)
+
+    report["logged_in_users"] = get_logged_in_users()
 
     report["manual_submission_info"] = get_manual_submission_info(start_date, end_date)
 
@@ -240,3 +265,129 @@ def manual_submission_forms_info(model_with_date, user_id=None):
     forms_info = [{"form_type":name, "submitted_count":count} for name, count in collections.Counter(forms).items()]
     # print(forms_info)
     return forms_info
+
+
+def get_logged_in_users():
+    users_info = list()
+   
+    max_login_date =  django_timezone.now()+ django_timezone.timedelta(hours=-8)
+    print(max_login_date)
+
+    recent_hours =  django_timezone.now()+ django_timezone.timedelta(hours=-1)
+    print(recent_hours)
+   
+    users = User.objects.filter(
+            last_login__gte=max_login_date
+        ).all()
+    
+    for user in users:            
+        usr = {}
+    #____
+        usr["Form1"] = NoticeOfAppeal.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()        
+    #____
+        usr["Form2"] = Case.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form3"] = NoticeOfCrossAppeal.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form4"] = NoticeOfApplication.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form5"] = NoticeOfHearing.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form6"] = NoticeOfSettlement.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form7"] = NoticeOfUrgentApplication.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form8"] = NoticeOfApplicationToVaryOrder.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form9"] = Requisition.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form10"] = OrderOfSingleJustice.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form11"] = OrderOfThreeJustices.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form12"] = OrderToVaryOrderOfJustice.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form13"] = ConsentExtendFilingTime.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form14"] = ConsentRemoveInactiveAppeal.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form15"] = ConsentOrderGeneral.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form16"] = OfferToSettleCosts.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form17"] = CertificateOfCosts.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form18"] = ChangeOfAddress.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form19"] = WithdrawLawyer.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form20"] = ObjectionWithdraw.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+    #____
+        usr["Form22"] = OrderNofeesPayable.objects.filter(
+            user_id=user.id,
+            modified__gte=recent_hours
+        ).count()
+
+        users_info.append(usr)
+
+    return users_info
