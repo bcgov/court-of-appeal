@@ -40,7 +40,7 @@
         />
 
         <form-icon 
-            style="left: 60%"
+            style="left: 62%"
             :twoPages="false"
             stepTitle="Notice of Cross Appeal"
             stepTitleOptional="(Optional)"
