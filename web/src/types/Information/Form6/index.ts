@@ -1,4 +1,4 @@
-import { applicantJsonDataType, respondentsJsonDataType } from "../json";
+import { applicantJsonDataType, initiatingDocumentJsonInfoType, previousCourtJsonInfoType, respondentsJsonDataType } from "../json";
 
 export interface form6FormsJsonDataType {
     id: number;
@@ -33,6 +33,8 @@ export interface form6DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
+    initiatingDocuments?: initiatingDocumentJsonInfoType[];
+    previousCourts?: previousCourtJsonInfoType[];
     firstAppellant: string;
     firstRespondent: string;
     judgeName: string;
