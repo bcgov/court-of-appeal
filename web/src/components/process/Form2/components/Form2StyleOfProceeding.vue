@@ -73,7 +73,7 @@
                 </b-col>
             </b-row>
 
-            <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
+            <b-row v-if="form2Info.filingParties && form2Info.filingParties.length > 0" :key="updated + 1" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Name(s) and address(es) within BC for the service of the respondent(s)
                     <p class="content text-primary">
@@ -110,7 +110,7 @@
                 </b-col>                
             </b-row>
 
-            <b-row v-if="form2Info.filingParties.length > 0" :key="updated" class="mt-5">
+            <b-row v-if="form2Info.filingParties && form2Info.filingParties.length > 0" :key="updated" class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Phone number(s) of the party(ies) filing the Notice of Appearance                                
                 </b-col>
@@ -135,7 +135,7 @@
                 </b-col>                
             </b-row>
 
-            <b-row v-if="form2Info.filingParties.length > 0" :key="updated + 2" class="mt-4">
+            <b-row v-if="form2Info.filingParties && form2Info.filingParties.length > 0" :key="updated + 2" class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
                     Email(s) address(es) for service of respondent(s)
                     <p class="content text-primary">
@@ -349,11 +349,11 @@ export default class Form2StyleOfProceeding extends Vue {
     public updateAddressFields(){
 
         const formData = this.form2Info;
-        const addressData = formData.addresses;
+        const addressData = formData.addresses? formData.addresses :[];
         const addresses: partiesContact[] = []; 
-        const emailData = formData.emailAdresses;
+        const emailData = formData.emailAdresses? formData.emailAdresses :[];
         const emails: partiesContact[] = []; 
-        const phoneData = formData.phoneNumbers;
+        const phoneData = formData.phoneNumbers? formData.phoneNumbers :[];
         const phoneNumbers: partiesContact[] = []; 
 
         for (const partyName of this.form2Info.filingParties){

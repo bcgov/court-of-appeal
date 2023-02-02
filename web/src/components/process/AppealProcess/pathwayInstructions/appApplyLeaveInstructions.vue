@@ -1,12 +1,12 @@
 <template>
     <b-card no-body border-variant="white">
-       
-        <p> 
+        
+        <p v-if="app"> 
             If you do not have the right to appeal, and you would still 
-            like to <span v-if="!app">cross </span> appeal your case, you must apply for leave to appeal 
+            like to appeal your case, you must apply for leave to appeal 
             from the court. Follow the steps below to complete the process.
         </p>
-        <p>
+        <p v-if="app">
             If you want to apply to put on hold a proceeding or a process 
             of execution pending the outcome of an appeal, you will need 
             to apply for a stay of proceedings or a stay of execution. 
@@ -20,6 +20,11 @@
             <a>
                 Application Book – Leave and Stay
             </a>.
+        </p>
+        <p v-if="!app"> 
+            If you have been served with a Notice of Application for 
+            Leave to Appeal, and you wish to respond, you will need 
+            to follow one of the steps below to complete the process.
         </p>
         
     </b-card>

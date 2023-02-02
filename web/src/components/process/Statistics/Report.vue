@@ -18,7 +18,7 @@
 
         <users-info-table class="court-header-after" :results="results" />
         <summary-table class="mt-5" :results="results" />
-        <manual-submission-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
+        <manual-submission-table class="mt-4" :results="results" :displayTopUser="displayTopUser"/>
         <form-1-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
         <form-2-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
         <form-3-table class="mt-5" :results="results" :displayTopUser="displayTopUser"/>
