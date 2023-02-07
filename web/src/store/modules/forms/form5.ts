@@ -1,5 +1,6 @@
 import { supportingDocumentInfoType } from '@/types/Common';
 import { form5DataInfoType, form5FormsJsonDataType } from '@/types/Information/Form5';
+import { chambersHearingJsonInfoType } from '@/types/Information/json';
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 @Module({
@@ -11,7 +12,7 @@ class Form5 extends VuexModule {
     public form5Info = {} as form5DataInfoType; 
     public currentNoticeOfHearingOfAppealId = null; 
     public supportingDocuments: supportingDocumentInfoType[] = [];
-
+    public chambersHearings: chambersHearingJsonInfoType[] = [];
     
     @Mutation
     public setForm5FormsJson(form5FormsJson: form5FormsJsonDataType[]): void {   
@@ -47,6 +48,15 @@ class Form5 extends VuexModule {
     @Action
     public UpdateSupportingDocuments(newSupportingDocuments) {
         this.context.commit("setSupportingDocuments", newSupportingDocuments);
+    }
+
+    @Mutation
+    public setChambersHearing(chambersHearings: chambersHearingJsonInfoType[]): void {
+        this.chambersHearings = chambersHearings;
+    }
+    @Action
+    public UpdateChambersHearing(newChambersHearings: chambersHearingJsonInfoType[]) {
+        this.context.commit("setChambersHearing", newChambersHearings);
     }
     
 }
