@@ -190,6 +190,7 @@
                         </b-form-select>
                     </b-card>
                     <b-card
+                        :key="updateInitiatingDocumentDateDetails"
                         v-if="!form6Info.dateOfInitiatingDocumentValidated"                
                         :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2':(form6Info.dateOfInitiatingDocumentValidated?'border-white':'muted mt-2')"
                         style="padding: 0; float: center;">
@@ -276,10 +277,10 @@ export default class Form6StyleOfProceeding extends Vue {
     public partiesJson: partiesDataJsonDataType;
 
     @informationState.State
-    public previousCourts: previousCourtJsonInfoType[]
+    public previousCourts: previousCourtJsonInfoType[];
 
     @informationState.State
-    public initiatingDocuments: initiatingDocumentJsonInfoType[]
+    public initiatingDocuments: initiatingDocumentJsonInfoType[];
 
     @informationState.State
     public fileNumber: string;
@@ -342,8 +343,7 @@ export default class Form6StyleOfProceeding extends Vue {
         this.updateOrderDetails ++;
     }
 
-    public updateInitiatingDocumentDate(){   
-        console.log(this.initiatingDocumentDateValue)   
+    public updateInitiatingDocumentDate(){
 
         if (this.initiatingDocumentDateValue == 'Other'){
             this.form6Info.dateOfInitiatingDocumentValidated = false;
@@ -352,7 +352,6 @@ export default class Form6StyleOfProceeding extends Vue {
             this.form6Info.dateOfInitiatingDocumentValidated = true;
             this.form6Info.initiatingDocumentDate = this.initiatingDocumentDateValue;
         }
-        
         
         this.recheckStates();
         this.updateInitiatingDocumentDateDetails ++;
@@ -371,6 +370,8 @@ export default class Form6StyleOfProceeding extends Vue {
 
             form6Data.appellants = this.partiesJson.appellants
             form6Data.respondents = this.partiesJson.respondents;
+            form6Data.initiatingDocuments = this.initiatingDocuments;
+            form6Data.previousCourts = this.previousCourts;
             form6Data.formSevenNumber = this.fileNumber;
             
             form6Data.version = this.$store.state.Application.version;  

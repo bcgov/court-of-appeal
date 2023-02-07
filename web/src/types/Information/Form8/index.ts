@@ -1,4 +1,4 @@
-import { applicantJsonDataType, respondentsJsonDataType } from "../json";
+import { applicantJsonDataType, chambersHearingJsonInfoType, respondentsJsonDataType } from "../json";
 
 export interface form8FormsJsonDataType {
     id: number;
@@ -52,11 +52,16 @@ export interface form8DataInfoType {
     formSevenNumber:string;
     appellants: applicantJsonDataType[];
     respondents: respondentsJsonDataType[];
+    order?: chambersHearingJsonInfoType;
     respondentNames: string;
     appellantNames: string;
     judgeName: string;
     judgeNameOther?: string;
+    judgeNameValidated: Boolean;
+    judgeNameExists: Boolean;
     orderDate: string;   
+    orderDateValidated: Boolean; 
+    orderDateExists: Boolean;
     filingParties: string[];  
     authorizedName: string; 
     completionDate?: string;
