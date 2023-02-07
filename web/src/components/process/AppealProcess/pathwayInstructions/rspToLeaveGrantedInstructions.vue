@@ -6,7 +6,7 @@
             to be updated about the status of the appeal, and would like 
             to participate in the appeal hearing, follow the instructions 
             until the appeal process is complete. Start by clicking on 
-            the first form. As you progress through your appeal journey, 
+            the first form. As you progress through your appeal, 
             check the box next to each step below to mark it as complete.
         </p>
         

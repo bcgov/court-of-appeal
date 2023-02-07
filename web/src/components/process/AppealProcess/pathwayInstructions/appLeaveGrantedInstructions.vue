@@ -5,14 +5,14 @@
             Now that the court has granted you the right to appeal, 
             follow the steps below to complete the appeal. Start by 
             clicking on the first form. As you progress through your 
-            appeal journey, check the box next to each step below to 
+            appeal, check the box next to each step below to 
             mark it as complete.
         </p>
 
         <p>
             In addition, you will need to follow the steps below to 
             complete the appeal. Start by clicking on the first form. 
-            As you progress through your appeal journey, check the 
+            As you progress through your appeal, check the 
             box next to each step below to mark it as complete.
         </p>
         

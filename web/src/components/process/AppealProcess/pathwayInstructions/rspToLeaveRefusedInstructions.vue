@@ -7,7 +7,7 @@
             appellant is asking three justices to review the previous justice's 
             decision. Follow the steps below if you would like to continue 
             to participate in the appeal process. " + " As you progress 
-            through your appeal journey, check the box next to each step below 
+            through your appeal, check the box next to each step below 
             to mark it as complete.
         </p>
         

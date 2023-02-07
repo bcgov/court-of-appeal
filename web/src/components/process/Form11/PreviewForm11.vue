@@ -18,11 +18,16 @@
         </b-card>
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">
-            <form-11 v-bind:caseId="currentOrderMultipleJusticesId" @navigateToSubmitPage="navigateToSubmitPage()" />            
+            <form-11 v-bind:caseId="currentOrderMultipleJusticesId" @navigateToSubmitPage="navigateToSubmitPage()"  @pdfReady="pdfReady=true" />            
+        </b-card> 
+
+        <b-card v-if="!pdfReady" no-body class="border-0">  
+            <loading-spinner color="#000" waitingText="Loading ..." /> 
         </b-card> 
 
         <b-card border-variant="light" bg-variant="light" class="mt-3 mx-4">                
             <b-button
+                :disabled="!pdfReady"
                 style="float: right;" 
                 variant="success"
                 @click="navigateToSubmitPage()"
@@ -59,6 +64,7 @@ export default class PreviewForm11 extends Vue {
     stepsCompleted = {} as form11StatusInfoType;
     
     dataReady = false;
+    pdfReady = false;
 
     mounted() {
         this.dataReady = false;

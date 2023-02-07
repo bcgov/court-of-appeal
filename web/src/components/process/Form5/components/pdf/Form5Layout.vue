@@ -143,8 +143,8 @@
             
             <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:1.1rem; height:3.5rem;">
                 <div class="ml-2">
-                    <b style="font-size:8.15pt; margin:0; padding:0;">Estimated length of appeal in days</b> <br>
-                    <i>The default length for an appeal is half a day.</i>
+                    <b style="font-size:8.0pt; margin:0; padding:0;">Estimated length of appeal in days</b> <br>
+                    <i style="font-size:8.5pt;">The default length for an appeal is half a day.</i>
                 </div>
             </div>
 

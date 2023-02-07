@@ -17,12 +17,12 @@
         <trail                
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
-            width='15%'
+            width='57%'
             level=1                
         />
 
         <form-icon   
-            style="left: 20%"
+            style="left: 27%"
             :twoPages="false"
             stepTitle="Notice of Appearance"
             @action="displayWindow('Notice of Appearance')"
@@ -32,15 +32,15 @@
         />
                     
         <trail
-            :startDelay="200"            
+                      
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[0]"
-            width='24%'
+            :completed="completedTrail[1]"
+            width='20%'
             level=1
         />
 
         <form-icon 
-            style="left: 44%"
+            style="left: 62%"
             :twoPages="false"
             stepTitle="Notice of Cross Appeal"
             stepTitleOptional="(Optional)"
@@ -50,27 +50,9 @@
             v-bind="pageState[1]"            
         />
 
-        <trail
-            className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[1]"
-            width='24%'
-            level=1
-        />
-
-        <form-icon   
-            style="left: 68%"
-            :twoPages="false"
-            stepTitle="Apply/Respond to Leave to Appeal"
-            stepTitleOptional="(Optional)"
-            @action="displayWindow('Apply for Leave to Appeal')"
-            @completed="completed"            
-            order=3
-            v-bind="pageState[2]"           
-        />
-
         <return-trail
-            :status="completedTrail[2]?'completed':''"
-            startpoint='70%'
+            :status="completedTrail[1]?'completed':''"
+            startpoint='73%'
             :extendEnd="true"
             :returnLevel="1"
         />
@@ -85,21 +67,22 @@
                 zIndex: '1',
                 marginBottom: '81px'}"
         />
-                
-        <form-icon 
+
+        <form-icon   
             :style="{left: '30%', top: '34%'}"
-            :twoPages="true"
-            stepTitle="Applications"
-            stepTitleOptional="(Optional)"            
-            @action="displayWindow('Applications')"
+            :twoPages="false"
+            stepTitle="Respond to Application"
+            stepTitleOptional="for Leave to Appeal"
+            stepTitleClass="step-title-wide"
+            @action="displayWindow('Respond to Application for Leave to Appeal')"
             @completed="completed"            
-            order=4
-            v-bind="pageState[3]"            
+            order=3
+            v-bind="pageState[2]"           
         />
         
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[3]"
+            :completed="completedTrail[2]"
             :style="{position: 'absolute', marginLeft:'33%', top:'34.12%',width: '30%'}"
             width='22%'
             level=2
@@ -111,12 +94,12 @@
             stepTitle="Factum and Appeal Book"
             @action="displayWindow('Factum and Appeal Book')"
             @completed="completed"            
-            order=5
-            v-bind="pageState[4]"
+            order=4
+            v-bind="pageState[3]"
         /> 
 
         <return-trail
-            :status="completedTrail[4]?'completed':''"
+            :status="completedTrail[3]?'completed':''"
             startpoint='70%'
             top='117px'
             :extendEnd="false"
@@ -142,13 +125,13 @@
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
             @completed="completed"            
-            order=6
-            v-bind="pageState[5]"
+            order=5
+            v-bind="pageState[4]"
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[5]"
+            :completed="completedTrail[4]"
             :style="{position: 'absolute', marginLeft:'24%', top:'63.12%',width: '20%'}"
             width='22%'
             level=2
@@ -161,13 +144,13 @@
             stepTitleOptional="(Optional)"
             @action="displayWindow('Notice of Hearing')"
             @completed="completed"            
-            order=7
-            v-bind="pageState[6]"            
+            order=6
+            v-bind="pageState[5]"            
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[6]"
+            :completed="completedTrail[5]"
             :style="{position: 'absolute', marginLeft:'46%', top:'63.12%',width: '22%'}"
             width='22%'
             level=2
@@ -179,14 +162,14 @@
             stepTitle="Book of Authorities"
             @action="displayWindow('Book of Authorities')"
             @completed="completed"            
-            order=8
-            v-bind="pageState[7]"            
+            order=7
+            v-bind="pageState[6]"            
         />
 
 <!-- <LEVEL 4> -->        
 
         <return-trail
-            :status="completedTrail[7]?'completed':''"
+            :status="completedTrail[6]?'completed':''"
             startpoint='70%'
             top='147px'
             :extendEnd="true"
@@ -201,8 +184,7 @@
                 top: '96.35%',
                 zIndex: '1',
                 marginBottom: '81px'}"
-        />
-        
+        />        
 
         <gavel-icon 
             :style="{left: '28%', top: '90%'}"
@@ -210,13 +192,13 @@
             stepTitle="The Hearing" 
             @action="displayWindow('The Hearing')"
             @completed="completed"            
-            order=9
-            v-bind="pageState[8]"            
+            order=8
+            v-bind="pageState[7]"            
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[8]"
+            :completed="completedTrail[7]"
             :style="{position: 'absolute', marginLeft:'32%', top:'91.9%',width: '28%'}"
             width='25%'
             level=2
@@ -225,18 +207,16 @@
         <form-icon 
             :style="{left: '60%', top: '92%'}"
             :twoPages="false"
-            stepTitle="Orders"
-            stepTitleOptional="(if required)"            
-            stepTitleClass="step-title-wide"
-            @action="displayWindow('Orders')"
+            stepTitle="Final Order"
+            @action="displayWindow('Final Order')"
             @completed="completed"            
-            order=10
-            v-bind="pageState[9]"
+            order=9
+            v-bind="pageState[8]"
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[9]"
+            :completed="completedTrail[8]"
             width='20%'
             :style="{position: 'absolute', width: '20%', left: '64%', top: '91.9%'}"
             level=2
@@ -247,9 +227,9 @@
             :style="{left: '80%', top: '92%'}"
             titleStyle="margin-top: -3.5rem;"
             @action="displayWindow('Appeal Process Complete')" 
-            :completed="completedTrail[9]"
-            order=11
-            v-bind="pageState[10]"           
+            :completed="completedTrail[8]"
+            order=10
+            v-bind="pageState[9]"           
         />
     </div>
 
@@ -273,8 +253,6 @@
                     <notice-of-cross-appeal-rsp-to-appeal-pg @showFactums="showFactums" @adjustHeights="adjustHeights" v-else-if="noticeOfCrossAppealContent"/>
                     <apply-leave-app-right-to-appeal-pg v-bind:app='false' @adjustHeights="adjustHeights" v-else-if="applyForLeaveToAppealContent"/>
                     
-                    <managing-appeal-process-pg @adjustHeights="adjustHeights" v-else-if="applicationsContent"/>
-                
                     <factum-appeal-book-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="factumAppealBookContent"/>              
                     <book-appeal-date-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     
@@ -322,7 +300,6 @@ import PathSidebar from '../components/PathSidebar.vue';
 import NoticeOfAppearanceRspToAppealPg from '../components/RspToAppeal/NoticeOfAppearanceRspToAppealPg.vue';
 import NoticeOfCrossAppealRspToAppealPg from '../components/RspToAppeal/NoticeOfCrossAppealRspToAppealPg.vue';
 import ApplyLeaveAppRightToAppealPg from '../components/AppRightToAppeal/ApplyLeaveAppRightToAppealPg.vue';
-import ManagingAppealProcessPg from '@/components/process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 
 import FactumAppealBookRspToAppealPg from '../components/RspToAppeal/FactumAppealBookRspToAppealPg.vue';
 import BookAppealDateRspToAppealPg from '../components/RspToAppeal/BookAppealDateRspToAppealPg.vue';
@@ -353,7 +330,6 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         NoticeOfAppearanceRspToAppealPg,
         NoticeOfCrossAppealRspToAppealPg,
         ApplyLeaveAppRightToAppealPg,
-        ManagingAppealProcessPg,
         FactumAppealBookRspToAppealPg,
         BookAppealDateRspToAppealPg,
         BookOfAuthoritiesRspToAppealPg,
@@ -382,7 +358,6 @@ export default class RespondToAppealJourneyMap extends Vue {
     noticeOfAppearanceContent = false; 
     noticeOfCrossAppealContent = false;
     applyForLeaveToAppealContent = false;
-    applicationsContent = false;
     factumAppealBookContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
@@ -421,7 +396,7 @@ export default class RespondToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Orders');
+        this.displayWindow('Final Order');
     }
 
     public showFactums(){
@@ -434,7 +409,6 @@ export default class RespondToAppealJourneyMap extends Vue {
         this.noticeOfAppearanceContent = false; 
         this.noticeOfCrossAppealContent = false;
         this.applyForLeaveToAppealContent = false;
-        this.applicationsContent = false;
         this.factumAppealBookContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
@@ -453,21 +427,15 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Notice of Cross Appeal"){            
             this.windowTitle = "Cross Appeal (Optional)";
             this.contentTitle = '';
-            this.pathTypes = ["info", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "info"];
+            this.pathHeights = ['5rem', '0', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
-        } else if (contentType == "Apply for Leave to Appeal") {
-            this.windowTitle = "Apply for Leave to Appeal";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
+        } else if (contentType == "Respond to Application for Leave to Appeal") {
+            this.windowTitle = "Respond to Application for Leave to Appeal";
+            this.pathTypes = ["info", "share", "share", "share", "share"];
+            this.pathHeights = ['9rem', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
-
-        } else if (contentType == "Applications") {
-            this.windowTitle = "Applications";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
-            this.applicationsContent = true;
 
         } else if (contentType == "Factum and Appeal Book"){            
             this.windowTitle = "Factum and Appeal Book";
@@ -500,8 +468,8 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Orders"){
-            this.windowTitle = "Orders";
+        } else if (contentType == "Final Order"){
+            this.windowTitle = "Final Order";
             this.pathTypes = ["info", "info", "share"];
             this.pathHeights = ['21rem', '0', '0'];
             this.courtOrderContent = true;
@@ -514,7 +482,6 @@ export default class RespondToAppealJourneyMap extends Vue {
         }       
         this.showWindow = true;
     }
-
 
 }
 </script>

@@ -18,7 +18,7 @@
         <trail                
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
-            width='57%'
+            width='57.75%'
             level=1                
         />
 
@@ -32,19 +32,20 @@
             v-bind="pageState[0]"           
         />
 
-         <trail                
+        <!-- <trail                
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[1]"
             width='20%'
             level=1                
-        />
+        /> -->
 
         <form-icon   
-            style="left: 60%"
+            style="left: 63%"
             :twoPages="false"
-            stepTitle="Apply/Respond to Leave to Appeal"
-            stepTitleOptional="(Optional)"
-            @action="displayWindow('Apply for Leave to Appeal')"
+            stepTitle="If Leave required"
+            stepTitleOptional="Apply/Respond for Leave to Appeal"
+            stepTitleClass="step-title-wide"
+            @action="displayWindow('If Leave required')"
             @completed="completed"            
             order=2
             v-bind="pageState[1]"           
@@ -60,7 +61,7 @@
         <!-- LEVEL 2 -->
 
         <div
-            :style="{marginLeft: '190px',
+            :style="{marginLeft: '187px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '56%',
                 position: 'absolute',
@@ -69,33 +70,35 @@
                 marginBottom: '81px'}"
         />
 
+
         <form-icon 
             style="top: 34%; left: 27%"
             :twoPages="true"
-            stepTitle="Applications"
-            stepTitleOptional="(Optional)"            
-            @action="displayWindow('Applications')"
+            stepTitle="Appeal Record and Transcript"           
+            @action="displayWindow('Appeal Record and Transcript')"
             @completed="completed"            
             order=3
             v-bind="pageState[2]"            
         />
 
+
         <trail
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[2]"
-            width='35%'
+            width='37%'
             :style="{top: '34.15%', left: '30%', position: 'absolute'}"
             level=1
-        />
+        />       
 
         <form-icon 
-            style="top: 34%; left: 60%"
+            :style="{top: '34%', left: '62%'}"
             :twoPages="true"
-            stepTitle="Appeal Record and Transcript"           
-            @action="displayWindow('Appeal Record and Transcript')"
+            stepTitle="Factums and Appeal Book"
+            @action="displayWindow('Factums and Appeal Book')"
+            stepTitleClass="step-title-wide"
             @completed="completed"            
             order=4
-            v-bind="pageState[3]"            
+            v-bind="pageState[3]"
         />
 
         <trail
@@ -110,14 +113,14 @@
             :status="completedTrail[3]?'completed':''"
             startpoint='73%'
             top='117px'
-            :extendEnd="false"
+            :extendEnd="true"
             :returnLevel="2"
         />
 
         <!-- LEVEL 3 -->
 
         <div
-            :style="{marginLeft: '204px',
+            :style="{marginLeft: '189px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '55%',
                 position: 'absolute',
@@ -126,12 +129,11 @@
                 marginBottom: '81px'}"
         />
 
-       <form-icon 
-            :style="{top: '63%', left: '21%'}"
-            :twoPages="true"
-            stepTitle="Factums and Appeal Book"
-            @action="displayWindow('Factums and Appeal Book')"
+        <calendar-icon 
+            :style="{top: '63.5%', left: '26.5%', height:'6rem'}"
+            stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
+            @action="displayWindow('Book Appeal Date')"
             @completed="completed"            
             order=5
             v-bind="pageState[4]"
@@ -140,42 +142,24 @@
         <trail
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[4]"
-            width='24%'
+            width='37%'
             :style="{top: '63.25%', left: '25%', position: 'absolute'}"
             level=2
         />
 
-        <calendar-icon 
-            :style="{top: '63.5%', left: '44%', height:'6rem'}"
-            stepTitle="Book Appeal Date with Registry"
-            stepTitleClass="step-title-wide"
-            @action="displayWindow('Book Appeal Date')"
-            @completed="completed"            
-            order=6
-            v-bind="pageState[5]"
-        />
-
-        <trail
-            className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[5]"
-            width='25%'
-            :style="{top: '63.25%', left: '48%', position: 'absolute'}"
-            level=2
-        />
-
         <form-icon 
-            :style="{top: '63%', left: '70%'}"
+            :style="{top: '63%', left: '62%'}"
             :twoPages="false"
             stepTitle="Notice of Hearing"
             @action="displayWindow('Notice of Hearing')"
             @completed="completed"            
-            order=7
-            v-bind="pageState[6]"            
+            order=6
+            v-bind="pageState[5]"            
         />
 
          <return-trail
             priorstep="this.state.steps[4]"
-            :status="completedTrail[6]?'completed':''"
+            :status="completedTrail[5]?'completed':''"
             top='150px'
             startpoint='73%'
             :extendEnd="true"
@@ -200,13 +184,13 @@
             stepTitle="The Hearing" 
             @action="displayWindow('The Hearing')"
             @completed="completed"            
-            order=8
-            v-bind="pageState[7]"            
+            order=7
+            v-bind="pageState[6]"            
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[7]"
+            :completed="completedTrail[6]"
             width='40%'
             :style="{top: '92.25%', left: '25%', position: 'absolute'}"
             level=3
@@ -216,16 +200,16 @@
             :style="{left: '60%', top: '92%'}"
             class="journey-box"
             :twoPages="false"
-            stepTitle="Orders"
-            @action="displayWindow('Orders')"
+            stepTitle="Final Order"
+            @action="displayWindow('Final Order')"
             @completed="completed"            
-            order=9
-            v-bind="pageState[8]"
+            order=8
+            v-bind="pageState[7]"
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[8]"
+            :completed="completedTrail[7]"
             width='25%'
             :style="{top: '92.25%', left: '60%', position: 'absolute', marginBottom: '100px'}"
             level=3
@@ -236,9 +220,9 @@
             :style="{top: '92%', left: '82%'}"
             titleStyle="margin-top: -3.5rem;" 
             @action="displayWindow('Appeal Process Complete')"
-            :completed="completedTrail[8]"
-            order=10
-            v-bind="pageState[9]" 
+            :completed="completedTrail[7]"
+            order=9
+            v-bind="pageState[8]" 
         />
 
         
@@ -274,8 +258,7 @@
                     <the-hearing-app-right-to-appeal-pg v-bind:app='true' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
                     <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
-                    <managing-appeal-process-pg @adjustHeights="adjustHeights" v-if="applicationsContent"/>
-                
+                    
                 </b-col>
             </b-row>
 
@@ -313,7 +296,6 @@ import PathSidebar from '../components/PathSidebar.vue';
 
 import InitialDocumentsAppRightToAppealPg from '../components/AppRightToAppeal/InitialDocumentsAppRightToAppealPg.vue';
 import ApplyLeaveAppRightToAppealPg from '../components/AppRightToAppeal/ApplyLeaveAppRightToAppealPg.vue';
-import ManagingAppealProcessPg from '@/components/process/JourneyMap/components/AppRightToAppeal/ManagingAppealProcessPg.vue';
 import AppealRecordTranscriptAppRightToAppealPg from '../components/AppRightToAppeal/AppealRecordTranscriptAppRightToAppealPg.vue';
 import FactumAppealBookAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookAppRightToAppealPg.vue';
 import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
@@ -347,8 +329,7 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         NoticeOfHearingAppRightToAppealPg,
         TheHearingAppRightToAppealPg,
         OrdersAppRightToAppealPg,
-        AppealProcessCompleteAppRightToAppealPg,
-        ManagingAppealProcessPg
+        AppealProcessCompleteAppRightToAppealPg
     }
 })
 export default class AppellantRightToAppealJourneyMap extends Vue {
@@ -369,7 +350,6 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
     pathHeights = [] as string[];
     initialDocumentsContent = false;
     applyForLeaveToAppealContent = false;
-    applicationsContent = false;
     appealRecordTranscriptContent = false;
     factumAppealBookContent = false;
     bookAppealDateContent = false;
@@ -406,7 +386,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Orders');
+        this.displayWindow('Final Order');
     }
 
     public displayWindow(contentType: string){
@@ -414,7 +394,6 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.contentTitle = '';
         this.initialDocumentsContent = false;
         this.applyForLeaveToAppealContent = false;
-        this.applicationsContent = false;
         this.appealRecordTranscriptContent = false;        
         this.factumAppealBookContent = false;
         this.bookAppealDateContent = false;
@@ -430,19 +409,12 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathHeights = ['18rem'];
             this.initialDocumentsContent = true;
 
-        } else if (contentType == "Apply for Leave to Appeal") {
+        } else if (contentType == "If Leave required") {
 
-            this.windowTitle = "Apply for Leave to Appeal";
+            this.windowTitle = "If Leave required";
             this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['14rem', '0', '0', '0', '0', '0', '0'];
+            this.pathHeights = ['16.5rem', '0', '0', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
-
-        } else if (contentType == "Applications") {
-
-            this.windowTitle = "Applications";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
-            this.applicationsContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){
 
@@ -479,9 +451,9 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Orders"){
+        } else if (contentType == "Final Order"){
 
-            this.windowTitle = "Orders";
+            this.windowTitle = "Final Order";
             this.pathTypes = ["info", "info", "share"];
             this.pathHeights = ['21rem', '0', '0'];
             this.courtOrderContent = true;
