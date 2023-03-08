@@ -116,7 +116,7 @@
 <!--Respond to an Application  -->
         <b-row 
             :class="showStayApplicationsInfo?'mt-0':'mt-4'" 
-            :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 0.95rem;'">            
+            :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 0.65rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application
             </b-col>   
@@ -186,7 +186,7 @@
 <!-- Vary an Order of a Justice -->
         <b-row 
             :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" 
-            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.95rem;'">            
+            :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.65rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Vary an Order of a Justice
             </b-col>   
@@ -501,14 +501,14 @@ export default class ManagingAppealProcessPg extends Vue {
         this.form4Button = 0;
 
         if (this.getAppRules().includes('54')){
-            this.appStepsLength = this.appStepsLength + 27;
+            this.appStepsLength = this.appStepsLength + 28.5;
             if (this.form4Button == 0){
                 this.form4Button = 54;
             }
         }
 
         if (this.getAppRules().includes('58')){
-            this.appStepsLength = this.appStepsLength + 35;
+            this.appStepsLength = this.appStepsLength + 37;
             if (this.form4Button == 0){
                 this.form4Button = 58;
             }
@@ -522,21 +522,21 @@ export default class ManagingAppealProcessPg extends Vue {
         }
 
         if (this.getAppRules().includes('60')){
-            this.appStepsLength = this.appStepsLength + 39;
+            this.appStepsLength = this.appStepsLength + 40.75;
             if (this.form4Button == 0){
                 this.form4Button = 60;
             }
         }
 
         if (this.getAppRules().includes('61')){
-            this.appStepsLength = this.appStepsLength + 28;
+            this.appStepsLength = this.appStepsLength + 29.5;
             if (this.form4Button == 0){
                 this.form4Button = 61;
             }
         }      
 
         if (this.getAppRules().includes('63')){
-            this.appStepsLength = this.appStepsLength + 28;
+            this.appStepsLength = this.appStepsLength + 29.5;
             if (this.form4Button == 0){
                 this.form4Button = 63;
             }
@@ -702,7 +702,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showUrgent(show: boolean){
         if (show) {
             this.showUrgentInfo = true;
-            this.$emit('adjustHeights', 1, "21rem");
+            this.$emit('adjustHeights', 1, "23rem");
         } else {
             this.showUrgentInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -732,7 +732,7 @@ export default class ManagingAppealProcessPg extends Vue {
     public showForm8(show: boolean){
         if (show) {
             this.showForm8Info = true;
-            this.$emit('adjustHeights', 4, "38rem");
+            this.$emit('adjustHeights', 4, "39.5rem");
         } else {
             this.showForm8Info = false;
             this.$emit('adjustHeights', 4, "0");

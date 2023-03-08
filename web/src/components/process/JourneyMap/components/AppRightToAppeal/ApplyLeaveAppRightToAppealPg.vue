@@ -63,11 +63,11 @@
                     </span> 
                 to file and serve the documents below after filing your 
                 Notice of Appeal or Notice of Cross Appeal form.<br/>
-                You must obtain an application hearing date that is 
+                Ensure the documents are served on a date that is 
                     <span 
                         class="text-danger font-weight-bold">at least 10 business days
                     </span>
-                after the application for leave to appeal is filed and served.
+                    before the application.
             </b-col>              
         </b-row>
 
@@ -80,9 +80,12 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
-                    Complete either the Online form or the .PDF. Click the document name for more information.
+                    Complete either the Online form or the .PDF. Click the document 
+                    name for more information.
                     <ul>
                         <li>
                             <b-row class="my-1 w-125">
@@ -171,6 +174,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
@@ -455,6 +460,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li>
                     Complete the documents below. Click on the document name for more information.
@@ -755,7 +762,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeave(show: boolean){
         if (show) {
             this.showNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 1, "24.5rem");
+            this.$emit('adjustHeights', 1, "26rem");
         } else {
             this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -765,7 +772,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeaveStay(show: boolean){
         if (show) {
             this.showNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 2, "24.5rem");
+            this.$emit('adjustHeights', 2, "26rem");
         } else {
             this.showNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 2, "0");
@@ -796,7 +803,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', this.app?5:3, "52rem");
+            this.$emit('adjustHeights', this.app?5:3, "53.5rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
             this.$emit('adjustHeights', this.app?5:3, "0");
