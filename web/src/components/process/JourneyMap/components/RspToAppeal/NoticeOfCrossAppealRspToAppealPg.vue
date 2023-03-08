@@ -142,12 +142,12 @@
                                     target="_blank">
                                     Factum and Appeal Book icon                
                                 </a> 
-                 on the journey map for details.
+                 for details.
             </p>
        
         </b-row> 
 
-        <b-row :class="showAddDocsInfo?'mt-3': 'mt-4'" :style="!showAddDocsInfo?'padding-top: 0.85rem;': ''">            
+        <!-- <b-row :class="showAddDocsInfo?'mt-3': 'mt-4'" :style="!showAddDocsInfo?'padding-top: 0.85rem;': ''">            
             <b-col cols="11" class="step-title-column pl-0">
                 The Appeal Record and Transcript
             </b-col> 
@@ -167,7 +167,7 @@
                 If you are served with a copy of the Appeal Record and Transcript, you do not have to respond to these documents.
             </p>
        
-        </b-row>
+        </b-row> -->
         
     </b-card>
 </template>

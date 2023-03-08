@@ -2,7 +2,7 @@
     <b-card class="bg-white border-white w-90">
 
         <b-row class="mt-4" >
-            You can prepare a book of authorities that includes each authority referred to 
+            You must prepare a book of authorities that includes each authority referred to 
             in your factum and each authority that you intend to refer to in court at the hearing.
         </b-row>
         
