@@ -23,22 +23,15 @@
 
         <b-row v-if="showFactumInfo" class="mt-2 bg-warning warning-message-row">
             <b-col cols="1">
-                <b-icon-exclamation-triangle-fill style="padding-top: 1.05rem;" class="mt-4 ml-2" scale="2"/>
+                <b-icon-exclamation-triangle-fill style="padding-top: 1.05rem;" class="mt-1 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
-                If you did not file a cross appeal, you need to file 
-                and serve your respondent’s factum 
+                You must file and serve a Respondent's Factum (or Respondent's Cross 
+                Appeal Factum, if you have filed a cross appeal) 
                 <span class="text-danger font-weight-bold">
-                    not more than 30 days after
+                    within 30 days
                 </span> 
-                being served with an appellant’s factum.<br>
-                If you did file a cross appeal, you need to file and 
-                serve a respondent’s cross appeal factum instead of 
-                a respondent’s factum 
-                <span class="text-danger font-weight-bold">
-                    not more than 30 days after
-                </span> 
-                being served with an appellant’s factum.
+                of being served with an appellant’s factum.
             </b-col>           
         </b-row>
 
@@ -244,8 +237,7 @@
                 If you have filed a factum or a cross appeal factum, and it 
                 refers to evidence which is not included in the appellant’s 
                 appeal book or a joint appeal book, you must file and serve 
-                an appeal book when you file and serve your factum or your 
-                cross appeal factum.
+                an appeal book when you file and serve your factum.
             </p>       
         </b-row>
 
@@ -255,7 +247,7 @@
             </b-col>
             <b-col cols="11" style="padding-left: 0; padding-right: 1.5rem;">
                 You must file your appeal book when you file and serve your 
-                cross appeal factum. 
+                factum. 
             </b-col>           
         </b-row> 
 
@@ -387,7 +379,7 @@ export default class FactumAppealBookRspToAppealPg extends Vue {
     public showFactum(show: boolean){
         if (show) {
             this.showFactumInfo = true;
-            this.$emit('adjustHeights', 0, "39rem");
+            this.$emit('adjustHeights', 0, "36rem");
         } else {
             this.showFactumInfo = false;
             this.$emit('adjustHeights', 0, "0");

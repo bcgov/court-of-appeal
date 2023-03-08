@@ -101,11 +101,7 @@
                         </li>
                         <li>
                             sending the document to the party’s email address for service, or
-                        </li>
-                        <li>
-                            faxing the document to the fax number included in the party’s 
-                            address for service, or
-                        </li>
+                        </li>                        
                     </ol>
                 </li>
                 <li>
@@ -116,7 +112,7 @@
 
         <b-row v-if="showServeNoaInfo" class="mt-1 ml-2" >
             <p style="padding: 0;">
-                A document transmitted for service by email or fax is deemed to be served as follows:
+                A document transmitted for service by email is deemed to be served as follows:
             </p>
             <ol type="a">                
                 <li>
@@ -206,7 +202,7 @@ export default class NoticeOfAppearanceRspToLeavePg extends Vue {
     public showServeNoa(show: boolean){
         if (show) {
             this.showServeNoaInfo = true;
-            this.$emit('adjustHeights', 1, "30rem")
+            this.$emit('adjustHeights', 1, "28.5rem")
         } else {
             this.showServeNoaInfo = false;
             this.$emit('adjustHeights', 1, "0");

@@ -207,8 +207,8 @@
         <form-icon 
             :style="{left: '60%', top: '92%'}"
             :twoPages="false"
-            stepTitle="Final Order"
-            @action="displayWindow('Final Order')"
+            stepTitle="Final Order and Costs"
+            @action="displayWindow('Final Order and Costs')"
             @completed="completed"            
             order=9
             v-bind="pageState[8]"
@@ -259,7 +259,7 @@
                     <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>
                     <book-of-authorities-rsp-to-appeal-pg v-else-if="bookOfAuthoritiesContent"/>
                     <the-hearing-app-right-to-appeal-pg v-bind:app='false' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
-                    <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>                    
+                    <orders-app-right-to-appeal-pg v-bind:app='false' @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>                    
                     <appeal-process-complete-rsp-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                 
                 </b-col>
@@ -396,7 +396,7 @@ export default class RespondToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Final Order');
+        this.displayWindow('Final Order and Costs');
     }
 
     public showFactums(){
@@ -427,8 +427,10 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Notice of Cross Appeal"){            
             this.windowTitle = "Cross Appeal (Optional)";
             this.contentTitle = '';
-            this.pathTypes = ["info", "share", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share"];
+            this.pathHeights = ['5rem', '0', '0', '0'];
+            // this.pathTypes = ["info", "share", "share", "share", "info"];
+            // this.pathHeights = ['5rem', '0', '0', '0', '0'];
             this.noticeOfCrossAppealContent = true;
 
         } else if (contentType == "Respond to Application for Leave to Appeal") {
@@ -440,13 +442,15 @@ export default class RespondToAppealJourneyMap extends Vue {
         } else if (contentType == "Factum and Appeal Book"){            
             this.windowTitle = "Factum and Appeal Book";
             this.pathTypes = ["share", "info", "info", "info"];
-            this.pathHeights = ['39rem', '0', '0', '0'];
+            this.pathHeights = ['36rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){            
             this.windowTitle = "Book Appeal Date";
-            this.pathTypes = ["gavel", "info", "info", "info"];
-            this.pathHeights = ['7rem', '0', '0', '0'];
+            this.pathTypes = ["gavel", "info", "info"];
+            this.pathHeights = ['7rem', '0', '0'];
+            // this.pathTypes = ["gavel", "info", "info", "info"];
+            // this.pathHeights = ['7rem', '0', '0', '0'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){            
@@ -468,10 +472,10 @@ export default class RespondToAppealJourneyMap extends Vue {
             this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Final Order"){
-            this.windowTitle = "Final Order";
-            this.pathTypes = ["info", "info", "share"];
-            this.pathHeights = ['21rem', '0', '0'];
+        } else if (contentType == "Final Order and Costs"){
+            this.windowTitle = "Final Order and Costs";
+            this.pathTypes = ["info", "info", "share", "info"];
+            this.pathHeights = ['21rem', '0', '0', '0'];
             this.courtOrderContent = true;
 
         }else if (contentType == "Appeal Process Complete"){

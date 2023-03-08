@@ -21,9 +21,10 @@
             </a>.
         </p>
         <p v-if="!app"> 
-            If you have been served with a Notice of Application for 
-            Leave to Appeal, and you wish to respond, you will need 
-            to follow one of the steps below to complete the process.
+            If you have been served with a Notice of Application 
+            for Leave to Appeal, you will need to follow one of 
+            the steps below to respond to the Notice of Application 
+            for Leave to Appeal.
         </p>
         
     </b-card>

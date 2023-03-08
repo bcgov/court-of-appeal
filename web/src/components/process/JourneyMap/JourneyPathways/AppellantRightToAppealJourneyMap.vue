@@ -256,7 +256,7 @@
                     <book-appeal-date-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
                     <the-hearing-app-right-to-appeal-pg v-bind:app='true' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
-                    <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
+                    <orders-app-right-to-appeal-pg v-bind:app='true' @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                     
                 </b-col>

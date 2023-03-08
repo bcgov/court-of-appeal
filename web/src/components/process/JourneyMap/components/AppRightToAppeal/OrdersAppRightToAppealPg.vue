@@ -75,7 +75,8 @@
             :class="showOrderInfo?'mt-0': 'mt-4'"
             :style="showOrderInfo?'padding-top: 0;': 'padding-top: 0.75rem;'" >            
             <b-col cols="11" class="pl-0" style="text-align: left; font-weight: bold;">
-                What happens if a respondent(s) refuses to sign the order?
+                What happens if a <span v-if="app">respondent(s)</span><span v-else>party</span> 
+                refuses to sign the order?
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -331,7 +332,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
@@ -352,6 +353,9 @@ const form17State = namespace("Form17");
 })
 export default class OrdersAppRightToAppealPg extends Vue { 
 
+    @Prop({required: true})
+    app!: boolean;
+    
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
 
