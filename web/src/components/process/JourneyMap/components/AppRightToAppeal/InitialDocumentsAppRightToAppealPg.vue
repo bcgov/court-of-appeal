@@ -14,7 +14,11 @@
             <b-col cols="11" style="padding-left: 0;">
                 The time limit to file and serve a notice of appeal is 
                 <span class="text-danger font-weight-bold">30 days</span> 
-                starting on the day after the order is declared.
+                starting on the day after the order is pronounced.
+                <b-icon-question-circle-fill
+                    style="color: #38598a;"
+                    v-b-tooltip:hover.v-info.html="helpText('The date the decision maker made the order you want to appeal.').title"                               
+                    />
                 <p class="mt-1">
                     <b style="text-decoration: underline;">NOTE:</b> 
                     If another enactment specifies a time limit within which the appeal must be commenced, that time limit would apply.
@@ -75,6 +79,10 @@ export default class InitialDocumentsAppRightToAppealPg extends Vue {
     public startNewForm1Document(){
         this.UpdateCurrentNoticeOfAppealId(null)
         this.$router.push({name: "checklist-form1" })
+    }
+
+    public helpText(content: string){
+        return {title: "<div style='margin: 0;'>" +content+ "</div>"};
     }
 
 }

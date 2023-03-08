@@ -16,6 +16,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li>
                     Complete either the Online form or the .PDF. Click the 
