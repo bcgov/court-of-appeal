@@ -150,8 +150,9 @@
         <b-row v-if="showOrderInfo" class="mt-3">            
             
             <p class="mt-2" style="display: inline-block;">
-                After judgment on an appeal has been given, the order of the court must be drawn 
-                up and entered in accordance with Rule 66 of the Court of Appeal Rules.
+                After judgment on an appeal has been given, the order must be 
+                drawn up and entered in accordance with Rule 66(3)(b) of the 
+                Court of Appeal Rules.
             </p>       
 
             <p class="mt-1 ml-3" >
@@ -163,7 +164,7 @@
             </p>
         </b-row>
 
-        <b-row :class="showOrderInfo?'mt-1': 'mt-4'" :style="showOrderInfo?'padding-top: 0.25rem;':'padding-top: 0.65rem;'" >
+        <!-- <b-row :class="showOrderInfo?'mt-1': 'mt-4'" :style="showOrderInfo?'padding-top: 0.25rem;':'padding-top: 0.65rem;'" >
             <b-col cols="11" class="step-title-column pl-0">
                 Directions
             </b-col> 
@@ -200,7 +201,7 @@
                     Serve a copy of the written request on each party.
                 </li>
             </ol>
-        </b-row>  
+        </b-row>   -->
         
     </b-card>
 </template>
