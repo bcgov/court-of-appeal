@@ -200,8 +200,8 @@
             :style="{left: '60%', top: '92%'}"
             class="journey-box"
             :twoPages="false"
-            stepTitle="Final Order"
-            @action="displayWindow('Final Order')"
+            stepTitle="Final Order and Costs"
+            @action="displayWindow('Final Order and Costs')"
             @completed="completed"            
             order=8
             v-bind="pageState[7]"
@@ -386,7 +386,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Final Order');
+        this.displayWindow('Final Order and Costs');
     }
 
     public displayWindow(contentType: string){
@@ -419,22 +419,28 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         } else if (contentType == "Appeal Record and Transcript"){
 
             this.windowTitle = "Appeal Record and Transcript";
-            this.pathTypes = ["share", "info"];
-            this.pathHeights = ['33rem', '0'];
+            this.pathTypes = ["share"];
+            this.pathHeights = ['33rem'];
+            // this.pathTypes = ["share", "info"];
+            // this.pathHeights = ['33rem', '0'];
             this.appealRecordTranscriptContent = true;
 
         } else if (contentType == "Factums and Appeal Book"){
 
             this.windowTitle = "Factums and Appeal Book";
-            this.pathTypes = ["share", "share", "info", "info"];
-            this.pathHeights = ['56rem', '0', '0', '0'];
+            this.pathTypes = ["share", "share", "info"];
+            this.pathHeights = ['54.75rem', '0', '0'];
+            // this.pathTypes = ["share", "share", "info", "info"];
+            // this.pathHeights = ['56rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
-            this.pathTypes = ["gavel", "info", "info"];
-            this.pathHeights = ['7rem', '0', '0'];
+            this.pathTypes = ["gavel", "info"];
+            this.pathHeights = ['7rem', '0'];
+            // this.pathTypes = ["gavel", "info", "info"];
+            // this.pathHeights = ['7rem', '0', '0'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){
@@ -447,15 +453,17 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         }  else if (contentType == "The Hearing"){
             this.contentTitle = "For more information about the hearing process, click the topics below:";
             this.windowTitle = "The Hearing";
-            this.pathTypes = ["gavel", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0'];
+            this.pathTypes = ["gavel", "share", "share"];
+            this.pathHeights = ['5rem', '0', '0'];
+            // this.pathTypes = ["gavel", "share", "share", "info"];
+            // this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Final Order"){
+        } else if (contentType == "Final Order and Costs"){
 
-            this.windowTitle = "Final Order";
-            this.pathTypes = ["info", "info", "share"];
-            this.pathHeights = ['21rem', '0', '0'];
+            this.windowTitle = "Final Order and Costs";
+            this.pathTypes = ["info", "info", "share", "info"];
+            this.pathHeights = ['21rem', '0', '0', '0'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){

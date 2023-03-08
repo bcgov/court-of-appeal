@@ -55,6 +55,8 @@
                             href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                             target="_blank"> registrar
                         </a>.
+                        You should communicate with the other parties to find a date that works for everyone.
+
                     </li>
                     <li>
                         inform the registrar if the parties disagree 
@@ -67,7 +69,7 @@
             </p>       
         </b-row> 
         
-        <b-row :class="showObtainInfo?'mt-0': 'mt-4'" :style="showObtainInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
+        <!-- <b-row :class="showObtainInfo?'mt-0': 'mt-4'" :style="showObtainInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
                    
             <b-col cols="11" class="step-title-column pl-0">
                 Can I expedite the hearing of the appeal?
@@ -101,7 +103,7 @@
                 </ul>
                                 
             </p>       
-        </b-row>        
+        </b-row>         -->
         
     </b-card>
 </template>
@@ -134,7 +136,7 @@ export default class BookAppealDateAppRightToAppealPg extends Vue {
     public showObtain(show: boolean){
         if (show) {
             this.showObtainInfo = true;
-            this.$emit('adjustHeights', 1, "8rem")
+            this.$emit('adjustHeights', 1, "9.5rem")
         } else {
             this.showObtainInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -150,9 +152,6 @@ export default class BookAppealDateAppRightToAppealPg extends Vue {
             this.$emit('adjustHeights', 2, "0");
         }
     }
-
-
-
 
 }
 </script>
