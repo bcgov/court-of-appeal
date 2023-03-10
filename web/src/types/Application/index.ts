@@ -2,7 +2,7 @@
 //This is what our database saves.
 export interface applicationStepOnlyInfoType {
   steps: stepInfoType[];
-  types_version?: "1.2.1";
+  types_version?: "1.2.2";
 }
 
 export interface applicationInfoType extends applicationStepOnlyInfoType {   
