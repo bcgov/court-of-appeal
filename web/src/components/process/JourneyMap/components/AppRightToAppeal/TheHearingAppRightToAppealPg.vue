@@ -27,7 +27,7 @@
             </p>
         </b-row> 
 
-        <b-row :class="showPrepareHearingInfo?'mt-2': 'mt-4'" :style="showPrepareHearingInfo?'padding-top: 0.15rem;':'padding-top: 0.75rem;'" >           
+        <!-- <b-row :class="showPrepareHearingInfo?'mt-2': 'mt-4'" :style="showPrepareHearingInfo?'padding-top: 0.15rem;':'padding-top: 0.75rem;'" >           
                     
             <b-col cols="11" class="step-title-column pl-0">
                 Points of law and authorities not cited in factum
@@ -132,9 +132,9 @@
                     </a>   
                 </li>                         
             </ul>
-        </b-row>
+        </b-row> -->
 
-        <b-row :class="showPointsInfo?'mt-2': 'mt-4'"  :style="showPointsInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
+        <b-row :class="showPrepareHearingInfo?'mt-2': 'mt-4'"  :style="showPrepareHearingInfo?'padding-top: 0.15rem;':'padding-top: 0.85rem;'">
             <b-col cols="11" class="step-title-column pl-0">
                 Court Order
             </b-col> 
@@ -252,10 +252,10 @@ export default class TheHearingAppRightToAppealPg extends Vue {
     public showOrder(show: boolean){
         if (show) {
             this.showOrderInfo = true;
-            this.$emit('adjustHeights', 2, "7rem")
+            this.$emit('adjustHeights', 1, "7rem")
         } else {
             this.showOrderInfo = false;
-            this.$emit('adjustHeights', 2, "0");
+            this.$emit('adjustHeights', 1, "0");
         }
     }
 

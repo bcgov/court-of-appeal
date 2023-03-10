@@ -233,7 +233,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-0" :style="showNoaLeaveStayInfo?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
+        <b-row v-if="!app" class="mt-0" :style="showNoaLeaveStayInfo?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -247,7 +247,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4">
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4">
             <p>
                 If you have been served with a Notice of Application for Leave to Appeal, 
                 you will need to follow one of the steps below to respond to the Notice 
@@ -269,7 +269,7 @@
             </p>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -282,7 +282,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4" >            
 
            <ol>
                 <li>
@@ -322,7 +322,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row v-if="!app" :class="(!app && showRespNoaLeaveInfo)?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -335,7 +335,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4" >            
             <p>
                 If you have been served with a Notice of Application for Leave to 
                 Appeal and Stay, and you wish to respond. Follow the steps below 
@@ -358,7 +358,7 @@
                
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -371,7 +371,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" > 
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4" > 
            <ol class="mt-2">
                 <li>
                     Complete the following using the Completion Instructions. 
@@ -411,7 +411,7 @@
             </ol>      
         </b-row>        
 
-        <b-row :class="showRespNoaLeaveStayInfo?'mt-0': 'mt-4'" :style="showRespNoaLeaveStayInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="((!app && showRespNoaLeaveStayInfo) || (app && showNoaLeaveStayInfo))?'mt-0': 'mt-4'" :style="((!app && showRespNoaLeaveStayInfo) || (app && showNoaLeaveStayInfo))?'':'padding-top: 0.85rem;'">            
             <b-col v-if="app" cols="11" class="step-title-column pl-0">
                 Was your leave to appeal granted or refused?
             </b-col>
@@ -429,10 +429,33 @@
 
         <b-row v-if="showDecisionOnLeaveInfo" class="mt-2" >
             <p style="padding: 0;">
-                If your leave to appeal was granted, you may continue to the next 
-                step (Appeal Record and Transcript)                
-            </p> 
+                If you application for leave to appeal is successful, you can proceed with 
+                your appeal.  You will need to complete the following steps:                
+            </p>             
+        </b-row>     
 
+        <b-row v-if="showDecisionOnLeaveInfo" class="mt-1">
+            <ol>
+                <li>
+                    You will need to prepare an order
+                    <a class="bg-white text-primary"
+                        @click="navigateToDraftOrders"
+                        target="_blank"> order
+                    </a> (Form 10) stating that leave was granted.
+                </li>
+                <li>
+                    Once the order is prepared you will need to send it to the other party for signature.                   
+                </li>                
+                <li>
+                    Submit to the registry for the judge to sign.
+                </li>
+                <li>
+                    Proceed to the <u>Appeal Record and Transcript</u> section.
+                </li>
+            </ol>
+        </b-row>
+
+        <b-row v-if="showDecisionOnLeaveInfo" class="mt-2" >  
             <div style="text-align: left; ">
                 If your application for leave to appeal is denied, you may want to bring an application to vary that decision.
             </div>
@@ -574,7 +597,7 @@
             <app-leave-refused-final-instructions/>
         </b-row>
 
-        <b-row :class="showDecisionOnLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row v-if="!app" :class="showDecisionOnLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Responding to Application to Vary An Order of a Justice
             </b-col> 
@@ -587,14 +610,14 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-4" >            
             <p>
                 If you were served with an application to vary an order of a justice 
                 and an application book, you can complete the steps below to respond:
             </p>               
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-2 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-2 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
@@ -607,7 +630,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-4" > 
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-4" > 
            <ol class="mt-2">
                 <li class="mb-3">
                     Complete the following using the Completion Instructions. 
@@ -783,40 +806,40 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
        
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', this.app?3:1, "27rem");
+            this.$emit('adjustHeights', 1, "27rem");
         } else {
             this.showRespNoaLeaveInfo = false;
-            this.$emit('adjustHeights', this.app?3:1, "0");
+            this.$emit('adjustHeights', 1, "0");
         }
     }
 
     public showRespNoaLeaveStay(show: boolean){
         if (show) {
             this.showRespNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', this.app?4:2, "27.5rem");
+            this.$emit('adjustHeights', 2, "27.5rem");
         } else {
             this.showRespNoaLeaveStayInfo = false;
-            this.$emit('adjustHeights', this.app?4:2, "0");
+            this.$emit('adjustHeights', 2, "0");
         }
     }
 
     public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', this.app?5:3, "53.5rem");
+            this.$emit('adjustHeights', 3, "63rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
-            this.$emit('adjustHeights', this.app?5:3, "0");
+            this.$emit('adjustHeights', 3, "0");
         }
     }
 
     public showRespVaryOrder(show: boolean){
         if (show) {
             this.showRespVaryOrderInfo = true;
-            this.$emit('adjustHeights', this.app?6:4, "26rem");
+            this.$emit('adjustHeights', 4, "26rem");
         } else {
             this.showRespVaryOrderInfo = false;
-            this.$emit('adjustHeights', this.app?6:4, "0");
+            this.$emit('adjustHeights', 4, "0");
         }
     }
 
@@ -832,6 +855,10 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
 
     public downloadInstructions(file_name: string){
         GetInstructionFile(file_name);
+    }
+
+    public navigateToDraftOrders() {       
+        this.$router.push({name: "checklist-orders"})
     }
         
 

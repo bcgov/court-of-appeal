@@ -21,6 +21,7 @@ export interface APP_RIGHT_TO_APPEAL_stPgTypes {
     FactumAppealBookAndCertificateOfReadiness: number;
     BookAppealDateWithRegistry: number;
     NoticeOfHearing: number;
+    BookOfAuthorities: number; 
     TheHearing: number;
     CourtOrder: number;
     AppealProcessComplete: number;

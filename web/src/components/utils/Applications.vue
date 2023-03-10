@@ -83,8 +83,8 @@ export default class Applications extends Vue {
         if (contentType == "Make an Application"){
 
             this.windowTitle = "Make an Application";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share", "share", "share", "share"];
+            this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
             this.managingAppealProcessContent = true;
         }
 
