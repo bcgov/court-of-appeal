@@ -435,8 +435,10 @@ export default class RespondToAppealJourneyMap extends Vue {
 
         } else if (contentType == "Respond to Application for Leave to Appeal") {
             this.windowTitle = "Respond to Application for Leave to Appeal";
-            this.pathTypes = ["info", "share", "share", "share", "share"];
-            this.pathHeights = ['9rem', '0', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share"];            
+            this.pathHeights = ['9rem', '0', '0', '0'];
+            // this.pathTypes = ["info", "share", "share", "share", "share"];
+            // this.pathHeights = ['9rem', '0', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
 
         } else if (contentType == "Factum and Appeal Book"){            
