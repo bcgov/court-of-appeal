@@ -115,7 +115,7 @@
 
 <!--Respond to an Application  -->
         <b-row 
-            :class="showStayApplicationsInfo?'mt-0':'mt-4'" 
+            :class="showStayApplicationsInfo?'mt-2':'mt-4'" 
             :style="showStayApplicationsInfo?'padding-top: 0.05rem;':'padding-top: 0.65rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application
@@ -203,7 +203,7 @@
 
 <!-- Order that no fees are payable -->
         <b-row 
-            :class="showForm8Info?'mt-0':'mt-4'" 
+            :class="showForm8Info?'mt-1':'mt-4'" 
             :style="showForm8Info?'padding-top: 1.15rem;':'padding-top: 0.75rem;'">             
             <b-col cols="11" class="step-title-column pl-0">
                 Order that no fees are payable
@@ -263,8 +263,8 @@
 
 <!-- I need to Request -->
         <b-row 
-            :class="showForm22Info?'mt-0':'mt-4'" 
-            :style="showForm22Info?'padding-top: 1rem;':'padding-top: 1rem;'">            
+            :class="showForm22Info?'mt-1':'mt-4'" 
+            :style="showForm22Info?'padding-top: 1.25rem;':'padding-top: 1rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Request to adjourn or reset a matter
             </b-col>   
@@ -364,7 +364,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showForm9Info?'mt-4':'mt-2'" :style="showForm9Info?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
+        <b-row :class="showForm9Info?'mt-4':'mt-2'" :style="showForm9Info?'padding-top: 1.05rem;':'padding-top: 2rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -453,7 +453,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row :class="showRespNoaLeaveInfo?'mt-1':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -542,7 +542,7 @@
             </ol>      
         </b-row>     
         
-        <b-row :class="showRespNoaLeaveStayInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row :class="showRespNoaLeaveStayInfo?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Responding to Application to Vary An Order of a Justice
             </b-col> 
@@ -627,6 +627,36 @@
                     Serve copy of the Response book and document(s) on each party.
                 </li>
             </ol>      
+        </b-row>
+
+        <b-row :class="showRespVaryOrderInfo?'mt-3':'mt-4'" style="padding-top: 0.75rem;">            
+            <b-col cols="11" class="step-title-column pl-0">
+                Drafting Orders
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showOrder(!showOrderInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showOrderInfo"></expand-icon>
+                </b-button>
+            </b-col>           
+        </b-row>
+
+
+        <b-row v-if="showOrderInfo" class="mt-3">
+            <p>
+                For additional information about drafting orders, please 
+                review the following information:
+            </p>
+        </b-row> 
+
+        <b-row v-if="showOrderInfo" class="mt-0">
+            <p class="ml-3" >            
+                <a 
+                    href="https://www.courtofappealbc.ca/civil-family-law/guidebook-appellants/court-orders"
+                    target="_blank">Drafting Orders
+                </a>                               
+            </p>
         </b-row>
 
         <b-modal size="xl" v-model="affidavit" header-class="bg-info">
@@ -776,6 +806,7 @@ export default class ManagingAppealProcessPg extends Vue {
     showRespNoaLeaveInfo = false;    
     showRespNoaLeaveStayInfo = false;
     showRespVaryOrderInfo = false;
+    showOrderInfo = false;
     affidavit = false;
     applications = [];
     responses = [];
@@ -1094,6 +1125,16 @@ export default class ManagingAppealProcessPg extends Vue {
         } else {
             this.showRespVaryOrderInfo = false;
             this.$emit('adjustHeights', 9, "0");
+        }
+    }
+
+    public showOrder(show: boolean){
+        if (show) {
+            this.showOrderInfo = true;
+            this.$emit('adjustHeights', 10, "7rem")
+        } else {
+            this.showOrderInfo = false;
+            this.$emit('adjustHeights', 10, "0");
         }
     }
     
