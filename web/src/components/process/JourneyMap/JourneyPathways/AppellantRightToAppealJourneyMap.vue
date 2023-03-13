@@ -130,7 +130,7 @@
         />
 
         <calendar-icon 
-            :style="{top: '63.5%', left: '20%', height:'6rem'}"
+            :style="{top: '64%', left: '20%', height:'6rem'}"
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
@@ -273,7 +273,7 @@
 
                     <book-appeal-date-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
-                    <book-of-authorities-app-right-to-appeal-pg v-else-if="bookOfAuthoritiesContent"/>                    
+                    <book-of-authorities-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookOfAuthoritiesContent"/>                    
                     <the-hearing-app-right-to-appeal-pg v-bind:app='true' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
                     <orders-app-right-to-appeal-pg v-bind:app='true' @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
@@ -293,8 +293,7 @@
             style="font-weight: bold; font-size: 1.25em;"
             class="closeButton"
             @click="showWindow = false"
-            >&times;</b-button
-            >
+            >&times;</b-button>
         </template>
     </b-modal>
 </div>
@@ -476,8 +475,8 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
         } else if (contentType == "Book of Authorities"){            
             this.windowTitle = "Book of Authorities";
-            this.pathTypes = ["info"];
-            this.pathHeights = ['23rem'];            
+            this.pathTypes = ["info", "share"];
+            this.pathHeights = ['26rem', '0'];            
             this.bookOfAuthoritiesContent = true;
 
         } else if (contentType == "The Hearing"){
