@@ -108,21 +108,21 @@ class FormParsing:
         else:
             return " "
     
-    def searchForPartyInRespondents(self, respondents, lastName, firstName, organizationName, searchBy):
+    def searchForPartyInTheResponse(self, all_parties, lastName, firstName, organizationName, searchBy):
 
         if searchBy == "Individual":
-            for respondant in respondents:                
-                if ('firstName' in respondant and 'lastName' in respondant and
-                    self.cleanName(respondant["lastName"]) == lastName.strip().lower() and                     
-                    self.cleanName(respondant["firstName"]) == firstName.strip().lower() 
+            for party in all_parties:                
+                if ('firstName' in party and 'lastName' in party and
+                    self.cleanName(party["lastName"]) == lastName.strip().lower() and                     
+                    self.cleanName(party["firstName"]) == firstName.strip().lower() 
                 ):
                     return True
             return False
         else:
             orgName = organizationName.strip().lower()
-            for respondant in respondents:
-                if "organization" in respondant:
-                    cleanOrg = self.cleanName(respondant["organization"])
+            for party in all_parties:
+                if "organization" in party:
+                    cleanOrg = self.cleanName(party["organization"])
                 else:
                     cleanOrg = ''
 
@@ -141,10 +141,9 @@ class FormParsing:
         if parties is not None:       
             appellants = self.getAppellants(parties)
             respondents = self.getRespondents(parties)
-            
-            # print(respondents)
+            all_parties = appellants+respondents
 
-            if self.searchForPartyInRespondents(respondents, lastName, firstName, organizationName, searchBy):
+            if self.searchForPartyInTheResponse(all_parties, lastName, firstName, organizationName, searchBy):
                 return {
                     "parties":{
                         "appellants": appellants,
