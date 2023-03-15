@@ -257,7 +257,7 @@
                     <book-appeal-date-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     
                     <notice-of-hearing-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>
-                    <book-of-authorities-rsp-to-appeal-pg v-else-if="bookOfAuthoritiesContent"/>
+                    <book-of-authorities-rsp-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookOfAuthoritiesContent"/>
                     <the-hearing-app-right-to-appeal-pg v-bind:app='false' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
                     <orders-app-right-to-appeal-pg v-bind:app='false' @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>                    
                     <appeal-process-complete-rsp-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
@@ -288,12 +288,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Trail from './Trail.vue'
-import FormIcon from './journeyicons/FormIcon.vue'
-import ReturnTrail from './ReturnTrail.vue'
-import CalendarIcon from './journeyicons/CalendarIcon.vue'
-import GavelIcon from './journeyicons/GavelIcon.vue'
-import EndCircle from './journeyicons/EndCircle.vue'
+import Trail from './Trail.vue';
+import FormIcon from './journeyicons/FormIcon.vue';
+import ReturnTrail from './ReturnTrail.vue';
+import CalendarIcon from './journeyicons/CalendarIcon.vue';
+import GavelIcon from './journeyicons/GavelIcon.vue';
+import EndCircle from './journeyicons/EndCircle.vue';
 
 import InstructionWindowFooter from '../components/InstructionWindowFooter.vue';
 import PathSidebar from '../components/PathSidebar.vue';
@@ -463,8 +463,8 @@ export default class RespondToAppealJourneyMap extends Vue {
 
         } else if (contentType == "Book of Authorities"){            
             this.windowTitle = "Book of Authorities";
-            this.pathTypes = ["info"];
-            this.pathHeights = ['23rem'];            
+            this.pathTypes = ["info", "share"];
+            this.pathHeights = ['26rem', '0'];            
             this.bookOfAuthoritiesContent = true;
 
         } else if (contentType == "The Hearing"){
