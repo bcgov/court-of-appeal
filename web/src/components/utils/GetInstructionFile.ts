@@ -3,7 +3,11 @@ import store from '@/store/index';
 import * as _ from 'underscore';
 import Vue from 'vue'
 
-export function GetInstructionFile(pdf_name: string) {
+export function GetInstructionFile(pdf_name: string, fileExtension?: string) {
+
+    if (!fileExtension){
+        fileExtension = ".docx";
+    }
 
     const url = '/print-fillable-pdf?name='+pdf_name
     const options = {
@@ -18,7 +22,7 @@ export function GetInstructionFile(pdf_name: string) {
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
         document.body.appendChild(link);
-        link.download = pdf_name+".docx";
+        link.download = pdf_name+ fileExtension;
         link.click();
         setTimeout(() => URL.revokeObjectURL(link.href), 1000);  
         return true;           

@@ -18,7 +18,7 @@
         <trail                
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[0]"
-            width='57%'
+            width='57.75%'
             level=1                
         />
 
@@ -32,15 +32,15 @@
             v-bind="pageState[0]"           
         />
 
-         <trail                
+        <!-- <trail                
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[1]"
             width='20%'
             level=1                
-        />
+        /> -->
 
         <form-icon   
-            style="left: 60%"
+            style="left: 63%"
             :twoPages="false"
             stepTitle="If Leave required"
             stepTitleOptional="Apply/Respond for Leave to Appeal"
@@ -61,7 +61,7 @@
         <!-- LEVEL 2 -->
 
         <div
-            :style="{marginLeft: '190px',
+            :style="{marginLeft: '187px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '56%',
                 position: 'absolute',
@@ -113,14 +113,14 @@
             :status="completedTrail[3]?'completed':''"
             startpoint='73%'
             top='117px'
-            :extendEnd="false"
+            :extendEnd="true"
             :returnLevel="2"
         />
 
         <!-- LEVEL 3 -->
 
         <div
-            :style="{marginLeft: '204px',
+            :style="{marginLeft: '189px',
                 borderTop: '9px solid rgb(159, 191, 226)',
                 width: '55%',
                 position: 'absolute',
@@ -130,7 +130,7 @@
         />
 
         <calendar-icon 
-            :style="{top: '63.5%', left: '27%', height:'6rem'}"
+            :style="{top: '63.5%', left: '26.5%', height:'6rem'}"
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
