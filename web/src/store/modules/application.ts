@@ -11,7 +11,7 @@ class Application extends VuexModule {
     public id = ""
     public steps = new Array<stepInfoType>()
 
-    public version = "1.1"
+    public version = "1.2"
 
     public currentStep = 1    
 
@@ -236,6 +236,14 @@ class Application extends VuexModule {
 
         p = {} as pageInfoType;
         p.key = "7";
+        p.name = "BookOfAuthorities";
+        p.label = "Book of Authorities";
+        p.active = false;
+        p.progress = 0;    
+        s.pages.push(p);
+
+        p = {} as pageInfoType;
+        p.key = "8";
         p.name = "TheHearing";
         p.label = "The Hearing";
         p.active = false;
@@ -243,7 +251,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "8";
+        p.key = "9";
         p.name = "CourtOrder";
         p.label = "Court Order";
         p.active = false;
@@ -251,7 +259,7 @@ class Application extends VuexModule {
         s.pages.push(p);
 
         p = {} as pageInfoType;
-        p.key = "9";
+        p.key = "10";
         p.name = "AppealProcessComplete";
         p.label = "Appeal Process Complete";
         p.active = false;

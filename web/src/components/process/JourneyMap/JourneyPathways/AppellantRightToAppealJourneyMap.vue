@@ -43,7 +43,7 @@
             style="left: 63%"
             :twoPages="false"
             stepTitle="If Leave required"
-            stepTitleOptional="Apply/Respond for Leave to Appeal"
+            stepTitleOptional="Apply for Leave to Appeal"
             stepTitleClass="step-title-wide"
             @action="displayWindow('If Leave required')"
             @completed="completed"            
@@ -130,7 +130,7 @@
         />
 
         <calendar-icon 
-            :style="{top: '63.5%', left: '26.5%', height:'6rem'}"
+            :style="{top: '64%', left: '20%', height:'6rem'}"
             stepTitle="Book Appeal Date with Registry"
             stepTitleClass="step-title-wide"
             @action="displayWindow('Book Appeal Date')"
@@ -142,13 +142,13 @@
         <trail
             className="journey-trail-l1-moveable-scoped"
             :completed="completedTrail[4]"
-            width='37%'
-            :style="{top: '63.25%', left: '25%', position: 'absolute'}"
+            width='22%'
+            :style="{top: '63.25%', left: '25%', position: 'absolute', width: '20%'}"
             level=2
         />
 
         <form-icon 
-            :style="{top: '63%', left: '62%'}"
+            :style="{top: '63.5%', left: '44%'}"
             :twoPages="false"
             stepTitle="Notice of Hearing"
             @action="displayWindow('Notice of Hearing')"
@@ -157,9 +157,27 @@
             v-bind="pageState[5]"            
         />
 
+        <trail
+            className="journey-trail-l1-moveable-scoped"
+            :completed="completedTrail[5]"
+            :style="{position: 'absolute', marginLeft:'46%', top:'63.12%',width: '22%'}"
+            width='22%'
+            level=2
+        />
+
+        <form-icon 
+            :style="{left: '67.5%', top: '63.5%'}"
+            :twoPages="false"
+            stepTitle="Book of Authorities"
+            @action="displayWindow('Book of Authorities')"
+            @completed="completed"            
+            order=7
+            v-bind="pageState[6]"            
+        />
+
          <return-trail
             priorstep="this.state.steps[4]"
-            :status="completedTrail[5]?'completed':''"
+            :status="completedTrail[6]?'completed':''"
             top='150px'
             startpoint='73%'
             :extendEnd="true"
@@ -184,13 +202,13 @@
             stepTitle="The Hearing" 
             @action="displayWindow('The Hearing')"
             @completed="completed"            
-            order=7
-            v-bind="pageState[6]"            
+            order=8
+            v-bind="pageState[7]"            
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[6]"
+            :completed="completedTrail[7]"
             width='40%'
             :style="{top: '92.25%', left: '25%', position: 'absolute'}"
             level=3
@@ -200,16 +218,16 @@
             :style="{left: '60%', top: '92%'}"
             class="journey-box"
             :twoPages="false"
-            stepTitle="Final Order"
-            @action="displayWindow('Final Order')"
+            stepTitle="Final Order and Costs"
+            @action="displayWindow('Final Order and Costs')"
             @completed="completed"            
-            order=8
-            v-bind="pageState[7]"
+            order=9
+            v-bind="pageState[8]"
         />
 
         <trail
             className="journey-trail-l1-moveable-scoped"
-            :completed="completedTrail[7]"
+            :completed="completedTrail[8]"
             width='25%'
             :style="{top: '92.25%', left: '60%', position: 'absolute', marginBottom: '100px'}"
             level=3
@@ -220,9 +238,9 @@
             :style="{top: '92%', left: '82%'}"
             titleStyle="margin-top: -3.5rem;" 
             @action="displayWindow('Appeal Process Complete')"
-            :completed="completedTrail[7]"
-            order=9
-            v-bind="pageState[8]" 
+            :completed="completedTrail[8]"
+            order=10
+            v-bind="pageState[9]" 
         />
 
         
@@ -255,8 +273,9 @@
 
                     <book-appeal-date-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookAppealDateContent"/>
                     <notice-of-hearing-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="noticeOfHearingContent"/>                
+                    <book-of-authorities-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="bookOfAuthoritiesContent"/>                    
                     <the-hearing-app-right-to-appeal-pg v-bind:app='true' @showOrders="showOrders" @adjustHeights="adjustHeights" v-else-if="theHearingContent"/>                
-                    <orders-app-right-to-appeal-pg @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
+                    <orders-app-right-to-appeal-pg v-bind:app='true' @adjustHeights="adjustHeights" v-else-if="courtOrderContent"/>
                     <appeal-process-complete-app-right-to-appeal-pg v-else-if="appealProcessCompleteContent"/>
                     
                 </b-col>
@@ -274,8 +293,7 @@
             style="font-weight: bold; font-size: 1.25em;"
             class="closeButton"
             @click="showWindow = false"
-            >&times;</b-button
-            >
+            >&times;</b-button>
         </template>
     </b-modal>
 </div>
@@ -300,6 +318,8 @@ import AppealRecordTranscriptAppRightToAppealPg from '../components/AppRightToAp
 import FactumAppealBookAppRightToAppealPg from '../components/AppRightToAppeal/FactumAppealBookAppRightToAppealPg.vue';
 import BookAppealDateAppRightToAppealPg from '../components/AppRightToAppeal/BookAppealDateAppRightToAppealPg.vue';
 import NoticeOfHearingAppRightToAppealPg from '../components/AppRightToAppeal/NoticeOfHearingAppRightToAppealPg.vue';
+import BookOfAuthoritiesAppRightToAppealPg from '../components/AppRightToAppeal/BookOfAuthoritiesAppRightToAppealPg.vue';
+
 import TheHearingAppRightToAppealPg from '../components/AppRightToAppeal/TheHearingAppRightToAppealPg.vue';
 import OrdersAppRightToAppealPg from '../components/AppRightToAppeal/OrdersAppRightToAppealPg.vue';
 import AppealProcessCompleteAppRightToAppealPg from '../components/AppRightToAppeal/AppealProcessCompleteAppRightToAppealPg.vue';
@@ -327,6 +347,7 @@ import {stepsAndPagesNumberInfoType} from "@/types/Application/StepsAndPages"
         FactumAppealBookAppRightToAppealPg,
         BookAppealDateAppRightToAppealPg,
         NoticeOfHearingAppRightToAppealPg,
+        BookOfAuthoritiesAppRightToAppealPg,
         TheHearingAppRightToAppealPg,
         OrdersAppRightToAppealPg,
         AppealProcessCompleteAppRightToAppealPg
@@ -354,6 +375,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
     factumAppealBookContent = false;
     bookAppealDateContent = false;
     noticeOfHearingContent = false;
+    bookOfAuthoritiesContent = false;
     theHearingContent = false;
     courtOrderContent = false;
     appealProcessCompleteContent = false; 
@@ -386,7 +408,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
 
     public showOrders(){
         this.showWindow = false;
-        this.displayWindow('Final Order');
+        this.displayWindow('Final Order and Costs');
     }
 
     public displayWindow(contentType: string){
@@ -398,6 +420,7 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         this.factumAppealBookContent = false;
         this.bookAppealDateContent = false;
         this.noticeOfHearingContent = false;
+        this.bookOfAuthoritiesContent = false;
         this.theHearingContent = false;
         this.courtOrderContent = false;
         this.appealProcessCompleteContent = false; 
@@ -412,50 +435,64 @@ export default class AppellantRightToAppealJourneyMap extends Vue {
         } else if (contentType == "If Leave required") {
 
             this.windowTitle = "If Leave required";
-            this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-            this.pathHeights = ['16.5rem', '0', '0', '0', '0', '0', '0'];
+            this.pathTypes = ["info", "share", "share", "share"];
+            this.pathHeights = ['16.5rem', '0', '0', '0'];
             this.applyForLeaveToAppealContent = true;
 
         } else if (contentType == "Appeal Record and Transcript"){
 
             this.windowTitle = "Appeal Record and Transcript";
-            this.pathTypes = ["share", "info"];
-            this.pathHeights = ['33rem', '0'];
+            this.pathTypes = ["share"];
+            this.pathHeights = ['33rem'];
+            // this.pathTypes = ["share", "info"];
+            // this.pathHeights = ['33rem', '0'];
             this.appealRecordTranscriptContent = true;
 
         } else if (contentType == "Factums and Appeal Book"){
 
             this.windowTitle = "Factums and Appeal Book";
-            this.pathTypes = ["share", "share", "info", "info"];
-            this.pathHeights = ['56rem', '0', '0', '0'];
+            this.pathTypes = ["share", "share", "info"];
+            this.pathHeights = ['54.75rem', '0', '0'];
+            // this.pathTypes = ["share", "share", "info", "info"];
+            // this.pathHeights = ['56rem', '0', '0', '0'];
             this.factumAppealBookContent = true;
 
         } else if (contentType == "Book Appeal Date"){
 
             this.windowTitle = "Book Appeal Date";
-            this.pathTypes = ["gavel", "info", "info"];
-            this.pathHeights = ['7rem', '0', '0'];
+            this.pathTypes = ["gavel", "info"];
+            this.pathHeights = ['7rem', '0'];
+            // this.pathTypes = ["gavel", "info", "info"];
+            // this.pathHeights = ['7rem', '0', '0'];
             this.bookAppealDateContent = true;
 
         } else if (contentType == "Notice of Hearing"){
 
             this.windowTitle = "Notice of Hearing";
-            this.pathTypes = ["question", "share", "share"];
-            this.pathHeights = ['31rem', '0', '0'];
+            this.pathTypes = ["question", "share"];
+            this.pathHeights = ['31rem', '0'];
             this.noticeOfHearingContent = true;
 
-        }  else if (contentType == "The Hearing"){
+        } else if (contentType == "Book of Authorities"){            
+            this.windowTitle = "Book of Authorities";
+            this.pathTypes = ["info", "share"];
+            this.pathHeights = ['26rem', '0'];            
+            this.bookOfAuthoritiesContent = true;
+
+        } else if (contentType == "The Hearing"){
             this.contentTitle = "For more information about the hearing process, click the topics below:";
             this.windowTitle = "The Hearing";
-            this.pathTypes = ["gavel", "share", "share", "info"];
-            this.pathHeights = ['5rem', '0', '0', '0'];
+            this.pathTypes = ["gavel", "share"];
+            this.pathHeights = ['5rem', '0'];
+            // this.pathTypes = ["gavel", "share", "share", "info"];
+            // this.pathHeights = ['5rem', '0', '0', '0'];
             this.theHearingContent = true;
 
-        } else if (contentType == "Final Order"){
+        } else if (contentType == "Final Order and Costs"){
 
-            this.windowTitle = "Final Order";
-            this.pathTypes = ["info", "info", "share"];
-            this.pathHeights = ['21rem', '0', '0'];
+            this.windowTitle = "Final Order and Costs";
+            this.pathTypes = ["info", "info", "share", "info"];
+            this.pathHeights = ['21rem', '0', '0', '0'];
             this.courtOrderContent = true;
 
         } else if (contentType == "Appeal Process Complete"){

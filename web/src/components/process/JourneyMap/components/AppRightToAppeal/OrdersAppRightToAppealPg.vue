@@ -75,7 +75,8 @@
             :class="showOrderInfo?'mt-0': 'mt-4'"
             :style="showOrderInfo?'padding-top: 0;': 'padding-top: 0.75rem;'" >            
             <b-col cols="11" class="pl-0" style="text-align: left; font-weight: bold;">
-                What happens if a respondent(s) refuses to sign the order?
+                What happens if a <span v-if="app">respondent(s)</span><span v-else>party</span> 
+                refuses to sign the order?
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -102,7 +103,11 @@
 
         <b-row v-if="showSignInfo" class="mt-4" >
             <ol class="w-90">
-                <li>Obtain application date</li>
+                <li>Obtain application date by contacting the 
+                    <a target="_blank"
+                       href="https://www.bccourts.ca/Court_of_Appeal/practice_and_procedure/registrar_office.aspx">
+                       Registrar's Office</a>.
+                </li>
                 <li>
                     <b-row class="my-1 w-110">
                         <b-col cols="6" style="font-weight: 700;">
@@ -138,7 +143,7 @@
             </p>
         </b-row>
 
-        <b-row :class="showSignInfo?'mt-0': 'mt-4'" :style="showSignInfo?'padding-top: 0;':'padding-top: 0.85rem;'" >
+        <b-row class="mt-4" :style="showSignInfo?'':'padding-top: 0.85rem;'" >
             <b-col cols="11" class="step-title-column pl-0">
                 Costs
             </b-col> 
@@ -283,13 +288,51 @@
                 </li>                                    
             </ol>            
         </b-row>
-       
+
+        <b-row :class="showCostsInfo?'mt-1': 'mt-4'" :style="showCostsInfo?'padding-top: 0.5rem;':'padding-top: 0.65rem;'" >
+            <b-col cols="11" class="step-title-column pl-0">
+                Directions
+            </b-col> 
+            <b-col cols="1">
+                <b-button
+                    @click="showDirections(!showDirectionsInfo)"
+                    class="p-1 bg-white border-white expand-steps-button">                    
+                    <expand-icon v-bind:showExpanded="showDirectionsInfo"></expand-icon>
+                </b-button>
+            </b-col>           
+        </b-row>
+
+        <b-row v-if="showDirectionsInfo" class="mt-3" >             
+            <p class="mt-2" style="display: inline-block;">
+                After a judgment on an appeal has been given, a party may apply to the court for directions 
+                under Section 45 of the Court of Appeal Act about costs if the parties disagree.
+            </p> 
+            <ol>
+                <li>
+                    Submit a written request to the registrar that includes the following:
+                    <ul>
+                        <li>
+                            Summary of the disagreement and the party’s position 
+                            on the disagreement
+                            
+                        </li>
+                        <li>A proposed schedule for submissions by the parties or 
+                            request to the registrar to arrange a timetable for 
+                            submissions
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Serve a copy of the written request on each party.
+                </li>
+            </ol>
+        </b-row>         
         
     </b-card>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from "vuex-class";
 import ExpandIcon from "@/components/utils/ExpandIcon.vue";
 import { GetInstructionFile } from '@/components/utils/GetInstructionFile';
@@ -310,6 +353,9 @@ const form17State = namespace("Form17");
 })
 export default class OrdersAppRightToAppealPg extends Vue { 
 
+    @Prop({required: true})
+    app!: boolean;
+    
     @form4State.Action
     public UpdateCurrentNoticeOfApplicationId!: (newCurrentNoticeOfApplicationId: string) => void
 
@@ -322,6 +368,7 @@ export default class OrdersAppRightToAppealPg extends Vue {
     showOrderInfo = true;
     showSignInfo = false;
     showCostsInfo = false;
+    showDirectionsInfo = false;
 
     public navigateToDraftOrders() {       
         this.$router.push({name: "checklist-orders"})
@@ -354,6 +401,16 @@ export default class OrdersAppRightToAppealPg extends Vue {
         } else {
             this.showCostsInfo = false;
             this.$emit('adjustHeights', 2, "0");
+        }
+    }
+
+    public showDirections(show: boolean){
+        if (show) {
+            this.showDirectionsInfo = true;
+            this.$emit('adjustHeights', 3, "14rem")
+        } else {
+            this.showDirectionsInfo = false;
+            this.$emit('adjustHeights', 3, "0");
         }
     }
 

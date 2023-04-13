@@ -31,7 +31,6 @@ import PathSidebar from '../PathSidebar.vue';
 })
 export default class ApplicationsProcessModal extends Vue {  
 
-
     pathTypes = [] as string[];
     pathHeights = [] as string[];
 
@@ -43,8 +42,8 @@ export default class ApplicationsProcessModal extends Vue {
     }
 
     mounted(){        
-        this.pathTypes = ["info", "share", "share", "share", "share", "share", "share"];
-        this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0'];
+        this.pathTypes = ["info", "share", "share", "share", "share", "share", "share", "share", "share", "share", "share"];
+        this.pathHeights = ['33rem', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
     }
     
 }

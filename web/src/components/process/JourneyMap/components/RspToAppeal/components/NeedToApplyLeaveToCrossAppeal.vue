@@ -78,6 +78,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
@@ -173,6 +175,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
@@ -276,7 +280,7 @@ export default class NeedToApplyLeaveToCrossAppeal extends Vue {
     public showNoaLeave(show: boolean){
         if (show) {
             this.showNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 1, "30rem");
+            this.$emit('adjustHeights', 1, "31.5rem");
         } else {
             this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -286,7 +290,7 @@ export default class NeedToApplyLeaveToCrossAppeal extends Vue {
     public showNoaLeaveStay(show: boolean){
         if (show) {
             this.showNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 2, "29rem");
+            this.$emit('adjustHeights', 2, "30.5rem");
         } else {
             this.showNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 2, "0");

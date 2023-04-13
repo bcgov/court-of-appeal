@@ -2,9 +2,8 @@
     <b-card no-body border-variant="white">
         
         <p v-if="app"> 
-            If you do not have the right to appeal, and you would still 
-            like to appeal your case, you must apply for leave to appeal 
-            from the court. Follow the steps below to complete the process.
+            If you do not have the right to appeal, you must apply for leave 
+            to appeal from the court. Follow the steps below to complete the process.
         </p>
         <p v-if="app">
             If you want to apply to put on hold a proceeding or a process 
@@ -22,9 +21,10 @@
             </a>.
         </p>
         <p v-if="!app"> 
-            If you have been served with a Notice of Application for 
-            Leave to Appeal, and you wish to respond, you will need 
-            to follow one of the steps below to complete the process.
+            If you have been served with a Notice of Application 
+            for Leave to Appeal, you will need to follow one of 
+            the steps below to respond to the Notice of Application 
+            for Leave to Appeal.
         </p>
         
     </b-card>

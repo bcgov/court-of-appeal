@@ -103,7 +103,7 @@
             </ol>
         </b-row> 
 
-        <b-row :class="showAppealRecordTranscriptInfo?'mt-2': 'mt-4'" style="padding-top: 0.75rem;">            
+        <!-- <b-row :class="showAppealRecordTranscriptInfo?'mt-2': 'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="pl-0" style="text-align: left; font-weight: bold;">
                 Were you served with a Notice of Appearance or Cross Appeal?
             </b-col> 
@@ -124,7 +124,7 @@
                 Cross Appeal, you do not have to respond to these documents.
             </p>
        
-        </b-row> 
+        </b-row>  -->
         
     </b-card>
 </template>

@@ -25,10 +25,10 @@ class UserView(APIView):
 
     def get(self, request: Request):
         logged_in = isinstance(request.user, User)
-        if settings.PRIVATE_RELEASE=="true" and logged_in and not user_authorized_for_stats(request):
-            info = build_get_user_object(False, request)
-        else:
-            info = build_get_user_object(logged_in, request)
+        # if settings.PRIVATE_RELEASE=="true" and logged_in and not user_authorized_for_stats(request):
+        #     info = build_get_user_object(False, request)
+        # else:
+        info = build_get_user_object(logged_in, request)
 
         info["location"] = logged_in and request.user.location
         info["stats"] = user_authorized_for_stats(request)        

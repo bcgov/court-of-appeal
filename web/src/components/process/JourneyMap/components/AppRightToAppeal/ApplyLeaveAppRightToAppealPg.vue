@@ -63,11 +63,11 @@
                     </span> 
                 to file and serve the documents below after filing your 
                 Notice of Appeal or Notice of Cross Appeal form.<br/>
-                You must obtain an application hearing date that is 
+                Ensure the documents are served on a date that is 
                     <span 
                         class="text-danger font-weight-bold">at least 10 business days
                     </span>
-                after the application for leave to appeal is filed and served.
+                    before the application.
             </b-col>              
         </b-row>
 
@@ -80,9 +80,12 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
-                    Complete either the Online form or the .PDF. Click the document name for more information.
+                    Complete either the Online form or the .PDF. Click the document 
+                    name for more information.
                     <ul>
                         <li>
                             <b-row class="my-1 w-125">
@@ -171,6 +174,8 @@
                         href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
                         target="_blank"> registrar
                     </a>.
+                    It is a good idea to communicate with the other parties first 
+                    to find a date that works for everyone.
                 </li>
                 <li class="my-2">
                     Complete either the Online form or the .PDF. Click the document name for more information.
@@ -228,7 +233,7 @@
             </ol>      
         </b-row>
 
-        <b-row class="mt-0" :style="showNoaLeaveStayInfo?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
+        <b-row v-if="!app" class="mt-0" :style="showNoaLeaveStayInfo?'padding-top: 0.25rem;':'padding-top: 2rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Appeal
             </b-col> 
@@ -242,11 +247,11 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4">
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4">
             <p>
-                If you have been served with a Notice of Application 
-                for Leave to Appeal, and you wish to respond, follow the 
-                steps below to complete the process.
+                If you have been served with a Notice of Application for Leave to Appeal, 
+                you will need to follow one of the steps below to respond to the Notice 
+                of Application for Leave to Appeal.
             </p>
             <p>
                 Every appeal process is unique. If you have any questions, please visit the 
@@ -264,7 +269,7 @@
             </p>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -277,7 +282,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespNoaLeaveInfo" class="mt-4" >            
 
            <ol>
                 <li>
@@ -317,7 +322,7 @@
             </ol>      
         </b-row> 
 
-        <b-row :class="showRespNoaLeaveInfo?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
+        <b-row v-if="!app" :class="(!app && showRespNoaLeaveInfo)?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Respond to an Application for Leave to Apply and Stay
             </b-col> 
@@ -330,7 +335,7 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4" >            
             <p>
                 If you have been served with a Notice of Application for Leave to 
                 Appeal and Stay, and you wish to respond. Follow the steps below 
@@ -353,7 +358,7 @@
                
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
@@ -366,7 +371,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespNoaLeaveStayInfo" class="mt-4" > 
+        <b-row v-if="!app && showRespNoaLeaveStayInfo" class="mt-4" > 
            <ol class="mt-2">
                 <li>
                     Complete the following using the Completion Instructions. 
@@ -406,7 +411,7 @@
             </ol>      
         </b-row>        
 
-        <b-row :class="showRespNoaLeaveStayInfo?'mt-0': 'mt-4'" :style="showRespNoaLeaveStayInfo?'':'padding-top: 0.85rem;'">            
+        <b-row :class="((!app && showRespNoaLeaveStayInfo) || (app && showNoaLeaveStayInfo))?'mt-0': 'mt-4'" :style="((!app && showRespNoaLeaveStayInfo) || (app && showNoaLeaveStayInfo))?'':'padding-top: 0.85rem;'">            
             <b-col v-if="app" cols="11" class="step-title-column pl-0">
                 Was your leave to appeal granted or refused?
             </b-col>
@@ -422,152 +427,203 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-2" >
-            <p style="padding: 0;">
-                If your leave to appeal was granted, you may continue to the next 
-                step (Appeal Record and Transcript)                
-            </p> 
+        <div v-if="app">
 
-            <div style="text-align: left; ">
-                If your application for leave to appeal is denied, you may want to bring an application to vary that decision.
-            </div>
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-2" >
+                <p style="padding: 0;">
+                    If you application for leave to appeal is successful, you can proceed with 
+                    your appeal.  You will need to complete the following steps:                
+                </p>             
+            </b-row>     
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-3 bg-warning warning-message-row" >
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0;">
-                File and serve the documents below 
-                    <span 
-                        class="text-danger" 
-                        style="font-weight: bold;">within 7 days
-                    </span> 
-                of the decision denying leave to appeal.
-            </b-col>     
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-1">
+                <ol>
+                    <li>
+                        You will need to prepare an order
+                        <a class="bg-white text-primary"
+                            @click="navigateToDraftOrders"
+                            target="_blank"> order
+                        </a> (Form 10) stating that leave was granted.
+                    </li>
+                    <li>
+                        Once the order is prepared you will need to send it to the other party for signature.                   
+                    </li>                
+                    <li>
+                        Submit to the registry for the judge to sign.
+                    </li>
+                    <li>
+                        Proceed to the <u>Appeal Record and Transcript</u> section.
+                    </li>
+                </ol>
+            </b-row>
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
-            <ol class="mt-3">
-                <li>
-                    Obtain an application hearing date from the  
-                    <a 
-                        href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
-                        target="_blank"> registrar
-                    </a>.
-                </li>
-                <li>
-                    Complete the documents below. Click on the document name for more information.
-                    <ul>
-                        <li>
-                            <b-row class="my-1 w-145">
-                                <b-col cols="4">
-                                    <a 
-                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
-                                        target="_blank">Notice of Application to Vary
-                                    </a>
-                                </b-col>                                
-                                <b-col cols="4" class="p-0" >
-                                    <b-button
-                                        @click="startNewForm8Document"
-                                        target="_blank" 
-                                        style="width: 80%;"                                                                               
-                                        class="p-1 bg-white text-primary border-primary online-form-button">Online form
-                                    </b-button>
-                                </b-col>
-                                <b-col class="p-0" cols="3">                                   
-                                </b-col>
-                            </b-row>
-                        </li>
-                        <li class="link-button" 
-                            @click="affidavit = true;"
-                            target="_blank">
-                            Supporting Affidavit (if any),                
-                        </li> 
-                        <li class="link-button" 
-                            @click="downloadInstructions('written-argument')"
-                            target="_blank">
-                            Written argument (if any)               
-                        </li>                        
-                    </ul>
-                </li>                
-                <li>
-                    File the document with the registry.
-                </li>
-                <li>
-                    Serve one copy of the document(s) and each attached order to each party.
-                </li>
-            </ol>
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-2" >  
+                <div style="text-align: left; ">
+                    If your application for leave to appeal is denied, you may want to bring an application to vary that decision.
+                </div>
+            </b-row>        
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-3">            
-            <div style="text-align: left; font-weight: bold;">
-                Prepare Application Book
-            </div>            
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-3 bg-warning warning-message-row" >
+                <b-col cols="1">
+                    <b-icon-exclamation-triangle-fill class="mt-1 ml-2" scale="2"/>
+                </b-col>
+                <b-col cols="11" style="padding-left: 0;">
+                    File and serve the documents below 
+                        <span 
+                            class="text-danger" 
+                            style="font-weight: bold;">within 7 days
+                        </span> 
+                    of the decision denying leave to appeal.
+                </b-col>     
+            </b-row>
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-4 bg-warning warning-message-row">
-            <b-col cols="1">
-                <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
-            </b-col>
-            <b-col cols="11" style="padding-left: 0;">
-                You have 
-                    <span 
-                        class="text-danger" 
-                        style="font-weight: bold;">14 days
-                    </span> 
-                to file the document below after filing a notice of application to vary the order 
-                denying you leave to appeal.
-            </b-col>           
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
+                <ol class="mt-3">
+                    <li>
+                        Obtain an application hearing date from the  
+                        <a 
+                            href="https://www.bccourts.ca/Court_of_Appeal/scheduling/"
+                            target="_blank"> registrar
+                        </a>.
+                        It is a good idea to communicate with the other parties first 
+                        to find a date that works for everyone.
+                    </li>
+                    <li>
+                        Complete the documents below. Click on the document name for more information.
+                        <ul>
+                            <li>
+                                <b-row class="my-1 w-145">
+                                    <b-col cols="4">
+                                        <a 
+                                            href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
+                                            target="_blank">Notice of Application to Vary
+                                        </a>
+                                    </b-col>                                
+                                    <b-col cols="4" class="p-0" >
+                                        <b-button
+                                            @click="startNewForm8Document"
+                                            target="_blank" 
+                                            style="width: 80%;"                                                                               
+                                            class="p-1 bg-white text-primary border-primary online-form-button">Online form
+                                        </b-button>
+                                    </b-col>
+                                    <b-col class="p-0" cols="3">                                   
+                                    </b-col>
+                                </b-row>
+                            </li>
+                            <li class="link-button" 
+                                @click="affidavit = true;"
+                                target="_blank">
+                                Supporting Affidavit (if any),                
+                            </li> 
+                            <li class="link-button" 
+                                @click="downloadInstructions('written-argument')"
+                                target="_blank">
+                                Written argument (if any)               
+                            </li>                        
+                        </ul>
+                    </li>                
+                    <li>
+                        File the document with the registry.
+                    </li>
+                    <li>
+                        Serve one copy of the document(s) and each attached order to each party.
+                    </li>
+                </ol>
+            </b-row>
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-4" >
-            <ol>
-                <li>
-                    Complete the following using the Completion Instructions. Please note that you must submit 
-                    the book in a pdf format. Click the document name for more information.
-                    <ul>
-                        
-                        <li>                            
-                            <b-row class="my-1 w-110">
-                                <b-col cols="4">
-                                    <a 
-                                        href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
-                                        target="_blank">Application Book
-                                    </a>                                 
-                                </b-col>
-                                <b-col cols="4" class="p-0" >
-                                    <b-button
-                                        @click="downloadInstructions('e-vary')"
-                                        target="_blank"                                                                                
-                                        class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
-                                    </b-button>
-                                </b-col>
-                                <b-col cols="4">
-                                    <b-button
-                                        @click="downloadInstructions('paper-vary')"
-                                        target="_blank"
-                                        class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
-                                    </b-button>                                    
-                                </b-col>
-                            </b-row>  
-                        </li>                      
-                    </ul>
-                </li>
-                <li>
-                    File the Application Book with the registry.
-                </li>
-                <li>
-                    Serve one copy to each party.
-                </li>
-            </ol>
-        </b-row>          
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-3">            
+                <div style="text-align: left; font-weight: bold;">
+                    Prepare Application Book
+                </div>            
+            </b-row>
 
-        <b-row v-if="showDecisionOnLeaveInfo" class="mt-3">
-            <app-leave-refused-final-instructions/>
-        </b-row>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-4 bg-warning warning-message-row">
+                <b-col cols="1">
+                    <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
+                </b-col>
+                <b-col cols="11" style="padding-left: 0;">
+                    You have 
+                        <span 
+                            class="text-danger" 
+                            style="font-weight: bold;">14 days
+                        </span> 
+                    to file the document below after filing a notice of application to vary the order 
+                    denying you leave to appeal.
+                </b-col>           
+            </b-row>
 
-        <b-row :class="showDecisionOnLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-4" >
+                <ol>
+                    <li>
+                        Complete the following using the Completion Instructions. Please note that you must submit 
+                        the book in a pdf format. Click the document name for more information.
+                        <ul>
+                            
+                            <li>                            
+                                <b-row class="my-1 w-110">
+                                    <b-col cols="4">
+                                        <a 
+                                            href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
+                                            target="_blank">Application Book
+                                        </a>                                 
+                                    </b-col>
+                                    <b-col cols="4" class="p-0" >
+                                        <b-button
+                                            @click="downloadInstructions('e-vary')"
+                                            target="_blank"                                                                                
+                                            class="w-90 p-1 bg-white text-primary border-primary online-form-button">E-Completion Instructions
+                                        </b-button>
+                                    </b-col>
+                                    <b-col cols="4">
+                                        <b-button
+                                            @click="downloadInstructions('paper-vary')"
+                                            target="_blank"
+                                            class="w-95 form-download-button p-1 bg-white text-primary border-primary">Paper – Completion Instructions
+                                        </b-button>                                    
+                                    </b-col>
+                                </b-row>  
+                            </li>                      
+                        </ul>
+                    </li>
+                    <li>
+                        File the Application Book with the registry.
+                    </li>
+                    <li>
+                        Serve one copy to each party.
+                    </li>
+                </ol>
+            </b-row>          
+
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-3">
+                <app-leave-refused-final-instructions/>
+            </b-row>
+
+        </div>
+        <div v-else>
+            <b-row v-if="showDecisionOnLeaveInfo" class="mt-4">
+                <p>
+                    If the court grants the appellant leave to appeal, the appeal process continues.  
+                    You cannot appeal from a decision that grants leave to appeal (See 
+                    <a
+                        href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/21006#section29"
+                        target="_blank">
+                        Section 29(2)(a) of the Act
+                    </a>).
+                </p>
+                <p>
+                    If the appellant was granted leave and you have not yet filed a notice of appearance you 
+                    must do so and follow the steps under Notice of Appearance.
+                </p>
+                <p>
+                    If the court does not grant the appellant leave to appeal, the appellant may apply to a 
+                    division of three justices to review the decision that was made.  You will be given 
+                    notice of the application.
+                </p>      
+            </b-row>
+        </div>
+
+        <!-- <b-row v-if="!app" :class="showDecisionOnLeaveInfo?'mt-0':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
                 Responding to Application to Vary An Order of a Justice
             </b-col> 
@@ -580,14 +636,14 @@
             </b-col>           
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-4" >            
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-4" >            
             <p>
                 If you were served with an application to vary an order of a justice 
                 and an application book, you can complete the steps below to respond:
             </p>               
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-2 mr-5 bg-warning warning-message-row">
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-2 mr-5 bg-warning warning-message-row">
             <b-col cols="1">
                 <b-icon-exclamation-triangle-fill class="mt-2 ml-2" scale="2"/>
             </b-col>
@@ -600,7 +656,7 @@
             </b-col>              
         </b-row>
 
-        <b-row v-if="showRespVaryOrderInfo" class="mt-4" > 
+        <b-row v-if="!app && showRespVaryOrderInfo" class="mt-4" > 
            <ol class="mt-2">
                 <li class="mb-3">
                     Complete the following using the Completion Instructions. 
@@ -652,7 +708,7 @@
                     Serve copy of the Response book and document(s) on each party.
                 </li>
             </ol>      
-        </b-row>
+        </b-row> -->
 
         <b-modal size="xl" v-model="affidavit" header-class="bg-info">
             <template v-slot:modal-title>
@@ -755,7 +811,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeave(show: boolean){
         if (show) {
             this.showNoaLeaveInfo = true;
-            this.$emit('adjustHeights', 1, "24.5rem");
+            this.$emit('adjustHeights', 1, "26rem");
         } else {
             this.showNoaLeaveInfo = false;
             this.$emit('adjustHeights', 1, "0");
@@ -765,7 +821,7 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
     public showNoaLeaveStay(show: boolean){
         if (show) {
             this.showNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', 2, "24.5rem");
+            this.$emit('adjustHeights', 2, "26rem");
         } else {
             this.showNoaLeaveStayInfo = false;
             this.$emit('adjustHeights', 2, "0");
@@ -776,40 +832,40 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
        
         if (show) {
             this.showRespNoaLeaveInfo = true;
-            this.$emit('adjustHeights', this.app?3:1, "27rem");
+            this.$emit('adjustHeights', 1, "27rem");
         } else {
             this.showRespNoaLeaveInfo = false;
-            this.$emit('adjustHeights', this.app?3:1, "0");
+            this.$emit('adjustHeights', 1, "0");
         }
     }
 
     public showRespNoaLeaveStay(show: boolean){
         if (show) {
             this.showRespNoaLeaveStayInfo = true;
-            this.$emit('adjustHeights', this.app?4:2, "27.5rem");
+            this.$emit('adjustHeights', 2, "27.5rem");
         } else {
             this.showRespNoaLeaveStayInfo = false;
-            this.$emit('adjustHeights', this.app?4:2, "0");
+            this.$emit('adjustHeights', 2, "0");
         }
     }
 
     public showDecisionOnLeave(show: boolean){
         if (show) {
             this.showDecisionOnLeaveInfo = true;
-            this.$emit('adjustHeights', this.app?5:3, "52rem");
+            this.$emit('adjustHeights', 3, this.app?"63rem":"12rem");
         } else {
             this.showDecisionOnLeaveInfo = false;
-            this.$emit('adjustHeights', this.app?5:3, "0");
+            this.$emit('adjustHeights', 3, "0");
         }
     }
 
     public showRespVaryOrder(show: boolean){
         if (show) {
             this.showRespVaryOrderInfo = true;
-            this.$emit('adjustHeights', this.app?6:4, "26rem");
+            this.$emit('adjustHeights', 4, "26rem");
         } else {
             this.showRespVaryOrderInfo = false;
-            this.$emit('adjustHeights', this.app?6:4, "0");
+            this.$emit('adjustHeights', 4, "0");
         }
     }
 
@@ -825,6 +881,10 @@ export default class ApplyLeaveAppRightToAppealPg extends Vue {
 
     public downloadInstructions(file_name: string){
         GetInstructionFile(file_name);
+    }
+
+    public navigateToDraftOrders() {       
+        this.$router.push({name: "checklist-orders"})
     }
         
 
