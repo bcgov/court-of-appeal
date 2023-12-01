@@ -77,7 +77,7 @@
         <div class="row mt-4" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
-                <b class="ml-2">Name(s) of party(ies) filing the notice of appearance</b>
+                <b class="ml-2">Name(s) of respondent(s) filing the notice of appearance</b>
             </div>
 
             <div class="arrow-right-flash-36"></div>
@@ -93,7 +93,7 @@
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6.5rem;">
                 <div class="ml-2" style="line-height:1.1rem;">
                     
-                    <b>Name(s) and address(es) within BC for service of party(ies).</b>
+                    <b>Name(s) and address(es) within BC for service of respondent(s)</b>
                     <i>
                         If you have a lawyer, include the law firm's address; 
                         otherwise provide another address for service.
@@ -115,7 +115,7 @@
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
                 <div class="ml-2" style="font-weight: 600; line-height:1.1rem;">
                    
-                    Phone number(s) of the party(ies) filing the notice of appearance
+                    Phone number(s) of the respondent(s) filing the notice of appearance
                   
                 </div>                
             </div>
@@ -133,7 +133,7 @@
             <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:6.5rem;">
                 <div class="ml-2" style="line-height:1.1rem;">
                     <b>
-                        Email address(es) for service of party(ies)
+                        Email address(es) for service of respondent(s)
                     </b> 
                     <i >
                         If you provide an email address, you consent to have documents served on you by email.
