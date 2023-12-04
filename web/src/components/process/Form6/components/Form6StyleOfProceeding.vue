@@ -95,50 +95,78 @@
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    This party is abandoning a:                                
+                    This party is abandoning a:
                 </b-col>
-                <b-col :class="state.abandonType==false?'border border-danger is-invalid ml-1': 'ml-1'">   
+                <b-col :class="state.abandonType==false?'border border-danger is-invalid ml-1': 'ml-1'">
 
-                    <b-form-radio-group                
-                        style="width:100%"
-                        @change="recheckStates()" 
-                        :state="state.abandonType"                   
-                        v-model="form6Info.abandonType"                    
-                        :options="abandonTypeOptions">
+                    <b-form-radio-group style="width:100%"
+                                        @change="recheckStates()"
+                                        :state="state.abandonType"
+                                        v-model="form6Info.abandonType"
+                                        :options="abandonTypeOptions">
                     </b-form-radio-group>
-                    
+
                 </b-col>
             </b-row>
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Which party(ies) are you abandoning against?                                
+                    Is it a full or partial abandonment?
+                </b-col>
+                <b-col :class="state.fullOrPartial==false?'border border-danger is-invalid ml-1': 'ml-1'">
+
+                    <b-form-radio-group style="width:100%"
+                                        @change="recheckStates()"
+                                        :state="state.fullOrPartial"
+                                        v-model="form6Info.fullOrPartial"
+                                        :options="fullOrPartialOptions">
+                    </b-form-radio-group>
+
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Which section(s) of the appeal are you abandoning?
+                    <br /><i>If partial abandonment, list the sections of the appeal that you are abandoning. E.g., grounds of appeal.</i>
+                </b-col>
+                <b-col>
+                    <b-form-input style="width:100%"
+                                  @change="recheckStates()"
+                                  :state="state.sectionsAbandoned"
+                                  v-model="form6Info.sectionsAbandoned">
+                    </b-form-input>
+                </b-col>
+            </b-row>
+
+            <b-row class="mt-4 question">
+                <b-col cols="7" class="labels">
+                    Which party(ies) are you abandoning against?
+                    <br /><i>If partial abandonment, list the party(ies) of the appeal that you are abandoning against.</i>
                 </b-col>
                 <b-col class="ml-1 mt-2">
-                    <b-form-checkbox-group 
-                        stacked
-                        @change="recheckStates()"
-                        :key="updated" 
-                        :state="state.abandoningAgainstParties"                   
-                        v-model="form6Info.abandoningAgainstParties"                    
-                        :options="otherPartyNames">
+                    <b-form-checkbox-group stacked
+                                           @change="recheckStates()"
+                                           :key="updated"
+                                           :state="state.abandoningAgainstParties"
+                                           v-model="form6Info.abandoningAgainstParties"
+                                           :options="otherPartyNames">
                     </b-form-checkbox-group>
                 </b-col>
-            </b-row> 
+            </b-row>
 
-           <b-row class="mt-4 question">
+            <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Who made the Order?
                 </b-col>
-                <b-col>                    
-                    <b-form-input                
-                        style="width:100%"
-                        @change="recheckStates()"                        
-                        :state="state.judgeName"                                                           
-                        v-model="form6Info.judgeName">
+                <b-col>
+                    <b-form-input style="width:100%"
+                                  @change="recheckStates()"
+                                  :state="state.judgeName"
+                                  v-model="form6Info.judgeName">
                     </b-form-input>
                 </b-col>
-            </b-row>  
+            </b-row>
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
@@ -146,94 +174,85 @@
                 </b-col>
                 <b-col>
 
-                    <b-card                 
-                        :class="state.orderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
-                        style="padding: 0; float: center;">
+                    <b-card :class="state.orderDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                            style="padding: 0; float: center;">
                         <div class="vuetify">
-                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                <v-date-picker
-                                    @change="updateOrderDate"
-                                    v-model="orderDateValue"                           
-                                    color="warning"             
-                                    :allowed-dates="allowedDates"                            
-                                    header-color="red"
-                                ></v-date-picker>                            
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">
+                                <v-date-picker @change="updateOrderDate"
+                                               v-model="orderDateValue"
+                                               color="warning"
+                                               :allowed-dates="allowedDates"
+                                               header-color="red"></v-date-picker>
                             </v-app>
-                        </div>    
+                        </div>
                     </b-card>
-                    <span 
-                        style="display: inline-block; font-size: 0.75rem;" 
-                        class="text-orange"
-                        :key="updateOrderDetails"
-                        v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
+                    <span style="display: inline-block; font-size: 0.75rem;"
+                          class="text-orange"
+                          :key="updateOrderDetails"
+                          v-if="isPastDeadline">You may need to apply to extend the time to cross appeal.</span>
 
                     <!-- <b-card body-class="py-2 bg-select" style="min-height:2.75rem;">
-                        {{form6Info.orderDate | beautify-date-blank}}
-                    </b-card> -->
+                {{form6Info.orderDate | beautify-date-blank}}
+            </b-card> -->
                 </b-col>
-            </b-row>  
+            </b-row>
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Date the initiating document in the appeal or cross appeal 
+                    Date the initiating document in the appeal or cross appeal
                     you are abandoning was filed:
                 </b-col>
                 <b-col>
-                    <b-card                 
-                        :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
-                        style="padding: 0; float: center;">
+                    <b-card :class="state.initiatingDocumentDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                            style="padding: 0; float: center;">
                         <div class="vuetify">
-                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                                <v-date-picker
-                                    @change="updateInitiatingDocumentDate"
-                                    v-model="initiatingDocumentDateValue"                           
-                                    color="warning"             
-                                    :allowed-dates="allowedDates"                            
-                                    header-color="red"
-                                ></v-date-picker>                            
+                            <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">
+                                <v-date-picker @change="updateInitiatingDocumentDate"
+                                               v-model="initiatingDocumentDateValue"
+                                               color="warning"
+                                               :allowed-dates="allowedDates"
+                                               header-color="red"></v-date-picker>
                             </v-app>
-                        </div>    
+                        </div>
                     </b-card>
                     <!-- <b-card body-class="py-2 bg-select" style="min-height:2.75rem; margin-top:0rem;">
-                        {{form6Info.initiatingDocumentDate | beautify-date-blank}}
-                    </b-card> -->
+                {{form6Info.initiatingDocumentDate | beautify-date-blank}}
+            </b-card> -->
                 </b-col>
-            </b-row>       
+            </b-row>
 
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Name of lawyer or party authorizing filing of this Form:                                 
+                    Name of lawyer or party authorizing filing of this Form:
                 </b-col>
                 <b-col>
-                    <b-form-input
-                        @change="recheckStates()"                    
-                        v-model="form6Info.authorizedName"                        
-                        :state ="state.authorizedName">
+                    <b-form-input @change="recheckStates()"
+                                  v-model="form6Info.authorizedName"
+                                  :state="state.authorizedName">
                     </b-form-input>
                     <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
                 </b-col>
             </b-row>
-            
 
-            <hr/>    
 
-            <b-row >
+            <hr />
+
+            <b-row>
                 <b-col cols="10">
-                    <b-button 
-                        style="float: left;" 
-                        variant="success"
-                        @click="saveForm(true)"
-                        >Save as Draft
+                    le
+                    <b-button style="float: left;"
+                              variant="success"
+                              @click="saveForm(true)">
+                        Save as Draft
                     </b-button>
                 </b-col>
                 <b-col cols="2">
-                    <b-button
-                        style="float: right;" 
-                        variant="success"
-                        @click="saveForm(false)"
-                        >Continue
-                        <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                    <b-button style="float: right;"
+                              variant="success"
+                              @click="saveForm(false)">
+                        Continue
+                        <b-icon-play-fill class="mx-0" variant="white" scale="1"></b-icon-play-fill>
                     </b-button>
                 </b-col>
             </b-row>
@@ -290,6 +309,7 @@ export default class Form6StyleOfProceeding extends Vue {
     respondentNames: string[] = [];
     partyNames: string[] = [];
     otherPartyNames: string[] = [];
+    otherSectionNames: string[] = [];
     
     representationOptions = [
         {text: 'Yes', value: true},
@@ -297,6 +317,8 @@ export default class Form6StyleOfProceeding extends Vue {
     ];
 
     abandonTypeOptions = [ 'Appeal', 'Cross Appeal' ];
+
+    fullOrPartialOptions = [ 'Full', 'Partial' ];
 
     state = {
         firstAppellant: null,
@@ -306,7 +328,9 @@ export default class Form6StyleOfProceeding extends Vue {
         initiatingDocumentDate: null,
         abandoningParties:null,
         abandonType: null,
-        abandoningAgainstParties: null,        
+        fullOrPartial: null,
+        abandoningAgainstParties: null,  
+        sectionsAbandoned: null,
         authorizedName:null,
         selfRepresented: null,
     }
@@ -426,7 +450,9 @@ export default class Form6StyleOfProceeding extends Vue {
             initiatingDocumentDate: null,
             abandoningParties:null,
             abandonType: null,
-            abandoningAgainstParties: null,        
+            fullOrPartial: null,
+            abandoningAgainstParties: null,   
+            sectionsAbandoned: null,
             authorizedName:null,
             selfRepresented: null
         }
@@ -451,7 +477,9 @@ export default class Form6StyleOfProceeding extends Vue {
         this.state.initiatingDocumentDate = this.form6Info.initiatingDocumentDate? null:false;
         this.state.abandoningParties = this.form6Info.abandoningParties?.length>0? null :false;
         this.state.abandonType = !this.form6Info.abandonType? false : null;
+        this.state.fullOrPartial = !this.form6Info.fullOrPartial? false : null;
         this.state.abandoningAgainstParties = this.form6Info.abandoningAgainstParties?.length>0? null :false;
+        this.state.sectionsAbandoned = this.form6Info.sectionsAbandoned? null :false;
         this.state.authorizedName = !this.form6Info.authorizedName? false : null;       
         this.state.selfRepresented = this.form6Info.selfRepresented != null? null: false
 
