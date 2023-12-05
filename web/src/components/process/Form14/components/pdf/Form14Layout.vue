@@ -1,125 +1,133 @@
 <template>
     <div>
 
-        <div>
-            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
-        </div> 
-
         <div class="my-0">
-            <div class="text-right" >Court of Appeal File No. <b class="ml-3" style="text-transform: uppercase">{{result.formSevenNumber}}</b></div>       
+            <div class="text-right">FORM 14 <i>(RULE 67(2)(b) )</i></div>
         </div>
 
-<!-- <BETWEEN> -->
+        <div class="my-0">
+            <div class="text-center"><b>COURT OF APPEAL FOR BRITISH COLUMBIA</b></div>
+        </div>
+
+        <div>
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
+        </div>
+
+        <div class="my-0">
+            <div class="text-right">Court of Appeal File No. <b class="ml-3" style="text-transform: uppercase">{{result.formSevenNumber}}</b></div>
+        </div>
+
+        <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
-                BETWEEN: 
+                BETWEEN:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 700;">
-            <div style="width:11%;"/>
+            <div style="width:11%;" />
             <div style="width:78%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
             </div>
-            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1" >s</span></div>
+            <div style="width:11%;" class="text-center">Appellant(s)</div>
         </div>
 
-<!-- <AND> -->
+        <!-- <AND> -->
         <div class="my-3 mx-0 row" style="font-weight: 600;">
             <div style="width:11%;">
-                AND: 
+                AND:
             </div>
         </div>
         <div class="mt-3 mx-0 row" style="font-weight: 600;">
-            <div style="width:11%;" />                
+            <div style="width:11%;" />
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
-            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
-        </div>        
+            <div style="width:13%;" class="text-center"> Respondent(s)</div>
+        </div>
 
-<!-- <ORDER-DATE> -->
+        <!-- <ORDER-DATE> -->
         <div class="mt-4 mb-4 mx-0 row">
             <div>
-                {{result.orderDate | beautify-date-full}} 
+                {{result.orderDate | beautify-date-full}}
             </div>
         </div>
 
-<!-- <WHEREAS:> -->
+        <!-- <WHEREAS:> -->
         <div class="mb-2 mt-2 mx-0 row" style="font-weight: 600;">
             <div>
-                WHEREAS: 
+                WHEREAS:
             </div>
         </div>
-        
-<!-- <Description> -->
+
+        <!-- <Description> -->
         <div class="my-2 ml-5 mr-0">
             <div class="mb-2 row">
                 (a) all parties have consented to this order,
             </div>
-            <div class="my-2 row">    
-                (b) no person involved is under any legal disability, and 
+            <div class="my-2 row">
+                (b) no person involved is under any legal disability, and
             </div>
-            <div class="my-2 row">    
-                (c) all parties have agreed to comply hereafter with the 
+            <div class="my-2 row">
+                (c) all parties have agreed to comply hereafter with the
                 time limits set forth in the Court of Appeal Act and Court of
-                Appeal Rules, 
+                Appeal Rules,
             </div>
         </div>
 
-<!-- <ORDERED> -->
+        <!-- <ORDERED> -->
         <div class="mt-3 mb-2 mx-0 row">
             <div>
-                <b>IT IS ORDERED</b> that this {{result.seekingRemoved.join(', ')}} 
-                be removed from the inactive list and that the time limit for taking 
-                the next step required by the Court of Appeal Act or Court 
+                <b>IT IS ORDERED</b> that this {{result.seekingRemoved.join(', ')}}
+                be removed from the inactive list and that the time limit for taking
+                the next step required by the <i>Court of Appeal Act</i> or Court
                 of Appeal Rules must begin to run as of the date of this order.
             </div>
         </div>
 
-<!-- <FURTHER ORDERS> -->
+        <!-- <FURTHER ORDERS> -->
         <div class="my-3 mx-0 row">
             <div>
-                <b>IT IS FURTHER ORDERED</b> that the notice of hearing be filed 
-                within 180 days of the date of this order, failing which the 
+                <b>IT IS FURTHER ORDERED</b> that the notice of hearing be filed
+                within 180 days of the date of this order, failing which the
                 {{result.seekingRemoved.join(', ')}} must be returned to the inactive list.
             </div>
         </div>
 
-<!-- <APPROVED> -->
+        <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>
-            <div  style="width:50%;">BY THE COURTS:</div>
+            <div style="width:50%;">APPROVED AS TO FORM:</div>
+            <div style="width:50%;"></div>
         </div>
 
-<!-- <Parties Signature> -->
-        <div  class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+        <!-- <Parties Signature> -->
+        <div class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
             <div style="width:50%;">
-                <div style="height:3rem;" />                               
-                <div style="border-top:1px dashed grey; width:94%; " > 
-                    {{party.name}} 
+                <div style="height:3rem;" />
+                <div style="border-top:1px dashed grey; width:94%; ">
+                    Signature of {{party.name}}
                     <span v-if="party.responding">, Respondent</span>
                     <span v-else>, Appellant</span>
-                </div>                               
+                </div>
             </div>
             <div v-if="inx==0" style="width:50%;">
                 <div style="height:3rem;" />
                 <div style="border-top:1px dashed grey;">
                     A Justice of the Court of Appeal
                 </div>
-            </div>            
+            </div>
         </div>
 
-<!-- <NOTES> -->
-         <div class="mt-5 ml-3 mr-0 font-italic">
+        <!-- <NOTES> -->
+        <div class="mt-5 ml-3 mr-0 font-italic">
             <div class="mb-2 row">
-                Note: This form of order may not be used to reinstate 
+                Note: This form of order may not be used to reinstate
                 appeals that have been dismissed as abandoned under Rule 51.
             </div>
-            <div class="my-2 row">    
-                Note: This form of order may be used only if there is no 
+            <div class="my-2 row">
+                Note: This form of order may be used only if there is no
                 prior order to remove the appeal or application for leave to
                 appeal from the inactive list.
-            </div>            
+            </div>
         </div>
 
     </div>
