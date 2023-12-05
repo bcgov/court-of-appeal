@@ -1,65 +1,77 @@
 <template>
     <div>
 
-        <div>
-            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
-        </div> 
-
         <div class="my-0">
-            <div class="text-right" >Court of Appeal File No. <b class="ml-3" style="text-transform: uppercase">{{result.formSevenNumber}}</b></div>       
+            <div class="text-right">FORM 15 <i>(RULE 67(2)(c) )</i></div>
         </div>
 
-<!-- <BETWEEN> -->
+        <div class="my-0">
+            <div class="text-center"><b>COURT OF APPEAL FOR BRITISH COLUMBIA</b></div>
+        </div>
+
+        <div>
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
+        </div>
+
+        <div class="my-0">
+            <div class="text-right">Court of Appeal File No. <b class="ml-3" style="text-transform: uppercase">{{result.formSevenNumber}}</b></div>
+        </div>
+
+        <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
-                BETWEEN: 
+                BETWEEN:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 700;">
-            <div style="width:11%;"/>
+            <div style="width:11%;" />
             <div style="width:78%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
             </div>
-            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1" >s</span></div>
+            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1">s</span></div>
         </div>
 
-<!-- <AND> -->
+        <!-- <AND> -->
         <div class="my-3 mx-0 row" style="font-weight: 600;">
             <div style="width:11%;">
-                AND: 
+                AND:
             </div>
         </div>
         <div class="mt-3 mx-0 row" style="font-weight: 600;">
-            <div style="width:11%;" />                
+            <div style="width:11%;" />
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
-            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
-        </div>  
+            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1">s</span></div>
+        </div>
 
-<!-- <BEFORE THE HONOURABLE> -->
+        <div class="my-0">
+            <div class="text-center"><b>CONSENT ORDER - GENERAL</b></div>
+        </div>
+
+        <!-- <BEFORE THE HONOURABLE> -->
         <div class="my-4 mx-0 row">
             <div>
                 <b>BEFORE THE HONOURABLE</b>
             </div>
         </div>
 
-<!-- <IN CHAMBERS:> -->
+        <!-- <IN CHAMBERS:> -->
         <div class="mb-2 mt-4 mx-0 row" style="font-weight: 600;">
             <div>
-                IN CHAMBERS: 
+                IN CHAMBERS:
             </div>
         </div>
 
-<!-- <ON APPLICATION> -->
+        <!-- <ON APPLICATION> -->
         <div class="my-2 ml-5 row">
             <div>
-                ON application of {{applyingParties}} 
-                 herein; AND BY CONSENT; 
+                ON application of {{applyingParties}}
+                herein; AND BY CONSENT;
             </div>
         </div>
 
-<!-- <ORDERS> -->
+        <!-- <ORDERS> -->
         <div class="my-2 ml-5 row">
             <div>
                 IT IS ORDERED that {{result.orders}}
@@ -67,29 +79,29 @@
         </div>
 
 
-<!-- <FURTHER ORDERS> -->
+        <!-- <FURTHER ORDERS> -->
         <div v-if="result.otherOrders" class="my-2 ml-5 row">
             <div>
                 IT IS FURTHER ORDERED that {{result.additionalOrders}}
             </div>
         </div>
 
-<!-- <APPROVED> -->
+        <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>           
+            <div style="width:50%;">APPROVED AS TO FORM:</div>
         </div>
 
-<!-- <Parties Signature> -->
-        <div  class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+        <!-- <Parties Signature> -->
+        <div class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
             <div style="width:50%;">
-                <div style="height:3rem;" />                               
-                <div style="border-top:1px dashed grey; width:94%; " > 
-                    {{party.name}} 
+                <div style="height:3rem;" />
+                <div style="border-top:1px dashed grey; width:94%; ">
+                    Signature of {{party.name}}
                     <span v-if="party.responding">, Respondent</span>
                     <span v-else>, Appellant</span>
-                </div>                               
+                </div>
             </div>
-                        
+
         </div>
 
     </div>
