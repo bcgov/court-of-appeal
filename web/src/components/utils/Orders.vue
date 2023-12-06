@@ -15,7 +15,7 @@
              <li class="link-button" 
                 @click="startNewForm12Document"
                 target="_blank">
-                Order from an application to vary the order of a justice (Form 12)                
+                Order from an application to vary or cancel the order of a justice (Form 12)                
             </li>  
             <li class="link-button" 
                 @click="startNewForm13Document"
