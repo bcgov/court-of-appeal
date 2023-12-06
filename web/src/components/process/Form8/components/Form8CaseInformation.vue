@@ -7,7 +7,7 @@
 
             <p class="mt-3">
                 Find the Court of Appeal case that you are wanting to create a Notice of 
-                Application to Vary an Order of a Justice form for by entered the following case information:
+                Application to Vary or Cancel an Order of a Justice form for by entered the following case information:
             </p>
 
             <b-form-group

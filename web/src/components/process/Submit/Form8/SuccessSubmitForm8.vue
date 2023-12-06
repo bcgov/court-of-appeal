@@ -13,11 +13,11 @@
             
             <b-card no-body class="border-white bg-white mx-4">
                 <b-row class="mx-5 mt-4" style="font-size: 14px;">
-                    Your Notice of Application to Vary An Order of Justice has been submitted. 
+                    Your Notice of Application to Vary or Cancel An Order of Justice has been submitted. 
                     Please click on the CSO Package number below to retrieve a filed copy of your document(s).
                 </b-row>
                 <b-row class="mx-5 mt-2 mb-4" style="font-size: 14px;  font-weight: 700; font-style: italic;">
-                    Please note that you must serve the Notice of Application to Vary An Order of a Justice along with 
+                    Please note that you must serve the Notice of Application to Vary or Cancel An Order of a Justice along with 
                     any supporting materials no later than 7 days after the order was made by a justice.
                 </b-row>
                 <b-row class="ml-5">

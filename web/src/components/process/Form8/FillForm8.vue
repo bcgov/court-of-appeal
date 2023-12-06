@@ -8,7 +8,7 @@
         <b-card border-variant="light" bg-variant="light" class="my-2">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Application To Vary an Order of a Justice
+                Notice of Application To Vary or Cancel an Order of a Justice
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
                 Form 8 - Rule 62(2)
@@ -19,14 +19,14 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do you Use the Notice of Application To Vary an Order of a Justice (Form 8)?
+                When Do you Use the Notice of Application To Vary or Cancel an Order of a Justice (Form 8)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
-                If you wish to apply to have the court vary an order of a justice.
+                If you wish to apply to have the court vary or cancel an order of a justice.
             </b-row>   
             <b-row class="ml-4 mt-3" style="font-size: 14px;">
                 You must immediately file and serve a Notice of Application To 
-                Vary an Order of a Justice, any supporting documents, and any 
+                Vary or Cancel an Order of a Justice, any supporting documents, and any 
                 written argument within 7 days after the order was made by a justice.    
             </b-row>        
            
