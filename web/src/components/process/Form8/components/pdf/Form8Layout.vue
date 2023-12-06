@@ -10,7 +10,7 @@
             <div class="row" style="margin-top: 0.75rem; text-align: center; border: 1px solid black; line-height: 3rem;">
                 <div style="width:25%; font-size:20pt; background: black; color: white;"><b>FORM 8</b></div>
                 <div style="width:72%; font-size:14pt; text-align:left; padding-left:1rem; line-height:1.65rem;"><b>
-                    NOTICE OF APPLICATION TO VARY AN ORDER OF A JUSTICE: <i>(RULE 62(2))</i>
+                    NOTICE OF APPLICATION TO VARY OR CANCEL AN ORDER OF A JUSTICE: <i>(RULE 62(2))</i>
                 </b></div>
             </div>         
         </div>
@@ -95,14 +95,14 @@
                     To the person(s) filing the application
                 </div>
                 <div style="margin-bottom: 0.75rem;">
-                    An application to vary is heard by a division of the court. 
+                    An application to vary or cancel an order of a justice is heard by a division of the court. 
                     Contact the court scheduler to obtain an application hearing 
                     date and time.
                 </div>
                 <div>
                     Communicate with the other person(s) to ensure they 
                     are available on the requested date. Applications to vary 
-                    are to be no more than 30 minutes.
+                    or cancel are to be no more than 30 minutes.
                 </div>
             </div>
 
@@ -132,7 +132,7 @@
             
             <div class="coa-arrow-box-left" style="width:28%; margin:.45rem 0; line-height:1rem; height:3.5rem;">
                 <div class="ml-2">
-                    <b>Date the order you are seeking to vary was pronounced</b>
+                    <b>Date the order you are seeking to vary or cancel was pronounced</b>
                     <i style="font-size:8.5pt;"><br>Not the date the order was entered.</i>
                 </div>                
             </div>

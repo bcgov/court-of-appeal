@@ -2,7 +2,7 @@
     <b-card no-body border-variant="white">
 
         <p>
-            If you wish to apply to the have the court vary an order of a justice:
+            If you wish to apply to the have the court vary or cancel an order of a justice:
         </p>
 
         <b-row class="mt-3 bg-warning warning-message-row" >
@@ -38,7 +38,7 @@
                                 <b-col cols="9">
                                     <a 
                                         href="http://www.courtofappealbc.ca/civil-family-law/guidebook-for-appellants/what-if-leave-to-appeal-is-required"
-                                        target="_blank">Notice of Application to vary an order of a justice
+                                        target="_blank">Notice of Application to vary or cancel an order of a justice
                                     </a>
                                 </b-col>                                
                                 <b-col cols="3" class="p-0" >

@@ -188,7 +188,7 @@
             :class="showRespIntroInfo && responses.length > 0?'mt-1':'mt-4'" 
             :style="showRespIntroInfo && responses.length > 0?'padding-top: 0.5rem;':'padding-top: 0.65rem;'">            
             <b-col cols="11" class="step-title-column pl-0">
-                Vary an Order of a Justice
+                Vary or Cancel an Order of a Justice
             </b-col>   
             <b-col cols="1">
                 <b-button
@@ -544,7 +544,7 @@
         
         <b-row :class="showRespNoaLeaveStayInfo?'mt-2':'mt-4'" style="padding-top: 0.75rem;">            
             <b-col cols="11" class="step-title-column pl-0">
-                Responding to Application to Vary An Order of a Justice
+                Responding to Application to Vary or Cancel An Order of a Justice
             </b-col> 
             <b-col cols="1">
                 <b-button
@@ -557,7 +557,7 @@
 
         <b-row v-if="showRespVaryOrderInfo" class="mt-4" >            
             <p>
-                If you were served with an application to vary an order of a justice 
+                If you were served with an application to vary or cancel an order of a justice 
                 and an application book, you can complete the steps below to respond:
             </p>               
         </b-row>
@@ -585,7 +585,7 @@
                         <li>                            
                             <b-row class="my-1 w-110">
                                 <b-col cols="4" style="font-weight: 700;">
-                                    Response book to vary an order of a justice                                  
+                                    Response book to vary or cancel an order of a justice                                  
                                 </b-col>
                                 <b-col cols="4" class="p-0" >
                                     <b-button
@@ -624,7 +624,7 @@
                     File the documents with the registry.
                 </li>
                 <li class="mt-2">
-                    Serve copy of the Response book and document(s) on each party.
+                    Serve a copy of the Response book and document(s) on the applicant and each party.
                 </li>
             </ol>      
         </b-row>
