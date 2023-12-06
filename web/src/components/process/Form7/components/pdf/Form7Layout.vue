@@ -165,7 +165,7 @@
 
             <div class="coa-arrow-box-left" style="width:28%; margin:.6rem 0; height:5.5rem;">
                 <div class="ml-2">
-                    <b>The applicant anticipates that this application will be...</b>
+                    <b>The applicant anticipates that this application will be</b>
                     <i>
                         <br>Check only one.
                     </i>
@@ -233,7 +233,7 @@
 
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">
-                    {{result.hearingLocation.name}}
+                    {{result.orderList}}
                 </div>
             </div>
         </div>

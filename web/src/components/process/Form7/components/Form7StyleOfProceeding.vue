@@ -179,9 +179,9 @@
                 Enter the section(s) or rule(s) that you are relying on for your application
                 <p class="content text-primary">
                     <i>E.g., If you are applying for leave to appeal, enter</i>
-                    “Section 31 of the Court of Appeal Act.” <i>If you are applying
+                    "Section 31 of the Court of Appeal Act." <i>If you are applying
                     for a stay of proceedings, enter
-                    </i>“Section 33 of the Court of Appeal Act.”
+                    </i>"Section 33 of the Court of Appeal Act."
                 </p>
             </b-col>
             <b-col class="ml-1 mt-2">
@@ -198,25 +198,16 @@
         <!-- <orders-you-are-seeking> -->
         <b-row class="mt-4 question">
             <b-col cols="7" class="labels">
-                Select the order(s) that you are seeking
+                Enter the order(s) that you are seeking
                 <br /><i>E.g., "stay of proceedings"</i>
             </b-col>
             <b-col class="ml-1 mt-2">
-
-                <b-form-checkbox-group style="width:100%"
-                                       stacked
-                                       @change="updateSeekingOrder"
-                                       v-model="form7Info.orderList"
-                                       :state="state.orderList"
-                                       :options="orderList">
-                </b-form-checkbox-group>
-
-                <span v-if="(state.orderList != null)"
-                      style="font-size: 0.75rem;"
-                      class="bg-white text-danger">
-                    <b-icon-exclamation-circle />
-                    Specify the order(s) you are seeking.
-                </span>
+                <b-form-textarea style="width:100%"
+                                 rows="6"
+                                 @change="recheckStates()"
+                                 v-model="form7Info.orderList"
+                                 :state="state.orderList">
+                </b-form-textarea>
             </b-col>
         </b-row>
 
