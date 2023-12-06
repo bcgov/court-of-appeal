@@ -352,7 +352,7 @@
 <!-- <ApplyingParties-Who Made Application to VARY ORDER> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Who made the application to vary the order of a justice?                                
+                    Who made the application to vary or cancel the order of a justice?                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-checkbox-group 
@@ -375,7 +375,7 @@
 <!-- <Who Made Order-VaryOrderJudgeName> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    Who made the order that you were seeking to vary?                                
+                    Who made the order that you were seeking to vary or cancel?                                
                 </b-col>
                 <b-col class="ml-1">   
                     <b-form-select 
@@ -402,14 +402,14 @@
                         v-if="(state.varyingOrderJudgeName != null)" 
                         style="font-size: 0.75rem;" 
                         class="bg-white text-danger"><b-icon-exclamation-circle/>
-                        Specify who made the order that you were seeking to vary.
+                        Specify who made the order that you were seeking to vary or cancel.
                     </span>
                 </b-col>
             </b-row>   
 <!-- <Date of Order> -->
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
-                    What was the date of the order that were seeking to vary?                    
+                    What was the date of the order that were seeking to vary or cancel?                    
                 </b-col>
                 <b-col>                   
                     <b-card                        
@@ -934,7 +934,7 @@ export default class Form12StyleOfProceeding extends Vue {
                 data: {
                     data:this.form12Info,
                     type:'Form12',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order from an application to vary or cancel the order of a justice'
                 }
             }
             this.saveInfo(options, draft);
@@ -946,7 +946,7 @@ export default class Form12StyleOfProceeding extends Vue {
                 data: {
                     data:this.form12Info,
                     type:'Form12',
-                    description:'Order from an application to vary the order of a justice'
+                    description:'Order from an application to vary or cancel the order of a justice'
                 }
             }
             this.saveInfo(options, draft);

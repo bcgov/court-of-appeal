@@ -188,7 +188,7 @@ export default class NewFormModal extends Vue {
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form10', title:'Order of a single justice (Form 10)'},
         {name:'form11', title:'Order of three or more justices (Form 11)'},
-        {name:'form12', title:'Order from an application to vary the order of a justice (Form 12)'},
+        {name:'form12', title:'Order from an application to vary or cancel the order of a justice (Form 12)'},
         {name:'form13', title:'Consent order to extend time to file a document (Form 13)'},
         {name:'form14', title:'Consent order to remove an appeal from the inactive list (Form 14)'},
         {name:'form15', title:'Consent Order - General (Form 15)'},
