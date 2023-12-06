@@ -45,6 +45,10 @@
             <div style="width:13%;" class="text-center"> Respondent(s)</div>
         </div>
 
+        <div class="my-0">
+            <div class="text-center"><b>CONSENT ORDER TO REMOVE AN APPEAL FROM THE INACTIVE LIST</b></div>
+        </div>
+
         <!-- <ORDER-DATE> -->
         <div class="mt-4 mb-4 mx-0 row">
             <div>
