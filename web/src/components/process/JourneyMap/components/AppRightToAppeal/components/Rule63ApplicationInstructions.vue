@@ -15,12 +15,16 @@
                 <b-icon-exclamation-triangle-fill class="mt-3 ml-2" scale="2"/>
             </b-col>
             <b-col cols="11" style="padding-left: 0;">
-                You must 
-                    <span 
-                        class="text-danger font-weight-bold">no later than 7 days
-                    </span> 
-                after the order was made or the direction given, file and 
-                serve on each party, the application materials listed below.
+                You must
+                <span class="text-danger font-weight-bold">
+                    no later than 7 days
+                </span>
+                after the order was made or the direction given obtain a hearing date
+                for the application; You must
+                <span class="text-danger font-weight-bold">
+                    at least 5 business days
+                </span>
+                before the application hearing date, file and serve the following:
             </b-col>              
         </b-row>
        
@@ -53,6 +57,9 @@
                             </b-col>
                         </b-row>
                     </li> 
+                    <li>
+                        Supporting Affidavits
+                    </li>
                     <li>
                         Memorandum of argument
                     </li>                    
