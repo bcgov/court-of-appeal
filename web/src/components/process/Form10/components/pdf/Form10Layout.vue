@@ -1,110 +1,121 @@
 <template>
     <div>
 
-        <div>
-            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
-        </div> 
-
         <div class="my-0">
-            <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
+            <div class="text-right">FORM 10 <i>(RULE 66(3)(a) )</i></div>
         </div>
 
-        
+        <div class="my-0">
+            <div class="text-center"><b>COURT OF APPEAL FOR BRITISH COLUMBIA</b></div>
+        </div>
 
-<!-- <BETWEEN> -->
+        <div>
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
+        </div>
+
+        <div class="my-0">
+            <div class="text-right">Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>
+        </div>
+
+
+
+        <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
-                BETWEEN: 
+                BETWEEN:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 700;">
-            <div style="width:11%;"/>
+            <div style="width:11%;" />
             <div style="width:78%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
             </div>
-            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1" >s</span></div>
+            <div style="width:11%;" class="text-center">Appellant(s)</div>
         </div>
 
-<!-- <AND> -->
+        <!-- <AND> -->
         <div class="my-3 mx-0 row" style="font-weight: 600;">
             <div style="width:11%;">
-                AND: 
+                AND:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 600;">
-            <div style="width:11%;" />                
+            <div style="width:11%;" />
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
-            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
+            <div style="width:13%;" class="text-center"> Respondent(s)</div>
         </div>
 
+        <div class="my-0">
+            <div class="text-center"><b>ORDER OF A SINGLE JUSTICE</b></div>
+        </div>
 
-<!-- <BEFORE> -->
+        <!-- <BEFORE> -->
         <div class="mt-5 mb-1 mx-0 row">
             <div>
                 <b>BEFORE THE HONOURABLE</b> {{result.judgeNames[0].text}} <b>IN CHAMBERS</b>
             </div>
-        </div>        
+        </div>
 
-<!-- <HEARING LOCATION-DATE> -->
+        <!-- <HEARING LOCATION-DATE> -->
         <div class="mb-4 mx-0 row">
             <div>
-                {{result.hearingLocation.name}}, British Columbia, {{hearingDate | beautify-date-full}} 
+                {{result.hearingLocation.name}}, British Columbia, {{hearingDate | beautify-date-full}}
             </div>
         </div>
 
-<!-- <Reasons to Follow> -->
+        <!-- <Reasons to Follow> -->
         <div class="mb-4 mx-0 row" v-if="result.reasonsIndicated">
             <div>
                 Reasons to follow being released on {{result.reasonsDate | beautify-date-full}}.
             </div>
         </div>
-        
-<!-- <THE APPEAL> -->
+
+        <!-- <THE APPEAL> -->
         <div class="my-3 mx-0 row">
             <div>
                 <b>THE APPLICATION OF</b> {{applyingParties}} for {{applicationType}} coming on
-                for hearing on {{result.hearingDate | beautify-date-full-no-weekday}}; <b>AND ON HEARING</b> {{appearingParties}}; 
+                for hearing on {{result.hearingDate | beautify-date-full-no-weekday}} at {{result.hearingLocation.name}}, British Columbia; <b>AND ON HEARING</b> {{appearingParties}};
                 <b>AND ON READING</b> the materials filed herein; <b>AND ON JUDGMENT BEING PRONOUNCED ON THIS DATE</b>;
             </div>
         </div>
 
-<!-- <ORDER Make> -->
+        <!-- <ORDER Make> -->
         <div class="my-3 mx-0 row">
             <div>
                 <b>IT IS ORDERED</b> that {{result.ordersJusticeMake}}
             </div>
         </div>
 
-<!-- <FURTHER ORDERS> -->
+        <!-- <FURTHER ORDERS> -->
         <div v-if="result.otherOrders" class="my-3 mx-0 row">
             <div>
                 <b>IT IS FURTHER ORDERED</b> that {{result.furtherOrders}}.
             </div>
         </div>
 
-<!-- <APPROVED> -->
+        <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div  style="width:50%;">APPROVED AS TO FORM:</div>           
+            <div style="width:50%;">APPROVED AS TO FORM:</div>
         </div>
 
-<!-- <Parties Signature> -->
-        <div  class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
+        <!-- <Parties Signature> -->
+        <div class="m-0 row print-block" v-for="party,inx in signingPartyList" :key="'party-sign-'+inx">
             <div style="width:50%;">
-                <div style="height:3rem;" />                               
-                <div style="border-top:1px dashed grey; width:94%; " > 
-                    {{party.name}} 
+                <div style="height:3rem;" />
+                <div style="border-top:1px dashed grey; width:94%; ">
+                    Signature of {{party.name}}
                     <span v-if="party.responding">, Respondent</span>
                     <span v-else>, Appellant</span>
-                </div>                               
+                </div>
             </div>
             <div v-if="inx==0" style="width:50%;">
                 <div style="height:3rem;" />
                 <div style="border-top:1px dashed grey;">
                     A Justice of the Court of Appeal
                 </div>
-            </div>            
+            </div>
         </div>
 
     </div>
