@@ -131,11 +131,11 @@
         <!-- <full or partial> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:0.25rem; height:1.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:0.5rem 0; line-height:0.25rem; height:3rem;">
                 <b class="ml-2">Is it a full or partial abandonment?</b>
             </div>
 
-            <div class="arrow-right-flash-20"></div>
+            <div class="arrow-right-flash-36"></div>
 
             <div style="width:2%;"></div>
 
@@ -144,7 +144,7 @@
                            :check="(result.fullOrPartial == 'Full')?'yes':''"
                            shiftmark="1"
                            marginLeft="0.5rem"
-                           text="Appeal" />
+                           text="Full" />
             </div>
 
             <div style="width:15%;margin:0.5rem 0;"> or </div>
@@ -154,7 +154,7 @@
                            :check="(result.fullOrPartial == 'Partial')?'yes':''"
                            shiftmark="1"
                            marginLeft="0.5rem"
-                           text="Cross Appeal" />
+                           text="Partial" />
             </div>
 
         </div>
@@ -162,12 +162,12 @@
         <!-- <which-sections-are-you-abandoning> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
                 <b class="ml-2">Which section(s) of the appeal are you abandoning?</b>
-                <br /><i>If partial abandonment, list the sections of the appeal that you are abandoning. E.g., grounds of appeal.</i>
+                <i style="font-size:8.5pt;"><br />If partial abandonment, list the sections of the appeal that you are abandoning. E.g., grounds of appeal.</i>
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-54"></div>
 
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.sectionsAbandoned}}</div>
@@ -177,12 +177,12 @@
         <!-- <name-of-parties-abandoning-against> -->
         <div class="row mt-4" style="font-size: 9pt;">
 
-            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:3.5rem;">
+            <div class="coa-arrow-box-left" style="width:28%; margin:.5rem 0; height:5.5rem;">
                 <b class="ml-2">Which party(ies) are you abandoning against?</b>
-                <br /><i>If partial abandonment, list the party(ies) of the appeal that you are abandoning against.</i>
+                <i style="font-size:8.5pt;"><br />If partial abandonment, list the party(ies) of the appeal that you are abandoning against.</i>
             </div>
 
-            <div class="arrow-right-flash-36"></div>
+            <div class="arrow-right-flash-54"></div>
 
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">{{result.abandoningAgainstParties.join(', ')}}</div>
