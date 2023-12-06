@@ -41,6 +41,8 @@ export interface form18DataInfoType {
     currentLawyerName?: string;
     newRepresentation?: string;  
     newLawyerName?: string; 
+    areYouLawyer: boolean;
+    nameOfLawyer: string;
     useServiceEmail: boolean;
     sendNotifications: boolean;
     serviceInformation: serviceInformationJsonDataType;

@@ -1,9 +1,9 @@
 <template>
     <b-card v-if="dataReady" class="ml-4 border-white">
-        
+
         <b-card class="bg-light border-0">
             <p style="font-size: 1.25rem;font-weight: 700;">Style of Proceeding (Parties) in Case</p>
-            
+
             <b-row class="mt-4" style="font-weight: 700;">
                 <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                 <b-col cols="2" class="text-primary">Appellant</b-col>
@@ -13,88 +13,86 @@
                 <b-col cols="2" class="text-info">Respondent</b-col>
             </b-row>
         </b-card>
-        
-<!-- <Appellant/Respondent> -->
+
+        <!-- <Appellant/Respondent> -->
         <b-row style="margin-top:4rem;">
-            <b-col cols="6" style="font-weight: 700;">First Appellant:
-                
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="Name of the first appellant named on Form 1: Notice of Appeal."/>
-                <b-form-select                            
-                    class="mt-2"
-                    @change="recheckStates()"                        
-                    :state="state.firstAppellant"                   
-                    v-model="form18Info.firstAppellant"                    
-                    :options="applicantNames">
+            <b-col cols="6" style="font-weight: 700;">
+                First Appellant:
+
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="Name of the first appellant named on Form 1: Notice of Appeal." />
+                <b-form-select class="mt-2"
+                               @change="recheckStates()"
+                               :state="state.firstAppellant"
+                               v-model="form18Info.firstAppellant"
+                               :options="applicantNames">
                 </b-form-select>
-                
+
             </b-col>
 
-            <b-col cols="6" style="font-weight: 700;">First Respondent:
-                
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="Name of the first respondent named on Form 1: Notice of Appeal."/>
-                <b-form-select 
-                    class="mt-2"
-                    @change="recheckStates()"             
-                    :state="state.firstRespondent"                   
-                    v-model="form18Info.firstRespondent"                    
-                    :options="respondentNames">
+            <b-col cols="6" style="font-weight: 700;">
+                First Respondent:
+
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="Name of the first respondent named on Form 1: Notice of Appeal." />
+                <b-form-select class="mt-2"
+                               @change="recheckStates()"
+                               :state="state.firstRespondent"
+                               v-model="form18Info.firstRespondent"
+                               :options="respondentNames">
                 </b-form-select>
-                
+
             </b-col>
         </b-row>
 
-<!-- <Asking for Changing Representation> -->
+        <!-- <Asking for Changing Representation> -->
         <b-row class="mt-5">
             <b-col cols="6" style="font-weight: 700;">
                 Are you changing your representation?
-                <div class="content text-primary"><b>Note:</b> Changing Representation means a change from one lawyer to another; 
-                    or from being self-represented to having a lawyer; or from having a lawyer 
-                    to being self-represented</div>                                
+                <div class="content text-primary">
+                    <b>Note:</b> Changing Representation means a change from one lawyer to another;
+                    or from being self-represented to having a lawyer; or from having a lawyer
+                    to being self-represented
+                </div>
             </b-col>
-            <b-col >
-                <b-form-radio-group                
-                    :class="state.changeRepresentation==false?'border border-danger is-invalid w-50':''"
-                    @change="recheckStates()"
-                    v-model="form18Info.changeRepresentation"
-                    :options="changeRepresentationOptions">
+            <b-col>
+                <b-form-radio-group :class="state.changeRepresentation==false?'border border-danger is-invalid w-50':''"
+                                    @change="recheckStates()"
+                                    v-model="form18Info.changeRepresentation"
+                                    :options="changeRepresentationOptions">
                 </b-form-radio-group>
-                <span
-                    v-if="(state.changeRepresentation != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                <span v-if="(state.changeRepresentation != null)"
+                      style="font-size: 0.75rem;"
+                      class="bg-white text-danger">
+                    <b-icon-exclamation-circle />
                     Specify whether you are changing representation.
-                </span>                     
+                </span>
             </b-col>
-        </b-row> 
+        </b-row>
 
-<!-- <Change Representation Lawyers> -->
+        <!-- <Change Representation Lawyers> -->
         <div v-if="form18Info.changeRepresentation">
 
             <b-row class="mt-4">
                 <b-col cols="6" style="font-weight: 700;">
-                    What is your current representation status?                                
+                    What is your current representation status?
                 </b-col>
                 <b-col>
-                    <b-form-radio-group                
-                        style="width:100%"
-                        :class="state.currentRepresentation==false?'border border-danger is-invalid':''" 
-                        :state="state.currentRepresentation"
-                        @change="recheckStates()"                                    
-                        v-model="form18Info.currentRepresentation"                    
-                        :options="representationOptions">
+                    <b-form-radio-group style="width:100%"
+                                        :class="state.currentRepresentation==false?'border border-danger is-invalid':''"
+                                        :state="state.currentRepresentation"
+                                        @change="recheckStates()"
+                                        v-model="form18Info.currentRepresentation"
+                                        :options="representationOptions">
                     </b-form-radio-group>
-                    <span
-                        v-if="(state.currentRepresentation != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    <span v-if="(state.currentRepresentation != null)"
+                          style="font-size: 0.75rem;"
+                          class="bg-white text-danger">
+                        <b-icon-exclamation-circle />
                         Specify Current Representation.
                     </span>
                 </b-col>
@@ -102,371 +100,375 @@
 
             <b-row class="mt-4" v-if="form18Info.currentRepresentation == 'Lawyer'">
                 <b-col cols="6" style="font-weight: 700;">
-                    What is the current lawyer's name and firm name?                                
+                    What is the current lawyer's name and firm name?
                 </b-col>
                 <b-col :class="state.currentLawyerName==false? 'is-invalid' :''">
-                    <b-form-textarea                
-                        style="width:100%"
-                        @change="recheckStates()" 
-                        :state="state.currentLawyerName"                                    
-                        v-model="form18Info.currentLawyerName">
-                    </b-form-textarea> 
+                    <b-form-textarea style="width:100%"
+                                     @change="recheckStates()"
+                                     :state="state.currentLawyerName"
+                                     v-model="form18Info.currentLawyerName">
+                    </b-form-textarea>
                 </b-col>
             </b-row>
 
             <b-row class="mt-4" v-if="form18Info.currentRepresentation != null">
                 <b-col cols="6" style="font-weight: 700;">
-                    What is your new representation status?                                
+                    What is your new representation status?
                 </b-col>
                 <b-col>
-                    <b-form-radio-group                
-                        style="width:100%"
-                        :class="state.newRepresentation==false?'border border-danger is-invalid':''" 
-                        :state="state.newRepresentation"
-                        @change="recheckStates();updated++;"                                    
-                        v-model="form18Info.newRepresentation"                    
-                        :options="form18Info.currentRepresentation == 'Lawyer' ? representationOptions: lawyerRepresentationOptions ">
+                    <b-form-radio-group style="width:100%"
+                                        :class="state.newRepresentation==false?'border border-danger is-invalid':''"
+                                        :state="state.newRepresentation"
+                                        @change="recheckStates();updated++;"
+                                        v-model="form18Info.newRepresentation"
+                                        :options="form18Info.currentRepresentation == 'Lawyer' ? representationOptions: lawyerRepresentationOptions ">
                     </b-form-radio-group>
-                    <span
-                        v-if="(state.newRepresentation != null)" 
-                        style="font-size: 0.75rem;" 
-                        class="bg-white text-danger"><b-icon-exclamation-circle/>
+                    <span v-if="(state.newRepresentation != null)"
+                          style="font-size: 0.75rem;"
+                          class="bg-white text-danger">
+                        <b-icon-exclamation-circle />
                         Specify New Representation.
                     </span>
-                    
+
                 </b-col>
             </b-row>
 
             <b-row class="mt-4" v-if="form18Info.newRepresentation == 'Lawyer'">
                 <b-col cols="6" style="font-weight: 700;">
-                    What is the new lawyer's name and firm name?                                
+                    What is the new lawyer's name and firm name?
                 </b-col>
                 <b-col :class="state.newLawyerName==false? 'is-invalid' :''">
-                    <b-form-textarea                
-                        style="width:100%"
-                        @change="recheckStates()"
-                        :state="state.newLawyerName"                                    
-                        v-model="form18Info.newLawyerName">
+                    <b-form-textarea style="width:100%"
+                                     @change="recheckStates()"
+                                     :state="state.newLawyerName"
+                                     v-model="form18Info.newLawyerName">
                     </b-form-textarea>
                 </b-col>
             </b-row>
+        </div>
 
-        </div> 
+        <b-row class="mt-4" v-if="form18Info.newRepresentation == 'Lawyer'">
+            <b-col cols="6" style="font-weight: 700;">
+                Are you a lawyer?
+            </b-col>
+            <b-col>
+                <b-form-radio-group :class="state.areYouLawyer==false?'border border-danger is-invalid w-50':''"
+                                    @change="recheckStates()"
+                                    v-model="form18Info.areYouLawyer"
+                                    :options="areYouLawyerOptions">
+                </b-form-radio-group>
+                <span v-if="(state.areYouLawyer != null)"
+                      style="font-size: 0.75rem;"
+                      class="bg-white text-danger">
+                    <b-icon-exclamation-circle />
+                    Specify whether you are a lawyer.
+                </span>
+            </b-col>
+        </b-row>
+        
+        <b-row class="mt-4" v-if="form18Info.areYouLawyer == 'Yes'">
+            <b-col cols="6" style="font-weight: 700;">
+                Name of lawyer completing the form:
+            </b-col>
+            <b-col :class="state.nameOfLawyer==false? 'is-invalid' :''">
+                <b-form-textarea style="width:100%"
+                                 @change="recheckStates()"
+                                 :state="state.nameOfLawyer"
+                                 v-model="form18Info.nameOfLawyer">
+                </b-form-textarea>
+            </b-col>
+        </b-row>
 
-<!-- <Name of Filing Parties> -->
+    <!-- <Name of Filing Parties> -->
         <b-row class="mt-4" v-if="form18Info.changeRepresentation != null">
             <b-col cols="6" style="font-weight: 700;">
-                Name of party(ies) filing this form:                                
+                Name of party(ies) filing this form:
             </b-col>
-            <b-col >
-                <b-form-checkbox-group                
-                    stacked
-                    @change="recheckStates()"
-                    style="width:100%" 
-                    :state="state.filingParties"                                        
-                    v-model="form18Info.filingParties"                    
-                    :options="partyNames">
+            <b-col>
+                <b-form-checkbox-group stacked
+                                       @change="recheckStates()"
+                                       style="width:100%"
+                                       :state="state.filingParties"
+                                       v-model="form18Info.filingParties"
+                                       :options="partyNames">
                 </b-form-checkbox-group>
             </b-col>
-        </b-row> 
+        </b-row>
 
-<!-- <Ask Self-Represented> -->
+        <!-- <Ask Self-Represented> -->
         <b-row class="mt-5" v-if="form18Info.changeRepresentation == false">
             <b-col cols="6" style="font-weight: 700;">
-                Are you self-represented?                                
+                Are you self-represented?
             </b-col>
-            <b-col >
-                <b-form-radio-group 
-                    :class="this.state.selfRepresented==false?'border w-25 border-danger is-invalid':'' "               
-                    @change="toggleRepresentation" 
-                    v-model="form18Info.selfRepresented"
-                    :options="changeRepresentationOptions"                
-                ></b-form-radio-group>                
+            <b-col>
+                <b-form-radio-group :class="this.state.selfRepresented==false?'border w-25 border-danger is-invalid':'' "
+                                    @change="toggleRepresentation"
+                                    v-model="form18Info.selfRepresented"
+                                    :options="changeRepresentationOptions"></b-form-radio-group>
             </b-col>
-        </b-row> 
+        </b-row>
 
-<!-- <Change Address> -->
+        <!-- <Change Address> -->
         <div :key="updated" v-if="form18Info.selfRepresented !=null || form18Info.changeRepresentation">
 
             <b-row class="mt-5">
                 <b-col cols="6" style="font-weight: 700;">
                     Mailing address for service:
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover
-                        scale="1.1"
-                        title="The address where you would like to receive documents."/>                  
+                    <b-icon-question-circle-fill class="text-primary"
+                                                 v-b-tooltip.hover
+                                                 scale="1.1"
+                                                 title="The address where you would like to receive documents." />
                 </b-col>
             </b-row>
 
             <p class="mt-4" style="font-weight: 700;">Service Information</p>
 
-<!-- <Self-Represented Name for Service> -->
-            <b-row  v-if="getServiceInfoCondition">
+            <!-- <Self-Represented Name for Service> -->
+            <b-row v-if="getServiceInfoCondition">
                 <b-col cols="3">
                     Phone <span class="text-danger">* </span>
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="The registry may contact you by phone to schedule your appeal."/>
+                    <b-icon-question-circle-fill class="text-primary"
+                                                 v-b-tooltip.hover.noninteractive
+                                                 scale="1.1"
+                                                 title="The registry may contact you by phone to schedule your appeal." />
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"
-                        :state="state.phone"
-                        @change="recheckStates()"                        
-                        v-model="form18Info.serviceInformation.phone">
+                    <b-form-input style="width: 100%"
+                                  :state="state.phone"
+                                  @change="recheckStates()"
+                                  v-model="form18Info.serviceInformation.phone">
                     </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        :class="state.phone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. 604-567-8901 x1234 or 250-123-4567
-                    </span>   
+                    <span style="font-size: 0.75rem;"
+                          :class="state.phone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">
+                        ex. 604-567-8901 x1234 or 250-123-4567
+                    </span>
                 </b-col>
             </b-row>
 
-<!-- < ^| Counsel Name for Service> -->
-            <b-card no-body border-variant="white" v-else >
+            <!-- < ^| Counsel Name for Service> -->
+            <b-card no-body border-variant="white" v-else>
 
                 <b-row class="mt-2">
                     <b-col cols="3">
-                        Counsel's First Name <span class="text-danger">*</span>                   
+                        Counsel's First Name <span class="text-danger">*</span>
                     </b-col>
                     <b-col cols="4">
-                        <b-form-input 
-                            style="width: 100%"
-                            @change="recheckStates()" 
-                            :state="state.counselFirstName"             
-                            v-model="form18Info.serviceInformation.counselFirstName">
-                        </b-form-input>  
+                        <b-form-input style="width: 100%"
+                                      @change="recheckStates()"
+                                      :state="state.counselFirstName"
+                                      v-model="form18Info.serviceInformation.counselFirstName">
+                        </b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="mt-2">
                     <b-col cols="3">
-                        Counsel's Last Name <span class="text-danger">*</span>                   
+                        Counsel's Last Name <span class="text-danger">*</span>
                     </b-col>
                     <b-col cols="4">
-                        <b-form-input 
-                            style="width: 100%"
-                            @change="recheckStates()"
-                            :state="state.counselLastName"
-                            v-model="form18Info.serviceInformation.counselLastName">
-                        </b-form-input>  
+                        <b-form-input style="width: 100%"
+                                      @change="recheckStates()"
+                                      :state="state.counselLastName"
+                                      v-model="form18Info.serviceInformation.counselLastName">
+                        </b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="mt-2">
                     <b-col cols="3">
-                        Firm Name <span class="text-danger">*</span>                   
+                        Firm Name <span class="text-danger">*</span>
                     </b-col>
                     <b-col cols="4">
-                        <b-form-input 
-                            style="width: 100%"
-                            @change="recheckStates()"
-                            :state="state.firmName"                        
-                            v-model="form18Info.serviceInformation.firmName">
-                        </b-form-input>  
+                        <b-form-input style="width: 100%"
+                                      @change="recheckStates()"
+                                      :state="state.firmName"
+                                      v-model="form18Info.serviceInformation.firmName">
+                        </b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="mt-2">
                     <b-col cols="3">
                         Firm's Phone <span class="text-danger">* </span>
-                        <b-icon-question-circle-fill 
-                            class="text-primary"
-                            scale="1.1"
-                            v-b-tooltip.hover
-                            title="The registry may contact you by phone to schedule your appeal."/>
+                        <b-icon-question-circle-fill class="text-primary"
+                                                     scale="1.1"
+                                                     v-b-tooltip.hover
+                                                     title="The registry may contact you by phone to schedule your appeal." />
                     </b-col>
                     <b-col cols="4">
-                        <b-form-input 
-                            style="width: 100%"
-                            @change="recheckStates()"
-                            :state="state.firmPhone"                        
-                            v-model="form18Info.serviceInformation.firmPhone">
+                        <b-form-input style="width: 100%"
+                                      @change="recheckStates()"
+                                      :state="state.firmPhone"
+                                      v-model="form18Info.serviceInformation.firmPhone">
                         </b-form-input>
-                        <span 
-                            style="font-size: 0.75rem;" 
-                            :class="state.firmPhone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. 604-567-8901 x1234 or 250-123-4567
-                        </span>   
+                        <span style="font-size: 0.75rem;"
+                              :class="state.firmPhone==null?'text-secondary ml-2':'px-2 bg-danger text-white'">
+                            ex. 604-567-8901 x1234 or 250-123-4567
+                        </span>
                     </b-col>
                 </b-row>
 
             </b-card>
 
-<!-- <Email> -->
+            <!-- <Email> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Email address
-                    <b-icon-question-circle-fill 
-                        class="text-primary"
-                        scale="1.1"
-                        v-b-tooltip.hover                    
-                        title="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below."/>
+                    <b-icon-question-circle-fill class="text-primary"
+                                                 scale="1.1"
+                                                 v-b-tooltip.hover
+                                                 title="Receive electronic document status change notifications or be served electonically by another party (you need to agree to this using the checkboxes below." />
                     <p class="content text-primary">
                         <b> Note: </b> If you provide an email address, you consent to have documents served on you by email.
                     </p>
 
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"
-                        @change="recheckStates()"
-                        :state="state.email"                         
-                        v-model="form18Info.serviceInformation.email">
+                    <b-form-input style="width: 100%"
+                                  @change="recheckStates()"
+                                  :state="state.email"
+                                  v-model="form18Info.serviceInformation.email">
                     </b-form-input>
-                    <span
-                        v-if="state.email==false" 
-                        style="font-size: 0.75rem;" 
-                        class="text-danger ml-1">Invalid Email Address. <div class="ml-1 mt-n1"> <i>(If you provide an email address, It must be valid.)</i></div>
+                    <span v-if="state.email==false"
+                          style="font-size: 0.75rem;"
+                          class="text-danger ml-1">
+                        Invalid Email Address. <div class="ml-1 mt-n1"> <i>(If you provide an email address, It must be valid.)</i></div>
                     </span>
                 </b-col>
             </b-row>
 
-<!-- <Address Line 1> -->
+            <!-- <Address Line 1> -->
             <b-row class="mt-2">
                 <b-col cols="3">
                     Address Line 1 <span class="text-danger">*</span>
                     <p class="content text-primary">
-                        <b> Note: </b>It must be a residential address or business address in British Columbia, 
-                        other than a post office box. 
-                    </p>                    
+                        <b> Note: </b>It must be a residential address or business address in British Columbia,
+                        other than a post office box.
+                    </p>
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"
-                        @change="recheckStates()"
-                        :state="state.addressLine1"                         
-                        v-model="form18Info.serviceInformation.addressLine1">
+                    <b-form-input style="width: 100%"
+                                  @change="recheckStates()"
+                                  :state="state.addressLine1"
+                                  v-model="form18Info.serviceInformation.addressLine1">
                     </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        class="text-secondary ml-2">Street address
-                    </span>   
+                    <span style="font-size: 0.75rem;"
+                          class="text-secondary ml-2">
+                        Street address
+                    </span>
                 </b-col>
             </b-row>
 
-<!-- <Address Line 2> -->
+            <!-- <Address Line 2> -->
             <b-row class="mt-2">
                 <b-col cols="3">
-                    Address Line 2                   
+                    Address Line 2
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"                        
-                        v-model="form18Info.serviceInformation.addressLine2">
+                    <b-form-input style="width: 100%"
+                                  v-model="form18Info.serviceInformation.addressLine2">
                     </b-form-input>
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        class="text-secondary ml-2">Apartment, suite, unit, building, floor, etc.
-                    </span>   
+                    <span style="font-size: 0.75rem;"
+                          class="text-secondary ml-2">
+                        Apartment, suite, unit, building, floor, etc.
+                    </span>
                 </b-col>
             </b-row>
 
-<!-- <City> -->
+            <!-- <City> -->
             <b-row class="mt-2">
                 <b-col cols="3">
-                    City <span class="text-danger">*</span>                   
+                    City <span class="text-danger">*</span>
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"
-                        @change="recheckStates()"
-                        :state="state.city"                         
-                        v-model="form18Info.serviceInformation.city">
-                    </b-form-input>  
+                    <b-form-input style="width: 100%"
+                                  @change="recheckStates()"
+                                  :state="state.city"
+                                  v-model="form18Info.serviceInformation.city">
+                    </b-form-input>
                 </b-col>
             </b-row>
 
-<!-- <Province> -->
+            <!-- <Province> -->
             <b-row class="mt-2">
                 <b-col cols="3">Province <span class="text-danger">*</span></b-col>
                 <b-col cols="4">
-                    <b-form-select
-                        v-model="form18Info.serviceInformation.province" 
-                        @change="recheckStates()"
-                        :state="state.province"
-                        :options="provinces" >                        
+                    <b-form-select v-model="form18Info.serviceInformation.province"
+                                   @change="recheckStates()"
+                                   :state="state.province"
+                                   :options="provinces">
                     </b-form-select>
-                    <div style="font-size: 0.75rem; text-align: justify;" v-if="state.nonBcAddress == true" class="text-warning mt-1" >
-                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c) 
+                    <div style="font-size: 0.75rem; text-align: justify;" v-if="state.nonBcAddress == true" class="text-warning mt-1">
+                        Pursuant to Rule 80(3) -  a party who wishes to apply for permission under subrule (1) (c)
                         to use a residential address or business address for service outside of British Columbia
                         must submit a written request to the registrar.
                     </div>
                 </b-col>
             </b-row>
 
-<!-- <Country> -->
+            <!-- <Country> -->
             <b-row class="mt-2">
                 <b-col cols="3">Country</b-col>
                 <b-col cols="4">Canada</b-col>
             </b-row>
 
-<!-- <Postal Code> -->
+            <!-- <Postal Code> -->
             <b-row class="mt-2">
                 <b-col cols="3">
-                    Postal Code <span class="text-danger">*</span>                   
+                    Postal Code <span class="text-danger">*</span>
                 </b-col>
                 <b-col cols="4">
-                    <b-form-input 
-                        style="width: 100%"
-                        @change="recheckStates()" 
-                        :state="state.postalCode"                        
-                        v-model="form18Info.serviceInformation.postalCode">
-                    </b-form-input> 
-                    <span 
-                        style="font-size: 0.75rem;" 
-                        :class="state.postalCode==null?'text-secondary ml-2':'px-2 bg-danger text-white'">ex. A1A 1A1
-                    </span> 
+                    <b-form-input style="width: 100%"
+                                  @change="recheckStates()"
+                                  :state="state.postalCode"
+                                  v-model="form18Info.serviceInformation.postalCode">
+                    </b-form-input>
+                    <span style="font-size: 0.75rem;"
+                          :class="state.postalCode==null?'text-secondary ml-2':'px-2 bg-danger text-white'">
+                        ex. A1A 1A1
+                    </span>
                 </b-col>
-            </b-row>        
+            </b-row>
         </div>
 
-<!-- <Use Service Email > -->
-        <div class="mt-5" v-if="form18Info.changeRepresentation != null">       
+        <!-- <Use Service Email > -->
+        <div class="mt-5" v-if="form18Info.changeRepresentation != null">
 
             <!-- <b-row>
-                <b-form-group>
-                    <span class="ml-3">I would like to receive email notifications when the status of my document changes</span>	
-                    <b-form-checkbox
-                        class="ml-5"
-                        style="display: inline;"
-                        size="sm"									
-                        v-model="form18Info.sendNotifications"
-                        >  
-                    </b-form-checkbox>						
-                </b-form-group>
-            </b-row> -->
+            <b-form-group>
+                <span class="ml-3">I would like to receive email notifications when the status of my document changes</span>
+                <b-form-checkbox
+                    class="ml-5"
+                    style="display: inline;"
+                    size="sm"
+                    v-model="form18Info.sendNotifications"
+                    >
+                </b-form-checkbox>
+            </b-form-group>
+        </b-row> -->
 
             <b-row>
                 <b-form-group>
                     <span class="ml-3 mr-1">I agree to be served documents electronically by another party</span>
-                    <b-icon-question-circle-fill 
-                        class="text-primary mr-5"
-                        v-b-tooltip.hover.noninteractive
-                        scale="1.1"
-                        title="Electronic service will replace in-person service if you select this option."/>	
-                    <b-form-checkbox                        
-                        style="display: inline; margin-left: 3.75rem;"
-                        									
-                        v-model="form18Info.useServiceEmail"
-                        >  
-                    </b-form-checkbox>						
+                    <b-icon-question-circle-fill class="text-primary mr-5"
+                                                 v-b-tooltip.hover.noninteractive
+                                                 scale="1.1"
+                                                 title="Electronic service will replace in-person service if you select this option." />
+                    <b-form-checkbox style="display: inline; margin-left: 3.75rem;"
+                                     v-model="form18Info.useServiceEmail">
+                    </b-form-checkbox>
                 </b-form-group>
-            </b-row> 
+            </b-row>
 
             <b-row class="my-3" style="padding: 0;">
-                <b-col 
-                    cols="3" 
-                    style="font-weight: 700;">
+                <b-col cols="3"
+                       style="font-weight: 700;">
                     Name of lawyer or party authorizing filing of this Form:
                 </b-col>
                 <b-col>
-                    <b-form-input
-                        @change="recheckStates()"                    
-                        v-model="form18Info.authorizedName"                        
-                        :state ="state.authorizedName">
+                    <b-form-input @change="recheckStates()"
+                                  v-model="form18Info.authorizedName"
+                                  :state="state.authorizedName">
                     </b-form-input>
                     <span class="ml-2" style="font-weight: 700; font-size:11pt">Electronically filed</span>
 
@@ -475,41 +477,39 @@
 
         </div>
 
-        <hr/>    
-<!-- <Save Buttons> -->
-        <b-row >
+        <hr />
+        <!-- <Save Buttons> -->
+        <b-row>
             <b-col cols="10">
-                <b-button 
-                    style="float: left;" 
-                    variant="success"
-                    @click="saveForm(true)"
-                    >Save as Draft
+                <b-button style="float: left;"
+                          variant="success"
+                          @click="saveForm(true)">
+                    Save as Draft
                 </b-button>
             </b-col>
             <b-col cols="2">
-                <b-button
-                    style="float: right;" 
-                    variant="success"
-                    @click="saveForm(false)"
-                    >Continue
-                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                <b-button style="float: right;"
+                          variant="success"
+                          @click="saveForm(false)">
+                    Continue
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1"></b-icon-play-fill>
                 </b-button>
             </b-col>
-        </b-row>        
-        
-        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">            
-			<template v-slot:modal-title>
-                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>                    
+        </b-row>
+
+        <b-modal size="lg" no-close-on-backdrop v-model="showNoneBcAlert" header-class="bg-warning text-light">
+            <template v-slot:modal-title>
+                <h2 class="mb-0 text-light">Service outside of British Columbia</h2>
             </template>
             <div>
-                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c) 
+                <b>Pursuant to Rule 80(3)</b> -  a party who wishes to apply for permission under subrule (1) (c)
                 to use a residential address or business address for service outside of British Columbia
                 must submit a written request to the registrar.
-            </div>			
+            </div>
             <template v-slot:modal-footer>
-                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>                
+                <b-button variant="primary" @click="confirmNavigateToPreviewPage()">OK</b-button>
             </template>
-        </b-modal>        
+        </b-modal>
     </b-card>
 </template>
 
@@ -557,6 +557,11 @@ export default class Form18StyleOfProceeding extends Vue {
         {text: 'No', value: false}
     ];
 
+    areYouLawyerOptions = [
+        { text: 'Yes', value: true },
+        { text: 'No', value: false }
+    ];
+
     representationOptions = [ 'Self-represented', 'Lawyer' ];
     lawyerRepresentationOptions = [ 'Lawyer' ];
 
@@ -586,6 +591,8 @@ export default class Form18StyleOfProceeding extends Vue {
         currentLawyerName: null,
         newRepresentation: null,  
         newLawyerName: null, 
+        areYouLawyer: null,
+        nameOfLawyer: null,
         phone:null,
         email:null,
         addressLine1:null,
@@ -713,6 +720,8 @@ export default class Form18StyleOfProceeding extends Vue {
             currentLawyerName: null,
             newRepresentation: null,  
             newLawyerName: null, 
+            areYouLawyer: null,
+            nameOfLawyer: null,
             phone:null,
             email:null,
             addressLine1:null,
