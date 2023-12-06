@@ -1,69 +1,79 @@
 <template>
     <div>
 
-        <div>
-            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
-        </div> 
+        <div class="my-0">
+            <div class="text-right">FORM 17 <i>(RULE 77 )</i></div>
+        </div>
 
         <div class="my-0">
-            <div class="text-right" >Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>       
+            <div class="text-center"><b>COURT OF APPEAL FOR BRITISH COLUMBIA</b></div>
         </div>
-       
-<!-- <BETWEEN> -->
+
+        <div>
+            <div style="color:#FFF; font-size:1px; width:0.1rem; height:0.1rem; margin:0; padding:0;"><b>i</b></div>
+        </div>
+
+        <div class="my-0">
+            <div class="text-right">Court of Appeal File No. <b class="ml-3">{{result.formSevenNumber}}</b></div>
+        </div>
+
+        <!-- <BETWEEN> -->
         <div class="mb-3 mx-0 row" style="font-weight: 700;">
             <div style="width:11%;">
-                BETWEEN: 
+                BETWEEN:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 700;">
-            <div style="width:11%;"/>
+            <div style="width:11%;" />
             <div style="width:78%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
             </div>
-            <div style="width:11%;" class="text-center">Appellant<span v-if="applicantNames.length>1" >s</span></div>
+            <div style="width:11%;" class="text-center">Appellant(s)</div>
         </div>
 
-<!-- <AND> -->
+        <!-- <AND> -->
         <div class="my-3 mx-0 row" style="font-weight: 600;">
             <div style="width:11%;">
-                AND: 
+                AND:
             </div>
         </div>
         <div class="my-3 mx-0 row" style="font-weight: 600;">
-            <div style="width:11%;" />                
+            <div style="width:11%;" />
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
-            <div style="width:13%;" class="text-center"> Respondent<span v-if="respondentNames.length>1" >s</span></div>
+            <div style="width:13%;" class="text-center"> Respondent(s)</div>
         </div>
 
-        
-<!-- <THE APPEAL> -->
+        <div class="my-0">
+            <div class="text-center"><b>CERTIFICATE OF COSTS</b></div>
+        </div>
+
+        <!-- <THE APPEAL> -->
         <div class="my-5 mx-0 row">
             <div>
-                <underline-form 
-                    style="display:inline-block;line-height:1rem;" 
-                    textwidth="10rem" 
-                    beforetext="I CERTIFY that on" 
-                    hint="" 
-                    :italicHint="false" 
-                    text=""
-                />
-                , the costs of the {{allowedCostsParties}} 
+                <underline-form style="display:inline-block;line-height:1rem;"
+                                textwidth="10rem"
+                                beforetext="I CERTIFY that on"
+                                hint=""
+                                :italicHint="false"
+                                text="" />
+                , the costs of the {{allowedCostsParties}}
                 have been allowed against the {{payingParties}} at $ {{result.amount}}.
             </div>
         </div>
 
-<!-- <Appellants Signature> -->
+        <!-- <Appellants Signature> -->
         <div class="my-5 mx-0 row">
-            <div  style="width:50%;">
+            <div style="width:50%;">
                 <div>....................................................................</div>
-                <div> Date
-                </div> 
-                      
+                <div>
+                    Date
+                </div>
+
             </div>
 
-            <div  style="width:50%;">
+            <div style="width:50%;">
                 <div>....................................................................</div>
                 <div>Registrar</div>
             </div>
