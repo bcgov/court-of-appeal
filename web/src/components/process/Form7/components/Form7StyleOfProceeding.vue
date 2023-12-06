@@ -3,8 +3,8 @@
         <b-card class="border-white bg-white">
 
             <b-card class="bg-light border-0">
-                <h2 class="ml-1 mt-2 text-primary" >Style of Proceeding (Parties) in Case</h2>
-                
+                <h2 class="ml-1 mt-2 text-primary">Style of Proceeding (Parties) in Case</h2>
+
                 <b-row class="mt-4" style="font-weight: 700;">
                     <b-col cols="10">Between: <span style="font-weight: 200;">{{applicantNames.join(', ')}}</span></b-col>
                     <b-col cols="2" class="text-primary">Appellant</b-col>
@@ -17,254 +17,296 @@
 
             <b-row class="mt-4 mx-5 bg-info p-3" style="border-radius: 1rem;">
                 <b-col cols="1">
-                    <b-icon-question-circle-fill style="margin-top: 4rem;" class="ml-3" scale="4" variant="primary"/>
+                    <b-icon-question-circle-fill style="margin-top: 4rem;" class="ml-3" scale="4" variant="primary" />
                 </b-col>
-                <b-col> 
+                <b-col>
                     <div style="margin-bottom: 0.75rem; font-weight: 700;">
                         To the party(ies) filing the notice of urgent application:
-                    </div>                   
+                    </div>
                     <div style="margin-bottom: 0.75rem;">
-                        In cases of urgency you may apply for permission to bring an application 
-                        on shorter notice than is otherwise required under the Court of Appeal 
-                        Rules. You must obtain an urgent application hearing date from the 
-                        Registrar. Even in cases of urgency, you must give notice and attempt 
+                        In cases of urgency you may apply for permission to bring an application
+                        on shorter notice than is otherwise required under the Court of Appeal
+                        Rules. You must obtain an urgent application hearing date from the
+                        Registrar. Even in cases of urgency, you must give notice and attempt
                         to serve the application material on all parties.
-                    </div>                   
-                
+                    </div>
+
                 </b-col>
             </b-row>
 
         </b-card>
 
         <b-row class="mt-5">
-            <b-col cols="6" style="font-weight: 700;">First Appellant:
-                
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="Name of the first appellant named on Form 1: Notice of Appeal."/>
-                <b-form-select                            
-                    class="mt-2"
-                    @change="recheckStates()"                        
-                    :state="state.firstAppellant"                   
-                    v-model="form7Info.firstAppellant"                    
-                    :options="applicantNames">
+            <b-col cols="6" style="font-weight: 700;">
+                First Appellant:
+
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="Name of the first appellant named on Form 1: Notice of Appeal." />
+                <b-form-select class="mt-2"
+                               @change="recheckStates()"
+                               :state="state.firstAppellant"
+                               v-model="form7Info.firstAppellant"
+                               :options="applicantNames">
                 </b-form-select>
-                
+
             </b-col>
 
-            <b-col cols="6" style="font-weight: 700;">First Respondent:
-                
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="Name of the first respondent named on Form 1: Notice of Appeal."/>
-                <b-form-select 
-                    class="mt-2"
-                    @change="recheckStates()"             
-                    :state="state.firstRespondent"                   
-                    v-model="form7Info.firstRespondent"                    
-                    :options="respondentNames">
+            <b-col cols="6" style="font-weight: 700;">
+                First Respondent:
+
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="Name of the first respondent named on Form 1: Notice of Appeal." />
+                <b-form-select class="mt-2"
+                               @change="recheckStates()"
+                               :state="state.firstRespondent"
+                               v-model="form7Info.firstRespondent"
+                               :options="respondentNames">
                 </b-form-select>
-                
+
             </b-col>
         </b-row>
 
         <b-row class="mt-4">
             <b-col cols="7" class="labels">
-                Name of the party(ies) bringing the application:                                
+                Name of the party(ies) bringing the application:
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-checkbox-group 
-                    stacked               
-                    style="width:100%"
-                    @change="recheckStates()" 
-                    :state="state.filingParties"              
-                    v-model="form7Info.filingParties"                    
-                    :options="partyNames">
-                </b-form-checkbox-group>                    
-                
+                <b-form-checkbox-group stacked
+                                       style="width:100%"
+                                       @change="recheckStates()"
+                                       :state="state.filingParties"
+                                       v-model="form7Info.filingParties"
+                                       :options="partyNames">
+                </b-form-checkbox-group>
+
             </b-col>
-        </b-row> 
+        </b-row>
 
         <b-row class="mt-4">
             <b-col cols="7" class="labels">
-                Location where the application will be heard:                                
+                Location where the application will be heard:
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-select                
-                    style="width:100%"              
-                    v-model="hearingLocation"
-                    :state="state.hearingLocation"
-                    @change="updateLocation"                   
-                    :options="hearingLocationList">
+                <b-form-select style="width:100%"
+                               v-model="hearingLocation"
+                               :state="state.hearingLocation"
+                               @change="updateLocation"
+                               :options="hearingLocationList">
                 </b-form-select>
                 <b-row v-if="hearingLocation == 'Other'">
                     <span class="mt-3 ml-3">Specify:</span>
-                    <b-form-select                        
-                        style="width:70%; float: right;"
-                        class="mt-2 ml-5"
-                        :state="state.hearingLocationOther"
-                        @change="updateLocation"
-                        :options="otherHearingLocationList"                                    
-                        v-model="otherHearingLocation">
+                    <b-form-select style="width:70%; float: right;"
+                                   class="mt-2 ml-5"
+                                   :state="state.hearingLocationOther"
+                                   @change="updateLocation"
+                                   :options="otherHearingLocationList"
+                                   v-model="otherHearingLocation">
                     </b-form-select>
                 </b-row>
-                <span
-                    v-if="(state.hearingLocation != null)" 
-                    style="font-size: 0.75rem;" 
-                    class="bg-white text-danger"><b-icon-exclamation-circle/>
+                <span v-if="(state.hearingLocation != null)"
+                      style="font-size: 0.75rem;"
+                      class="bg-white text-danger">
+                    <b-icon-exclamation-circle />
                     Specify Hearing Location.
-                </span>  
-                
+                </span>
+
             </b-col>
         </b-row>
 
         <b-row class="mt-4">
             <b-col cols="7" class="labels">
                 Date the application will be heard:
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="Chamber applications begin at 9:30AM"/>
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="Chamber applications begin at 9:30AM" />
             </b-col>
-            <b-col>                   
-                <b-card                        
-                    :class="state.hearingDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
-                    style="padding: 0; float: center;">
+            <b-col>
+                <b-card :class="state.hearingDate == false?'border border-danger is-invalid mt-2': 'muted mt-2'"
+                        style="padding: 0; float: center;">
                     <div class="vuetify">
-                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">                        
-                            <v-date-picker
-                                v-model="form7Info.hearingDate"                           
-                                color="warning"             
-                                :allowed-dates="allowedDates"                            
-                                header-color="red"
-                                @change="recheckStates()"
-                            ></v-date-picker>                            
+                        <v-app style="height:17rem; padding:0; margin:0 0 4rem 0;">
+                            <v-date-picker v-model="form7Info.hearingDate"
+                                           color="warning"
+                                           :allowed-dates="allowedDates"
+                                           header-color="red"
+                                           @change="recheckStates()"></v-date-picker>
                         </v-app>
-                    </div>    
-                </b-card>                    
-            </b-col>
-        </b-row>   
-
-        <b-row class="mt-5">
-            <b-col cols="7" class="labels">Time of Hearing: 
-                <b-icon-question-circle-fill 
-                    class="text-primary"
-                    v-b-tooltip.hover.noninteractive
-                    scale="1.1"
-                    title="The default value is 10:00AM."/>            
-            </b-col>
-            <b-col class="ml-1 mt-1">
-                <b-form-timepicker 
-                    style="width: 12rem;"  
-                    v-model="form7Info.hearingTime"
-                    :state="state.hearingTime"
-                    locale="en">
-                </b-form-timepicker> 
+                    </div>
+                </b-card>
             </b-col>
         </b-row>
 
-        <b-card no-body class="my-4 bg-white border-white text-dark"> 
+        <b-row class="mt-5">
+            <b-col cols="7" class="labels">
+                Time of Hearing:
+                <b-icon-question-circle-fill class="text-primary"
+                                             v-b-tooltip.hover.noninteractive
+                                             scale="1.1"
+                                             title="The default value is 10:00AM." />
+            </b-col>
+            <b-col class="ml-1 mt-1">
+                <b-form-timepicker style="width: 12rem;"
+                                   v-model="form7Info.hearingTime"
+                                   :state="state.hearingTime"
+                                   locale="en">
+                </b-form-timepicker>
+            </b-col>
+        </b-row>
+
+        <!-- <contested-or-uncontested> -->
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                The applicant anticipates that this application will be...
+                <br /><i>Check only one.</i>
+            </b-col>
+            <b-col class="ml-1 mt-2">
+                <b-form-radio-group :class="state.applicationContested==false?'border border-danger is-invalid':''"
+                                    :state="state.applicationContested"
+                                    @change="recheckStates()"
+                                    v-model="form7Info.applicationContested"
+                                    :options="contestedOptions"></b-form-radio-group>
+            </b-col>
+        </b-row>
+
+        <!-- <section-or-rule-for-application> -->
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                Enter the section(s) or rule(s) that you are relying on for your application
+                <p class="content text-primary">
+                    <i>E.g., If you are applying for leave to appeal, enter</i>
+                    “Section 31 of the Court of Appeal Act.” <i>If you are applying
+                    for a stay of proceedings, enter
+                    </i>“Section 33 of the Court of Appeal Act.”
+                </p>
+            </b-col>
+            <b-col class="ml-1 mt-2">
+                <b-form-textarea style="width:100%"
+                                 rows="6"
+                                 @change="recheckStates()"
+                                 v-model="form7Info.relyingSectionRule"
+                                 :state="state.relyingSectionRule">
+                </b-form-textarea>
+
+            </b-col>
+        </b-row>
+
+        <!-- <orders-you-are-seeking> -->
+        <b-row class="mt-4 question">
+            <b-col cols="7" class="labels">
+                Select the order(s) that you are seeking
+                <br /><i>E.g., "stay of proceedings"</i>
+            </b-col>
+            <b-col class="ml-1 mt-2">
+
+                <b-form-checkbox-group style="width:100%"
+                                       stacked
+                                       @change="updateSeekingOrder"
+                                       v-model="form7Info.orderList"
+                                       :state="state.orderList"
+                                       :options="orderList">
+                </b-form-checkbox-group>
+
+                <span v-if="(state.orderList != null)"
+                      style="font-size: 0.75rem;"
+                      class="bg-white text-danger">
+                    <b-icon-exclamation-circle />
+                    Specify the order(s) you are seeking.
+                </span>
+            </b-col>
+        </b-row>
+
+
+        <b-card no-body class="my-4 bg-white border-white text-dark">
             <b-card no-body :class="state.affidavitList !=null?'border-danger is-invalid':'border-white'">
-                <b-row class="mb-2 ml-1" style="margin-left: -1rem !important;">   
-                    <b-col cols="10" >
-                        <b-form-group
-                            class="labels"                
-                            label="List the affidavit(s) in support of this application:" 
-                            label-for="affidavits">
-                            <span 
-                                v-if="form7Info.affidavitList && form7Info.affidavitList.length == 0 && !AddNewAffidavitForm" 
-                                id="affidavits" 
-                                class="text-muted ml-2 my-2">No affidavits have been listed.
+                <b-row class="mb-2 ml-1" style="margin-left: -1rem !important;">
+                    <b-col cols="10">
+                        <b-form-group class="labels"
+                                      label="List the affidavit(s) in support of this application:"
+                                      label-for="affidavits">
+                            <span v-if="form7Info.affidavitList && form7Info.affidavitList.length == 0 && !AddNewAffidavitForm"
+                                  id="affidavits"
+                                  class="text-muted ml-2 my-2">
+                                No affidavits have been listed.
                             </span>
-                            <b-table
-                                v-else-if="form7Info.affidavitList && form7Info.affidavitList.length > 0"
-                                :key="updated"                                
-                                id="affidavits"
-                                :items="form7Info.affidavitList"
-                                :fields="affidavitFields"
-                                head-row-variant="primary"
-                                borderless    
-                                small                                            
-                                responsive="sm"
-                                >                                          
-                                <template v-slot:cell(date)="data" >
+                            <b-table v-else-if="form7Info.affidavitList && form7Info.affidavitList.length > 0"
+                                     :key="updated"
+                                     id="affidavits"
+                                     :items="form7Info.affidavitList"
+                                     :fields="affidavitFields"
+                                     head-row-variant="primary"
+                                     borderless
+                                     small
+                                     responsive="sm">
+                                <template v-slot:cell(date)="data">
                                     <span style="font-size: 16px;">
                                         {{data.item.date | beautify-date}}
-                                    </span>                             
+                                    </span>
                                 </template>
 
-                                <template v-slot:cell(name)="data" >
+                                <template v-slot:cell(name)="data">
                                     <span style="font-size: 16px;">
                                         {{data.item.name}}
                                     </span>
                                 </template>
-                                
-                                <template v-slot:cell(edit)="data" >   
-                                    <div style="float: right;">                                                                     
-                                        <b-button 
-                                            class="mr-2" 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="removeAffidavit(data)">
-                                            <b-icon 
-                                                icon="trash-fill" 
-                                                font-scale="1.25" 
-                                                variant="danger"/>
+
+                                <template v-slot:cell(edit)="data">
+                                    <div style="float: right;">
+                                        <b-button class="mr-2"
+                                                  size="sm"
+                                                  variant="transparent"
+                                                  @click="removeAffidavit(data)">
+                                            <b-icon icon="trash-fill"
+                                                    font-scale="1.25"
+                                                    variant="danger" />
                                         </b-button>
-                                        <b-button 
-                                            size="sm" 
-                                            variant="transparent" 
-                                            @click="editAffidavit(data)">
-                                            <b-icon icon="pencil-square" font-scale="1.25" variant="primary"/>
+                                        <b-button size="sm"
+                                                  variant="transparent"
+                                                  @click="editAffidavit(data)">
+                                            <b-icon icon="pencil-square" font-scale="1.25" variant="primary" />
                                         </b-button>
                                     </div>
                                 </template>
 
                                 <template v-slot:row-details="data">
-                                    <b-card 
-                                        body-class="m-0 px-0 py-1" 
-                                        :border-variant="addAffidavitFormColor" 
-                                        style="border:2px solid;">
-                                        <add-affidavit-form 
-                                            :formData="data.item" 
-                                            :index="data.index" 
-                                            :isCreateAffidavit="false" 
-                                            v-on:submit="modifyAffidavitList" 
-                                            v-on:cancel="closeAffidavitForm" />
+                                    <b-card body-class="m-0 px-0 py-1"
+                                            :border-variant="addAffidavitFormColor"
+                                            style="border:2px solid;">
+                                        <add-affidavit-form :formData="data.item"
+                                                            :index="data.index"
+                                                            :isCreateAffidavit="false"
+                                                            v-on:submit="modifyAffidavitList"
+                                                            v-on:cancel="closeAffidavitForm" />
                                     </b-card>
                                 </template>
-                            </b-table> 
+                            </b-table>
                         </b-form-group>
-                    </b-col>  
-                    <b-col>           
-                        <b-button 
-                            style="margin-top: 2.25rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
-                            v-if="!AddNewAffidavitForm" 
-                            size="sm" 
-                            variant="court" 
-                            @click="addNewAffidavit"><b-icon icon="plus"/>Add Affidavit</b-button>
+                    </b-col>
+                    <b-col>
+                        <b-button style="margin-top: 2.25rem; height: 2.25rem; font-size: 0.75rem; width: 100%; float: right;"
+                                  v-if="!AddNewAffidavitForm"
+                                  size="sm"
+                                  variant="court"
+                                  @click="addNewAffidavit"><b-icon icon="plus" />Add Affidavit</b-button>
                     </b-col>
                 </b-row>
-            </b-card>           
+            </b-card>
 
-            <b-card 
-                v-if="AddNewAffidavitForm" 
-                id="addAffidavitForm" 
-                class="my-1 ml-4" 
-                :border-variant="addAffidavitFormColor" 
-                style="border:2px solid;" 
-                body-class="px-1 py-1">
-                <add-affidavit-form 
-                    :formData="{}" 
-                    :index="-1" 
-                    :isCreateAffidavit="true" 
-                    v-on:submit="modifyAffidavitList" 
-                    v-on:cancel="closeAffidavitForm" />                
+            <b-card v-if="AddNewAffidavitForm"
+                    id="addAffidavitForm"
+                    class="my-1 ml-4"
+                    :border-variant="addAffidavitFormColor"
+                    style="border:2px solid;"
+                    body-class="px-1 py-1">
+                <add-affidavit-form :formData="{}"
+                                    :index="-1"
+                                    :isCreateAffidavit="true"
+                                    v-on:submit="modifyAffidavitList"
+                                    v-on:cancel="closeAffidavitForm" />
             </b-card>
         </b-card>
 
@@ -273,67 +315,61 @@
                 Have you filed materials in support of the main application?
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-radio-group
-                    :class="state.filedMaterial==false? 'border border-danger is-invalid' :''"
-                    @change="recheckStates()"                 
-                    v-model="form7Info.filedMaterial"
-                    :options="yesNoOptions"                
-                ></b-form-radio-group>
+                <b-form-radio-group :class="state.filedMaterial==false? 'border border-danger is-invalid' :''"
+                                    @change="recheckStates()"
+                                    v-model="form7Info.filedMaterial"
+                                    :options="yesNoOptions"></b-form-radio-group>
 
             </b-col>
-        </b-row> 
+        </b-row>
 
         <b-row v-if="form7Info.filedMaterial" class="mt-4">
             <b-col cols="7" class="labels">
-                Enter a list of the material you have filed:                                
+                Enter a list of the material you have filed:
             </b-col>
-            <b-col class="ml-1 mt-2">                   
-                <b-form-textarea                
-                    style="width:100%"
-                    @change="recheckStates()"                                                            
-                    v-model="form7Info.materialList"
-                    :state ="state.materialList">
-                </b-form-textarea>                    
-            </b-col>                
+            <b-col class="ml-1 mt-2">
+                <b-form-textarea style="width:100%"
+                                 @change="recheckStates()"
+                                 v-model="form7Info.materialList"
+                                 :state="state.materialList">
+                </b-form-textarea>
+            </b-col>
         </b-row>
 
         <b-row class="mt-4">
             <b-col cols="7" class="labels">
-                Name of lawyer or party authorizing filing of this Form:                             
+                Name of lawyer or party authorizing filing of this Form:
             </b-col>
             <b-col class="ml-1 mt-2">
-                <b-form-input                    
-                    v-model="form7Info.authorizedName"
-                    @change="recheckStates()"                        
-                    :state ="state.authorizedName">
+                <b-form-input v-model="form7Info.authorizedName"
+                              @change="recheckStates()"
+                              :state="state.authorizedName">
                 </b-form-input>
                 <span class="ml-2" style="font-weight: 600; font-size:11pt;">Electronically filed</span>
 
             </b-col>
         </b-row>
 
-        <hr/>    
+        <hr />
 
-        <b-row >
+        <b-row>
             <b-col cols="10">
-                <b-button 
-                    style="float: left;" 
-                    variant="success"
-                    @click="saveForm(true)"
-                    >Save as Draft
+                <b-button style="float: left;"
+                          variant="success"
+                          @click="saveForm(true)">
+                    Save as Draft
                 </b-button>
             </b-col>
             <b-col cols="2">
-                <b-button
-                    style="float: right;" 
-                    variant="success"
-                    @click="saveForm(false)"
-                    >Continue
-                    <b-icon-play-fill class="mx-0" variant="white" scale="1" ></b-icon-play-fill>
+                <b-button style="float: right;"
+                          variant="success"
+                          @click="saveForm(false)">
+                    Continue
+                    <b-icon-play-fill class="mx-0" variant="white" scale="1"></b-icon-play-fill>
                 </b-button>
             </b-col>
         </b-row>
-        
+
     </b-card>
 </template>
 
@@ -394,6 +430,11 @@ export default class Form7StyleOfProceeding extends Vue {
     hearingLocation = "";
     otherHearingLocation = "";
 
+    contestedOptions = [
+        { text: 'Contested', value: true },
+        { text: 'Uncontested', value: false }
+    ];
+
     updated=0; 
     addAffidavitFormColor = 'court';
     AddNewAffidavitForm = false;
@@ -437,6 +478,9 @@ export default class Form7StyleOfProceeding extends Vue {
         hearingDate: null,
         hearingTime: null,    
         affidavitList: null,
+        applicationContested: null, 
+        relyingSectionRule: null,
+        orderList: null,
         filedMaterial: null,
         materialList: null,         
         authorizedName:null
@@ -614,6 +658,9 @@ export default class Form7StyleOfProceeding extends Vue {
             hearingDate: null,
             hearingTime: null,    
             affidavitList: null,
+            applicationContested: null, 
+            relyingSectionRule: null,
+            orderList: null,
             filedMaterial: null,
             materialList: null,         
             authorizedName:null
@@ -641,7 +688,10 @@ export default class Form7StyleOfProceeding extends Vue {
         this.state.hearingDate = this.form7Info.hearingDate && this.allowedDates(this.form7Info.hearingDate)? null :false;
         this.state.hearingTime = this.form7Info.hearingTime? null :false;
         this.state.affidavitList = this.form7Info.affidavitList?.length > 0? null :false;
-        this.state.filedMaterial = this.form7Info.filedMaterial != null? null :false;
+        this.state.filedMaterial = this.form7Info.filedMaterial != null ? null : false;
+        this.state.applicationContested = this.form7Info.applicationContested == null ? false : null;
+        this.state.relyingSectionRule = !this.form7Info.relyingSectionRule ? false : null;
+        this.state.orderList = this.form7Info.orderList?.length > 0 ? null : false  
         this.state.materialList = this.form7Info.filedMaterial && !this.form7Info.materialList? false: null;
         this.state.authorizedName = !this.form7Info.authorizedName? false : null;       
 

@@ -41,6 +41,9 @@ export interface form7DataInfoType {
     hearingLocation: hearingLocationsInfoType;
     hearingDate: string;
     hearingTime: string;    
+    relyingSectionRule: string;
+    orderList: string[];
+    applicationContested: boolean;
     affidavitList: affidavitInfoType[];
     filedMaterial: boolean;
     materialList: string;   
