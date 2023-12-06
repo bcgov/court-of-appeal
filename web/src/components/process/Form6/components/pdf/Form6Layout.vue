@@ -129,7 +129,7 @@
         </div>
 
         <!-- <full or partial> -->
-        <div class="row mt-4" style="font-size: 9pt;">
+        <div class="row mt-3" style="font-size: 9pt;">
 
             <div class="coa-arrow-box-left" style="width:28%; line-height:1rem; margin: 0.5rem 0; height: 3rem;">
                 <b class="ml-2">Is it a full or partial abandonment?</b>
