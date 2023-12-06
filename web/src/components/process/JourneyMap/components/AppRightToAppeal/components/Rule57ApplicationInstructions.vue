@@ -50,14 +50,10 @@
                             </li>
                             <li>
                                 Impose conditions or give directions related to the urgent 
-                                application, including that notice be given to another 
-                                party. 
+                                application
                             </li>
                         </ul>
                     </div>
-                </li>
-                <li>
-                    If an order if made, you must serve notice of the order on each party.
                 </li>
             </ol>
         </b-row>
