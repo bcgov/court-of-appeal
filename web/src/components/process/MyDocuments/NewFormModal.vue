@@ -184,7 +184,7 @@ export default class NewFormModal extends Vue {
         {name:'form5', title:'Notice of Hearing of Appeal (Form 5)'},
         {name:'form6', title:'Notice of Settlement or Abandonment (Form 6)'},   
         {name:'form7', title:'Notice of Urgent Application (Form 7)'},  
-        {name:'form8', title:'Notice of Application to Vary an Order of a Justice (Form 8)'},     
+        {name:'form8', title:'Notice of Application to Vary or Cancel an Order of a Justice (Form 8)'},     
         {name:'form9', title:'Requisition (Form 9)'},
         {name:'form10', title:'Order of a single justice (Form 10)'},
         {name:'form11', title:'Order of three or more justices (Form 11)'},
