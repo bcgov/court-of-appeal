@@ -566,21 +566,21 @@ export default class Form18StyleOfProceeding extends Vue {
     lawyerRepresentationOptions = [ 'Lawyer' ];
 
     provinces = [
-        {text:'british columbia', value:'BC'}, 
-        {text:'ontario', value:'ON'}, 
-        {text:'quebec', value:'QC'}, 
-        {text:'alberta', value:'AB'}, 
-        {text:'saskatchewan', value:'SK'}, 
-        {text:'manitoba', value:'MB'},
-        {text:'newfoundland and labrador', value:'NL'},
-        {text:'newfoundland', value:'NL'},
-        {text:'labrador', value:'NL'},
-        {text:'prince edward island', value:'PE'},
-        {text:'nova scotia', value:'NS'},
-        {text:'new brunswick', value:'NB'},
-        {text:'yukon', value:'YT'},
-        {text:'northwest territories', value:'NT'},
-        {text:'nunavut', value:'NU'}
+        {text:'British Columbia', value:'BC'}, 
+        {text:'Ontario', value:'ON'}, 
+        {text:'Quebec', value:'QC'}, 
+        {text:'Alberta', value:'AB'}, 
+        {text:'Saskatchewan', value:'SK'}, 
+        {text:'Manitoba', value:'MB'},
+        {text:'Newfoundland and Labrador', value:'NL'},
+        {text:'Newfoundland', value:'NL'},
+        {text:'Labrador', value:'NL'},
+        {text:'Prince Edward Island', value:'PE'},
+        {text:'Nova Scotia', value:'NS'},
+        {text:'New Brunswick', value:'NB'},
+        {text:'Yukon', value:'YT'},
+        {text:'Northwest Territories', value:'NT'},
+        {text:'Nunavut', value:'NU'}
     ]
 
     state = {
