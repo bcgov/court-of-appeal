@@ -212,7 +212,7 @@
 
             <div class="coa-text-box-left" style="width:64%;">
                 <div class="ml-2" style="font-weight: 700;">
-                    {{result.hearingLocation.name}}
+                    {{result.relyingSectionRule}}
                 </div>
             </div>
         </div>

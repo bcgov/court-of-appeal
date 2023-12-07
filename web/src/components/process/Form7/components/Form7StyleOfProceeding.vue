@@ -161,8 +161,8 @@
         <!-- <contested-or-uncontested> -->
         <b-row class="mt-4 question">
             <b-col cols="7" class="labels">
-                The applicant anticipates that this application will be...
-                <br /><i>Check only one.</i>
+                The applicant anticipates that this application will be
+                <br /><p class="content text-primary"><i>Check only one.</i></p>
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-radio-group :class="state.applicationContested==false?'border border-danger is-invalid':''"
@@ -199,7 +199,7 @@
         <b-row class="mt-4 question">
             <b-col cols="7" class="labels">
                 Enter the order(s) that you are seeking
-                <br /><i>E.g., "stay of proceedings"</i>
+                <br /><p class="content text-primary"><i>E.g., "stay of proceedings"</i></p>
             </b-col>
             <b-col class="ml-1 mt-2">
                 <b-form-textarea style="width:100%"
