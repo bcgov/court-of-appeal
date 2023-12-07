@@ -388,7 +388,7 @@ export default class Form8StyleOfProceeding extends Vue {
                 data: {
                     data:this.form8Info,
                     type:'Form8',
-                    description:'Notice of Application to Vary an Order of a Justice'
+                    description:'Notice of Application to Vary or Change an Order of a Justice'
                 }
             }
             this.saveInfo(options, draft);
@@ -401,7 +401,7 @@ export default class Form8StyleOfProceeding extends Vue {
                 data: {
                     data:this.form8Info,
                     type:'Form8',
-                    description:'Notice of Application to Vary an Order of a Justice'
+                    description:'Notice of Application to Vary or Change an Order of a Justice'
                 }
             }
             this.saveInfo(options, draft);
