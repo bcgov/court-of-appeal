@@ -51,7 +51,7 @@
                         </b-row>
                     </li> 
                     <li>
-                        Support Affidavits (if any) between Notice of Application (Form 4) and Memorandum of Argument.
+                        Support Affidavits (if any)
                     </li>
                     <li>
                         Memorandum of argument, not exceeding 10 pages 
