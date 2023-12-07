@@ -8,7 +8,7 @@
         <b-card border-variant="light" bg-variant="light" class="my-2 mx-4">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Notice of Application To Vary an Order of a Justice
+                Notice of Application To Vary or Cancel an Order of a Justice
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
                 Form 8 - Rule 62(2)
