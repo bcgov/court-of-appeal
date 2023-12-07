@@ -128,7 +128,9 @@
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Which section(s) of the appeal are you abandoning?
-                    <br /><i>If partial abandonment, list the sections of the appeal that you are abandoning. E.g., grounds of appeal.</i>
+                    <br /><p class="content text-primary">
+                    <i>If partial abandonment, list the sections of the appeal that you are abandoning. E.g., grounds of appeal.</i>
+                    </p>
                 </b-col>
                 <b-col>
                     <b-form-input style="width:100%"
@@ -142,7 +144,8 @@
             <b-row class="mt-4 question">
                 <b-col cols="7" class="labels">
                     Which party(ies) are you abandoning against?
-                    <br /><i>If partial abandonment, list the party(ies) of the appeal that you are abandoning against.</i>
+                    <br /><p class="content text-primary"><i>If partial abandonment, list the party(ies) of the appeal that you are abandoning against.</i>
+                    </p>
                 </b-col>
                 <b-col class="ml-1 mt-2">
                     <b-form-checkbox-group stacked
