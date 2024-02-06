@@ -204,7 +204,7 @@
             <b-col cols="11">
 
                 <p class="question pb-0 mt-3">
-                    Do you seek to appeal an order of a Supreme Court Master?
+                    Do you seek to appeal an order of a Supreme Court Associate Judge?
                 </p>               
 
                 <b-form-radio-group 
@@ -215,13 +215,13 @@
                 <b-card class="border-primary bg-primary text-white mt-2 mr-5" v-if="qualificationInfo.appealingSupremeCourtMaster">    
 
                     <p>
-                        Appeals of a Supreme Court Master's decision are typically brought 
+                        Appeals of a Supreme Court Associate Judge's decision are typically brought 
                         to a Supreme Court Justice.
                     </p> 
 
                     <p>
                         Complete and file with the Supreme Court, a Notice of Appeal 
-                        from Master, Registrar or Special Referee form.                        
+                        from Associate Judge, Registrar or Special Referee form.                        
                     </p>               
 
                     <p>
