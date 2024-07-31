@@ -1,5 +1,5 @@
 # Main
-django==4.0.10
+django==4.2.14
 django-filter>=21.1,<22
 djangorestframework>=3.13.1,<4
 djangorestframework-bulk>=0.2.1,<1
@@ -30,4 +30,4 @@ jsonschema>=3.2.0,<4
 zeep>=4.0.0
 
 setuptools>=65.5.1
-certifi==2022.12.07
+certifi==2024.7.4
