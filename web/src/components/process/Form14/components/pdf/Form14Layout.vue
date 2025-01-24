@@ -49,10 +49,10 @@
             <div class="text-center"><b>CONSENT ORDER TO REMOVE AN APPEAL FROM THE INACTIVE LIST</b></div>
         </div>
 
-        <!-- <ORDER-DATE> -->
-        <div class="mt-4 mb-4 mx-0 row">
+        <!-- <BEFORE THE HONOURABLE> -->
+        <div class="my-4 mx-0 row">
             <div>
-                {{result.orderDate | beautify-date-full}}
+                <b>BEFORE THE HONOURABLE</b>
             </div>
         </div>
 
