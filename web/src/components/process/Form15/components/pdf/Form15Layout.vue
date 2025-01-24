@@ -101,9 +101,13 @@
                     <span v-else>, Appellant</span>
                 </div>
             </div>
-
+            <div v-if="inx==0" style="width:50%;">
+                <div style="height:3rem;" />
+                <div style="border-top:1px dashed grey;">
+                    A Justice of the Court of Appeal
+                </div>
+            </div>
         </div>
-
     </div>
 </template>
 
