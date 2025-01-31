@@ -7,4 +7,4 @@ NAME=pdf
 OUTPUT_IMAGE_TAG=latest
 SOURCE_IMAGE_KIND=DockerImage
 SOURCE_IMAGE_NAME=bcgovimages/weasyprint
-SOURCE_IMAGE_TAG=latest
+SOURCE_IMAGE_TAG=63
