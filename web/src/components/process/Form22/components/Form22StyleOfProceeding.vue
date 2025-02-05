@@ -313,13 +313,37 @@
                     <p>Income</p>                    
                 </b-col>
                 <b-col class="ml-1">
-                    <b-form-radio-group   
-                        stacked             
-                        style="width:100%"
-                        @change="recheckStates()" 
-                        :class="state.income==false?'border border-danger is-invalid':''"                     
-                        v-model="form22Info.income"
-                        :options="incomeOptions">
+                    <b-form-radio-group stacked style="width:100%"
+                        @change="handleIncomeChange" :class="state.income == false ? 'border border-danger is-invalid' : ''"
+                        v-model="form22Info.income">
+                        <b-form-radio :value="1" @focus="handleIncomeChange">
+                            1-3 household members – Household gross income is:
+                            <b-input-group>
+                                <b-input-group-prepend is-text>$</b-input-group-prepend>
+                                <b-form-input 
+                                    v-model="form22Info.incomeValue1" 
+                                    type="number" 
+                                    class="d-inline-block w-auto"
+                                    :disabled="form22Info.income !== 1"
+                                    min="0">
+                                </b-form-input>
+                            </b-input-group>
+                        </b-form-radio>
+                        <b-form-radio :value="2" @focus="handleIncomeChange">
+                            4 or more household members – Household gross income is:
+                            <b-input-group>
+                                <b-input-group-prepend is-text>$</b-input-group-prepend>
+                                <b-form-input
+                                    v-model="form22Info.incomeValue2"
+                                    type="number" class="d-inline-block w-auto"
+                                    :disabled="form22Info.income !== 2"
+                                    min="0">
+                                </b-form-input>
+                            </b-input-group>
+                        </b-form-radio>
+                        <b-form-radio :value="0" @focus="handleIncomeChange">
+                            None of the above
+                        </b-form-radio>
                     </b-form-radio-group>
                     <span
                         v-if="(state.income != null)" 
@@ -337,11 +361,25 @@
                 <b-col class="ml-1">
                     <b-form-radio-group                
                         stacked
-                        @change="recheckStates()"
+                        @change="handleAssetsChange"
                         :class="state.assets==false?'border border-danger is-invalid':''"
                         style="width:100%"                      
-                        v-model="form22Info.assets"
-                        :options="assetOptions">
+                        v-model="form22Info.assets">
+                        <b-form-radio :value="true" @focus="handleAssetsChange">
+                            The value of my household assets, after subtracting any outstanding debt owing on them, is:
+                            <b-input-group>
+                                <b-input-group-prepend is-text>$</b-input-group-prepend>
+                                <b-form-input
+                                    v-model="form22Info.assetsValue"
+                                    type="number" class="d-inline-block w-auto"
+                                    :disabled="form22Info.assets !== true"
+                                    min="0">
+                                </b-form-input>
+                            </b-input-group>
+                        </b-form-radio>
+                        <b-form-radio :value="false" @focus="handleAssetsChange">
+                            Not applicable
+                        </b-form-radio>
                     </b-form-radio-group>
                     <span
                         v-if="(state.assets != null)" 
@@ -367,8 +405,9 @@
                     <b-col cols="7" class="labels">
                         Please provide specific details about your financial circumstances 
                         <p class="content text-primary">
-                            For example, if you have recently lost employment or have a large number of dependents.
-                        </p>                               
+                            Complete this Part if you do not meet the income or assets criteria set under 
+                            <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/120_2022a#section85" target="_blank">Rule 85(2)</a>. Be specific, for example, if you have recently lost employment or have a large number of dependents.
+                        </p>                             
                     </b-col>
                     <b-col>                    
                         <b-form-textarea                
@@ -384,7 +423,7 @@
 
             <b-row class="my-3 question" style="padding: 0;">
                 <b-col cols="7" class="labels">
-                    Name of lawyer or party authorizing filing of this Form:                                
+                    Name of party authorizing filing of this Form:                                
                 </b-col>
                 <b-col>
                     <b-form-input                    
@@ -480,17 +519,8 @@ export default class Form22StyleOfProceeding extends Vue {
     latestEditAppellantData;
     isEditAppellantOpen = false;
 
-    assetOptions = [
-        {text: 'The value of my household assets, after subtracting any outstanding debt owing on them, is less than $10,000', value: true},
-        {text: 'Not applicable', value: false}
-    ];
     
-    incomeOptions = [
-        {text: '1-3 household members - My gross household income is less than $60,000', value: 1},
-        {text: '4 or more household members - My gross household income is less than $84,000', value: 2},
-        {text: 'None of the above', value: 0}
-    ];
-
+   
     partyFields = [
         {
             key:'organization',          
@@ -964,7 +994,21 @@ export default class Form22StyleOfProceeding extends Vue {
     public navigateToPreviewPage() {        
         this.$router.push({name: "preview-form22"}) 
     }
-
+    public handleIncomeChange() {
+        if (this.form22Info.income !== 1) {
+            this.form22Info.incomeValue1 = null;
+        }
+        if (this.form22Info.income !== 2) {
+            this.form22Info.incomeValue2 = null;
+        }
+        this.recheckStates();
+    }
+    public handleAssetsChange() {
+        if (this.form22Info.assets !== true) {
+            this.form22Info.assetsValue = null;
+        }
+        this.recheckStates();
+    }
 }
 </script>
 

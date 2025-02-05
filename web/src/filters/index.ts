@@ -400,6 +400,8 @@ Vue.filter('printPdf', function(html, pageFooterLeft, pageFooterRight, pageHeade
 			`.coa-arrow-box-left{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:left; text-align:left;}`+
 			`.coa-arrow-box-right{background: #E8E8E8;word-wrap: break-word; display:flex; align-items:center; justify-content:right; text-align:right;}`+
 
+			`.arrow-right-flash-110{ margin-right:1.25rem;  width:0;height:0; border-top: 110px solid transparent; border-bottom: 123px solid transparent;border-left: 36px solid #E8E8E8;}`+
+			`.arrow-right-flash-85{ margin-right:1.25rem;  width:0;height:0; border-top: 85px solid transparent; border-bottom: 85px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-80{ margin-right:1.25rem;  width:0;height:0; border-top: 80px solid transparent; border-bottom: 80px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-76{ margin-right:1.25rem;  width:0;height:0; border-top: 76px solid transparent; border-bottom: 76px solid transparent;border-left: 36px solid #E8E8E8;}`+
 			`.arrow-right-flash-66{ margin-right:1.25rem;  width:0;height:0; border-top: 66px solid transparent; border-bottom: 66px solid transparent;border-left: 36px solid #E8E8E8;}`+

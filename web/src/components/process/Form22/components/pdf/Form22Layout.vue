@@ -86,10 +86,10 @@
                     you undue hardship.
                 </div>
                 <div style="margin-bottom: 0.75rem;">
-                    If you meet the income and assets criteria in Part B, you meet the 
-                    financial hardship criteria. If not, you can complete Part C and 
-                    argue at the hearing that there are special financial circumstances 
-                    that establish undue hardship, or you can abandon your application.
+                    The criteria set by the registrar under Rule 85 (2) are on the main page of the Court of Appeal’s website. Complete Part B to
+                    determine if you meet the income and assets criteria. 
+                    If you do not meet the criteria, you can also complete Part C and argue at the hearing that there are special financial circumstances that establish undue hardship, or you can abandon your
+                    application. <b>You must provide complete and accurate financial information.</b>
                 </div>
                 <div style="margin-bottom: 0.75rem;">
                     This is a “without notice” application. You do not need to serve 
@@ -171,17 +171,18 @@
             <!-- <part-of-order-cross-appealed> -->
             <div class="row mt-1" style="font-size: 9pt; margin: 0.5rem 0.5rem;">
 
-                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.75rem 0; height:6.1rem;">
+                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.75rem 0; height:13rem;">
                     <div class="ml-2">
-                        <b>Check the applicable boxes</b>
+                        <b>Household income and assets</b>
                         <i style="font-size:8.8pt;">
-                            <br>If the income or assets criteria do not apply, you must complete
-                                Part C or abandon your application. 
+                            <br>Check the applicable boxes and indicate the household income and value of all household assets. <b>Provide complete and accurate financial information.</b>
+                            <br><br> 
+                            If you do not meet the income or assets criteria set by the registrar under Rule 85 (2), you must also complete Part C or abandon your application.
                         </i>
                     </div>
                 </div>
 
-                <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div>
+                <div class="arrow-right-flash-110" style="border-left-color: #FFF;"></div>
                         
                 <div style="width:62%; margin:0; font-size:8.75pt;"> 
                     <b>Income</b>                 
@@ -190,20 +191,20 @@
                         :check="(result.income == 1)?'yes':''" 
                         shiftmark="1" 
                         marginLeft="0.5rem"
-                        text="<i>1-3 household members</i> - My gross household income is less than $60,000"/> 
+                        :text="computedIncome1"/> 
                     <check-box 
                         style="margin-left:0.85rem;line-height:1rem;" 
                         :check="(result.income == 2)?'yes':''"
                         shiftmark="1" 
                         marginLeft="0.5rem"
-                        text="<i>4 or more household members</i> - My gross household income is less than $84,000"/> 
-                    <b>Assets</b>                 
+                        :text="computedIncome2"/> 
+                    <b><br><br>Assets</b>                 
                     <check-box 
                         style="margin-left:0.85rem;"
                         :check="(result.assets)?'yes':''" 
                         shiftmark="1" 
                         marginLeft="0.5rem"
-                        text="The value of my household assets, after subtracting any outstanding debt owing on them, is less than $10,000"/> 
+                        :text="computedAsset"/> 
                 </div>
                 
             </div>
@@ -217,18 +218,17 @@
             <!-- <financial> -->
             <div class="row mt-1" style="font-size: 9pt; margin: 0.5rem 0.5rem;">
 
-                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.25rem 0; height:7.2rem;">
+                <div class="coa-arrow-box-left" style="background:#FFF; width:28%; line-height:1rem; margin:.25rem 0; height:10rem;">
                     <div class="ml-2">
                         <b style="font-size:8.5pt;">Special financial circumstances</b>
                         <i style="font-size:8.5pt;">
-                            <br>Be as specific as possible about your financial circumstances. For example,
-                            if you have recently lost employment or have a large number of
-                            dependants note that here.
+                            <br>Complete this Part if you do not meet the income or assets criteria set under Rule 85 (2). Be as specific as possible about
+                                your financial circumstances. For example, if you have recently lost employment or have a large number of dependants, note that here.
                         </i>
                     </div>
                 </div>
 
-                <div class="arrow-right-flash-62" style="border-left-color: #FFF;"></div>
+                <div class="arrow-right-flash-85" style="border-left-color: #FFF;"></div>
                         
                 <div class="coa-text-box-left" style="width:63.25%; background:#FFF; font-weight: 700;">
                     <div v-if="result.assets == false && result.income == 0" class="ml-2">{{result.finances}}</div>                       
@@ -300,7 +300,7 @@
             <div style="width:3.28%;"></div>
             
             <div class="coa-arrow-box-left" style="width:25%; margin:0.5rem 0; line-height:0.95rem;  height:2.15rem;">
-                <div class="ml-2">Name of lawyer or person authorizing filing of this form</div>
+                <div class="ml-2">Name of person authorizing filing of this form</div>
             </div>
             <div class="arrow-right-flash-25"></div> <!-- < width ~ 6.64% > -->
 
@@ -336,8 +336,32 @@ export default class Form22Layout extends Vue {
 
     @Prop({required:true})
     result!: form22DataInfoType;
-}
+    get computedIncome1(): string {
+        if (this.result.income == 1) {
+            return `<i>1-3 household members</i> - Household gross income is $${this.formatCurrency(this.result.incomeValue1)}`;
+        } else {
+            return `<i>1-3 household members</i> - Household gross income is $........`;
+        }
+    }
+    get computedIncome2(): string {
+        if (this.result.income == 2) {
+            return `<i>4 or more household members</i> - Household gross income is $${this.formatCurrency(this.result.incomeValue2)}`;
+        } else {
+            return `<i>4 or more household members</i> - Household gross income is $........`;
+        }
+    }
+    get computedAsset(): string {
+        if (this.result.assets) {
+            return `The value of household assets, after subtracting any outstanding debt owing on them, is $${this.formatCurrency(this.result.assetsValue)}`;
+        } else {
+            return `The value of household assets, after subtracting any outstanding debt owing on them, is $........`;
+        }
+    }
 
+    formatCurrency(value: string): string {
+        return parseInt(value).toLocaleString('en-US');
+    }
+}
 </script>
 
 <style scoped lang="scss" src="@/styles/_pdf.scss">
