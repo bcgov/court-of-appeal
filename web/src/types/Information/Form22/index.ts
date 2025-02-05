@@ -46,6 +46,9 @@ export interface form22DataInfoType {
     orders: string;
     grounds: string;
     income: number;
+    incomeValue1?:string;
+    incomeValue2?:string;
+    assetsValue?:string;
     assets: boolean;
     finances?: string;
     completionDate?: string;
