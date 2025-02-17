@@ -28,7 +28,7 @@
             <div style="width:78%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{applicantNamesFull}}</div>
             </div>
-            <div style="width:11%;" class="text-center">Appellant(s)</div>
+            <div style="width:11%; white-space: nowrap !important;" class="text-center">Appellant(s)</div>
         </div>
 
         <!-- <AND> -->
@@ -42,10 +42,10 @@
             <div style="width:76%;">
                 <div style="font-weight: 200;" class="text-center mx-3">{{respondentNamesFull}}</div>
             </div>
-            <div style="width:13%;" class="text-center"> Respondent(s)</div>
+            <div style="width:13%; white-space: nowrap !important;" class="text-center"> Respondent(s)</div>
         </div>
 
-        <div class="my-0">
+        <div class="mt-3">
             <div class="text-center"><b>CONSENT ORDER TO EXTEND TIME TO FILE A DOCUMENT</b></div>
         </div>
 
