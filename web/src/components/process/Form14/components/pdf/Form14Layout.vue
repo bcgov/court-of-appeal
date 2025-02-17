@@ -45,14 +45,14 @@
             <div style="width:13%; white-space: nowrap !important;" class="text-center"> Respondent(s)</div>
         </div>
 
-        <div class="my-0">
+        <div class="mt-3">
             <div class="text-center"><b>CONSENT ORDER TO REMOVE AN APPEAL FROM THE INACTIVE LIST</b></div>
         </div>
 
         <!-- <BEFORE THE HONOURABLE> -->
         <div class="my-4 mx-0 row">
             <div>
-                <b>BEFORE THE HONOURABLE</b>
+                <b>BEFORE THE HONOURABLE ________________________________</b>
             </div>
         </div>
 
