@@ -37,11 +37,11 @@ def get_logout_uri(request: Request = None) -> str:
         try:
             uri = (
                 settings.OIDC_RP_PROVIDER_ENDPOINT
-                + "/protocol/openid-connect/logout?post_logout_redirect_uri={end_session}&retnow=1&client_id={clientid}&kc_idp_hint={hint}".format(
+                + "/protocol/openid-connect/logout?redirect_uri={end_session}&retnow=1&client_id={clientid}".format(
                 # settings.SITEMINDER_LOGOFF_URL
                 # + "?returl={end_session}&retnow=1".format(
                     end_session=reverse("oidc_end_session", request=request),
-                    clientid=settings.OIDC_RP_CLIENT_ID, hint=settings.OIDC_RP_KC_IDP_HINT
+                    clientid=settings.OIDC_RP_CLIENT_ID
                 )
             )
         except NoReverseMatch:
