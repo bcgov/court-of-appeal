@@ -1,6 +1,6 @@
 # Main
 django==4.2.14
-django-filter>=21.1,<22
+django-filter>=21.1,<25
 djangorestframework>=3.13.1,<4
 djangorestframework-bulk>=0.2.1,<1
 django-cors-headers>=3.10.0,<4
