@@ -8,7 +8,7 @@
         <b-card border-variant="light" bg-variant="light" class="my-2">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Order of three or more justices
+                Order of the Court
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
                 Form 11 (Rule 66(3)(b))
@@ -19,7 +19,7 @@
         <b-card border-variant="white" bg-variant="white" class="my-2 mx-4">
 
             <b-row class="ml-4" style="font-size: 1.25rem;">
-                When Do You Use the Order of Three or More Justices (Form 11)?
+                When Do You Use the Order of the Court (Form 11)?
             </b-row> 
             <b-row class="ml-4 mt-4" style="font-size: 14px;">
                 If you have made an application or if the hearing of the appeal 

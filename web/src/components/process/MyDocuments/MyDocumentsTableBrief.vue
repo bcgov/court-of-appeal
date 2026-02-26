@@ -568,7 +568,7 @@ export default class MyDocumentsTableBrief extends Vue {
                 pdfType:'FORM',
                 form:'form11',
                 formName:'Form 11',
-                description:'Order of three or more justices',
+                description:'Order of the Court',
                 fileNumber:'',                 
                 status:'', 
                 modifiedDate:'', 
