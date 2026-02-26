@@ -8,7 +8,7 @@
         <b-card border-variant="light" bg-variant="light" class="my-2 mx-4">
 
             <b-row class="ml-5" style="font-size: 2rem;">
-                Order of three or more justices
+                Order of the Court
             </b-row> 
             <b-row class="ml-5" style="font-size: 14px;">
                 Form 11

@@ -16,7 +16,7 @@
                 <div 
                     style="font-weight:600; font-size:14pt; margin:0 0 0 18rem;" 
                     class="p-0 text-center">
-                    Order of three or more justices (Form 11)
+                    Order of the Court (Form 11)
                 </div>
             </b-col>
             <b-col  cols="2">
@@ -51,7 +51,7 @@
             <b-col cols="12">
                 <div 
                     style="font-weight:600; line-height:1rem; font-size:12pt; margin:0 0 0 0rem;" 
-                    class="p-0 text-center text-primary">Order of three or more justices (Form 11) </div>
+                    class="p-0 text-center text-primary">Order of the Court (Form 11) </div>
             </b-col>
         </b-row>
        
@@ -171,7 +171,7 @@
             <template v-slot:modal-title>
                 <h3 class="mb-0 text-light">Confirm Delete Application</h3>                                  
             </template>
-            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Order of three or more justices </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
+            <h4 v-if="applicationsToDelete.length>0">Are you sure you want to delete the selected <b>"{{applicationsToDelete.join(', ')}}"</b> <b class="text-danger"> Order of the Court </b> application<span v-if="applicationsToDelete.length>1" >s</span>?</h4>            
             <h4 v-if="applicationsNotAllowedToDelete.length>0" class="text-danger"> You cannot delete the submitted application<span v-if="applicationsNotAllowedToDelete.length>1" >s</span> <b> "{{applicationsNotAllowedToDelete.join(', ')}}"</b> !</h4>
             <template v-slot:modal-footer>
                 <b-button v-if="applicationsToDelete.length>0" variant="danger" @click="confirmDeleteApplication()">Confirm</b-button>

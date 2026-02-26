@@ -10,7 +10,7 @@
             <li class="link-button" 
                 @click="startNewForm11Document"
                 target="_blank">
-                Order of three or more justices (Form 11)                
+                Order of the Court (Form 11)                
             </li>
              <li class="link-button" 
                 @click="startNewForm12Document"

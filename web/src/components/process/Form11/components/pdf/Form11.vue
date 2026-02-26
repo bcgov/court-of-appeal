@@ -96,7 +96,7 @@ export default class Form11 extends Vue {
         const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                    www.bccourts.ca/Court_of_Appeal/"`;
         const bottomRightText = `" "`;
         //const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA		Rule 66(3)(b)"`;
-        //const bottomRightText = `"Form 11: Order of three or more justices"`;        
+        //const bottomRightText = `"Form 11:  Order of the Court"`;        
         const url = '/form11/form-print/'+this.caseId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0&noDownload=true'
         const pdfhtml = Vue.filter('printPdf')(el.innerHTML, bottomLeftText, bottomRightText );
 
@@ -178,10 +178,10 @@ export default class Form11 extends Vue {
     //     const pdf_name = "form11-" + this.currentOrderMultipleJusticesId
     //     const el= document.getElementById("print");
         
-    //     const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11: ORDER OF THREE OR MORE JUSTICES"`;
+    //     const topLeftText    = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11:  Order of the Court"`;
     //     const topRightText   = `"(Rule 66(3)(b) )"`;
 
-    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11: ORDER OF THREE OR MORE JUSTICES  (Rule 66(3)(b) )"`;
+    //     const bottomLeftText = `"COURT OF APPEAL FOR BRITISH COLUMBIA                              FORM 11:  Order of the Court  (Rule 66(3)(b) )"`;
     //     const bottomRightText = `" "`;
         
     //     const url = '/form11/form-print/'+this.currentOrderMultipleJusticesId+'/?name=' + pdf_name + '&pdf_type='+pdf_type+'&version=1.0'

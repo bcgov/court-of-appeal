@@ -1204,7 +1204,7 @@ export default class Form11StyleOfProceeding extends Vue {
                 data: {
                     data:this.form11Info,
                     type:'Form11',
-                    description:'Order of three or more justices'
+                    description:'Order of the Court'
                 }
             }
             this.saveInfo(options, draft);
@@ -1216,7 +1216,7 @@ export default class Form11StyleOfProceeding extends Vue {
                 data: {
                     data:this.form11Info,
                     type:'Form11',
-                    description:'Order of three or more justices'
+                    description:'Order of the Court'
                 }
             }
             this.saveInfo(options, draft);

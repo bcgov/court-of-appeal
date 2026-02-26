@@ -46,7 +46,7 @@
         </div>
 
         <div class="my-0">
-            <div class="text-center"><b>ORDER OF THREE OR MORE JUSTICES</b></div>
+            <div class="text-center"><b>ORDER OF THE COURT</b></div>
         </div>
 
 
@@ -126,8 +126,8 @@
 
         <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div style="width:50%;">APPROVED AS TO FORM:</div>
-            <div style="width:50%;">BY THE COURT</div>
+            <div style="width:50%;">APPROVED</div>
+            <div style="width:50%;">BY THE COURT:</div>
         </div>
 
         <!-- <Parties Signature> -->
@@ -143,7 +143,7 @@
             <div v-if="inx==0" style="width:50%;">
                 <div style="height:3rem;" />
                 <div style="border-top:1px dashed grey;">
-                    Deputy Registrar
+                    A Justice of the Court of Appeal
                 </div>
             </div>
         </div>
