@@ -126,8 +126,8 @@
 
         <!-- <APPROVED> -->
         <div class="mb-3 mt-5 mx-0 row">
-            <div style="width:50%;">APPROVED</div>
-            <div style="width:50%;">BY THE COURT:</div>
+            <div style="width:50%;">APPROVED AS TO FORM:</div>
+            <div style="width:50%;">APPROVED BY THE COURT</div>
         </div>
 
         <!-- <Parties Signature> -->
